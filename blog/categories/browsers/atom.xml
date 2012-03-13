@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: Browsers | TJ VanToll]]></title>
-  <link href="http://tjvantoll.github.com/blog/categories/browsers/atom.xml" rel="self"/>
-  <link href="http://tjvantoll.github.com/"/>
-  <updated>2012-03-12T22:47:45-04:00</updated>
-  <id>http://tjvantoll.github.com/</id>
+  <link href="http://tjvantoll.com/blog/categories/browsers/atom.xml" rel="self"/>
+  <link href="http://tjvantoll.com/"/>
+  <updated>2012-03-12T22:52:14-04:00</updated>
+  <id>http://tjvantoll.com/</id>
   <author>
     <name><![CDATA[TJ VanToll]]></name>
     <email><![CDATA[tj.vantoll@gmail.com]]></email>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[IE7 Attribute Selector Bugs]]></title>
-    <link href="http://tjvantoll.github.com/2012/03/08/IE7-Attribute-Selector-Bugs/"/>
+    <link href="http://tjvantoll.com/2012/03/08/IE7-Attribute-Selector-Bugs/"/>
     <updated>2012-03-08T00:00:00-05:00</updated>
-    <id>http://tjvantoll.github.com/2012/03/08/IE7-Attribute-Selector-Bugs</id>
+    <id>http://tjvantoll.com/2012/03/08/IE7-Attribute-Selector-Bugs</id>
     <content type="html"><![CDATA[<p>The CSS attribute selector allows you to select HTML elements based on their attributes.  For example, take the following markup:</p>
 
 <p>``` html Simple List</p>

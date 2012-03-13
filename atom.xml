@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[TJ VanToll]]></title>
-  <link href="http://tjvantoll.github.com/atom.xml" rel="self"/>
-  <link href="http://tjvantoll.github.com/"/>
-  <updated>2012-03-12T22:47:45-04:00</updated>
-  <id>http://tjvantoll.github.com/</id>
+  <link href="http://tjvantoll.com/atom.xml" rel="self"/>
+  <link href="http://tjvantoll.com/"/>
+  <updated>2012-03-12T22:52:14-04:00</updated>
+  <id>http://tjvantoll.com/</id>
   <author>
     <name><![CDATA[TJ VanToll]]></name>
     <email><![CDATA[tj.vantoll@gmail.com]]></email>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[IE7 Attribute Selector Bugs]]></title>
-    <link href="http://tjvantoll.github.com/2012/03/08/IE7-Attribute-Selector-Bugs/"/>
+    <link href="http://tjvantoll.com/2012/03/08/IE7-Attribute-Selector-Bugs/"/>
     <updated>2012-03-08T00:00:00-05:00</updated>
-    <id>http://tjvantoll.github.com/2012/03/08/IE7-Attribute-Selector-Bugs</id>
+    <id>http://tjvantoll.com/2012/03/08/IE7-Attribute-Selector-Bugs</id>
     <content type="html"><![CDATA[<p>The CSS attribute selector allows you to select HTML elements based on their attributes.  For example, take the following markup:</p>
 
 <figure class='code'><figcaption><span>Simple List</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
@@ -216,9 +216,9 @@
   
   <entry>
     <title type="html"><![CDATA[Making a 3D Picture Cube with CSS3]]></title>
-    <link href="http://tjvantoll.github.com/2012/02/27/Making-a-3D-Picture-Cube-with-CSS3/"/>
+    <link href="http://tjvantoll.com/2012/02/27/Making-a-3D-Picture-Cube-with-CSS3/"/>
     <updated>2012-02-27T00:00:00-05:00</updated>
-    <id>http://tjvantoll.github.com/2012/02/27/Making-a-3D-Picture-Cube-with-CSS3</id>
+    <id>http://tjvantoll.com/2012/02/27/Making-a-3D-Picture-Cube-with-CSS3</id>
     <content type="html"><![CDATA[<div class="warning">
     Your browser doesn&#8217;t support CSS 3D transformations, therefore some of these demos might not work as intended.  Please try viewing this page in the latest version of Firefox, Safari, or an iOS device.
 </div>
@@ -233,7 +233,7 @@
 <!--more-->
 
 
-<p><link href="http://tjvantoll.github.com/stylesheets/posts/2012-02-27.css" rel="stylesheet" />
+<p><link href="http://tjvantoll.com/stylesheets/posts/2012-02-27.css" rel="stylesheet" />
 Note: Google Chrome supports 3D transforms, but <a href="https://github.com/Modernizr/Modernizr/issues/240">Modernizr will report a false positive</a> if <a href="http://blog.chromium.org/2011/03/gpu-acceleration-old-drivers.html">Chrome has disabled GPU acceleration</a>.  So if you&#8217;re using Chrome you may or may not see a warning at the top of the screen saying that the demos won&#8217;t work (since I use Modernizr to detect whether to display that warning).  I&#8217;ve also found that if Chrome does disable hardware acceleration, some of the demos in this post are a bit choppy, and occasionally don&#8217;t work.  That&#8217;s one of the downsides with working something so new, all the kinks haven&#8217;t been worked out quite yet.</p>
 
 <h3>Getting Started</h3>
@@ -328,21 +328,21 @@ Note: Google Chrome supports 3D transforms, but <a href="https://github.com/Mode
 <p>Since this is hard to visualize in your head, here&#8217;s an example of a box rotating from 0deg to -180deg on the X axis in slow motion.</p>
 
 <div class="demo-container">
-    <img id="demo-cube-1" class="demo-cube" src="http://tjvantoll.github.com/images/kids/2.jpg" />
+    <img id="demo-cube-1" class="demo-cube" src="http://tjvantoll.com/images/kids/2.jpg" />
 </div>
 
 
 <p>And here&#8217;s one going from 0deg to 90deg on the Y axis.</p>
 
 <div class="demo-container">
-    <img id="demo-cube-2" class="demo-cube" src="http://tjvantoll.github.com/images/kids/1.jpg" />
+    <img id="demo-cube-2" class="demo-cube" src="http://tjvantoll.com/images/kids/1.jpg" />
 </div>
 
 
 <p>Although I won&#8217;t get into how the Z axis is used here, it&#8217;s perhaps the hardest to visualize so I thought I&#8217;d include an example of it as well.  In 3D world it&#8217;s the axis that&#8217;s going straight between you and your monitor.   Here&#8217;s an image going from -50px to 50px on the Z axis.</p>
 
 <div class="demo-container">
-    <img id="demo-cube-3" class="demo-cube" src="http://tjvantoll.github.com/images/izzie/6.jpg" />
+    <img id="demo-cube-3" class="demo-cube" src="http://tjvantoll.com/images/izzie/6.jpg" />
 </div>
 
 
@@ -557,9 +557,9 @@ Note: Google Chrome supports 3D transforms, but <a href="https://github.com/Mode
   
   <entry>
     <title type="html"><![CDATA[CSS3 Color Animations]]></title>
-    <link href="http://tjvantoll.github.com/2012/02/20/CSS3-Color-Animations/"/>
+    <link href="http://tjvantoll.com/2012/02/20/CSS3-Color-Animations/"/>
     <updated>2012-02-20T00:00:00-05:00</updated>
-    <id>http://tjvantoll.github.com/2012/02/20/CSS3-Color-Animations</id>
+    <id>http://tjvantoll.com/2012/02/20/CSS3-Color-Animations</id>
     <content type="html"><![CDATA[<p>CSS3 animations allow you to alter the values of CSS properties over time.  They&#8217;re now supported in Firefox 5+, Chrome, Safari 4+, iOS, Android 4+, and the upcoming IE10, therefore, using them in real production websites is possible.  One of the cool things you can do with them is change the color of an element using exclusively CSS.  Previously a technique like this was only possible using <a href="https://developer.mozilla.org/en/window.setInterval">JavaScript&#8217;s setInterval function</a> to gradually change the appropriate property of the element. See <a href="http://jqueryui.com/demos/animate/">jQuery UI&#8217;s animate demos</a> for a good example.</p>
 
 <!--more-->

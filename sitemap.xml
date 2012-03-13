@@ -1,27 +1,27 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <urlset xmlns='http://www.sitemaps.org/schemas/sitemap/0.9'>
     <url>
-        <loc>http://tjvantoll.github.com/2012/02/20/CSS3-Color-Animations/</loc>
+        <loc>http://tjvantoll.com/2012/02/20/CSS3-Color-Animations/</loc>
         <lastmod>2012-03-11T23:03:55-04:00</lastmod>
     </url>
     <url>
-        <loc>http://tjvantoll.github.com/2012/02/27/Making-a-3D-Picture-Cube-with-CSS3/</loc>
+        <loc>http://tjvantoll.com/2012/02/27/Making-a-3D-Picture-Cube-with-CSS3/</loc>
         <lastmod>2012-03-11T21:09:47-04:00</lastmod>
     </url>
     <url>
-        <loc>http://tjvantoll.github.com/2012/03/08/IE7-Attribute-Selector-Bugs/</loc>
+        <loc>http://tjvantoll.com/2012/03/08/IE7-Attribute-Selector-Bugs/</loc>
         <lastmod>2012-03-11T21:08:34-04:00</lastmod>
     </url>
     <url>
-        <loc>http://tjvantoll.github.com/about/</loc>
+        <loc>http://tjvantoll.com/about/</loc>
         <lastmod>2012-03-11T22:49:32-04:00</lastmod>
     </url>
     <url>
-        <loc>http://tjvantoll.github.com/blog/archives/</loc>
+        <loc>http://tjvantoll.com/blog/archives/</loc>
         <lastmod>2012-03-11T23:03:55-04:00</lastmod>
     </url>
     <url>
-        <loc>http://tjvantoll.github.com/</loc>
+        <loc>http://tjvantoll.com/</loc>
         <lastmod>2012-03-11T23:03:55-04:00</lastmod>
     </url>
 </urlset>
