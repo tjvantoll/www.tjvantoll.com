@@ -1,0 +1,567 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>IE7 Attribute Selector Bugs - TJ VanToll</title>
+  <meta name="author" content="TJ VanToll">
+
+  
+  <meta name="description" content="The CSS attribute selector allows you to select HTML elements based on their attributes. For example, take the following markup: Simple List1
+2
+3
+4
+5 &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://tjvantoll.github.com/2012/03/08/IE7-Attribute-Selector-Bugs">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  
+  <!--
+  Custom script concatenation, including a custom version of Modernizr, prefixfree, and PictureCube
+  <script src="/javascripts/modernizr-2.5.3.js"></script>
+  <script src="/javascripts/prefixfree.min.js"></script>  
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js"></script>
+  <script src="/javascripts/PictureCube.js"></script>
+  -->
+  <script src="/javascripts/build/scripts.js"></script>
+	
+  <link href="/atom.xml" rel="alternate" title="TJ VanToll" type="application/atom+xml">
+  <script>
+	$.domReady(function() {
+		if (Modernizr.csstransforms3d) {
+			new PictureCube('picture-cube', [
+				'/images/me/1.jpg',
+				'/images/me/2.jpg',
+				'/images/kids/2.jpg',
+				'/images/kids/3.jpg',
+				'/images/izzie/5.jpg',
+				'/images/me/3.jpg'											
+			]).cycle(10000);
+		}			
+	});  
+</script>
+
+<!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-29179796-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+	<div id="picture-cube"></div>
+	<h1><a href="/">TJ VanToll</a></h1>
+	
+		<!--<h2>Adventures in Front End Technologies</h2>-->
+		<h2>
+			<span>
+				<span class="a1">A</span>
+				<span class="a2">d</span>
+				<span class="a1">v</span>
+				<span class="a2">e</span>
+				<span class="a1">n</span>
+				<span class="a2">t</span>
+				<span class="a1">u</span>
+				<span class="a2">r</span>
+				<span class="a1">e</span>
+				<span class="a2">s</span>
+			</span>
+			&nbsp;
+			<span>
+				<span class="b">i</span>
+				<span class="b">n</span>
+			</span>
+			&nbsp; 
+			<span>
+				<span class="c1">F</span>
+				<span class="c2">r</span>
+				<span class="c3">o</span>
+				<span class="c4">n</span>
+				<span class="c5">t</span>
+			</span>
+			&nbsp;
+			<span>
+				<span class="d">E</span>
+				<span class="d">n</span>
+				<span class="d">d</span>
+			</span>
+			&nbsp;
+			<span>
+				<span class="e">T</span>
+				<span class="e">e</span>
+				<span class="e">c</span>
+				<span class="e">h</span>
+				<span class="e">n</span>
+				<span class="e">o</span>
+				<span class="e">l</span>
+				<span class="e">o</span>
+				<span class="e">g</span>
+				<span class="e">i</span>
+				<span class="e">e</span>
+				<span class="e">s</span>
+			</span>
+		</h2>    
+	
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:tjvantoll.github.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/about">About</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">IE7 Attribute Selector Bugs</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-03-08T00:00:00-05:00" pubdate data-updated="true">Mar 8<span>th</span>, 2012</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>The CSS attribute selector allows you to select HTML elements based on their attributes.  For example, take the following markup:</p>
+
+<figure class='code'><figcaption><span>Simple List</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;ul&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;li</span> <span class="na">id=</span><span class="s">&quot;item1&quot;</span><span class="nt">&gt;&lt;/li&gt;</span>  <span class="c">&lt;!-- #1 --&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;li</span> <span class="na">id=</span><span class="s">&quot;item2&quot;</span><span class="nt">&gt;&lt;/li&gt;</span>  <span class="c">&lt;!-- #2 --&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;li&gt;&lt;/li&gt;</span>             <span class="c">&lt;!-- #3 --&gt;</span>
+</span><span class='line'><span class="nt">&lt;/ul&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<!--more-->
+
+
+<p>In a compliant browser, here&#8217;s some selectors you can use to target these list items.</p>
+
+<figure class='code'><figcaption><span>Selectors to Target the List</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nt">li</span>             <span class="c">/* Selects #1, #2, #3 */</span>
+</span><span class='line'><span class="nt">li</span><span class="o">[</span><span class="nt">id</span><span class="o">]</span>         <span class="c">/* Selects #1, #2 */</span>
+</span><span class='line'><span class="nt">li</span><span class="o">[</span><span class="nt">id</span><span class="o">=</span><span class="nt">item1</span><span class="o">]</span>   <span class="c">/* Selects #1 */</span>
+</span><span class='line'><span class="nt">li</span><span class="o">[</span><span class="nt">id</span><span class="o">=</span><span class="s1">&#39;item1&#39;</span><span class="o">]</span> <span class="c">/* Selects #1, single quotes are valid */</span>
+</span><span class='line'><span class="nt">li</span><span class="o">[</span><span class="nt">id</span><span class="o">=</span><span class="s2">&quot;item2&quot;</span><span class="o">]</span> <span class="c">/* Selects #1, double quotes are valid too */</span>
+</span><span class='line'><span class="nt">li</span><span class="o">[</span><span class="nt">id</span><span class="o">^=</span><span class="nt">item</span><span class="o">]</span>   <span class="c">/* Selects #1, #2, ^ = starts with */</span>
+</span><span class='line'><span class="nt">li</span><span class="o">[</span><span class="nt">id</span><span class="err">$</span><span class="o">=</span><span class="nt">1</span><span class="o">]</span>      <span class="c">/* Selects #1, $ = ends with */</span>
+</span><span class='line'><span class="nt">li</span><span class="o">[</span><span class="nt">id</span><span class="o">*=</span><span class="nt">item</span><span class="o">]</span>   <span class="c">/* Selects #1, #2, * = contains */</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>Enter IE7</h3>
+
+<p>This is all well and good in most all modern browsers.  Unfortunately IE7 is buggy when handling this selector.  For those of use that are still unlucky enough to be supporting it, I thought it would be nice to have some of these documented.</p>
+
+<h3>DOM Attributes == HTML Attributes?</h3>
+
+<p>Some DOM attributes have different names than the HTML attributes to avoid conflicts with JavaScript reserved words.  Specifically in this case, DOM nodes have <code>htmlFor</code> and <code>className</code> attributes to avoid JavaScript reserved words <code>for</code> and <code>class</code>.</p>
+
+<figure class='code'><figcaption><span>htmlFor and className</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;label</span> <span class="na">class=</span><span class="s">&quot;foo&quot;</span> <span class="na">for=</span><span class="s">&quot;name&quot;</span> <span class="na">id=</span><span class="s">&quot;nameLabel&quot;</span><span class="nt">&gt;</span>Name:<span class="nt">&lt;/label&gt;</span>
+</span><span class='line'><span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;text&quot;</span> <span class="na">name=</span><span class="s">&quot;name&quot;</span> <span class="na">id=</span><span class="s">&quot;name&quot;</span> <span class="nt">/&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nt">&lt;script&gt;</span>
+</span><span class='line'>  <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">&#39;nameLabel&#39;</span><span class="p">).</span><span class="k">for</span><span class="p">;</span> <span class="c1">//undefined</span>
+</span><span class='line'>  <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">&#39;nameLabel&#39;</span><span class="p">).</span><span class="nx">htmlFor</span> <span class="c1">//&#39;name&#39;</span>
+</span><span class='line'>  <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">&#39;nameLabel&#39;</span><span class="p">).</span><span class="kr">class</span> <span class="c1">//undefined</span>
+</span><span class='line'>  <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">&#39;nameLabel&#39;</span><span class="p">).</span><span class="nx">className</span> <span class="c1">//&#39;foo&#39;</span>
+</span><span class='line'><span class="nt">&lt;/script&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>In IE8+ (and everywhere else for that matter) the following attribute selector will select the label2:</p>
+
+<figure class='code'><figcaption><span>Standard Attribute Selector</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nt">label</span><span class="o">[</span><span class="nt">for</span><span class="o">=</span><span class="s1">&#39;name&#39;</span><span class="o">]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>In IE7 this won&#8217;t work.  You&#8217;ll need to use the incorrect <code>htmlFor</code> attribute:</p>
+
+<figure class='code'><figcaption><span>IE7 for Attribute Selector</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nt">label</span><span class="o">[</span><span class="nt">htmlFor</span><span class="o">=</span><span class="s1">&#39;name&#39;</span><span class="o">]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>So if you&#8217;re still supporting IE7 you&#8217;ll almost certainly want to include them together:</p>
+
+<figure class='code'><figcaption><span>Combined Selector</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nt">label</span><span class="o">[</span><span class="nt">for</span><span class="o">=</span><span class="s1">&#39;name&#39;</span><span class="o">],</span> <span class="nt">label</span><span class="o">[</span><span class="nt">htmlFor</span><span class="o">=</span><span class="s1">&#39;name&#39;</span><span class="o">]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Along the same lines, IE7 will incorrectly select attributes based on the className attribute:</p>
+
+<figure class='code'><figcaption><span>IE7 class Attribute Selector</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nt">label</span><span class="o">[</span><span class="nt">className</span><span class="o">=</span><span class="s1">&#39;name&#39;</span><span class="o">]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Fortunately IE7 also supports selecting using <code>class</code>.</p>
+
+<figure class='code'><figcaption><span>class Attribute Selector</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nt">label</span><span class="o">[</span><span class="nt">class</span><span class="o">=</span><span class="s1">&#39;name&#39;</span><span class="o">]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>IE8 fixed both of these bugs and selecting for the attributes <code>htmlFor</code> and <code>className</code> no longer work.</p>
+
+<h3>Empty Attributes</h3>
+
+<p>It&#8217;s impossible to target empty attributes via CSS in IE7.  As an example, let&#8217;s say you apply a <a href="http://html5doctor.com/html5-custom-data-attributes/">custom HTML5 data attribute</a> to nodes at random throughout the DOM.  Let&#8217;s say you want to select only the ones that have an empty value, for example the h3 below:</p>
+
+<figure class='code'><figcaption><span>Headings to Select</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;h1</span> <span class="na">data-state=</span><span class="s">&quot;foo&quot;</span><span class="nt">&gt;</span>Top Heading<span class="nt">&lt;h1&gt;</span>
+</span><span class='line'><span class="nt">&lt;h2</span> <span class="na">data-state=</span><span class="s">&quot;bar&quot;</span><span class="nt">&gt;</span>Sub Heading<span class="nt">&lt;h2&gt;</span>
+</span><span class='line'><span class="nt">&lt;h3</span> <span class="na">data-state=</span><span class="s">&quot;&quot;</span><span class="nt">&gt;</span>Another Heading<span class="nt">&lt;h3&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>You would write this selector and call it a day:</p>
+
+<figure class='code'><figcaption><span>Empty Attribute Selector</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="o">[</span><span class="nt">data-state</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="o">]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Expect it won&#8217;t work in IE7.  There is simply no way to target empty attributes via CSS in IE7.  So how can you replicate this functionality?  For better or worse JavaScript is the only client option to handle this.</p>
+
+<p><a href="http://caniuse.com/queryselector">querySelectorAll</a> isn&#8217;t supported until IE8, so you need a selector engine to target these nodes.  Here&#8217;s how you can do it in jQuery:</p>
+
+<figure class='code'><figcaption><span>Selecting Nodes with Empty Attribute - jQuery</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">$</span><span class="p">(</span><span class="s1">&#39;[data-state=&quot;&quot;]&#39;</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>If you&#8217;re using <a href="http://dojotoolkit.org">Dojo</a> yet another step is necessary.  For whatever reason running…</p>
+
+<figure class='code'><figcaption><span>JavaScript Selecting Nodes with Empty Attribute - Dojo</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">dojo</span><span class="p">.</span><span class="nx">query</span><span class="p">(</span><span class="s1">&#39;[data-state=&quot;&quot;]&#39;</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>…returns not only the nodes with empty attributes, but also all the nodes that don&#8217;t have the attribute declared at all!  Furthermore, <code>dojo.query('[data-state]')</code> incorrectly doesn&#8217;t return nodes that have the attribute with an empty value.  So you need the following approach to select the nodes in IE7.</p>
+
+<figure class='code'><figcaption><span>Functioning IE7 Approach</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">dojo</span><span class="p">.</span><span class="nx">query</span><span class="p">(</span><span class="s1">&#39;*&#39;</span><span class="p">).</span><span class="nx">forEach</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">element</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">if</span> <span class="p">(</span><span class="nx">dojo</span><span class="p">.</span><span class="nx">hasAttr</span><span class="p">(</span><span class="nx">element</span><span class="p">,</span> <span class="s1">&#39;data-state&#39;</span><span class="p">)</span> <span class="o">&amp;&amp;</span>
+</span><span class='line'>      <span class="nx">dojo</span><span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="nx">element</span><span class="p">,</span> <span class="s1">&#39;data-state&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="s1">&#39;&#39;</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>      <span class="c1">//Safe to finally apply your styling here.</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'><span class="p">});</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Note that when using any of the JavaScript based solutions it&#8217;s recommended to leave the CSS in place.  Yes this is dual maintenance, but it avoids a potential <a href="http://en.wikipedia.org/wiki/FOUC">FOUC</a>.  Fortunately ALL of this nonsense is fixed in IE8.</p>
+
+<h3>Descendant Selector Typos</h3>
+
+<p>Let&#8217;s say you have the following markup.</p>
+
+<figure class='code'><figcaption><span>Sample HTML</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;div</span> <span class="na">data-state=</span><span class="s">&#39;active&#39;</span><span class="nt">&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;p&gt;</span>Some text<span class="nt">&lt;/p&gt;</span>
+</span><span class='line'><span class="nt">&lt;/div&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>…and you want to apply some styling to the paragraph, maybe something like this:</p>
+
+<figure class='code'><figcaption><span>Descendant Selector</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nt">div</span><span class="o">[</span><span class="nt">data-state</span><span class="o">=</span><span class="s1">&#39;active&#39;</span><span class="o">]</span><span class="nt">p</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">color</span><span class="o">:</span> <span class="nb">red</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Notice how there&#8217;s no space between the &#8220;]&#8221; and the &#8220;p&#8221;, that&#8217;s a syntax error, right?  Correct… except in IE7!  IE7 will incorrectly parse this as if a space were there and change the color of the paragraph to red.</p>
+
+<p>This was also fixed in IE8.</p>
+
+<h3>Summary</h3>
+
+<p>We&#8217;re actually really fortunate that the attribute selector is supported in IE7.  It&#8217;s a very useful tool to have available and it can help solve a lot of real world issues.  And if you&#8217;ve dropped IE6 support they&#8217;re finally safe to use.</p>
+
+<p>While support is buggy, the attribute selector does work for the vast majority of use cases.  However, knowing to look out for these bugs can save hours of frustration.  Yet another reason for IE7 to fall off the face of the Earth.  Happy hacking.</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">TJ VanToll</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-03-08T00:00:00-05:00" pubdate data-updated="true">Mar 8<span>th</span>, 2012</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/browsers/'>Browsers</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://tjvantoll.github.com/2012/03/08/IE7-Attribute-Selector-Bugs/" data-via="tjvantoll" data-counturl="http://tjvantoll.github.com/2012/03/08/IE7-Attribute-Selector-Bugs/" >Tweet</a>
+  
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/2012/02/27/Making-a-3D-Picture-Cube-with-CSS3/" title="Previous Post: Making a 3D Picture Cube with CSS3">&laquo; Making a 3D Picture Cube with CSS3</a>
+      
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2012/03/08/IE7-Attribute-Selector-Bugs/">IE7 Attribute Selector Bugs</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2012/02/27/Making-a-3D-Picture-Cube-with-CSS3/">Making a 3D Picture Cube with CSS3</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2012/02/20/CSS3-Color-Animations/">CSS3 Color Animations</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>Latest Tweets</h1>
+  <ul id="tweets">
+    <li class="loading">Status updating...</li>
+  </ul>
+  <script type="text/javascript">
+    $.domReady(function(){
+      getTwitterFeed("tjvantoll", 4, false);
+    });
+  </script>
+  <script src="/javascripts/twitter.js" type="text/javascript"> </script>
+  
+    <a href="http://twitter.com/tjvantoll" class="twitter-follow-button" data-show-count="false">Follow @tjvantoll</a>
+  
+</section>
+
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/tjvantoll">@tjvantoll</a> on GitHub
+  
+  <script type="text/javascript">
+    $.domReady(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'tjvantoll',
+            count: 5,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2012 - TJ VanToll -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'tjvantoll';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://tjvantoll.github.com/2012/03/08/IE7-Attribute-Selector-Bugs/';
+        var disqus_url = 'http://tjvantoll.github.com/2012/03/08/IE7-Attribute-Selector-Bugs/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

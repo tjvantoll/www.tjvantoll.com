@@ -1,0 +1,828 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[TJ VanToll]]></title>
+  <link href="http://tjvantoll.github.com/atom.xml" rel="self"/>
+  <link href="http://tjvantoll.github.com/"/>
+  <updated>2012-03-12T22:13:18-04:00</updated>
+  <id>http://tjvantoll.github.com/</id>
+  <author>
+    <name><![CDATA[TJ VanToll]]></name>
+    <email><![CDATA[tj.vantoll@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[IE7 Attribute Selector Bugs]]></title>
+    <link href="http://tjvantoll.github.com/2012/03/08/IE7-Attribute-Selector-Bugs/"/>
+    <updated>2012-03-08T00:00:00-05:00</updated>
+    <id>http://tjvantoll.github.com/2012/03/08/IE7-Attribute-Selector-Bugs</id>
+    <content type="html"><![CDATA[<p>The CSS attribute selector allows you to select HTML elements based on their attributes.  For example, take the following markup:</p>
+
+<figure class='code'><figcaption><span>Simple List</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;ul&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;li</span> <span class="na">id=</span><span class="s">&quot;item1&quot;</span><span class="nt">&gt;&lt;/li&gt;</span>  <span class="c">&lt;!-- #1 --&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;li</span> <span class="na">id=</span><span class="s">&quot;item2&quot;</span><span class="nt">&gt;&lt;/li&gt;</span>  <span class="c">&lt;!-- #2 --&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;li&gt;&lt;/li&gt;</span>             <span class="c">&lt;!-- #3 --&gt;</span>
+</span><span class='line'><span class="nt">&lt;/ul&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<!--more-->
+
+
+<p>In a compliant browser, here&#8217;s some selectors you can use to target these list items.</p>
+
+<figure class='code'><figcaption><span>Selectors to Target the List</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nt">li</span>             <span class="c">/* Selects #1, #2, #3 */</span>
+</span><span class='line'><span class="nt">li</span><span class="o">[</span><span class="nt">id</span><span class="o">]</span>         <span class="c">/* Selects #1, #2 */</span>
+</span><span class='line'><span class="nt">li</span><span class="o">[</span><span class="nt">id</span><span class="o">=</span><span class="nt">item1</span><span class="o">]</span>   <span class="c">/* Selects #1 */</span>
+</span><span class='line'><span class="nt">li</span><span class="o">[</span><span class="nt">id</span><span class="o">=</span><span class="s1">&#39;item1&#39;</span><span class="o">]</span> <span class="c">/* Selects #1, single quotes are valid */</span>
+</span><span class='line'><span class="nt">li</span><span class="o">[</span><span class="nt">id</span><span class="o">=</span><span class="s2">&quot;item2&quot;</span><span class="o">]</span> <span class="c">/* Selects #1, double quotes are valid too */</span>
+</span><span class='line'><span class="nt">li</span><span class="o">[</span><span class="nt">id</span><span class="o">^=</span><span class="nt">item</span><span class="o">]</span>   <span class="c">/* Selects #1, #2, ^ = starts with */</span>
+</span><span class='line'><span class="nt">li</span><span class="o">[</span><span class="nt">id</span><span class="err">$</span><span class="o">=</span><span class="nt">1</span><span class="o">]</span>      <span class="c">/* Selects #1, $ = ends with */</span>
+</span><span class='line'><span class="nt">li</span><span class="o">[</span><span class="nt">id</span><span class="o">*=</span><span class="nt">item</span><span class="o">]</span>   <span class="c">/* Selects #1, #2, * = contains */</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>Enter IE7</h3>
+
+<p>This is all well and good in most all modern browsers.  Unfortunately IE7 is buggy when handling this selector.  For those of use that are still unlucky enough to be supporting it, I thought it would be nice to have some of these documented.</p>
+
+<h3>DOM Attributes == HTML Attributes?</h3>
+
+<p>Some DOM attributes have different names than the HTML attributes to avoid conflicts with JavaScript reserved words.  Specifically in this case, DOM nodes have <code>htmlFor</code> and <code>className</code> attributes to avoid JavaScript reserved words <code>for</code> and <code>class</code>.</p>
+
+<figure class='code'><figcaption><span>htmlFor and className</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;label</span> <span class="na">class=</span><span class="s">&quot;foo&quot;</span> <span class="na">for=</span><span class="s">&quot;name&quot;</span> <span class="na">id=</span><span class="s">&quot;nameLabel&quot;</span><span class="nt">&gt;</span>Name:<span class="nt">&lt;/label&gt;</span>
+</span><span class='line'><span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;text&quot;</span> <span class="na">name=</span><span class="s">&quot;name&quot;</span> <span class="na">id=</span><span class="s">&quot;name&quot;</span> <span class="nt">/&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nt">&lt;script&gt;</span>
+</span><span class='line'>  <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">&#39;nameLabel&#39;</span><span class="p">).</span><span class="k">for</span><span class="p">;</span> <span class="c1">//undefined</span>
+</span><span class='line'>  <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">&#39;nameLabel&#39;</span><span class="p">).</span><span class="nx">htmlFor</span> <span class="c1">//&#39;name&#39;</span>
+</span><span class='line'>  <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">&#39;nameLabel&#39;</span><span class="p">).</span><span class="kr">class</span> <span class="c1">//undefined</span>
+</span><span class='line'>  <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">&#39;nameLabel&#39;</span><span class="p">).</span><span class="nx">className</span> <span class="c1">//&#39;foo&#39;</span>
+</span><span class='line'><span class="nt">&lt;/script&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>In IE8+ (and everywhere else for that matter) the following attribute selector will select the label2:</p>
+
+<figure class='code'><figcaption><span>Standard Attribute Selector</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nt">label</span><span class="o">[</span><span class="nt">for</span><span class="o">=</span><span class="s1">&#39;name&#39;</span><span class="o">]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>In IE7 this won&#8217;t work.  You&#8217;ll need to use the incorrect <code>htmlFor</code> attribute:</p>
+
+<figure class='code'><figcaption><span>IE7 for Attribute Selector</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nt">label</span><span class="o">[</span><span class="nt">htmlFor</span><span class="o">=</span><span class="s1">&#39;name&#39;</span><span class="o">]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>So if you&#8217;re still supporting IE7 you&#8217;ll almost certainly want to include them together:</p>
+
+<figure class='code'><figcaption><span>Combined Selector</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nt">label</span><span class="o">[</span><span class="nt">for</span><span class="o">=</span><span class="s1">&#39;name&#39;</span><span class="o">],</span> <span class="nt">label</span><span class="o">[</span><span class="nt">htmlFor</span><span class="o">=</span><span class="s1">&#39;name&#39;</span><span class="o">]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Along the same lines, IE7 will incorrectly select attributes based on the className attribute:</p>
+
+<figure class='code'><figcaption><span>IE7 class Attribute Selector</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nt">label</span><span class="o">[</span><span class="nt">className</span><span class="o">=</span><span class="s1">&#39;name&#39;</span><span class="o">]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Fortunately IE7 also supports selecting using <code>class</code>.</p>
+
+<figure class='code'><figcaption><span>class Attribute Selector</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nt">label</span><span class="o">[</span><span class="nt">class</span><span class="o">=</span><span class="s1">&#39;name&#39;</span><span class="o">]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>IE8 fixed both of these bugs and selecting for the attributes <code>htmlFor</code> and <code>className</code> no longer work.</p>
+
+<h3>Empty Attributes</h3>
+
+<p>It&#8217;s impossible to target empty attributes via CSS in IE7.  As an example, let&#8217;s say you apply a <a href="http://html5doctor.com/html5-custom-data-attributes/">custom HTML5 data attribute</a> to nodes at random throughout the DOM.  Let&#8217;s say you want to select only the ones that have an empty value, for example the h3 below:</p>
+
+<figure class='code'><figcaption><span>Headings to Select</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;h1</span> <span class="na">data-state=</span><span class="s">&quot;foo&quot;</span><span class="nt">&gt;</span>Top Heading<span class="nt">&lt;h1&gt;</span>
+</span><span class='line'><span class="nt">&lt;h2</span> <span class="na">data-state=</span><span class="s">&quot;bar&quot;</span><span class="nt">&gt;</span>Sub Heading<span class="nt">&lt;h2&gt;</span>
+</span><span class='line'><span class="nt">&lt;h3</span> <span class="na">data-state=</span><span class="s">&quot;&quot;</span><span class="nt">&gt;</span>Another Heading<span class="nt">&lt;h3&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>You would write this selector and call it a day:</p>
+
+<figure class='code'><figcaption><span>Empty Attribute Selector</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="o">[</span><span class="nt">data-state</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="o">]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Expect it won&#8217;t work in IE7.  There is simply no way to target empty attributes via CSS in IE7.  So how can you replicate this functionality?  For better or worse JavaScript is the only client option to handle this.</p>
+
+<p><a href="http://caniuse.com/queryselector">querySelectorAll</a> isn&#8217;t supported until IE8, so you need a selector engine to target these nodes.  Here&#8217;s how you can do it in jQuery:</p>
+
+<figure class='code'><figcaption><span>Selecting Nodes with Empty Attribute - jQuery</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">$</span><span class="p">(</span><span class="s1">&#39;[data-state=&quot;&quot;]&#39;</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>If you&#8217;re using <a href="http://dojotoolkit.org">Dojo</a> yet another step is necessary.  For whatever reason running…</p>
+
+<figure class='code'><figcaption><span>JavaScript Selecting Nodes with Empty Attribute - Dojo</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">dojo</span><span class="p">.</span><span class="nx">query</span><span class="p">(</span><span class="s1">&#39;[data-state=&quot;&quot;]&#39;</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>…returns not only the nodes with empty attributes, but also all the nodes that don&#8217;t have the attribute declared at all!  Furthermore, <code>dojo.query('[data-state]')</code> incorrectly doesn&#8217;t return nodes that have the attribute with an empty value.  So you need the following approach to select the nodes in IE7.</p>
+
+<figure class='code'><figcaption><span>Functioning IE7 Approach</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">dojo</span><span class="p">.</span><span class="nx">query</span><span class="p">(</span><span class="s1">&#39;*&#39;</span><span class="p">).</span><span class="nx">forEach</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">element</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">if</span> <span class="p">(</span><span class="nx">dojo</span><span class="p">.</span><span class="nx">hasAttr</span><span class="p">(</span><span class="nx">element</span><span class="p">,</span> <span class="s1">&#39;data-state&#39;</span><span class="p">)</span> <span class="o">&amp;&amp;</span>
+</span><span class='line'>      <span class="nx">dojo</span><span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="nx">element</span><span class="p">,</span> <span class="s1">&#39;data-state&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="s1">&#39;&#39;</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>      <span class="c1">//Safe to finally apply your styling here.</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'><span class="p">});</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Note that when using any of the JavaScript based solutions it&#8217;s recommended to leave the CSS in place.  Yes this is dual maintenance, but it avoids a potential <a href="http://en.wikipedia.org/wiki/FOUC">FOUC</a>.  Fortunately ALL of this nonsense is fixed in IE8.</p>
+
+<h3>Descendant Selector Typos</h3>
+
+<p>Let&#8217;s say you have the following markup.</p>
+
+<figure class='code'><figcaption><span>Sample HTML</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;div</span> <span class="na">data-state=</span><span class="s">&#39;active&#39;</span><span class="nt">&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;p&gt;</span>Some text<span class="nt">&lt;/p&gt;</span>
+</span><span class='line'><span class="nt">&lt;/div&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>…and you want to apply some styling to the paragraph, maybe something like this:</p>
+
+<figure class='code'><figcaption><span>Descendant Selector</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nt">div</span><span class="o">[</span><span class="nt">data-state</span><span class="o">=</span><span class="s1">&#39;active&#39;</span><span class="o">]</span><span class="nt">p</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">color</span><span class="o">:</span> <span class="nb">red</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Notice how there&#8217;s no space between the &#8220;]&#8221; and the &#8220;p&#8221;, that&#8217;s a syntax error, right?  Correct… except in IE7!  IE7 will incorrectly parse this as if a space were there and change the color of the paragraph to red.</p>
+
+<p>This was also fixed in IE8.</p>
+
+<h3>Summary</h3>
+
+<p>We&#8217;re actually really fortunate that the attribute selector is supported in IE7.  It&#8217;s a very useful tool to have available and it can help solve a lot of real world issues.  And if you&#8217;ve dropped IE6 support they&#8217;re finally safe to use.</p>
+
+<p>While support is buggy, the attribute selector does work for the vast majority of use cases.  However, knowing to look out for these bugs can save hours of frustration.  Yet another reason for IE7 to fall off the face of the Earth.  Happy hacking.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Making a 3D Picture Cube with CSS3]]></title>
+    <link href="http://tjvantoll.github.com/2012/02/27/Making-a-3D-Picture-Cube-with-CSS3/"/>
+    <updated>2012-02-27T00:00:00-05:00</updated>
+    <id>http://tjvantoll.github.com/2012/02/27/Making-a-3D-Picture-Cube-with-CSS3</id>
+    <content type="html"><![CDATA[<div class="warning">
+    Your browser doesn&#8217;t support CSS 3D transformations, therefore some of these demos might not work as intended.  Please try viewing this page in the latest version of Firefox, Safari, or an iOS device.
+</div>
+
+
+<p>Let&#8217;s face it, the mere concept of doing something in 3D in the browser is pretty awesome.  For those of us that remember the good old days of font tags and spacer gifs… well, let&#8217;s just say we&#8217;ve come a long way.</p>
+
+<p>CSS3 3D transforms were recently added in Firefox 10 and <a href="http://blogs.msdn.com/b/ie/archive/2011/09/13/ie10pp3.aspx">IE10&#8217;s 3rd platform preview</a>.  They&#8217;ve been in Safari since v4, in iOS since v3.2, and they&#8217;re also supported in Android&#8217;s recent Ice Cream Sandwich release.  So a decent chunk of web users now have the capability to run 3D transitions (at the time of this writing <a href="http://caniuse.com/#feat=transforms3d">caniuse.com</a> has it at ~32%).</p>
+
+<p>So I decided I wanted to start messing around with this.</p>
+
+<!--more-->
+
+
+<p><link href="http://tjvantoll.github.com/stylesheets/posts/2012-02-27.css" rel="stylesheet" />
+Note: Google Chrome supports 3D transforms, but <a href="https://github.com/Modernizr/Modernizr/issues/240">Modernizr will report a false positive</a> if <a href="http://blog.chromium.org/2011/03/gpu-acceleration-old-drivers.html">Chrome has disabled GPU acceleration</a>.  So if you&#8217;re using Chrome you may or may not see a warning at the top of the screen saying that the demos won&#8217;t work (since I use Modernizr to detect whether to display that warning).  I&#8217;ve also found that if Chrome does disable hardware acceleration, some of the demos in this post are a bit choppy, and occasionally don&#8217;t work.  That&#8217;s one of the downsides with working something so new, all the kinks haven&#8217;t been worked out quite yet.</p>
+
+<h3>Getting Started</h3>
+
+<p>There are a few resources that I would recommend for getting started.</p>
+
+<ul>
+<li><a href="http://24ways.org/2010/intro-to-css-3d-transforms">An Introduction to CSS 3D Transforms</a> by David DeSandro.  This is an excellent starting point to learn the syntax and to see some <a href="http://desandro.github.com/3dtransforms/examples/card-02-slide-flip.html">pretty</a> <a href="http://desandro.github.com/3dtransforms/examples/cube-02-show-sides.html">sweet</a> <a href="http://desandro.github.com/3dtransforms/examples/carousel-02-dynamic.html">demos</a>.</li>
+<li><a href="http://www.paulrhayes.com/2010-09/3d-css-cube-ii-touch-gestures-click-and-drag/">CSS 3D cube with touch gestures, click and drag</a> by Paul Hayes.  Another excellent <a href="http://www.paulrhayes.com/experiments/cube-3d/touch.html">demo</a> of a 3D cube that supports the keyboard, touch gestures, and dragging.</li>
+<li><a href="https://developer.mozilla.org/En/CSS/Using_CSS_transforms">Mozilla Developer Network&#8217;s entry on CSS Transforms</a></li>
+</ul>
+
+
+<p>I decided that I wanted a way to show off pictures in the footer of this blog using 3D transforms.  The effect I decided on was having a cube with an image on all 6 sides that I could rotate through a JavaScript API.  More importantly, I wanted the solution to be something that other people could use and extend.</p>
+
+<h3>Markup</h3>
+
+<p>The markup I ended up using was very similar to the cube in <a href="http://desandro.github.com/3dtransforms/examples/cube-02-show-sides.html">David DeSandro&#8217;s cube demo</a>.</p>
+
+<figure class='code'><figcaption><span>Basic Markup</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;PictureCube-container&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;cube show-front&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>      <span class="nt">&lt;figure</span> <span class="na">class=</span><span class="s">&quot;front&quot;</span><span class="nt">&gt;&lt;img</span> <span class="na">src=</span><span class="s">&quot;1.jpg&quot;</span> <span class="nt">/&gt;&lt;/figure&gt;</span>
+</span><span class='line'>      <span class="nt">&lt;figure</span> <span class="na">class=</span><span class="s">&quot;back&quot;</span><span class="nt">&gt;&lt;img</span> <span class="na">src=</span><span class="s">&quot;2.jpg&quot;</span> <span class="nt">/&gt;&lt;/figure&gt;</span>
+</span><span class='line'>      <span class="nt">&lt;figure</span> <span class="na">class=</span><span class="s">&quot;right&quot;</span><span class="nt">&gt;&lt;img</span> <span class="na">src=</span><span class="s">&quot;3.jpg&quot;</span> <span class="nt">/&gt;&lt;/figure&gt;</span>
+</span><span class='line'>      <span class="nt">&lt;figure</span> <span class="na">class=</span><span class="s">&quot;left&quot;</span><span class="nt">&gt;&lt;img</span> <span class="na">src=</span><span class="s">&quot;4.jpg&quot;</span> <span class="nt">/&gt;&lt;/figure&gt;</span>
+</span><span class='line'>      <span class="nt">&lt;figure</span> <span class="na">class=</span><span class="s">&quot;top&quot;</span><span class="nt">&gt;&lt;img</span> <span class="na">src=</span><span class="s">&quot;5.jpg&quot;</span> <span class="nt">/&gt;&lt;/figure&gt;</span>
+</span><span class='line'>      <span class="nt">&lt;figure</span> <span class="na">class=</span><span class="s">&quot;bottom&quot;</span><span class="nt">&gt;&lt;img</span> <span class="na">src=</span><span class="s">&quot;6.jpg&quot;</span> <span class="nt">/&gt;&lt;/figure&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;/div&gt;</span>
+</span><span class='line'><span class="nt">&lt;/div&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>Styling</h3>
+
+<p>I&#8217;m not going to go into the full details of how the styling to create the cubes works, those are best covered by the articles I linked to earlier, but I did want to give a high level overview of what&#8217;s going on.  Here&#8217;s a simplified version of the styles applied to each of the sides of the cube.</p>
+
+<figure class='code'><figcaption><span>Basic Styling</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="c">/* Vendor prefixes removed for readability */</span>
+</span><span class='line'><span class="nc">.cube</span> <span class="nc">.front</span> <span class="p">{</span>
+</span><span class='line'>  <span class="c">/* No X/Y rotation needed since the front is */</span>
+</span><span class='line'>  <span class="c">/* already facing forward. */</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="nc">.cube</span> <span class="nc">.back</span> <span class="p">{</span>
+</span><span class='line'>  <span class="n">transform</span><span class="o">:</span> <span class="n">rotateX</span><span class="p">(</span> <span class="m">-180</span><span class="n">deg</span> <span class="p">);</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="nc">.cube</span> <span class="nc">.right</span> <span class="p">{</span>
+</span><span class='line'>  <span class="n">transform</span><span class="o">:</span> <span class="n">rotateY</span><span class="p">(</span> <span class="m">90</span><span class="n">deg</span> <span class="p">);</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="nc">.cube</span> <span class="nc">.left</span> <span class="p">{</span>
+</span><span class='line'>  <span class="n">transform</span><span class="o">:</span> <span class="n">rotateY</span><span class="p">(</span> <span class="m">-90</span><span class="n">deg</span> <span class="p">);</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="nc">.cube</span> <span class="nc">.top</span> <span class="p">{</span>
+</span><span class='line'>  <span class="n">transform</span><span class="o">:</span> <span class="n">rotateX</span><span class="p">(</span> <span class="m">90</span><span class="n">deg</span> <span class="p">);</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="nc">.cube</span> <span class="nc">.bottom</span> <span class="p">{</span>
+</span><span class='line'>  <span class="n">transform</span><span class="o">:</span> <span class="n">rotateX</span><span class="p">(</span> <span class="m">-90</span><span class="n">deg</span> <span class="p">);</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The front side doesn&#8217;t need to be rotated since it&#8217;s already facing the screen front and center, but all the other sides need to be rotated on either the X or Y axis to create the cube.  For example, the back side is rotated on the X axis -180 degrees so that it faces directly away from the screen.</p>
+
+<p>Since this is hard to visualize in your head, here&#8217;s an example of a box rotating from 0deg to -180deg on the X axis in slow motion.</p>
+
+<div class="demo-container">
+    <img id="demo-cube-1" class="demo-cube" src="http://tjvantoll.github.com/images/kids/2.jpg" />
+</div>
+
+
+<p>And here&#8217;s one going from 0deg to 90deg on the Y axis.</p>
+
+<div class="demo-container">
+    <img id="demo-cube-2" class="demo-cube" src="http://tjvantoll.github.com/images/kids/1.jpg" />
+</div>
+
+
+<p>Although I won&#8217;t get into how the Z axis is used here, it&#8217;s perhaps the hardest to visualize so I thought I&#8217;d include an example of it as well.  In 3D world it&#8217;s the axis that&#8217;s going straight between you and your monitor.   Here&#8217;s an image going from -50px to 50px on the Z axis.</p>
+
+<div class="demo-container">
+    <img id="demo-cube-3" class="demo-cube" src="http://tjvantoll.github.com/images/izzie/6.jpg" />
+</div>
+
+
+<h3>Rotating the Cube</h3>
+
+<p>So the 6 sides themselves have now have been rotated to form the cube.  In order to show various sides of the cube to the user, the cube itself needs to be rotated to move the appropriate side to the front.  This will be done by applying classes to the cube, one for each side.</p>
+
+<figure class='code'><figcaption><span>Basic Classes for Rotation</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="c">/* Vendor prefixes removed for readability */</span>
+</span><span class='line'><span class="nc">.cube.show-front</span> <span class="p">{</span>
+</span><span class='line'>  <span class="c">/* No X/Y translation is necessary */</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="nc">.cube.show-back</span> <span class="p">{</span>
+</span><span class='line'>  <span class="n">transform</span><span class="o">:</span> <span class="n">rotateX</span><span class="p">(</span> <span class="m">-180</span><span class="n">deg</span> <span class="p">);</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="nc">.cube.show-right</span> <span class="p">{</span>
+</span><span class='line'>  <span class="n">transform</span><span class="o">:</span> <span class="n">rotateY</span><span class="p">(</span> <span class="m">-90</span><span class="n">deg</span> <span class="p">);</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="nc">.cube.show-left</span> <span class="p">{</span>
+</span><span class='line'>  <span class="n">transform</span><span class="o">:</span> <span class="n">rotateY</span><span class="p">(</span> <span class="m">90</span><span class="n">deg</span> <span class="p">);</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="nc">.cube.show-top</span> <span class="p">{</span>
+</span><span class='line'>  <span class="n">transform</span><span class="o">:</span> <span class="n">rotateX</span><span class="p">(</span> <span class="m">-90</span><span class="n">deg</span> <span class="p">);</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="nc">.cube.show-bottom</span> <span class="p">{</span>
+</span><span class='line'>  <span class="n">transform</span><span class="o">:</span> <span class="n">rotateX</span><span class="p">(</span> <span class="m">90</span><span class="n">deg</span> <span class="p">);</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>Designing an API</h3>
+
+<p>Now we have a cube but nothing to use to interact with it.  At the very least we need something to toggle the classes shown above to make the cube rotate.  Time to start designing a JavaScript API for the cube.</p>
+
+<p>I started with a constructor function that takes the necessary information, a DOM node and an array of the URLs for the images to use on the cube.</p>
+
+<figure class='code'><figcaption><span>PictureCube Constructor</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="cm">/**</span>
+</span><span class='line'><span class="cm"> * @param node {DOMNode|string} The node to turn into the cube </span>
+</span><span class='line'><span class="cm"> *             or the id attribute of the node</span>
+</span><span class='line'><span class="cm"> * @param images {Array} An Array of 6 Strings containing the URLs </span>
+</span><span class='line'><span class="cm"> *               of the images to place in the cube</span>
+</span><span class='line'><span class="cm"> */</span>
+</span><span class='line'><span class="nx">PictureCube</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span> <span class="nx">node</span><span class="p">,</span> <span class="nx">images</span> <span class="p">)</span> <span class="p">{</span> <span class="p">};</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>For convenience&#8217;s sake I allow the user to pass in either a String id attribute of a DOM node or the node itself.  A quick conversion internally will make it so I only have to deal with the node.</p>
+
+<figure class='code'><figcaption><span>Getting the Node</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="k">typeof</span> <span class="nx">node</span> <span class="o">==</span> <span class="s1">&#39;string&#39;</span> <span class="o">?</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="nx">node</span><span class="p">)</span> <span class="o">:</span> <span class="nx">node</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Next you need to be able to do things with the cube.  The things I wanted to do were the ability to go to a particular side, cycle through the sides at some interval, and the ability to clear that interval.</p>
+
+<figure class='code'><figcaption><span>Methods</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="cm">/**</span>
+</span><span class='line'><span class="cm"> * @param slide {number} The number of the side to change the </span>
+</span><span class='line'><span class="cm"> *              cube to.</span>
+</span><span class='line'><span class="cm"> */</span>
+</span><span class='line'><span class="nx">PictureCube</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="kr">goto</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">side</span><span class="p">)</span> <span class="p">{}</span>
+</span><span class='line'>
+</span><span class='line'><span class="cm">/**</span>
+</span><span class='line'><span class="cm"> * @param interval {number} The number of milliseconds between each </span>
+</span><span class='line'><span class="cm"> *                 image transition</span>
+</span><span class='line'><span class="cm"> */</span>
+</span><span class='line'><span class="nx">PictureCube</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">cycle</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">interval</span><span class="p">)</span> <span class="p">{};</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">PictureCube</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">clearCycle</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{};</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>So to create the cube you call the constructor with the node you want the cube to be in and the images you want to be on the various sides of the cube.</p>
+
+<figure class='code'><figcaption><span>Instantiating a Cube</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="kd">var</span> <span class="nx">myCube</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">PictureCube</span><span class="p">(</span>
+</span><span class='line'>  <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">&#39;cube-container&#39;</span><span class="p">),</span>
+</span><span class='line'>  <span class="p">[</span><span class="s1">&#39;1.jpg&#39;</span><span class="p">,</span> <span class="s1">&#39;2.jpg&#39;</span><span class="p">,</span> <span class="s1">&#39;3.jpg&#39;</span><span class="p">,</span> <span class="s1">&#39;4.jpg&#39;</span><span class="p">,</span> <span class="s1">&#39;5.jpg&#39;</span><span class="p">,</span> <span class="s1">&#39;6.jpg&#39;</span><span class="p">]</span>
+</span><span class='line'><span class="p">]);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Then you can simply call the methods provided.</p>
+
+<figure class='code'><figcaption><span>Calling the Available Methods</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">myCube</span><span class="p">.</span><span class="kr">goto</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
+</span><span class='line'><span class="nx">myCube</span><span class="p">.</span><span class="nx">cycle</span><span class="p">(</span><span class="mi">2000</span><span class="p">);</span>
+</span><span class='line'><span class="nx">myCube</span><span class="p">.</span><span class="nx">clearCycle</span><span class="p">();</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>What&#8217;s with the prototype?</h3>
+
+<p>The methods are added to the function&#8217;s prototype so PictureCube can be extended.  As an example here&#8217;s an AwesomeCube extension that inherits functionality from PictureCube, and adds on an additional awesome method.</p>
+
+<figure class='code'><figcaption><span>Extending PictureCube</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">AwesomeCube</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">node</span><span class="p">,</span> <span class="nx">images</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nx">PictureCube</span><span class="p">.</span><span class="nx">apply</span><span class="p">(</span><span class="k">this</span><span class="p">,</span> <span class="p">[</span><span class="nx">node</span><span class="p">,</span> <span class="nx">images</span><span class="p">]);</span>
+</span><span class='line'><span class="p">};</span>
+</span><span class='line'><span class="nx">AwesomeCube</span><span class="p">.</span><span class="nx">prototype</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">PictureCube</span><span class="p">();</span>
+</span><span class='line'><span class="nx">AwesomeCube</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">awesome</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>    <span class="c1">//this.cube, this.images, this.goto, this.cycle</span>
+</span><span class='line'>    <span class="c1">//and this.clearCycle are available to the new</span>
+</span><span class='line'>    <span class="c1">//function.</span>
+</span><span class='line'><span class="p">};</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Line 1 defines AwesomeCube&#8217;s constructor function with the same parameters as PictureCube.  It then invokes PictureCube&#8217;s constructor using <a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Function/apply">function.apply</a>.  The apply function is defined in <a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Function#Methods">Function.prototype</a>, and essentially allows you to control what the value of <code>this</code> will be in the function being invoked.  This technique is actually <a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Function/apply#Using_apply_to_chain_constructors">a common way of implementing Java-like super calls to chain constructors</a>.</p>
+
+<p>If this syntax seems clunky to you, or you prefer a more classical inheritance model, there are plenty of &#8220;class&#8221; JS libraries available in various libraries, see <a href="http://www.sitepen.com/blog/2010/07/01/creating-and-enhancing-dojo-classes/">Dojo&#8217;s</a> and <a href="http://mootools.net/docs/core/Class/Class">MooTools&#8217;</a> for examples.  In this case straight up JavaScript works just fine and I didn&#8217;t want to add a dependency on a JS toolkit.</p>
+
+<h3>Why isn&#8217;t this a jQuery plugin?</h3>
+
+<p>jQuery is great for normalizing browser differences so you don&#8217;t need to worry about them.  But in this case, the list of browsers that support CSS3 3D transformations have sufficient standards support that I had no need for jQuery.  Therefore, writing this as a jQuery plugin would add an unnecessary dependency on jQuery.</p>
+
+<p>Plus, jQuery plugins require some extra boilerplate to maintain state, which is necessary in this case.  <a href="http://blog.nemikor.com/2010/05/15/building-stateful-jquery-plugins/">Using jQuery UI&#8217;s widget factory</a> would work great, and might be something I consider if this implementation becomes more complex in the future.  But for now didn&#8217;t want to add dependencies.</p>
+
+<h3>Limitations</h3>
+
+<p>The current biggest limitation of the PictureCube implementation is that it has a hardcoded 100px height and 100px width.  Eventually I plan on moving these declarations from CSS to JS so that it can be adjusted on the fly.</p>
+
+<h3>Putting it all Together</h3>
+
+<p>PictureCube.js is available to be forked or used on Github - <a href="https://github.com/tjvantoll/PictureCube">https://github.com/tjvantoll/PictureCube</a>.  I&#8217;m planning on adding the ability to alter the height and width of the cube in a future update.  Please give it a shot and let me know what you think.</p>
+
+<p>Here&#8217;s a final cube for you to play with.  Happy hacking.</p>
+
+<script>
+    $.domReady(function(){
+        window.playgroundCube = new PictureCube('playground-cube', [
+            '/images/izzie/1.jpg',
+            '/images/izzie/2.jpg',
+            '/images/izzie/3.jpg',
+            '/images/izzie/4.jpg',
+            '/images/izzie/5.jpg',
+            '/images/izzie/6.jpg'                                                                                   
+        ]);
+    });
+</script>
+
+
+<div id="playground">
+    <div id="playground-cube"></div>
+    
+    <div class="form-row">
+        <label for="goto">Go To:</label>
+        <input type="text" size="2" maxlength="1" id="goto" />(1 - 6)
+        <button onclick="playgroundCube.goto(parseInt(document.getElementById('goto').value, 10));">Go</button>
+    </div>
+    
+    <div class="form-row">
+        <label for="cycle">Cycle:</label>
+        <input type="text" size="5" maxlength="5" id="cycle">(milliseconds)
+        <button onclick="playgroundCube.cycle(parseInt(document.getElementById('cycle').value, 10));">Start Cycle</button>
+        <button onclick="playgroundCube.clearCycle();">Stop Cycle</button>  
+    </div>
+</div>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[CSS3 Color Animations]]></title>
+    <link href="http://tjvantoll.github.com/2012/02/20/CSS3-Color-Animations/"/>
+    <updated>2012-02-20T00:00:00-05:00</updated>
+    <id>http://tjvantoll.github.com/2012/02/20/CSS3-Color-Animations</id>
+    <content type="html"><![CDATA[<p>CSS3 animations allow you to alter the values of CSS properties over time.  They&#8217;re now supported in Firefox 5+, Chrome, Safari 4+, iOS, Android 4+, and the upcoming IE10, therefore, using them in real production websites is possible.  One of the cool things you can do with them is change the color of an element using exclusively CSS.  Previously a technique like this was only possible using <a href="https://developer.mozilla.org/en/window.setInterval">JavaScript&#8217;s setInterval function</a> to gradually change the appropriate property of the element. See <a href="http://jqueryui.com/demos/animate/">jQuery UI&#8217;s animate demos</a> for a good example.</p>
+
+<!--more-->
+
+
+<h3>Getting Started</h3>
+
+<p>Let&#8217;s start with a basic example (note - Whether or not you see the animation depends on whether your browser supports CSS3 animations.  You can check at <a href="http://caniuse.com/css-animation">caniuse.com</a>.</p>
+
+<iframe style="width: 100%; height: 120px;" src="http://jsfiddle.net/RfYMA/1/embedded/result,html,css/" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
+
+
+<h3>Syntax</h3>
+
+<p>Let&#8217;s break this down one section at a time.</p>
+
+<figure class='code'><figcaption><span>Animation CSS</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nt">div</span> <span class="p">{</span>
+</span><span class='line'>  <span class="o">-</span><span class="n">webkit</span><span class="o">-</span><span class="n">animation</span><span class="o">:</span> <span class="n">color</span><span class="err">_</span><span class="n">change</span> <span class="m">1s</span> <span class="n">infinite</span> <span class="n">alternate</span><span class="p">;</span>
+</span><span class='line'>  <span class="o">-</span><span class="n">moz</span><span class="o">-</span><span class="n">animation</span><span class="o">:</span> <span class="n">color</span><span class="err">_</span><span class="n">change</span> <span class="m">1s</span> <span class="n">infinite</span> <span class="n">alternate</span><span class="p">;</span>
+</span><span class='line'>  <span class="o">-</span><span class="n">ms</span><span class="o">-</span><span class="n">animation</span><span class="o">:</span> <span class="n">color</span><span class="err">_</span><span class="n">change</span> <span class="m">1s</span> <span class="n">infinite</span> <span class="n">alternate</span><span class="p">;</span>
+</span><span class='line'>  <span class="o">-</span><span class="err">o</span><span class="o">-</span><span class="n">animation</span><span class="o">:</span> <span class="n">color</span><span class="err">_</span><span class="n">change</span> <span class="m">1s</span> <span class="n">infinite</span> <span class="n">alternate</span><span class="p">;</span>
+</span><span class='line'>  <span class="n">animation</span><span class="o">:</span> <span class="n">color</span><span class="err">_</span><span class="n">change</span> <span class="m">1s</span> <span class="n">infinite</span> <span class="n">alternate</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The <code>animation</code> property is how you define a <a href="https://developer.mozilla.org/en/CSS/CSS_animations">CSS3 animation</a>.  The <a href="https://developer.mozilla.org/en-US/">MDN</a> (Mozilla Developer Network) docs have extensive documentation on all the various sub properties available to configure the animation <a href="https://developer.mozilla.org/en/CSS/CSS_animations#Configuring_the_animation">here</a>.  In this example I&#8217;m setting…</p>
+
+<ul>
+<li><code><a href="https://developer.mozilla.org/en/CSS/animation-name">animation name</a></code>: <code>color_change</code> - This refers to a named @keyframes rule, which we&#8217;ll get into in a minute.</li>
+<li><code><a href="https://developer.mozilla.org/en/CSS/animation-duration">animation_duration</a></code>: <code>1s</code> - The animation should last 1 second.</li>
+<li><code><a href="https://developer.mozilla.org/en/CSS/animation-iteration-count">animation_iteration_count</a></code>: <code>infinite</code> - The animation will cycle forever.</li>
+<li><code><a href="https://developer.mozilla.org/en/CSS/animation-direction">animation_direction</a></code>: <code>alternate</code> - This will tell the animation to alternate, from start to end, then end to start, then start to end, and so on.  In this example it keeps the box from being jerky by quickly switching from red to blue.</li>
+</ul>
+
+
+<p>For readability you can also list the properties out individually.</p>
+
+<figure class='code'><figcaption><span>Animation broken out</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="c">/* Note: Prefixes omitted, see below */</span>
+</span><span class='line'><span class="nt">div</span> <span class="p">{</span>
+</span><span class='line'>  <span class="n">animation</span><span class="o">-</span><span class="n">name</span><span class="o">:</span> <span class="n">color</span><span class="err">_</span><span class="n">change</span><span class="p">;</span>
+</span><span class='line'>  <span class="n">animation</span><span class="o">-</span><span class="n">duration</span><span class="o">:</span> <span class="m">1s</span><span class="p">;</span>
+</span><span class='line'>  <span class="n">animation</span><span class="o">-</span><span class="n">iteration</span><span class="o">-</span><span class="n">count</span><span class="o">:</span> <span class="n">infinite</span><span class="p">;</span>
+</span><span class='line'>  <span class="n">animation</span><span class="o">-</span><span class="k">direction</span><span class="o">:</span> <span class="n">alternate</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>Prefixes</h3>
+
+<p>The vendor prefixes are necessary because CSS3 animations are still considered an experimental feature (the <a href="http://www.w3.org/TR/css3-animations/">spec</a> is still in working draft status.  However, the syntax is consistent across modern browsers, so you only have to copy and paste the code to add all the necessary prefixes.  Always include the un-prefixed property last to make your code future friendly to browsers that add un-prefixed support.  For an up to date list of what browsers support CSS3 animations and which prefixes to use check out the <a href="http://caniuse.com/css-animation">CSS animation page at caniuse.com</a>.</p>
+
+<p>If you get sick of typing out all the vendor prefixes you&#8217;re not alone.  <a href="http://leaverou.github.com/prefixfree/">-prefix-free</a> is a tool by <a href="http://lea.verou.me/">Lea Verou</a> that lets you write your CSS unprefixed.  A JavaScript file detects whether a browser prefix is necessary, which one to use, and applies it automatically.</p>
+
+<p>Another option is <a href="http://prefixr.com/">Prefixr</a> by Jeffrey Way of <a href="http://net.tutsplus.com/">nettuts</a>.  It lets you copy and paste your code in, run it, and have the appropriate prefixes added automatically.</p>
+
+<p>Browser prefixes have been been a hot topic lately after it was announced that IE, Firefox, and Opera are <a href="http://lists.w3.org/Archives/Public/www-style/2012Feb/0313.html">considering adopting support for -webkit prefixes</a>.  If you&#8217;re curious a <a href="http://remysharp.com/2012/02/09/vendor-prefixes-about-to-go-south/">number</a> <a href="http://christianheilmann.com/2012/02/09/now-vendor-prefixes-have-become-a-problem-want-to-help-fix-it/">of</a> <a href="http://www.brucelawson.co.uk/2012/on-the-vendor-prefixes-problem/">others</a> have <a href="http://infrequently.org/2012/02/misdirection/">written</a> about this.</p>
+
+<h3>Keyframes</h3>
+
+<figure class='code'><figcaption><span>Keyframe Declarations</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="k">@-webkit-keyframes</span> <span class="nt">color_change</span> <span class="p">{</span>
+</span><span class='line'>  <span class="nt">from</span> <span class="p">{</span> <span class="k">background-color</span><span class="o">:</span> <span class="nb">blue</span><span class="p">;</span> <span class="p">}</span>
+</span><span class='line'>  <span class="nt">to</span> <span class="p">{</span> <span class="k">background-color</span><span class="o">:</span> <span class="nb">red</span><span class="p">;</span> <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="k">@-moz-keyframes</span> <span class="nt">color_change</span> <span class="p">{</span>
+</span><span class='line'>  <span class="nt">from</span> <span class="p">{</span> <span class="k">background-color</span><span class="o">:</span> <span class="nb">blue</span><span class="p">;</span> <span class="p">}</span>
+</span><span class='line'>  <span class="nt">to</span> <span class="p">{</span> <span class="k">background-color</span><span class="o">:</span> <span class="nb">red</span><span class="p">;</span> <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="k">@-ms-keyframes</span> <span class="nt">color_change</span> <span class="p">{</span>
+</span><span class='line'>  <span class="nt">from</span> <span class="p">{</span> <span class="k">background-color</span><span class="o">:</span> <span class="nb">blue</span><span class="p">;</span> <span class="p">}</span>
+</span><span class='line'>  <span class="nt">to</span> <span class="p">{</span> <span class="k">background-color</span><span class="o">:</span> <span class="nb">red</span><span class="p">;</span> <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="k">@-o-keyframes</span> <span class="nt">color_change</span> <span class="p">{</span>
+</span><span class='line'>  <span class="nt">from</span> <span class="p">{</span> <span class="k">background-color</span><span class="o">:</span> <span class="nb">blue</span><span class="p">;</span> <span class="p">}</span>
+</span><span class='line'>  <span class="nt">to</span> <span class="p">{</span> <span class="k">background-color</span><span class="o">:</span> <span class="nb">red</span><span class="p">;</span> <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="k">@keyframes</span> <span class="nt">color_change</span> <span class="p">{</span>
+</span><span class='line'>  <span class="nt">from</span> <span class="p">{</span> <span class="k">background-color</span><span class="o">:</span> <span class="nb">blue</span><span class="p">;</span> <span class="p">}</span>
+</span><span class='line'>  <span class="nt">to</span> <span class="p">{</span> <span class="k">background-color</span><span class="o">:</span> <span class="nb">red</span><span class="p">;</span> <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><a href="https://developer.mozilla.org/en/CSS/@keyframes">Keyframes</a> are a way of specifying a set of properties and their values at different states of an animation.  <code>@keyframes color_change</code> gives the @keyframes a name of <code>color_change</code>.  This provides the connection used on the animation property above.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nt">from</span> <span class="p">{</span> <span class="k">background-color</span><span class="o">:</span> <span class="nb">blue</span><span class="p">;</span> <span class="p">}</span>
+</span><span class='line'><span class="nt">to</span> <span class="p">{</span> <span class="k">background-color</span><span class="o">:</span> <span class="nb">red</span><span class="p">;</span> <span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This animation only has 2 steps, a start and an end.  Since such animations are quite common, the <a href="http://www.w3.org/TR/css3-animations/#keyframes-">spec</a> provides the keywords <code>from</code> and <code>to</code> for defining the state of properties at the beginning and end of the animation.  This could also have been written using percentages for the steps.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nt">0</span><span class="o">%</span> <span class="p">{</span> <span class="k">background-color</span><span class="o">:</span> <span class="nb">blue</span><span class="p">;</span> <span class="p">}</span>
+</span><span class='line'><span class="nt">100</span><span class="o">%</span> <span class="p">{</span> <span class="k">background-color</span><span class="o">:</span> <span class="nb">red</span><span class="p">;</span> <span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>If the animation has more than 2 steps, they can be listed using multiple steps as such.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nt">0</span><span class="o">%</span> <span class="p">{</span> <span class="k">background-color</span><span class="o">:</span> <span class="nb">blue</span><span class="p">;</span> <span class="p">}</span>
+</span><span class='line'><span class="nt">25</span><span class="o">%</span> <span class="p">{</span> <span class="k">background-color</span><span class="o">:</span> <span class="nb">orange</span><span class="p">;</span> <span class="p">}</span>
+</span><span class='line'><span class="nt">50</span><span class="o">%</span> <span class="p">{</span> <span class="k">background-color</span><span class="o">:</span> <span class="nb">yellow</span><span class="p">;</span> <span class="p">}</span>
+</span><span class='line'><span class="nt">75</span><span class="o">%</span> <span class="p">{</span> <span class="k">background-color</span><span class="o">:</span> <span class="nb">black</span><span class="p">;</span> <span class="p">}</span>
+</span><span class='line'><span class="nt">100</span><span class="o">%</span> <span class="p">{</span> <span class="k">background-color</span><span class="o">:</span> <span class="nb">red</span><span class="p">;</span> <span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>Real World Example</h3>
+
+<p>Since the first demo was rather contrived, I thought I&#8217;d provide an example of how you could use this technique in the real world.  On buttons, a common UI pattern is to provide the user with visual feedback that they&#8217;re on the button by applying a subtle color change.  This is usually done by applying a different <code>background-color</code> on the hover pseudoclass of the button as such:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nt">button</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">background-color</span><span class="o">:</span> <span class="nb">pink</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="nt">button</span><span class="nd">:hover</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">background-color</span><span class="o">:</span> <span class="nb">hotpink</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>To improve upon this, we can add a CSS 3 color animation to gradually make the color transition.  The following example shows each side by side:</p>
+
+<iframe style="width: 100%; height: 250px" src="http://jsfiddle.net/PTfZD/3/embedded/result,html,css/" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
+
+
+<h3>Falling Back Gracefully</h3>
+
+<p>Since CSS3 animations are only present in modern browsers, there&#8217;s a good chance a number of your users won&#8217;t have them available.  Luckily, CSS3 animations fallback gracefully to browsers that don&#8217;t support them.  If the browser doesn&#8217;t know how to handle a CSS animation, it just ignores the CSS rules.  Therefore, make sure not to use CSS animations to perform functionality that is vital to your site or application, it should simply enhance the user experience.</p>
+
+<p>In the button example above if the browser can&#8217;t perform the animation, the animated button will simply fallback on the hover button&#8217;s behavior.</p>
+
+<figure class='code'><figcaption><span>Color Animation with Fallback</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nt">button</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">background-color</span><span class="o">:</span> <span class="nb">pink</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="nt">button</span><span class="nd">:hover</span> <span class="p">{</span>
+</span><span class='line'>  <span class="c">/* IE &lt;= 6 get no hover effect */</span>
+</span><span class='line'>  <span class="c">/* All browsers IE 7+ know how to handle this */</span>
+</span><span class='line'>  <span class="k">background-color</span><span class="o">:</span> <span class="nb">hotpink</span><span class="p">;</span>
+</span><span class='line'>  
+</span><span class='line'>  <span class="c">/* Browsers that support CSS animations get the animation, */</span>
+</span><span class='line'>  <span class="c">/* those that don&#39;t ignore this and move on. */</span>
+</span><span class='line'>  <span class="c">/* Note: I&#39;ve omitted the vendor prefixes for simplicity. */</span>
+</span><span class='line'>  <span class="n">animation</span><span class="o">:</span> <span class="n">color</span><span class="err">_</span><span class="n">change</span> <span class="m">1s</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>Detect Support and Polyfill</h3>
+
+<p>If you have a CSS color animation that you absolutely must have work on all browsers back to IE6, you can do so by detecting support via <a href="http://modernizr.com">Modernizr</a>, and falling back to <a href="http://jqueryui.com/demos/animate/">jQuery UI&#8217;s animation</a>.</p>
+
+<figure class='code'><figcaption><span>Fallback Behavior with jQuery UI</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">Modernizr</span><span class="p">.</span><span class="nx">cssanimation</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;button&#39;</span><span class="p">).</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;mouseover&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>      <span class="c1">//jQuery UI doesn&#39;t support the hotpink keyword :(</span>
+</span><span class='line'>      <span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">animate</span><span class="p">({</span> <span class="nx">backgroundColor</span><span class="o">:</span> <span class="s1">&#39;#FF69B4&#39;</span> <span class="p">},</span> <span class="mi">1000</span><span class="p">);</span>
+</span><span class='line'>  <span class="p">}).</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;mouseout&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>      <span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">stop</span><span class="p">(</span><span class="kc">true</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span>
+</span><span class='line'>      <span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">css</span><span class="p">(</span><span class="s1">&#39;backgroundColor&#39;</span><span class="p">,</span> <span class="s1">&#39;pink&#39;</span><span class="p">);</span>
+</span><span class='line'>  <span class="p">});</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Live example (this should work across all browsers):</p>
+
+<iframe style="width: 100%; height: 160px" src="http://jsfiddle.net/tj_vantoll/2Yrpe/3/embedded/result,js,css,html" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
+
+
+<p>If the jQuery UI approach already works cross browser why would you bother doing this with CSS?</p>
+
+<ul>
+<li>Certain desktop and mobile browsers can use hardware acceleration with CSS3 animations.  This usually results in the animation rendering smoother.</li>
+<li>Users with JavaScript disabled will still see the animation.</li>
+<li>If you&#8217;re only using jQuery &amp; jQuery UI for this animation you can save yourself two HTTP requests by using <a href="http://www.modernizr.com/docs/#load">Modernizr&#8217;s load function</a>.  This will first test whether the browser supports CSS animations, if it does nothing needs to be done, if it doesn&#8217;t all scripts listed in the <code>nope</code> parameter will be loaded.</li>
+</ul>
+
+
+<figure class='code'><figcaption><span>Conditionally Loading jQuery UI</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">Modernizr</span><span class="p">.</span><span class="nx">load</span><span class="p">({</span>
+</span><span class='line'>  <span class="nx">test</span><span class="o">:</span> <span class="nx">Modernizr</span><span class="p">.</span><span class="nx">cssanimation</span><span class="p">,</span>
+</span><span class='line'>  <span class="nx">nope</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;jquery.js&#39;</span><span class="p">,</span> <span class="s1">&#39;jquery-ui&#39;</span><span class="p">]</span>
+</span><span class='line'><span class="p">});</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>Summary</h3>
+
+<p>CSS 3 color animations can be used in modern browsers today.  For most use cases no animations in unsupported browsers isn&#8217;t a problem, and, if it is, <a href="http://jqueryui.com">jQuery UI</a> can be used to polyfill the functionality.</p>
+]]></content>
+  </entry>
+  
+</feed>
