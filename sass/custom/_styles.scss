@@ -1,0 +1,110 @@
+// This File is imported last, and will override other styles in the cascade
+// Add styles here to make changes without digging in too much
+@import "custom/partials/PictureCube";
+@import "custom/partials/helpers";
+
+/* Header */
+@keyframes move_up {
+	0% { top: 0px; }
+	10% { top: 5px; }
+	20% { top: 0px; }
+	100% { top: 0px; }
+}
+@keyframes move_down {
+	0% { top: 0px; }
+	10% { top: -5px; }
+	20% { top: 0px; }
+	100% { top: 0px; }
+}
+
+@keyframes spin_left {
+	0% { transform: rotate(0deg); }
+	15% { transform: rotate(0deg); }
+	25% { transform: rotate(360deg); }
+	35% { transform: rotate(0deg); }
+	100% { transform: rotate(0deg); }	
+}
+
+@keyframes red_color_change {
+	0% { color: $subtitle-color; }
+	35% { color: $subtitle-color; }
+	45% { color: red; }
+	55% { color: $subtitle-color; }
+	100% { color: $subtitle-color; }
+}
+@keyframes orange_color_change {
+	0% { color: $subtitle-color; }
+	35% { color: $subtitle-color; }
+	45% { color: orange; }
+	55% { color: $subtitle-color; }
+	100% { color: $subtitle-color; }
+}
+@keyframes green_color_change {
+	0% { color: $subtitle-color; }
+	35% { color: $subtitle-color; }
+	45% { color: green; }
+	55% { color: $subtitle-color; }
+	100% { color: $subtitle-color; }
+}
+@keyframes blue_color_change {
+	0% { color: $subtitle-color; }
+	35% { color: $subtitle-color; }
+	45% { color: blue; }
+	55% { color: $subtitle-color; }
+	100% { color: $subtitle-color; }
+}
+@keyframes indigo_color_change {
+	0% { color: $subtitle-color; }
+	35% { color: $subtitle-color; }
+	45% { color: indigo; }
+	55% { color: $subtitle-color; }
+	100% { color: $subtitle-color; }
+}
+
+@keyframes flip_it {
+	0% { transform: perspective(400px) translateZ(0px) rotateY(0deg); }
+	55% { transform: perspective(400px) translateZ(0px) rotateY(0deg); }
+	65% { transform: perspective(400px) translateZ(150px) rotateY(180deg); }
+	75% { transform: perspective(400px) translateZ(0px) rotateY(0deg); }
+	100% { transform: perspective(400px) translateZ(0px) rotateY(0deg); }
+}
+
+@keyframes spin_it {
+	0% { transform: rotate(0deg) scale(1); }
+	75% { transform: rotate(0deg) scale(1); }
+	85% { transform: rotate(360deg) scale(0); }
+	95% { transform: rotate(0deg) scale(1); }
+}
+
+body > header {
+	h2 { letter-spacing: -1px; }
+	h2 > span {
+		display: inline-block;
+		white-space: no-wrap;
+	}
+	h2:hover {
+		.a1 { position: relative; animation: move_up 6s; }
+		.a2 { position: relative; animation: move_down 6s; }
+		
+		.b { animation: spin_left 6s; }
+	
+		.c1 { animation: red_color_change 6s; }
+		.c2 { animation: orange_color_change 6s; }
+		.c3 { animation: green_color_change 6s; }
+		.c4 { animation: blue_color_change 6s; }
+		.c5 { animation: indigo_color_change 6s; }
+		
+		.d { animation: flip_it 6s; }
+		
+		.e { animation: spin_it 6s; }
+	}      
+  
+	#picture-cube {
+		float: right;
+		margin-right: 20px;
+		
+		@media only screen and (max-width: 550px) {
+			display: none;
+		}
+	}
+}
