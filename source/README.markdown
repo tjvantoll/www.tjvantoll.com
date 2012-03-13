@@ -1,3 +1,3 @@
-Source for my blog at <http://tjvantoll.com> generated using [Octopress](http://octopress.org).  Everything here is completely open source, feel free to look around and see what I've done.
+Generated content for my blog at <http://tjvantoll.com>.  The blog was generated using [Octopress](http://octopress.org) which is based on [Jekyll](https://github.com/mojombo/jekyll/wiki).  Take a look at the [source branch](https://github.com/tjvantoll/tjvantoll.github.com/tree/source) for the full source files.  Everything here is completely open source, feel free to look around and see what I've done.
 
 Everything other than the contents of the posts themselves is free to use, copy, or whatever.  Credit is appreciated but not required.
