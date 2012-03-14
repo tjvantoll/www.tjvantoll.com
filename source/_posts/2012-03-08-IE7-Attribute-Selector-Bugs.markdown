@@ -16,7 +16,7 @@ The CSS attribute selector allows you to select HTML elements based on their att
 ```
 <!--more-->
 
-In a compliant browser, here's some selectors you can use to target these list items.
+In a compliant browser, here are some selectors you can use to target these list items.
 
 ``` css Selectors to Target the List
 li             /* Selects #1, #2, #3 */
@@ -49,7 +49,7 @@ Some DOM attributes have different names than the HTML attributes to avoid confl
 </script>
 ```
 
-In IE8+ (and everywhere else for that matter) the following attribute selector will select the label2:
+In IE8+ (and everywhere else for that matter) the following attribute selector will select the label:
 
 ``` css Standard Attribute Selector
 label[for='name']
