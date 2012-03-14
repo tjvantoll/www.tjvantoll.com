@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Browsers | TJ VanToll]]></title>
   <link href="http://tjvantoll.com/blog/categories/browsers/atom.xml" rel="self"/>
   <link href="http://tjvantoll.com/"/>
-  <updated>2012-03-12T22:52:14-04:00</updated>
+  <updated>2012-03-13T20:50:14-04:00</updated>
   <id>http://tjvantoll.com/</id>
   <author>
     <name><![CDATA[TJ VanToll]]></name>
@@ -34,7 +34,7 @@
 <!--more-->
 
 
-<p>In a compliant browser, here's some selectors you can use to target these list items.</p>
+<p>In a compliant browser, here are some selectors you can use to target these list items.</p>
 
 <p><code>css Selectors to Target the List
 li             /* Selects #1, #2, #3 */
@@ -69,7 +69,7 @@ li[id*=item]   /* Selects #1, #2, * = contains */
 
 <p>```</p>
 
-<p>In IE8+ (and everywhere else for that matter) the following attribute selector will select the label2:</p>
+<p>In IE8+ (and everywhere else for that matter) the following attribute selector will select the label:</p>
 
 <p><code>css Standard Attribute Selector
 label[for='name']
