@@ -1,0 +1,1240 @@
+<!DOCTYPE html>
+<!-- Google HTML5 slide template used as a basis: http://code.google.com/p/html5slides/ -->
+<html>
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    	<title>JavaScript for Java Programmers</title>
+
+    	<meta charset="utf-8">
+    	
+		<link href="css/css.css" rel="stylesheet" />
+		<link href="css/styles.css" rel="stylesheet" />
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+		<script src="js/prettify.js"></script>    	    	
+    	<script src="js/slides.js"></script>
+    	
+    	<script>
+    		dojoConfig = {
+    			isDebug: true,
+    			paths: {
+    				'dojoDemo': '/Presentations/JsforJava/demos/dojoDemo'
+    			}
+    		};
+    	</script>
+    	<script src="//ajax.googleapis.com/ajax/libs/dojo/1.7.2/dojo/dojo.js"></script>
+    	<script src="http://www.cornify.com/js/cornify.js"></script>
+    	<script>
+    		//Make it so that whenever concat is called a unicorn is displayed.
+    		String.prototype.concat = cornify_add;
+    	</script>
+    	
+    	<style>
+    		h1:not(.main) {
+    			text-align: center;
+    			line-height: 80px;
+    		}
+    	</style>
+  
+  		<meta content="width=1100,height=750" name="viewport" />
+  		<meta content="yes" name="apple-mobile-web-app-capable" />
+	</head>
+	
+	<body class="loaded" style="display: none;">
+
+		<section class="slides layout-regular template-default">
+		
+			<article class="current">
+				<h1 class="main">
+					JavaScript for the<br />Java Developer
+				</h1>
+				<p>Ted VanToll<br />March 20th, 2012</p>
+			</article>
+			
+			<article>
+				<h3>Me</h3>
+				<ul class="build">
+					<li class="to-build">
+						Sun Certified Java Programmer
+					</li>
+					<li class="to-build">
+						Sun Certified Web Component Developer 
+					</li>
+					<li class="to-build">
+						Building web sites for a long time.
+					</li>
+					<li class="to-build">
+						I have twin 1 year old boys.
+					</li>
+				</ul>
+				
+				<p class="to-build">
+					<img src="img/chase.jpg" />
+					<img src="img/max.jpg" />
+				</p>
+				<p class="to-build">
+					You should probably feel really sorry for them.
+				</p>
+			</article>			
+			
+			<article>
+				<h1>
+					JavaScript - A Real Brief History
+				</h1>
+			</article>
+
+			<article class="fill next">
+				<h3>1990 - First successful HTTP communication</h3>
+				<p>
+					<img src="img/internet-tubes.jpg">
+				</p>
+			</article>	
+			
+			<article class="fill">
+				<h3>1993 - Mosaic adds images to the internet.</h3>
+				<p>
+					<img src="img/max-happy.jpg" />
+				</p>
+			</article>				
+			
+			<article>
+				<h3>Early Internet</h3>
+				<ul>
+					<li>There was still something to be desired though.</li>
+					<li class="to-build">The Web was a pretty static place.</li>
+				</ul>
+			</article>
+
+			<article>
+				<h3>
+					JavaScript's Begininngs
+				</h3>
+				<ul>
+					<li>
+						Created by Brendan Eich in 1995 at Netscape for Netscape
+						Navigator 2.
+					</li>
+					<li>
+						It was originally going to be called LiveScript, but was renamed 
+						in an ill-fated marketing decision to try to capitalize on the popularity 
+						of Sun Microsystem's Java language.
+					</li>
+					<li>
+						Sun wanted to get their Java Applets into Netscape Navigator.
+					</li>
+				</ul>
+			</article>
+			
+			<article class="next">
+				<h3>
+					History Continued
+				</h3>
+				<ul>
+					<li>
+						Microsoft reverse engineered LiveScript/JavaScript, called it JScript
+						and put it into IE3 in 1996.
+					</li>
+					<li>
+						The language was standardized by the European Computers Manufacturers
+						Association (ECMA) as ECMAScript in late 1996 / early 1997.
+					</li>
+				</ul>
+			</article>
+			
+			<article>
+        		<q>
+          			ECMAScript was always an unwanted trade name that sounds like a skin disease.
+        		</q>
+        		<div class="author">
+					Brendan Eich
+				</div>
+			</article>
+			
+			<article>
+        		<p>Pretty much the only thing Java and JavaScript share is C style styntax.</p>
+        		<pre class="prettyprint lang-js">
+//JavaScript        		
+for (var i = 0; i < foo.length; i++) {
+    if (bar) {
+        doSomething();
+    } else {
+        doSomethingElse();
+    }
+}
+        		</pre>
+        		<pre class="prettyprint lang-java">
+//Java        		
+for (int i = 0; i < foo.length; i++) {
+    if (bar) {
+        doSomething();
+    } else {
+        doSomethingElse();
+    }
+}
+        		</pre>
+			</article>
+			
+			<article>
+				<h3>
+					Typing
+				</h3>
+				<p>Java is strongly typed.</p>
+        		<pre class="prettyprint lang-java">      		
+Integer foo = 8; String bar = "hello";
+        		</pre>					
+				<p>JavaScript is loosely typed.</p>
+        		<pre class="prettyprint lang-js">      		
+var foo = 8, var bar = 'hello', foo = bar = {};
+        		</pre>					
+			</article>	
+			
+			<article class="varTypes">
+				<style>
+					.varTypes ul { margin-top: 1em; }
+					.varTypes li { margin-bottom: .1em; }
+					.varTypes p { margin-top: 30px; }
+				</style>
+				<h3>
+					JavaScript variable types
+				</h3>
+				<ul>
+					<li>String</li>
+					<li>Number</li>
+					<li>Boolean</li>
+					<li>Object</li>
+					<li>Function</li>
+					<li>null</li>
+					<li>undefined</li>
+				</ul>
+				
+				<p>Special types of Objects</p>
+				<ul>
+					<li>Array</li>
+					<li>Date</li>
+					<li>RegExp</li>
+				</ul>
+			</article>	
+			
+			<article>
+				<!-- http://oreilly.com/javascript/excerpts/javascript-good-parts/bad-parts.html -->
+				<p>JavaScript uses type coercion whenever it needs to perform an operation on two operands that need to be the same type and are not.</p>
+				<pre class="prettyprint lang-js">
+8 == "8" //true
+				</pre>
+				<p>Relying on type coercion is not a good idea.</p>
+				<pre class="prettyprint lang-js">
+null == undefined  //true
+false == undefined //false
+false == "false"   //false				
+
+'' == '0'          //false
+0 == ''            //true
+0 == '0'           //true
+				</pre>
+			</article>
+			
+			<article>
+				<h3>Type Coercion</h3>
+				<p>To avoid type coercion use the === and !== operators.</p>
+				<pre class="prettyprint lang-js">
+8 === "8"           //false				
+				
+null === undefined  //false
+false === undefined //false
+false === "false"   //false				
+
+'' === '0'          //false
+0 === ''            //false
+0 === '0'           //false
+				</pre>				
+			</article>					
+			
+			<article>
+				<h3>Number</h3>
+				<p>Numbers in JavaScript are "double-precision 64-bit format IEEE 754 values".</p>
+				<pre class="prettyprint lang-js">
+0.1 + 0.2 == 0.3; //false				
+				</pre>
+				<p>You can use parseInt to convert Strings to "Integers"</p>
+				<pre class="prettyprint lang-js">
+parseInt("20", 10); //20				
+				</pre>
+				<p>A special value, NaN ("Not a Number") is returned if the string is non-numeric.</p>
+				<pre class="prettyprint lang-js">
+parseInt("ABC", 10) //NaN
+				</pre>
+			</article>						
+			
+			<article>
+				<h3>JavaScript Quiz</h3>
+				<h1 style="padding: 0;">1 / 0</h1>
+				<p style="text-align: center;" class="to-build">Infinity</p>
+			</article>
+			
+			<article>
+				<h3>Quiz Part 2</h3>
+				<h1 style="padding: 0;">-1 / 0</h1>
+			</article>
+			
+			<article class="fill">
+				<h3 style="text-align: center;">-Infinity</h3>
+				<p>
+					<img src="img/fire.jpg" />
+				</p>
+			</article>
+			
+			<article>
+				<h3>Strings</h3>
+				<p>JavaScript has no character type.</p>
+				<p><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String#Methods_unrelated_to_HTML">Methods</a></p>
+				<pre class="prettyprint lang-js">
+'bar'.replace('a', 'b'); //'bbr'
+'bar'.split('a'); //['b', 'r']				
+				</pre>
+			</article>
+			
+			<article>
+				<h3>Objects</h3>
+				<p>JavaScript objects are simply collections of name value pairs.</p>
+				<pre class="prettyprint jang-js">
+//JavaScript
+var foo = {};
+foo.bar = 'hi';
+console.log(foo.bar); //"hi"
+console.log(foo['bar']); //"hi"
+				</pre>
+				<pre class="prettyprint lang-java">
+//Java
+Map&lt;String, Object&gt; foo = new HashMap&lt;String, Object&gt;();
+foo.put("bar", "hi");
+System.out.println(foo.get("bar")); //"hi"
+				</pre>
+			</article>
+			
+			<article>
+				<h3>Objects Continued</h3>
+				<p>You can retrieve members of the object using dot or bracket notation.</p>
+				<pre class="prettyprint lang-js">
+var dog = {
+    name: 'Rover',
+    bark: function() { return 'woof'; }
+};				
+
+dog.name; //'Rover'
+dog['name']; //'Rover'
+dog.bark();  //'woof'
+dog['bark'](); //'woof'
+				</pre>
+			</article>
+			
+			<article>
+				<h3>Iterating over Object Members</h3>
+				<p>You can iterate over JavaScript Objects using for in loops.</p>
+				<pre class="prettyprint lang-js">
+var dog = {
+    name: 'Rover',
+    noise: 'bark'
+};				
+for (var prop in dog) {
+    console.log("Property: ", prop);
+    console.log("Value", dog[prop]);
+}
+
+//Logs: 
+//Property: name
+//Value: Rover
+//Property: noise
+//Value: bark
+				</pre>
+			</article>		
+			
+			<article>
+				<h3>Functions</h3>
+				<p>Functions are first class citizens in JavaScript.</p>
+				<p>Meaning, you can store them in variables...</p>
+				<pre class="prettyprint lang-js">
+var foo = function() {};				
+				</pre>
+				<p>…pass them around as parameters, etc...</p>
+				<pre class="prettyprint lang-js">
+setInterval(foo, 2000);				
+				</pre>
+			</article>
+			
+			<article>
+				<h3>Parameters</h3>
+				<pre class="prettyprint lang-js">
+function doSomeMath(x, y) {
+    return x + y / 6 + x;
+};				
+				</pre>
+				<p>Even though you define the number of arguments a function takes, you can pass as many as you'd like.  All arguments are made available through an <code>arguments</code> array-like property.</p>
+				<p></p>
+			</article>						
+			
+			<article>
+				<h3>Default Argument Values</h3>
+				<p>Currently</p>
+				<pre class="prettyprint lang-js">
+function addIt(bar) {
+    bar = bar || 8;
+    return bar + 2;
+};
+				</pre>
+				<p>ECMAScript 6 Proposed</p>
+				<pre class="prettyprint lang-js">
+function addIt(bar = 8) {
+    return bar + 2;
+};				
+				</pre>
+			</article>			
+			
+			<article>
+				<h3>this</h3>
+				<p>In JavaScript you can change the invocation context for a function, i.e. you can literally change the value of <code>this</code> when you invoke a function.</p>
+				<pre class="prettyprint lang-js">
+window.name = 'bar';
+var foo = function() {
+    console.log(this.name);
+};
+	
+foo(); //'bar'
+foo.apply( { name: 'lalala' } ); //'lalala
+				</pre>		
+			</article>
+			
+			<article>
+				<h3>How is this useful?</h3>
+				<p>jQuery Event Handlers</p>
+				<pre class="prettyprint lang-js">
+$('button').on('click', function() {
+    //this is set to the button that was clicked on.
+});				
+				</pre>
+			</article>
+			
+			<article>
+				<h1>Namespacing</h1>
+			</article>
+			
+			<article class="fill">
+				<h3>Java has Packages</h3>
+				<p>
+					<img src="img/boys-packages.jpg" />
+				</p>
+			</article>
+			
+			<article>
+				<h3>Java Packages</h3>
+				<p>The folder structure must match the package structure.</p>
+				<img style="margin-top: 20px;" src="img/java-packages.png" />
+			</article>	
+			
+			<article>
+				<h3>Namespacing in JavaScript</h3>
+				<p>There is no native namespacing mechanism in JavaScript.  The only built in way for scripts to communicate is via the global object.</p>
+				<p>A number of <a href="http://addyosmani.com/blog/essential-js-namespacing/">namespacing patterns</a> are used to provide Java-like functionality.</p>
+			</article>	
+			
+			<article>
+				<h3>Using Objects to Provide Namespaces</h3>
+<pre class="prettyprint lang-js">
+myApp = myApp || {};
+myApp.builder = {
+    init: function(){},
+    destroy: function(){}
+};
+</pre>				
+				<p>Continued nesting:</p>
+<pre class="prettyprint lang-js">
+myApp = myApp || {};
+myApp.pages = myApp.pages || {};
+myApp.pages.signup = {
+    load: function(){}
+};
+</pre>				
+			</article>
+			
+			<article>
+				<h3><a href="http://api.jquery.com/jQuery.extend/">jQuery's $.extend</a></h3>
+<pre class="prettyprint lang-js">
+var myApp = myApp || {};
+​$.ext​end(​myApp, {
+    builder: {},
+    init: {},
+    unload: {}     
+});​​
+</pre>				
+			</article>								
+			
+			<article>
+				<h3><a href="http://api.jquery.com/jQuery.extend/">jQuery's $.extend</a></h3>
+<pre class="prettyprint lang-js">
+//From http://addyosmani.com/blog/essential-js-namespacing/
+var myApp = myApp || {};  
+// directly assign a nested namespace  
+myApp.library = {  
+    foo:function(){ /*..*/}  
+};  
+// deep extend/merge this namespace with another  
+// to make things interesting, let's say it's a namespace  
+// with the same name but with a different function  
+// signature: $.extend(deep, target, object1, object2)  
+$.extend(true, myApp, {  
+    library:{  
+        bar:function(){  
+            /*..*/  
+        }  
+    }  
+});  
+console.log(myApp); 
+</pre>				
+			</article>
+			
+			<article>
+				<h3>Dojo</h3>
+				<p>Define your base level namespace.</p>
+				<pre class="prettyprint lang-js">
+&lt;script&gt;
+dojoConfig = {
+    paths: {
+        'myNamespace': '/path/to/myNamespace'
+    }
+};
+myNamespace = {};
+&lt;/script&gt;
+&lt;script src="//ajax.googleapis.com/ajax/libs/dojo/1.7.2/dojo/dojo.js"&gt;&lt;/script&gt;
+				</pre>
+			</article>	
+			
+			<article>
+				<h3>dojo.require</h3>
+				<p>File at /myNamespace named foo.js</p>
+				<pre class="prettyprint lang-js">
+dojo.provide("myNamespace.foo");
+myNamespace.foo = function() {};
+				</pre>
+				<p>Then to get that file asynchronously and added to the main namespace.</p>
+				<pre class="prettyprint lang-js">
+dojo.require("myNamespace.foo");				
+				</pre>
+			</article>			
+			
+			<article>
+				<h1>Visibility / Scoping</h1>
+			</article>
+			
+			<article>
+				<h3>Visibility in Java</h3>
+				<ul>
+					<li>public</li>
+					<li>protected</li>
+					<li>package / default</li>
+					<li>private</li>
+				</ul>
+			</article>
+			
+			<article>
+				<h3>Visibility in JavaScript</h3>
+				<p>Everything is based on functions.</p>
+				<pre class="prettyprint lang-js">
+var s = 1;
+var t = function() {
+    var u = 2;
+    var v = function() {
+        var w = 3;
+    }; 
+};
+var x = function() {};
+				</pre>
+				<p>JavaScript has no block scoping.</p>
+				<pre class="prettyprint lang-js">
+for (var i = 0; i <= 8; i++) {
+	//whatever
+}
+console.log(i); //9
+				</pre>
+			</article>	
+			
+			<article>
+				<h3>Design Patterns</h3>
+				<p>Module Pattern</p>
+				
+				<pre class="prettyprint lang-js">
+var Foo = function() {
+    var bar = {};
+
+    this.getBar = function() {
+        return bar;
+    };
+	
+    this.setBar = function(bar) {
+        this.bar = bar;
+    }
+};
+				</pre>
+			</article>	
+			
+			<article>
+				<h3>Module Pattern Issues</h3>
+				<p>Calling <i>public</i> methods from <i>private</i> ones is awkward.</p>
+				<pre class="prettyprint lang-js">
+var Foo = function() {
+    var init = function() {
+    	this.stuff();  //JS Error
+    };
+
+    this.stuff = function() {
+    	return 'stuff';
+    };
+    
+    init();
+};
+				</pre>
+			</article>						
+			
+			<article>
+				<h3>Modern Pattern <i>Fix</i></h3>
+				<pre class="prettyprint lang-js">
+var Foo = function() {
+    var that = this;
+    
+    var init = function() {
+    	that.stuff();
+    };
+
+    this.stuff = function() {
+    	return 'stuff';
+    };
+    
+    init();
+};
+				</pre>
+			</article>
+			
+			<article>
+				<h3>Revealing Module Pattern</h3>
+				<pre class="prettyprint lang-js">
+var Foo = function() {
+    var init = function() {
+    	stuff();
+    };
+
+    var stuff = function() {
+    	return 'stuff';
+    };
+    
+    init();
+    
+    return { stuff: stuff };
+};
+				</pre>
+			</article>	
+			
+			<article>
+				<h3>Modules in ES6</h3>
+				<pre class="prettyprint lang-js">
+module Foo {
+    var init = function() {
+        stuff();
+    };
+    
+    export function stuff() {
+        return 'stuff';
+    };
+};
+				</pre>
+			</article>	
+			
+			<article>
+				<h3>Dealing with Global Variables</h3>
+				<p>Both of these are global variables.</p>
+				<pre class="prettyprint lang-js">
+var foo = 'foo';
+var bar = function() {};
+				</pre>
+				<div class="to-build">
+					<p>Wrap this with a function and they're no longer global.</p>
+					<pre class="prettyprint lang-js">
+function wrapper() {
+    var foo = 'foo';
+    var bar = function() {};
+};					
+					</pre>
+				</div>
+			</article>	
+			
+			<article>
+				<h3><a href="http://benalman.com/news/2010/11/immediately-invoked-function-expression/">IIFE</a> (Immediately Invoked Function Expression)</h3>
+				<p>An elegant way of mimicking block scoping in JS.</p>
+				<pre class="prettyprint lang-js">
+(function() {
+    var foo = 'foo';
+    var bar = function() {};
+}());				
+				</pre>
+				
+				<p>See <a href="http://code.jquery.com/jquery-1.7.1.js">jQuery</a></p>
+			</article>	
+			
+			<article>
+				<h1>Classes and Inheritance</h1>
+			</article>	
+			
+			<article>
+				<h3>Classes in Java</h3>
+				<p>In Java, other than a few primitives everything is an Object and an Object of some Class.</p>
+				<pre class="prettyprint lang-java">
+public class Poodle {
+    private String name;
+    
+    public String getName() {
+        return name;
+    }
+    
+    public void setName(String name) {
+        this.name = name;
+    }
+}				
+				</pre>
+			</article>	
+			
+			<article>
+				<h3>Classes in JavaScript</h3>
+				<p>There are no native classes in JavaScript.</p>
+				<p>Classes are unlikely to be added because the standards committee doesn't want to offer two different inheritance models in the same language.</p>
+				<p>There is still a chance for class syntax that is simply syntax sugar for valid ES5 JavaScript.</p>
+				<ul>
+					<li><a href="https://gist.github.com/1329619">Proposal from Jeremy Ashkenas</a></li>
+					<li><a href="https://gist.github.com/1332193">Proposal from Brendan Eich</a></li>
+				</ul>
+			</article>			
+			
+			<article>
+				<h3>Inheritance in Java</h3>
+				<p>Java has classical single inheritance, every class extends Object.</p>
+				<pre class="prettyprint lang-java">
+public class Poodle extends Dog {
+    private String name;
+    
+    public String getName() {
+        return name;
+    }
+    
+    public void setName(String name) {
+        this.name = name;
+    }
+}				
+				</pre>				
+			</article>	
+			
+			<article class="fill">
+				<h3>Warning: Average Java programmer's first experience with prototype inheritance</h3>
+				<p>
+					<img src="img/chase-dumbfounded.jpg" />
+				</p>
+			</article>			
+			
+			<article>
+				<h3>Inheritance in JavaScript</h3>
+				<p>JavaScript uses single prototype inheritance. All objects have a prototype.</p>
+				<p>A prototype is simply an Object.</p>
+			</article>	
+			
+			<article>
+				<h3>Inheritance in JavaScript</h3>
+				<p>Much like all classes in Java have Object at the end of their inheritance chain, all Objects in JavaScript have Object.prototype at the end of their prototype chain.</p>
+				<p>For example, the valueOf function is defined in Object.prototype, so it can be called on essentially anything in JavaScript.</p>
+				<pre class="prettyprint lang-js">
+new String().valueOf();
+new Number().valueOf();
+new Boolean().valueOf();
+new Function().valueOf();
+new Object().valueOf();
+new Array().valueOf();
+				</pre>
+			</article>	
+			
+			<article>
+				<h3>Core Prototypes</h3>
+				<p>The following are examples of some of the prototypes built into the language.  You can type these into a JavaScript console with autocomplete (Firebug or WebKit Web Inspector) and see what are in the following.</p>
+				<ul>
+					<li>Array.prototype</li>
+					<li>String.prototype</li>
+					<li>Number.prototype</li>
+					<li>Date.prototype</li>
+					<li>Function.prototype</li>
+					<li>Object.prototype</li>
+				</ul>
+			</article>			
+			
+			<article>
+				<h3>Basic Example - Java</h3>
+				<pre class="prettyprint lang-java">
+public class Animal {
+    public String eats() {
+        return "meat";
+    }
+
+    public String noise() {
+        return "roar";
+    }
+}
+
+public class Dog extends Animal {
+    public String noise() {
+        return "bark";
+    }
+}
+
+new Dog().eats(); //"meat"
+new Dog().noise(); //"bark"
+				</pre>
+			</article>	
+			
+			<article>
+				<h3>JavaScript Equivalent</h3>
+				<pre class="prettyprint lang-js">
+var Animal = function() {};
+Animal.prototype.eats = function() {
+    return 'meat';
+};
+Animal.prototype.noise = function() {
+    return 'noise';
+};
+
+var Dog = function(){};
+Dog.prototype = new Animal();
+Dog.constructor = Animal;
+Dog.prototype.noise = function() {
+    return 'bark';
+};
+
+new Dog().eats(); //"meat"
+new Dog().noise(); //"bark"
+				</pre>
+			</article>	
+			
+			<article>
+				<h3>Viewing the Prototype</h3>
+				<p>Functions have a prototype property set to their prototype Object.  The only way to view the prototype of an Object before ES5 was to look at the non-standard __proto__ property.</p>
+				<p>In ES5 you can use Object.getPrototypeOf().</p>
+				<pre class="prettyprint lang-js">
+var x = function() {};
+x.prototype;
+
+var y = {};
+Object.getPrototypeOf(y);
+				</pre>
+			</article>
+					
+			<article>
+				<h3>Adding to Built in Prototypes</h3>
+				<p>You can add methods to the built in prototypes.</p>
+				<p>For example, IE &lt; 9 doesn't have a trim method in String.prototype, but thanks to JavaScript's dynamic nature you can make one.</p>
+				<pre class="prettyprint lang-js">
+if (!String.prototype.trim) {
+    String.prototype.trim = function(value) {
+        //implement a trim here
+    }
+}
+				</pre>
+				<p>As an example of this feature detection see the trim method in <a href="http://jquery.com">jQuery</a>.  However, jQuery doesn't add to the prototype.</p>
+			</article>	
+			
+			<article>
+				<h3>Built in Prototypes</h3>
+				<p>You can even change the behavior of core methods.</p>
+				<pre class="prettyprint lang-js">
+String.prototype.trim = function() {
+    //Whatever you'd like.
+};				
+				</pre>
+				<p>Can be handy for unit testing.</p>
+			</article>	
+			
+			<article>
+				<h3>Dangers of Adding to the Built in Prototypes</h3>
+				<p>Until ES5 there was no way of adding to Object.prototype without the property being enumerable in a for in loop.</p>
+				<pre class="prettyprint lang-js">
+Object.prototype.foo = function() {};
+
+var anObject = {
+    a: 1,
+    b: 2,
+    c: 3
+};
+
+for (var prop in anObject) {
+    console.log(prop + " = " + anObject[prop]);
+}				
+
+//Logs:
+//a = 1
+//b = 2
+//c = 3
+//foo = function() {}
+				</pre>
+			</article>	
+			
+			<article>
+				<h3>Fix for enumeration in ES3</h3>
+				<p>This can be fixed by wrapping everything within the loop in a Object.hasOwnProperty check:</p>
+				<pre class="prettyprint lang-js">
+Object.prototype.foo = function() {};
+
+var anObject = {
+    a: 1,
+    b: 2,
+    c: 3
+};
+
+for (var prop in anObject) {
+    if (anObject.hasOwnProperty(prop)) {
+        console.log(prop + " = " + anObject[prop]);
+    }
+}				
+				</pre>
+			</article>
+			
+			<article>
+				<h3>Fix for enumeration in ES5</h3>
+				<pre class="prettyprint lang-js">
+Object.defineProperty(Object.prototype, 'foo', { 
+    value: function(){},
+    enumerable: false
+});
+
+var anObject = {
+    a: 1,
+    b: 2,
+    c: 3
+};
+
+for (var prop in anObject) {
+    console.log(prop + " = " + anObject[prop]);
+}				
+				</pre>
+			</article>
+			
+			<article>
+				<h3>Adding to Prototypes in JS Libraries</h3>
+				<p>Whether or not the native prototypes are added to is a dividing line amongst popular libraries.</p>
+				<h4>Libraries that do:</h4>
+				<ul>
+					<li>MooTools</li>
+					<li>Prototype</li>
+				</ul>
+				<h4>Libraries that do not:</h4>
+				<ul>
+					<li>jQuery</li>
+					<li>Dojo</li>
+					<li>YUI</li>
+				</ul>
+			</article>	
+			
+			<article>
+				<h3>Other Class Options in JS</h3>
+				<p>Plenty of people prefer classical inheritance and sought to replicate it in JS.</p>
+			</article>	
+			
+			<article>
+				<h3><a href="http://mootools.net/docs/core/Class/Class">MooTools Classes</a></h3>
+				<pre class="prettyprint lang-js">
+var Animal = new Class({
+    noise: function() {
+        console.log('roar');      
+    }
+});
+
+var Dog = new Class({
+    noise: function() {
+        console.log('bark');               
+    }       
+});
+
+new Animal().noise(); //'roar'
+new Dog().noise(); //'bark'	
+				</pre>
+			</article>	
+			
+			<article>
+				<h3><a href="http://dojotoolkit.org/documentation/tutorials/1.7/declare/">Dojo Classes</a></h3>
+				<pre class="prettyprint lang-js">
+require(['dojo/_base/declare'], function(declare) {
+    declare("Animal", null, {
+        noise: function() {
+            console.log('roar');
+        }           
+    });
+	
+    declare("Dog", Animal, {
+        noise: function() {
+            console.log('bark');
+        }           
+    });
+});
+		
+new Animal().noise(); //'roar'
+new Dog().noise(); //'bark'	
+				</pre>
+			</article>
+			
+			<article class="fill">
+				<h3>JavaScript's Bad Parts</h3>
+				<p>
+					<img src="img/max-bad.jpg" />
+				</p>
+			</article>	
+			
+			<article>
+				<h3>JavaScript's Rough Parts</h3>
+				<p>There are a lot of them.  Here is a small sampling, for a more comprehensive list check out <a href="http://shop.oreilly.com/product/9780596517748.do">Douglas Crockford's JavaScript the Good Parts</a>.</p>
+			</article>	
+			
+			<article>
+				<h3>Global Variables</h3>
+				<pre class="prettyprint lang-js">
+var foo = function() {
+    for (x = 0; x < something.length; x++) {
+        console.log(something[x]);
+    }
+};
+
+function bar() {
+    //whatever
+}
+
+//x and bar are now global variables
+				</pre>
+			</article>	
+			
+			<article>
+				<h3>Block Scoping</h3>
+				<p>There is none.</p>
+				<pre class="prettyprint lang-js">
+{
+    var x = 2;
+}
+console.log(x); //2
+
+for (var y = 0; y < 8; y++) {}
+console.log(y); //8	
+				</pre>
+			</article>
+			
+			<article>
+				<h3>Octal Numbers</h3>
+				<p>Numbers with leading zeros are treated as octal numbers in JavaScript.</p>
+				<pre class="prettyprint lang-js">
+010 === 8 //true				
+				</pre>
+				<p>This is handled the same in Java.  The difference is how Strings are converted into integers.</p>
+				<pre class="prettyprint lang-java">
+//Java
+Integer.parseInt("010"); //10				
+				</pre>
+				<pre class="prettyprint lang-js">
+//JavaScript
+parseInt("010"); //8
+parseInt("010", 10); //10				
+				</pre>
+			</article>
+			
+			<article>
+				<h3>Why isn't this stuff fixed?</h3>
+				<ul>
+					<li>No one wants to break the web, therefore the only real option is to add to the language.</li>
+					<li>The language sat stagnant during the large portions of the IE6 monopoly years.<li>
+					<li>A large amount of time was spent on ES4 which ultimately failed.</li>
+				</ul>
+			</article>
+
+			<article>
+				<h3><a href="https://developer.mozilla.org/en/JavaScript/Strict_mode">ECMAScript 5 Strict Mode</a></h3>
+				<p>ECMAScript 5 introduced strict mode, a way of opting in to a restricted variant of JS.</p>
+				<pre class="prettyprint lang-js">
+var foo = function() {
+    "use strict";
+    x = 2; //error
+};
+foo();
+				</pre>
+			</article>
+			
+			<article>
+				<h3>Support</h3>
+				<ul>
+					<li>ECMAScript 5 strict mode is supported in the latest version of all of the major browsers.
+					<li>Full list - <a href="http://caniuse.com/#feat=use-strict.">http://caniuse.com/#feat=use-strict</a><li>
+					<li>Unfortunately, the IE team decided to include all of ES5 except strict mode.  ES5 strict mode will ship with IE10.</li>
+			</article>
+			
+			<article>
+				<h3>ECMAScript 6</h3>
+				<p>ECMAScript 6 contains some proposed major changes to the language. Features under discussion:</p>
+				<ul>
+					<li>Constants using the const keyword</li>
+					<li>Default parameter values</li>
+					<li>let statement to allow for block scoping</li>
+					<li>Syntax sugar for functions (use "->" instead of "function" and you can optionally drop the curly braces and return statement.</li>
+					<li>Module system</li>
+				</ul>
+			</article>
+			
+			<article>
+				<h3>ECMAScript 6's let keyword</h3>
+				<p>The let keyword can be used to offer true block scoping.</p>
+				<pre class="prettyprint lang-js">
+for (var x = 0; x < 8; x++) {}
+console.log(x); //8
+
+for (let y = 0; y < 8; y++) {}
+console.log(y); //ReferenceError
+				</pre>
+			</article>
+			
+			<article>
+				<h1>JavaScript as a Compile Target</h1>
+			</article>		
+			
+			<article>
+				<h3>Languages</h3>
+				<p>Most all languages have had something written to compile them into JavaScript.  There're a giant list at <a href="https://github.com/jashkenas/coffee-script/wiki/List-of-languages-that-compile-to-JS">https://github.com/jashkenas/coffee-script/wiki/List-of-languages-that-compile-to-JS</a></p>
+			</article>
+			
+			<article>
+				<h1><a href="http://coffeescript.org/">CoffeeScript</a></h1>
+			</article>
+			
+			<article>
+				<h3>CoffeeScript</h3>
+				<ul>
+					<li>Written by Jeremy Ashkenas in late 2009.</li>
+					<li>Generates readable, optimized valid ES3 JavaScript that will run in all browsers.</li>
+					<li>Can watch for changes in the file system and automatically compile .coffee files into .js files whenever a .coffee file is saved.</li>
+				</ul>
+			</article>
+			
+			<article>
+				<h3>CoffeeScript Example - Functions</h3>
+				<pre class="prettyprint lang-js">
+//CoffeeScript
+double = (num) -> num * 2		
+				</pre>
+				<pre class="prettyprint lang-js">
+//JavaScript
+var double = function(num) {
+    return num * 2;
+};				
+				</pre>				
+			</article>
+			
+			<article>
+				<h3>CoffeeScript Example - if else blocks</h3>
+				<pre class="prettyprint lang-js">
+//CoffeeScript				
+if happy and knowsIt
+    clapsHands()
+else
+    doSomethingElse()				
+				</pre>
+				<pre class="prettyprint lang-js">
+//JavaScript				
+if (happy && knowsIt) {
+    clapsHands();
+} else {
+    doSomethingElse();
+}				
+				</pre>
+			</article>
+			
+			<article>
+				<h3>CoffeeScript Example - Switch Statements</h3>
+				<style>pre.squish { margin: 0; }</style>
+				<pre class="prettyprint lang-js squish">
+//CoffeeScript
+switch day
+    when "Fri", "Sat"
+        if day is sunny
+            go outside
+    when "Sun" then go mall
+    else go work				
+				</pre>
+				<pre class="prettyprint lang-js squish">
+//JavaScript
+switch (day) {
+    case "Fri":
+    case "Sat":
+        if (day === sunny) go(outside);
+        break;
+    case "Sun":
+        go(mall);
+        break;
+    default:
+        go(work);
+}				
+				</pre>
+			</article>
+			
+			<article>
+				<h1><a href="http://dartlang.org">Dart</a></h1>
+			</article>	
+			
+			<article>
+				<h3>Dart</h3>
+				<ul>
+					<li>Created by Google</li>
+					<li><i><a href="http://googlecode.blogspot.com/2011/10/dart-language-for-structured-web.html">"A language for structured web programming"</a></i></li>
+					<li><i>"Can be executed in two different ways: either on a native virtual machine or on top of a JavaScript engine by using a compiler that translates Dart code to JavaScript."</i></li>
+					<li>Joshua Bloch is now the language's "Core Libraries Architect".</li>
+				</ul>
+			</article>
+			
+			<article>
+				<h3><a href="http://dartlang.org">Dart</a></h3>
+				<ul>
+					<li>Very much a mix between Java and JavaScript</li>
+					<li>Optional typing</li>
+				</ul>
+				<p>You can try writing some Dart at <a href="http://try.dartlang.org">http://try.dartlang.org</a>.</p>
+			</article>
+			
+			<article>
+				<h3>Criticism</h3>
+				<q style="font-size: 40px; line-height: 60px; margin-top: 30px;">"JavaScript is already there. On a couple of billion devices… If you want to work with the web, learn JavaScript. If you don’t want to learn JavaScript, stay the hell away from the web."</q>
+				<div class="author">
+					<a href="http://www.quirksmode.org/blog/archives/2011/10/dart_or_why_jav.html">ppk of quirksmode.org</a>
+				</div>
+			</article>
+			
+			<article>
+				<h1>Back to JavaScript… and about time to end this.</h1>
+			</article>			
+			
+			<article>
+				<h3>Reasons JavaScript has become way more awesome in the last few years, and why you might want to give it another shot.</h3>
+				<ul>
+					<li>Browser Tools</li>
+					<li>Speed</li>
+					<li>Libraries</li>
+				</ul>
+			</article>
+			
+			<article>
+				<h1>The End</h1>
+			</article>
+			
+			<article>
+				<h3>Thanks</h3>
+				<ul>
+					<li><a href="http://tjvantoll.com">tjvantoll.com</a></li>
+					<li>Twitter: <a href="https://twitter.com/#!/tjvantoll">@tjvantoll</a></li>
+					<li>GitHub: <a href="http://github.com/tjvantoll">github.com/tjvantoll</a></li>
+				</ul>				
+			</article>
+			
+    		<div id="prev-slide-area" class="slide-area"></div>
+    		<div id="next-slide-area" class="slide-area"></div>
+    	</section>
+	</body>
+</html>

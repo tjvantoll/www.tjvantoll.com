@@ -4,7 +4,7 @@
   <title><![CDATA[Category: CSS | TJ VanToll]]></title>
   <link href="http://tjvantoll.com/blog/categories/css/atom.xml" rel="self"/>
   <link href="http://tjvantoll.com/"/>
-  <updated>2012-03-13T20:50:14-04:00</updated>
+  <updated>2012-03-16T23:07:36-04:00</updated>
   <id>http://tjvantoll.com/</id>
   <author>
     <name><![CDATA[TJ VanToll]]></name>
@@ -12,6 +12,415 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Styling Disabled Form Fields]]></title>
+    <link href="http://tjvantoll.com/2012/03/20/Styling-Disabled-Form-Fields/"/>
+    <updated>2012-03-20T00:00:00-04:00</updated>
+    <id>http://tjvantoll.com/2012/03/20/Styling-Disabled-Form-Fields</id>
+    <content type="html"><![CDATA[<p>Form fields can be disabled by simply adding the <code>disabled</code> attribute.</p>
+
+<p><code>html Simple Disabled Fields
+&lt;input type="text" disabled /&gt;
+&lt;textarea disabled&gt;&lt;/textarea&gt;
+&lt;select disabled&gt;&lt;/select&gt;
+</code></p>
+
+<p>Disabled fields cannot be interacted with by the user; the browser will not allow the field to receive focus or be tabbed to.  For an intuitive UI it's important that disabled fields are clearly evident to the user.  Users are easily confused and frustrated when attempting to interact with fields that they are not able to.</p>
+
+<p>To apply custom styling to disabled fields you can add CSS rules that target <code>input:disabled</code>, <code>select:disabled</code>, &amp; <code>textarea:disabled</code>. (Note: IE doesn't support the <a href="https://developer.mozilla.org/En/CSS/%3Adisabled">disabled pseduo class</a> until IE9, so you'll need to use <code>input[disabled]</code>, <code>select[disabled]</code>, &amp; <code>textarea[disabled]</code> <a href="https://developer.mozilla.org/en/CSS/Attribute_selectors">attribute selectors</a> if IE &lt; 9 support is important for you.  It'll work just the same.)</p>
+
+<p>While you <i>can</i> provide custom disabled field styling, it's not generally a good idea.  All browsers come with default styling for these fields that attempt to mesh with native UI elements in the OS.  Also, users have a certain expectation for what disabled fields look like in their preferred web browser and it's best not to mess with that.</p>
+
+<p>Unfortunately some browser's default styling is less than ideal.  <!--more-->To best show this I've created a <a href="http://jsfiddle.net/ygwnh/12/">test case</a> with the most common form elements and recorded a rendering of the test case in a large number of browser / OS combinations.  Since some of the styles are more evident when a the element is selected and/or has a value, I included both a grouping with no <code>selected</code> or <code>value</code> attributes, and another with those set.</p>
+
+<h3>Markup</h3>
+
+<p>Here's the markup I used for the test cases, some very basic form fields with the <code>disabled</code> attribute.</p>
+
+<h4>No Value / Selected Attributes</h4>
+
+<p>``` html Markup Used to Generate the Examples http://jsfiddle.net/ygwnh/12/</p>
+
+<table>
+    <thead>
+        <tr>
+            <th>Enabled</th>
+            <th>Disabled</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><input type="text" /></td>
+            <td><input type="text" disabled /></td>
+        </tr>
+        <tr>
+            <td><input type="checkbox" /></td>
+            <td><input type="checkbox" disabled /></td>
+        </tr>
+        <tr>
+            <td><input type="radio" /></td>
+            <td><input type="radio" disabled /></td>
+        </tr>
+        <tr>
+            <td><select></select></td>
+            <td><select disabled></select></td>
+        </tr>
+        <tr>
+            <td><textarea></textarea></td>
+            <td><textarea disabled></textarea></td>
+        </tr>
+    </tbody>
+</table>
+
+
+<p>```</p>
+
+<h4>With Value / Selected Attributes</h4>
+
+<p>``` html Markup Used to Generate the Examples http://jsfiddle.net/ygwnh/12/</p>
+
+<table>
+    <thead>
+        <tr>
+            <th>Enabled w/Value</th>
+            <th>Disabled w/Value</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><input type="text" value="Value" /></td>
+            <td><input type="text" disabled value="Value"></td>
+        <tr>
+            <td><input type="checkbox" checked /></td>
+            <td><input type="checkbox" disabled checked /></td>
+        </tr>
+        <tr>
+            <td><input type="radio" checked /></td>
+            <td><input type="radio" disabled checked /></td>
+        </tr>
+        <tr>
+            <td><select><option selected>Value</option></select></td>
+            <td><select disabled><option selected>Value</option></select></td>
+        </tr>
+        <tr>
+            <td><textarea>Value</textarea></td>
+            <td><textarea disabled>Value</textarea></td>
+        </tr>
+    </tbody>
+</table>
+
+
+<p>  <br/>
+```</p>
+
+<h3>Results</h3>
+
+<p>You can view <a href="/images/posts/2012-03-13/All.html">all the results on one page</a> or see individual ones listed below.</p>
+
+<h4>Windows</h4>
+
+<ul>
+<li><a href="/images/posts/2012-03-13/IE6.png" title="IE6">IE6</a></li>
+<li><a href="/images/posts/2012-03-13/IE7.png" title="IE7">IE7</a></li>
+<li><a href="/images/posts/2012-03-13/IE8.png" title="IE8">IE8</a></li>
+<li><a href="/images/posts/2012-03-13/IE9.png" title="IE9">IE9</a></li>
+<li><a href="/images/posts/2012-03-13/IE10.png" title="IE10">IE10</a></li>
+<li><a href="/images/posts/2012-03-13/Windows-Chrome-17.png" title="Windows - Chrome 17">Chrome 17</a></li>
+<li><a href="/images/posts/2012-03-13/Windows-Safari-5.1.png" title="Windows - Safari 5.1">Safari 5.1</a></li>
+<li><a href="/images/posts/2012-03-13/Windows-Firefox-10.png" title="Windows - Firefox 10">Firefox 10</a></li>
+<li><a href="/images/posts/2012-03-13/Windows-Opera-11.61.png" title="Windows - Opera 11.61">Opera 11.61</a></li>
+</ul>
+
+
+<h4>OS X</h4>
+
+<ul>
+<li><a href="/images/posts/2012-03-13/OSX-Chrome-17.png" title="OSX - Chrome 17">Chrome 17</a></li>
+<li><a href="/images/posts/2012-03-13/OSX-Safari-5.1.png" title="OSX - Safari 5.1">Safari 5.1</a></li>
+<li><a href="/images/posts/2012-03-13/OSX-Firefox-11.png" title="OSX - Firefox 11">Firefox 11</a></li>
+<li><a href="/images/posts/2012-03-13/OSX-Opera-11.61.png" title="OSX - Opera 11.61">Opera 11.61</a></li>
+</ul>
+
+
+<h4>Mobile</h4>
+
+<ul>
+<li><a href="/images/posts/2012-03-13/iOS-5.png" title="iOS 5">iOS 5</a></li>
+<li><a href="/images/posts/2012-03-13/Android-2.3.png" title="Android 2.3">Android 2.3</a></li>
+<li><a href="/images/posts/2012-03-13/Opera-Mobile.png" title="Opera Mobile">Opera Mobile</a></li>
+</ul>
+
+
+<h3>Findings</h3>
+
+<p>In general browsers add some combination of <code>opacity</code>, a grayish <code>background-color</code>, and a grayish <code>color</code> to the element to create the disabled effect.  For the most part browsers do a pretty good job making it evident that the fields are disabled.</p>
+
+<p>There are exceptions though.  One glaring issue is the display of disabled text inputs and textareas in IE &lt; 10; when no text is present it's impossible to tell whether the field is disabled.  In Windows, all non-IE browsers simply apply a <code>background-color</code> of <code>#EBEBE4</code> to all disabled elements.  Unfortunately, IE &lt; 10 doesn't do much of anything to designate text inputs and textareas as disabled other than change the color of the text, which, doesn't work out all that well when there's no text present.</p>
+
+<h3>Normalizing IE</h3>
+
+<p>To normalize the display of disabled fields in IE we need to be able to target IE &lt;= 9 with CSS.  Why?  We don't want to override the default styling whenever possible.  As mentioned earlier browsers apply different styling to attempt to match native UI elements.  If you blindly apply a background-color to all disabled elements, you'll do so in Windows, OS X, Linux, iOS, Android, etc… as well as any future devices where it might look horrible, or worse, confuse the user.</p>
+
+<p>So back to selecting IE &lt;= 9.  In my opinion the most elegant way to do this is use <a href="http://msdn.microsoft.com/en-us/library/ms537512.aspx">IE's conditional comments</a> to apply classes to the HTML node.  This approach was <a href="http://paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/">first proposed by Paul Irish in 2008</a> and is used in the <a href="http://html5boilerplate.com/">HTML5 boilerplate</a>.  There are many variations but in this case we only need to worry about IE &lt;= 9.</p>
+
+<p>``` html Applying a Class to IE &lt;= 9</p>
+
+<!--[if lte IE 9 ]> <html class="lte9"> <![endif]-->
+
+
+<!--[if (gt IE 9)|!(IE)]><!-->
+
+
+<p> <html class=""> <!--<![endif]-->
+```</p>
+
+<p>Then we can apply the <code>background-color</code> as such:</p>
+
+<p>``` css Normalizing the Disabled Field Display for Windows
+.lte9 input[type='text'][disabled], .lte9 textarea[disabled] {</p>
+
+<pre><code>background-color: #EBEBE4;
+</code></pre>
+
+<p>}
+```</p>
+
+<p>Alternatively you could use IE's conditional comments to apply these rules directly:</p>
+
+<p>``` html Using IE's Conditional Comments</p>
+
+<!--[if lte IE 9 ]>
+    <style>
+        input[type='text'][disabled], textarea[disabled] {
+            background-color: #EBEBE4;
+        }
+    </style>
+<!--<![endif]-->
+
+
+<p>```</p>
+
+<p>Either of these approaches will normalize the display of disabled text inputs and textareas on Windows.</p>
+
+<p><img src="/images/posts/2012-03-13/IE-Before-and-After.png" alt="IE Before and After" /> <!-- http://jsfiddle.net/vCdcr/show/ --></p>
+
+<h3>Normalizing IE6</h3>
+
+<p>The above solution will not affect the display of these elements in IE6 because it does not support CSS attribute selectors.  Therefore, if you're still supporting IE6 and the display of disabled fields is important to your UI you'll need some other sort of hook on the node.  For example a class will work:</p>
+
+<p>``` html IE6 Disabled Field Markup</p>
+
+<!--[if IE 6 ]> <html class="ie6"> <![endif]-->
+
+
+<!--[if (gt IE 6)|!(IE)]><!-->
+
+
+<p> <html class=""> <!--<![endif]--></p>
+
+<p>/<em> … </em>/</p>
+
+<p><input type="text" disabled class="disabled" />
+<textarea disabled class="disabled">
+```</p>
+
+<p>Then you can apply the following CSS:</p>
+
+<p>``` css IE6 Disabled Field Styling
+.ie6 input.disabled, .ie6 textarea.disabled {</p>
+
+<pre><code>background-color: #EBEBE4;
+</code></pre>
+
+<p>}
+```</p>
+
+<h3>Other Issues</h3>
+
+<p>A number of browsers including all OS X browsers except Opera, Android, and iOS do a poor job making textareas appear disabled, in some cases even when text is present.  If your UI contains disabled textareas it's probably worth adding a little bit of opacity to compensate for browsers that don't make it very apparent that you cannot interact with them.</p>
+
+<p>``` css Normalizing Textarea Disabling
+textarea:disabled {</p>
+
+<pre><code>opacity: 0.5;
+</code></pre>
+
+<p>}
+```</p>
+
+<p>The effect is subtle but can make a big difference in helping the user to recognize that the field is disabled, especially if multiple textareas are near each other.  Here's an example from Chrome 17 on OS X:</p>
+
+<p><img src="/images/posts/2012-03-13/OSX-Before-and-After.png" alt="OSX Before and After" /> <!-- http://jsfiddle.net/JpNav/1/show/ --></p>
+
+<h3>Summary</h3>
+
+<p>Browsers have default styling for disabled fields that is usually pretty good at visually indicating that the field cannot be interacted with.  In situations where the browser default isn't ideal, custom styling can be applied.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[IE7 Attribute Selector Bugs]]></title>
+    <link href="http://tjvantoll.com/2012/03/08/IE7-Attribute-Selector-Bugs/"/>
+    <updated>2012-03-08T00:00:00-05:00</updated>
+    <id>http://tjvantoll.com/2012/03/08/IE7-Attribute-Selector-Bugs</id>
+    <content type="html"><![CDATA[<p>The CSS attribute selector allows you to select HTML elements based on their attributes.  For example, take the following markup:</p>
+
+<p>``` html Simple List</p>
+
+<ul>
+    <li id="item1"></li>  <!-- #1 -->
+    <li id="item2"></li>  <!-- #2 -->
+    <li></li>             <!-- #3 -->
+</ul>
+
+
+<p>```</p>
+
+<!--more-->
+
+
+<p>In a compliant browser, here are some selectors you can use to target these list items.</p>
+
+<p><code>css Selectors to Target the List
+li             /* Selects #1, #2, #3 */
+li[id]         /* Selects #1, #2 */
+li[id=item1]   /* Selects #1 */
+li[id='item1'] /* Selects #1, single quotes are valid */
+li[id="item2"] /* Selects #1, double quotes are valid too */
+li[id^=item]   /* Selects #1, #2, ^ = starts with */
+li[id$=1]      /* Selects #1, $ = ends with */
+li[id*=item]   /* Selects #1, #2, * = contains */
+</code></p>
+
+<h3>Enter IE7</h3>
+
+<p>This is all well and good in most all modern browsers.  Unfortunately IE7 is buggy when handling this selector.  For those of use that are still unlucky enough to be supporting it, I thought it would be nice to have some of these documented.</p>
+
+<h3>DOM Attributes == HTML Attributes?</h3>
+
+<p>Some DOM attributes have different names than the HTML attributes to avoid conflicts with JavaScript reserved words.  Specifically in this case, DOM nodes have <code>htmlFor</code> and <code>className</code> attributes to avoid JavaScript reserved words <code>for</code> and <code>class</code>.</p>
+
+<p>``` html htmlFor and className
+<label class="foo" for="name" id="nameLabel">Name:</label>
+<input type="text" name="name" id="name" /></p>
+
+<script>
+    document.getElementById('nameLabel').for; //undefined
+    document.getElementById('nameLabel').htmlFor //'name'
+    document.getElementById('nameLabel').class //undefined
+    document.getElementById('nameLabel').className //'foo'
+</script>
+
+
+<p>```</p>
+
+<p>In IE8+ (and everywhere else for that matter) the following attribute selector will select the label:</p>
+
+<p><code>css Standard Attribute Selector
+label[for='name']
+</code></p>
+
+<p>In IE7 this won't work.  You'll need to use the incorrect <code>htmlFor</code> attribute:</p>
+
+<p><code>css IE7 for Attribute Selector
+label[htmlFor='name']
+</code></p>
+
+<p>So if you're still supporting IE7 you'll almost certainly want to include them together:</p>
+
+<p><code>css Combined Selector
+label[for='name'], label[htmlFor='name']
+</code></p>
+
+<p>Along the same lines, IE7 will incorrectly select attributes based on the className attribute:</p>
+
+<p><code>css IE7 class Attribute Selector
+label[className='name']
+</code></p>
+
+<p>Fortunately IE7 also supports selecting using <code>class</code>.</p>
+
+<p><code>css class Attribute Selector
+label[class='name']
+</code></p>
+
+<p>IE8 fixed both of these bugs and selecting for the attributes <code>htmlFor</code> and <code>className</code> no longer work.</p>
+
+<h3>Empty Attributes</h3>
+
+<p>It's impossible to target empty attributes via CSS in IE7.  As an example, let's say you apply a <a href="http://html5doctor.com/html5-custom-data-attributes/">custom HTML5 data attribute</a> to nodes at random throughout the DOM.  Let's say you want to select only the ones that have an empty value, for example the h3 below:</p>
+
+<p>``` html Headings to Select</p>
+
+<h1 data-state="foo">Top Heading<h1>
+<h2 data-state="bar">Sub Heading<h2>
+<h3 data-state="">Another Heading<h3>
+```
+
+You would write this selector and call it a day:
+
+``` css Empty Attribute Selector
+[data-state='']
+```
+
+Expect it won't work in IE7.  There is simply no way to target empty attributes via CSS in IE7.  So how can you replicate this functionality?  For better or worse JavaScript is the only client option to handle this.
+
+[querySelectorAll](http://caniuse.com/queryselector) isn't supported until IE8, so you need a selector engine to target these nodes.  Here's how you can do it in jQuery:
+
+``` javascript Selecting Nodes with Empty Attribute - jQuery
+$('[data-state=""]');
+```
+
+If you're using [Dojo](http://dojotoolkit.org) yet another step is necessary.  For whatever reason running…
+
+``` javascript JavaScript Selecting Nodes with Empty Attribute - Dojo
+dojo.query('[data-state=""]');
+```
+
+…returns not only the nodes with empty attributes, but also all the nodes that don't have the attribute declared at all!  Furthermore, <code>dojo.query('[data-state]')</code> incorrectly doesn't return nodes that have the attribute with an empty value.  So you need the following approach to select the nodes in IE7.
+
+``` javascript Functioning IE7 Approach
+dojo.query('*').forEach(function(element) {
+    if (dojo.hasAttr(element, 'data-state') && 
+      dojo.attr(element, 'data-state') == '') {
+        //Safe to finally apply your styling here.
+    }
+});
+```
+
+Note that when using any of the JavaScript based solutions it's recommended to leave the CSS in place.  Yes this is dual maintenance, but it avoids a potential [FOUC](http://en.wikipedia.org/wiki/FOUC).  Fortunately ALL of this nonsense is fixed in IE8.
+
+### Descendant Selector Typos
+
+Let's say you have the following markup.
+
+``` html Sample HTML
+<div data-state='active'>
+    <p>Some text</p>
+</div>
+```
+
+…and you want to apply some styling to the paragraph, maybe something like this:
+
+``` css Descendant Selector
+div[data-state='active']p {
+    color: red;
+}
+```
+
+Notice how there's no space between the "]" and the "p", that's a syntax error, right?  Correct… except in IE7!  IE7 will incorrectly parse this as if a space were there and change the color of the paragraph to red.
+
+This was also fixed in IE8.
+
+### Summary
+
+We're actually really fortunate that the attribute selector is supported in IE7.  It's a very useful tool to have available and it can help solve a lot of real world issues.  And if you've dropped IE6 support they're finally safe to use.
+
+While support is buggy, the attribute selector does work for the vast majority of use cases.  However, knowing to look out for these bugs can save hours of frustration.  Yet another reason for IE7 to fall off the face of the Earth.  Happy hacking.
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Making a 3D Picture Cube with CSS3]]></title>
