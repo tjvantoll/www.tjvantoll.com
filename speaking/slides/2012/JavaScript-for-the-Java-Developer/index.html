@@ -17,7 +17,7 @@
     		dojoConfig = {
     			isDebug: true,
     			paths: {
-    				'dojoDemo': '/Presentations/JsforJava/demos/dojoDemo'
+    				'dojoDemo': '/speaking/slides/2012/JavaScript-for-the-Java-Developer/demos/dojoDemo'
     			}
     		};
     	</script>
@@ -48,6 +48,7 @@
 					JavaScript for the<br />Java Developer
 				</h1>
 				<p>Ted VanToll<br />March 20th, 2012</p>
+				<p>Slides at http://tjvantoll.com/jug</p>
 			</article>
 			
 			<article>
@@ -148,6 +149,18 @@
 					Brendan Eich
 				</div>
 			</article>
+			
+			<article>
+				<h3>ECMAScript Editions</h3>
+				<ul>
+					<li>1 - 1997</li>
+					<li>2 - 1998</li>
+					<li>3 - 1999</li>
+					<li>4 - N/A</li>
+					<li>5 - 2009</li>
+					<li>6 - In Progress</li>
+				</ul>
+			</article>			
 			
 			<article>
         		<p>Pretty much the only thing Java and JavaScript share is C style styntax.</p>
@@ -438,7 +451,7 @@ $('button').on('click', function() {
 			<article>
 				<h3>Using Objects to Provide Namespaces</h3>
 <pre class="prettyprint lang-js">
-myApp = myApp || {};
+myApp = {};
 myApp.builder = {
     init: function(){},
     destroy: function(){}
@@ -465,30 +478,6 @@ var myApp = myApp || {};
 });​​
 </pre>				
 			</article>								
-			
-			<article>
-				<h3><a href="http://api.jquery.com/jQuery.extend/">jQuery's $.extend</a></h3>
-<pre class="prettyprint lang-js">
-//From http://addyosmani.com/blog/essential-js-namespacing/
-var myApp = myApp || {};  
-// directly assign a nested namespace  
-myApp.library = {  
-    foo:function(){ /*..*/}  
-};  
-// deep extend/merge this namespace with another  
-// to make things interesting, let's say it's a namespace  
-// with the same name but with a different function  
-// signature: $.extend(deep, target, object1, object2)  
-$.extend(true, myApp, {  
-    library:{  
-        bar:function(){  
-            /*..*/  
-        }  
-    }  
-});  
-console.log(myApp); 
-</pre>				
-			</article>
 			
 			<article>
 				<h3>Dojo</h3>
@@ -546,13 +535,6 @@ var t = function() {
 };
 var x = function() {};
 				</pre>
-				<p>JavaScript has no block scoping.</p>
-				<pre class="prettyprint lang-js">
-for (var i = 0; i <= 8; i++) {
-	//whatever
-}
-console.log(i); //9
-				</pre>
 			</article>	
 			
 			<article>
@@ -571,6 +553,11 @@ var Foo = function() {
         this.bar = bar;
     }
 };
+
+var foo = new Foo();
+foo.setBar('hi');
+foo.getBar('hi');
+foo.bar; //Error
 				</pre>
 			</article>	
 			
@@ -804,7 +791,6 @@ Animal.prototype.noise = function() {
 
 var Dog = function(){};
 Dog.prototype = new Animal();
-Dog.constructor = Animal;
 Dog.prototype.noise = function() {
     return 'bark';
 };
@@ -947,6 +933,7 @@ var Animal = new Class({
 });
 
 var Dog = new Class({
+    Extends: Animal,
     noise: function() {
         console.log('bark');               
     }       
@@ -1099,7 +1086,7 @@ console.log(y); //ReferenceError
 			
 			<article>
 				<h3>Languages</h3>
-				<p>Most all languages have had something written to compile them into JavaScript.  There're a giant list at <a href="https://github.com/jashkenas/coffee-script/wiki/List-of-languages-that-compile-to-JS">https://github.com/jashkenas/coffee-script/wiki/List-of-languages-that-compile-to-JS</a></p>
+				<p>Most all languages have had something written to compile them into JavaScript.  There's a giant list at <a href="https://github.com/jashkenas/coffee-script/wiki/List-of-languages-that-compile-to-JS">https://github.com/jashkenas/coffee-script/wiki/List-of-languages-that-compile-to-JS</a></p>
 			</article>
 			
 			<article>
