@@ -1,1 +1,1 @@
-double = (num) -> num * 2
+triple = (num) -> num * 3

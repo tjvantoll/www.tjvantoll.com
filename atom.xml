@@ -4,7 +4,7 @@
   <title><![CDATA[TJ VanToll]]></title>
   <link href="http://tjvantoll.com/atom.xml" rel="self"/>
   <link href="http://tjvantoll.com/"/>
-  <updated>2012-03-19T22:38:35-04:00</updated>
+  <updated>2012-03-20T22:16:25-04:00</updated>
   <id>http://tjvantoll.com/</id>
   <author>
     <name><![CDATA[TJ VanToll]]></name>
@@ -12,6 +12,15 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[JavaScript for the Java Developer]]></title>
+    <link href="http://tjvantoll.com/2012/03/21/javascript-for-the-java-developer/"/>
+    <updated>2012-03-21T00:00:00-04:00</updated>
+    <id>http://tjvantoll.com/2012/03/21/javascript-for-the-java-developer</id>
+    <content type="html"><![CDATA[<p>I gave a &#8220;JavaScript for the Java Developer&#8221; talk to the <a href="http://groups.google.com/group/greaterlansingjug?pli=1">Greater Lansing Java Users Group</a> on March 20th, 2012.  For those that missed the talk the slides are <a href="http://tjvantoll.com/speaking/slides/2012/JavaScript-for-the-Java-Developer/">here</a>.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Styling Disabled Form Fields]]></title>
