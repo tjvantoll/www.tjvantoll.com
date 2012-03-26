@@ -1,6 +1,6 @@
 ---
 layout: page
-title: "about"
+title: "About Me"
 comments: false
 sharing: false
 footer: true

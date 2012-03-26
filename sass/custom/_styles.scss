@@ -111,4 +111,11 @@ body > header {
 	}
 }
 
+aside.sidebar .jsdocs a {
+	text-decoration: none;
+	color: $sidebar-color;
+	
+	img { border: 0; border-radius: 0; margin-top: 10px; }
+}
+
 i { font-style: italic; }
