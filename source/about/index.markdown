@@ -35,6 +35,7 @@ If you're looking to contact me, email me at [tj.vantoll@gmail.com](mailto:tj.va
 	- Proficient at relational databases and SQL.
 	- Self taught PHP coder, never used professionally.
 	- Developed and maintain <http://pamperedpoodles4u.com>, which receives ~100 unique visitors a day, hosts ~50,000 images, and has a full mobile site.
+	- [WordPress](http://wordpress.org) experience.
 
 ### My Work
 
