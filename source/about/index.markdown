@@ -36,6 +36,9 @@ If you're looking to contact me, email me at [tj.vantoll@gmail.com](mailto:tj.va
 	- Self taught PHP coder, never used professionally.
 	- Developed and maintain <http://pamperedpoodles4u.com>, which receives ~100 unique visitors a day, hosts ~50,000 images, and has a full mobile site.
 	- [WordPress](http://wordpress.org) experience.
+* Other
+	- Experience securing large applications against common exploits (XSS, SQL injection, etc…).
+	- Proficient in Windows / Mac environments.
 
 ### My Work
 
