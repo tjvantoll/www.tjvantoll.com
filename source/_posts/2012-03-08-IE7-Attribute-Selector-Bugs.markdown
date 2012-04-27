@@ -97,7 +97,7 @@ You would write this selector and call it a day:
 [data-state='']
 ```
 
-Expect it won't work in IE7.  There is simply no way to target empty attributes via CSS in IE7.  So how can you replicate this functionality?  For better or worse JavaScript is the only client option to handle this.
+Except it won't work in IE7.  There is simply no way to target empty attributes via CSS in IE7.  So how can you replicate this functionality?  For better or worse JavaScript is the only client side option to handle this.
 
 [querySelectorAll](http://caniuse.com/queryselector) isn't supported until IE8, so you need a selector engine to target these nodes.  Here's how you can do it in jQuery:
 
