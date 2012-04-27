@@ -39,6 +39,7 @@ If you're looking to contact me, email me at [tj.vantoll@gmail.com](mailto:tj.va
 * Other
 	- Experience securing large applications against common exploits (XSS, SQL injection, etc…).
 	- Proficient in Windows / Mac environments.
+	- Experience with AccuRev
 
 ### My Work
 
