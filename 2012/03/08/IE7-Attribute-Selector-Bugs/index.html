@@ -58,15 +58,17 @@
 
   
   <script type="text/javascript">
-    var _gaq = _gaq || [];
-    _gaq.push(['_setAccount', 'UA-29179796-1']);
-    _gaq.push(['_trackPageview']);
-
-    (function() {
-      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-    })();
+  	if (window.location.host.indexOf('local') == -1) {
+	    var _gaq = _gaq || [];
+	    _gaq.push(['_setAccount', 'UA-29179796-1']);
+	    _gaq.push(['_trackPageview']);
+	
+	    (function() {
+	      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+	      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+	      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	    })();
+    }
   </script>
 
 
@@ -307,7 +309,7 @@
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>Expect it won&#8217;t work in IE7.  There is simply no way to target empty attributes via CSS in IE7.  So how can you replicate this functionality?  For better or worse JavaScript is the only client option to handle this.</p>
+<p>Except it won&#8217;t work in IE7.  There is simply no way to target empty attributes via CSS in IE7.  So how can you replicate this functionality?  For better or worse JavaScript is the only client side option to handle this.</p>
 
 <p><a href="http://caniuse.com/queryselector">querySelectorAll</a> isn&#8217;t supported until IE8, so you need a selector engine to target these nodes.  Here&#8217;s how you can do it in jQuery:</p>
 
