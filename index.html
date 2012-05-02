@@ -9,7 +9,7 @@
   <meta name="author" content="TJ VanToll">
 
   
-  <meta name="description" content="I gave a &#8220;JavaScript for the Java Developer&#8221; talk to the Greater Lansing Java Users Group on March 20th, 2012. For those that missed the &hellip;">
+  <meta name="description" content="Ah, 1997. The first browser war was in full force, and Microsoft was busy adding proprietary new features to compete with Netscape Navigator. One of &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -152,6 +152,55 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2012/05/02/showmodaldialog-what-it-is-and-why-you-should-never-use-it/">window.showModalDialog: What It Is and Why You Should Never Use It</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-05-02T22:37:00-04:00" pubdate data-updated="true">May 2<span>nd</span>, 2012</time>
+        
+         | <a href="/2012/05/02/showmodaldialog-what-it-is-and-why-you-should-never-use-it/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Ah, 1997.  The first browser war was in full force, and Microsoft was busy adding proprietary new features to compete with Netscape Navigator.  One of those features was introducing a common OS UI element into the browser - modal dialogs.  Internet Explorer 4 launched with a <code>showModalDialog</code> method on the global <code>window</code> object.  When called it displays a dialog that the user has to deal with before interacting with the rest of the page.</p>
+
+<p>Fast forward a few years and Internet Explorer had won the war, 95+ percent of us were using IE6.  Consequently a whole lot of web applications were designed around many of the proprietary features that IE had added.  Interestingly several of these have recently been added to the HTML5 specification including <a href="http://www.w3.org/TR/html5/embedded-content-0.html#dom-innerhtml">innerHTML</a>, <a href="http://html5.org/specs/dom-parsing.html#insertadjacenthtml%28%29">insertAdjacentHTML</a>, <a href="http://html5.org/specs/dom-parsing.html#outerhtml">outerHTML</a>, and… <a href="http://www.whatwg.org/specs/web-apps/current-work/multipage/timers.html#dialogs-implemented-using-separate-documents">window.showModalDialog</a>.</p>
+
+<p>So now that <code>window.showModalDialog</code> has been standardized should you be using it?</p>
+
+<p><strong>No.</strong></p>
+
+<p>In general the idea of putting a native dialog implementation into the browser was a really good idea, but  <code>window.showModalDialog</code> was a bad implementation that is riddled with issues and poor browser support.</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/2012/05/02/showmodaldialog-what-it-is-and-why-you-should-never-use-it/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -413,6 +462,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2012/05/02/showmodaldialog-what-it-is-and-why-you-should-never-use-it/">window.showModalDialog: What It is and Why You Should Never Use It</a>
+      </li>
+    
+      <li class="post">
         <a href="/2012/03/21/javascript-for-the-java-developer/">JavaScript for the Java Developer</a>
       </li>
     
@@ -426,10 +479,6 @@
     
       <li class="post">
         <a href="/2012/02/27/Making-a-3D-Picture-Cube-with-CSS3/">Making a 3D Picture Cube with CSS3</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2012/02/20/CSS3-Color-Animations/">CSS3 Color Animations</a>
       </li>
     
   </ul>

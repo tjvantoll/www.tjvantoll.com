@@ -4,7 +4,7 @@
   <title><![CDATA[Category: JavaScript, | TJ VanToll]]></title>
   <link href="http://tjvantoll.com/blog/categories/javascript-/atom.xml" rel="self"/>
   <link href="http://tjvantoll.com/"/>
-  <updated>2012-04-26T22:58:01-04:00</updated>
+  <updated>2012-05-01T23:15:29-04:00</updated>
   <id>http://tjvantoll.com/</id>
   <author>
     <name><![CDATA[TJ VanToll]]></name>
@@ -12,6 +12,184 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[window.showModalDialog: What It is and Why You Should Never Use It]]></title>
+    <link href="http://tjvantoll.com/2012/05/02/showmodaldialog-what-it-is-and-why-you-should-never-use-it/"/>
+    <updated>2012-05-02T22:37:00-04:00</updated>
+    <id>http://tjvantoll.com/2012/05/02/showmodaldialog-what-it-is-and-why-you-should-never-use-it</id>
+    <content type="html"><![CDATA[<p>Ah, 1997.  The first browser war was in full force, and Microsoft was busy adding proprietary new features to compete with Netscape Navigator.  One of those features was introducing a common OS UI element into the browser - modal dialogs.  Internet Explorer 4 launched with a <code>showModalDialog</code> method on the global <code>window</code> object.  When called it displays a dialog that the user has to deal with before interacting with the rest of the page.</p>
+
+<p>Fast forward a few years and Internet Explorer had won the war, 95+ percent of us were using IE6.  Consequently a whole lot of web applications were designed around many of the proprietary features that IE had added.  Interestingly several of these have recently been added to the HTML5 specification including <a href="http://www.w3.org/TR/html5/embedded-content-0.html#dom-innerhtml">innerHTML</a>, <a href="http://html5.org/specs/dom-parsing.html#insertadjacenthtml%28%29">insertAdjacentHTML</a>, <a href="http://html5.org/specs/dom-parsing.html#outerhtml">outerHTML</a>, and… <a href="http://www.whatwg.org/specs/web-apps/current-work/multipage/timers.html#dialogs-implemented-using-separate-documents">window.showModalDialog</a>.</p>
+
+<p>So now that <code>window.showModalDialog</code> has been standardized should you be using it?</p>
+
+<p><strong>No.</strong></p>
+
+<p>In general the idea of putting a native dialog implementation into the browser was a really good idea, but  <code>window.showModalDialog</code> was a bad implementation that is riddled with issues and poor browser support.<!--more--></p>
+
+<h3>Modal Dialogs</h3>
+
+<p>So why did Microsoft add modal dialogs to begin with?  They're actually a heavily used UI element in most all computer interfaces.  Try to shut off your phone, tablet, laptop, etc.. and you're almost certainly going to be presented with a modal dialog asking you to confirm your decision before being allowed to shut it down.  What makes it modal is the fact that you are forced to make a selection before you do anything else.</p>
+
+<p>It's oftentimes convenient from a usability stand point to get some form of feedback from a user before allowing them to continue.  <code>showModalDialog</code> was simply Microsoft's attempt to bring this UI element to the web.</p>
+
+<h3>Implementation</h3>
+
+<p>To use the <code>showModalDialog</code> method you simply call it with a URL.</p>
+
+<p><code>javascript window.showModalDialog Basic Usage
+window.showModalDialog('http://google.com');
+</code></p>
+
+<p>This will open up a modal dialog with Google loaded in it.  In and of itself this isn't all that useful.  Usually if you're showing a modal dialog you want to get some information back from it.  This is where the window.returnValue comes into play.</p>
+
+<h4>window.returnValue</h4>
+
+<p>``` html window.returnValue Example</p>
+
+<!-- page.html -->
+
+
+<p>&lt;!DOCTYPE html>
+<html>
+  <head></p>
+
+<pre><code>&lt;script&gt;
+  var result = window.showModalDialog('modal.html');
+  console.log(result);
+&lt;/script&gt;
+</code></pre>
+
+<p>  </head>
+  <body>
+  </body>
+</html></p>
+
+<!-- modal.html -->
+
+
+<p>&lt;!DOCTYPE html>
+<html>
+  <head></p>
+
+<pre><code>&lt;script&gt;
+  window.returnValue = 'foo';
+  window.close();
+&lt;/script&gt;
+</code></pre>
+
+<p>  </head>
+  <body>
+  </body>
+</html>
+```</p>
+
+<p>In this example when page.html is loaded it will immediately open up a modal dialog with modal.html loaded in it.  It will then block until the modal dialog returns control.  The JavaScript interpreter will literally pause execution as if you had a breakpoint set at that line of code and wait for the result of the modal dialog.</p>
+
+<p>When modal.html loads it will assign a value of 'foo' to <code>window.returnValue</code> and close itself via <code>window.close()</code>.  The opening window (page.html) will get control back, resume execution, and log the return value of 'foo'.</p>
+
+<h4>window.dialogArguments</h4>
+
+<p>If you want to pass information to the modal dialog you can do so via the second parameter of <code>window.showModalDialog</code>.  Those values will be available in the modal dialog's <code>window.dialogArguments</code> property.</p>
+
+<p>``` html window.returnValue Example</p>
+
+<!-- page.html -->
+
+
+<p>&lt;!DOCTYPE html>
+<html>
+  <head></p>
+
+<pre><code>&lt;script&gt;
+  window.showModalDialog('anotherPage.html', 'foo');
+&lt;/script&gt;
+</code></pre>
+
+<p>  </head>
+  <body>
+  </body>
+</html></p>
+
+<!-- anotherPage.html -->
+
+
+<p>&lt;!DOCTYPE html>
+<html>
+  <head></p>
+
+<pre><code>&lt;script&gt;
+  alert(window.dialogArguments); //'foo'
+  window.close();
+&lt;/script&gt;
+</code></pre>
+
+<p>  </head>
+  <body>
+  </body>
+</html>
+```</p>
+
+<h4>Further Options</h4>
+
+<p>A third parameter to <code>window.showModalDialog</code> is available to customize the look and behavior of the modal dialog.  The <a href="https://developer.mozilla.org/en/DOM/window.showModalDialog">MDN article on showModalDialog</a> has these well documented.</p>
+
+<h3>Modal Dialog == A Brand New Window</h3>
+
+<p>Note that in all these examples modal.html is a full HTML document, not a snippet that is injected in.  This is a characterizing feature of <code>window.showModalDialog</code>.  It's really just two completely separate windows communicating with each other.  The fact that you have two separate windows and DOMs means you don't have to worry about JS &amp; DOM conflicts, which is appealing if you have a lot of bad JavaScript with a cluttered global scope.  But mostly this just adds unnecessary complexity, complicates the browser implementation, and contributes to a number of bugs (see below).</p>
+
+<p><blockquote><p>"You should only use one browser window ever, as a Web app author."</p><footer><strong>Ian Hickson (HTML 5 spec maintainer)</strong> <cite><a href='http://www.mail-archive.com/public-webapi@w3.org/msg03345.html'>www.mail-archive.com/&hellip;</a></cite></footer></blockquote></p>
+
+<h3>Browser Support</h3>
+
+<p>IE obviously supports this function and has since IE4, but what about the other browsers?  Firefox added support in version 3 and Safari added support in 5.1.  Opera doesn't support it at all.</p>
+
+<p>Chrome has supported it since an early version but has some serious bugs with its implementation.  Most importantly the window Chrome displays isn't modal (see <a href="http://code.google.com/p/chromium/issues/detail?id=16045">Chromium bug #16045</a>), meaning, the user is able to interact with the original window before dealing with the modal dialog, which kind of defeats the whole purpose.  Another big one is that <code>window.returnValue</code> will be lost if any sort of redirect or form submission is done in the modal dialog (see <a href="http://code.google.com/p/chromium/issues/detail?id=42939">Chromium bug #42939</a>).</p>
+
+<p>Despite these issues Chrome did do one thing right.  While it's important that modal dialogs prevent the user from interacting with the originating window, there's no reason the user shouldn't be allowed to interact with other tabs or native browser controls (back/forward, favorites, address bar, etc). Chrome is the only browser that allows this - IE, Firefox, and Safari do not.  This is actually a big annoyance to the end user.  IE, Firefox, and Safari don't even allow you to minimize or close the browser until you've dealt with the modal dialog.</p>
+
+<h3>More Issues</h3>
+
+<h4>Modal Dialog == Popup</h4>
+
+<p>The biggest issue with modal dialogs is that Firefox, Chrome, and Safari all treat them as popups by default and block them.  A user has to explictly allow the popup in order to see your modal dialog.  In my experience users usually get frustrated and leave at that point.</p>
+
+<h4>Debugging</h4>
+
+<p>The debugging experience for <code>window.showModalDialog</code> is horrible.  IE as recent as version 9 won't let you open their dev tools up in the modal dialog… at all.  Firefox, Chrome, and Safari will let you open FireBug / Web Inspector, but good luck debugging any script that happens when the dialog is opened.  You're basically forced to alert like it's 1999 to determine what's going on.  Also just a word of warning, IE <strong>LOVES</strong> to cache modal dialogs.</p>
+
+<h4>Mobile</h4>
+
+<p>Currently no major mobile browsers support <code>window.showModalDialog</code>, so if you're looking for any sort of tablet / mobile support you need to stay away.</p>
+
+<h3>Why was this added to HTML5?</h3>
+
+<p>So why have other browsers added support for this method and why was it added to the HTML5 spec?  It's mostly because in the IE6 days 1.2 bajillion applications were written to be extremely dependent on <code>window.showModalDialog</code>.  I can say that I personally work at an enterprise that has its fair share of those applications, and you can see many comments demanding enterprise application support on the various Chrome bugs (see <a href="http://code.google.com/p/chromium/issues/detail?id=4202">#4202</a>, <a href="http://code.google.com/p/chromium/issues/detail?id=16045">#16045</a>, &amp; <a href="http://code.google.com/p/chromium/issues/detail?id=42939">#42939</a>).</p>
+
+<p>Refactoring these applications is no small task, and browsers that want to win market share are catering to them to gain support.</p>
+
+<p><blockquote><p>"At this point, browsers have to support it, there's too much content out there that uses it."</p><footer><strong>Ian Hickson</strong> <cite><a href='http://www.mail-archive.com/public-webapi@w3.org/msg03363.html'>www.mail-archive.com/&hellip;</a></cite></footer></blockquote></p>
+
+<h3>Better Alternatives</h3>
+
+<p>Given all the issues outlined above, it is not a good idea to use <code>window.showModalDialog</code> in new development (or any development for that matter).  So what should you use?  There's no shortage of choices, basically all JavaScript frameworks provide an alternative (see <a href="http://livedocs.dojotoolkit.org/dijit/Dialog">Dojo</a>, <a href="http://mootools.net/forge/p/ascribe_dialog">MooTools</a>, &amp; <a href="http://yuilibrary.com/yui/docs/overlay/">YUI</a>).</p>
+
+<p>Personally I would highly recommend <a href="http://jqueryui.com/demos/dialog/">jQuery UI's dialog</a>.  It has a clean API, is highly customizable, extendable, and is themeable through <a href="http://jqueryui.com/themeroller/">jQuery UI's theme roller</a>.</p>
+
+<h3>Moving Forward</h3>
+
+<p>When asked "What’s your fave feature that didn’t get into HTML 5 that you’d put into HTML 6?", Ian Hickson stated in a 2009 interview that:</p>
+
+<p><blockquote><p>In-window modal dialogs or dialog box—the kind of prompt you get when the computer asks you a question and won’t let you do anything else until you answer the question. For instance, the window that comes up when you say "Save As…" is usually a modal dialog.</p></p><p><p>Right now people fake it with divs and complicated styles and script. It would be neat to just be able to say "make this section a modal dialog". Like showModalDialog(), but within the page instead of opening a new window with a new page.</p></p><p><p>I’d add it to HTML 5, but there are so many new features already that we need to wait for the browsers to catch up.</p><footer><strong>Ian Hickson</strong> <cite><a href='http://www.webstandards.org/2009/05/13/interview-with-ian-hickson-editor-of-the-html-5-specification/'>www.webstandards.org/2009/05/13/&hellip;</a></cite></footer></blockquote></p>
+
+<p>Good news, <a href="http://dev.w3.org/html5/spec/commands.html#the-dialog-element">the dialog element</a> has recently been added to the HTML spec.  It includes a <code>showModal</code> method as well as a <code>returnValue</code> property that mimics <code>window.returnValue</code>.  The bad news?  It will be a long time before this element is useable  in all browsers.  The good news?  This would be a relatively easy element to <a href="http://remysharp.com/2010/10/08/what-is-a-polyfill/">polyfill</a>, so once some implementations make their way into browsers, developers could make a functional version for older browsers with the same API.</p>
+
+<h3>Conclusion</h3>
+
+<p><code>window.showModalDialog</code> is an old API that has been retroactively standardized; but that doesn't mean you should actually be using it.  If you're still maintaining code using this try to get off of it as soon as possible.  That being said the idea of having native dialog capabilities built into the browser wasn't a bad idea.  Hope may be on the way with the dialog element that was recently added to the HTML5 spec.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[JavaScript for the Java Developer]]></title>

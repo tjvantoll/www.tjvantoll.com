@@ -1,0 +1,584 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>window.showModalDialog: What It is and Why You Should Never Use It - TJ VanToll - Adventures in Front End Technologies</title>
+  <meta name="author" content="TJ VanToll">
+
+  
+  <meta name="description" content="Ah, 1997. The first browser war was in full force, and Microsoft was busy adding proprietary new features to compete with Netscape Navigator. One of &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://tjvantoll.com/2012/05/02/showmodaldialog-what-it-is-and-why-you-should-never-use-it">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  
+  <!--
+  Custom script concatenation, including a custom version of Modernizr, prefixfree, and PictureCube
+  <script src="/javascripts/modernizr-2.5.3.js"></script>
+  <script src="/javascripts/prefixfree.min.js"></script>  
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js"></script>
+  <script src="/javascripts/PictureCube.js"></script>
+  -->
+  <script src="/javascripts/build/scripts.js"></script>
+	
+  <link href="/atom.xml" rel="alternate" title="TJ VanToll" type="application/atom+xml">
+  <script>
+	$.domReady(function() {
+		if (Modernizr.csstransforms3d) {
+			new PictureCube('picture-cube', [
+				'/images/me/1.jpg',
+				'/images/me/2.jpg',
+				'/images/kids/2.jpg',
+				'/images/kids/3.jpg',
+				'/images/izzie/5.jpg',
+				'/images/me/3.jpg'											
+			]).cycle(5000);
+		}			
+	});  
+</script>
+
+<!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+  	if (window.location.host.indexOf('local') == -1) {
+	    var _gaq = _gaq || [];
+	    _gaq.push(['_setAccount', 'UA-29179796-1']);
+	    _gaq.push(['_trackPageview']);
+	
+	    (function() {
+	      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+	      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+	      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	    })();
+    }
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+	<div id="picture-cube"></div>
+	<h1><a href="/">TJ VanToll</a></h1>
+	
+		<h2>Adventures in Front End Technologies</h2>
+		<!--
+		<h2>
+			<span>
+				<span class="a1">A</span>
+				<span class="a2">d</span>
+				<span class="a1">v</span>
+				<span class="a2">e</span>
+				<span class="a1">n</span>
+				<span class="a2">t</span>
+				<span class="a1">u</span>
+				<span class="a2">r</span>
+				<span class="a1">e</span>
+				<span class="a2">s</span>
+			</span>
+			&nbsp;
+			<span>
+				<span class="b">i</span>
+				<span class="b">n</span>
+			</span>
+			&nbsp; 
+			<span>
+				<span class="c1">F</span>
+				<span class="c2">r</span>
+				<span class="c3">o</span>
+				<span class="c4">n</span>
+				<span class="c5">t</span>
+			</span>
+			&nbsp;
+			<span>
+				<span class="d">E</span>
+				<span class="d">n</span>
+				<span class="d">d</span>
+			</span>
+			&nbsp;
+			<span>
+				<span class="e">T</span>
+				<span class="e">e</span>
+				<span class="e">c</span>
+				<span class="e">h</span>
+				<span class="e">n</span>
+				<span class="e">o</span>
+				<span class="e">l</span>
+				<span class="e">o</span>
+				<span class="e">g</span>
+				<span class="e">i</span>
+				<span class="e">e</span>
+				<span class="e">s</span>
+			</span>
+		</h2>-->  
+	
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:tjvantoll.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/about">About</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">window.showModalDialog: What It Is and Why You Should Never Use It</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-05-02T22:37:00-04:00" pubdate data-updated="true">May 2<span>nd</span>, 2012</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>Ah, 1997.  The first browser war was in full force, and Microsoft was busy adding proprietary new features to compete with Netscape Navigator.  One of those features was introducing a common OS UI element into the browser - modal dialogs.  Internet Explorer 4 launched with a <code>showModalDialog</code> method on the global <code>window</code> object.  When called it displays a dialog that the user has to deal with before interacting with the rest of the page.</p>
+
+<p>Fast forward a few years and Internet Explorer had won the war, 95+ percent of us were using IE6.  Consequently a whole lot of web applications were designed around many of the proprietary features that IE had added.  Interestingly several of these have recently been added to the HTML5 specification including <a href="http://www.w3.org/TR/html5/embedded-content-0.html#dom-innerhtml">innerHTML</a>, <a href="http://html5.org/specs/dom-parsing.html#insertadjacenthtml%28%29">insertAdjacentHTML</a>, <a href="http://html5.org/specs/dom-parsing.html#outerhtml">outerHTML</a>, and… <a href="http://www.whatwg.org/specs/web-apps/current-work/multipage/timers.html#dialogs-implemented-using-separate-documents">window.showModalDialog</a>.</p>
+
+<p>So now that <code>window.showModalDialog</code> has been standardized should you be using it?</p>
+
+<p><strong>No.</strong></p>
+
+<p>In general the idea of putting a native dialog implementation into the browser was a really good idea, but  <code>window.showModalDialog</code> was a bad implementation that is riddled with issues and poor browser support.<!--more--></p>
+
+<h3>Modal Dialogs</h3>
+
+<p>So why did Microsoft add modal dialogs to begin with?  They&#8217;re actually a heavily used UI element in most all computer interfaces.  Try to shut off your phone, tablet, laptop, etc.. and you&#8217;re almost certainly going to be presented with a modal dialog asking you to confirm your decision before being allowed to shut it down.  What makes it modal is the fact that you are forced to make a selection before you do anything else.</p>
+
+<p>It&#8217;s oftentimes convenient from a usability stand point to get some form of feedback from a user before allowing them to continue.  <code>showModalDialog</code> was simply Microsoft&#8217;s attempt to bring this UI element to the web.</p>
+
+<h3>Implementation</h3>
+
+<p>To use the <code>showModalDialog</code> method you simply call it with a URL.</p>
+
+<figure class='code'><figcaption><span>window.showModalDialog Basic Usage</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nb">window</span><span class="p">.</span><span class="nx">showModalDialog</span><span class="p">(</span><span class="s1">&#39;http://google.com&#39;</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This will open up a modal dialog with Google loaded in it.  In and of itself this isn&#8217;t all that useful.  Usually if you&#8217;re showing a modal dialog you want to get some information back from it.  This is where the window.returnValue comes into play.</p>
+
+<h4>window.returnValue</h4>
+
+<figure class='code'><figcaption><span>window.returnValue Example</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="c">&lt;!-- page.html --&gt;</span>
+</span><span class='line'><span class="cp">&lt;!DOCTYPE html&gt;</span>
+</span><span class='line'><span class="nt">&lt;html&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;head&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;script&gt;</span>
+</span><span class='line'>      <span class="kd">var</span> <span class="nx">result</span> <span class="o">=</span> <span class="nb">window</span><span class="p">.</span><span class="nx">showModalDialog</span><span class="p">(</span><span class="s1">&#39;modal.html&#39;</span><span class="p">);</span>
+</span><span class='line'>      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span>
+</span><span class='line'>    <span class="nt">&lt;/script&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;/head&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;body&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;/body&gt;</span>
+</span><span class='line'><span class="nt">&lt;/html&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="c">&lt;!-- modal.html --&gt;</span>
+</span><span class='line'><span class="cp">&lt;!DOCTYPE html&gt;</span>
+</span><span class='line'><span class="nt">&lt;html&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;head&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;script&gt;</span>
+</span><span class='line'>      <span class="nb">window</span><span class="p">.</span><span class="nx">returnValue</span> <span class="o">=</span> <span class="s1">&#39;foo&#39;</span><span class="p">;</span>
+</span><span class='line'>      <span class="nb">window</span><span class="p">.</span><span class="nx">close</span><span class="p">();</span>
+</span><span class='line'>    <span class="nt">&lt;/script&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;/head&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;body&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;/body&gt;</span>
+</span><span class='line'><span class="nt">&lt;/html&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>In this example when page.html is loaded it will immediately open up a modal dialog with modal.html loaded in it.  It will then block until the modal dialog returns control.  The JavaScript interpreter will literally pause execution as if you had a breakpoint set at that line of code and wait for the result of the modal dialog.</p>
+
+<p>When modal.html loads it will assign a value of &#8216;foo&#8217; to <code>window.returnValue</code> and close itself via <code>window.close()</code>.  The opening window (page.html) will get control back, resume execution, and log the return value of &#8216;foo&#8217;.</p>
+
+<h4>window.dialogArguments</h4>
+
+<p>If you want to pass information to the modal dialog you can do so via the second parameter of <code>window.showModalDialog</code>.  Those values will be available in the modal dialog&#8217;s <code>window.dialogArguments</code> property.</p>
+
+<figure class='code'><figcaption><span>window.returnValue Example</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="c">&lt;!-- page.html --&gt;</span>
+</span><span class='line'><span class="cp">&lt;!DOCTYPE html&gt;</span>
+</span><span class='line'><span class="nt">&lt;html&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;head&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;script&gt;</span>
+</span><span class='line'>      <span class="nb">window</span><span class="p">.</span><span class="nx">showModalDialog</span><span class="p">(</span><span class="s1">&#39;anotherPage.html&#39;</span><span class="p">,</span> <span class="s1">&#39;foo&#39;</span><span class="p">);</span>
+</span><span class='line'>    <span class="nt">&lt;/script&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;/head&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;body&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;/body&gt;</span>
+</span><span class='line'><span class="nt">&lt;/html&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="c">&lt;!-- anotherPage.html --&gt;</span>
+</span><span class='line'><span class="cp">&lt;!DOCTYPE html&gt;</span>
+</span><span class='line'><span class="nt">&lt;html&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;head&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;script&gt;</span>
+</span><span class='line'>      <span class="nx">alert</span><span class="p">(</span><span class="nb">window</span><span class="p">.</span><span class="nx">dialogArguments</span><span class="p">);</span> <span class="c1">//&#39;foo&#39;</span>
+</span><span class='line'>      <span class="nb">window</span><span class="p">.</span><span class="nx">close</span><span class="p">();</span>
+</span><span class='line'>    <span class="nt">&lt;/script&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;/head&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;body&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;/body&gt;</span>
+</span><span class='line'><span class="nt">&lt;/html&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>Further Options</h4>
+
+<p>A third parameter to <code>window.showModalDialog</code> is available to customize the look and behavior of the modal dialog.  The <a href="https://developer.mozilla.org/en/DOM/window.showModalDialog">MDN article on showModalDialog</a> has these well documented.</p>
+
+<h3>Modal Dialog == A Brand New Window</h3>
+
+<p>Note that in all these examples modal.html is a full HTML document, not a snippet that is injected in.  This is a characterizing feature of <code>window.showModalDialog</code>.  It&#8217;s really just two completely separate windows communicating with each other.  The fact that you have two separate windows and DOMs means you don&#8217;t have to worry about JS &amp; DOM conflicts, which is appealing if you have a lot of bad JavaScript with a cluttered global scope.  But mostly this just adds unnecessary complexity, complicates the browser implementation, and contributes to a number of bugs (see below).</p>
+
+<blockquote><p>&#8220;You should only use one browser window ever, as a Web app author.&#8221;</p><footer><strong>Ian Hickson (HTML 5 spec maintainer)</strong> <cite><a href='http://www.mail-archive.com/public-webapi@w3.org/msg03345.html'>www.mail-archive.com/&hellip;</a></cite></footer></blockquote>
+
+
+<h3>Browser Support</h3>
+
+<p>IE obviously supports this function and has since IE4, but what about the other browsers?  Firefox added support in version 3 and Safari added support in 5.1.  Opera doesn&#8217;t support it at all.</p>
+
+<p>Chrome has supported it since an early version but has some serious bugs with its implementation.  Most importantly the window Chrome displays isn&#8217;t modal (see <a href="http://code.google.com/p/chromium/issues/detail?id=16045">Chromium bug #16045</a>), meaning, the user is able to interact with the original window before dealing with the modal dialog, which kind of defeats the whole purpose.  Another big one is that <code>window.returnValue</code> will be lost if any sort of redirect or form submission is done in the modal dialog (see <a href="http://code.google.com/p/chromium/issues/detail?id=42939">Chromium bug #42939</a>).</p>
+
+<p>Despite these issues Chrome did do one thing right.  While it&#8217;s important that modal dialogs prevent the user from interacting with the originating window, there&#8217;s no reason the user shouldn&#8217;t be allowed to interact with other tabs or native browser controls (back/forward, favorites, address bar, etc). Chrome is the only browser that allows this - IE, Firefox, and Safari do not.  This is actually a big annoyance to the end user.  IE, Firefox, and Safari don&#8217;t even allow you to minimize or close the browser until you&#8217;ve dealt with the modal dialog.</p>
+
+<h3>More Issues</h3>
+
+<h4>Modal Dialog == Popup</h4>
+
+<p>The biggest issue with modal dialogs is that Firefox, Chrome, and Safari all treat them as popups by default and block them.  A user has to explictly allow the popup in order to see your modal dialog.  In my experience users usually get frustrated and leave at that point.</p>
+
+<h4>Debugging</h4>
+
+<p>The debugging experience for <code>window.showModalDialog</code> is horrible.  IE as recent as version 9 won&#8217;t let you open their dev tools up in the modal dialog… at all.  Firefox, Chrome, and Safari will let you open FireBug / Web Inspector, but good luck debugging any script that happens when the dialog is opened.  You&#8217;re basically forced to alert like it&#8217;s 1999 to determine what&#8217;s going on.  Also just a word of warning, IE <strong>LOVES</strong> to cache modal dialogs.</p>
+
+<h4>Mobile</h4>
+
+<p>Currently no major mobile browsers support <code>window.showModalDialog</code>, so if you&#8217;re looking for any sort of tablet / mobile support you need to stay away.</p>
+
+<h3>Why was this added to HTML5?</h3>
+
+<p>So why have other browsers added support for this method and why was it added to the HTML5 spec?  It&#8217;s mostly because in the IE6 days 1.2 bajillion applications were written to be extremely dependent on <code>window.showModalDialog</code>.  I can say that I personally work at an enterprise that has its fair share of those applications, and you can see many comments demanding enterprise application support on the various Chrome bugs (see <a href="http://code.google.com/p/chromium/issues/detail?id=4202">#4202</a>, <a href="http://code.google.com/p/chromium/issues/detail?id=16045">#16045</a>, &amp; <a href="http://code.google.com/p/chromium/issues/detail?id=42939">#42939</a>).</p>
+
+<p>Refactoring these applications is no small task, and browsers that want to win market share are catering to them to gain support.</p>
+
+<blockquote><p>&#8220;At this point, browsers have to support it, there&#8217;s too much content out there that uses it.&#8221;</p><footer><strong>Ian Hickson</strong> <cite><a href='http://www.mail-archive.com/public-webapi@w3.org/msg03363.html'>www.mail-archive.com/&hellip;</a></cite></footer></blockquote>
+
+
+<h3>Better Alternatives</h3>
+
+<p>Given all the issues outlined above, it is not a good idea to use <code>window.showModalDialog</code> in new development (or any development for that matter).  So what should you use?  There&#8217;s no shortage of choices, basically all JavaScript frameworks provide an alternative (see <a href="http://livedocs.dojotoolkit.org/dijit/Dialog">Dojo</a>, <a href="http://mootools.net/forge/p/ascribe_dialog">MooTools</a>, &amp; <a href="http://yuilibrary.com/yui/docs/overlay/">YUI</a>).</p>
+
+<p>Personally I would highly recommend <a href="http://jqueryui.com/demos/dialog/">jQuery UI&#8217;s dialog</a>.  It has a clean API, is highly customizable, extendable, and is themeable through <a href="http://jqueryui.com/themeroller/">jQuery UI&#8217;s theme roller</a>.</p>
+
+<h3>Moving Forward</h3>
+
+<p>When asked &#8220;What’s your fave feature that didn’t get into HTML 5 that you’d put into HTML 6?&#8221;, Ian Hickson stated in a 2009 interview that:</p>
+
+<blockquote><p>In-window modal dialogs or dialog box—the kind of prompt you get when the computer asks you a question and won’t let you do anything else until you answer the question. For instance, the window that comes up when you say &#8220;Save As…&#8221; is usually a modal dialog.</p><p>Right now people fake it with divs and complicated styles and script. It would be neat to just be able to say &#8220;make this section a modal dialog&#8221;. Like showModalDialog(), but within the page instead of opening a new window with a new page.</p><p>I’d add it to HTML 5, but there are so many new features already that we need to wait for the browsers to catch up.</p><footer><strong>Ian Hickson</strong> <cite><a href='http://www.webstandards.org/2009/05/13/interview-with-ian-hickson-editor-of-the-html-5-specification/'>www.webstandards.org/2009/05/13/&hellip;</a></cite></footer></blockquote>
+
+
+<p>Good news, <a href="http://dev.w3.org/html5/spec/commands.html#the-dialog-element">the dialog element</a> has recently been added to the HTML spec.  It includes a <code>showModal</code> method as well as a <code>returnValue</code> property that mimics <code>window.returnValue</code>.  The bad news?  It will be a long time before this element is useable  in all browsers.  The good news?  This would be a relatively easy element to <a href="http://remysharp.com/2010/10/08/what-is-a-polyfill/">polyfill</a>, so once some implementations make their way into browsers, developers could make a functional version for older browsers with the same API.</p>
+
+<h3>Conclusion</h3>
+
+<p><code>window.showModalDialog</code> is an old API that has been retroactively standardized; but that doesn&#8217;t mean you should actually be using it.  If you&#8217;re still maintaining code using this try to get off of it as soon as possible.  That being said the idea of having native dialog capabilities built into the browser wasn&#8217;t a bad idea.  Hope may be on the way with the dialog element that was recently added to the HTML5 spec.</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">TJ VanToll</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-05-02T22:37:00-04:00" pubdate data-updated="true">May 2<span>nd</span>, 2012</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/browsers/'>Browsers</a>, <a class='category' href='/blog/categories/javascript-/'>JavaScript,</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://tjvantoll.com/2012/05/02/showmodaldialog-what-it-is-and-why-you-should-never-use-it/" data-via="tjvantoll" data-counturl="http://tjvantoll.com/2012/05/02/showmodaldialog-what-it-is-and-why-you-should-never-use-it/" >Tweet</a>
+  
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/2012/03/21/javascript-for-the-java-developer/" title="Previous Post: JavaScript for the Java Developer">&laquo; JavaScript for the Java Developer</a>
+      
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2012/05/02/showmodaldialog-what-it-is-and-why-you-should-never-use-it/">window.showModalDialog: What It is and Why You Should Never Use It</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2012/03/21/javascript-for-the-java-developer/">JavaScript for the Java Developer</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2012/03/17/Styling-Disabled-Form-Fields/">Styling Disabled Form Fields</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2012/03/08/IE7-Attribute-Selector-Bugs/">IE7 Attribute Selector Bugs</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2012/02/27/Making-a-3D-Picture-Cube-with-CSS3/">Making a 3D Picture Cube with CSS3</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>Latest Tweets</h1>
+  <ul id="tweets">
+    <li class="loading">Status updating...</li>
+  </ul>
+  <script type="text/javascript">
+    $.domReady(function(){
+      getTwitterFeed("tjvantoll", 4, false);
+    });
+  </script>
+  <script src="/javascripts/twitter.js" type="text/javascript"> </script>
+  
+    <a href="http://twitter.com/tjvantoll" class="twitter-follow-button" data-show-count="false">Follow @tjvantoll</a>
+  
+</section>
+
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/tjvantoll">@tjvantoll</a> on GitHub
+  
+  <script type="text/javascript">
+    $.domReady(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'tjvantoll',
+            count: 5,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+<section class="jsdocs">
+	<h1><a href="http://promotejs.com">Promote JS!</a></h1>
+	<a href="https://developer.mozilla.org/en/JavaScript/Guide" title="JS Tutorial, JavaScript Tutorial, JavaScript Guide, Learn JavaScript JS, How To Learn JS, Learning JavaScript"><img src="http://static.jsconf.us/promotejshs.png" height="150" alt="JS Tutorial, JavaScript Tutorial, JavaScript Guide, Learn JavaScript JS, How To Learn JS, Learning JavaScript" width="180"></a></section>
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2012 - TJ VanToll -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'tjvantoll';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://tjvantoll.com/2012/05/02/showmodaldialog-what-it-is-and-why-you-should-never-use-it/';
+        var disqus_url = 'http://tjvantoll.com/2012/05/02/showmodaldialog-what-it-is-and-why-you-should-never-use-it/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>
