@@ -6,7 +6,7 @@ sharing: false
 footer: true
 ---
 <img src="/images/me/1.jpg" alt="Me!" style="float: right;" />
-I'm a web developer in Lansing, MI.  By day I program for Auto-Owners Insurance, where I build insurancey web applications.  By night, I play with front end stuff and have been getting involved in the open source community.
+I'm a web developer in Lansing, MI.  By day I program for [Liquid Web](http://liquidweb.com).  By night, I play with front end stuff and have been getting involved in the open source community.
 
 I have a wonderful girlfriend (who's also a programmer), twin boys (who might be doomed to become programmers), and a pair of standard poodles (who despite my best efforts can't grasp the basics of programming).
 
@@ -38,8 +38,8 @@ If you're looking to contact me, email me at [tj.vantoll@gmail.com](mailto:tj.va
 	- [WordPress](http://wordpress.org) experience.
 * Other
 	- Experience securing large applications against common exploits (XSS, SQL injection, etc…).
-	- Proficient in Windows / Mac environments.
-	- Experience with AccuRev
+	- Proficient in Windows / Mac / Linux environments.
+	- Experience with Git.
 
 ### My Work
 
