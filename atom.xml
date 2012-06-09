@@ -4,7 +4,7 @@
   <title><![CDATA[TJ VanToll]]></title>
   <link href="http://tjvantoll.com/atom.xml" rel="self"/>
   <link href="http://tjvantoll.com/"/>
-  <updated>2012-05-01T23:15:29-04:00</updated>
+  <updated>2012-06-09T17:18:47-04:00</updated>
   <id>http://tjvantoll.com/</id>
   <author>
     <name><![CDATA[TJ VanToll]]></name>
@@ -78,7 +78,7 @@
 </span><span class='line'>  <span class="nt">&lt;head&gt;</span>
 </span><span class='line'>    <span class="nt">&lt;script&gt;</span>
 </span><span class='line'>      <span class="kd">var</span> <span class="nx">result</span> <span class="o">=</span> <span class="nb">window</span><span class="p">.</span><span class="nx">showModalDialog</span><span class="p">(</span><span class="s1">&#39;modal.html&#39;</span><span class="p">);</span>
-</span><span class='line'>      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span>
+</span><span class='line'>      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span> <span class="c1">//&#39;foo&#39;</span>
 </span><span class='line'>    <span class="nt">&lt;/script&gt;</span>
 </span><span class='line'>  <span class="nt">&lt;/head&gt;</span>
 </span><span class='line'>  <span class="nt">&lt;body&gt;</span>
@@ -137,14 +137,14 @@
 </span><span class='line'><span class="nt">&lt;html&gt;</span>
 </span><span class='line'>  <span class="nt">&lt;head&gt;</span>
 </span><span class='line'>    <span class="nt">&lt;script&gt;</span>
-</span><span class='line'>      <span class="nb">window</span><span class="p">.</span><span class="nx">showModalDialog</span><span class="p">(</span><span class="s1">&#39;anotherPage.html&#39;</span><span class="p">,</span> <span class="s1">&#39;foo&#39;</span><span class="p">);</span>
+</span><span class='line'>      <span class="nb">window</span><span class="p">.</span><span class="nx">showModalDialog</span><span class="p">(</span><span class="s1">&#39;modal.html&#39;</span><span class="p">,</span> <span class="s1">&#39;foo&#39;</span><span class="p">);</span>
 </span><span class='line'>    <span class="nt">&lt;/script&gt;</span>
 </span><span class='line'>  <span class="nt">&lt;/head&gt;</span>
 </span><span class='line'>  <span class="nt">&lt;body&gt;</span>
 </span><span class='line'>  <span class="nt">&lt;/body&gt;</span>
 </span><span class='line'><span class="nt">&lt;/html&gt;</span>
 </span><span class='line'>
-</span><span class='line'><span class="c">&lt;!-- anotherPage.html --&gt;</span>
+</span><span class='line'><span class="c">&lt;!-- modal.html --&gt;</span>
 </span><span class='line'><span class="cp">&lt;!DOCTYPE html&gt;</span>
 </span><span class='line'><span class="nt">&lt;html&gt;</span>
 </span><span class='line'>  <span class="nt">&lt;head&gt;</span>
