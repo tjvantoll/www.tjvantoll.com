@@ -1,0 +1,600 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Browser CSS Parsing Discrepancies - TJ VanToll - Adventures in Front End Technologies</title>
+  <meta name="author" content="TJ VanToll">
+
+  
+  <meta name="description" content="Possibly the most frustrating thing that can happen during web development is when things look or behave differently in different browsers for no &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://tjvantoll.com/2012/06/10/browser-css-parsing-discrepancies">
+  <!-- Use custom favicon -->
+  <!--<link href="/favicon.png" rel="icon">-->
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  
+  <!--
+  Custom script concatenation, including a custom version of Modernizr, prefixfree, and PictureCube
+  <script src="/javascripts/modernizr-2.5.3.js"></script>
+  <script src="/javascripts/prefixfree.min.js"></script>  
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js"></script>
+  <script src="/javascripts/PictureCube.js"></script>
+  -->
+  <script src="/javascripts/build/scripts.js"></script>
+	
+  <link href="/atom.xml" rel="alternate" title="TJ VanToll" type="application/atom+xml">
+  <script>
+	$.domReady(function() {
+		if (Modernizr.csstransforms3d) {
+			new PictureCube('picture-cube', [
+				'/images/me/1.jpg',
+				'/images/me/2.jpg',
+				'/images/kids/2.jpg',
+				'/images/kids/3.jpg',
+				'/images/izzie/5.jpg',
+				'/images/me/3.jpg'											
+			]).cycle(5000);
+		}			
+	});  
+</script>
+
+<!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+  	if (window.location.host.indexOf('local') == -1) {
+	    var _gaq = _gaq || [];
+	    _gaq.push(['_setAccount', 'UA-29179796-1']);
+	    _gaq.push(['_trackPageview']);
+	
+	    (function() {
+	      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+	      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+	      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	    })();
+    }
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+	<div id="picture-cube"></div>
+	<h1><a href="/">TJ VanToll</a></h1>
+	
+		<h2>Adventures in Front End Technologies</h2>
+		<!--
+		<h2>
+			<span>
+				<span class="a1">A</span>
+				<span class="a2">d</span>
+				<span class="a1">v</span>
+				<span class="a2">e</span>
+				<span class="a1">n</span>
+				<span class="a2">t</span>
+				<span class="a1">u</span>
+				<span class="a2">r</span>
+				<span class="a1">e</span>
+				<span class="a2">s</span>
+			</span>
+			&nbsp;
+			<span>
+				<span class="b">i</span>
+				<span class="b">n</span>
+			</span>
+			&nbsp; 
+			<span>
+				<span class="c1">F</span>
+				<span class="c2">r</span>
+				<span class="c3">o</span>
+				<span class="c4">n</span>
+				<span class="c5">t</span>
+			</span>
+			&nbsp;
+			<span>
+				<span class="d">E</span>
+				<span class="d">n</span>
+				<span class="d">d</span>
+			</span>
+			&nbsp;
+			<span>
+				<span class="e">T</span>
+				<span class="e">e</span>
+				<span class="e">c</span>
+				<span class="e">h</span>
+				<span class="e">n</span>
+				<span class="e">o</span>
+				<span class="e">l</span>
+				<span class="e">o</span>
+				<span class="e">g</span>
+				<span class="e">i</span>
+				<span class="e">e</span>
+				<span class="e">s</span>
+			</span>
+		</h2>-->  
+	
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:tjvantoll.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/about">About</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Browser CSS Parsing Discrepancies</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-06-10T22:24:00-04:00" pubdate data-updated="true">Jun 10<span>th</span>, 2012</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>Possibly the most frustrating thing that can happen during web development is when things look or behave differently in different browsers for no apparent reason.</p>
+
+<p>One of the major features of HTML5 is a <a href="http://www.whatwg.org/specs/web-apps/current-work/multipage/parsing.html">parsing algorithm</a> that specifies not only how to handle well formed markup, but also what to do with invalid HTML.</p>
+
+<p>The <a href="http://www.w3.org/TR/CSS2/syndata.html#parsing-errors">CSS specification</a> actually does the same.  In fact, it goes into explicit detail for how to handle a wide variety of nonsense syntax that it might encounter.  For example&#8230;</p>
+
+<!--more-->
+
+
+<p><strong>Declarations with unkown properties should be ignored.</strong></p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nt">h1</span> <span class="p">{</span> <span class="k">color</span><span class="o">:</span> <span class="nb">red</span><span class="p">;</span> <span class="n">foo</span><span class="o">:</span> <span class="n">bar</span><span class="p">;</span> <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="c">/* foo is an unkown property so the browser should interpret this as... */</span>
+</span><span class='line'><span class="nt">h1</span> <span class="p">{</span> <span class="k">color</span><span class="o">:</span> <span class="nb">red</span><span class="p">;</span> <span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><strong>Illegal values should be ignored.</strong></p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nt">h1</span> <span class="p">{</span> <span class="k">float</span><span class="o">:</span> <span class="s1">&#39;foo&#39;</span><span class="p">;</span> <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="c">/* foo is an invalid value for the float property and should be ignored */</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>These are just a sampling of what is specified.  The above rules are well documented and consistenly followed by all browsers.  Unfortunately that is not the case as we get into more complicated scenarios.</p>
+
+<h3>Malformed Strings in CSS</h3>
+
+<p>Take a guess, what <em>should</em> happen with the following:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;div</span> <span class="na">data-number=</span><span class="s">&quot;one&quot;</span><span class="nt">&gt;</span>one<span class="nt">&lt;/div&gt;</span>
+</span><span class='line'><span class="nt">&lt;div</span> <span class="na">data-number=</span><span class="s">&quot;two&quot;</span><span class="nt">&gt;</span>two<span class="nt">&lt;/div&gt;</span>​
+</span><span class='line'>
+</span><span class='line'><span class="nt">&lt;style&gt;</span>
+</span><span class='line'>  <span class="nt">div</span> <span class="p">{</span> <span class="k">color</span><span class="o">:</span> <span class="nb">black</span><span class="p">;</span> <span class="p">}</span>
+</span><span class='line'>  <span class="c">/*Notice the missing double quote after the URL.*/</span>
+</span><span class='line'>  <span class="o">[</span><span class="nt">data-number</span><span class="o">=</span><span class="s1">&#39;one&#39;</span><span class="o">]</span> <span class="p">{</span> <span class="k">background</span><span class="o">:</span> <span class="sx">url(&quot;some-url)</span><span class="p">;</span> <span class="k">color</span><span class="o">:</span> <span class="nb">red</span><span class="p">;</span> <span class="p">}</span>
+</span><span class='line'>  <span class="o">[</span><span class="nt">data-number</span><span class="o">=</span><span class="s1">&#39;two&#39;</span><span class="o">]</span> <span class="p">{</span> <span class="k">color</span><span class="o">:</span> <span class="nb">blue</span><span class="p">;</span> <span class="p">}</span>
+</span><span class='line'>  <span class="nt">div</span> <span class="p">{</span> <span class="k">border</span><span class="o">:</span> <span class="m">2px</span> <span class="k">solid</span> <span class="nb">black</span><span class="p">;</span> <span class="p">}</span><span class="err">​</span>
+</span><span class='line'><span class="nt">&lt;/style&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The relevant portion of the specification states that&#8230;</p>
+
+<blockquote><p>User agents must close strings upon reaching the end of a line (i.e., before an unescaped line feed, carriage return or form feed character), but then drop the construct (declaration or rule) in which the string was found.</p><footer><strong>CSS Specification</strong> <cite><a href='http://www.w3.org/TR/CSS2/syndata.html#parsing-errors'>www.w3.org/TR/CSS2/&hellip;</a></cite></footer></blockquote>
+
+
+<p>Let&#8217;s take this one rule at a time.</p>
+
+<pre><code>background: url("some-url);
+</code></pre>
+
+<p>Per the spec you would expect the <code>background</code> to be ignored because of the malformed string, and it is in all browsers I tested.</p>
+
+<pre><code>color: red;
+</code></pre>
+
+<p>This is kind of in a gray area.  The spec says that the <em>construct in which the unclosed string was found</em> should be dropped, but what about subsequent rules that were encountered before a new line?</p>
+
+<pre><code>color: blue;
+</code></pre>
+
+<p>Per the spec you would expect this to be interpreted since a new line character occurred after the unclosed double quote.</p>
+
+<pre><code>border: 2px solid black;
+</code></pre>
+
+<p>Along the same lines you would also expect a border to be around both divs since by then normal parsing of the stylesheet should resume.</p>
+
+<p>Here&#8217;s what a sampling of browsers actually do.</p>
+
+<table>
+    <thead>
+        <tr>
+            <th>Browser</th>
+            <th>Div one color</th>
+            <th>Div two color</th>
+            <th>Border around the divs</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Chrome 19</td>
+            <td class="red">Red</td>
+            <td class="blue">Blue</td>
+            <td>Yes</td>
+        </tr>
+        <tr>
+            <td>Safari 5.1.7</td>
+            <td class="red">Red</td>
+            <td class="blue">Blue</td>
+            <td>Yes</td>
+        </tr>        
+        <tr>
+            <td>Firefox 12</td>
+            <td>Black</td>
+            <td>Black</td>
+            <td>No</td>
+        </tr>        
+        <tr>
+            <td>Opera 11.62</td>
+            <td>Black</td>
+            <td>Black</td>
+            <td>No</td>
+        </tr>
+        <tr>
+            <td>Opera Mobile</td>
+            <td>Black</td>
+            <td>Black</td>
+            <td>No</td>
+        </tr> 
+        <tr>
+            <td>iOS 5</td>
+            <td class="red">Red</td>
+            <td class="blue">Blue</td>
+            <td>Yes</td>
+        </tr> 
+        <tr>
+            <td>Android 2+</td>
+            <td class="red">Red</td>
+            <td class="blue">Blue</td>
+            <td>Yes</td>
+        </tr> 
+        <tr>
+            <td>Internet Explorer 7</td>
+            <td>Black</td>
+            <td>Black</td>
+            <td>No</td>
+        </tr>
+        <tr>
+            <td>Internet Explorer 8</td>
+            <td>Black</td>
+            <td>Black</td>
+            <td>No</td>
+        </tr>
+        <tr>
+            <td>Internet Explorer 9</td>
+            <td>Black</td>
+            <td>Black</td>
+            <td>No</td>
+        </tr>
+        <tr>
+            <td>Internet Explorer 10</td>
+            <td>Black</td>
+            <td>Black</td>
+            <td>No</td>
+        </tr>        
+    </tbody>
+</table>
+
+
+<p>You can see what your browser does here.</p>
+
+<iframe style="width: 100%; height: 120px;" src="http://jsfiddle.net/tj_vantoll/PHKLz/3/embedded/result,html,css/" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
+
+
+<h3>Results</h3>
+
+<p>WebKit based browsers are evaluating all rules after a semicolon is encountered and all other browsers stop in their tracks and don&#8217;t evaluate any other rules.  The same results occur with some other common fat finger situations.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="c">/* Notice the mix of single and double quote in the url property value. */</span>
+</span><span class='line'><span class="o">[</span><span class="nt">data-number</span><span class="o">=</span><span class="s1">&#39;one&#39;</span><span class="o">]</span> <span class="p">{</span> <span class="k">background</span><span class="o">:</span> <span class="sx">url(&quot;some_url&#39;)</span><span class="p">;</span> <span class="k">color</span><span class="o">:</span> <span class="nb">red</span><span class="p">;</span> <span class="p">}</span>
+</span><span class='line'><span class="o">[</span><span class="nt">data-number</span><span class="o">=</span><span class="s1">&#39;two&#39;</span><span class="o">]</span> <span class="p">{</span> <span class="k">color</span><span class="o">:</span> <span class="nb">blue</span><span class="p">;</span> <span class="p">}</span>
+</span><span class='line'><span class="c">/* In WebKit browsers the color: blue; will be evaluated, in others it will not be. */</span>
+</span><span class='line'>
+</span><span class='line'><span class="c">/* Same thing if there&#39;s an malfored selector (notice the missing single quote in the selector. */</span>
+</span><span class='line'><span class="o">[</span><span class="nt">data-number</span><span class="o">=</span><span class="nt">one</span><span class="s1">&#39;] { color: red; }</span>
+</span><span class='line'><span class="s1">[data-number=&#39;</span><span class="nt">two</span><span class="err">&#39;</span><span class="o">]</span> <span class="p">{</span> <span class="k">color</span><span class="o">:</span> <span class="nb">blue</span><span class="p">;</span> <span class="p">}</span>
+</span><span class='line'><span class="c">/* Again in Webkit color: blue; will be evaluated, in others it will not be. */</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>What Could Possibly Go Wrong?</h3>
+
+<p>Frankly, since this is an error situtation I don&#8217;t think many developers would care what the browser does with this.  If the rules aren&#8217;t evaluated it becomes pretty clear there&#8217;s an issue and it becomes pretty easy to find and clean up the issue.  What is important to developers is that the results are consistent.  The danger here is if you make a quick fix to a CSS file, fat finger some quotes, and only test in WebKit, you could catastrophically break your styling in non-WebKit browsers.</p>
+
+<h3>Avoiding Issues</h3>
+
+<p>The obvious way to avoid running into issues is to test your code in all browsers.  However, with the amount of browsers, devices, etc&#8230; there are to test on that&#8217;s not always feasible; especially for trivial changes.</p>
+
+<p>Modern editors with syntax highlighting can help you find malformed strings by creating an obvious syntax highlighting problem.  If yours doesn&#8217;t you might want to consider switching to one that does.</p>
+
+<p>Furthermore, tools like <a href="http://csslint.net/">CSS Lint</a> can help detect issues <a href="https://github.com/stubbornella/csslint/wiki/IDE-integration">via your editor / IDE</a> or at build time by <a href="https://github.com/stubbornella/csslint/wiki/Command-line-interface">incorporating them into a Node.js or Ant build process</a>.</p>
+
+<h3>Conclusion</h3>
+
+<p>While the CSS specification tries to standarize what to do with invalid CSS browsers still handle some situations differently.  Make sure your editor or build process can help detect silly typos, and attempt to test your code in a variety of browsers, even for trivial changes.</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">TJ VanToll</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-06-10T22:24:00-04:00" pubdate data-updated="true">Jun 10<span>th</span>, 2012</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/browsers/'>Browsers</a>, <a class='category' href='/blog/categories/css/'>CSS</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://tjvantoll.com/2012/06/10/browser-css-parsing-discrepancies/" data-via="tjvantoll" data-counturl="http://tjvantoll.com/2012/06/10/browser-css-parsing-discrepancies/" >Tweet</a>
+  
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/2012/05/02/showmodaldialog-what-it-is-and-why-you-should-never-use-it/" title="Previous Post: window.showModalDialog: What It is and Why You Should Never Use It">&laquo; window.showModalDialog: What It is and Why You Should Never Use It</a>
+      
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2012/06/10/browser-css-parsing-discrepancies/">Browser CSS Parsing Discrepancies</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2012/05/02/showmodaldialog-what-it-is-and-why-you-should-never-use-it/">window.showModalDialog: What It is and Why You Should Never Use It</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2012/03/21/javascript-for-the-java-developer/">JavaScript for the Java Developer</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2012/03/17/Styling-Disabled-Form-Fields/">Styling Disabled Form Fields</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2012/03/08/IE7-Attribute-Selector-Bugs/">IE7 Attribute Selector Bugs</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>Latest Tweets</h1>
+  <ul id="tweets">
+    <li class="loading">Status updating...</li>
+  </ul>
+  <script type="text/javascript">
+    $.domReady(function(){
+      getTwitterFeed("tjvantoll", 4, false);
+    });
+  </script>
+  <script src="/javascripts/twitter.js" type="text/javascript"> </script>
+  
+    <a href="http://twitter.com/tjvantoll" class="twitter-follow-button" data-show-count="false">Follow @tjvantoll</a>
+  
+</section>
+
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/tjvantoll">@tjvantoll</a> on GitHub
+  
+  <script type="text/javascript">
+    $.domReady(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'tjvantoll',
+            count: 5,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+<section class="jsdocs">
+	<h1><a href="http://promotejs.com">Promote JS!</a></h1>
+	<a href="https://developer.mozilla.org/en/JavaScript/Guide" title="JS Tutorial, JavaScript Tutorial, JavaScript Guide, Learn JavaScript JS, How To Learn JS, Learning JavaScript"><img src="http://static.jsconf.us/promotejshs.png" height="150" alt="JS Tutorial, JavaScript Tutorial, JavaScript Guide, Learn JavaScript JS, How To Learn JS, Learning JavaScript" width="180"></a></section>
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2012 - TJ VanToll -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'tjvantoll';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://tjvantoll.com/2012/06/10/browser-css-parsing-discrepancies/';
+        var disqus_url = 'http://tjvantoll.com/2012/06/10/browser-css-parsing-discrepancies/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>
