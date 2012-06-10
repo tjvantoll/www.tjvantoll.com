@@ -3,7 +3,7 @@ layout: post
 title: "window.showModalDialog: What It is and Why You Should Never Use It"
 date: 2012-05-02 22:37
 comments: true
-categories: JavaScript, Browsers
+categories: JavaScript Browsers
 ---
 Ah, 1997.  The first browser war was in full force, and Microsoft was busy adding proprietary new features to compete with Netscape Navigator.  One of those features was introducing a common OS UI element into the browser - modal dialogs.  Internet Explorer 4 launched with a ```showModalDialog``` method on the global ```window``` object.  When called it displays a dialog that the user has to deal with before interacting with the rest of the page.
 

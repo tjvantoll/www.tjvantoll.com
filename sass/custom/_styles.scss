@@ -118,4 +118,12 @@ aside.sidebar .jsdocs a {
 	img { border: 0; border-radius: 0; margin-top: 10px; }
 }
 
+.entry-content table {
+	margin-bottom: 20px;
+	th { font-weight: bold; text-decoration: underline; }
+	td, th { padding: 5px; border: 2px solid black; }
+	td.blue { color: blue; }
+	td.red { color: red; }
+}
+
 i { font-style: italic; }
