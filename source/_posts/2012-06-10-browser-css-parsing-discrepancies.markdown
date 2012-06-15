@@ -62,11 +62,11 @@ Per the spec you would expect the ```background``` to be ignored because of the 
 
     color: red;
 
-This is kind of in a gray area.  The spec says that the *construct in which the unclosed string was found* should be dropped, but what about subsequent rules that were encountered before a new line?
+This is kind of in a gray area.  The spec says that the *construct in which the unclosed string was found* should be dropped, which makes it seem like this rule shouldn't be interpreted.   But what about subsequent rules that were encountered before a new line?  It seems like the browser could be smart enough to apply this rule.
 
     color: blue;
 
-Per the spec you would expect this to be interpreted since a new line character occurred after the unclosed double quote.  
+Per the spec you would expect this to be interpreted since a new line character occurred between the unclosed quote and this rule.
 
     border: 2px solid black;
 
@@ -179,7 +179,7 @@ Frankly, since this is an error situtation I don't think many developers would c
 
 ### Avoiding Issues
 
-The obvious way to avoid running into issues is to test your code in all browsers.  However, with the amount of browsers, devices, etc... there are to test on that's not always feasible; especially for trivial changes.
+The obvious way to avoid running into issues is to test your code in all browsers.  However, with the number of browsers and devices there are to test on that's not always feasible, especially for trivial changes.
 
 Modern editors with syntax highlighting can help you find malformed strings by creating an obvious syntax highlighting problem.  If yours doesn't you might want to consider switching to one that does.
 
