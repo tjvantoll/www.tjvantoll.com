@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Detecting Print Requests with JavaScript"
-date: 2012-06-13 21:09
+date: 2012-06-15
 comments: true
 categories: Browsers JavaScript
 ---
