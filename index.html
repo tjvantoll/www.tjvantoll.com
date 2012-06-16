@@ -9,7 +9,7 @@
   <meta name="author" content="TJ VanToll">
 
   
-  <meta name="description" content="Possibly the most frustrating thing that can happen during web development is when things look or behave differently in different browsers for no &hellip;">
+  <meta name="description" content="CSS has a well supported mechanism for applying changes only when the user is printing a document, print stylesheets. They allow you to alter the &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -153,6 +153,51 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2012/06/13/detecting-printing-in-javascript/">Detecting Print Requests With JavaScript</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-06-13T21:09:00-04:00" pubdate data-updated="true">Jun 13<span>th</span>, 2012</time>
+        
+         | <a href="/2012/06/13/detecting-printing-in-javascript/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>CSS has a well supported mechanism for applying changes only when the user is printing a document, print stylesheets.  They allow you to alter the presentation of a web page for the printer by applying rules that will only be interpreted for printing.  This is great for common tasks like hiding non-essential content, using more print friendly fonts typography, and adjusting the layout to better suit the size and shape of paper.  If you&#8217;re unfamiliar with how print stylesheets work Smashing Magazine has an excellent article on how to setup and use a print stylesheet <a href="http://coding.smashingmagazine.com/2011/11/24/how-to-set-up-a-print-style-sheet/">here</a>.</p>
+
+<p>Print stylesheets are great for making presentational changes for printing, but sometimes you need the full power of JavaScript.  But in order to do this in JavaScript you need the browser to notify you that a print request occurred.</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/2012/06/13/detecting-printing-in-javascript/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -510,6 +555,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2012/06/13/detecting-printing-in-javascript/">Detecting Print Requests with JavaScript</a>
+      </li>
+    
+      <li class="post">
         <a href="/2012/06/10/browser-css-parsing-discrepancies/">Browser CSS Parsing Discrepancies</a>
       </li>
     
@@ -523,10 +572,6 @@
     
       <li class="post">
         <a href="/2012/03/17/Styling-Disabled-Form-Fields/">Styling Disabled Form Fields</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2012/03/08/IE7-Attribute-Selector-Bugs/">IE7 Attribute Selector Bugs</a>
       </li>
     
   </ul>
