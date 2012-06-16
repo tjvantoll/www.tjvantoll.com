@@ -5,9 +5,9 @@ date: 2012-06-15
 comments: true
 categories: Browsers JavaScript
 ---
-CSS has a well supported mechanism for applying changes only when the user is printing a document, print stylesheets.  They allow you to alter the presentation of a web page for the printer by applying rules that will only be interpreted for printing.  This is great for common tasks like hiding non-essential content, using more print friendly fonts typography, and adjusting the layout to better suit the size and shape of paper.  If you're unfamiliar with how print stylesheets work Smashing Magazine has an excellent article on how to setup and use a print stylesheet [here](http://coding.smashingmagazine.com/2011/11/24/how-to-set-up-a-print-style-sheet/).
+CSS has a well supported mechanism for applying changes only when the user is printing a document, [print stylesheets](http://coding.smashingmagazine.com/2011/11/24/how-to-set-up-a-print-style-sheet/).  They allow you to alter the presentation of a web page for the printer by applying rules that will only be interpreted for printing.  This is great for common tasks like hiding non-essential content, using more print friendly typography, and adjusting the layout to better suit the size and shape of paper.
 
-Print stylesheets are great for making presentational changes for printing, but sometimes you need the full power of JavaScript.  But in order to do this in JavaScript you need the browser to notify you that a print request occurred.
+Print stylesheets are great for making presentational changes for printing, but sometimes you need the full power of JavaScript.  And in order to do respond to print requests in JavaScript you need the browser to notify you that a print request occurred.
 
 <!--more-->
 
@@ -35,10 +35,10 @@ WebKit has a bug (#[19937](https://bugs.webkit.org/show_bug.cgi?id=19937)) out t
 The `window.matchMedia` [API](https://developer.mozilla.org/en/DOM/window.matchMedia) provides a means of determining whether the current `document` matches a given [media query](https://developer.mozilla.org/En/CSS/Media_queries).  For example:
 
 ``` javascript window.matchMedia
-if (window.matchMedia(' (min-width: 400px) ').matches) {  
-    console.log('The viewport is at least 400 pixels wide');
+if (window.matchMedia(' (min-width: 600px) ').matches) {  
+    console.log('The viewport is at least 600 pixels wide');
 } else { 
-    console.log('The viewport is less than 400 pixels wide');
+    console.log('The viewport is less than 600 pixels wide');
 } 
 ```
 
@@ -55,11 +55,11 @@ mediaQueryList.addListener(function(mql) {
 });
 ```
 
-You can see this behavior live ([if your browser supports window.matchMedia](http://caniuse.com/#feat=matchmedia)) below by resizing your browser window under 600px and checking your browser's JavaScript console.
+[If your browser supports window.matchMedia](http://caniuse.com/#feat=matchmedia) you can see this behavior live below by resizing your browser window under 600px and checking your browser's JavaScript console.
 
 <iframe style="width: 100%; height: 200px;" src="http://jsfiddle.net/tj_vantoll/uYJxy/2/embedded/result,js,css/" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
 
-Interestingly, it turns out you can also use this same technique to listen for the print media being applied ([hat tip to Ben Wells](http://code.google.com/p/chromium/issues/detail?id=105743)):
+Interestingly, it turns out you can also use this same technique to listen for the ```print``` media being applied when the user requests the document to be printed ([hat tip to Ben Wells](http://code.google.com/p/chromium/issues/detail?id=105743)):
 
 ``` javascript Using window.matchMedia to detecting print requests
 var mediaQueryList = window.matchMedia('print');
@@ -107,7 +107,7 @@ Note that your event handlers might potentially have to deal with the fact that 
 
 ### Why Would I Use This?
 
-For most situations print stylesheets are all you need to use to prepare the document for printing.  But I can think of a couple practical uses of the JavaScript event.
+For most situations print stylesheets are all you need to prepare the document for printing.  But I can think of a couple practical uses of the JavaScript event.
 
 ### Responsive Print Images
 
@@ -115,7 +115,7 @@ One use is substituting a higher quality image for the purposes of printing.  Tr
 
 Therefore an image that might look just fine on the user's screen might look fuzzy and grainy when printed out.  For most images this is acceptable, but it might be an issue for prominent images on regularly printed documents, like a company logo.  You probably want that to look crisp when printed out.
 
-The [technique to work around this](http://www.alistapart.com/articles/hiresprinting) involves loading both images, showing only the lower quality one by default, then hiding the low quality image and showing the high quality one in the print stylesheet.  The main downfall of this approach is that the end user has to download both images regardless of whether they're going to print the page.  Users on 3G iPhones that have no intention or capability of printing the document will still have to download your high resolution logo.
+The [technique to work around this](http://www.alistapart.com/articles/hiresprinting) involves loading both images, showing only the lower quality one by default, then hiding the low quality image and showing the high quality one in the print stylesheet.  The main downfall of this approach is that the end user has to download both images regardless of whether they're going to print the page.  Users on 3G devices that have no intention or capability of printing the document will still have to download your high resolution logo.
 
 With the ability to detect print requests in JavaScript you can substitute the higher quality image on the fly when the user requests the page to be printed.
 
@@ -139,11 +139,11 @@ With the ability to detect print requests in JavaScript you can substitute the h
 </script>
 ```
 
-The nice thing about this approach is that users that never print will never have to download the high quality image.  This technique also degrades nicely; users with browsers that don't support the print events will simply print the lower quality image.
+The nice thing about this approach is that users that never print will not have to download the high quality image.  This technique also degrades nicely; users with browsers that don't support the print events will simply print the lower quality image.
 
 ### Tracking Print Requests
 
-Another situation print events can be used for is tracking the number of times users print pages within a site or application.  Because of the lack of total browser support you wouldn't capture every print request, but this would be sufficient for getting a rough idea of how often people are printing.
+Print events can also be used to track the number of times users print pages within a site or application.  Because of the lack of total browser support you wouldn't capture every print request, but this would be sufficient for getting a rough idea of how often people are printing.
 
 ``` javascript Tracking Print Requests
 (function() {
@@ -166,7 +166,7 @@ Another situation print events can be used for is tracking the number of times u
 }());
 ```
 
-### So Can I Use This?
+### So can I use this in a "real" application?
 
 Sure, just make sure what you're doing degrades nicely for users using a browser in which the event will not be fired.
 
