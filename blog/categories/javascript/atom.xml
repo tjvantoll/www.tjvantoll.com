@@ -4,7 +4,7 @@
   <title><![CDATA[Category: JavaScript | TJ VanToll]]></title>
   <link href="http://tjvantoll.com/blog/categories/javascript/atom.xml" rel="self"/>
   <link href="http://tjvantoll.com/"/>
-  <updated>2012-06-15T21:21:15-04:00</updated>
+  <updated>2012-06-15T21:36:37-04:00</updated>
   <id>http://tjvantoll.com/</id>
   <author>
     <name><![CDATA[TJ VanToll]]></name>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Detecting Print Requests with JavaScript]]></title>
-    <link href="http://tjvantoll.com/2012/06/13/detecting-printing-in-javascript/"/>
-    <updated>2012-06-13T21:09:00-04:00</updated>
-    <id>http://tjvantoll.com/2012/06/13/detecting-printing-in-javascript</id>
+    <link href="http://tjvantoll.com/2012/06/15/detecting-print-requests-with-javascript/"/>
+    <updated>2012-06-15T00:00:00-04:00</updated>
+    <id>http://tjvantoll.com/2012/06/15/detecting-print-requests-with-javascript</id>
     <content type="html"><![CDATA[<p>CSS has a well supported mechanism for applying changes only when the user is printing a document, print stylesheets.  They allow you to alter the presentation of a web page for the printer by applying rules that will only be interpreted for printing.  This is great for common tasks like hiding non-essential content, using more print friendly fonts typography, and adjusting the layout to better suit the size and shape of paper.  If you're unfamiliar with how print stylesheets work Smashing Magazine has an excellent article on how to setup and use a print stylesheet <a href="http://coding.smashingmagazine.com/2011/11/24/how-to-set-up-a-print-style-sheet/">here</a>.</p>
 
 <p>Print stylesheets are great for making presentational changes for printing, but sometimes you need the full power of JavaScript.  But in order to do this in JavaScript you need the browser to notify you that a print request occurred.</p>
