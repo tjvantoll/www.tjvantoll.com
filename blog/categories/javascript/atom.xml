@@ -4,7 +4,7 @@
   <title><![CDATA[Category: JavaScript | TJ VanToll]]></title>
   <link href="http://tjvantoll.com/blog/categories/javascript/atom.xml" rel="self"/>
   <link href="http://tjvantoll.com/"/>
-  <updated>2012-06-15T21:36:37-04:00</updated>
+  <updated>2012-06-15T21:57:01-04:00</updated>
   <id>http://tjvantoll.com/</id>
   <author>
     <name><![CDATA[TJ VanToll]]></name>
@@ -18,9 +18,9 @@
     <link href="http://tjvantoll.com/2012/06/15/detecting-print-requests-with-javascript/"/>
     <updated>2012-06-15T00:00:00-04:00</updated>
     <id>http://tjvantoll.com/2012/06/15/detecting-print-requests-with-javascript</id>
-    <content type="html"><![CDATA[<p>CSS has a well supported mechanism for applying changes only when the user is printing a document, print stylesheets.  They allow you to alter the presentation of a web page for the printer by applying rules that will only be interpreted for printing.  This is great for common tasks like hiding non-essential content, using more print friendly fonts typography, and adjusting the layout to better suit the size and shape of paper.  If you're unfamiliar with how print stylesheets work Smashing Magazine has an excellent article on how to setup and use a print stylesheet <a href="http://coding.smashingmagazine.com/2011/11/24/how-to-set-up-a-print-style-sheet/">here</a>.</p>
+    <content type="html"><![CDATA[<p>CSS has a well supported mechanism for applying changes only when the user is printing a document, <a href="http://coding.smashingmagazine.com/2011/11/24/how-to-set-up-a-print-style-sheet/">print stylesheets</a>.  They allow you to alter the presentation of a web page for the printer by applying rules that will only be interpreted for printing.  This is great for common tasks like hiding non-essential content, using more print friendly typography, and adjusting the layout to better suit the size and shape of paper.</p>
 
-<p>Print stylesheets are great for making presentational changes for printing, but sometimes you need the full power of JavaScript.  But in order to do this in JavaScript you need the browser to notify you that a print request occurred.</p>
+<p>Print stylesheets are great for making presentational changes for printing, but sometimes you need the full power of JavaScript.  And in order to do respond to print requests in JavaScript you need the browser to notify you that a print request occurred.</p>
 
 <!--more-->
 
@@ -55,14 +55,14 @@ window.onafterprint = function() {</p>
 <p>The <code>window.matchMedia</code> <a href="https://developer.mozilla.org/en/DOM/window.matchMedia">API</a> provides a means of determining whether the current <code>document</code> matches a given <a href="https://developer.mozilla.org/En/CSS/Media_queries">media query</a>.  For example:</p>
 
 <p>``` javascript window.matchMedia
-if (window.matchMedia(' (min-width: 400px) ').matches) {</p>
+if (window.matchMedia(' (min-width: 600px) ').matches) {</p>
 
-<pre><code>console.log('The viewport is at least 400 pixels wide');
+<pre><code>console.log('The viewport is at least 600 pixels wide');
 </code></pre>
 
 <p>} else {</p>
 
-<pre><code>console.log('The viewport is less than 400 pixels wide');
+<pre><code>console.log('The viewport is less than 600 pixels wide');
 </code></pre>
 
 <p>}
@@ -84,12 +84,12 @@ mediaQueryList.addListener(function(mql) {</p>
 <p>});
 ```</p>
 
-<p>You can see this behavior live (<a href="http://caniuse.com/#feat=matchmedia">if your browser supports window.matchMedia</a>) below by resizing your browser window under 600px and checking your browser's JavaScript console.</p>
+<p><a href="http://caniuse.com/#feat=matchmedia">If your browser supports window.matchMedia</a> you can see this behavior live below by resizing your browser window under 600px and checking your browser's JavaScript console.</p>
 
 <iframe style="width: 100%; height: 200px;" src="http://jsfiddle.net/tj_vantoll/uYJxy/2/embedded/result,js,css/" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
 
 
-<p>Interestingly, it turns out you can also use this same technique to listen for the print media being applied (<a href="http://code.google.com/p/chromium/issues/detail?id=105743">hat tip to Ben Wells</a>):</p>
+<p>Interestingly, it turns out you can also use this same technique to listen for the <code>print</code> media being applied when the user requests the document to be printed (<a href="http://code.google.com/p/chromium/issues/detail?id=105743">hat tip to Ben Wells</a>):</p>
 
 <p>``` javascript Using window.matchMedia to detecting print requests
 var mediaQueryList = window.matchMedia('print');
@@ -143,7 +143,7 @@ window.onafterprint = afterPrint;
 
 <h3>Why Would I Use This?</h3>
 
-<p>For most situations print stylesheets are all you need to use to prepare the document for printing.  But I can think of a couple practical uses of the JavaScript event.</p>
+<p>For most situations print stylesheets are all you need to prepare the document for printing.  But I can think of a couple practical uses of the JavaScript event.</p>
 
 <h3>Responsive Print Images</h3>
 
@@ -151,7 +151,7 @@ window.onafterprint = afterPrint;
 
 <p>Therefore an image that might look just fine on the user's screen might look fuzzy and grainy when printed out.  For most images this is acceptable, but it might be an issue for prominent images on regularly printed documents, like a company logo.  You probably want that to look crisp when printed out.</p>
 
-<p>The <a href="http://www.alistapart.com/articles/hiresprinting">technique to work around this</a> involves loading both images, showing only the lower quality one by default, then hiding the low quality image and showing the high quality one in the print stylesheet.  The main downfall of this approach is that the end user has to download both images regardless of whether they're going to print the page.  Users on 3G iPhones that have no intention or capability of printing the document will still have to download your high resolution logo.</p>
+<p>The <a href="http://www.alistapart.com/articles/hiresprinting">technique to work around this</a> involves loading both images, showing only the lower quality one by default, then hiding the low quality image and showing the high quality one in the print stylesheet.  The main downfall of this approach is that the end user has to download both images regardless of whether they're going to print the page.  Users on 3G devices that have no intention or capability of printing the document will still have to download your high resolution logo.</p>
 
 <p>With the ability to detect print requests in JavaScript you can substitute the higher quality image on the fly when the user requests the page to be printed.</p>
 
@@ -177,11 +177,11 @@ window.onafterprint = afterPrint;
 
 <p>```</p>
 
-<p>The nice thing about this approach is that users that never print will never have to download the high quality image.  This technique also degrades nicely; users with browsers that don't support the print events will simply print the lower quality image.</p>
+<p>The nice thing about this approach is that users that never print will not have to download the high quality image.  This technique also degrades nicely; users with browsers that don't support the print events will simply print the lower quality image.</p>
 
 <h3>Tracking Print Requests</h3>
 
-<p>Another situation print events can be used for is tracking the number of times users print pages within a site or application.  Because of the lack of total browser support you wouldn't capture every print request, but this would be sufficient for getting a rough idea of how often people are printing.</p>
+<p>Print events can also be used to track the number of times users print pages within a site or application.  Because of the lack of total browser support you wouldn't capture every print request, but this would be sufficient for getting a rough idea of how often people are printing.</p>
 
 <p>``` javascript Tracking Print Requests
 (function() {</p>
@@ -207,7 +207,7 @@ window.onafterprint = afterPrint;
 <p>}());
 ```</p>
 
-<h3>So Can I Use This?</h3>
+<h3>So can I use this in a "real" application?</h3>
 
 <p>Sure, just make sure what you're doing degrades nicely for users using a browser in which the event will not be fired.</p>
 
