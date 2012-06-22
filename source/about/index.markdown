@@ -5,7 +5,7 @@ comments: false
 sharing: false
 footer: true
 ---
-<img src="/images/me/1.jpg" alt="Me!" style="float: right;" />
+<img src="/images/me/1.jpg" alt="Me!" style="float: right; margin: 10px;" />
 I'm a web developer in Lansing, MI.  By day I program for [Liquid Web](http://liquidweb.com).  By night, I play with front end stuff and have been getting involved in the open source community.
 
 I have a wonderful girlfriend (who's also a programmer), twin boys (who might be doomed to become programmers), and a pair of standard poodles (who despite my best efforts can't grasp the basics of programming).
