@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Browsers | TJ VanToll]]></title>
   <link href="http://tjvantoll.com/blog/categories/browsers/atom.xml" rel="self"/>
   <link href="http://tjvantoll.com/"/>
-  <updated>2012-06-21T21:06:32-04:00</updated>
+  <updated>2012-06-30T17:57:00-04:00</updated>
   <id>http://tjvantoll.com/</id>
   <author>
     <name><![CDATA[TJ VanToll]]></name>
@@ -12,6 +12,102 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Creating a Native HTML 5 Datepicker with a Fallback to jQuery UI]]></title>
+    <link href="http://tjvantoll.com/2012/06/30/creating-a-native-html5-datepicker-with-a-fallback-to-jquery-ui/"/>
+    <updated>2012-06-30T17:06:00-04:00</updated>
+    <id>http://tjvantoll.com/2012/06/30/creating-a-native-html5-datepicker-with-a-fallback-to-jquery-ui</id>
+    <content type="html"><![CDATA[<p>The recently released Chrome 20 features support for native datepickers on <code>&lt;input&gt;</code> nodes with a <code>[type=date]</code> attribute.  The list of browsers that support native datepickers now includes Chrome, Opera 11+, Opera Mobile, and iOS 5+ (see <a href="http://caniuse.com/#feat=input-datetime">caniuse.com</a>).  Therefore, now's a great time to start using them in your web applications.</p>
+
+<!--more-->
+
+
+<h3>Using</h3>
+
+<p>Using the native datepickers is easy, just change the <code>type</code> attribute of your date inputs from <code>text</code> to <code>date</code>.</p>
+
+<p>``` html Converting to a native HTML5 datepicker</p>
+
+<!-- Before -->
+
+
+<p><input type="text" /></p>
+
+<!-- After -->
+
+
+<p><input type="date" />
+```</p>
+
+<p>Here is what the user will see in supported browsers:</p>
+
+<h4>Chrome 20</h4>
+
+<p><img src="/images/posts/2012-06-30/Chrome.png" title="Chrome 20" alt="Chrome 20" /></p>
+
+<h4>Opera 12</h4>
+
+<p><img src="/images/posts/2012-06-30/Opera.png" title="Opera 12" alt="Opera 12" /></p>
+
+<h4>Opera Mobile</h4>
+
+<p><img src="/images/posts/2012-06-30/Opera%20Mobile.png" title="Opera Mobile" alt="Opera Mobile" /></p>
+
+<h4>iOS 5</h4>
+
+<p><img src="/images/posts/2012-06-30/iOS5.png" title="iOS 5" alt="iOS 5" /></p>
+
+<h3>Advantages</h3>
+
+<p>Why would use the native solution?</p>
+
+<p>First and foremost there are no dependencies.  There is no need to bring in a library or toolkit, it's all native.  Therefore, you save some bytes by not having to ship the JavaScript / CSS to make the datepicker work.</p>
+
+<p>Furthermore you can be guaranteed that it will work perfectly on all devices that support the native datepicker.  It's not dependent on JavaScript so it'll even work for users that have JavaScript disabled.</p>
+
+<p>Another key advantage is that devices can give alternative means of input for date controls.  For example note the native date control in iOS 5:</p>
+
+<p><img src="/images/posts/2012-06-30/iOS5.png" title="iOS 5" alt="iOS 5" /></p>
+
+<p>It will be a lot easier for the user to input a date with those controls, plus you can be guaranteed that you'll receive input in the correct format.</p>
+
+<h3>Disadvantages</h3>
+
+<p>The main disadvantage of using a native datepicker is that you have a lot less control.  There are no hooks to control the look of the date picker; you get what the browser wants to give you.  You also have a lot less control over the behavior.  Here's a small sampling of things that jQuery UI's datepicker can do that you cannot do with the native control.</p>
+
+<ul>
+<li>Only allow selection on certain days of the week.</li>
+<li>Control the formatting of the headers in the control (Monday vs Mon vs M).</li>
+<li>View multiple months at the same time.</li>
+</ul>
+
+
+<p>If any of this functionality is important to your application you'll probably want to stick with the jQuery UI solution.</p>
+
+<h3>Best of Both Worlds</h3>
+
+<p><a href="http://modernizr.com">Modernizr</a> gives you the ability to detect whether the browser supports native datepickers.  The following shows how you can use the native datepicker when available, and fallback to jQuery UI's datepicker in unsupported browsers.</p>
+
+<p>``` javascript Detect native support for datepickers and fallback to jQuery UI
+if (!Moderniz.inputtypes.date) {</p>
+
+<pre><code>$('input[type=date]').datepicker();
+</code></pre>
+
+<p>}
+```</p>
+
+<p>You can see how your browser handles this situation here:</p>
+
+<iframe style="width: 100%; height: 120px;" src="http://jsfiddle.net/p58bt/2/embedded/result,html,js/" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
+
+
+<h3>Conclusion</h3>
+
+<p>With Chrome adding support for native datepickers a large chunk web users now have the ability to use native pickers.  Therefore, now's a great time to consider using them in your applications.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Detecting Print Requests with JavaScript]]></title>
@@ -833,169 +929,6 @@ textarea:disabled {</p>
 <h3>Summary</h3>
 
 <p>Browsers have default styling for disabled fields that is usually pretty good at visually indicating that the field cannot be interacted with.  In situations where the browser default isn't ideal, custom styling can be applied.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[IE7 Attribute Selector Bugs]]></title>
-    <link href="http://tjvantoll.com/2012/03/08/IE7-Attribute-Selector-Bugs/"/>
-    <updated>2012-03-08T00:00:00-05:00</updated>
-    <id>http://tjvantoll.com/2012/03/08/IE7-Attribute-Selector-Bugs</id>
-    <content type="html"><![CDATA[<p>The CSS attribute selector allows you to select HTML elements based on their attributes.  For example, take the following markup:</p>
-
-<p>``` html Simple List</p>
-
-<ul>
-    <li id="item1"></li>  <!-- #1 -->
-    <li id="item2"></li>  <!-- #2 -->
-    <li></li>             <!-- #3 -->
-</ul>
-
-
-<p>```</p>
-
-<!--more-->
-
-
-<p>In a compliant browser, here are some selectors you can use to target these list items.</p>
-
-<p><code>css Selectors to Target the List
-li             /* Selects #1, #2, #3 */
-li[id]         /* Selects #1, #2 */
-li[id=item1]   /* Selects #1 */
-li[id='item1'] /* Selects #1, single quotes are valid */
-li[id="item2"] /* Selects #1, double quotes are valid too */
-li[id^=item]   /* Selects #1, #2, ^ = starts with */
-li[id$=1]      /* Selects #1, $ = ends with */
-li[id*=item]   /* Selects #1, #2, * = contains */
-</code></p>
-
-<h3>Enter IE7</h3>
-
-<p>This is all well and good in most all modern browsers.  Unfortunately IE7 is buggy when handling this selector.  For those of use that are still unlucky enough to be supporting it, I thought it would be nice to have some of these documented.</p>
-
-<h3>DOM Attributes == HTML Attributes?</h3>
-
-<p>Some DOM attributes have different names than the HTML attributes to avoid conflicts with JavaScript reserved words.  Specifically in this case, DOM nodes have <code>htmlFor</code> and <code>className</code> attributes to avoid JavaScript reserved words <code>for</code> and <code>class</code>.</p>
-
-<p>``` html htmlFor and className
-<label class="foo" for="name" id="nameLabel">Name:</label>
-<input type="text" name="name" id="name" /></p>
-
-<script>
-    document.getElementById('nameLabel').for; //undefined
-    document.getElementById('nameLabel').htmlFor //'name'
-    document.getElementById('nameLabel').class //undefined
-    document.getElementById('nameLabel').className //'foo'
-</script>
-
-
-<p>```</p>
-
-<p>In IE8+ (and everywhere else for that matter) the following attribute selector will select the label:</p>
-
-<p><code>css Standard Attribute Selector
-label[for='name']
-</code></p>
-
-<p>In IE7 this won't work.  You'll need to use the incorrect <code>htmlFor</code> attribute:</p>
-
-<p><code>css IE7 for Attribute Selector
-label[htmlFor='name']
-</code></p>
-
-<p>So if you're still supporting IE7 you'll almost certainly want to include them together:</p>
-
-<p><code>css Combined Selector
-label[for='name'], label[htmlFor='name']
-</code></p>
-
-<p>Along the same lines, IE7 will incorrectly select attributes based on the className attribute:</p>
-
-<p><code>css IE7 class Attribute Selector
-label[className='name']
-</code></p>
-
-<p>Fortunately IE7 also supports selecting using <code>class</code>.</p>
-
-<p><code>css class Attribute Selector
-label[class='name']
-</code></p>
-
-<p>IE8 fixed both of these bugs and selecting for the attributes <code>htmlFor</code> and <code>className</code> no longer work.</p>
-
-<h3>Empty Attributes</h3>
-
-<p>It's impossible to target empty attributes via CSS in IE7.  As an example, let's say you apply a <a href="http://html5doctor.com/html5-custom-data-attributes/">custom HTML5 data attribute</a> to nodes at random throughout the DOM.  Let's say you want to select only the ones that have an empty value, for example the h3 below:</p>
-
-<p>``` html Headings to Select</p>
-
-<h1 data-state="foo">Top Heading<h1>
-<h2 data-state="bar">Sub Heading<h2>
-<h3 data-state="">Another Heading<h3>
-```
-
-You would write this selector and call it a day:
-
-``` css Empty Attribute Selector
-[data-state='']
-```
-
-Except it won't work in IE7.  There is simply no way to target empty attributes via CSS in IE7.  So how can you replicate this functionality?  For better or worse JavaScript is the only client side option to handle this.
-
-[querySelectorAll](http://caniuse.com/queryselector) isn't supported until IE8, so you need a selector engine to target these nodes.  Here's how you can do it in jQuery:
-
-``` javascript Selecting Nodes with Empty Attribute - jQuery
-$('[data-state=""]');
-```
-
-If you're using [Dojo](http://dojotoolkit.org) yet another step is necessary.  For whatever reason running…
-
-``` javascript JavaScript Selecting Nodes with Empty Attribute - Dojo
-dojo.query('[data-state=""]');
-```
-
-…returns not only the nodes with empty attributes, but also all the nodes that don't have the attribute declared at all!  Furthermore, <code>dojo.query('[data-state]')</code> incorrectly doesn't return nodes that have the attribute with an empty value.  So you need the following approach to select the nodes in IE7.
-
-``` javascript Functioning IE7 Approach
-dojo.query('*').forEach(function(element) {
-    if (dojo.hasAttr(element, 'data-state') && 
-      dojo.attr(element, 'data-state') == '') {
-        //Safe to finally apply your styling here.
-    }
-});
-```
-
-Note that when using any of the JavaScript based solutions it's recommended to leave the CSS in place.  Yes this is dual maintenance, but it avoids a potential [FOUC](http://en.wikipedia.org/wiki/FOUC).  Fortunately ALL of this nonsense is fixed in IE8.
-
-### Descendant Selector Typos
-
-Let's say you have the following markup.
-
-``` html Sample HTML
-<div data-state='active'>
-    <p>Some text</p>
-</div>
-```
-
-…and you want to apply some styling to the paragraph, maybe something like this:
-
-``` css Descendant Selector
-div[data-state='active']p {
-    color: red;
-}
-```
-
-Notice how there's no space between the "]" and the "p", that's a syntax error, right?  Correct… except in IE7!  IE7 will incorrectly parse this as if a space were there and change the color of the paragraph to red.
-
-This was also fixed in IE8.
-
-### Summary
-
-We're actually really fortunate that the attribute selector is supported in IE7.  It's a very useful tool to have available and it can help solve a lot of real world issues.  And if you've dropped IE6 support they're finally safe to use.
-
-While support is buggy, the attribute selector does work for the vast majority of use cases.  However, knowing to look out for these bugs can save hours of frustration.  Yet another reason for IE7 to fall off the face of the Earth.  Happy hacking.
-
 ]]></content>
   </entry>
   

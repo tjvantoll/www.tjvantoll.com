@@ -5,12 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Blog Archive - TJ VanToll - Adventures in Front End Technologies</title>
+  <title>Creating a Native HTML 5 Datepicker with a Fallback to jQuery UI - TJ VanToll - Adventures in Front End Technologies</title>
   <meta name="author" content="TJ VanToll">
 
   
-  <meta name="description" content="Blog Archive 2012 Creating a Native HTML 5 Datepicker with a Fallback to jQuery UI
-Jun 30 2012 posted in Browsers, jQuery UI Detecting Print &hellip;">
+  <meta name="description" content="The recently released Chrome 20 features support for native datepickers on &lt;input&gt; nodes with a [type=date] attribute. The list of browsers &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -19,7 +18,7 @@ Jun 30 2012 posted in Browsers, jQuery UI Detecting Print &hellip;">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://tjvantoll.com/blog/archives">
+  <link rel="canonical" href="http://tjvantoll.com/2012/06/30/creating-a-native-html5-datepicker-with-a-fallback-to-jquery-ui">
   <!-- Use custom favicon -->
   <!--<link href="/favicon.png" rel="icon">-->
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
@@ -154,148 +153,182 @@ Jun 30 2012 posted in Browsers, jQuery UI Detecting Print &hellip;">
   <div id="main">
     <div id="content">
       <div>
-<article role="article">
+<article class="hentry" role="article">
   
-  <header >
-    <h1 class="entry-title">Blog Archive</h1>
+  <header>
+    
+      <h1 class="entry-title">Creating a Native HTML 5 Datepicker With a Fallback to jQuery UI</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-06-30T17:06:00-04:00" pubdate data-updated="true">Jun 30<span>th</span>, 2012</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
     
   </header>
-  
-  <div id="blog-archives">
 
 
+<div class="entry-content"><p>The recently released Chrome 20 features support for native datepickers on <code>&lt;input&gt;</code> nodes with a <code>[type=date]</code> attribute.  The list of browsers that support native datepickers now includes Chrome, Opera 11+, Opera Mobile, and iOS 5+ (see <a href="http://caniuse.com/#feat=input-datetime">caniuse.com</a>).  Therefore, now&#8217;s a great time to start using them in your web applications.</p>
 
-  
-  <h2>2012</h2>
-
-<article>
-  
-<h1><a href="/2012/06/30/creating-a-native-html5-datepicker-with-a-fallback-to-jquery-ui/">Creating a Native HTML 5 Datepicker with a Fallback to jQuery UI</a></h1>
-<time datetime="2012-06-30T17:06:00-04:00" pubdate><span class='month'>Jun</span> <span class='day'>30</span> <span class='year'>2012</span></time>
-
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/browsers/'>Browsers</a>, <a class='category' href='/blog/categories/jquery-ui/'>jQuery UI</a></span>
-</footer>
+<!--more-->
 
 
-</article>
+<h3>Using</h3>
+
+<p>Using the native datepickers is easy, just change the <code>type</code> attribute of your date inputs from <code>text</code> to <code>date</code>.</p>
+
+<figure class='code'><figcaption><span>Converting to a native HTML5 datepicker</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="c">&lt;!-- Before --&gt;</span>
+</span><span class='line'><span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;text&quot;</span> <span class="nt">/&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="c">&lt;!-- After --&gt;</span>
+</span><span class='line'><span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;date&quot;</span> <span class="nt">/&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
 
 
+<p>Here is what the user will see in supported browsers:</p>
 
-<article>
-  
-<h1><a href="/2012/06/15/detecting-print-requests-with-javascript/">Detecting Print Requests with JavaScript</a></h1>
-<time datetime="2012-06-15T00:00:00-04:00" pubdate><span class='month'>Jun</span> <span class='day'>15</span> <span class='year'>2012</span></time>
+<h4>Chrome 20</h4>
 
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/browsers/'>Browsers</a>, <a class='category' href='/blog/categories/javascript/'>JavaScript</a></span>
-</footer>
+<p><img src="/images/posts/2012-06-30/Chrome.png" title="Chrome 20" alt="Chrome 20" /></p>
 
+<h4>Opera 12</h4>
 
-</article>
+<p><img src="/images/posts/2012-06-30/Opera.png" title="Opera 12" alt="Opera 12" /></p>
 
+<h4>Opera Mobile</h4>
 
+<p><img src="/images/posts/2012-06-30/Opera%20Mobile.png" title="Opera Mobile" alt="Opera Mobile" /></p>
 
-<article>
-  
-<h1><a href="/2012/06/10/browser-css-parsing-discrepancies/">Browser CSS Parsing Discrepancies</a></h1>
-<time datetime="2012-06-10T22:24:00-04:00" pubdate><span class='month'>Jun</span> <span class='day'>10</span> <span class='year'>2012</span></time>
+<h4>iOS 5</h4>
 
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/browsers/'>Browsers</a>, <a class='category' href='/blog/categories/css/'>CSS</a></span>
-</footer>
+<p><img src="/images/posts/2012-06-30/iOS5.png" title="iOS 5" alt="iOS 5" /></p>
 
+<h3>Advantages</h3>
 
-</article>
+<p>Why would use the native solution?</p>
 
+<p>First and foremost there are no dependencies.  There is no need to bring in a library or toolkit, it&#8217;s all native.  Therefore, you save some bytes by not having to ship the JavaScript / CSS to make the datepicker work.</p>
 
+<p>Furthermore you can be guaranteed that it will work perfectly on all devices that support the native datepicker.  It&#8217;s not dependent on JavaScript so it&#8217;ll even work for users that have JavaScript disabled.</p>
 
-<article>
-  
-<h1><a href="/2012/05/02/showmodaldialog-what-it-is-and-why-you-should-never-use-it/">window.showModalDialog: What It is and Why You Should Never Use It</a></h1>
-<time datetime="2012-05-02T22:37:00-04:00" pubdate><span class='month'>May</span> <span class='day'>02</span> <span class='year'>2012</span></time>
+<p>Another key advantage is that devices can give alternative means of input for date controls.  For example note the native date control in iOS 5:</p>
 
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/browsers/'>Browsers</a>, <a class='category' href='/blog/categories/javascript/'>JavaScript</a></span>
-</footer>
+<p><img src="/images/posts/2012-06-30/iOS5.png" title="iOS 5" alt="iOS 5" /></p>
 
+<p>It will be a lot easier for the user to input a date with those controls, plus you can be guaranteed that you&#8217;ll receive input in the correct format.</p>
 
-</article>
+<h3>Disadvantages</h3>
 
+<p>The main disadvantage of using a native datepicker is that you have a lot less control.  There are no hooks to control the look of the date picker; you get what the browser wants to give you.  You also have a lot less control over the behavior.  Here&#8217;s a small sampling of things that jQuery UI&#8217;s datepicker can do that you cannot do with the native control.</p>
 
-
-<article>
-  
-<h1><a href="/2012/03/21/javascript-for-the-java-developer/">JavaScript for the Java Developer</a></h1>
-<time datetime="2012-03-21T00:00:00-04:00" pubdate><span class='month'>Mar</span> <span class='day'>21</span> <span class='year'>2012</span></time>
-
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/java/'>Java</a>, <a class='category' href='/blog/categories/javascript/'>JavaScript</a></span>
-</footer>
+<ul>
+<li>Only allow selection on certain days of the week.</li>
+<li>Control the formatting of the headers in the control (Monday vs Mon vs M).</li>
+<li>View multiple months at the same time.</li>
+</ul>
 
 
-</article>
+<p>If any of this functionality is important to your application you&#8217;ll probably want to stick with the jQuery UI solution.</p>
+
+<h3>Best of Both Worlds</h3>
+
+<p><a href="http://modernizr.com">Modernizr</a> gives you the ability to detect whether the browser supports native datepickers.  The following shows how you can use the native datepicker when available, and fallback to jQuery UI&#8217;s datepicker in unsupported browsers.</p>
+
+<figure class='code'><figcaption><span>Detect native support for datepickers and fallback to jQuery UI</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">Moderniz</span><span class="p">.</span><span class="nx">inputtypes</span><span class="p">.</span><span class="nx">date</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;input[type=date]&#39;</span><span class="p">).</span><span class="nx">datepicker</span><span class="p">();</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
 
 
+<p>You can see how your browser handles this situation here:</p>
 
-<article>
-  
-<h1><a href="/2012/03/17/Styling-Disabled-Form-Fields/">Styling Disabled Form Fields</a></h1>
-<time datetime="2012-03-17T00:00:00-04:00" pubdate><span class='month'>Mar</span> <span class='day'>17</span> <span class='year'>2012</span></time>
-
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/browsers/'>Browsers</a>, <a class='category' href='/blog/categories/css/'>CSS</a></span>
-</footer>
+<iframe style="width: 100%; height: 120px;" src="http://jsfiddle.net/p58bt/2/embedded/result,html,js/" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
 
 
-</article>
+<h3>Conclusion</h3>
 
-
-
-<article>
-  
-<h1><a href="/2012/03/08/IE7-Attribute-Selector-Bugs/">IE7 Attribute Selector Bugs</a></h1>
-<time datetime="2012-03-08T00:00:00-05:00" pubdate><span class='month'>Mar</span> <span class='day'>08</span> <span class='year'>2012</span></time>
-
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/browsers/'>Browsers</a>, <a class='category' href='/blog/categories/css/'>CSS</a></span>
-</footer>
-
-
-</article>
-
-
-
-<article>
-  
-<h1><a href="/2012/02/27/Making-a-3D-Picture-Cube-with-CSS3/">Making a 3D Picture Cube with CSS3</a></h1>
-<time datetime="2012-02-27T00:00:00-05:00" pubdate><span class='month'>Feb</span> <span class='day'>27</span> <span class='year'>2012</span></time>
-
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/css/'>CSS</a></span>
-</footer>
-
-
-</article>
-
-
-
-<article>
-  
-<h1><a href="/2012/02/20/CSS3-Color-Animations/">CSS3 Color Animations</a></h1>
-<time datetime="2012-02-20T00:00:00-05:00" pubdate><span class='month'>Feb</span> <span class='day'>20</span> <span class='year'>2012</span></time>
-
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/css/'>CSS</a></span>
-</footer>
-
-
-</article>
-
+<p>With Chrome adding support for native datepickers a large chunk web users now have the ability to use native pickers.  Therefore, now&#8217;s a great time to consider using them in your applications.</p>
 </div>
 
+
+  <footer>
+    <p class="meta">
+      
   
+
+<span class="byline author vcard">Posted by <span class="fn">TJ VanToll</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-06-30T17:06:00-04:00" pubdate data-updated="true">Jun 30<span>th</span>, 2012</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/browsers/'>Browsers</a>, <a class='category' href='/blog/categories/jquery-ui/'>jQuery UI</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://tjvantoll.com/2012/06/30/creating-a-native-html5-datepicker-with-a-fallback-to-jquery-ui/" data-via="tjvantoll" data-counturl="http://tjvantoll.com/2012/06/30/creating-a-native-html5-datepicker-with-a-fallback-to-jquery-ui/" >Tweet</a>
+  
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/2012/06/15/detecting-print-requests-with-javascript/" title="Previous Post: Detecting Print Requests with JavaScript">&laquo; Detecting Print Requests with JavaScript</a>
+      
+      
+    </p>
+  </footer>
 </article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
 
 </div>
 
@@ -395,7 +428,10 @@ Jun 30 2012 posted in Browsers, jQuery UI Detecting Print &hellip;">
       var disqus_shortname = 'tjvantoll';
       
         
-        var disqus_script = 'count.js';
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://tjvantoll.com/2012/06/30/creating-a-native-html5-datepicker-with-a-fallback-to-jquery-ui/';
+        var disqus_url = 'http://tjvantoll.com/2012/06/30/creating-a-native-html5-datepicker-with-a-fallback-to-jquery-ui/';
+        var disqus_script = 'embed.js';
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
