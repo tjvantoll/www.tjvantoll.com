@@ -3,7 +3,7 @@ layout: post
 title: "Detecting Print Requests with JavaScript"
 date: 2012-06-15
 comments: true
-categories: Browsers JavaScript
+categories: [Browsers, JavaScript]
 ---
 CSS has a well supported mechanism for applying changes only when the user is printing a document, [print stylesheets](http://coding.smashingmagazine.com/2011/11/24/how-to-set-up-a-print-style-sheet/).  They allow you to alter the presentation of a web page for the printer by applying rules that will only be interpreted for printing.  This is great for common tasks like hiding non-essential content, using more print friendly typography, and adjusting the layout to better suit the size and shape of paper.
 

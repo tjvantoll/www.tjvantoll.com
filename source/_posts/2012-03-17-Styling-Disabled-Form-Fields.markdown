@@ -2,7 +2,7 @@
 layout: post
 title: "Styling Disabled Form Fields"
 comments: true
-categories: Browsers CSS
+categories: [Browsers, CSS]
 ---
 
 Form fields can be disabled by simply adding the <code>disabled</code> attribute.  

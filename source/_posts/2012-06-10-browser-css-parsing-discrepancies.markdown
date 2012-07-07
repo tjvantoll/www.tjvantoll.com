@@ -3,7 +3,7 @@ layout: post
 title: "Browser CSS Parsing Discrepancies"
 date: 2012-06-10 22:24
 comments: true
-categories: Browsers CSS
+categories: [Browsers, CSS]
 ---
 Possibly the most frustrating thing that can happen during web development is when things look or behave differently in different browsers for no apparent reason.
 

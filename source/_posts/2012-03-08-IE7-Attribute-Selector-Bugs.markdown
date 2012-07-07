@@ -2,7 +2,7 @@
 layout: post
 title: IE7 Attribute Selector Bugs
 comments: true
-categories: Browsers CSS
+categories: [Browsers, CSS]
 ---
 
 The CSS attribute selector allows you to select HTML elements based on their attributes.  For example, take the following markup:
