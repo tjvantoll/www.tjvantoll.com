@@ -14,7 +14,7 @@ To develop LESS files all you need is your browser.  SASS requires Ruby to be ru
 While some would argue that this isn't a big deal (Ruby is pre-installed on OS X for example), it can potentially put off beginners or those not familiar with the command line.  A lot of people that write CSS wear a designer hat more than a developer hat.  Even if _you_ know what you're doing, if you're on a team with less technical people oftentimes the simplest approach will make everyone happy.
 
 #### **You can auto-reload changes to less files without reloading the browser and without external dependencies.**
-With LESS you can easily watch for changes by appending `#!watch` to the URL or by running `less.watch()` from the console.  There's no additional setup neededd and no need to reload your browser, changes automatically take effect automatically.
+With LESS you can easily watch for changes by appending `#!watch` to the URL or by running `less.watch()` from the console.  There's no additional setup and no need to reload your browser, changes take effect automatically.
 
 If you want files to be regenerated using SASS you must tell SASS which files to watch via the command line or use an app that does that for you.  If you want CSS changes to happen without reloading your browser you need to enlist the help of an app / extension such as [LiveReload](http://livereload.com).  While this works fine this is yet another dependency.
 
