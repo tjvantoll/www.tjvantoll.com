@@ -4,7 +4,7 @@
   <title><![CDATA[Category: CSS | TJ VanToll]]></title>
   <link href="http://tjvantoll.com/blog/categories/css/atom.xml" rel="self"/>
   <link href="http://tjvantoll.com/"/>
-  <updated>2012-06-30T17:57:00-04:00</updated>
+  <updated>2012-07-07T15:50:05-04:00</updated>
   <id>http://tjvantoll.com/</id>
   <author>
     <name><![CDATA[TJ VanToll]]></name>
@@ -12,6 +12,281 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[The Ideal LESS Workflow with git]]></title>
+    <link href="http://tjvantoll.com/2012/07/07/the-ideal-less-workflow-with-git/"/>
+    <updated>2012-07-07T00:00:00-04:00</updated>
+    <id>http://tjvantoll.com/2012/07/07/the-ideal-less-workflow-with-git</id>
+    <content type="html"><![CDATA[<p>LESS is a CSS pre-processor written in JavaScript.  Unlike its main competitor SASS, it has the ability to run both on the client side via a simple <code>&lt;script&gt;</code> tag, as well as server-side in Node.js.  The fact that LESS files can be processed client side is advantageous for a number of reasons:</p>
+
+<h4><strong>There are no dependencies.</strong></h4>
+
+<p>To develop LESS files all you need is your browser.  SASS requires Ruby to be running on your system to generate the CSS files.</p>
+
+<p>While some would argue that this isn't a big deal (Ruby is pre-installed on OS X for example), it can potentially put off beginners or those not familiar with the command line.  A lot of people that write CSS wear a designer hat more than a developer hat.  Even if <em>you</em> know what you're doing, if you're on a team with less technical people oftentimes the simplest approach will make everyone happy.</p>
+
+<h4><strong>You can auto-reload changes to less files without reloading the browser and without external dependencies.</strong></h4>
+
+<p>With LESS you can easily watch for changes by appending <code>#!watch</code> to the URL or by running <code>less.watch()</code> from the console.  There's no additional setup neededd and no need to reload your browser, changes automatically take effect automatically.</p>
+
+<p>If you want files to be regenerated using SASS you must tell SASS which files to watch via the command line or use an app that does that for you.  If you want CSS changes to happen without reloading your browser you need to enlist the help of an app / extension such as <a href="http://livereload.com">LiveReload</a>.  While this works fine this is yet another dependency.</p>
+
+<!--more-->
+
+
+<h3>Production</h3>
+
+<p>While the ease of use during development is great, you don't want visitors to your site to incur the cost of processing the LESS files client side in a production settting.  The easy way to accomplish this is to manually run <code>lessc</code> from the command line to convert all LESS files into CSS files, and then updating all of your .less paths in <code>&lt;link&gt;</code> tags to use .css paths.</p>
+
+<p>This works, but the lazy programmer in you will be looking to automate this after doing this more than once.  If you're using Git for source control one way you can accomplish this is by running a commit hook to do the generation.</p>
+
+<h3>Git Commit Hooks</h3>
+
+<p><a href="http://git-scm.com/book/en/Customizing-Git-Git-Hooks">Git commit hooks</a> allow you to run scripts whenever a commit occurs.  A <code>pre-commit</code> hook allows you to run a script that can also optionally prevent the commit from occurring.  The <code>pre-commit</code> hook works well for generating CSS files from LESS files for a few reasons.</p>
+
+<ul>
+<li>Once the script is in place you no longer have to manually generate CSS files, it'll simply be done automatically when you commit changes to source control.</li>
+<li>The script can be setup so that if <code>lessc</code> fails the commit will be rejected.  Therefore, LESS files with invalid syntax will be kept out of source control.</li>
+</ul>
+
+
+<p>To create a Git commit hook navigate into the <code>.git/hooks</code> directory of your repository.  This folder has a number of sample hooks that you can potentially use with a <code>.sample</code> suffix.  To create a <code>pre-commit</code> script that Git will run simply create an un-prefixed copy of <code>pre-commit.sample</code>.</p>
+
+<p><code>bash
+cd /MyProject/.git/hooks
+cp pre-commit.sample pre-commit
+</code></p>
+
+<p>Once a <code>pre-commit</code> file exists in <code>.git/hooks</code>, Git will run it before every commit.</p>
+
+<h3>The Script</h3>
+
+<p>There are many ways to implement a script that generates CSS files from LESS files.  This is the <code>pre-commit</code> script that I use.</p>
+
+<p>``` bash The script</p>
+
+<h1>!/bin/sh</h1>
+
+<h1>Pre-commit hook to generate .css files from .less files using lessc.</h1>
+
+<h1>Script assumes .less files are in a directory named "less" and will</h1>
+
+<h1>put the generated files in a sibling "css" directory.  The generated</h1>
+
+<h1>CSS will also be compressed as part of lessc.</h1>
+
+<p>#</p>
+
+<h1>When .less files are deleted the script will delete the corresponding</h1>
+
+<h1>.css files if they exist.</h1>
+
+<p>#</p>
+
+<h1>Example</h1>
+
+<h1>-------</h1>
+
+<p>#</p>
+
+<h1>Before:       After:</h1>
+
+<p>#</p>
+
+<h1>foo/          foo/</h1>
+
+<h1>less/         css/</h1>
+
+<h1>a.less        a.css</h1>
+
+<h1>bar/            less/</h1>
+
+<h1>less/           a.less</h1>
+
+<h1>b.less    bar/</h1>
+
+<h1>css/</h1>
+
+<h1>b.css</h1>
+
+<h1>less</h1>
+
+<h1>b.less</h1>
+
+<p>#</p>
+
+<h1>Loop over all files included in the commit.</h1>
+
+<p>for file in $( exec git diff-index --cached --name-only HEAD )
+do</p>
+
+<h1>We only want to take action unless the file is a LESS file.</h1>
+
+<p>  if [[ $file == <em>".less"</em> ]]; then</p>
+
+<pre><code>lessFile=$file
+</code></pre>
+
+<h1>Find where the corresponding CSS file should be located</h1>
+
+<h1>in the file system, in this case a sibling CSS directory.</h1>
+
+<pre><code>cssFile="${lessFile/less\//css/}"
+cssFile="${cssFile/.less/.css}"
+</code></pre>
+
+<h1>Determine the status of the file in the commit.</h1>
+
+<h1>M = Modified, A = Added, D = deleted, R = renamed,</h1>
+
+<h1>C = copied, U = Updated but unmerged</h1>
+
+<pre><code>status=$( exec git status --porcelain $lessFile )
+</code></pre>
+
+<h1>If the file was deleted as part of the commit, delete the</h1>
+
+<h1>corresponding CSS file.</h1>
+
+<pre><code>if [[ $status == D* ]]; then
+  if [ -e "$cssFile" ]; then
+    echo "Removing $cssFile"
+    git rm $cssFile 
+  fi
+else
+</code></pre>
+
+<h1>Otherwise we must generate the CSS file. First create a</h1>
+
+<h1>CSS folder to place the file in.  The -p option for mdkir</h1>
+
+<h1>tells it to create parent folders if necessary.</h1>
+
+<pre><code>  baseDirectory=${lessFile/less\/*/}
+  mkdir -p ${baseDirectory}css
+</code></pre>
+
+<h1>Log to the console that the CSS is being generated so the person</h1>
+
+<h1>running the commit is aware.</h1>
+
+<pre><code>  echo "Generating $cssFile from $lessFile"
+</code></pre>
+
+<h1>Run lessc to do the actual generation.  If lessc fails exit</h1>
+
+<h1>with a code of 1 so that the commit is rejected.  The -x option</h1>
+
+<h1>tells lessc to generate compressed CSS for production usage.</h1>
+
+<pre><code>  if ! lessc -x $lessFile $cssFile; then
+    exit 1
+  fi
+</code></pre>
+
+<h1>Add the CSS file to the commit.</h1>
+
+<pre><code>  git add $cssFile
+fi
+</code></pre>
+
+<p>  fi
+done
+```</p>
+
+<p>You could greatly simplify this script to simply run <code>lessc</code> on all .less files on every commit.  I go file by file because the script has to be run on a large code base where generating hundreds to thousands of CSS files on every commit isn't practical.  This script is also setup to create sibling <code>css</code> and <code>less</code> directories.  You could easily modify this to simply put the files in the same directory; I like them to be logically separated.</p>
+
+<h3>Automating <code>&lt;link&gt;</code> File Paths</h3>
+
+<p>As I said, the script I use assumes that there are sibling <code>css</code> and <code>less</code> directories.  To give a concrete example of this say I have the following file system structure.</p>
+
+<pre><code>/MyProject
+    /css
+        * Generated files *
+    index.html
+    /js
+        less.js
+    /less
+        a.less
+        b.less
+</code></pre>
+
+<p>To include these files I use the following locally:</p>
+
+<p>``` html Local Includes</p>
+
+<!-- index.html -->
+
+
+<p>&lt;!DOCTYPE html>
+<html></p>
+
+<pre><code>&lt;head&gt;
+    &lt;link rel="stylesheet/less" href="less/a.less"&gt;
+    &lt;link rel="stylesheet/less" href="less/b.less"&gt;
+    &lt;script src="js/less.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;/body&gt;
+</code></pre>
+
+<p></html>
+```</p>
+
+<p>And the following in production:</p>
+
+<p>``` html Production Includes</p>
+
+<!-- index.html -->
+
+
+<p>&lt;!DOCTYPE html>
+<html></p>
+
+<pre><code>&lt;head&gt;
+    &lt;link rel="stylesheet" href="css/a.css"&gt;
+    &lt;link rel="stylesheet" href="css/b.css"&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;/body&gt;
+</code></pre>
+
+<p></html>
+```</p>
+
+<p>The best way to handle both development and production with minimal maintenance is to use some sort of server-side check so that you don't have to change your HTML whenever you release to production.  Here's an example of a PHP script that does this by detecting whether the host contains <code>localhost</code>.</p>
+
+<p>``` html Making both imports work</p>
+
+<!-- index.html -->
+
+
+<p>&lt;!DOCTYPE html>
+<html></p>
+
+<pre><code>&lt;head&gt;
+    &lt;? if (strpos($_SERVER['HTTP_HOST'], 'localhost')) { ?&gt;
+        &lt;link rel="stylesheet/less" href="http://tjvantoll.com/less/a.less"&gt;
+        &lt;link rel="stylesheet/less" href="http://tjvantoll.com/less/b.less"&gt;
+        &lt;script src="http://tjvantoll.com/js/less.js"&gt;&lt;/script&gt;
+    &lt; } else { ?&gt;
+        &lt;link rel="stylesheet" href="http://tjvantoll.com/css/a.css"&gt;
+        &lt;link rel="stylesheet" href="http://tjvantoll.com/css/b.css"&gt;
+    &lt;? } ?&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;/body&gt;
+</code></pre>
+
+<p></html>
+```</p>
+
+<h3>Conclusion</h3>
+
+<p>Using LESS client side is awfully convenient, but it shouldn't be done in a production setting.  If you use LESS a lot then this is something you'll want to automate in your workflow.  In my opinion using a git <code>pre-commit</code> hook is a clean way to accomplish this.  Feel free to use my script or alter it to your liking.  If you have any other ways you automate your LESS workflow I'd love to hear about it.  Let me know in the comments.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Browser CSS Parsing Discrepancies]]></title>
@@ -919,239 +1194,6 @@ AwesomeCube.prototype.awesome = function() {</p>
     </div>
 </div>
 
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[CSS3 Color Animations]]></title>
-    <link href="http://tjvantoll.com/2012/02/20/CSS3-Color-Animations/"/>
-    <updated>2012-02-20T00:00:00-05:00</updated>
-    <id>http://tjvantoll.com/2012/02/20/CSS3-Color-Animations</id>
-    <content type="html"><![CDATA[<p>CSS3 animations allow you to alter the values of CSS properties over time.  They're now supported in Firefox 5+, Chrome, Safari 4+, iOS, Android 4+, and the upcoming IE10, therefore, using them in real production websites is possible.  One of the cool things you can do with them is change the color of an element using exclusively CSS.  Previously a technique like this was only possible using <a href="https://developer.mozilla.org/en/window.setInterval">JavaScript's setInterval function</a> to gradually change the appropriate property of the element. See <a href="http://jqueryui.com/demos/animate/">jQuery UI's animate demos</a> for a good example.</p>
-
-<!--more-->
-
-
-<h3>Getting Started</h3>
-
-<p>Let's start with a basic example (note - Whether or not you see the animation depends on whether your browser supports CSS3 animations.  You can check at <a href="http://caniuse.com/css-animation">caniuse.com</a>.</p>
-
-<iframe style="width: 100%; height: 120px;" src="http://jsfiddle.net/RfYMA/1/embedded/result,html,css/" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
-
-
-<h3>Syntax</h3>
-
-<p>Let's break this down one section at a time.
-``` css Animation CSS
-div {</p>
-
-<pre><code>-webkit-animation: color_change 1s infinite alternate;
--moz-animation: color_change 1s infinite alternate;  
--ms-animation: color_change 1s infinite alternate;  
--o-animation: color_change 1s infinite alternate;
-animation: color_change 1s infinite alternate;   
-</code></pre>
-
-<p>}
-```</p>
-
-<p>The <code>animation</code> property is how you define a <a href="https://developer.mozilla.org/en/CSS/CSS_animations">CSS3 animation</a>.  The <a href="https://developer.mozilla.org/en-US/">MDN</a> (Mozilla Developer Network) docs have extensive documentation on all the various sub properties available to configure the animation <a href="https://developer.mozilla.org/en/CSS/CSS_animations#Configuring_the_animation">here</a>.  In this example I'm setting…</p>
-
-<ul>
-<li><code><a href="https://developer.mozilla.org/en/CSS/animation-name">animation name</a></code>: <code>color_change</code> - This refers to a named @keyframes rule, which we'll get into in a minute.</li>
-<li><code><a href="https://developer.mozilla.org/en/CSS/animation-duration">animation_duration</a></code>: <code>1s</code> - The animation should last 1 second.</li>
-<li><code><a href="https://developer.mozilla.org/en/CSS/animation-iteration-count">animation_iteration_count</a></code>: <code>infinite</code> - The animation will cycle forever.</li>
-<li><code><a href="https://developer.mozilla.org/en/CSS/animation-direction">animation_direction</a></code>: <code>alternate</code> - This will tell the animation to alternate, from start to end, then end to start, then start to end, and so on.  In this example it keeps the box from being jerky by quickly switching from red to blue.</li>
-</ul>
-
-
-<p>For readability you can also list the properties out individually.</p>
-
-<p>``` css Animation broken out
-/<em> Note: Prefixes omitted, see below </em>/
-div {</p>
-
-<pre><code>animation-name: color_change;
-animation-duration: 1s;
-animation-iteration-count: infinite;
-animation-direction: alternate;
-</code></pre>
-
-<p>}
-```</p>
-
-<h3>Prefixes</h3>
-
-<p>The vendor prefixes are necessary because CSS3 animations are still considered an experimental feature (the <a href="http://www.w3.org/TR/css3-animations/">spec</a> is still in working draft status.  However, the syntax is consistent across modern browsers, so you only have to copy and paste the code to add all the necessary prefixes.  Always include the un-prefixed property last to make your code future friendly to browsers that add un-prefixed support.  For an up to date list of what browsers support CSS3 animations and which prefixes to use check out the <a href="http://caniuse.com/css-animation">CSS animation page at caniuse.com</a>.</p>
-
-<p>If you get sick of typing out all the vendor prefixes you're not alone.  <a href="http://leaverou.github.com/prefixfree/">-prefix-free</a> is a tool by <a href="http://lea.verou.me/">Lea Verou</a> that lets you write your CSS unprefixed.  A JavaScript file detects whether a browser prefix is necessary, which one to use, and applies it automatically.</p>
-
-<p>Another option is <a href="http://prefixr.com/">Prefixr</a> by Jeffrey Way of <a href="http://net.tutsplus.com/">nettuts</a>.  It lets you copy and paste your code in, run it, and have the appropriate prefixes added automatically.</p>
-
-<p>Browser prefixes have been been a hot topic lately after it was announced that IE, Firefox, and Opera are <a href="http://lists.w3.org/Archives/Public/www-style/2012Feb/0313.html">considering adopting support for -webkit prefixes</a>.  If you're curious a <a href="http://remysharp.com/2012/02/09/vendor-prefixes-about-to-go-south/">number</a> <a href="http://christianheilmann.com/2012/02/09/now-vendor-prefixes-have-become-a-problem-want-to-help-fix-it/">of</a> <a href="http://www.brucelawson.co.uk/2012/on-the-vendor-prefixes-problem/">others</a> have <a href="http://infrequently.org/2012/02/misdirection/">written</a> about this.</p>
-
-<h3>Keyframes</h3>
-
-<p>``` css Keyframe Declarations
-@-webkit-keyframes color_change {</p>
-
-<pre><code>from { background-color: blue; }
-to { background-color: red; }
-</code></pre>
-
-<p>}
-@-moz-keyframes color_change {</p>
-
-<pre><code>from { background-color: blue; }
-to { background-color: red; }
-</code></pre>
-
-<p>}
-@-ms-keyframes color_change {</p>
-
-<pre><code>from { background-color: blue; }
-to { background-color: red; }
-</code></pre>
-
-<p>}
-@-o-keyframes color_change {</p>
-
-<pre><code>from { background-color: blue; }
-to { background-color: red; }
-</code></pre>
-
-<p>}
-@keyframes color_change {</p>
-
-<pre><code>from { background-color: blue; }
-to { background-color: red; }
-</code></pre>
-
-<p>}
-```</p>
-
-<p><a href="https://developer.mozilla.org/en/CSS/@keyframes">Keyframes</a> are a way of specifying a set of properties and their values at different states of an animation.  <code>@keyframes color_change</code> gives the @keyframes a name of <code>color_change</code>.  This provides the connection used on the animation property above.</p>
-
-<p><code>css
-from { background-color: blue; }
-to { background-color: red; }
-</code></p>
-
-<p>This animation only has 2 steps, a start and an end.  Since such animations are quite common, the <a href="http://www.w3.org/TR/css3-animations/#keyframes-">spec</a> provides the keywords <code>from</code> and <code>to</code> for defining the state of properties at the beginning and end of the animation.  This could also have been written using percentages for the steps.</p>
-
-<p><code>css
-0% { background-color: blue; }
-100% { background-color: red; }
-</code></p>
-
-<p>If the animation has more than 2 steps, they can be listed using multiple steps as such.</p>
-
-<p><code>css
-0% { background-color: blue; }
-25% { background-color: orange; }
-50% { background-color: yellow; }
-75% { background-color: black; }
-100% { background-color: red; }
-</code></p>
-
-<h3>Real World Example</h3>
-
-<p>Since the first demo was rather contrived, I thought I'd provide an example of how you could use this technique in the real world.  On buttons, a common UI pattern is to provide the user with visual feedback that they're on the button by applying a subtle color change.  This is usually done by applying a different <code>background-color</code> on the hover pseudoclass of the button as such:</p>
-
-<p>``` css
-button {</p>
-
-<pre><code>background-color: pink;
-</code></pre>
-
-<p>}
-button:hover {</p>
-
-<pre><code>background-color: hotpink;
-</code></pre>
-
-<p>}
-```</p>
-
-<p>To improve upon this, we can add a CSS 3 color animation to gradually make the color transition.  The following example shows each side by side:</p>
-
-<iframe style="width: 100%; height: 250px" src="http://jsfiddle.net/PTfZD/3/embedded/result,html,css/" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
-
-
-<h3>Falling Back Gracefully</h3>
-
-<p>Since CSS3 animations are only present in modern browsers, there's a good chance a number of your users won't have them available.  Luckily, CSS3 animations fallback gracefully to browsers that don't support them.  If the browser doesn't know how to handle a CSS animation, it just ignores the CSS rules.  Therefore, make sure not to use CSS animations to perform functionality that is vital to your site or application, it should simply enhance the user experience.</p>
-
-<p>In the button example above if the browser can't perform the animation, the animated button will simply fallback on the hover button's behavior.</p>
-
-<p>``` css Color Animation with Fallback
-button {</p>
-
-<pre><code>background-color: pink;
-</code></pre>
-
-<p>}
-button:hover {</p>
-
-<pre><code>/* IE &lt;= 6 get no hover effect */
-/* All browsers IE 7+ know how to handle this */
-background-color: hotpink;
-
-/* Browsers that support CSS animations get the animation, */
-/* those that don't ignore this and move on. */
-/* Note: I've omitted the vendor prefixes for simplicity. */
-animation: color_change 1s;
-</code></pre>
-
-<p>}
-```</p>
-
-<h3>Detect Support and Polyfill</h3>
-
-<p>If you have a CSS color animation that you absolutely must have work on all browsers back to IE6, you can do so by detecting support via <a href="http://modernizr.com">Modernizr</a>, and falling back to <a href="http://jqueryui.com/demos/animate/">jQuery UI's animation</a>.</p>
-
-<p>``` javascript Fallback Behavior with jQuery UI
-if (!Modernizr.cssanimation) {</p>
-
-<pre><code>$('button').on('mouseover', function() {
-    //jQuery UI doesn't support the hotpink keyword :(
-    $(this).animate({ backgroundColor: '#FF69B4' }, 1000);
-}).on('mouseout', function() {
-    $(this).stop(true, true);
-    $(this).css('backgroundColor', 'pink');
-});            
-</code></pre>
-
-<p>}
-```</p>
-
-<p>Live example (this should work across all browsers):</p>
-
-<iframe style="width: 100%; height: 160px" src="http://jsfiddle.net/tj_vantoll/2Yrpe/3/embedded/result,js,css,html" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
-
-
-<p>If the jQuery UI approach already works cross browser why would you bother doing this with CSS?</p>
-
-<ul>
-<li>Certain desktop and mobile browsers can use hardware acceleration with CSS3 animations.  This usually results in the animation rendering smoother.</li>
-<li>Users with JavaScript disabled will still see the animation.</li>
-<li>If you're only using jQuery &amp; jQuery UI for this animation you can save yourself two HTTP requests by using <a href="http://www.modernizr.com/docs/#load">Modernizr's load function</a>.  This will first test whether the browser supports CSS animations, if it does nothing needs to be done, if it doesn't all scripts listed in the <code>nope</code> parameter will be loaded.</li>
-</ul>
-
-
-<p>``` javascript Conditionally Loading jQuery UI
-Modernizr.load({</p>
-
-<pre><code>test: Modernizr.cssanimation,
-nope: ['jquery.js', 'jquery-ui']
-</code></pre>
-
-<p>});
-```</p>
-
-<h3>Summary</h3>
-
-<p>CSS 3 color animations can be used in modern browsers today.  For most use cases no animations in unsupported browsers isn't a problem, and, if it is, <a href="http://jqueryui.com">jQuery UI</a> can be used to polyfill the functionality.</p>
 ]]></content>
   </entry>
   
