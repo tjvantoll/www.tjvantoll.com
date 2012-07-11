@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Browsers | TJ VanToll]]></title>
   <link href="http://tjvantoll.com/blog/categories/browsers/atom.xml" rel="self"/>
   <link href="http://tjvantoll.com/"/>
-  <updated>2012-07-07T17:49:45-04:00</updated>
+  <updated>2012-07-10T23:04:31-04:00</updated>
   <id>http://tjvantoll.com/</id>
   <author>
     <name><![CDATA[TJ VanToll]]></name>
@@ -12,6 +12,139 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Default Browser Handling of the CSS text-transform Property]]></title>
+    <link href="http://tjvantoll.com/2012/07/10/default-browser-handling-of-the-css-text-transform-property/"/>
+    <updated>2012-07-10T21:05:00-04:00</updated>
+    <id>http://tjvantoll.com/2012/07/10/default-browser-handling-of-the-css-text-transform-property</id>
+    <content type="html"><![CDATA[<p>The <code>text-transform</code> CSS property is most frequently used to uppercase and lowercase text.  According to the <a href="http://www.w3.org/TR/CSS21/text.html#caps-prop">CSS 2.1 specification</a> it is also an inherited property, meaning, when no value is specified on a given element, it should inherit its parent's <code>text-transform</code> value.</p>
+
+<p>If no parents have a <code>text-transform</code> property defined, the element will take on the default value of <code>none</code>.</p>
+
+<p>Where it gets interesting is that all browsers define default <code>text-transform</code> properties for certain form elements.  What does this mean?  <!--more-->Let's say you have the following markup:</p>
+
+<p>``` html</p>
+
+
+
+<p><form></p>
+
+<pre><code>&lt;input type="text" value="foo" /&gt;
+&lt;input type="submit" value="bar" /&gt;
+</code></pre>
+
+<p></form>
+```</p>
+
+<p>Both the value of the <code>input[type=text]</code> and <code>input[type=submit]</code> will appear lowercased in all major browsers.  This happens because they all include <code>text-transform: none</code> in their user agent stylesheet for those elements.  Therefore the <code>text-transform: uppercase</code> rule declared on the parent node is not inherited.</p>
+
+<p>Unfortunately (but not surprisingly), browsers aren't consistent about their default values for all elements.</p>
+
+<h3>What the Browsers Do</h3>
+
+<p>The following chart shows popular browser rendering engines and whether their user agent stylesheet includes <code>text-transform: none</code> for the listed elements.</p>
+
+<table>
+    <thead>
+        <tr>
+            <th>Rendering Engine</th>
+            <th>input[type=submit]</th>
+            <th>input[type=text]</th>
+            <th>select</th>
+            <th>textarea</th>
+            <th>button</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Trident (Internet Explorer)</td>
+            <td>Yes</td>
+            <td>Yes</td>
+            <td>Yes</td>
+            <td>Yes</td>
+            <td><strong>No</strong></td>
+        </tr>
+        <tr>
+            <td>Gecko (Firefox)</td>
+            <td>Yes</td>
+            <td>Yes</td>
+            <td><strong>No</strong></td>
+            <td>Yes</td>
+            <td><strong>No</strong></td>
+        </tr>
+        <tr>
+            <td>WebKit (Chrome, Safari, etc...)</td>
+            <td>Yes</td>
+            <td>Yes</td>
+            <td>Yes</td>
+            <td>Yes</td>
+            <td>Yes</td>
+        </tr>
+        <tr>
+            <td>Presto (Opera)</td>
+            <td>Yes</td>
+            <td>Yes</td>
+            <td><strong>No</strong></td>
+            <td>Yes</td>
+            <td><strong>No</strong></td>
+        </tr>
+    </tbody>
+</table>
+
+
+<h3>What Does This Mean?</h3>
+
+<p>The browser differences occur on the <code>button</code> and <code>select</code> elements.  Therefore, if you apply a <code>text-transform</code> value to a node, AND that node has children <code>button</code> / <code>select</code> nodes, AND you do not apply a <code>text-transform</code> value to the <code>button</code> or <code>select</code> nodes themselves... you'll get different behavior in different browsers.</p>
+
+<p>For example:</p>
+
+<p>``` html
+&lt;!DOCTYPE html>
+<html></p>
+
+<pre><code>&lt;head&gt;
+    &lt;style&gt;
+        form { text-transform: uppercase; }
+    &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;form&gt;
+        &lt;!-- "foo" will be uppercase in IE, Firefox, and Opera --&gt;
+        &lt;!-- "foo" will be lowercase in WebKit based browsers --&gt;
+        &lt;button&gt;foo&lt;/button&gt;
+
+        &lt;!-- "bar" will be uppercase in Firefox and Opera --&gt;
+        &lt;!-- "bar" will be lowercase in IE and WebKit based browsers --&gt;
+        &lt;select&gt;
+            &lt;option&gt;bar&lt;/option&gt;
+        &lt;/select&gt;
+    &lt;/form&gt;
+&lt;/body&gt;
+</code></pre>
+
+<p></html>
+```</p>
+
+<h3>Consistency</h3>
+
+<p>You could make arguments as to whether the user agent stylesheets <em>should</em> be defaulting the <code>text-transform</code> of various form elements to <code>none</code>, but to most people all that matters is that the behavior is consistent.  It's easy enough to override the defaults if you don't like them.</p>
+
+<p>Therefore to get consistent rendering you need to define some <code>text-transform</code> value for both <code>button</code> and <code>select</code> elements.</p>
+
+<p>``` css
+/<em> Option 1 - Don't inherit values in all browsers </em>/
+button, select { text-transform: none; }</p>
+
+<p>/<em> Option 2 - Inherit values in all browsers </em>/
+button, select { text-transform: inherit; }
+```</p>
+
+<h3>Is This a Big Deal?</h3>
+
+<p>No.  But, in my opinion it's something that's well suited for a reset or normalizing stylesheet.  I'll be sending a pull request to <a href="https://github.com/necolas/normalize.css">normalize.css</a> shortly.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Creating a Native HTML 5 Datepicker with a Fallback to jQuery UI]]></title>
@@ -683,252 +816,6 @@ window.showModalDialog('http://google.com');
 <h3>Conclusion</h3>
 
 <p><code>window.showModalDialog</code> is an old API that has been retroactively standardized; but that doesn't mean you should actually be using it.  If you're still maintaining code using this try to get off of it as soon as possible.  That being said the idea of having native dialog capabilities built into the browser wasn't a bad idea.  Hope may be on the way with the dialog element that was recently added to the HTML5 spec.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Styling Disabled Form Fields]]></title>
-    <link href="http://tjvantoll.com/2012/03/17/Styling-Disabled-Form-Fields/"/>
-    <updated>2012-03-17T00:00:00-04:00</updated>
-    <id>http://tjvantoll.com/2012/03/17/Styling-Disabled-Form-Fields</id>
-    <content type="html"><![CDATA[<p>Form fields can be disabled by simply adding the <code>disabled</code> attribute.</p>
-
-<p><code>html Simple Disabled Fields
-&lt;input type="text" disabled /&gt;
-&lt;textarea disabled&gt;&lt;/textarea&gt;
-&lt;select disabled&gt;&lt;/select&gt;
-</code></p>
-
-<p>Disabled fields cannot be interacted with by the user; the browser will not allow the field to receive focus or be tabbed to.  For an intuitive UI it's important that disabled fields are clearly evident to the user.  Users are easily confused and frustrated when attempting to interact with fields that they are not able to.</p>
-
-<p>To apply custom styling to disabled fields you can add CSS rules that target <code>input:disabled</code>, <code>select:disabled</code>, &amp; <code>textarea:disabled</code>. (Note: IE doesn't support the <a href="https://developer.mozilla.org/En/CSS/%3Adisabled">disabled pseduo class</a> until IE9, so you'll need to use <code>input[disabled]</code>, <code>select[disabled]</code>, &amp; <code>textarea[disabled]</code> <a href="https://developer.mozilla.org/en/CSS/Attribute_selectors">attribute selectors</a> if IE &lt; 9 support is important for you.  It'll work just the same.)</p>
-
-<p>While you <i>can</i> provide custom disabled field styling, it's not generally a good idea.  All browsers come with default styling for these fields that attempt to mesh with native UI elements in the OS.  Also, users have a certain expectation for what disabled fields look like in their preferred web browser and it's best not to mess with that.</p>
-
-<p>Unfortunately some browser's default styling is less than ideal.  <!--more-->To best show this I've created a <a href="http://jsfiddle.net/ygwnh/12/">test case</a> with the most common form elements and recorded a rendering of the test case in a large number of browser / OS combinations.  Since some of the styles are more evident when a the element is selected and/or has a value, I included both a grouping with no <code>selected</code> or <code>value</code> attributes, and another with those set.</p>
-
-<h3>Markup</h3>
-
-<p>Here's the markup I used for the test cases, some very basic form fields with the <code>disabled</code> attribute.</p>
-
-<h4>No Value / Selected Attributes</h4>
-
-<p>``` html Markup Used to Generate the Examples http://jsfiddle.net/ygwnh/12/</p>
-
-<table>
-    <thead>
-        <tr>
-            <th>Enabled</th>
-            <th>Disabled</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td><input type="text" /></td>
-            <td><input type="text" disabled /></td>
-        </tr>
-        <tr>
-            <td><input type="checkbox" /></td>
-            <td><input type="checkbox" disabled /></td>
-        </tr>
-        <tr>
-            <td><input type="radio" /></td>
-            <td><input type="radio" disabled /></td>
-        </tr>
-        <tr>
-            <td><select></select></td>
-            <td><select disabled></select></td>
-        </tr>
-        <tr>
-            <td><textarea></textarea></td>
-            <td><textarea disabled></textarea></td>
-        </tr>
-    </tbody>
-</table>
-
-
-<p>```</p>
-
-<h4>With Value / Selected Attributes</h4>
-
-<p>``` html Markup Used to Generate the Examples http://jsfiddle.net/ygwnh/12/</p>
-
-<table>
-    <thead>
-        <tr>
-            <th>Enabled w/Value</th>
-            <th>Disabled w/Value</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td><input type="text" value="Value" /></td>
-            <td><input type="text" disabled value="Value"></td>
-        <tr>
-            <td><input type="checkbox" checked /></td>
-            <td><input type="checkbox" disabled checked /></td>
-        </tr>
-        <tr>
-            <td><input type="radio" checked /></td>
-            <td><input type="radio" disabled checked /></td>
-        </tr>
-        <tr>
-            <td><select><option selected>Value</option></select></td>
-            <td><select disabled><option selected>Value</option></select></td>
-        </tr>
-        <tr>
-            <td><textarea>Value</textarea></td>
-            <td><textarea disabled>Value</textarea></td>
-        </tr>
-    </tbody>
-</table>
-
-
-<p>  <br/>
-```</p>
-
-<h3>Results</h3>
-
-<p>You can view <a href="/images/posts/2012-03-17/All.html">all the results on one page</a> or see individual ones listed below.</p>
-
-<h4>Windows</h4>
-
-<ul>
-<li><a href="/images/posts/2012-03-17/IE6.png" title="IE6">IE6</a></li>
-<li><a href="/images/posts/2012-03-17/IE7.png" title="IE7">IE7</a></li>
-<li><a href="/images/posts/2012-03-17/IE8.png" title="IE8">IE8</a></li>
-<li><a href="/images/posts/2012-03-17/IE9.png" title="IE9">IE9</a></li>
-<li><a href="/images/posts/2012-03-17/IE10.png" title="IE10">IE10</a></li>
-<li><a href="/images/posts/2012-03-17/Windows-Chrome-17.png" title="Windows - Chrome 17">Chrome 17</a></li>
-<li><a href="/images/posts/2012-03-17/Windows-Safari-5.1.png" title="Windows - Safari 5.1">Safari 5.1</a></li>
-<li><a href="/images/posts/2012-03-17/Windows-Firefox-10.png" title="Windows - Firefox 10">Firefox 10</a></li>
-<li><a href="/images/posts/2012-03-17/Windows-Opera-11.61.png" title="Windows - Opera 11.61">Opera 11.61</a></li>
-</ul>
-
-
-<h4>OS X</h4>
-
-<ul>
-<li><a href="/images/posts/2012-03-17/OSX-Chrome-17.png" title="OSX - Chrome 17">Chrome 17</a></li>
-<li><a href="/images/posts/2012-03-17/OSX-Safari-5.1.png" title="OSX - Safari 5.1">Safari 5.1</a></li>
-<li><a href="/images/posts/2012-03-17/OSX-Firefox-11.png" title="OSX - Firefox 11">Firefox 11</a></li>
-<li><a href="/images/posts/2012-03-17/OSX-Opera-11.61.png" title="OSX - Opera 11.61">Opera 11.61</a></li>
-</ul>
-
-
-<h4>Mobile</h4>
-
-<ul>
-<li><a href="/images/posts/2012-03-17/iOS-5.png" title="iOS 5">iOS 5</a></li>
-<li><a href="/images/posts/2012-03-17/Android-2.3.png" title="Android 2.3">Android 2.3</a></li>
-<li><a href="/images/posts/2012-03-17/Opera-Mobile.png" title="Opera Mobile">Opera Mobile</a></li>
-</ul>
-
-
-<h3>Findings</h3>
-
-<p>In general browsers add some combination of <code>opacity</code>, a grayish <code>background-color</code>, and a grayish <code>color</code> to the element to create the disabled effect.  For the most part browsers do a pretty good job making it evident that the fields are disabled.</p>
-
-<p>There are exceptions though.  One glaring issue is the display of disabled text inputs and textareas in IE &lt; 10; when no text is present it's impossible to tell whether the field is disabled.  In Windows, all non-IE browsers simply apply a <code>background-color</code> of <code>#EBEBE4</code> to all disabled elements.  Unfortunately, IE &lt; 10 doesn't do much of anything to designate text inputs and textareas as disabled other than change the color of the text, which, doesn't work out all that well when there's no text present.</p>
-
-<h3>Normalizing IE</h3>
-
-<p>To normalize the display of disabled fields in IE we need to be able to target IE &lt;= 9 with CSS.  Why?  We don't want to override the default styling whenever possible.  As mentioned earlier browsers apply different styling to attempt to match native UI elements.  If you blindly apply a background-color to all disabled elements, you'll do so in Windows, OS X, Linux, iOS, Android, etc… as well as any future devices where it might look horrible, or worse, confuse the user.</p>
-
-<p>So back to selecting IE &lt;= 9.  In my opinion the most elegant way to do this is use <a href="http://msdn.microsoft.com/en-us/library/ms537512.aspx">IE's conditional comments</a> to apply classes to the HTML node.  This approach was <a href="http://paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/">first proposed by Paul Irish in 2008</a> and is used in the <a href="http://html5boilerplate.com/">HTML5 boilerplate</a>.  There are many variations but in this case we only need to worry about IE &lt;= 9.</p>
-
-<p>``` html Applying a Class to IE &lt;= 9</p>
-
-<!--[if lte IE 9 ]> <html class="lte9"> <![endif]-->
-
-
-<!--[if (gt IE 9)|!(IE)]><!-->
-
-
-<p> <html class=""> <!--<![endif]-->
-```</p>
-
-<p>Then we can apply the <code>background-color</code> as such:</p>
-
-<p>``` css Normalizing the Disabled Field Display for Windows
-.lte9 input[type='text'][disabled], .lte9 textarea[disabled] {</p>
-
-<pre><code>background-color: #EBEBE4;
-</code></pre>
-
-<p>}
-```</p>
-
-<p>Alternatively you could use IE's conditional comments to apply these rules directly:</p>
-
-<p>``` html Using IE's Conditional Comments</p>
-
-<!--[if lte IE 9 ]>
-    <style>
-        input[type='text'][disabled], textarea[disabled] {
-            background-color: #EBEBE4;
-        }
-    </style>
-<!--<![endif]-->
-
-
-<p>```</p>
-
-<p>Either of these approaches will normalize the display of disabled text inputs and textareas on Windows.</p>
-
-<p><img src="/images/posts/2012-03-17/IE-Before-and-After.png" alt="IE Before and After" /> <!-- http://jsfiddle.net/vCdcr/show/ --></p>
-
-<h3>Normalizing IE6</h3>
-
-<p>The above solution will not affect the display of these elements in IE6 because it does not support CSS attribute selectors.  Therefore, if you're still supporting IE6 and the display of disabled fields is important to your UI you'll need some other sort of hook on the node.  For example a class will work:</p>
-
-<p>``` html IE6 Disabled Field Markup</p>
-
-<!--[if IE 6 ]> <html class="ie6"> <![endif]-->
-
-
-<!--[if (gt IE 6)|!(IE)]><!-->
-
-
-<p> <html class=""> <!--<![endif]--></p>
-
-<p>/<em> … </em>/</p>
-
-<p><input type="text" disabled class="disabled" />
-<textarea disabled class="disabled">
-```</p>
-
-<p>Then you can apply the following CSS:</p>
-
-<p>``` css IE6 Disabled Field Styling
-.ie6 input.disabled, .ie6 textarea.disabled {</p>
-
-<pre><code>background-color: #EBEBE4;
-</code></pre>
-
-<p>}
-```</p>
-
-<h3>Other Issues</h3>
-
-<p>A number of browsers including all OS X browsers except Opera, Android, and iOS do a poor job making textareas appear disabled, in some cases even when text is present.  If your UI contains disabled textareas it's probably worth adding a little bit of opacity to compensate for browsers that don't make it very apparent that you cannot interact with them.</p>
-
-<p>``` css Normalizing Textarea Disabling
-textarea:disabled {</p>
-
-<pre><code>opacity: 0.5;
-</code></pre>
-
-<p>}
-```</p>
-
-<p>The effect is subtle but can make a big difference in helping the user to recognize that the field is disabled, especially if multiple textareas are near each other.  Here's an example from Chrome 17 on OS X:</p>
-
-<p><img src="/images/posts/2012-03-17/OSX-Before-and-After.png" alt="OSX Before and After" /> <!-- http://jsfiddle.net/JpNav/1/show/ --></p>
-
-<h3>Summary</h3>
-
-<p>Browsers have default styling for disabled fields that is usually pretty good at visually indicating that the field cannot be interacted with.  In situations where the browser default isn't ideal, custom styling can be applied.</p>
 ]]></content>
   </entry>
   

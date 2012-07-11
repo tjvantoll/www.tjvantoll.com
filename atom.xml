@@ -4,7 +4,7 @@
   <title><![CDATA[TJ VanToll]]></title>
   <link href="http://tjvantoll.com/atom.xml" rel="self"/>
   <link href="http://tjvantoll.com/"/>
-  <updated>2012-07-07T17:49:45-04:00</updated>
+  <updated>2012-07-10T23:04:31-04:00</updated>
   <id>http://tjvantoll.com/</id>
   <author>
     <name><![CDATA[TJ VanToll]]></name>
@@ -12,6 +12,168 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Default Browser Handling of the CSS text-transform Property]]></title>
+    <link href="http://tjvantoll.com/2012/07/10/default-browser-handling-of-the-css-text-transform-property/"/>
+    <updated>2012-07-10T21:05:00-04:00</updated>
+    <id>http://tjvantoll.com/2012/07/10/default-browser-handling-of-the-css-text-transform-property</id>
+    <content type="html"><![CDATA[<p>The <code>text-transform</code> CSS property is most frequently used to uppercase and lowercase text.  According to the <a href="http://www.w3.org/TR/CSS21/text.html#caps-prop">CSS 2.1 specification</a> it is also an inherited property, meaning, when no value is specified on a given element, it should inherit its parent&#8217;s <code>text-transform</code> value.</p>
+
+<p>If no parents have a <code>text-transform</code> property defined, the element will take on the default value of <code>none</code>.</p>
+
+<p>Where it gets interesting is that all browsers define default <code>text-transform</code> properties for certain form elements.  What does this mean?  <!--more-->Let&#8217;s say you have the following markup:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;style&gt;</span>
+</span><span class='line'>    <span class="nt">form</span> <span class="p">{</span> <span class="k">text-transform</span><span class="o">:</span> <span class="k">uppercase</span><span class="p">;</span> <span class="p">}</span>
+</span><span class='line'><span class="nt">&lt;/style&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nt">&lt;form&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;text&quot;</span> <span class="na">value=</span><span class="s">&quot;foo&quot;</span> <span class="nt">/&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;submit&quot;</span> <span class="na">value=</span><span class="s">&quot;bar&quot;</span> <span class="nt">/&gt;</span>
+</span><span class='line'><span class="nt">&lt;/form&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Both the value of the <code>input[type=text]</code> and <code>input[type=submit]</code> will appear lowercased in all major browsers.  This happens because they all include <code>text-transform: none</code> in their user agent stylesheet for those elements.  Therefore the <code>text-transform: uppercase</code> rule declared on the parent node is not inherited.</p>
+
+<p>Unfortunately (but not surprisingly), browsers aren&#8217;t consistent about their default values for all elements.</p>
+
+<h3>What the Browsers Do</h3>
+
+<p>The following chart shows popular browser rendering engines and whether their user agent stylesheet includes <code>text-transform: none</code> for the listed elements.</p>
+
+<table>
+    <thead>
+        <tr>
+            <th>Rendering Engine</th>
+            <th>input[type=submit]</th>
+            <th>input[type=text]</th>
+            <th>select</th>
+            <th>textarea</th>
+            <th>button</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Trident (Internet Explorer)</td>
+            <td>Yes</td>
+            <td>Yes</td>
+            <td>Yes</td>
+            <td>Yes</td>
+            <td><strong>No</strong></td>
+        </tr>
+        <tr>
+            <td>Gecko (Firefox)</td>
+            <td>Yes</td>
+            <td>Yes</td>
+            <td><strong>No</strong></td>
+            <td>Yes</td>
+            <td><strong>No</strong></td>
+        </tr>
+        <tr>
+            <td>WebKit (Chrome, Safari, etc&#8230;)</td>
+            <td>Yes</td>
+            <td>Yes</td>
+            <td>Yes</td>
+            <td>Yes</td>
+            <td>Yes</td>
+        </tr>
+        <tr>
+            <td>Presto (Opera)</td>
+            <td>Yes</td>
+            <td>Yes</td>
+            <td><strong>No</strong></td>
+            <td>Yes</td>
+            <td><strong>No</strong></td>
+        </tr>
+    </tbody>
+</table>
+
+
+<h3>What Does This Mean?</h3>
+
+<p>The browser differences occur on the <code>button</code> and <code>select</code> elements.  Therefore, if you apply a <code>text-transform</code> value to a node, AND that node has children <code>button</code> / <code>select</code> nodes, AND you do not apply a <code>text-transform</code> value to the <code>button</code> or <code>select</code> nodes themselves&#8230; you&#8217;ll get different behavior in different browsers.</p>
+
+<p>For example:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="cp">&lt;!DOCTYPE html&gt;</span>
+</span><span class='line'><span class="nt">&lt;html&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;head&gt;</span>
+</span><span class='line'>        <span class="nt">&lt;style&gt;</span>
+</span><span class='line'>            <span class="nt">form</span> <span class="p">{</span> <span class="k">text-transform</span><span class="o">:</span> <span class="k">uppercase</span><span class="p">;</span> <span class="p">}</span>
+</span><span class='line'>        <span class="nt">&lt;/style&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;/head&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;body&gt;</span>
+</span><span class='line'>        <span class="nt">&lt;form&gt;</span>
+</span><span class='line'>            <span class="c">&lt;!-- &quot;foo&quot; will be uppercase in IE, Firefox, and Opera --&gt;</span>
+</span><span class='line'>            <span class="c">&lt;!-- &quot;foo&quot; will be lowercase in WebKit based browsers --&gt;</span>
+</span><span class='line'>            <span class="nt">&lt;button&gt;</span>foo<span class="nt">&lt;/button&gt;</span>
+</span><span class='line'>
+</span><span class='line'>            <span class="c">&lt;!-- &quot;bar&quot; will be uppercase in Firefox and Opera --&gt;</span>
+</span><span class='line'>            <span class="c">&lt;!-- &quot;bar&quot; will be lowercase in IE and WebKit based browsers --&gt;</span>
+</span><span class='line'>            <span class="nt">&lt;select&gt;</span>
+</span><span class='line'>                <span class="nt">&lt;option&gt;</span>bar<span class="nt">&lt;/option&gt;</span>
+</span><span class='line'>            <span class="nt">&lt;/select&gt;</span>
+</span><span class='line'>        <span class="nt">&lt;/form&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;/body&gt;</span>
+</span><span class='line'><span class="nt">&lt;/html&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>Consistency</h3>
+
+<p>You could make arguments as to whether the user agent stylesheets <em>should</em> be defaulting the <code>text-transform</code> of various form elements to <code>none</code>, but to most people all that matters is that the behavior is consistent.  It&#8217;s easy enough to override the defaults if you don&#8217;t like them.</p>
+
+<p>Therefore to get consistent rendering you need to define some <code>text-transform</code> value for both <code>button</code> and <code>select</code> elements.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="c">/* Option 1 - Don&#39;t inherit values in all browsers */</span>
+</span><span class='line'><span class="nt">button</span><span class="o">,</span> <span class="nt">select</span> <span class="p">{</span> <span class="k">text-transform</span><span class="o">:</span> <span class="k">none</span><span class="p">;</span> <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="c">/* Option 2 - Inherit values in all browsers */</span>
+</span><span class='line'><span class="nt">button</span><span class="o">,</span> <span class="nt">select</span> <span class="p">{</span> <span class="k">text-transform</span><span class="o">:</span> <span class="k">inherit</span><span class="p">;</span> <span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>Is This a Big Deal?</h3>
+
+<p>No.  But, in my opinion it&#8217;s something that&#8217;s well suited for a reset or normalizing stylesheet.  I&#8217;ll be sending a pull request to <a href="https://github.com/necolas/normalize.css">normalize.css</a> shortly.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[The Ideal LESS Workflow with git]]></title>

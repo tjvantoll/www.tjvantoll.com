@@ -4,7 +4,7 @@
   <title><![CDATA[Category: CSS | TJ VanToll]]></title>
   <link href="http://tjvantoll.com/blog/categories/css/atom.xml" rel="self"/>
   <link href="http://tjvantoll.com/"/>
-  <updated>2012-07-07T17:49:45-04:00</updated>
+  <updated>2012-07-10T23:04:31-04:00</updated>
   <id>http://tjvantoll.com/</id>
   <author>
     <name><![CDATA[TJ VanToll]]></name>
@@ -12,6 +12,139 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Default Browser Handling of the CSS text-transform Property]]></title>
+    <link href="http://tjvantoll.com/2012/07/10/default-browser-handling-of-the-css-text-transform-property/"/>
+    <updated>2012-07-10T21:05:00-04:00</updated>
+    <id>http://tjvantoll.com/2012/07/10/default-browser-handling-of-the-css-text-transform-property</id>
+    <content type="html"><![CDATA[<p>The <code>text-transform</code> CSS property is most frequently used to uppercase and lowercase text.  According to the <a href="http://www.w3.org/TR/CSS21/text.html#caps-prop">CSS 2.1 specification</a> it is also an inherited property, meaning, when no value is specified on a given element, it should inherit its parent's <code>text-transform</code> value.</p>
+
+<p>If no parents have a <code>text-transform</code> property defined, the element will take on the default value of <code>none</code>.</p>
+
+<p>Where it gets interesting is that all browsers define default <code>text-transform</code> properties for certain form elements.  What does this mean?  <!--more-->Let's say you have the following markup:</p>
+
+<p>``` html</p>
+
+
+
+<p><form></p>
+
+<pre><code>&lt;input type="text" value="foo" /&gt;
+&lt;input type="submit" value="bar" /&gt;
+</code></pre>
+
+<p></form>
+```</p>
+
+<p>Both the value of the <code>input[type=text]</code> and <code>input[type=submit]</code> will appear lowercased in all major browsers.  This happens because they all include <code>text-transform: none</code> in their user agent stylesheet for those elements.  Therefore the <code>text-transform: uppercase</code> rule declared on the parent node is not inherited.</p>
+
+<p>Unfortunately (but not surprisingly), browsers aren't consistent about their default values for all elements.</p>
+
+<h3>What the Browsers Do</h3>
+
+<p>The following chart shows popular browser rendering engines and whether their user agent stylesheet includes <code>text-transform: none</code> for the listed elements.</p>
+
+<table>
+    <thead>
+        <tr>
+            <th>Rendering Engine</th>
+            <th>input[type=submit]</th>
+            <th>input[type=text]</th>
+            <th>select</th>
+            <th>textarea</th>
+            <th>button</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Trident (Internet Explorer)</td>
+            <td>Yes</td>
+            <td>Yes</td>
+            <td>Yes</td>
+            <td>Yes</td>
+            <td><strong>No</strong></td>
+        </tr>
+        <tr>
+            <td>Gecko (Firefox)</td>
+            <td>Yes</td>
+            <td>Yes</td>
+            <td><strong>No</strong></td>
+            <td>Yes</td>
+            <td><strong>No</strong></td>
+        </tr>
+        <tr>
+            <td>WebKit (Chrome, Safari, etc...)</td>
+            <td>Yes</td>
+            <td>Yes</td>
+            <td>Yes</td>
+            <td>Yes</td>
+            <td>Yes</td>
+        </tr>
+        <tr>
+            <td>Presto (Opera)</td>
+            <td>Yes</td>
+            <td>Yes</td>
+            <td><strong>No</strong></td>
+            <td>Yes</td>
+            <td><strong>No</strong></td>
+        </tr>
+    </tbody>
+</table>
+
+
+<h3>What Does This Mean?</h3>
+
+<p>The browser differences occur on the <code>button</code> and <code>select</code> elements.  Therefore, if you apply a <code>text-transform</code> value to a node, AND that node has children <code>button</code> / <code>select</code> nodes, AND you do not apply a <code>text-transform</code> value to the <code>button</code> or <code>select</code> nodes themselves... you'll get different behavior in different browsers.</p>
+
+<p>For example:</p>
+
+<p>``` html
+&lt;!DOCTYPE html>
+<html></p>
+
+<pre><code>&lt;head&gt;
+    &lt;style&gt;
+        form { text-transform: uppercase; }
+    &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;form&gt;
+        &lt;!-- "foo" will be uppercase in IE, Firefox, and Opera --&gt;
+        &lt;!-- "foo" will be lowercase in WebKit based browsers --&gt;
+        &lt;button&gt;foo&lt;/button&gt;
+
+        &lt;!-- "bar" will be uppercase in Firefox and Opera --&gt;
+        &lt;!-- "bar" will be lowercase in IE and WebKit based browsers --&gt;
+        &lt;select&gt;
+            &lt;option&gt;bar&lt;/option&gt;
+        &lt;/select&gt;
+    &lt;/form&gt;
+&lt;/body&gt;
+</code></pre>
+
+<p></html>
+```</p>
+
+<h3>Consistency</h3>
+
+<p>You could make arguments as to whether the user agent stylesheets <em>should</em> be defaulting the <code>text-transform</code> of various form elements to <code>none</code>, but to most people all that matters is that the behavior is consistent.  It's easy enough to override the defaults if you don't like them.</p>
+
+<p>Therefore to get consistent rendering you need to define some <code>text-transform</code> value for both <code>button</code> and <code>select</code> elements.</p>
+
+<p>``` css
+/<em> Option 1 - Don't inherit values in all browsers </em>/
+button, select { text-transform: none; }</p>
+
+<p>/<em> Option 2 - Inherit values in all browsers </em>/
+button, select { text-transform: inherit; }
+```</p>
+
+<h3>Is This a Big Deal?</h3>
+
+<p>No.  But, in my opinion it's something that's well suited for a reset or normalizing stylesheet.  I'll be sending a pull request to <a href="https://github.com/necolas/normalize.css">normalize.css</a> shortly.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[The Ideal LESS Workflow with git]]></title>
@@ -890,309 +1023,6 @@ This was also fixed in IE8.
 We're actually really fortunate that the attribute selector is supported in IE7.  It's a very useful tool to have available and it can help solve a lot of real world issues.  And if you've dropped IE6 support they're finally safe to use.
 
 While support is buggy, the attribute selector does work for the vast majority of use cases.  However, knowing to look out for these bugs can save hours of frustration.  Yet another reason for IE7 to fall off the face of the Earth.  Happy hacking.
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Making a 3D Picture Cube with CSS3]]></title>
-    <link href="http://tjvantoll.com/2012/02/27/Making-a-3D-Picture-Cube-with-CSS3/"/>
-    <updated>2012-02-27T00:00:00-05:00</updated>
-    <id>http://tjvantoll.com/2012/02/27/Making-a-3D-Picture-Cube-with-CSS3</id>
-    <content type="html"><![CDATA[<div class="warning">
-    Your browser doesn't support CSS 3D transformations, therefore some of these demos might not work as intended.  Please try viewing this page in the latest version of Firefox, Safari, or an iOS device.
-</div>
-
-
-<p>Let's face it, the mere concept of doing something in 3D in the browser is pretty awesome.  For those of us that remember the good old days of font tags and spacer gifs… well, let's just say we've come a long way.</p>
-
-<p>CSS3 3D transforms were recently added in Firefox 10 and <a href="http://blogs.msdn.com/b/ie/archive/2011/09/13/ie10pp3.aspx">IE10's 3rd platform preview</a>.  They've been in Safari since v4, in iOS since v3.2, and they're also supported in Android's recent Ice Cream Sandwich release.  So a decent chunk of web users now have the capability to run 3D transitions (at the time of this writing <a href="http://caniuse.com/#feat=transforms3d">caniuse.com</a> has it at ~32%).</p>
-
-<p>So I decided I wanted to start messing around with this.</p>
-
-<!--more-->
-
-
-<p><link href="http://tjvantoll.com/stylesheets/posts/2012-02-27.css" rel="stylesheet" />
-Note: Google Chrome supports 3D transforms, but <a href="https://github.com/Modernizr/Modernizr/issues/240">Modernizr will report a false positive</a> if <a href="http://blog.chromium.org/2011/03/gpu-acceleration-old-drivers.html">Chrome has disabled GPU acceleration</a>.  So if you're using Chrome you may or may not see a warning at the top of the screen saying that the demos won't work (since I use Modernizr to detect whether to display that warning).  I've also found that if Chrome does disable hardware acceleration, some of the demos in this post are a bit choppy, and occasionally don't work.  That's one of the downsides with working something so new, all the kinks haven't been worked out quite yet.</p>
-
-<h3>Getting Started</h3>
-
-<p>There are a few resources that I would recommend for getting started.</p>
-
-<ul>
-<li><a href="http://24ways.org/2010/intro-to-css-3d-transforms">An Introduction to CSS 3D Transforms</a> by David DeSandro.  This is an excellent starting point to learn the syntax and to see some <a href="http://desandro.github.com/3dtransforms/examples/card-02-slide-flip.html">pretty</a> <a href="http://desandro.github.com/3dtransforms/examples/cube-02-show-sides.html">sweet</a> <a href="http://desandro.github.com/3dtransforms/examples/carousel-02-dynamic.html">demos</a>.</li>
-<li><a href="http://www.paulrhayes.com/2010-09/3d-css-cube-ii-touch-gestures-click-and-drag/">CSS 3D cube with touch gestures, click and drag</a> by Paul Hayes.  Another excellent <a href="http://www.paulrhayes.com/experiments/cube-3d/touch.html">demo</a> of a 3D cube that supports the keyboard, touch gestures, and dragging.</li>
-<li><a href="https://developer.mozilla.org/En/CSS/Using_CSS_transforms">Mozilla Developer Network's entry on CSS Transforms</a></li>
-</ul>
-
-
-<p>I decided that I wanted a way to show off pictures in the footer of this blog using 3D transforms.  The effect I decided on was having a cube with an image on all 6 sides that I could rotate through a JavaScript API.  More importantly, I wanted the solution to be something that other people could use and extend.</p>
-
-<h3>Markup</h3>
-
-<p>The markup I ended up using was very similar to the cube in <a href="http://desandro.github.com/3dtransforms/examples/cube-02-show-sides.html">David DeSandro's cube demo</a>.</p>
-
-<p>``` html Basic Markup</p>
-
-<div class="PictureCube-container">
-    <div class="cube show-front">
-        <figure class="front"><img src="1.jpg" /></figure>
-        <figure class="back"><img src="2.jpg" /></figure>
-        <figure class="right"><img src="3.jpg" /></figure>
-        <figure class="left"><img src="4.jpg" /></figure>
-        <figure class="top"><img src="5.jpg" /></figure>
-        <figure class="bottom"><img src="6.jpg" /></figure>
-    </div>
-</div>
-
-
-<p>```</p>
-
-<h3>Styling</h3>
-
-<p>I'm not going to go into the full details of how the styling to create the cubes works, those are best covered by the articles I linked to earlier, but I did want to give a high level overview of what's going on.  Here's a simplified version of the styles applied to each of the sides of the cube.</p>
-
-<p>``` css Basic Styling
-/<em> Vendor prefixes removed for readability </em>/
-.cube .front {</p>
-
-<pre><code>/* No X/Y rotation needed since the front is */
-/* already facing forward. */
-</code></pre>
-
-<p>}
-.cube .back {</p>
-
-<pre><code>transform: rotateX( -180deg );
-</code></pre>
-
-<p>}
-.cube .right {</p>
-
-<pre><code>transform: rotateY( 90deg );
-</code></pre>
-
-<p>}
-.cube .left {</p>
-
-<pre><code>transform: rotateY( -90deg );
-</code></pre>
-
-<p>}
-.cube .top {</p>
-
-<pre><code>transform: rotateX( 90deg );
-</code></pre>
-
-<p>}
-.cube .bottom {</p>
-
-<pre><code>transform: rotateX( -90deg );
-</code></pre>
-
-<p>}
-```</p>
-
-<p>The front side doesn't need to be rotated since it's already facing the screen front and center, but all the other sides need to be rotated on either the X or Y axis to create the cube.  For example, the back side is rotated on the X axis -180 degrees so that it faces directly away from the screen.</p>
-
-<p>Since this is hard to visualize in your head, here's an example of a box rotating from 0deg to -180deg on the X axis in slow motion.</p>
-
-<div class="demo-container">
-    <img id="demo-cube-1" class="demo-cube" src="http://tjvantoll.com/images/kids/2.jpg" />
-</div>
-
-
-<p>And here's one going from 0deg to 90deg on the Y axis.</p>
-
-<div class="demo-container">
-    <img id="demo-cube-2" class="demo-cube" src="http://tjvantoll.com/images/kids/1.jpg" />
-</div>
-
-
-<p>Although I won't get into how the Z axis is used here, it's perhaps the hardest to visualize so I thought I'd include an example of it as well.  In 3D world it's the axis that's going straight between you and your monitor.   Here's an image going from -50px to 50px on the Z axis.</p>
-
-<div class="demo-container">
-    <img id="demo-cube-3" class="demo-cube" src="http://tjvantoll.com/images/izzie/6.jpg" />
-</div>
-
-
-<h3>Rotating the Cube</h3>
-
-<p>So the 6 sides themselves have now have been rotated to form the cube.  In order to show various sides of the cube to the user, the cube itself needs to be rotated to move the appropriate side to the front.  This will be done by applying classes to the cube, one for each side.</p>
-
-<p>``` css Basic Classes for Rotation
-/<em> Vendor prefixes removed for readability </em>/
-.cube.show-front {</p>
-
-<pre><code>/* No X/Y translation is necessary */
-</code></pre>
-
-<p>}
-.cube.show-back {</p>
-
-<pre><code>transform: rotateX( -180deg );
-</code></pre>
-
-<p>}
-.cube.show-right {</p>
-
-<pre><code>transform: rotateY( -90deg );
-</code></pre>
-
-<p>}
-.cube.show-left {</p>
-
-<pre><code>transform: rotateY( 90deg );
-</code></pre>
-
-<p>}
-.cube.show-top {</p>
-
-<pre><code>transform: rotateX( -90deg );
-</code></pre>
-
-<p>}
-.cube.show-bottom {</p>
-
-<pre><code>transform: rotateX( 90deg );
-</code></pre>
-
-<p>}
-```</p>
-
-<h3>Designing an API</h3>
-
-<p>Now we have a cube but nothing to use to interact with it.  At the very least we need something to toggle the classes shown above to make the cube rotate.  Time to start designing a JavaScript API for the cube.</p>
-
-<p>I started with a constructor function that takes the necessary information, a DOM node and an array of the URLs for the images to use on the cube.</p>
-
-<p><code>javascript PictureCube Constructor
-/**
- * @param node {DOMNode|string} The node to turn into the cube
- *             or the id attribute of the node
- * @param images {Array} An Array of 6 Strings containing the URLs
- *               of the images to place in the cube
- */
-PictureCube = function( node, images ) { };
-</code></p>
-
-<p>For convenience's sake I allow the user to pass in either a String id attribute of a DOM node or the node itself.  A quick conversion internally will make it so I only have to deal with the node.</p>
-
-<p><code>javascript Getting the Node
-typeof node == 'string' ? document.getElementById(node) : node
-</code></p>
-
-<p>Next you need to be able to do things with the cube.  The things I wanted to do were the ability to go to a particular side, cycle through the sides at some interval, and the ability to clear that interval.</p>
-
-<p>``` javascript Methods
-/<em>*
- * @param slide {number} The number of the side to change the
- *              cube to.
- </em>/
-PictureCube.prototype.goto = function(side) {}</p>
-
-<p>/<em>*
- * @param interval {number} The number of milliseconds between each
- *                 image transition
- </em>/
-PictureCube.prototype.cycle = function(interval) {};</p>
-
-<p>PictureCube.prototype.clearCycle = function() {};
-```</p>
-
-<p>So to create the cube you call the constructor with the node you want the cube to be in and the images you want to be on the various sides of the cube.</p>
-
-<p>``` javascript Instantiating a Cube
-var myCube = new PictureCube(</p>
-
-<pre><code>document.getElementById('cube-container'), 
-['1.jpg', '2.jpg', '3.jpg', '4.jpg', '5.jpg', '6.jpg']
-</code></pre>
-
-<p>]);
-```</p>
-
-<p>Then you can simply call the methods provided.</p>
-
-<p><code>javascript Calling the Available Methods
-myCube.goto(2);
-myCube.cycle(2000);
-myCube.clearCycle();
-</code></p>
-
-<h3>What's with the prototype?</h3>
-
-<p>The methods are added to the function's prototype so PictureCube can be extended.  As an example here's an AwesomeCube extension that inherits functionality from PictureCube, and adds on an additional awesome method.</p>
-
-<p>``` javascript Extending PictureCube
-AwesomeCube = function(node, images) {</p>
-
-<pre><code>PictureCube.apply(this, [node, images]);
-</code></pre>
-
-<p>};
-AwesomeCube.prototype = new PictureCube();
-AwesomeCube.prototype.awesome = function() {</p>
-
-<pre><code>//this.cube, this.images, this.goto, this.cycle
-//and this.clearCycle are available to the new
-//function.
-</code></pre>
-
-<p>};
-```</p>
-
-<p>Line 1 defines AwesomeCube's constructor function with the same parameters as PictureCube.  It then invokes PictureCube's constructor using <a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Function/apply">function.apply</a>.  The apply function is defined in <a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Function#Methods">Function.prototype</a>, and essentially allows you to control what the value of <code>this</code> will be in the function being invoked.  This technique is actually <a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Function/apply#Using_apply_to_chain_constructors">a common way of implementing Java-like super calls to chain constructors</a>.</p>
-
-<p>If this syntax seems clunky to you, or you prefer a more classical inheritance model, there are plenty of "class" JS libraries available in various libraries, see <a href="http://www.sitepen.com/blog/2010/07/01/creating-and-enhancing-dojo-classes/">Dojo's</a> and <a href="http://mootools.net/docs/core/Class/Class">MooTools'</a> for examples.  In this case straight up JavaScript works just fine and I didn't want to add a dependency on a JS toolkit.</p>
-
-<h3>Why isn't this a jQuery plugin?</h3>
-
-<p>jQuery is great for normalizing browser differences so you don't need to worry about them.  But in this case, the list of browsers that support CSS3 3D transformations have sufficient standards support that I had no need for jQuery.  Therefore, writing this as a jQuery plugin would add an unnecessary dependency on jQuery.</p>
-
-<p>Plus, jQuery plugins require some extra boilerplate to maintain state, which is necessary in this case.  <a href="http://blog.nemikor.com/2010/05/15/building-stateful-jquery-plugins/">Using jQuery UI's widget factory</a> would work great, and might be something I consider if this implementation becomes more complex in the future.  But for now didn't want to add dependencies.</p>
-
-<h3>Limitations</h3>
-
-<p>The current biggest limitation of the PictureCube implementation is that it has a hardcoded 100px height and 100px width.  Eventually I plan on moving these declarations from CSS to JS so that it can be adjusted on the fly.</p>
-
-<h3>Putting it all Together</h3>
-
-<p>PictureCube.js is available to be forked or used on Github - <a href="https://github.com/tjvantoll/PictureCube">https://github.com/tjvantoll/PictureCube</a>.  I'm planning on adding the ability to alter the height and width of the cube in a future update.  Please give it a shot and let me know what you think.</p>
-
-<p>Here's a final cube for you to play with.  Happy hacking.</p>
-
-<script>
-    $.domReady(function(){
-        window.playgroundCube = new PictureCube('playground-cube', [
-            '/images/izzie/1.jpg',
-            '/images/izzie/2.jpg',
-            '/images/izzie/3.jpg',
-            '/images/izzie/4.jpg',
-            '/images/izzie/5.jpg',
-            '/images/izzie/6.jpg'                                                                                   
-        ]);
-    });
-</script>
-
-
-<div id="playground">
-    <div id="playground-cube"></div>
-    
-    <div class="form-row">
-        <label for="goto">Go To:</label>
-        <input type="text" size="2" maxlength="1" id="goto" />(1 - 6)
-        <button onclick="playgroundCube.goto(parseInt(document.getElementById('goto').value, 10));">Go</button>
-    </div>
-    
-    <div class="form-row">
-        <label for="cycle">Cycle:</label>
-        <input type="text" size="5" maxlength="5" id="cycle">(milliseconds)
-        <button onclick="playgroundCube.cycle(parseInt(document.getElementById('cycle').value, 10));">Start Cycle</button>
-        <button onclick="playgroundCube.clearCycle();">Stop Cycle</button>  
-    </div>
-</div>
 
 ]]></content>
   </entry>
