@@ -4,7 +4,7 @@
   <title><![CDATA[Category: CSS | TJ VanToll]]></title>
   <link href="http://tjvantoll.com/blog/categories/css/atom.xml" rel="self"/>
   <link href="http://tjvantoll.com/"/>
-  <updated>2012-07-10T23:04:31-04:00</updated>
+  <updated>2012-07-11T20:58:59-04:00</updated>
   <id>http://tjvantoll.com/</id>
   <author>
     <name><![CDATA[TJ VanToll]]></name>
@@ -28,18 +28,24 @@
 
 
 
-<p><form></p>
 
-<pre><code>&lt;input type="text" value="foo" /&gt;
-&lt;input type="submit" value="bar" /&gt;
-</code></pre>
 
-<p></form>
-```</p>
+<div>
+    <input type="text" value="foo" />
+    <input type="submit" value="bar" />
+</div>
 
-<p>Both the value of the <code>input[type=text]</code> and <code>input[type=submit]</code> will appear lowercased in all major browsers.  This happens because they all include <code>text-transform: none</code> in their user agent stylesheet for those elements.  Therefore the <code>text-transform: uppercase</code> rule declared on the parent node is not inherited.</p>
 
-<p>Unfortunately (but not surprisingly), browsers aren't consistent about their default values for all elements.</p>
+<p>```</p>
+
+<p>Both <code>foo</code> and <code>bar</code> will appear lowercased in all major browsers.  You can see this for yourself below:</p>
+
+<iframe style="width: 100%; height: 120px;" src="http://jsfiddle.net/tj_vantoll/DxANv/1/embedded/result,html,css/" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
+
+
+<p>This happens because all browser vendors include <code>text-transform: none</code> in their user agent stylesheet for those elements.  Therefore the <code>text-transform: uppercase</code> rule declared on the parent node is not inherited.</p>
+
+<p>Unfortunately, but not surprisingly, browsers are not consistent about their default values for all elements.</p>
 
 <h3>What the Browsers Do</h3>
 
@@ -93,6 +99,8 @@
 </table>
 
 
+<p>The rendering engines that have a <strong>No</strong> for a given element declare no default for <code>text-transform</code>.  Therefore, those elements will inherit the value from their parent.</p>
+
 <h3>What Does This Mean?</h3>
 
 <p>The browser differences occur on the <code>button</code> and <code>select</code> elements.  Therefore, if you apply a <code>text-transform</code> value to a node, AND that node has children <code>button</code> / <code>select</code> nodes, AND you do not apply a <code>text-transform</code> value to the <code>button</code> or <code>select</code> nodes themselves... you'll get different behavior in different browsers.</p>
@@ -130,7 +138,7 @@
 
 <p>You could make arguments as to whether the user agent stylesheets <em>should</em> be defaulting the <code>text-transform</code> of various form elements to <code>none</code>, but to most people all that matters is that the behavior is consistent.  It's easy enough to override the defaults if you don't like them.</p>
 
-<p>Therefore to get consistent rendering you need to define some <code>text-transform</code> value for both <code>button</code> and <code>select</code> elements.</p>
+<p>Therefore to get consistent behavior you would <em>think</em> you would need to set the default value of <code>button</code> and <code>select</code> elements to either <code>none</code> or <code>inherit</code>.</p>
 
 <p>``` css
 /<em> Option 1 - Don't inherit values in all browsers </em>/
@@ -140,9 +148,16 @@ button, select { text-transform: none; }</p>
 button, select { text-transform: inherit; }
 ```</p>
 
-<h3>Is This a Big Deal?</h3>
+<p>But unfortunately for whatever reason Option 2 doesn't work on the <code>&lt;select&gt;</code> in IE &lt;= 7, Safari, and most interestingly, doesn't take effect in Chrome until you click on <code>&lt;select&gt;</code>.  You can verify this behavior for yourself below:</p>
 
-<p>No.  But, in my opinion it's something that's well suited for a reset or normalizing stylesheet.  I'll be sending a pull request to <a href="https://github.com/necolas/normalize.css">normalize.css</a> shortly.</p>
+<iframe style="width: 100%; height: 120px;" src="http://jsfiddle.net/tj_vantoll/dUjXB/10/embedded/result,html,css/" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
+
+
+<p>Fortunately Option 1 does indeed produce the same behavior in IE6+, Firefox, Chrome, Safari, and Opera.  Therefore to normalize <code>text-transform</code> you need to include the following in your stylesheet.</p>
+
+<p><code>css Cross Browser text-transform Goodness
+button, select { text-transform: none; }
+</code></p>
 ]]></content>
   </entry>
   
