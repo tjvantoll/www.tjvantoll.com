@@ -4,7 +4,7 @@
   <title><![CDATA[TJ VanToll]]></title>
   <link href="http://tjvantoll.com/atom.xml" rel="self"/>
   <link href="http://tjvantoll.com/"/>
-  <updated>2012-07-15T14:53:33-04:00</updated>
+  <updated>2012-07-16T23:06:47-04:00</updated>
   <id>http://tjvantoll.com/</id>
   <author>
     <name><![CDATA[TJ VanToll]]></name>
@@ -12,6 +12,276 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Native HTML5 Number Picker and jQuery UI's Spinner - Which to Use?]]></title>
+    <link href="http://tjvantoll.com/2012/07/15/native-html5-number-picker-vs-jquery-uis-spinner-which-to-use/"/>
+    <updated>2012-07-15T21:07:00-04:00</updated>
+    <id>http://tjvantoll.com/2012/07/15/native-html5-number-picker-vs-jquery-uis-spinner-which-to-use</id>
+    <content type="html"><![CDATA[<p><a href="http://www.w3.org/TR/html5/number-state.html#number-state">HTML5&#8217;s native number picker</a> (<code>&lt;input[type=number]</code>) and jQuery UI 1.9&#8217;s spinner can both be used to create inputs for numeric data.  So which makes sense for your application?  Let&#8217;s start with a brief explanation of each.</p>
+
+<h3><code>input[type=number]</code></h3>
+
+<p>HTML5 adds several new valid <code>type</code> attributes for <code>&lt;input&gt;</code> elements.  One of them, <code>number</code>, can be used to create a number picker.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;number&quot;</span> <span class="nt">/&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This will give present the user with a number picker in supported browsers, which, as of this writing includes Chrome, Safari, Opera, iOS, Opera Mobile, and Android 4.0+ (<a href="http://caniuse.com/#feat=input-number">full support list</a>).  Here&#8217;s what the user will see in supported browsers:</p>
+
+<!--more-->
+
+
+<h5>Chrome 20:</h5>
+
+<p><img src="http://tjvantoll.com/images/posts/2012-07-15/Chrome.png" title="Chrome" alt="Chrome" /></p>
+
+<h5>Safari 5.1.7:</h5>
+
+<p><img src="http://tjvantoll.com/images/posts/2012-07-15/Safari.png" title="Safari" alt="Safari" /></p>
+
+<h5>Opera 12.00:</h5>
+
+<p><img src="http://tjvantoll.com/images/posts/2012-07-15/Opera.png" title="Opera" alt="Opera" /></p>
+
+<h5>Opera Mobile 12:</h5>
+
+<p><img alt="Opera Mobile" title="Opera Mobile" src="http://tjvantoll.com/images/posts/2012-07-15/Opera_Mobile.png" style="height: 250px;" /></p>
+
+<h5>iOS 5:</h5>
+
+<p><img alt="iOS" title="iOS" src="http://tjvantoll.com/images/posts/2012-07-15/iOS.png" style="height: 200px;" /></p>
+
+<h5>Android 4.1 (Jelly Bean):</h5>
+
+<p><img alt="Android" title="Android" src="http://tjvantoll.com/images/posts/2012-07-15/Android.png" style="height: 200px;" /></p>
+
+<p>As you can see one of the nicest effects of using <code>[type=number]</code> is that mobile users will automatically be presented with a number pad to aid with entry of numeric data.  Unsupported browsers will simply treat the <code>input[type=number]</code> as a normal text input.  Firefox has <a href="https://bugzilla.mozilla.org/show_bug.cgi?id=344616">recently added a UI-less version</a> of <code>input[type=number]</code> to their nightly builds so hopefully a fully enabled version will be coming soon.</p>
+
+<p>You can see what your browser does below:</p>
+
+<iframe style="width: 100%; height: 120px;" src="http://jsfiddle.net/tj_vantoll/XMEEz/1/embedded/result,html/" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
+
+
+<h4>Additional Functionality</h4>
+
+<p>The native number picker supports <code>min</code>, <code>max</code>, and <code>step</code> attributes to allow you to pick the minimum value of the <code>&lt;input&gt;</code>, the maximum value of the <code>&lt;input&gt;</code>, and the amount the value should be incremented / decremented when the user spins through values (the <code>step</code> attribute defaults to <code>1</code> if not specified).</p>
+
+<p>For example, on the <code>&lt;input&gt;</code> below the browser will enforce that the minimum value will be <code>2</code>, the maxiumum value will be <code>20</code>, and the user will step at increments of <code>2</code>.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;number&quot;</span> <span class="na">min=</span><span class="s">&quot;2&quot;</span> <span class="na">max=</span><span class="s">&quot;20&quot;</span> <span class="na">step=</span><span class="s">&quot;2&quot;</span> <span class="nt">/&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>You can see how this behaves in your browser below:</p>
+
+<iframe style="width: 100%; height: 120px;" src="http://jsfiddle.net/tj_vantoll/YmQFS/embedded/result,html/" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
+
+
+<p>Just as a word of warning, Android 4.1 and iOS 5 do not support the <code>min</code>, <code>max</code>, or <code>step</code> attributes.</p>
+
+<h4>Methods</h4>
+
+<p>In addition to the new attributes, supporting browsers also provide 3  JavaScript methods specifically for <code>input[type=number]</code>.</p>
+
+<ul>
+<li><code>stepUp(n)</code> - Increment the <code>value</code> of the <code>&lt;input&gt;</code> by <code>n</code>.</li>
+<li><code>stepDown(n)</code> - Decrement the <code>value</code> of the <code>&lt;input&gt;</code> by <code>n</code>.</li>
+<li><code>valueAsNumber</code> - Retrieve the <code>value</code> of the <code>input</code> as a JavaScript <code>number</code> variable (by default retrieving the <code>value</code> of an <code>&lt;input&gt;</code> returns a <code>string</code>).</li>
+</ul>
+
+
+<h3>jQuery UI Spinner</h3>
+
+<p>jQuery UI&#8217;s <code>spinner</code> is a new plugin due for jQuery UI&#8217;s 1.9 release (currently in beta).  The plugin by default looks and behaves much like the native number picker.</p>
+
+<iframe style="width: 100%; height: 120px;" src="http://jsfiddle.net/tj_vantoll/scXYB/embedded/result,js,html/" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
+
+
+<p>It also supports setting minimum, maximum, and step values through options rather than attributes.</p>
+
+<figure class='code'><figcaption><span>jQuery UI Spinner</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;input</span> <span class="na">id=</span><span class="s">&quot;spinner&quot;</span> <span class="nt">/&gt;</span>
+</span><span class='line'><span class="nt">&lt;script&gt;</span>
+</span><span class='line'>    <span class="nx">$</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>        <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#spinner&#39;</span><span class="p">).</span><span class="nx">spinner</span><span class="p">({</span>
+</span><span class='line'>            <span class="nx">min</span><span class="o">:</span> <span class="mi">2</span><span class="p">,</span>
+</span><span class='line'>            <span class="nx">max</span><span class="o">:</span> <span class="mi">20</span><span class="p">,</span>
+</span><span class='line'>            <span class="nx">step</span><span class="o">:</span> <span class="mi">2</span>
+</span><span class='line'>        <span class="p">});</span>
+</span><span class='line'>    <span class="p">});</span>
+</span><span class='line'><span class="nt">&lt;/script&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Example:</p>
+
+<iframe style="width: 100%; height: 120px;" src="http://jsfiddle.net/tj_vantoll/N7UXT/1/embedded/result,js,html/" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
+
+
+<h3>Above and Beyond</h3>
+
+<p>What really sets jQuery UI&#8217;s <code>spinner</code> apart from the native picker is that it is extensible, customizable, and it brings a number of extra features.  Here are some of the additional things that you can do.</p>
+
+<h4>Paging</h4>
+
+<p><code>spinner</code> takes a <code>page</code> option that allows you to define how much the <code>spinner</code> should step when the page down / page up keys are pressed.  The example below shows a <code>spinner</code> with a <code>step</code> value of <code>1</code> and a <code>page</code> value of <code>10</code>.</p>
+
+<iframe style="width: 100%; height: 150px;" src="http://jsfiddle.net/tj_vantoll/EvTeQ/1/embedded/result,js,html/" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
+
+
+<h4>Currency</h4>
+
+<p>Ever need to accept currency at certain defined increments?  This example shows a <code>spinner</code> that spins through currency values at $25 increments, all with the same clean API.</p>
+
+<iframe style="width: 100%; height: 150px;" src="http://jsfiddle.net/tj_vantoll/2wEe6/3/embedded/result,js,html/" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
+
+
+<p>The formatting is localized through <a href="https://github.com/jquery/globalize/">Globalize.js</a>, therefore, if you want to handle different currencies all you need to do is pass in the appropriate <code>culture</code> and include the necessary JavaScript dependencies.  Here&#8217;s an example of an input that takes Euros.</p>
+
+<iframe style="width: 100%; height: 150px;" src="http://jsfiddle.net/tj_vantoll/ppH7g/embedded/result,js,html/" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
+
+
+<h4>Time</h4>
+
+<p>If you need to accept times <code>spinner</code> can be used for that as well.</p>
+
+<iframe style="width: 100%; height: 150px;" src="http://jsfiddle.net/tj_vantoll/2wEe6/5/embedded/result,js,html/" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
+
+
+<p>The <code>page</code> option discussed earlier is used nicely here to make the up / down keys control the seconds and the page up / page down keys to controls hours.  Try it on the example above.</p>
+
+<h3>24 Hour Times</h3>
+
+<p>Since the <code>spinner</code> uses Globalize.js, you&#8217;re free to use a time system different than the United States&#8217; nonsensical one.</p>
+
+<iframe style="width: 100%; height: 150px;" src="http://jsfiddle.net/tj_vantoll/Kenve/2/embedded/result,js,html/" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
+
+
+<h3>Time Picker vs. <code>&lt;input type="time"&gt;</code></h3>
+
+<p>HTML5 also provides a native time picker (<code>input[type=time]</code>), but, it has <a href="http://caniuse.com/#feat=input-datetime">nearly no support</a>, does not provide localized formatting, and does not provide the stepping/paging functionality that <code>spinner</code> has baked in.  In the future it might provide a viable native solution, but for now it&#8217;s best to stay away.</p>
+
+<h4>Extensible and Customizable</h4>
+
+<p>Because <code>spinner</code> is built on top of <a href="http://ajpiano.com/widgetfactory">jQuery UI&#8217;s widget factory</a>, it is easily extensible.  For example, let&#8217;s say you need to build an input that accepts a year in which the modern summer olympics were held.  You could do that with the following:</p>
+
+<figure class='code'><figcaption><span>Extending spinner</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="o">&lt;</span><span class="nx">input</span> <span class="o">/&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">script</span><span class="o">&gt;</span>
+</span><span class='line'>    <span class="nx">$</span><span class="p">.</span><span class="nx">widget</span><span class="p">(</span> <span class="s2">&quot;tj.olympicspicker&quot;</span><span class="p">,</span> <span class="nx">$</span><span class="p">.</span><span class="nx">ui</span><span class="p">.</span><span class="nx">spinner</span><span class="p">,</span> <span class="p">{</span>
+</span><span class='line'>        <span class="nx">options</span><span class="o">:</span> <span class="p">{</span>
+</span><span class='line'>            <span class="nx">min</span><span class="o">:</span> <span class="mi">1896</span><span class="p">,</span>
+</span><span class='line'>            <span class="nx">max</span><span class="o">:</span> <span class="mi">2012</span><span class="p">,</span>
+</span><span class='line'>            <span class="nx">step</span><span class="o">:</span> <span class="mi">4</span>
+</span><span class='line'>        <span class="p">}</span>
+</span><span class='line'>    <span class="p">});</span>
+</span><span class='line'>    <span class="nx">$</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>        <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;input&#39;</span><span class="p">).</span><span class="nx">olympicspicker</span><span class="p">();</span>
+</span><span class='line'>    <span class="p">});</span>
+</span><span class='line'><span class="o">&lt;</span><span class="err">/script&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<iframe style="width: 100%; height: 150px;" src="http://jsfiddle.net/tj_vantoll/EsTYd/1/embedded/result,js,html/" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
+
+
+<p>Now all your olympics pickers in your code base can share the same code!</p>
+
+<h3><code>&lt;input type="number"&gt;</code> vs. <code>spinner</code></h3>
+
+<p>Although jQuery UI&#8217;s <code>spinner</code> is more advanced and customizable, for most simple applications the native number picker will work just fine.  If you simply need a field that accepts numeric data there&#8217;s no need to bring in <code>spinner</code> as a dependency.  However, if you do need the ability to fine tune the behavior and look of the picker, or if you need consistent UI across all browsers, jQuery UI&#8217;s <code>spinner</code> provides an excellent API to do so.</p>
+
+<p>To summarize the reasons to use the native picker are:</p>
+
+<ul>
+<li>Easy to implement, simply give an <code>&lt;input&gt;</code> a <code>type</code> attribute of <code>number</code>.</li>
+<li>There are no dependencies, the number picker is native to the browser.</li>
+<li>Mobile browsers that support the native picker will optimize the touch keyboard for number input.</li>
+</ul>
+
+
+<p>And the reasons to use jQuery UI&#8217;s <code>spinner</code> are:</p>
+
+<ul>
+<li>Browser support - The <code>spinner</code> will work all the way back to IE6.</li>
+<li>Extremely customizable and extensible.</li>
+<li>Customizable handling of the page up and page down keys.</li>
+<li>Built in custom types such as currency and time.</li>
+<li>Built in i18n support.</li>
+</ul>
+
+
+<h3>Using jQuery UI&#8217;s Spinner to Polyfill <code>input[type=number]</code></h3>
+
+<p>Another option is to use the native HTML number picker when it&#8217;s available, and fallback to jQuery UI&#8217;s <code>spinner</code> when it&#8217;s not.</p>
+
+<figure class='code'><figcaption><span>Using jQuery UI to Polyfill input[type=number]</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">$</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>    <span class="kd">var</span> <span class="nx">input</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="s1">&#39;input&#39;</span><span class="p">);</span>
+</span><span class='line'>    <span class="nx">input</span><span class="p">.</span><span class="nx">setAttribute</span><span class="p">(</span><span class="s1">&#39;type&#39;</span><span class="p">,</span> <span class="s1">&#39;number&#39;</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">if</span> <span class="p">(</span><span class="nx">input</span><span class="p">.</span><span class="nx">type</span> <span class="o">==</span> <span class="s1">&#39;text&#39;</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>        <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;input[type=number]&#39;</span><span class="p">).</span><span class="nx">each</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">index</span><span class="p">,</span> <span class="nx">numberInput</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>            <span class="kd">var</span> <span class="nx">$numberInput</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="nx">numberInput</span><span class="p">);</span>
+</span><span class='line'>            <span class="nx">$numberInput</span><span class="p">.</span><span class="nx">spinner</span><span class="p">({</span>
+</span><span class='line'>                <span class="nx">step</span><span class="o">:</span> <span class="nx">$numberInput</span><span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s1">&#39;step&#39;</span><span class="p">),</span>
+</span><span class='line'>                <span class="nx">min</span><span class="o">:</span> <span class="nx">$numberInput</span><span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s1">&#39;min&#39;</span><span class="p">),</span>
+</span><span class='line'>                <span class="nx">max</span><span class="o">:</span> <span class="nx">$numberInput</span><span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s1">&#39;max&#39;</span><span class="p">)</span>
+</span><span class='line'>            <span class="p">});</span>
+</span><span class='line'>        <span class="p">});</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'><span class="p">});</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This tecnique was taken from <a href="https://github.com/jonstipe/number-polyfill">another number picker polyfill by jonstipe</a>.  It creates an <code>&lt;input&gt;</code>, changes its <code>type</code> to <code>number</code>, and sees if that change actually took effect to determine whether the browser supports the type.  You could also use the <code>Modernizr.inputtypes.number</code> check from <a href="http://modernizr.com">Modernizr</a> to achieve the same thing.</p>
+
+<p>The benefit of this technique is that you get the benefits of the native picker when it&#8217;s available, and be sure that you&#8217;ll have a functioning number picker in all browsers.  As an ultra optimization you could even use a conditional script loader such as <a href="yepnopejs.com">yepnope.js</a> to bring in jQuery UI&#8217;s required JavaScript and CSS only when you need it.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Default Browser Handling of the CSS text-transform Property]]></title>
@@ -705,6 +975,10 @@
 
 <p>This works great in Chrome 9+ and Safari 5.1 (with the exception of the fact that the <a href="http://code.google.com/p/chromium/issues/detail?id=105743">listeners fire twice in Chrome</a>).  However, it doesn&#8217;t work in Firefox or IE10, even though they both support <code>window.matchMedia</code>.</p>
 
+<h4>Update (July 16th, 2012)</h4>
+
+<p>I created a bug on Firefox&#8217;s issue tracker for this defect - <a href="https://bugzilla.mozilla.org/show_bug.cgi?id=774398">https://bugzilla.mozilla.org/show_bug.cgi?id=774398</a>.  I&#8217;ll update this post when I hear back.</p>
+
 <h3>Combining the Approaches</h3>
 
 <p>If you combine the two approaches you can detect print requests in IE 5+, Firefox 6+, Chrome 9+, and Safari 5.1+ (unfortunately Opera doesn&#8217;t support either approach).</p>
@@ -859,6 +1133,83 @@
 <p>Sure, just make sure what you&#8217;re doing degrades nicely for users using a browser in which the event will not be fired.</p>
 
 <p>Can you think of any other practical uses of detecting print requests in JavaScript?  If so let me know in the comments.</p>
+
+<h4>Update (July 16th, 2012)</h4>
+
+<p>Per the comments I&#8217;ve found that in addition to all the bugs mentioned above, certain browsers trigger the after print event early (with either <code>onafterprint</code> or the <code>window.matchMedia</code> handler implementation).</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="cp">&lt;!DOCTYPE html&gt;</span>
+</span><span class='line'><span class="nt">&lt;html&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;head&gt;</span>
+</span><span class='line'>        <span class="nt">&lt;script&gt;</span>
+</span><span class='line'>            <span class="kd">var</span> <span class="nx">beforePrint</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>                <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">&#39;printImage&#39;</span><span class="p">).</span><span class="nx">src</span> <span class="o">=</span>
+</span><span class='line'>                    <span class="s1">&#39;http://stackoverflow.com/favicon.ico&#39;</span><span class="p">;</span>
+</span><span class='line'>            <span class="p">};</span>
+</span><span class='line'>            <span class="kd">var</span> <span class="nx">afterPrint</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>                <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">&#39;printImage&#39;</span><span class="p">).</span><span class="nx">src</span> <span class="o">=</span>
+</span><span class='line'>                    <span class="s1">&#39;http://google.com/favicon.ico&#39;</span><span class="p">;</span>
+</span><span class='line'>            <span class="p">};</span>
+</span><span class='line'>
+</span><span class='line'>            <span class="k">if</span> <span class="p">(</span><span class="nb">window</span><span class="p">.</span><span class="nx">matchMedia</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>                <span class="kd">var</span> <span class="nx">mediaQueryList</span> <span class="o">=</span> <span class="nb">window</span><span class="p">.</span><span class="nx">matchMedia</span><span class="p">(</span><span class="s1">&#39;print&#39;</span><span class="p">);</span>
+</span><span class='line'>                <span class="nx">mediaQueryList</span><span class="p">.</span><span class="nx">addListener</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">mql</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>                    <span class="k">if</span> <span class="p">(</span><span class="nx">mql</span><span class="p">.</span><span class="nx">matches</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>                        <span class="nx">beforePrint</span><span class="p">();</span>
+</span><span class='line'>                    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span><span class='line'>                        <span class="nx">afterPrint</span><span class="p">();</span>
+</span><span class='line'>                    <span class="p">}</span>
+</span><span class='line'>                <span class="p">});</span>
+</span><span class='line'>            <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>            <span class="nb">window</span><span class="p">.</span><span class="nx">onbeforeprint</span> <span class="o">=</span> <span class="nx">beforePrint</span><span class="p">;</span>
+</span><span class='line'>            <span class="nb">window</span><span class="p">.</span><span class="nx">onafterprint</span> <span class="o">=</span> <span class="nx">afterPrint</span><span class="p">;</span>
+</span><span class='line'>        <span class="nt">&lt;/script&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;/head&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;body&gt;</span>
+</span><span class='line'>        <span class="nt">&lt;img</span> <span class="na">id=</span><span class="s">&quot;printImage&quot;</span> <span class="na">src=</span><span class="s">&quot;http://google.com/favicon.ico&quot;</span> <span class="nt">/&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;/body&gt;</span>
+</span><span class='line'><span class="nt">&lt;/html&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>When printing the above document you would expect Stack Overflow&#8217;s favicon to print, when in actuality Google&#8217;s favicon prints.  Both events fire, but the after print event fires before the printing actually occurs, which in this case reverts the changes made in the before print event.</p>
+
+<p>I was able to recreate this problem in Chrome and Firefox.</p>
+
+<p>Therefore do not do anything that relies on the after print event to fix what the before print event did.  For responsive print images this shouldn&#8217;t be an issue because there should be no harm leaving the higher quality image in place; the user has already downloaded it.</p>
 ]]></content>
   </entry>
   

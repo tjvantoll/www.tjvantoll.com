@@ -4,7 +4,7 @@
   <title><![CDATA[Category: JavaScript | TJ VanToll]]></title>
   <link href="http://tjvantoll.com/blog/categories/javascript/atom.xml" rel="self"/>
   <link href="http://tjvantoll.com/"/>
-  <updated>2012-07-15T14:53:33-04:00</updated>
+  <updated>2012-07-16T23:06:47-04:00</updated>
   <id>http://tjvantoll.com/</id>
   <author>
     <name><![CDATA[TJ VanToll]]></name>
@@ -12,6 +12,241 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Native HTML5 Number Picker and jQuery UI's Spinner - Which to Use?]]></title>
+    <link href="http://tjvantoll.com/2012/07/15/native-html5-number-picker-vs-jquery-uis-spinner-which-to-use/"/>
+    <updated>2012-07-15T21:07:00-04:00</updated>
+    <id>http://tjvantoll.com/2012/07/15/native-html5-number-picker-vs-jquery-uis-spinner-which-to-use</id>
+    <content type="html"><![CDATA[<p><a href="http://www.w3.org/TR/html5/number-state.html#number-state">HTML5's native number picker</a> (<code>&lt;input[type=number]</code>) and jQuery UI 1.9's spinner can both be used to create inputs for numeric data.  So which makes sense for your application?  Let's start with a brief explanation of each.</p>
+
+<h3><code>input[type=number]</code></h3>
+
+<p>HTML5 adds several new valid <code>type</code> attributes for <code>&lt;input&gt;</code> elements.  One of them, <code>number</code>, can be used to create a number picker.</p>
+
+<p><code>html
+&lt;input type="number" /&gt;
+</code></p>
+
+<p>This will give present the user with a number picker in supported browsers, which, as of this writing includes Chrome, Safari, Opera, iOS, Opera Mobile, and Android 4.0+ (<a href="http://caniuse.com/#feat=input-number">full support list</a>).  Here's what the user will see in supported browsers:</p>
+
+<!--more-->
+
+
+<h5>Chrome 20:</h5>
+
+<p><img src="/images/posts/2012-07-15/Chrome.png" title="Chrome" alt="Chrome" /></p>
+
+<h5>Safari 5.1.7:</h5>
+
+<p><img src="/images/posts/2012-07-15/Safari.png" title="Safari" alt="Safari" /></p>
+
+<h5>Opera 12.00:</h5>
+
+<p><img src="/images/posts/2012-07-15/Opera.png" title="Opera" alt="Opera" /></p>
+
+<h5>Opera Mobile 12:</h5>
+
+<p><img alt="Opera Mobile" title="Opera Mobile" src="http://tjvantoll.com/images/posts/2012-07-15/Opera_Mobile.png" style="height: 250px;" /></p>
+
+<h5>iOS 5:</h5>
+
+<p><img alt="iOS" title="iOS" src="http://tjvantoll.com/images/posts/2012-07-15/iOS.png" style="height: 200px;" /></p>
+
+<h5>Android 4.1 (Jelly Bean):</h5>
+
+<p><img alt="Android" title="Android" src="http://tjvantoll.com/images/posts/2012-07-15/Android.png" style="height: 200px;" /></p>
+
+<p>As you can see one of the nicest effects of using <code>[type=number]</code> is that mobile users will automatically be presented with a number pad to aid with entry of numeric data.  Unsupported browsers will simply treat the <code>input[type=number]</code> as a normal text input.  Firefox has <a href="https://bugzilla.mozilla.org/show_bug.cgi?id=344616">recently added a UI-less version</a> of <code>input[type=number]</code> to their nightly builds so hopefully a fully enabled version will be coming soon.</p>
+
+<p>You can see what your browser does below:</p>
+
+<iframe style="width: 100%; height: 120px;" src="http://jsfiddle.net/tj_vantoll/XMEEz/1/embedded/result,html/" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
+
+
+<h4>Additional Functionality</h4>
+
+<p>The native number picker supports <code>min</code>, <code>max</code>, and <code>step</code> attributes to allow you to pick the minimum value of the <code>&lt;input&gt;</code>, the maximum value of the <code>&lt;input&gt;</code>, and the amount the value should be incremented / decremented when the user spins through values (the <code>step</code> attribute defaults to <code>1</code> if not specified).</p>
+
+<p>For example, on the <code>&lt;input&gt;</code> below the browser will enforce that the minimum value will be <code>2</code>, the maxiumum value will be <code>20</code>, and the user will step at increments of <code>2</code>.</p>
+
+<p><code>html
+&lt;input type="number" min="2" max="20" step="2" /&gt;
+</code></p>
+
+<p>You can see how this behaves in your browser below:</p>
+
+<iframe style="width: 100%; height: 120px;" src="http://jsfiddle.net/tj_vantoll/YmQFS/embedded/result,html/" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
+
+
+<p>Just as a word of warning, Android 4.1 and iOS 5 do not support the <code>min</code>, <code>max</code>, or <code>step</code> attributes.</p>
+
+<h4>Methods</h4>
+
+<p>In addition to the new attributes, supporting browsers also provide 3  JavaScript methods specifically for <code>input[type=number]</code>.</p>
+
+<ul>
+<li><code>stepUp(n)</code> - Increment the <code>value</code> of the <code>&lt;input&gt;</code> by <code>n</code>.</li>
+<li><code>stepDown(n)</code> - Decrement the <code>value</code> of the <code>&lt;input&gt;</code> by <code>n</code>.</li>
+<li><code>valueAsNumber</code> - Retrieve the <code>value</code> of the <code>input</code> as a JavaScript <code>number</code> variable (by default retrieving the <code>value</code> of an <code>&lt;input&gt;</code> returns a <code>string</code>).</li>
+</ul>
+
+
+<h3>jQuery UI Spinner</h3>
+
+<p>jQuery UI's <code>spinner</code> is a new plugin due for jQuery UI's 1.9 release (currently in beta).  The plugin by default looks and behaves much like the native number picker.</p>
+
+<iframe style="width: 100%; height: 120px;" src="http://jsfiddle.net/tj_vantoll/scXYB/embedded/result,js,html/" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
+
+
+<p>It also supports setting minimum, maximum, and step values through options rather than attributes.</p>
+
+<p>``` html jQuery UI Spinner
+<input id="spinner" /></p>
+
+<script>
+    $(function() {
+        $('#spinner').spinner({
+            min: 2,
+            max: 20,
+            step: 2
+        });
+    });
+</script>
+
+
+<p>```</p>
+
+<p>Example:</p>
+
+<iframe style="width: 100%; height: 120px;" src="http://jsfiddle.net/tj_vantoll/N7UXT/1/embedded/result,js,html/" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
+
+
+<h3>Above and Beyond</h3>
+
+<p>What really sets jQuery UI's <code>spinner</code> apart from the native picker is that it is extensible, customizable, and it brings a number of extra features.  Here are some of the additional things that you can do.</p>
+
+<h4>Paging</h4>
+
+<p><code>spinner</code> takes a <code>page</code> option that allows you to define how much the <code>spinner</code> should step when the page down / page up keys are pressed.  The example below shows a <code>spinner</code> with a <code>step</code> value of <code>1</code> and a <code>page</code> value of <code>10</code>.</p>
+
+<iframe style="width: 100%; height: 150px;" src="http://jsfiddle.net/tj_vantoll/EvTeQ/1/embedded/result,js,html/" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
+
+
+<h4>Currency</h4>
+
+<p>Ever need to accept currency at certain defined increments?  This example shows a <code>spinner</code> that spins through currency values at $25 increments, all with the same clean API.</p>
+
+<iframe style="width: 100%; height: 150px;" src="http://jsfiddle.net/tj_vantoll/2wEe6/3/embedded/result,js,html/" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
+
+
+<p>The formatting is localized through <a href="https://github.com/jquery/globalize/">Globalize.js</a>, therefore, if you want to handle different currencies all you need to do is pass in the appropriate <code>culture</code> and include the necessary JavaScript dependencies.  Here's an example of an input that takes Euros.</p>
+
+<iframe style="width: 100%; height: 150px;" src="http://jsfiddle.net/tj_vantoll/ppH7g/embedded/result,js,html/" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
+
+
+<h4>Time</h4>
+
+<p>If you need to accept times <code>spinner</code> can be used for that as well.</p>
+
+<iframe style="width: 100%; height: 150px;" src="http://jsfiddle.net/tj_vantoll/2wEe6/5/embedded/result,js,html/" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
+
+
+<p>The <code>page</code> option discussed earlier is used nicely here to make the up / down keys control the seconds and the page up / page down keys to controls hours.  Try it on the example above.</p>
+
+<h3>24 Hour Times</h3>
+
+<p>Since the <code>spinner</code> uses Globalize.js, you're free to use a time system different than the United States' nonsensical one.</p>
+
+<iframe style="width: 100%; height: 150px;" src="http://jsfiddle.net/tj_vantoll/Kenve/2/embedded/result,js,html/" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
+
+
+<h3>Time Picker vs. <code>&lt;input type="time"&gt;</code></h3>
+
+<p>HTML5 also provides a native time picker (<code>input[type=time]</code>), but, it has <a href="http://caniuse.com/#feat=input-datetime">nearly no support</a>, does not provide localized formatting, and does not provide the stepping/paging functionality that <code>spinner</code> has baked in.  In the future it might provide a viable native solution, but for now it's best to stay away.</p>
+
+<h4>Extensible and Customizable</h4>
+
+<p>Because <code>spinner</code> is built on top of <a href="http://ajpiano.com/widgetfactory">jQuery UI's widget factory</a>, it is easily extensible.  For example, let's say you need to build an input that accepts a year in which the modern summer olympics were held.  You could do that with the following:</p>
+
+<p>```javascript Extending spinner
+<input /></p>
+
+<script>
+    $.widget( "tj.olympicspicker", $.ui.spinner, {
+        options: {
+            min: 1896,
+            max: 2012,
+            step: 4
+        }
+    });
+    $(function() {
+        $('input').olympicspicker();
+    });
+</script>
+
+
+<p>```</p>
+
+<iframe style="width: 100%; height: 150px;" src="http://jsfiddle.net/tj_vantoll/EsTYd/1/embedded/result,js,html/" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
+
+
+<p>Now all your olympics pickers in your code base can share the same code!</p>
+
+<h3><code>&lt;input type="number"&gt;</code> vs. <code>spinner</code></h3>
+
+<p>Although jQuery UI's <code>spinner</code> is more advanced and customizable, for most simple applications the native number picker will work just fine.  If you simply need a field that accepts numeric data there's no need to bring in <code>spinner</code> as a dependency.  However, if you do need the ability to fine tune the behavior and look of the picker, or if you need consistent UI across all browsers, jQuery UI's <code>spinner</code> provides an excellent API to do so.</p>
+
+<p>To summarize the reasons to use the native picker are:</p>
+
+<ul>
+<li>Easy to implement, simply give an <code>&lt;input&gt;</code> a <code>type</code> attribute of <code>number</code>.</li>
+<li>There are no dependencies, the number picker is native to the browser.</li>
+<li>Mobile browsers that support the native picker will optimize the touch keyboard for number input.</li>
+</ul>
+
+
+<p>And the reasons to use jQuery UI's <code>spinner</code> are:</p>
+
+<ul>
+<li>Browser support - The <code>spinner</code> will work all the way back to IE6.</li>
+<li>Extremely customizable and extensible.</li>
+<li>Customizable handling of the page up and page down keys.</li>
+<li>Built in custom types such as currency and time.</li>
+<li>Built in i18n support.</li>
+</ul>
+
+
+<h3>Using jQuery UI's Spinner to Polyfill <code>input[type=number]</code></h3>
+
+<p>Another option is to use the native HTML number picker when it's available, and fallback to jQuery UI's <code>spinner</code> when it's not.</p>
+
+<p>``` javascript Using jQuery UI to Polyfill input[type=number]
+$(function() {</p>
+
+<pre><code>var input = document.createElement('input');
+input.setAttribute('type', 'number');
+
+if (input.type == 'text') {
+    $('input[type=number]').each(function(index, numberInput) {
+        var $numberInput = $(numberInput);
+        $numberInput.spinner({
+            step: $numberInput.attr('step'),
+            min: $numberInput.attr('min'),
+            max: $numberInput.attr('max')            
+        });            
+    });
+}
+</code></pre>
+
+<p>});
+```</p>
+
+<p>This tecnique was taken from <a href="https://github.com/jonstipe/number-polyfill">another number picker polyfill by jonstipe</a>.  It creates an <code>&lt;input&gt;</code>, changes its <code>type</code> to <code>number</code>, and sees if that change actually took effect to determine whether the browser supports the type.  You could also use the <code>Modernizr.inputtypes.number</code> check from <a href="http://modernizr.com">Modernizr</a> to achieve the same thing.</p>
+
+<p>The benefit of this technique is that you get the benefits of the native picker when it's available, and be sure that you'll have a functioning number picker in all browsers.  As an ultra optimization you could even use a conditional script loader such as <a href="yepnopejs.com">yepnope.js</a> to bring in jQuery UI's required JavaScript and CSS only when you need it.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Detecting Print Requests with JavaScript]]></title>
@@ -106,6 +341,10 @@ mediaQueryList.addListener(function(mql) {</p>
 ```</p>
 
 <p>This works great in Chrome 9+ and Safari 5.1 (with the exception of the fact that the <a href="http://code.google.com/p/chromium/issues/detail?id=105743">listeners fire twice in Chrome</a>).  However, it doesn't work in Firefox or IE10, even though they both support <code>window.matchMedia</code>.</p>
+
+<h4>Update (July 16th, 2012)</h4>
+
+<p>I created a bug on Firefox's issue tracker for this defect - <a href="https://bugzilla.mozilla.org/show_bug.cgi?id=774398">https://bugzilla.mozilla.org/show_bug.cgi?id=774398</a>.  I'll update this post when I hear back.</p>
 
 <h3>Combining the Approaches</h3>
 
@@ -212,6 +451,54 @@ window.onafterprint = afterPrint;
 <p>Sure, just make sure what you're doing degrades nicely for users using a browser in which the event will not be fired.</p>
 
 <p>Can you think of any other practical uses of detecting print requests in JavaScript?  If so let me know in the comments.</p>
+
+<h4>Update (July 16th, 2012)</h4>
+
+<p>Per the comments I've found that in addition to all the bugs mentioned above, certain browsers trigger the after print event early (with either <code>onafterprint</code> or the <code>window.matchMedia</code> handler implementation).</p>
+
+<p>``` html
+&lt;!DOCTYPE html>
+<html></p>
+
+<pre><code>&lt;head&gt;
+    &lt;script&gt;
+        var beforePrint = function() {
+            document.getElementById('printImage').src = 
+                'http://stackoverflow.com/favicon.ico';
+        };
+        var afterPrint = function() {
+            document.getElementById('printImage').src = 
+                'http://google.com/favicon.ico';
+        };
+
+        if (window.matchMedia) {
+            var mediaQueryList = window.matchMedia('print');
+            mediaQueryList.addListener(function(mql) {
+                if (mql.matches) {
+                    beforePrint();
+                } else {
+                    afterPrint();
+                }
+            });
+        }
+
+        window.onbeforeprint = beforePrint;
+        window.onafterprint = afterPrint;
+    &lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;img id="printImage" src="http://google.com/favicon.ico" /&gt;
+&lt;/body&gt;
+</code></pre>
+
+<p></html>
+```</p>
+
+<p>When printing the above document you would expect Stack Overflow's favicon to print, when in actuality Google's favicon prints.  Both events fire, but the after print event fires before the printing actually occurs, which in this case reverts the changes made in the before print event.</p>
+
+<p>I was able to recreate this problem in Chrome and Firefox.</p>
+
+<p>Therefore do not do anything that relies on the after print event to fix what the before print event did.  For responsive print images this shouldn't be an issue because there should be no harm leaving the higher quality image in place; the user has already downloaded it.</p>
 ]]></content>
   </entry>
   

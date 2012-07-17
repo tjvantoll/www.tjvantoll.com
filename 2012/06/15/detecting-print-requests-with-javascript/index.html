@@ -280,6 +280,10 @@
 
 <p>This works great in Chrome 9+ and Safari 5.1 (with the exception of the fact that the <a href="http://code.google.com/p/chromium/issues/detail?id=105743">listeners fire twice in Chrome</a>).  However, it doesn&#8217;t work in Firefox or IE10, even though they both support <code>window.matchMedia</code>.</p>
 
+<h4>Update (July 16th, 2012)</h4>
+
+<p>I created a bug on Firefox&#8217;s issue tracker for this defect - <a href="https://bugzilla.mozilla.org/show_bug.cgi?id=774398">https://bugzilla.mozilla.org/show_bug.cgi?id=774398</a>.  I&#8217;ll update this post when I hear back.</p>
+
 <h3>Combining the Approaches</h3>
 
 <p>If you combine the two approaches you can detect print requests in IE 5+, Firefox 6+, Chrome 9+, and Safari 5.1+ (unfortunately Opera doesn&#8217;t support either approach).</p>
@@ -434,6 +438,83 @@
 <p>Sure, just make sure what you&#8217;re doing degrades nicely for users using a browser in which the event will not be fired.</p>
 
 <p>Can you think of any other practical uses of detecting print requests in JavaScript?  If so let me know in the comments.</p>
+
+<h4>Update (July 16th, 2012)</h4>
+
+<p>Per the comments I&#8217;ve found that in addition to all the bugs mentioned above, certain browsers trigger the after print event early (with either <code>onafterprint</code> or the <code>window.matchMedia</code> handler implementation).</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="cp">&lt;!DOCTYPE html&gt;</span>
+</span><span class='line'><span class="nt">&lt;html&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;head&gt;</span>
+</span><span class='line'>        <span class="nt">&lt;script&gt;</span>
+</span><span class='line'>            <span class="kd">var</span> <span class="nx">beforePrint</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>                <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">&#39;printImage&#39;</span><span class="p">).</span><span class="nx">src</span> <span class="o">=</span>
+</span><span class='line'>                    <span class="s1">&#39;http://stackoverflow.com/favicon.ico&#39;</span><span class="p">;</span>
+</span><span class='line'>            <span class="p">};</span>
+</span><span class='line'>            <span class="kd">var</span> <span class="nx">afterPrint</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>                <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">&#39;printImage&#39;</span><span class="p">).</span><span class="nx">src</span> <span class="o">=</span>
+</span><span class='line'>                    <span class="s1">&#39;http://google.com/favicon.ico&#39;</span><span class="p">;</span>
+</span><span class='line'>            <span class="p">};</span>
+</span><span class='line'>
+</span><span class='line'>            <span class="k">if</span> <span class="p">(</span><span class="nb">window</span><span class="p">.</span><span class="nx">matchMedia</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>                <span class="kd">var</span> <span class="nx">mediaQueryList</span> <span class="o">=</span> <span class="nb">window</span><span class="p">.</span><span class="nx">matchMedia</span><span class="p">(</span><span class="s1">&#39;print&#39;</span><span class="p">);</span>
+</span><span class='line'>                <span class="nx">mediaQueryList</span><span class="p">.</span><span class="nx">addListener</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">mql</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>                    <span class="k">if</span> <span class="p">(</span><span class="nx">mql</span><span class="p">.</span><span class="nx">matches</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>                        <span class="nx">beforePrint</span><span class="p">();</span>
+</span><span class='line'>                    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span><span class='line'>                        <span class="nx">afterPrint</span><span class="p">();</span>
+</span><span class='line'>                    <span class="p">}</span>
+</span><span class='line'>                <span class="p">});</span>
+</span><span class='line'>            <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>            <span class="nb">window</span><span class="p">.</span><span class="nx">onbeforeprint</span> <span class="o">=</span> <span class="nx">beforePrint</span><span class="p">;</span>
+</span><span class='line'>            <span class="nb">window</span><span class="p">.</span><span class="nx">onafterprint</span> <span class="o">=</span> <span class="nx">afterPrint</span><span class="p">;</span>
+</span><span class='line'>        <span class="nt">&lt;/script&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;/head&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;body&gt;</span>
+</span><span class='line'>        <span class="nt">&lt;img</span> <span class="na">id=</span><span class="s">&quot;printImage&quot;</span> <span class="na">src=</span><span class="s">&quot;http://google.com/favicon.ico&quot;</span> <span class="nt">/&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;/body&gt;</span>
+</span><span class='line'><span class="nt">&lt;/html&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>When printing the above document you would expect Stack Overflow&#8217;s favicon to print, when in actuality Google&#8217;s favicon prints.  Both events fire, but the after print event fires before the printing actually occurs, which in this case reverts the changes made in the before print event.</p>
+
+<p>I was able to recreate this problem in Chrome and Firefox.</p>
+
+<p>Therefore do not do anything that relies on the after print event to fix what the before print event did.  For responsive print images this shouldn&#8217;t be an issue because there should be no harm leaving the higher quality image in place; the user has already downloaded it.</p>
 </div>
 
 
@@ -505,6 +586,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2012/07/15/native-html5-number-picker-vs-jquery-uis-spinner-which-to-use/">Native HTML5 Number Picker and jQuery UI's Spinner - Which to Use?</a>
+      </li>
+    
+      <li class="post">
         <a href="/2012/07/10/default-browser-handling-of-the-css-text-transform-property/">Default Browser Handling of the CSS text-transform Property</a>
       </li>
     
@@ -518,10 +603,6 @@
     
       <li class="post">
         <a href="/2012/06/15/detecting-print-requests-with-javascript/">Detecting Print Requests with JavaScript</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2012/06/10/browser-css-parsing-discrepancies/">Browser CSS Parsing Discrepancies</a>
       </li>
     
   </ul>

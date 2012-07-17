@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Browsers | TJ VanToll]]></title>
   <link href="http://tjvantoll.com/blog/categories/browsers/atom.xml" rel="self"/>
   <link href="http://tjvantoll.com/"/>
-  <updated>2012-07-15T14:53:33-04:00</updated>
+  <updated>2012-07-16T23:06:47-04:00</updated>
   <id>http://tjvantoll.com/</id>
   <author>
     <name><![CDATA[TJ VanToll]]></name>
@@ -351,6 +351,10 @@ mediaQueryList.addListener(function(mql) {</p>
 
 <p>This works great in Chrome 9+ and Safari 5.1 (with the exception of the fact that the <a href="http://code.google.com/p/chromium/issues/detail?id=105743">listeners fire twice in Chrome</a>).  However, it doesn't work in Firefox or IE10, even though they both support <code>window.matchMedia</code>.</p>
 
+<h4>Update (July 16th, 2012)</h4>
+
+<p>I created a bug on Firefox's issue tracker for this defect - <a href="https://bugzilla.mozilla.org/show_bug.cgi?id=774398">https://bugzilla.mozilla.org/show_bug.cgi?id=774398</a>.  I'll update this post when I hear back.</p>
+
 <h3>Combining the Approaches</h3>
 
 <p>If you combine the two approaches you can detect print requests in IE 5+, Firefox 6+, Chrome 9+, and Safari 5.1+ (unfortunately Opera doesn't support either approach).</p>
@@ -456,6 +460,54 @@ window.onafterprint = afterPrint;
 <p>Sure, just make sure what you're doing degrades nicely for users using a browser in which the event will not be fired.</p>
 
 <p>Can you think of any other practical uses of detecting print requests in JavaScript?  If so let me know in the comments.</p>
+
+<h4>Update (July 16th, 2012)</h4>
+
+<p>Per the comments I've found that in addition to all the bugs mentioned above, certain browsers trigger the after print event early (with either <code>onafterprint</code> or the <code>window.matchMedia</code> handler implementation).</p>
+
+<p>``` html
+&lt;!DOCTYPE html>
+<html></p>
+
+<pre><code>&lt;head&gt;
+    &lt;script&gt;
+        var beforePrint = function() {
+            document.getElementById('printImage').src = 
+                'http://stackoverflow.com/favicon.ico';
+        };
+        var afterPrint = function() {
+            document.getElementById('printImage').src = 
+                'http://google.com/favicon.ico';
+        };
+
+        if (window.matchMedia) {
+            var mediaQueryList = window.matchMedia('print');
+            mediaQueryList.addListener(function(mql) {
+                if (mql.matches) {
+                    beforePrint();
+                } else {
+                    afterPrint();
+                }
+            });
+        }
+
+        window.onbeforeprint = beforePrint;
+        window.onafterprint = afterPrint;
+    &lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;img id="printImage" src="http://google.com/favicon.ico" /&gt;
+&lt;/body&gt;
+</code></pre>
+
+<p></html>
+```</p>
+
+<p>When printing the above document you would expect Stack Overflow's favicon to print, when in actuality Google's favicon prints.  Both events fire, but the after print event fires before the printing actually occurs, which in this case reverts the changes made in the before print event.</p>
+
+<p>I was able to recreate this problem in Chrome and Firefox.</p>
+
+<p>Therefore do not do anything that relies on the after print event to fix what the before print event did.  For responsive print images this shouldn't be an issue because there should be no harm leaving the higher quality image in place; the user has already downloaded it.</p>
 ]]></content>
   </entry>
   
