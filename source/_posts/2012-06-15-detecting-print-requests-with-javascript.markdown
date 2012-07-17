@@ -72,7 +72,11 @@ mediaQueryList.addListener(function(mql) {
 });
 ```
 
-This works great in Chrome 9+ and Safari 5.1 (with the exception of the fact that the [listeners fire twice in Chrome](http://code.google.com/p/chromium/issues/detail?id=105743)).  However, it doesn't work in Firefox or IE10, even though they both support ```window.matchMedia```.
+This works great in Chrome 9+ and Safari 5.1 (with the exception of the fact that the [listeners fire twice in Chrome](http://code.google.com/p/chromium/issues/detail?id=105743)).  However, it doesn't work in Firefox or IE10, even though they both support ```window.matchMedia```.  
+
+#### Update (July 16th, 2012)
+
+I created a bug on Firefox's issue tracker for this defect - [https://bugzilla.mozilla.org/show_bug.cgi?id=774398](https://bugzilla.mozilla.org/show_bug.cgi?id=774398).  I'll update this post when I hear back.
 
 ### Combining the Approaches
 
@@ -171,3 +175,46 @@ Print events can also be used to track the number of times users print pages wit
 Sure, just make sure what you're doing degrades nicely for users using a browser in which the event will not be fired.
 
 Can you think of any other practical uses of detecting print requests in JavaScript?  If so let me know in the comments.
+
+#### Update (July 16th, 2012)
+
+Per the comments I've found that in addition to all the bugs mentioned above, certain browsers trigger the after print event early (with either `onafterprint` or the `window.matchMedia` handler implementation).
+
+``` html
+<!DOCTYPE html>
+<html>
+    <head>
+        <script>
+            var beforePrint = function() {
+                document.getElementById('printImage').src = 
+                    'http://stackoverflow.com/favicon.ico';
+            };
+            var afterPrint = function() {
+                document.getElementById('printImage').src = 
+                    'http://google.com/favicon.ico';
+            };
+
+            if (window.matchMedia) {
+                var mediaQueryList = window.matchMedia('print');
+                mediaQueryList.addListener(function(mql) {
+                    if (mql.matches) {
+                        beforePrint();
+                    } else {
+                        afterPrint();
+                    }
+                });
+            }
+
+            window.onbeforeprint = beforePrint;
+            window.onafterprint = afterPrint;
+        </script>
+    </head>
+    <body>
+        <img id="printImage" src="http://google.com/favicon.ico" />
+    </body>
+</html>
+```
+
+When printing the above document you would expect Stack Overflow's favicon to print, when in actuality Google's favicon prints.  Both events fire, but the after print event fires before the printing actually occurs, which in this case reverts the changes made in the before print event.
+
+Therefore do not do anything that relies on the after print event to fix what the before print event did.  For responsive print images this shouldn't be an issue because there should be no harm leaving the higher quality image in place; the user has already downloaded it.
