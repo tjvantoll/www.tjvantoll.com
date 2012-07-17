@@ -217,4 +217,6 @@ Per the comments I've found that in addition to all the bugs mentioned above, ce
 
 When printing the above document you would expect Stack Overflow's favicon to print, when in actuality Google's favicon prints.  Both events fire, but the after print event fires before the printing actually occurs, which in this case reverts the changes made in the before print event.
 
+I was able to recreate this problem in Chrome and Firefox.
+
 Therefore do not do anything that relies on the after print event to fix what the before print event did.  For responsive print images this shouldn't be an issue because there should be no harm leaving the higher quality image in place; the user has already downloaded it.
