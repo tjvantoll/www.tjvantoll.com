@@ -108,6 +108,10 @@ What really sets jQuery UI's `spinner` apart from the native picker is that it i
 
 <iframe style="width: 100%; height: 150px;" src="http://jsfiddle.net/tj_vantoll/EvTeQ/1/embedded/result,js,html/" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
 
+#### Mousewheel
+
+If you want mousewheel support for a `spinner` all you need to do is include [Brandon Aaron's mousewheel plugin](https://github.com/brandonaaron/jquery-mousewheel) and you get it automatically!  Try it out on any of the `spinner` demos on this page.
+
 #### Currency
 
 Ever need to accept currency at certain defined increments?  This example shows a `spinner` that spins through currency values at $25 increments, all with the same clean API.
@@ -120,11 +124,11 @@ The formatting is localized through [Globalize.js](https://github.com/jquery/glo
 
 #### Time
 
-If you need to accept times `spinner` can be used for that as well.
+If you need to accept time data `spinner` can be used for that as well.
 
 <iframe style="width: 100%; height: 150px;" src="http://jsfiddle.net/tj_vantoll/2wEe6/5/embedded/result,js,html/" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
 
-The `page` option discussed earlier is used nicely here to make the up / down keys control the seconds and the page up / page down keys to controls hours.  Try it on the example above.
+The `page` option discussed earlier is used nicely here to make the up / down keys control the minutes and the page up / page down keys to controls hours.  Try it out on the example above.
 
 ### 24 Hour Times
 
@@ -134,7 +138,7 @@ Since the `spinner` uses Globalize.js, you're free to use a time system differen
 
 ### Time Picker vs. `<input type="time">`
 
-HTML5 also provides a native time picker (`input[type=time]`), but, it has [nearly no support](http://caniuse.com/#feat=input-datetime), does not provide localized formatting, and does not provide the stepping/paging functionality that `spinner` has baked in.  In the future it might provide a viable native solution, but for now it's best to stay away.
+HTML5 also provides a native time picker (`input[type=time]`), but, it has [nearly no support](http://caniuse.com/#feat=input-datetime), does not yet provide localized formatting, and does not provide the stepping/paging functionality that `spinner` has baked in.  In the future it might provide a viable native solution, but for now it's best to stay away.
 
 #### Extensible and Customizable
 
@@ -176,6 +180,7 @@ And the reasons to use jQuery UI's `spinner` are:
 * Browser support - The `spinner` will work all the way back to IE6.
 * Extremely customizable and extensible.
 * Customizable handling of the page up and page down keys.
+* Easily integrated mousewheel support.
 * Built in custom types such as currency and time.
 * Built in i18n support.
 
@@ -189,18 +194,49 @@ $(function() {
     input.setAttribute('type', 'number');
 
     if (input.type == 'text') {
-        $('input[type=number]').each(function(index, numberInput) {
-            var $numberInput = $(numberInput);
-            $numberInput.spinner({
-                step: $numberInput.attr('step'),
-                min: $numberInput.attr('min'),
-                max: $numberInput.attr('max')            
-            });            
-        });
+        $('input[type=number]').spinner();
     }
 });
 ```
 
-This tecnique was taken from [another number picker polyfill by jonstipe](https://github.com/jonstipe/number-polyfill).  It creates an `<input>`, changes its `type` to `number`, and sees if that change actually took effect to determine whether the browser supports the type.  You could also use the `Modernizr.inputtypes.number` check from [Modernizr](http://modernizr.com) to achieve the same thing.
+The code to detect `input[type=number]` support was taken from [another number picker polyfill by jonstipe](https://github.com/jonstipe/number-polyfill).  It creates an `<input>`, changes its `type` to `number`, and sees if that change actually took effect to determine whether the browser supports the type.  You could also use the `Modernizr.inputtypes.number` check from [Modernizr](http://modernizr.com) to achieve the same thing.
 
-The benefit of this technique is that you get the benefits of the native picker when it's available, and be sure that you'll have a functioning number picker in all browsers.  As an ultra optimization you could even use a conditional script loader such as [yepnope.js](yepnopejs.com) to bring in jQuery UI's required JavaScript and CSS only when you need it.
+The `spinner` plugin is smart enough to look for the `step`, `min`, and `max` attributes on the `<input>` so you don't have to pass those in explictly ([thanks @bassistance](https://twitter.com/bassistance/status/225532234017406977)).
+
+The benefit of this technique is that you get the benefits of the native picker when it's available, and you can count on having a number picker in all browsers.  As a further optimization you could even use a conditional script loader such as [yepnope.js](yepnopejs.com) to bring in jQuery UI's required JavaScript and CSS only when you need it.
+
+### Using Spinner and Getting a Number Keyboard on Mobile
+
+If you want to use a `spinner` everywhere AND get a number keyboard on mobile things get a little trickier.  Mobile browsers look for an `<input>` to have `type=number` to provide the number keyboard.  So you think this would be as simple as creating a `spinner` on a `<input[type=number]>` node.  However, that produces the following on supporting desktop browsers.
+
+##### Chrome 20:
+
+![Chrome](/images/posts/2012-07-15/Chrome-Dual.png "Chrome")
+
+##### Safari 5.1.7:
+
+![Safari](/images/posts/2012-07-15/Safari-Dual.png "Safari")
+
+##### Opera 12.00:
+
+![Opera](/images/posts/2012-07-15/Opera-Dual.png "Opera")
+
+Obviously the double arrow UI is less than ideal.  So to work around this you simply need to hide or destroy one of the sets or controls... right?  
+
+Well it turns out hiding the native arrow controls is difficult because Chrome places the control on the inside of the `<input>` and Safari and Opera place it on the outside.  Therefore, if you try to adjust the `margin` of the `<input>` so jQuery UI's controls overlap the native ones it won't work in a cross browser friendly way.
+
+Therefore the best approach I've came up with is to hide the `spinner`'s arrow controls when the browser creates its own.
+
+``` javascript Number keyboard for a spinner
+$(function() {
+    $('input[type=number]').spinner();
+    if (Modernizr.input.step) {
+        $('.ui-spinner-button').hide();
+        $('.ui-spinner-input').css('marginRight', 0);
+    }
+});
+```
+
+What this does is detect whether the browser supports the `step` attribute, if it does it removes jQuery UI's controls.  What does the `step` attribute have to do with the arrow controls?  Nothing, except that it just *happens* that the browsers the support the `step` attribute also create a native control to do the stepping.  Is this going to change in the future?  Quite possibly.
+
+So obviously this is not ideal, and probably shouldn't be used in production code, but it works at the moment.  Have a better approach for tackling this problem?  Let me know in the comments.
