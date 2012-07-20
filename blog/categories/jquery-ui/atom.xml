@@ -4,7 +4,7 @@
   <title><![CDATA[Category: jQuery UI | TJ VanToll]]></title>
   <link href="http://tjvantoll.com/blog/categories/jquery-ui/atom.xml" rel="self"/>
   <link href="http://tjvantoll.com/"/>
-  <updated>2012-07-19T22:05:05-04:00</updated>
+  <updated>2012-07-19T22:18:17-04:00</updated>
   <id>http://tjvantoll.com/</id>
   <author>
     <name><![CDATA[TJ VanToll]]></name>
@@ -96,7 +96,7 @@
 
 <p>jQuery UI's <code>spinner</code> is a new plugin due for jQuery UI's 1.9 release (currently in beta).  The plugin by default looks and behaves much like the native number picker.</p>
 
-<iframe style="width: 100%; height: 120px;" src="http://jsfiddle.net/tj_vantoll/scXYB/embedded/result,js,html/" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
+<iframe style="width: 100%; height: 120px;" src="http://jsfiddle.net/tj_vantoll/scXYB/1/embedded/result,js,html/" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
 
 
 <p>It also supports setting minimum, maximum, and step values through options rather than attributes.</p>
@@ -119,7 +119,7 @@
 
 <p>Example:</p>
 
-<iframe style="width: 100%; height: 120px;" src="http://jsfiddle.net/tj_vantoll/N7UXT/1/embedded/result,js,html/" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
+<iframe style="width: 100%; height: 120px;" src="http://jsfiddle.net/tj_vantoll/N7UXT/2/embedded/result,js,html/" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
 
 
 <h3>Above and Beyond</h3>
