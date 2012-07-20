@@ -77,7 +77,7 @@ In addition to the new attributes, supporting browsers also provide 3  JavaScrip
 
 jQuery UI's `spinner` is a new plugin due for jQuery UI's 1.9 release (currently in beta).  The plugin by default looks and behaves much like the native number picker.
 
-<iframe style="width: 100%; height: 120px;" src="http://jsfiddle.net/tj_vantoll/scXYB/embedded/result,js,html/" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
+<iframe style="width: 100%; height: 120px;" src="http://jsfiddle.net/tj_vantoll/scXYB/1/embedded/result,js,html/" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
 
 It also supports setting minimum, maximum, and step values through options rather than attributes.
 
@@ -96,7 +96,7 @@ It also supports setting minimum, maximum, and step values through options rathe
 
 Example:
 
-<iframe style="width: 100%; height: 120px;" src="http://jsfiddle.net/tj_vantoll/N7UXT/1/embedded/result,js,html/" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
+<iframe style="width: 100%; height: 120px;" src="http://jsfiddle.net/tj_vantoll/N7UXT/2/embedded/result,js,html/" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
 
 ### Above and Beyond
 
