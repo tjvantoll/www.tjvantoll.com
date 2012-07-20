@@ -473,6 +473,26 @@
         <a href="/2012/06/15/detecting-print-requests-with-javascript/">Detecting Print Requests with JavaScript</a>
       </li>
     
+      <li class="post">
+        <a href="/2012/06/10/browser-css-parsing-discrepancies/">Browser CSS Parsing Discrepancies</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2012/05/02/showmodaldialog-what-it-is-and-why-you-should-never-use-it/">window.showModalDialog: What It is and Why You Should Never Use It</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2012/03/21/javascript-for-the-java-developer/">JavaScript for the Java Developer</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2012/03/17/Styling-Disabled-Form-Fields/">Styling Disabled Form Fields</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2012/03/08/IE7-Attribute-Selector-Bugs/">IE7 Attribute Selector Bugs</a>
+      </li>
+    
   </ul>
 </section>
 
@@ -490,36 +510,6 @@
   
     <a href="http://twitter.com/tjvantoll" class="twitter-follow-button" data-show-count="false">Follow @tjvantoll</a>
   
-</section>
-
-
-<section>
-  <h1>GitHub Repos</h1>
-  <ul id="gh_repos">
-    <li class="loading">Status updating...</li>
-  </ul>
-  
-  <a href="https://github.com/tjvantoll">@tjvantoll</a> on GitHub
-  
-  <script type="text/javascript">
-    $.domReady(function(){
-        if (!window.jXHR){
-            var jxhr = document.createElement('script');
-            jxhr.type = 'text/javascript';
-            jxhr.src = '/javascripts/libs/jXHR.js';
-            var s = document.getElementsByTagName('script')[0];
-            s.parentNode.insertBefore(jxhr, s);
-        }
-
-        github.showRepos({
-            user: 'tjvantoll',
-            count: 5,
-            skip_forks: true,
-            target: '#gh_repos'
-        });
-    });
-  </script>
-  <script src="/javascripts/github.js" type="text/javascript"> </script>
 </section>
 
 <section class="jsdocs">
