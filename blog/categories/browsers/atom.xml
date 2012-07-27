@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Browsers | TJ VanToll]]></title>
   <link href="http://tjvantoll.com/blog/categories/browsers/atom.xml" rel="self"/>
   <link href="http://tjvantoll.com/"/>
-  <updated>2012-07-19T22:18:17-04:00</updated>
+  <updated>2012-07-26T21:53:08-04:00</updated>
   <id>http://tjvantoll.com/</id>
   <author>
     <name><![CDATA[TJ VanToll]]></name>
@@ -12,6 +12,293 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[DOM Element References as Global Variables]]></title>
+    <link href="http://tjvantoll.com/2012/07/19/dom-element-references-as-global-variables/"/>
+    <updated>2012-07-19T22:33:00-04:00</updated>
+    <id>http://tjvantoll.com/2012/07/19/dom-element-references-as-global-variables</id>
+    <content type="html"><![CDATA[<p>Quiz: What is logged when the following markup is rendered?</p>
+
+<p>``` html
+<html></p>
+
+<pre><code>&lt;head&gt;&lt;/head&gt;
+&lt;body&gt;
+    &lt;button id="bar"&gt;Button&lt;/button&gt;
+    &lt;script&gt;
+        console.log(bar);
+    &lt;/script&gt;
+&lt;/body&gt;
+</code></pre>
+
+<p></html>
+```</p>
+
+<p>Syntax error obviously, right?  Wrong.  All major browser rendering engines will log a reference to the <code>&lt;button&gt;</code> node.  This includes Trident (IE), Gecko (Firefox), WebKit (Chrome, Safari, etc), and Presto (Opera).</p>
+
+<h3>Wait What?</h3>
+
+<p>Ah, I get it, there's no doctype on that markup.  So this a quirks mode only thing then right?  Wrong.  <a href="https://bugzilla.mozilla.org/show_bug.cgi?id=622491">As of Firefox 14</a> the lastest version of all major browsers will produce the same result IN STANDARDS MODE.</p>
+
+<p>``` html
+&lt;!DOCTYPE html>
+<html></p>
+
+<pre><code>&lt;head&gt;&lt;/head&gt;
+&lt;body&gt;
+    &lt;button id="bar"&gt;Button&lt;/button&gt;
+    &lt;script&gt;
+        console.log(bar); //Reference to &lt;button&gt;, even in standards mode
+    &lt;/script&gt;
+&lt;/body&gt;
+</code></pre>
+
+<p></html>
+```</p>
+
+<!--more-->
+
+
+<h3>So What's Going On?</h3>
+
+<p>Believe it or not this is actually correct behavior per the HTML specification.</p>
+
+<p><blockquote><p>6.2.4 Named access on the Window object</p></p><p><p>The Window interface supports named properties. The supported property names at any moment consist of:</p></p><p><blockquote><p>the value of the name content attribute for all a, applet, area, embed, form, frame, frameset, iframe, img, and object elements in the active document that have a name content attribute, and<br/>the value of the id content attribute of any HTML element in the active document with an id content attribute.</p><footer><strong>HTML Specification</strong> <cite><a href='http://www.whatwg.org/specs/web-apps/current-work/#named-access-on-the-window-object'>www.whatwg.org/specs/web-apps/&hellip;</a></cite></footer></blockquote></p></blockquote>
+
+<p>What this is saying is that the value of the <code>name</code> attribute of certain elements and the value of the <code>id</code> attribute of ALL elements are accessible via the <code>window</code> object in the browser.  So, if you have a node <code>&lt;button id="foo"&gt;&lt;/button&gt;</code>, then <code>window.foo</code> will be resolved to a reference to the <code>&lt;button&gt;</code>.  From this point forward I will refer to this behavior as named access.</p>
+
+<h3>How is This Standard Behavior?</h3>
+
+<p>This behavior is an old Internet Explorer <em>feature</em>.  I can only imagine that it was intended to be a convenience for web developers that got sick of typing <code>document.getElementById</code> over and over again.  (this is way before jQuery and other popular toolkits came to be).  Regardless of the reasoning, IE shipped with this functionality and a whole lot of people utilized it.</p>
+
+<p>Other rendering engines were faced with the difficult decision of implementing non-standard behavior or remaining incompatible with a slew of websites written specifically for Internet Explorer.</p>
+
+<p>Gecko implemented this functionality but originally turned it on only in quirks mode.  They recently took the extra step and <a href="https://bugzilla.mozilla.org/show_bug.cgi?id=622491">turned named access on in standards mode with Firefox 14</a>.</p>
+
+<p>Webkit and Presto have had named access in standards mode for some time now.  <a href="https://www.w3.org/Bugs/Public/show_bug.cgi?id=11960">Webkit recently considered relegating this behavior to quirks mode</a>, however, they decided on leaving it enabled in standards mode.  Apparently there is still just too much stuff out there relying on this behavior to remove it in standards mode.  Believe it or not Microsoft even <a href="https://bugzilla.mozilla.org/show_bug.cgi?id=737760">shipped a marketing demo</a> that directly referenced named DOM elements, preventing it from functioning in Gecko.</p>
+
+<p>One of the main aims of the HTML5 specification is to standarize browser behavior, however quirky it might be.  Therefore, this functionality made it into the specification.</p>
+
+<h3>Why is This Behavior Bad?</h3>
+
+<p>I've alluded to the fact that this behavior is bad, but I've haven't gotten into details as to why.</p>
+
+<h4>There is a high potential to introduce bugs into the system.</h4>
+
+<p>Let's say you have some code that looks something like this:</p>
+
+<p>``` html
+<html></p>
+
+<pre><code>&lt;head&gt;&lt;/head&gt;
+&lt;body&gt;
+    &lt;input type="text" id="choice"&gt;&lt;/button&gt;
+    &lt;script&gt;
+        var choice = 'foo';
+        //Lots more JavaScript
+        doSomethingVeryComplicated(choice);
+    &lt;/script&gt;
+&lt;/body&gt;
+</code></pre>
+
+<p></html>
+```</p>
+
+<p>Since a global <code>choice</code> variable is being created, <code>window.choice</code> will resolve to the string <code>foo</code> and not a reference to the <code>&lt;input&gt;</code>.  This is because the <code>&lt;input&gt;</code> reference is being <a href="http://en.wikipedia.org/wiki/Variable_shadowing">shadowed</a> by the variable declaration.  This works the same way as a variable with the same name being declared in a nested function.</p>
+
+<p>``` javascript
+(function() {</p>
+
+<pre><code>var x = 2;
+var y = function() {
+    var x = 3;
+    //Logs 3 instead of 2 because the value defined in the outer
+    //function is shadowed by the x defined in the inner function.
+    console.log(x);
+};
+y();
+</code></pre>
+
+<p>}());
+```</p>
+
+<p>This is all well and good.  However, let's say that during a refactor of this code the <code>var choice = 'foo';</code> line is accidentally removed.  Under normal circumstances this would cause a syntax error because <code>window.choice</code> would now be undefined.  However, because there is a DOM node with an <code>id</code> of <code>choice</code>, that reference will now refer to the DOM node instead.  This can easily lead to unexpected behavior.</p>
+
+<p>It doesn't even need to be this complex of an example.  Say you mistype the name of your variable and happen to type a named DOM element.  SURPRISE!</p>
+
+<h4>Non-trivial cost for the browser to implement</h4>
+
+<p>In order for these named elements to be available, the browser has to create a list of all named elements and maintain it as the page changes.  I can't offer any specific metrics as to how much time and memory this takes, but there is a cost, especially on pages with a large number of named elements.</p>
+
+<h4>Named elements will be shadowed by properties natively defined on <code>window</code>.</h4>
+
+<p>If you <em>were</em> to go the route of using named access you'd have to be careful to avoid using named elements with values that are predefined on the <code>window</code> already.</p>
+
+<p>For example you cannot refer to a <code>&lt;input id="location"&gt;</code> by <code>window.location</code> because that <a href="https://developer.mozilla.org/en/DOM/window.location">already resolves to an object</a> with information about the URL of the current document.</p>
+
+<p>There are a number of other property names on the <code>window</code> object that you could easily see being used to name a DOM element - <code>event</code>, <code>history</code>, <code>name</code>, <code>self</code>, <code>status</code>, and <code>toolbar</code> to name a few.</p>
+
+<h4>Browsers have inconsistent implementations.</h4>
+
+<p>Even though this is behavior is now standardized, there are still browser quirks in the way named access is implemented.</p>
+
+<h5>IE and Form Elements</h5>
+
+<p>IE will (incorrectly) make the <code>name</code> attribute of form elements available on the <code>window</code> object.</p>
+
+<p>``` html
+&lt;!DOCTYPE html>
+<html></p>
+
+<pre><code>&lt;head&gt;&lt;/head&gt;
+&lt;body&gt;
+    &lt;form&gt;
+        &lt;input name="foo" /&gt;
+    &lt;/form&gt;
+    &lt;script&gt;
+        //Logs a reference to the &lt;input&gt; in IE.
+        //Syntax error in all other rendering engines.
+        console.log(foo);
+    &lt;/script&gt;
+&lt;/body&gt;
+</code></pre>
+
+<p></html>
+```</p>
+
+<h5>Name Attribute on Anchor Tags</h5>
+
+<p>Per the spec, <code>&lt;a&gt;</code> tags should be accessible on the <code>window</code> object via the value of their <code>name</code> attribute.  However, this only works in IE and Opera.</p>
+
+<p>``` html
+&lt;!DOCTYPE html>
+<html></p>
+
+<pre><code>&lt;head&gt;&lt;/head&gt;
+&lt;body&gt;
+    &lt;a name="foo"&gt;&lt;/a&gt;
+    &lt;script&gt;
+        //Logs a reference to the &lt;a&gt; in IE and Opera.
+        //Syntax error in Gecko and WebKit.
+        console.log(foo);
+    &lt;/script&gt;
+&lt;/body&gt;
+</code></pre>
+
+<p></html>
+```</p>
+
+<h5>Multiple Named Attributes with the Same Value</h5>
+
+<p>Per this portion of the spec:</p>
+
+<p><blockquote><p>...if elements has only one element, return that element and abort these steps.</p></p><p><p>Otherwise return an HTMLCollection rooted at the Document node, whose filter matches only named elements with the name name.</p><footer><strong>HTML Specification</strong> <cite><a href='http://dev.w3.org/html5/spec/single-page.html#dom-window-nameditem'>dev.w3.org/html5/spec/&hellip;</a></cite></footer></blockquote></p>
+
+<p>What this is staying is that when there are multiple named propeties with the same name, the browser should return an array when that property is referenced (instead of a reference to a specific DOM node).  As an example given this markup:</p>
+
+<p>``` html
+&lt;!DOCTYPE html>
+<html></p>
+
+<pre><code>&lt;head&gt;&lt;/head&gt;
+&lt;body&gt;
+    &lt;input id="one"&gt;
+    &lt;input id="one"&gt;
+    &lt;script&gt;
+        console.log(one);
+    &lt;/script&gt;
+&lt;/body&gt;
+</code></pre>
+
+<p></html>
+```</p>
+
+<p>...an array with references to the two <code>&lt;input&gt;</code> nodes should be logged per the spec.  And it will be in all browsers except Firefox.  Firefox 14 will simply log the first element.</p>
+
+<p>Having two elements with the same <code>id</code> is invalid HTML, but the browser will still render it just fine.  Even with the best of intentions these sorts of things do happen, especially in larger, dynamic applications.  When you do silly things as a web developer it's best when the browsers behave consistently.</p>
+
+<h3>More?</h3>
+
+<p>These are simply the bugs that I've ran into, I'm sure there are more.  If you know of any let me know in the comments and I can update this list.</p>
+
+<h3>But won't strict mode prevent this?</h3>
+
+<p><a href="https://developer.mozilla.org/en/JavaScript/Strict_mode">ECMAScript 5 strict mode</a> prevents you assigning values to variables before they are declared.  Therefore this...</p>
+
+<p>``` javascript
+(function() {</p>
+
+<pre><code>foo = 2; 
+</code></pre>
+
+<p>}());
+```</p>
+
+<p>will execute just fine whereas this...</p>
+
+<p>``` javascript
+(function() {</p>
+
+<pre><code>'use strict';
+foo = 2; 
+</code></pre>
+
+<p>}());
+```</p>
+
+<p>...will produce a syntax error that <code>foo</code> is not defined.  This is great, but it will not stop you from accessing named properties on the <code>window</code> object.</p>
+
+<p>``` html</p>
+
+<div id="foo"></div>
+
+
+<script>
+    (function() {
+        'use strict';
+        console.log(foo);
+    });
+</script>
+
+
+<p>```</p>
+
+<p>This will log a reference to the <code>&lt;div&gt;</code> in standards mode in the latest version of all modern browsers.  Strict mode will only prevent you from assigning values to variables that have yet to be declared.  If you're simply using a variable then strict mode doesn't protect you.  Therefore, you're not prevented from accessing name properties on the global <code>window</code> object.</p>
+
+<h3>What to do instead</h3>
+
+<p>Use <code>document.getElementById</code> to retrieve references to DOM nodes via their <code>id</code> attribute.</p>
+
+<p>``` html
+<button id="foo"></button></p>
+
+<script>
+    document.getElementById('foo');
+</script>
+
+
+<p>```</p>
+
+<p>To get a reference to a DOM node via its <code>name</code> attribute you can use <code>document.querySelectorAll</code>.</p>
+
+<p>``` html
+<a name="bar"></a></p>
+
+<script>
+    document.querySelectorAll('[name=bar]');
+</script>
+
+
+<p>```</p>
+
+<p><code>document.querySelectorAll</code> is not safe to use in IE &lt;= 8, so if you need to support older IE look into using a toolkit such as <a href="http://jquery.com">jQuery</a> to select the DOM nodes that you need.</p>
+
+<h3>Conclusion</h3>
+
+<p>All major browsers now make named properties available on the global <code>window</code> object in standards mode.  It's important to know that browsers do this because you'll likely run into this at some point.  However, never purposely utilize this functionality.  If you see others use it tell them to stop, ridicule them, do whatever it takes.  Help <a href="http://movethewebforward.org/">move the web forward</a>.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Default Browser Handling of the CSS text-transform Property]]></title>
@@ -705,184 +992,6 @@ The relevant portion of the specification states that...</p>
 <h3>Conclusion</h3>
 
 <p>While the CSS specification tries to standarize what to do with invalid CSS browsers still handle some situations differently.  Make sure your editor or build process can help detect silly typos, and attempt to test your code in a variety of browsers, even for trivial changes.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[window.showModalDialog: What It is and Why You Should Never Use It]]></title>
-    <link href="http://tjvantoll.com/2012/05/02/showmodaldialog-what-it-is-and-why-you-should-never-use-it/"/>
-    <updated>2012-05-02T22:37:00-04:00</updated>
-    <id>http://tjvantoll.com/2012/05/02/showmodaldialog-what-it-is-and-why-you-should-never-use-it</id>
-    <content type="html"><![CDATA[<p>Ah, 1997.  The first browser war was in full force, and Microsoft was busy adding proprietary new features to compete with Netscape Navigator.  One of those features was introducing a common OS UI element into the browser - modal dialogs.  Internet Explorer 4 launched with a <code>showModalDialog</code> method on the global <code>window</code> object.  When called it displays a dialog that the user has to deal with before interacting with the rest of the page.</p>
-
-<p>Fast forward a few years and Internet Explorer had won the war, 95+ percent of us were using IE6.  Consequently a whole lot of web applications were designed around many of the proprietary features that IE had added.  Interestingly several of these have recently been added to the HTML5 specification including <a href="http://www.w3.org/TR/html5/embedded-content-0.html#dom-innerhtml">innerHTML</a>, <a href="http://html5.org/specs/dom-parsing.html#insertadjacenthtml%28%29">insertAdjacentHTML</a>, <a href="http://html5.org/specs/dom-parsing.html#outerhtml">outerHTML</a>, and… <a href="http://www.whatwg.org/specs/web-apps/current-work/multipage/timers.html#dialogs-implemented-using-separate-documents">window.showModalDialog</a>.</p>
-
-<p>So now that <code>window.showModalDialog</code> has been standardized should you be using it?</p>
-
-<p><strong>No.</strong></p>
-
-<p>In general the idea of putting a native dialog implementation into the browser was a really good idea, but  <code>window.showModalDialog</code> was a bad implementation that is riddled with issues and poor browser support.<!--more--></p>
-
-<h3>Modal Dialogs</h3>
-
-<p>So why did Microsoft add modal dialogs to begin with?  They're actually a heavily used UI element in most all computer interfaces.  Try to shut off your phone, tablet, laptop, etc.. and you're almost certainly going to be presented with a modal dialog asking you to confirm your decision before being allowed to shut it down.  What makes it modal is the fact that you are forced to make a selection before you do anything else.</p>
-
-<p>It's oftentimes convenient from a usability stand point to get some form of feedback from a user before allowing them to continue.  <code>showModalDialog</code> was simply Microsoft's attempt to bring this UI element to the web.</p>
-
-<h3>Implementation</h3>
-
-<p>To use the <code>showModalDialog</code> method you simply call it with a URL.</p>
-
-<p><code>javascript window.showModalDialog Basic Usage
-window.showModalDialog('http://google.com');
-</code></p>
-
-<p>This will open up a modal dialog with Google loaded in it.  In and of itself this isn't all that useful.  Usually if you're showing a modal dialog you want to get some information back from it.  This is where the window.returnValue comes into play.</p>
-
-<h4>window.returnValue</h4>
-
-<p>``` html window.returnValue Example</p>
-
-<!-- page.html -->
-
-
-<p>&lt;!DOCTYPE html>
-<html>
-  <head></p>
-
-<pre><code>&lt;script&gt;
-  var result = window.showModalDialog('modal.html');
-  console.log(result); //'foo'
-&lt;/script&gt;
-</code></pre>
-
-<p>  </head>
-  <body>
-  </body>
-</html></p>
-
-<!-- modal.html -->
-
-
-<p>&lt;!DOCTYPE html>
-<html>
-  <head></p>
-
-<pre><code>&lt;script&gt;
-  window.returnValue = 'foo';
-  window.close();
-&lt;/script&gt;
-</code></pre>
-
-<p>  </head>
-  <body>
-  </body>
-</html>
-```</p>
-
-<p>In this example when page.html is loaded it will immediately open up a modal dialog with modal.html loaded in it.  It will then block until the modal dialog returns control.  The JavaScript interpreter will literally pause execution as if you had a breakpoint set at that line of code and wait for the result of the modal dialog.</p>
-
-<p>When modal.html loads it will assign a value of 'foo' to <code>window.returnValue</code> and close itself via <code>window.close()</code>.  The opening window (page.html) will get control back, resume execution, and log the return value of 'foo'.</p>
-
-<h4>window.dialogArguments</h4>
-
-<p>If you want to pass information to the modal dialog you can do so via the second parameter of <code>window.showModalDialog</code>.  Those values will be available in the modal dialog's <code>window.dialogArguments</code> property.</p>
-
-<p>``` html window.returnValue Example</p>
-
-<!-- page.html -->
-
-
-<p>&lt;!DOCTYPE html>
-<html>
-  <head></p>
-
-<pre><code>&lt;script&gt;
-  window.showModalDialog('modal.html', 'foo');
-&lt;/script&gt;
-</code></pre>
-
-<p>  </head>
-  <body>
-  </body>
-</html></p>
-
-<!-- modal.html -->
-
-
-<p>&lt;!DOCTYPE html>
-<html>
-  <head></p>
-
-<pre><code>&lt;script&gt;
-  alert(window.dialogArguments); //'foo'
-  window.close();
-&lt;/script&gt;
-</code></pre>
-
-<p>  </head>
-  <body>
-  </body>
-</html>
-```</p>
-
-<h4>Further Options</h4>
-
-<p>A third parameter to <code>window.showModalDialog</code> is available to customize the look and behavior of the modal dialog.  The <a href="https://developer.mozilla.org/en/DOM/window.showModalDialog">MDN article on showModalDialog</a> has these well documented.</p>
-
-<h3>Modal Dialog == A Brand New Window</h3>
-
-<p>Note that in all these examples modal.html is a full HTML document, not a snippet that is injected in.  This is a characterizing feature of <code>window.showModalDialog</code>.  It's really just two completely separate windows communicating with each other.  The fact that you have two separate windows and DOMs means you don't have to worry about JS &amp; DOM conflicts, which is appealing if you have a lot of bad JavaScript with a cluttered global scope.  But mostly this just adds unnecessary complexity, complicates the browser implementation, and contributes to a number of bugs (see below).</p>
-
-<p><blockquote><p>"You should only use one browser window ever, as a Web app author."</p><footer><strong>Ian Hickson (HTML 5 spec maintainer)</strong> <cite><a href='http://www.mail-archive.com/public-webapi@w3.org/msg03345.html'>www.mail-archive.com/&hellip;</a></cite></footer></blockquote></p>
-
-<h3>Browser Support</h3>
-
-<p>IE obviously supports this function and has since IE4, but what about the other browsers?  Firefox added support in version 3 and Safari added support in 5.1.  Opera doesn't support it at all.</p>
-
-<p>Chrome has supported it since an early version but has some serious bugs with its implementation.  Most importantly the window Chrome displays isn't modal (see <a href="http://code.google.com/p/chromium/issues/detail?id=16045">Chromium bug #16045</a>), meaning, the user is able to interact with the original window before dealing with the modal dialog, which kind of defeats the whole purpose.  Another big one is that <code>window.returnValue</code> will be lost if any sort of redirect or form submission is done in the modal dialog (see <a href="http://code.google.com/p/chromium/issues/detail?id=42939">Chromium bug #42939</a>).</p>
-
-<p>Despite these issues Chrome did do one thing right.  While it's important that modal dialogs prevent the user from interacting with the originating window, there's no reason the user shouldn't be allowed to interact with other tabs or native browser controls (back/forward, favorites, address bar, etc). Chrome is the only browser that allows this - IE, Firefox, and Safari do not.  This is actually a big annoyance to the end user.  IE, Firefox, and Safari don't even allow you to minimize or close the browser until you've dealt with the modal dialog.</p>
-
-<h3>More Issues</h3>
-
-<h4>Modal Dialog == Popup</h4>
-
-<p>The biggest issue with modal dialogs is that Firefox, Chrome, and Safari all treat them as popups by default and block them.  A user has to explictly allow the popup in order to see your modal dialog.  In my experience users usually get frustrated and leave at that point.</p>
-
-<h4>Debugging</h4>
-
-<p>The debugging experience for <code>window.showModalDialog</code> is horrible.  IE as recent as version 9 won't let you open their dev tools up in the modal dialog… at all.  Firefox, Chrome, and Safari will let you open FireBug / Web Inspector, but good luck debugging any script that happens when the dialog is opened.  You're basically forced to alert like it's 1999 to determine what's going on.  Also just a word of warning, IE <strong>LOVES</strong> to cache modal dialogs.</p>
-
-<h4>Mobile</h4>
-
-<p>Currently no major mobile browsers support <code>window.showModalDialog</code>, so if you're looking for any sort of tablet / mobile support you need to stay away.</p>
-
-<h3>Why was this added to HTML5?</h3>
-
-<p>So why have other browsers added support for this method and why was it added to the HTML5 spec?  It's mostly because in the IE6 days 1.2 bajillion applications were written to be extremely dependent on <code>window.showModalDialog</code>.  I can say that I personally work at an enterprise that has its fair share of those applications, and you can see many comments demanding enterprise application support on the various Chrome bugs (see <a href="http://code.google.com/p/chromium/issues/detail?id=4202">#4202</a>, <a href="http://code.google.com/p/chromium/issues/detail?id=16045">#16045</a>, &amp; <a href="http://code.google.com/p/chromium/issues/detail?id=42939">#42939</a>).</p>
-
-<p>Refactoring these applications is no small task, and browsers that want to win market share are catering to them to gain support.</p>
-
-<p><blockquote><p>"At this point, browsers have to support it, there's too much content out there that uses it."</p><footer><strong>Ian Hickson</strong> <cite><a href='http://www.mail-archive.com/public-webapi@w3.org/msg03363.html'>www.mail-archive.com/&hellip;</a></cite></footer></blockquote></p>
-
-<h3>Better Alternatives</h3>
-
-<p>Given all the issues outlined above, it is not a good idea to use <code>window.showModalDialog</code> in new development (or any development for that matter).  So what should you use?  There's no shortage of choices, basically all JavaScript frameworks provide an alternative (see <a href="http://livedocs.dojotoolkit.org/dijit/Dialog">Dojo</a>, <a href="http://mootools.net/forge/p/ascribe_dialog">MooTools</a>, &amp; <a href="http://yuilibrary.com/yui/docs/overlay/">YUI</a>).</p>
-
-<p>Personally I would highly recommend <a href="http://jqueryui.com/demos/dialog/">jQuery UI's dialog</a>.  It has a clean API, is highly customizable, extendable, and is themeable through <a href="http://jqueryui.com/themeroller/">jQuery UI's theme roller</a>.</p>
-
-<h3>Moving Forward</h3>
-
-<p>When asked "What’s your fave feature that didn’t get into HTML 5 that you’d put into HTML 6?", Ian Hickson stated in a 2009 interview that:</p>
-
-<p><blockquote><p>In-window modal dialogs or dialog box—the kind of prompt you get when the computer asks you a question and won’t let you do anything else until you answer the question. For instance, the window that comes up when you say "Save As…" is usually a modal dialog.</p></p><p><p>Right now people fake it with divs and complicated styles and script. It would be neat to just be able to say "make this section a modal dialog". Like showModalDialog(), but within the page instead of opening a new window with a new page.</p></p><p><p>I’d add it to HTML 5, but there are so many new features already that we need to wait for the browsers to catch up.</p><footer><strong>Ian Hickson</strong> <cite><a href='http://www.webstandards.org/2009/05/13/interview-with-ian-hickson-editor-of-the-html-5-specification/'>www.webstandards.org/2009/05/13/&hellip;</a></cite></footer></blockquote></p>
-
-<p>Good news, <a href="http://dev.w3.org/html5/spec/commands.html#the-dialog-element">the dialog element</a> has recently been added to the HTML spec.  It includes a <code>showModal</code> method as well as a <code>returnValue</code> property that mimics <code>window.returnValue</code>.  The bad news?  It will be a long time before this element is useable  in all browsers.  The good news?  This would be a relatively easy element to <a href="http://remysharp.com/2010/10/08/what-is-a-polyfill/">polyfill</a>, so once some implementations make their way into browsers, developers could make a functional version for older browsers with the same API.</p>
-
-<h3>Conclusion</h3>
-
-<p><code>window.showModalDialog</code> is an old API that has been retroactively standardized; but that doesn't mean you should actually be using it.  If you're still maintaining code using this try to get off of it as soon as possible.  That being said the idea of having native dialog capabilities built into the browser wasn't a bad idea.  Hope may be on the way with the dialog element that was recently added to the HTML5 spec.</p>
 ]]></content>
   </entry>
   

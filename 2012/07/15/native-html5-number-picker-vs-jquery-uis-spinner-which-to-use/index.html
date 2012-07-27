@@ -193,7 +193,7 @@
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>This will give present the user with a number picker in supported browsers, which, as of this writing includes Chrome, Safari, Opera, iOS, Opera Mobile, and Android 4.0+ (<a href="http://caniuse.com/#feat=input-number">full support list</a>).  Here&#8217;s what the user will see in supported browsers:</p>
+<p>This will present the user with a number picker in supported browsers, which, as of this writing includes Chrome, Safari, Opera, iOS, Opera Mobile, and Android 4.0+ (<a href="http://caniuse.com/#feat=input-number">full support list</a>).  Here&#8217;s what the user will see in supported browsers:</p>
 
 <!--more-->
 
@@ -477,7 +477,7 @@
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>What this does is detect whether the browser supports the <code>step</code> attribute, if it does it removes jQuery UI&#8217;s controls.  What does the <code>step</code> attribute have to do with the arrow controls?  Nothing, except that it just <em>happens</em> that the browsers the support the <code>step</code> attribute also create a native control to do the stepping.  Is this going to change in the future?  Quite possibly.</p>
+<p>What this does is detect whether the browser supports the <code>step</code> attribute, if it does it removes jQuery UI&#8217;s controls.  What does the <code>step</code> attribute have to do with the arrow controls?  Nothing, except that it just <em>happens</em> that the browsers that support the <code>step</code> attribute also create a native control to do the stepping.  Is this going to change in the future?  Quite possibly.</p>
 
 <p>So obviously this is not ideal, and probably shouldn&#8217;t be used in production code, but it works at the moment.  Have a better approach for tackling this problem?  Let me know in the comments.</p>
 </div>
@@ -520,8 +520,6 @@
   
   
   
-    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
-  
 </div>
 
     
@@ -529,6 +527,8 @@
       
         <a class="basic-alignment left" href="/2012/07/10/default-browser-handling-of-the-css-text-transform-property/" title="Previous Post: Default Browser Handling of the CSS text-transform Property">&laquo; Default Browser Handling of the CSS text-transform Property</a>
       
+      
+        <a class="basic-alignment right" href="/2012/07/19/dom-element-references-as-global-variables/" title="Next Post: DOM Element References as Global Variables">DOM Element References as Global Variables &raquo;</a>
       
     </p>
   </footer>
@@ -547,6 +547,10 @@
     <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2012/07/19/dom-element-references-as-global-variables/">DOM Element References as Global Variables</a>
+      </li>
     
       <li class="post">
         <a href="/2012/07/15/native-html5-number-picker-vs-jquery-uis-spinner-which-to-use/">Native HTML5 Number Picker and jQuery UI's Spinner - Which to Use?</a>
@@ -582,10 +586,6 @@
     
       <li class="post">
         <a href="/2012/03/17/Styling-Disabled-Form-Fields/">Styling Disabled Form Fields</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2012/03/08/IE7-Attribute-Selector-Bugs/">IE7 Attribute Selector Bugs</a>
       </li>
     
   </ul>
@@ -641,15 +641,6 @@
 </script>
 
 
-
-<div id="fb-root"></div>
-<script>(function(d, s, id) {
-  var js, fjs = d.getElementsByTagName(s)[0];
-  if (d.getElementById(id)) {return;}
-  js = d.createElement(s); js.id = id;
-  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
-  fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));</script>
 
 
 

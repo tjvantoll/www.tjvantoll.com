@@ -1,0 +1,721 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>DOM Element References as Global Variables - TJ VanToll - Adventures in Front End Technologies</title>
+  <meta name="author" content="TJ VanToll">
+
+  
+  <meta name="description" content="Quiz: What is logged when the following markup is rendered? 1
+2
+3
+4
+5
+6
+7
+8
+9
+&lt;html&gt; &lt;head&gt;&lt;/head&gt; &lt;body&gt; &lt;button id=&quot &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://tjvantoll.com/2012/07/19/dom-element-references-as-global-variables">
+  <!-- Use custom favicon -->
+  <!--<link href="/favicon.png" rel="icon">-->
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  
+  <!--
+  Custom script concatenation, including a custom version of Modernizr, prefixfree, and PictureCube
+  <script src="/javascripts/modernizr-2.5.3.js"></script>
+  <script src="/javascripts/prefixfree.min.js"></script>  
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js"></script>
+  <script src="/javascripts/PictureCube.js"></script>
+  -->
+  <script src="/javascripts/build/scripts.js"></script>
+	
+  <link href="/atom.xml" rel="alternate" title="TJ VanToll" type="application/atom+xml">
+  <script>
+	$.domReady(function() {
+		if (Modernizr.csstransforms3d) {
+			new PictureCube('picture-cube', [
+				'/images/me/1.jpg',
+				'/images/me/2.jpg',
+				'/images/kids/2.jpg',
+				'/images/kids/3.jpg',
+				'/images/izzie/5.jpg',
+				'/images/me/3.jpg'											
+			]).cycle(5000);
+		}			
+	});  
+</script>
+
+<!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+  	if (window.location.host.indexOf('local') == -1) {
+	    var _gaq = _gaq || [];
+	    _gaq.push(['_setAccount', 'UA-29179796-1']);
+	    _gaq.push(['_trackPageview']);
+	
+	    (function() {
+	      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+	      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+	      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	    })();
+    }
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+	<div id="picture-cube"></div>
+	<h1><a href="/">TJ VanToll</a></h1>
+	
+		<h2>Adventures in Front End Technologies</h2>
+		<!--
+		<h2>
+			<span>
+				<span class="a1">A</span>
+				<span class="a2">d</span>
+				<span class="a1">v</span>
+				<span class="a2">e</span>
+				<span class="a1">n</span>
+				<span class="a2">t</span>
+				<span class="a1">u</span>
+				<span class="a2">r</span>
+				<span class="a1">e</span>
+				<span class="a2">s</span>
+			</span>
+			&nbsp;
+			<span>
+				<span class="b">i</span>
+				<span class="b">n</span>
+			</span>
+			&nbsp; 
+			<span>
+				<span class="c1">F</span>
+				<span class="c2">r</span>
+				<span class="c3">o</span>
+				<span class="c4">n</span>
+				<span class="c5">t</span>
+			</span>
+			&nbsp;
+			<span>
+				<span class="d">E</span>
+				<span class="d">n</span>
+				<span class="d">d</span>
+			</span>
+			&nbsp;
+			<span>
+				<span class="e">T</span>
+				<span class="e">e</span>
+				<span class="e">c</span>
+				<span class="e">h</span>
+				<span class="e">n</span>
+				<span class="e">o</span>
+				<span class="e">l</span>
+				<span class="e">o</span>
+				<span class="e">g</span>
+				<span class="e">i</span>
+				<span class="e">e</span>
+				<span class="e">s</span>
+			</span>
+		</h2>-->  
+	
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:tjvantoll.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/about">About</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/speaking">Speaking</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">DOM Element References as Global Variables</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-07-19T22:33:00-04:00" pubdate data-updated="true">Jul 19<span>th</span>, 2012</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>Quiz: What is logged when the following markup is rendered?</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;html&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;head&gt;&lt;/head&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;body&gt;</span>
+</span><span class='line'>        <span class="nt">&lt;button</span> <span class="na">id=</span><span class="s">&quot;bar&quot;</span><span class="nt">&gt;</span>Button<span class="nt">&lt;/button&gt;</span>
+</span><span class='line'>        <span class="nt">&lt;script&gt;</span>
+</span><span class='line'>            <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">bar</span><span class="p">);</span>
+</span><span class='line'>        <span class="nt">&lt;/script&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;/body&gt;</span>
+</span><span class='line'><span class="nt">&lt;/html&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Syntax error obviously, right?  Wrong.  All major browser rendering engines will log a reference to the <code>&lt;button&gt;</code> node.  This includes Trident (IE), Gecko (Firefox), WebKit (Chrome, Safari, etc), and Presto (Opera).</p>
+
+<h3>Wait What?</h3>
+
+<p>Ah, I get it, there&#8217;s no doctype on that markup.  So this a quirks mode only thing then right?  Wrong.  <a href="https://bugzilla.mozilla.org/show_bug.cgi?id=622491">As of Firefox 14</a> the lastest version of all major browsers will produce the same result IN STANDARDS MODE.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="cp">&lt;!DOCTYPE html&gt;</span>
+</span><span class='line'><span class="nt">&lt;html&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;head&gt;&lt;/head&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;body&gt;</span>
+</span><span class='line'>        <span class="nt">&lt;button</span> <span class="na">id=</span><span class="s">&quot;bar&quot;</span><span class="nt">&gt;</span>Button<span class="nt">&lt;/button&gt;</span>
+</span><span class='line'>        <span class="nt">&lt;script&gt;</span>
+</span><span class='line'>            <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">bar</span><span class="p">);</span> <span class="c1">//Reference to &lt;button&gt;, even in standards mode</span>
+</span><span class='line'>        <span class="nt">&lt;/script&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;/body&gt;</span>
+</span><span class='line'><span class="nt">&lt;/html&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<!--more-->
+
+
+<h3>So What&#8217;s Going On?</h3>
+
+<p>Believe it or not this is actually correct behavior per the HTML specification.</p>
+
+<blockquote><p>6.2.4 Named access on the Window object</p><p>The Window interface supports named properties. The supported property names at any moment consist of:</p><p>> the value of the name content attribute for all a, applet, area, embed, form, frame, frameset, iframe, img, and object elements in the active document that have a name content attribute, and<br/>> the value of the id content attribute of any HTML element in the active document with an id content attribute.</p><footer><strong>HTML Specification</strong> <cite><a href='http://www.whatwg.org/specs/web-apps/current-work/#named-access-on-the-window-object'>www.whatwg.org/specs/web-apps/&hellip;</a></cite></footer></blockquote>
+
+
+<p>What this is saying is that the value of the <code>name</code> attribute of certain elements and the value of the <code>id</code> attribute of ALL elements are accessible via the <code>window</code> object in the browser.  So, if you have a node <code>&lt;button id="foo"&gt;&lt;/button&gt;</code>, then <code>window.foo</code> will be resolved to a reference to the <code>&lt;button&gt;</code>.  From this point forward I will refer to this behavior as named access.</p>
+
+<h3>How is This Standard Behavior?</h3>
+
+<p>This behavior is an old Internet Explorer <em>feature</em>.  I can only imagine that it was intended to be a convenience for web developers that got sick of typing <code>document.getElementById</code> over and over again.  (this is way before jQuery and other popular toolkits came to be).  Regardless of the reasoning, IE shipped with this functionality and a whole lot of people utilized it.</p>
+
+<p>Other rendering engines were faced with the difficult decision of implementing non-standard behavior or remaining incompatible with a slew of websites written specifically for Internet Explorer.</p>
+
+<p>Gecko implemented this functionality but originally turned it on only in quirks mode.  They recently took the extra step and <a href="https://bugzilla.mozilla.org/show_bug.cgi?id=622491">turned named access on in standards mode with Firefox 14</a>.</p>
+
+<p>Webkit and Presto have had named access in standards mode for some time now.  <a href="https://www.w3.org/Bugs/Public/show_bug.cgi?id=11960">Webkit recently considered relegating this behavior to quirks mode</a>, however, they decided on leaving it enabled in standards mode.  Apparently there is still just too much stuff out there relying on this behavior to remove it in standards mode.  Believe it or not Microsoft even <a href="https://bugzilla.mozilla.org/show_bug.cgi?id=737760">shipped a marketing demo</a> that directly referenced named DOM elements, preventing it from functioning in Gecko.</p>
+
+<p>One of the main aims of the HTML5 specification is to standarize browser behavior, however quirky it might be.  Therefore, this functionality made it into the specification.</p>
+
+<h3>Why is This Behavior Bad?</h3>
+
+<p>I&#8217;ve alluded to the fact that this behavior is bad, but I&#8217;ve haven&#8217;t gotten into details as to why.</p>
+
+<h4>There is a high potential to introduce bugs into the system.</h4>
+
+<p>Let&#8217;s say you have some code that looks something like this:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;html&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;head&gt;&lt;/head&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;body&gt;</span>
+</span><span class='line'>        <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;text&quot;</span> <span class="na">id=</span><span class="s">&quot;choice&quot;</span><span class="nt">&gt;&lt;/button&gt;</span>
+</span><span class='line'>        <span class="nt">&lt;script&gt;</span>
+</span><span class='line'>            <span class="kd">var</span> <span class="nx">choice</span> <span class="o">=</span> <span class="s1">&#39;foo&#39;</span><span class="p">;</span>
+</span><span class='line'>            <span class="c1">//Lots more JavaScript</span>
+</span><span class='line'>            <span class="nx">doSomethingVeryComplicated</span><span class="p">(</span><span class="nx">choice</span><span class="p">);</span>
+</span><span class='line'>        <span class="nt">&lt;/script&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;/body&gt;</span>
+</span><span class='line'><span class="nt">&lt;/html&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Since a global <code>choice</code> variable is being created, <code>window.choice</code> will resolve to the string <code>foo</code> and not a reference to the <code>&lt;input&gt;</code>.  This is because the <code>&lt;input&gt;</code> reference is being <a href="http://en.wikipedia.org/wiki/Variable_shadowing">shadowed</a> by the variable declaration.  This works the same way as a variable with the same name being declared in a nested function.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>    <span class="kd">var</span> <span class="nx">x</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+</span><span class='line'>    <span class="kd">var</span> <span class="nx">y</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>        <span class="kd">var</span> <span class="nx">x</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span>
+</span><span class='line'>        <span class="c1">//Logs 3 instead of 2 because the value defined in the outer</span>
+</span><span class='line'>        <span class="c1">//function is shadowed by the x defined in the inner function.</span>
+</span><span class='line'>        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">x</span><span class="p">);</span>
+</span><span class='line'>    <span class="p">};</span>
+</span><span class='line'>    <span class="nx">y</span><span class="p">();</span>
+</span><span class='line'><span class="p">}());</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This is all well and good.  However, let&#8217;s say that during a refactor of this code the <code>var choice = 'foo';</code> line is accidentally removed.  Under normal circumstances this would cause a syntax error because <code>window.choice</code> would now be undefined.  However, because there is a DOM node with an <code>id</code> of <code>choice</code>, that reference will now refer to the DOM node instead.  This can easily lead to unexpected behavior.</p>
+
+<p>It doesn&#8217;t even need to be this complex of an example.  Say you mistype the name of your variable and happen to type a named DOM element.  SURPRISE!</p>
+
+<h4>Non-trivial cost for the browser to implement</h4>
+
+<p>In order for these named elements to be available, the browser has to create a list of all named elements and maintain it as the page changes.  I can&#8217;t offer any specific metrics as to how much time and memory this takes, but there is a cost, especially on pages with a large number of named elements.</p>
+
+<h4>Named elements will be shadowed by properties natively defined on <code>window</code>.</h4>
+
+<p>If you <em>were</em> to go the route of using named access you&#8217;d have to be careful to avoid using named elements with values that are predefined on the <code>window</code> already.</p>
+
+<p>For example you cannot refer to a <code>&lt;input id="location"&gt;</code> by <code>window.location</code> because that <a href="https://developer.mozilla.org/en/DOM/window.location">already resolves to an object</a> with information about the URL of the current document.</p>
+
+<p>There are a number of other property names on the <code>window</code> object that you could easily see being used to name a DOM element - <code>event</code>, <code>history</code>, <code>name</code>, <code>self</code>, <code>status</code>, and <code>toolbar</code> to name a few.</p>
+
+<h4>Browsers have inconsistent implementations.</h4>
+
+<p>Even though this is behavior is now standardized, there are still browser quirks in the way named access is implemented.</p>
+
+<h5>IE and Form Elements</h5>
+
+<p>IE will (incorrectly) make the <code>name</code> attribute of form elements available on the <code>window</code> object.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="cp">&lt;!DOCTYPE html&gt;</span>
+</span><span class='line'><span class="nt">&lt;html&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;head&gt;&lt;/head&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;body&gt;</span>
+</span><span class='line'>        <span class="nt">&lt;form&gt;</span>
+</span><span class='line'>            <span class="nt">&lt;input</span> <span class="na">name=</span><span class="s">&quot;foo&quot;</span> <span class="nt">/&gt;</span>
+</span><span class='line'>        <span class="nt">&lt;/form&gt;</span>
+</span><span class='line'>        <span class="nt">&lt;script&gt;</span>
+</span><span class='line'>            <span class="c1">//Logs a reference to the &lt;input&gt; in IE.</span>
+</span><span class='line'>            <span class="c1">//Syntax error in all other rendering engines.</span>
+</span><span class='line'>            <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">foo</span><span class="p">);</span>
+</span><span class='line'>        <span class="nt">&lt;/script&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;/body&gt;</span>
+</span><span class='line'><span class="nt">&lt;/html&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h5>Name Attribute on Anchor Tags</h5>
+
+<p>Per the spec, <code>&lt;a&gt;</code> tags should be accessible on the <code>window</code> object via the value of their <code>name</code> attribute.  However, this only works in IE and Opera.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="cp">&lt;!DOCTYPE html&gt;</span>
+</span><span class='line'><span class="nt">&lt;html&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;head&gt;&lt;/head&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;body&gt;</span>
+</span><span class='line'>        <span class="nt">&lt;a</span> <span class="na">name=</span><span class="s">&quot;foo&quot;</span><span class="nt">&gt;&lt;/a&gt;</span>
+</span><span class='line'>        <span class="nt">&lt;script&gt;</span>
+</span><span class='line'>            <span class="c1">//Logs a reference to the &lt;a&gt; in IE and Opera.</span>
+</span><span class='line'>            <span class="c1">//Syntax error in Gecko and WebKit.</span>
+</span><span class='line'>            <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">foo</span><span class="p">);</span>
+</span><span class='line'>        <span class="nt">&lt;/script&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;/body&gt;</span>
+</span><span class='line'><span class="nt">&lt;/html&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h5>Multiple Named Attributes with the Same Value</h5>
+
+<p>Per this portion of the spec:</p>
+
+<blockquote><p>&#8230;if elements has only one element, return that element and abort these steps.</p><p>Otherwise return an HTMLCollection rooted at the Document node, whose filter matches only named elements with the name name.</p><footer><strong>HTML Specification</strong> <cite><a href='http://dev.w3.org/html5/spec/single-page.html#dom-window-nameditem'>dev.w3.org/html5/spec/&hellip;</a></cite></footer></blockquote>
+
+
+<p>What this is staying is that when there are multiple named propeties with the same name, the browser should return an array when that property is referenced (instead of a reference to a specific DOM node).  As an example given this markup:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="cp">&lt;!DOCTYPE html&gt;</span>
+</span><span class='line'><span class="nt">&lt;html&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;head&gt;&lt;/head&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;body&gt;</span>
+</span><span class='line'>        <span class="nt">&lt;input</span> <span class="na">id=</span><span class="s">&quot;one&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>        <span class="nt">&lt;input</span> <span class="na">id=</span><span class="s">&quot;one&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>        <span class="nt">&lt;script&gt;</span>
+</span><span class='line'>            <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">one</span><span class="p">);</span>
+</span><span class='line'>        <span class="nt">&lt;/script&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;/body&gt;</span>
+</span><span class='line'><span class="nt">&lt;/html&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>&#8230;an array with references to the two <code>&lt;input&gt;</code> nodes should be logged per the spec.  And it will be in all browsers except Firefox.  Firefox 14 will simply log the first element.</p>
+
+<p>Having two elements with the same <code>id</code> is invalid HTML, but the browser will still render it just fine.  Even with the best of intentions these sorts of things do happen, especially in larger, dynamic applications.  When you do silly things as a web developer it&#8217;s best when the browsers behave consistently.</p>
+
+<h3>More?</h3>
+
+<p>These are simply the bugs that I&#8217;ve ran into, I&#8217;m sure there are more.  If you know of any let me know in the comments and I can update this list.</p>
+
+<h3>But won&#8217;t strict mode prevent this?</h3>
+
+<p><a href="https://developer.mozilla.org/en/JavaScript/Strict_mode">ECMAScript 5 strict mode</a> prevents you assigning values to variables before they are declared.  Therefore this&#8230;</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nx">foo</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+</span><span class='line'><span class="p">}());</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>will execute just fine whereas this&#8230;</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>    <span class="s1">&#39;use strict&#39;</span><span class="p">;</span>
+</span><span class='line'>    <span class="nx">foo</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+</span><span class='line'><span class="p">}());</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>&#8230;will produce a syntax error that <code>foo</code> is not defined.  This is great, but it will not stop you from accessing named properties on the <code>window</code> object.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">&quot;foo&quot;</span><span class="nt">&gt;&lt;/div&gt;</span>
+</span><span class='line'><span class="nt">&lt;script&gt;</span>
+</span><span class='line'>    <span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>        <span class="s1">&#39;use strict&#39;</span><span class="p">;</span>
+</span><span class='line'>        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">foo</span><span class="p">);</span>
+</span><span class='line'>    <span class="p">});</span>
+</span><span class='line'><span class="nt">&lt;/script&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This will log a reference to the <code>&lt;div&gt;</code> in standards mode in the latest version of all modern browsers.  Strict mode will only prevent you from assigning values to variables that have yet to be declared.  If you&#8217;re simply using a variable then strict mode doesn&#8217;t protect you.  Therefore, you&#8217;re not prevented from accessing name properties on the global <code>window</code> object.</p>
+
+<h3>What to do instead</h3>
+
+<p>Use <code>document.getElementById</code> to retrieve references to DOM nodes via their <code>id</code> attribute.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;button</span> <span class="na">id=</span><span class="s">&quot;foo&quot;</span><span class="nt">&gt;&lt;/button&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nt">&lt;script&gt;</span>
+</span><span class='line'>    <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">&#39;foo&#39;</span><span class="p">);</span>
+</span><span class='line'><span class="nt">&lt;/script&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>To get a reference to a DOM node via its <code>name</code> attribute you can use <code>document.querySelectorAll</code>.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;a</span> <span class="na">name=</span><span class="s">&quot;bar&quot;</span><span class="nt">&gt;&lt;/a&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nt">&lt;script&gt;</span>
+</span><span class='line'>    <span class="nb">document</span><span class="p">.</span><span class="nx">querySelectorAll</span><span class="p">(</span><span class="s1">&#39;[name=bar]&#39;</span><span class="p">);</span>
+</span><span class='line'><span class="nt">&lt;/script&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><code>document.querySelectorAll</code> is not safe to use in IE &lt;= 8, so if you need to support older IE look into using a toolkit such as <a href="http://jquery.com">jQuery</a> to select the DOM nodes that you need.</p>
+
+<h3>Conclusion</h3>
+
+<p>All major browsers now make named properties available on the global <code>window</code> object in standards mode.  It&#8217;s important to know that browsers do this because you&#8217;ll likely run into this at some point.  However, never purposely utilize this functionality.  If you see others use it tell them to stop, ridicule them, do whatever it takes.  Help <a href="http://movethewebforward.org/">move the web forward</a>.</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">TJ VanToll</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-07-19T22:33:00-04:00" pubdate data-updated="true">Jul 19<span>th</span>, 2012</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/browsers/'>Browsers</a>, <a class='category' href='/blog/categories/javascript/'>JavaScript</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://tjvantoll.com/2012/07/19/dom-element-references-as-global-variables/" data-via="tjvantoll" data-counturl="http://tjvantoll.com/2012/07/19/dom-element-references-as-global-variables/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/2012/07/15/native-html5-number-picker-vs-jquery-uis-spinner-which-to-use/" title="Previous Post: Native HTML5 Number Picker and jQuery UI's Spinner - Which to Use?">&laquo; Native HTML5 Number Picker and jQuery UI's Spinner - Which to Use?</a>
+      
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2012/07/19/dom-element-references-as-global-variables/">DOM Element References as Global Variables</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2012/07/15/native-html5-number-picker-vs-jquery-uis-spinner-which-to-use/">Native HTML5 Number Picker and jQuery UI's Spinner - Which to Use?</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2012/07/10/default-browser-handling-of-the-css-text-transform-property/">Default Browser Handling of the CSS text-transform Property</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2012/07/07/the-ideal-less-workflow-with-git/">The Ideal LESS Workflow with git</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2012/06/30/creating-a-native-html5-datepicker-with-a-fallback-to-jquery-ui/">Creating a Native HTML 5 Datepicker with a Fallback to jQuery UI</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2012/06/15/detecting-print-requests-with-javascript/">Detecting Print Requests with JavaScript</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2012/06/10/browser-css-parsing-discrepancies/">Browser CSS Parsing Discrepancies</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2012/05/02/showmodaldialog-what-it-is-and-why-you-should-never-use-it/">window.showModalDialog: What It is and Why You Should Never Use It</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2012/03/21/javascript-for-the-java-developer/">JavaScript for the Java Developer</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2012/03/17/Styling-Disabled-Form-Fields/">Styling Disabled Form Fields</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>Latest Tweets</h1>
+  <ul id="tweets">
+    <li class="loading">Status updating...</li>
+  </ul>
+  <script type="text/javascript">
+    $.domReady(function(){
+      getTwitterFeed("tjvantoll", 4, false);
+    });
+  </script>
+  <script src="/javascripts/twitter.js" type="text/javascript"> </script>
+  
+    <a href="http://twitter.com/tjvantoll" class="twitter-follow-button" data-show-count="false">Follow @tjvantoll</a>
+  
+</section>
+
+<section class="jsdocs">
+	<h1><a href="http://promotejs.com">Promote JS!</a></h1>
+	<a href="https://developer.mozilla.org/en/JavaScript/Guide" title="JS Tutorial, JavaScript Tutorial, JavaScript Guide, Learn JavaScript JS, How To Learn JS, Learning JavaScript"><img src="http://static.jsconf.us/promotejshs.png" height="150" alt="JS Tutorial, JavaScript Tutorial, JavaScript Guide, Learn JavaScript JS, How To Learn JS, Learning JavaScript" width="180"></a></section>
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2012 - TJ VanToll -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'tjvantoll';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://tjvantoll.com/2012/07/19/dom-element-references-as-global-variables/';
+        var disqus_url = 'http://tjvantoll.com/2012/07/19/dom-element-references-as-global-variables/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>
