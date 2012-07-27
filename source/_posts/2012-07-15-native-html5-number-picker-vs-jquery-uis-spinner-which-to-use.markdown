@@ -16,7 +16,7 @@ HTML5 adds several new valid `type` attributes for `<input>` elements.  One of t
 <input type="number" />
 ```
 
-This will give present the user with a number picker in supported browsers, which, as of this writing includes Chrome, Safari, Opera, iOS, Opera Mobile, and Android 4.0+ ([full support list](http://caniuse.com/#feat=input-number)).  Here's what the user will see in supported browsers:
+This will present the user with a number picker in supported browsers, which, as of this writing includes Chrome, Safari, Opera, iOS, Opera Mobile, and Android 4.0+ ([full support list](http://caniuse.com/#feat=input-number)).  Here's what the user will see in supported browsers:
 
 <!--more-->
 
@@ -237,6 +237,6 @@ $(function() {
 });
 ```
 
-What this does is detect whether the browser supports the `step` attribute, if it does it removes jQuery UI's controls.  What does the `step` attribute have to do with the arrow controls?  Nothing, except that it just *happens* that the browsers the support the `step` attribute also create a native control to do the stepping.  Is this going to change in the future?  Quite possibly.
+What this does is detect whether the browser supports the `step` attribute, if it does it removes jQuery UI's controls.  What does the `step` attribute have to do with the arrow controls?  Nothing, except that it just *happens* that the browsers that support the `step` attribute also create a native control to do the stepping.  Is this going to change in the future?  Quite possibly.
 
 So obviously this is not ideal, and probably shouldn't be used in production code, but it works at the moment.  Have a better approach for tackling this problem?  Let me know in the comments.
