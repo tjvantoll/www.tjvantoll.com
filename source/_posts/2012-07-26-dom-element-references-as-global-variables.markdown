@@ -22,9 +22,9 @@ Quiz: What is logged when the following markup is rendered?
 
 Syntax error obviously, right?  Wrong.  All major browser rendering engines will log a reference to the `<button>` node.  This includes Trident (IE), Gecko (Firefox), WebKit (Chrome, Safari, etc), and Presto (Opera).
 
-### Wait What?
+### Wait.  What?
 
-Ah, I get it, there's no doctype on that markup.  So this a quirks mode only thing then right?  Wrong.  [As of Firefox 14](https://bugzilla.mozilla.org/show_bug.cgi?id=622491) the lastest version of all major browsers will produce the same result IN STANDARDS MODE.
+Ah, I get it, there's no doctype on that markup.  So this a quirks mode only thing then right?  Wrong.  [As of Firefox 14](https://bugzilla.mozilla.org/show_bug.cgi?id=622491) the latest version of all major browsers will produce the same result IN STANDARDS MODE.
 
 ``` html
 <!DOCTYPE html>
@@ -66,13 +66,13 @@ Gecko implemented this functionality but originally turned it on only in quirks 
 
 Webkit and Presto have had named access in standards mode for some time now.  [Webkit recently considered relegating this behavior to quirks mode](https://www.w3.org/Bugs/Public/show_bug.cgi?id=11960), however, they decided on leaving it enabled in standards mode.  Apparently there is still just too much stuff out there relying on this behavior to remove it in standards mode.  Believe it or not Microsoft even [shipped a marketing demo](https://bugzilla.mozilla.org/show_bug.cgi?id=737760) that directly referenced named DOM elements, preventing it from functioning in Gecko.
 
-One of the main aims of the HTML5 specification is to standarize browser behavior, however quirky it might be.  Therefore, this functionality made it into the specification.
+One of the main aims of the HTML5 specification is to standardize browser behavior, however quirky it might be.  Therefore, this functionality made it into the specification.
 
 ### Why is This Behavior Bad?
 
 I've alluded to the fact that this behavior is bad, but I've haven't gotten into details as to why.
 
-#### There is a high potential to introduce bugs into the system.
+#### There is a high potential for bugs to be introduced into the system
 
 Let's say you have some code that looks something like this:
 
@@ -107,7 +107,11 @@ Since a global `choice` variable is being created, `window.choice` will resolve 
 
 This is all well and good.  However, let's say that during a refactor of this code the `var choice = 'foo';` line is accidentally removed.  Under normal circumstances this would cause a syntax error because `window.choice` would now be undefined.  However, because there is a DOM node with an `id` of `choice`, that reference will now refer to the DOM node instead.  This can easily lead to unexpected behavior.
 
-It doesn't even need to be this complex of an example.  Say you mistype the name of your variable and happen to type a named DOM element.  SURPRISE!
+The flip side of this situation is also true.  If you have an element `<div id="bar"></div>` and use `window.bar` to refer to it, that code will break if you create JavaScript variable using `var` in the same scope (i.e. `var bar = 2;`).
+
+#### Mistyping
+
+Say you mistype the name of your variable and happen to type a named DOM element.  SURPRISE!
 
 #### Non-trivial cost for the browser to implement
 
@@ -175,7 +179,7 @@ Per this portion of the spec:
 Otherwise return an HTMLCollection rooted at the Document node, whose filter matches only named elements with the name name.
 {% endblockquote %}
 
-What this is staying is that when there are multiple named propeties with the same name, the browser should return an array when that property is referenced (instead of a reference to a specific DOM node).  As an example given this markup:
+What this is staying is that when there are multiple named properties with the same name, the browser should return an array when that property is referenced (instead of a reference to a specific DOM node).  As an example given this markup:
 
 ``` html
 <!DOCTYPE html>
@@ -193,7 +197,7 @@ What this is staying is that when there are multiple named propeties with the sa
 
 ...an array with references to the two `<input>` nodes should be logged per the spec.  And it will be in all browsers except Firefox.  Firefox 14 will simply log the first element.
 
-Having two elements with the same `id` is invalid HTML, but the browser will still render it just fine.  Even with the best of intentions these sorts of things do happen, especially in larger, dynamic applications.  When you do silly things as a web developer it's best when the browsers behave consistently.
+Having two elements with the same `id` is invalid HTML, but the browser will still render it just fine.  Even with the best of intentions these sorts of things do happen, especially in larger, dynamic applications.
 
 ### More?
 
