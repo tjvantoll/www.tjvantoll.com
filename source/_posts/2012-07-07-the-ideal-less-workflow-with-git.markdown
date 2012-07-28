@@ -22,7 +22,7 @@ If you want files to be regenerated using SASS you must tell SASS which files to
 
 ### Production
 
-While the ease of use during development is great, you don't want visitors to your site to incur the cost of processing the LESS files client side in a production settting.  The easy way to accomplish this is to manually run ```lessc``` from the command line to convert all LESS files into CSS files, and then updating all of your .less paths in `<link>` tags to use .css paths.
+While the ease of use during development is great, you don't want visitors to your site to incur the cost of processing the LESS files client side in a production setting.  The easy way to accomplish this is to manually run ```lessc``` from the command line to convert all LESS files into CSS files, and then updating all of your .less paths in `<link>` tags to use .css paths.
 
 This works, but the lazy programmer in you will be looking to automate this after doing this more than once.  If you're using Git for source control one way you can accomplish this is by running a commit hook to do the generation.
 

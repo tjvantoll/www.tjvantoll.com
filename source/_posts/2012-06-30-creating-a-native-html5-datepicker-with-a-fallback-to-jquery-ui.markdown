@@ -6,7 +6,7 @@ comments: true
 categories: [jQuery UI, Browsers]
 ---
 
-The recently released Chrome 20 features support for native datepickers on `<input>` nodes with a `[type=date]` attribute.  The list of browsers that support native datepickers now includes Chrome, Opera 11+, Opera Mobile, and iOS 5+ (see [caniuse.com](http://caniuse.com/#feat=input-datetime)).  Therefore, now's a great time to start using them in your web applications.
+The recently released Chrome 20 features support for native datepickers on `<input>` nodes with a `[type=date]` attribute.  The list of browsers that support native datepickers now includes Chrome, Opera 11+, Opera Mobile, and iOS 5+ (see [caniuse.com](http://caniuse.com/#feat=input-datetime)).  Therefore, now is a great time to start using them in your web applications.
 
 <!--more-->
 
@@ -80,4 +80,4 @@ You can see how your browser handles this situation here:
 
 ### Conclusion
 
-With Chrome adding support for native datepickers a large chunk web users now have the ability to use native pickers.  Therefore, now's a great time to consider using them in your applications.
+With Chrome adding support for native datepickers a large chunk web users now have the ability to use native pickers.  Therefore, now is a great time to consider using them in your applications.

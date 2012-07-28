@@ -53,7 +53,7 @@ You can see what your browser does below:
 
 The native number picker supports `min`, `max`, and `step` attributes to allow you to pick the minimum value of the `<input>`, the maximum value of the `<input>`, and the amount the value should be incremented / decremented when the user spins through values (the `step` attribute defaults to `1` if not specified).
 
-For example, on the `<input>` below the browser will enforce that the minimum value will be `2`, the maxiumum value will be `20`, and the user will step at increments of `2`.
+For example, on the `<input>` below the browser will enforce that the minimum value will be `2`, the maximum value will be `20`, and the user will step at increments of `2`.
 
 ``` html
 <input type="number" min="2" max="20" step="2" />

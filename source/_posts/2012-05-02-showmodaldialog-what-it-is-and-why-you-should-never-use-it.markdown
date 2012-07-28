@@ -120,7 +120,7 @@ Despite these issues Chrome did do one thing right.  While it's important that m
 
 #### Modal Dialog == Popup
 
-The biggest issue with modal dialogs is that Firefox, Chrome, and Safari all treat them as popups by default and block them.  A user has to explictly allow the popup in order to see your modal dialog.  In my experience users usually get frustrated and leave at that point.
+The biggest issue with modal dialogs is that Firefox, Chrome, and Safari all treat them as popups by default and block them.  A user has to explicitly allow the popup in order to see your modal dialog.  In my experience users usually get frustrated and leave at that point.
 
 #### Debugging
 
@@ -158,7 +158,7 @@ Right now people fake it with divs and complicated styles and script. It would b
 I’d add it to HTML 5, but there are so many new features already that we need to wait for the browsers to catch up.
 {% endblockquote %}
 
-Good news, [the dialog element](http://dev.w3.org/html5/spec/commands.html#the-dialog-element) has recently been added to the HTML spec.  It includes a ```showModal``` method as well as a ```returnValue``` property that mimics ```window.returnValue```.  The bad news?  It will be a long time before this element is useable  in all browsers.  The good news?  This would be a relatively easy element to [polyfill](http://remysharp.com/2010/10/08/what-is-a-polyfill/), so once some implementations make their way into browsers, developers could make a functional version for older browsers with the same API.
+Good news, [the dialog element](http://dev.w3.org/html5/spec/commands.html#the-dialog-element) has recently been added to the HTML spec.  It includes a ```showModal``` method as well as a ```returnValue``` property that mimics ```window.returnValue```.  The bad news?  It will be a long time before this element is usable  in all browsers.  The good news?  This would be a relatively easy element to [polyfill](http://remysharp.com/2010/10/08/what-is-a-polyfill/), so once some implementations make their way into browsers, developers could make a functional version for older browsers with the same API.
 
 ### Conclusion
 
