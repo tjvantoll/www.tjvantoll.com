@@ -4,7 +4,7 @@
   <title><![CDATA[TJ VanToll]]></title>
   <link href="http://tjvantoll.com/atom.xml" rel="self"/>
   <link href="http://tjvantoll.com/"/>
-  <updated>2012-07-26T21:53:08-04:00</updated>
+  <updated>2012-07-27T21:22:40-04:00</updated>
   <id>http://tjvantoll.com/</id>
   <author>
     <name><![CDATA[TJ VanToll]]></name>
@@ -43,9 +43,9 @@
 
 <p>Syntax error obviously, right?  Wrong.  All major browser rendering engines will log a reference to the <code>&lt;button&gt;</code> node.  This includes Trident (IE), Gecko (Firefox), WebKit (Chrome, Safari, etc), and Presto (Opera).</p>
 
-<h3>Wait What?</h3>
+<h3>Wait.  What?</h3>
 
-<p>Ah, I get it, there&#8217;s no doctype on that markup.  So this a quirks mode only thing then right?  Wrong.  <a href="https://bugzilla.mozilla.org/show_bug.cgi?id=622491">As of Firefox 14</a> the lastest version of all major browsers will produce the same result IN STANDARDS MODE.</p>
+<p>Ah, I get it, there&#8217;s no doctype on that markup.  So this a quirks mode only thing then right?  Wrong.  <a href="https://bugzilla.mozilla.org/show_bug.cgi?id=622491">As of Firefox 14</a> the latest version of all major browsers will produce the same result IN STANDARDS MODE.</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -94,13 +94,13 @@
 
 <p>Webkit and Presto have had named access in standards mode for some time now.  <a href="https://www.w3.org/Bugs/Public/show_bug.cgi?id=11960">Webkit recently considered relegating this behavior to quirks mode</a>, however, they decided on leaving it enabled in standards mode.  Apparently there is still just too much stuff out there relying on this behavior to remove it in standards mode.  Believe it or not Microsoft even <a href="https://bugzilla.mozilla.org/show_bug.cgi?id=737760">shipped a marketing demo</a> that directly referenced named DOM elements, preventing it from functioning in Gecko.</p>
 
-<p>One of the main aims of the HTML5 specification is to standarize browser behavior, however quirky it might be.  Therefore, this functionality made it into the specification.</p>
+<p>One of the main aims of the HTML5 specification is to standardize browser behavior, however quirky it might be.  Therefore, this functionality made it into the specification.</p>
 
 <h3>Why is This Behavior Bad?</h3>
 
 <p>I&#8217;ve alluded to the fact that this behavior is bad, but I&#8217;ve haven&#8217;t gotten into details as to why.</p>
 
-<h4>There is a high potential to introduce bugs into the system.</h4>
+<h4>There is a high potential for bugs to be introduced into the system</h4>
 
 <p>Let&#8217;s say you have some code that looks something like this:</p>
 
@@ -156,7 +156,11 @@
 
 <p>This is all well and good.  However, let&#8217;s say that during a refactor of this code the <code>var choice = 'foo';</code> line is accidentally removed.  Under normal circumstances this would cause a syntax error because <code>window.choice</code> would now be undefined.  However, because there is a DOM node with an <code>id</code> of <code>choice</code>, that reference will now refer to the DOM node instead.  This can easily lead to unexpected behavior.</p>
 
-<p>It doesn&#8217;t even need to be this complex of an example.  Say you mistype the name of your variable and happen to type a named DOM element.  SURPRISE!</p>
+<p>The flip side of this situation is also true.  If you have an element <code>&lt;div id="bar"&gt;&lt;/div&gt;</code> and use <code>window.bar</code> to refer to it, that code will break if you create JavaScript variable using <code>var</code> in the same scope (i.e. <code>var bar = 2;</code>).</p>
+
+<h4>Mistyping</h4>
+
+<p>Say you mistype the name of your variable and happen to type a named DOM element.  SURPRISE!</p>
 
 <h4>Non-trivial cost for the browser to implement</h4>
 
@@ -247,7 +251,7 @@
 <blockquote><p>&#8230;if elements has only one element, return that element and abort these steps.</p><p>Otherwise return an HTMLCollection rooted at the Document node, whose filter matches only named elements with the name name.</p><footer><strong>HTML Specification</strong> <cite><a href='http://dev.w3.org/html5/spec/single-page.html#dom-window-nameditem'>dev.w3.org/html5/spec/&hellip;</a></cite></footer></blockquote>
 
 
-<p>What this is staying is that when there are multiple named propeties with the same name, the browser should return an array when that property is referenced (instead of a reference to a specific DOM node).  As an example given this markup:</p>
+<p>What this is staying is that when there are multiple named properties with the same name, the browser should return an array when that property is referenced (instead of a reference to a specific DOM node).  As an example given this markup:</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -276,7 +280,7 @@
 
 <p>&#8230;an array with references to the two <code>&lt;input&gt;</code> nodes should be logged per the spec.  And it will be in all browsers except Firefox.  Firefox 14 will simply log the first element.</p>
 
-<p>Having two elements with the same <code>id</code> is invalid HTML, but the browser will still render it just fine.  Even with the best of intentions these sorts of things do happen, especially in larger, dynamic applications.  When you do silly things as a web developer it&#8217;s best when the browsers behave consistently.</p>
+<p>Having two elements with the same <code>id</code> is invalid HTML, but the browser will still render it just fine.  Even with the best of intentions these sorts of things do happen, especially in larger, dynamic applications.</p>
 
 <h3>More?</h3>
 
@@ -425,7 +429,7 @@
 
 <p>The native number picker supports <code>min</code>, <code>max</code>, and <code>step</code> attributes to allow you to pick the minimum value of the <code>&lt;input&gt;</code>, the maximum value of the <code>&lt;input&gt;</code>, and the amount the value should be incremented / decremented when the user spins through values (the <code>step</code> attribute defaults to <code>1</code> if not specified).</p>
 
-<p>For example, on the <code>&lt;input&gt;</code> below the browser will enforce that the minimum value will be <code>2</code>, the maxiumum value will be <code>20</code>, and the user will step at increments of <code>2</code>.</p>
+<p>For example, on the <code>&lt;input&gt;</code> below the browser will enforce that the minimum value will be <code>2</code>, the maximum value will be <code>20</code>, and the user will step at increments of <code>2</code>.</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;number&quot;</span> <span class="na">min=</span><span class="s">&quot;2&quot;</span> <span class="na">max=</span><span class="s">&quot;20&quot;</span> <span class="na">step=</span><span class="s">&quot;2&quot;</span> <span class="nt">/&gt;</span>
@@ -876,7 +880,7 @@
 
 <h3>Production</h3>
 
-<p>While the ease of use during development is great, you don&#8217;t want visitors to your site to incur the cost of processing the LESS files client side in a production settting.  The easy way to accomplish this is to manually run <code>lessc</code> from the command line to convert all LESS files into CSS files, and then updating all of your .less paths in <code>&lt;link&gt;</code> tags to use .css paths.</p>
+<p>While the ease of use during development is great, you don&#8217;t want visitors to your site to incur the cost of processing the LESS files client side in a production setting.  The easy way to accomplish this is to manually run <code>lessc</code> from the command line to convert all LESS files into CSS files, and then updating all of your .less paths in <code>&lt;link&gt;</code> tags to use .css paths.</p>
 
 <p>This works, but the lazy programmer in you will be looking to automate this after doing this more than once.  If you&#8217;re using Git for source control one way you can accomplish this is by running a commit hook to do the generation.</p>
 
@@ -1173,7 +1177,7 @@
     <link href="http://tjvantoll.com/2012/06/30/creating-a-native-html5-datepicker-with-a-fallback-to-jquery-ui/"/>
     <updated>2012-06-30T17:06:00-04:00</updated>
     <id>http://tjvantoll.com/2012/06/30/creating-a-native-html5-datepicker-with-a-fallback-to-jquery-ui</id>
-    <content type="html"><![CDATA[<p>The recently released Chrome 20 features support for native datepickers on <code>&lt;input&gt;</code> nodes with a <code>[type=date]</code> attribute.  The list of browsers that support native datepickers now includes Chrome, Opera 11+, Opera Mobile, and iOS 5+ (see <a href="http://caniuse.com/#feat=input-datetime">caniuse.com</a>).  Therefore, now&#8217;s a great time to start using them in your web applications.</p>
+    <content type="html"><![CDATA[<p>The recently released Chrome 20 features support for native datepickers on <code>&lt;input&gt;</code> nodes with a <code>[type=date]</code> attribute.  The list of browsers that support native datepickers now includes Chrome, Opera 11+, Opera Mobile, and iOS 5+ (see <a href="http://caniuse.com/#feat=input-datetime">caniuse.com</a>).  Therefore, now is a great time to start using them in your web applications.</p>
 
 <!--more-->
 
@@ -1260,7 +1264,7 @@
 
 <h3>Conclusion</h3>
 
-<p>With Chrome adding support for native datepickers a large chunk web users now have the ability to use native pickers.  Therefore, now&#8217;s a great time to consider using them in your applications.</p>
+<p>With Chrome adding support for native datepickers a large chunk web users now have the ability to use native pickers.  Therefore, now is a great time to consider using them in your applications.</p>
 ]]></content>
   </entry>
   
@@ -1998,7 +2002,7 @@
 
 <h4>Modal Dialog == Popup</h4>
 
-<p>The biggest issue with modal dialogs is that Firefox, Chrome, and Safari all treat them as popups by default and block them.  A user has to explictly allow the popup in order to see your modal dialog.  In my experience users usually get frustrated and leave at that point.</p>
+<p>The biggest issue with modal dialogs is that Firefox, Chrome, and Safari all treat them as popups by default and block them.  A user has to explicitly allow the popup in order to see your modal dialog.  In my experience users usually get frustrated and leave at that point.</p>
 
 <h4>Debugging</h4>
 
@@ -2030,7 +2034,7 @@
 <blockquote><p>In-window modal dialogs or dialog box—the kind of prompt you get when the computer asks you a question and won’t let you do anything else until you answer the question. For instance, the window that comes up when you say &#8220;Save As…&#8221; is usually a modal dialog.</p><p>Right now people fake it with divs and complicated styles and script. It would be neat to just be able to say &#8220;make this section a modal dialog&#8221;. Like showModalDialog(), but within the page instead of opening a new window with a new page.</p><p>I’d add it to HTML 5, but there are so many new features already that we need to wait for the browsers to catch up.</p><footer><strong>Ian Hickson</strong> <cite><a href='http://www.webstandards.org/2009/05/13/interview-with-ian-hickson-editor-of-the-html-5-specification/'>www.webstandards.org/2009/05/13/&hellip;</a></cite></footer></blockquote>
 
 
-<p>Good news, <a href="http://dev.w3.org/html5/spec/commands.html#the-dialog-element">the dialog element</a> has recently been added to the HTML spec.  It includes a <code>showModal</code> method as well as a <code>returnValue</code> property that mimics <code>window.returnValue</code>.  The bad news?  It will be a long time before this element is useable  in all browsers.  The good news?  This would be a relatively easy element to <a href="http://remysharp.com/2010/10/08/what-is-a-polyfill/">polyfill</a>, so once some implementations make their way into browsers, developers could make a functional version for older browsers with the same API.</p>
+<p>Good news, <a href="http://dev.w3.org/html5/spec/commands.html#the-dialog-element">the dialog element</a> has recently been added to the HTML spec.  It includes a <code>showModal</code> method as well as a <code>returnValue</code> property that mimics <code>window.returnValue</code>.  The bad news?  It will be a long time before this element is usable  in all browsers.  The good news?  This would be a relatively easy element to <a href="http://remysharp.com/2010/10/08/what-is-a-polyfill/">polyfill</a>, so once some implementations make their way into browsers, developers could make a functional version for older browsers with the same API.</p>
 
 <h3>Conclusion</h3>
 

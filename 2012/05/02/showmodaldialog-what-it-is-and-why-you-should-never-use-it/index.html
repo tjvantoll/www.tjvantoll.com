@@ -346,7 +346,7 @@
 
 <h4>Modal Dialog == Popup</h4>
 
-<p>The biggest issue with modal dialogs is that Firefox, Chrome, and Safari all treat them as popups by default and block them.  A user has to explictly allow the popup in order to see your modal dialog.  In my experience users usually get frustrated and leave at that point.</p>
+<p>The biggest issue with modal dialogs is that Firefox, Chrome, and Safari all treat them as popups by default and block them.  A user has to explicitly allow the popup in order to see your modal dialog.  In my experience users usually get frustrated and leave at that point.</p>
 
 <h4>Debugging</h4>
 
@@ -378,7 +378,7 @@
 <blockquote><p>In-window modal dialogs or dialog box—the kind of prompt you get when the computer asks you a question and won’t let you do anything else until you answer the question. For instance, the window that comes up when you say &#8220;Save As…&#8221; is usually a modal dialog.</p><p>Right now people fake it with divs and complicated styles and script. It would be neat to just be able to say &#8220;make this section a modal dialog&#8221;. Like showModalDialog(), but within the page instead of opening a new window with a new page.</p><p>I’d add it to HTML 5, but there are so many new features already that we need to wait for the browsers to catch up.</p><footer><strong>Ian Hickson</strong> <cite><a href='http://www.webstandards.org/2009/05/13/interview-with-ian-hickson-editor-of-the-html-5-specification/'>www.webstandards.org/2009/05/13/&hellip;</a></cite></footer></blockquote>
 
 
-<p>Good news, <a href="http://dev.w3.org/html5/spec/commands.html#the-dialog-element">the dialog element</a> has recently been added to the HTML spec.  It includes a <code>showModal</code> method as well as a <code>returnValue</code> property that mimics <code>window.returnValue</code>.  The bad news?  It will be a long time before this element is useable  in all browsers.  The good news?  This would be a relatively easy element to <a href="http://remysharp.com/2010/10/08/what-is-a-polyfill/">polyfill</a>, so once some implementations make their way into browsers, developers could make a functional version for older browsers with the same API.</p>
+<p>Good news, <a href="http://dev.w3.org/html5/spec/commands.html#the-dialog-element">the dialog element</a> has recently been added to the HTML spec.  It includes a <code>showModal</code> method as well as a <code>returnValue</code> property that mimics <code>window.returnValue</code>.  The bad news?  It will be a long time before this element is usable  in all browsers.  The good news?  This would be a relatively easy element to <a href="http://remysharp.com/2010/10/08/what-is-a-polyfill/">polyfill</a>, so once some implementations make their way into browsers, developers could make a functional version for older browsers with the same API.</p>
 
 <h3>Conclusion</h3>
 
