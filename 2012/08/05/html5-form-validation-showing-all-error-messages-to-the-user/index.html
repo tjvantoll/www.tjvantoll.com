@@ -1,0 +1,553 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>HTML5 Form Validation - Showing All Error Messages - TJ VanToll - Adventures in Front End Technologies</title>
+  <meta name="author" content="TJ VanToll">
+
+  
+  <meta name="description" content="Browsers that support HTML5 form validation have one thing in common; if a &lt;form&gt; is submitted and has errors on multiple fields, the browser &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://tjvantoll.com/2012/08/05/html5-form-validation-showing-all-error-messages-to-the-user">
+  <!-- Use custom favicon -->
+  <!--<link href="/favicon.png" rel="icon">-->
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  
+  <!--
+  Custom script concatenation, including a custom version of Modernizr, prefixfree, and PictureCube
+  <script src="/javascripts/modernizr-2.5.3.js"></script>
+  <script src="/javascripts/prefixfree.min.js"></script>  
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js"></script>
+  <script src="/javascripts/PictureCube.js"></script>
+  -->
+  <script src="/javascripts/build/scripts.js"></script>
+	
+  <link href="/atom.xml" rel="alternate" title="TJ VanToll" type="application/atom+xml">
+  <script>
+	$.domReady(function() {
+		if (Modernizr.csstransforms3d) {
+			new PictureCube('picture-cube', [
+				'/images/me/1.jpg',
+				'/images/me/2.jpg',
+				'/images/kids/2.jpg',
+				'/images/kids/3.jpg',
+				'/images/izzie/5.jpg',
+				'/images/me/3.jpg'											
+			]).cycle(5000);
+		}			
+	});  
+</script>
+
+<!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+  	if (window.location.host.indexOf('local') == -1) {
+	    var _gaq = _gaq || [];
+	    _gaq.push(['_setAccount', 'UA-29179796-1']);
+	    _gaq.push(['_trackPageview']);
+	
+	    (function() {
+	      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+	      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+	      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	    })();
+    }
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+	<div id="picture-cube"></div>
+	<h1><a href="/">TJ VanToll</a></h1>
+	
+		<h2>Adventures in Front End Technologies</h2>
+		<!--
+		<h2>
+			<span>
+				<span class="a1">A</span>
+				<span class="a2">d</span>
+				<span class="a1">v</span>
+				<span class="a2">e</span>
+				<span class="a1">n</span>
+				<span class="a2">t</span>
+				<span class="a1">u</span>
+				<span class="a2">r</span>
+				<span class="a1">e</span>
+				<span class="a2">s</span>
+			</span>
+			&nbsp;
+			<span>
+				<span class="b">i</span>
+				<span class="b">n</span>
+			</span>
+			&nbsp; 
+			<span>
+				<span class="c1">F</span>
+				<span class="c2">r</span>
+				<span class="c3">o</span>
+				<span class="c4">n</span>
+				<span class="c5">t</span>
+			</span>
+			&nbsp;
+			<span>
+				<span class="d">E</span>
+				<span class="d">n</span>
+				<span class="d">d</span>
+			</span>
+			&nbsp;
+			<span>
+				<span class="e">T</span>
+				<span class="e">e</span>
+				<span class="e">c</span>
+				<span class="e">h</span>
+				<span class="e">n</span>
+				<span class="e">o</span>
+				<span class="e">l</span>
+				<span class="e">o</span>
+				<span class="e">g</span>
+				<span class="e">i</span>
+				<span class="e">e</span>
+				<span class="e">s</span>
+			</span>
+		</h2>-->  
+	
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:tjvantoll.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/about">About</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/speaking">Speaking</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">HTML5 Form Validation - Showing All Error Messages</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-08-05T16:21:00-04:00" pubdate data-updated="true">Aug 5<span>th</span>, 2012</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p><a href="http://caniuse.com/#feat=form-validation">Browsers that support HTML5 form validation</a> have one thing in common; if a <code>&lt;form&gt;</code> is submitted and has errors on multiple fields, the browser will only display the first error to the user.</p>
+
+<p>Turns out the spec leaves the specific means of handling multiple errors up to the browser itself:</p>
+
+<blockquote><p>Report the problems with the constraints of at least one of the elements given in unhandled invalid controls to the user. User agents may focus one of those elements in the process, by running the focusing steps for that element, and may change the scrolling position of the document, or perform some other action that brings the element to the user&#8217;s attention.</p><p>User agents may report more than one constraint violation. User agents may coalesce related constraint violation reports if appropriate (e.g. if multiple radio buttons in a group are marked as required, only one error need be reported). If one of the controls is not being rendered (e.g. it has the hidden attribute set) then user agents may report a script error.</p><footer><strong>HTML5 Specification</strong> <cite><a href='http://www.whatwg.org/specs/web-apps/current-work/#the-constraint-validation-api'>www.whatwg.org/specs/web-apps/&hellip;</a></cite></footer></blockquote>
+
+
+<p>The key part here being that user agents (i.e. browsers) <strong>MAY</strong> report more than one constraint violation (i.e. error).  Turns out they all decided not to.</p>
+
+<!--more-->
+
+
+<p>You can see this in your browser below (assuming it <a href="http://caniuse.com/#feat=form-validation">supports HTML5 form validation</a> and is not Safari).  Both fields are <code>required</code>, but if you submit the form you will only see an error for the first field.</p>
+
+<pre class="codepen" data-type="result" data-href="FBGvu" data-user="tjvantoll" data-host="http://codepen.io"><code></code></pre>
+
+
+<script async src="http://codepen.io/assets/embed/ei.js"></script>
+
+
+<p>Here&#8217;s what it looks like on supported browsers if you attempt to submit an empty <code>&lt;form&gt;</code>:</p>
+
+<h5>Chrome 21</h5>
+
+<p><img src="/images/posts/2012-08-05/Chrome.png" title="Chrome" alt="Chrome" /></p>
+
+<h5>Firefox 14</h5>
+
+<p><img src="/images/posts/2012-08-05/Firefox.png" title="Firefox" alt="Firefox" /></p>
+
+<h5>Opera 12</h5>
+
+<p><img src="/images/posts/2012-08-05/Opera.png" title="Opera" alt="Opera" /></p>
+
+<p>As you can see, all three only give an error for the first field.  Firefox at least has the decency to put a red border around all fields that had an error associated with them by default.</p>
+
+<p>The one noticeable browser missing from the above list is Safari.  Even though Safari supports the constraint validation API, the validation of forms is turned off.</p>
+
+<h3>Usability</h3>
+
+<p>From a usability perspective showing the users only the first error message is bad.  Imagine how frustrating it would be to continually correct errors just to be presented with the next error in the sequence.  If you&#8217;ve ran into a form of this variety before then you already know.</p>
+
+<p>Luckily browsers provide a <a href="http://www.whatwg.org/specs/web-apps/current-work/#the-constraint-validation-api">constraint validation API</a> that can be used to provide this functionality.</p>
+
+<h3>Using the Validation API</h3>
+
+<p>All dom nodes now possess a <a href="http://www.whatwg.org/specs/web-apps/current-work/#dom-cva-willvalidate_">willValidate</a> property that indicates whether the node is a candidate for form validation.</p>
+
+<p>Nodes in which <code>willValidate</code> is <code>true</code> also have a <code>validity</code> property which resolves to a <a href="https://developer.mozilla.org/en-US/docs/DOM/ValidityState">ValidityState object</a> which contains information about whether the field has an validation errors, as well as the error message the browser will display to the user.  You can leverage this API to display all error messages whenever a <code>&lt;form&gt;</code> is submitted.</p>
+
+<h3>The Code</h3>
+
+<p>Here&#8217;s how I accomplished this.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;form&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;ul</span> <span class="na">id=</span><span class="s">&quot;errorMessages&quot;</span><span class="nt">&gt;&lt;/ul&gt;</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="nt">&lt;label</span> <span class="na">for=</span><span class="s">&quot;name&quot;</span><span class="nt">&gt;</span>Name:<span class="nt">&lt;/label&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;text&quot;</span> <span class="na">required</span> <span class="nt">/&gt;</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="nt">&lt;label</span> <span class="na">for=</span><span class="s">&quot;comments&quot;</span><span class="nt">&gt;</span>Comments:<span class="nt">&lt;/label&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;textarea</span> <span class="na">id=</span><span class="s">&quot;comments&quot;</span> <span class="na">required</span><span class="nt">&gt;&lt;/textarea&gt;</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;submit&quot;</span> <span class="na">value=</span><span class="s">&quot;Submit&quot;</span> <span class="nt">/&gt;</span>
+</span><span class='line'><span class="nt">&lt;/form&gt;</span>​
+</span><span class='line'>
+</span><span class='line'><span class="nt">&lt;script&gt;</span>
+</span><span class='line'><span class="nx">$</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>    <span class="c1">//Keep track of whether there are any errors on the form for Safari.</span>
+</span><span class='line'>    <span class="kd">var</span> <span class="nx">formHasErrors</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="kd">var</span> <span class="nx">showAllErrorMessages</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>        <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#errorMessages&#39;</span><span class="p">).</span><span class="nx">empty</span><span class="p">();</span>
+</span><span class='line'>        <span class="nx">formHasErrors</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="c1">//Find everything within the form</span>
+</span><span class='line'>        <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;form&#39;</span><span class="p">).</span><span class="nx">find</span><span class="p">(</span><span class="s1">&#39;*&#39;</span><span class="p">).</span><span class="nx">each</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">index</span><span class="p">,</span> <span class="nx">node</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>            <span class="k">if</span> <span class="p">(</span><span class="nx">node</span><span class="p">.</span><span class="nx">willValidate</span> <span class="o">&amp;&amp;</span> <span class="nx">node</span><span class="p">.</span><span class="nx">validity</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="nx">node</span><span class="p">.</span><span class="nx">validity</span><span class="p">.</span><span class="nx">valid</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>                <span class="nx">formHasErrors</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+</span><span class='line'>                <span class="c1">//Find the field&#39;s corresponding label</span>
+</span><span class='line'>                <span class="kd">var</span> <span class="nx">label</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;label[for=&#39;</span> <span class="o">+</span> <span class="nx">node</span><span class="p">.</span><span class="nx">id</span> <span class="o">+</span> <span class="s1">&#39;]&#39;</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>                <span class="c1">//Opera incorrectly does not fill the validationMessage property.</span>
+</span><span class='line'>                <span class="kd">var</span> <span class="nx">message</span> <span class="o">=</span> <span class="nx">node</span><span class="p">.</span><span class="nx">validationMessage</span> <span class="o">||</span> <span class="s1">&#39;Invalid value.&#39;</span><span class="p">;</span>
+</span><span class='line'>                <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#errorMessages&#39;</span><span class="p">)</span>
+</span><span class='line'>                    <span class="p">.</span><span class="nx">show</span><span class="p">()</span>
+</span><span class='line'>                    <span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s1">&#39;&lt;li&gt;&lt;span&gt;&#39;</span> <span class="o">+</span> <span class="nx">label</span><span class="p">.</span><span class="nx">html</span><span class="p">()</span> <span class="o">+</span> <span class="s1">&#39;&lt;/span&gt; &#39;</span> <span class="o">+</span> <span class="nx">message</span> <span class="o">+</span> <span class="s1">&#39;&lt;/li&gt;&#39;</span><span class="p">);</span>
+</span><span class='line'>            <span class="p">}</span>
+</span><span class='line'>        <span class="p">});</span>
+</span><span class='line'>    <span class="p">};</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;input[type=submit]&#39;</span><span class="p">).</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;click&#39;</span><span class="p">,</span> <span class="nx">showAllErrorMessages</span><span class="p">);</span>
+</span><span class='line'>    <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;input[type=text]&#39;</span><span class="p">).</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;keypress&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>        <span class="c1">//keyCode 13 is Enter</span>
+</span><span class='line'>        <span class="k">if</span> <span class="p">(</span><span class="nx">event</span><span class="p">.</span><span class="nx">keyCode</span> <span class="o">==</span> <span class="mi">13</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>            <span class="nx">showAllErrorMessages</span><span class="p">();</span>
+</span><span class='line'>        <span class="p">}</span>
+</span><span class='line'>    <span class="p">});</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="c1">//Handle for Safari not having HTML5 form validation active.</span>
+</span><span class='line'>    <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;form&#39;</span><span class="p">).</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;submit&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>        <span class="k">if</span> <span class="p">(</span><span class="nx">formHasErrors</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>            <span class="nx">event</span><span class="p">.</span><span class="nx">preventDefault</span><span class="p">();</span>
+</span><span class='line'>        <span class="p">}</span>
+</span><span class='line'>    <span class="p">});</span>
+</span><span class='line'><span class="p">});</span><span class="err">​</span>
+</span><span class='line'><span class="nt">&lt;/script&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>You can see the results in your browser below:</p>
+
+<pre class="codepen" data-type="result" data-href="eLvlf" data-user="tjvantoll" data-host="http://codepen.io"><code></code></pre>
+
+
+<p>Here&#8217;s how it looks in Chrome 21:</p>
+
+<p><img src="/images/posts/2012-08-05/Chrome-full.png" title="Chrome" alt="Chrome" /></p>
+
+<p>A couple things to note:</p>
+
+<p>1) If a user attempts to submit a form and gets validation errors, a <code>submit</code> event is never fired for the <code>&lt;form&gt;</code>.  Therefore, instead of listening for <code>submit</code> on the <code>&lt;form&gt;</code> I instead listen for a <code>click</code> on the <code>&lt;input type="submit"&gt;</code>.  Since the user is also able to submit the form pressing enter in text inputs I listen for a Enter <code>keypress</code> on all text inputs.</p>
+
+<p>2) In my example I start each error message with the contents of the field&#8217;s <code>&lt;label&gt;</code>.  This is because quite often the messages for each field are going to be exactly the same.  Another approach would to use another constraint validation API method, <a href="http://www.whatwg.org/specs/web-apps/current-work/#dom-cva-setcustomvalidity">setCustomValidity</a>.</p>
+
+<p>3) The <code>node.willValidate &amp;&amp; node.validity</code> check will be <code>false</code> in all browsers that do not support the constraint validation API, therefore this code will simply do nothing in browsers that do not support HTML5 form validation.</p>
+
+<p>4) Opera incorrectly does not support the <code>validationMessage</code> property, therefore the check <code>var message = node.validationMessage || 'Invalid value.';</code> is necessary so a message is displayed for Opera.</p>
+
+<p>5) In order to make Safari display the error messages I manually keep track of whether there are any validation errors when the <code>&lt;form&gt;</code> is submitted.  If there are I prevent it by listening to the <code>submit</code> event of the <code>&lt;form&gt;</code>.</p>
+
+<p>6) I do nothing to style the individual fields based on whether they have valid data.  The HTML5 spec provides a number of CSS hooks to do this and I would recommend reading <a href="http://html5doctor.com/css3-pseudo-classes-and-html5-forms/">CSS Pseudo-Classes and HTML5 Forms</a> from <a href="http://html5doctor.com">html5 Doctor</a> if you&#8217;re interested in including such styling.</p>
+
+<h3>That&#8217;s a Lot of Code to Do Something Simple</h3>
+
+<p>Yep.  While browser support is getting to be quite good for these APIs the implementations themselves are still a bit buggy.  Nevertheless, this approach will work for displaying all validation errors to the end user.</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">TJ VanToll</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-08-05T16:21:00-04:00" pubdate data-updated="true">Aug 5<span>th</span>, 2012</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/browsers/'>Browsers</a>, <a class='category' href='/blog/categories/html5/'>HTML5</a>, <a class='category' href='/blog/categories/javascript/'>JavaScript</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://tjvantoll.com/2012/08/05/html5-form-validation-showing-all-error-messages-to-the-user/" data-via="tjvantoll" data-counturl="http://tjvantoll.com/2012/08/05/html5-form-validation-showing-all-error-messages-to-the-user/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/2012/07/19/dom-element-references-as-global-variables/" title="Previous Post: DOM Element References as Global Variables">&laquo; DOM Element References as Global Variables</a>
+      
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2012/08/05/html5-form-validation-showing-all-error-messages-to-the-user/">HTML5 Form Validation - Showing All Error Messages</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2012/07/19/dom-element-references-as-global-variables/">DOM Element References as Global Variables</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2012/07/15/native-html5-number-picker-vs-jquery-uis-spinner-which-to-use/">Native HTML5 Number Picker and jQuery UI's Spinner - Which to Use?</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2012/07/10/default-browser-handling-of-the-css-text-transform-property/">Default Browser Handling of the CSS text-transform Property</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2012/07/07/the-ideal-less-workflow-with-git/">The Ideal LESS Workflow with git</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2012/06/30/creating-a-native-html5-datepicker-with-a-fallback-to-jquery-ui/">Creating a Native HTML 5 Datepicker with a Fallback to jQuery UI</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2012/06/15/detecting-print-requests-with-javascript/">Detecting Print Requests with JavaScript</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2012/06/10/browser-css-parsing-discrepancies/">Browser CSS Parsing Discrepancies</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2012/05/02/showmodaldialog-what-it-is-and-why-you-should-never-use-it/">window.showModalDialog: What It is and Why You Should Never Use It</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2012/03/21/javascript-for-the-java-developer/">JavaScript for the Java Developer</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>Latest Tweets</h1>
+  <ul id="tweets">
+    <li class="loading">Status updating...</li>
+  </ul>
+  <script type="text/javascript">
+    $.domReady(function(){
+      getTwitterFeed("tjvantoll", 4, false);
+    });
+  </script>
+  <script src="/javascripts/twitter.js" type="text/javascript"> </script>
+  
+    <a href="http://twitter.com/tjvantoll" class="twitter-follow-button" data-show-count="false">Follow @tjvantoll</a>
+  
+</section>
+
+<section class="jsdocs">
+	<h1><a href="http://promotejs.com">Promote JS!</a></h1>
+	<a href="https://developer.mozilla.org/en/JavaScript/Guide" title="JS Tutorial, JavaScript Tutorial, JavaScript Guide, Learn JavaScript JS, How To Learn JS, Learning JavaScript"><img src="http://static.jsconf.us/promotejshs.png" height="150" alt="JS Tutorial, JavaScript Tutorial, JavaScript Guide, Learn JavaScript JS, How To Learn JS, Learning JavaScript" width="180"></a></section>
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2012 - TJ VanToll -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'tjvantoll';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://tjvantoll.com/2012/08/05/html5-form-validation-showing-all-error-messages-to-the-user/';
+        var disqus_url = 'http://tjvantoll.com/2012/08/05/html5-form-validation-showing-all-error-messages-to-the-user/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>
