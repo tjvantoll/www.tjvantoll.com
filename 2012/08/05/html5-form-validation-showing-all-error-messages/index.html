@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://tjvantoll.com/2012/08/05/html5-form-validation-showing-all-error-messages-to-the-user">
+  <link rel="canonical" href="http://tjvantoll.com/2012/08/05/html5-form-validation-showing-all-error-messages">
   <!-- Use custom favicon -->
   <!--<link href="/favicon.png" rel="icon">-->
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
@@ -186,7 +186,7 @@
 
 <p>Turns out the spec leaves the specific means of handling multiple errors up to the browser itself:</p>
 
-<blockquote><p>Report the problems with the constraints of at least one of the elements given in unhandled invalid controls to the user. User agents may focus one of those elements in the process, by running the focusing steps for that element, and may change the scrolling position of the document, or perform some other action that brings the element to the user&#8217;s attention.</p><p>User agents may report more than one constraint violation. User agents may coalesce related constraint violation reports if appropriate (e.g. if multiple radio buttons in a group are marked as required, only one error need be reported). If one of the controls is not being rendered (e.g. it has the hidden attribute set) then user agents may report a script error.</p><footer><strong>HTML5 Specification</strong> <cite><a href='http://www.whatwg.org/specs/web-apps/current-work/#the-constraint-validation-api'>www.whatwg.org/specs/web-apps/&hellip;</a></cite></footer></blockquote>
+<blockquote><p>Report the problems with the constraints of at least one of the elements given in unhandled invalid controls to the user. User agents may focus one of those elements in the process, by running the focusing steps for that element, and may change the scrolling position of the document, or perform some other action that brings the element to the user&#8217;s attention.</p><p>User agents may report more than one constraint violation. User agents may coalesce related constraint violation reports if appropriate (e.g. if multiple radio buttons in a group are marked as required, only one error need be reported).</p><footer><strong>HTML5 Specification</strong> <cite><a href='http://www.whatwg.org/specs/web-apps/current-work/#the-constraint-validation-api'>www.whatwg.org/specs/web-apps/&hellip;</a></cite></footer></blockquote>
 
 
 <p>The key part here being that user agents (i.e. browsers) <strong>MAY</strong> report more than one constraint violation (i.e. error).  Turns out they all decided not to.</p>
@@ -194,7 +194,7 @@
 <!--more-->
 
 
-<p>You can see this in your browser below (assuming it <a href="http://caniuse.com/#feat=form-validation">supports HTML5 form validation</a> and is not Safari).  Both fields are <code>required</code>, but if you submit the form you will only see an error for the first field.</p>
+<p>You can see this in your browser below (assuming it <a href="http://caniuse.com/#feat=form-validation">supports HTML5 form validation</a> and is not Safari, more on that later).  Both fields are <code>required</code>, but if you submit the form you will only see an error for the first field.</p>
 
 <pre class="codepen" data-type="result" data-href="FBGvu" data-user="tjvantoll" data-host="http://codepen.io"><code></code></pre>
 
@@ -202,7 +202,7 @@
 <script async src="http://codepen.io/assets/embed/ei.js"></script>
 
 
-<p>Here&#8217;s what it looks like on supported browsers if you attempt to submit an empty <code>&lt;form&gt;</code>:</p>
+<p>Here&#8217;s what it looks like on supported browsers if you attempt to submit this empty <code>&lt;form&gt;</code>:</p>
 
 <h5>Chrome 21</h5>
 
@@ -216,25 +216,25 @@
 
 <p><img src="/images/posts/2012-08-05/Opera.png" title="Opera" alt="Opera" /></p>
 
-<p>As you can see, all three only give an error for the first field.  Firefox at least has the decency to put a red border around all fields that had an error associated with them by default.</p>
+<p>As you can see, all three only give an error for the first field.  Firefox at least has the decency to put a red border around all fields with invalid data by default.</p>
 
-<p>The one noticeable browser missing from the above list is Safari.  Even though Safari supports the constraint validation API, the validation of forms is turned off.</p>
+<p>The one noticeable browser missing from the list above is Safari.  Even though Safari supports the constraint validation API, the validation itself is turned off.</p>
 
 <h3>Usability</h3>
 
-<p>From a usability perspective showing the users only the first error message is bad.  Imagine how frustrating it would be to continually correct errors just to be presented with the next error in the sequence.  If you&#8217;ve ran into a form of this variety before then you already know.</p>
+<p>From a usability perspective showing the users only the first error message is bad.  Imagine how frustrating it would be to continually correct errors just to be presented with the next error in the sequence.  If you&#8217;ve ran into a form such as this before you know what I&#8217;m talking about.</p>
 
-<p>Luckily browsers provide a <a href="http://www.whatwg.org/specs/web-apps/current-work/#the-constraint-validation-api">constraint validation API</a> that can be used to provide this functionality.</p>
+<p>Luckily, browsers provide a <a href="http://www.whatwg.org/specs/web-apps/current-work/#the-constraint-validation-api">constraint validation API</a> that can be used to provide this functionality.</p>
 
 <h3>Using the Validation API</h3>
 
 <p>All dom nodes now possess a <a href="http://www.whatwg.org/specs/web-apps/current-work/#dom-cva-willvalidate_">willValidate</a> property that indicates whether the node is a candidate for form validation.</p>
 
-<p>Nodes in which <code>willValidate</code> is <code>true</code> also have a <code>validity</code> property which resolves to a <a href="https://developer.mozilla.org/en-US/docs/DOM/ValidityState">ValidityState object</a> which contains information about whether the field has an validation errors, as well as the error message the browser will display to the user.  You can leverage this API to display all error messages whenever a <code>&lt;form&gt;</code> is submitted.</p>
+<p>Nodes in which <code>willValidate</code> is <code>true</code> also have a <code>validity</code> property.  The <code>validity</code> property resolves to a <a href="https://developer.mozilla.org/en-US/docs/DOM/ValidityState">ValidityState object</a> which contains information about whether the field has validation errors, as well as the error message the browser will display to the user.  You can leverage this API to display all error messages whenever a <code>&lt;form&gt;</code> is submitted.</p>
 
 <h3>The Code</h3>
 
-<p>Here&#8217;s how I accomplished this.</p>
+<p>Here&#8217;s how I accomplished this with a jQuery dependent script.</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -356,21 +356,21 @@
 
 <p>A couple things to note:</p>
 
-<p>1) If a user attempts to submit a form and gets validation errors, a <code>submit</code> event is never fired for the <code>&lt;form&gt;</code>.  Therefore, instead of listening for <code>submit</code> on the <code>&lt;form&gt;</code> I instead listen for a <code>click</code> on the <code>&lt;input type="submit"&gt;</code>.  Since the user is also able to submit the form pressing enter in text inputs I listen for a Enter <code>keypress</code> on all text inputs.</p>
+<p>1) If a user attempts to submit a form and gets validation errors, a <code>submit</code> event is never fired for the <code>&lt;form&gt;</code>.  Therefore, instead of listening for <code>submit</code> on the <code>&lt;form&gt;</code>, I instead listen for a <code>click</code> on the <code>&lt;input type="submit"&gt;</code>.  Since the user is also able to submit the form pressing enter in text inputs, I attach a <code>keypress</code> listener to them to ensure the same logic runs.</p>
 
-<p>2) In my example I start each error message with the contents of the field&#8217;s <code>&lt;label&gt;</code>.  This is because quite often the messages for each field are going to be exactly the same.  Another approach would to use another constraint validation API method, <a href="http://www.whatwg.org/specs/web-apps/current-work/#dom-cva-setcustomvalidity">setCustomValidity</a>.</p>
+<p>2) In my example I start each error message with the contents of the field&#8217;s <code>&lt;label&gt;</code>.  This is because the messages for each field are often identical.  An alternative approach would be to use another constraint validation API method, <a href="http://www.whatwg.org/specs/web-apps/current-work/#dom-cva-setcustomvalidity">setCustomValidity</a> to set a completely custom message.</p>
 
-<p>3) The <code>node.willValidate &amp;&amp; node.validity</code> check will be <code>false</code> in all browsers that do not support the constraint validation API, therefore this code will simply do nothing in browsers that do not support HTML5 form validation.</p>
+<p>3) The <code>node.willValidate &amp;&amp; node.validity</code> check will be <code>false</code> in all browsers that do not support the constraint validation API.  Therefore this code will simply do nothing in browsers that do not support HTML5 form validation.</p>
 
-<p>4) Opera incorrectly does not support the <code>validationMessage</code> property, therefore the check <code>var message = node.validationMessage || 'Invalid value.';</code> is necessary so a message is displayed for Opera.</p>
+<p>4) Opera incorrectly does not fill the <code>validationMessage</code> property.  Therefore the check <code>var message = node.validationMessage || 'Invalid value.'</code> is necessary so a message is displayed for Opera.</p>
 
-<p>5) In order to make Safari display the error messages I manually keep track of whether there are any validation errors when the <code>&lt;form&gt;</code> is submitted.  If there are I prevent it by listening to the <code>submit</code> event of the <code>&lt;form&gt;</code>.</p>
+<p>5) In order to make Safari display the error messages I manually keep track of whether there are any validation errors in the <code>&lt;form&gt;</code>.  If there are I prevent the <code>&lt;form&gt;</code> from submitting in a <code>submit</code> event.</p>
 
 <p>6) I do nothing to style the individual fields based on whether they have valid data.  The HTML5 spec provides a number of CSS hooks to do this and I would recommend reading <a href="http://html5doctor.com/css3-pseudo-classes-and-html5-forms/">CSS Pseudo-Classes and HTML5 Forms</a> from <a href="http://html5doctor.com">html5 Doctor</a> if you&#8217;re interested in including such styling.</p>
 
 <h3>That&#8217;s a Lot of Code to Do Something Simple</h3>
 
-<p>Yep.  While browser support is getting to be quite good for these APIs the implementations themselves are still a bit buggy.  Nevertheless, this approach will work for displaying all validation errors to the end user.</p>
+<p>Yep.  While browser support is getting to be quite good for HTML5 forms the implementations themselves are still a bit buggy.  Nevertheless, this approach will work for displaying all validation errors to the end user.</p>
 </div>
 
 
@@ -407,7 +407,7 @@
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://tjvantoll.com/2012/08/05/html5-form-validation-showing-all-error-messages-to-the-user/" data-via="tjvantoll" data-counturl="http://tjvantoll.com/2012/08/05/html5-form-validation-showing-all-error-messages-to-the-user/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://tjvantoll.com/2012/08/05/html5-form-validation-showing-all-error-messages/" data-via="tjvantoll" data-counturl="http://tjvantoll.com/2012/08/05/html5-form-validation-showing-all-error-messages/" >Tweet</a>
   
   
   
@@ -438,7 +438,7 @@
   <ul id="recent_posts">
     
       <li class="post">
-        <a href="/2012/08/05/html5-form-validation-showing-all-error-messages-to-the-user/">HTML5 Form Validation - Showing All Error Messages</a>
+        <a href="/2012/08/05/html5-form-validation-showing-all-error-messages/">HTML5 Form Validation - Showing All Error Messages</a>
       </li>
     
       <li class="post">
@@ -518,8 +518,8 @@
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://tjvantoll.com/2012/08/05/html5-form-validation-showing-all-error-messages-to-the-user/';
-        var disqus_url = 'http://tjvantoll.com/2012/08/05/html5-form-validation-showing-all-error-messages-to-the-user/';
+        var disqus_identifier = 'http://tjvantoll.com/2012/08/05/html5-form-validation-showing-all-error-messages/';
+        var disqus_url = 'http://tjvantoll.com/2012/08/05/html5-form-validation-showing-all-error-messages/';
         var disqus_script = 'embed.js';
       
     (function () {
