@@ -9,6 +9,20 @@ footer: true
 	<h2>2012</h2>
 
 	<article>
+		<h1>LESS 101</h1>
+		<time datetime="2012-08-09">
+			<span class="month">Aug</span>
+			<span class="day">09</span>
+			<span class="year">2012</span>
+		</time>
+		<footer>
+			<span class="categories">
+				Liquid Web - <a href="/speaking/slides/2012/LESS-101">Slides</a>
+			</span>
+		</footer>
+	</article>
+
+	<article>
 		<h1>JavaScript for the Java Developer</h1>
 		<time datetime="2012-03-20">
 			<span class="month">Mar</span>
