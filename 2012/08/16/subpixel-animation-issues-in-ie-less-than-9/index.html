@@ -1,0 +1,398 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Subpixel Animation Issues in IE < 9 - TJ VanToll - Tutorials, Thoughts, and Ramblings on Front End Development</title>
+  <meta name="author" content="TJ VanToll">
+
+  
+  <meta name="description" content="While there are definitely cross browser discrepancies handling subpixels, this one caught me by surprise. Take the following: 1
+2
+3
+4
+5
+6
+&lt;div id &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://tjvantoll.com/2012/08/16/subpixel-animation-issues-in-ie-less-than-9">
+  <!-- Use custom favicon -->
+  <!--<link href="/favicon.png" rel="icon">-->
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  
+  <!--
+  Custom script concatenation, including a custom version of Modernizr, prefixfree, and PictureCube
+  <script src="/javascripts/modernizr-2.5.3.js"></script>
+  <script src="/javascripts/prefixfree.min.js"></script>  
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js"></script>
+  <script src="/javascripts/PictureCube.js"></script>
+  -->
+  <script src="/javascripts/build/scripts.js"></script>
+	
+  <link href="/atom.xml" rel="alternate" title="TJ VanToll" type="application/atom+xml">
+  <script>
+	$.domReady(function() {
+		if (Modernizr.csstransforms3d) {
+			new PictureCube('picture-cube', [
+				'/images/me/1.jpg',
+				'/images/me/2.jpg',
+				'/images/kids/2.jpg',
+				'/images/kids/3.jpg',
+				'/images/izzie/5.jpg',
+				'/images/me/3.jpg'											
+			]).cycle(5000);
+		}			
+	});  
+</script>
+
+<!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+  	if (window.location.host.indexOf('local') == -1) {
+	    var _gaq = _gaq || [];
+	    _gaq.push(['_setAccount', 'UA-29179796-1']);
+	    _gaq.push(['_trackPageview']);
+	
+	    (function() {
+	      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+	      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+	      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	    })();
+    }
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+	<div id="picture-cube"></div>
+	<h1><a href="/">TJ VanToll</a></h1>
+	
+		<h2>Tutorials, Thoughts, and Ramblings on Front End Development</h2> 
+	
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:tjvantoll.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/about">About</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/speaking">Speaking</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Subpixel Animation Issues in IE < 9</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-08-16T21:56:00-04:00" pubdate data-updated="true">Aug 16<span>th</span>, 2012</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>While there are definitely <a href="http://ejohn.org/blog/sub-pixel-problems-in-css/">cross browser discrepancies handling subpixels</a>, this one caught me by surprise.  Take the following:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">&quot;box&quot;</span><span class="nt">&gt;&lt;/div&gt;</span>
+</span><span class='line'><span class="nt">&lt;script&gt;</span>
+</span><span class='line'>    <span class="kd">var</span> <span class="nx">box</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">&#39;box&#39;</span><span class="p">);</span>
+</span><span class='line'>    <span class="nx">box</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">left</span> <span class="o">=</span> <span class="s1">&#39;10.25px&#39;</span><span class="p">;</span>
+</span><span class='line'>    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">box</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">left</span><span class="p">);</span>
+</span><span class='line'><span class="nt">&lt;/script&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This simply sets a value for the <code>left</code> CSS property then immediately retrieves it.  In Chrome 22, Firefox 14, Safari 6, Opera 12, IE >= 9, iOS 5, and Android <code>10.25px</code> will be logged.</p>
+
+<p>In IE &lt; 9 <code>10px</code> is logged.  While not all browsers can accurately render the subpixel values, I had assumed all of them would&#8217;ve at least allowed the assignment.  I was wrong.  Internet Explorer will simply round the value to the nearest integer.</p>
+
+<p>Why is this a problem?  <!--more-->Take the following code.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">&quot;box&quot;</span><span class="nt">&gt;&lt;/div&gt;</span>
+</span><span class='line'><span class="nt">&lt;script&gt;</span>
+</span><span class='line'>    <span class="kd">var</span> <span class="nx">box</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">&#39;box&#39;</span><span class="p">);</span>
+</span><span class='line'>    <span class="nx">box</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">left</span> <span class="o">=</span> <span class="s1">&#39;0px&#39;</span><span class="p">;</span>
+</span><span class='line'>    <span class="nx">setInterval</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>        <span class="kd">var</span> <span class="nx">currentLeft</span> <span class="o">=</span> <span class="nx">box</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">left</span><span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="s1">&#39;px&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">);</span>
+</span><span class='line'>        <span class="nx">currentLeft</span> <span class="o">=</span> <span class="nb">parseFloat</span><span class="p">(</span><span class="nx">currentLeft</span><span class="p">);</span>
+</span><span class='line'>        <span class="nx">box</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">left</span> <span class="o">=</span> <span class="nx">currentLeft</span> <span class="o">+</span> <span class="mf">0.25</span> <span class="o">+</span> <span class="s1">&#39;px&#39;</span><span class="p">;</span>
+</span><span class='line'>    <span class="p">},</span> <span class="mi">20</span><span class="p">);</span>
+</span><span class='line'><span class="nt">&lt;/script&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This sets an interval that will increase the <code>left</code> property of a box by <code>0.25</code> pixels every 20 milliseconds.  Doing so will move the box left across the screen as seen below:</p>
+
+<iframe style="width: 100%; height: 150px;" src="http://jsfiddle.net/tj_vantoll/PBsLt/9/embedded/result,js,html/" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
+
+
+<p>Great.  Unfortunately in IE &lt; 9 the box will not move.  Within the interval function the value to increment is being retrieved from the element itself, which, in IE &lt; 9 will continuously return the rounded value.</p>
+
+<p>The way around this is simply to use store off the value of the property outside of the animation loop itself.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">&quot;box&quot;</span><span class="nt">&gt;&lt;/div&gt;</span>
+</span><span class='line'><span class="nt">&lt;script&gt;</span>
+</span><span class='line'>    <span class="kd">var</span> <span class="nx">left</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span><span class='line'>    <span class="kd">var</span> <span class="nx">box</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">&#39;box&#39;</span><span class="p">);</span>
+</span><span class='line'>    <span class="nx">setInterval</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>        <span class="nx">box</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">left</span> <span class="o">=</span> <span class="nx">left</span> <span class="o">+</span> <span class="s1">&#39;px&#39;</span><span class="p">;</span>
+</span><span class='line'>        <span class="nx">left</span> <span class="o">+=</span> <span class="mf">0.25</span><span class="p">;</span>
+</span><span class='line'>    <span class="p">},</span> <span class="mi">20</span><span class="p">);</span>
+</span><span class='line'><span class="nt">&lt;/script&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This has the added benefit of being more efficient since you save a property retrieval on every invocation of the loop.</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">TJ VanToll</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-08-16T21:56:00-04:00" pubdate data-updated="true">Aug 16<span>th</span>, 2012</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/browsers/'>Browsers</a>, <a class='category' href='/blog/categories/javascript/'>JavaScript</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://tjvantoll.com/2012/08/16/subpixel-animation-issues-in-ie-less-than-9/" data-via="tjvantoll" data-counturl="http://tjvantoll.com/2012/08/16/subpixel-animation-issues-in-ie-less-than-9/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/2012/08/10/less-101-the-basics-of-the-css-preprocessor/" title="Previous Post: LESS 101 - The Basics of the CSS Preprocessor">&laquo; LESS 101 - The Basics of the CSS Preprocessor</a>
+      
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2012/08/16/subpixel-animation-issues-in-ie-less-than-9/">Subpixel Animation Issues in IE < 9</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2012/08/10/less-101-the-basics-of-the-css-preprocessor/">LESS 101 - The Basics of the CSS Preprocessor</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2012/08/05/html5-form-validation-showing-all-error-messages/">HTML5 Form Validation - Showing All Error Messages</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2012/07/19/dom-element-references-as-global-variables/">DOM Element References as Global Variables</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2012/07/15/native-html5-number-picker-vs-jquery-uis-spinner-which-to-use/">Native HTML5 Number Picker and jQuery UI's Spinner - Which to Use?</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2012/07/10/default-browser-handling-of-the-css-text-transform-property/">Default Browser Handling of the CSS text-transform Property</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2012/07/07/the-ideal-less-workflow-with-git/">The Ideal LESS Workflow with git</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2012/06/30/creating-a-native-html5-datepicker-with-a-fallback-to-jquery-ui/">Creating a Native HTML 5 Datepicker with a Fallback to jQuery UI</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2012/06/15/detecting-print-requests-with-javascript/">Detecting Print Requests with JavaScript</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2012/06/10/browser-css-parsing-discrepancies/">Browser CSS Parsing Discrepancies</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>Latest Tweets</h1>
+  <ul id="tweets">
+    <li class="loading">Status updating...</li>
+  </ul>
+  <script type="text/javascript">
+    $.domReady(function(){
+      getTwitterFeed("tjvantoll", 4, false);
+    });
+  </script>
+  <script src="/javascripts/twitter.js" type="text/javascript"> </script>
+  
+    <a href="http://twitter.com/tjvantoll" class="twitter-follow-button" data-show-count="false">Follow @tjvantoll</a>
+  
+</section>
+
+<section class="jsdocs">
+	<h1><a href="http://promotejs.com">Promote JS!</a></h1>
+	<a href="https://developer.mozilla.org/en/JavaScript/Guide" title="JS Tutorial, JavaScript Tutorial, JavaScript Guide, Learn JavaScript JS, How To Learn JS, Learning JavaScript"><img src="http://static.jsconf.us/promotejshs.png" height="150" alt="JS Tutorial, JavaScript Tutorial, JavaScript Guide, Learn JavaScript JS, How To Learn JS, Learning JavaScript" width="180"></a></section>
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2012 - TJ VanToll -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'tjvantoll';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://tjvantoll.com/2012/08/16/subpixel-animation-issues-in-ie-less-than-9/';
+        var disqus_url = 'http://tjvantoll.com/2012/08/16/subpixel-animation-issues-in-ie-less-than-9/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>
