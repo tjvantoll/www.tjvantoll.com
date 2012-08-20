@@ -9,7 +9,7 @@ categories: [Mobile, Browsers, JavaScript]
 All browsers will fire an `onscroll` event on the `window` object whenever the window is scrolled.  However, when and how often they fire the event varies greatly.
 
 On desktop browsers this event is fired for every pixel the user scrolls.  But on most all mobile browsers the event is not fired until the *scrolling action* comes to a complete stop.
-
+<!--more-->
 You can see this by scrolling in the example below:
 
 <iframe style="width: 100%; height: 300px;" src="http://jsfiddle.net/tj_vantoll/p4pww/12/embedded/result,html,js,css/" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
