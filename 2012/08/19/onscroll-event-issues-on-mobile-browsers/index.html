@@ -1,0 +1,451 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>onscroll Event Issues on Mobile Browsers - TJ VanToll - Tutorials, Thoughts, and Ramblings on Front End Development</title>
+  <meta name="author" content="TJ VanToll">
+
+  
+  <meta name="description" content="All browsers will fire an onscroll event on the window object whenever the window is scrolled. However, when and how often they fire the event varies &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://tjvantoll.com/2012/08/19/onscroll-event-issues-on-mobile-browsers">
+  <!-- Use custom favicon -->
+  <!--<link href="/favicon.png" rel="icon">-->
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  
+  <!--
+  Custom script concatenation, including a custom version of Modernizr, prefixfree, and PictureCube
+  <script src="/javascripts/modernizr-2.5.3.js"></script>
+  <script src="/javascripts/prefixfree.min.js"></script>  
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js"></script>
+  <script src="/javascripts/PictureCube.js"></script>
+  -->
+  <script src="/javascripts/build/scripts.js"></script>
+	
+  <link href="/atom.xml" rel="alternate" title="TJ VanToll" type="application/atom+xml">
+  <script>
+	$.domReady(function() {
+		if (Modernizr.csstransforms3d) {
+			new PictureCube('picture-cube', [
+				'/images/me/1.jpg',
+				'/images/me/2.jpg',
+				'/images/kids/2.jpg',
+				'/images/kids/3.jpg',
+				'/images/izzie/5.jpg',
+				'/images/me/3.jpg'											
+			]).cycle(5000);
+		}			
+	});  
+</script>
+
+<!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+  	if (window.location.host.indexOf('local') == -1) {
+	    var _gaq = _gaq || [];
+	    _gaq.push(['_setAccount', 'UA-29179796-1']);
+	    _gaq.push(['_trackPageview']);
+	
+	    (function() {
+	      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+	      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+	      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	    })();
+    }
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+	<div id="picture-cube"></div>
+	<h1><a href="/">TJ VanToll</a></h1>
+	
+		<h2>Tutorials, Thoughts, and Ramblings on Front End Development</h2> 
+	
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:tjvantoll.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/about">About</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/speaking">Speaking</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">onscroll Event Issues on Mobile Browsers</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-08-19T00:00:00-04:00" pubdate data-updated="true">Aug 19<span>th</span>, 2012</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>All browsers will fire an <code>onscroll</code> event on the <code>window</code> object whenever the window is scrolled.  However, when and how often they fire the event varies greatly.</p>
+
+<p>On desktop browsers this event is fired for every pixel the user scrolls.  But on most all mobile browsers the event is not fired until the <em>scrolling action</em> comes to a complete stop.</p>
+
+<!--more-->
+
+
+<p>You can see this by scrolling in the example below:</p>
+
+<iframe style="width: 100%; height: 300px;" src="http://jsfiddle.net/tj_vantoll/p4pww/12/embedded/result,html,js,css/" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
+
+
+<p>The <code>onscroll</code> event count and the value of <code>window.scrollY</code> (<a href="https://developer.mozilla.org/en-US/docs/DOM/window.scrollY">the number of pixels the document has been scrolled vertically</a>) are updated in an <code>onscroll</code> event handler.</p>
+
+<p>If you&#8217;re viewing this on any desktop browser you&#8217;ll see that as you scroll the <code>onscroll</code> event is continuously firing, <code>window.scrollY</code> is continuously updating, and the blue box (which is present so you can visibly tell whether the browser re-paints the screens) is continuously moving.</p>
+
+<h3>Enter Mobile</h3>
+
+<p>If you try the same demo on iOS Safari (5.0), the default Android browser &lt;= 2.3, Opera Mobile, or IE on Windows Phone 7 you&#8217;ll notice something quite different.  As you scroll the <code>onscroll</code> event isn&#8217;t fired, <code>window.scrollY</code> isn&#8217;t updated, and the blue box does not move until the scrolling has come to a complete stop.</p>
+
+<p>You can see this in the video below (the video shows iOS Safari but the same behavior occurs in the other listed browsers):</p>
+
+<iframe width="420" height="315" src="http://www.youtube.com/embed/8rk06wdLbKw" frameborder="0" allowfullscreen></iframe>
+
+
+<h3>Why</h3>
+
+<p>These mobile browsers simply do not fire the <code>onscroll</code> event until scrolling has completely stopped.  This includes not only the touch based scrolling itself, but additionally any momentum that the user gives on the scroll.  The event will not fire until it stops.  This is a problem if you want to apply a visual change to the screen as the user scrolls.</p>
+
+<h3>Other Mobile Browsers</h3>
+
+<p>Firefox for Android does fire the <code>onscroll</code> event and updates <code>window.clientY</code> as you scroll, but strangely it doesn&#8217;t re-paint the screen for any changes that have been applied.</p>
+
+<p>The Android browser in Ice Cream Sandwich fires the event but doesn&#8217;t feel very responsive and only sporadically re-paints the DOM to move the blue box.  Thankfully, Jelly Bean&#8217;s Android browser handles this example perfectly.  Everything is updated and rendered smoothly as the user scrolls exactly as desktop browsers do.</p>
+
+<p>I haven&#8217;t been able to test this in Chrome for Android and I know there are other mobile browsers that I&#8217;m missing.  If someone has this capability I&#8217;d love to know how they handle this situation.  Also some of my testing has been limited to simulators / emulators rather than actual devices.  If you notice any discrepancies with my findings please let me know in the comments so I can keep this post accurate.</p>
+
+<h3>The Problem</h3>
+
+<p>In my case I wanted to apply a change to the DOM for every pixel that the user scrolled, exactly like moving the blue box in the example above.</p>
+
+<p>So the question is, can we work around this limitation and get desktop <code>onscroll</code> functionality in a mobile friendly way?</p>
+
+<h3>Workaround Attempt - setInterval</h3>
+
+<p>My first attempt was to set an interval that did what I wanted to do in the <code>onscroll</code> event.  Yes the code will run continuously instead of just when the user scrolls, but it&#8217;s somewhere to start.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">setInterval</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>  <span class="c1">// Logic</span>
+</span><span class='line'><span class="p">},</span> <span class="mi">20</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The problem with this approach is that iOS Safari, Android &lt;= 2.3, and Opera Mobile do not run any functions queued through <code>setInterval</code> or <code>setTimeout</code> while a scroll is being performed.  The execution will simply be paused until the scroll has completed.</p>
+
+<p>Here&#8217;s an example that simply appends an asterisk to a div every 500 milliseconds using <code>setInterval</code>:</p>
+
+<iframe style="width: 100%; height: 300px;" src="http://jsfiddle.net/tj_vantoll/NfkEg/7/embedded/result,js,html,css/" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
+
+
+<p>If you&#8217;re viewing this in a desktop browser and you scroll, you can see that the asterisks will continue to be created.</p>
+
+<p>However, on the affected mobile browsers (iOS Safari, Android &lt;= 2.3, Opera Mobile), because the function queued through <code>setInterval</code> is paused, asterisk creation stops the moment you start scrolling and doesn&#8217;t resume until you stop.</p>
+
+<p>This video shows this behavior on iOS Safari (5.0):</p>
+
+<iframe width="560" height="315" src="http://www.youtube.com/embed/XkLvV9aPcYQ" frameborder="0" allowfullscreen></iframe>
+
+
+<p>This example works perfectly (scrolling doesn&#8217;t stop asterisk creation) on the default Ice Cream Sandwich / Jelly Bean browser, Firefox for Android, and IE for Windows Phone 7.</p>
+
+<h3>Workaround Attempt 2 - Use Touch Events</h3>
+
+<p>Since the <code>setInterval</code> approach failed on the big mobile browsers my next thought was to use touch events instead.</p>
+
+<p>Most mobile browsers fire <a href="http://blog.jquery.com/2012/04/10/getting-touchy-about-patents/">Apple&#8217;s flavor</a> of <a href="https://developer.mozilla.org/en-US/docs/DOM/Touch_events">touch events</a> as the user interacts with the screen via touch (the notable exception being Window&#8217;s Mobile since Microsoft has their own touch model).</p>
+
+<p>In particular the <code>ontouchmove</code> event is fired as the user moves their finger (or stylus, etc) across the screen.  Since users on touch devices need to move their finger across the screen to scroll, this seemed like the perfect alternative to <code>onscroll</code>.</p>
+
+<p>Therefore I modified my example to use <code>ontouchmove</code> instead of <code>onscroll</code>:</p>
+
+<iframe style="width: 100%; height: 300px;" src="http://jsfiddle.net/tj_vantoll/RFdve/9/embedded/result,js,html,css/" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
+
+
+<p>If you try to scroll this example on a desktop browser nothing will happen since everything is now being driven by the <code>ontouchmove</code> event.  On mobile browsers a wide variety of things happen:</p>
+
+<ul>
+<li>Android: The <code>ontouchmove</code> event does get fired as the user moves the screen.  However the DOM updates are very sporadic and feel very jerky.  This is true of the default Android browser in Gingerbread, Ice Cream Sandwich, and Jelly Bean although it gets better in later versions.</li>
+<li>Firefox for Android: The <code>ontouchmove</code> events fires but DOM updates made in the <code>ontouchmove</code> event take effect sporadicly if at all.  Everything feels very jerky at best.</li>
+<li>Opera Mobile: <code>ontouchmove</code> events occur but DOM changes are not applied until scrolling is complete.</li>
+<li>iOS Safari: On <code>ontouchmove</code> event is fired as the screen is moved and the DOM does get re-painted.  This is only mobile browser where this approach made a substantial difference.</li>
+</ul>
+
+
+<p>One consistent issue with this approach is that the <code>ontouchmove</code> event is only fired when the user&#8217;s finger remains on the screen.  Meaning, if the user gives any momentum to the scroll, <code>ontouchmove</code> events will not be fired as the screen when the user&#8217;s finger is not on the screen.</p>
+
+<p>You can see this in the video below:</p>
+
+<iframe width="420" height="315" src="http://www.youtube.com/embed/bPWtg0mn7Sk" frameborder="0" allowfullscreen></iframe>
+
+
+<p>So what does all of this mean about using the <code>ontouchmove</code> event to mimic desktop <code>onscroll</code> functionality?   At the moment there are too many inconsistencies to rely on this behavior in any way.  If you only need to support iOS Safari this approach works reasonably.</p>
+
+<h3>Workaround Attempt 3 - Don&#8217;t <em>Really</em> Scroll</h3>
+
+<p>Another <em>solution</em> out there is to disable native scrolling altogether and use JavaScript to mimic scrolling instead.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">$</span><span class="p">(</span><span class="s1">&#39;window&#39;</span><span class="p">).</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;touchmove&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="c1">//Prevent the window from being scrolled.</span>
+</span><span class='line'>    <span class="nx">event</span><span class="p">.</span><span class="nx">preventDefault</span><span class="p">();</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="c1">//Do something like call window.scrollTo to mimic the scrolling</span>
+</span><span class='line'>    <span class="c1">//request the user made.</span>
+</span><span class='line'><span class="p">});</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Unfortunately such techniques are usually utilized to create fixed height/width scrolling areas and are not intended (nor especially practical) for full screens.  If you are only interested in a scrolling event for a small section of the page you might want to look into something such as <a href="http://cubiq.org/iscroll-4">iScroll 4</a>.</p>
+
+<h3>Conclusion</h3>
+
+<p>Unlike desktop browsers, most all mobile browsers simply do not fire an <code>onscroll</code> event until the scrolling action comes to a complete stop.</p>
+
+<p>If you only need to support Android&#8217;s Jelly Bean browser the <code>onscroll</code> event works beautifully and behaves just like desktop browsers.  If you only need to support iOS Safari using the <code>ontouchmove</code> event to mimic Desktop <code>onscroll</code> events mostly works.</p>
+
+<p>If you need any sort of cross browser support you&#8217;re simply out of luck.  At this point there is simply no cross browser viable workaround to mimic the desktop behavior.  If you had success implementing this by some other means let me know in the comments.</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">TJ VanToll</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-08-19T00:00:00-04:00" pubdate data-updated="true">Aug 19<span>th</span>, 2012</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/browsers/'>Browsers</a>, <a class='category' href='/blog/categories/javascript/'>JavaScript</a>, <a class='category' href='/blog/categories/mobile/'>Mobile</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://tjvantoll.com/2012/08/19/onscroll-event-issues-on-mobile-browsers/" data-via="tjvantoll" data-counturl="http://tjvantoll.com/2012/08/19/onscroll-event-issues-on-mobile-browsers/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/2012/08/16/subpixel-animation-issues-in-ie-less-than-9/" title="Previous Post: Subpixel Animation Issues in IE < 9">&laquo; Subpixel Animation Issues in IE < 9</a>
+      
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2012/08/19/onscroll-event-issues-on-mobile-browsers/">onscroll Event Issues on Mobile Browsers</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2012/08/16/subpixel-animation-issues-in-ie-less-than-9/">Subpixel Animation Issues in IE < 9</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2012/08/10/less-101-the-basics-of-the-css-preprocessor/">LESS 101 - The Basics of the CSS Preprocessor</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2012/08/05/html5-form-validation-showing-all-error-messages/">HTML5 Form Validation - Showing All Error Messages</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2012/07/19/dom-element-references-as-global-variables/">DOM Element References as Global Variables</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2012/07/15/native-html5-number-picker-vs-jquery-uis-spinner-which-to-use/">Native HTML5 Number Picker and jQuery UI's Spinner - Which to Use?</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2012/07/10/default-browser-handling-of-the-css-text-transform-property/">Default Browser Handling of the CSS text-transform Property</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2012/07/07/the-ideal-less-workflow-with-git/">The Ideal LESS Workflow with git</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2012/06/30/creating-a-native-html5-datepicker-with-a-fallback-to-jquery-ui/">Creating a Native HTML 5 Datepicker with a Fallback to jQuery UI</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2012/06/15/detecting-print-requests-with-javascript/">Detecting Print Requests with JavaScript</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>Latest Tweets</h1>
+  <ul id="tweets">
+    <li class="loading">Status updating...</li>
+  </ul>
+  <script type="text/javascript">
+    $.domReady(function(){
+      getTwitterFeed("tjvantoll", 4, false);
+    });
+  </script>
+  <script src="/javascripts/twitter.js" type="text/javascript"> </script>
+  
+    <a href="http://twitter.com/tjvantoll" class="twitter-follow-button" data-show-count="false">Follow @tjvantoll</a>
+  
+</section>
+
+<section class="jsdocs">
+	<h1><a href="http://promotejs.com">Promote JS!</a></h1>
+	<a href="https://developer.mozilla.org/en/JavaScript/Guide" title="JS Tutorial, JavaScript Tutorial, JavaScript Guide, Learn JavaScript JS, How To Learn JS, Learning JavaScript"><img src="http://static.jsconf.us/promotejshs.png" height="150" alt="JS Tutorial, JavaScript Tutorial, JavaScript Guide, Learn JavaScript JS, How To Learn JS, Learning JavaScript" width="180"></a></section>
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2012 - TJ VanToll -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'tjvantoll';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://tjvantoll.com/2012/08/19/onscroll-event-issues-on-mobile-browsers/';
+        var disqus_url = 'http://tjvantoll.com/2012/08/19/onscroll-event-issues-on-mobile-browsers/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

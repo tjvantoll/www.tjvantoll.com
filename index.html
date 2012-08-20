@@ -9,13 +9,7 @@
   <meta name="author" content="TJ VanToll">
 
   
-  <meta name="description" content="While there are definitely cross browser discrepancies handling subpixels, this one caught me by surprise. Take the following: 1
-2
-3
-4
-5
-6
-&lt;div id &hellip;">
+  <meta name="description" content="All browsers will fire an onscroll event on the window object whenever the window is scrolled. However, when and how often they fire the event varies &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -111,6 +105,51 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2012/08/19/onscroll-event-issues-on-mobile-browsers/">onscroll Event Issues on Mobile Browsers</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-08-19T00:00:00-04:00" pubdate data-updated="true">Aug 19<span>th</span>, 2012</time>
+        
+         | <a href="/2012/08/19/onscroll-event-issues-on-mobile-browsers/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>All browsers will fire an <code>onscroll</code> event on the <code>window</code> object whenever the window is scrolled.  However, when and how often they fire the event varies greatly.</p>
+
+<p>On desktop browsers this event is fired for every pixel the user scrolls.  But on most all mobile browsers the event is not fired until the <em>scrolling action</em> comes to a complete stop.</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/2012/08/19/onscroll-event-issues-on-mobile-browsers/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -599,53 +638,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2012/06/10/browser-css-parsing-discrepancies/">Browser CSS Parsing Discrepancies</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-06-10T22:24:00-04:00" pubdate data-updated="true">Jun 10<span>th</span>, 2012</time>
-        
-         | <a href="/2012/06/10/browser-css-parsing-discrepancies/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Possibly the most frustrating thing that can happen during web development is when things look or behave differently in different browsers for no apparent reason.</p>
-
-<p>One of the major features of HTML5 is a <a href="http://www.whatwg.org/specs/web-apps/current-work/multipage/parsing.html">parsing algorithm</a> that specifies not only how to handle well formed markup, but also what to do with invalid HTML.</p>
-
-<p>The <a href="http://www.w3.org/TR/CSS2/syndata.html#parsing-errors">CSS specification</a> actually does the same.  In fact, it goes into explicit detail for how to handle a wide variety of nonsense syntax that it might encounter.  For example&#8230;</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/2012/06/10/browser-css-parsing-discrepancies/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -659,6 +651,10 @@
     <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2012/08/19/onscroll-event-issues-on-mobile-browsers/">onscroll Event Issues on Mobile Browsers</a>
+      </li>
     
       <li class="post">
         <a href="/2012/08/16/subpixel-animation-issues-in-ie-less-than-9/">Subpixel Animation Issues in IE < 9</a>
@@ -694,10 +690,6 @@
     
       <li class="post">
         <a href="/2012/06/15/detecting-print-requests-with-javascript/">Detecting Print Requests with JavaScript</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2012/06/10/browser-css-parsing-discrepancies/">Browser CSS Parsing Discrepancies</a>
       </li>
     
   </ul>
