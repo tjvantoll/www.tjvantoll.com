@@ -4,7 +4,7 @@
   <title><![CDATA[TJ VanToll]]></title>
   <link href="http://tjvantoll.com/atom.xml" rel="self"/>
   <link href="http://tjvantoll.com/"/>
-  <updated>2012-08-19T23:08:20-04:00</updated>
+  <updated>2012-08-20T21:39:01-04:00</updated>
   <id>http://tjvantoll.com/</id>
   <author>
     <name><![CDATA[TJ VanToll]]></name>
@@ -18,21 +18,19 @@
     <link href="http://tjvantoll.com/2012/08/19/onscroll-event-issues-on-mobile-browsers/"/>
     <updated>2012-08-19T00:00:00-04:00</updated>
     <id>http://tjvantoll.com/2012/08/19/onscroll-event-issues-on-mobile-browsers</id>
-    <content type="html"><![CDATA[<p>All browsers will fire an <code>onscroll</code> event on the <code>window</code> object whenever the window is scrolled.  However, when and how often they fire the event varies greatly.</p>
-
-<p>On desktop browsers this event is fired for every pixel the user scrolls.  But on most all mobile browsers the event is not fired until the <em>scrolling action</em> comes to a complete stop.</p>
+    <content type="html"><![CDATA[<p>All browsers fire an <code>onscroll</code> event on the <code>window</code> object whenever the window is scrolled.  On desktop browsers this event is fired continuously as the user scrolls, but on most all mobile browsers the event is not fired until the <em>scrolling action</em> comes to a complete stop.</p>
 
 <!--more-->
 
 
 <p>You can see this by scrolling in the example below:</p>
 
-<iframe style="width: 100%; height: 300px;" src="http://jsfiddle.net/tj_vantoll/p4pww/12/embedded/result,html,js,css/" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
+<iframe style="width: 100%; height: 300px;" src="http://jsfiddle.net/tj_vantoll/p4pww/13/embedded/result,html,js,css/" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
 
 
-<p>The <code>onscroll</code> event count and the value of <code>window.scrollY</code> (<a href="https://developer.mozilla.org/en-US/docs/DOM/window.scrollY">the number of pixels the document has been scrolled vertically</a>) are updated in an <code>onscroll</code> event handler.</p>
+<p>The <code>onscroll</code> event count and the value of <code>window.scrollY</code> (<a href="https://developer.mozilla.org/en-US/docs/DOM/window.scrollY">the number of pixels the document has been scrolled vertically</a>) displayed on the top of the screen in the example are updated in an <code>onscroll</code> event handler.</p>
 
-<p>If you&#8217;re viewing this on any desktop browser you&#8217;ll see that as you scroll the <code>onscroll</code> event is continuously firing, <code>window.scrollY</code> is continuously updating, and the blue box (which is present so you can visibly tell whether the browser re-paints the screens) is continuously moving.</p>
+<p>If you&#8217;re viewing this on any desktop browser you&#8217;ll see that as you scroll the <code>onscroll</code> event is continuously firing, <code>window.scrollY</code> is continuously updating, and the blue box (which is present so you can visibly tell whether the browser re-paints the screen) is continuously moving.</p>
 
 <h3>Enter Mobile</h3>
 
@@ -40,7 +38,7 @@
 
 <p>You can see this in the video below (the video shows iOS Safari but the same behavior occurs in the other listed browsers):</p>
 
-<iframe width="420" height="315" src="http://www.youtube.com/embed/8rk06wdLbKw" frameborder="0" allowfullscreen></iframe>
+<iframe width="420" height="315" src="http://www.youtube.com/embed/5-vOJEP3x28" frameborder="0" allowfullscreen></iframe>
 
 
 <h3>Why</h3>
@@ -51,9 +49,7 @@
 
 <p>Firefox for Android does fire the <code>onscroll</code> event and updates <code>window.clientY</code> as you scroll, but strangely it doesn&#8217;t re-paint the screen for any changes that have been applied.</p>
 
-<p>The Android browser in Ice Cream Sandwich fires the event but doesn&#8217;t feel very responsive and only sporadically re-paints the DOM to move the blue box.  Thankfully, Jelly Bean&#8217;s Android browser handles this example perfectly.  Everything is updated and rendered smoothly as the user scrolls exactly as desktop browsers do.</p>
-
-<p>I haven&#8217;t been able to test this in Chrome for Android and I know there are other mobile browsers that I&#8217;m missing.  If someone has this capability I&#8217;d love to know how they handle this situation.  Also some of my testing has been limited to simulators / emulators rather than actual devices.  If you notice any discrepancies with my findings please let me know in the comments so I can keep this post accurate.</p>
+<p>The Android browser in Ice Cream Sandwich fires the event but doesn&#8217;t feel very responsive and only sporadically re-paints the DOM to move the blue box.  Luckily, Jelly Bean&#8217;s Android browser handles this example perfectly; everything is updated and rendered smoothly as the user scrolls.</p>
 
 <h3>The Problem</h3>
 
@@ -102,10 +98,10 @@
 
 <p>Therefore I modified my example to use <code>ontouchmove</code> instead of <code>onscroll</code>:</p>
 
-<iframe style="width: 100%; height: 300px;" src="http://jsfiddle.net/tj_vantoll/RFdve/9/embedded/result,js,html,css/" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
+<iframe style="width: 100%; height: 300px;" src="http://jsfiddle.net/tj_vantoll/RFdve/10/embedded/result,js,html,css/" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
 
 
-<p>If you try to scroll this example on a desktop browser nothing will happen since everything is now being driven by the <code>ontouchmove</code> event.  On mobile browsers a wide variety of things happen:</p>
+<p>If you scroll on the above example on a desktop browser nothing will be updated since the counters are being driven by the <code>ontouchmove</code> event.  On mobile browsers a wide variety of things happen:</p>
 
 <ul>
 <li>Android: The <code>ontouchmove</code> event does get fired as the user moves the screen.  However the DOM updates are very sporadic and feel very jerky.  This is true of the default Android browser in Gingerbread, Ice Cream Sandwich, and Jelly Bean although it gets better in later versions.</li>
@@ -115,11 +111,11 @@
 </ul>
 
 
-<p>One consistent issue with this approach is that the <code>ontouchmove</code> event is only fired when the user&#8217;s finger remains on the screen.  Meaning, if the user gives any momentum to the scroll, <code>ontouchmove</code> events will not be fired as the screen when the user&#8217;s finger is not on the screen.</p>
+<p>One consistent issue with this approach is that the <code>ontouchmove</code> event is only fired when the user&#8217;s finger remains on the screen.  Meaning, if the user gives any momentum to the scroll, <code>ontouchmove</code> events will not be fired while the window is scrolling and their finger is not on the screen.</p>
 
 <p>You can see this in the video below:</p>
 
-<iframe width="420" height="315" src="http://www.youtube.com/embed/bPWtg0mn7Sk" frameborder="0" allowfullscreen></iframe>
+<iframe width="420" height="315" src="http://www.youtube.com/embed/wied94KmwKw" frameborder="0" allowfullscreen></iframe>
 
 
 <p>So what does all of this mean about using the <code>ontouchmove</code> event to mimic desktop <code>onscroll</code> functionality?   At the moment there are too many inconsistencies to rely on this behavior in any way.  If you only need to support iOS Safari this approach works reasonably.</p>
@@ -151,9 +147,13 @@
 
 <p>Unlike desktop browsers, most all mobile browsers simply do not fire an <code>onscroll</code> event until the scrolling action comes to a complete stop.</p>
 
-<p>If you only need to support Android&#8217;s Jelly Bean browser the <code>onscroll</code> event works beautifully and behaves just like desktop browsers.  If you only need to support iOS Safari using the <code>ontouchmove</code> event to mimic Desktop <code>onscroll</code> events mostly works.</p>
+<p>The only mobile browser that handled this event elegantly in my testing was Android&#8217;s Jelly Bean browser.  Therefore, if you need any sort of cross browser support you&#8217;re simply out of luck; there is simply no cross browser viable workaround to mimic the desktop behavior.  If you have had success implementing this by some other means please let me know in the comments.</p>
 
-<p>If you need any sort of cross browser support you&#8217;re simply out of luck.  At this point there is simply no cross browser viable workaround to mimic the desktop behavior.  If you had success implementing this by some other means let me know in the comments.</p>
+<h3>Disclaimer</h3>
+
+<p>I haven&#8217;t been able to test this in Chrome for Android and I know there are other mobile browsers that I&#8217;m missing.  If someone else has this capability I&#8217;d love to know how they handle these situations.</p>
+
+<p>Also while I did verify these findings on physical devices for Firefox for Android, Android 2.3&#8217;s default browser, and Safari on iOS 5; the rest of my testing was limited to simulators / emulators.  From past experience I know that simulator / emulator testing is no substitute for the real thing.  Therefore, if you find any discrepancies in my findings please let me know in the comments so I can update the post.</p>
 ]]></content>
   </entry>
   
