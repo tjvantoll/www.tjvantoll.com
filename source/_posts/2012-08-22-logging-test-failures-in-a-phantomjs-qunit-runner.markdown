@@ -28,6 +28,8 @@ Tests completed in 535 milliseconds.
 
 The provided runner doesn't provide any additional information about the tests that failed.  Luckily PhantomJS and QUnit make it trivial to customize the output to meet your needs.
 
+<!--more-->
+
 ### Logging
 
 PhantomJS's [page.onConsoleMessage](http://code.google.com/p/phantomjs/wiki/Interface#onConsoleMessage) callback can be used to redirect the browser's JavaScript console logging.  The provided test runner uses this callback to redirect the output to the command line instead of the headless browser (where you would never see it).
