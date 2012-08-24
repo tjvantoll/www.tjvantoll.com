@@ -4,7 +4,7 @@
   <title><![CDATA[Category: QUnit | TJ VanToll]]></title>
   <link href="http://tjvantoll.com/blog/categories/qunit/atom.xml" rel="self"/>
   <link href="http://tjvantoll.com/"/>
-  <updated>2012-08-23T22:05:40-04:00</updated>
+  <updated>2012-08-23T22:08:43-04:00</updated>
   <id>http://tjvantoll.com/</id>
   <author>
     <name><![CDATA[TJ VanToll]]></name>
@@ -39,6 +39,9 @@ Tests completed in 535 milliseconds.
 </code></p>
 
 <p>The provided runner doesn't provide any additional information about the tests that failed.  Luckily PhantomJS and QUnit make it trivial to customize the output to meet your needs.</p>
+
+<!--more-->
+
 
 <h3>Logging</h3>
 
