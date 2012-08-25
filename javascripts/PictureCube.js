@@ -1,27 +1,49 @@
 /**
  * @param node {DOMNode|string} The node to turn into the cube or the id attribute of the node
  * @param images {Array} An Array of 6 Strings containing the URLs of the images to place in the cube
+ * @param options {Object} Optional
+ *             onchange {Function} Callback to invoke when the side of the cube is change.,
  */
-PictureCube = function(node, images) {
+window.PictureCube = function(node, images, options) {
 	if (!node) return;
+	options = options || {};
 
 	var base = (typeof node == 'string' ? document.getElementById(node) : node);
 	base.className += ' PictureCube-container';
+	var coreClasses = ['front', 'back', 'right', 'left', 'top', 'bottom'];
 	
-	base.innerHTML = '<div class="cube show-front">' + 
-		'<figure class="front"><img src="' + images[0] + '" /></figure>' + 
-		'<figure class="back"><img src="' + images[1] + '" /></figure>' + 
-		'<figure class="right"><img src="' + images[2] + '" /></figure>' + 
-		'<figure class="left"><img src="' + images[3] + '" /></figure>' + 
-		'<figure class="top"><img src="' + images[4] + '" /></figure>' + 
-		'<figure class="bottom"><img src="' + images[5] + '" /></figure>' +
-	'</div>';
+	var html = '<div class="cube show-front">';
+	for (var i = 0; i < coreClasses.length; i++) {
+		html += '<figure class="' + coreClasses[i] + '">' +
+			'<img src="' + images[i].src + '" title="' + images[i].title + '" />' +
+			'</figure>';
+	}
+	
+	html += '</div>';
+	base.innerHTML = html;
 	
 	this.cube = base.childNodes[0],
 		this.cycleTimeoutId = null,
-		this.images = images;
+		this.images = images,
+		this.options = options;
 	
-	this.cube.setAttribute('data-cube-picture-number', 1);	
+	this.cube.setAttribute('data-cube-picture-number', 1);
+
+	var cubeHolder = this;
+	var transitionEvent = function(event) {
+		var side = parseInt(event.target.getAttribute('data-cube-picture-number'), 10);
+		if (!side) return;
+		var image = cubeHolder.cube.childNodes[side - 1].childNodes[0];
+		
+		if (options.onchange) {
+			options.onchange(side, image, cubeHolder);
+		}
+	};
+
+	var transitionEndEvents = ['webkitTransitionEnd', 'transitionend', 'otransitionend'];
+	for (var i = 0; i < transitionEndEvents.length; i++) {
+		this.cube.addEventListener(transitionEndEvents[i], transitionEvent);
+	}
 };
 
 /**
@@ -72,7 +94,7 @@ PictureCube.prototype.cycle = function(interval) {
 			if (pictureNumber == instance.images.length + 1) {
 				pictureNumber = 1;
 			}						
-		}
+		};
 	}(this), interval);
 };
 
