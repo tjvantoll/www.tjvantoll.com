@@ -214,12 +214,12 @@ Here's a final cube for you to play with.  Happy hacking.
 <script>
 	$.domReady(function(){
 		window.playgroundCube = new PictureCube('playground-cube', [
-			'/images/izzie/1.jpg',
-			'/images/izzie/2.jpg',
-			'/images/izzie/3.jpg',
-			'/images/izzie/4.jpg',
-			'/images/izzie/5.jpg',
-			'/images/izzie/6.jpg'																					
+			{ src: '/images/izzie/1.jpg' },
+			{ src: '/images/izzie/2.jpg' },
+			{ src: '/images/izzie/3.jpg' },
+			{ src: '/images/izzie/4.jpg' },
+			{ src: '/images/izzie/5.jpg' },
+			{ src: '/images/izzie/6.jpg' }
 		]);
 	});
 </script>
