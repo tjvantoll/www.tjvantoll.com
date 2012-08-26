@@ -8,14 +8,22 @@ $accent_color: #CF481C;
 
 body > header {
 	background: #058AA3;
-	background: rgba(30, 171, 221, 0.74) 
-	repeating-linear-gradient(60deg, transparent, transparent 42px, rgba(190, 190, 190, 0.1) 30px, rgba(190, 190, 190, 0.1) 45px);
+	background: rgba(30, 171, 221, 0.74);
+	background: rgba(30, 171, 221, 0.74) -moz-repeating-linear-gradient(60deg, transparent, transparent 42px, rgba(190, 190, 190, 0.1) 30px, rgba(190, 190, 190, 0.1) 45px);
+	background: rgba(30, 171, 221, 0.74) -ms-repeating-linear-gradient(60deg, transparent, transparent 42px, rgba(190, 190, 190, 0.1) 30px, rgba(190, 190, 190, 0.1) 45px);
+	background: rgba(30, 171, 221, 0.74) -o-repeating-linear-gradient(60deg, transparent, transparent 42px, rgba(190, 190, 190, 0.1) 30px, rgba(190, 190, 190, 0.1) 45px);
+	background: rgba(30, 171, 221, 0.74) -webkit-repeating-linear-gradient(60deg, transparent, transparent 42px, rgba(190, 190, 190, 0.1) 30px, rgba(190, 190, 190, 0.1) 45px);
+	background: rgba(30, 171, 221, 0.74) repeating-linear-gradient(60deg, transparent, transparent 42px, rgba(190, 190, 190, 0.1) 30px, rgba(190, 190, 190, 0.1) 45px);
 
 	h1 {
 		font-weight: bold;
 		text-shadow: 1px 1px 1px #333;
 
 		a {
+			-moz-transition: none;
+			-ms-transition: none;
+			-o-transition: none;
+			-webkit-transition: none;
 			transition: none;
 		}
 		a:hover, a:visited {

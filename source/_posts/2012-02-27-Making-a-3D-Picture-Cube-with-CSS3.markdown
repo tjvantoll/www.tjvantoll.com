@@ -4,6 +4,7 @@ title: Making a 3D Picture Cube with CSS3
 comments: true
 categories: CSS
 ---
+<script src="{{ root_url }}/javascripts/prefixfree.min.js"></script>
 <div class="warning">
 	Your browser doesn't support CSS 3D transformations, therefore some of these demos might not work as intended.  Please try viewing this page in the latest version of Firefox, Safari, or an iOS device.
 </div>
