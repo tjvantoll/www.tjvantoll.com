@@ -4,7 +4,7 @@
   <title><![CDATA[TJ VanToll]]></title>
   <link href="http://tjvantoll.com/atom.xml" rel="self"/>
   <link href="http://tjvantoll.com/"/>
-  <updated>2012-08-26T19:39:45-04:00</updated>
+  <updated>2012-08-26T19:50:43-04:00</updated>
   <id>http://tjvantoll.com/</id>
   <author>
     <name><![CDATA[TJ VanToll]]></name>
@@ -1459,7 +1459,7 @@
 
 <h3>Update (August 26th, 2012)</h3>
 
-<p>Commenter amir pointed out the WebKit provides a pseudoclass that you can use to style, and therefore hide the native Spin controls.</p>
+<p>Commenter amir pointed out the WebKit provides a pseudoclass that you can use to style, and therefore hide the native spin controls.</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
