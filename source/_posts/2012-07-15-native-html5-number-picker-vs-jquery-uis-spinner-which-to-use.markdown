@@ -243,7 +243,7 @@ So obviously this is not ideal, and probably shouldn't be used in production cod
 
 ### Update (August 26th, 2012)
 
-Commenter amir pointed out the WebKit provides a pseudoclass that you can use to style, and therefore hide the native Spin controls.
+Commenter amir pointed out the WebKit provides a pseudoclass that you can use to style, and therefore hide the native spin controls.
 
 ``` css
 input[type=number]::-webkit-outer-spin-button {
