@@ -4,7 +4,7 @@
   <title><![CDATA[TJ VanToll]]></title>
   <link href="http://tjvantoll.com/atom.xml" rel="self"/>
   <link href="http://tjvantoll.com/"/>
-  <updated>2012-08-25T22:20:11-04:00</updated>
+  <updated>2012-08-25T22:44:24-04:00</updated>
   <id>http://tjvantoll.com/</id>
   <author>
     <name><![CDATA[TJ VanToll]]></name>
@@ -3339,7 +3339,10 @@
     <link href="http://tjvantoll.com/2012/02/27/Making-a-3D-Picture-Cube-with-CSS3/"/>
     <updated>2012-02-27T00:00:00-05:00</updated>
     <id>http://tjvantoll.com/2012/02/27/Making-a-3D-Picture-Cube-with-CSS3</id>
-    <content type="html"><![CDATA[<div class="warning">
+    <content type="html"><![CDATA[<script src="http://tjvantoll.com/javascripts/prefixfree.min.js"></script>
+
+
+<div class="warning">
     Your browser doesn&#8217;t support CSS 3D transformations, therefore some of these demos might not work as intended.  Please try viewing this page in the latest version of Firefox, Safari, or an iOS device.
 </div>
 
