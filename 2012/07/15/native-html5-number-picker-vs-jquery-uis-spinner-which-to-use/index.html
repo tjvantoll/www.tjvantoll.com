@@ -420,6 +420,27 @@
 <p>What this does is detect whether the browser supports the <code>step</code> attribute, if it does it removes jQuery UI&#8217;s controls.  What does the <code>step</code> attribute have to do with the arrow controls?  Nothing, except that it just <em>happens</em> that the browsers that support the <code>step</code> attribute also create a native control to do the stepping.  Is this going to change in the future?  Quite possibly.</p>
 
 <p>So obviously this is not ideal, and probably shouldn&#8217;t be used in production code, but it works at the moment.  Have a better approach for tackling this problem?  Let me know in the comments.</p>
+
+<h3>Update (August 26th, 2012)</h3>
+
+<p>Commenter amir pointed out the WebKit provides a pseudoclass that you can use to style, and therefore hide the native Spin controls.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nt">input</span><span class="o">[</span><span class="nt">type</span><span class="o">=</span><span class="nt">number</span><span class="o">]:</span><span class="nd">:-webkit-outer-spin-button</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">display</span><span class="o">:</span> <span class="k">none</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="nt">input</span><span class="o">[</span><span class="nt">type</span><span class="o">=</span><span class="nt">number</span><span class="o">]:</span><span class="nd">:-webkit-inner-spin-button</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">display</span><span class="o">:</span> <span class="k">none</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This solves the issue for Webkit, but this remains an issue for Opera and browsers that add <code>input[type=number]</code> support in the future.</p>
 </div>
 
 

@@ -4,7 +4,7 @@
   <title><![CDATA[Category: HTML5 | TJ VanToll]]></title>
   <link href="http://tjvantoll.com/blog/categories/html5/atom.xml" rel="self"/>
   <link href="http://tjvantoll.com/"/>
-  <updated>2012-08-25T22:44:24-04:00</updated>
+  <updated>2012-08-26T19:39:45-04:00</updated>
   <id>http://tjvantoll.com/</id>
   <author>
     <name><![CDATA[TJ VanToll]]></name>
@@ -432,6 +432,27 @@ if (Modernizr.input.step) {
 <p>What this does is detect whether the browser supports the <code>step</code> attribute, if it does it removes jQuery UI's controls.  What does the <code>step</code> attribute have to do with the arrow controls?  Nothing, except that it just <em>happens</em> that the browsers that support the <code>step</code> attribute also create a native control to do the stepping.  Is this going to change in the future?  Quite possibly.</p>
 
 <p>So obviously this is not ideal, and probably shouldn't be used in production code, but it works at the moment.  Have a better approach for tackling this problem?  Let me know in the comments.</p>
+
+<h3>Update (August 26th, 2012)</h3>
+
+<p>Commenter amir pointed out the WebKit provides a pseudoclass that you can use to style, and therefore hide the native Spin controls.</p>
+
+<p>``` css
+input[type=number]::-webkit-outer-spin-button {</p>
+
+<pre><code>display: none; 
+</code></pre>
+
+<p>}
+input[type=number]::-webkit-inner-spin-button {</p>
+
+<pre><code>display: none;
+</code></pre>
+
+<p>}
+```</p>
+
+<p>This solves the issue for Webkit, but this remains an issue for Opera and browsers that add <code>input[type=number]</code> support in the future.</p>
 ]]></content>
   </entry>
   
