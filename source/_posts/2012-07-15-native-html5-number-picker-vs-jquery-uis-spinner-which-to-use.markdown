@@ -240,3 +240,18 @@ $(function() {
 What this does is detect whether the browser supports the `step` attribute, if it does it removes jQuery UI's controls.  What does the `step` attribute have to do with the arrow controls?  Nothing, except that it just *happens* that the browsers that support the `step` attribute also create a native control to do the stepping.  Is this going to change in the future?  Quite possibly.
 
 So obviously this is not ideal, and probably shouldn't be used in production code, but it works at the moment.  Have a better approach for tackling this problem?  Let me know in the comments.
+
+### Update (August 26th, 2012)
+
+Commenter amir pointed out the WebKit provides a pseudoclass that you can use to style, and therefore hide the native Spin controls.
+
+``` css
+input[type=number]::-webkit-outer-spin-button {
+    display: none; 
+}
+input[type=number]::-webkit-inner-spin-button {
+    display: none;
+}
+```
+
+This solves the issue for Webkit, but this remains an issue for Opera and browsers that add `input[type=number]` support in the future.
