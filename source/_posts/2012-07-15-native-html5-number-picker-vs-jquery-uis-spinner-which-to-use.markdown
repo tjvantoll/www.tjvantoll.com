@@ -203,7 +203,7 @@ The code to detect `input[type=number]` support was taken from [another number p
 
 The `spinner` plugin is smart enough to look for the `step`, `min`, and `max` attributes on the `<input>` so you don't have to pass those in explictly ([thanks @bassistance](https://twitter.com/bassistance/status/225532234017406977)).
 
-The benefit of this technique is that you get the benefits of the native picker when it's available, and you can count on having a number picker in all browsers.  As a further optimization you could even use a conditional script loader such as [yepnope.js](yepnopejs.com) to bring in jQuery UI's required JavaScript and CSS only when you need it.
+The benefit of this technique is that you get the benefits of the native picker when it's available, and you can count on having a number picker in all browsers.  As a further optimization you could even use a conditional script loader such as [yepnope.js](http://yepnopejs.com) to bring in jQuery UI's required JavaScript and CSS only when you need it.
 
 ### Using Spinner and Getting a Number Keyboard on Mobile
 
