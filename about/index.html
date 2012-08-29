@@ -101,11 +101,44 @@
   </header>
   
   <p><img src="/images/me/1.jpg" alt="Me!" style="float: right; margin: 10px;" />
-Hi!  I&#8217;m Ted VanToll.  I&#8217;m a Web Developer working for <a href="http://liquidweb.com">Liquid Web</a> in Lansing, MI.  I&#8217;ve been making web sites since the web was a thing and I have experience building things ranging from major applications for Fortune 500 companies to small personal sites and everything in between.</p>
+Hi!  I&#8217;m Ted VanToll.  I&#8217;m a Web Developer working for <a href="http://liquidweb.com">Liquid Web</a> in Lansing, MI.  I&#8217;ve been making web sites since the web was a thing and I have experience building sites ranging from major applications for Fortune 500 companies to small personal sites and everything in between.</p>
 
 <p>I&#8217;m a big open source advocate and have made some minor contributions to a few open source libraries that I use.  This blog itself is open source and if you&#8217;d like to <a href="https://github.com/tjvantoll/tjvantoll.github.com/tree/source">dig around the source</a> to see how I&#8217;ve made it you&#8217;re free to.</p>
 
 <p>If you&#8217;re looking to contact me, email me at <a href="mailto:tj.vantoll@gmail.com">tj.vantoll@gmail.com</a> or contact me via Twitter (<a href="https://twitter.com/tjvantoll">@tjvantoll</a>).</p>
+
+<p><header><h1 class="entry-title">Stuff I&#8217;ve Made</h1></header></p>
+
+<p>Occasionally I make things.</p>
+
+<script>
+$.domReady(function() {
+    if (Modernizr.csstransforms3d) {
+        new PictureCube('browser-picture-cube', 
+            [
+                { src: '/images/browsers/Chrome.png', title: 'Chrome' },
+                { src: '/images/browsers/Firefox.png', title: 'Firefox' },
+                { src: '/images/browsers/IE8.png', title: 'IE8' },
+                { src: '/images/browsers/Safari.png', title: 'Safari' },
+                { src: '/images/browsers/Opera.png', title: 'Opera' },
+                { src: '/images/browsers/IE9.png', title: 'IE9' }
+            ]
+        ).cycle(2500);
+    }
+});
+</script>
+
+
+<div class="project-contents">
+    <div class="image">
+        <div id="browser-picture-cube"></div>
+    </div>
+    <div class="wording">
+        <a href="https://github.com/tjvantoll/PictureCube">PictureCube</a>
+        <p>3D Cube of images created and controlled by a simplistic JavaScript API.</p>
+    </div>
+</div>
+
 
   
     <footer>
@@ -122,6 +155,10 @@ Hi!  I&#8217;m Ted VanToll.  I&#8217;m a Web Developer working for <a href="http
     <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2012/08/28/google-analytics-excluding-visits-in-development-and-production/">Google Analytics - Excluding Your Own Visits in Development and Production</a>
+      </li>
     
       <li class="post">
         <a href="/2012/08/22/logging-test-failures-in-a-phantomjs-qunit-runner/">Logging Test Failures in a PhantomJS QUnit Runner</a>
@@ -157,10 +194,6 @@ Hi!  I&#8217;m Ted VanToll.  I&#8217;m a Web Developer working for <a href="http
     
       <li class="post">
         <a href="/2012/07/07/the-ideal-less-workflow-with-git/">The Ideal LESS Workflow with git</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2012/06/30/creating-a-native-html5-datepicker-with-a-fallback-to-jquery-ui/">Creating a Native HTML 5 Datepicker with a Fallback to jQuery UI</a>
       </li>
     
   </ul>

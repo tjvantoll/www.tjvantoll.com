@@ -4,7 +4,7 @@
   <title><![CDATA[Category: jQuery UI | TJ VanToll]]></title>
   <link href="http://tjvantoll.com/blog/categories/jquery-ui/atom.xml" rel="self"/>
   <link href="http://tjvantoll.com/"/>
-  <updated>2012-08-26T19:50:43-04:00</updated>
+  <updated>2012-08-28T22:53:53-04:00</updated>
   <id>http://tjvantoll.com/</id>
   <author>
     <name><![CDATA[TJ VanToll]]></name>
@@ -244,7 +244,7 @@ if (input.type == 'text') {
 
 <p>The <code>spinner</code> plugin is smart enough to look for the <code>step</code>, <code>min</code>, and <code>max</code> attributes on the <code>&lt;input&gt;</code> so you don't have to pass those in explictly (<a href="https://twitter.com/bassistance/status/225532234017406977">thanks @bassistance</a>).</p>
 
-<p>The benefit of this technique is that you get the benefits of the native picker when it's available, and you can count on having a number picker in all browsers.  As a further optimization you could even use a conditional script loader such as <a href="yepnopejs.com">yepnope.js</a> to bring in jQuery UI's required JavaScript and CSS only when you need it.</p>
+<p>The benefit of this technique is that you get the benefits of the native picker when it's available, and you can count on having a number picker in all browsers.  As a further optimization you could even use a conditional script loader such as <a href="http://yepnopejs.com">yepnope.js</a> to bring in jQuery UI's required JavaScript and CSS only when you need it.</p>
 
 <h3>Using Spinner and Getting a Number Keyboard on Mobile</h3>
 

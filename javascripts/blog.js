@@ -1,6 +1,6 @@
 $.domReady(function() {
 	if (Modernizr.csstransforms3d) {
-		cube = new PictureCube('picture-cube', 
+		new PictureCube('picture-cube', 
 		[
 			{ src: '/images/me/1.jpg', title: 'This is me. Hi!' },
 			{ src: '/images/me/2.jpg', title: 'Trish and I in NYC.' },
