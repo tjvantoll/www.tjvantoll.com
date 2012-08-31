@@ -86,6 +86,7 @@ body > footer {
 	-o-transition: -webkit-transform 1s ease;
 	-webkit-transition: -webkit-transform 1s ease;
 	transition: -webkit-transform 1s ease;
+	min-height: 5em;
 
 	a {
 		font-size: 1.3em;
@@ -97,7 +98,7 @@ body > footer {
 	.wording {
 		float: left;
 		padding-left: 1em;
-		width: 80%;
+		width: 70%;
 		width: -moz-calc(100% - 175px);
 		width: -webkit-calc(100% - 175px);
 		width: calc(100% - 175px);
@@ -116,9 +117,9 @@ body > footer {
 	}
 
 	&:hover {
-		-ms-transform: scale(1.05);
-		-moz-transform: scale(1.05);
-		-o-transform: scale(1.05);
+		//-ms-transform: scale(1.05);
+		//-moz-transform: scale(1.05);
+		//-o-transform: scale(1.05);
 		-webkit-transform: scale(1.05);
 		transform: scale(1.05);
 	}
