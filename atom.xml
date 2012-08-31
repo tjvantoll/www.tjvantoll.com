@@ -4,7 +4,7 @@
   <title><![CDATA[TJ VanToll]]></title>
   <link href="http://tjvantoll.com/atom.xml" rel="self"/>
   <link href="http://tjvantoll.com/"/>
-  <updated>2012-08-31T06:36:38-04:00</updated>
+  <updated>2012-08-31T06:41:07-04:00</updated>
   <id>http://tjvantoll.com/</id>
   <author>
     <name><![CDATA[TJ VanToll]]></name>
@@ -2377,7 +2377,7 @@
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>This gives touch users with <code>input[type=date]</code> support the optimized keyboard and everyone else jQuery UI&#8217;s picker.</p>
+<p>This gives touch users with <code>input[type=date]</code> support the optimized UI / keyboard and everyone else jQuery UI&#8217;s picker.</p>
 
 <h3>Conclusion</h3>
 
