@@ -94,7 +94,7 @@ Another option I like is showing the native date picker only to users that are o
 </script>
 ```
 
-This gives touch users with `input[type=date]` support the optimized keyboard and everyone else jQuery UI's picker.
+This gives touch users with `input[type=date]` support the optimized UI / keyboard and everyone else jQuery UI's picker.
 
 ### Conclusion
 
