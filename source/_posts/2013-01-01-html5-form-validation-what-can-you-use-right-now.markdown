@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "HTML5 Form Validation - What Can You Use Right Now?"
-date: 2012-08-10 20:52
+date: 2012-08-30
 comments: true
 categories: [HTML5, Browsers, Forms]
 published: false
@@ -9,9 +9,7 @@ published: false
 
 HTML5 includes a built in client side form validation mechanism designed to make implementing client side validation powerful, seamless, and most importantly - easy to implement.
 
-Despite this, HTML5 form validation is a topic relegated to presentations and demos; I personally have yet to fill out a web form in the wild that actually makes use of HTML5 form validation.
-
-Nevertheless, more and more pieces or HTML5 form validation are being supported in browsers all the time.  It is now at least mostly supported in the following browsers ([full list](http://caniuse.com/#feat=form-validation)).
+Despite this, HTML5 form validation is a topic relegated to presentations and demos.  Nevertheless, more and more pieces or HTML5 form validation are being supported in browsers all the time.  It is now at least mostly supported in the following browsers ([full list](http://caniuse.com/#feat=form-validation)).
 
 * IE 10
 * Firefox 4+
