@@ -66,7 +66,7 @@ If any of this functionality is important to your application you'll probably wa
 
 ### Best of Both Worlds
 
-[Modernizr](http://modernizr.com) gives you the ability to detect whether the browser supports native datepickers.  The following shows how you can use the native datepicker when available, and fallback to jQuery UI's datepicker in unsupported browsers.
+[Modernizr](http://modernizr.com) gives you the ability to detect whether the browser supports native datepickers.  The following shows how you can use the native datepicker when available, and fallback to jQuery UI's picker in unsupported browsers.
 
 ``` javascript Detect native support for datepickers and fallback to jQuery UI
 if (!Moderniz.inputtypes.date) {
@@ -78,6 +78,24 @@ You can see how your browser handles this situation here:
 
 <iframe style="width: 100%; height: 120px;" src="http://jsfiddle.net/p58bt/2/embedded/result,html,js/" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
 
+### Another Option
+
+Another option I like is showing the native date picker only to users that are on touch capable devices.
+
+``` html Native picker for supported touch users only
+<input type="text" id="myDate" />
+
+<script>
+    if (Modernizr.touch && Moderniz.inputtypes.date) {
+        $('input').attr('type', 'date');
+    } else {
+    	$('#myDate').datepicker();
+    }
+</script>
+```
+
+This gives touch users with `input[type=date]` support the optimized keyboard and everyone else jQuery UI's picker.
+
 ### Conclusion
 
-With Chrome adding support for native datepickers a large chunk web users now have the ability to use native pickers.  Therefore, now is a great time to consider using them in your applications.
+With Chrome adding support for native datepickers a large chunk web users now have the ability to use them.  Therefore, now is a great time to consider using them in your applications.
