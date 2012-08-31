@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Creating a Native HTML 5 Datepicker with a Fallback to jQuery UI - TJ VanToll - Tutorials, Thoughts, and Ramblings on Front End Development</title>
+  <title>HTML5 Form Validation - Start Using it in Production Applications - TJ VanToll - Tutorials, Thoughts, and Ramblings on Front End Development</title>
   <meta name="author" content="TJ VanToll">
 
   
-  <meta name="description" content="The recently released Chrome 20 features support for native datepickers on &lt;input&gt; nodes with a [type=date] attribute. The list of browsers &hellip;">
+  <meta name="description" content="Forms suck, yet, they make or break the most crucial online transactions. Building web forms sucks as well; the APIs and lack of customizability has &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://tjvantoll.com/2012/06/30/creating-a-native-html5-datepicker-with-a-fallback-to-jquery-ui">
+  <link rel="canonical" href="http://tjvantoll.com/2012/08/30/html5-form-validation-start-using-it-in-production-applications">
   <!-- Use custom favicon -->
   <!--<link href="/favicon.png" rel="icon">-->
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
@@ -97,7 +97,7 @@
   
   <header>
     
-      <h1 class="entry-title">Creating a Native HTML 5 Datepicker with a Fallback to jQuery UI</h1>
+      <h1 class="entry-title">HTML5 Form Validation - Start Using it in Production Applications</h1>
     
     
       <p class="meta">
@@ -113,7 +113,7 @@
   
 
 
-<time datetime="2012-06-30T17:06:00-04:00" pubdate data-updated="true">Jun 30<span>th</span>, 2012</time>
+<time datetime="2012-08-30T00:00:00-04:00" pubdate data-updated="true">Aug 30<span>th</span>, 2012</time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -122,94 +122,66 @@
   </header>
 
 
-<div class="entry-content"><p>The recently released Chrome 20 features support for native datepickers on <code>&lt;input&gt;</code> nodes with a <code>[type=date]</code> attribute.  The list of browsers that support native datepickers now includes Chrome, Opera 11+, Opera Mobile, and iOS 5+ (see <a href="http://caniuse.com/#feat=input-datetime">caniuse.com</a>).  Therefore, now is a great time to start using them in your web applications.</p>
+<div class="entry-content"><p>Forms suck, yet, they make or break the most crucial online transactions.  Building web forms sucks as well; the APIs and lack of customizability has confused and frustrated people for years.  As a byproduct an abundance of horribly unusable forms have been created for everyone to suffer through.</p>
+
+<p>Therefore <em>anything</em> that makes this process easier should be greeted with joy and enthusiasm.</p>
+
+<p>HTML5 does just this by including a built in <a href="https://developer.mozilla.org/en-US/docs/HTML/Forms_in_HTML#Constraint_Validation_API">client side form validation mechanism</a> designed to make implementing client side validation powerful, seamless, and most importantly - easy to implement.</p>
+
+<p>Great!  Despite this, HTML5 form validation is a topic relegated to presentations and demos; I personally have yet to fill out a web form in the wild that actually makes use of it.</p>
+
+<p>Why?</p>
 
 <!--more-->
 
 
-<h3>Using</h3>
+<h3>Browser Support</h3>
 
-<p>Using the native datepickers is easy, just change the <code>type</code> attribute of your date inputs from <code>text</code> to <code>date</code>.</p>
-
-<figure class='code'><figcaption><span>Converting to a native HTML5 datepicker</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="c">&lt;!-- Before --&gt;</span>
-</span><span class='line'><span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;text&quot;</span> <span class="nt">/&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="c">&lt;!-- After --&gt;</span>
-</span><span class='line'><span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;date&quot;</span> <span class="nt">/&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Here is what the user will see in supported browsers:</p>
-
-<h4>Chrome 20</h4>
-
-<p><img src="/images/posts/2012-06-30/Chrome.png" title="Chrome 20" alt="Chrome 20" /></p>
-
-<h4>Opera 12</h4>
-
-<p><img src="/images/posts/2012-06-30/Opera.png" title="Opera 12" alt="Opera 12" /></p>
-
-<h4>Opera Mobile</h4>
-
-<p><img src="/images/posts/2012-06-30/Opera%20Mobile.png" title="Opera Mobile" alt="Opera Mobile" /></p>
-
-<h4>iOS 5</h4>
-
-<p><img src="/images/posts/2012-06-30/iOS5.png" title="iOS 5" alt="iOS 5" /></p>
-
-<h3>Advantages</h3>
-
-<p>Why would use the native solution?</p>
-
-<p>First and foremost there are no dependencies.  There is no need to bring in a library or toolkit, it&#8217;s all native.  Therefore, you save some bytes by not having to ship the JavaScript / CSS to make the datepicker work.</p>
-
-<p>Furthermore you can be guaranteed that it will work perfectly on all devices that support the native datepicker.  It&#8217;s not dependent on JavaScript so it&#8217;ll even work for users that have JavaScript disabled.</p>
-
-<p>Another key advantage is that devices can give alternative means of input for date controls.  For example note the native date control in iOS 5:</p>
-
-<p><img src="/images/posts/2012-06-30/iOS5.png" title="iOS 5" alt="iOS 5" /></p>
-
-<p>It will be a lot easier for the user to input a date with those controls, plus you can be guaranteed that you&#8217;ll receive input in the correct format.</p>
-
-<h3>Disadvantages</h3>
-
-<p>The main disadvantage of using a native datepicker is that you have a lot less control.  There are no hooks to control the look of the date picker; you get what the browser wants to give you.  You also have a lot less control over the behavior.  Here&#8217;s a small sampling of things that jQuery UI&#8217;s datepicker can do that you cannot do with the native control.</p>
+<p>One reason people avoid HTML5 form validation is lack (or perceived lack) of browser support for the new APIs.  However the <a href="http://caniuse.com/#feat=form-validation">list of supported browsers</a> now includes the latest version of every major browser, including:</p>
 
 <ul>
-<li>Only allow selection on certain days of the week.</li>
-<li>Control the formatting of the headers in the control (Monday vs Mon vs M).</li>
-<li>View multiple months at the same time.</li>
+<li>IE 10</li>
+<li>Firefox 4+</li>
+<li>Chrome 10+</li>
+<li>Safari 5+</li>
+<li>Opera 10+</li>
+<li>Opera Mobile</li>
+<li>Chrome for Android</li>
+<li>Firefox for Android</li>
 </ul>
 
 
-<p>If any of this functionality is important to your application you&#8217;ll probably want to stick with the jQuery UI solution.</p>
+<h3>What to do in unsupported browsers?</h3>
 
-<h3>Best of Both Worlds</h3>
+<p>This is <em>the</em> problem.  Despite browser support being relatively good, for most sites there are still going to be a substantial amount of users with browsers that simply do not support the new APIs.  Therefore, if you are intending to support these users you have to start forking your code to support both browsers with native support and browsers without it.</p>
 
-<p><a href="http://modernizr.com">Modernizr</a> gives you the ability to detect whether the browser supports native datepickers.  The following shows how you can use the native datepicker when available, and fallback to jQuery UI&#8217;s datepicker in unsupported browsers.</p>
+<p>While this can absolutely be done, it&#8217;s time consuming and a bit of a nuisance.  It&#8217;s faster and easier to simply ditch the native validation and use your own.  In this case you don&#8217;t have to worry about multiple code paths; every user in every browser will hit the same codepath and get the same experience.</p>
 
-<figure class='code'><figcaption><span>Detect native support for datepickers and fallback to jQuery UI</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">Moderniz</span><span class="p">.</span><span class="nx">inputtypes</span><span class="p">.</span><span class="nx">date</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>    <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;input[type=date]&#39;</span><span class="p">).</span><span class="nx">datepicker</span><span class="p">();</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
+<h3>What if we did nothing?</h3>
 
+<p>But what if we took a new approach to this problem - simply don&#8217;t do client side validation in unsupported browsers, at all.  This is advantageous for a number of reasons.</p>
 
-<p>You can see how your browser handles this situation here:</p>
+<p>1) <strong>No dual maintenance</strong>.  One thing that has always bothered me about doing validation on both the client and server side is that you&#8217;re validating the #1 principle of software development - <a href="http://en.wikipedia.org/wiki/Don't_repeat_yourself"><strong>D</strong>on&#8217;t <strong>R</strong>epeat <strong>Y</strong>ourself</a>.</p>
 
-<iframe style="width: 100%; height: 120px;" src="http://jsfiddle.net/p58bt/2/embedded/result,html,js/" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
+<p>2) <strong>No dependencies</strong>.  If you only use native browser APIs to provide client side validation you don&#8217;t have to worry about maintaining plugin or library dependencies that might not be maintained.</p>
 
+<p>3) <strong>Faster and easier</strong>.  The browser APIs are simple and easy to use.  Want to make a field required?  <a href="http://wufoo.com/html5/attributes/09-required.html">Add the <code>required</code> attribute</a>.  Want to make a field only accept email address?  <a href="http://wufoo.com/html5/types/1-email.html">Add <code>type=email</code> to your <code>&lt;input&gt;</code> field</a>.</p>
+
+<p>4) <strong>Future Friendly</strong>.  Although currently a number of older browsers (namely IE &lt;= 9) do not support the new APIs, eventually they all will.  Therefore, eventually all users will hit the client side validation as intended.</p>
+
+<h3>But, you can&#8217;t just not validate data&#8230; right?</h3>
+
+<p>Of course you have to validate client submitted data, but you already need to be doing that on the server side anyways.  What this approach requires you to do is simply return formatted error messages from your server side processing and <a href="http://uxdesign.smashingmagazine.com/2011/11/08/extensive-guide-web-form-usability/">display them in a usability friendly way</a>.  You&#8217;re likely doing that already.</p>
+
+<h3>What About Polyfills?</h3>
+
+<p><a href="http://remysharp.com/2010/10/08/what-is-a-polyfill/">Polyfills</a> are great and a number of <a href="https://github.com/Modernizr/Modernizr/wiki/HTML5-Cross-browser-Polyfills">HTML5 form validation polyfills</a> exist.  My problem with polyfills in this case is that they add a dependency that I believe is unnecessary.</p>
 
 <h3>Conclusion</h3>
 
-<p>With Chrome adding support for native datepickers a large chunk web users now have the ability to use native pickers.  Therefore, now is a great time to consider using them in your applications.</p>
+<p>HTML5 provides native solutions to validating client side data and most all modern browsers support it.  Yet, most people are still relying on the JavaScript hacks we&#8217;ve been using for well over a decade now.</p>
+
+<p>It&#8217;s time.  Come to the dark side.</p>
 </div>
 
 
@@ -232,12 +204,12 @@
   
 
 
-<time datetime="2012-06-30T17:06:00-04:00" pubdate data-updated="true">Jun 30<span>th</span>, 2012</time>
+<time datetime="2012-08-30T00:00:00-04:00" pubdate data-updated="true">Aug 30<span>th</span>, 2012</time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/browsers/'>Browsers</a>, <a class='category' href='/blog/categories/jquery-ui/'>jQuery UI</a>
+    <a class='category' href='/blog/categories/browsers/'>Browsers</a>, <a class='category' href='/blog/categories/html5/'>HTML5</a>, <a class='category' href='/blog/categories/javascript/'>JavaScript</a>
   
 </span>
 
@@ -246,7 +218,7 @@
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://tjvantoll.com/2012/06/30/creating-a-native-html5-datepicker-with-a-fallback-to-jquery-ui/" data-via="tjvantoll" data-counturl="http://tjvantoll.com/2012/06/30/creating-a-native-html5-datepicker-with-a-fallback-to-jquery-ui/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://tjvantoll.com/2012/08/30/html5-form-validation-start-using-it-in-production-applications/" data-via="tjvantoll" data-counturl="http://tjvantoll.com/2012/08/30/html5-form-validation-start-using-it-in-production-applications/" >Tweet</a>
   
   
   
@@ -255,10 +227,8 @@
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/2012/06/15/detecting-print-requests-with-javascript/" title="Previous Post: Detecting Print Requests with JavaScript">&laquo; Detecting Print Requests with JavaScript</a>
+        <a class="basic-alignment left" href="/2012/08/28/google-analytics-excluding-visits-in-development-and-production/" title="Previous Post: Google Analytics - Excluding Your Own Visits in Development and Production">&laquo; Google Analytics - Excluding Your Own Visits in Development and Production</a>
       
-      
-        <a class="basic-alignment right" href="/2012/07/07/the-ideal-less-workflow-with-git/" title="Next Post: The Ideal LESS Workflow with git">The Ideal LESS Workflow with git &raquo;</a>
       
     </p>
   </footer>
@@ -359,8 +329,8 @@
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://tjvantoll.com/2012/06/30/creating-a-native-html5-datepicker-with-a-fallback-to-jquery-ui/';
-        var disqus_url = 'http://tjvantoll.com/2012/06/30/creating-a-native-html5-datepicker-with-a-fallback-to-jquery-ui/';
+        var disqus_identifier = 'http://tjvantoll.com/2012/08/30/html5-form-validation-start-using-it-in-production-applications/';
+        var disqus_url = 'http://tjvantoll.com/2012/08/30/html5-form-validation-start-using-it-in-production-applications/';
         var disqus_script = 'embed.js';
       
     (function () {
