@@ -6,7 +6,7 @@ sharing: false
 footer: true
 ---
 <img src="/images/me/1.jpg" alt="Me!" style="float: right; margin: 10px;" />
-Hi!  I'm Ted VanToll.  I'm a Web Developer working for [Liquid Web](http://liquidweb.com) in Lansing, MI.  I've been making web sites since the web was a thing and I have experience building sites ranging from major applications for Fortune 500 companies to small personal sites and everything in between.
+Oh hi!  I'm Ted VanToll.  I'm a Web Developer working for [Liquid Web](http://liquidweb.com) in Lansing, MI.  I've been making web sites since the web was a thing and I have experience building sites ranging from major applications for Fortune 500 companies to small personal sites and everything in between.
 
 I'm a big open source advocate and have made some minor contributions to a few open source libraries that I use.  This blog itself is open source and if you'd like to [dig around the source](https://github.com/tjvantoll/tjvantoll.github.com/tree/source) to see how I've made it you're free to.
 
@@ -32,6 +32,15 @@ $.domReady(function() {
 	}
 });
 </script>
+<div class="project-contents">
+	<div class="image">
+		<img src="/images/lw15yearlogo.png" alt="Liquid Web's 15th Anniversary" />
+	</div>
+	<div class="wording">
+		<a href="https://liquidweb.com/15-year">Liquid Web's 15th Anniversary Celebration</a>
+		<p>An interactive timeline with scroll triggered animations.  If that's not cool enough you also get to play with bubbles and clouds.</p>
+	</div>
+</div>
 <div class="project-contents">
 	<div class="image">
 		<div id="browser-picture-cube"></div>
