@@ -201,3 +201,13 @@ This might be a bit excessive for some but I like being able to quickly see info
 ### TAP Format
 
 If you want to output the test results in [TAP format](http://en.wikipedia.org/wiki/Test_Anything_Protocol) the [QUnit-tap](https://github.com/twada/qunit-tap) plugin provides an excellent implementation using the same approach described above.
+
+### Update (August 31st, 2012)
+
+{% tweet https://twitter.com/qunitjs/status/240049283997503488 %}
+
+QUnit provides its own [test runner for use with PhantomJS](https://github.com/jquery/qunit/tree/master/addons/phantomjs) which logs information on the test run using its own APIs.
+
+One difference with doing the logging in the runner rather than in the HTML is that you will not get the console logging when you run the tests in the browser, which is usually what you want.
+
+Either approach can be used and customized to provide the logging you'd like.
