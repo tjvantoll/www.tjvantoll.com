@@ -459,6 +459,18 @@
 <h3>TAP Format</h3>
 
 <p>If you want to output the test results in <a href="http://en.wikipedia.org/wiki/Test_Anything_Protocol">TAP format</a> the <a href="https://github.com/twada/qunit-tap">QUnit-tap</a> plugin provides an excellent implementation using the same approach described above.</p>
+
+<h3>Update (August 31st, 2012)</h3>
+
+<div class='embed tweet'><blockquote class="twitter-tweet" data-in-reply-to="238820410278436864"><p><a href="https://twitter.com/tjvantoll"><s>@</s><b>tjvantoll</b></a> did you try the phantomjs addon? <a href="https://t.co/6Orpiwda" title="https://github.com/jquery/qunit/tree/master/addons/phantomjs">github.com/jquery/qunit/t…</a></p>&mdash; QUnit (@qunitjs) <a href="https://twitter.com/qunitjs/status/240049283997503488" data-datetime="2012-08-27T11:33:03+00:00">August 27, 2012</a></blockquote>
+<script src="//platform.twitter.com/widgets.js" charset="utf-8"></script></div>
+
+
+<p>QUnit provides its own <a href="https://github.com/jquery/qunit/tree/master/addons/phantomjs">test runner for use with PhantomJS</a> which logs information on the test run using its own APIs.</p>
+
+<p>One difference with doing the logging in the runner rather than in the HTML is that you will not get the console logging when you run the tests in the browser, which is usually what you want.</p>
+
+<p>Either approach can be used and customized to provide the logging you&#8217;d like.</p>
 </div>
 
 
