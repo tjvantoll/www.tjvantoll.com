@@ -1,7 +1,7 @@
 ---
 layout: post
-title: "HTML 5 Validation API - What It Is And How You Can Use It To Enhance Your Forms"
-date: 2012-08-04
+title: "HTML 5 Constraint Validation API - What It is and How You Can Use It to Enhance Your Forms"
+date: 2012-09-08
 comments: true
 categories: [HTML5, Browsers, JavaScript]
 published: false
@@ -9,9 +9,7 @@ published: false
 
 HTML5 includes a built in client side form validation mechanism designed to make implementing client side validation powerful, seamless, and most importantly - easy to implement.
 
-Despite this, HTML5 form validation is a topic relegated to presentations and demos; I personally have yet to fill out a web form in the wild that actually makes use of HTML5 form validation.
-
-One of the reasons for this is a lack of browser support and a lack of customization in the validation itself.  However, the [list of browsers that support form validation](http://caniuse.com/#feat=form-validation) is now fairly comprehensive:
+Most modern browsers now [support the new APIs](http://caniuse.com/#feat=form-validation):
 
 * IE 10
 * Firefox 4+
@@ -22,39 +20,25 @@ One of the reasons for this is a lack of browser support and a lack of customiza
 * Chrome for Android
 * Firefox for Android
 
-Additionally all of the browsers listed above provide a [full validation API](https://developer.mozilla.org/en-US/docs/HTML/Forms_in_HTML?redirectlocale=en-US&redirectslug=HTML%2FHTML5%2FForms_in_HTML5#Constraint_Validation_API) for client side scripts.  Therefore now is a great time to start using HTML5 form validation in real applications.
+The noticeable browsers missing from this list are the default Android (<= 4) browser, iOS Safari, and IE <= 9.  Nevertheless, with IE10 releasing soon and [Chrome replacing the default Android browser in Jelly Bean](http://www.pcmag.com/article2/0,2817,2406535,00.asp) something something something.
 
 <!--more-->
+
+### Constraint Validation
+
+When a form is submitted the browser runs through a series of steps known as [constraint validation](http://www.whatwg.org/specs/web-apps/current-work/#constraint-validation) to determine whether the submission should be allowed.
+
+For example if a form has an input with the `required` attribute and no value, supporting browsers prevent the form's submission.
+
+If you're using a supporting browser you can see this below:
+
+<iframe style="width: 100%; height: 150px;" src="http://jsfiddle.net/tj_vantoll/8gJnv/embedded/result,html,css/" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
 
 ### Form Validation
 
 When you submit a form in a supported browser the form will be validate that the data meets the criteria specified in attributes such as `min`, `max`, `required`, `type`, `step`, and `pattern`.  As an example if you submit the following `<form>`:
 
-``` html
-<form>
-    <label for="name">Name:</label>
-    <input id="name" type="text" required value="" />
-    <input type="submit" />
-</form>
-```
 
-The browser will prevent the form from being submitted since the `<input>` has the `required` attribute and an empty `value`.  It will also present the user with an error message:
-
-##### Chrome
-
-![Chrome](/images/posts/2012-08-05/Chrome-required.png "Chrome")
-
-##### Firefox
-
-![Firefox](/images/posts/2012-08-05/Firefox-required.png "Firefox")
-
-##### Opera
-
-![Opera](/images/posts/2012-08-05/Opera-required.png "Opera")
-
-You can see what your browser does below:
-
-<iframe style="width: 100%; height: 100px;" src="http://jsfiddle.net/tj_vantoll/8gJnv/embedded/result,html,css/" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
 
 This is great but what if you want do something like customize the error message or show it in an additional location?  The [constraint validation API](http://www.whatwg.org/specs/web-apps/current-work/#the-constraint-validation-api) will allow you to do this.
 

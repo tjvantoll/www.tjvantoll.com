@@ -1,29 +1,85 @@
 ---
-layout: default
+layout: page
+comments: false
+sharing: false
+footer: true
 ---
+<img src="/images/me/1.jpg" alt="Me!" id="home_me" />
+<p>Oh hi!  I'm Ted VanToll and this is my blog.</p>
 
-<div class="blog-index">
-  {% assign index = true %}
-  {% for post in paginator.posts %}
-  {% assign content = post.content %}
-    <article>
-      {% include article.html %}
-    </article>
-  {% endfor %}
-  <div class="pagination">
-    {% if paginator.next_page %}
-      <a class="prev" href="{{paginator.next_page}}">&larr; Older</a>
-    {% endif %}
-    <a href="/blog/archives">Blog Archives</a>
-    {% if paginator.previous_page %}
-    <a class="next" href="{{paginator.previous_page}}">Newer &rarr;</a>
-    {% endif %}
+<p>I'm a Web Developer working for <a href="http://liquidweb.com">Liquid Web</a> in Lansing, MI.  I've been making web sites since the web was a thing and I have experience building sites ranging from major applications for Fortune 500 companies to small personal sites and everything in between.</p>
+
+<p>I'm an open source advocate and have made minor contributions to a few open source libraries that I use.  This blog itself is open source and if you'd like to <a href="https://github.com/tjvantoll/tjvantoll.github.com/tree/source">dig around the source</a> to see how I've made it you're free to.</p>
+
+<span id="home_contact_label">Contact:</span>
+<nav id="home_links">
+  <ul>
+  <li><a href="https://twitter.com/tjvantoll">Twitter</a>|</li>
+  <li><a href="https://github.com/tjvantoll">GitHub</a>|</li>
+  <li><a href="mailto:tj.vantoll@gmail.com">Email</a></li>
+  </ul>
+</nav>
+
+<header class="home">
+  <h2 class="entry-title">
+    Most Popular Posts
+    <a href="/blog/archives">(View All)</a>
+  </h2>
+</header>
+<p>Posts that were good or that I deceived people into clicking from Google searches.</p>
+<ul id="home_popular_posts">
+  <li>
+    <span>May 2nd, 2012:</span><a href="/2012/05/02/showmodaldialog-what-it-is-and-why-you-should-never-use-it/">window.showModalDialog: What It is and Why You Should Never Use It</a>
+  </li>
+  <li>
+    <span>July 15th, 2012:</span><a href="/2012/07/15/native-html5-number-picker-vs-jquery-uis-spinner-which-to-use/">Native HTML5 Number Picker and jQuery UI's Spinner - Which to Use?</a>
+  </li>
+  <li>
+    <span>June 30th, 2012:</span><a href="/2012/06/30/creating-a-native-html5-datepicker-with-a-fallback-to-jquery-ui/">Creating a Native HTML 5 Datepicker with a Fallback to jQuery UI</a>
+  </li>
+  <li>
+    <span>August 19th, 2012:</span><a href="/2012/08/19/onscroll-event-issues-on-mobile-browsers/">onscroll Event Issues on Mobile Browsers</a>
+  </li>
+  <li>
+    <span>June 15th, 2012:</span><a href="/2012/06/15/detecting-print-requests-with-javascript/">Detecting Print Requests with JavaScript</a>
+  </li>
+</ul>
+
+<header class="home"><h2 class="entry-title">Stuff I've Made</h2></header>
+
+<p>Occasionally I make things.</p>
+
+<script>
+$.domReady(function() {
+  if (Modernizr.csstransforms3d) {
+    new PictureCube('browser-picture-cube', 
+      [
+        { src: '/images/browsers/Chrome.png', title: 'Chrome' },
+        { src: '/images/browsers/Firefox.png', title: 'Firefox' },
+        { src: '/images/browsers/IE8.png', title: 'IE8' },
+        { src: '/images/browsers/Safari.png', title: 'Safari' },
+        { src: '/images/browsers/Opera.png', title: 'Opera' },
+        { src: '/images/browsers/IE9.png', title: 'IE9' }
+      ]
+    ).cycle(2500);
+  }
+});
+</script>
+<div class="project-contents">
+  <div class="image">
+    <img src="/images/lw15yearlogo.png" alt="Liquid Web's 15th Anniversary" />
+  </div>
+  <div class="wording">
+    <a href="https://liquidweb.com/15-year">Liquid Web's 15th Anniversary Celebration</a>
+    <p>An interactive timeline with scroll triggered animations.  If that's not cool enough you also get to play with bubbles and clouds.</p>
   </div>
 </div>
-<aside class="sidebar">
-  {% if site.blog_index_asides.size %}
-    {% include_array blog_index_asides %}
-  {% else %}
-    {% include_array default_asides %}
-  {% endif %}
-</aside>
+<div class="project-contents">
+  <div class="image">
+    <div id="browser-picture-cube"></div>
+  </div>
+  <div class="wording">
+    <a href="https://github.com/tjvantoll/PictureCube">PictureCube</a>
+    <p>3D Cube of images created and controlled by a simplistic JavaScript API.</p>
+  </div>
+</div>

@@ -75,6 +75,56 @@ body > footer {
 /******************** About Page *********************/
 /*****************************************************/
 
+#home_me {
+	float: right;
+	margin: 10px;
+}
+
+#home_contact_label {
+	float: left;
+}
+#home_links {
+	overflow: hidden;
+	
+	ul {
+		margin: 0;
+		padding: 0;
+		float: left; 
+		overflow: hidden;
+	}
+	li {
+		float: left;
+		list-style-type: none;
+	}
+	a {
+		margin: 0 0.7em;
+	}
+}
+
+#home_popular_posts {
+	margin-bottom: 0;
+
+	a { 
+		display: block;
+		margin-bottom: 1em;
+	}
+}
+
+header.home {
+	margin-bottom: 1em;
+
+	h2 {
+		margin: 0.2em 0 0 0;
+		padding: 0;
+		clear: both;
+
+		a {
+			font-size: 0.65em;
+			font-weight: normal;
+		}
+	}
+}
+
 .project-contents {
 	overflow: hidden;
 	box-shadow: 1px 1px 1px 1px lighten(#333, 10%);
@@ -125,10 +175,17 @@ body > footer {
 	}
 }
 @media all and (max-width: 500px) {
+	.project-contents .image {
+		display: none;
+	}
 	.project-contents .wording {
 		clear: left;
-		width: 95%;
-		margin-top: 0.5em;
+		width: 100%;
+		padding: 0;
+	}
+	.project-contents:hover {
+		-webkit-transform: none;
+		transform: none;
 	}
 }
 
