@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Browsers | TJ VanToll]]></title>
   <link href="http://tjvantoll.com/blog/categories/browsers/atom.xml" rel="self"/>
   <link href="http://tjvantoll.com/"/>
-  <updated>2012-09-02T15:47:33-04:00</updated>
+  <updated>2012-09-02T21:32:24-04:00</updated>
   <id>http://tjvantoll.com/</id>
   <author>
     <name><![CDATA[TJ VanToll]]></name>
@@ -12,6 +12,121 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[HTML 5 Constraint Validation API - What It is and How You Can Use It to Enhance Your Forms]]></title>
+    <link href="http://tjvantoll.com/2012/09/08/html-5-constraint-validation-api-what-it-is-and-how-you-can-use-it-to-enhance-your-forms/"/>
+    <updated>2012-09-08T00:00:00-04:00</updated>
+    <id>http://tjvantoll.com/2012/09/08/html-5-constraint-validation-api-what-it-is-and-how-you-can-use-it-to-enhance-your-forms</id>
+    <content type="html"><![CDATA[<p>HTML5 includes a built in client side form validation mechanism designed to make implementing client side validation powerful, seamless, and most importantly - easy to implement.</p>
+
+<p>Most modern browsers now <a href="http://caniuse.com/#feat=form-validation">support the new APIs</a>:</p>
+
+<ul>
+<li>IE 10</li>
+<li>Firefox 4+</li>
+<li>Chrome 10+</li>
+<li>Safari 5+</li>
+<li>Opera 10+</li>
+<li>Opera Mobile</li>
+<li>Chrome for Android</li>
+<li>Firefox for Android</li>
+</ul>
+
+
+<p>The noticeable browsers missing from this list are the default Android (&lt;= 4) browser, iOS Safari, and IE &lt;= 9.  Nevertheless, with IE10 releasing soon and <a href="http://www.pcmag.com/article2/0,2817,2406535,00.asp">Chrome replacing the default Android browser in Jelly Bean</a> something something something.</p>
+
+<!--more-->
+
+
+<h3>Constraint Validation</h3>
+
+<p>When a form is submitted the browser runs through a series of steps known as <a href="http://www.whatwg.org/specs/web-apps/current-work/#constraint-validation">constraint validation</a> to determine whether the submission should be allowed.</p>
+
+<p>For example if a form has an input with the <code>required</code> attribute and no value, supporting browsers prevent the form's submission.</p>
+
+<p>If you're using a supporting browser you can see this below:</p>
+
+<iframe style="width: 100%; height: 150px;" src="http://jsfiddle.net/tj_vantoll/8gJnv/embedded/result,html,css/" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
+
+
+<h3>Form Validation</h3>
+
+<p>When you submit a form in a supported browser the form will be validate that the data meets the criteria specified in attributes such as <code>min</code>, <code>max</code>, <code>required</code>, <code>type</code>, <code>step</code>, and <code>pattern</code>.  As an example if you submit the following <code>&lt;form&gt;</code>:</p>
+
+<p>This is great but what if you want do something like customize the error message or show it in an additional location?  The <a href="http://www.whatwg.org/specs/web-apps/current-work/#the-constraint-validation-api">constraint validation API</a> will allow you to do this.</p>
+
+<h3>The API</h3>
+
+<p>1) Form elements have a <a href="http://www.whatwg.org/specs/web-apps/current-work/#dom-cva-willvalidate">willValidate</a> property, which will return whether the element is <a href="http://www.whatwg.org/specs/web-apps/current-work/#candidate-for-constraint-validation">a candidate for constraint validation</a>.</p>
+
+<p>``` html
+<input id="input" type="text" /></p>
+
+<div id="div"></div>
+
+
+<script>
+    //true, because input elements are validated by default
+    document.getElementById('input').willValidate;
+
+    //false, because div elements are not validated
+    document.getElementById('div').willValidate; //false
+</script>
+
+
+<p>```</p>
+
+<p>This is useful to know what</p>
+
+<p>2) Form elements have a <code>validity</code> property which is a <a href="http://www.whatwg.org/specs/web-apps/current-work/#dom-cva-validity">ValidityState object</a> with the following boolean properties per the <a href="http://www.whatwg.org/specs/web-apps/current-work/#validitystate">spec</a>:</p>
+
+<ul>
+<li><code>customError</code> - <code>true</code> if custom validity message has been set per a call to <code>setCustomValidity()</code>.</li>
+<li><code>patternMismatch</code> - <code>true</code> if the value does not match its <code>pattern</code> attribute.</li>
+<li><code>rangeOverflow</code> - <code>true</code>, if the value is greater than its <code>max</code> attribute.</li>
+<li><code>rangeUnderflow</code> -  <code>true, if the value is less than its</code>min` attribute.</li>
+<li><code>stepMismatch</code> - <code>true</code> if the value is invalid per its <code>step</code> attribute.</li>
+<li><code>tooLong</code> - <code>true</code> if the value exceeds its <code>maxlength</code> attribute.</li>
+<li><code>typeMismatch</code> - <code>true</code> if the value is invalid per its <code>type</code> attribute.</li>
+<li><code>valid</code> - <code>true</code> if non of the other validation conditions are `true.</li>
+<li><code>valueMissing</code> - <code>true</code> if the element has a <code>required</code> attribute but has no value.</li>
+</ul>
+
+
+<p>Here's a few examples of how this can be used.</p>
+
+<p>``` html
+<input id="one" type="text" />
+<input id="two" type="text" required />
+<input id="three" type="number" value="3" max="2" />
+<input id="four" type="email" value="abc" />
+<input id="five" type="number" value="3" step="2" /></p>
+
+<script>
+    document.getElementById('one').validity.valid; //false
+
+    document.getElementById('two').validity.valueMissing; //true
+    document.getElementById('two').validity.valid; //false
+
+    document.getElementById('three').validity.rangeOverflow; //true
+    document.getElementById('three').validity.valid; //false
+
+    document.getElementById('four').validity.typeMismatch; //true
+    document.getElementById('four').validity.valid; //false
+
+    document.getElementById('five').validity.stepMismatch; //true
+    document.getElementById('five').validity.valid; //false
+</script>
+
+
+<p>```</p>
+
+<p>3) Form elements will have a <code>validationMessage</code> property will <a href="http://www.whatwg.org/specs/web-apps/current-work/#dom-cva-validationmessage">return string that the browser would show the user if this were the only form control with a validity constraint problem</a>.</p>
+
+<p>```</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[HTML5 Form Validation - Start Using it in Production Applications]]></title>
@@ -441,297 +556,6 @@ $(function() {
 <h3>That's a Lot of Code to Do Something Simple</h3>
 
 <p>Yep.  While browser support is getting to be quite good for HTML5 forms the implementations themselves are still a bit buggy.  Nevertheless, this approach will work for displaying all validation errors to the end user.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[DOM Element References as Global Variables]]></title>
-    <link href="http://tjvantoll.com/2012/07/19/dom-element-references-as-global-variables/"/>
-    <updated>2012-07-19T22:33:00-04:00</updated>
-    <id>http://tjvantoll.com/2012/07/19/dom-element-references-as-global-variables</id>
-    <content type="html"><![CDATA[<p>Quiz: What is logged when the following markup is rendered?</p>
-
-<p>``` html
-<html></p>
-
-<pre><code>&lt;head&gt;&lt;/head&gt;
-&lt;body&gt;
-    &lt;button id="bar"&gt;Button&lt;/button&gt;
-    &lt;script&gt;
-        console.log(bar);
-    &lt;/script&gt;
-&lt;/body&gt;
-</code></pre>
-
-<p></html>
-```</p>
-
-<p>Syntax error obviously, right?  Wrong.  All major browser rendering engines will log a reference to the <code>&lt;button&gt;</code> node.  This includes Trident (IE), Gecko (Firefox), WebKit (Chrome, Safari, etc), and Presto (Opera).</p>
-
-<h3>Wait.  What?</h3>
-
-<p>Ah, I get it, there's no doctype on that markup.  So this a quirks mode only thing then right?  Wrong.  <a href="https://bugzilla.mozilla.org/show_bug.cgi?id=622491">As of Firefox 14</a> the latest version of all major browsers will produce the same result IN STANDARDS MODE.</p>
-
-<p>``` html
-&lt;!DOCTYPE html>
-<html></p>
-
-<pre><code>&lt;head&gt;&lt;/head&gt;
-&lt;body&gt;
-    &lt;button id="bar"&gt;Button&lt;/button&gt;
-    &lt;script&gt;
-        console.log(bar); //Reference to &lt;button&gt;, even in standards mode
-    &lt;/script&gt;
-&lt;/body&gt;
-</code></pre>
-
-<p></html>
-```</p>
-
-<!--more-->
-
-
-<h3>So What's Going On?</h3>
-
-<p>Believe it or not this is actually correct behavior per the HTML specification.</p>
-
-<p><blockquote><p>6.2.4 Named access on the Window object</p></p><p><p>The Window interface supports named properties. The supported property names at any moment consist of:</p></p><p><blockquote><p>the value of the name content attribute for all a, applet, area, embed, form, frame, frameset, iframe, img, and object elements in the active document that have a name content attribute, and<br/>the value of the id content attribute of any HTML element in the active document with an id content attribute.</p><footer><strong>HTML Specification</strong> <cite><a href='http://www.whatwg.org/specs/web-apps/current-work/#named-access-on-the-window-object'>www.whatwg.org/specs/web-apps/&hellip;</a></cite></footer></blockquote></p></blockquote>
-
-<p>What this is saying is that the value of the <code>name</code> attribute of certain elements and the value of the <code>id</code> attribute of ALL elements are accessible via the <code>window</code> object in the browser.  So, if you have a node <code>&lt;button id="foo"&gt;&lt;/button&gt;</code>, then <code>window.foo</code> will be resolved to a reference to the <code>&lt;button&gt;</code>.  From this point forward I will refer to this behavior as named access.</p>
-
-<h3>How is This Standard Behavior?</h3>
-
-<p>This behavior is an old Internet Explorer <em>feature</em>.  I can only imagine that it was intended to be a convenience for web developers that got sick of typing <code>document.getElementById</code> over and over again.  (this is way before jQuery and other popular toolkits came to be).  Regardless of the reasoning, IE shipped with this functionality and a whole lot of people utilized it.</p>
-
-<p>Other rendering engines were faced with the difficult decision of implementing non-standard behavior or remaining incompatible with a slew of websites written specifically for Internet Explorer.</p>
-
-<p>Gecko implemented this functionality but originally turned it on only in quirks mode.  They recently took the extra step and <a href="https://bugzilla.mozilla.org/show_bug.cgi?id=622491">turned named access on in standards mode with Firefox 14</a>.</p>
-
-<p>Webkit and Presto have had named access in standards mode for some time now.  <a href="https://www.w3.org/Bugs/Public/show_bug.cgi?id=11960">Webkit recently considered relegating this behavior to quirks mode</a>, however, they decided on leaving it enabled in standards mode.  Apparently there is still just too much stuff out there relying on this behavior to remove it in standards mode.  Believe it or not Microsoft even <a href="https://bugzilla.mozilla.org/show_bug.cgi?id=737760">shipped a marketing demo</a> that directly referenced named DOM elements, preventing it from functioning in Gecko.</p>
-
-<p>One of the main aims of the HTML5 specification is to standardize browser behavior, however quirky it might be.  Therefore, this functionality made it into the specification.</p>
-
-<h3>Why is This Behavior Bad?</h3>
-
-<p>I've alluded to the fact that this behavior is bad, but I've haven't gotten into details as to why.</p>
-
-<h4>There is a high potential for bugs to be introduced into the system</h4>
-
-<p>Let's say you have some code that looks something like this:</p>
-
-<p>``` html
-<html></p>
-
-<pre><code>&lt;head&gt;&lt;/head&gt;
-&lt;body&gt;
-    &lt;input type="text" id="choice"&gt;&lt;/button&gt;
-    &lt;script&gt;
-        var choice = 'foo';
-        //Lots more JavaScript
-        doSomethingVeryComplicated(choice);
-    &lt;/script&gt;
-&lt;/body&gt;
-</code></pre>
-
-<p></html>
-```</p>
-
-<p>Since a global <code>choice</code> variable is being created, <code>window.choice</code> will resolve to the string <code>foo</code> and not a reference to the <code>&lt;input&gt;</code>.  This is because the <code>&lt;input&gt;</code> reference is being <a href="http://en.wikipedia.org/wiki/Variable_shadowing">shadowed</a> by the variable declaration.  This works the same way as a variable with the same name being declared in a nested function.</p>
-
-<p>``` javascript
-(function() {</p>
-
-<pre><code>var x = 2;
-var y = function() {
-    var x = 3;
-    //Logs 3 instead of 2 because the value defined in the outer
-    //function is shadowed by the x defined in the inner function.
-    console.log(x);
-};
-y();
-</code></pre>
-
-<p>}());
-```</p>
-
-<p>This is all well and good.  However, let's say that during a refactor of this code the <code>var choice = 'foo';</code> line is accidentally removed.  Under normal circumstances this would cause a syntax error because <code>window.choice</code> would now be undefined.  However, because there is a DOM node with an <code>id</code> of <code>choice</code>, that reference will now refer to the DOM node instead.  This can easily lead to unexpected behavior.</p>
-
-<p>The flip side of this situation is also true.  If you have an element <code>&lt;div id="bar"&gt;&lt;/div&gt;</code> and use <code>window.bar</code> to refer to it, that code will break if you create JavaScript variable using <code>var</code> in the same scope (i.e. <code>var bar = 2;</code>).</p>
-
-<h4>Mistyping</h4>
-
-<p>Say you mistype the name of your variable and happen to type a named DOM element.  SURPRISE!</p>
-
-<h4>Non-trivial cost for the browser to implement</h4>
-
-<p>In order for these named elements to be available, the browser has to create a list of all named elements and maintain it as the page changes.  I can't offer any specific metrics as to how much time and memory this takes, but there is a cost, especially on pages with a large number of named elements.</p>
-
-<h4>Named elements will be shadowed by properties natively defined on <code>window</code>.</h4>
-
-<p>If you <em>were</em> to go the route of using named access you'd have to be careful to avoid using named elements with values that are predefined on the <code>window</code> already.</p>
-
-<p>For example you cannot refer to a <code>&lt;input id="location"&gt;</code> by <code>window.location</code> because that <a href="https://developer.mozilla.org/en/DOM/window.location">already resolves to an object</a> with information about the URL of the current document.</p>
-
-<p>There are a number of other property names on the <code>window</code> object that you could easily see being used to name a DOM element - <code>event</code>, <code>history</code>, <code>name</code>, <code>self</code>, <code>status</code>, and <code>toolbar</code> to name a few.</p>
-
-<h4>Browsers have inconsistent implementations.</h4>
-
-<p>Even though this is behavior is now standardized, there are still browser quirks in the way named access is implemented.</p>
-
-<h5>IE and Form Elements</h5>
-
-<p>IE will (incorrectly) make the <code>name</code> attribute of form elements available on the <code>window</code> object.</p>
-
-<p>``` html
-&lt;!DOCTYPE html>
-<html></p>
-
-<pre><code>&lt;head&gt;&lt;/head&gt;
-&lt;body&gt;
-    &lt;form&gt;
-        &lt;input name="foo" /&gt;
-    &lt;/form&gt;
-    &lt;script&gt;
-        //Logs a reference to the &lt;input&gt; in IE.
-        //Syntax error in all other rendering engines.
-        console.log(foo);
-    &lt;/script&gt;
-&lt;/body&gt;
-</code></pre>
-
-<p></html>
-```</p>
-
-<h5>Name Attribute on Anchor Tags</h5>
-
-<p>Per the spec, <code>&lt;a&gt;</code> tags should be accessible on the <code>window</code> object via the value of their <code>name</code> attribute.  However, this only works in IE and Opera.</p>
-
-<p>``` html
-&lt;!DOCTYPE html>
-<html></p>
-
-<pre><code>&lt;head&gt;&lt;/head&gt;
-&lt;body&gt;
-    &lt;a name="foo"&gt;&lt;/a&gt;
-    &lt;script&gt;
-        //Logs a reference to the &lt;a&gt; in IE and Opera.
-        //Syntax error in Gecko and WebKit.
-        console.log(foo);
-    &lt;/script&gt;
-&lt;/body&gt;
-</code></pre>
-
-<p></html>
-```</p>
-
-<h5>Multiple Named Attributes with the Same Value</h5>
-
-<p>Per this portion of the spec:</p>
-
-<p><blockquote><p>...if elements has only one element, return that element and abort these steps.</p></p><p><p>Otherwise return an HTMLCollection rooted at the Document node, whose filter matches only named elements with the name name.</p><footer><strong>HTML Specification</strong> <cite><a href='http://dev.w3.org/html5/spec/single-page.html#dom-window-nameditem'>dev.w3.org/html5/spec/&hellip;</a></cite></footer></blockquote></p>
-
-<p>What this is staying is that when there are multiple named properties with the same name, the browser should return an array when that property is referenced (instead of a reference to a specific DOM node).  As an example given this markup:</p>
-
-<p>``` html
-&lt;!DOCTYPE html>
-<html></p>
-
-<pre><code>&lt;head&gt;&lt;/head&gt;
-&lt;body&gt;
-    &lt;input id="one"&gt;
-    &lt;input id="one"&gt;
-    &lt;script&gt;
-        console.log(one);
-    &lt;/script&gt;
-&lt;/body&gt;
-</code></pre>
-
-<p></html>
-```</p>
-
-<p>...an array with references to the two <code>&lt;input&gt;</code> nodes should be logged per the spec.  And it will be in all browsers except Firefox.  Firefox 14 will simply log the first element.</p>
-
-<p>Having two elements with the same <code>id</code> is invalid HTML, but the browser will still render it just fine.  Even with the best of intentions these sorts of things do happen, especially in larger, dynamic applications.</p>
-
-<h3>More?</h3>
-
-<p>These are simply the bugs that I've ran into, I'm sure there are more.  If you know of any let me know in the comments and I can update this list.</p>
-
-<h3>But won't strict mode prevent this?</h3>
-
-<p><a href="https://developer.mozilla.org/en/JavaScript/Strict_mode">ECMAScript 5 strict mode</a> prevents you assigning values to variables before they are declared.  Therefore this...</p>
-
-<p>``` javascript
-(function() {</p>
-
-<pre><code>foo = 2; 
-</code></pre>
-
-<p>}());
-```</p>
-
-<p>will execute just fine whereas this...</p>
-
-<p>``` javascript
-(function() {</p>
-
-<pre><code>'use strict';
-foo = 2; 
-</code></pre>
-
-<p>}());
-```</p>
-
-<p>...will produce a syntax error that <code>foo</code> is not defined.  This is great, but it will not stop you from accessing named properties on the <code>window</code> object.</p>
-
-<p>``` html</p>
-
-<div id="foo"></div>
-
-
-<script>
-    (function() {
-        'use strict';
-        console.log(foo);
-    });
-</script>
-
-
-<p>```</p>
-
-<p>This will log a reference to the <code>&lt;div&gt;</code> in standards mode in the latest version of all modern browsers.  Strict mode will only prevent you from assigning values to variables that have yet to be declared.  If you're simply using a variable then strict mode doesn't protect you.  Therefore, you're not prevented from accessing name properties on the global <code>window</code> object.</p>
-
-<h3>What to do instead</h3>
-
-<p>Use <code>document.getElementById</code> to retrieve references to DOM nodes via their <code>id</code> attribute.</p>
-
-<p>``` html
-<button id="foo"></button></p>
-
-<script>
-    document.getElementById('foo');
-</script>
-
-
-<p>```</p>
-
-<p>To get a reference to a DOM node via its <code>name</code> attribute you can use <code>document.querySelectorAll</code>.</p>
-
-<p>``` html
-<a name="bar"></a></p>
-
-<script>
-    document.querySelectorAll('[name=bar]');
-</script>
-
-
-<p>```</p>
-
-<p><code>document.querySelectorAll</code> is not safe to use in IE &lt;= 8, so if you need to support older IE look into using a toolkit such as <a href="http://jquery.com">jQuery</a> to select the DOM nodes that you need.</p>
-
-<h3>Conclusion</h3>
-
-<p>All major browsers now make named properties available on the global <code>window</code> object in standards mode.  It's important to know that browsers do this because you'll likely run into this at some point.  However, never purposely utilize this functionality.  If you see others use it tell them to stop, ridicule them, do whatever it takes.  Help <a href="http://movethewebforward.org/">move the web forward</a>.</p>
 ]]></content>
   </entry>
   

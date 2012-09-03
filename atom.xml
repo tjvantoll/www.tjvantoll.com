@@ -4,7 +4,7 @@
   <title><![CDATA[TJ VanToll]]></title>
   <link href="http://tjvantoll.com/atom.xml" rel="self"/>
   <link href="http://tjvantoll.com/"/>
-  <updated>2012-09-02T15:47:33-04:00</updated>
+  <updated>2012-09-02T21:32:24-04:00</updated>
   <id>http://tjvantoll.com/</id>
   <author>
     <name><![CDATA[TJ VanToll]]></name>
@@ -12,6 +12,144 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[HTML 5 Constraint Validation API - What It is and How You Can Use It to Enhance Your Forms]]></title>
+    <link href="http://tjvantoll.com/2012/09/08/html-5-constraint-validation-api-what-it-is-and-how-you-can-use-it-to-enhance-your-forms/"/>
+    <updated>2012-09-08T00:00:00-04:00</updated>
+    <id>http://tjvantoll.com/2012/09/08/html-5-constraint-validation-api-what-it-is-and-how-you-can-use-it-to-enhance-your-forms</id>
+    <content type="html"><![CDATA[<p>HTML5 includes a built in client side form validation mechanism designed to make implementing client side validation powerful, seamless, and most importantly - easy to implement.</p>
+
+<p>Most modern browsers now <a href="http://caniuse.com/#feat=form-validation">support the new APIs</a>:</p>
+
+<ul>
+<li>IE 10</li>
+<li>Firefox 4+</li>
+<li>Chrome 10+</li>
+<li>Safari 5+</li>
+<li>Opera 10+</li>
+<li>Opera Mobile</li>
+<li>Chrome for Android</li>
+<li>Firefox for Android</li>
+</ul>
+
+
+<p>The noticeable browsers missing from this list are the default Android (&lt;= 4) browser, iOS Safari, and IE &lt;= 9.  Nevertheless, with IE10 releasing soon and <a href="http://www.pcmag.com/article2/0,2817,2406535,00.asp">Chrome replacing the default Android browser in Jelly Bean</a> something something something.</p>
+
+<!--more-->
+
+
+<h3>Constraint Validation</h3>
+
+<p>When a form is submitted the browser runs through a series of steps known as <a href="http://www.whatwg.org/specs/web-apps/current-work/#constraint-validation">constraint validation</a> to determine whether the submission should be allowed.</p>
+
+<p>For example if a form has an input with the <code>required</code> attribute and no value, supporting browsers prevent the form&#8217;s submission.</p>
+
+<p>If you&#8217;re using a supporting browser you can see this below:</p>
+
+<iframe style="width: 100%; height: 150px;" src="http://jsfiddle.net/tj_vantoll/8gJnv/embedded/result,html,css/" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
+
+
+<h3>Form Validation</h3>
+
+<p>When you submit a form in a supported browser the form will be validate that the data meets the criteria specified in attributes such as <code>min</code>, <code>max</code>, <code>required</code>, <code>type</code>, <code>step</code>, and <code>pattern</code>.  As an example if you submit the following <code>&lt;form&gt;</code>:</p>
+
+<p>This is great but what if you want do something like customize the error message or show it in an additional location?  The <a href="http://www.whatwg.org/specs/web-apps/current-work/#the-constraint-validation-api">constraint validation API</a> will allow you to do this.</p>
+
+<h3>The API</h3>
+
+<p>1) Form elements have a <a href="http://www.whatwg.org/specs/web-apps/current-work/#dom-cva-willvalidate">willValidate</a> property, which will return whether the element is <a href="http://www.whatwg.org/specs/web-apps/current-work/#candidate-for-constraint-validation">a candidate for constraint validation</a>.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;input</span> <span class="na">id=</span><span class="s">&quot;input&quot;</span> <span class="na">type=</span><span class="s">&quot;text&quot;</span> <span class="nt">/&gt;</span>
+</span><span class='line'><span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">&quot;div&quot;</span><span class="nt">&gt;&lt;/div&gt;</span>
+</span><span class='line'><span class="nt">&lt;script&gt;</span>
+</span><span class='line'>  <span class="c1">//true, because input elements are validated by default</span>
+</span><span class='line'>    <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">&#39;input&#39;</span><span class="p">).</span><span class="nx">willValidate</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="c1">//false, because div elements are not validated</span>
+</span><span class='line'>    <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">&#39;div&#39;</span><span class="p">).</span><span class="nx">willValidate</span><span class="p">;</span> <span class="c1">//false</span>
+</span><span class='line'><span class="nt">&lt;/script&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This is useful to know what</p>
+
+<p>2) Form elements have a <code>validity</code> property which is a <a href="http://www.whatwg.org/specs/web-apps/current-work/#dom-cva-validity">ValidityState object</a> with the following boolean properties per the <a href="http://www.whatwg.org/specs/web-apps/current-work/#validitystate">spec</a>:</p>
+
+<ul>
+<li><code>customError</code> - <code>true</code> if custom validity message has been set per a call to <code>setCustomValidity()</code>.</li>
+<li><code>patternMismatch</code> - <code>true</code> if the value does not match its <code>pattern</code> attribute.</li>
+<li><code>rangeOverflow</code> - <code>true</code>, if the value is greater than its <code>max</code> attribute.</li>
+<li><code>rangeUnderflow</code> -  <code>true, if the value is less than its</code>min` attribute.</li>
+<li><code>stepMismatch</code> - <code>true</code> if the value is invalid per its <code>step</code> attribute.</li>
+<li><code>tooLong</code> - <code>true</code> if the value exceeds its <code>maxlength</code> attribute.</li>
+<li><code>typeMismatch</code> - <code>true</code> if the value is invalid per its <code>type</code> attribute.</li>
+<li><code>valid</code> - <code>true</code> if non of the other validation conditions are `true.</li>
+<li><code>valueMissing</code> - <code>true</code> if the element has a <code>required</code> attribute but has no value.</li>
+</ul>
+
+
+<p>Here&#8217;s a few examples of how this can be used.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;input</span> <span class="na">id=</span><span class="s">&quot;one&quot;</span> <span class="na">type=</span><span class="s">&quot;text&quot;</span> <span class="nt">/&gt;</span>
+</span><span class='line'><span class="nt">&lt;input</span> <span class="na">id=</span><span class="s">&quot;two&quot;</span> <span class="na">type=</span><span class="s">&quot;text&quot;</span> <span class="na">required</span> <span class="nt">/&gt;</span>
+</span><span class='line'><span class="nt">&lt;input</span> <span class="na">id=</span><span class="s">&quot;three&quot;</span> <span class="na">type=</span><span class="s">&quot;number&quot;</span> <span class="na">value=</span><span class="s">&quot;3&quot;</span> <span class="na">max=</span><span class="s">&quot;2&quot;</span> <span class="nt">/&gt;</span>
+</span><span class='line'><span class="nt">&lt;input</span> <span class="na">id=</span><span class="s">&quot;four&quot;</span> <span class="na">type=</span><span class="s">&quot;email&quot;</span> <span class="na">value=</span><span class="s">&quot;abc&quot;</span> <span class="nt">/&gt;</span>
+</span><span class='line'><span class="nt">&lt;input</span> <span class="na">id=</span><span class="s">&quot;five&quot;</span> <span class="na">type=</span><span class="s">&quot;number&quot;</span> <span class="na">value=</span><span class="s">&quot;3&quot;</span> <span class="na">step=</span><span class="s">&quot;2&quot;</span> <span class="nt">/&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nt">&lt;script&gt;</span>
+</span><span class='line'>    <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">&#39;one&#39;</span><span class="p">).</span><span class="nx">validity</span><span class="p">.</span><span class="nx">valid</span><span class="p">;</span> <span class="c1">//false</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">&#39;two&#39;</span><span class="p">).</span><span class="nx">validity</span><span class="p">.</span><span class="nx">valueMissing</span><span class="p">;</span> <span class="c1">//true</span>
+</span><span class='line'>    <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">&#39;two&#39;</span><span class="p">).</span><span class="nx">validity</span><span class="p">.</span><span class="nx">valid</span><span class="p">;</span> <span class="c1">//false</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">&#39;three&#39;</span><span class="p">).</span><span class="nx">validity</span><span class="p">.</span><span class="nx">rangeOverflow</span><span class="p">;</span> <span class="c1">//true</span>
+</span><span class='line'>    <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">&#39;three&#39;</span><span class="p">).</span><span class="nx">validity</span><span class="p">.</span><span class="nx">valid</span><span class="p">;</span> <span class="c1">//false</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">&#39;four&#39;</span><span class="p">).</span><span class="nx">validity</span><span class="p">.</span><span class="nx">typeMismatch</span><span class="p">;</span> <span class="c1">//true</span>
+</span><span class='line'>    <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">&#39;four&#39;</span><span class="p">).</span><span class="nx">validity</span><span class="p">.</span><span class="nx">valid</span><span class="p">;</span> <span class="c1">//false</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">&#39;five&#39;</span><span class="p">).</span><span class="nx">validity</span><span class="p">.</span><span class="nx">stepMismatch</span><span class="p">;</span> <span class="c1">//true</span>
+</span><span class='line'>    <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">&#39;five&#39;</span><span class="p">).</span><span class="nx">validity</span><span class="p">.</span><span class="nx">valid</span><span class="p">;</span> <span class="c1">//false</span>
+</span><span class='line'><span class="nt">&lt;/script&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>3) Form elements will have a <code>validationMessage</code> property will <a href="http://www.whatwg.org/specs/web-apps/current-work/#dom-cva-validationmessage">return string that the browser would show the user if this were the only form control with a validity constraint problem</a>.</p>
+
+<p>&#8220;`</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[HTML5 Form Validation - Start Using it in Production Applications]]></title>
@@ -4024,276 +4162,6 @@ Note: Google Chrome supports 3D transforms, but <a href="https://github.com/Mode
     </div>
 </div>
 
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[CSS3 Color Animations]]></title>
-    <link href="http://tjvantoll.com/2012/02/20/CSS3-Color-Animations/"/>
-    <updated>2012-02-20T00:00:00-05:00</updated>
-    <id>http://tjvantoll.com/2012/02/20/CSS3-Color-Animations</id>
-    <content type="html"><![CDATA[<p>CSS3 animations allow you to alter the values of CSS properties over time.  They&#8217;re now supported in Firefox 5+, Chrome, Safari 4+, iOS, Android 4+, and the upcoming IE10, therefore, using them in real production websites is possible.  One of the cool things you can do with them is change the color of an element using exclusively CSS.  Previously a technique like this was only possible using <a href="https://developer.mozilla.org/en/window.setInterval">JavaScript&#8217;s setInterval function</a> to gradually change the appropriate property of the element. See <a href="http://jqueryui.com/demos/animate/">jQuery UI&#8217;s animate demos</a> for a good example.</p>
-
-<!--more-->
-
-
-<h3>Getting Started</h3>
-
-<p>Let&#8217;s start with a basic example (note - Whether or not you see the animation depends on whether your browser supports CSS3 animations.  You can check at <a href="http://caniuse.com/css-animation">caniuse.com</a>.</p>
-
-<iframe style="width: 100%; height: 120px;" src="http://jsfiddle.net/RfYMA/1/embedded/result,html,css/" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
-
-
-<h3>Syntax</h3>
-
-<p>Let&#8217;s break this down one section at a time.</p>
-
-<figure class='code'><figcaption><span>Animation CSS</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nt">div</span> <span class="p">{</span>
-</span><span class='line'>  <span class="o">-</span><span class="n">webkit</span><span class="o">-</span><span class="n">animation</span><span class="o">:</span> <span class="n">color</span><span class="err">_</span><span class="n">change</span> <span class="m">1s</span> <span class="n">infinite</span> <span class="n">alternate</span><span class="p">;</span>
-</span><span class='line'>  <span class="o">-</span><span class="n">moz</span><span class="o">-</span><span class="n">animation</span><span class="o">:</span> <span class="n">color</span><span class="err">_</span><span class="n">change</span> <span class="m">1s</span> <span class="n">infinite</span> <span class="n">alternate</span><span class="p">;</span>
-</span><span class='line'>  <span class="o">-</span><span class="n">ms</span><span class="o">-</span><span class="n">animation</span><span class="o">:</span> <span class="n">color</span><span class="err">_</span><span class="n">change</span> <span class="m">1s</span> <span class="n">infinite</span> <span class="n">alternate</span><span class="p">;</span>
-</span><span class='line'>  <span class="o">-</span><span class="err">o</span><span class="o">-</span><span class="n">animation</span><span class="o">:</span> <span class="n">color</span><span class="err">_</span><span class="n">change</span> <span class="m">1s</span> <span class="n">infinite</span> <span class="n">alternate</span><span class="p">;</span>
-</span><span class='line'>  <span class="n">animation</span><span class="o">:</span> <span class="n">color</span><span class="err">_</span><span class="n">change</span> <span class="m">1s</span> <span class="n">infinite</span> <span class="n">alternate</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>The <code>animation</code> property is how you define a <a href="https://developer.mozilla.org/en/CSS/CSS_animations">CSS3 animation</a>.  The <a href="https://developer.mozilla.org/en-US/">MDN</a> (Mozilla Developer Network) docs have extensive documentation on all the various sub properties available to configure the animation <a href="https://developer.mozilla.org/en/CSS/CSS_animations#Configuring_the_animation">here</a>.  In this example I&#8217;m setting…</p>
-
-<ul>
-<li><code><a href="https://developer.mozilla.org/en/CSS/animation-name">animation name</a></code>: <code>color_change</code> - This refers to a named @keyframes rule, which we&#8217;ll get into in a minute.</li>
-<li><code><a href="https://developer.mozilla.org/en/CSS/animation-duration">animation_duration</a></code>: <code>1s</code> - The animation should last 1 second.</li>
-<li><code><a href="https://developer.mozilla.org/en/CSS/animation-iteration-count">animation_iteration_count</a></code>: <code>infinite</code> - The animation will cycle forever.</li>
-<li><code><a href="https://developer.mozilla.org/en/CSS/animation-direction">animation_direction</a></code>: <code>alternate</code> - This will tell the animation to alternate, from start to end, then end to start, then start to end, and so on.  In this example it keeps the box from being jerky by quickly switching from red to blue.</li>
-</ul>
-
-
-<p>For readability you can also list the properties out individually.</p>
-
-<figure class='code'><figcaption><span>Animation broken out</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="c">/* Note: Prefixes omitted, see below */</span>
-</span><span class='line'><span class="nt">div</span> <span class="p">{</span>
-</span><span class='line'>  <span class="n">animation</span><span class="o">-</span><span class="n">name</span><span class="o">:</span> <span class="n">color</span><span class="err">_</span><span class="n">change</span><span class="p">;</span>
-</span><span class='line'>  <span class="n">animation</span><span class="o">-</span><span class="n">duration</span><span class="o">:</span> <span class="m">1s</span><span class="p">;</span>
-</span><span class='line'>  <span class="n">animation</span><span class="o">-</span><span class="n">iteration</span><span class="o">-</span><span class="n">count</span><span class="o">:</span> <span class="n">infinite</span><span class="p">;</span>
-</span><span class='line'>  <span class="n">animation</span><span class="o">-</span><span class="k">direction</span><span class="o">:</span> <span class="n">alternate</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>Prefixes</h3>
-
-<p>The vendor prefixes are necessary because CSS3 animations are still considered an experimental feature (the <a href="http://www.w3.org/TR/css3-animations/">spec</a> is still in working draft status.  However, the syntax is consistent across modern browsers, so you only have to copy and paste the code to add all the necessary prefixes.  Always include the un-prefixed property last to make your code future friendly to browsers that add un-prefixed support.  For an up to date list of what browsers support CSS3 animations and which prefixes to use check out the <a href="http://caniuse.com/css-animation">CSS animation page at caniuse.com</a>.</p>
-
-<p>If you get sick of typing out all the vendor prefixes you&#8217;re not alone.  <a href="http://leaverou.github.com/prefixfree/">-prefix-free</a> is a tool by <a href="http://lea.verou.me/">Lea Verou</a> that lets you write your CSS unprefixed.  A JavaScript file detects whether a browser prefix is necessary, which one to use, and applies it automatically.</p>
-
-<p>Another option is <a href="http://prefixr.com/">Prefixr</a> by Jeffrey Way of <a href="http://net.tutsplus.com/">nettuts</a>.  It lets you copy and paste your code in, run it, and have the appropriate prefixes added automatically.</p>
-
-<p>Browser prefixes have been been a hot topic lately after it was announced that IE, Firefox, and Opera are <a href="http://lists.w3.org/Archives/Public/www-style/2012Feb/0313.html">considering adopting support for -webkit prefixes</a>.  If you&#8217;re curious a <a href="http://remysharp.com/2012/02/09/vendor-prefixes-about-to-go-south/">number</a> <a href="http://christianheilmann.com/2012/02/09/now-vendor-prefixes-have-become-a-problem-want-to-help-fix-it/">of</a> <a href="http://www.brucelawson.co.uk/2012/on-the-vendor-prefixes-problem/">others</a> have <a href="http://infrequently.org/2012/02/misdirection/">written</a> about this.</p>
-
-<h3>Keyframes</h3>
-
-<figure class='code'><figcaption><span>Keyframe Declarations</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="k">@-webkit-keyframes</span> <span class="nt">color_change</span> <span class="p">{</span>
-</span><span class='line'>  <span class="nt">from</span> <span class="p">{</span> <span class="k">background-color</span><span class="o">:</span> <span class="nb">blue</span><span class="p">;</span> <span class="p">}</span>
-</span><span class='line'>  <span class="nt">to</span> <span class="p">{</span> <span class="k">background-color</span><span class="o">:</span> <span class="nb">red</span><span class="p">;</span> <span class="p">}</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'><span class="k">@-moz-keyframes</span> <span class="nt">color_change</span> <span class="p">{</span>
-</span><span class='line'>  <span class="nt">from</span> <span class="p">{</span> <span class="k">background-color</span><span class="o">:</span> <span class="nb">blue</span><span class="p">;</span> <span class="p">}</span>
-</span><span class='line'>  <span class="nt">to</span> <span class="p">{</span> <span class="k">background-color</span><span class="o">:</span> <span class="nb">red</span><span class="p">;</span> <span class="p">}</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'><span class="k">@-ms-keyframes</span> <span class="nt">color_change</span> <span class="p">{</span>
-</span><span class='line'>  <span class="nt">from</span> <span class="p">{</span> <span class="k">background-color</span><span class="o">:</span> <span class="nb">blue</span><span class="p">;</span> <span class="p">}</span>
-</span><span class='line'>  <span class="nt">to</span> <span class="p">{</span> <span class="k">background-color</span><span class="o">:</span> <span class="nb">red</span><span class="p">;</span> <span class="p">}</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'><span class="k">@-o-keyframes</span> <span class="nt">color_change</span> <span class="p">{</span>
-</span><span class='line'>  <span class="nt">from</span> <span class="p">{</span> <span class="k">background-color</span><span class="o">:</span> <span class="nb">blue</span><span class="p">;</span> <span class="p">}</span>
-</span><span class='line'>  <span class="nt">to</span> <span class="p">{</span> <span class="k">background-color</span><span class="o">:</span> <span class="nb">red</span><span class="p">;</span> <span class="p">}</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'><span class="k">@keyframes</span> <span class="nt">color_change</span> <span class="p">{</span>
-</span><span class='line'>  <span class="nt">from</span> <span class="p">{</span> <span class="k">background-color</span><span class="o">:</span> <span class="nb">blue</span><span class="p">;</span> <span class="p">}</span>
-</span><span class='line'>  <span class="nt">to</span> <span class="p">{</span> <span class="k">background-color</span><span class="o">:</span> <span class="nb">red</span><span class="p">;</span> <span class="p">}</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p><a href="https://developer.mozilla.org/en/CSS/@keyframes">Keyframes</a> are a way of specifying a set of properties and their values at different states of an animation.  <code>@keyframes color_change</code> gives the @keyframes a name of <code>color_change</code>.  This provides the connection used on the animation property above.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nt">from</span> <span class="p">{</span> <span class="k">background-color</span><span class="o">:</span> <span class="nb">blue</span><span class="p">;</span> <span class="p">}</span>
-</span><span class='line'><span class="nt">to</span> <span class="p">{</span> <span class="k">background-color</span><span class="o">:</span> <span class="nb">red</span><span class="p">;</span> <span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>This animation only has 2 steps, a start and an end.  Since such animations are quite common, the <a href="http://www.w3.org/TR/css3-animations/#keyframes-">spec</a> provides the keywords <code>from</code> and <code>to</code> for defining the state of properties at the beginning and end of the animation.  This could also have been written using percentages for the steps.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nt">0</span><span class="o">%</span> <span class="p">{</span> <span class="k">background-color</span><span class="o">:</span> <span class="nb">blue</span><span class="p">;</span> <span class="p">}</span>
-</span><span class='line'><span class="nt">100</span><span class="o">%</span> <span class="p">{</span> <span class="k">background-color</span><span class="o">:</span> <span class="nb">red</span><span class="p">;</span> <span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>If the animation has more than 2 steps, they can be listed using multiple steps as such.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nt">0</span><span class="o">%</span> <span class="p">{</span> <span class="k">background-color</span><span class="o">:</span> <span class="nb">blue</span><span class="p">;</span> <span class="p">}</span>
-</span><span class='line'><span class="nt">25</span><span class="o">%</span> <span class="p">{</span> <span class="k">background-color</span><span class="o">:</span> <span class="nb">orange</span><span class="p">;</span> <span class="p">}</span>
-</span><span class='line'><span class="nt">50</span><span class="o">%</span> <span class="p">{</span> <span class="k">background-color</span><span class="o">:</span> <span class="nb">yellow</span><span class="p">;</span> <span class="p">}</span>
-</span><span class='line'><span class="nt">75</span><span class="o">%</span> <span class="p">{</span> <span class="k">background-color</span><span class="o">:</span> <span class="nb">black</span><span class="p">;</span> <span class="p">}</span>
-</span><span class='line'><span class="nt">100</span><span class="o">%</span> <span class="p">{</span> <span class="k">background-color</span><span class="o">:</span> <span class="nb">red</span><span class="p">;</span> <span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>Real World Example</h3>
-
-<p>Since the first demo was rather contrived, I thought I&#8217;d provide an example of how you could use this technique in the real world.  On buttons, a common UI pattern is to provide the user with visual feedback that they&#8217;re on the button by applying a subtle color change.  This is usually done by applying a different <code>background-color</code> on the hover pseudoclass of the button as such:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nt">button</span> <span class="p">{</span>
-</span><span class='line'>  <span class="k">background-color</span><span class="o">:</span> <span class="nb">pink</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'><span class="nt">button</span><span class="nd">:hover</span> <span class="p">{</span>
-</span><span class='line'>  <span class="k">background-color</span><span class="o">:</span> <span class="nb">hotpink</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>To improve upon this, we can add a CSS 3 color animation to gradually make the color transition.  The following example shows each side by side:</p>
-
-<iframe style="width: 100%; height: 250px" src="http://jsfiddle.net/PTfZD/3/embedded/result,html,css/" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
-
-
-<h3>Falling Back Gracefully</h3>
-
-<p>Since CSS3 animations are only present in modern browsers, there&#8217;s a good chance a number of your users won&#8217;t have them available.  Luckily, CSS3 animations fallback gracefully to browsers that don&#8217;t support them.  If the browser doesn&#8217;t know how to handle a CSS animation, it just ignores the CSS rules.  Therefore, make sure not to use CSS animations to perform functionality that is vital to your site or application, it should simply enhance the user experience.</p>
-
-<p>In the button example above if the browser can&#8217;t perform the animation, the animated button will simply fallback on the hover button&#8217;s behavior.</p>
-
-<figure class='code'><figcaption><span>Color Animation with Fallback</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nt">button</span> <span class="p">{</span>
-</span><span class='line'>  <span class="k">background-color</span><span class="o">:</span> <span class="nb">pink</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'><span class="nt">button</span><span class="nd">:hover</span> <span class="p">{</span>
-</span><span class='line'>  <span class="c">/* IE &lt;= 6 get no hover effect */</span>
-</span><span class='line'>  <span class="c">/* All browsers IE 7+ know how to handle this */</span>
-</span><span class='line'>  <span class="k">background-color</span><span class="o">:</span> <span class="nb">hotpink</span><span class="p">;</span>
-</span><span class='line'>  
-</span><span class='line'>  <span class="c">/* Browsers that support CSS animations get the animation, */</span>
-</span><span class='line'>  <span class="c">/* those that don&#39;t ignore this and move on. */</span>
-</span><span class='line'>  <span class="c">/* Note: I&#39;ve omitted the vendor prefixes for simplicity. */</span>
-</span><span class='line'>  <span class="n">animation</span><span class="o">:</span> <span class="n">color</span><span class="err">_</span><span class="n">change</span> <span class="m">1s</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>Detect Support and Polyfill</h3>
-
-<p>If you have a CSS color animation that you absolutely must have work on all browsers back to IE6, you can do so by detecting support via <a href="http://modernizr.com">Modernizr</a>, and falling back to <a href="http://jqueryui.com/demos/animate/">jQuery UI&#8217;s animation</a>.</p>
-
-<figure class='code'><figcaption><span>Fallback Behavior with jQuery UI</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">Modernizr</span><span class="p">.</span><span class="nx">cssanimation</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>  <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;button&#39;</span><span class="p">).</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;mouseover&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-</span><span class='line'>      <span class="c1">//jQuery UI doesn&#39;t support the hotpink keyword :(</span>
-</span><span class='line'>      <span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">animate</span><span class="p">({</span> <span class="nx">backgroundColor</span><span class="o">:</span> <span class="s1">&#39;#FF69B4&#39;</span> <span class="p">},</span> <span class="mi">1000</span><span class="p">);</span>
-</span><span class='line'>  <span class="p">}).</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;mouseout&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-</span><span class='line'>      <span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">stop</span><span class="p">(</span><span class="kc">true</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span>
-</span><span class='line'>      <span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">css</span><span class="p">(</span><span class="s1">&#39;backgroundColor&#39;</span><span class="p">,</span> <span class="s1">&#39;pink&#39;</span><span class="p">);</span>
-</span><span class='line'>  <span class="p">});</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Live example (this should work across all browsers):</p>
-
-<iframe style="width: 100%; height: 160px" src="http://jsfiddle.net/tj_vantoll/2Yrpe/3/embedded/result,js,css,html" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
-
-
-<p>If the jQuery UI approach already works cross browser why would you bother doing this with CSS?</p>
-
-<ul>
-<li>Certain desktop and mobile browsers can use hardware acceleration with CSS3 animations.  This usually results in the animation rendering smoother.</li>
-<li>Users with JavaScript disabled will still see the animation.</li>
-<li>If you&#8217;re only using jQuery &amp; jQuery UI for this animation you can save yourself two HTTP requests by using <a href="http://www.modernizr.com/docs/#load">Modernizr&#8217;s load function</a>.  This will first test whether the browser supports CSS animations, if it does nothing needs to be done, if it doesn&#8217;t all scripts listed in the <code>nope</code> parameter will be loaded.</li>
-</ul>
-
-
-<figure class='code'><figcaption><span>Conditionally Loading jQuery UI</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">Modernizr</span><span class="p">.</span><span class="nx">load</span><span class="p">({</span>
-</span><span class='line'>  <span class="nx">test</span><span class="o">:</span> <span class="nx">Modernizr</span><span class="p">.</span><span class="nx">cssanimation</span><span class="p">,</span>
-</span><span class='line'>  <span class="nx">nope</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;jquery.js&#39;</span><span class="p">,</span> <span class="s1">&#39;jquery-ui&#39;</span><span class="p">]</span>
-</span><span class='line'><span class="p">});</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>Summary</h3>
-
-<p>CSS 3 color animations can be used in modern browsers today.  For most use cases no animations in unsupported browsers isn&#8217;t a problem, and, if it is, <a href="http://jqueryui.com">jQuery UI</a> can be used to polyfill the functionality.</p>
 ]]></content>
   </entry>
   
