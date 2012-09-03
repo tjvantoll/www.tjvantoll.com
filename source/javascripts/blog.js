@@ -2,8 +2,8 @@ $.domReady(function() {
 	if (Modernizr.csstransforms3d) {
 		new PictureCube('picture-cube', 
 		[
+			{ src: '/images/me/2.jpg', title: 'My girlfriend Trish and I in NYC.' },
 			{ src: '/images/me/1.jpg', title: 'This is me. Hi!' },
-			{ src: '/images/me/2.jpg', title: 'Trish and I in NYC.' },
 			{ src: '/images/kids/2.jpg', title: 'My son Chase being brainwashed.' },
 			{ src: '/images/kids/3.jpg', title: 'My son Max, also being brainwashed.' },
 			{ src: '/images/izzie/5.jpg', title: 'My favorite dog, Izzie.' },
