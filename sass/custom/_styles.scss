@@ -41,6 +41,12 @@ body > header {
 	}
 }
 
+@media only screen and (max-width: 768px) {
+	#content > div {
+		padding-top: $pad-medium / 2;
+	}
+}
+
 aside.sidebar:hover a:hover {
 	color: $accent_color;
 }
