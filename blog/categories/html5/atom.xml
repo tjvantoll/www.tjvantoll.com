@@ -4,7 +4,7 @@
   <title><![CDATA[Category: HTML5 | TJ VanToll]]></title>
   <link href="http://tjvantoll.com/blog/categories/html5/atom.xml" rel="self"/>
   <link href="http://tjvantoll.com/"/>
-  <updated>2012-09-02T21:38:15-04:00</updated>
+  <updated>2012-09-05T22:03:01-04:00</updated>
   <id>http://tjvantoll.com/</id>
   <author>
     <name><![CDATA[TJ VanToll]]></name>
@@ -133,7 +133,9 @@
 
 <p>All dom nodes now possess a <a href="http://www.whatwg.org/specs/web-apps/current-work/#dom-cva-willvalidate_">willValidate</a> property that indicates whether the node is a candidate for form validation.</p>
 
-<p>Nodes in which <code>willValidate</code> is <code>true</code> also have a <code>validity</code> property.  The <code>validity</code> property resolves to a <a href="https://developer.mozilla.org/en-US/docs/DOM/ValidityState">ValidityState object</a> which contains information about whether the field has validation errors, as well as the error message the browser will display to the user.  You can leverage this API to display all error messages whenever a <code>&lt;form&gt;</code> is submitted.</p>
+<p>Nodes in which <code>willValidate</code> is <code>true</code> also have a <code>validity</code> property.  The <code>validity</code> property resolves to a <a href="https://developer.mozilla.org/en-US/docs/DOM/ValidityState">ValidityState object</a> which contains information about whether the field has validation errors, as well as the error message the browser will display to the user.</p>
+
+<p>To make things even easier browsers provide an <a href="https://developer.mozilla.org/en-US/docs/CSS/:invalid">:invalid pseduoselector</a> that can be used to select all elements with validation errors.  Let's see how this can be leveraged to show all error messages.</p>
 
 <h3>The Code</h3>
 
@@ -142,7 +144,7 @@
 <p>``` html
 <form></p>
 
-<pre><code>&lt;ul id="errorMessages"&gt;&lt;/ul&gt;
+<pre><code>&lt;ul class="errorMessages"&gt;&lt;/ul&gt;
 
 &lt;label for="name"&gt;Name:&lt;/label&gt;
 &lt;input type="text" required /&gt;
@@ -157,44 +159,38 @@
 
 <script>
 $(function() {
-    //Keep track of whether there are any errors on the form for Safari.
-    var formHasErrors = false;
-    
-    var showAllErrorMessages = function() {
-        $('#errorMessages').empty();
-        formHasErrors = false;
+    var createAllErrors = function() {
+        var form = $(this);
+        var errorList = $('ul.errorMessages', form);
+        
+        var showAllErrorMessages = function() {
+            errorList.empty();
+            
+            //Find all invalid fields within the form.
+            form.find(':invalid').each(function(index, node) {
 
-        //Find everything within the form
-        $('form').find('*').each(function(index, node) {
-            if (node.willValidate && node.validity && !node.validity.valid) {
-                formHasErrors = true;
                 //Find the field's corresponding label
                 var label = $('label[for=' + node.id + ']');
-                
+
                 //Opera incorrectly does not fill the validationMessage property.
                 var message = node.validationMessage || 'Invalid value.';
-                $('#errorMessages')
+                errorList
                     .show()
-                    .append('<li><span>' + label.html() + '</span> ' + message + '</li>');                                       
+                    .append('<li><span>' + label.html() + '</span> ' + message + '</li>');
+            });
+        };
+        
+        $('input[type=submit]', form).on('click', showAllErrorMessages);
+        $('input[type=text]', form).on('keypress', function(event) {
+            //keyCode 13 is Enter
+            if (event.keyCode == 13) {
+                showAllErrorMessages();
             }
         });
     };
     
-    $('input[type=submit]').on('click', showAllErrorMessages);
-    $('input[type=text]').on('keypress', function(event) {
-        //keyCode 13 is Enter
-        if (event.keyCode == 13) {
-            showAllErrorMessages();
-        }
-    });
-    
-    //Handle for Safari not having HTML5 form validation active.
-    $('form').on('submit', function(event) {
-        if (formHasErrors) {
-            event.preventDefault();
-        }
-    });
-});​
+    $('form').each(createAllErrors);
+});
 </script>
 
 
@@ -215,17 +211,38 @@ $(function() {
 
 <p>2) In my example I start each error message with the contents of the field's <code>&lt;label&gt;</code>.  This is because the messages for each field are often identical.  An alternative approach would be to use another constraint validation API method, <a href="http://www.whatwg.org/specs/web-apps/current-work/#dom-cva-setcustomvalidity">setCustomValidity</a> to set a completely custom message.</p>
 
-<p>3) The <code>node.willValidate &amp;&amp; node.validity</code> check will be <code>false</code> in all browsers that do not support the constraint validation API.  Therefore this code will simply do nothing in browsers that do not support HTML5 form validation.</p>
+<p>3) The <code>:invalid</code> selector will return nothing in all browsers that do not support the constraint validation API.  Therefore this code will simply do nothing in those browsers.</p>
 
 <p>4) Opera incorrectly does not fill the <code>validationMessage</code> property.  Therefore the check <code>var message = node.validationMessage || 'Invalid value.'</code> is necessary so a message is displayed for Opera.</p>
 
-<p>5) In order to make Safari display the error messages I manually keep track of whether there are any validation errors in the <code>&lt;form&gt;</code>.  If there are I prevent the <code>&lt;form&gt;</code> from submitting in a <code>submit</code> event.</p>
-
-<p>6) I do nothing to style the individual fields based on whether they have valid data.  The HTML5 spec provides a number of CSS hooks to do this and I would recommend reading <a href="http://html5doctor.com/css3-pseudo-classes-and-html5-forms/">CSS Pseudo-Classes and HTML5 Forms</a> from <a href="http://html5doctor.com">html5 Doctor</a> if you're interested in including such styling.</p>
+<p>5) I do nothing to style the individual fields based on whether they have valid data.  The HTML5 spec provides a number of CSS hooks to do this and I would recommend reading <a href="http://html5doctor.com/css3-pseudo-classes-and-html5-forms/">CSS Pseudo-Classes and HTML5 Forms</a> from <a href="http://html5doctor.com">html5 Doctor</a> if you're interested in including such styling.</p>
 
 <h3>That's a Lot of Code to Do Something Simple</h3>
 
 <p>Yep.  While browser support is getting to be quite good for HTML5 forms the implementations themselves are still a bit buggy.  Nevertheless, this approach will work for displaying all validation errors to the end user.</p>
+
+<h3>Polyfill</h3>
+
+<p>If you are interested in making the code above work in all browsers one option you have is to polyfill the functionality for unsupported browsers.  One robust choice is the <a href="https://github.com/aFarkas/webshim">webshims</a> library.</p>
+
+<p>To make webshims work with the code above all you need to do is add <code>$.webshims.polyfill('forms');</code>.  The maintainer, <a href="https://github.com/aFarkas">@aFarkas</a> was even kind of enough to provide me with a live example showing this - <a href="http://jsfiddle.net/trixta/HynHy/">http://jsfiddle.net/trixta/HynHy/</a>.</p>
+
+<h3>Update (September 5th, 2012)</h3>
+
+<p>Per some <a href="https://github.com/html5rocks/www.html5rocks.com/issues/175#issuecomment-8311986">critique on Github</a> from <a href="https://github.com/aFarkas">@aFarkas</a> I've made the following changes:</p>
+
+<ul>
+<li>Updated the example code.
+
+<ul>
+<li>Removed a hack I had in place for Safari.</li>
+<li>Switched to use the <code>:invalid</code> pseudoselector to find all invalid fields within a form.</li>
+<li>Make the script handle multiple <code>&lt;form&gt;</code> elements in one DOM.</li>
+</ul>
+</li>
+<li>Added the above section on using webshim to polyfill this behavior for all browsers.</li>
+</ul>
+
 ]]></content>
   </entry>
   
