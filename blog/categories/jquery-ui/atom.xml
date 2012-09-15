@@ -4,7 +4,7 @@
   <title><![CDATA[Category: jQuery UI | TJ VanToll]]></title>
   <link href="http://tjvantoll.com/blog/categories/jquery-ui/atom.xml" rel="self"/>
   <link href="http://tjvantoll.com/"/>
-  <updated>2012-09-05T22:58:55-04:00</updated>
+  <updated>2012-09-14T22:05:54-04:00</updated>
   <id>http://tjvantoll.com/</id>
   <author>
     <name><![CDATA[TJ VanToll]]></name>
@@ -12,6 +12,69 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Using jQuery UI's Slider to Polyfill HTML5's input[type=range]]]></title>
+    <link href="http://tjvantoll.com/2012/09/14/using-jquery-ui-slider-to-polyfill-html5-input-type-range/"/>
+    <updated>2012-09-14T21:25:00-04:00</updated>
+    <id>http://tjvantoll.com/2012/09/14/using-jquery-ui-slider-to-polyfill-html5-input-type-range</id>
+    <content type="html"><![CDATA[<p><a href="http://jqueryui.com/demos/slider">jQuery UI's slider plugin</a> looks and behaves much like the browser's native <code>input[type=range]</code> control; therefore it makes an excellent choice for <a href="http://remysharp.com/2010/10/08/what-is-a-polyfill/">polyfilling</a> the native behavior.</p>
+
+<h3>How to do it</h3>
+
+<p>The main issue is that the slider must be built on a block level node, not an <code>&lt;input&gt;</code>.  Therefore you must create another container node (in this case a <code>&lt;div&gt;</code>) to create the slider from then hide the original <code>&lt;input&gt;</code>.</p>
+
+<p>Here's the script that I used.</p>
+
+<!--more-->
+
+
+<p>``` javascript Polyfill input[type=range] with jQuery UI's Slider
+$(function() {</p>
+
+<pre><code>//Determine whether the browser natively supports input[type=range].
+//If you're using Modernizr this is equivalent to Modernizr.inputtypes.range
+var input = document.createElement('input');
+input.setAttribute('type', 'range');
+var rangeSupport = input.type != 'text';
+
+if (!rangeSupport) {
+    var $input, $slider;
+
+    $('input[type=range]').each(function(index, input) {
+        $input = $(input);
+
+        //Create a new div, turn it into a slider, and set its attributes based on
+        //the attributes of the input.  If the input doesn't possess those attributes
+        //use jQuery UI's defaults.
+        $slider = $('&lt;div /&gt;').slider({
+            min: parseInt($input.attr('min'), 10) || 0,
+            max: parseInt($input.attr('max'), 10) || 100,
+            value: parseInt($input.attr('value'), 10) || 0,
+            step: parseInt($input.attr('step'), 10) || 1,
+            slide: function(event, ui) {
+                //Keep the value of the input[type=range] in sync with the slider.
+                $(this).prev('input').val(ui.value);
+            }
+        });
+
+        //Append the slider after the input and hide the input.  The user will only
+        //interact with the slider.        
+        $input.after($slider).hide();
+    });
+}
+</code></pre>
+
+<p>});
+```</p>
+
+<h3>Future</h3>
+
+<p>This approach handles the most common use cases but it isn't perfect.  For example, if you want to disable the <code>&lt;input type="range"&gt;</code> you'll have to disable the slider as well.</p>
+
+<p>There is a <a href="http://bugs.jqueryui.com/ticket/5800">feature request to add support for this natively in the slider plugin</a> itself, but it's been sitting inactive for quite some time now.  Hopefully over time <code>input[type=range]</code> support will become ubiquitous enough that we can drop these workarounds.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Native HTML5 Number Picker and jQuery UI's Spinner - Which to Use?]]></title>

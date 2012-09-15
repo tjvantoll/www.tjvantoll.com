@@ -4,7 +4,7 @@
   <title><![CDATA[TJ VanToll]]></title>
   <link href="http://tjvantoll.com/atom.xml" rel="self"/>
   <link href="http://tjvantoll.com/"/>
-  <updated>2012-09-05T22:58:55-04:00</updated>
+  <updated>2012-09-14T22:05:54-04:00</updated>
   <id>http://tjvantoll.com/</id>
   <author>
     <name><![CDATA[TJ VanToll]]></name>
@@ -12,6 +12,101 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Using jQuery UI's Slider to Polyfill HTML5's input[type=range]]]></title>
+    <link href="http://tjvantoll.com/2012/09/14/using-jquery-ui-slider-to-polyfill-html5-input-type-range/"/>
+    <updated>2012-09-14T21:25:00-04:00</updated>
+    <id>http://tjvantoll.com/2012/09/14/using-jquery-ui-slider-to-polyfill-html5-input-type-range</id>
+    <content type="html"><![CDATA[<p><a href="http://jqueryui.com/demos/slider">jQuery UI&#8217;s slider plugin</a> looks and behaves much like the browser&#8217;s native <code>input[type=range]</code> control; therefore it makes an excellent choice for <a href="http://remysharp.com/2010/10/08/what-is-a-polyfill/">polyfilling</a> the native behavior.</p>
+
+<h3>How to do it</h3>
+
+<p>The main issue is that the slider must be built on a block level node, not an <code>&lt;input&gt;</code>.  Therefore you must create another container node (in this case a <code>&lt;div&gt;</code>) to create the slider from then hide the original <code>&lt;input&gt;</code>.</p>
+
+<p>Here&#8217;s the script that I used.</p>
+
+<!--more-->
+
+
+
+
+<figure class='code'><figcaption><span>Polyfill input[type=range] with jQuery UI&#8217;s Slider</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">$</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>    <span class="c1">//Determine whether the browser natively supports input[type=range].</span>
+</span><span class='line'>    <span class="c1">//If you&#39;re using Modernizr this is equivalent to Modernizr.inputtypes.range</span>
+</span><span class='line'>    <span class="kd">var</span> <span class="nx">input</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="s1">&#39;input&#39;</span><span class="p">);</span>
+</span><span class='line'>    <span class="nx">input</span><span class="p">.</span><span class="nx">setAttribute</span><span class="p">(</span><span class="s1">&#39;type&#39;</span><span class="p">,</span> <span class="s1">&#39;range&#39;</span><span class="p">);</span>
+</span><span class='line'>    <span class="kd">var</span> <span class="nx">rangeSupport</span> <span class="o">=</span> <span class="nx">input</span><span class="p">.</span><span class="nx">type</span> <span class="o">!=</span> <span class="s1">&#39;text&#39;</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">rangeSupport</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>        <span class="kd">var</span> <span class="nx">$input</span><span class="p">,</span> <span class="nx">$slider</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;input[type=range]&#39;</span><span class="p">).</span><span class="nx">each</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">index</span><span class="p">,</span> <span class="nx">input</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>            <span class="nx">$input</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="nx">input</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>            <span class="c1">//Create a new div, turn it into a slider, and set its attributes based on</span>
+</span><span class='line'>            <span class="c1">//the attributes of the input.  If the input doesn&#39;t possess those attributes</span>
+</span><span class='line'>            <span class="c1">//use jQuery UI&#39;s defaults.</span>
+</span><span class='line'>            <span class="nx">$slider</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;&lt;div /&gt;&#39;</span><span class="p">).</span><span class="nx">slider</span><span class="p">({</span>
+</span><span class='line'>                <span class="nx">min</span><span class="o">:</span> <span class="nb">parseInt</span><span class="p">(</span><span class="nx">$input</span><span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s1">&#39;min&#39;</span><span class="p">),</span> <span class="mi">10</span><span class="p">)</span> <span class="o">||</span> <span class="mi">0</span><span class="p">,</span>
+</span><span class='line'>                <span class="nx">max</span><span class="o">:</span> <span class="nb">parseInt</span><span class="p">(</span><span class="nx">$input</span><span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s1">&#39;max&#39;</span><span class="p">),</span> <span class="mi">10</span><span class="p">)</span> <span class="o">||</span> <span class="mi">100</span><span class="p">,</span>
+</span><span class='line'>                <span class="nx">value</span><span class="o">:</span> <span class="nb">parseInt</span><span class="p">(</span><span class="nx">$input</span><span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s1">&#39;value&#39;</span><span class="p">),</span> <span class="mi">10</span><span class="p">)</span> <span class="o">||</span> <span class="mi">0</span><span class="p">,</span>
+</span><span class='line'>                <span class="nx">step</span><span class="o">:</span> <span class="nb">parseInt</span><span class="p">(</span><span class="nx">$input</span><span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s1">&#39;step&#39;</span><span class="p">),</span> <span class="mi">10</span><span class="p">)</span> <span class="o">||</span> <span class="mi">1</span><span class="p">,</span>
+</span><span class='line'>                <span class="nx">slide</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">event</span><span class="p">,</span> <span class="nx">ui</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>                    <span class="c1">//Keep the value of the input[type=range] in sync with the slider.</span>
+</span><span class='line'>                    <span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">prev</span><span class="p">(</span><span class="s1">&#39;input&#39;</span><span class="p">).</span><span class="nx">val</span><span class="p">(</span><span class="nx">ui</span><span class="p">.</span><span class="nx">value</span><span class="p">);</span>
+</span><span class='line'>                <span class="p">}</span>
+</span><span class='line'>            <span class="p">});</span>
+</span><span class='line'>
+</span><span class='line'>            <span class="c1">//Append the slider after the input and hide the input.  The user will only</span>
+</span><span class='line'>            <span class="c1">//interact with the slider.        </span>
+</span><span class='line'>            <span class="nx">$input</span><span class="p">.</span><span class="nx">after</span><span class="p">(</span><span class="nx">$slider</span><span class="p">).</span><span class="nx">hide</span><span class="p">();</span>
+</span><span class='line'>        <span class="p">});</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'><span class="p">});</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>Future</h3>
+
+<p>This approach handles the most common use cases but it isn&#8217;t perfect.  For example, if you want to disable the <code>&lt;input type="range"&gt;</code> you&#8217;ll have to disable the slider as well.</p>
+
+<p>There is a <a href="http://bugs.jqueryui.com/ticket/5800">feature request to add support for this natively in the slider plugin</a> itself, but it&#8217;s been sitting inactive for quite some time now.  Hopefully over time <code>input[type=range]</code> support will become ubiquitous enough that we can drop these workarounds.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[HTML5 Form Validation - Start Using it in Production Applications]]></title>
@@ -4035,276 +4130,6 @@ Note: Google Chrome supports 3D transforms, but <a href="https://github.com/Mode
     </div>
 </div>
 
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[CSS3 Color Animations]]></title>
-    <link href="http://tjvantoll.com/2012/02/20/CSS3-Color-Animations/"/>
-    <updated>2012-02-20T00:00:00-05:00</updated>
-    <id>http://tjvantoll.com/2012/02/20/CSS3-Color-Animations</id>
-    <content type="html"><![CDATA[<p>CSS3 animations allow you to alter the values of CSS properties over time.  They&#8217;re now supported in Firefox 5+, Chrome, Safari 4+, iOS, Android 4+, and the upcoming IE10, therefore, using them in real production websites is possible.  One of the cool things you can do with them is change the color of an element using exclusively CSS.  Previously a technique like this was only possible using <a href="https://developer.mozilla.org/en/window.setInterval">JavaScript&#8217;s setInterval function</a> to gradually change the appropriate property of the element. See <a href="http://jqueryui.com/demos/animate/">jQuery UI&#8217;s animate demos</a> for a good example.</p>
-
-<!--more-->
-
-
-<h3>Getting Started</h3>
-
-<p>Let&#8217;s start with a basic example (note - Whether or not you see the animation depends on whether your browser supports CSS3 animations.  You can check at <a href="http://caniuse.com/css-animation">caniuse.com</a>.</p>
-
-<iframe style="width: 100%; height: 120px;" src="http://jsfiddle.net/RfYMA/1/embedded/result,html,css/" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
-
-
-<h3>Syntax</h3>
-
-<p>Let&#8217;s break this down one section at a time.</p>
-
-<figure class='code'><figcaption><span>Animation CSS</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nt">div</span> <span class="p">{</span>
-</span><span class='line'>  <span class="o">-</span><span class="n">webkit</span><span class="o">-</span><span class="n">animation</span><span class="o">:</span> <span class="n">color</span><span class="err">_</span><span class="n">change</span> <span class="m">1s</span> <span class="n">infinite</span> <span class="n">alternate</span><span class="p">;</span>
-</span><span class='line'>  <span class="o">-</span><span class="n">moz</span><span class="o">-</span><span class="n">animation</span><span class="o">:</span> <span class="n">color</span><span class="err">_</span><span class="n">change</span> <span class="m">1s</span> <span class="n">infinite</span> <span class="n">alternate</span><span class="p">;</span>
-</span><span class='line'>  <span class="o">-</span><span class="n">ms</span><span class="o">-</span><span class="n">animation</span><span class="o">:</span> <span class="n">color</span><span class="err">_</span><span class="n">change</span> <span class="m">1s</span> <span class="n">infinite</span> <span class="n">alternate</span><span class="p">;</span>
-</span><span class='line'>  <span class="o">-</span><span class="err">o</span><span class="o">-</span><span class="n">animation</span><span class="o">:</span> <span class="n">color</span><span class="err">_</span><span class="n">change</span> <span class="m">1s</span> <span class="n">infinite</span> <span class="n">alternate</span><span class="p">;</span>
-</span><span class='line'>  <span class="n">animation</span><span class="o">:</span> <span class="n">color</span><span class="err">_</span><span class="n">change</span> <span class="m">1s</span> <span class="n">infinite</span> <span class="n">alternate</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>The <code>animation</code> property is how you define a <a href="https://developer.mozilla.org/en/CSS/CSS_animations">CSS3 animation</a>.  The <a href="https://developer.mozilla.org/en-US/">MDN</a> (Mozilla Developer Network) docs have extensive documentation on all the various sub properties available to configure the animation <a href="https://developer.mozilla.org/en/CSS/CSS_animations#Configuring_the_animation">here</a>.  In this example I&#8217;m setting…</p>
-
-<ul>
-<li><code><a href="https://developer.mozilla.org/en/CSS/animation-name">animation name</a></code>: <code>color_change</code> - This refers to a named @keyframes rule, which we&#8217;ll get into in a minute.</li>
-<li><code><a href="https://developer.mozilla.org/en/CSS/animation-duration">animation_duration</a></code>: <code>1s</code> - The animation should last 1 second.</li>
-<li><code><a href="https://developer.mozilla.org/en/CSS/animation-iteration-count">animation_iteration_count</a></code>: <code>infinite</code> - The animation will cycle forever.</li>
-<li><code><a href="https://developer.mozilla.org/en/CSS/animation-direction">animation_direction</a></code>: <code>alternate</code> - This will tell the animation to alternate, from start to end, then end to start, then start to end, and so on.  In this example it keeps the box from being jerky by quickly switching from red to blue.</li>
-</ul>
-
-
-<p>For readability you can also list the properties out individually.</p>
-
-<figure class='code'><figcaption><span>Animation broken out</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="c">/* Note: Prefixes omitted, see below */</span>
-</span><span class='line'><span class="nt">div</span> <span class="p">{</span>
-</span><span class='line'>  <span class="n">animation</span><span class="o">-</span><span class="n">name</span><span class="o">:</span> <span class="n">color</span><span class="err">_</span><span class="n">change</span><span class="p">;</span>
-</span><span class='line'>  <span class="n">animation</span><span class="o">-</span><span class="n">duration</span><span class="o">:</span> <span class="m">1s</span><span class="p">;</span>
-</span><span class='line'>  <span class="n">animation</span><span class="o">-</span><span class="n">iteration</span><span class="o">-</span><span class="n">count</span><span class="o">:</span> <span class="n">infinite</span><span class="p">;</span>
-</span><span class='line'>  <span class="n">animation</span><span class="o">-</span><span class="k">direction</span><span class="o">:</span> <span class="n">alternate</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>Prefixes</h3>
-
-<p>The vendor prefixes are necessary because CSS3 animations are still considered an experimental feature (the <a href="http://www.w3.org/TR/css3-animations/">spec</a> is still in working draft status.  However, the syntax is consistent across modern browsers, so you only have to copy and paste the code to add all the necessary prefixes.  Always include the un-prefixed property last to make your code future friendly to browsers that add un-prefixed support.  For an up to date list of what browsers support CSS3 animations and which prefixes to use check out the <a href="http://caniuse.com/css-animation">CSS animation page at caniuse.com</a>.</p>
-
-<p>If you get sick of typing out all the vendor prefixes you&#8217;re not alone.  <a href="http://leaverou.github.com/prefixfree/">-prefix-free</a> is a tool by <a href="http://lea.verou.me/">Lea Verou</a> that lets you write your CSS unprefixed.  A JavaScript file detects whether a browser prefix is necessary, which one to use, and applies it automatically.</p>
-
-<p>Another option is <a href="http://prefixr.com/">Prefixr</a> by Jeffrey Way of <a href="http://net.tutsplus.com/">nettuts</a>.  It lets you copy and paste your code in, run it, and have the appropriate prefixes added automatically.</p>
-
-<p>Browser prefixes have been been a hot topic lately after it was announced that IE, Firefox, and Opera are <a href="http://lists.w3.org/Archives/Public/www-style/2012Feb/0313.html">considering adopting support for -webkit prefixes</a>.  If you&#8217;re curious a <a href="http://remysharp.com/2012/02/09/vendor-prefixes-about-to-go-south/">number</a> <a href="http://christianheilmann.com/2012/02/09/now-vendor-prefixes-have-become-a-problem-want-to-help-fix-it/">of</a> <a href="http://www.brucelawson.co.uk/2012/on-the-vendor-prefixes-problem/">others</a> have <a href="http://infrequently.org/2012/02/misdirection/">written</a> about this.</p>
-
-<h3>Keyframes</h3>
-
-<figure class='code'><figcaption><span>Keyframe Declarations</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="k">@-webkit-keyframes</span> <span class="nt">color_change</span> <span class="p">{</span>
-</span><span class='line'>  <span class="nt">from</span> <span class="p">{</span> <span class="k">background-color</span><span class="o">:</span> <span class="nb">blue</span><span class="p">;</span> <span class="p">}</span>
-</span><span class='line'>  <span class="nt">to</span> <span class="p">{</span> <span class="k">background-color</span><span class="o">:</span> <span class="nb">red</span><span class="p">;</span> <span class="p">}</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'><span class="k">@-moz-keyframes</span> <span class="nt">color_change</span> <span class="p">{</span>
-</span><span class='line'>  <span class="nt">from</span> <span class="p">{</span> <span class="k">background-color</span><span class="o">:</span> <span class="nb">blue</span><span class="p">;</span> <span class="p">}</span>
-</span><span class='line'>  <span class="nt">to</span> <span class="p">{</span> <span class="k">background-color</span><span class="o">:</span> <span class="nb">red</span><span class="p">;</span> <span class="p">}</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'><span class="k">@-ms-keyframes</span> <span class="nt">color_change</span> <span class="p">{</span>
-</span><span class='line'>  <span class="nt">from</span> <span class="p">{</span> <span class="k">background-color</span><span class="o">:</span> <span class="nb">blue</span><span class="p">;</span> <span class="p">}</span>
-</span><span class='line'>  <span class="nt">to</span> <span class="p">{</span> <span class="k">background-color</span><span class="o">:</span> <span class="nb">red</span><span class="p">;</span> <span class="p">}</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'><span class="k">@-o-keyframes</span> <span class="nt">color_change</span> <span class="p">{</span>
-</span><span class='line'>  <span class="nt">from</span> <span class="p">{</span> <span class="k">background-color</span><span class="o">:</span> <span class="nb">blue</span><span class="p">;</span> <span class="p">}</span>
-</span><span class='line'>  <span class="nt">to</span> <span class="p">{</span> <span class="k">background-color</span><span class="o">:</span> <span class="nb">red</span><span class="p">;</span> <span class="p">}</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'><span class="k">@keyframes</span> <span class="nt">color_change</span> <span class="p">{</span>
-</span><span class='line'>  <span class="nt">from</span> <span class="p">{</span> <span class="k">background-color</span><span class="o">:</span> <span class="nb">blue</span><span class="p">;</span> <span class="p">}</span>
-</span><span class='line'>  <span class="nt">to</span> <span class="p">{</span> <span class="k">background-color</span><span class="o">:</span> <span class="nb">red</span><span class="p">;</span> <span class="p">}</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p><a href="https://developer.mozilla.org/en/CSS/@keyframes">Keyframes</a> are a way of specifying a set of properties and their values at different states of an animation.  <code>@keyframes color_change</code> gives the @keyframes a name of <code>color_change</code>.  This provides the connection used on the animation property above.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nt">from</span> <span class="p">{</span> <span class="k">background-color</span><span class="o">:</span> <span class="nb">blue</span><span class="p">;</span> <span class="p">}</span>
-</span><span class='line'><span class="nt">to</span> <span class="p">{</span> <span class="k">background-color</span><span class="o">:</span> <span class="nb">red</span><span class="p">;</span> <span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>This animation only has 2 steps, a start and an end.  Since such animations are quite common, the <a href="http://www.w3.org/TR/css3-animations/#keyframes-">spec</a> provides the keywords <code>from</code> and <code>to</code> for defining the state of properties at the beginning and end of the animation.  This could also have been written using percentages for the steps.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nt">0</span><span class="o">%</span> <span class="p">{</span> <span class="k">background-color</span><span class="o">:</span> <span class="nb">blue</span><span class="p">;</span> <span class="p">}</span>
-</span><span class='line'><span class="nt">100</span><span class="o">%</span> <span class="p">{</span> <span class="k">background-color</span><span class="o">:</span> <span class="nb">red</span><span class="p">;</span> <span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>If the animation has more than 2 steps, they can be listed using multiple steps as such.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nt">0</span><span class="o">%</span> <span class="p">{</span> <span class="k">background-color</span><span class="o">:</span> <span class="nb">blue</span><span class="p">;</span> <span class="p">}</span>
-</span><span class='line'><span class="nt">25</span><span class="o">%</span> <span class="p">{</span> <span class="k">background-color</span><span class="o">:</span> <span class="nb">orange</span><span class="p">;</span> <span class="p">}</span>
-</span><span class='line'><span class="nt">50</span><span class="o">%</span> <span class="p">{</span> <span class="k">background-color</span><span class="o">:</span> <span class="nb">yellow</span><span class="p">;</span> <span class="p">}</span>
-</span><span class='line'><span class="nt">75</span><span class="o">%</span> <span class="p">{</span> <span class="k">background-color</span><span class="o">:</span> <span class="nb">black</span><span class="p">;</span> <span class="p">}</span>
-</span><span class='line'><span class="nt">100</span><span class="o">%</span> <span class="p">{</span> <span class="k">background-color</span><span class="o">:</span> <span class="nb">red</span><span class="p">;</span> <span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>Real World Example</h3>
-
-<p>Since the first demo was rather contrived, I thought I&#8217;d provide an example of how you could use this technique in the real world.  On buttons, a common UI pattern is to provide the user with visual feedback that they&#8217;re on the button by applying a subtle color change.  This is usually done by applying a different <code>background-color</code> on the hover pseudoclass of the button as such:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nt">button</span> <span class="p">{</span>
-</span><span class='line'>  <span class="k">background-color</span><span class="o">:</span> <span class="nb">pink</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'><span class="nt">button</span><span class="nd">:hover</span> <span class="p">{</span>
-</span><span class='line'>  <span class="k">background-color</span><span class="o">:</span> <span class="nb">hotpink</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>To improve upon this, we can add a CSS 3 color animation to gradually make the color transition.  The following example shows each side by side:</p>
-
-<iframe style="width: 100%; height: 250px" src="http://jsfiddle.net/PTfZD/3/embedded/result,html,css/" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
-
-
-<h3>Falling Back Gracefully</h3>
-
-<p>Since CSS3 animations are only present in modern browsers, there&#8217;s a good chance a number of your users won&#8217;t have them available.  Luckily, CSS3 animations fallback gracefully to browsers that don&#8217;t support them.  If the browser doesn&#8217;t know how to handle a CSS animation, it just ignores the CSS rules.  Therefore, make sure not to use CSS animations to perform functionality that is vital to your site or application, it should simply enhance the user experience.</p>
-
-<p>In the button example above if the browser can&#8217;t perform the animation, the animated button will simply fallback on the hover button&#8217;s behavior.</p>
-
-<figure class='code'><figcaption><span>Color Animation with Fallback</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nt">button</span> <span class="p">{</span>
-</span><span class='line'>  <span class="k">background-color</span><span class="o">:</span> <span class="nb">pink</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'><span class="nt">button</span><span class="nd">:hover</span> <span class="p">{</span>
-</span><span class='line'>  <span class="c">/* IE &lt;= 6 get no hover effect */</span>
-</span><span class='line'>  <span class="c">/* All browsers IE 7+ know how to handle this */</span>
-</span><span class='line'>  <span class="k">background-color</span><span class="o">:</span> <span class="nb">hotpink</span><span class="p">;</span>
-</span><span class='line'>  
-</span><span class='line'>  <span class="c">/* Browsers that support CSS animations get the animation, */</span>
-</span><span class='line'>  <span class="c">/* those that don&#39;t ignore this and move on. */</span>
-</span><span class='line'>  <span class="c">/* Note: I&#39;ve omitted the vendor prefixes for simplicity. */</span>
-</span><span class='line'>  <span class="n">animation</span><span class="o">:</span> <span class="n">color</span><span class="err">_</span><span class="n">change</span> <span class="m">1s</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>Detect Support and Polyfill</h3>
-
-<p>If you have a CSS color animation that you absolutely must have work on all browsers back to IE6, you can do so by detecting support via <a href="http://modernizr.com">Modernizr</a>, and falling back to <a href="http://jqueryui.com/demos/animate/">jQuery UI&#8217;s animation</a>.</p>
-
-<figure class='code'><figcaption><span>Fallback Behavior with jQuery UI</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">Modernizr</span><span class="p">.</span><span class="nx">cssanimation</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>  <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;button&#39;</span><span class="p">).</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;mouseover&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-</span><span class='line'>      <span class="c1">//jQuery UI doesn&#39;t support the hotpink keyword :(</span>
-</span><span class='line'>      <span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">animate</span><span class="p">({</span> <span class="nx">backgroundColor</span><span class="o">:</span> <span class="s1">&#39;#FF69B4&#39;</span> <span class="p">},</span> <span class="mi">1000</span><span class="p">);</span>
-</span><span class='line'>  <span class="p">}).</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;mouseout&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-</span><span class='line'>      <span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">stop</span><span class="p">(</span><span class="kc">true</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span>
-</span><span class='line'>      <span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">css</span><span class="p">(</span><span class="s1">&#39;backgroundColor&#39;</span><span class="p">,</span> <span class="s1">&#39;pink&#39;</span><span class="p">);</span>
-</span><span class='line'>  <span class="p">});</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Live example (this should work across all browsers):</p>
-
-<iframe style="width: 100%; height: 160px" src="http://jsfiddle.net/tj_vantoll/2Yrpe/3/embedded/result,js,css,html" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
-
-
-<p>If the jQuery UI approach already works cross browser why would you bother doing this with CSS?</p>
-
-<ul>
-<li>Certain desktop and mobile browsers can use hardware acceleration with CSS3 animations.  This usually results in the animation rendering smoother.</li>
-<li>Users with JavaScript disabled will still see the animation.</li>
-<li>If you&#8217;re only using jQuery &amp; jQuery UI for this animation you can save yourself two HTTP requests by using <a href="http://www.modernizr.com/docs/#load">Modernizr&#8217;s load function</a>.  This will first test whether the browser supports CSS animations, if it does nothing needs to be done, if it doesn&#8217;t all scripts listed in the <code>nope</code> parameter will be loaded.</li>
-</ul>
-
-
-<figure class='code'><figcaption><span>Conditionally Loading jQuery UI</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">Modernizr</span><span class="p">.</span><span class="nx">load</span><span class="p">({</span>
-</span><span class='line'>  <span class="nx">test</span><span class="o">:</span> <span class="nx">Modernizr</span><span class="p">.</span><span class="nx">cssanimation</span><span class="p">,</span>
-</span><span class='line'>  <span class="nx">nope</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;jquery.js&#39;</span><span class="p">,</span> <span class="s1">&#39;jquery-ui&#39;</span><span class="p">]</span>
-</span><span class='line'><span class="p">});</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>Summary</h3>
-
-<p>CSS 3 color animations can be used in modern browsers today.  For most use cases no animations in unsupported browsers isn&#8217;t a problem, and, if it is, <a href="http://jqueryui.com">jQuery UI</a> can be used to polyfill the functionality.</p>
 ]]></content>
   </entry>
   
