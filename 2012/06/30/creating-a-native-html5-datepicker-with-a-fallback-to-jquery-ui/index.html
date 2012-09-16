@@ -224,7 +224,7 @@
 </span><span class='line'>
 </span><span class='line'><span class="nt">&lt;script&gt;</span>
 </span><span class='line'>    <span class="k">if</span> <span class="p">(</span><span class="nx">Modernizr</span><span class="p">.</span><span class="nx">touch</span> <span class="o">&amp;&amp;</span> <span class="nx">Moderniz</span><span class="p">.</span><span class="nx">inputtypes</span><span class="p">.</span><span class="nx">date</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>        <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;input&#39;</span><span class="p">).</span><span class="nx">attr</span><span class="p">(</span><span class="s1">&#39;type&#39;</span><span class="p">,</span> <span class="s1">&#39;date&#39;</span><span class="p">);</span>
+</span><span class='line'>        <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">&#39;myDate&#39;</span><span class="p">).</span><span class="nx">type</span> <span class="o">=</span> <span class="s1">&#39;date&#39;</span><span class="p">;</span>
 </span><span class='line'>    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
 </span><span class='line'>      <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#myDate&#39;</span><span class="p">).</span><span class="nx">datepicker</span><span class="p">();</span>
 </span><span class='line'>    <span class="p">}</span>
@@ -237,6 +237,10 @@
 <h3>Conclusion</h3>
 
 <p>With Chrome adding support for native datepickers a large chunk web users now have the ability to use them.  Therefore, now is a great time to consider using them in your applications.</p>
+
+<h3>Update - September 15th, 2012</h3>
+
+<p>I updated one of my code examples from using <code>$('input').attr('type', 'date')</code> to <code>document.getElementById('myDate').type = 'date'</code> after commenter brownieboy pointed out that jQuery actually doesn&#8217;t allow you to change an input&#8217;s <code>type</code>.  jQuery does this because IE &lt;= 8 does not allow an the <code>type</code> of an input to be changed at all.  The native JS solution works just fine.</p>
 </div>
 
 

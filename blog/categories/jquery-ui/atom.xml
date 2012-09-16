@@ -4,7 +4,7 @@
   <title><![CDATA[Category: jQuery UI | TJ VanToll]]></title>
   <link href="http://tjvantoll.com/blog/categories/jquery-ui/atom.xml" rel="self"/>
   <link href="http://tjvantoll.com/"/>
-  <updated>2012-09-15T21:15:01-04:00</updated>
+  <updated>2012-09-15T21:40:22-04:00</updated>
   <id>http://tjvantoll.com/</id>
   <author>
     <name><![CDATA[TJ VanToll]]></name>
@@ -470,7 +470,7 @@ if (!Moderniz.inputtypes.date) {</p>
 
 <script>
     if (Modernizr.touch && Moderniz.inputtypes.date) {
-        $('input').attr('type', 'date');
+        document.getElementById('myDate').type = 'date';
     } else {
         $('#myDate').datepicker();
     }
@@ -484,6 +484,10 @@ if (!Moderniz.inputtypes.date) {</p>
 <h3>Conclusion</h3>
 
 <p>With Chrome adding support for native datepickers a large chunk web users now have the ability to use them.  Therefore, now is a great time to consider using them in your applications.</p>
+
+<h3>Update - September 15th, 2012</h3>
+
+<p>I updated one of my code examples from using <code>$('input').attr('type', 'date')</code> to <code>document.getElementById('myDate').type = 'date'</code> after commenter brownieboy pointed out that jQuery actually doesn't allow you to change an input's <code>type</code>.  jQuery does this because IE &lt;= 8 does not allow an the <code>type</code> of an input to be changed at all.  The native JS solution works just fine.</p>
 ]]></content>
   </entry>
   
