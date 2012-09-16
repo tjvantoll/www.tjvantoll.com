@@ -87,7 +87,7 @@ Another option I like is showing the native date picker only to users that are o
 
 <script>
     if (Modernizr.touch && Moderniz.inputtypes.date) {
-        $('input').attr('type', 'date');
+        document.getElementById('myDate').type = 'date';
     } else {
     	$('#myDate').datepicker();
     }
@@ -99,3 +99,7 @@ This gives touch users with `input[type=date]` support the optimized UI / keyboa
 ### Conclusion
 
 With Chrome adding support for native datepickers a large chunk web users now have the ability to use them.  Therefore, now is a great time to consider using them in your applications.
+
+### Update - September 15th, 2012
+
+I updated one of my code examples from using ```$('input').attr('type', 'date')``` to ```document.getElementById('myDate').type = 'date'``` after commenter brownieboy pointed out that jQuery actually doesn't allow you to change an input's `type`.  jQuery does this because IE <= 8 does not allow an the `type` of an input to be changed at all.  The native JS solution works just fine.
