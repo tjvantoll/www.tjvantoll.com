@@ -157,7 +157,7 @@
 
 <p>To create a Git commit hook navigate into the <code>.git/hooks</code> directory of your repository.  This folder has a number of sample hooks that you can potentially use with a <code>.sample</code> suffix.  To create a <code>pre-commit</code> script that Git will run simply create an un-prefixed copy of <code>pre-commit.sample</code>.</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 </pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nb">cd</span> /MyProject/.git/hooks
 </span><span class='line'>cp pre-commit.sample pre-commit
@@ -170,7 +170,7 @@
 
 <p>There are many ways to implement a script that generates CSS files from LESS files.  This is the <code>pre-commit</code> script that I use.</p>
 
-<figure class='code'><figcaption><span>The script</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption class='not_empty'><span>The script</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -340,7 +340,7 @@
 
 <p>To include these files I use the following locally:</p>
 
-<figure class='code'><figcaption><span>Local Includes</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption class='not_empty'><span>Local Includes</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -367,7 +367,7 @@
 
 <p>And the following in production:</p>
 
-<figure class='code'><figcaption><span>Production Includes</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption class='not_empty'><span>Production Includes</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -392,7 +392,7 @@
 
 <p>The best way to handle both development and production with minimal maintenance is to use some sort of server-side check so that you don&#8217;t have to change your HTML whenever you release to production.  Here&#8217;s an example of a PHP script that does this by detecting whether the host contains <code>localhost</code>.</p>
 
-<figure class='code'><figcaption><span>Making both imports work</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption class='not_empty'><span>Making both imports work</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>

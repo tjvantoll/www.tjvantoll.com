@@ -147,7 +147,7 @@
 
 <p>If you test your site on a local server you likely don&#8217;t want that traffic being logged.  Assuming that your local server is using <code>localhost</code> as the hostname the following will exclude the traffic.</p>
 
-<figure class='code'><figcaption><span>Excluding localhost Traffic</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption class='not_empty'><span>Excluding localhost Traffic</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -182,7 +182,7 @@
 
 <p>For example if your site is <code>http://mysite.com</code> then you could visit <code>http://mysite.com?analytics=off</code> to exclude the logging.  The following script makes it so that any page view with the appropriate <code>analytics=off</code> request parameter is not logged.</p>
 
-<figure class='code'><figcaption><span>Excluding Production Traffic via a Request Parameter</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption class='not_empty'><span>Excluding Production Traffic via a Request Parameter</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -257,7 +257,7 @@
 
 <p>In case you want to include both of these here&#8217;s a code snippet that makes it so that both <code>localhost</code> traffic and pages with a <code>analytics=off</code> request parameter are excluded.</p>
 
-<figure class='code'><figcaption><span>The Final Exclusion Script</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption class='not_empty'><span>The Final Exclusion Script</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>

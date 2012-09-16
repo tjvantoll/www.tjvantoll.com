@@ -128,7 +128,7 @@
 
 <div class="entry-content"><p>Form fields can be disabled by simply adding the <code>disabled</code> attribute.</p>
 
-<figure class='code'><figcaption><span>Simple Disabled Fields</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption class='not_empty'><span>Simple Disabled Fields</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 </pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;text&quot;</span> <span class="na">disabled</span> <span class="nt">/&gt;</span>
@@ -151,7 +151,7 @@
 
 <h4>No Value / Selected Attributes</h4>
 
-<figure class='code'><figcaption><span>Markup Used to Generate the Examples </span><a href='http://jsfiddle.net/ygwnh/12/'>link</a></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption class='not_empty'><span>Markup Used to Generate the Examples </span><a href='http://jsfiddle.net/ygwnh/12/'>link</a></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -216,7 +216,7 @@
 
 <h4>With Value / Selected Attributes</h4>
 
-<figure class='code'><figcaption><span>Markup Used to Generate the Examples </span><a href='http://jsfiddle.net/ygwnh/12/'>link</a></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption class='not_empty'><span>Markup Used to Generate the Examples </span><a href='http://jsfiddle.net/ygwnh/12/'>link</a></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -327,7 +327,7 @@
 
 <p>So back to selecting IE &lt;= 9.  In my opinion the most elegant way to do this is use <a href="http://msdn.microsoft.com/en-us/library/ms537512.aspx">IE&#8217;s conditional comments</a> to apply classes to the HTML node.  This approach was <a href="http://paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/">first proposed by Paul Irish in 2008</a> and is used in the <a href="http://html5boilerplate.com/">HTML5 boilerplate</a>.  There are many variations but in this case we only need to worry about IE &lt;= 9.</p>
 
-<figure class='code'><figcaption><span>Applying a Class to IE <= 9</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption class='not_empty'><span>Applying a Class to IE <= 9</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 </pre></td><td class='code'><pre><code class='html'><span class='line'><span class="c">&lt;!--[if lte IE 9 ]&gt; &lt;html class=&quot;lte9&quot;&gt; &lt;![endif]--&gt;</span>
 </span><span class='line'><span class="c">&lt;!--[if (gt IE 9)|!(IE)]&gt;&lt;!--&gt;</span> <span class="nt">&lt;html</span> <span class="na">class=</span><span class="s">&quot;&quot;</span><span class="nt">&gt;</span> <span class="c">&lt;!--&lt;![endif]--&gt;</span>
@@ -336,7 +336,7 @@
 
 <p>Then we can apply the <code>background-color</code> as such:</p>
 
-<figure class='code'><figcaption><span>Normalizing the Disabled Field Display for Windows</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption class='not_empty'><span>Normalizing the Disabled Field Display for Windows</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 </pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nc">.lte9</span> <span class="nt">input</span><span class="o">[</span><span class="nt">type</span><span class="o">=</span><span class="s1">&#39;text&#39;</span><span class="o">][</span><span class="nt">disabled</span><span class="o">],</span> <span class="nc">.lte9</span> <span class="nt">textarea</span><span class="o">[</span><span class="nt">disabled</span><span class="o">]</span> <span class="p">{</span>
@@ -347,7 +347,7 @@
 
 <p>Alternatively you could use IE&#8217;s conditional comments to apply these rules directly:</p>
 
-<figure class='code'><figcaption><span>Using IE&#8217;s Conditional Comments</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption class='not_empty'><span>Using IE&#8217;s Conditional Comments</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -372,7 +372,7 @@
 
 <p>The above solution will not affect the display of these elements in IE6 because it does not support CSS attribute selectors.  Therefore, if you&#8217;re still supporting IE6 and the display of disabled fields is important to your UI you&#8217;ll need some other sort of hook on the node.  For example a class will work:</p>
 
-<figure class='code'><figcaption><span>IE6 Disabled Field Markup</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption class='not_empty'><span>IE6 Disabled Field Markup</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -391,7 +391,7 @@
 
 <p>Then you can apply the following CSS:</p>
 
-<figure class='code'><figcaption><span>IE6 Disabled Field Styling</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption class='not_empty'><span>IE6 Disabled Field Styling</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 </pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nc">.ie6</span> <span class="nt">input</span><span class="nc">.disabled</span><span class="o">,</span> <span class="nc">.ie6</span> <span class="nt">textarea</span><span class="nc">.disabled</span> <span class="p">{</span>
@@ -404,7 +404,7 @@
 
 <p>A number of browsers including all OS X browsers except Opera, Android, and iOS do a poor job making textareas appear disabled, in some cases even when text is present.  If your UI contains disabled textareas it&#8217;s probably worth adding a little bit of opacity to compensate for browsers that don&#8217;t make it very apparent that you cannot interact with them.</p>
 
-<figure class='code'><figcaption><span>Normalizing Textarea Disabling</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption class='not_empty'><span>Normalizing Textarea Disabling</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 </pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nt">textarea</span><span class="nd">:disabled</span> <span class="p">{</span>

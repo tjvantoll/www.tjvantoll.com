@@ -159,7 +159,7 @@ Note: Google Chrome supports 3D transforms, but <a href="https://github.com/Mode
 
 <p>The markup I ended up using was very similar to the cube in <a href="http://desandro.github.com/3dtransforms/examples/cube-02-show-sides.html">David DeSandro&#8217;s cube demo</a>.</p>
 
-<figure class='code'><figcaption><span>Basic Markup</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption class='not_empty'><span>Basic Markup</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -186,7 +186,7 @@ Note: Google Chrome supports 3D transforms, but <a href="https://github.com/Mode
 
 <p>I&#8217;m not going to go into the full details of how the styling to create the cubes works, those are best covered by the articles I linked to earlier, but I did want to give a high level overview of what&#8217;s going on.  Here&#8217;s a simplified version of the styles applied to each of the sides of the cube.</p>
 
-<figure class='code'><figcaption><span>Basic Styling</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption class='not_empty'><span>Basic Styling</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -256,7 +256,7 @@ Note: Google Chrome supports 3D transforms, but <a href="https://github.com/Mode
 
 <p>So the 6 sides themselves have now have been rotated to form the cube.  In order to show various sides of the cube to the user, the cube itself needs to be rotated to move the appropriate side to the front.  This will be done by applying classes to the cube, one for each side.</p>
 
-<figure class='code'><figcaption><span>Basic Classes for Rotation</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption class='not_empty'><span>Basic Classes for Rotation</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -303,7 +303,7 @@ Note: Google Chrome supports 3D transforms, but <a href="https://github.com/Mode
 
 <p>I started with a constructor function that takes the necessary information, a DOM node and an array of the URLs for the images to use on the cube.</p>
 
-<figure class='code'><figcaption><span>PictureCube Constructor</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption class='not_empty'><span>PictureCube Constructor</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -322,14 +322,14 @@ Note: Google Chrome supports 3D transforms, but <a href="https://github.com/Mode
 
 <p>For convenience&#8217;s sake I allow the user to pass in either a String id attribute of a DOM node or the node itself.  A quick conversion internally will make it so I only have to deal with the node.</p>
 
-<figure class='code'><figcaption><span>Getting the Node</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption class='not_empty'><span>Getting the Node</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="k">typeof</span> <span class="nx">node</span> <span class="o">==</span> <span class="s1">&#39;string&#39;</span> <span class="o">?</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="nx">node</span><span class="p">)</span> <span class="o">:</span> <span class="nx">node</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
 <p>Next you need to be able to do things with the cube.  The things I wanted to do were the ability to go to a particular side, cycle through the sides at some interval, and the ability to clear that interval.</p>
 
-<figure class='code'><figcaption><span>Methods</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption class='not_empty'><span>Methods</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -360,7 +360,7 @@ Note: Google Chrome supports 3D transforms, but <a href="https://github.com/Mode
 
 <p>So to create the cube you call the constructor with the node you want the cube to be in and the images you want to be on the various sides of the cube.</p>
 
-<figure class='code'><figcaption><span>Instantiating a Cube</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption class='not_empty'><span>Instantiating a Cube</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -373,7 +373,7 @@ Note: Google Chrome supports 3D transforms, but <a href="https://github.com/Mode
 
 <p>Then you can simply call the methods provided.</p>
 
-<figure class='code'><figcaption><span>Calling the Available Methods</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption class='not_empty'><span>Calling the Available Methods</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 </pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">myCube</span><span class="p">.</span><span class="kr">goto</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
@@ -386,7 +386,7 @@ Note: Google Chrome supports 3D transforms, but <a href="https://github.com/Mode
 
 <p>The methods are added to the function&#8217;s prototype so PictureCube can be extended.  As an example here&#8217;s an AwesomeCube extension that inherits functionality from PictureCube, and adds on an additional awesome method.</p>
 
-<figure class='code'><figcaption><span>Extending PictureCube</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption class='not_empty'><span>Extending PictureCube</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>

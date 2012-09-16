@@ -128,7 +128,7 @@
 
 <p>HTML5 adds several new valid <code>type</code> attributes for <code>&lt;input&gt;</code> elements.  One of them, <code>number</code>, can be used to create a number picker.</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;number&quot;</span> <span class="nt">/&gt;</span>
 </span></code></pre></td></tr></table></div></figure>
 
@@ -175,7 +175,7 @@
 
 <p>For example, on the <code>&lt;input&gt;</code> below the browser will enforce that the minimum value will be <code>2</code>, the maximum value will be <code>20</code>, and the user will step at increments of <code>2</code>.</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;number&quot;</span> <span class="na">min=</span><span class="s">&quot;2&quot;</span> <span class="na">max=</span><span class="s">&quot;20&quot;</span> <span class="na">step=</span><span class="s">&quot;2&quot;</span> <span class="nt">/&gt;</span>
 </span></code></pre></td></tr></table></div></figure>
 
@@ -207,7 +207,7 @@
 
 <p>It also supports setting minimum, maximum, and step values through options rather than attributes.</p>
 
-<figure class='code'><figcaption><span>jQuery UI Spinner</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption class='not_empty'><span>jQuery UI Spinner</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -286,7 +286,7 @@
 
 <p>Because <code>spinner</code> is built on top of <a href="http://ajpiano.com/widgetfactory">jQuery UI&#8217;s widget factory</a>, it is easily extensible.  For example, let&#8217;s say you need to build an input that accepts a year in which the modern summer olympics were held.  You could do that with the following:</p>
 
-<figure class='code'><figcaption><span>Extending spinner</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption class='not_empty'><span>Extending spinner</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -353,7 +353,7 @@
 
 <p>Another option is to use the native HTML number picker when it&#8217;s available, and fallback to jQuery UI&#8217;s <code>spinner</code> when it&#8217;s not.</p>
 
-<figure class='code'><figcaption><span>Using jQuery UI to Polyfill input[type=number]</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption class='not_empty'><span>Using jQuery UI to Polyfill input[type=number]</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -400,7 +400,7 @@
 
 <p>Therefore the best approach I&#8217;ve came up with is to hide the <code>spinner</code>&#8217;s arrow controls when the browser creates its own.</p>
 
-<figure class='code'><figcaption><span>Number keyboard for a spinner</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption class='not_empty'><span>Number keyboard for a spinner</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -425,7 +425,7 @@
 
 <p>Commenter amir pointed out the WebKit provides a pseudoclass that you can use to style, and therefore hide the native spin controls.</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>

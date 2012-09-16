@@ -128,7 +128,7 @@
 
 <div class="entry-content"><p>The CSS attribute selector allows you to select HTML elements based on their attributes.  For example, take the following markup:</p>
 
-<figure class='code'><figcaption><span>Simple List</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption class='not_empty'><span>Simple List</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -146,7 +146,7 @@
 
 <p>In a compliant browser, here are some selectors you can use to target these list items.</p>
 
-<figure class='code'><figcaption><span>Selectors to Target the List</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption class='not_empty'><span>Selectors to Target the List</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -173,7 +173,7 @@
 
 <p>Some DOM attributes have different names than the HTML attributes to avoid conflicts with JavaScript reserved words.  Specifically in this case, DOM nodes have <code>htmlFor</code> and <code>className</code> attributes to avoid JavaScript reserved words <code>for</code> and <code>class</code>.</p>
 
-<figure class='code'><figcaption><span>htmlFor and className</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption class='not_empty'><span>htmlFor and className</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -196,35 +196,35 @@
 
 <p>In IE8+ (and everywhere else for that matter) the following attribute selector will select the label:</p>
 
-<figure class='code'><figcaption><span>Standard Attribute Selector</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption class='not_empty'><span>Standard Attribute Selector</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nt">label</span><span class="o">[</span><span class="nt">for</span><span class="o">=</span><span class="s1">&#39;name&#39;</span><span class="o">]</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
 <p>In IE7 this won&#8217;t work.  You&#8217;ll need to use the incorrect <code>htmlFor</code> attribute:</p>
 
-<figure class='code'><figcaption><span>IE7 for Attribute Selector</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption class='not_empty'><span>IE7 for Attribute Selector</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nt">label</span><span class="o">[</span><span class="nt">htmlFor</span><span class="o">=</span><span class="s1">&#39;name&#39;</span><span class="o">]</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
 <p>So if you&#8217;re still supporting IE7 you&#8217;ll almost certainly want to include them together:</p>
 
-<figure class='code'><figcaption><span>Combined Selector</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption class='not_empty'><span>Combined Selector</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nt">label</span><span class="o">[</span><span class="nt">for</span><span class="o">=</span><span class="s1">&#39;name&#39;</span><span class="o">],</span> <span class="nt">label</span><span class="o">[</span><span class="nt">htmlFor</span><span class="o">=</span><span class="s1">&#39;name&#39;</span><span class="o">]</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
 <p>Along the same lines, IE7 will incorrectly select attributes based on the className attribute:</p>
 
-<figure class='code'><figcaption><span>IE7 class Attribute Selector</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption class='not_empty'><span>IE7 class Attribute Selector</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nt">label</span><span class="o">[</span><span class="nt">className</span><span class="o">=</span><span class="s1">&#39;name&#39;</span><span class="o">]</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
 <p>Fortunately IE7 also supports selecting using <code>class</code>.</p>
 
-<figure class='code'><figcaption><span>class Attribute Selector</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption class='not_empty'><span>class Attribute Selector</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nt">label</span><span class="o">[</span><span class="nt">class</span><span class="o">=</span><span class="s1">&#39;name&#39;</span><span class="o">]</span>
 </span></code></pre></td></tr></table></div></figure>
 
@@ -235,7 +235,7 @@
 
 <p>It&#8217;s impossible to target empty attributes via CSS in IE7.  As an example, let&#8217;s say you apply a <a href="http://html5doctor.com/html5-custom-data-attributes/">custom HTML5 data attribute</a> to nodes at random throughout the DOM.  Let&#8217;s say you want to select only the ones that have an empty value, for example the h3 below:</p>
 
-<figure class='code'><figcaption><span>Headings to Select</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption class='not_empty'><span>Headings to Select</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 </pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;h1</span> <span class="na">data-state=</span><span class="s">&quot;foo&quot;</span><span class="nt">&gt;</span>Top Heading<span class="nt">&lt;h1&gt;</span>
@@ -246,7 +246,7 @@
 
 <p>You would write this selector and call it a day:</p>
 
-<figure class='code'><figcaption><span>Empty Attribute Selector</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption class='not_empty'><span>Empty Attribute Selector</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class='css'><span class='line'><span class="o">[</span><span class="nt">data-state</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="o">]</span>
 </span></code></pre></td></tr></table></div></figure>
 
@@ -255,21 +255,21 @@
 
 <p><a href="http://caniuse.com/queryselector">querySelectorAll</a> isn&#8217;t supported until IE8, so you need a selector engine to target these nodes.  Here&#8217;s how you can do it in jQuery:</p>
 
-<figure class='code'><figcaption><span>Selecting Nodes with Empty Attribute - jQuery</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption class='not_empty'><span>Selecting Nodes with Empty Attribute - jQuery</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">$</span><span class="p">(</span><span class="s1">&#39;[data-state=&quot;&quot;]&#39;</span><span class="p">);</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
 <p>If you&#8217;re using <a href="http://dojotoolkit.org">Dojo</a> yet another step is necessary.  For whatever reason running…</p>
 
-<figure class='code'><figcaption><span>JavaScript Selecting Nodes with Empty Attribute - Dojo</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption class='not_empty'><span>JavaScript Selecting Nodes with Empty Attribute - Dojo</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">dojo</span><span class="p">.</span><span class="nx">query</span><span class="p">(</span><span class="s1">&#39;[data-state=&quot;&quot;]&#39;</span><span class="p">);</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
 <p>…returns not only the nodes with empty attributes, but also all the nodes that don&#8217;t have the attribute declared at all!  Furthermore, <code>dojo.query('[data-state]')</code> incorrectly doesn&#8217;t return nodes that have the attribute with an empty value.  So you need the following approach to select the nodes in IE7.</p>
 
-<figure class='code'><figcaption><span>Functioning IE7 Approach</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption class='not_empty'><span>Functioning IE7 Approach</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -290,7 +290,7 @@
 
 <p>Let&#8217;s say you have the following markup.</p>
 
-<figure class='code'><figcaption><span>Sample HTML</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption class='not_empty'><span>Sample HTML</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 </pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;div</span> <span class="na">data-state=</span><span class="s">&#39;active&#39;</span><span class="nt">&gt;</span>
@@ -301,7 +301,7 @@
 
 <p>…and you want to apply some styling to the paragraph, maybe something like this:</p>
 
-<figure class='code'><figcaption><span>Descendant Selector</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption class='not_empty'><span>Descendant Selector</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 </pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nt">div</span><span class="o">[</span><span class="nt">data-state</span><span class="o">=</span><span class="s1">&#39;active&#39;</span><span class="o">]</span><span class="nt">p</span> <span class="p">{</span>

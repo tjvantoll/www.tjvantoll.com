@@ -4,7 +4,7 @@
   <title><![CDATA[TJ VanToll]]></title>
   <link href="http://tjvantoll.com/atom.xml" rel="self"/>
   <link href="http://tjvantoll.com/"/>
-  <updated>2012-09-14T22:05:54-04:00</updated>
+  <updated>2012-09-15T21:15:01-04:00</updated>
   <id>http://tjvantoll.com/</id>
   <author>
     <name><![CDATA[TJ VanToll]]></name>
@@ -31,7 +31,7 @@
 
 
 
-<figure class='code'><figcaption><span>Polyfill input[type=range] with jQuery UI&#8217;s Slider</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption class='not_empty'><span>Polyfill input[type=range] with jQuery UI&#8217;s Slider</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -206,7 +206,7 @@
 
 <p>If you test your site on a local server you likely don&#8217;t want that traffic being logged.  Assuming that your local server is using <code>localhost</code> as the hostname the following will exclude the traffic.</p>
 
-<figure class='code'><figcaption><span>Excluding localhost Traffic</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption class='not_empty'><span>Excluding localhost Traffic</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -241,7 +241,7 @@
 
 <p>For example if your site is <code>http://mysite.com</code> then you could visit <code>http://mysite.com?analytics=off</code> to exclude the logging.  The following script makes it so that any page view with the appropriate <code>analytics=off</code> request parameter is not logged.</p>
 
-<figure class='code'><figcaption><span>Excluding Production Traffic via a Request Parameter</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption class='not_empty'><span>Excluding Production Traffic via a Request Parameter</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -316,7 +316,7 @@
 
 <p>In case you want to include both of these here&#8217;s a code snippet that makes it so that both <code>localhost</code> traffic and pages with a <code>analytics=off</code> request parameter are excluded.</p>
 
-<figure class='code'><figcaption><span>The Final Exclusion Script</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption class='not_empty'><span>The Final Exclusion Script</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -406,7 +406,7 @@
 
 <p>The output of said runner displays the number of tests ran and the number that passed.  For example, here&#8217;s an example of the output when I use the default runner on jQuery UI&#8217;s spinner test suite:</p>
 
-<figure class='code'><figcaption><span>PhantomJS + QUnit Run Output</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption class='not_empty'><span>PhantomJS + QUnit Run Output</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -419,7 +419,7 @@
 
 <p>Which is great, but if something fails you only get the following:</p>
 
-<figure class='code'><figcaption><span>PhantomJS + QUnit Run Output with Failures</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption class='not_empty'><span>PhantomJS + QUnit Run Output with Failures</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -439,7 +439,7 @@
 
 <p>PhantomJS&#8217;s <a href="http://code.google.com/p/phantomjs/wiki/Interface#onConsoleMessage">page.onConsoleMessage</a> callback can be used to redirect the browser&#8217;s JavaScript console logging.  The provided test runner uses this callback to redirect the output to the command line instead of the headless browser (where you would never see it).</p>
 
-<figure class='code'><figcaption><span>Snippet from Default run-qunit.js</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption class='not_empty'><span>Snippet from Default run-qunit.js</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -458,7 +458,7 @@
 
 <p>For example you could use the following to log the associated message for every test that fails:</p>
 
-<figure class='code'><figcaption><span>Logging Each Test Failure with QUnit</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption class='not_empty'><span>Logging Each Test Failure with QUnit</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -473,7 +473,7 @@
 
 <p>If we apply this our failing test suite we now get the following:</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -492,7 +492,7 @@
 
 <p>Better, but still not terribly useful.  In order to provide a useful report of failed tests you need to combine more of QUnit&#8217;s API callbacks with some basic text formatting.  Here&#8217;s a more comprehensive example:</p>
 
-<figure class='code'><figcaption><span>QUnit Test Results with a Formatted Display of Failed Tests</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption class='not_empty'><span>QUnit Test Results with a Formatted Display of Failed Tests</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -617,7 +617,7 @@
 
 <p>Now running tests with failures will produce something like the following:</p>
 
-<figure class='code'><figcaption><span>PhantomJS + QUnit Output with Failures</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption class='not_empty'><span>PhantomJS + QUnit Output with Failures</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -802,7 +802,7 @@
 
 <p>My first attempt was to set an interval that did what I wanted to do in the <code>onscroll</code> event.  Yes the code will run continuously instead of just when the user scrolls, but it&#8217;s somewhere to start.</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 </pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">setInterval</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
@@ -865,7 +865,7 @@
 
 <p>Another <em>solution</em> out there is to disable native scrolling altogether and use JavaScript to mimic scrolling instead.</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -905,7 +905,7 @@
     <id>http://tjvantoll.com/2012/08/16/subpixel-animation-issues-in-ie-less-than-9</id>
     <content type="html"><![CDATA[<p>While there are definitely <a href="http://ejohn.org/blog/sub-pixel-problems-in-css/">cross browser discrepancies handling subpixels</a>, this one caught me by surprise.  Take the following:</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -926,7 +926,7 @@
 
 <p>Why is this a problem?  <!--more-->Take the following code.</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -958,7 +958,7 @@
 
 <p>The way around this is simply to use store off the value of the property outside of the animation loop itself.</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -1053,7 +1053,7 @@
 
 <p>Here&#8217;s how I accomplished this with a jQuery dependent script.</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -1207,7 +1207,7 @@
     <id>http://tjvantoll.com/2012/07/19/dom-element-references-as-global-variables</id>
     <content type="html"><![CDATA[<p>Quiz: What is logged when the following markup is rendered?</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -1234,7 +1234,7 @@
 
 <p>Ah, I get it, there&#8217;s no doctype on that markup.  So this a quirks mode only thing then right?  Wrong.  <a href="https://bugzilla.mozilla.org/show_bug.cgi?id=622491">As of Firefox 14</a> the latest version of all major browsers will produce the same result IN STANDARDS MODE.</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -1291,7 +1291,7 @@
 
 <p>Let&#8217;s say you have some code that looks something like this:</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -1318,7 +1318,7 @@
 
 <p>Since a global <code>choice</code> variable is being created, <code>window.choice</code> will resolve to the string <code>foo</code> and not a reference to the <code>&lt;input&gt;</code>.  This is because the <code>&lt;input&gt;</code> reference is being <a href="http://en.wikipedia.org/wiki/Variable_shadowing">shadowed</a> by the variable declaration.  This works the same way as a variable with the same name being declared in a nested function.</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -1369,7 +1369,7 @@
 
 <p>IE will (incorrectly) make the <code>name</code> attribute of form elements available on the <code>window</code> object.</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -1404,7 +1404,7 @@
 
 <p>Per the spec, <code>&lt;a&gt;</code> tags should be accessible on the <code>window</code> object via the value of their <code>name</code> attribute.  However, this only works in IE and Opera.</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -1440,7 +1440,7 @@
 
 <p>What this is staying is that when there are multiple named properties with the same name, the browser should return an array when that property is referenced (instead of a reference to a specific DOM node).  As an example given this markup:</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -1477,7 +1477,7 @@
 
 <p><a href="https://developer.mozilla.org/en/JavaScript/Strict_mode">ECMAScript 5 strict mode</a> prevents you assigning values to variables before they are declared.  Therefore this&#8230;</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 </pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
@@ -1488,7 +1488,7 @@
 
 <p>will execute just fine whereas this&#8230;</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -1501,7 +1501,7 @@
 
 <p>&#8230;will produce a syntax error that <code>foo</code> is not defined.  This is great, but it will not stop you from accessing named properties on the <code>window</code> object.</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -1524,7 +1524,7 @@
 
 <p>Use <code>document.getElementById</code> to retrieve references to DOM nodes via their <code>id</code> attribute.</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -1539,7 +1539,7 @@
 
 <p>To get a reference to a DOM node via its <code>name</code> attribute you can use <code>document.querySelectorAll</code>.</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -1571,7 +1571,7 @@
 
 <p>HTML5 adds several new valid <code>type</code> attributes for <code>&lt;input&gt;</code> elements.  One of them, <code>number</code>, can be used to create a number picker.</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;number&quot;</span> <span class="nt">/&gt;</span>
 </span></code></pre></td></tr></table></div></figure>
 
@@ -1618,7 +1618,7 @@
 
 <p>For example, on the <code>&lt;input&gt;</code> below the browser will enforce that the minimum value will be <code>2</code>, the maximum value will be <code>20</code>, and the user will step at increments of <code>2</code>.</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;number&quot;</span> <span class="na">min=</span><span class="s">&quot;2&quot;</span> <span class="na">max=</span><span class="s">&quot;20&quot;</span> <span class="na">step=</span><span class="s">&quot;2&quot;</span> <span class="nt">/&gt;</span>
 </span></code></pre></td></tr></table></div></figure>
 
@@ -1650,7 +1650,7 @@
 
 <p>It also supports setting minimum, maximum, and step values through options rather than attributes.</p>
 
-<figure class='code'><figcaption><span>jQuery UI Spinner</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption class='not_empty'><span>jQuery UI Spinner</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -1729,7 +1729,7 @@
 
 <p>Because <code>spinner</code> is built on top of <a href="http://ajpiano.com/widgetfactory">jQuery UI&#8217;s widget factory</a>, it is easily extensible.  For example, let&#8217;s say you need to build an input that accepts a year in which the modern summer olympics were held.  You could do that with the following:</p>
 
-<figure class='code'><figcaption><span>Extending spinner</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption class='not_empty'><span>Extending spinner</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -1796,7 +1796,7 @@
 
 <p>Another option is to use the native HTML number picker when it&#8217;s available, and fallback to jQuery UI&#8217;s <code>spinner</code> when it&#8217;s not.</p>
 
-<figure class='code'><figcaption><span>Using jQuery UI to Polyfill input[type=number]</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption class='not_empty'><span>Using jQuery UI to Polyfill input[type=number]</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -1843,7 +1843,7 @@
 
 <p>Therefore the best approach I&#8217;ve came up with is to hide the <code>spinner</code>&#8217;s arrow controls when the browser creates its own.</p>
 
-<figure class='code'><figcaption><span>Number keyboard for a spinner</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption class='not_empty'><span>Number keyboard for a spinner</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -1868,7 +1868,7 @@
 
 <p>Commenter amir pointed out the WebKit provides a pseudoclass that you can use to style, and therefore hide the native spin controls.</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -1898,7 +1898,7 @@
 
 <p>Where it gets interesting is that all browsers define default <code>text-transform</code> properties for certain form elements.  What does this mean?  <!--more-->Let&#8217;s say you have the following markup:</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -1986,7 +1986,7 @@
 
 <p>For example:</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -2037,7 +2037,7 @@
 
 <p>Therefore to get consistent behavior you would <em>think</em> you would need to set the default value of <code>button</code> and <code>select</code> elements to either <code>none</code> or <code>inherit</code>.</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -2057,7 +2057,7 @@
 
 <p>Fortunately Option 1 does indeed produce the same behavior in IE6+, Firefox, Chrome, Safari, and Opera.  Therefore to normalize <code>text-transform</code> you need to include the following in your stylesheet.</p>
 
-<figure class='code'><figcaption><span>Cross Browser text-transform Goodness</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption class='not_empty'><span>Cross Browser text-transform Goodness</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nt">button</span><span class="o">,</span> <span class="nt">select</span> <span class="p">{</span> <span class="k">text-transform</span><span class="o">:</span> <span class="k">none</span><span class="p">;</span> <span class="p">}</span>
 </span></code></pre></td></tr></table></div></figure>
 
@@ -2104,7 +2104,7 @@
 
 <p>To create a Git commit hook navigate into the <code>.git/hooks</code> directory of your repository.  This folder has a number of sample hooks that you can potentially use with a <code>.sample</code> suffix.  To create a <code>pre-commit</code> script that Git will run simply create an un-prefixed copy of <code>pre-commit.sample</code>.</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 </pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nb">cd</span> /MyProject/.git/hooks
 </span><span class='line'>cp pre-commit.sample pre-commit
@@ -2117,7 +2117,7 @@
 
 <p>There are many ways to implement a script that generates CSS files from LESS files.  This is the <code>pre-commit</code> script that I use.</p>
 
-<figure class='code'><figcaption><span>The script</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption class='not_empty'><span>The script</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -2287,7 +2287,7 @@
 
 <p>To include these files I use the following locally:</p>
 
-<figure class='code'><figcaption><span>Local Includes</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption class='not_empty'><span>Local Includes</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -2314,7 +2314,7 @@
 
 <p>And the following in production:</p>
 
-<figure class='code'><figcaption><span>Production Includes</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption class='not_empty'><span>Production Includes</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -2339,7 +2339,7 @@
 
 <p>The best way to handle both development and production with minimal maintenance is to use some sort of server-side check so that you don&#8217;t have to change your HTML whenever you release to production.  Here&#8217;s an example of a PHP script that does this by detecting whether the host contains <code>localhost</code>.</p>
 
-<figure class='code'><figcaption><span>Making both imports work</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption class='not_empty'><span>Making both imports work</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -2394,7 +2394,7 @@
 
 <p>Using the native datepickers is easy, just change the <code>type</code> attribute of your date inputs from <code>text</code> to <code>date</code>.</p>
 
-<figure class='code'><figcaption><span>Converting to a native HTML5 datepicker</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption class='not_empty'><span>Converting to a native HTML5 datepicker</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -2456,7 +2456,7 @@
 
 <p><a href="http://modernizr.com">Modernizr</a> gives you the ability to detect whether the browser supports native datepickers.  The following shows how you can use the native datepicker when available, and fallback to jQuery UI&#8217;s picker in unsupported browsers.</p>
 
-<figure class='code'><figcaption><span>Detect native support for datepickers and fallback to jQuery UI</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption class='not_empty'><span>Detect native support for datepickers and fallback to jQuery UI</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 </pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">Moderniz</span><span class="p">.</span><span class="nx">inputtypes</span><span class="p">.</span><span class="nx">date</span><span class="p">)</span> <span class="p">{</span>
@@ -2474,7 +2474,7 @@
 
 <p>Another option I like is showing the native date picker only to users that are on touch capable devices.</p>
 
-<figure class='code'><figcaption><span>Native picker for supported touch users only</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption class='not_empty'><span>Native picker for supported touch users only</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -2519,7 +2519,7 @@
 
 <p>IE5+ fires <code>onbeforeprint</code> and <code>onafterprint</code> events before and after the user requests the page to be printed.</p>
 
-<figure class='code'><figcaption><span>onbeforeprint and onaferprint</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption class='not_empty'><span>onbeforeprint and onaferprint</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -2544,7 +2544,7 @@
 
 <p>The <code>window.matchMedia</code> <a href="https://developer.mozilla.org/en/DOM/window.matchMedia">API</a> provides a means of determining whether the current <code>document</code> matches a given <a href="https://developer.mozilla.org/En/CSS/Media_queries">media query</a>.  For example:</p>
 
-<figure class='code'><figcaption><span>window.matchMedia</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption class='not_empty'><span>window.matchMedia</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -2559,7 +2559,7 @@
 
 <p>You can also use this API to add listeners that will be fired whenever the result of the media query changes.  In the above example the <code>matches</code> criteria will be met whenever the viewport is at least 600px wide.  If you wanted to receive notifications whenever the viewport crossed the 600px threshold you could use the following.</p>
 
-<figure class='code'><figcaption><span>window.matchMedia with notifications</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption class='not_empty'><span>window.matchMedia with notifications</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -2585,7 +2585,7 @@
 
 <p>Interestingly, it turns out you can also use this same technique to listen for the <code>print</code> media being applied when the user requests the document to be printed (<a href="http://code.google.com/p/chromium/issues/detail?id=105743">hat tip to Ben Wells</a>):</p>
 
-<figure class='code'><figcaption><span>Using window.matchMedia to detecting print requests</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption class='not_empty'><span>Using window.matchMedia to detecting print requests</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -2614,7 +2614,7 @@
 
 <p>If you combine the two approaches you can detect print requests in IE 5+, Firefox 6+, Chrome 9+, and Safari 5.1+ (unfortunately Opera doesn&#8217;t support either approach).</p>
 
-<figure class='code'><figcaption><span>Cross browser print request detection</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption class='not_empty'><span>Cross browser print request detection</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -2677,7 +2677,7 @@
 
 <p>With the ability to detect print requests in JavaScript you can substitute the higher quality image on the fly when the user requests the page to be printed.</p>
 
-<figure class='code'><figcaption><span>Substituting higher quality images when printing</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption class='not_empty'><span>Substituting higher quality images when printing</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -2720,7 +2720,7 @@
 
 <p>Print events can also be used to track the number of times users print pages within a site or application.  Because of the lack of total browser support you wouldn&#8217;t capture every print request, but this would be sufficient for getting a rough idea of how often people are printing.</p>
 
-<figure class='code'><figcaption><span>Tracking Print Requests</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption class='not_empty'><span>Tracking Print Requests</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -2769,7 +2769,7 @@
 
 <p>Per the comments I&#8217;ve found that in addition to all the bugs mentioned above, certain browsers trigger the after print event early (with either <code>onafterprint</code> or the <code>window.matchMedia</code> handler implementation).</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -2860,7 +2860,7 @@
 
 <p><strong>Declarations with unkown properties should be ignored.</strong></p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -2873,7 +2873,7 @@
 
 <p><strong>Illegal values should be ignored.</strong></p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 </pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nt">h1</span> <span class="p">{</span> <span class="k">float</span><span class="o">:</span> <span class="s1">&#39;foo&#39;</span><span class="p">;</span> <span class="p">}</span>
@@ -2888,7 +2888,7 @@
 
 <p>Take a guess, what <em>should</em> happen with the following:</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -3029,7 +3029,7 @@
 
 <p>WebKit based browsers are evaluating all rules after a semicolon is encountered and all other browsers stop in their tracks and don&#8217;t evaluate any other rules.  The same results occur with some other common fat finger situations.</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -3093,7 +3093,7 @@
 
 <p>To use the <code>showModalDialog</code> method you simply call it with a URL.</p>
 
-<figure class='code'><figcaption><span>window.showModalDialog Basic Usage</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption class='not_empty'><span>window.showModalDialog Basic Usage</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nb">window</span><span class="p">.</span><span class="nx">showModalDialog</span><span class="p">(</span><span class="s1">&#39;http://google.com&#39;</span><span class="p">);</span>
 </span></code></pre></td></tr></table></div></figure>
 
@@ -3102,7 +3102,7 @@
 
 <h4>window.returnValue</h4>
 
-<figure class='code'><figcaption><span>window.returnValue Example</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption class='not_empty'><span>window.returnValue Example</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -3163,7 +3163,7 @@
 
 <p>If you want to pass information to the modal dialog you can do so via the second parameter of <code>window.showModalDialog</code>.  Those values will be available in the modal dialog&#8217;s <code>window.dialogArguments</code> property.</p>
 
-<figure class='code'><figcaption><span>window.returnValue Example</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption class='not_empty'><span>window.returnValue Example</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -3293,7 +3293,7 @@
     <id>http://tjvantoll.com/2012/03/17/Styling-Disabled-Form-Fields</id>
     <content type="html"><![CDATA[<p>Form fields can be disabled by simply adding the <code>disabled</code> attribute.</p>
 
-<figure class='code'><figcaption><span>Simple Disabled Fields</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption class='not_empty'><span>Simple Disabled Fields</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 </pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;text&quot;</span> <span class="na">disabled</span> <span class="nt">/&gt;</span>
@@ -3316,7 +3316,7 @@
 
 <h4>No Value / Selected Attributes</h4>
 
-<figure class='code'><figcaption><span>Markup Used to Generate the Examples </span><a href='http://jsfiddle.net/ygwnh/12/'>link</a></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption class='not_empty'><span>Markup Used to Generate the Examples </span><a href='http://jsfiddle.net/ygwnh/12/'>link</a></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -3381,7 +3381,7 @@
 
 <h4>With Value / Selected Attributes</h4>
 
-<figure class='code'><figcaption><span>Markup Used to Generate the Examples </span><a href='http://jsfiddle.net/ygwnh/12/'>link</a></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption class='not_empty'><span>Markup Used to Generate the Examples </span><a href='http://jsfiddle.net/ygwnh/12/'>link</a></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -3492,7 +3492,7 @@
 
 <p>So back to selecting IE &lt;= 9.  In my opinion the most elegant way to do this is use <a href="http://msdn.microsoft.com/en-us/library/ms537512.aspx">IE&#8217;s conditional comments</a> to apply classes to the HTML node.  This approach was <a href="http://paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/">first proposed by Paul Irish in 2008</a> and is used in the <a href="http://html5boilerplate.com/">HTML5 boilerplate</a>.  There are many variations but in this case we only need to worry about IE &lt;= 9.</p>
 
-<figure class='code'><figcaption><span>Applying a Class to IE <= 9</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption class='not_empty'><span>Applying a Class to IE <= 9</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 </pre></td><td class='code'><pre><code class='html'><span class='line'><span class="c">&lt;!--[if lte IE 9 ]&gt; &lt;html class=&quot;lte9&quot;&gt; &lt;![endif]--&gt;</span>
 </span><span class='line'><span class="c">&lt;!--[if (gt IE 9)|!(IE)]&gt;&lt;!--&gt;</span> <span class="nt">&lt;html</span> <span class="na">class=</span><span class="s">&quot;&quot;</span><span class="nt">&gt;</span> <span class="c">&lt;!--&lt;![endif]--&gt;</span>
@@ -3501,7 +3501,7 @@
 
 <p>Then we can apply the <code>background-color</code> as such:</p>
 
-<figure class='code'><figcaption><span>Normalizing the Disabled Field Display for Windows</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption class='not_empty'><span>Normalizing the Disabled Field Display for Windows</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 </pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nc">.lte9</span> <span class="nt">input</span><span class="o">[</span><span class="nt">type</span><span class="o">=</span><span class="s1">&#39;text&#39;</span><span class="o">][</span><span class="nt">disabled</span><span class="o">],</span> <span class="nc">.lte9</span> <span class="nt">textarea</span><span class="o">[</span><span class="nt">disabled</span><span class="o">]</span> <span class="p">{</span>
@@ -3512,7 +3512,7 @@
 
 <p>Alternatively you could use IE&#8217;s conditional comments to apply these rules directly:</p>
 
-<figure class='code'><figcaption><span>Using IE&#8217;s Conditional Comments</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption class='not_empty'><span>Using IE&#8217;s Conditional Comments</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -3537,7 +3537,7 @@
 
 <p>The above solution will not affect the display of these elements in IE6 because it does not support CSS attribute selectors.  Therefore, if you&#8217;re still supporting IE6 and the display of disabled fields is important to your UI you&#8217;ll need some other sort of hook on the node.  For example a class will work:</p>
 
-<figure class='code'><figcaption><span>IE6 Disabled Field Markup</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption class='not_empty'><span>IE6 Disabled Field Markup</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -3556,7 +3556,7 @@
 
 <p>Then you can apply the following CSS:</p>
 
-<figure class='code'><figcaption><span>IE6 Disabled Field Styling</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption class='not_empty'><span>IE6 Disabled Field Styling</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 </pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nc">.ie6</span> <span class="nt">input</span><span class="nc">.disabled</span><span class="o">,</span> <span class="nc">.ie6</span> <span class="nt">textarea</span><span class="nc">.disabled</span> <span class="p">{</span>
@@ -3569,7 +3569,7 @@
 
 <p>A number of browsers including all OS X browsers except Opera, Android, and iOS do a poor job making textareas appear disabled, in some cases even when text is present.  If your UI contains disabled textareas it&#8217;s probably worth adding a little bit of opacity to compensate for browsers that don&#8217;t make it very apparent that you cannot interact with them.</p>
 
-<figure class='code'><figcaption><span>Normalizing Textarea Disabling</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption class='not_empty'><span>Normalizing Textarea Disabling</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 </pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nt">textarea</span><span class="nd">:disabled</span> <span class="p">{</span>
@@ -3595,7 +3595,7 @@
     <id>http://tjvantoll.com/2012/03/08/IE7-Attribute-Selector-Bugs</id>
     <content type="html"><![CDATA[<p>The CSS attribute selector allows you to select HTML elements based on their attributes.  For example, take the following markup:</p>
 
-<figure class='code'><figcaption><span>Simple List</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption class='not_empty'><span>Simple List</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -3613,7 +3613,7 @@
 
 <p>In a compliant browser, here are some selectors you can use to target these list items.</p>
 
-<figure class='code'><figcaption><span>Selectors to Target the List</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption class='not_empty'><span>Selectors to Target the List</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -3640,7 +3640,7 @@
 
 <p>Some DOM attributes have different names than the HTML attributes to avoid conflicts with JavaScript reserved words.  Specifically in this case, DOM nodes have <code>htmlFor</code> and <code>className</code> attributes to avoid JavaScript reserved words <code>for</code> and <code>class</code>.</p>
 
-<figure class='code'><figcaption><span>htmlFor and className</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption class='not_empty'><span>htmlFor and className</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -3663,35 +3663,35 @@
 
 <p>In IE8+ (and everywhere else for that matter) the following attribute selector will select the label:</p>
 
-<figure class='code'><figcaption><span>Standard Attribute Selector</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption class='not_empty'><span>Standard Attribute Selector</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nt">label</span><span class="o">[</span><span class="nt">for</span><span class="o">=</span><span class="s1">&#39;name&#39;</span><span class="o">]</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
 <p>In IE7 this won&#8217;t work.  You&#8217;ll need to use the incorrect <code>htmlFor</code> attribute:</p>
 
-<figure class='code'><figcaption><span>IE7 for Attribute Selector</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption class='not_empty'><span>IE7 for Attribute Selector</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nt">label</span><span class="o">[</span><span class="nt">htmlFor</span><span class="o">=</span><span class="s1">&#39;name&#39;</span><span class="o">]</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
 <p>So if you&#8217;re still supporting IE7 you&#8217;ll almost certainly want to include them together:</p>
 
-<figure class='code'><figcaption><span>Combined Selector</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption class='not_empty'><span>Combined Selector</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nt">label</span><span class="o">[</span><span class="nt">for</span><span class="o">=</span><span class="s1">&#39;name&#39;</span><span class="o">],</span> <span class="nt">label</span><span class="o">[</span><span class="nt">htmlFor</span><span class="o">=</span><span class="s1">&#39;name&#39;</span><span class="o">]</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
 <p>Along the same lines, IE7 will incorrectly select attributes based on the className attribute:</p>
 
-<figure class='code'><figcaption><span>IE7 class Attribute Selector</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption class='not_empty'><span>IE7 class Attribute Selector</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nt">label</span><span class="o">[</span><span class="nt">className</span><span class="o">=</span><span class="s1">&#39;name&#39;</span><span class="o">]</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
 <p>Fortunately IE7 also supports selecting using <code>class</code>.</p>
 
-<figure class='code'><figcaption><span>class Attribute Selector</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption class='not_empty'><span>class Attribute Selector</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nt">label</span><span class="o">[</span><span class="nt">class</span><span class="o">=</span><span class="s1">&#39;name&#39;</span><span class="o">]</span>
 </span></code></pre></td></tr></table></div></figure>
 
@@ -3702,7 +3702,7 @@
 
 <p>It&#8217;s impossible to target empty attributes via CSS in IE7.  As an example, let&#8217;s say you apply a <a href="http://html5doctor.com/html5-custom-data-attributes/">custom HTML5 data attribute</a> to nodes at random throughout the DOM.  Let&#8217;s say you want to select only the ones that have an empty value, for example the h3 below:</p>
 
-<figure class='code'><figcaption><span>Headings to Select</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption class='not_empty'><span>Headings to Select</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 </pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;h1</span> <span class="na">data-state=</span><span class="s">&quot;foo&quot;</span><span class="nt">&gt;</span>Top Heading<span class="nt">&lt;h1&gt;</span>
@@ -3713,7 +3713,7 @@
 
 <p>You would write this selector and call it a day:</p>
 
-<figure class='code'><figcaption><span>Empty Attribute Selector</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption class='not_empty'><span>Empty Attribute Selector</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class='css'><span class='line'><span class="o">[</span><span class="nt">data-state</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="o">]</span>
 </span></code></pre></td></tr></table></div></figure>
 
@@ -3722,21 +3722,21 @@
 
 <p><a href="http://caniuse.com/queryselector">querySelectorAll</a> isn&#8217;t supported until IE8, so you need a selector engine to target these nodes.  Here&#8217;s how you can do it in jQuery:</p>
 
-<figure class='code'><figcaption><span>Selecting Nodes with Empty Attribute - jQuery</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption class='not_empty'><span>Selecting Nodes with Empty Attribute - jQuery</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">$</span><span class="p">(</span><span class="s1">&#39;[data-state=&quot;&quot;]&#39;</span><span class="p">);</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
 <p>If you&#8217;re using <a href="http://dojotoolkit.org">Dojo</a> yet another step is necessary.  For whatever reason running…</p>
 
-<figure class='code'><figcaption><span>JavaScript Selecting Nodes with Empty Attribute - Dojo</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption class='not_empty'><span>JavaScript Selecting Nodes with Empty Attribute - Dojo</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">dojo</span><span class="p">.</span><span class="nx">query</span><span class="p">(</span><span class="s1">&#39;[data-state=&quot;&quot;]&#39;</span><span class="p">);</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
 <p>…returns not only the nodes with empty attributes, but also all the nodes that don&#8217;t have the attribute declared at all!  Furthermore, <code>dojo.query('[data-state]')</code> incorrectly doesn&#8217;t return nodes that have the attribute with an empty value.  So you need the following approach to select the nodes in IE7.</p>
 
-<figure class='code'><figcaption><span>Functioning IE7 Approach</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption class='not_empty'><span>Functioning IE7 Approach</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -3757,7 +3757,7 @@
 
 <p>Let&#8217;s say you have the following markup.</p>
 
-<figure class='code'><figcaption><span>Sample HTML</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption class='not_empty'><span>Sample HTML</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 </pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;div</span> <span class="na">data-state=</span><span class="s">&#39;active&#39;</span><span class="nt">&gt;</span>
@@ -3768,7 +3768,7 @@
 
 <p>…and you want to apply some styling to the paragraph, maybe something like this:</p>
 
-<figure class='code'><figcaption><span>Descendant Selector</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption class='not_empty'><span>Descendant Selector</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 </pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nt">div</span><span class="o">[</span><span class="nt">data-state</span><span class="o">=</span><span class="s1">&#39;active&#39;</span><span class="o">]</span><span class="nt">p</span> <span class="p">{</span>
@@ -3831,7 +3831,7 @@ Note: Google Chrome supports 3D transforms, but <a href="https://github.com/Mode
 
 <p>The markup I ended up using was very similar to the cube in <a href="http://desandro.github.com/3dtransforms/examples/cube-02-show-sides.html">David DeSandro&#8217;s cube demo</a>.</p>
 
-<figure class='code'><figcaption><span>Basic Markup</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption class='not_empty'><span>Basic Markup</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -3858,7 +3858,7 @@ Note: Google Chrome supports 3D transforms, but <a href="https://github.com/Mode
 
 <p>I&#8217;m not going to go into the full details of how the styling to create the cubes works, those are best covered by the articles I linked to earlier, but I did want to give a high level overview of what&#8217;s going on.  Here&#8217;s a simplified version of the styles applied to each of the sides of the cube.</p>
 
-<figure class='code'><figcaption><span>Basic Styling</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption class='not_empty'><span>Basic Styling</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -3928,7 +3928,7 @@ Note: Google Chrome supports 3D transforms, but <a href="https://github.com/Mode
 
 <p>So the 6 sides themselves have now have been rotated to form the cube.  In order to show various sides of the cube to the user, the cube itself needs to be rotated to move the appropriate side to the front.  This will be done by applying classes to the cube, one for each side.</p>
 
-<figure class='code'><figcaption><span>Basic Classes for Rotation</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption class='not_empty'><span>Basic Classes for Rotation</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -3975,7 +3975,7 @@ Note: Google Chrome supports 3D transforms, but <a href="https://github.com/Mode
 
 <p>I started with a constructor function that takes the necessary information, a DOM node and an array of the URLs for the images to use on the cube.</p>
 
-<figure class='code'><figcaption><span>PictureCube Constructor</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption class='not_empty'><span>PictureCube Constructor</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -3994,14 +3994,14 @@ Note: Google Chrome supports 3D transforms, but <a href="https://github.com/Mode
 
 <p>For convenience&#8217;s sake I allow the user to pass in either a String id attribute of a DOM node or the node itself.  A quick conversion internally will make it so I only have to deal with the node.</p>
 
-<figure class='code'><figcaption><span>Getting the Node</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption class='not_empty'><span>Getting the Node</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="k">typeof</span> <span class="nx">node</span> <span class="o">==</span> <span class="s1">&#39;string&#39;</span> <span class="o">?</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="nx">node</span><span class="p">)</span> <span class="o">:</span> <span class="nx">node</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
 <p>Next you need to be able to do things with the cube.  The things I wanted to do were the ability to go to a particular side, cycle through the sides at some interval, and the ability to clear that interval.</p>
 
-<figure class='code'><figcaption><span>Methods</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption class='not_empty'><span>Methods</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -4032,7 +4032,7 @@ Note: Google Chrome supports 3D transforms, but <a href="https://github.com/Mode
 
 <p>So to create the cube you call the constructor with the node you want the cube to be in and the images you want to be on the various sides of the cube.</p>
 
-<figure class='code'><figcaption><span>Instantiating a Cube</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption class='not_empty'><span>Instantiating a Cube</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -4045,7 +4045,7 @@ Note: Google Chrome supports 3D transforms, but <a href="https://github.com/Mode
 
 <p>Then you can simply call the methods provided.</p>
 
-<figure class='code'><figcaption><span>Calling the Available Methods</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption class='not_empty'><span>Calling the Available Methods</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 </pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">myCube</span><span class="p">.</span><span class="kr">goto</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
@@ -4058,7 +4058,7 @@ Note: Google Chrome supports 3D transforms, but <a href="https://github.com/Mode
 
 <p>The methods are added to the function&#8217;s prototype so PictureCube can be extended.  As an example here&#8217;s an AwesomeCube extension that inherits functionality from PictureCube, and adds on an additional awesome method.</p>
 
-<figure class='code'><figcaption><span>Extending PictureCube</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption class='not_empty'><span>Extending PictureCube</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>

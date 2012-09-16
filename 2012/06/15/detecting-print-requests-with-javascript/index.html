@@ -133,7 +133,7 @@
 
 <p>IE5+ fires <code>onbeforeprint</code> and <code>onafterprint</code> events before and after the user requests the page to be printed.</p>
 
-<figure class='code'><figcaption><span>onbeforeprint and onaferprint</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption class='not_empty'><span>onbeforeprint and onaferprint</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -158,7 +158,7 @@
 
 <p>The <code>window.matchMedia</code> <a href="https://developer.mozilla.org/en/DOM/window.matchMedia">API</a> provides a means of determining whether the current <code>document</code> matches a given <a href="https://developer.mozilla.org/En/CSS/Media_queries">media query</a>.  For example:</p>
 
-<figure class='code'><figcaption><span>window.matchMedia</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption class='not_empty'><span>window.matchMedia</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -173,7 +173,7 @@
 
 <p>You can also use this API to add listeners that will be fired whenever the result of the media query changes.  In the above example the <code>matches</code> criteria will be met whenever the viewport is at least 600px wide.  If you wanted to receive notifications whenever the viewport crossed the 600px threshold you could use the following.</p>
 
-<figure class='code'><figcaption><span>window.matchMedia with notifications</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption class='not_empty'><span>window.matchMedia with notifications</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -199,7 +199,7 @@
 
 <p>Interestingly, it turns out you can also use this same technique to listen for the <code>print</code> media being applied when the user requests the document to be printed (<a href="http://code.google.com/p/chromium/issues/detail?id=105743">hat tip to Ben Wells</a>):</p>
 
-<figure class='code'><figcaption><span>Using window.matchMedia to detecting print requests</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption class='not_empty'><span>Using window.matchMedia to detecting print requests</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -228,7 +228,7 @@
 
 <p>If you combine the two approaches you can detect print requests in IE 5+, Firefox 6+, Chrome 9+, and Safari 5.1+ (unfortunately Opera doesn&#8217;t support either approach).</p>
 
-<figure class='code'><figcaption><span>Cross browser print request detection</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption class='not_empty'><span>Cross browser print request detection</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -291,7 +291,7 @@
 
 <p>With the ability to detect print requests in JavaScript you can substitute the higher quality image on the fly when the user requests the page to be printed.</p>
 
-<figure class='code'><figcaption><span>Substituting higher quality images when printing</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption class='not_empty'><span>Substituting higher quality images when printing</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -334,7 +334,7 @@
 
 <p>Print events can also be used to track the number of times users print pages within a site or application.  Because of the lack of total browser support you wouldn&#8217;t capture every print request, but this would be sufficient for getting a rough idea of how often people are printing.</p>
 
-<figure class='code'><figcaption><span>Tracking Print Requests</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption class='not_empty'><span>Tracking Print Requests</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -383,7 +383,7 @@
 
 <p>Per the comments I&#8217;ve found that in addition to all the bugs mentioned above, certain browsers trigger the after print event early (with either <code>onafterprint</code> or the <code>window.matchMedia</code> handler implementation).</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
