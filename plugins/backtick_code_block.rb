@@ -16,10 +16,20 @@ module BacktickCodeBlock
 
       if @options =~ AllOptions
         @lang = $1
-        @caption = "<figcaption><span>#{$2}</span><a href='#{$3}'>#{$4 || 'link'}</a></figcaption>"
+        #Custom adding of the empty / not_empty classes for styling.
+        if $2.to_s == ""
+          @caption = "<figcaption class='empty'><span>#{$2}</span><a href='#{$3}'>#{$4 || 'link'}</a></figcaption>"
+        else
+          @caption = "<figcaption class='not_empty'><span>#{$2}</span><a href='#{$3}'>#{$4 || 'link'}</a></figcaption>"
+        end
       elsif @options =~ LangCaption
         @lang = $1
-        @caption = "<figcaption><span>#{$2}</span></figcaption>"
+        #Custom adding of the empty / not_empty classes for styling.
+        if $2.to_s == ""
+          @caption = "<figcaption class='empty'><span>#{$2}</span></figcaption>"
+        else
+          @caption = "<figcaption class='not_empty'><span>#{$2}</span></figcaption>"
+        end
       end
 
       if str.match(/\A( {4}|\t)/)

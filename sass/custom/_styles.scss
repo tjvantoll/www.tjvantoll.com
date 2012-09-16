@@ -201,3 +201,39 @@ header.home {
 		background-color: white;
 	}
 }
+
+
+/*****************************************************/
+/*********************** Code ************************/
+/*****************************************************/
+
+figure.code figcaption.empty {
+	border: none;
+}
+.empty + .highlight {
+	border-radius: 5px;
+}
+.not_empty + .highlight {
+	border-radius: 0 0 5px 5px;
+}
+.highlight {
+	border: none !important;
+	table {
+		margin-bottom: 0;
+	}
+	.gutter, .code {
+		border: 0;
+		background-color: #333 !important;
+
+		.line-numbers {
+			background-color: #333 !important;
+			text-shadow: none;			
+		}
+		code {
+			background-color: #333 !important;
+		}
+	}
+}
+pre {
+	background-color: #333;
+}
