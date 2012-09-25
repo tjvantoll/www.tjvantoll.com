@@ -237,3 +237,20 @@ figure.code figcaption.empty {
 pre {
 	background-color: #333;
 }
+
+/*****************************************************/
+/************************ Posts **********************/
+/*****************************************************/
+
+.author_card {
+	padding: 1em;
+	border: 1px solid #333;
+	border-radius: 5px;
+
+	img {
+		border: none;
+		float: left;
+		width: 100px;
+		margin-right: 1em;
+	}
+}
