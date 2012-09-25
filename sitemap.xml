@@ -2,111 +2,111 @@
 <urlset xmlns='http://www.sitemaps.org/schemas/sitemap/0.9'>
     <url>
         <loc>http://tjvantoll.com/2012/02/20/CSS3-Color-Animations/</loc>
-        <lastmod>2012-03-11T23:03:55-04:00</lastmod>
+        <lastmod>2012-09-24T21:12:07-04:00</lastmod>
     </url>
     <url>
         <loc>http://tjvantoll.com/2012/02/27/Making-a-3D-Picture-Cube-with-CSS3/</loc>
-        <lastmod>2012-08-25T22:40:40-04:00</lastmod>
+        <lastmod>2012-09-24T21:12:07-04:00</lastmod>
     </url>
     <url>
         <loc>http://tjvantoll.com/2012/03/08/IE7-Attribute-Selector-Bugs/</loc>
-        <lastmod>2012-07-07T15:03:22-04:00</lastmod>
+        <lastmod>2012-09-24T21:12:07-04:00</lastmod>
     </url>
     <url>
         <loc>http://tjvantoll.com/2012/03/17/Styling-Disabled-Form-Fields/</loc>
-        <lastmod>2012-07-07T15:03:14-04:00</lastmod>
+        <lastmod>2012-09-24T21:12:07-04:00</lastmod>
     </url>
     <url>
         <loc>http://tjvantoll.com/2012/03/21/javascript-for-the-java-developer/</loc>
-        <lastmod>2012-07-07T15:03:06-04:00</lastmod>
+        <lastmod>2012-09-24T21:12:07-04:00</lastmod>
     </url>
     <url>
         <loc>
             http://tjvantoll.com/2012/05/02/showmodaldialog-what-it-is-and-why-you-should-never-use-it/
         </loc>
-        <lastmod>2012-07-27T21:15:08-04:00</lastmod>
+        <lastmod>2012-09-24T21:12:07-04:00</lastmod>
     </url>
     <url>
         <loc>http://tjvantoll.com/2012/06/10/browser-css-parsing-discrepancies/</loc>
-        <lastmod>2012-09-15T21:07:34-04:00</lastmod>
+        <lastmod>2012-09-24T21:12:07-04:00</lastmod>
     </url>
     <url>
         <loc>http://tjvantoll.com/2012/06/15/detecting-print-requests-with-javascript/</loc>
-        <lastmod>2012-07-16T21:52:08-04:00</lastmod>
+        <lastmod>2012-09-24T21:12:07-04:00</lastmod>
     </url>
     <url>
         <loc>
             http://tjvantoll.com/2012/06/30/creating-a-native-html5-datepicker-with-a-fallback-to-jquery-ui/
         </loc>
-        <lastmod>2012-09-15T21:40:18-04:00</lastmod>
+        <lastmod>2012-09-24T21:12:07-04:00</lastmod>
     </url>
     <url>
         <loc>http://tjvantoll.com/2012/07/07/the-ideal-less-workflow-with-git/</loc>
-        <lastmod>2012-07-27T21:13:39-04:00</lastmod>
+        <lastmod>2012-09-24T21:12:07-04:00</lastmod>
     </url>
     <url>
         <loc>
             http://tjvantoll.com/2012/07/10/default-browser-handling-of-the-css-text-transform-property/
         </loc>
-        <lastmod>2012-07-11T20:58:43-04:00</lastmod>
+        <lastmod>2012-09-24T21:12:07-04:00</lastmod>
     </url>
     <url>
         <loc>
             http://tjvantoll.com/2012/07/15/native-html5-number-picker-vs-jquery-uis-spinner-which-to-use/
         </loc>
-        <lastmod>2012-08-28T22:29:25-04:00</lastmod>
+        <lastmod>2012-09-24T21:12:07-04:00</lastmod>
     </url>
     <url>
         <loc>http://tjvantoll.com/2012/07/19/dom-element-references-as-global-variables/</loc>
-        <lastmod>2012-09-15T16:09:10-04:00</lastmod>
+        <lastmod>2012-09-24T21:25:38-04:00</lastmod>
     </url>
     <url>
         <loc>
             http://tjvantoll.com/2012/08/05/html5-form-validation-showing-all-error-messages/
         </loc>
-        <lastmod>2012-09-05T22:58:45-04:00</lastmod>
+        <lastmod>2012-09-24T21:12:07-04:00</lastmod>
     </url>
     <url>
         <loc>http://tjvantoll.com/2012/08/10/less-101-the-basics-of-the-css-preprocessor/</loc>
-        <lastmod>2012-08-09T21:50:45-04:00</lastmod>
+        <lastmod>2012-09-24T21:12:07-04:00</lastmod>
     </url>
     <url>
         <loc>http://tjvantoll.com/2012/08/16/subpixel-animation-issues-in-ie-less-than-9/</loc>
-        <lastmod>2012-08-16T23:09:54-04:00</lastmod>
+        <lastmod>2012-09-24T21:12:07-04:00</lastmod>
     </url>
     <url>
         <loc>http://tjvantoll.com/2012/08/19/onscroll-event-issues-on-mobile-browsers/</loc>
-        <lastmod>2012-08-20T21:35:14-04:00</lastmod>
+        <lastmod>2012-09-24T21:12:07-04:00</lastmod>
     </url>
     <url>
         <loc>
             http://tjvantoll.com/2012/08/22/logging-test-failures-in-a-phantomjs-qunit-runner/
         </loc>
-        <lastmod>2012-08-31T21:27:04-04:00</lastmod>
+        <lastmod>2012-09-24T21:12:07-04:00</lastmod>
     </url>
     <url>
         <loc>
             http://tjvantoll.com/2012/08/28/google-analytics-excluding-visits-in-development-and-production/
         </loc>
-        <lastmod>2012-08-28T22:46:36-04:00</lastmod>
+        <lastmod>2012-09-24T21:12:07-04:00</lastmod>
     </url>
     <url>
         <loc>
             http://tjvantoll.com/2012/08/30/html5-form-validation-start-using-it-in-production-applications/
         </loc>
-        <lastmod>2012-08-30T22:48:19-04:00</lastmod>
+        <lastmod>2012-09-24T21:12:07-04:00</lastmod>
     </url>
     <url>
         <loc>
             http://tjvantoll.com/2012/09/14/using-jquery-ui-slider-to-polyfill-html5-input-type-range/
         </loc>
-        <lastmod>2012-09-14T22:03:18-04:00</lastmod>
+        <lastmod>2012-09-24T21:12:07-04:00</lastmod>
     </url>
     <url>
         <loc>
             http://tjvantoll.com/2012/09/19/using-the-attribute-selector-with-numeric-values/
         </loc>
-        <lastmod>2012-09-19T21:19:59-04:00</lastmod>
+        <lastmod>2012-09-24T21:12:07-04:00</lastmod>
     </url>
     <url>
         <loc>http://tjvantoll.com/404.html</loc>
@@ -114,15 +114,15 @@
     </url>
     <url>
         <loc>http://tjvantoll.com/blog/archives/</loc>
-        <lastmod>2012-09-19T21:19:59-04:00</lastmod>
+        <lastmod>2012-09-24T21:25:38-04:00</lastmod>
     </url>
     <url>
         <loc>http://tjvantoll.com/blog/</loc>
-        <lastmod>2012-09-19T21:19:59-04:00</lastmod>
+        <lastmod>2012-09-24T21:25:38-04:00</lastmod>
     </url>
     <url>
         <loc>http://tjvantoll.com/</loc>
-        <lastmod>2012-09-19T21:19:59-04:00</lastmod>
+        <lastmod>2012-09-24T21:25:38-04:00</lastmod>
     </url>
     <url>
         <loc>http://tjvantoll.com/speaking/</loc>

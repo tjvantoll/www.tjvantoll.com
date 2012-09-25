@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Browsers | TJ VanToll]]></title>
   <link href="http://tjvantoll.com/blog/categories/browsers/atom.xml" rel="self"/>
   <link href="http://tjvantoll.com/"/>
-  <updated>2012-09-19T21:20:03-04:00</updated>
+  <updated>2012-09-24T21:28:17-04:00</updated>
   <id>http://tjvantoll.com/</id>
   <author>
     <name><![CDATA[TJ VanToll]]></name>
@@ -483,7 +483,7 @@ $(function() {
 <p></html>
 ```</p>
 
-<p>Syntax error obviously, right?  Wrong.  All major browser rendering engines will log a reference to the <code>&lt;button&gt;</code> node.  This includes Trident (IE), Gecko (Firefox), WebKit (Chrome, Safari, etc), and Presto (Opera).</p>
+<p><a href="https://developer.mozilla.org/en-US/docs/JavaScript/Reference/Global_Objects/ReferenceError">ReferenceError</a> obviously, right?  Wrong.  All major browser rendering engines will log a reference to the <code>&lt;button&gt;</code> node.  This includes Trident (IE), Gecko (Firefox), WebKit (Chrome, Safari, etc), and Presto (Opera).</p>
 
 <h3>Wait.  What?</h3>
 
@@ -571,7 +571,7 @@ y();
 <p>}());
 ```</p>
 
-<p>This is all well and good.  However, let's say that during a refactor of this code the <code>var choice = 'foo';</code> line is accidentally removed.  Under normal circumstances this would cause a syntax error because <code>window.choice</code> would now be undefined.  However, because there is a DOM node with an <code>id</code> of <code>choice</code>, that reference will now refer to the DOM node instead.  This can easily lead to unexpected behavior.</p>
+<p>This is all well and good.  However, let's say that during a refactor of this code the <code>var choice = 'foo';</code> line is accidentally removed.  Under normal circumstances this would cause a ReferenceError because <code>window.choice</code> would now be undefined.  However, because there is a DOM node with an <code>id</code> of <code>choice</code>, that reference will now refer to the DOM node instead.  This can easily lead to unexpected behavior.</p>
 
 <p>The flip side of this situation is also true.  If you have an element <code>&lt;div id="bar"&gt;&lt;/div&gt;</code> and use <code>window.bar</code> to refer to it, that code will break if you create JavaScript variable using <code>var</code> in the same scope (i.e. <code>var bar = 2;</code>).</p>
 
@@ -610,7 +610,7 @@ y();
     &lt;/form&gt;
     &lt;script&gt;
         //Logs a reference to the &lt;input&gt; in IE.
-        //Syntax error in all other rendering engines.
+        //ReferenceError in all other rendering engines.
         console.log(foo);
     &lt;/script&gt;
 &lt;/body&gt;
@@ -632,7 +632,7 @@ y();
     &lt;a name="foo"&gt;&lt;/a&gt;
     &lt;script&gt;
         //Logs a reference to the &lt;a&gt; in IE and Opera.
-        //Syntax error in Gecko and WebKit.
+        //ReferenceError in Gecko and WebKit.
         console.log(foo);
     &lt;/script&gt;
 &lt;/body&gt;
@@ -699,7 +699,7 @@ foo = 2;
 <p>}());
 ```</p>
 
-<p>...will produce a syntax error that <code>foo</code> is not defined.  This is great, but it will not stop you from accessing named properties on the <code>window</code> object.</p>
+<p>...will produce a ReferenceError that <code>foo</code> is not defined.  This is great, but it will not stop you from accessing named properties on the <code>window</code> object.</p>
 
 <p>``` html</p>
 
@@ -732,23 +732,34 @@ foo = 2;
 
 <p>```</p>
 
-<p>To get a reference to a DOM node via its <code>name</code> attribute you can use <code>document.querySelectorAll</code>.</p>
+<p>To get a reference to a DOM node via its <code>name</code> attribute you can use <code>document.getElementsByName</code> or <code>document.querySelectorAll</code>.</p>
 
 <p>``` html
 <a name="bar"></a></p>
 
 <script>
+    document.getElementsByName('bar');
     document.querySelectorAll('[name=bar]');
 </script>
 
 
 <p>```</p>
 
-<p><code>document.querySelectorAll</code> is not safe to use in IE &lt;= 8, so if you need to support older IE look into using a toolkit such as <a href="http://jquery.com">jQuery</a> to select the DOM nodes that you need.</p>
+<p><code>document.querySelectorAll</code> is not safe to use in IE &lt;= 8, but <code>document.getElementsByName</code> is safe to use in all browsers.</p>
 
 <h3>Conclusion</h3>
 
 <p>All major browsers now make named properties available on the global <code>window</code> object in standards mode.  It's important to know that browsers do this because you'll likely run into this at some point.  However, never purposely utilize this functionality.  If you see others use it tell them to stop, ridicule them, do whatever it takes.  Help <a href="http://movethewebforward.org/">move the web forward</a>.</p>
+
+<h3>Update September 24th, 2012</h3>
+
+<p>Per comments from Rob W I've updated the following:</p>
+
+<ul>
+<li>I had incorrectly used "Syntax error" to describe the situation when an undeclared variable is referenced.  I updated those to correctly use "ReferenceError".</li>
+<li>I updated my last example to show that <code>document.getElementsByName</code> is a cross browser way of getting reference to DOM nodes by their name attribute.</li>
+</ul>
+
 ]]></content>
   </entry>
   

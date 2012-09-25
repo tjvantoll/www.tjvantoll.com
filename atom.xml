@@ -4,7 +4,7 @@
   <title><![CDATA[TJ VanToll]]></title>
   <link href="http://tjvantoll.com/atom.xml" rel="self"/>
   <link href="http://tjvantoll.com/"/>
-  <updated>2012-09-19T21:20:03-04:00</updated>
+  <updated>2012-09-24T21:28:17-04:00</updated>
   <id>http://tjvantoll.com/</id>
   <author>
     <name><![CDATA[TJ VanToll]]></name>
@@ -1300,7 +1300,7 @@
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>Syntax error obviously, right?  Wrong.  All major browser rendering engines will log a reference to the <code>&lt;button&gt;</code> node.  This includes Trident (IE), Gecko (Firefox), WebKit (Chrome, Safari, etc), and Presto (Opera).</p>
+<p><a href="https://developer.mozilla.org/en-US/docs/JavaScript/Reference/Global_Objects/ReferenceError">ReferenceError</a> obviously, right?  Wrong.  All major browser rendering engines will log a reference to the <code>&lt;button&gt;</code> node.  This includes Trident (IE), Gecko (Firefox), WebKit (Chrome, Safari, etc), and Presto (Opera).</p>
 
 <h3>Wait.  What?</h3>
 
@@ -1413,7 +1413,7 @@
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>This is all well and good.  However, let&#8217;s say that during a refactor of this code the <code>var choice = 'foo';</code> line is accidentally removed.  Under normal circumstances this would cause a syntax error because <code>window.choice</code> would now be undefined.  However, because there is a DOM node with an <code>id</code> of <code>choice</code>, that reference will now refer to the DOM node instead.  This can easily lead to unexpected behavior.</p>
+<p>This is all well and good.  However, let&#8217;s say that during a refactor of this code the <code>var choice = 'foo';</code> line is accidentally removed.  Under normal circumstances this would cause a ReferenceError because <code>window.choice</code> would now be undefined.  However, because there is a DOM node with an <code>id</code> of <code>choice</code>, that reference will now refer to the DOM node instead.  This can easily lead to unexpected behavior.</p>
 
 <p>The flip side of this situation is also true.  If you have an element <code>&lt;div id="bar"&gt;&lt;/div&gt;</code> and use <code>window.bar</code> to refer to it, that code will break if you create JavaScript variable using <code>var</code> in the same scope (i.e. <code>var bar = 2;</code>).</p>
 
@@ -1464,7 +1464,7 @@
 </span><span class='line'>        <span class="nt">&lt;/form&gt;</span>
 </span><span class='line'>        <span class="nt">&lt;script&gt;</span>
 </span><span class='line'>            <span class="c1">//Logs a reference to the &lt;input&gt; in IE.</span>
-</span><span class='line'>            <span class="c1">//Syntax error in all other rendering engines.</span>
+</span><span class='line'>            <span class="c1">//ReferenceError in all other rendering engines.</span>
 </span><span class='line'>            <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">foo</span><span class="p">);</span>
 </span><span class='line'>        <span class="nt">&lt;/script&gt;</span>
 </span><span class='line'>    <span class="nt">&lt;/body&gt;</span>
@@ -1495,7 +1495,7 @@
 </span><span class='line'>        <span class="nt">&lt;a</span> <span class="na">name=</span><span class="s">&quot;foo&quot;</span><span class="nt">&gt;&lt;/a&gt;</span>
 </span><span class='line'>        <span class="nt">&lt;script&gt;</span>
 </span><span class='line'>            <span class="c1">//Logs a reference to the &lt;a&gt; in IE and Opera.</span>
-</span><span class='line'>            <span class="c1">//Syntax error in Gecko and WebKit.</span>
+</span><span class='line'>            <span class="c1">//ReferenceError in Gecko and WebKit.</span>
 </span><span class='line'>            <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">foo</span><span class="p">);</span>
 </span><span class='line'>        <span class="nt">&lt;/script&gt;</span>
 </span><span class='line'>    <span class="nt">&lt;/body&gt;</span>
@@ -1571,7 +1571,7 @@
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>&#8230;will produce a syntax error that <code>foo</code> is not defined.  This is great, but it will not stop you from accessing named properties on the <code>window</code> object.</p>
+<p>&#8230;will produce a ReferenceError that <code>foo</code> is not defined.  This is great, but it will not stop you from accessing named properties on the <code>window</code> object.</p>
 
 <figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -1609,26 +1609,38 @@
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>To get a reference to a DOM node via its <code>name</code> attribute you can use <code>document.querySelectorAll</code>.</p>
+<p>To get a reference to a DOM node via its <code>name</code> attribute you can use <code>document.getElementsByName</code> or <code>document.querySelectorAll</code>.</p>
 
 <figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
 <span class='line-number'>5</span>
+<span class='line-number'>6</span>
 </pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;a</span> <span class="na">name=</span><span class="s">&quot;bar&quot;</span><span class="nt">&gt;&lt;/a&gt;</span>
 </span><span class='line'>
 </span><span class='line'><span class="nt">&lt;script&gt;</span>
+</span><span class='line'>    <span class="nb">document</span><span class="p">.</span><span class="nx">getElementsByName</span><span class="p">(</span><span class="s1">&#39;bar&#39;</span><span class="p">);</span>
 </span><span class='line'>    <span class="nb">document</span><span class="p">.</span><span class="nx">querySelectorAll</span><span class="p">(</span><span class="s1">&#39;[name=bar]&#39;</span><span class="p">);</span>
 </span><span class='line'><span class="nt">&lt;/script&gt;</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p><code>document.querySelectorAll</code> is not safe to use in IE &lt;= 8, so if you need to support older IE look into using a toolkit such as <a href="http://jquery.com">jQuery</a> to select the DOM nodes that you need.</p>
+<p><code>document.querySelectorAll</code> is not safe to use in IE &lt;= 8, but <code>document.getElementsByName</code> is safe to use in all browsers.</p>
 
 <h3>Conclusion</h3>
 
 <p>All major browsers now make named properties available on the global <code>window</code> object in standards mode.  It&#8217;s important to know that browsers do this because you&#8217;ll likely run into this at some point.  However, never purposely utilize this functionality.  If you see others use it tell them to stop, ridicule them, do whatever it takes.  Help <a href="http://movethewebforward.org/">move the web forward</a>.</p>
+
+<h3>Update September 24th, 2012</h3>
+
+<p>Per comments from Rob W I&#8217;ve updated the following:</p>
+
+<ul>
+<li>I had incorrectly used &#8220;Syntax error&#8221; to describe the situation when an undeclared variable is referenced.  I updated those to correctly use &#8220;ReferenceError&#8221;.</li>
+<li>I updated my last example to show that <code>document.getElementsByName</code> is a cross browser way of getting reference to DOM nodes by their name attribute.</li>
+</ul>
+
 ]]></content>
   </entry>
   
