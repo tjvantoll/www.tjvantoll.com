@@ -20,7 +20,7 @@ Quiz: What is logged when the following markup is rendered?
 </html>
 ```
 
-Syntax error obviously, right?  Wrong.  All major browser rendering engines will log a reference to the `<button>` node.  This includes Trident (IE), Gecko (Firefox), WebKit (Chrome, Safari, etc), and Presto (Opera).
+[ReferenceError](https://developer.mozilla.org/en-US/docs/JavaScript/Reference/Global_Objects/ReferenceError) obviously, right?  Wrong.  All major browser rendering engines will log a reference to the `<button>` node.  This includes Trident (IE), Gecko (Firefox), WebKit (Chrome, Safari, etc), and Presto (Opera).
 
 ### Wait.  What?
 
@@ -105,7 +105,7 @@ Since a global `choice` variable is being created, `window.choice` will resolve 
 }());
 ```
 
-This is all well and good.  However, let's say that during a refactor of this code the `var choice = 'foo';` line is accidentally removed.  Under normal circumstances this would cause a syntax error because `window.choice` would now be undefined.  However, because there is a DOM node with an `id` of `choice`, that reference will now refer to the DOM node instead.  This can easily lead to unexpected behavior.
+This is all well and good.  However, let's say that during a refactor of this code the `var choice = 'foo';` line is accidentally removed.  Under normal circumstances this would cause a ReferenceError because `window.choice` would now be undefined.  However, because there is a DOM node with an `id` of `choice`, that reference will now refer to the DOM node instead.  This can easily lead to unexpected behavior.
 
 The flip side of this situation is also true.  If you have an element `<div id="bar"></div>` and use `window.bar` to refer to it, that code will break if you create JavaScript variable using `var` in the same scope (i.e. `var bar = 2;`).
 
@@ -143,7 +143,7 @@ IE will (incorrectly) make the `name` attribute of form elements available on th
         </form>
         <script>
             //Logs a reference to the <input> in IE.
-            //Syntax error in all other rendering engines.
+            //ReferenceError in all other rendering engines.
             console.log(foo);
         </script>
     </body>
@@ -162,7 +162,7 @@ Per the spec, `<a>` tags should be accessible on the `window` object via the val
         <a name="foo"></a>
         <script>
             //Logs a reference to the <a> in IE and Opera.
-            //Syntax error in Gecko and WebKit.
+            //ReferenceError in Gecko and WebKit.
             console.log(foo);
         </script>
     </body>
@@ -222,7 +222,7 @@ will execute just fine whereas this...
 }());
 ```
 
-...will produce a syntax error that `foo` is not defined.  This is great, but it will not stop you from accessing named properties on the `window` object.
+...will produce a ReferenceError that `foo` is not defined.  This is great, but it will not stop you from accessing named properties on the `window` object.
 
 ``` html
 <div id="foo"></div>
@@ -248,18 +248,26 @@ Use `document.getElementById` to retrieve references to DOM nodes via their `id`
 </script>
 ```
 
-To get a reference to a DOM node via its `name` attribute you can use `document.querySelectorAll`.
+To get a reference to a DOM node via its `name` attribute you can use `document.getElementsByName` or `document.querySelectorAll`.
 
 ``` html
 <a name="bar"></a>
 
 <script>
+    document.getElementsByName('bar');
     document.querySelectorAll('[name=bar]');
 </script>
 ```
 
-`document.querySelectorAll` is not safe to use in IE <= 8, so if you need to support older IE look into using a toolkit such as [jQuery](http://jquery.com) to select the DOM nodes that you need.
+`document.querySelectorAll` is not safe to use in IE <= 8, but `document.getElementsByName` is safe to use in all browsers.
 
 ### Conclusion
 
 All major browsers now make named properties available on the global `window` object in standards mode.  It's important to know that browsers do this because you'll likely run into this at some point.  However, never purposely utilize this functionality.  If you see others use it tell them to stop, ridicule them, do whatever it takes.  Help [move the web forward](http://movethewebforward.org/).
+
+### Update September 24th, 2012
+
+Per comments from Rob W I've updated the following:
+
+* I had incorrectly used "Syntax error" to describe the situation when an undeclared variable is referenced.  I updated those to correctly use "ReferenceError".
+* I updated my last example to show that `document.getElementsByName` is a cross browser way of getting reference to DOM nodes by their name attribute.
