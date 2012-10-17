@@ -4,7 +4,7 @@
   <title><![CDATA[TJ VanToll]]></title>
   <link href="http://tjvantoll.com/atom.xml" rel="self"/>
   <link href="http://tjvantoll.com/"/>
-  <updated>2012-09-24T21:28:17-04:00</updated>
+  <updated>2012-10-17T13:52:16-04:00</updated>
   <id>http://tjvantoll.com/</id>
   <author>
     <name><![CDATA[TJ VanToll]]></name>
@@ -12,6 +12,59 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[maxlength Constraint Validation Oddities in Major Browsers]]></title>
+    <link href="http://tjvantoll.com/2012/10/17/maxlength-constraint-validation-oddities/"/>
+    <updated>2012-10-17T12:48:00-04:00</updated>
+    <id>http://tjvantoll.com/2012/10/17/maxlength-constraint-validation-oddities</id>
+    <content type="html"><![CDATA[<p>The <code>maxlength</code> attribute has been around in browsers for a long time.  When provided all browsers prevent the user entering a value that exceeds the <code>maxlength</code>.</p>
+
+<p>For example you cannot type more than 2 characters in the textbox below:</p>
+
+<p><input type="text" maxlength="2" /></p>
+
+<h3>Constraint Validation</h3>
+
+<p><a href="https://developer.mozilla.org/en-US/docs/HTML/HTML5/Constraint_validation_">Constraint validation</a> is a new native means of client side form validation new in HTML5.  As part of its <a href="https://developer.mozilla.org/en-US/docs/HTML/Forms_in_HTML#Constraint_Validation_API">API</a>, all <code>&lt;input&gt;</code> and <code>&lt;textarea&gt;</code> elements have a <code>validity.tooLong</code> property that is <code>true</code> when the length of the <code>value</code> exceeds the <code>maxlength</code>.</p>
+
+<p>But if the browser prevents this then why does the property exist?</p>
+
+<h3>Prefilled value Attribute</h3>
+
+<p>Assume that you&#8217;re filling the <code>value</code> of form elements with information from a database and you end up with something like this:</p>
+
+<p><code>&lt;input type="text" maxlength="1" value="ABC" /&gt;</code></p>
+
+<p>How will the browser handle this?</p>
+
+<p>All browsers will prevent entry of additional characters, but they do not trim excess characters already present.  Additionally all browsers will allow a form containing the above input to submit.  <em>Note: Opera incorrectly sets the <code>validity.tooLong</code> property to <code>true</code> in this situation even though it does not prevent form submission.</em></p>
+
+<p>Why is submission not prevented?  The key is in the <a href="http://www.whatwg.org/specs/web-apps/current-work/#concept-input-value-dirty-flag">specification</a>:</p>
+
+<blockquote><p>Constraint validation: If an element has a maximum allowed value length, its dirty value flag is true, its value was last changed by a user edit (as opposed to a change made by a script), and the code-unit length of the element&#8217;s value is greater than the element&#8217;s maximum allowed value length, then the element is suffering from being too long.</p></blockquote>
+
+<p>The <a href="http://www.whatwg.org/specs/web-apps/current-work/#concept-input-value-dirty-flag">dirty flag</a> essentially means the the user has changed the value of an element.  Therefore, in order to be a candidate for constraint validation the element must have been last interacted with by a user edit.</p>
+
+<h3>Actually Triggering tooLong</h3>
+
+<p>So let&#8217;s take another approach.  What happens if you have the same input:</p>
+
+<p><code>&lt;input type="text" maxlength="1" value="ABC" /&gt;</code></p>
+
+<p>&#8230;remove one character, then submit?  You can try it for yourself below:</p>
+
+<iframe style="width: 100%; height: 180px;" src="http://jsfiddle.net/tj_vantoll/epCQe/embedded/result,html/" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
+
+
+<p>Upon edit IE10 and Chrome will set the <code>validity.tooLong</code> property to <code>true</code> and prevent form submission.  If the user attempts to submit a form after removing the &#8220;C&#8221; they will see the following in those browsers:</p>
+
+<p><img src="http://tjvantoll.com/images/posts/2012-10-17/Chrome.png" title="Chrome" alt="Chrome" />
+<img src="http://tjvantoll.com/images/posts/2012-10-17/IE10.png" title="IE10" alt="IE10" /></p>
+
+<p>Firefox, Safari, and Opera incorrectly handle this situation and allow the form to be submitted anyways.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Using the Attribute Selector with Numeric Values]]></title>
@@ -3673,207 +3726,6 @@
 <h3>Summary</h3>
 
 <p>Browsers have default styling for disabled fields that is usually pretty good at visually indicating that the field cannot be interacted with.  In situations where the browser default isn&#8217;t ideal, custom styling can be applied.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[IE7 Attribute Selector Bugs]]></title>
-    <link href="http://tjvantoll.com/2012/03/08/IE7-Attribute-Selector-Bugs/"/>
-    <updated>2012-03-08T00:00:00-05:00</updated>
-    <id>http://tjvantoll.com/2012/03/08/IE7-Attribute-Selector-Bugs</id>
-    <content type="html"><![CDATA[<p>The CSS attribute selector allows you to select HTML elements based on their attributes.  For example, take the following markup:</p>
-
-<figure class='code'><figcaption class='not_empty'><span>Simple List</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;ul&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;li</span> <span class="na">id=</span><span class="s">&quot;item1&quot;</span><span class="nt">&gt;&lt;/li&gt;</span>  <span class="c">&lt;!-- #1 --&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;li</span> <span class="na">id=</span><span class="s">&quot;item2&quot;</span><span class="nt">&gt;&lt;/li&gt;</span>  <span class="c">&lt;!-- #2 --&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;li&gt;&lt;/li&gt;</span>             <span class="c">&lt;!-- #3 --&gt;</span>
-</span><span class='line'><span class="nt">&lt;/ul&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<!--more-->
-
-
-<p>In a compliant browser, here are some selectors you can use to target these list items.</p>
-
-<figure class='code'><figcaption class='not_empty'><span>Selectors to Target the List</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nt">li</span>             <span class="c">/* Selects #1, #2, #3 */</span>
-</span><span class='line'><span class="nt">li</span><span class="o">[</span><span class="nt">id</span><span class="o">]</span>         <span class="c">/* Selects #1, #2 */</span>
-</span><span class='line'><span class="nt">li</span><span class="o">[</span><span class="nt">id</span><span class="o">=</span><span class="nt">item1</span><span class="o">]</span>   <span class="c">/* Selects #1 */</span>
-</span><span class='line'><span class="nt">li</span><span class="o">[</span><span class="nt">id</span><span class="o">=</span><span class="s1">&#39;item1&#39;</span><span class="o">]</span> <span class="c">/* Selects #1, single quotes are valid */</span>
-</span><span class='line'><span class="nt">li</span><span class="o">[</span><span class="nt">id</span><span class="o">=</span><span class="s2">&quot;item2&quot;</span><span class="o">]</span> <span class="c">/* Selects #1, double quotes are valid too */</span>
-</span><span class='line'><span class="nt">li</span><span class="o">[</span><span class="nt">id</span><span class="o">^=</span><span class="nt">item</span><span class="o">]</span>   <span class="c">/* Selects #1, #2, ^ = starts with */</span>
-</span><span class='line'><span class="nt">li</span><span class="o">[</span><span class="nt">id</span><span class="err">$</span><span class="o">=</span><span class="nt">1</span><span class="o">]</span>      <span class="c">/* Selects #1, $ = ends with */</span>
-</span><span class='line'><span class="nt">li</span><span class="o">[</span><span class="nt">id</span><span class="o">*=</span><span class="nt">item</span><span class="o">]</span>   <span class="c">/* Selects #1, #2, * = contains */</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>Enter IE7</h3>
-
-<p>This is all well and good in most all modern browsers.  Unfortunately IE7 is buggy when handling this selector.  For those of use that are still unlucky enough to be supporting it, I thought it would be nice to have some of these documented.</p>
-
-<h3>DOM Attributes == HTML Attributes?</h3>
-
-<p>Some DOM attributes have different names than the HTML attributes to avoid conflicts with JavaScript reserved words.  Specifically in this case, DOM nodes have <code>htmlFor</code> and <code>className</code> attributes to avoid JavaScript reserved words <code>for</code> and <code>class</code>.</p>
-
-<figure class='code'><figcaption class='not_empty'><span>htmlFor and className</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;label</span> <span class="na">class=</span><span class="s">&quot;foo&quot;</span> <span class="na">for=</span><span class="s">&quot;name&quot;</span> <span class="na">id=</span><span class="s">&quot;nameLabel&quot;</span><span class="nt">&gt;</span>Name:<span class="nt">&lt;/label&gt;</span>
-</span><span class='line'><span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;text&quot;</span> <span class="na">name=</span><span class="s">&quot;name&quot;</span> <span class="na">id=</span><span class="s">&quot;name&quot;</span> <span class="nt">/&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="nt">&lt;script&gt;</span>
-</span><span class='line'>  <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">&#39;nameLabel&#39;</span><span class="p">).</span><span class="k">for</span><span class="p">;</span> <span class="c1">//undefined</span>
-</span><span class='line'>  <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">&#39;nameLabel&#39;</span><span class="p">).</span><span class="nx">htmlFor</span> <span class="c1">//&#39;name&#39;</span>
-</span><span class='line'>  <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">&#39;nameLabel&#39;</span><span class="p">).</span><span class="kr">class</span> <span class="c1">//undefined</span>
-</span><span class='line'>  <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">&#39;nameLabel&#39;</span><span class="p">).</span><span class="nx">className</span> <span class="c1">//&#39;foo&#39;</span>
-</span><span class='line'><span class="nt">&lt;/script&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>In IE8+ (and everywhere else for that matter) the following attribute selector will select the label:</p>
-
-<figure class='code'><figcaption class='not_empty'><span>Standard Attribute Selector</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nt">label</span><span class="o">[</span><span class="nt">for</span><span class="o">=</span><span class="s1">&#39;name&#39;</span><span class="o">]</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>In IE7 this won&#8217;t work.  You&#8217;ll need to use the incorrect <code>htmlFor</code> attribute:</p>
-
-<figure class='code'><figcaption class='not_empty'><span>IE7 for Attribute Selector</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nt">label</span><span class="o">[</span><span class="nt">htmlFor</span><span class="o">=</span><span class="s1">&#39;name&#39;</span><span class="o">]</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>So if you&#8217;re still supporting IE7 you&#8217;ll almost certainly want to include them together:</p>
-
-<figure class='code'><figcaption class='not_empty'><span>Combined Selector</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nt">label</span><span class="o">[</span><span class="nt">for</span><span class="o">=</span><span class="s1">&#39;name&#39;</span><span class="o">],</span> <span class="nt">label</span><span class="o">[</span><span class="nt">htmlFor</span><span class="o">=</span><span class="s1">&#39;name&#39;</span><span class="o">]</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Along the same lines, IE7 will incorrectly select attributes based on the className attribute:</p>
-
-<figure class='code'><figcaption class='not_empty'><span>IE7 class Attribute Selector</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nt">label</span><span class="o">[</span><span class="nt">className</span><span class="o">=</span><span class="s1">&#39;name&#39;</span><span class="o">]</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Fortunately IE7 also supports selecting using <code>class</code>.</p>
-
-<figure class='code'><figcaption class='not_empty'><span>class Attribute Selector</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nt">label</span><span class="o">[</span><span class="nt">class</span><span class="o">=</span><span class="s1">&#39;name&#39;</span><span class="o">]</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>IE8 fixed both of these bugs and selecting for the attributes <code>htmlFor</code> and <code>className</code> no longer work.</p>
-
-<h3>Empty Attributes</h3>
-
-<p>It&#8217;s impossible to target empty attributes via CSS in IE7.  As an example, let&#8217;s say you apply a <a href="http://html5doctor.com/html5-custom-data-attributes/">custom HTML5 data attribute</a> to nodes at random throughout the DOM.  Let&#8217;s say you want to select only the ones that have an empty value, for example the h3 below:</p>
-
-<figure class='code'><figcaption class='not_empty'><span>Headings to Select</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;h1</span> <span class="na">data-state=</span><span class="s">&quot;foo&quot;</span><span class="nt">&gt;</span>Top Heading<span class="nt">&lt;h1&gt;</span>
-</span><span class='line'><span class="nt">&lt;h2</span> <span class="na">data-state=</span><span class="s">&quot;bar&quot;</span><span class="nt">&gt;</span>Sub Heading<span class="nt">&lt;h2&gt;</span>
-</span><span class='line'><span class="nt">&lt;h3</span> <span class="na">data-state=</span><span class="s">&quot;&quot;</span><span class="nt">&gt;</span>Another Heading<span class="nt">&lt;h3&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>You would write this selector and call it a day:</p>
-
-<figure class='code'><figcaption class='not_empty'><span>Empty Attribute Selector</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="o">[</span><span class="nt">data-state</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="o">]</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Except it won&#8217;t work in IE7.  There is simply no way to target empty attributes via CSS in IE7.  So how can you replicate this functionality?  For better or worse JavaScript is the only client side option to handle this.</p>
-
-<p><a href="http://caniuse.com/queryselector">querySelectorAll</a> isn&#8217;t supported until IE8, so you need a selector engine to target these nodes.  Here&#8217;s how you can do it in jQuery:</p>
-
-<figure class='code'><figcaption class='not_empty'><span>Selecting Nodes with Empty Attribute - jQuery</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">$</span><span class="p">(</span><span class="s1">&#39;[data-state=&quot;&quot;]&#39;</span><span class="p">);</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>If you&#8217;re using <a href="http://dojotoolkit.org">Dojo</a> yet another step is necessary.  For whatever reason running…</p>
-
-<figure class='code'><figcaption class='not_empty'><span>JavaScript Selecting Nodes with Empty Attribute - Dojo</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">dojo</span><span class="p">.</span><span class="nx">query</span><span class="p">(</span><span class="s1">&#39;[data-state=&quot;&quot;]&#39;</span><span class="p">);</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>…returns not only the nodes with empty attributes, but also all the nodes that don&#8217;t have the attribute declared at all!  Furthermore, <code>dojo.query('[data-state]')</code> incorrectly doesn&#8217;t return nodes that have the attribute with an empty value.  So you need the following approach to select the nodes in IE7.</p>
-
-<figure class='code'><figcaption class='not_empty'><span>Functioning IE7 Approach</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">dojo</span><span class="p">.</span><span class="nx">query</span><span class="p">(</span><span class="s1">&#39;*&#39;</span><span class="p">).</span><span class="nx">forEach</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">element</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>    <span class="k">if</span> <span class="p">(</span><span class="nx">dojo</span><span class="p">.</span><span class="nx">hasAttr</span><span class="p">(</span><span class="nx">element</span><span class="p">,</span> <span class="s1">&#39;data-state&#39;</span><span class="p">)</span> <span class="o">&amp;&amp;</span>
-</span><span class='line'>      <span class="nx">dojo</span><span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="nx">element</span><span class="p">,</span> <span class="s1">&#39;data-state&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="s1">&#39;&#39;</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>      <span class="c1">//Safe to finally apply your styling here.</span>
-</span><span class='line'>    <span class="p">}</span>
-</span><span class='line'><span class="p">});</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Note that when using any of the JavaScript based solutions it&#8217;s recommended to leave the CSS in place.  Yes this is dual maintenance, but it avoids a potential <a href="http://en.wikipedia.org/wiki/FOUC">FOUC</a>.  Fortunately ALL of this nonsense is fixed in IE8.</p>
-
-<h3>Descendant Selector Typos</h3>
-
-<p>Let&#8217;s say you have the following markup.</p>
-
-<figure class='code'><figcaption class='not_empty'><span>Sample HTML</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;div</span> <span class="na">data-state=</span><span class="s">&#39;active&#39;</span><span class="nt">&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;p&gt;</span>Some text<span class="nt">&lt;/p&gt;</span>
-</span><span class='line'><span class="nt">&lt;/div&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>…and you want to apply some styling to the paragraph, maybe something like this:</p>
-
-<figure class='code'><figcaption class='not_empty'><span>Descendant Selector</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nt">div</span><span class="o">[</span><span class="nt">data-state</span><span class="o">=</span><span class="s1">&#39;active&#39;</span><span class="o">]</span><span class="nt">p</span> <span class="p">{</span>
-</span><span class='line'>  <span class="k">color</span><span class="o">:</span> <span class="nb">red</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Notice how there&#8217;s no space between the &#8220;]&#8221; and the &#8220;p&#8221;, that&#8217;s a syntax error, right?  Correct… except in IE7!  IE7 will incorrectly parse this as if a space were there and change the color of the paragraph to red.</p>
-
-<p>This was also fixed in IE8.</p>
-
-<h3>Summary</h3>
-
-<p>We&#8217;re actually really fortunate that the attribute selector is supported in IE7.  It&#8217;s a very useful tool to have available and it can help solve a lot of real world issues.  And if you&#8217;ve dropped IE6 support they&#8217;re finally safe to use.</p>
-
-<p>While support is buggy, the attribute selector does work for the vast majority of use cases.  However, knowing to look out for these bugs can save hours of frustration.  Yet another reason for IE7 to fall off the face of the Earth.  Happy hacking.</p>
 ]]></content>
   </entry>
   

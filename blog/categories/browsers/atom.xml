@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Browsers | TJ VanToll]]></title>
   <link href="http://tjvantoll.com/blog/categories/browsers/atom.xml" rel="self"/>
   <link href="http://tjvantoll.com/"/>
-  <updated>2012-09-24T21:28:17-04:00</updated>
+  <updated>2012-10-17T13:52:16-04:00</updated>
   <id>http://tjvantoll.com/</id>
   <author>
     <name><![CDATA[TJ VanToll]]></name>
@@ -12,6 +12,59 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[maxlength Constraint Validation Oddities in Major Browsers]]></title>
+    <link href="http://tjvantoll.com/2012/10/17/maxlength-constraint-validation-oddities/"/>
+    <updated>2012-10-17T12:48:00-04:00</updated>
+    <id>http://tjvantoll.com/2012/10/17/maxlength-constraint-validation-oddities</id>
+    <content type="html"><![CDATA[<p>The <code>maxlength</code> attribute has been around in browsers for a long time.  When provided all browsers prevent the user entering a value that exceeds the <code>maxlength</code>.</p>
+
+<p>For example you cannot type more than 2 characters in the textbox below:</p>
+
+<p><input type="text" maxlength="2" /></p>
+
+<h3>Constraint Validation</h3>
+
+<p><a href="https://developer.mozilla.org/en-US/docs/HTML/HTML5/Constraint_validation_">Constraint validation</a> is a new native means of client side form validation new in HTML5.  As part of its <a href="https://developer.mozilla.org/en-US/docs/HTML/Forms_in_HTML#Constraint_Validation_API">API</a>, all <code>&lt;input&gt;</code> and <code>&lt;textarea&gt;</code> elements have a <code>validity.tooLong</code> property that is <code>true</code> when the length of the <code>value</code> exceeds the <code>maxlength</code>.</p>
+
+<p>But if the browser prevents this then why does the property exist?</p>
+
+<h3>Prefilled value Attribute</h3>
+
+<p>Assume that you're filling the <code>value</code> of form elements with information from a database and you end up with something like this:</p>
+
+<p><code>&lt;input type="text" maxlength="1" value="ABC" /&gt;</code></p>
+
+<p>How will the browser handle this?</p>
+
+<p>All browsers will prevent entry of additional characters, but they do not trim excess characters already present.  Additionally all browsers will allow a form containing the above input to submit.  <em>Note: Opera incorrectly sets the <code>validity.tooLong</code> property to <code>true</code> in this situation even though it does not prevent form submission.</em></p>
+
+<p>Why is submission not prevented?  The key is in the <a href="http://www.whatwg.org/specs/web-apps/current-work/#concept-input-value-dirty-flag">specification</a>:</p>
+
+<blockquote><p>Constraint validation: If an element has a maximum allowed value length, its dirty value flag is true, its value was last changed by a user edit (as opposed to a change made by a script), and the code-unit length of the element's value is greater than the element's maximum allowed value length, then the element is suffering from being too long.</p></blockquote>
+
+<p>The <a href="http://www.whatwg.org/specs/web-apps/current-work/#concept-input-value-dirty-flag">dirty flag</a> essentially means the the user has changed the value of an element.  Therefore, in order to be a candidate for constraint validation the element must have been last interacted with by a user edit.</p>
+
+<h3>Actually Triggering tooLong</h3>
+
+<p>So let's take another approach.  What happens if you have the same input:</p>
+
+<p><code>&lt;input type="text" maxlength="1" value="ABC" /&gt;</code></p>
+
+<p>...remove one character, then submit?  You can try it for yourself below:</p>
+
+<iframe style="width: 100%; height: 180px;" src="http://jsfiddle.net/tj_vantoll/epCQe/embedded/result,html/" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
+
+
+<p>Upon edit IE10 and Chrome will set the <code>validity.tooLong</code> property to <code>true</code> and prevent form submission.  If the user attempts to submit a form after removing the "C" they will see the following in those browsers:</p>
+
+<p><img src="/images/posts/2012-10-17/Chrome.png" title="Chrome" alt="Chrome" />
+<img src="/images/posts/2012-10-17/IE10.png" title="IE10" alt="IE10" /></p>
+
+<p>Firefox, Safari, and Opera incorrectly handle this situation and allow the form to be submitted anyways.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[HTML5 Form Validation - Start Using it in Production Applications]]></title>
@@ -456,308 +509,6 @@ $(function() {
 </ul>
 </li>
 <li>Added the above section on using webshim to polyfill this behavior for all browsers.</li>
-</ul>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[DOM Element References as Global Variables]]></title>
-    <link href="http://tjvantoll.com/2012/07/19/dom-element-references-as-global-variables/"/>
-    <updated>2012-07-19T22:33:00-04:00</updated>
-    <id>http://tjvantoll.com/2012/07/19/dom-element-references-as-global-variables</id>
-    <content type="html"><![CDATA[<p>Quiz: What is logged when the following markup is rendered?</p>
-
-<p>``` html
-<html></p>
-
-<pre><code>&lt;head&gt;&lt;/head&gt;
-&lt;body&gt;
-    &lt;button id="bar"&gt;Button&lt;/button&gt;
-    &lt;script&gt;
-        console.log(bar);
-    &lt;/script&gt;
-&lt;/body&gt;
-</code></pre>
-
-<p></html>
-```</p>
-
-<p><a href="https://developer.mozilla.org/en-US/docs/JavaScript/Reference/Global_Objects/ReferenceError">ReferenceError</a> obviously, right?  Wrong.  All major browser rendering engines will log a reference to the <code>&lt;button&gt;</code> node.  This includes Trident (IE), Gecko (Firefox), WebKit (Chrome, Safari, etc), and Presto (Opera).</p>
-
-<h3>Wait.  What?</h3>
-
-<p>Ah, I get it, there's no doctype on that markup.  So this a quirks mode only thing then right?  Wrong.  <a href="https://bugzilla.mozilla.org/show_bug.cgi?id=622491">As of Firefox 14</a> the latest version of all major browsers will produce the same result IN STANDARDS MODE.</p>
-
-<p>``` html
-&lt;!DOCTYPE html>
-<html></p>
-
-<pre><code>&lt;head&gt;&lt;/head&gt;
-&lt;body&gt;
-    &lt;button id="bar"&gt;Button&lt;/button&gt;
-    &lt;script&gt;
-        console.log(bar); //Reference to &lt;button&gt;, even in standards mode
-    &lt;/script&gt;
-&lt;/body&gt;
-</code></pre>
-
-<p></html>
-```</p>
-
-<!--more-->
-
-
-<h3>So What's Going On?</h3>
-
-<p>Believe it or not this is actually correct behavior per the HTML specification.</p>
-
-<p><blockquote><p>6.2.4 Named access on the Window object</p></p><p><p>The Window interface supports named properties. The supported property names at any moment consist of:</p></p><p><blockquote><p>the value of the name content attribute for all a, applet, area, embed, form, frame, frameset, iframe, img, and object elements in the active document that have a name content attribute, and<br/>the value of the id content attribute of any HTML element in the active document with an id content attribute.</p><footer><strong>HTML Specification</strong> <cite><a href='http://www.whatwg.org/specs/web-apps/current-work/#named-access-on-the-window-object'>www.whatwg.org/specs/web-apps/&hellip;</a></cite></footer></blockquote></p></blockquote>
-
-<p>What this is saying is that the value of the <code>name</code> attribute of certain elements and the value of the <code>id</code> attribute of ALL elements are accessible via the <code>window</code> object in the browser.  So, if you have a node <code>&lt;button id="foo"&gt;&lt;/button&gt;</code>, then <code>window.foo</code> will be resolved to a reference to the <code>&lt;button&gt;</code>.  From this point forward I will refer to this behavior as named access.</p>
-
-<h3>How is This Standard Behavior?</h3>
-
-<p>This behavior is an old Internet Explorer <em>feature</em>.  I can only imagine that it was intended to be a convenience for web developers that got sick of typing <code>document.getElementById</code> over and over again.  (this is way before jQuery and other popular toolkits came to be).  Regardless of the reasoning, IE shipped with this functionality and a whole lot of people utilized it.</p>
-
-<p>Other rendering engines were faced with the difficult decision of implementing non-standard behavior or remaining incompatible with a slew of websites written specifically for Internet Explorer.</p>
-
-<p>Gecko implemented this functionality but originally turned it on only in quirks mode.  They recently took the extra step and <a href="https://bugzilla.mozilla.org/show_bug.cgi?id=622491">turned named access on in standards mode with Firefox 14</a>.</p>
-
-<p>Webkit and Presto have had named access in standards mode for some time now.  <a href="https://www.w3.org/Bugs/Public/show_bug.cgi?id=11960">Webkit recently considered relegating this behavior to quirks mode</a>, however, they decided on leaving it enabled in standards mode.  Apparently there is still just too much stuff out there relying on this behavior to remove it in standards mode.  Believe it or not Microsoft even <a href="https://bugzilla.mozilla.org/show_bug.cgi?id=737760">shipped a marketing demo</a> that directly referenced named DOM elements, preventing it from functioning in Gecko.</p>
-
-<p>One of the main aims of the HTML5 specification is to standardize browser behavior, however quirky it might be.  Therefore, this functionality made it into the specification.</p>
-
-<h3>Why is This Behavior Bad?</h3>
-
-<p>I've alluded to the fact that this behavior is bad, but I've haven't gotten into details as to why.</p>
-
-<h4>There is a high potential for bugs to be introduced into the system</h4>
-
-<p>Let's say you have some code that looks something like this:</p>
-
-<p>``` html
-<html></p>
-
-<pre><code>&lt;head&gt;&lt;/head&gt;
-&lt;body&gt;
-    &lt;input type="text" id="choice"&gt;&lt;/button&gt;
-    &lt;script&gt;
-        var choice = 'foo';
-        //Lots more JavaScript
-        doSomethingVeryComplicated(choice);
-    &lt;/script&gt;
-&lt;/body&gt;
-</code></pre>
-
-<p></html>
-```</p>
-
-<p>Since a global <code>choice</code> variable is being created, <code>window.choice</code> will resolve to the string <code>foo</code> and not a reference to the <code>&lt;input&gt;</code>.  This is because the <code>&lt;input&gt;</code> reference is being <a href="http://en.wikipedia.org/wiki/Variable_shadowing">shadowed</a> by the variable declaration.  This works the same way as a variable with the same name being declared in a nested function.</p>
-
-<p>``` javascript
-(function() {</p>
-
-<pre><code>var x = 2;
-var y = function() {
-    var x = 3;
-    //Logs 3 instead of 2 because the value defined in the outer
-    //function is shadowed by the x defined in the inner function.
-    console.log(x);
-};
-y();
-</code></pre>
-
-<p>}());
-```</p>
-
-<p>This is all well and good.  However, let's say that during a refactor of this code the <code>var choice = 'foo';</code> line is accidentally removed.  Under normal circumstances this would cause a ReferenceError because <code>window.choice</code> would now be undefined.  However, because there is a DOM node with an <code>id</code> of <code>choice</code>, that reference will now refer to the DOM node instead.  This can easily lead to unexpected behavior.</p>
-
-<p>The flip side of this situation is also true.  If you have an element <code>&lt;div id="bar"&gt;&lt;/div&gt;</code> and use <code>window.bar</code> to refer to it, that code will break if you create JavaScript variable using <code>var</code> in the same scope (i.e. <code>var bar = 2;</code>).</p>
-
-<h4>Mistyping</h4>
-
-<p>Say you mistype the name of your variable and happen to type a named DOM element.  SURPRISE!</p>
-
-<h4>Non-trivial cost for the browser to implement</h4>
-
-<p>In order for these named elements to be available, the browser has to create a list of all named elements and maintain it as the page changes.  I can't offer any specific metrics as to how much time and memory this takes, but there is a cost, especially on pages with a large number of named elements.</p>
-
-<h4>Named elements will be shadowed by properties natively defined on <code>window</code>.</h4>
-
-<p>If you <em>were</em> to go the route of using named access you'd have to be careful to avoid using named elements with values that are predefined on the <code>window</code> already.</p>
-
-<p>For example you cannot refer to a <code>&lt;input id="location"&gt;</code> by <code>window.location</code> because that <a href="https://developer.mozilla.org/en/DOM/window.location">already resolves to an object</a> with information about the URL of the current document.</p>
-
-<p>There are a number of other property names on the <code>window</code> object that you could easily see being used to name a DOM element - <code>event</code>, <code>history</code>, <code>name</code>, <code>self</code>, <code>status</code>, and <code>toolbar</code> to name a few.</p>
-
-<h4>Browsers have inconsistent implementations.</h4>
-
-<p>Even though this is behavior is now standardized, there are still browser quirks in the way named access is implemented.</p>
-
-<h5>IE and Form Elements</h5>
-
-<p>IE will (incorrectly) make the <code>name</code> attribute of form elements available on the <code>window</code> object.</p>
-
-<p>``` html
-&lt;!DOCTYPE html>
-<html></p>
-
-<pre><code>&lt;head&gt;&lt;/head&gt;
-&lt;body&gt;
-    &lt;form&gt;
-        &lt;input name="foo" /&gt;
-    &lt;/form&gt;
-    &lt;script&gt;
-        //Logs a reference to the &lt;input&gt; in IE.
-        //ReferenceError in all other rendering engines.
-        console.log(foo);
-    &lt;/script&gt;
-&lt;/body&gt;
-</code></pre>
-
-<p></html>
-```</p>
-
-<h5>Name Attribute on Anchor Tags</h5>
-
-<p>Per the spec, <code>&lt;a&gt;</code> tags should be accessible on the <code>window</code> object via the value of their <code>name</code> attribute.  However, this only works in IE and Opera.</p>
-
-<p>``` html
-&lt;!DOCTYPE html>
-<html></p>
-
-<pre><code>&lt;head&gt;&lt;/head&gt;
-&lt;body&gt;
-    &lt;a name="foo"&gt;&lt;/a&gt;
-    &lt;script&gt;
-        //Logs a reference to the &lt;a&gt; in IE and Opera.
-        //ReferenceError in Gecko and WebKit.
-        console.log(foo);
-    &lt;/script&gt;
-&lt;/body&gt;
-</code></pre>
-
-<p></html>
-```</p>
-
-<h5>Multiple Named Attributes with the Same Value</h5>
-
-<p>Per this portion of the spec:</p>
-
-<p><blockquote><p>...if elements has only one element, return that element and abort these steps.</p></p><p><p>Otherwise return an HTMLCollection rooted at the Document node, whose filter matches only named elements with the name name.</p><footer><strong>HTML Specification</strong> <cite><a href='http://dev.w3.org/html5/spec/single-page.html#dom-window-nameditem'>dev.w3.org/html5/spec/&hellip;</a></cite></footer></blockquote></p>
-
-<p>What this is staying is that when there are multiple named properties with the same name, the browser should return an array when that property is referenced (instead of a reference to a specific DOM node).  As an example given this markup:</p>
-
-<p>``` html
-&lt;!DOCTYPE html>
-<html></p>
-
-<pre><code>&lt;head&gt;&lt;/head&gt;
-&lt;body&gt;
-    &lt;input id="one"&gt;
-    &lt;input id="one"&gt;
-    &lt;script&gt;
-        console.log(one);
-    &lt;/script&gt;
-&lt;/body&gt;
-</code></pre>
-
-<p></html>
-```</p>
-
-<p>...an array with references to the two <code>&lt;input&gt;</code> nodes should be logged per the spec.  And it will be in all browsers except Firefox.  Firefox 14 will simply log the first element.</p>
-
-<p>Having two elements with the same <code>id</code> is invalid HTML, but the browser will still render it just fine.  Even with the best of intentions these sorts of things do happen, especially in larger, dynamic applications.</p>
-
-<h3>More?</h3>
-
-<p>These are simply the bugs that I've ran into, I'm sure there are more.  If you know of any let me know in the comments and I can update this list.</p>
-
-<h3>But won't strict mode prevent this?</h3>
-
-<p><a href="https://developer.mozilla.org/en/JavaScript/Strict_mode">ECMAScript 5 strict mode</a> prevents you assigning values to variables before they are declared.  Therefore this...</p>
-
-<p>``` javascript
-(function() {</p>
-
-<pre><code>foo = 2; 
-</code></pre>
-
-<p>}());
-```</p>
-
-<p>will execute just fine whereas this...</p>
-
-<p>``` javascript
-(function() {</p>
-
-<pre><code>'use strict';
-foo = 2; 
-</code></pre>
-
-<p>}());
-```</p>
-
-<p>...will produce a ReferenceError that <code>foo</code> is not defined.  This is great, but it will not stop you from accessing named properties on the <code>window</code> object.</p>
-
-<p>``` html</p>
-
-<div id="foo"></div>
-
-
-<script>
-    (function() {
-        'use strict';
-        console.log(foo);
-    });
-</script>
-
-
-<p>```</p>
-
-<p>This will log a reference to the <code>&lt;div&gt;</code> in standards mode in the latest version of all modern browsers.  Strict mode will only prevent you from assigning values to variables that have yet to be declared.  If you're simply using a variable then strict mode doesn't protect you.  Therefore, you're not prevented from accessing name properties on the global <code>window</code> object.</p>
-
-<h3>What to do instead</h3>
-
-<p>Use <code>document.getElementById</code> to retrieve references to DOM nodes via their <code>id</code> attribute.</p>
-
-<p>``` html
-<button id="foo"></button></p>
-
-<script>
-    document.getElementById('foo');
-</script>
-
-
-<p>```</p>
-
-<p>To get a reference to a DOM node via its <code>name</code> attribute you can use <code>document.getElementsByName</code> or <code>document.querySelectorAll</code>.</p>
-
-<p>``` html
-<a name="bar"></a></p>
-
-<script>
-    document.getElementsByName('bar');
-    document.querySelectorAll('[name=bar]');
-</script>
-
-
-<p>```</p>
-
-<p><code>document.querySelectorAll</code> is not safe to use in IE &lt;= 8, but <code>document.getElementsByName</code> is safe to use in all browsers.</p>
-
-<h3>Conclusion</h3>
-
-<p>All major browsers now make named properties available on the global <code>window</code> object in standards mode.  It's important to know that browsers do this because you'll likely run into this at some point.  However, never purposely utilize this functionality.  If you see others use it tell them to stop, ridicule them, do whatever it takes.  Help <a href="http://movethewebforward.org/">move the web forward</a>.</p>
-
-<h3>Update September 24th, 2012</h3>
-
-<p>Per comments from Rob W I've updated the following:</p>
-
-<ul>
-<li>I had incorrectly used "Syntax error" to describe the situation when an undeclared variable is referenced.  I updated those to correctly use "ReferenceError".</li>
-<li>I updated my last example to show that <code>document.getElementsByName</code> is a cross browser way of getting reference to DOM nodes by their name attribute.</li>
 </ul>
 
 ]]></content>
