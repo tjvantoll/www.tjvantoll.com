@@ -107,10 +107,10 @@ body > footer {
 	}
 }
 
-#home_popular_posts {
+.post_list {
 	margin-bottom: 0;
 
-	a { 
+	a:not(.external) {
 		display: block;
 		margin-bottom: 1em;
 	}
@@ -133,15 +133,10 @@ header.home {
 
 .project-contents {
 	overflow: hidden;
-	box-shadow: 1px 1px 1px 1px lighten(#333, 10%);
+	border: 1px solid lighten(#333, 10%);
 	padding: 1em;
 	margin-bottom: 1em;
 	border-radius: 10px;
-	-ms-transition: -webkit-transform 1s ease;
-	-moz-transition: -webkit-transform 1s ease;
-	-o-transition: -webkit-transform 1s ease;
-	-webkit-transition: -webkit-transform 1s ease;
-	transition: -webkit-transform 1s ease;
 	min-height: 5em;
 
 	a {
@@ -170,14 +165,6 @@ header.home {
 			border: none;
 			box-shadow: none;
 		}
-	}
-
-	&:hover {
-		//-ms-transform: scale(1.05);
-		//-moz-transform: scale(1.05);
-		//-o-transform: scale(1.05);
-		-webkit-transform: scale(1.05);
-		transform: scale(1.05);
 	}
 }
 @media all and (max-width: 500px) {
