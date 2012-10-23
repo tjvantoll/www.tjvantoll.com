@@ -13,21 +13,6 @@
 		<script src="js/prettify.js"></script>    	    	
     	<script src="js/slides.js"></script>
     	
-    	<script>
-    		dojoConfig = {
-    			isDebug: true,
-    			paths: {
-    				'dojoDemo': '/speaking/slides/2012/JavaScript-for-the-Java-Developer/demos/dojoDemo'
-    			}
-    		};
-    	</script>
-    	<script src="//ajax.googleapis.com/ajax/libs/dojo/1.7.2/dojo/dojo.js"></script>
-    	<script src="http://www.cornify.com/js/cornify.js"></script>
-    	<script>
-    		//Make it so that whenever concat is called a unicorn is displayed.
-    		String.prototype.concat = cornify_add;
-    	</script>
-    	
     	<style>
     		h1:not(.main) {
     			text-align: center;
@@ -37,6 +22,20 @@
   
   		<meta content="width=1100,height=750" name="viewport" />
   		<meta content="yes" name="apple-mobile-web-app-capable" />
+
+		<script type="text/javascript">
+			if (window.location.host.indexOf('local') == -1) {
+				var _gaq = _gaq || [];
+				_gaq.push(['_setAccount', 'UA-29179796-1']);
+				_gaq.push(['_trackPageview']);
+			
+				(function() {
+					var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+					ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+					var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+				})();
+			}
+		</script>
 	</head>
 	
 	<body class="loaded" style="display: none;">
@@ -48,7 +47,6 @@
 					JavaScript for the<br />Java Developer
 				</h1>
 				<p>Ted VanToll<br />March 20th, 2012</p>
-				<p>Slides at http://tjvantoll.com/jug</p>
 			</article>
 			
 			<article>
