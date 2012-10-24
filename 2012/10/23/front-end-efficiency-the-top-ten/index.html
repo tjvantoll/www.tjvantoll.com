@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>HTML5 Form Validation - Start Using it in Production Applications - TJ VanToll - Tutorials, Thoughts, and Ramblings on Front End Development</title>
+  <title>Front End Efficiency - The Top Ten - TJ VanToll - Tutorials, Thoughts, and Ramblings on Front End Development</title>
   <meta name="author" content="TJ VanToll">
 
   
-  <meta name="description" content="Forms suck, yet, they make or break the most crucial online transactions. Building web forms sucks as well; the APIs and lack of customizability has &hellip;">
+  <meta name="description" content="I gave a &#8220;Front End Efficiency - The Top Ten&#8221; talk to the Greater Lansing Java Users Group on October 23rd, 2012. For those that missed &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://tjvantoll.com/2012/08/30/html5-form-validation-start-using-it-in-production-applications">
+  <link rel="canonical" href="http://tjvantoll.com/2012/10/23/front-end-efficiency-the-top-ten">
   <!-- Use custom favicon -->
   <!--<link href="/favicon.png" rel="icon">-->
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
@@ -97,7 +97,7 @@
   
   <header>
     
-      <h1 class="entry-title">HTML5 Form Validation - Start Using it in Production Applications</h1>
+      <h1 class="entry-title">Front End Efficiency - The Top Ten</h1>
     
     
       <p class="meta">
@@ -113,7 +113,7 @@
   
 
 
-<time datetime="2012-08-30T00:00:00-04:00" pubdate data-updated="true">Aug 30<span>th</span>, 2012</time>
+<time datetime="2012-10-23T00:00:00-04:00" pubdate data-updated="true">Oct 23<span>rd</span>, 2012</time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -122,66 +122,7 @@
   </header>
 
 
-<div class="entry-content"><p>Forms suck, yet, they make or break the most crucial online transactions.  Building web forms sucks as well; the APIs and lack of customizability has confused and frustrated people for years.  As a byproduct an abundance of horribly unusable forms have been created for everyone to suffer through.</p>
-
-<p>Therefore <em>anything</em> that makes this process easier should be greeted with joy and enthusiasm.</p>
-
-<p>HTML5 does just this by including a built in <a href="https://developer.mozilla.org/en-US/docs/HTML/Forms_in_HTML#Constraint_Validation_API">client side form validation mechanism</a> designed to make implementing client side validation powerful, seamless, and most importantly - easy to implement.</p>
-
-<p>Great!  Despite this, HTML5 form validation is a topic relegated to presentations and demos; I personally have yet to fill out a web form in the wild that actually makes use of it.</p>
-
-<p>Why?</p>
-
-<!--more-->
-
-
-<h3>Browser Support</h3>
-
-<p>One reason people avoid HTML5 form validation is lack (or perceived lack) of browser support for the new APIs.  However the <a href="http://caniuse.com/#feat=form-validation">list of supported browsers</a> now includes the latest version of every major browser, including:</p>
-
-<ul>
-<li>IE 10</li>
-<li>Firefox 4+</li>
-<li>Chrome 10+</li>
-<li>Safari 5+</li>
-<li>Opera 10+</li>
-<li>Opera Mobile</li>
-<li>Chrome for Android</li>
-<li>Firefox for Android</li>
-</ul>
-
-
-<h3>What to do in unsupported browsers?</h3>
-
-<p>This is <em>the</em> problem.  Despite browser support being relatively good, for most sites there are still going to be a substantial amount of users with browsers that simply do not support the new APIs.  Therefore, if you are intending to support these users you have to start forking your code to support both browsers with native support and browsers without it.</p>
-
-<p>While this can absolutely be done, it&#8217;s time consuming and a bit of a nuisance.  It&#8217;s faster and easier to simply ditch the native validation and use your own.  In this case you don&#8217;t have to worry about multiple code paths; every user in every browser will hit the same codepath and get the same experience.</p>
-
-<h3>What if we did nothing?</h3>
-
-<p>But what if we took a new approach to this problem - simply don&#8217;t do client side validation in unsupported browsers, at all.  This is advantageous for a number of reasons.</p>
-
-<p>1) <strong>No dual maintenance</strong>.  One thing that has always bothered me about doing validation on both the client and server side is that you&#8217;re validating the #1 principle of software development - <a href="http://en.wikipedia.org/wiki/Don't_repeat_yourself"><strong>D</strong>on&#8217;t <strong>R</strong>epeat <strong>Y</strong>ourself</a>.</p>
-
-<p>2) <strong>No dependencies</strong>.  If you only use native browser APIs to provide client side validation you don&#8217;t have to worry about maintaining plugin or library dependencies that might not be maintained.</p>
-
-<p>3) <strong>Faster and easier</strong>.  The browser APIs are simple and easy to use.  Want to make a field required?  <a href="http://wufoo.com/html5/attributes/09-required.html">Add the <code>required</code> attribute</a>.  Want to make a field only accept email address?  <a href="http://wufoo.com/html5/types/1-email.html">Add <code>type=email</code> to your <code>&lt;input&gt;</code> field</a>.</p>
-
-<p>4) <strong>Future Friendly</strong>.  Although currently a number of older browsers (namely IE &lt;= 9) do not support the new APIs, eventually they all will.  Therefore, eventually all users will hit the client side validation as intended.</p>
-
-<h3>But, you can&#8217;t just not validate data&#8230; right?</h3>
-
-<p>Of course you have to validate client submitted data, but you already need to be doing that on the server side anyways.  What this approach requires you to do is simply return formatted error messages from your server side processing and <a href="http://uxdesign.smashingmagazine.com/2011/11/08/extensive-guide-web-form-usability/">display them in a usability friendly way</a>.  You&#8217;re likely doing that already.</p>
-
-<h3>What About Polyfills?</h3>
-
-<p><a href="http://remysharp.com/2010/10/08/what-is-a-polyfill/">Polyfills</a> are great and a number of <a href="https://github.com/Modernizr/Modernizr/wiki/HTML5-Cross-browser-Polyfills">HTML5 form validation polyfills</a> exist.  My problem with polyfills in this case is that they add a dependency that I believe is unnecessary.</p>
-
-<h3>Conclusion</h3>
-
-<p>HTML5 provides native solutions to validating client side data and most all modern browsers support it.  Yet, most people are still relying on the JavaScript hacks we&#8217;ve been using for well over a decade now.</p>
-
-<p>It&#8217;s time.  Come to the dark side.</p>
+<div class="entry-content"><p>I gave a &#8220;Front End Efficiency - The Top Ten&#8221; talk to the <a href="http://groups.google.com/group/greaterlansingjug?pli=1">Greater Lansing Java Users Group</a> on October 23rd, 2012.  For those that missed the talk the slides are <a href="/speaking/slides/2012/Efficiency-Top-Ten/">here</a>.</p>
 </div>
 
 
@@ -204,12 +145,12 @@
   
 
 
-<time datetime="2012-08-30T00:00:00-04:00" pubdate data-updated="true">Aug 30<span>th</span>, 2012</time>
+<time datetime="2012-10-23T00:00:00-04:00" pubdate data-updated="true">Oct 23<span>rd</span>, 2012</time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/browsers/'>Browsers</a>, <a class='category' href='/blog/categories/html5/'>HTML5</a>, <a class='category' href='/blog/categories/javascript/'>JavaScript</a>
+    <a class='category' href='/blog/categories/efficiency/'>Efficiency</a>, <a class='category' href='/blog/categories/speaking/'>Speaking</a>
   
 </span>
 
@@ -222,7 +163,7 @@
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://tjvantoll.com/2012/08/30/html5-form-validation-start-using-it-in-production-applications/" data-via="tjvantoll" data-counturl="http://tjvantoll.com/2012/08/30/html5-form-validation-start-using-it-in-production-applications/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://tjvantoll.com/2012/10/23/front-end-efficiency-the-top-ten/" data-via="tjvantoll" data-counturl="http://tjvantoll.com/2012/10/23/front-end-efficiency-the-top-ten/" >Tweet</a>
   
   
   
@@ -231,10 +172,8 @@
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/2012/08/28/google-analytics-excluding-visits-in-development-and-production/" title="Previous Post: Google Analytics - Excluding Your Own Visits in Development and Production">&laquo; Google Analytics - Excluding Your Own Visits in Development and Production</a>
+        <a class="basic-alignment left" href="/2012/10/17/maxlength-constraint-validation-oddities/" title="Previous Post: maxlength Constraint Validation Oddities in Major Browsers">&laquo; maxlength Constraint Validation Oddities in Major Browsers</a>
       
-      
-        <a class="basic-alignment right" href="/2012/09/14/using-jquery-ui-slider-to-polyfill-html5-input-type-range/" title="Next Post: Using jQuery UI's Slider to Polyfill HTML5's input[type=range]">Using jQuery UI's Slider to Polyfill HTML5's input[type=range] &raquo;</a>
       
     </p>
   </footer>
@@ -335,8 +274,8 @@
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://tjvantoll.com/2012/08/30/html5-form-validation-start-using-it-in-production-applications/';
-        var disqus_url = 'http://tjvantoll.com/2012/08/30/html5-form-validation-start-using-it-in-production-applications/';
+        var disqus_identifier = 'http://tjvantoll.com/2012/10/23/front-end-efficiency-the-top-ten/';
+        var disqus_url = 'http://tjvantoll.com/2012/10/23/front-end-efficiency-the-top-ten/';
         var disqus_script = 'embed.js';
       
     (function () {
