@@ -4,7 +4,7 @@
   <title><![CDATA[TJ VanToll]]></title>
   <link href="http://tjvantoll.com/atom.xml" rel="self"/>
   <link href="http://tjvantoll.com/"/>
-  <updated>2012-10-23T22:51:18-04:00</updated>
+  <updated>2012-10-24T22:06:09-04:00</updated>
   <id>http://tjvantoll.com/</id>
   <author>
     <name><![CDATA[TJ VanToll]]></name>
@@ -12,6 +12,27 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Adding Pointers to jQuery UI Tooltips]]></title>
+    <link href="http://tjvantoll.com/2012/10/24/adding-pointers-to-jquery-ui-tooltips/"/>
+    <updated>2012-10-24T20:58:00-04:00</updated>
+    <id>http://tjvantoll.com/2012/10/24/adding-pointers-to-jquery-ui-tooltips</id>
+    <content type="html"><![CDATA[<p>The recent <a href="http://jqueryui.com/changelog/1.9.0/">jQuery UI 1.9 release</a> included a new <a href="http://jqueryui.com/tooltip/">tooltip plugin</a> that can be used to create tooltips much like the native tooltips the browser provides.  The difference is that jQuery UI&#8217;s version are completely customizable.  As such I thought I&#8217;d show a quick example of how you can create a pointer from the tooltip to its associated field:</p>
+
+<iframe style="width: 100%; height: 350px;" src="http://jsfiddle.net/tj_vantoll/kyBwU/embedded/result,js,html,css/" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
+
+
+<p>So how is this done?</p>
+
+<ul>
+<li>The <a href="http://api.jqueryui.com/tooltip/#option-position">position</a> option is used to place the tooltip appropriately around the textbox.  Importantly the <code>collision</code> property is set to <code>none</code>, since, if the tooltip were to be repositioned the arrow would be placed incorrectly.</li>
+<li>The pointers themselves are created using using the <code>::after</code> and <code>::before</code> pseudo-elements.  For some more information on the technique and to see some other variations there&#8217;s an excellent tutorial <a href="http://nicolasgallagher.com/pure-css-speech-bubbles/">here</a>.</li>
+<li>Since the <code>::after</code> and <code>::before</code> pseudo-elements are used to create the pointers, IE &lt;= 8 users will not see them.  However, they&#8217;ll simply see the default pointerless tooltip, no harm done.</li>
+</ul>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Front End Efficiency - The Top Ten]]></title>
@@ -3424,15 +3445,6 @@
 <h3>Conclusion</h3>
 
 <p><code>window.showModalDialog</code> is an old API that has been retroactively standardized; but that doesn&#8217;t mean you should actually be using it.  If you&#8217;re still maintaining code using this try to get off of it as soon as possible.  That being said the idea of having native dialog capabilities built into the browser wasn&#8217;t a bad idea.  Hope may be on the way with the dialog element that was recently added to the HTML5 spec.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[JavaScript for the Java Developer]]></title>
-    <link href="http://tjvantoll.com/2012/03/21/javascript-for-the-java-developer/"/>
-    <updated>2012-03-21T00:00:00-04:00</updated>
-    <id>http://tjvantoll.com/2012/03/21/javascript-for-the-java-developer</id>
-    <content type="html"><![CDATA[<p>I gave a &#8220;JavaScript for the Java Developer&#8221; talk to the <a href="http://groups.google.com/group/greaterlansingjug?pli=1">Greater Lansing Java Users Group</a> on March 20th, 2012.  For those that missed the talk the slides are <a href="http://tjvantoll.com/speaking/slides/2012/JavaScript-for-the-Java-Developer/">here</a>.</p>
 ]]></content>
   </entry>
   

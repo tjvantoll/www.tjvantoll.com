@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>maxlength Constraint Validation Oddities in Major Browsers - TJ VanToll - Tutorials, Thoughts, and Ramblings on Front End Development</title>
+  <title>Adding Pointers to jQuery UI Tooltips - TJ VanToll - Tutorials, Thoughts, and Ramblings on Front End Development</title>
   <meta name="author" content="TJ VanToll">
 
   
-  <meta name="description" content="The maxlength attribute has been around in browsers for a long time. When provided all browsers prevent the user entering a value that exceeds the &hellip;">
+  <meta name="description" content="The recent jQuery UI 1.9 release included a new tooltip plugin that can be used to create tooltips much like the native tooltips the browser provides &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://tjvantoll.com/2012/10/17/maxlength-constraint-validation-oddities">
+  <link rel="canonical" href="http://tjvantoll.com/2012/10/24/adding-pointers-to-jquery-ui-tooltips">
   <!-- Use custom favicon -->
   <!--<link href="/favicon.png" rel="icon">-->
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
@@ -97,7 +97,7 @@
   
   <header>
     
-      <h1 class="entry-title">maxlength Constraint Validation Oddities in Major Browsers</h1>
+      <h1 class="entry-title">Adding Pointers to jQuery UI Tooltips</h1>
     
     
       <p class="meta">
@@ -113,7 +113,7 @@
   
 
 
-<time datetime="2012-10-17T12:48:00-04:00" pubdate data-updated="true">Oct 17<span>th</span>, 2012</time>
+<time datetime="2012-10-24T20:58:00-04:00" pubdate data-updated="true">Oct 24<span>th</span>, 2012</time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -122,51 +122,19 @@
   </header>
 
 
-<div class="entry-content"><p>The <code>maxlength</code> attribute has been around in browsers for a long time.  When provided all browsers prevent the user entering a value that exceeds the <code>maxlength</code>.</p>
+<div class="entry-content"><p>The recent <a href="http://jqueryui.com/changelog/1.9.0/">jQuery UI 1.9 release</a> included a new <a href="http://jqueryui.com/tooltip/">tooltip plugin</a> that can be used to create tooltips much like the native tooltips the browser provides.  The difference is that jQuery UI&#8217;s version are completely customizable.  As such I thought I&#8217;d show a quick example of how you can create a pointer from the tooltip to its associated field:</p>
 
-<p>For example you cannot type more than 2 characters in the textbox below:</p>
-
-<p><input type="text" maxlength="2" /></p>
-
-<h3>Constraint Validation</h3>
-
-<p><a href="https://developer.mozilla.org/en-US/docs/HTML/HTML5/Constraint_validation_">Constraint validation</a> is an HTML5 spec that provides native client side form validation in the browser.  As part of its <a href="https://developer.mozilla.org/en-US/docs/HTML/Forms_in_HTML#Constraint_Validation_API">API</a>, all <code>&lt;input&gt;</code> and <code>&lt;textarea&gt;</code> elements have a <code>validity.tooLong</code> property that is <code>true</code> when the length of the <code>value</code> exceeds the <code>maxlength</code>.</p>
-
-<p>But if the browser prevents this then why does the property exist?</p>
-
-<h3>Prefilled value Attribute</h3>
-
-<p>Assume that you&#8217;re filling the <code>value</code> of form elements with information from a database and you end up with something like this:</p>
-
-<p><code>&lt;input type="text" maxlength="1" value="ABC" /&gt;</code></p>
-
-<p>How will the browser handle this?</p>
-
-<p>All browsers will prevent entry of additional characters, but they do not trim excess characters already present.  Additionally all browsers will allow a form containing the above input to submit.  <em>Note: Opera is the only browser to set the <code>validity.tooLong</code> property to <code>true</code> in this situation.  Despite this, it does not prevent form submission.</em></p>
-
-<p>Why is submission not prevented?  The key is in the <a href="http://www.whatwg.org/specs/web-apps/current-work/#concept-input-value-dirty-flag">specification</a>:</p>
-
-<blockquote><p>Constraint validation: If an element has a maximum allowed value length, its dirty value flag is true, its value was last changed by a user edit (as opposed to a change made by a script), and the code-unit length of the element&#8217;s value is greater than the element&#8217;s maximum allowed value length, then the element is suffering from being too long.</p></blockquote>
-
-<p>The <a href="http://www.whatwg.org/specs/web-apps/current-work/#concept-input-value-dirty-flag">dirty flag</a> essentially means the the user has changed the value of an element.  Therefore, in order to be <code>tooLong</code> the element must have been last interacted with by a user edit.</p>
-
-<h3>Actually Triggering tooLong</h3>
-
-<p>So let&#8217;s take another approach.  What happens if you have the same input:</p>
-
-<p><code>&lt;input type="text" maxlength="1" value="ABC" /&gt;</code></p>
-
-<p>&#8230;remove one character, then submit?  You can try it for yourself below:</p>
-
-<iframe style="width: 100%; height: 180px;" src="http://jsfiddle.net/tj_vantoll/epCQe/embedded/result,html/" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
+<iframe style="width: 100%; height: 350px;" src="http://jsfiddle.net/tj_vantoll/kyBwU/embedded/result,js,html,css/" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
 
 
-<p>Upon edit IE10 and Chrome will set the <code>validity.tooLong</code> property to <code>true</code> and prevent form submission.  If the user attempts to submit a form after removing the &#8220;C&#8221; they will see the following in those browsers:</p>
+<p>So how is this done?</p>
 
-<p><img src="/images/posts/2012-10-17/Chrome.png" title="Chrome" alt="Chrome" />
-<img src="/images/posts/2012-10-17/IE10.png" title="IE10" alt="IE10" /></p>
+<ul>
+<li>The <a href="http://api.jqueryui.com/tooltip/#option-position">position</a> option is used to place the tooltip appropriately around the textbox.  Importantly the <code>collision</code> property is set to <code>none</code>, since, if the tooltip were to be repositioned the arrow would be placed incorrectly.</li>
+<li>The pointers themselves are created using using the <code>::after</code> and <code>::before</code> pseudo-elements.  For some more information on the technique and to see some other variations there&#8217;s an excellent tutorial <a href="http://nicolasgallagher.com/pure-css-speech-bubbles/">here</a>.</li>
+<li>Since the <code>::after</code> and <code>::before</code> pseudo-elements are used to create the pointers, IE &lt;= 8 users will not see them.  However, they&#8217;ll simply see the default pointerless tooltip, no harm done.</li>
+</ul>
 
-<p>Firefox, Safari, and Opera incorrectly handle this situation and allow the form to be submitted anyways.</p>
 </div>
 
 
@@ -189,12 +157,12 @@
   
 
 
-<time datetime="2012-10-17T12:48:00-04:00" pubdate data-updated="true">Oct 17<span>th</span>, 2012</time>
+<time datetime="2012-10-24T20:58:00-04:00" pubdate data-updated="true">Oct 24<span>th</span>, 2012</time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/browsers/'>Browsers</a>, <a class='category' href='/blog/categories/forms/'>Forms</a>, <a class='category' href='/blog/categories/html5/'>HTML5</a>, <a class='category' href='/blog/categories/javascript/'>JavaScript</a>
+    <a class='category' href='/blog/categories/css/'>CSS</a>, <a class='category' href='/blog/categories/jquery-ui/'>jQuery UI</a>
   
 </span>
 
@@ -207,7 +175,7 @@
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://tjvantoll.com/2012/10/17/maxlength-constraint-validation-oddities/" data-via="tjvantoll" data-counturl="http://tjvantoll.com/2012/10/17/maxlength-constraint-validation-oddities/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://tjvantoll.com/2012/10/24/adding-pointers-to-jquery-ui-tooltips/" data-via="tjvantoll" data-counturl="http://tjvantoll.com/2012/10/24/adding-pointers-to-jquery-ui-tooltips/" >Tweet</a>
   
   
   
@@ -216,10 +184,8 @@
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/2012/09/19/using-the-attribute-selector-with-numeric-values/" title="Previous Post: Using the Attribute Selector with Numeric Values">&laquo; Using the Attribute Selector with Numeric Values</a>
+        <a class="basic-alignment left" href="/2012/10/23/front-end-efficiency-the-top-ten/" title="Previous Post: Front End Efficiency - The Top Ten">&laquo; Front End Efficiency - The Top Ten</a>
       
-      
-        <a class="basic-alignment right" href="/2012/10/23/front-end-efficiency-the-top-ten/" title="Next Post: Front End Efficiency - The Top Ten">Front End Efficiency - The Top Ten &raquo;</a>
       
     </p>
   </footer>
@@ -320,8 +286,8 @@
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://tjvantoll.com/2012/10/17/maxlength-constraint-validation-oddities/';
-        var disqus_url = 'http://tjvantoll.com/2012/10/17/maxlength-constraint-validation-oddities/';
+        var disqus_identifier = 'http://tjvantoll.com/2012/10/24/adding-pointers-to-jquery-ui-tooltips/';
+        var disqus_url = 'http://tjvantoll.com/2012/10/24/adding-pointers-to-jquery-ui-tooltips/';
         var disqus_script = 'embed.js';
       
     (function () {

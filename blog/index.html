@@ -9,7 +9,7 @@
   <meta name="author" content="TJ VanToll">
 
   
-  <meta name="description" content="I gave a &#8220;Front End Efficiency - The Top Ten&#8221; talk to the Greater Lansing Java Users Group on October 23rd, 2012. For those that missed &hellip;">
+  <meta name="description" content="The recent jQuery UI 1.9 release included a new tooltip plugin that can be used to create tooltips much like the native tooltips the browser provides &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -94,6 +94,56 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2012/10/24/adding-pointers-to-jquery-ui-tooltips/">Adding Pointers to jQuery UI Tooltips</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-10-24T20:58:00-04:00" pubdate data-updated="true">Oct 24<span>th</span>, 2012</time>
+        
+         | <a href="/2012/10/24/adding-pointers-to-jquery-ui-tooltips/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>The recent <a href="http://jqueryui.com/changelog/1.9.0/">jQuery UI 1.9 release</a> included a new <a href="http://jqueryui.com/tooltip/">tooltip plugin</a> that can be used to create tooltips much like the native tooltips the browser provides.  The difference is that jQuery UI&#8217;s version are completely customizable.  As such I thought I&#8217;d show a quick example of how you can create a pointer from the tooltip to its associated field:</p>
+
+<iframe style="width: 100%; height: 350px;" src="http://jsfiddle.net/tj_vantoll/kyBwU/embedded/result,js,html,css/" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
+
+
+<p>So how is this done?</p>
+
+<ul>
+<li>The <a href="http://api.jqueryui.com/tooltip/#option-position">position</a> option is used to place the tooltip appropriately around the textbox.  Importantly the <code>collision</code> property is set to <code>none</code>, since, if the tooltip were to be repositioned the arrow would be placed incorrectly.</li>
+<li>The pointers themselves are created using using the <code>::after</code> and <code>::before</code> pseudo-elements.  For some more information on the technique and to see some other variations there&#8217;s an excellent tutorial <a href="http://nicolasgallagher.com/pure-css-speech-bubbles/">here</a>.</li>
+<li>Since the <code>::after</code> and <code>::before</code> pseudo-elements are used to create the pointers, IE &lt;= 8 users will not see them.  However, they&#8217;ll simply see the default pointerless tooltip, no harm done.</li>
+</ul>
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -626,44 +676,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2012/08/10/less-101-the-basics-of-the-css-preprocessor/">LESS 101 - The Basics of the CSS Preprocessor</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-08-10T00:00:00-04:00" pubdate data-updated="true">Aug 10<span>th</span>, 2012</time>
-        
-         | <a href="/2012/08/10/less-101-the-basics-of-the-css-preprocessor/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>I gave a &#8220;LESS 101&#8221; talk to my coworkers at Liquid Web today.  I thought I&#8217;d post the slides here in case anyone else might find them useful.  They are <a href="/speaking/slides/2012/LESS-101">here</a>.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -677,6 +689,10 @@
     <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2012/10/24/adding-pointers-to-jquery-ui-tooltips/">Adding Pointers to jQuery UI Tooltips</a>
+      </li>
     
       <li class="post">
         <a href="/2012/10/23/front-end-efficiency-the-top-ten/">Front End Efficiency - The Top Ten</a>
@@ -712,10 +728,6 @@
     
       <li class="post">
         <a href="/2012/08/16/subpixel-animation-issues-in-ie-less-than-9/">Subpixel Animation Issues in IE < 9</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2012/08/10/less-101-the-basics-of-the-css-preprocessor/">LESS 101 - The Basics of the CSS Preprocessor</a>
       </li>
     
   </ul>
