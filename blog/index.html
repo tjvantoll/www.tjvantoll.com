@@ -127,19 +127,12 @@
 
   <div class="entry-content"><p>The recent <a href="http://jqueryui.com/changelog/1.9.0/">jQuery UI 1.9 release</a> included a new <a href="http://jqueryui.com/tooltip/">tooltip plugin</a> that can be used to create tooltips much like the native tooltips the browser provides.  The difference is that jQuery UI&#8217;s version are completely customizable.  As such I thought I&#8217;d show a quick example of how you can create a pointer from the tooltip to its associated field:</p>
 
-<iframe style="width: 100%; height: 350px;" src="http://jsfiddle.net/tj_vantoll/kyBwU/embedded/result,js,html,css/" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
-
-
-<p>So how is this done?</p>
-
-<ul>
-<li>The <a href="http://api.jqueryui.com/tooltip/#option-position">position</a> option is used to place the tooltip appropriately around the textbox.  Importantly the <code>collision</code> property is set to <code>none</code>, since, if the tooltip were to be repositioned the arrow would be placed incorrectly.</li>
-<li>The pointers themselves are created using using the <code>::after</code> and <code>::before</code> pseudo-elements.  For some more information on the technique and to see some other variations there&#8217;s an excellent tutorial <a href="http://nicolasgallagher.com/pure-css-speech-bubbles/">here</a>.</li>
-<li>Since the <code>::after</code> and <code>::before</code> pseudo-elements are used to create the pointers, IE &lt;= 8 users will not see them.  However, they&#8217;ll simply see the default pointerless tooltip, no harm done.</li>
-</ul>
-
 </div>
   
+  
+    <footer>
+      <a rel="full-article" href="/2012/10/24/adding-pointers-to-jquery-ui-tooltips/">Read on &rarr;</a>
+    </footer>
   
 
 
@@ -225,41 +218,12 @@
 
 <p>But if the browser prevents this then why does the property exist?</p>
 
-<h3>Prefilled value Attribute</h3>
-
-<p>Assume that you&#8217;re filling the <code>value</code> of form elements with information from a database and you end up with something like this:</p>
-
-<p><code>&lt;input type="text" maxlength="1" value="ABC" /&gt;</code></p>
-
-<p>How will the browser handle this?</p>
-
-<p>All browsers will prevent entry of additional characters, but they do not trim excess characters already present.  Additionally all browsers will allow a form containing the above input to submit.  <em>Note: Opera is the only browser to set the <code>validity.tooLong</code> property to <code>true</code> in this situation.  Despite this, it does not prevent form submission.</em></p>
-
-<p>Why is submission not prevented?  The key is in the <a href="http://www.whatwg.org/specs/web-apps/current-work/#concept-input-value-dirty-flag">specification</a>:</p>
-
-<blockquote><p>Constraint validation: If an element has a maximum allowed value length, its dirty value flag is true, its value was last changed by a user edit (as opposed to a change made by a script), and the code-unit length of the element&#8217;s value is greater than the element&#8217;s maximum allowed value length, then the element is suffering from being too long.</p></blockquote>
-
-<p>The <a href="http://www.whatwg.org/specs/web-apps/current-work/#concept-input-value-dirty-flag">dirty flag</a> essentially means the the user has changed the value of an element.  Therefore, in order to be <code>tooLong</code> the element must have been last interacted with by a user edit.</p>
-
-<h3>Actually Triggering tooLong</h3>
-
-<p>So let&#8217;s take another approach.  What happens if you have the same input:</p>
-
-<p><code>&lt;input type="text" maxlength="1" value="ABC" /&gt;</code></p>
-
-<p>&#8230;remove one character, then submit?  You can try it for yourself below:</p>
-
-<iframe style="width: 100%; height: 180px;" src="http://jsfiddle.net/tj_vantoll/epCQe/embedded/result,html/" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
-
-
-<p>Upon edit IE10 and Chrome will set the <code>validity.tooLong</code> property to <code>true</code> and prevent form submission.  If the user attempts to submit a form after removing the &#8220;C&#8221; they will see the following in those browsers:</p>
-
-<p><img src="/images/posts/2012-10-17/Chrome.png" title="Chrome" alt="Chrome" />
-<img src="/images/posts/2012-10-17/IE10.png" title="IE10" alt="IE10" /></p>
-
-<p>Firefox, Safari, and Opera incorrectly handle this situation and allow the form to be submitted anyways.</p>
 </div>
   
+  
+    <footer>
+      <a rel="full-article" href="/2012/10/17/maxlength-constraint-validation-oddities/">Read on &rarr;</a>
+    </footer>
   
 
 
