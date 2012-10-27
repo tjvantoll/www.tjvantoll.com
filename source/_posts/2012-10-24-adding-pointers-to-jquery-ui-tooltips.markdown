@@ -8,6 +8,8 @@ categories: [jQuery UI, CSS]
 
 The recent [jQuery UI 1.9 release](http://jqueryui.com/changelog/1.9.0/) included a new [tooltip plugin](http://jqueryui.com/tooltip/) that can be used to create tooltips much like the native tooltips the browser provides.  The difference is that jQuery UI's version are completely customizable.  As such I thought I'd show a quick example of how you can create a pointer from the tooltip to its associated field:
 
+<!--more-->
+
 <iframe style="width: 100%; height: 350px;" src="http://jsfiddle.net/tj_vantoll/kyBwU/embedded/result,js,html,css/" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
 
 So how is this done?

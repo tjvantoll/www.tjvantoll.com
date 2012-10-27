@@ -18,6 +18,8 @@ For example you cannot type more than 2 characters in the textbox below:
 
 But if the browser prevents this then why does the property exist?
 
+<!--more-->
+
 ### Prefilled value Attribute
 
 Assume that you're filling the `value` of form elements with information from a database and you end up with something like this:
