@@ -9,7 +9,7 @@
   <meta name="author" content="TJ VanToll">
 
   
-  <meta name="description" content="The recent jQuery UI 1.9 release included a new tooltip plugin that can be used to create tooltips much like the native tooltips the browser provides &hellip;">
+  <meta name="description" content="The jQuery UI tabs widget provides a clean way to implement a tabular UI. Furthermore, the markup used gives you ample hooks to make the tabs &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -94,6 +94,49 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2012/11/08/creating-a-polished-vertical-tabs-interaction-with-jquery-ui/">Creating a Polished Vertical Tabs Interaction with jQuery UI</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-11-08T00:00:00-05:00" pubdate data-updated="true">Nov 8<span>th</span>, 2012</time>
+        
+         | <a href="/2012/11/08/creating-a-polished-vertical-tabs-interaction-with-jquery-ui/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>The <a href="http://jqueryui.com/tabs/">jQuery UI tabs widget</a> provides a clean way to implement a tabular UI.  Furthermore, the markup used gives you ample hooks to make the tabs visually into what you want them to be.  The docs provide a <a href="http://jqueryui.com/tabs/#vertical">simple demo</a> of how you can give the tabs a vertical orientation, but I thought I&#8217;d show how you can use what the framework provides to create something a bit more polished.</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/2012/11/08/creating-a-polished-vertical-tabs-interaction-with-jquery-ui/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -578,68 +621,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2012/08/16/subpixel-animation-issues-in-ie-less-than-9/">Subpixel Animation Issues in IE < 9</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-08-16T21:56:00-04:00" pubdate data-updated="true">Aug 16<span>th</span>, 2012</time>
-        
-         | <a href="/2012/08/16/subpixel-animation-issues-in-ie-less-than-9/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>While there are definitely <a href="http://ejohn.org/blog/sub-pixel-problems-in-css/">cross browser discrepancies handling subpixels</a>, this one caught me by surprise.  Take the following:</p>
-
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">&quot;box&quot;</span><span class="nt">&gt;&lt;/div&gt;</span>
-</span><span class='line'><span class="nt">&lt;script&gt;</span>
-</span><span class='line'>    <span class="kd">var</span> <span class="nx">box</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">&#39;box&#39;</span><span class="p">);</span>
-</span><span class='line'>    <span class="nx">box</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">left</span> <span class="o">=</span> <span class="s1">&#39;10.25px&#39;</span><span class="p">;</span>
-</span><span class='line'>    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">box</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">left</span><span class="p">);</span>
-</span><span class='line'><span class="nt">&lt;/script&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>This simply sets a value for the <code>left</code> CSS property then immediately retrieves it.  In Chrome 22, Firefox 14, Safari 6, Opera 12, IE >= 9, iOS 5, and Android <code>10.25px</code> will be logged.</p>
-
-<p>In IE &lt; 9 <code>10px</code> is logged.  While not all browsers can accurately render the subpixel values, I had assumed all of them would&#8217;ve at least allowed the assignment.  I was wrong.  Internet Explorer will simply round the value to the nearest integer.</p>
-
-<p>Why is this a problem?  </div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/2012/08/16/subpixel-animation-issues-in-ie-less-than-9/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -653,6 +634,10 @@
     <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2012/11/08/creating-a-polished-vertical-tabs-interaction-with-jquery-ui/">Creating a Polished Vertical Tabs Interaction with jQuery UI</a>
+      </li>
     
       <li class="post">
         <a href="/2012/10/24/adding-pointers-to-jquery-ui-tooltips/">Adding Pointers to jQuery UI Tooltips</a>
@@ -688,10 +673,6 @@
     
       <li class="post">
         <a href="/2012/08/19/onscroll-event-issues-on-mobile-browsers/">onscroll Event Issues on Mobile Browsers</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2012/08/16/subpixel-animation-issues-in-ie-less-than-9/">Subpixel Animation Issues in IE < 9</a>
       </li>
     
   </ul>
