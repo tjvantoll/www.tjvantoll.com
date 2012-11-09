@@ -13,3 +13,5 @@ The [jQuery UI tabs widget](http://jqueryui.com/tabs/) provides a clean way to i
 Here's an example:
 
 <iframe style="width: 100%; height: 350px;" src="http://jsfiddle.net/tj_vantoll/nn2Qw/embedded/result,js,html,css/" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
+
+Please poke around in the source to see how it was made.  Feel free to use this or modify it to your liking.
