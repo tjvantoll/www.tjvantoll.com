@@ -89,7 +89,7 @@ Another option I like is showing the native date picker only to users that are o
     if (Modernizr.touch && Moderniz.inputtypes.date) {
         document.getElementById('myDate').type = 'date';
     } else {
-    	$('#myDate').datepicker();
+        $('#myDate').datepicker();
     }
 </script>
 ```
