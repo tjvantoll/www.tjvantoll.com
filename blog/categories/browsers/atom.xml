@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Browsers | TJ VanToll]]></title>
   <link href="http://tjvantoll.com/blog/categories/browsers/atom.xml" rel="self"/>
   <link href="http://tjvantoll.com/"/>
-  <updated>2012-11-09T22:36:40-05:00</updated>
+  <updated>2012-11-10T17:45:05-05:00</updated>
   <id>http://tjvantoll.com/</id>
   <author>
     <name><![CDATA[TJ VanToll]]></name>
@@ -12,6 +12,94 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Creating Cross Browser Scrollable &lt;tbody&gt;s - A CSS Only Approach]]></title>
+    <link href="http://tjvantoll.com/2012/11/10/creating-cross-browser-scrollable-tbody/"/>
+    <updated>2012-11-10T15:44:00-05:00</updated>
+    <id>http://tjvantoll.com/2012/11/10/creating-cross-browser-scrollable-tbody</id>
+    <content type="html"><![CDATA[<p>By default the <code>overflow</code> CSS property does not apply to table group elements (<code>&lt;thead&gt;</code>, <code>&lt;tbody&gt;</code>, or <code>&lt;tfoot&gt;</code>).  <a href="https://developer.mozilla.org/en-US/docs/Firefox_4_for_developers#Miscellaneous_CSS_changes">As of Firefox 4</a> this behavior is consistent across all browser implementations.</p>
+
+<p>Therefore, if you attempt to apply a CSS <code>height</code> and <code>overflow: scroll</code> to a <code>&lt;tbody&gt;</code> it will have no effect in modern browsers.  You can see this for yourself <a href="http://jsfiddle.net/tj_vantoll/vU494/">here</a>.</p>
+
+<p>But having a scrolling table body with fixed headers is a useful UI element, so how do you work around this?</p>
+
+<!--more-->
+
+
+<h3>The Solution</h3>
+
+<p>Here is my solution:</p>
+
+<p><pre class="codepen" data-height="400" data-type="result" data-href="JEKIu" data-user="tjvantoll"><code></code></pre>
+<script async src="http://codepen.io:/assets/embed/ei.js"></script></p>
+
+<h3>How does it work?</h3>
+
+<p>The first step is to set the <code>&lt;tbody&gt;</code> to <code>display: block</code> so an <code>overflow</code> and <code>height</code> can be applied.  From there the rows in the <code>&lt;thead&gt;</code> need to be set to <code>position: relative</code> and <code>display: block</code> so that they'll sit on top of the now scrollable <code>&lt;tbody&gt;</code>.</p>
+
+<p>That's really about it.</p>
+
+<h3>Unfortunate Part #1: Old Internet Explorer</h3>
+
+<p>When you set a <code>height</code> on a <code>&lt;tbody&gt;</code> Internet Explorer &lt; 10 applies that <code>height</code> to every table cell, which is of course wonderful.</p>
+
+<p>My workaround for this is to conditionally create a wrapper <code>&lt;div&gt;</code>.  When it's present I give it the <code>height</code> and <code>overflow</code> and remove the <code>height</code> from the <code>&lt;tbody&gt;</code>.</p>
+
+<p>``` html Wrap table for IE</p>
+
+
+
+<!--[if lte IE 9]>
+<div class="old_ie_wrapper">
+<!--<![endif]-->
+
+
+<pre><code>&lt;table&gt;
+    &lt;!-- Contents of the table --&gt;
+&lt;/table&gt;
+</code></pre>
+
+<!--[if lte IE 9]>
+</div>
+<!--<![endif]-->
+
+
+<p>```</p>
+
+<p>The headers will scroll with the table body, but the table will at least be usable.  You could also create <a href="http://paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/">conditional classes on the &lt;html&gt; tag</a> to handle this as well.</p>
+
+<h3>Unfortunate Part #2: Widths</h3>
+
+<p>Because the <code>&lt;thead&gt;</code> is relatively positioned each table cell needs an explicit <code>width</code>.</p>
+
+<p><code>css
+td:nth-child(1), th:nth-child(1) { width: 100px; }
+td:nth-child(2), th:nth-child(2) { width: 100px; }
+td:nth-child(3), th:nth-child(3) { width: 100px; }
+</code></p>
+
+<p>But unfortunately that is not enough.  When a scrollbar is present browsers allocate space for it, therefore, the <code>&lt;tbody&gt;</code> ends up having less space available than the <code>&lt;thead&gt;</code>.  Notice the slight misalignment this creates:</p>
+
+<p><img src="/images/posts/2012-11-10/Alignment-Issue.png" title="Alignment issue with scroll bar" alt="Alignment issue with scroll bar" /></p>
+
+<p>The only workaround I could come up with was to set a <code>min-width</code> on all columns except the last one.</p>
+
+<p><code>css
+td:nth-child(1), th:nth-child(1) { min-width: 100px; }
+td:nth-child(2), th:nth-child(2) { min-width: 100px; }
+td:nth-child(3), th:nth-child(3) { width: 100px; }
+</code></p>
+
+<h3>The Good</h3>
+
+<p>Despite these issues the solution does work in all browsers back to IE6 with no JavaScript dependency.</p>
+
+<p>The markup to create the table is simple and semantic.  I've seen workarounds for this issue that use <code>&lt;div&gt;</code>s instead of <code>&lt;table&gt;</code>s or multiple aligned <code>&lt;table&gt;</code>s and those always felt dirty to me.</p>
+
+<p>The code is free to use and do whatever you want with it.  If you have any suggestions for improvements or find any issues please let me know in the comments.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[maxlength Constraint Validation Oddities in Major Browsers]]></title>
@@ -349,171 +437,6 @@ event.preventDefault();
 <p>```</p>
 
 <p>This has the added benefit of being more efficient since you save a property retrieval on every invocation of the loop.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[HTML5 Form Validation - Showing All Error Messages]]></title>
-    <link href="http://tjvantoll.com/2012/08/05/html5-form-validation-showing-all-error-messages/"/>
-    <updated>2012-08-05T16:21:00-04:00</updated>
-    <id>http://tjvantoll.com/2012/08/05/html5-form-validation-showing-all-error-messages</id>
-    <content type="html"><![CDATA[<p><a href="http://caniuse.com/#feat=form-validation">Browsers that support HTML5 form validation</a> have one thing in common; if a <code>&lt;form&gt;</code> is submitted and has errors on multiple fields, the browser will only display the first error to the user.</p>
-
-<p>Turns out the spec leaves the specific means of handling multiple errors up to the browser itself:</p>
-
-<p><blockquote><p>Report the problems with the constraints of at least one of the elements given in unhandled invalid controls to the user. User agents may focus one of those elements in the process, by running the focusing steps for that element, and may change the scrolling position of the document, or perform some other action that brings the element to the user's attention.</p></p><p><p>User agents may report more than one constraint violation. User agents may coalesce related constraint violation reports if appropriate (e.g. if multiple radio buttons in a group are marked as required, only one error need be reported).</p><footer><strong>HTML5 Specification</strong> <cite><a href='http://www.whatwg.org/specs/web-apps/current-work/#the-constraint-validation-api'>www.whatwg.org/specs/web-apps/&hellip;</a></cite></footer></blockquote></p>
-
-<p>The key part here being that user agents (i.e. browsers) <strong>MAY</strong> report more than one constraint violation (i.e. error).  Turns out they all decided not to.</p>
-
-<!--more-->
-
-
-<p>You can see this in your browser below (assuming it <a href="http://caniuse.com/#feat=form-validation">supports HTML5 form validation</a> and is not Safari, more on that later).  Both fields are <code>required</code>, but if you submit the form you will only see an error for the first field.</p>
-
-<pre class="codepen" data-type="result" data-href="FBGvu" data-user="tjvantoll" data-host="http://codepen.io"><code></code></pre>
-
-
-<script async src="http://codepen.io/assets/embed/ei.js"></script>
-
-
-<p>Here's what it looks like on supported browsers if you attempt to submit this empty <code>&lt;form&gt;</code>:</p>
-
-<h5>Chrome 21</h5>
-
-<p><img src="/images/posts/2012-08-05/Chrome.png" title="Chrome" alt="Chrome" /></p>
-
-<h5>Firefox 14</h5>
-
-<p><img src="/images/posts/2012-08-05/Firefox.png" title="Firefox" alt="Firefox" /></p>
-
-<h5>Opera 12</h5>
-
-<p><img src="/images/posts/2012-08-05/Opera.png" title="Opera" alt="Opera" /></p>
-
-<p>As you can see, all three only give an error for the first field.  Firefox at least has the decency to put a red border around all fields with invalid data by default.</p>
-
-<p>The one noticeable browser missing from the list above is Safari.  Even though Safari supports the constraint validation API, the validation itself is turned off.</p>
-
-<h3>Usability</h3>
-
-<p>From a usability perspective showing the users only the first error message is bad.  Imagine how frustrating it would be to continually correct errors just to be presented with the next error in the sequence.  If you've ran into a form such as this before you know what I'm talking about.</p>
-
-<p>Luckily, browsers provide a <a href="http://www.whatwg.org/specs/web-apps/current-work/#the-constraint-validation-api">constraint validation API</a> that can be used to provide this functionality.</p>
-
-<h3>Using the Validation API</h3>
-
-<p>All dom nodes now possess a <a href="http://www.whatwg.org/specs/web-apps/current-work/#dom-cva-willvalidate_">willValidate</a> property that indicates whether the node is a candidate for form validation.</p>
-
-<p>Nodes in which <code>willValidate</code> is <code>true</code> also have a <code>validity</code> property.  The <code>validity</code> property resolves to a <a href="https://developer.mozilla.org/en-US/docs/DOM/ValidityState">ValidityState object</a> which contains information about whether the field has validation errors, as well as the error message the browser will display to the user.</p>
-
-<p>To make things even easier browsers provide an <a href="https://developer.mozilla.org/en-US/docs/CSS/:invalid">:invalid pseduoselector</a> that can be used to select all elements with validation errors.  Let's see how this can be leveraged to show all error messages.</p>
-
-<h3>The Code</h3>
-
-<p>Here's how I accomplished this with a jQuery dependent script.</p>
-
-<p>``` html
-<form></p>
-
-<pre><code>&lt;ul class="errorMessages"&gt;&lt;/ul&gt;
-
-&lt;label for="name"&gt;Name:&lt;/label&gt;
-&lt;input type="text" required /&gt;
-
-&lt;label for="comments"&gt;Comments:&lt;/label&gt;
-&lt;textarea id="comments" required&gt;&lt;/textarea&gt;
-
-&lt;input type="submit" value="Submit" /&gt;
-</code></pre>
-
-<p></form>​</p>
-
-<script>
-$(function() {
-    var createAllErrors = function() {
-        var form = $(this);
-        var errorList = $('ul.errorMessages', form);
-        
-        var showAllErrorMessages = function() {
-            errorList.empty();
-            
-            //Find all invalid fields within the form.
-            form.find(':invalid').each(function(index, node) {
-
-                //Find the field's corresponding label
-                var label = $('label[for=' + node.id + ']');
-
-                //Opera incorrectly does not fill the validationMessage property.
-                var message = node.validationMessage || 'Invalid value.';
-                errorList
-                    .show()
-                    .append('<li><span>' + label.html() + '</span> ' + message + '</li>');
-            });
-        };
-        
-        $('input[type=submit]', form).on('click', showAllErrorMessages);
-        $('input[type=text]', form).on('keypress', function(event) {
-            //keyCode 13 is Enter
-            if (event.keyCode == 13) {
-                showAllErrorMessages();
-            }
-        });
-    };
-    
-    $('form').each(createAllErrors);
-});
-</script>
-
-
-<p>```</p>
-
-<p>You can see the results in your browser below:</p>
-
-<pre class="codepen" data-type="result" data-href="eLvlf" data-user="tjvantoll" data-host="http://codepen.io"><code></code></pre>
-
-
-<p>Here's how it looks in Chrome 21:</p>
-
-<p><img src="/images/posts/2012-08-05/Chrome-full.png" title="Chrome" alt="Chrome" /></p>
-
-<p>A couple things to note:</p>
-
-<p>1) If a user attempts to submit a form and gets validation errors, a <code>submit</code> event is never fired for the <code>&lt;form&gt;</code>.  Therefore, instead of listening for <code>submit</code> on the <code>&lt;form&gt;</code>, I instead listen for a <code>click</code> on the <code>&lt;input type="submit"&gt;</code>.  Since the user is also able to submit the form pressing enter in text inputs, I attach a <code>keypress</code> listener to them to ensure the same logic runs.</p>
-
-<p>2) In my example I start each error message with the contents of the field's <code>&lt;label&gt;</code>.  This is because the messages for each field are often identical.  An alternative approach would be to use another constraint validation API method, <a href="http://www.whatwg.org/specs/web-apps/current-work/#dom-cva-setcustomvalidity">setCustomValidity</a> to set a completely custom message.</p>
-
-<p>3) The <code>:invalid</code> selector will return nothing in all browsers that do not support the constraint validation API.  Therefore this code will simply do nothing in those browsers.</p>
-
-<p>4) Opera incorrectly does not fill the <code>validationMessage</code> property.  Therefore the check <code>var message = node.validationMessage || 'Invalid value.'</code> is necessary so a message is displayed for Opera.</p>
-
-<p>5) I do nothing to style the individual fields based on whether they have valid data.  The HTML5 spec provides a number of CSS hooks to do this and I would recommend reading <a href="http://html5doctor.com/css3-pseudo-classes-and-html5-forms/">CSS Pseudo-Classes and HTML5 Forms</a> from <a href="http://html5doctor.com">html5 Doctor</a> if you're interested in including such styling.</p>
-
-<h3>That's a Lot of Code to Do Something Simple</h3>
-
-<p>Yep.  While browser support is getting to be quite good for HTML5 forms the implementations themselves are still a bit buggy.  Nevertheless, this approach will work for displaying all validation errors to the end user.</p>
-
-<h3>Polyfill</h3>
-
-<p>If you are interested in making the code above work in all browsers one option you have is to polyfill the functionality for unsupported browsers.  One robust choice is the <a href="https://github.com/aFarkas/webshim">webshims</a> library.</p>
-
-<p>To make webshims work with the code above all you need to do is add <code>$.webshims.polyfill('forms');</code>.  The maintainer, <a href="https://github.com/aFarkas">@aFarkas</a> was even kind of enough to provide me with a live example showing this - <a href="http://jsfiddle.net/trixta/HynHy/">http://jsfiddle.net/trixta/HynHy/</a>.</p>
-
-<h3>Update (September 5th, 2012)</h3>
-
-<p>Per some <a href="https://github.com/html5rocks/www.html5rocks.com/issues/175#issuecomment-8301873">critique on Github</a> from <a href="https://github.com/aFarkas">@aFarkas</a> I've made the following changes:</p>
-
-<ul>
-<li>Updated the example code.
-
-<ul>
-<li>Removed a hack I had in place for Safari.</li>
-<li>Switched to use the <code>:invalid</code> pseudoselector to find all invalid fields within a form.</li>
-<li>Make the script handle multiple <code>&lt;form&gt;</code> elements in one DOM.</li>
-</ul>
-</li>
-<li>Added the above section on using webshim to polyfill this behavior for all browsers.</li>
-</ul>
-
 ]]></content>
   </entry>
   

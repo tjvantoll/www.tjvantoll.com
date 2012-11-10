@@ -9,7 +9,7 @@
   <meta name="author" content="TJ VanToll">
 
   
-  <meta name="description" content="The jQuery UI tabs widget provides a clean way to implement a tabular UI. Furthermore, the markup used gives you ample hooks to make the tabs &hellip;">
+  <meta name="description" content="By default the overflow CSS property does not apply to table group elements (&lt;thead&gt;, &lt;tbody&gt;, or &lt;tfoot&gt;). As of Firefox 4 this &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -94,6 +94,53 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2012/11/10/creating-cross-browser-scrollable-tbody/">Creating Cross Browser Scrollable &lt;tbody&gt;s - A CSS Only Approach</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-11-10T15:44:00-05:00" pubdate data-updated="true">Nov 10<span>th</span>, 2012</time>
+        
+         | <a href="/2012/11/10/creating-cross-browser-scrollable-tbody/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>By default the <code>overflow</code> CSS property does not apply to table group elements (<code>&lt;thead&gt;</code>, <code>&lt;tbody&gt;</code>, or <code>&lt;tfoot&gt;</code>).  <a href="https://developer.mozilla.org/en-US/docs/Firefox_4_for_developers#Miscellaneous_CSS_changes">As of Firefox 4</a> this behavior is consistent across all browser implementations.</p>
+
+<p>Therefore, if you attempt to apply a CSS <code>height</code> and <code>overflow: scroll</code> to a <code>&lt;tbody&gt;</code> it will have no effect in modern browsers.  You can see this for yourself <a href="http://jsfiddle.net/tj_vantoll/vU494/">here</a>.</p>
+
+<p>But having a scrolling table body with fixed headers is a useful UI element, so how do you work around this?</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/2012/11/10/creating-cross-browser-scrollable-tbody/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -578,49 +625,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2012/08/19/onscroll-event-issues-on-mobile-browsers/">onscroll Event Issues on Mobile Browsers</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-08-19T00:00:00-04:00" pubdate data-updated="true">Aug 19<span>th</span>, 2012</time>
-        
-         | <a href="/2012/08/19/onscroll-event-issues-on-mobile-browsers/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>All browsers fire an <code>onscroll</code> event on the <code>window</code> object whenever the window is scrolled.  On desktop browsers this event is fired continuously as the user scrolls, but on most all mobile browsers the event is not fired until the <em>scrolling action</em> comes to a complete stop.</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/2012/08/19/onscroll-event-issues-on-mobile-browsers/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -634,6 +638,10 @@
     <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2012/11/10/creating-cross-browser-scrollable-tbody/">Creating Cross Browser Scrollable &lt;tbody&gt;s - A CSS Only Approach</a>
+      </li>
     
       <li class="post">
         <a href="/2012/11/08/creating-a-polished-vertical-tabs-interaction-with-jquery-ui/">Creating a Polished Vertical Tabs Interaction with jQuery UI</a>
@@ -669,10 +677,6 @@
     
       <li class="post">
         <a href="/2012/08/22/logging-test-failures-in-a-phantomjs-qunit-runner/">Logging Test Failures in a PhantomJS QUnit Runner</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2012/08/19/onscroll-event-issues-on-mobile-browsers/">onscroll Event Issues on Mobile Browsers</a>
       </li>
     
   </ul>
