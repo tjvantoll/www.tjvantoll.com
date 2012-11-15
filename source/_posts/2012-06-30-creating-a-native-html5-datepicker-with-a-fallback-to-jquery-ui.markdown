@@ -69,7 +69,7 @@ If any of this functionality is important to your application you'll probably wa
 [Modernizr](http://modernizr.com) gives you the ability to detect whether the browser supports native datepickers.  The following shows how you can use the native datepicker when available, and fallback to jQuery UI's picker in unsupported browsers.
 
 ``` javascript Detect native support for datepickers and fallback to jQuery UI
-if (!Moderniz.inputtypes.date) {
+if (!Modernizr.inputtypes.date) {
     $('input[type=date]').datepicker();
 }
 ```
@@ -86,7 +86,7 @@ Another option I like is showing the native date picker only to users that are o
 <input type="text" id="myDate" />
 
 <script>
-    if (Modernizr.touch && Moderniz.inputtypes.date) {
+    if (Modernizr.touch && Modernizr.inputtypes.date) {
         document.getElementById('myDate').type = 'date';
     } else {
         $('#myDate').datepicker();
