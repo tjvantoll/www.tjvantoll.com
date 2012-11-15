@@ -196,7 +196,7 @@
 <figure class='code'><figcaption class='not_empty'><span>Detect native support for datepickers and fallback to jQuery UI</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">Moderniz</span><span class="p">.</span><span class="nx">inputtypes</span><span class="p">.</span><span class="nx">date</span><span class="p">)</span> <span class="p">{</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">Modernizr</span><span class="p">.</span><span class="nx">inputtypes</span><span class="p">.</span><span class="nx">date</span><span class="p">)</span> <span class="p">{</span>
 </span><span class='line'>    <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;input[type=date]&#39;</span><span class="p">).</span><span class="nx">datepicker</span><span class="p">();</span>
 </span><span class='line'><span class="p">}</span>
 </span></code></pre></td></tr></table></div></figure>
@@ -223,7 +223,7 @@
 </pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;text&quot;</span> <span class="na">id=</span><span class="s">&quot;myDate&quot;</span> <span class="nt">/&gt;</span>
 </span><span class='line'>
 </span><span class='line'><span class="nt">&lt;script&gt;</span>
-</span><span class='line'>    <span class="k">if</span> <span class="p">(</span><span class="nx">Modernizr</span><span class="p">.</span><span class="nx">touch</span> <span class="o">&amp;&amp;</span> <span class="nx">Moderniz</span><span class="p">.</span><span class="nx">inputtypes</span><span class="p">.</span><span class="nx">date</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">if</span> <span class="p">(</span><span class="nx">Modernizr</span><span class="p">.</span><span class="nx">touch</span> <span class="o">&amp;&amp;</span> <span class="nx">Modernizr</span><span class="p">.</span><span class="nx">inputtypes</span><span class="p">.</span><span class="nx">date</span><span class="p">)</span> <span class="p">{</span>
 </span><span class='line'>        <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">&#39;myDate&#39;</span><span class="p">).</span><span class="nx">type</span> <span class="o">=</span> <span class="s1">&#39;date&#39;</span><span class="p">;</span>
 </span><span class='line'>    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
 </span><span class='line'>        <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#myDate&#39;</span><span class="p">).</span><span class="nx">datepicker</span><span class="p">();</span>
