@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>jQuery UI Triage Links</title>
+	<style>
+		#wrapper {
+			width: 1200px;
+			border: 3px solid black;
+			border-radius: 5px;
+			overflow: hidden;
+		}
+
+		label {
+			display: block;
+			margin: 10px 0 5px 0;
+		}
+		textarea {
+			width: 550px;
+			height: 85px;
+			display: block;
+		}
+
+
+		#widgets, #interactions {
+			float: left;
+			width: 305px;
+		}
+
+		h2 {
+			margin: 10px 0 10px 15px;
+		}
+		h2 + ul {
+			list-style: none;
+			max-width: 300px;
+			padding: 0;
+		}
+		h2 + ul > li {
+			margin: 15px;
+			padding: 5px;
+			border: 1px solid black;
+			border-radius: 5px;
+		}
+
+		#top {
+			float: left;
+			padding: 0 0 0 15px;
+		}
+		#top h2 {
+			margin-left: 0;
+		}
+	</style>
+</head>
+<body>
+<div id="wrapper">
+
+<div id="widgets">
+	<h2>Widgets</h2>
+	<ul>
+		<li>
+			Accordion:
+			<ul>
+				<li><a href="http://jsfiddle.net/tj_vantoll/rF4Da/">Base</a></li>
+			</ul>
+		</li>
+
+		<li>
+			Autocomplete:
+			<ul>
+				<li><a href="http://jsfiddle.net/tj_vantoll/hmarM/">Base</a></li>
+			</ul>
+		</li>
+
+		<li>
+			Button:
+			<ul>
+				<li><a href="http://jsfiddle.net/tj_vantoll/8mLwn/">Base</a></li>
+				<li><a href="http://jsfiddle.net/tj_vantoll/xD53m/">Checkbox</a></li>
+				<li><a href="http://jsfiddle.net/tj_vantoll/RKwuk/">Radios</a></li>
+			</ul>
+		</li>
+
+		<li>
+			Datepicker:
+			<ul>
+				<li><a href="http://jsfiddle.net/tj_vantoll/tRdpr/">Base</a></li>
+			</ul>
+		</li>
+
+		<li>
+			Dialog:
+			<ul>
+				<li><a href="http://jsfiddle.net/tj_vantoll/vwk3D/">Base</a></li>
+				<li><a href="http://jsfiddle.net/tj_vantoll/QFp2J/">Modal</a></li>
+				<li><a href="http://jsfiddle.net/tj_vantoll/wAnrN/">Modal within Modal</a></li>
+			</ul>
+		</li>
+
+		<li>
+			Menu:
+			<ul>
+				<li><a href="http://jsfiddle.net/tj_vantoll/jCTEP/">Base</a></li>
+			</ul>
+		</li>
+
+		<li>
+			Progressbar:
+			<ul>
+				<li><a href="http://jsfiddle.net/tj_vantoll/34jLX/">Base</a></li>
+			</ul>
+		</li>
+
+		<li>
+			Slider:
+			<ul>
+				<li><a href="http://jsfiddle.net/tj_vantoll/Hd4Ca/">Base</a></li>
+				<li><a href="http://jsfiddle.net/tj_vantoll/r87b8/">Range</a></li>
+			</ul>
+		</li>
+
+		<li>
+			Spinner:
+			<ul>
+				<li><a href="http://jsfiddle.net/tj_vantoll/2bxRU/">Base</a></li>
+			</ul>
+		</li>
+
+		<li>
+			Tabs:
+			<ul>
+				<li><a href="http://jsfiddle.net/tj_vantoll/ZjgbK/">Base</a></li>
+			</ul>
+		</li>
+
+		<li>
+			Tooltip:
+			<ul>
+				<li><a href="http://jsfiddle.net/tj_vantoll/FMUZL/">Base</a></li>
+			</ul>
+		</li>
+	</ul>
+</div>
+<div id="interactions">
+	<h2>Interactions</h2>
+	<ul>
+		<li>
+			Draggable:
+			<ul>
+				<li><a href="http://jsfiddle.net/tj_vantoll/maP9S/">Base</a></li>
+			</ul>
+		</li>
+		<li>
+			Droppable:
+			<ul>
+				<li><a href="http://jsfiddle.net/tj_vantoll/8RtqV/">Base</a></li>
+			</ul>
+		</li>
+		<li>
+			Resizable:
+			<ul>
+				<li><a href="http://jsfiddle.net/tj_vantoll/VJNFF/">Base</a></li>
+			</ul>
+		</li>
+		<li>
+			Selectable:
+			<ul>
+				<li><a href="http://jsfiddle.net/tj_vantoll/WhPMY/">Base</a></li>
+			</ul>
+		</li>
+		<li>
+			Sortable:
+			<ul>
+				<li><a href="http://jsfiddle.net/tj_vantoll/wjxe4/">Base</a></li>
+			</ul>
+		</li>
+	</ul>
+</div>
+
+<div id="top">
+	<h2>Copy and Paste</h2>
+
+<label for="latest">Latest Official Releases:</label>
+<textarea id="latest" style="height: 50px;">
+<script src="http://code.jquery.com/jquery-1.8.3.js"></script>
+<link href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css" rel="stylesheet" />
+<script src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
+</textarea>
+
+<label for="invalid">Invalid Ticket Boilerplate:</label>
+<textarea id="invalid">Thanks for taking the time to contribute to the jQuery UI project! Please provide a complete reduced test case on jsFiddle to help us assess your ticket.
+
+Additionally, be sure to test against the git version of both jQuery UI and jQuery to ensure the issue still exists. To get started, you can use this boilerplate: http://jsfiddle.net/ZgAqH/. Open the link and click to "Fork" (in the top menu).
+</textarea>
+</div>
+
+</div>
+</body>
+</html>
