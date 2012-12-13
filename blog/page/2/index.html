@@ -9,7 +9,7 @@
   <meta name="author" content="TJ VanToll">
 
   
-  <meta name="description" content="All browsers fire an onscroll event on the window object whenever the window is scrolled. On desktop browsers this event is fired continuously as the &hellip;">
+  <meta name="description" content="PhantomJS provides an easy means of automating QUnit tests; it even provides a test runner that you can simply copy into your project to run them. &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -94,6 +94,77 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2012/08/22/logging-test-failures-in-a-phantomjs-qunit-runner/">Logging Test Failures in a PhantomJS QUnit Runner</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-08-22T00:00:00-04:00" pubdate data-updated="true">Aug 22<span>nd</span>, 2012</time>
+        
+         | <a href="/2012/08/22/logging-test-failures-in-a-phantomjs-qunit-runner/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><a href="http://phantomjs.com">PhantomJS</a> provides an easy means of automating <a href="http://qunitjs.com">QUnit</a> tests; it even provides a <a href="https://github.com/ariya/phantomjs/blob/master/examples/run-qunit.js">test runner</a> that you can simply copy into your project to run them.</p>
+
+<p>The output of said runner displays the number of tests ran and the number that passed.  For example, here&#8217;s an example of the output when I use the default runner on jQuery UI&#8217;s spinner test suite:</p>
+
+<figure class='code'><figcaption class='not_empty'><span>PhantomJS + QUnit Run Output</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='text'><span class='line'>tj-cpu:spinner tj$ phantomjs run-qunit.js spinner.html
+</span><span class='line'>Tests completed in 492 milliseconds
+</span><span class='line'>489 tests of 489 passed, 0 failed.
+</span><span class='line'>&#39;waitFor()&#39; finished in 587ms.
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Which is great, but if something fails you only get the following:</p>
+
+<figure class='code'><figcaption class='not_empty'><span>PhantomJS + QUnit Run Output with Failures</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='text'><span class='line'>tj-cpu:myproject tj$ phantomjs run-qunit.js spinner.html
+</span><span class='line'>&#39;waitFor()&#39; finished in 630ms.
+</span><span class='line'>Tests completed in 535 milliseconds.
+</span><span class='line'>486 tests of 489 passed, 3 failed.
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The provided runner doesn&#8217;t provide any additional information about the tests that failed.  Luckily PhantomJS and QUnit make it trivial to customize the output to meet your needs.</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/2012/08/22/logging-test-failures-in-a-phantomjs-qunit-runner/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -580,51 +651,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2012/06/15/detecting-print-requests-with-javascript/">Detecting Print Requests with JavaScript</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-06-15T00:00:00-04:00" pubdate data-updated="true">Jun 15<span>th</span>, 2012</time>
-        
-         | <a href="/2012/06/15/detecting-print-requests-with-javascript/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>CSS has a well supported mechanism for applying changes only when the user is printing a document, <a href="http://coding.smashingmagazine.com/2011/11/24/how-to-set-up-a-print-style-sheet/">print stylesheets</a>.  They allow you to alter the presentation of a web page for the printer by applying rules that will only be interpreted for printing.  This is great for common tasks like hiding non-essential content, using more print friendly typography, and adjusting the layout to better suit the size and shape of paper.</p>
-
-<p>Print stylesheets are great for making presentational changes for printing, but sometimes you need the full power of JavaScript.  And in order to do respond to print requests in JavaScript you need the browser to notify you that a print request occurred.</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/2012/06/15/detecting-print-requests-with-javascript/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/3/">&larr; Older</a>
@@ -640,6 +666,10 @@
     <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2012/12/12/debugging-print-stylesheets-now-significantly-easier-in-chrome/">Debugging Print Stylesheets: Now Significantly Easier in Chrome</a>
+      </li>
     
       <li class="post">
         <a href="/2012/11/10/creating-cross-browser-scrollable-tbody/">Creating Cross Browser Scrollable &lt;tbody&gt;s - A CSS Only Approach</a>
@@ -675,10 +705,6 @@
     
       <li class="post">
         <a href="/2012/08/28/google-analytics-excluding-visits-in-development-and-production/">Google Analytics - Excluding Your Own Visits in Development and Production</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2012/08/22/logging-test-failures-in-a-phantomjs-qunit-runner/">Logging Test Failures in a PhantomJS QUnit Runner</a>
       </li>
     
   </ul>

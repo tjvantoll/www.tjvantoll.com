@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>maxlength Constraint Validation Oddities in Major Browsers - TJ VanToll - Tutorials, Thoughts, and Ramblings on Front End Development</title>
+  <title>Debugging Print Stylesheets: Now Significantly Easier in Chrome - TJ VanToll - Tutorials, Thoughts, and Ramblings on Front End Development</title>
   <meta name="author" content="TJ VanToll">
 
   
-  <meta name="description" content="The maxlength attribute has been around in browsers for a long time. When provided all browsers prevent the user entering a value that exceeds the &hellip;">
+  <meta name="description" content="Debugging print stylesheets has always been a bit of a pain. The traditional way of doing so was to simply change the media attribute of all link &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://tjvantoll.com/2012/10/17/maxlength-constraint-validation-oddities">
+  <link rel="canonical" href="http://tjvantoll.com/2012/12/12/debugging-print-stylesheets-now-significantly-easier-in-chrome">
   <!-- Use custom favicon -->
   <!--<link href="/favicon.png" rel="icon">-->
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
@@ -97,7 +97,7 @@
   
   <header>
     
-      <h1 class="entry-title">maxlength Constraint Validation Oddities in Major Browsers</h1>
+      <h1 class="entry-title">Debugging Print Stylesheets: Now Significantly Easier in Chrome</h1>
     
     
       <p class="meta">
@@ -113,7 +113,7 @@
   
 
 
-<time datetime="2012-10-17T12:48:00-04:00" pubdate data-updated="true">Oct 17<span>th</span>, 2012</time>
+<time datetime="2012-12-12T21:55:00-05:00" pubdate data-updated="true">Dec 12<span>th</span>, 2012</time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -122,54 +122,69 @@
   </header>
 
 
-<div class="entry-content"><p>The <code>maxlength</code> attribute has been around in browsers for a long time.  When provided all browsers prevent the user entering a value that exceeds the <code>maxlength</code>.</p>
+<div class="entry-content"><p>Debugging print stylesheets has always been a bit of a pain.  The traditional way of doing so was to simply change the <code>media</code> attribute of all <code>link</code> tags from <code>print</code> to <code>screen</code> or <code>all</code> while testing.</p>
 
-<p>For example you cannot type more than 2 characters in the textbox below:</p>
+<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="c">&lt;!-- Before --&gt;</span>
+</span><span class='line'><span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">&quot;stylesheet&quot;</span> <span class="na">href=</span><span class="s">&quot;print.css&quot;</span> <span class="na">media=</span><span class="s">&quot;print&quot;</span> <span class="nt">/&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="c">&lt;!-- After --&gt;</span>
+</span><span class='line'><span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">&quot;stylesheet&quot;</span> <span class="na">href=</span><span class="s">&quot;print.css&quot;</span> <span class="na">media=</span><span class="s">&quot;screen&quot;</span> <span class="nt">/&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
 
-<p><input type="text" maxlength="2" /></p>
 
-<h3>Constraint Validation</h3>
-
-<p><a href="https://developer.mozilla.org/en-US/docs/HTML/HTML5/Constraint_validation_">Constraint validation</a> is an HTML5 spec that provides native client side form validation in the browser.  As part of its <a href="https://developer.mozilla.org/en-US/docs/HTML/Forms_in_HTML#Constraint_Validation_API">API</a>, all <code>&lt;input&gt;</code> and <code>&lt;textarea&gt;</code> elements have a <code>validity.tooLong</code> property that is <code>true</code> when the length of the <code>value</code> exceeds the <code>maxlength</code>.</p>
-
-<p>But if the browser prevents this then why does the property exist?</p>
+<p>The popular <a href="https://addons.mozilla.org/en-US/firefox/addon/web-developer/">Web Developer Extension</a> for Firefox even has an option to do this for you automatically.</p>
 
 <!--more-->
 
 
-<h3>Prefilled value Attribute</h3>
+<p><img src="/images/posts/2012-12-12/Web_Developer.png" title="Web Developer Extension" alt="Web Developer Extension" /></p>
 
-<p>Assume that you&#8217;re filling the <code>value</code> of form elements with information from a database and you end up with something like this:</p>
+<p>Then something changed.</p>
 
-<p><code>&lt;input type="text" maxlength="1" value="ABC" /&gt;</code></p>
+<p>We found out that <a href="https://developers.google.com/speed/docs/best-practices/rtt">unnecessary HTTP requests are bad</a>.  We also found out that there are some <a href="http://www.phpied.com/5-years-later-print-css-still-sucks/">serious performance issues with print stylesheets</a>.</p>
 
-<p>How will the browser handle this?</p>
+<p>Therefore, behind the lead of projects like the <a href="http://html5boilerplate.com/">HTML5 Boilerplate</a> we all switched to writing our print styles inline with the rest of our CSS.</p>
 
-<p>All browsers will prevent entry of additional characters, but they do not trim excess characters already present.  Additionally all browsers will allow a form containing the above input to submit.  <em>Note: Opera is the only browser to set the <code>validity.tooLong</code> property to <code>true</code> in this situation.  Despite this, it does not prevent form submission.</em></p>
-
-<p>Why is submission not prevented?  The key is in the <a href="http://www.whatwg.org/specs/web-apps/current-work/#concept-input-value-dirty-flag">specification</a>:</p>
-
-<blockquote><p>Constraint validation: If an element has a maximum allowed value length, its dirty value flag is true, its value was last changed by a user edit (as opposed to a change made by a script), and the code-unit length of the element&#8217;s value is greater than the element&#8217;s maximum allowed value length, then the element is suffering from being too long.</p></blockquote>
-
-<p>The <a href="http://www.whatwg.org/specs/web-apps/current-work/#concept-input-value-dirty-flag">dirty flag</a> essentially means the the user has changed the value of an element.  Therefore, in order to be <code>tooLong</code> the element must have been last interacted with by a user edit.</p>
-
-<h3>Actually Triggering tooLong</h3>
-
-<p>So let&#8217;s take another approach.  What happens if you have the same input:</p>
-
-<p><code>&lt;input type="text" maxlength="1" value="ABC" /&gt;</code></p>
-
-<p>&#8230;remove one character, then submit?  You can try it for yourself below:</p>
-
-<iframe style="width: 100%; height: 180px;" src="http://jsfiddle.net/tj_vantoll/epCQe/embedded/result,html/" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
+<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="k">@media</span> <span class="nt">print</span> <span class="p">{</span>
+</span><span class='line'>  <span class="nt">body</span> <span class="p">{</span> <span class="k">font-size</span><span class="o">:</span> <span class="k">larger</span><span class="p">;</span> <span class="p">}</span>
+</span><span class='line'>  <span class="nf">#ads</span><span class="o">,</span> <span class="nf">#junk</span> <span class="p">{</span> <span class="k">display</span><span class="o">:</span> <span class="k">none</span><span class="p">;</span> <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
 
 
-<p>Upon edit IE10 and Chrome will set the <code>validity.tooLong</code> property to <code>true</code> and prevent form submission.  If the user attempts to submit a form after removing the &#8220;C&#8221; they will see the following in those browsers:</p>
+<p>Inline print styles save HTTP requests and are easier to maintain, but they unfortunately make testing a bit harder.  They don&#8217;t work with Firefox&#8217;s Web Developer Extension and a simple find and replace is now quite a bit harder.</p>
 
-<p><img src="/images/posts/2012-10-17/Chrome.png" title="Chrome" alt="Chrome" />
-<img src="/images/posts/2012-10-17/IE10.png" title="IE10" alt="IE10" /></p>
+<h3>Good News!</h3>
 
-<p>Firefox, Safari, and Opera incorrectly handle this situation and allow the form to be submitted anyways.</p>
+<p>A means to emulate the <code>print</code> media type <a href="https://plus.google.com/115133653231679625609/posts/MgpioU84JPe">just landed in Chrome Canary</a>.</p>
+
+<p>To use it first open up the settings by clicking on the gear in the bottom right corner of the DevTools:</p>
+
+<p><img src="/images/posts/2012-12-12/DevTools_1.png" title="How to open the DevTools settings" alt="How to open the DevTools settings" /></p>
+
+<p>Next, select the Overrides menu, check the &#8220;Emulate CSS media&#8221; checkbox, and select &#8220;print&#8221;.</p>
+
+<p><img src="/images/posts/2012-12-12/DevTools_2.png" title="How to emulate CSS media in Chrome's DevTools" alt="How to emulate CSS media in Chrome's DevTools" /></p>
+
+<p>That&#8217;s it!  It will apply both rules applied in external <code>media="print"</code> stylesheets as well as rules within inline <code>@media print {}</code> blocks.  Combine this with a CSS preprocessor that can watch for changes and you have a quick and easy way to debug print styles.</p>
+
+<p>This feature is in version 25 of Chrome Canary so it hopefully it will make it into Chrome stable around Chrome 27.  If you don&#8217;t have Canary yet you should consider <a href="http://paulirish.com/2012/chrome-canary-for-developers/">installing it side by side</a> with the stable release.</p>
+
+<h3>WON&#8217;T SOMEONE THINK ABOUT THE TREES</h3>
+
+<p>Of course the definitive way of testing print stylesheets is to physically print a web page on physical paper.  I&#8217;ve done this plenty of times.  And if you&#8217;ve read this far you likely have to.  Hopefully the next time you have to debug printing you can save a bit of paper.</p>
+
+<p><img src="/images/posts/2012-12-12/trees.jpg" title="The less pages you print the more of my type get to live" alt="The less pages you print the more of my type get to live" />
+<a href="http://www.flickr.com/photos/cransell/5119828609/" style="display: block; font-size: 0.8em;">Photo Credit</a></p>
 </div>
 
 
@@ -192,12 +207,12 @@
   
 
 
-<time datetime="2012-10-17T12:48:00-04:00" pubdate data-updated="true">Oct 17<span>th</span>, 2012</time>
+<time datetime="2012-12-12T21:55:00-05:00" pubdate data-updated="true">Dec 12<span>th</span>, 2012</time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/browsers/'>Browsers</a>, <a class='category' href='/blog/categories/forms/'>Forms</a>, <a class='category' href='/blog/categories/html5/'>HTML5</a>, <a class='category' href='/blog/categories/javascript/'>JavaScript</a>
+    <a class='category' href='/blog/categories/css/'>CSS</a>
   
 </span>
 
@@ -210,7 +225,7 @@
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://tjvantoll.com/2012/10/17/maxlength-constraint-validation-oddities/" data-via="tjvantoll" data-counturl="http://tjvantoll.com/2012/10/17/maxlength-constraint-validation-oddities/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://tjvantoll.com/2012/12/12/debugging-print-stylesheets-now-significantly-easier-in-chrome/" data-via="tjvantoll" data-counturl="http://tjvantoll.com/2012/12/12/debugging-print-stylesheets-now-significantly-easier-in-chrome/" >Tweet</a>
   
   
   
@@ -219,10 +234,8 @@
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/2012/09/19/using-the-attribute-selector-with-numeric-values/" title="Previous Post: Using the Attribute Selector with Numeric Values">&laquo; Using the Attribute Selector with Numeric Values</a>
+        <a class="basic-alignment left" href="/2012/11/10/creating-cross-browser-scrollable-tbody/" title="Previous Post: Creating Cross Browser Scrollable &lt;tbody&gt;s - A CSS Only Approach">&laquo; Creating Cross Browser Scrollable &lt;tbody&gt;s - A CSS Only Approach</a>
       
-      
-        <a class="basic-alignment right" href="/2012/10/23/front-end-efficiency-the-top-ten/" title="Next Post: Front End Efficiency - The Top Ten">Front End Efficiency - The Top Ten &raquo;</a>
       
     </p>
   </footer>
@@ -323,8 +336,8 @@
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://tjvantoll.com/2012/10/17/maxlength-constraint-validation-oddities/';
-        var disqus_url = 'http://tjvantoll.com/2012/10/17/maxlength-constraint-validation-oddities/';
+        var disqus_identifier = 'http://tjvantoll.com/2012/12/12/debugging-print-stylesheets-now-significantly-easier-in-chrome/';
+        var disqus_url = 'http://tjvantoll.com/2012/12/12/debugging-print-stylesheets-now-significantly-easier-in-chrome/';
         var disqus_script = 'embed.js';
       
     (function () {

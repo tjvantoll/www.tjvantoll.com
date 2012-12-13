@@ -4,7 +4,7 @@
   <title><![CDATA[Category: CSS | TJ VanToll]]></title>
   <link href="http://tjvantoll.com/blog/categories/css/atom.xml" rel="self"/>
   <link href="http://tjvantoll.com/"/>
-  <updated>2012-12-04T21:48:22-05:00</updated>
+  <updated>2012-12-12T23:19:22-05:00</updated>
   <id>http://tjvantoll.com/</id>
   <author>
     <name><![CDATA[TJ VanToll]]></name>
@@ -12,6 +12,76 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Debugging Print Stylesheets: Now Significantly Easier in Chrome]]></title>
+    <link href="http://tjvantoll.com/2012/12/12/debugging-print-stylesheets-now-significantly-easier-in-chrome/"/>
+    <updated>2012-12-12T21:55:00-05:00</updated>
+    <id>http://tjvantoll.com/2012/12/12/debugging-print-stylesheets-now-significantly-easier-in-chrome</id>
+    <content type="html"><![CDATA[<p>Debugging print stylesheets has always been a bit of a pain.  The traditional way of doing so was to simply change the <code>media</code> attribute of all <code>link</code> tags from <code>print</code> to <code>screen</code> or <code>all</code> while testing.</p>
+
+<p>``` html</p>
+
+<!-- Before -->
+
+
+<p><link rel="stylesheet" href="print.css" media="print" /></p>
+
+<!-- After -->
+
+
+<p><link rel="stylesheet" href="print.css" media="screen" />
+```</p>
+
+<p>The popular <a href="https://addons.mozilla.org/en-US/firefox/addon/web-developer/">Web Developer Extension</a> for Firefox even has an option to do this for you automatically.</p>
+
+<!--more-->
+
+
+<p><img src="/images/posts/2012-12-12/Web_Developer.png" title="Web Developer Extension" alt="Web Developer Extension" /></p>
+
+<p>Then something changed.</p>
+
+<p>We found out that <a href="https://developers.google.com/speed/docs/best-practices/rtt">unnecessary HTTP requests are bad</a>.  We also found out that there are some <a href="http://www.phpied.com/5-years-later-print-css-still-sucks/">serious performance issues with print stylesheets</a>.</p>
+
+<p>Therefore, behind the lead of projects like the <a href="http://html5boilerplate.com/">HTML5 Boilerplate</a> we all switched to writing our print styles inline with the rest of our CSS.</p>
+
+<p>``` css
+@media print {</p>
+
+<pre><code>body { font-size: larger; }
+#ads, #junk { display: none; }
+</code></pre>
+
+<p>}
+```</p>
+
+<p>Inline print styles save HTTP requests and are easier to maintain, but they unfortunately make testing a bit harder.  They don't work with Firefox's Web Developer Extension and a simple find and replace is now quite a bit harder.</p>
+
+<h3>Good News!</h3>
+
+<p>A means to emulate the <code>print</code> media type <a href="https://plus.google.com/115133653231679625609/posts/MgpioU84JPe">just landed in Chrome Canary</a>.</p>
+
+<p>To use it first open up the settings by clicking on the gear in the bottom right corner of the DevTools:</p>
+
+<p><img src="/images/posts/2012-12-12/DevTools_1.png" title="How to open the DevTools settings" alt="How to open the DevTools settings" /></p>
+
+<p>Next, select the Overrides menu, check the "Emulate CSS media" checkbox, and select "print".</p>
+
+<p><img src="/images/posts/2012-12-12/DevTools_2.png" title="How to emulate CSS media in Chrome's DevTools" alt="How to emulate CSS media in Chrome's DevTools" /></p>
+
+<p>That's it!  It will apply both rules applied in external <code>media="print"</code> stylesheets as well as rules within inline <code>@media print {}</code> blocks.  Combine this with a CSS preprocessor that can watch for changes and you have a quick and easy way to debug print styles.</p>
+
+<p>This feature is in version 25 of Chrome Canary so it hopefully it will make it into Chrome stable around Chrome 27.  If you don't have Canary yet you should consider <a href="http://paulirish.com/2012/chrome-canary-for-developers/">installing it side by side</a> with the stable release.</p>
+
+<h3>WON'T SOMEONE THINK ABOUT THE TREES</h3>
+
+<p>Of course the definitive way of testing print stylesheets is to physically print a web page on physical paper.  I've done this plenty of times.  And if you've read this far you likely have to.  Hopefully the next time you have to debug printing you can save a bit of paper.</p>
+
+<p><img src="/images/posts/2012-12-12/trees.jpg" title="The less pages you print the more of my type get to live" alt="The less pages you print the more of my type get to live" />
+<a href="http://www.flickr.com/photos/cransell/5119828609/" style="display: block; font-size: 0.8em;">Photo Credit</a></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Creating Cross Browser Scrollable &lt;tbody&gt;s - A CSS Only Approach]]></title>
@@ -202,154 +272,6 @@ td:nth-child(3), th:nth-child(3) { width: 100px; }
 <h3>Conclusion</h3>
 
 <p>Attributes with numeric values need to have quotes around them when using them in CSS or JavaScript.  When in doubt use quotes around attribute values; it never hurts, and there are some strange edge cases where omitting the quotes leads to unexpected behavior.  If you're looking for a more detailed writeup on when quotes are ok to omit checkout <a href="http://mathiasbynens.be/notes/unquoted-attribute-values">Mathias Bynens' writeup on the topic</a>.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Default Browser Handling of the CSS text-transform Property]]></title>
-    <link href="http://tjvantoll.com/2012/07/10/default-browser-handling-of-the-css-text-transform-property/"/>
-    <updated>2012-07-10T21:05:00-04:00</updated>
-    <id>http://tjvantoll.com/2012/07/10/default-browser-handling-of-the-css-text-transform-property</id>
-    <content type="html"><![CDATA[<p>The <code>text-transform</code> CSS property is most frequently used to uppercase and lowercase text.  According to the <a href="http://www.w3.org/TR/CSS21/text.html#caps-prop">CSS 2.1 specification</a> it is also an inherited property, meaning, when no value is specified on a given element, it should inherit its parent's <code>text-transform</code> value.</p>
-
-<p>If no parents have a <code>text-transform</code> property defined, the element will take on the default value of <code>none</code>.</p>
-
-<p>Where it gets interesting is that all browsers define default <code>text-transform</code> properties for certain form elements.  What does this mean?  <!--more-->Let's say you have the following markup:</p>
-
-<p>``` html</p>
-
-
-
-
-
-<div>
-    <input type="text" value="foo" />
-    <input type="submit" value="bar" />
-</div>
-
-
-<p>```</p>
-
-<p>Both <code>foo</code> and <code>bar</code> will appear lowercased in all major browsers.  You can see this for yourself below:</p>
-
-<iframe style="width: 100%; height: 120px;" src="http://jsfiddle.net/tj_vantoll/DxANv/1/embedded/result,html,css/" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
-
-
-<p>This happens because all browser vendors include <code>text-transform: none</code> in their user agent stylesheet for those elements.  Therefore the <code>text-transform: uppercase</code> rule declared on the parent node is not inherited.</p>
-
-<p>Unfortunately, but not surprisingly, browsers are not consistent about their default values for all elements.</p>
-
-<h3>What the Browsers Do</h3>
-
-<p>The following chart shows popular browser rendering engines and whether their user agent stylesheet includes <code>text-transform: none</code> for the listed elements.</p>
-
-<table>
-    <thead>
-        <tr>
-            <th>Rendering Engine</th>
-            <th>input[type=submit]</th>
-            <th>input[type=text]</th>
-            <th>select</th>
-            <th>textarea</th>
-            <th>button</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>Trident (Internet Explorer)</td>
-            <td>Yes</td>
-            <td>Yes</td>
-            <td>Yes</td>
-            <td>Yes</td>
-            <td><strong>No</strong></td>
-        </tr>
-        <tr>
-            <td>Gecko (Firefox)</td>
-            <td>Yes</td>
-            <td>Yes</td>
-            <td><strong>No</strong></td>
-            <td>Yes</td>
-            <td><strong>No</strong></td>
-        </tr>
-        <tr>
-            <td>WebKit (Chrome, Safari, etc...)</td>
-            <td>Yes</td>
-            <td>Yes</td>
-            <td>Yes</td>
-            <td>Yes</td>
-            <td>Yes</td>
-        </tr>
-        <tr>
-            <td>Presto (Opera)</td>
-            <td>Yes</td>
-            <td>Yes</td>
-            <td><strong>No</strong></td>
-            <td>Yes</td>
-            <td><strong>No</strong></td>
-        </tr>
-    </tbody>
-</table>
-
-
-<p>The rendering engines that have a <strong>No</strong> for a given element declare no default for <code>text-transform</code>.  Therefore, those elements will inherit the value from their parent.</p>
-
-<h3>What Does This Mean?</h3>
-
-<p>The browser differences occur on the <code>button</code> and <code>select</code> elements.  Therefore, if you apply a <code>text-transform</code> value to a node, AND that node has children <code>button</code> / <code>select</code> nodes, AND you do not apply a <code>text-transform</code> value to the <code>button</code> or <code>select</code> nodes themselves... you'll get different behavior in different browsers.</p>
-
-<p>For example:</p>
-
-<p>``` html
-&lt;!DOCTYPE html>
-<html></p>
-
-<pre><code>&lt;head&gt;
-    &lt;style&gt;
-        form { text-transform: uppercase; }
-    &lt;/style&gt;
-&lt;/head&gt;
-&lt;body&gt;
-    &lt;form&gt;
-        &lt;!-- "foo" will be uppercase in IE, Firefox, and Opera --&gt;
-        &lt;!-- "foo" will be lowercase in WebKit based browsers --&gt;
-        &lt;button&gt;foo&lt;/button&gt;
-
-        &lt;!-- "bar" will be uppercase in Firefox and Opera --&gt;
-        &lt;!-- "bar" will be lowercase in IE and WebKit based browsers --&gt;
-        &lt;select&gt;
-            &lt;option&gt;bar&lt;/option&gt;
-        &lt;/select&gt;
-    &lt;/form&gt;
-&lt;/body&gt;
-</code></pre>
-
-<p></html>
-```</p>
-
-<h3>Consistency</h3>
-
-<p>You could make arguments as to whether the user agent stylesheets <em>should</em> be defaulting the <code>text-transform</code> of various form elements to <code>none</code>, but to most people all that matters is that the behavior is consistent.  It's easy enough to override the defaults if you don't like them.</p>
-
-<p>Therefore to get consistent behavior you would <em>think</em> you would need to set the default value of <code>button</code> and <code>select</code> elements to either <code>none</code> or <code>inherit</code>.</p>
-
-<p>``` css
-/<em> Option 1 - Don't inherit values in all browsers </em>/
-button, select { text-transform: none; }</p>
-
-<p>/<em> Option 2 - Inherit values in all browsers </em>/
-button, select { text-transform: inherit; }
-```</p>
-
-<p>But unfortunately for whatever reason Option 2 doesn't work on the <code>&lt;select&gt;</code> in IE &lt;= 7, Safari, and most interestingly, doesn't take effect in Chrome until you click on <code>&lt;select&gt;</code>.  You can verify this behavior for yourself below:</p>
-
-<iframe style="width: 100%; height: 120px;" src="http://jsfiddle.net/tj_vantoll/dUjXB/10/embedded/result,html,css/" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
-
-
-<p>Fortunately Option 1 does indeed produce the same behavior in IE6+, Firefox, Chrome, Safari, and Opera.  Therefore to normalize <code>text-transform</code> you need to include the following in your stylesheet.</p>
-
-<p><code>css Cross Browser text-transform Goodness
-button, select { text-transform: none; }
-</code></p>
 ]]></content>
   </entry>
   
