@@ -1,5 +1,5 @@
 $.domReady(function() {
-	if (Modernizr.csstransforms3d) {
+	if (Modernizr.csstransforms3d && navigator.userAgent.indexOf('MSIE') == -1) {
 		new PictureCube('picture-cube', 
 		[
 			{ src: '/images/me/2.jpg', title: 'My girlfriend Trish and I in NYC.' },
