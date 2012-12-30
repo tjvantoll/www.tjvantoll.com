@@ -155,7 +155,7 @@
 
 <script>
 $.domReady(function() {
-  if (Modernizr.csstransforms3d) {
+  if (Modernizr.csstransforms3d && navigator.userAgent.indexOf('MSIE') == -1) {
 	new PictureCube('browser-picture-cube', 
 	  [
 		{ src: '/images/browsers/Chrome.png', title: 'Chrome' },
