@@ -4,7 +4,7 @@
   <title><![CDATA[TJ VanToll]]></title>
   <link href="http://tjvantoll.com/atom.xml" rel="self"/>
   <link href="http://tjvantoll.com/"/>
-  <updated>2013-01-01T18:17:55-05:00</updated>
+  <updated>2013-01-01T18:32:45-05:00</updated>
   <id>http://tjvantoll.com/</id>
   <author>
     <name><![CDATA[TJ VanToll]]></name>
@@ -937,6 +937,10 @@
 
 
 <p>If you have any other recommendations for how to exclude Google Analytics traffic let me know in the comments.</p>
+
+<h3>Update (January 1st, 2013)</h3>
+
+<p>Reader Aaron Hillyer has created a WordPress plugin to implement the request parameter exclusion approach, <a href="http://socialmediabar.com/enhanced-google-analytics-tracking">check it out</a>.</p>
 ]]></content>
   </entry>
   
