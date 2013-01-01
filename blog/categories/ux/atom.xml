@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: HTML | TJ VanToll]]></title>
-  <link href="http://tjvantoll.com/blog/categories/html/atom.xml" rel="self"/>
+  <title><![CDATA[Category: UX | TJ VanToll]]></title>
+  <link href="http://tjvantoll.com/blog/categories/ux/atom.xml" rel="self"/>
   <link href="http://tjvantoll.com/"/>
   <updated>2013-01-01T18:17:55-05:00</updated>
   <id>http://tjvantoll.com/</id>
@@ -165,94 +165,6 @@
 <h3>Conclusion</h3>
 
 <p>When filling out a form, pressing enter in a textbox should submit the form.  This is known as an implicit form submission.  Despite being vital for assistive technologies and an important user convenience, many web forms prevent it for one reason or another.  If you write web forms, please take a minute to ensure that the enter key can indeed be used to submit them; it'll help make the web a better place for everyone.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Creating Cross Browser Scrollable &lt;tbody&gt;s - A CSS Only Approach]]></title>
-    <link href="http://tjvantoll.com/2012/11/10/creating-cross-browser-scrollable-tbody/"/>
-    <updated>2012-11-10T15:44:00-05:00</updated>
-    <id>http://tjvantoll.com/2012/11/10/creating-cross-browser-scrollable-tbody</id>
-    <content type="html"><![CDATA[<p>By default the <code>overflow</code> CSS property does not apply to table group elements (<code>&lt;thead&gt;</code>, <code>&lt;tbody&gt;</code>, or <code>&lt;tfoot&gt;</code>).  <a href="https://developer.mozilla.org/en-US/docs/Firefox_4_for_developers#Miscellaneous_CSS_changes">As of Firefox 4</a> this behavior is consistent across all browser implementations.</p>
-
-<p>Therefore, if you attempt to apply a CSS <code>height</code> and <code>overflow: scroll</code> to a <code>&lt;tbody&gt;</code> it will have no effect in modern browsers.  You can see this for yourself <a href="http://jsfiddle.net/tj_vantoll/vU494/">here</a>.</p>
-
-<p>But having a scrolling table body with fixed headers is a useful UI element, so how do you work around this?</p>
-
-<!--more-->
-
-
-<h3>The Solution</h3>
-
-<p>Here is my solution:</p>
-
-<p><pre class="codepen" data-height="400" data-type="result" data-href="JEKIu" data-user="tjvantoll"><code></code></pre>
-<script async src="http://codepen.io:/assets/embed/ei.js"></script></p>
-
-<h3>How does it work?</h3>
-
-<p>The first step is to set the <code>&lt;tbody&gt;</code> to <code>display: block</code> so an <code>overflow</code> and <code>height</code> can be applied.  From there the rows in the <code>&lt;thead&gt;</code> need to be set to <code>position: relative</code> and <code>display: block</code> so that they'll sit on top of the now scrollable <code>&lt;tbody&gt;</code>.</p>
-
-<p>That's really about it.</p>
-
-<h3>Unfortunate Part #1: Old Internet Explorer</h3>
-
-<p>When you set a <code>height</code> on a <code>&lt;tbody&gt;</code> Internet Explorer &lt; 10 applies that <code>height</code> to every table cell, which is of course wonderful.</p>
-
-<p>My workaround for this is to conditionally create a wrapper <code>&lt;div&gt;</code>.  When it's present I give it the <code>height</code> and <code>overflow</code> and remove the <code>height</code> from the <code>&lt;tbody&gt;</code>.</p>
-
-<p>``` html Wrap table for IE</p>
-
-
-
-<!--[if lte IE 9]>
-<div class="old_ie_wrapper">
-<!--<![endif]-->
-
-
-<pre><code>&lt;table&gt;
-    &lt;!-- Contents of the table --&gt;
-&lt;/table&gt;
-</code></pre>
-
-<!--[if lte IE 9]>
-</div>
-<!--<![endif]-->
-
-
-<p>```</p>
-
-<p>The headers will scroll with the table body, but the table will at least be usable.  You could also create <a href="http://paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/">conditional classes on the &lt;html&gt; tag</a> to handle this as well.</p>
-
-<h3>Unfortunate Part #2: Widths</h3>
-
-<p>Because the <code>&lt;thead&gt;</code> is relatively positioned each table cell needs an explicit <code>width</code>.</p>
-
-<p><code>css
-td:nth-child(1), th:nth-child(1) { width: 100px; }
-td:nth-child(2), th:nth-child(2) { width: 100px; }
-td:nth-child(3), th:nth-child(3) { width: 100px; }
-</code></p>
-
-<p>But unfortunately that is not enough.  When a scrollbar is present browsers allocate space for it, therefore, the <code>&lt;tbody&gt;</code> ends up having less space available than the <code>&lt;thead&gt;</code>.  Notice the slight misalignment this creates:</p>
-
-<p><img src="/images/posts/2012-11-10/Alignment-Issue.png" title="Alignment issue with scroll bar" alt="Alignment issue with scroll bar" /></p>
-
-<p>The only workaround I could come up with was to set a <code>min-width</code> on all columns except the last one.</p>
-
-<p><code>css
-td:nth-child(1), th:nth-child(1) { min-width: 100px; }
-td:nth-child(2), th:nth-child(2) { min-width: 100px; }
-td:nth-child(3), th:nth-child(3) { width: 100px; }
-</code></p>
-
-<h3>The Good</h3>
-
-<p>Despite these issues the solution does work in all browsers back to IE6 with no JavaScript dependency.</p>
-
-<p>The markup to create the table is simple and semantic.  I've seen workarounds for this issue that use <code>&lt;div&gt;</code>s instead of <code>&lt;table&gt;</code>s or multiple aligned <code>&lt;table&gt;</code>s and those always felt dirty to me.</p>
-
-<p>The code is free to use and do whatever you want with it.  If you have any suggestions for improvements or find any issues please let me know in the comments.</p>
 ]]></content>
   </entry>
   

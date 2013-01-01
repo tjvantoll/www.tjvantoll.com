@@ -5,7 +5,7 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>TJ VanToll - Tutorials, Thoughts, and Ramblings on Front End Development</title>
+  <title>The Enter Key should Submit Forms, Stop Suppressing it - TJ VanToll - Tutorials, Thoughts, and Ramblings on Front End Development</title>
   <meta name="author" content="TJ VanToll">
 
   
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://tjvantoll.com/blog">
+  <link rel="canonical" href="http://tjvantoll.com/2013/01/01/enter-should-submit-forms-stop-messing-with-that">
   <!-- Use custom favicon -->
   <!--<link href="/favicon.png" rel="icon">-->
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
@@ -92,15 +92,12 @@
 </nav>
   <div id="main">
     <div id="content">
-      <div class="blog-index">
+      <div>
+<article class="hentry" role="article">
   
-  
-  
-    <article>
-      
   <header>
     
-      <h1 class="entry-title"><a href="/2013/01/01/enter-should-submit-forms-stop-messing-with-that/">The Enter Key should Submit Forms, Stop Suppressing it</a></h1>
+      <h1 class="entry-title">The Enter Key should Submit Forms, Stop Suppressing it</h1>
     
     
       <p class="meta">
@@ -118,14 +115,14 @@
 
 <time datetime="2013-01-01T15:54:00-05:00" pubdate data-updated="true">Jan 1<span>st</span>, 2013</time>
         
-         | <a href="/2013/01/01/enter-should-submit-forms-stop-messing-with-that/#disqus_thread">Comments</a>
+         | <a href="#disqus_thread">Comments</a>
         
       </p>
     
   </header>
 
 
-  <div class="entry-content"><p>I try to do most of my work and play on the internet with the keyboard as much as possible.  In the course of my internet-ing there&#8217;s one unfortunate trend that I&#8217;ve noticed; an increasing number of sites are not allowing the enter key to submit a form.  Before I tell you why you care, let&#8217;s look at how this should work.</p>
+<div class="entry-content"><p>I try to do most of my work and play on the internet with the keyboard as much as possible.  In the course of my internet-ing there&#8217;s one unfortunate trend that I&#8217;ve noticed; an increasing number of sites are not allowing the enter key to submit a form.  Before I tell you why you care, let&#8217;s look at how this should work.</p>
 
 <h3>Enter = Submit</h3>
 
@@ -303,80 +300,16 @@
 
 <p>When filling out a form, pressing enter in a textbox should submit the form.  This is known as an implicit form submission.  Despite being vital for assistive technologies and an important user convenience, many web forms prevent it for one reason or another.  If you write web forms, please take a minute to ensure that the enter key can indeed be used to submit them; it&#8217;ll help make the web a better place for everyone.</p>
 </div>
-  
-  
 
 
-    </article>
-  
-  
-    <article>
+  <footer>
+    <p class="meta">
       
-  <header>
-    
-      <h1 class="entry-title"><a href="/2012/12/12/debugging-print-stylesheets-now-significantly-easier-in-chrome/">Debugging Print Stylesheets: Now Significantly Easier in Chrome</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
   
 
+<span class="byline author vcard">Posted by <span class="fn">TJ VanToll</span></span>
 
-<time datetime="2012-12-12T21:55:00-05:00" pubdate data-updated="true">Dec 12<span>th</span>, 2012</time>
-        
-         | <a href="/2012/12/12/debugging-print-stylesheets-now-significantly-easier-in-chrome/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Debugging print stylesheets has always been a bit of a pain.  The traditional way of doing so was to manually change the <code>media</code> attribute of all <code>link</code> tags from <code>print</code> to <code>screen</code> or <code>all</code> while testing.</p>
-
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="c">&lt;!-- Before --&gt;</span>
-</span><span class='line'><span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">&quot;stylesheet&quot;</span> <span class="na">href=</span><span class="s">&quot;print.css&quot;</span> <span class="na">media=</span><span class="s">&quot;print&quot;</span> <span class="nt">/&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="c">&lt;!-- After --&gt;</span>
-</span><span class='line'><span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">&quot;stylesheet&quot;</span> <span class="na">href=</span><span class="s">&quot;print.css&quot;</span> <span class="na">media=</span><span class="s">&quot;screen&quot;</span> <span class="nt">/&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>The popular <a href="https://addons.mozilla.org/en-US/firefox/addon/web-developer/">Web Developer Add-on</a> for Firefox even has an option to do this for you automatically.</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/2012/12/12/debugging-print-stylesheets-now-significantly-easier-in-chrome/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
-  
-    <article>
       
-  <header>
-    
-      <h1 class="entry-title"><a href="/2012/11/10/creating-cross-browser-scrollable-tbody/">Creating Cross Browser Scrollable &lt;tbody&gt;s - A CSS Only Approach</a></h1>
-    
-    
-      <p class="meta">
-        
 
 
 
@@ -388,393 +321,48 @@
   
 
 
-<time datetime="2012-11-10T15:44:00-05:00" pubdate data-updated="true">Nov 10<span>th</span>, 2012</time>
-        
-         | <a href="/2012/11/10/creating-cross-browser-scrollable-tbody/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>By default the <code>overflow</code> CSS property does not apply to table group elements (<code>&lt;thead&gt;</code>, <code>&lt;tbody&gt;</code>, or <code>&lt;tfoot&gt;</code>).  <a href="https://developer.mozilla.org/en-US/docs/Firefox_4_for_developers#Miscellaneous_CSS_changes">As of Firefox 4</a> this behavior is consistent across all browser implementations.</p>
-
-<p>Therefore, if you attempt to apply a CSS <code>height</code> and <code>overflow: scroll</code> to a <code>&lt;tbody&gt;</code> it will have no effect in modern browsers.  You can see this for yourself <a href="http://jsfiddle.net/tj_vantoll/vU494/">here</a>.</p>
-
-<p>But having a scrolling table body with fixed headers is a useful UI element, so how do you work around this?</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/2012/11/10/creating-cross-browser-scrollable-tbody/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
-  
-    <article>
+<time datetime="2013-01-01T15:54:00-05:00" pubdate data-updated="true">Jan 1<span>st</span>, 2013</time>
       
-  <header>
-    
-      <h1 class="entry-title"><a href="/2012/11/08/creating-a-polished-vertical-tabs-interaction-with-jquery-ui/">Creating a Polished Vertical Tabs Interaction with jQuery UI</a></h1>
-    
-    
-      <p class="meta">
-        
 
-
-
-
-
-
-
-
+<span class="categories">
   
+    <a class='category' href='/blog/categories/html/'>HTML</a>, <a class='category' href='/blog/categories/ux/'>UX</a>
+  
+</span>
 
 
-<time datetime="2012-11-08T00:00:00-05:00" pubdate data-updated="true">Nov 8<span>th</span>, 2012</time>
-        
-         | <a href="/2012/11/08/creating-a-polished-vertical-tabs-interaction-with-jquery-ui/#disqus_thread">Comments</a>
-        
-      </p>
+    </p>
+    <p class="author_card meta">
+      <img src="/images/me/1.jpg" alt="Me!" id="post_me" />
+      TJ VanToll is an avid web developer working for <a href="http://liquidweb.com">Liquid Web</a> and living in Lansing, MI.  He is an open source advocate that is on the <a href="http://jqueryui.com">jQuery UI</a> team and publishes this blog <a href="https://github.com/tjvantoll/tjvantoll.github.com/tree/source">open source</a>.  When not on the internet he is generally found <a href="/images/kids/2.jpg">brainwashing his children</a> and talking about himself in the third person.  If you like hearing TJ talk about himself you should consider <a href="http://twitter.com/tjvantoll">following him on Twitter</a>.
+    </p>
     
-  </header>
-
-
-  <div class="entry-content"><p>The <a href="http://jqueryui.com/tabs/">jQuery UI tabs widget</a> provides a clean way to implement a tabular UI.  Furthermore, the markup used gives you ample hooks to make the tabs visually into what you want them to be.  The docs provide a <a href="http://jqueryui.com/tabs/#vertical">simple demo</a> of how you can give the tabs a vertical orientation, but I thought I&#8217;d show how you can use what the framework provides to create something a bit more polished.</p>
-
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://tjvantoll.com/2013/01/01/enter-should-submit-forms-stop-messing-with-that/" data-via="tjvantoll" data-counturl="http://tjvantoll.com/2013/01/01/enter-should-submit-forms-stop-messing-with-that/" >Tweet</a>
+  
+  
+  
 </div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/2012/11/08/creating-a-polished-vertical-tabs-interaction-with-jquery-ui/">Read on &rarr;</a>
-    </footer>
-  
 
-
-    </article>
-  
-  
-    <article>
+    
+    <p class="meta">
       
-  <header>
-    
-      <h1 class="entry-title"><a href="/2012/10/24/adding-pointers-to-jquery-ui-tooltips/">Adding Pointers to jQuery UI Tooltips</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-10-24T20:58:00-04:00" pubdate data-updated="true">Oct 24<span>th</span>, 2012</time>
-        
-         | <a href="/2012/10/24/adding-pointers-to-jquery-ui-tooltips/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>The recent <a href="http://jqueryui.com/changelog/1.9.0/">jQuery UI 1.9 release</a> included a new <a href="http://jqueryui.com/tooltip/">tooltip plugin</a> that can be used to create tooltips much like the native tooltips the browser provides.  The difference is that jQuery UI&#8217;s version are completely customizable.  As such I thought I&#8217;d show a quick example of how you can create a pointer from the tooltip to its associated field:</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/2012/10/24/adding-pointers-to-jquery-ui-tooltips/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
-  
-    <article>
+        <a class="basic-alignment left" href="/2012/12/12/debugging-print-stylesheets-now-significantly-easier-in-chrome/" title="Previous Post: Debugging Print Stylesheets: Now Significantly Easier in Chrome">&laquo; Debugging Print Stylesheets: Now Significantly Easier in Chrome</a>
       
-  <header>
-    
-      <h1 class="entry-title"><a href="/2012/10/23/front-end-efficiency-the-top-ten/">Front End Efficiency - The Top Ten</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-10-23T00:00:00-04:00" pubdate data-updated="true">Oct 23<span>rd</span>, 2012</time>
-        
-         | <a href="/2012/10/23/front-end-efficiency-the-top-ten/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>I gave a &#8220;Front End Efficiency - The Top Ten&#8221; talk to the <a href="http://groups.google.com/group/greaterlansingjug?pli=1">Greater Lansing Java Users Group</a> on October 23rd, 2012.  For those that missed the talk the slides are <a href="/speaking/slides/2012/Efficiency-Top-Ten/">here</a>.</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
       
-  <header>
-    
-      <h1 class="entry-title"><a href="/2012/10/17/maxlength-constraint-validation-oddities/">maxlength Constraint Validation Oddities in Major Browsers</a></h1>
-    
-    
-      <p class="meta">
-        
+    </p>
+  </footer>
+</article>
 
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-10-17T12:48:00-04:00" pubdate data-updated="true">Oct 17<span>th</span>, 2012</time>
-        
-         | <a href="/2012/10/17/maxlength-constraint-validation-oddities/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>The <code>maxlength</code> attribute has been around in browsers for a long time.  When provided all browsers prevent the user entering a value that exceeds the <code>maxlength</code>.</p>
-
-<p>For example you cannot type more than 2 characters in the textbox below:</p>
-
-<p><input type="text" maxlength="2" /></p>
-
-<h3>Constraint Validation</h3>
-
-<p><a href="https://developer.mozilla.org/en-US/docs/HTML/HTML5/Constraint_validation_">Constraint validation</a> is an HTML5 spec that provides native client side form validation in the browser.  As part of its <a href="https://developer.mozilla.org/en-US/docs/HTML/Forms_in_HTML#Constraint_Validation_API">API</a>, all <code>&lt;input&gt;</code> and <code>&lt;textarea&gt;</code> elements have a <code>validity.tooLong</code> property that is <code>true</code> when the length of the <code>value</code> exceeds the <code>maxlength</code>.</p>
-
-<p>But if the browser prevents this then why does the property exist?</p>
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
 
 </div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/2012/10/17/maxlength-constraint-validation-oddities/">Read on &rarr;</a>
-    </footer>
-  
 
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2012/09/19/using-the-attribute-selector-with-numeric-values/">Using the Attribute Selector with Numeric Values</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-09-19T20:42:00-04:00" pubdate data-updated="true">Sep 19<span>th</span>, 2012</time>
-        
-         | <a href="/2012/09/19/using-the-attribute-selector-with-numeric-values/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>What color will the number 3 be in the example below?</p>
-
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;style&gt;</span>
-</span><span class='line'>    <span class="nt">td</span> <span class="p">{</span> <span class="k">color</span><span class="o">:</span> <span class="nb">red</span><span class="p">;</span> <span class="p">}</span>
-</span><span class='line'>    <span class="nt">td</span><span class="o">[</span><span class="nt">colspan</span><span class="o">=</span><span class="nt">2</span><span class="o">]</span> <span class="p">{</span> <span class="k">color</span><span class="o">:</span> <span class="nb">blue</span><span class="p">;</span> <span class="p">}</span>
-</span><span class='line'><span class="nt">&lt;/style&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="nt">&lt;table&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;tr&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;td</span> <span class="na">colspan=</span><span class="s">&quot;2&quot;</span><span class="nt">&gt;</span>1<span class="nt">&lt;/td&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;/tr&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;td&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;td&gt;</span>2<span class="nt">&lt;/td&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;td&gt;</span>3<span class="nt">&lt;/td&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;/tr&gt;</span>
-</span><span class='line'><span class="nt">&lt;/table&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Turns out it will be red because the <code>td[colspan=2]</code> selector does not match it.  Why?</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/2012/09/19/using-the-attribute-selector-with-numeric-values/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2012/09/14/using-jquery-ui-slider-to-polyfill-html5-input-type-range/">Using jQuery UI&#8217;s Slider to Polyfill HTML5&#8217;s input[type=range]</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-09-14T21:25:00-04:00" pubdate data-updated="true">Sep 14<span>th</span>, 2012</time>
-        
-         | <a href="/2012/09/14/using-jquery-ui-slider-to-polyfill-html5-input-type-range/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><a href="http://jqueryui.com/demos/slider">jQuery UI&#8217;s slider plugin</a> looks and behaves much like the browser&#8217;s native <code>input[type=range]</code> control; therefore it makes an excellent choice for <a href="http://remysharp.com/2010/10/08/what-is-a-polyfill/">polyfilling</a> the native behavior.</p>
-
-<h3>How to do it</h3>
-
-<p>The main issue is that the slider must be built on a block level node, not an <code>&lt;input&gt;</code>.  Therefore you must create another container node (in this case a <code>&lt;div&gt;</code>) to create the slider from then hide the original <code>&lt;input&gt;</code>.</p>
-
-<p>Here&#8217;s the script that I used.</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/2012/09/14/using-jquery-ui-slider-to-polyfill-html5-input-type-range/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2012/08/30/html5-form-validation-start-using-it-in-production-applications/">HTML5 Form Validation - Start Using it in Production Applications</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-08-30T00:00:00-04:00" pubdate data-updated="true">Aug 30<span>th</span>, 2012</time>
-        
-         | <a href="/2012/08/30/html5-form-validation-start-using-it-in-production-applications/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Forms suck, yet, they make or break the most crucial online transactions.  Building web forms sucks as well; the APIs and lack of customizability has confused and frustrated people for years.  As a byproduct an abundance of horribly unusable forms have been created for everyone to suffer through.</p>
-
-<p>Therefore <em>anything</em> that makes this process easier should be greeted with joy and enthusiasm.</p>
-
-<p>HTML5 does just this by including a built in <a href="https://developer.mozilla.org/en-US/docs/HTML/Forms_in_HTML#Constraint_Validation_API">client side form validation mechanism</a> designed to make implementing client side validation powerful, seamless, and most importantly - easy to implement.</p>
-
-<p>Great!  Despite this, HTML5 form validation is a topic relegated to presentations and demos; I personally have yet to fill out a web form in the wild that actually makes use of it.</p>
-
-<p>Why?</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/2012/08/30/html5-form-validation-start-using-it-in-production-applications/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
-  <div class="pagination">
-    
-      <a class="prev" href="/blog/page/2/">&larr; Older</a>
-    
-    <a href="/blog/archives">Blog Archives</a>
-    
-  </div>
-</div>
 <aside class="sidebar">
   
     <section>
@@ -814,7 +402,7 @@
       </li>
     
       <li class="post">
-        <a href="/2012/09/14/using-jquery-ui-slider-to-polyfill-html5-input-type-range/">Using jQuery UI&#8217;s Slider to Polyfill HTML5&#8217;s input[type=range]</a>
+        <a href="/2012/09/14/using-jquery-ui-slider-to-polyfill-html5-input-type-range/">Using jQuery UI's Slider to Polyfill HTML5's input[type=range]</a>
       </li>
     
       <li class="post">
@@ -833,6 +421,7 @@
   
 </aside>
 
+
     </div>
   </div>
   <footer role="contentinfo"><p>
@@ -847,7 +436,10 @@
       var disqus_shortname = 'tjvantoll';
       
         
-        var disqus_script = 'count.js';
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://tjvantoll.com/2013/01/01/enter-should-submit-forms-stop-messing-with-that/';
+        var disqus_url = 'http://tjvantoll.com/2013/01/01/enter-should-submit-forms-stop-messing-with-that/';
+        var disqus_script = 'embed.js';
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;

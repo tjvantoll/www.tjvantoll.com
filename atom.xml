@@ -4,7 +4,7 @@
   <title><![CDATA[TJ VanToll]]></title>
   <link href="http://tjvantoll.com/atom.xml" rel="self"/>
   <link href="http://tjvantoll.com/"/>
-  <updated>2012-12-29T22:57:44-05:00</updated>
+  <updated>2013-01-01T18:17:55-05:00</updated>
   <id>http://tjvantoll.com/</id>
   <author>
     <name><![CDATA[TJ VanToll]]></name>
@@ -12,6 +12,191 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[The Enter Key should Submit Forms, Stop Suppressing it]]></title>
+    <link href="http://tjvantoll.com/2013/01/01/enter-should-submit-forms-stop-messing-with-that/"/>
+    <updated>2013-01-01T15:54:00-05:00</updated>
+    <id>http://tjvantoll.com/2013/01/01/enter-should-submit-forms-stop-messing-with-that</id>
+    <content type="html"><![CDATA[<p>I try to do most of my work and play on the internet with the keyboard as much as possible.  In the course of my internet-ing there&#8217;s one unfortunate trend that I&#8217;ve noticed; an increasing number of sites are not allowing the enter key to submit a form.  Before I tell you why you care, let&#8217;s look at how this should work.</p>
+
+<h3>Enter = Submit</h3>
+
+<p>Take the following basic form:</p>
+
+<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;form&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;label</span> <span class="na">for=</span><span class="s">&quot;name&quot;</span><span class="nt">&gt;</span>Name:<span class="nt">&lt;/label&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;text&quot;</span> <span class="na">name=</span><span class="s">&quot;name&quot;</span> <span class="na">id=</span><span class="s">&quot;name&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;submit&quot;</span> <span class="na">value=</span><span class="s">&quot;Submit&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'><span class="nt">&lt;/form&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>If you have focus in the textbox and hit enter, the form will be submitted automatically.  This behavior is consistent across all browsers and is known as implicit submission.  So why is this important?</p>
+
+<h3>Accessibility</h3>
+
+<p>Implicit submission is vital to assistive technologies and impaired users that cannot use a mouse at all.  From the HTML5 specification:</p>
+
+<blockquote><p>There are pages on the Web that are only usable if there is a way to implicitly submit forms, so user agents are strongly encouraged to support this.</p><footer><strong>HTML 5 specification</strong> <cite><a href='http://www.whatwg.org/specs/web-apps/current-work/multipage/association-of-controls-and-forms.html#implicit-submission'>www.whatwg.org/specs/web-apps/&hellip;</a></cite></footer></blockquote>
+
+
+<p>By user agent the spec is referring to browsers, and it&#8217;s strongly encouraging them to allow implicit submission.  They all do, you should too.</p>
+
+<h3>User Expectations</h3>
+
+<p>Many users have an expectation that implicit submission will just work.  Interfering with this leads to a worse user experience for these users.  At the very least I won&#8217;t be happy.</p>
+
+<h3>How to Prevent Implicit Submission</h3>
+
+<p>What are sites doing to keep this from happening?  Here&#8217;s a few things I&#8217;ve seen.</p>
+
+<h4>No Submit Buttons</h4>
+
+<p>Many sites simply don&#8217;t have a submit button within the form itself.  From the spec here&#8217;s how browsers determine what to do when enter is clicked.</p>
+
+<blockquote><p>If the user agent supports letting the user submit a form implicitly (for example, on some platforms hitting the &#8220;enter&#8221; key while a text field is focused implicitly submits the form), then doing so for a form whose default button has a defined activation behavior must cause the user agent to run synthetic click activation steps on that default button.</p><footer><strong>HTML 5 specification</strong> <cite><a href='http://www.whatwg.org/specs/web-apps/current-work/multipage/association-of-controls-and-forms.html#implicit-submission'>www.whatwg.org/specs/web-apps/&hellip;</a></cite></footer></blockquote>
+
+
+<p>Basically, if the user hits enter when a text field is focused, find the first submit button in the form and click it.</p>
+
+<blockquote><p>If the form has no submit button, then the implicit submission mechanism must do nothing if the form has more than one field that blocks implicit submission, and must submit the form element from the form element itself otherwise.</p><p>For the purpose of the previous paragraph, an element is a field that blocks implicit submission of a form element if it is an input element whose form owner is that form element and whose type attribute is in one of the following states: Text, Search, URL, Telephone, E-mail, Password, Date and Time, Date, Month, Week, Time, Local Date and Time, Number</p><footer><strong>HTML 5 specification</strong> <cite><a href='http://www.whatwg.org/specs/web-apps/current-work/multipage/association-of-controls-and-forms.html#implicit-submission'>www.whatwg.org/specs/web-apps/&hellip;</a></cite></footer></blockquote>
+
+
+<p>So, in a form with no submit buttons, implicit submission will only be done if one input is present.  Therefore, pressing enter in this textbox will submit the form:</p>
+
+<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;form&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;label</span> <span class="na">for=</span><span class="s">&quot;name&quot;</span><span class="nt">&gt;</span>Name:<span class="nt">&lt;/label&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;text&quot;</span> <span class="na">name=</span><span class="s">&quot;name&quot;</span> <span class="na">id=</span><span class="s">&quot;name&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'><span class="nt">&lt;/form&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>But in this form it will not because there are multiple fields:</p>
+
+<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;form&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;label</span> <span class="na">for=</span><span class="s">&quot;name&quot;</span><span class="nt">&gt;</span>Name:<span class="nt">&lt;/label&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;text&quot;</span> <span class="na">name=</span><span class="s">&quot;name&quot;</span> <span class="na">id=</span><span class="s">&quot;name&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;label</span> <span class="na">for=</span><span class="s">&quot;address&quot;</span><span class="nt">&gt;</span>Address:<span class="nt">&lt;/label&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;text&quot;</span> <span class="na">name=</span><span class="s">&quot;address&quot;</span> <span class="na">id=</span><span class="s">&quot;address&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'><span class="nt">&lt;/form&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Therefore, if you have a form with more than one input field, always include a submit button.  Specifically an <code>&lt;input&gt;</code> with the <code>type="submit"</code> attribute, or a <code>&lt;button&gt;</code> element should be present.  If you need to run some JavaScript before the form is submitted (validation, data manipulation, etc), do it in a <code>submit</code> event handler on the form, not a <code>click</code> handler on a button.</p>
+
+<h4>No &lt;form&gt;</h4>
+
+<p>I&#8217;ve seen a few forms that simply do not use the <code>&lt;form&gt;</code> HTML tag.  Why would they do that?</p>
+
+<p>With modern day browsers and JavaScript libraries it&#8217;s easy to send data to the server via AJAX.  Because an AJAX request does not require a true <code>&lt;form&gt;</code> tag, it is often omitted.  However, much like implicit submission, surrounding form data with a true <code>&lt;form&gt;</code> tag is vital for accessibility.  Most screen readers have a <a href="http://www.htctu.fhda.edu/trainings/manuals/tutorials/readweb/forms.htm">mode specifically for filling out forms</a>, and by not using a true <code>&lt;form&gt;</code> tag, you risk this not being activated.</p>
+
+<h4>Explicit Prevention</h4>
+
+<p>Finally, it&#8217;s also quite easy to prevent implicit submission in JavaScript.  Take the following example:</p>
+
+<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;form&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;label</span> <span class="na">for=</span><span class="s">&quot;name&quot;</span><span class="nt">&gt;</span>Name:<span class="nt">&lt;/label&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;text&quot;</span> <span class="na">name=</span><span class="s">&quot;name&quot;</span> <span class="na">id=</span><span class="s">&quot;name&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;submit&quot;</span> <span class="na">value=</span><span class="s">&quot;Submit&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'><span class="nt">&lt;/form&gt;</span>
+</span><span class='line'><span class="nt">&lt;script&gt;</span>
+</span><span class='line'>    <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">).</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">&#39;keypress&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>        <span class="k">if</span> <span class="p">(</span><span class="nx">event</span><span class="p">.</span><span class="nx">keyCode</span> <span class="o">==</span> <span class="mi">13</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>            <span class="nx">event</span><span class="p">.</span><span class="nx">preventDefault</span><span class="p">();</span>
+</span><span class='line'>        <span class="p">}</span>
+</span><span class='line'>    <span class="p">});</span>
+</span><span class='line'><span class="nt">&lt;/script&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This sets up a simple <code>keypress</code> event handler that prevents the default action (implicit submission) from occurring when the enter key is pressed.</p>
+
+<p>This technique can be handy.  For example, say you have a form with multiple submit buttons.  As we saw earlier, the implicit submission algorithm will simply click the first submit button that it finds.  Therefore, if you need control over which submit button is clicked, you can use the above technique to listen for enter keypresses, prevent the default action, then explicitly click the appropriate button.</p>
+
+<p>Take the following example:</p>
+
+<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;form&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;label</span> <span class="na">for=</span><span class="s">&quot;age&quot;</span><span class="nt">&gt;</span>Age:<span class="nt">&lt;/label&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;number&quot;</span> <span class="na">min=</span><span class="s">&quot;0&quot;</span> <span class="na">max=</span><span class="s">&quot;120&quot;</span> <span class="na">name=</span><span class="s">&quot;age&quot;</span> <span class="na">id=</span><span class="s">&quot;age&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;button</span> <span class="na">id=</span><span class="s">&quot;child&quot;</span><span class="nt">&gt;</span>Child<span class="nt">&lt;/button&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;button</span> <span class="na">id=</span><span class="s">&quot;adult&quot;</span><span class="nt">&gt;</span>Adult<span class="nt">&lt;/button&gt;</span>
+</span><span class='line'><span class="nt">&lt;/form&gt;</span>
+</span><span class='line'><span class="nt">&lt;script&gt;</span>
+</span><span class='line'>    <span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>        <span class="kd">var</span> <span class="nx">age</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">&#39;age&#39;</span><span class="p">);</span>
+</span><span class='line'>        <span class="nx">age</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">&#39;keypress&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>            <span class="k">if</span> <span class="p">(</span><span class="nx">event</span><span class="p">.</span><span class="nx">keyCode</span> <span class="o">==</span> <span class="mi">13</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>                <span class="nx">event</span><span class="p">.</span><span class="nx">preventDefault</span><span class="p">();</span>
+</span><span class='line'>                <span class="k">if</span> <span class="p">(</span><span class="nx">age</span><span class="p">.</span><span class="nx">value</span> <span class="o">&gt;</span> <span class="mi">20</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>                    <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">&#39;adult&#39;</span><span class="p">).</span><span class="nx">click</span><span class="p">();</span>
+</span><span class='line'>                <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span><span class='line'>                    <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">&#39;child&#39;</span><span class="p">).</span><span class="nx">click</span><span class="p">();</span>
+</span><span class='line'>                <span class="p">}</span>
+</span><span class='line'>            <span class="p">}</span>
+</span><span class='line'>        <span class="p">});</span>
+</span><span class='line'>    <span class="p">}());</span>
+</span><span class='line'><span class="nt">&lt;/script&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>When enter is clicked in the number input, the <code>keypress</code> event handler determines which submit button is appropriate and clicks it.</p>
+
+<p>While this technique can be handy I&#8217;ve seen it used plenty of times to simply prevent implicit submission from working.  Don&#8217;t do that.</p>
+
+<h3>Conclusion</h3>
+
+<p>When filling out a form, pressing enter in a textbox should submit the form.  This is known as an implicit form submission.  Despite being vital for assistive technologies and an important user convenience, many web forms prevent it for one reason or another.  If you write web forms, please take a minute to ensure that the enter key can indeed be used to submit them; it&#8217;ll help make the web a better place for everyone.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Debugging Print Stylesheets: Now Significantly Easier in Chrome]]></title>
@@ -2747,133 +2932,6 @@
 <h3>Conclusion</h3>
 
 <p>Using LESS client side is awfully convenient, but it shouldn&#8217;t be done in a production setting.  If you use LESS a lot then this is something you&#8217;ll want to automate in your workflow.  In my opinion using a git <code>pre-commit</code> hook is a clean way to accomplish this.  Feel free to use my script or alter it to your liking.  If you have any other ways you automate your LESS workflow I&#8217;d love to hear about it.  Let me know in the comments.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Creating a Native HTML 5 Datepicker with a Fallback to jQuery UI]]></title>
-    <link href="http://tjvantoll.com/2012/06/30/creating-a-native-html5-datepicker-with-a-fallback-to-jquery-ui/"/>
-    <updated>2012-06-30T17:06:00-04:00</updated>
-    <id>http://tjvantoll.com/2012/06/30/creating-a-native-html5-datepicker-with-a-fallback-to-jquery-ui</id>
-    <content type="html"><![CDATA[<p>The recently released Chrome 20 features support for native datepickers on <code>&lt;input&gt;</code> nodes with a <code>[type=date]</code> attribute.  The list of browsers that support native datepickers now includes Chrome, Opera 11+, Opera Mobile, and iOS 5+ (see <a href="http://caniuse.com/#feat=input-datetime">caniuse.com</a>).  Therefore, now is a great time to start using them in your web applications.</p>
-
-<!--more-->
-
-
-<h3>Using</h3>
-
-<p>Using the native datepickers is easy, just change the <code>type</code> attribute of your date inputs from <code>text</code> to <code>date</code>.</p>
-
-<figure class='code'><figcaption class='not_empty'><span>Converting to a native HTML5 datepicker</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="c">&lt;!-- Before --&gt;</span>
-</span><span class='line'><span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;text&quot;</span> <span class="nt">/&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="c">&lt;!-- After --&gt;</span>
-</span><span class='line'><span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;date&quot;</span> <span class="nt">/&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Here is what the user will see in supported browsers:</p>
-
-<h4>Chrome 20</h4>
-
-<p><img src="http://tjvantoll.com/images/posts/2012-06-30/Chrome.png" title="Chrome 20" alt="Chrome 20" /></p>
-
-<h4>Opera 12</h4>
-
-<p><img src="http://tjvantoll.com/images/posts/2012-06-30/Opera.png" title="Opera 12" alt="Opera 12" /></p>
-
-<h4>Opera Mobile</h4>
-
-<p><img src="http://tjvantoll.com/images/posts/2012-06-30/Opera%20Mobile.png" title="Opera Mobile" alt="Opera Mobile" /></p>
-
-<h4>iOS 5</h4>
-
-<p><img src="http://tjvantoll.com/images/posts/2012-06-30/iOS5.png" title="iOS 5" alt="iOS 5" /></p>
-
-<h3>Advantages</h3>
-
-<p>Why would use the native solution?</p>
-
-<p>First and foremost there are no dependencies.  There is no need to bring in a library or toolkit, it&#8217;s all native.  Therefore, you save some bytes by not having to ship the JavaScript / CSS to make the datepicker work.</p>
-
-<p>Furthermore you can be guaranteed that it will work perfectly on all devices that support the native datepicker.  It&#8217;s not dependent on JavaScript so it&#8217;ll even work for users that have JavaScript disabled.</p>
-
-<p>Another key advantage is that devices can give alternative means of input for date controls.  For example note the native date control in iOS 5:</p>
-
-<p><img src="http://tjvantoll.com/images/posts/2012-06-30/iOS5.png" title="iOS 5" alt="iOS 5" /></p>
-
-<p>It will be a lot easier for the user to input a date with those controls, plus you can be guaranteed that you&#8217;ll receive input in the correct format.</p>
-
-<h3>Disadvantages</h3>
-
-<p>The main disadvantage of using a native datepicker is that you have a lot less control.  There are no hooks to control the look of the date picker; you get what the browser wants to give you.  You also have a lot less control over the behavior.  Here&#8217;s a small sampling of things that jQuery UI&#8217;s datepicker can do that you cannot do with the native control.</p>
-
-<ul>
-<li>Only allow selection on certain days of the week.</li>
-<li>Control the formatting of the headers in the control (Monday vs Mon vs M).</li>
-<li>View multiple months at the same time.</li>
-</ul>
-
-
-<p>If any of this functionality is important to your application you&#8217;ll probably want to stick with the jQuery UI solution.</p>
-
-<h3>Best of Both Worlds</h3>
-
-<p><a href="http://modernizr.com">Modernizr</a> gives you the ability to detect whether the browser supports native datepickers.  The following shows how you can use the native datepicker when available, and fallback to jQuery UI&#8217;s picker in unsupported browsers.</p>
-
-<figure class='code'><figcaption class='not_empty'><span>Detect native support for datepickers and fallback to jQuery UI</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">Modernizr</span><span class="p">.</span><span class="nx">inputtypes</span><span class="p">.</span><span class="nx">date</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>    <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;input[type=date]&#39;</span><span class="p">).</span><span class="nx">datepicker</span><span class="p">();</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>You can see how your browser handles this situation here:</p>
-
-<iframe style="width: 100%; height: 120px;" src="http://jsfiddle.net/p58bt/2/embedded/result,html,js/" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
-
-
-<h3>Another Option</h3>
-
-<p>Another option I like is showing the native date picker only to users that are on touch capable devices.</p>
-
-<figure class='code'><figcaption class='not_empty'><span>Native picker for supported touch users only</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;text&quot;</span> <span class="na">id=</span><span class="s">&quot;myDate&quot;</span> <span class="nt">/&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="nt">&lt;script&gt;</span>
-</span><span class='line'>    <span class="k">if</span> <span class="p">(</span><span class="nx">Modernizr</span><span class="p">.</span><span class="nx">touch</span> <span class="o">&amp;&amp;</span> <span class="nx">Modernizr</span><span class="p">.</span><span class="nx">inputtypes</span><span class="p">.</span><span class="nx">date</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>        <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">&#39;myDate&#39;</span><span class="p">).</span><span class="nx">type</span> <span class="o">=</span> <span class="s1">&#39;date&#39;</span><span class="p">;</span>
-</span><span class='line'>    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-</span><span class='line'>        <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#myDate&#39;</span><span class="p">).</span><span class="nx">datepicker</span><span class="p">();</span>
-</span><span class='line'>    <span class="p">}</span>
-</span><span class='line'><span class="nt">&lt;/script&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>This gives touch users with <code>input[type=date]</code> support the optimized UI / keyboard and everyone else jQuery UI&#8217;s picker.</p>
-
-<h3>Conclusion</h3>
-
-<p>With Chrome adding support for native datepickers a large chunk web users now have the ability to use them.  Therefore, now is a great time to consider using them in your applications.</p>
-
-<h3>Update - September 15th, 2012</h3>
-
-<p>I updated one of my code examples from using <code>$('input').attr('type', 'date')</code> to <code>document.getElementById('myDate').type = 'date'</code> after commenter brownieboy pointed out that jQuery actually doesn&#8217;t allow you to change an input&#8217;s <code>type</code>.  jQuery does this because IE &lt;= 8 does not allow an the <code>type</code> of an input to be changed at all.  The native JS solution works just fine.</p>
 ]]></content>
   </entry>
   
