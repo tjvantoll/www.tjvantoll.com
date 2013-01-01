@@ -133,3 +133,7 @@ In case you want to include both of these here's a code snippet that makes it so
 ```
 
 If you have any other recommendations for how to exclude Google Analytics traffic let me know in the comments.
+
+### Update (January 1st, 2013)
+
+Reader Aaron Hillyer has created a WordPress plugin to implement the request parameter exclusion approach, [check it out](http://socialmediabar.com/enhanced-google-analytics-tracking).
