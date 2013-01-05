@@ -7,6 +7,8 @@ categories: [HTML, UX]
 ---
 I try to do most of my work and play on the internet with the keyboard.  In the course of my internet-ing there's one unfortunate trend that I've noticed; an increasing number of sites are not allowing the enter key to submit a form.  Before I tell you why you care, let's look at how this should work.
 
+<!--more-->
+
 ### Enter = Submit
 
 Take the following basic form:
