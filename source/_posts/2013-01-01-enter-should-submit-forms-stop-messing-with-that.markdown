@@ -5,7 +5,7 @@ date: 2013-01-01 15:54
 comments: true
 categories: [HTML, UX]
 ---
-I try to do most of my work and play on the internet with the keyboard as much as possible.  In the course of my internet-ing there's one unfortunate trend that I've noticed; an increasing number of sites are not allowing the enter key to submit a form.  Before I tell you why you care, let's look at how this should work.
+I try to do most of my work and play on the internet with the keyboard.  In the course of my internet-ing there's one unfortunate trend that I've noticed; an increasing number of sites are not allowing the enter key to submit a form.  Before I tell you why you care, let's look at how this should work.
 
 ### Enter = Submit
 
@@ -26,14 +26,14 @@ If you have focus in the textbox and hit enter, the form will be submitted autom
 Implicit submission is vital to assistive technologies and impaired users that cannot use a mouse at all.  From the HTML5 specification:
 
 {% blockquote HTML 5 specification http://www.whatwg.org/specs/web-apps/current-work/multipage/association-of-controls-and-forms.html#implicit-submission %}
-There are pages on the Web that are only usable if there is a way to implicitly submit forms, so user agents are strongly encouraged to support this.
+There are pages on the Web that are only usable if there is a way to implicitly submit forms, so user agents [browsers] are strongly encouraged to support this.
 {% endblockquote %}
 
-By user agent the spec is referring to browsers, and it's strongly encouraging them to allow implicit submission.  They all do, you should too.
+The spec strongly encourages browsers to allow implicit submission; they all do.
 
 ### User Expectations
 
-Many users have an expectation that implicit submission will just work.  Interfering with this leads to a worse user experience for these users.  At the very least I won't be happy.
+Many users have an expectation that implicit submission will just work.  Interfering with this leads to a negative user experience for these users.
 
 ### How to Prevent Implicit Submission
 
@@ -41,13 +41,13 @@ What are sites doing to keep this from happening?  Here's a few things I've seen
 
 #### No Submit Buttons
 
-Many sites simply don't have a submit button within the form itself.  From the spec here's how browsers determine what to do when enter is clicked.
+Many sites do not have a submit button within the form.  From the spec here's how browsers determine what to do when enter is clicked.
 
 {% blockquote HTML 5 specification http://www.whatwg.org/specs/web-apps/current-work/multipage/association-of-controls-and-forms.html#implicit-submission %}
 If the user agent supports letting the user submit a form implicitly (for example, on some platforms hitting the "enter" key while a text field is focused implicitly submits the form), then doing so for a form whose default button has a defined activation behavior must cause the user agent to run synthetic click activation steps on that default button.
 {% endblockquote %}
 
-Basically, if the user hits enter when a text field is focused, find the first submit button in the form and click it.
+Basically, if the user hits enter when a text field is focused, the browser should find the first submit button in the form and click it.
 
 {% blockquote HTML 5 specification http://www.whatwg.org/specs/web-apps/current-work/multipage/association-of-controls-and-forms.html#implicit-submission %}
 If the form has no submit button, then the implicit submission mechanism must do nothing if the form has more than one field that blocks implicit submission, and must submit the form element from the form element itself otherwise.
@@ -55,7 +55,7 @@ If the form has no submit button, then the implicit submission mechanism must do
 For the purpose of the previous paragraph, an element is a field that blocks implicit submission of a form element if it is an input element whose form owner is that form element and whose type attribute is in one of the following states: Text, Search, URL, Telephone, E-mail, Password, Date and Time, Date, Month, Week, Time, Local Date and Time, Number
 {% endblockquote %}
 
-So, in a form with no submit buttons, implicit submission will only be done if one input is present.  Therefore, pressing enter in this textbox will submit the form:
+So, in a form with no submit buttons, implicit submission will be done if only one input is present.  Therefore, pressing enter in this textbox will submit the form:
 
 ``` html
 <form>
@@ -75,13 +75,15 @@ But in this form it will not because there are multiple fields:
 </form>
 ```
 
-Therefore, if you have a form with more than one input field, always include a submit button.  Specifically an `<input>` with the `type="submit"` attribute, or a `<button>` element should be present.  If you need to run some JavaScript before the form is submitted (validation, data manipulation, etc), do it in a `submit` event handler on the form, not a `click` handler on a button.
+Therefore, if you have a form with more than one input field, always include a submit button.  Specifically an `<input>` with the `type="submit"` attribute, or a `<button>` element should be present.  (Note: IE7 has a bug where the `type` attribute of a `<button>` defaults to `button` instead of `submit`.  Therefore for IE7 compatibility you'll need `<button type="submit">`.)
+
+If you need to run some JavaScript before the form is submitted (validation, data manipulation, etc), do it in a `submit` event handler on the form, not a `click` handler on a button.
 
 #### No &lt;form&gt;
 
-I've seen a few forms that simply do not use the `<form>` HTML tag.  Why would they do that?
+I've seen a few forms that do not use the `<form>` HTML tag.  Why would they do that?
 
-With modern day browsers and JavaScript libraries it's easy to send data to the server via AJAX.  Because an AJAX request does not require a true `<form>` tag, it is often omitted.  However, much like implicit submission, surrounding form data with a true `<form>` tag is vital for accessibility.  Most screen readers have a [mode specifically for filling out forms](http://www.htctu.fhda.edu/trainings/manuals/tutorials/readweb/forms.htm), and by not using a true `<form>` tag, you risk this not being activated.
+With modern day browsers and JavaScript libraries it's easy to send data to the server via AJAX.  Because an AJAX request does not require a true `<form>` tag, it is often omitted.  However, much like implicit submission, surrounding form data with a true `<form>` tag is vital for accessibility.  Most screen readers have a [mode specifically for filling out forms](http://www.htctu.fhda.edu/trainings/manuals/tutorials/readweb/forms.htm), and by omitting a true `<form>` tag you risk this mode not being activated.
 
 #### Explicit Prevention
 
@@ -102,9 +104,9 @@ Finally, it's also quite easy to prevent implicit submission in JavaScript.  Tak
 </script>
 ```
 
-This sets up a simple `keypress` event handler that prevents the default action (implicit submission) from occurring when the enter key is pressed.
+This sets up a `keypress` event handler that prevents the default action (implicit submission) from occurring when the enter key is pressed.
 
-This technique can be handy.  For example, say you have a form with multiple submit buttons.  As we saw earlier, the implicit submission algorithm will simply click the first submit button that it finds.  Therefore, if you need control over which submit button is clicked, you can use the above technique to listen for enter keypresses, prevent the default action, then explicitly click the appropriate button.
+This technique can be handy.  For example, say you have a form with multiple submit buttons.  As we saw earlier, the implicit submission algorithm will click the first submit button that it finds.  Therefore, if you need control over which submit button is clicked, you can use the above technique to listen an for enter keypress, prevent the default action, then explicitly click the appropriate button.
 
 Take the following example:
 
@@ -134,7 +136,7 @@ Take the following example:
 
 When enter is clicked in the number input, the `keypress` event handler determines which submit button is appropriate and clicks it.
 
-While this technique can be handy I've seen it used plenty of times to simply prevent implicit submission from working.  Don't do that.
+While this technique can be handy, I've seen it used plenty of times to completely prevent implicit submission from working.  Don't do that.
 
 ### Conclusion
 
