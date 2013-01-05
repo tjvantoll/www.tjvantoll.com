@@ -9,7 +9,7 @@
   <meta name="author" content="TJ VanToll">
 
   
-  <meta name="description" content="I try to do most of my work and play on the internet with the keyboard as much as possible. In the course of my internet-ing there&#8217;s one &hellip;">
+  <meta name="description" content="I try to do most of my work and play on the internet with the keyboard. In the course of my internet-ing there&#8217;s one unfortunate trend that I&# &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -125,7 +125,7 @@
   </header>
 
 
-  <div class="entry-content"><p>I try to do most of my work and play on the internet with the keyboard as much as possible.  In the course of my internet-ing there&#8217;s one unfortunate trend that I&#8217;ve noticed; an increasing number of sites are not allowing the enter key to submit a form.  Before I tell you why you care, let&#8217;s look at how this should work.</p>
+  <div class="entry-content"><p>I try to do most of my work and play on the internet with the keyboard.  In the course of my internet-ing there&#8217;s one unfortunate trend that I&#8217;ve noticed; an increasing number of sites are not allowing the enter key to submit a form.  Before I tell you why you care, let&#8217;s look at how this should work.</p>
 
 <h3>Enter = Submit</h3>
 
@@ -150,14 +150,14 @@
 
 <p>Implicit submission is vital to assistive technologies and impaired users that cannot use a mouse at all.  From the HTML5 specification:</p>
 
-<blockquote><p>There are pages on the Web that are only usable if there is a way to implicitly submit forms, so user agents are strongly encouraged to support this.</p><footer><strong>HTML 5 specification</strong> <cite><a href='http://www.whatwg.org/specs/web-apps/current-work/multipage/association-of-controls-and-forms.html#implicit-submission'>www.whatwg.org/specs/web-apps/&hellip;</a></cite></footer></blockquote>
+<blockquote><p>There are pages on the Web that are only usable if there is a way to implicitly submit forms, so user agents [browsers] are strongly encouraged to support this.</p><footer><strong>HTML 5 specification</strong> <cite><a href='http://www.whatwg.org/specs/web-apps/current-work/multipage/association-of-controls-and-forms.html#implicit-submission'>www.whatwg.org/specs/web-apps/&hellip;</a></cite></footer></blockquote>
 
 
-<p>By user agent the spec is referring to browsers, and it&#8217;s strongly encouraging them to allow implicit submission.  They all do, you should too.</p>
+<p>The spec strongly encourages browsers to allow implicit submission; they all do.</p>
 
 <h3>User Expectations</h3>
 
-<p>Many users have an expectation that implicit submission will just work.  Interfering with this leads to a worse user experience for these users.  At the very least I won&#8217;t be happy.</p>
+<p>Many users have an expectation that implicit submission will just work.  Interfering with this leads to a negative user experience for these users.</p>
 
 <h3>How to Prevent Implicit Submission</h3>
 
@@ -165,17 +165,17 @@
 
 <h4>No Submit Buttons</h4>
 
-<p>Many sites simply don&#8217;t have a submit button within the form itself.  From the spec here&#8217;s how browsers determine what to do when enter is clicked.</p>
+<p>Many sites do not have a submit button within the form.  From the spec here&#8217;s how browsers determine what to do when enter is clicked.</p>
 
 <blockquote><p>If the user agent supports letting the user submit a form implicitly (for example, on some platforms hitting the &#8220;enter&#8221; key while a text field is focused implicitly submits the form), then doing so for a form whose default button has a defined activation behavior must cause the user agent to run synthetic click activation steps on that default button.</p><footer><strong>HTML 5 specification</strong> <cite><a href='http://www.whatwg.org/specs/web-apps/current-work/multipage/association-of-controls-and-forms.html#implicit-submission'>www.whatwg.org/specs/web-apps/&hellip;</a></cite></footer></blockquote>
 
 
-<p>Basically, if the user hits enter when a text field is focused, find the first submit button in the form and click it.</p>
+<p>Basically, if the user hits enter when a text field is focused, the browser should find the first submit button in the form and click it.</p>
 
 <blockquote><p>If the form has no submit button, then the implicit submission mechanism must do nothing if the form has more than one field that blocks implicit submission, and must submit the form element from the form element itself otherwise.</p><p>For the purpose of the previous paragraph, an element is a field that blocks implicit submission of a form element if it is an input element whose form owner is that form element and whose type attribute is in one of the following states: Text, Search, URL, Telephone, E-mail, Password, Date and Time, Date, Month, Week, Time, Local Date and Time, Number</p><footer><strong>HTML 5 specification</strong> <cite><a href='http://www.whatwg.org/specs/web-apps/current-work/multipage/association-of-controls-and-forms.html#implicit-submission'>www.whatwg.org/specs/web-apps/&hellip;</a></cite></footer></blockquote>
 
 
-<p>So, in a form with no submit buttons, implicit submission will only be done if one input is present.  Therefore, pressing enter in this textbox will submit the form:</p>
+<p>So, in a form with no submit buttons, implicit submission will be done if only one input is present.  Therefore, pressing enter in this textbox will submit the form:</p>
 
 <figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -205,13 +205,15 @@
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>Therefore, if you have a form with more than one input field, always include a submit button.  Specifically an <code>&lt;input&gt;</code> with the <code>type="submit"</code> attribute, or a <code>&lt;button&gt;</code> element should be present.  If you need to run some JavaScript before the form is submitted (validation, data manipulation, etc), do it in a <code>submit</code> event handler on the form, not a <code>click</code> handler on a button.</p>
+<p>Therefore, if you have a form with more than one input field, always include a submit button.  Specifically an <code>&lt;input&gt;</code> with the <code>type="submit"</code> attribute, or a <code>&lt;button&gt;</code> element should be present.  (Note: IE7 has a bug where the <code>type</code> attribute of a <code>&lt;button&gt;</code> defaults to <code>button</code> instead of <code>submit</code>.  Therefore for IE7 compatibility you&#8217;ll need <code>&lt;button type="submit"&gt;</code>.)</p>
+
+<p>If you need to run some JavaScript before the form is submitted (validation, data manipulation, etc), do it in a <code>submit</code> event handler on the form, not a <code>click</code> handler on a button.</p>
 
 <h4>No &lt;form&gt;</h4>
 
-<p>I&#8217;ve seen a few forms that simply do not use the <code>&lt;form&gt;</code> HTML tag.  Why would they do that?</p>
+<p>I&#8217;ve seen a few forms that do not use the <code>&lt;form&gt;</code> HTML tag.  Why would they do that?</p>
 
-<p>With modern day browsers and JavaScript libraries it&#8217;s easy to send data to the server via AJAX.  Because an AJAX request does not require a true <code>&lt;form&gt;</code> tag, it is often omitted.  However, much like implicit submission, surrounding form data with a true <code>&lt;form&gt;</code> tag is vital for accessibility.  Most screen readers have a <a href="http://www.htctu.fhda.edu/trainings/manuals/tutorials/readweb/forms.htm">mode specifically for filling out forms</a>, and by not using a true <code>&lt;form&gt;</code> tag, you risk this not being activated.</p>
+<p>With modern day browsers and JavaScript libraries it&#8217;s easy to send data to the server via AJAX.  Because an AJAX request does not require a true <code>&lt;form&gt;</code> tag, it is often omitted.  However, much like implicit submission, surrounding form data with a true <code>&lt;form&gt;</code> tag is vital for accessibility.  Most screen readers have a <a href="http://www.htctu.fhda.edu/trainings/manuals/tutorials/readweb/forms.htm">mode specifically for filling out forms</a>, and by omitting a true <code>&lt;form&gt;</code> tag you risk this mode not being activated.</p>
 
 <h4>Explicit Prevention</h4>
 
@@ -244,9 +246,9 @@
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>This sets up a simple <code>keypress</code> event handler that prevents the default action (implicit submission) from occurring when the enter key is pressed.</p>
+<p>This sets up a <code>keypress</code> event handler that prevents the default action (implicit submission) from occurring when the enter key is pressed.</p>
 
-<p>This technique can be handy.  For example, say you have a form with multiple submit buttons.  As we saw earlier, the implicit submission algorithm will simply click the first submit button that it finds.  Therefore, if you need control over which submit button is clicked, you can use the above technique to listen for enter keypresses, prevent the default action, then explicitly click the appropriate button.</p>
+<p>This technique can be handy.  For example, say you have a form with multiple submit buttons.  As we saw earlier, the implicit submission algorithm will click the first submit button that it finds.  Therefore, if you need control over which submit button is clicked, you can use the above technique to listen an for enter keypress, prevent the default action, then explicitly click the appropriate button.</p>
 
 <p>Take the following example:</p>
 
@@ -297,7 +299,7 @@
 
 <p>When enter is clicked in the number input, the <code>keypress</code> event handler determines which submit button is appropriate and clicks it.</p>
 
-<p>While this technique can be handy I&#8217;ve seen it used plenty of times to simply prevent implicit submission from working.  Don&#8217;t do that.</p>
+<p>While this technique can be handy, I&#8217;ve seen it used plenty of times to completely prevent implicit submission from working.  Don&#8217;t do that.</p>
 
 <h3>Conclusion</h3>
 
