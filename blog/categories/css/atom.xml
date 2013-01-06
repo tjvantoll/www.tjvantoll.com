@@ -4,7 +4,7 @@
   <title><![CDATA[Category: CSS | TJ VanToll]]></title>
   <link href="http://tjvantoll.com/blog/categories/css/atom.xml" rel="self"/>
   <link href="http://tjvantoll.com/"/>
-  <updated>2013-01-04T21:15:03-05:00</updated>
+  <updated>2013-01-05T22:45:43-05:00</updated>
   <id>http://tjvantoll.com/</id>
   <author>
     <name><![CDATA[TJ VanToll]]></name>
@@ -12,6 +12,195 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Using the body Element as a Top Level Container - Is it Safe Yet?]]></title>
+    <link href="http://tjvantoll.com/2013/01/05/is-it-safe-to-use-the-body-as-a-top-level-container-yet/"/>
+    <updated>2013-01-05T14:21:00-05:00</updated>
+    <id>http://tjvantoll.com/2013/01/05/is-it-safe-to-use-the-body-as-a-top-level-container-yet</id>
+    <content type="html"><![CDATA[<p>View source on almost any web page and you'll likely see the following:</p>
+
+<p>``` html Common HTML Template
+<html></p>
+
+<pre><code>&lt;head&gt;&lt;/head&gt;
+&lt;body&gt;
+    &lt;div id="wrapper"&gt;
+        &lt;!-- All the things --&gt;
+    &lt;/div&gt;
+&lt;/body&gt;
+</code></pre>
+
+<p></html>
+```</p>
+
+<p>The use of a wrapper or container <code>div</code> around the page is fairly universal.  It is commonly used to perform tasks such as centering a page's content or providing a shadow or border to frame it.  But, since the <code>body</code> element is a necessity in the markup, why can't it be styled directly instead?  Why is a wrapper <code>div</code> used?  Historically there have been a number of issues with using the <code>body</code> element as a top level container.</p>
+
+<!--more-->
+
+
+<h3>IE 5.5</h3>
+
+<p>A pretty common practice is to center the top level container using <code>margin: 0 auto</code>, and this works fine in all browsers... back to IE 5.5.  IE 5.5 did not support <code>auto</code> margins so this approach did not work.</p>
+
+<p>To center the top level container in IE 5.5 you had to make use of <code>text-align: center</code> as such:</p>
+
+<p>``` css Centering the top level container in IE 5.5
+body {</p>
+
+<pre><code>text-align: center;
+</code></pre>
+
+<p>}</p>
+
+<h1>wrapper {</h1>
+
+<pre><code>width: 1000px;
+text-align: left; /* counteract the declaration on body */
+</code></pre>
+
+<p>}
+```</p>
+
+<p><code>text-align: center</code> <em>should</em> only affect inline elements, but IE 5.5 incorrectly applied it to block elements as well.  Because the <code>body</code> needed to be used to center subsequent content, it could not be used as a top level container in IE 5.5.</p>
+
+<p>(Note: The <code>text-align: center</code> bug was fixed in IE6 standards mode, but the behavior remained in Internet Explorer's quirks mode until IE 10.)</p>
+
+<h3>IE6</h3>
+
+<p>IE6 implemented <code>auto</code> margins, so <code>margin: 0 auto</code> was now safe to use on the <code>body</code>.  Additionally, IE6 fully supports adding a <code>width</code>, <code>padding</code>, <code>margin</code>, and <code>border</code> to the body element.  Take the following CSS:</p>
+
+<p>```
+body{</p>
+
+<pre><code>width: 90%;
+border: 2px solid red;
+background-color: black;
+color: white;
+padding: 10px;
+margin: 0 auto;
+</code></pre>
+
+<p>}
+```</p>
+
+<p>The layout renders the same in IE6 as it does in the latest version of Chrome (23 as of this writing).</p>
+
+<div style="overflow: hidden;">
+    <div style="float: left; width: 49%;">
+        <h4>IE6</h4>
+        <img title="Styling the body element in IE6" src="http://tjvantoll.com/images/posts/2013-01-05/IE6.png">
+    </div>
+    <div style="float: right; width: 49%;">
+        <h4>Chrome</h4>
+        <img title="Styling the body element in Chrome" src="http://tjvantoll.com/images/posts/2013-01-05/Chrome.png">
+    </div>
+</div>
+
+
+<p>So what's the issue?  Unfortunately IE6 does not support <code>min-width</code> or <code>max-width</code>.  Therefore if you apply a percentage based width to the <code>body</code>, you can not cap the minimum and maximum widths.  This is major limitations for a number of layouts, especially modern responsive designs.</p>
+
+<h3>IE7</h3>
+
+<p>IE7 implemented <code>min-width</code> and <code>max-width</code>, applying them to the <code>body</code> works as it does with any other element.  IE7 also was the first version of Internet Explorer that allowed the user to zoom.</p>
+
+<p>Unfortunately, when a <code>margin</code> / <code>width</code> is applied to the <code>body</code> and the user zooms, IE7 incorrectly treats the left edge of the <code>body</code> as the edge of the viewport.  This shift bumps content on the right hand side of the page outside of the screen.  The image below shows the result of a zoomed in window and styled <code>body</code> in IE7.</p>
+
+<p><img src="http://tjvantoll.com/images/posts/2013-01-05/IE7Zoom.png" title="Zooming in IE7" style="max-height: 400px;"></p>
+
+<h3>Beyond IE7</h3>
+
+<p>In my testing beyond IE7 there are no major issues using the <code>body</code> element as a top level container.  There are however a few things to be aware of.</p>
+
+<h3>Positioning</h3>
+
+<p>Any absolutely positioned elements will be positioned relative to the viewport rather than the newly placed <code>body</code>.  To fix this set <code>position: relative</code> on the <code>body</code> as such:</p>
+
+<p>``` css Positioning elements relative to the body rather than the viewport
+body {</p>
+
+<pre><code>margin: 0 auto;
+width: 90%;
+position: relative;
+</code></pre>
+
+<p>}
+```</p>
+
+<h3>Backgrounds</h3>
+
+<p>Backgrounds applied to the <code>body</code> will take up whole page regardless or margins.  Consider the following:</p>
+
+<p>``` css
+body {</p>
+
+<pre><code>background: black;
+margin: 0 auto;
+width: 200px;
+</code></pre>
+
+<p>}
+```</p>
+
+<p>Here, the background of the entire viewport will be black rather than a centered 200px block.</p>
+
+<p><img src="http://tjvantoll.com/images/posts/2013-01-05/background-before.png" title="background on a body element" style="max-height: 300px;"></p>
+
+<p>Luckily, this can be worked around by applying a <code>background</code> on the <code>html</code> element.</p>
+
+<p>``` css
+html {</p>
+
+<pre><code>background: white;
+</code></pre>
+
+<p>}
+body {</p>
+
+<pre><code>background: black;
+margin: 0 auto;
+width: 200px;
+</code></pre>
+
+<p>}
+```</p>
+
+<p>Which renders as expected:</p>
+
+<p><img src="http://tjvantoll.com/images/posts/2013-01-05/background-after.png" title="background on a body element with background on html element" style="max-height: 300px;"></p>
+
+<h3>scrollHeight and scrollWidth</h3>
+
+<p>In WebKit based browsers the <code>body</code>'s <a href="https://developer.mozilla.org/en-US/docs/DOM/element.scrollHeight">scrollHeight</a> and <a href="https://developer.mozilla.org/en-US/docs/DOM/element.scrollWidth">scrollWidth</a> properties are unaffected by declared <code>height</code> and <code>width</code> styles.  For example:</p>
+
+<p>``` html scrollHeight and scrollWidth on the body element
+<html></p>
+
+<pre><code>&lt;head&gt;&lt;/head&gt;
+&lt;body style="height: 200px; width: 200px;"&gt;
+    &lt;script&gt;
+        console.log(document.body.scrollHeight);
+        console.log(document.body.scrollWidth);
+    &lt;/script&gt;
+&lt;/body&gt;
+</code></pre>
+
+<p></html>
+```</p>
+
+<p>This will log <code>200</code> for both in all modern browsers with the exception of WebKit based ones.  WebKit will return the height and width of the viewport.</p>
+
+<p>While you are unlikely to run into this directly, you may use a library that does.  For example, this <a href="http://bugs.jqueryui.com/ticket/8940">causes an issue</a> trying to constrain <a href="http://jqueryui.com/draggable/">jQuery UI draggables</a> within the <code>body</code>.</p>
+
+<h3>Is it Safe to Use Yet?</h3>
+
+<p>The zoom issue in IE7 is bad, but if you're no longer supporting IE7 it's safe to drop the wrapper <code>div</code> and style the <code>body</code> directly.</p>
+
+<p>That being said, there's no harm in leaving a wrapper <code>div</code> in place.  So if you have any doubt stick with <code>&lt;div id="wrapper"&gt;&lt;/div&gt;</code>.</p>
+
+<p>Know of any other bugs with styling the <code>body</code> element?  Let me know in the comments.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Debugging Print Stylesheets: Now Significantly Easier in Chrome]]></title>
@@ -213,65 +402,6 @@ td:nth-child(3), th:nth-child(3) { width: 100px; }
 <li>Since the <code>::after</code> and <code>::before</code> pseudo-elements are used to create the pointers, IE &lt;= 8 users will not see them.  However, they'll simply see the default pointerless tooltip, no harm done.</li>
 </ul>
 
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Using the Attribute Selector with Numeric Values]]></title>
-    <link href="http://tjvantoll.com/2012/09/19/using-the-attribute-selector-with-numeric-values/"/>
-    <updated>2012-09-19T20:42:00-04:00</updated>
-    <id>http://tjvantoll.com/2012/09/19/using-the-attribute-selector-with-numeric-values</id>
-    <content type="html"><![CDATA[<p>What color will the number 3 be in the example below?</p>
-
-<p>``` html</p>
-
-
-
-
-
-<table>
-    <tr>
-        <td colspan="2">1</td>
-    </tr>
-    <td>
-        <td>2</td>
-        <td>3</td>
-    </tr>
-</table>
-
-
-<p>```</p>
-
-<p>Turns out it will be red because the <code>td[colspan=2]</code> selector does not match it.  Why?</p>
-
-<!--more-->
-
-
-<h3>Attribute Selector</h3>
-
-<p>Per the <a href="http://www.w3.org/TR/css3-selectors/#attribute-selectors">CSS 3 specification</a> values used in attribute selectors must be either identifiers or strings.</p>
-
-<p>String values are those enclosed by single or double quotes (e.g. the <code>2</code> in the selector <code>value="2"</code>).  If a value is not a string the browser attempts to resolve it as an identifier, which the spec defines as such:</p>
-
-<p><blockquote><p>"In CSS, identifiers (including element names, classes, and IDs in selectors) can contain only the characters [a-zA-Z0-9] and ISO 10646 characters U+00A0 and higher, plus the hyphen (-) and the underscore (_); they cannot start with a digit, two hyphens, or a hyphen followed by a digit."</p><footer><strong>CSS 2.1 Specification</strong> <cite><a href='http://www.w3.org/TR/CSS2/syndata.html#value-def-identifier'>www.w3.org/TR/CSS2/&hellip;</a></cite></footer></blockquote></p>
-
-<p>So why doesn't <code>colspan=2</code> work above?  The key part from the spec is that "<em>identifiers ... cannot start with a digit</em>".  Therefore, since <code>2</code> is not a string and does not qualify as an identifier, the browser ignores it.  This behavior is implemented consistently in all browsers.</p>
-
-<p>The fix?  Simply wrap the value in quotes; both <code>td[colspan='2']</code> and <code>td[colspan="2"]</code> will match the cell in the example above.</p>
-
-<h3>Numeric Attributes</h3>
-
-<p>Attributes that generally only have numeric values include <code>colspan</code>, <code>rowspan</code>, <code>cellpadding</code>, <code>cellspacing</code>, <code>min</code>, <code>max</code>, and <code>step</code>.  When using any of these attributes in an attribute selector ensure that you wrap the value in quotes.</p>
-
-<h3>JavaScript</h3>
-
-<p>Most selector engines such as jQuery's sizzle will make the selector work regardless of whether the quotes are present.  <code>$('td[colspan=2]')</code> will return the cell in question in the example above.</p>
-
-<p>However, if you are using native JavaScript though you will not be so lucky; <code>document.querySelectorAll('td[colspan=2]')</code> actually throws an error.</p>
-
-<h3>Conclusion</h3>
-
-<p>Attributes with numeric values need to have quotes around them when using them in CSS or JavaScript.  When in doubt use quotes around attribute values; it never hurts, and there are some strange edge cases where omitting the quotes leads to unexpected behavior.  If you're looking for a more detailed writeup on when quotes are ok to omit checkout <a href="http://mathiasbynens.be/notes/unquoted-attribute-values">Mathias Bynens' writeup on the topic</a>.</p>
 ]]></content>
   </entry>
   

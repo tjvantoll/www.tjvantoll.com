@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Browsers | TJ VanToll]]></title>
   <link href="http://tjvantoll.com/blog/categories/browsers/atom.xml" rel="self"/>
   <link href="http://tjvantoll.com/"/>
-  <updated>2013-01-04T21:15:03-05:00</updated>
+  <updated>2013-01-05T22:45:43-05:00</updated>
   <id>http://tjvantoll.com/</id>
   <author>
     <name><![CDATA[TJ VanToll]]></name>
@@ -12,6 +12,195 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Using the body Element as a Top Level Container - Is it Safe Yet?]]></title>
+    <link href="http://tjvantoll.com/2013/01/05/is-it-safe-to-use-the-body-as-a-top-level-container-yet/"/>
+    <updated>2013-01-05T14:21:00-05:00</updated>
+    <id>http://tjvantoll.com/2013/01/05/is-it-safe-to-use-the-body-as-a-top-level-container-yet</id>
+    <content type="html"><![CDATA[<p>View source on almost any web page and you'll likely see the following:</p>
+
+<p>``` html Common HTML Template
+<html></p>
+
+<pre><code>&lt;head&gt;&lt;/head&gt;
+&lt;body&gt;
+    &lt;div id="wrapper"&gt;
+        &lt;!-- All the things --&gt;
+    &lt;/div&gt;
+&lt;/body&gt;
+</code></pre>
+
+<p></html>
+```</p>
+
+<p>The use of a wrapper or container <code>div</code> around the page is fairly universal.  It is commonly used to perform tasks such as centering a page's content or providing a shadow or border to frame it.  But, since the <code>body</code> element is a necessity in the markup, why can't it be styled directly instead?  Why is a wrapper <code>div</code> used?  Historically there have been a number of issues with using the <code>body</code> element as a top level container.</p>
+
+<!--more-->
+
+
+<h3>IE 5.5</h3>
+
+<p>A pretty common practice is to center the top level container using <code>margin: 0 auto</code>, and this works fine in all browsers... back to IE 5.5.  IE 5.5 did not support <code>auto</code> margins so this approach did not work.</p>
+
+<p>To center the top level container in IE 5.5 you had to make use of <code>text-align: center</code> as such:</p>
+
+<p>``` css Centering the top level container in IE 5.5
+body {</p>
+
+<pre><code>text-align: center;
+</code></pre>
+
+<p>}</p>
+
+<h1>wrapper {</h1>
+
+<pre><code>width: 1000px;
+text-align: left; /* counteract the declaration on body */
+</code></pre>
+
+<p>}
+```</p>
+
+<p><code>text-align: center</code> <em>should</em> only affect inline elements, but IE 5.5 incorrectly applied it to block elements as well.  Because the <code>body</code> needed to be used to center subsequent content, it could not be used as a top level container in IE 5.5.</p>
+
+<p>(Note: The <code>text-align: center</code> bug was fixed in IE6 standards mode, but the behavior remained in Internet Explorer's quirks mode until IE 10.)</p>
+
+<h3>IE6</h3>
+
+<p>IE6 implemented <code>auto</code> margins, so <code>margin: 0 auto</code> was now safe to use on the <code>body</code>.  Additionally, IE6 fully supports adding a <code>width</code>, <code>padding</code>, <code>margin</code>, and <code>border</code> to the body element.  Take the following CSS:</p>
+
+<p>```
+body{</p>
+
+<pre><code>width: 90%;
+border: 2px solid red;
+background-color: black;
+color: white;
+padding: 10px;
+margin: 0 auto;
+</code></pre>
+
+<p>}
+```</p>
+
+<p>The layout renders the same in IE6 as it does in the latest version of Chrome (23 as of this writing).</p>
+
+<div style="overflow: hidden;">
+    <div style="float: left; width: 49%;">
+        <h4>IE6</h4>
+        <img title="Styling the body element in IE6" src="http://tjvantoll.com/images/posts/2013-01-05/IE6.png">
+    </div>
+    <div style="float: right; width: 49%;">
+        <h4>Chrome</h4>
+        <img title="Styling the body element in Chrome" src="http://tjvantoll.com/images/posts/2013-01-05/Chrome.png">
+    </div>
+</div>
+
+
+<p>So what's the issue?  Unfortunately IE6 does not support <code>min-width</code> or <code>max-width</code>.  Therefore if you apply a percentage based width to the <code>body</code>, you can not cap the minimum and maximum widths.  This is major limitations for a number of layouts, especially modern responsive designs.</p>
+
+<h3>IE7</h3>
+
+<p>IE7 implemented <code>min-width</code> and <code>max-width</code>, applying them to the <code>body</code> works as it does with any other element.  IE7 also was the first version of Internet Explorer that allowed the user to zoom.</p>
+
+<p>Unfortunately, when a <code>margin</code> / <code>width</code> is applied to the <code>body</code> and the user zooms, IE7 incorrectly treats the left edge of the <code>body</code> as the edge of the viewport.  This shift bumps content on the right hand side of the page outside of the screen.  The image below shows the result of a zoomed in window and styled <code>body</code> in IE7.</p>
+
+<p><img src="http://tjvantoll.com/images/posts/2013-01-05/IE7Zoom.png" title="Zooming in IE7" style="max-height: 400px;"></p>
+
+<h3>Beyond IE7</h3>
+
+<p>In my testing beyond IE7 there are no major issues using the <code>body</code> element as a top level container.  There are however a few things to be aware of.</p>
+
+<h3>Positioning</h3>
+
+<p>Any absolutely positioned elements will be positioned relative to the viewport rather than the newly placed <code>body</code>.  To fix this set <code>position: relative</code> on the <code>body</code> as such:</p>
+
+<p>``` css Positioning elements relative to the body rather than the viewport
+body {</p>
+
+<pre><code>margin: 0 auto;
+width: 90%;
+position: relative;
+</code></pre>
+
+<p>}
+```</p>
+
+<h3>Backgrounds</h3>
+
+<p>Backgrounds applied to the <code>body</code> will take up whole page regardless or margins.  Consider the following:</p>
+
+<p>``` css
+body {</p>
+
+<pre><code>background: black;
+margin: 0 auto;
+width: 200px;
+</code></pre>
+
+<p>}
+```</p>
+
+<p>Here, the background of the entire viewport will be black rather than a centered 200px block.</p>
+
+<p><img src="http://tjvantoll.com/images/posts/2013-01-05/background-before.png" title="background on a body element" style="max-height: 300px;"></p>
+
+<p>Luckily, this can be worked around by applying a <code>background</code> on the <code>html</code> element.</p>
+
+<p>``` css
+html {</p>
+
+<pre><code>background: white;
+</code></pre>
+
+<p>}
+body {</p>
+
+<pre><code>background: black;
+margin: 0 auto;
+width: 200px;
+</code></pre>
+
+<p>}
+```</p>
+
+<p>Which renders as expected:</p>
+
+<p><img src="http://tjvantoll.com/images/posts/2013-01-05/background-after.png" title="background on a body element with background on html element" style="max-height: 300px;"></p>
+
+<h3>scrollHeight and scrollWidth</h3>
+
+<p>In WebKit based browsers the <code>body</code>'s <a href="https://developer.mozilla.org/en-US/docs/DOM/element.scrollHeight">scrollHeight</a> and <a href="https://developer.mozilla.org/en-US/docs/DOM/element.scrollWidth">scrollWidth</a> properties are unaffected by declared <code>height</code> and <code>width</code> styles.  For example:</p>
+
+<p>``` html scrollHeight and scrollWidth on the body element
+<html></p>
+
+<pre><code>&lt;head&gt;&lt;/head&gt;
+&lt;body style="height: 200px; width: 200px;"&gt;
+    &lt;script&gt;
+        console.log(document.body.scrollHeight);
+        console.log(document.body.scrollWidth);
+    &lt;/script&gt;
+&lt;/body&gt;
+</code></pre>
+
+<p></html>
+```</p>
+
+<p>This will log <code>200</code> for both in all modern browsers with the exception of WebKit based ones.  WebKit will return the height and width of the viewport.</p>
+
+<p>While you are unlikely to run into this directly, you may use a library that does.  For example, this <a href="http://bugs.jqueryui.com/ticket/8940">causes an issue</a> trying to constrain <a href="http://jqueryui.com/draggable/">jQuery UI draggables</a> within the <code>body</code>.</p>
+
+<h3>Is it Safe to Use Yet?</h3>
+
+<p>The zoom issue in IE7 is bad, but if you're no longer supporting IE7 it's safe to drop the wrapper <code>div</code> and style the <code>body</code> directly.</p>
+
+<p>That being said, there's no harm in leaving a wrapper <code>div</code> in place.  So if you have any doubt stick with <code>&lt;div id="wrapper"&gt;&lt;/div&gt;</code>.</p>
+
+<p>Know of any other bugs with styling the <code>body</code> element?  Let me know in the comments.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Creating Cross Browser Scrollable &lt;tbody&gt;s - A CSS Only Approach]]></title>
@@ -362,81 +551,6 @@ event.preventDefault();
 <p>I haven't been able to test this in Chrome for Android and I know there are other mobile browsers that I'm missing.  If someone else has this capability I'd love to know how they handle these situations.</p>
 
 <p>Also while I did verify these findings on physical devices for Firefox for Android, Android 2.3's default browser, and Safari on iOS 5; the rest of my testing was limited to simulators / emulators.  From past experience I know that simulator / emulator testing is no substitute for the real thing.  Therefore, if you find any discrepancies in my findings please let me know in the comments so I can update the post.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Subpixel Animation Issues in IE < 9]]></title>
-    <link href="http://tjvantoll.com/2012/08/16/subpixel-animation-issues-in-ie-less-than-9/"/>
-    <updated>2012-08-16T21:56:00-04:00</updated>
-    <id>http://tjvantoll.com/2012/08/16/subpixel-animation-issues-in-ie-less-than-9</id>
-    <content type="html"><![CDATA[<p>While there are definitely <a href="http://ejohn.org/blog/sub-pixel-problems-in-css/">cross browser discrepancies handling subpixels</a>, this one caught me by surprise.  Take the following:</p>
-
-<p>``` html</p>
-
-<div id="box"></div>
-
-
-<script>
-    var box = document.getElementById('box');
-    box.style.left = '10.25px';
-    console.log(box.style.left);
-</script>
-
-
-<p>```</p>
-
-<p>This simply sets a value for the <code>left</code> CSS property then immediately retrieves it.  In Chrome 22, Firefox 14, Safari 6, Opera 12, IE >= 9, iOS 5, and Android <code>10.25px</code> will be logged.</p>
-
-<p>In IE &lt; 9 <code>10px</code> is logged.  While not all browsers can accurately render the subpixel values, I had assumed all of them would've at least allowed the assignment.  I was wrong.  Internet Explorer will simply round the value to the nearest integer.</p>
-
-<p>Why is this a problem?  <!--more-->Take the following code.</p>
-
-<p>``` html</p>
-
-<div id="box"></div>
-
-
-<script>
-    var box = document.getElementById('box');
-    box.style.left = '0px';
-    setInterval(function() {
-        var currentLeft = box.style.left.replace('px', '');
-        currentLeft = parseFloat(currentLeft);
-        box.style.left = currentLeft + 0.25 + 'px';
-    }, 20);
-</script>
-
-
-<p>```</p>
-
-<p>This sets an interval that will increase the <code>left</code> property of a box by <code>0.25</code> pixels every 20 milliseconds.  Doing so will move the box left across the screen as seen below:</p>
-
-<iframe style="width: 100%; height: 150px;" src="http://jsfiddle.net/tj_vantoll/PBsLt/9/embedded/result,js,html/" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
-
-
-<p>Great.  Unfortunately in IE &lt; 9 the box will not move.  Within the interval function the value to increment is being retrieved from the element itself, which, in IE &lt; 9 will continuously return the rounded value.</p>
-
-<p>The way around this is simply to use store off the value of the property outside of the animation loop itself.</p>
-
-<p>``` html</p>
-
-<div id="box"></div>
-
-
-<script>
-    var left = 0;
-    var box = document.getElementById('box');
-    setInterval(function() {
-        box.style.left = left + 'px';
-        left += 0.25;
-    }, 20);
-</script>
-
-
-<p>```</p>
-
-<p>This has the added benefit of being more efficient since you save a property retrieval on every invocation of the loop.</p>
 ]]></content>
   </entry>
   

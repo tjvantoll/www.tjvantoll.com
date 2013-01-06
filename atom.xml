@@ -4,7 +4,7 @@
   <title><![CDATA[TJ VanToll]]></title>
   <link href="http://tjvantoll.com/atom.xml" rel="self"/>
   <link href="http://tjvantoll.com/"/>
-  <updated>2013-01-04T21:15:03-05:00</updated>
+  <updated>2013-01-05T22:45:43-05:00</updated>
   <id>http://tjvantoll.com/</id>
   <author>
     <name><![CDATA[TJ VanToll]]></name>
@@ -14,11 +14,225 @@
 
   
   <entry>
+    <title type="html"><![CDATA[Using the body Element as a Top Level Container - Is it Safe Yet?]]></title>
+    <link href="http://tjvantoll.com/2013/01/05/is-it-safe-to-use-the-body-as-a-top-level-container-yet/"/>
+    <updated>2013-01-05T14:21:00-05:00</updated>
+    <id>http://tjvantoll.com/2013/01/05/is-it-safe-to-use-the-body-as-a-top-level-container-yet</id>
+    <content type="html"><![CDATA[<p>View source on almost any web page and you&#8217;ll likely see the following:</p>
+
+<figure class='code'><figcaption class='not_empty'><span>Common HTML Template</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;html&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;head&gt;&lt;/head&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;body&gt;</span>
+</span><span class='line'>        <span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">&quot;wrapper&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>            <span class="c">&lt;!-- All the things --&gt;</span>
+</span><span class='line'>        <span class="nt">&lt;/div&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;/body&gt;</span>
+</span><span class='line'><span class="nt">&lt;/html&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The use of a wrapper or container <code>div</code> around the page is fairly universal.  It is commonly used to perform tasks such as centering a page&#8217;s content or providing a shadow or border to frame it.  But, since the <code>body</code> element is a necessity in the markup, why can&#8217;t it be styled directly instead?  Why is a wrapper <code>div</code> used?  Historically there have been a number of issues with using the <code>body</code> element as a top level container.</p>
+
+<!--more-->
+
+
+<h3>IE 5.5</h3>
+
+<p>A pretty common practice is to center the top level container using <code>margin: 0 auto</code>, and this works fine in all browsers&#8230; back to IE 5.5.  IE 5.5 did not support <code>auto</code> margins so this approach did not work.</p>
+
+<p>To center the top level container in IE 5.5 you had to make use of <code>text-align: center</code> as such:</p>
+
+<figure class='code'><figcaption class='not_empty'><span>Centering the top level container in IE 5.5</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nt">body</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">text-align</span><span class="o">:</span> <span class="k">center</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="nf">#wrapper</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">width</span><span class="o">:</span> <span class="m">1000px</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">text-align</span><span class="o">:</span> <span class="k">left</span><span class="p">;</span> <span class="c">/* counteract the declaration on body */</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><code>text-align: center</code> <em>should</em> only affect inline elements, but IE 5.5 incorrectly applied it to block elements as well.  Because the <code>body</code> needed to be used to center subsequent content, it could not be used as a top level container in IE 5.5.</p>
+
+<p>(Note: The <code>text-align: center</code> bug was fixed in IE6 standards mode, but the behavior remained in Internet Explorer&#8217;s quirks mode until IE 10.)</p>
+
+<h3>IE6</h3>
+
+<p>IE6 implemented <code>auto</code> margins, so <code>margin: 0 auto</code> was now safe to use on the <code>body</code>.  Additionally, IE6 fully supports adding a <code>width</code>, <code>padding</code>, <code>margin</code>, and <code>border</code> to the body element.  Take the following CSS:</p>
+
+<figure class='code'><figcaption class='not_empty'><span>Centering the top level container in IE 5.5</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nt">body</span><span class="p">{</span>
+</span><span class='line'>    <span class="k">width</span><span class="o">:</span> <span class="m">90</span><span class="o">%</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">border</span><span class="o">:</span> <span class="m">2px</span> <span class="k">solid</span> <span class="nb">red</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">background-color</span><span class="o">:</span> <span class="nb">black</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">color</span><span class="o">:</span> <span class="nb">white</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">padding</span><span class="o">:</span> <span class="m">10px</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">margin</span><span class="o">:</span> <span class="m">0</span> <span class="k">auto</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The layout renders the same in IE6 as it does in the latest version of Chrome (23 as of this writing).</p>
+
+<div style="overflow: hidden;">
+    <div style="float: left; width: 49%;">
+        <h4>IE6</h4>
+        <img title="Styling the body element in IE6" src="http://tjvantoll.com/images/posts/2013-01-05/IE6.png">
+    </div>
+    <div style="float: right; width: 49%;">
+        <h4>Chrome</h4>
+        <img title="Styling the body element in Chrome" src="http://tjvantoll.com/images/posts/2013-01-05/Chrome.png">
+    </div>
+</div>
+
+
+<p>So what&#8217;s the issue?  Unfortunately IE6 does not support <code>min-width</code> or <code>max-width</code>.  Therefore if you apply a percentage based width to the <code>body</code>, you can not cap the minimum and maximum widths.  This is major limitations for a number of layouts, especially modern responsive designs.</p>
+
+<h3>IE7</h3>
+
+<p>IE7 implemented <code>min-width</code> and <code>max-width</code>, applying them to the <code>body</code> works as it does with any other element.  IE7 also was the first version of Internet Explorer that allowed the user to zoom.</p>
+
+<p>Unfortunately, when a <code>margin</code> / <code>width</code> is applied to the <code>body</code> and the user zooms, IE7 incorrectly treats the left edge of the <code>body</code> as the edge of the viewport.  This shift bumps content on the right hand side of the page outside of the screen.  The image below shows the result of a zoomed in window and styled <code>body</code> in IE7.</p>
+
+<p><img src="http://tjvantoll.com/images/posts/2013-01-05/IE7Zoom.png" title="Zooming in IE7" style="max-height: 400px;"></p>
+
+<h3>Beyond IE7</h3>
+
+<p>In my testing beyond IE7 there are no major issues using the <code>body</code> element as a top level container.  There are however a few things to be aware of.</p>
+
+<h3>Positioning</h3>
+
+<p>Any absolutely positioned elements will be positioned relative to the viewport rather than the newly placed <code>body</code>.  To fix this set <code>position: relative</code> on the <code>body</code> as such:</p>
+
+<figure class='code'><figcaption class='not_empty'><span>Positioning elements relative to the body rather than the viewport</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nt">body</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">margin</span><span class="o">:</span> <span class="m">0</span> <span class="k">auto</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">width</span><span class="o">:</span> <span class="m">90</span><span class="o">%</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">position</span><span class="o">:</span> <span class="k">relative</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>Backgrounds</h3>
+
+<p>Backgrounds applied to the <code>body</code> will take up whole page regardless or margins.  Consider the following:</p>
+
+<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nt">body</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">background</span><span class="o">:</span> <span class="nb">black</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">margin</span><span class="o">:</span> <span class="m">0</span> <span class="k">auto</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">width</span><span class="o">:</span> <span class="m">200px</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Here, the background of the entire viewport will be black rather than a centered 200px block.</p>
+
+<p><img src="http://tjvantoll.com/images/posts/2013-01-05/background-before.png" title="background on a body element" style="max-height: 300px;"></p>
+
+<p>Luckily, this can be worked around by applying a <code>background</code> on the <code>html</code> element.</p>
+
+<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nt">html</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">background</span><span class="o">:</span> <span class="nb">white</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="nt">body</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">background</span><span class="o">:</span> <span class="nb">black</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">margin</span><span class="o">:</span> <span class="m">0</span> <span class="k">auto</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">width</span><span class="o">:</span> <span class="m">200px</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Which renders as expected:</p>
+
+<p><img src="http://tjvantoll.com/images/posts/2013-01-05/background-after.png" title="background on a body element with background on html element" style="max-height: 300px;"></p>
+
+<h3>scrollHeight and scrollWidth</h3>
+
+<p>In WebKit based browsers the <code>body</code>&#8217;s <a href="https://developer.mozilla.org/en-US/docs/DOM/element.scrollHeight">scrollHeight</a> and <a href="https://developer.mozilla.org/en-US/docs/DOM/element.scrollWidth">scrollWidth</a> properties are unaffected by declared <code>height</code> and <code>width</code> styles.  For example:</p>
+
+<figure class='code'><figcaption class='not_empty'><span>scrollHeight and scrollWidth on the body element</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;html&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;head&gt;&lt;/head&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;body</span> <span class="na">style=</span><span class="s">&quot;height: 200px; width: 200px;&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>        <span class="nt">&lt;script&gt;</span>
+</span><span class='line'>          <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nb">document</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">scrollHeight</span><span class="p">);</span>
+</span><span class='line'>          <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nb">document</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">scrollWidth</span><span class="p">);</span>
+</span><span class='line'>        <span class="nt">&lt;/script&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;/body&gt;</span>
+</span><span class='line'><span class="nt">&lt;/html&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This will log <code>200</code> for both in all modern browsers with the exception of WebKit based ones.  WebKit will return the height and width of the viewport.</p>
+
+<p>While you are unlikely to run into this directly, you may use a library that does.  For example, this <a href="http://bugs.jqueryui.com/ticket/8940">causes an issue</a> trying to constrain <a href="http://jqueryui.com/draggable/">jQuery UI draggables</a> within the <code>body</code>.</p>
+
+<h3>Is it Safe to Use Yet?</h3>
+
+<p>The zoom issue in IE7 is bad, but if you&#8217;re no longer supporting IE7 it&#8217;s safe to drop the wrapper <code>div</code> and style the <code>body</code> directly.</p>
+
+<p>That being said, there&#8217;s no harm in leaving a wrapper <code>div</code> in place.  So if you have any doubt stick with <code>&lt;div id="wrapper"&gt;&lt;/div&gt;</code>.</p>
+
+<p>Know of any other bugs with styling the <code>body</code> element?  Let me know in the comments.</p>
+]]></content>
+  </entry>
+  
+  <entry>
     <title type="html"><![CDATA[The Enter Key should Submit Forms, Stop Suppressing it]]></title>
     <link href="http://tjvantoll.com/2013/01/01/enter-should-submit-forms-stop-messing-with-that/"/>
     <updated>2013-01-01T15:54:00-05:00</updated>
     <id>http://tjvantoll.com/2013/01/01/enter-should-submit-forms-stop-messing-with-that</id>
     <content type="html"><![CDATA[<p>I try to do most of my work and play on the internet with the keyboard.  In the course of my internet-ing there&#8217;s one unfortunate trend that I&#8217;ve noticed; an increasing number of sites are not allowing the enter key to submit a form.  Before I tell you why you care, let&#8217;s look at how this should work.</p>
+
+<!--more-->
+
 
 <h3>Enter = Submit</h3>
 
@@ -2622,322 +2836,6 @@
 </pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nt">button</span><span class="o">,</span> <span class="nt">select</span> <span class="p">{</span> <span class="k">text-transform</span><span class="o">:</span> <span class="k">none</span><span class="p">;</span> <span class="p">}</span>
 </span></code></pre></td></tr></table></div></figure>
 
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[The Ideal LESS Workflow with git]]></title>
-    <link href="http://tjvantoll.com/2012/07/07/the-ideal-less-workflow-with-git/"/>
-    <updated>2012-07-07T00:00:00-04:00</updated>
-    <id>http://tjvantoll.com/2012/07/07/the-ideal-less-workflow-with-git</id>
-    <content type="html"><![CDATA[<p>LESS is a CSS pre-processor written in JavaScript.  Unlike its main competitor SASS, it has the ability to run both on the client side via a simple <code>&lt;script&gt;</code> tag, as well as server-side in Node.js.  The fact that LESS files can be processed client side is advantageous for a number of reasons:</p>
-
-<h4><strong>There are no dependencies.</strong></h4>
-
-<p>To develop LESS files all you need is your browser.  SASS requires Ruby to be running on your system to generate the CSS files.</p>
-
-<p>While some would argue that this isn&#8217;t a big deal (Ruby is pre-installed on OS X for example), it can potentially put off beginners or those not familiar with the command line.  A lot of people that write CSS wear a designer hat more than a developer hat.  Even if <em>you</em> know what you&#8217;re doing, if you&#8217;re on a team with less technical people oftentimes the simplest approach will make everyone happy.</p>
-
-<h4><strong>You can auto-reload changes to less files without reloading the browser and without external dependencies.</strong></h4>
-
-<p>With LESS you can easily watch for changes by appending <code>#!watch</code> to the URL or by running <code>less.watch()</code> from the console.  There&#8217;s no additional setup and no need to reload your browser, changes take effect automatically.</p>
-
-<p>If you want files to be regenerated using SASS you must tell SASS which files to watch via the command line or use an app that does that for you.  If you want CSS changes to happen without reloading your browser you need to enlist the help of an app / extension such as <a href="http://livereload.com">LiveReload</a>.  While this works fine this is yet another dependency.</p>
-
-<!--more-->
-
-
-<h3>Production</h3>
-
-<p>While the ease of use during development is great, you don&#8217;t want visitors to your site to incur the cost of processing the LESS files client side in a production setting.  The easy way to accomplish this is to manually run <code>lessc</code> from the command line to convert all LESS files into CSS files, and then updating all of your .less paths in <code>&lt;link&gt;</code> tags to use .css paths.</p>
-
-<p>This works, but the lazy programmer in you will be looking to automate this after doing this more than once.  If you&#8217;re using Git for source control one way you can accomplish this is by running a commit hook to do the generation.</p>
-
-<h3>Git Commit Hooks</h3>
-
-<p><a href="http://git-scm.com/book/en/Customizing-Git-Git-Hooks">Git commit hooks</a> allow you to run scripts whenever a commit occurs.  A <code>pre-commit</code> hook allows you to run a script that can also optionally prevent the commit from occurring.  The <code>pre-commit</code> hook works well for generating CSS files from LESS files for a few reasons.</p>
-
-<ul>
-<li>Once the script is in place you no longer have to manually generate CSS files, it&#8217;ll simply be done automatically when you commit changes to source control.</li>
-<li>The script can be setup so that if <code>lessc</code> fails the commit will be rejected.  Therefore, LESS files with invalid syntax will be kept out of source control.</li>
-</ul>
-
-
-<p>To create a Git commit hook navigate into the <code>.git/hooks</code> directory of your repository.  This folder has a number of sample hooks that you can potentially use with a <code>.sample</code> suffix.  To create a <code>pre-commit</code> script that Git will run simply create an un-prefixed copy of <code>pre-commit.sample</code>.</p>
-
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nb">cd</span> /MyProject/.git/hooks
-</span><span class='line'>cp pre-commit.sample pre-commit
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Once a <code>pre-commit</code> file exists in <code>.git/hooks</code>, Git will run it before every commit.</p>
-
-<h3>The Script</h3>
-
-<p>There are many ways to implement a script that generates CSS files from LESS files.  This is the <code>pre-commit</code> script that I use.</p>
-
-<figure class='code'><figcaption class='not_empty'><span>The script</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-<span class='line-number'>33</span>
-<span class='line-number'>34</span>
-<span class='line-number'>35</span>
-<span class='line-number'>36</span>
-<span class='line-number'>37</span>
-<span class='line-number'>38</span>
-<span class='line-number'>39</span>
-<span class='line-number'>40</span>
-<span class='line-number'>41</span>
-<span class='line-number'>42</span>
-<span class='line-number'>43</span>
-<span class='line-number'>44</span>
-<span class='line-number'>45</span>
-<span class='line-number'>46</span>
-<span class='line-number'>47</span>
-<span class='line-number'>48</span>
-<span class='line-number'>49</span>
-<span class='line-number'>50</span>
-<span class='line-number'>51</span>
-<span class='line-number'>52</span>
-<span class='line-number'>53</span>
-<span class='line-number'>54</span>
-<span class='line-number'>55</span>
-<span class='line-number'>56</span>
-<span class='line-number'>57</span>
-<span class='line-number'>58</span>
-<span class='line-number'>59</span>
-<span class='line-number'>60</span>
-<span class='line-number'>61</span>
-<span class='line-number'>62</span>
-<span class='line-number'>63</span>
-<span class='line-number'>64</span>
-<span class='line-number'>65</span>
-<span class='line-number'>66</span>
-<span class='line-number'>67</span>
-<span class='line-number'>68</span>
-<span class='line-number'>69</span>
-<span class='line-number'>70</span>
-<span class='line-number'>71</span>
-<span class='line-number'>72</span>
-<span class='line-number'>73</span>
-<span class='line-number'>74</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c">#!/bin/sh</span>
-</span><span class='line'>
-</span><span class='line'><span class="c"># Pre-commit hook to generate .css files from .less files using lessc.</span>
-</span><span class='line'><span class="c"># Script assumes .less files are in a directory named &quot;less&quot; and will</span>
-</span><span class='line'><span class="c"># put the generated files in a sibling &quot;css&quot; directory.  The generated</span>
-</span><span class='line'><span class="c"># CSS will also be compressed as part of lessc.</span>
-</span><span class='line'><span class="c">#</span>
-</span><span class='line'><span class="c"># When .less files are deleted the script will delete the corresponding</span>
-</span><span class='line'><span class="c"># .css files if they exist.</span>
-</span><span class='line'><span class="c">#</span>
-</span><span class='line'><span class="c"># Example</span>
-</span><span class='line'><span class="c"># -------</span>
-</span><span class='line'><span class="c">#</span>
-</span><span class='line'><span class="c"># Before:       After:</span>
-</span><span class='line'><span class="c">#</span>
-</span><span class='line'><span class="c"># foo/          foo/</span>
-</span><span class='line'><span class="c">#   less/         css/</span>
-</span><span class='line'><span class="c">#     a.less        a.css</span>
-</span><span class='line'><span class="c"># bar/            less/</span>
-</span><span class='line'><span class="c">#   less/           a.less</span>
-</span><span class='line'><span class="c">#     b.less    bar/   </span>
-</span><span class='line'><span class="c">#                 css/</span>
-</span><span class='line'><span class="c">#                   b.css</span>
-</span><span class='line'><span class="c">#                 less</span>
-</span><span class='line'><span class="c">#                   b.less</span>
-</span><span class='line'><span class="c">#</span>
-</span><span class='line'><span class="c"># Loop over all files included in the commit.</span>
-</span><span class='line'><span class="k">for </span>file in <span class="k">$(</span> <span class="nb">exec </span>git diff-index --cached --name-only HEAD <span class="k">)</span>
-</span><span class='line'><span class="k">do</span>
-</span><span class='line'><span class="c"># We only want to take action unless the file is a LESS file.</span>
-</span><span class='line'>  <span class="k">if</span> <span class="o">[[</span> <span class="nv">$file</span> <span class="o">==</span> *<span class="s2">&quot;.less&quot;</span>* <span class="o">]]</span>; <span class="k">then</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">    </span><span class="nv">lessFile</span><span class="o">=</span><span class="nv">$file</span>
-</span><span class='line'>
-</span><span class='line'><span class="c">#   Find where the corresponding CSS file should be located</span>
-</span><span class='line'><span class="c">#   in the file system, in this case a sibling CSS directory.</span>
-</span><span class='line'>    <span class="nv">cssFile</span><span class="o">=</span><span class="s2">&quot;${lessFile/less\//css/}&quot;</span>
-</span><span class='line'>    <span class="nv">cssFile</span><span class="o">=</span><span class="s2">&quot;${cssFile/.less/.css}&quot;</span>
-</span><span class='line'>
-</span><span class='line'><span class="c">#   Determine the status of the file in the commit.</span>
-</span><span class='line'><span class="c">#   M = Modified, A = Added, D = deleted, R = renamed,</span>
-</span><span class='line'><span class="c">#   C = copied, U = Updated but unmerged</span>
-</span><span class='line'>    <span class="nv">status</span><span class="o">=</span><span class="k">$(</span> <span class="nb">exec </span>git status --porcelain <span class="nv">$lessFile</span> <span class="k">)</span>
-</span><span class='line'>
-</span><span class='line'><span class="c">#   If the file was deleted as part of the commit, delete the</span>
-</span><span class='line'><span class="c">#   corresponding CSS file.</span>
-</span><span class='line'>    <span class="k">if</span> <span class="o">[[</span> <span class="nv">$status</span> <span class="o">==</span> D* <span class="o">]]</span>; <span class="k">then</span>
-</span><span class='line'><span class="k">      if</span> <span class="o">[</span> -e <span class="s2">&quot;$cssFile&quot;</span> <span class="o">]</span>; <span class="k">then</span>
-</span><span class='line'><span class="k">        </span><span class="nb">echo</span> <span class="s2">&quot;Removing $cssFile&quot;</span>
-</span><span class='line'>        git rm <span class="nv">$cssFile</span>
-</span><span class='line'>      <span class="k">fi</span>
-</span><span class='line'><span class="k">    else</span>
-</span><span class='line'><span class="c">#     Otherwise we must generate the CSS file. First create a</span>
-</span><span class='line'><span class="c">#     CSS folder to place the file in.  The -p option for mdkir</span>
-</span><span class='line'><span class="c">#     tells it to create parent folders if necessary.</span>
-</span><span class='line'>      <span class="nv">baseDirectory</span><span class="o">=</span><span class="k">${</span><span class="nv">lessFile</span><span class="p">/less\/*/</span><span class="k">}</span>
-</span><span class='line'>      mkdir -p <span class="k">${</span><span class="nv">baseDirectory</span><span class="k">}</span>css
-</span><span class='line'>
-</span><span class='line'><span class="c">#     Log to the console that the CSS is being generated so the person</span>
-</span><span class='line'><span class="c">#     running the commit is aware.</span>
-</span><span class='line'>      <span class="nb">echo</span> <span class="s2">&quot;Generating $cssFile from $lessFile&quot;</span>
-</span><span class='line'>
-</span><span class='line'><span class="c">#     Run lessc to do the actual generation.  If lessc fails exit</span>
-</span><span class='line'><span class="c">#     with a code of 1 so that the commit is rejected.  The -x option </span>
-</span><span class='line'><span class="c">#     tells lessc to generate compressed CSS for production usage.</span>
-</span><span class='line'>      <span class="k">if</span> ! lessc -x <span class="nv">$lessFile</span> <span class="nv">$cssFile</span>; <span class="k">then</span>
-</span><span class='line'><span class="k">        </span><span class="nb">exit </span>1
-</span><span class='line'>      <span class="k">fi</span>
-</span><span class='line'>
-</span><span class='line'><span class="c">#     Add the CSS file to the commit.</span>
-</span><span class='line'>      git add <span class="nv">$cssFile</span>
-</span><span class='line'>    <span class="k">fi</span>
-</span><span class='line'><span class="k">  fi</span>
-</span><span class='line'><span class="k">done</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>You could greatly simplify this script to simply run <code>lessc</code> on all .less files on every commit.  I go file by file because the script has to be run on a large code base where generating hundreds to thousands of CSS files on every commit isn&#8217;t practical.  This script is also setup to create sibling <code>css</code> and <code>less</code> directories.  You could easily modify this to simply put the files in the same directory; I like them to be logically separated.</p>
-
-<h3>Automating <code>&lt;link&gt;</code> File Paths</h3>
-
-<p>As I said, the script I use assumes that there are sibling <code>css</code> and <code>less</code> directories.  To give a concrete example of this say I have the following file system structure.</p>
-
-<pre><code>/MyProject
-    /css
-        * Generated files *
-    index.html
-    /js
-        less.js
-    /less
-        a.less
-        b.less
-</code></pre>
-
-<p>To include these files I use the following locally:</p>
-
-<figure class='code'><figcaption class='not_empty'><span>Local Includes</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="c">&lt;!-- index.html --&gt;</span>
-</span><span class='line'><span class="cp">&lt;!DOCTYPE html&gt;</span>
-</span><span class='line'><span class="nt">&lt;html&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;head&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">&quot;stylesheet/less&quot;</span> <span class="na">href=</span><span class="s">&quot;less/a.less&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">&quot;stylesheet/less&quot;</span> <span class="na">href=</span><span class="s">&quot;less/b.less&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;js/less.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;/head&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;body&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;/body&gt;</span>
-</span><span class='line'><span class="nt">&lt;/html&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>And the following in production:</p>
-
-<figure class='code'><figcaption class='not_empty'><span>Production Includes</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="c">&lt;!-- index.html --&gt;</span>
-</span><span class='line'><span class="cp">&lt;!DOCTYPE html&gt;</span>
-</span><span class='line'><span class="nt">&lt;html&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;head&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">&quot;stylesheet&quot;</span> <span class="na">href=</span><span class="s">&quot;css/a.css&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">&quot;stylesheet&quot;</span> <span class="na">href=</span><span class="s">&quot;css/b.css&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;/head&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;body&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;/body&gt;</span>
-</span><span class='line'><span class="nt">&lt;/html&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>The best way to handle both development and production with minimal maintenance is to use some sort of server-side check so that you don&#8217;t have to change your HTML whenever you release to production.  Here&#8217;s an example of a PHP script that does this by detecting whether the host contains <code>localhost</code>.</p>
-
-<figure class='code'><figcaption class='not_empty'><span>Making both imports work</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="c">&lt;!-- index.html --&gt;</span>
-</span><span class='line'><span class="cp">&lt;!DOCTYPE html&gt;</span>
-</span><span class='line'><span class="nt">&lt;html&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;head&gt;</span>
-</span><span class='line'>      <span class="cp">&lt;? if (strpos($_SERVER[&#39;HTTP_HOST&#39;], &#39;localhost&#39;)) { ?&gt;</span>
-</span><span class='line'>            <span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">&quot;stylesheet/less&quot;</span> <span class="na">href=</span><span class="s">&quot;/less/a.less&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'>            <span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">&quot;stylesheet/less&quot;</span> <span class="na">href=</span><span class="s">&quot;/less/b.less&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'>            <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;/js/less.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
-</span><span class='line'>        <span class="err">&lt;</span> } else { ?&gt;
-</span><span class='line'>            <span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">&quot;stylesheet&quot;</span> <span class="na">href=</span><span class="s">&quot;/css/a.css&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'>            <span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">&quot;stylesheet&quot;</span> <span class="na">href=</span><span class="s">&quot;/css/b.css&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'>        <span class="cp">&lt;? } ?&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;/head&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;body&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;/body&gt;</span>
-</span><span class='line'><span class="nt">&lt;/html&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>Conclusion</h3>
-
-<p>Using LESS client side is awfully convenient, but it shouldn&#8217;t be done in a production setting.  If you use LESS a lot then this is something you&#8217;ll want to automate in your workflow.  In my opinion using a git <code>pre-commit</code> hook is a clean way to accomplish this.  Feel free to use my script or alter it to your liking.  If you have any other ways you automate your LESS workflow I&#8217;d love to hear about it.  Let me know in the comments.</p>
 ]]></content>
   </entry>
   
