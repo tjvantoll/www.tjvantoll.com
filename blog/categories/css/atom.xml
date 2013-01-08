@@ -4,7 +4,7 @@
   <title><![CDATA[Category: CSS | TJ VanToll]]></title>
   <link href="http://tjvantoll.com/blog/categories/css/atom.xml" rel="self"/>
   <link href="http://tjvantoll.com/"/>
-  <updated>2013-01-05T22:45:43-05:00</updated>
+  <updated>2013-01-07T23:09:22-05:00</updated>
   <id>http://tjvantoll.com/</id>
   <author>
     <name><![CDATA[TJ VanToll]]></name>
@@ -34,14 +34,16 @@
 <p></html>
 ```</p>
 
-<p>The use of a wrapper or container <code>div</code> around the page is fairly universal.  It is commonly used to perform tasks such as centering a page's content or providing a shadow or border to frame it.  But, since the <code>body</code> element is a necessity in the markup, why can't it be styled directly instead?  Why is a wrapper <code>div</code> used?  Historically there have been a number of issues with using the <code>body</code> element as a top level container.</p>
+<p>The use of a wrapper or container <code>div</code> around the page is fairly universal.  It is commonly used to perform tasks such as centering a page's content or providing a shadow or border to frame it.  But, since the <code>body</code> element is a necessity in the markup, why can't it be styled directly instead?  Why is a wrapper <code>div</code> used?</p>
+
+<p>Historically there have been a number of issues with using the <code>body</code> element as a top level container in old versions of Internet Explorers.  If you're supporting IE >= 8 you're good, but there are some things <a href="#now">you should be aware of</a>.</p>
 
 <!--more-->
 
 
 <h3>IE 5.5</h3>
 
-<p>A pretty common practice is to center the top level container using <code>margin: 0 auto</code>, and this works fine in all browsers... back to IE 5.5.  IE 5.5 did not support <code>auto</code> margins so this approach did not work.</p>
+<p>To get to the origins of the wrapper <code>div</code> let's go way back.  A pretty common practice is to center the top level container using <code>margin: 0 auto</code>, and this works fine in all browsers... back to IE 5.5.  IE 5.5 did not support <code>auto</code> margins so this approach did not work.</p>
 
 <p>To center the top level container in IE 5.5 you had to make use of <code>text-align: center</code> as such:</p>
 
@@ -62,9 +64,7 @@ text-align: left; /* counteract the declaration on body */
 <p>}
 ```</p>
 
-<p><code>text-align: center</code> <em>should</em> only affect inline elements, but IE 5.5 incorrectly applied it to block elements as well.  Because the <code>body</code> needed to be used to center subsequent content, it could not be used as a top level container in IE 5.5.</p>
-
-<p>(Note: The <code>text-align: center</code> bug was fixed in IE6 standards mode, but the behavior remained in Internet Explorer's quirks mode until IE 10.)</p>
+<p><code>text-align: center</code> <em>should</em> only affect inline elements, but IE 5.5 incorrectly applied it to block elements as well.  (Note: The <code>text-align: center</code> bug was fixed in IE6 standards mode, but the behavior remained in Internet Explorer's quirks mode to this day.)</p>
 
 <h3>IE6</h3>
 
@@ -98,19 +98,25 @@ margin: 0 auto;
 </div>
 
 
-<p>So what's the issue?  Unfortunately IE6 does not support <code>min-width</code> or <code>max-width</code>.  Therefore if you apply a percentage based width to the <code>body</code>, you can not cap the minimum and maximum widths.  This is major limitations for a number of layouts, especially modern responsive designs.</p>
+<p>Believe it or not using the <code>body</code> element as a top level container is actually safe in IE6.</p>
+
+<p><a name="zoom"></a></p>
 
 <h3>IE7</h3>
 
-<p>IE7 implemented <code>min-width</code> and <code>max-width</code>, applying them to the <code>body</code> works as it does with any other element.  IE7 also was the first version of Internet Explorer that allowed the user to zoom.</p>
+<p>If there are no issues with IE6 why am I still writing?  IE7 introduced a feature new to Internet Explorer, zoom, and with it came a new bug.</p>
 
-<p>Unfortunately, when a <code>margin</code> / <code>width</code> is applied to the <code>body</code> and the user zooms, IE7 incorrectly treats the left edge of the <code>body</code> as the edge of the viewport.  This shift bumps content on the right hand side of the page outside of the screen.  The image below shows the result of a zoomed in window and styled <code>body</code> in IE7.</p>
+<p>When a <code>margin</code> or <code>width</code> is applied to the <code>body</code> and the user zooms, IE7 incorrectly treats the left edge of the <code>body</code> as the edge of the viewport.  This shift bumps content on the right hand side of the page outside of the screen.  The image below shows the result of a zoomed in window and styled <code>body</code> in IE7.</p>
 
 <p><img src="http://tjvantoll.com/images/posts/2013-01-05/IE7Zoom.png" title="Zooming in IE7" style="max-height: 400px;"></p>
+
+<p>This issue is not present using a wrapper <code>div</code>.</p>
 
 <h3>Beyond IE7</h3>
 
 <p>In my testing beyond IE7 there are no major issues using the <code>body</code> element as a top level container.  There are however a few things to be aware of.</p>
+
+<p><a name="now"></a></p>
 
 <h3>Positioning</h3>
 
@@ -129,7 +135,7 @@ position: relative;
 
 <h3>Backgrounds</h3>
 
-<p>Backgrounds applied to the <code>body</code> will take up whole page regardless or margins.  Consider the following:</p>
+<p>Backgrounds applied to the <code>body</code> will take up whole page regardless of margins.  Consider the following:</p>
 
 <p>``` css
 body {</p>
@@ -194,7 +200,7 @@ width: 200px;
 
 <h3>Is it Safe to Use Yet?</h3>
 
-<p>The zoom issue in IE7 is bad, but if you're no longer supporting IE7 it's safe to drop the wrapper <code>div</code> and style the <code>body</code> directly.</p>
+<p>The <a href="#zoom">zoom issue in IE7</a> is bad, but if you're no longer supporting IE7 it's safe to drop the wrapper <code>div</code> and style the <code>body</code> directly.</p>
 
 <p>That being said, there's no harm in leaving a wrapper <code>div</code> in place.  So if you have any doubt stick with <code>&lt;div id="wrapper"&gt;&lt;/div&gt;</code>.</p>
 
