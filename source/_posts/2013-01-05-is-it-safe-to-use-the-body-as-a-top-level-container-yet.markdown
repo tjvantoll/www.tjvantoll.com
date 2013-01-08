@@ -19,13 +19,15 @@ View source on almost any web page and you'll likely see the following:
 </html>
 ```
 
-The use of a wrapper or container `div` around the page is fairly universal.  It is commonly used to perform tasks such as centering a page's content or providing a shadow or border to frame it.  But, since the `body` element is a necessity in the markup, why can't it be styled directly instead?  Why is a wrapper `div` used?  Historically there have been a number of issues with using the `body` element as a top level container.
+The use of a wrapper or container `div` around the page is fairly universal.  It is commonly used to perform tasks such as centering a page's content or providing a shadow or border to frame it.  But, since the `body` element is a necessity in the markup, why can't it be styled directly instead?  Why is a wrapper `div` used? 
+
+Historically there have been a number of issues with using the `body` element as a top level container in old versions of Internet Explorers.  If you're supporting IE >= 8 you're good, but there are some things [you should be aware of](#now).
 
 <!--more-->
 
 ### IE 5.5
 
-A pretty common practice is to center the top level container using `margin: 0 auto`, and this works fine in all browsers... back to IE 5.5.  IE 5.5 did not support `auto` margins so this approach did not work.
+To get to the origins of the wrapper `div` let's go way back.  A pretty common practice is to center the top level container using `margin: 0 auto`, and this works fine in all browsers... back to IE 5.5.  IE 5.5 did not support `auto` margins so this approach did not work.
 
 To center the top level container in IE 5.5 you had to make use of `text-align: center` as such:
 
@@ -39,9 +41,7 @@ body {
 }
 ```
 
-`text-align: center` *should* only affect inline elements, but IE 5.5 incorrectly applied it to block elements as well.  Because the `body` needed to be used to center subsequent content, it could not be used as a top level container in IE 5.5.
-
-(Note: The `text-align: center` bug was fixed in IE6 standards mode, but the behavior remained in Internet Explorer's quirks mode until IE 10.)
+`text-align: center` *should* only affect inline elements, but IE 5.5 incorrectly applied it to block elements as well.  (Note: The `text-align: center` bug was fixed in IE6 standards mode, but the behavior remained in Internet Explorer's quirks mode to this day.)
 
 ### IE6
 
@@ -71,20 +71,24 @@ The layout renders the same in IE6 as it does in the latest version of Chrome (2
 	</div>
 </div>
 
-So what's the issue?  Unfortunately IE6 does not support `min-width` or `max-width`.  Therefore if you apply a percentage based width to the `body`, you can not cap the minimum and maximum widths.  This is major limitations for a number of layouts, especially modern responsive designs.
+Believe it or not using the `body` element as a top level container is actually safe in IE6.
 
+<a name="zoom"></a>
 ### IE7
 
-IE7 implemented `min-width` and `max-width`, applying them to the `body` works as it does with any other element.  IE7 also was the first version of Internet Explorer that allowed the user to zoom.
+If there are no issues with IE6 why am I still writing?  IE7 introduced a feature new to Internet Explorer, zoom, and with it came a new bug.
 
-Unfortunately, when a `margin` / `width` is applied to the `body` and the user zooms, IE7 incorrectly treats the left edge of the `body` as the edge of the viewport.  This shift bumps content on the right hand side of the page outside of the screen.  The image below shows the result of a zoomed in window and styled `body` in IE7.
+When a `margin` or `width` is applied to the `body` and the user zooms, IE7 incorrectly treats the left edge of the `body` as the edge of the viewport.  This shift bumps content on the right hand side of the page outside of the screen.  The image below shows the result of a zoomed in window and styled `body` in IE7.
 
 <img src="/images/posts/2013-01-05/IE7Zoom.png" title="Zooming in IE7" style="max-height: 400px;">
+
+This issue is not present using a wrapper `div`.
 
 ### Beyond IE7
 
 In my testing beyond IE7 there are no major issues using the `body` element as a top level container.  There are however a few things to be aware of.
 
+<a name="now"></a>
 ### Positioning
 
 Any absolutely positioned elements will be positioned relative to the viewport rather than the newly placed `body`.  To fix this set `position: relative` on the `body` as such:
@@ -99,7 +103,7 @@ body {
 
 ### Backgrounds
 
-Backgrounds applied to the `body` will take up whole page regardless or margins.  Consider the following:
+Backgrounds applied to the `body` will take up whole page regardless of margins.  Consider the following:
 
 ``` css
 body {
@@ -152,7 +156,7 @@ While you are unlikely to run into this directly, you may use a library that doe
 
 ### Is it Safe to Use Yet?
 
-The zoom issue in IE7 is bad, but if you're no longer supporting IE7 it's safe to drop the wrapper `div` and style the `body` directly.
+The [zoom issue in IE7](#zoom) is bad, but if you're no longer supporting IE7 it's safe to drop the wrapper `div` and style the `body` directly.
 
 That being said, there's no harm in leaving a wrapper `div` in place.  So if you have any doubt stick with `<div id="wrapper"></div>`.
 
