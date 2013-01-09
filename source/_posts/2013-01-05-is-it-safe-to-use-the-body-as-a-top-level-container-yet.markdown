@@ -47,7 +47,7 @@ body {
 
 IE6 implemented `auto` margins, so `margin: 0 auto` was now safe to use on the `body`.  Additionally, IE6 fully supports adding a `width`, `padding`, `margin`, and `border` to the body element.  Take the following CSS:
 
-```
+``` css
 body{
     width: 90%;
     border: 2px solid red;
