@@ -4,7 +4,7 @@
   <title><![CDATA[Category: HTML5 | TJ VanToll]]></title>
   <link href="http://tjvantoll.com/blog/categories/html5/atom.xml" rel="self"/>
   <link href="http://tjvantoll.com/"/>
-  <updated>2013-01-08T21:18:43-05:00</updated>
+  <updated>2013-01-09T21:50:34-05:00</updated>
   <id>http://tjvantoll.com/</id>
   <author>
     <name><![CDATA[TJ VanToll]]></name>
@@ -12,6 +12,33 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[HTML 5 hidden Attribute Browser Support]]></title>
+    <link href="http://tjvantoll.com/2013/01/09/html5-hidden-attribute-browser-support/"/>
+    <updated>2013-01-09T21:27:00-05:00</updated>
+    <id>http://tjvantoll.com/2013/01/09/html5-hidden-attribute-browser-support</id>
+    <content type="html"><![CDATA[<p>I had trouble finding this from a Google search, so I thought I'd list the browser support for the <a href="http://www.whatwg.org/specs/web-apps/current-work/multipage/editing.html#the-hidden-attribute">HTML5 hidden attribute</a> here.</p>
+
+<ul>
+<li>Chrome 6+</li>
+<li>Firefox 4+</li>
+<li>Safari 5.1+</li>
+<li>Opera 11+</li>
+<li>iOS 5+</li>
+<li>Android Browser 4+</li>
+</ul>
+
+
+<p>IE still does not support the <code>hidden</code> attribute as of IE 10.  For any unsupported browser you can easily add support by just including the following CSS:</p>
+
+<p><code>css Polyfiling the hidden attribute.
+[hidden] { display: none; }
+</code></p>
+
+<p>This will work back to IE6, which doesn't support the <a href="https://developer.mozilla.org/en-US/docs/CSS/Attribute_selectors">attribute selector</a>.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[maxlength Constraint Validation Oddities in Major Browsers]]></title>
@@ -362,301 +389,6 @@ $(function() {
 <li>Added the above section on using webshim to polyfill this behavior for all browsers.</li>
 </ul>
 
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Native HTML5 Number Picker and jQuery UI's Spinner - Which to Use?]]></title>
-    <link href="http://tjvantoll.com/2012/07/15/native-html5-number-picker-vs-jquery-uis-spinner-which-to-use/"/>
-    <updated>2012-07-15T21:07:00-04:00</updated>
-    <id>http://tjvantoll.com/2012/07/15/native-html5-number-picker-vs-jquery-uis-spinner-which-to-use</id>
-    <content type="html"><![CDATA[<p><a href="http://www.w3.org/TR/html5/number-state.html#number-state">HTML5's native number picker</a> (<code>&lt;input[type=number]</code>) and jQuery UI 1.9's spinner can both be used to create inputs for numeric data.  So which makes sense for your application?  Let's start with a brief explanation of each.</p>
-
-<h3><code>input[type=number]</code></h3>
-
-<p>HTML5 adds several new valid <code>type</code> attributes for <code>&lt;input&gt;</code> elements.  One of them, <code>number</code>, can be used to create a number picker.</p>
-
-<p><code>html
-&lt;input type="number" /&gt;
-</code></p>
-
-<p>This will present the user with a number picker in supported browsers, which, as of this writing includes Chrome, Safari, Opera, iOS, Opera Mobile, and Android 4.0+ (<a href="http://caniuse.com/#feat=input-number">full support list</a>).  Here's what the user will see in supported browsers:</p>
-
-<!--more-->
-
-
-<h5>Chrome 20:</h5>
-
-<p><img src="/images/posts/2012-07-15/Chrome.png" title="Chrome" alt="Chrome" /></p>
-
-<h5>Safari 5.1.7:</h5>
-
-<p><img src="/images/posts/2012-07-15/Safari.png" title="Safari" alt="Safari" /></p>
-
-<h5>Opera 12.00:</h5>
-
-<p><img src="/images/posts/2012-07-15/Opera.png" title="Opera" alt="Opera" /></p>
-
-<h5>Opera Mobile 12:</h5>
-
-<p><img alt="Opera Mobile" title="Opera Mobile" src="http://tjvantoll.com/images/posts/2012-07-15/Opera_Mobile.png" style="height: 250px;" /></p>
-
-<h5>iOS 5:</h5>
-
-<p><img alt="iOS" title="iOS" src="http://tjvantoll.com/images/posts/2012-07-15/iOS.png" style="height: 200px;" /></p>
-
-<h5>Android 4.1 (Jelly Bean):</h5>
-
-<p><img alt="Android" title="Android" src="http://tjvantoll.com/images/posts/2012-07-15/Android.png" style="height: 200px;" /></p>
-
-<p>As you can see one of the nicest effects of using <code>[type=number]</code> is that mobile users will automatically be presented with a number pad to aid with entry of numeric data.  Unsupported browsers will simply treat the <code>input[type=number]</code> as a normal text input.  Firefox has <a href="https://bugzilla.mozilla.org/show_bug.cgi?id=344616">recently added a UI-less version</a> of <code>input[type=number]</code> to their nightly builds so hopefully a fully enabled version will be coming soon.</p>
-
-<p>You can see what your browser does below:</p>
-
-<iframe style="width: 100%; height: 120px;" src="http://jsfiddle.net/tj_vantoll/XMEEz/1/embedded/result,html/" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
-
-
-<h4>Additional Functionality</h4>
-
-<p>The native number picker supports <code>min</code>, <code>max</code>, and <code>step</code> attributes to allow you to pick the minimum value of the <code>&lt;input&gt;</code>, the maximum value of the <code>&lt;input&gt;</code>, and the amount the value should be incremented / decremented when the user spins through values (the <code>step</code> attribute defaults to <code>1</code> if not specified).</p>
-
-<p>For example, on the <code>&lt;input&gt;</code> below the browser will enforce that the minimum value will be <code>2</code>, the maximum value will be <code>20</code>, and the user will step at increments of <code>2</code>.</p>
-
-<p><code>html
-&lt;input type="number" min="2" max="20" step="2" /&gt;
-</code></p>
-
-<p>You can see how this behaves in your browser below:</p>
-
-<iframe style="width: 100%; height: 120px;" src="http://jsfiddle.net/tj_vantoll/YmQFS/embedded/result,html/" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
-
-
-<p>Just as a word of warning, Android 4.1 and iOS 5 do not support the <code>min</code>, <code>max</code>, or <code>step</code> attributes.</p>
-
-<h4>Methods</h4>
-
-<p>In addition to the new attributes, supporting browsers also provide 3  JavaScript methods specifically for <code>input[type=number]</code>.</p>
-
-<ul>
-<li><code>stepUp(n)</code> - Increment the <code>value</code> of the <code>&lt;input&gt;</code> by <code>n</code>.</li>
-<li><code>stepDown(n)</code> - Decrement the <code>value</code> of the <code>&lt;input&gt;</code> by <code>n</code>.</li>
-<li><code>valueAsNumber</code> - Retrieve the <code>value</code> of the <code>input</code> as a JavaScript <code>number</code> variable (by default retrieving the <code>value</code> of an <code>&lt;input&gt;</code> returns a <code>string</code>).</li>
-</ul>
-
-
-<h3>jQuery UI Spinner</h3>
-
-<p>jQuery UI's <code>spinner</code> is a new plugin due for jQuery UI's 1.9 release (currently in beta).  The plugin by default looks and behaves much like the native number picker.</p>
-
-<iframe style="width: 100%; height: 120px;" src="http://jsfiddle.net/tj_vantoll/scXYB/1/embedded/result,js,html/" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
-
-
-<p>It also supports setting minimum, maximum, and step values through options rather than attributes.</p>
-
-<p>``` html jQuery UI Spinner
-<input id="spinner" /></p>
-
-<script>
-    $(function() {
-        $('#spinner').spinner({
-            min: 2,
-            max: 20,
-            step: 2
-        });
-    });
-</script>
-
-
-<p>```</p>
-
-<p>Example:</p>
-
-<iframe style="width: 100%; height: 120px;" src="http://jsfiddle.net/tj_vantoll/N7UXT/2/embedded/result,js,html/" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
-
-
-<h3>Above and Beyond</h3>
-
-<p>What really sets jQuery UI's <code>spinner</code> apart from the native picker is that it is extensible, customizable, and it brings a number of extra features.  Here are some of the additional things that you can do.</p>
-
-<h4>Paging</h4>
-
-<p><code>spinner</code> takes a <code>page</code> option that allows you to define how much the <code>spinner</code> should step when the page down / page up keys are pressed.  The example below shows a <code>spinner</code> with a <code>step</code> value of <code>1</code> and a <code>page</code> value of <code>10</code>.</p>
-
-<iframe style="width: 100%; height: 150px;" src="http://jsfiddle.net/tj_vantoll/EvTeQ/1/embedded/result,js,html/" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
-
-
-<h4>Mousewheel</h4>
-
-<p>If you want mousewheel support for a <code>spinner</code> all you need to do is include <a href="https://github.com/brandonaaron/jquery-mousewheel">Brandon Aaron's mousewheel plugin</a> and you get it automatically!  Try it out on any of the <code>spinner</code> demos on this page.</p>
-
-<h4>Currency</h4>
-
-<p>Ever need to accept currency at certain defined increments?  This example shows a <code>spinner</code> that spins through currency values at $25 increments, all with the same clean API.</p>
-
-<iframe style="width: 100%; height: 150px;" src="http://jsfiddle.net/tj_vantoll/2wEe6/3/embedded/result,js,html/" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
-
-
-<p>The formatting is localized through <a href="https://github.com/jquery/globalize/">Globalize.js</a>, therefore, if you want to handle different currencies all you need to do is pass in the appropriate <code>culture</code> and include the necessary JavaScript dependencies.  Here's an example of an input that takes Euros.</p>
-
-<iframe style="width: 100%; height: 150px;" src="http://jsfiddle.net/tj_vantoll/ppH7g/embedded/result,js,html/" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
-
-
-<h4>Time</h4>
-
-<p>If you need to accept time data <code>spinner</code> can be used for that as well.</p>
-
-<iframe style="width: 100%; height: 150px;" src="http://jsfiddle.net/tj_vantoll/2wEe6/5/embedded/result,js,html/" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
-
-
-<p>The <code>page</code> option discussed earlier is used nicely here to make the up / down keys control the minutes and the page up / page down keys to controls hours.  Try it out on the example above.</p>
-
-<h3>24 Hour Times</h3>
-
-<p>Since the <code>spinner</code> uses Globalize.js, you're free to use a time system different than the United States' nonsensical one.</p>
-
-<iframe style="width: 100%; height: 150px;" src="http://jsfiddle.net/tj_vantoll/Kenve/2/embedded/result,js,html/" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
-
-
-<h3>Time Picker vs. <code>&lt;input type="time"&gt;</code></h3>
-
-<p>HTML5 also provides a native time picker (<code>input[type=time]</code>), but, it has <a href="http://caniuse.com/#feat=input-datetime">nearly no support</a>, does not yet provide localized formatting, and does not provide the stepping/paging functionality that <code>spinner</code> has baked in.  In the future it might provide a viable native solution, but for now it's best to stay away.</p>
-
-<h4>Extensible and Customizable</h4>
-
-<p>Because <code>spinner</code> is built on top of <a href="http://ajpiano.com/widgetfactory">jQuery UI's widget factory</a>, it is easily extensible.  For example, let's say you need to build an input that accepts a year in which the modern summer olympics were held.  You could do that with the following:</p>
-
-<p>```javascript Extending spinner
-<input /></p>
-
-<script>
-    $.widget( "tj.olympicspicker", $.ui.spinner, {
-        options: {
-            min: 1896,
-            max: 2012,
-            step: 4
-        }
-    });
-    $(function() {
-        $('input').olympicspicker();
-    });
-</script>
-
-
-<p>```</p>
-
-<iframe style="width: 100%; height: 150px;" src="http://jsfiddle.net/tj_vantoll/EsTYd/1/embedded/result,js,html/" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
-
-
-<p>Now all your olympics pickers in your code base can share the same code!</p>
-
-<h3><code>&lt;input type="number"&gt;</code> vs. <code>spinner</code></h3>
-
-<p>Although jQuery UI's <code>spinner</code> is more advanced and customizable, for most simple applications the native number picker will work just fine.  If you simply need a field that accepts numeric data there's no need to bring in <code>spinner</code> as a dependency.  However, if you do need the ability to fine tune the behavior and look of the picker, or if you need consistent UI across all browsers, jQuery UI's <code>spinner</code> provides an excellent API to do so.</p>
-
-<p>To summarize the reasons to use the native picker are:</p>
-
-<ul>
-<li>Easy to implement, simply give an <code>&lt;input&gt;</code> a <code>type</code> attribute of <code>number</code>.</li>
-<li>There are no dependencies, the number picker is native to the browser.</li>
-<li>Mobile browsers that support the native picker will optimize the touch keyboard for number input.</li>
-</ul>
-
-
-<p>And the reasons to use jQuery UI's <code>spinner</code> are:</p>
-
-<ul>
-<li>Browser support - The <code>spinner</code> will work all the way back to IE6.</li>
-<li>Extremely customizable and extensible.</li>
-<li>Customizable handling of the page up and page down keys.</li>
-<li>Easily integrated mousewheel support.</li>
-<li>Built in custom types such as currency and time.</li>
-<li>Built in i18n support.</li>
-</ul>
-
-
-<h3>Using jQuery UI's Spinner to Polyfill <code>input[type=number]</code></h3>
-
-<p>Another option is to use the native HTML number picker when it's available, and fallback to jQuery UI's <code>spinner</code> when it's not.</p>
-
-<p>``` javascript Using jQuery UI to Polyfill input[type=number]
-$(function() {</p>
-
-<pre><code>var input = document.createElement('input');
-input.setAttribute('type', 'number');
-
-if (input.type == 'text') {
-    $('input[type=number]').spinner();
-}
-</code></pre>
-
-<p>});
-```</p>
-
-<p>The code to detect <code>input[type=number]</code> support was taken from <a href="https://github.com/jonstipe/number-polyfill">another number picker polyfill by jonstipe</a>.  It creates an <code>&lt;input&gt;</code>, changes its <code>type</code> to <code>number</code>, and sees if that change actually took effect to determine whether the browser supports the type.  You could also use the <code>Modernizr.inputtypes.number</code> check from <a href="http://modernizr.com">Modernizr</a> to achieve the same thing.</p>
-
-<p>The <code>spinner</code> plugin is smart enough to look for the <code>step</code>, <code>min</code>, and <code>max</code> attributes on the <code>&lt;input&gt;</code> so you don't have to pass those in explictly (<a href="https://twitter.com/bassistance/status/225532234017406977">thanks @bassistance</a>).</p>
-
-<p>The benefit of this technique is that you get the benefits of the native picker when it's available, and you can count on having a number picker in all browsers.  As a further optimization you could even use a conditional script loader such as <a href="http://yepnopejs.com">yepnope.js</a> to bring in jQuery UI's required JavaScript and CSS only when you need it.</p>
-
-<h3>Using Spinner and Getting a Number Keyboard on Mobile</h3>
-
-<p>If you want to use a <code>spinner</code> everywhere AND get a number keyboard on mobile things get a little trickier.  Mobile browsers look for an <code>&lt;input&gt;</code> to have <code>type=number</code> to provide the number keyboard.  So you think this would be as simple as creating a <code>spinner</code> on a <code>&lt;input[type=number]&gt;</code> node.  However, that produces the following on supporting desktop browsers.</p>
-
-<h5>Chrome 20:</h5>
-
-<p><img src="/images/posts/2012-07-15/Chrome-Dual.png" title="Chrome" alt="Chrome" /></p>
-
-<h5>Safari 5.1.7:</h5>
-
-<p><img src="/images/posts/2012-07-15/Safari-Dual.png" title="Safari" alt="Safari" /></p>
-
-<h5>Opera 12.00:</h5>
-
-<p><img src="/images/posts/2012-07-15/Opera-Dual.png" title="Opera" alt="Opera" /></p>
-
-<p>Obviously the double arrow UI is less than ideal.  So to work around this you simply need to hide or destroy one of the sets or controls... right?</p>
-
-<p>Well it turns out hiding the native arrow controls is difficult because Chrome places the control on the inside of the <code>&lt;input&gt;</code> and Safari and Opera place it on the outside.  Therefore, if you try to adjust the <code>margin</code> of the <code>&lt;input&gt;</code> so jQuery UI's controls overlap the native ones it won't work in a cross browser friendly way.</p>
-
-<p>Therefore the best approach I've came up with is to hide the <code>spinner</code>'s arrow controls when the browser creates its own.</p>
-
-<p>``` javascript Number keyboard for a spinner
-$(function() {</p>
-
-<pre><code>$('input[type=number]').spinner();
-if (Modernizr.input.step) {
-    $('.ui-spinner-button').hide();
-    $('.ui-spinner-input').css('marginRight', 0);
-}
-</code></pre>
-
-<p>});
-```</p>
-
-<p>What this does is detect whether the browser supports the <code>step</code> attribute, if it does it removes jQuery UI's controls.  What does the <code>step</code> attribute have to do with the arrow controls?  Nothing, except that it just <em>happens</em> that the browsers that support the <code>step</code> attribute also create a native control to do the stepping.  Is this going to change in the future?  Quite possibly.</p>
-
-<p>So obviously this is not ideal, and probably shouldn't be used in production code, but it works at the moment.  Have a better approach for tackling this problem?  Let me know in the comments.</p>
-
-<h3>Update (August 26th, 2012)</h3>
-
-<p>Commenter amir pointed out the WebKit provides a pseudoclass that you can use to style, and therefore hide the native spin controls.</p>
-
-<p>``` css
-input[type=number]::-webkit-outer-spin-button {</p>
-
-<pre><code>display: none; 
-</code></pre>
-
-<p>}
-input[type=number]::-webkit-inner-spin-button {</p>
-
-<pre><code>display: none;
-</code></pre>
-
-<p>}
-```</p>
-
-<p>This solves the issue for Webkit, but this remains an issue for Opera and browsers that add <code>input[type=number]</code> support in the future.</p>
 ]]></content>
   </entry>
   
