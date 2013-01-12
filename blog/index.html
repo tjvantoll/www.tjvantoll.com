@@ -9,7 +9,7 @@
   <meta name="author" content="TJ VanToll">
 
   
-  <meta name="description" content="I had trouble finding this from a Google search, so I thought I&#8217;d list the browser support for the HTML5 hidden attribute here. Chrome 6+ &hellip;">
+  <meta name="description" content="One of the changes in jQuery&#8217;s upcoming 1.9 release is the removal of $.browser. So if you&#8217;re using it to test for Internet Explorer, &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -94,6 +94,119 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2013/01/11/detecting-internet-explorer-without-jquery/">Detecting Internet Explorer without jQuery</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-01-11T17:26:00-05:00" pubdate data-updated="true">Jan 11<span>th</span>, 2013</time>
+        
+         | <a href="/2013/01/11/detecting-internet-explorer-without-jquery/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>One of the changes in jQuery&#8217;s <a href="http://blog.jquery.com/2013/01/09/jquery-1-9-rc1-and-migrate-rc1-released/">upcoming 1.9 release</a> is the removal of <a href="http://api.jquery.com/jQuery.browser/">$.browser</a>.  So if you&#8217;re using it to test for Internet Explorer, what do you do?</p>
+
+<h3>Option 1: Use the migrate plugin</h3>
+
+<p>If you want to avoid upgrading existing code, use the <a href="https://github.com/jquery/jquery-migrate/">migrate plugin</a> which will preserve <code>$.browser</code> as it was.  Of course this is simply putting off the inevitable, but if you need to upgrade a large code base it&#8217;s a good temporary measure.  The development version of the plugin will produce a console warning message whenever <code>$.browser</code> is used, which can help you identify where you&#8217;re using it and migrate accordingly.</p>
+
+<h3>Option 2: Switch to feature detection</h3>
+
+<p>Testing for specific browsers is <a href="http://www.sitepoint.com/why-browser-sniffing-stinks/">a</a> <a href="http://msdn.microsoft.com/en-us/magazine/hh475813.aspx">bad</a> <a href="http://diveintohtml5.info/detect.html">practice</a>.  If you are not supporting IE because of features that it does not possess, test for those features instead of the browser.  The <a href="http://modernizr.com">Modernizr</a> library includes a wide variety of feature tests and is a good place to get started.</p>
+
+<h3>Option 3: Use conditional classes or conditional comments</h3>
+
+<p>IE versions &lt;= 10 support <a href="http://msdn.microsoft.com/en-us/library/ms537512(v=vs.85).aspx">conditional comments</a> that can be used to detect Internet Explorer.  For example the <a href="http://html5boilerplate.com/">HTML5 boilerplate</a> <a href="https://github.com/h5bp/html5-boilerplate/blob/master/index.html">uses the following</a> to show a warning to users using IE &lt; 7:</p>
+
+<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="c">&lt;!--[if lt IE 7]&gt;</span>
+</span><span class='line'><span class="c">    &lt;p class=&quot;chromeframe&quot;&gt;</span>
+</span><span class='line'><span class="c">        You are using an &lt;strong&gt;outdated&lt;/strong&gt; browser. Please</span>
+</span><span class='line'><span class="c">        &lt;a href=&quot;http://browsehappy.com/&quot;&gt;upgrade your browser&lt;/a&gt;</span>
+</span><span class='line'><span class="c">        or &lt;a href=&quot;http://www.google.com/chromeframe/?redirect=true&quot;&gt;</span>
+</span><span class='line'><span class="c">        activate Google Chrome Frame&lt;/a&gt; to improve your experience.</span>
+</span><span class='line'><span class="c">    &lt;/p&gt;</span>
+</span><span class='line'><span class="c">&lt;![endif]--&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This approach can be used to add conditional classes on the <code>html</code> element (<a href="http://paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/">via Paul Irish</a>).</p>
+
+<figure class='code'><figcaption class='not_empty'><span>Conditional classes on the html element</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="c">&lt;!--[if lt IE 7]&gt;      &lt;html class=&quot;ie6&quot;&gt; &lt;![endif]--&gt;</span>
+</span><span class='line'><span class="c">&lt;!--[if IE 7]&gt;         &lt;html class=&quot;ie7&quot;&gt; &lt;![endif]--&gt;</span>
+</span><span class='line'><span class="c">&lt;!--[if IE 8]&gt;         &lt;html class=&quot;ie8&quot;&gt; &lt;![endif]--&gt;</span>
+</span><span class='line'><span class="c">&lt;!--[if gt IE 8]&gt;&lt;!--&gt;</span> <span class="nt">&lt;html&gt;</span>         <span class="c">&lt;!--&lt;![endif]--&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Now the presence of a class on the <code>html</code> element can be used to derive the version of Internet Explorer the user is using:</p>
+
+<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">$</span><span class="p">(</span><span class="s1">&#39;html&#39;</span><span class="p">).</span><span class="nx">hasClass</span><span class="p">(</span><span class="s1">&#39;ie6&#39;</span><span class="p">);</span> <span class="c1">//True if the user is using IE6</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>Option 4: Sniff the User Agent</h3>
+
+<p>If for whatever reason you cannot do any of the options above, you <em>can</em> determine IE usage the from <code>navigator</code> object.</p>
+
+<div class="warning" style="display: block;">
+    User agent sniffing should be used as a last resort.  Make sure you at least consider the options above before using this.
+</div>
+
+
+
+
+<figure class='code'><figcaption class='not_empty'><span>Sniffing the user agent string to test for Internet Explorer</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="c1">//Test for Internet Explorer</span>
+</span><span class='line'><span class="k">if</span> <span class="p">(</span><span class="sr">/MSIE\s([\d.]+)/</span><span class="p">.</span><span class="nx">test</span><span class="p">(</span><span class="nx">navigator</span><span class="p">.</span><span class="nx">userAgent</span><span class="p">))</span> <span class="p">{</span>
+</span><span class='line'>    <span class="c1">//Get the IE version.  This will be 6 for IE6, 7 for IE7, etc...</span>
+</span><span class='line'>    <span class="nx">version</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Number</span><span class="p">(</span><span class="nb">RegExp</span><span class="p">.</span><span class="nx">$1</span><span class="p">);</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -543,82 +656,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2012/09/19/using-the-attribute-selector-with-numeric-values/">Using the Attribute Selector with Numeric Values</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-09-19T20:42:00-04:00" pubdate data-updated="true">Sep 19<span>th</span>, 2012</time>
-        
-         | <a href="/2012/09/19/using-the-attribute-selector-with-numeric-values/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>What color will the number 3 be in the example below?</p>
-
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;style&gt;</span>
-</span><span class='line'>    <span class="nt">td</span> <span class="p">{</span> <span class="k">color</span><span class="o">:</span> <span class="nb">red</span><span class="p">;</span> <span class="p">}</span>
-</span><span class='line'>    <span class="nt">td</span><span class="o">[</span><span class="nt">colspan</span><span class="o">=</span><span class="nt">2</span><span class="o">]</span> <span class="p">{</span> <span class="k">color</span><span class="o">:</span> <span class="nb">blue</span><span class="p">;</span> <span class="p">}</span>
-</span><span class='line'><span class="nt">&lt;/style&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="nt">&lt;table&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;tr&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;td</span> <span class="na">colspan=</span><span class="s">&quot;2&quot;</span><span class="nt">&gt;</span>1<span class="nt">&lt;/td&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;/tr&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;td&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;td&gt;</span>2<span class="nt">&lt;/td&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;td&gt;</span>3<span class="nt">&lt;/td&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;/tr&gt;</span>
-</span><span class='line'><span class="nt">&lt;/table&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Turns out it will be red because the <code>td[colspan=2]</code> selector does not match it.  Why?</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/2012/09/19/using-the-attribute-selector-with-numeric-values/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -632,6 +669,10 @@
     <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2013/01/11/detecting-internet-explorer-without-jquery/">Detecting Internet Explorer without jQuery</a>
+      </li>
     
       <li class="post">
         <a href="/2013/01/09/html5-hidden-attribute-browser-support/">HTML 5 hidden Attribute Browser Support</a>
@@ -667,10 +708,6 @@
     
       <li class="post">
         <a href="/2012/10/17/maxlength-constraint-validation-oddities/">maxlength Constraint Validation Oddities in Major Browsers</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2012/09/19/using-the-attribute-selector-with-numeric-values/">Using the Attribute Selector with Numeric Values</a>
       </li>
     
   </ul>

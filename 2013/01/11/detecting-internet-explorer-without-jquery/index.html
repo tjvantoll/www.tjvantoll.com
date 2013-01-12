@@ -5,17 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Subpixel Animation Issues in IE < 9 - TJ VanToll - Tutorials, Thoughts, and Ramblings on Front End Development</title>
+  <title>Detecting Internet Explorer without jQuery - TJ VanToll - Tutorials, Thoughts, and Ramblings on Front End Development</title>
   <meta name="author" content="TJ VanToll">
 
   
-  <meta name="description" content="While there are definitely cross browser discrepancies handling subpixels, this one caught me by surprise. Take the following: 1
-2
-3
-4
-5
-6
-&lt;div id &hellip;">
+  <meta name="description" content="One of the changes in jQuery&#8217;s upcoming 1.9 release is the removal of $.browser. So if you&#8217;re using it to test for Internet Explorer, &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -24,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://tjvantoll.com/2012/08/16/subpixel-animation-issues-in-ie-less-than-9">
+  <link rel="canonical" href="http://tjvantoll.com/2013/01/11/detecting-internet-explorer-without-jquery">
   <!-- Use custom favicon -->
   <!--<link href="/favicon.png" rel="icon">-->
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
@@ -103,7 +97,7 @@
   
   <header>
     
-      <h1 class="entry-title">Subpixel Animation Issues in IE < 9</h1>
+      <h1 class="entry-title">Detecting Internet Explorer without jQuery</h1>
     
     
       <p class="meta">
@@ -119,7 +113,7 @@
   
 
 
-<time datetime="2012-08-16T21:56:00-04:00" pubdate data-updated="true">Aug 16<span>th</span>, 2012</time>
+<time datetime="2013-01-11T17:26:00-05:00" pubdate data-updated="true">Jan 11<span>th</span>, 2013</time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -128,28 +122,19 @@
   </header>
 
 
-<div class="entry-content"><p>While there are definitely <a href="http://ejohn.org/blog/sub-pixel-problems-in-css/">cross browser discrepancies handling subpixels</a>, this one caught me by surprise.  Take the following:</p>
+<div class="entry-content"><p>One of the changes in jQuery&#8217;s <a href="http://blog.jquery.com/2013/01/09/jquery-1-9-rc1-and-migrate-rc1-released/">upcoming 1.9 release</a> is the removal of <a href="http://api.jquery.com/jQuery.browser/">$.browser</a>.  So if you&#8217;re using it to test for Internet Explorer, what do you do?</p>
 
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">&quot;box&quot;</span><span class="nt">&gt;&lt;/div&gt;</span>
-</span><span class='line'><span class="nt">&lt;script&gt;</span>
-</span><span class='line'>    <span class="kd">var</span> <span class="nx">box</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">&#39;box&#39;</span><span class="p">);</span>
-</span><span class='line'>    <span class="nx">box</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">left</span> <span class="o">=</span> <span class="s1">&#39;10.25px&#39;</span><span class="p">;</span>
-</span><span class='line'>    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">box</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">left</span><span class="p">);</span>
-</span><span class='line'><span class="nt">&lt;/script&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
+<h3>Option 1: Use the migrate plugin</h3>
 
+<p>If you want to avoid upgrading existing code, use the <a href="https://github.com/jquery/jquery-migrate/">migrate plugin</a> which will preserve <code>$.browser</code> as it was.  Of course this is simply putting off the inevitable, but if you need to upgrade a large code base it&#8217;s a good temporary measure.  The development version of the plugin will produce a console warning message whenever <code>$.browser</code> is used, which can help you identify where you&#8217;re using it and migrate accordingly.</p>
 
-<p>This simply sets a value for the <code>left</code> CSS property then immediately retrieves it.  In Chrome 22, Firefox 14, Safari 6, Opera 12, IE >= 9, iOS 5, and Android <code>10.25px</code> will be logged.</p>
+<h3>Option 2: Switch to feature detection</h3>
 
-<p>In IE &lt; 9 <code>10px</code> is logged.  While not all browsers can accurately render the subpixel values, I had assumed all of them would&#8217;ve at least allowed the assignment.  I was wrong.  Internet Explorer will simply round the value to the nearest integer.</p>
+<p>Testing for specific browsers is <a href="http://www.sitepoint.com/why-browser-sniffing-stinks/">a</a> <a href="http://msdn.microsoft.com/en-us/magazine/hh475813.aspx">bad</a> <a href="http://diveintohtml5.info/detect.html">practice</a>.  If you are not supporting IE because of features that it does not possess, test for those features instead of the browser.  The <a href="http://modernizr.com">Modernizr</a> library includes a wide variety of feature tests and is a good place to get started.</p>
 
-<p>Why is this a problem?  <!--more-->Take the following code.</p>
+<h3>Option 3: Use conditional classes or conditional comments</h3>
+
+<p>IE versions &lt;= 10 support <a href="http://msdn.microsoft.com/en-us/library/ms537512(v=vs.85).aspx">conditional comments</a> that can be used to detect Internet Explorer.  For example the <a href="http://html5boilerplate.com/">HTML5 boilerplate</a> <a href="https://github.com/h5bp/html5-boilerplate/blob/master/index.html">uses the following</a> to show a warning to users using IE &lt; 7:</p>
 
 <figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -159,52 +144,60 @@
 <span class='line-number'>6</span>
 <span class='line-number'>7</span>
 <span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">&quot;box&quot;</span><span class="nt">&gt;&lt;/div&gt;</span>
-</span><span class='line'><span class="nt">&lt;script&gt;</span>
-</span><span class='line'>    <span class="kd">var</span> <span class="nx">box</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">&#39;box&#39;</span><span class="p">);</span>
-</span><span class='line'>    <span class="nx">box</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">left</span> <span class="o">=</span> <span class="s1">&#39;0px&#39;</span><span class="p">;</span>
-</span><span class='line'>    <span class="nx">setInterval</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-</span><span class='line'>        <span class="kd">var</span> <span class="nx">currentLeft</span> <span class="o">=</span> <span class="nx">box</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">left</span><span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="s1">&#39;px&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">);</span>
-</span><span class='line'>        <span class="nx">currentLeft</span> <span class="o">=</span> <span class="nb">parseFloat</span><span class="p">(</span><span class="nx">currentLeft</span><span class="p">);</span>
-</span><span class='line'>        <span class="nx">box</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">left</span> <span class="o">=</span> <span class="nx">currentLeft</span> <span class="o">+</span> <span class="mf">0.25</span> <span class="o">+</span> <span class="s1">&#39;px&#39;</span><span class="p">;</span>
-</span><span class='line'>    <span class="p">},</span> <span class="mi">20</span><span class="p">);</span>
-</span><span class='line'><span class="nt">&lt;/script&gt;</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="c">&lt;!--[if lt IE 7]&gt;</span>
+</span><span class='line'><span class="c">    &lt;p class=&quot;chromeframe&quot;&gt;</span>
+</span><span class='line'><span class="c">        You are using an &lt;strong&gt;outdated&lt;/strong&gt; browser. Please</span>
+</span><span class='line'><span class="c">        &lt;a href=&quot;http://browsehappy.com/&quot;&gt;upgrade your browser&lt;/a&gt;</span>
+</span><span class='line'><span class="c">        or &lt;a href=&quot;http://www.google.com/chromeframe/?redirect=true&quot;&gt;</span>
+</span><span class='line'><span class="c">        activate Google Chrome Frame&lt;/a&gt; to improve your experience.</span>
+</span><span class='line'><span class="c">    &lt;/p&gt;</span>
+</span><span class='line'><span class="c">&lt;![endif]--&gt;</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>This sets an interval that will increase the <code>left</code> property of a box by <code>0.25</code> pixels every 20 milliseconds.  Doing so will move the box left across the screen as seen below:</p>
+<p>This approach can be used to add conditional classes on the <code>html</code> element (<a href="http://paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/">via Paul Irish</a>).</p>
 
-<iframe style="width: 100%; height: 150px;" src="http://jsfiddle.net/tj_vantoll/PBsLt/9/embedded/result,js,html/" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
+<figure class='code'><figcaption class='not_empty'><span>Conditional classes on the html element</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="c">&lt;!--[if lt IE 7]&gt;      &lt;html class=&quot;ie6&quot;&gt; &lt;![endif]--&gt;</span>
+</span><span class='line'><span class="c">&lt;!--[if IE 7]&gt;         &lt;html class=&quot;ie7&quot;&gt; &lt;![endif]--&gt;</span>
+</span><span class='line'><span class="c">&lt;!--[if IE 8]&gt;         &lt;html class=&quot;ie8&quot;&gt; &lt;![endif]--&gt;</span>
+</span><span class='line'><span class="c">&lt;!--[if gt IE 8]&gt;&lt;!--&gt;</span> <span class="nt">&lt;html&gt;</span>         <span class="c">&lt;!--&lt;![endif]--&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
 
 
-<p>Great.  Unfortunately in IE &lt; 9 the box will not move.  Within the interval function the value to increment is being retrieved from the element itself, which, in IE &lt; 9 will continuously return the rounded value.</p>
-
-<p>The way around this is simply to use store off the value of the property outside of the animation loop itself.</p>
+<p>Now the presence of a class on the <code>html</code> element can be used to derive the version of Internet Explorer the user is using:</p>
 
 <figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">$</span><span class="p">(</span><span class="s1">&#39;html&#39;</span><span class="p">).</span><span class="nx">hasClass</span><span class="p">(</span><span class="s1">&#39;ie6&#39;</span><span class="p">);</span> <span class="c1">//True if the user is using IE6</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>Option 4: Sniff the User Agent</h3>
+
+<p>If for whatever reason you cannot do any of the options above, you <em>can</em> determine IE usage the from <code>navigator</code> object.</p>
+
+<div class="warning" style="display: block;">
+    User agent sniffing should be used as a last resort.  Make sure you at least consider the options above before using this.
+</div>
+
+
+
+
+<figure class='code'><figcaption class='not_empty'><span>Sniffing the user agent string to test for Internet Explorer</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
 <span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">&quot;box&quot;</span><span class="nt">&gt;&lt;/div&gt;</span>
-</span><span class='line'><span class="nt">&lt;script&gt;</span>
-</span><span class='line'>    <span class="kd">var</span> <span class="nx">left</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-</span><span class='line'>    <span class="kd">var</span> <span class="nx">box</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">&#39;box&#39;</span><span class="p">);</span>
-</span><span class='line'>    <span class="nx">setInterval</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-</span><span class='line'>        <span class="nx">box</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">left</span> <span class="o">=</span> <span class="nx">left</span> <span class="o">+</span> <span class="s1">&#39;px&#39;</span><span class="p">;</span>
-</span><span class='line'>        <span class="nx">left</span> <span class="o">+=</span> <span class="mf">0.25</span><span class="p">;</span>
-</span><span class='line'>    <span class="p">},</span> <span class="mi">20</span><span class="p">);</span>
-</span><span class='line'><span class="nt">&lt;/script&gt;</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="c1">//Test for Internet Explorer</span>
+</span><span class='line'><span class="k">if</span> <span class="p">(</span><span class="sr">/MSIE\s([\d.]+)/</span><span class="p">.</span><span class="nx">test</span><span class="p">(</span><span class="nx">navigator</span><span class="p">.</span><span class="nx">userAgent</span><span class="p">))</span> <span class="p">{</span>
+</span><span class='line'>    <span class="c1">//Get the IE version.  This will be 6 for IE6, 7 for IE7, etc...</span>
+</span><span class='line'>    <span class="nx">version</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Number</span><span class="p">(</span><span class="nb">RegExp</span><span class="p">.</span><span class="nx">$1</span><span class="p">);</span>
+</span><span class='line'><span class="p">}</span>
 </span></code></pre></td></tr></table></div></figure>
 
-
-<p>This has the added benefit of being more efficient since you save a property retrieval on every invocation of the loop.</p>
 </div>
 
 
@@ -227,12 +220,12 @@
   
 
 
-<time datetime="2012-08-16T21:56:00-04:00" pubdate data-updated="true">Aug 16<span>th</span>, 2012</time>
+<time datetime="2013-01-11T17:26:00-05:00" pubdate data-updated="true">Jan 11<span>th</span>, 2013</time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/browsers/'>Browsers</a>, <a class='category' href='/blog/categories/javascript/'>JavaScript</a>
+    <a class='category' href='/blog/categories/javascript/'>JavaScript</a>, <a class='category' href='/blog/categories/jquery/'>jQuery</a>
   
 </span>
 
@@ -245,7 +238,7 @@
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://tjvantoll.com/2012/08/16/subpixel-animation-issues-in-ie-less-than-9/" data-via="tjvantoll" data-counturl="http://tjvantoll.com/2012/08/16/subpixel-animation-issues-in-ie-less-than-9/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://tjvantoll.com/2013/01/11/detecting-internet-explorer-without-jquery/" data-via="tjvantoll" data-counturl="http://tjvantoll.com/2013/01/11/detecting-internet-explorer-without-jquery/" >Tweet</a>
   
   
   
@@ -254,10 +247,8 @@
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/2012/08/10/less-101-the-basics-of-the-css-preprocessor/" title="Previous Post: LESS 101 - The Basics of the CSS Preprocessor">&laquo; LESS 101 - The Basics of the CSS Preprocessor</a>
+        <a class="basic-alignment left" href="/2013/01/09/html5-hidden-attribute-browser-support/" title="Previous Post: HTML 5 hidden Attribute Browser Support">&laquo; HTML 5 hidden Attribute Browser Support</a>
       
-      
-        <a class="basic-alignment right" href="/2012/08/19/onscroll-event-issues-on-mobile-browsers/" title="Next Post: onscroll Event Issues on Mobile Browsers">onscroll Event Issues on Mobile Browsers &raquo;</a>
       
     </p>
   </footer>
@@ -345,8 +336,8 @@
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://tjvantoll.com/2012/08/16/subpixel-animation-issues-in-ie-less-than-9/';
-        var disqus_url = 'http://tjvantoll.com/2012/08/16/subpixel-animation-issues-in-ie-less-than-9/';
+        var disqus_identifier = 'http://tjvantoll.com/2013/01/11/detecting-internet-explorer-without-jquery/';
+        var disqus_url = 'http://tjvantoll.com/2013/01/11/detecting-internet-explorer-without-jquery/';
         var disqus_script = 'embed.js';
       
     (function () {
