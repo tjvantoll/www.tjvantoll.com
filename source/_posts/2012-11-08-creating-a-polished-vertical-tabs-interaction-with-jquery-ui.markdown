@@ -81,4 +81,4 @@ And here's the result:
 	<iframe style="width: 100%; height: 265px;" frameborder="0" src="/demos/2012-11-08/verticalTabs.html"></iframe>
 </div>
 
-Please poke around in the source to see how it was made.  Feel free to use this or modify it to your liking.
+Feel free to use this or modify it to your liking.
