@@ -21,6 +21,7 @@
 	border: 1px solid black;
 	border-radius: 5px;
 	margin-bottom: 1.5em;
+	overflow-x: auto;
 
 	h6 {
 		@extend .striped_bg;
@@ -38,6 +39,18 @@
 			right: 1em;
 			font-size: 0.7em;
 			color: white;
+		}
+	}
+}
+@media all and (max-width: 500px) {
+	.code_example {
+		h6 {
+			overflow: hidden;
+			a {
+				position: static;
+				float: left;
+				width: 100%;
+			}
 		}
 	}
 }
