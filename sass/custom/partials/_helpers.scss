@@ -9,3 +9,36 @@
 	background-size: 50px;
 	display: none;
 }
+
+.striped_bg {
+	background: #058AA3;
+	background: rgba(30, 171, 221, 0.74);
+	background: rgba(30, 171, 221, 0.74) -webkit-repeating-linear-gradient(60deg, transparent, transparent 42px, rgba(190, 190, 190, 0.1) 30px, rgba(190, 190, 190, 0.1) 45px);
+	background: rgba(30, 171, 221, 0.74) repeating-linear-gradient(60deg, transparent, transparent 42px, rgba(190, 190, 190, 0.1) 30px, rgba(190, 190, 190, 0.1) 45px);
+}
+
+.code_example {
+	border: 1px solid black;
+	background: white;
+	border-radius: 5px;
+	margin-bottom: 1.5em;
+
+	h6 {
+		@extend .striped_bg;
+
+		position: relative;
+		top: -1px;
+		color: $custom_header_color;
+		padding: 0.2em 1em;
+		border-bottom: 1px solid $custom_header_color;
+		font-size: 1em; 
+
+		a {
+			position: absolute;
+			top: 0.2em;
+			right: 1em;
+			font-size: 0.7em;
+			color: white;
+		}
+	}
+}

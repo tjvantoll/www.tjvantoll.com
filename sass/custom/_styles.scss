@@ -1,33 +1,25 @@
 // This File is imported last, and will override other styles in the cascade
 // Add styles here to make changes without digging in too much
+$accent_color: #CF481C;
+$custom_header_color: #333;
+
 @import "custom/partials/tipsy";
 @import "custom/partials/PictureCube";
 @import "custom/partials/helpers";
 
-$accent_color: #CF481C;
-
 body > header {
-	background: #058AA3;
-	background: rgba(30, 171, 221, 0.74);
-	background: rgba(30, 171, 221, 0.74) -moz-repeating-linear-gradient(60deg, transparent, transparent 42px, rgba(190, 190, 190, 0.1) 30px, rgba(190, 190, 190, 0.1) 45px);
-	background: rgba(30, 171, 221, 0.74) -ms-repeating-linear-gradient(60deg, transparent, transparent 42px, rgba(190, 190, 190, 0.1) 30px, rgba(190, 190, 190, 0.1) 45px);
-	background: rgba(30, 171, 221, 0.74) -o-repeating-linear-gradient(60deg, transparent, transparent 42px, rgba(190, 190, 190, 0.1) 30px, rgba(190, 190, 190, 0.1) 45px);
-	background: rgba(30, 171, 221, 0.74) -webkit-repeating-linear-gradient(60deg, transparent, transparent 42px, rgba(190, 190, 190, 0.1) 30px, rgba(190, 190, 190, 0.1) 45px);
-	background: rgba(30, 171, 221, 0.74) repeating-linear-gradient(60deg, transparent, transparent 42px, rgba(190, 190, 190, 0.1) 30px, rgba(190, 190, 190, 0.1) 45px);
+	@extend .striped_bg;
 
 	h1 {
 		font-weight: bold;
-		text-shadow: 1px 1px 1px #333;
+		text-shadow: 1px 1px 1px $custom_header_color;
 
 		a {
-			-moz-transition: none;
-			-ms-transition: none;
-			-o-transition: none;
 			-webkit-transition: none;
 			transition: none;
 		}
 		a:hover, a:visited {
-			color: #333;
+			color: $custom_header_color;
 		}
 	}
 
@@ -136,7 +128,7 @@ header.home {
 
 .project-contents {
 	overflow: hidden;
-	border: 1px solid lighten(#333, 10%);
+	border: 1px solid lighten($custom_header_color, 10%);
 	padding: 1em;
 	margin-bottom: 1em;
 	border-radius: 10px;
@@ -213,19 +205,19 @@ figure.code figcaption.empty {
 	}
 	.gutter, .code {
 		border: 0;
-		background-color: #333 !important;
+		background-color: $custom_header_color !important;
 
 		.line-numbers {
-			background-color: #333 !important;
+			background-color: $custom_header_color !important;
 			text-shadow: none;			
 		}
 		code {
-			background-color: #333 !important;
+			background-color: $custom_header_color !important;
 		}
 	}
 }
 pre {
-	background-color: #333;
+	background-color: $custom_header_color;
 }
 
 /*****************************************************/
@@ -234,7 +226,7 @@ pre {
 
 .author_card {
 	padding: 1em;
-	border: 1px solid #333;
+	border: 1px solid $custom_header_color;
 	border-radius: 5px;
 
 	img {
