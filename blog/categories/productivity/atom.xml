@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Productivity | TJ VanToll]]></title>
+  <link href="http://tjvantoll.com/blog/categories/productivity/atom.xml" rel="self"/>
+  <link href="http://tjvantoll.com/"/>
+  <updated>2013-01-18T21:22:59-05:00</updated>
+  <id>http://tjvantoll.com/</id>
+  <author>
+    <name><![CDATA[TJ VanToll]]></name>
+    <email><![CDATA[tj.vantoll@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Keyboard Shortcuts for OS X Web Developers]]></title>
+    <link href="http://tjvantoll.com/2013/01/18/keyboard-shortcuts-for-os-x-web-developers/"/>
+    <updated>2013-01-18T20:46:00-05:00</updated>
+    <id>http://tjvantoll.com/2013/01/18/keyboard-shortcuts-for-os-x-web-developers</id>
+    <content type="html"><![CDATA[<p>Recently some <a href="http://en.wikipedia.org/wiki/Repetitive_strain_injury">RSI</a>
+-like symptoms in my right hand have forced me to re-evaluate my day to day computer usage.  Since the symptoms are exclusively in my right hand, I decided to start by restricting my mouse usage as much as possible.</p>
+
+<p>To discourage my mouse using tendencies, I decided to only use the mouse left-handed.  After a few minutes I found that my current repertoire of keyboard shortcuts did not meet my new mouse-free workflow.</p>
+
+<p>To build my keyboard portfolio, I've been accumulating a list of shortcuts I find handy near my desk.  I thought I'd post the list here in case others might find them useful.  This list is not intended to be comprehensive; these are merely shortcuts that I have found helpful.  I'm happy to say that within a week of making this switch the symptoms in my right hand are virtually gone.</p>
+
+<h3>OS X</h3>
+
+<ul>
+<li><code>Control</code> + <code>←</code> → Move one space to the left</li>
+<li><code>Control</code> + <code>→</code> → Move one space to the right</li>
+<li><code>Control</code> + <code>↑</code> → Enter mission control</li>
+<li><code>Control</code> + <code>↓</code> → Leave mission control</li>
+<li><code>Command</code> + <code>Tab</code> → Switch applications</li>
+<li><code>Command</code> + <code>~</code> → Switch windows within an application</li>
+<li><code>Control</code> + <code>fn</code> + <code>F3</code> → Summon the dock (arrow keys are pretty intuitive from there)</li>
+</ul>
+
+
+<h4>Screenshots</h4>
+
+<ul>
+<li><code>Command</code> + <code>Shift</code> + <code>3</code> → Full page screenshot</li>
+<li><code>Command</code> + <code>Shift</code> + <code>4</code> → Screenshot of section of screen</li>
+<li><code>Command</code> + <code>Shift</code> + <code>4</code>, then <code>Space Bar</code> → Screenshot of application window</li>
+</ul>
+
+
+<h3>Finder</h3>
+
+<ul>
+<li><code>Command</code> + <code>O</code> → Open (useful for directories)</li>
+<li><code>Command</code> + <code>Delete</code> → Delete file</li>
+<li><code>Command</code> + <code>W</code> → Close Finder window</li>
+</ul>
+
+
+<h3>Browsers</h3>
+
+<ul>
+<li><code>Command</code> + <code>W</code> → Close current tab</li>
+<li><code>Command</code> + <code>Shift</code> + <code>W</code> → Close current window</li>
+<li><code>Command</code> + <code>1</code> → Switch to tab 1, works for <code>2</code> through <code>9</code> as well</li>
+<li><code>Control</code> + <code>Tab</code> → Switch to next tab</li>
+<li><code>Control</code> + <code>Shift</code> + <code>Tab</code> → Switch to previous tab</li>
+<li><code>Command</code> + <code>Shift</code> + <code>T</code> → Open previously closed tab</li>
+<li><code>Delete</code> OR <code>Command</code> + <code>[</code> → Back</li>
+<li><code>Command</code> + <code>]</code> → Forward</li>
+<li><code>Command</code> + <code>↑</code> → Scroll to top of page</li>
+<li><code>Command</code> + <code>↓</code> → Scroll to bottom of page</li>
+<li><code>Space Bar</code> → Page down</li>
+<li><code>Command</code> + <code>Option</code> + <code>U</code> → View Source (Chrome, Opera)</li>
+<li><code>Command</code> + <code>U</code> → View Source (Firefox)</li>
+<li><code>Command</code> + <code>Option</code> + <code>I</code> → Open Dev Tools</li>
+</ul>
+
+
+<p>I also make use of a <a href="https://chrome.google.com/webstore/detail/keyboard-shortcuts-to-reo/moigagbiaanpboaflikhdhgdfiifdodd">Chrome extension</a> that allows me to reorder tabs using <code>Control</code> + <code>Shift</code> + <code>Page Up</code> and <code>Control</code> + <code>Shift</code> + <code>Page Down</code>.</p>
+
+<h3>Sublime Text 2</h3>
+
+<ul>
+<li><code>Command</code> + <code>P</code> → Fuzzy search of files in current project
+
+<ul>
+<li>Start with <code>@</code> → Search symbols in current file</li>
+<li>Start with <code>#</code> → Search current file</li>
+<li>Start with <code>:</code> → Goto line number</li>
+</ul>
+</li>
+<li><code>Command</code> + <code>Shift</code> + <code>V</code> → Paste and indent</li>
+<li><code>Command</code> + <code>L</code> → Select current line (can be repeated to select multiple lines)</li>
+<li><code>Command</code> + <code>D</code> → Select word (repeat to select next occurrence for multiple editing)</li>
+<li><code>Command</code> + <code>Return</code> → Insert new line <em>after</em> current line</li>
+<li><code>Command</code> + <code>Shift</code> + <code>Return</code> → Insert new line <em>before</em> current line</li>
+<li><code>Command</code> + <code>/</code> → Comment out current line or selection</li>
+<li><code>Command</code> + <code>Option</code> + <code>/</code> → Block comment selection</li>
+<li><code>Control</code> + <code>Shift</code> + <code>K</code> → Delete current line</li>
+<li><code>Command</code> + <code>K</code> + <code>K</code> → Delete from cursor to <em>end</em> of the line</li>
+<li><code>Command</code> + <code>K</code> + <code>Delete</code> → Delete from cursor to the <em>start</em> of the line</li>
+<li><code>Control</code> + <code>Command</code> + <code>↑</code> → Move selected line(s) up</li>
+<li><code>Control</code> + <code>Command</code> + <code>↓</code> → Move selected line(s) down</li>
+</ul>
+
+
+<h4>Layout</h4>
+
+<ul>
+<li><code>Command</code> + <code>K</code> + <code>B</code> → Toggle sidebar display</li>
+<li><code>Command</code> + <code>Option</code> + <code>1</code> → One editor column</li>
+<li><code>Command</code> + <code>Option</code> + <code>2</code> → Two editor columns</li>
+<li><code>Command</code> + <code>Option</code> + <code>3</code> → Three editor columns</li>
+<li><code>Command</code> + <code>Option</code> + <code>4</code> → Four editor columns</li>
+<li><code>Command</code> + <code>Option</code> + <code>5</code> → Grid View (2 X 2)</li>
+<li><code>Control</code> + [<code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>] → Focus group</li>
+<li><code>Control</code> + <code>Shift</code> + [<code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>] → Move current file into group</li>
+</ul>
+
+
+<h3>Terminal</h3>
+
+<ul>
+<li><code>Control</code> + <code>A</code> → Move to <em>beginning</em> of line</li>
+<li><code>Control</code> + <code>E</code> → Move to <em>end</em> of line</li>
+<li><code>Control</code> + <code>U</code> → Clear text from cursor to the <em>beginning</em> of the line</li>
+<li><code>Control</code> + <code>K</code> → Clear text from cursor to the <em>end</em> of the line</li>
+<li><code>open .</code> → Open the current directory in a new Finder window</li>
+</ul>
+
+
+<h3>Twitter</h3>
+
+<ul>
+<li><code>?</code> → List all available keyboard shortcuts</li>
+<li><code>.</code> → Load new tweets</li>
+</ul>
+
+
+<h3>Gmail</h3>
+
+<ul>
+<li><code>?</code> → List all available keyboard shortcuts</li>
+<li><code>C</code> → Compose a new message</li>
+</ul>
+
+
+<h3>Applications</h3>
+
+<p>Being a Windows 7 user in a previous life, I miss <a href="http://www.techspot.com/blog/283/windows-7-improved-window-management-using-the-keyboard-hotkeys/">its really nice set of keyboard shortcuts to manage windows</a>.</p>
+
+<p>To help fill the gap on OS X, I've been using a 3rd party application, <a href="http://mizage.com/divvy/">Divvy</a>.  It allows you to assign custom keyboard shortcuts to resize and align windows.  I use <code>Control</code> + <code>Command</code> + <code>Space Bar</code> to activate Divvy.  From there I have the following keys to resize windows predefined:</p>
+
+<ul>
+<li><code>D</code> → Dominant, left 5/6 of the screen</li>
+<li><code>S</code> → Sidebar, right 1/6 of the screen</li>
+<li><code>T</code> → Top half of screen</li>
+<li><code>B</code> → Bottom half of screen</li>
+<li><code>L</code> → Left half of screen</li>
+<li><code>R</code> → Right half of screen</li>
+</ul>
+
+]]></content>
+  </entry>
+  
+</feed>
