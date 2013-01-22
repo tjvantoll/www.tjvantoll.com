@@ -6,12 +6,12 @@ comments: true
 categories: [Productivity, OS X]
 ---
 
-Recently some [RSI](http://en.wikipedia.org/wiki/Repetitive_strain_injury)
+Recently some minor [RSI](http://en.wikipedia.org/wiki/Repetitive_strain_injury)
 -like symptoms in my right hand have forced me to re-evaluate my day to day computer usage.  Since the symptoms are exclusively in my right hand, I decided to start by restricting my mouse usage as much as possible.
 
 To discourage my mouse using tendencies, I decided to only use the mouse left-handed.  After a few minutes I found that my current repertoire of keyboard shortcuts did not meet my new mouse-free workflow.
 
-To build my keyboard portfolio, I've been accumulating a list of shortcuts I find handy near my desk.  I thought I'd post the list here in case others might find them useful.  This list is not intended to be comprehensive; these are merely shortcuts that I have found helpful.  I'm happy to say that within a week of making this switch the symptoms in my right hand are virtually gone.
+To build my keyboard portfolio, I've been accumulating a list of shortcuts I find handy near my desk.  I thought I'd post the list here in case others might find them useful.  This list is not intended to be comprehensive; these are merely shortcuts that I have found helpful.
 
 ### OS X
 

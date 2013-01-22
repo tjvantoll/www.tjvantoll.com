@@ -137,3 +137,7 @@ Fortunately Option 1 does indeed produce the same behavior in IE6+, Firefox, Chr
 ``` css Cross Browser text-transform Goodness
 button, select { text-transform: none; }
 ```
+
+#### Update (January 21st, 2013)
+
+A [pull request](https://github.com/necolas/normalize.css/pull/104) I sent for this change was accepted into [normalize.css](http://necolas.github.com/normalize.css/).
