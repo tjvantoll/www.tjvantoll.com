@@ -68,7 +68,7 @@ The following CSS will vertically arrange the tabs:
 It only relies on a class of `ui-tabs-vertical` being applied to the elements the `tabs` widget is created on.
 
 ``` javascript
-$('tabs').tabs().addClass('ui-tabs-vertical');
+$('#tabs').tabs().addClass('ui-tabs-vertical');
 ```
 
 And here's the result:
