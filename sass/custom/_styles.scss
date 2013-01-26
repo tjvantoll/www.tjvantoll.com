@@ -104,7 +104,10 @@ body > footer {
 
 .post_list {
 	margin-bottom: 0;
-
+	span {
+		display: inline-block;
+		padding-right: 2px;
+	}
 	a:not(.external) {
 		display: block;
 		margin-bottom: 1em;
