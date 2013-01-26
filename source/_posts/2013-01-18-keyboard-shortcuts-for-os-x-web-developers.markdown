@@ -13,6 +13,8 @@ To discourage my mouse using tendencies, I decided to only use the mouse left-ha
 
 To build my keyboard portfolio, I've been accumulating a list of shortcuts I find handy near my desk.  I thought I'd post the list here in case others might find them useful.  This list is not intended to be comprehensive; these are merely shortcuts that I have found helpful.
 
+<!--more-->
+
 ### OS X
 
 * `Control` + `←` → Move one space to the left

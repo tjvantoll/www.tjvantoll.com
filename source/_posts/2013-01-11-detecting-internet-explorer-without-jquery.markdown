@@ -8,6 +8,8 @@ categories: [jQuery, JavaScript]
 
 One of the changes in jQuery's [upcoming 1.9 release](http://blog.jquery.com/2013/01/09/jquery-1-9-rc1-and-migrate-rc1-released/) is the removal of [$.browser](http://api.jquery.com/jQuery.browser/).  So if you're using it to test for Internet Explorer, what do you do?
 
+<!--more-->
+
 ### Option 1: Use the migrate plugin
 
 If you want to avoid upgrading existing code, use the [migrate plugin](https://github.com/jquery/jquery-migrate/) which will preserve `$.browser` as it was.  Of course this is simply putting off the inevitable, but if you need to upgrade a large code base it's a good temporary measure.  The development version of the plugin will produce a console warning message whenever `$.browser` is used, which can help you identify where you're using it and migrate accordingly.
