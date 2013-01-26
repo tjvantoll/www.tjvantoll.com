@@ -179,9 +179,11 @@
                           // but some mobile devices need to be blacklisted,
                           // because their CSS 3D support or hardware is not
                           // good enough to run impress.js properly, sorry...
-                           ( ua.search(/(iphone)|(ipod)|(android)/) === -1 );
+                           ( ua.search(/(iphone)|(ipod)|(android)/) === -1 )
+
+                           && window.location.href.indexOf('plain') == -1;
     
-    if (!impressSupported) {
+    if (!impressSupported && window.location.href.indexOf('plain') == -1) {
         // we can't be sure that `classList` is supported
         body.className += " impress-not-supported ";
     } else {

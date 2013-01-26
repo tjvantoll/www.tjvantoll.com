@@ -8,40 +8,39 @@ footer: true
 
 On certain occasions I've been known to talk to people in real life.
 
-<div id="blog-archives">
+<div id="speaking-archives">
 	<h2>2012</h2>
 
 	<article>
-		<h1>
-			<a href="/speaking/slides/2012/Efficiency-Top-Ten">Front End Web Efficiency - The Top Ten</a>
-		</h1>
+		<h1>Front End Web Efficiency - The Top Ten</h1>
 		<time datetime="2012-10-23">
 			<span class="month">Oct</span>
 			<span class="day">23</span>
 			<span class="year">2012</span>
 		</time>
 		<footer>
-			<span class="categories">Lansing Java Users Group</span>
+			<span class="categories">Lansing Java Users Group</span> | 
+			<a href="/speaking/slides/2012/Efficiency-Top-Ten">Slides</a> | 
+			<a href="/speaking/slides/2012/Efficiency-Top-Ten?plain">Slides (No animation)</a>
 		</footer>
 	</article>
 
 	<article>
-		<h1>
-			<a href="/speaking/slides/2012/LESS-101">LESS 101</a>
-		</h1>
+		<h1>LESS 101</h1>
 		<time datetime="2012-08-09">
 			<span class="month">Aug</span>
 			<span class="day">09</span>
 			<span class="year">2012</span>
 		</time>
 		<footer>
-			<span class="categories">Liquid Web</span>
+			<span class="categories">Liquid Web</span> | 
+			<a href="/speaking/slides/2012/LESS-101">Slides</a> | 
+			<a href="/speaking/slides/2012/LESS-101?plain">Slides (No animation)</a>
 		</footer>
 	</article>
 
 	<article>
-		<h1>
-			<a href="/speaking/slides/2012/JavaScript-for-the-Java-Developer">JavaScript for the Java Developer</a>
+		<h1>JavaScript for the Java Developer</h1>
 		</h1>
 		<time datetime="2012-03-20">
 			<span class="month">Mar</span>
@@ -49,7 +48,8 @@ On certain occasions I've been known to talk to people in real life.
 			<span class="year">2012</span>
 		</time>
 		<footer>
-			<span class="categories">Lansing Java Users Group</span>
+			<span class="categories">Lansing Java Users Group</span> | 
+			<a href="/speaking/slides/2012/JavaScript-for-the-Java-Developer">Slides</a>
 		</footer>
 	</article>
 
@@ -65,5 +65,5 @@ On certain occasions I've been known to talk to people in real life.
 		<footer>
 			<span class="categories">Eastern Michigan University</span>
 		</footer>
-	</article>	
+	</article>
 </div>
