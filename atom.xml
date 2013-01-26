@@ -4,7 +4,7 @@
   <title><![CDATA[TJ VanToll]]></title>
   <link href="http://tjvantoll.com/atom.xml" rel="self"/>
   <link href="http://tjvantoll.com/"/>
-  <updated>2013-01-25T22:47:08-05:00</updated>
+  <updated>2013-01-25T22:57:36-05:00</updated>
   <id>http://tjvantoll.com/</id>
   <author>
     <name><![CDATA[TJ VanToll]]></name>
@@ -24,6 +24,9 @@
 <p>To discourage my mouse using tendencies, I decided to only use the mouse left-handed.  After a few minutes I found that my current repertoire of keyboard shortcuts did not meet my new mouse-free workflow.</p>
 
 <p>To build my keyboard portfolio, I&#8217;ve been accumulating a list of shortcuts I find handy near my desk.  I thought I&#8217;d post the list here in case others might find them useful.  This list is not intended to be comprehensive; these are merely shortcuts that I have found helpful.</p>
+
+<!--more-->
+
 
 <h3>OS X</h3>
 
@@ -169,6 +172,9 @@
     <updated>2013-01-11T17:26:00-05:00</updated>
     <id>http://tjvantoll.com/2013/01/11/detecting-internet-explorer-without-jquery</id>
     <content type="html"><![CDATA[<p>One of the changes in jQuery&#8217;s <a href="http://blog.jquery.com/2013/01/09/jquery-1-9-rc1-and-migrate-rc1-released/">upcoming 1.9 release</a> is the removal of <a href="http://api.jquery.com/jQuery.browser/">$.browser</a>.  So if you&#8217;re using it to test for Internet Explorer, what do you do?</p>
+
+<!--more-->
+
 
 <h3>Option 1: Use the migrate plugin</h3>
 

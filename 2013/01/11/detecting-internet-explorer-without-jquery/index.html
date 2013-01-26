@@ -124,6 +124,9 @@
 
 <div class="entry-content"><p>One of the changes in jQuery&#8217;s <a href="http://blog.jquery.com/2013/01/09/jquery-1-9-rc1-and-migrate-rc1-released/">upcoming 1.9 release</a> is the removal of <a href="http://api.jquery.com/jQuery.browser/">$.browser</a>.  So if you&#8217;re using it to test for Internet Explorer, what do you do?</p>
 
+<!--more-->
+
+
 <h3>Option 1: Use the migrate plugin</h3>
 
 <p>If you want to avoid upgrading existing code, use the <a href="https://github.com/jquery/jquery-migrate/">migrate plugin</a> which will preserve <code>$.browser</code> as it was.  Of course this is simply putting off the inevitable, but if you need to upgrade a large code base it&#8217;s a good temporary measure.  The development version of the plugin will produce a console warning message whenever <code>$.browser</code> is used, which can help you identify where you&#8217;re using it and migrate accordingly.</p>

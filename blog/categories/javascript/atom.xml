@@ -4,7 +4,7 @@
   <title><![CDATA[Category: JavaScript | TJ VanToll]]></title>
   <link href="http://tjvantoll.com/blog/categories/javascript/atom.xml" rel="self"/>
   <link href="http://tjvantoll.com/"/>
-  <updated>2013-01-25T22:47:08-05:00</updated>
+  <updated>2013-01-25T22:57:36-05:00</updated>
   <id>http://tjvantoll.com/</id>
   <author>
     <name><![CDATA[TJ VanToll]]></name>
@@ -19,6 +19,9 @@
     <updated>2013-01-11T17:26:00-05:00</updated>
     <id>http://tjvantoll.com/2013/01/11/detecting-internet-explorer-without-jquery</id>
     <content type="html"><![CDATA[<p>One of the changes in jQuery's <a href="http://blog.jquery.com/2013/01/09/jquery-1-9-rc1-and-migrate-rc1-released/">upcoming 1.9 release</a> is the removal of <a href="http://api.jquery.com/jQuery.browser/">$.browser</a>.  So if you're using it to test for Internet Explorer, what do you do?</p>
+
+<!--more-->
+
 
 <h3>Option 1: Use the migrate plugin</h3>
 
