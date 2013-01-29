@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Browsers | TJ VanToll]]></title>
   <link href="http://tjvantoll.com/blog/categories/browsers/atom.xml" rel="self"/>
   <link href="http://tjvantoll.com/"/>
-  <updated>2013-01-25T23:17:22-05:00</updated>
+  <updated>2013-01-28T22:47:15-05:00</updated>
   <id>http://tjvantoll.com/</id>
   <author>
     <name><![CDATA[TJ VanToll]]></name>
@@ -12,6 +12,102 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Stop Messing with the Browser's Default Focus outline]]></title>
+    <link href="http://tjvantoll.com/2013/01/28/stop-messing-with-the-browsers-default-focus-outline/"/>
+    <updated>2013-01-28T20:57:00-05:00</updated>
+    <id>http://tjvantoll.com/2013/01/28/stop-messing-with-the-browsers-default-focus-outline</id>
+    <content type="html"><![CDATA[<p>This is the latest in my series of accessibility best practices after getting frustrated with using a keyboard on the internet.  Last time I talked about <a href="/2013/01/01/enter-should-submit-forms-stop-messing-with-that/">enter submitting forms</a>, this time I'm going to explain why removing the browser's default focus <code>outline</code> is a bad idea.</p>
+
+<h3>Focus Rings</h3>
+
+<p>All browsers have a default value they apply to the currently focused item.  For example Chrome on OS X uses the following:</p>
+
+<p>``` css
+:focus {</p>
+
+<pre><code>/* -webkit-focus-ring-color = '#5B9DD9' */
+outline: -webkit-focus-ring-color auto 5px;
+</code></pre>
+
+<p>}
+```</p>
+
+<p>Firefox uses a <code>1px dotted #212121</code> outline, other browser use other values.  The focus ring looks like this for Chrome on OS X:</p>
+
+<p><img src="/images/posts/2013-01-28/default.png" title="Default Focus Ring in Chrome on OS X" alt="Default Focus Ring in Chrome on OS X" /></p>
+
+<p>Keyboard users <strong>depend</strong> on this <code>outline</code> to determine where they are on the page.  I cannot stress <strong>depend</strong> enough, without the <code>outline</code> you have no idea where you are.  Don't believe me?  Go to <a href="http://www.cnn.com">cnn.com</a> right now.  Hit tab a few times and try to figure out where the hell you are on the page.</p>
+
+<p>The <code>outline</code> <em>can</em> be removed with the following:</p>
+
+<p>``` css
+:focus {</p>
+
+<pre><code>outline: 0;
+/* or */
+outline: none;
+</code></pre>
+
+<p>}
+```</p>
+
+<p>This is obviously bad per the reasoning above.  The HTML5 specification has the following to say about removing the default <code>outline</code>:</p>
+
+<p><blockquote><p>"...if an alternative focusing style isn't made available instead, the page will be significantly less usable for people who primarily navigate pages using a keyboard, or those with reduced vision who use focus outlines to help them navigate the page."</p><footer><strong>HTML5 Specification</strong> <cite><a href='http://www.whatwg.org/specs/web-apps/current-work/multipage/editing.html#element-level-focus-apis'>www.whatwg.org/specs/web-apps/&hellip;</a></cite></footer></blockquote></p>
+
+<h3>Custom Focus Outlines</h3>
+
+<p>As the spec mentions, you can create your own styling for focused items instead of using the browser's default.  For example the following will change all focused links to white text on a black background:</p>
+
+<p>``` css
+:link:focus, :visited:focus {</p>
+
+<pre><code>outline: none;
+background-color: black;
+color: white;
+</code></pre>
+
+<p>}
+```</p>
+
+<p>Although this is possible, I would <strong>strongly</strong> recommend simply leaving the default browser <code>outline</code> in place.  Changing the default display messes with a user's expectations, which is a big usability no no.  Furthermore, you need to make sure that whatever alternative you put in is sufficiently identifiable for users with reduced vision.</p>
+
+<h3>Why do People Want it Removed?</h3>
+
+<p>At the <a href="http://jqueryui.com">jQuery UI</a> project we get a <a href="https://github.com/jquery/jquery-ui/pull/898">lot</a> <a href="http://bugs.jqueryui.com/ticket/8959">of</a> <a href="http://bugs.jqueryui.com/ticket/6146">requests</a> to remove the browser default <code>outline</code>s from our widgets</p>
+
+<p>  The most recent tickets have come from the <a href="http://jqueryui.com/slider">slider</a> and <a href="http://jqueryui.com/tabs">tabs</a> widgets.  This is what they look like on the latest Chrome on OS X:</p>
+
+<p><img src="/images/posts/2013-01-28/slider.png" title="Focus ring on jQuery UI slider" alt="Focus ring on jQuery UI slider" />
+<img src="/images/posts/2013-01-28/tabs.png" title="Focus ring on jQuery UI tabs" alt="Focus ring on jQuery UI tabs" /></p>
+
+<p>Some people find this unsightly.  Others are thrown off by the fact that the display varies on different browsers / operating systems.  While these concerns are reasonable, they do not outweigh the importance of the <code>outline</code> for keyboard users and users with reduced vision.</p>
+
+<p>jQuery UI does nothing to alter the browser's default <code>outline</code> on these widgets and I encourage others to do the same.</p>
+
+<h3>CSS Reset</h3>
+
+<p>Unfortunately one of the reasons much of the internet removes the default focus ring is because the <a href="http://meyerweb.com/eric/tools/css/reset/reset200802.css">first version of Eric Meyer's CSS reset</a> included the following:</p>
+
+<p>``` css
+/<em> remember to define focus styles! </em>/
+:focus {</p>
+
+<pre><code>outline: 0;
+</code></pre>
+
+<p>}
+```</p>
+
+<p>As you can see it's made abundantly clear that you should define your own focus styles, but most people simply copied and pasted the file without realizing this.</p>
+
+<p>The <a href="http://meyerweb.com/eric/tools/css/reset/index.html">updated version</a> of the CSS reset no longer features this, but sadly it's a bit too late for a lot of sites.</p>
+
+<p>Sigh.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[HTML 5 hidden Attribute Browser Support]]></title>
@@ -376,74 +472,6 @@ td:nth-child(3), th:nth-child(3) { width: 100px; }
 <img src="/images/posts/2012-10-17/IE10.png" title="IE10" alt="IE10" /></p>
 
 <p>Firefox, Safari, and Opera incorrectly handle this situation and allow the form to be submitted anyways.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[HTML5 Form Validation - Start Using it in Production Applications]]></title>
-    <link href="http://tjvantoll.com/2012/08/30/html5-form-validation-start-using-it-in-production-applications/"/>
-    <updated>2012-08-30T00:00:00-04:00</updated>
-    <id>http://tjvantoll.com/2012/08/30/html5-form-validation-start-using-it-in-production-applications</id>
-    <content type="html"><![CDATA[<p>Forms suck, yet, they make or break the most crucial online transactions.  Building web forms sucks as well; the APIs and lack of customizability has confused and frustrated people for years.  As a byproduct an abundance of horribly unusable forms have been created for everyone to suffer through.</p>
-
-<p>Therefore <em>anything</em> that makes this process easier should be greeted with joy and enthusiasm.</p>
-
-<p>HTML5 does just this by including a built in <a href="https://developer.mozilla.org/en-US/docs/HTML/Forms_in_HTML#Constraint_Validation_API">client side form validation mechanism</a> designed to make implementing client side validation powerful, seamless, and most importantly - easy to implement.</p>
-
-<p>Great!  Despite this, HTML5 form validation is a topic relegated to presentations and demos; I personally have yet to fill out a web form in the wild that actually makes use of it.</p>
-
-<p>Why?</p>
-
-<!--more-->
-
-
-<h3>Browser Support</h3>
-
-<p>One reason people avoid HTML5 form validation is lack (or perceived lack) of browser support for the new APIs.  However the <a href="http://caniuse.com/#feat=form-validation">list of supported browsers</a> now includes the latest version of every major browser, including:</p>
-
-<ul>
-<li>IE 10</li>
-<li>Firefox 4+</li>
-<li>Chrome 10+</li>
-<li>Safari 5+</li>
-<li>Opera 10+</li>
-<li>Opera Mobile</li>
-<li>Chrome for Android</li>
-<li>Firefox for Android</li>
-</ul>
-
-
-<h3>What to do in unsupported browsers?</h3>
-
-<p>This is <em>the</em> problem.  Despite browser support being relatively good, for most sites there are still going to be a substantial amount of users with browsers that simply do not support the new APIs.  Therefore, if you are intending to support these users you have to start forking your code to support both browsers with native support and browsers without it.</p>
-
-<p>While this can absolutely be done, it's time consuming and a bit of a nuisance.  It's faster and easier to simply ditch the native validation and use your own.  In this case you don't have to worry about multiple code paths; every user in every browser will hit the same codepath and get the same experience.</p>
-
-<h3>What if we did nothing?</h3>
-
-<p>But what if we took a new approach to this problem - simply don't do client side validation in unsupported browsers, at all.  This is advantageous for a number of reasons.</p>
-
-<p>1) <strong>No dual maintenance</strong>.  One thing that has always bothered me about doing validation on both the client and server side is that you're validating the #1 principle of software development - <a href="http://en.wikipedia.org/wiki/Don't_repeat_yourself"><strong>D</strong>on't <strong>R</strong>epeat <strong>Y</strong>ourself</a>.</p>
-
-<p>2) <strong>No dependencies</strong>.  If you only use native browser APIs to provide client side validation you don't have to worry about maintaining plugin or library dependencies that might not be maintained.</p>
-
-<p>3) <strong>Faster and easier</strong>.  The browser APIs are simple and easy to use.  Want to make a field required?  <a href="http://wufoo.com/html5/attributes/09-required.html">Add the <code>required</code> attribute</a>.  Want to make a field only accept email address?  <a href="http://wufoo.com/html5/types/1-email.html">Add <code>type=email</code> to your <code>&lt;input&gt;</code> field</a>.</p>
-
-<p>4) <strong>Future Friendly</strong>.  Although currently a number of older browsers (namely IE &lt;= 9) do not support the new APIs, eventually they all will.  Therefore, eventually all users will hit the client side validation as intended.</p>
-
-<h3>But, you can't just not validate data... right?</h3>
-
-<p>Of course you have to validate client submitted data, but you already need to be doing that on the server side anyways.  What this approach requires you to do is simply return formatted error messages from your server side processing and <a href="http://uxdesign.smashingmagazine.com/2011/11/08/extensive-guide-web-form-usability/">display them in a usability friendly way</a>.  You're likely doing that already.</p>
-
-<h3>What About Polyfills?</h3>
-
-<p><a href="http://remysharp.com/2010/10/08/what-is-a-polyfill/">Polyfills</a> are great and a number of <a href="https://github.com/Modernizr/Modernizr/wiki/HTML5-Cross-browser-Polyfills">HTML5 form validation polyfills</a> exist.  My problem with polyfills in this case is that they add a dependency that I believe is unnecessary.</p>
-
-<h3>Conclusion</h3>
-
-<p>HTML5 provides native solutions to validating client side data and most all modern browsers support it.  Yet, most people are still relying on the JavaScript hacks we've been using for well over a decade now.</p>
-
-<p>It's time.  Come to the dark side.</p>
 ]]></content>
   </entry>
   

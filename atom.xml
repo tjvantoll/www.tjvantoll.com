@@ -4,7 +4,7 @@
   <title><![CDATA[TJ VanToll]]></title>
   <link href="http://tjvantoll.com/atom.xml" rel="self"/>
   <link href="http://tjvantoll.com/"/>
-  <updated>2013-01-25T23:17:22-05:00</updated>
+  <updated>2013-01-28T22:47:15-05:00</updated>
   <id>http://tjvantoll.com/</id>
   <author>
     <name><![CDATA[TJ VanToll]]></name>
@@ -12,6 +12,109 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Stop Messing with the Browser's Default Focus outline]]></title>
+    <link href="http://tjvantoll.com/2013/01/28/stop-messing-with-the-browsers-default-focus-outline/"/>
+    <updated>2013-01-28T20:57:00-05:00</updated>
+    <id>http://tjvantoll.com/2013/01/28/stop-messing-with-the-browsers-default-focus-outline</id>
+    <content type="html"><![CDATA[<p>This is the latest in my series of accessibility best practices after getting frustrated with using a keyboard on the internet.  Last time I talked about <a href="http://tjvantoll.com/2013/01/01/enter-should-submit-forms-stop-messing-with-that/">enter submitting forms</a>, this time I&#8217;m going to explain why removing the browser&#8217;s default focus <code>outline</code> is a bad idea.</p>
+
+<h3>Focus Rings</h3>
+
+<p>All browsers have a default value they apply to the currently focused item.  For example Chrome on OS X uses the following:</p>
+
+<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nd">:focus</span> <span class="p">{</span>
+</span><span class='line'>    <span class="c">/* -webkit-focus-ring-color = &#39;#5B9DD9&#39; */</span>
+</span><span class='line'>    <span class="k">outline</span><span class="o">:</span> <span class="o">-</span><span class="n">webkit</span><span class="o">-</span><span class="n">focus</span><span class="o">-</span><span class="n">ring</span><span class="o">-</span><span class="k">color</span> <span class="k">auto</span> <span class="m">5px</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Firefox uses a <code>1px dotted #212121</code> outline, other browser use other values.  The focus ring looks like this for Chrome on OS X:</p>
+
+<p><img src="http://tjvantoll.com/images/posts/2013-01-28/default.png" title="Default Focus Ring in Chrome on OS X" alt="Default Focus Ring in Chrome on OS X" /></p>
+
+<p>Keyboard users <strong>depend</strong> on this <code>outline</code> to determine where they are on the page.  I cannot stress <strong>depend</strong> enough, without the <code>outline</code> you have no idea where you are.  Don&#8217;t believe me?  Go to <a href="http://www.cnn.com">cnn.com</a> right now.  Hit tab a few times and try to figure out where the hell you are on the page.</p>
+
+<p>The <code>outline</code> <em>can</em> be removed with the following:</p>
+
+<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nd">:focus</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">outline</span><span class="o">:</span> <span class="m">0</span><span class="p">;</span>
+</span><span class='line'>    <span class="c">/* or */</span>
+</span><span class='line'>    <span class="k">outline</span><span class="o">:</span> <span class="k">none</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This is obviously bad per the reasoning above.  The HTML5 specification has the following to say about removing the default <code>outline</code>:</p>
+
+<blockquote><p>&#8220;&#8230;if an alternative focusing style isn&#8217;t made available instead, the page will be significantly less usable for people who primarily navigate pages using a keyboard, or those with reduced vision who use focus outlines to help them navigate the page.&#8221;</p><footer><strong>HTML5 Specification</strong> <cite><a href='http://www.whatwg.org/specs/web-apps/current-work/multipage/editing.html#element-level-focus-apis'>www.whatwg.org/specs/web-apps/&hellip;</a></cite></footer></blockquote>
+
+
+<h3>Custom Focus Outlines</h3>
+
+<p>As the spec mentions, you can create your own styling for focused items instead of using the browser&#8217;s default.  For example the following will change all focused links to white text on a black background:</p>
+
+<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nd">:link:focus</span><span class="o">,</span> <span class="nd">:visited:focus</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">outline</span><span class="o">:</span> <span class="k">none</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">background-color</span><span class="o">:</span> <span class="nb">black</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">color</span><span class="o">:</span> <span class="nb">white</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Although this is possible, I would <strong>strongly</strong> recommend simply leaving the default browser <code>outline</code> in place.  Changing the default display messes with a user&#8217;s expectations, which is a big usability no no.  Furthermore, you need to make sure that whatever alternative you put in is sufficiently identifiable for users with reduced vision.</p>
+
+<h3>Why do People Want it Removed?</h3>
+
+<p>At the <a href="http://jqueryui.com">jQuery UI</a> project we get a <a href="https://github.com/jquery/jquery-ui/pull/898">lot</a> <a href="http://bugs.jqueryui.com/ticket/8959">of</a> <a href="http://bugs.jqueryui.com/ticket/6146">requests</a> to remove the browser default <code>outline</code>s from our widgets</p>
+
+<p>  The most recent tickets have come from the <a href="http://jqueryui.com/slider">slider</a> and <a href="http://jqueryui.com/tabs">tabs</a> widgets.  This is what they look like on the latest Chrome on OS X:</p>
+
+<p><img src="http://tjvantoll.com/images/posts/2013-01-28/slider.png" title="Focus ring on jQuery UI slider" alt="Focus ring on jQuery UI slider" />
+<img src="http://tjvantoll.com/images/posts/2013-01-28/tabs.png" title="Focus ring on jQuery UI tabs" alt="Focus ring on jQuery UI tabs" /></p>
+
+<p>Some people find this unsightly.  Others are thrown off by the fact that the display varies on different browsers / operating systems.  While these concerns are reasonable, they do not outweigh the importance of the <code>outline</code> for keyboard users and users with reduced vision.</p>
+
+<p>jQuery UI does nothing to alter the browser&#8217;s default <code>outline</code> on these widgets and I encourage others to do the same.</p>
+
+<h3>CSS Reset</h3>
+
+<p>Unfortunately one of the reasons much of the internet removes the default focus ring is because the <a href="http://meyerweb.com/eric/tools/css/reset/reset200802.css">first version of Eric Meyer&#8217;s CSS reset</a> included the following:</p>
+
+<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="c">/* remember to define focus styles! */</span>
+</span><span class='line'><span class="nd">:focus</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">outline</span><span class="o">:</span> <span class="m">0</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>As you can see it&#8217;s made abundantly clear that you should define your own focus styles, but most people simply copied and pasted the file without realizing this.</p>
+
+<p>The <a href="http://meyerweb.com/eric/tools/css/reset/index.html">updated version</a> of the CSS reset no longer features this, but sadly it&#8217;s a bit too late for a lot of sites.</p>
+
+<p>Sigh.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Keyboard Shortcuts for OS X Web Developers]]></title>
@@ -2144,214 +2247,6 @@
     <updated>2012-08-10T00:00:00-04:00</updated>
     <id>http://tjvantoll.com/2012/08/10/less-101-the-basics-of-the-css-preprocessor</id>
     <content type="html"><![CDATA[<p>I gave a &#8220;LESS 101&#8221; talk to my coworkers at Liquid Web today.  I thought I&#8217;d post the slides here in case anyone else might find them useful.  They are <a href="http://tjvantoll.com/speaking/slides/2012/LESS-101">here</a>.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[HTML5 Form Validation - Showing All Error Messages]]></title>
-    <link href="http://tjvantoll.com/2012/08/05/html5-form-validation-showing-all-error-messages/"/>
-    <updated>2012-08-05T16:21:00-04:00</updated>
-    <id>http://tjvantoll.com/2012/08/05/html5-form-validation-showing-all-error-messages</id>
-    <content type="html"><![CDATA[<p><a href="http://caniuse.com/#feat=form-validation">Browsers that support HTML5 form validation</a> have one thing in common; if a <code>&lt;form&gt;</code> is submitted and has errors on multiple fields, the browser will only display the first error to the user.</p>
-
-<p>Turns out the spec leaves the specific means of handling multiple errors up to the browser itself:</p>
-
-<blockquote><p>Report the problems with the constraints of at least one of the elements given in unhandled invalid controls to the user. User agents may focus one of those elements in the process, by running the focusing steps for that element, and may change the scrolling position of the document, or perform some other action that brings the element to the user&#8217;s attention.</p><p>User agents may report more than one constraint violation. User agents may coalesce related constraint violation reports if appropriate (e.g. if multiple radio buttons in a group are marked as required, only one error need be reported).</p><footer><strong>HTML5 Specification</strong> <cite><a href='http://www.whatwg.org/specs/web-apps/current-work/#the-constraint-validation-api'>www.whatwg.org/specs/web-apps/&hellip;</a></cite></footer></blockquote>
-
-
-<p>The key part here being that user agents (i.e. browsers) <strong>MAY</strong> report more than one constraint violation (i.e. error).  Turns out they all decided not to.</p>
-
-<!--more-->
-
-
-<p>You can see this in your browser below (assuming it <a href="http://caniuse.com/#feat=form-validation">supports HTML5 form validation</a> and is not Safari, more on that later).  Both fields are <code>required</code>, but if you submit the form you will only see an error for the first field.</p>
-
-<pre class="codepen" data-type="result" data-href="FBGvu" data-user="tjvantoll" data-host="http://codepen.io"><code></code></pre>
-
-
-<script async src="http://codepen.io/assets/embed/ei.js"></script>
-
-
-<p>Here&#8217;s what it looks like on supported browsers if you attempt to submit this empty <code>&lt;form&gt;</code>:</p>
-
-<h5>Chrome 21</h5>
-
-<p><img src="http://tjvantoll.com/images/posts/2012-08-05/Chrome.png" title="Chrome" alt="Chrome" /></p>
-
-<h5>Firefox 14</h5>
-
-<p><img src="http://tjvantoll.com/images/posts/2012-08-05/Firefox.png" title="Firefox" alt="Firefox" /></p>
-
-<h5>Opera 12</h5>
-
-<p><img src="http://tjvantoll.com/images/posts/2012-08-05/Opera.png" title="Opera" alt="Opera" /></p>
-
-<p>As you can see, all three only give an error for the first field.  Firefox at least has the decency to put a red border around all fields with invalid data by default.</p>
-
-<p>The one noticeable browser missing from the list above is Safari.  Even though Safari supports the constraint validation API, the validation itself is turned off.</p>
-
-<h3>Usability</h3>
-
-<p>From a usability perspective showing the users only the first error message is bad.  Imagine how frustrating it would be to continually correct errors just to be presented with the next error in the sequence.  If you&#8217;ve ran into a form such as this before you know what I&#8217;m talking about.</p>
-
-<p>Luckily, browsers provide a <a href="http://www.whatwg.org/specs/web-apps/current-work/#the-constraint-validation-api">constraint validation API</a> that can be used to provide this functionality.</p>
-
-<h3>Using the Validation API</h3>
-
-<p>All dom nodes now possess a <a href="http://www.whatwg.org/specs/web-apps/current-work/#dom-cva-willvalidate_">willValidate</a> property that indicates whether the node is a candidate for form validation.</p>
-
-<p>Nodes in which <code>willValidate</code> is <code>true</code> also have a <code>validity</code> property.  The <code>validity</code> property resolves to a <a href="https://developer.mozilla.org/en-US/docs/DOM/ValidityState">ValidityState object</a> which contains information about whether the field has validation errors, as well as the error message the browser will display to the user.</p>
-
-<p>To make things even easier browsers provide an <a href="https://developer.mozilla.org/en-US/docs/CSS/:invalid">:invalid pseduoselector</a> that can be used to select all elements with validation errors.  Let&#8217;s see how this can be leveraged to show all error messages.</p>
-
-<h3>The Code</h3>
-
-<p>Here&#8217;s how I accomplished this with a jQuery dependent script.</p>
-
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-<span class='line-number'>33</span>
-<span class='line-number'>34</span>
-<span class='line-number'>35</span>
-<span class='line-number'>36</span>
-<span class='line-number'>37</span>
-<span class='line-number'>38</span>
-<span class='line-number'>39</span>
-<span class='line-number'>40</span>
-<span class='line-number'>41</span>
-<span class='line-number'>42</span>
-<span class='line-number'>43</span>
-<span class='line-number'>44</span>
-<span class='line-number'>45</span>
-<span class='line-number'>46</span>
-<span class='line-number'>47</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;form&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;ul</span> <span class="na">class=</span><span class="s">&quot;errorMessages&quot;</span><span class="nt">&gt;&lt;/ul&gt;</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="nt">&lt;label</span> <span class="na">for=</span><span class="s">&quot;name&quot;</span><span class="nt">&gt;</span>Name:<span class="nt">&lt;/label&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;text&quot;</span> <span class="na">required</span> <span class="nt">/&gt;</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="nt">&lt;label</span> <span class="na">for=</span><span class="s">&quot;comments&quot;</span><span class="nt">&gt;</span>Comments:<span class="nt">&lt;/label&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;textarea</span> <span class="na">id=</span><span class="s">&quot;comments&quot;</span> <span class="na">required</span><span class="nt">&gt;&lt;/textarea&gt;</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;submit&quot;</span> <span class="na">value=</span><span class="s">&quot;Submit&quot;</span> <span class="nt">/&gt;</span>
-</span><span class='line'><span class="nt">&lt;/form&gt;</span>​
-</span><span class='line'>
-</span><span class='line'><span class="nt">&lt;script&gt;</span>
-</span><span class='line'><span class="nx">$</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-</span><span class='line'>    <span class="kd">var</span> <span class="nx">createAllErrors</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-</span><span class='line'>        <span class="kd">var</span> <span class="nx">form</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
-</span><span class='line'>        <span class="kd">var</span> <span class="nx">errorList</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;ul.errorMessages&#39;</span><span class="p">,</span> <span class="nx">form</span><span class="p">);</span>
-</span><span class='line'>
-</span><span class='line'>        <span class="kd">var</span> <span class="nx">showAllErrorMessages</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-</span><span class='line'>            <span class="nx">errorList</span><span class="p">.</span><span class="nx">empty</span><span class="p">();</span>
-</span><span class='line'>
-</span><span class='line'>            <span class="c1">//Find all invalid fields within the form.</span>
-</span><span class='line'>            <span class="nx">form</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span><span class="s1">&#39;:invalid&#39;</span><span class="p">).</span><span class="nx">each</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">index</span><span class="p">,</span> <span class="nx">node</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>
-</span><span class='line'>                <span class="c1">//Find the field&#39;s corresponding label</span>
-</span><span class='line'>                <span class="kd">var</span> <span class="nx">label</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;label[for=&#39;</span> <span class="o">+</span> <span class="nx">node</span><span class="p">.</span><span class="nx">id</span> <span class="o">+</span> <span class="s1">&#39;]&#39;</span><span class="p">);</span>
-</span><span class='line'>
-</span><span class='line'>                <span class="c1">//Opera incorrectly does not fill the validationMessage property.</span>
-</span><span class='line'>                <span class="kd">var</span> <span class="nx">message</span> <span class="o">=</span> <span class="nx">node</span><span class="p">.</span><span class="nx">validationMessage</span> <span class="o">||</span> <span class="s1">&#39;Invalid value.&#39;</span><span class="p">;</span>
-</span><span class='line'>                <span class="nx">errorList</span>
-</span><span class='line'>                    <span class="p">.</span><span class="nx">show</span><span class="p">()</span>
-</span><span class='line'>                    <span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s1">&#39;&lt;li&gt;&lt;span&gt;&#39;</span> <span class="o">+</span> <span class="nx">label</span><span class="p">.</span><span class="nx">html</span><span class="p">()</span> <span class="o">+</span> <span class="s1">&#39;&lt;/span&gt; &#39;</span> <span class="o">+</span> <span class="nx">message</span> <span class="o">+</span> <span class="s1">&#39;&lt;/li&gt;&#39;</span><span class="p">);</span>
-</span><span class='line'>            <span class="p">});</span>
-</span><span class='line'>        <span class="p">};</span>
-</span><span class='line'>
-</span><span class='line'>        <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;input[type=submit]&#39;</span><span class="p">,</span> <span class="nx">form</span><span class="p">).</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;click&#39;</span><span class="p">,</span> <span class="nx">showAllErrorMessages</span><span class="p">);</span>
-</span><span class='line'>        <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;input[type=text]&#39;</span><span class="p">,</span> <span class="nx">form</span><span class="p">).</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;keypress&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>            <span class="c1">//keyCode 13 is Enter</span>
-</span><span class='line'>            <span class="k">if</span> <span class="p">(</span><span class="nx">event</span><span class="p">.</span><span class="nx">keyCode</span> <span class="o">==</span> <span class="mi">13</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>                <span class="nx">showAllErrorMessages</span><span class="p">();</span>
-</span><span class='line'>            <span class="p">}</span>
-</span><span class='line'>        <span class="p">});</span>
-</span><span class='line'>    <span class="p">};</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;form&#39;</span><span class="p">).</span><span class="nx">each</span><span class="p">(</span><span class="nx">createAllErrors</span><span class="p">);</span>
-</span><span class='line'><span class="p">});</span>
-</span><span class='line'><span class="nt">&lt;/script&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>You can see the results in your browser below:</p>
-
-<pre class="codepen" data-type="result" data-href="eLvlf" data-user="tjvantoll" data-host="http://codepen.io"><code></code></pre>
-
-
-<p>Here&#8217;s how it looks in Chrome 21:</p>
-
-<p><img src="http://tjvantoll.com/images/posts/2012-08-05/Chrome-full.png" title="Chrome" alt="Chrome" /></p>
-
-<p>A couple things to note:</p>
-
-<p>1) If a user attempts to submit a form and gets validation errors, a <code>submit</code> event is never fired for the <code>&lt;form&gt;</code>.  Therefore, instead of listening for <code>submit</code> on the <code>&lt;form&gt;</code>, I instead listen for a <code>click</code> on the <code>&lt;input type="submit"&gt;</code>.  Since the user is also able to submit the form pressing enter in text inputs, I attach a <code>keypress</code> listener to them to ensure the same logic runs.</p>
-
-<p>2) In my example I start each error message with the contents of the field&#8217;s <code>&lt;label&gt;</code>.  This is because the messages for each field are often identical.  An alternative approach would be to use another constraint validation API method, <a href="http://www.whatwg.org/specs/web-apps/current-work/#dom-cva-setcustomvalidity">setCustomValidity</a> to set a completely custom message.</p>
-
-<p>3) The <code>:invalid</code> selector will return nothing in all browsers that do not support the constraint validation API.  Therefore this code will simply do nothing in those browsers.</p>
-
-<p>4) Opera incorrectly does not fill the <code>validationMessage</code> property.  Therefore the check <code>var message = node.validationMessage || 'Invalid value.'</code> is necessary so a message is displayed for Opera.</p>
-
-<p>5) I do nothing to style the individual fields based on whether they have valid data.  The HTML5 spec provides a number of CSS hooks to do this and I would recommend reading <a href="http://html5doctor.com/css3-pseudo-classes-and-html5-forms/">CSS Pseudo-Classes and HTML5 Forms</a> from <a href="http://html5doctor.com">html5 Doctor</a> if you&#8217;re interested in including such styling.</p>
-
-<h3>That&#8217;s a Lot of Code to Do Something Simple</h3>
-
-<p>Yep.  While browser support is getting to be quite good for HTML5 forms the implementations themselves are still a bit buggy.  Nevertheless, this approach will work for displaying all validation errors to the end user.</p>
-
-<h3>Polyfill</h3>
-
-<p>If you are interested in making the code above work in all browsers one option you have is to polyfill the functionality for unsupported browsers.  One robust choice is the <a href="https://github.com/aFarkas/webshim">webshims</a> library.</p>
-
-<p>To make webshims work with the code above all you need to do is add <code>$.webshims.polyfill('forms');</code>.  The maintainer, <a href="https://github.com/aFarkas">@aFarkas</a> was even kind of enough to provide me with a live example showing this - <a href="http://jsfiddle.net/trixta/HynHy/">http://jsfiddle.net/trixta/HynHy/</a>.</p>
-
-<h3>Update (September 5th, 2012)</h3>
-
-<p>Per some <a href="https://github.com/html5rocks/www.html5rocks.com/issues/175#issuecomment-8301873">critique on Github</a> from <a href="https://github.com/aFarkas">@aFarkas</a> I&#8217;ve made the following changes:</p>
-
-<ul>
-<li>Updated the example code.
-
-<ul>
-<li>Removed a hack I had in place for Safari.</li>
-<li>Switched to use the <code>:invalid</code> pseudoselector to find all invalid fields within a form.</li>
-<li>Make the script handle multiple <code>&lt;form&gt;</code> elements in one DOM.</li>
-</ul>
-</li>
-<li>Added the above section on using webshim to polyfill this behavior for all browsers.</li>
-</ul>
-
 ]]></content>
   </entry>
   
