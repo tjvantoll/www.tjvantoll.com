@@ -3,7 +3,7 @@ layout: post
 title: "The Enter Key should Submit Forms, Stop Suppressing it"
 date: 2013-01-01 15:54
 comments: true
-categories: [HTML, UX]
+categories: [HTML, Accessibility]
 ---
 I try to do most of my work and play on the internet with the keyboard.  In the course of my internet-ing there's one unfortunate trend that I've noticed; an increasing number of sites are not allowing the enter key to submit a form.  Before I tell you why you care, let's look at how this should work.
 
