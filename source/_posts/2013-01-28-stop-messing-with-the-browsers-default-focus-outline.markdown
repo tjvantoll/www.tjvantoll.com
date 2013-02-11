@@ -57,7 +57,7 @@ Although this is possible, I would **strongly** recommend simply leaving the def
 
 ### Why do People Want it Removed?
 
-At the [jQuery UI](http://jqueryui.com) project we get a [lot](https://github.com/jquery/jquery-ui/pull/898) [of](http://bugs.jqueryui.com/ticket/8959) [requests](http://bugs.jqueryui.com/ticket/6146) to remove the browser default `outline`s from our widgets
+For the [jQuery UI](http://jqueryui.com) project we get a [lot](https://github.com/jquery/jquery-ui/pull/898) [of](http://bugs.jqueryui.com/ticket/8959) [requests](http://bugs.jqueryui.com/ticket/6146) to remove the browser default `outline`s from our widgets.
 
   The most recent tickets have come from the [slider](http://jqueryui.com/slider) and [tabs](http://jqueryui.com/tabs) widgets.  This is what they look like on the latest Chrome on OS X:
 
