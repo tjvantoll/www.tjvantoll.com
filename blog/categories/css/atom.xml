@@ -4,7 +4,7 @@
   <title><![CDATA[Category: CSS | TJ VanToll]]></title>
   <link href="http://tjvantoll.com/blog/categories/css/atom.xml" rel="self"/>
   <link href="http://tjvantoll.com/"/>
-  <updated>2013-02-10T21:07:05-05:00</updated>
+  <updated>2013-02-11T21:49:59-05:00</updated>
   <id>http://tjvantoll.com/</id>
   <author>
     <name><![CDATA[TJ VanToll]]></name>
@@ -76,7 +76,7 @@ color: white;
 
 <h3>Why do People Want it Removed?</h3>
 
-<p>For the <a href="http://jqueryui.com">jQuery UI</a> project we get a <a href="https://github.com/jquery/jquery-ui/pull/898">lot</a> <a href="http://bugs.jqueryui.com/ticket/8959">of</a> <a href="http://bugs.jqueryui.com/ticket/6146">requests</a> to remove the browser default <code>outline</code>s from our widgets.</p>
+<p>At the <a href="http://jqueryui.com">jQuery UI</a> project we get a <a href="https://github.com/jquery/jquery-ui/pull/898">lot</a> <a href="http://bugs.jqueryui.com/ticket/8959">of</a> <a href="http://bugs.jqueryui.com/ticket/6146">requests</a> to remove the browser default <code>outline</code>s from our widgets.</p>
 
 <p>  The most recent tickets have come from the <a href="http://jqueryui.com/slider">slider</a> and <a href="http://jqueryui.com/tabs">tabs</a> widgets.  This is what they look like on the latest Chrome on OS X:</p>
 
@@ -244,16 +244,17 @@ width: 200px;
 <p>}
 ```</p>
 
-<p>Here, the background of the entire viewport will be black rather than a centered 200px block.</p>
+<p>The screenshot below shows this.  The background of the entire viewport is black rather than a centered 200px block.</p>
 
 <p><img src="http://tjvantoll.com/images/posts/2013-01-05/background-before.png" title="background on a body element" style="max-height: 300px;"></p>
 
-<p>Luckily, this can be worked around by applying a <code>background</code> on the <code>html</code> element.</p>
+<p>This can be worked around by applying a <code>background</code> on the <code>html</code> element:</p>
 
 <p>``` css
 html {</p>
 
 <pre><code>background: white;
+height: 100%;
 </code></pre>
 
 <p>}
@@ -262,12 +263,15 @@ body {</p>
 <pre><code>background: black;
 margin: 0 auto;
 width: 200px;
+min-height: 100%;
 </code></pre>
 
 <p>}
 ```</p>
 
-<p>Which renders as expected:</p>
+<p>Note the <code>height</code> that was added to the <code>html</code> element and the <code>min-height</code> added to the <code>body</code>.  This ensures that the <code>background</code> applied to the <code>body</code> element will take up the entire height of the screen.</p>
+
+<p>The rules above will now render as expected:</p>
 
 <p><img src="http://tjvantoll.com/images/posts/2013-01-05/background-after.png" title="background on a body element with background on html element" style="max-height: 300px;"></p>
 
