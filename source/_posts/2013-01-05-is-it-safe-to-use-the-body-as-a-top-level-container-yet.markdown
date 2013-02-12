@@ -113,24 +113,28 @@ body {
 }
 ```
 
-Here, the background of the entire viewport will be black rather than a centered 200px block.  
+The screenshot below shows this.  The background of the entire viewport is black rather than a centered 200px block.  
 
 <img src="/images/posts/2013-01-05/background-before.png" title="background on a body element" style="max-height: 300px;">
 
-Luckily, this can be worked around by applying a `background` on the `html` element.
+This can be worked around by applying a `background` on the `html` element:
 
 ``` css
 html {
     background: white;
+    height: 100%;
 }
 body {
     background: black;
     margin: 0 auto;
     width: 200px;
+    min-height: 100%;
 }
 ```
 
-Which renders as expected:
+Note the `height` that was added to the `html` element and the `min-height` added to the `body`.  This ensures that the `background` applied to the `body` element will take up the entire height of the screen.
+
+The rules above will now render as expected:
 
 <img src="/images/posts/2013-01-05/background-after.png" title="background on a body element with background on html element" style="max-height: 300px;">
 
