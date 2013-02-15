@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Browsers | TJ VanToll]]></title>
   <link href="http://tjvantoll.com/blog/categories/browsers/atom.xml" rel="self"/>
   <link href="http://tjvantoll.com/"/>
-  <updated>2013-02-11T21:49:59-05:00</updated>
+  <updated>2013-02-14T22:40:13-05:00</updated>
   <id>http://tjvantoll.com/</id>
   <author>
     <name><![CDATA[TJ VanToll]]></name>
@@ -12,6 +12,73 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Opera Moves to WebKit - Why We Should Care]]></title>
+    <link href="http://tjvantoll.com/2014/02/13/opera-moves-to-webkit-why-we-should-care/"/>
+    <updated>2014-02-13T00:00:00-05:00</updated>
+    <id>http://tjvantoll.com/2014/02/13/opera-moves-to-webkit-why-we-should-care</id>
+    <content type="html"><![CDATA[<p>Opera <a href="http://my.opera.com/ODIN/blog/300-million-users-and-move-to-webkit">announced Wednesday</a> that they are moving from their Presto rendering engine to WebKit.</p>
+
+<p>The reaction I saw from most developers was mostly positive - one less rendering engine to support.</p>
+
+<p>And yes, having one less rendering engine to support will make the lives of web developers easier.  But the loss of one of the web's core four rendering engines represents a slippery slope towards a WebKit monoculture.</p>
+
+<h3>WebKit - Our New Overlords?</h3>
+
+<p>On desktop there's still a healthy distribution between the 3 remaining rendering engines.  According to <a href="http://gs.statcounter.com/#browser-ww-monthly-201201-201301">StatCounter</a>, as of January 2013 Trident (Internet Explorer) has 30.7% of the market, Gecko (Firefox) has 21.4%, and WebKit picks up the rest:</p>
+
+<p><img src="http://tjvantoll.com/images/posts/2013-02-14/statcounter-desktop.png"></p>
+
+<p>On mobile however, the loss of Presto gives WebKit a near monopoly:</p>
+
+<p><img src="http://tjvantoll.com/images/posts/2013-02-14/statcounter-mobile.png"></p>
+
+<p>WebKit is, or will be, the rendering engine behind all browsers listed other than the <a href="http://en.wikipedia.org/wiki/UC_Browser">UC Browser</a>.  Gecko and Trident's mobile browsers are not even popular enough to be put in the key.</p>
+
+<p>This is concerning.</p>
+
+<h3>Why is One Rendering Engine Bad?</h3>
+
+<p>There seems to be a perception amongst web developers that if we had one rendering engine our lives would be so much easier.  And after years of wrestling with asinine browser differences this view is understandable.  But there are some fundamental problems with a single rendering engine having a monopoly.</p>
+
+<h4>Standards</h4>
+
+<p>With one rendering engine the line between bugs and standard behavior becomes blurred.  The only way developers have to verify correctness is to refer to the appropriate specification.  And standardization is less likely to happen in the first place.  For better or worse, when there is one rendering engine its behavior becomes the standard.</p>
+
+<p>Tools are already being developed that target WebKit exclusively.  The following is from <a href="http://html.adobe.com/edge/">Adobe's Edge tools</a>:</p>
+
+<p><blockquote><p>"Because you design in an environment based on WebKit, your content will display reliably across modern browsers and mobile devices."</p></blockquote></p>
+
+<p>This sort of language is detrimental to Gecko and Trident's chances of being relevant, especially on mobile.</p>
+
+<h4>Competition</h4>
+
+<p>Competition drives innovation.  Fewer rendering engines means less competition.</p>
+
+<h4>Proprietary</h4>
+
+<p>Have you ever used window.showModalDialog?  It's an API <a href="http://tjvantoll.com/2012/05/02/showmodaldialog-what-it-is-and-why-you-should-never-use-it/">riddled with issues</a>, yet, it is now <a href="http://www.whatwg.org/specs/web-apps/current-work/multipage/timers.html#dialogs-implemented-using-separate-documents">standardized in the HTML5 specification</a>.</p>
+
+<p>Why?  When IE6 had a virtual monopoly on the browser world, a lot of applications were written that depended on the API.  And once an API is used on the web, it's almost impossible to change or remove it.</p>
+
+<p>For WebKit this is less of a concern than it was with IE6, but there are still a lot of WebKit specific features that are not part of any specification (<a href="http://peter.sh/experiments/vendor-prefixed-css-property-overview/">prefixes</a>, for example).</p>
+
+<h3>Business</h3>
+
+<p>From a business perspective Opera's move is an inevitability.  With the complexity of web browsers rapidly approaching Skynet, keeping up with a rendering engine that is backed by the likes of Google, Apple, Adobe, Nokia, RIM, and <a href="http://techcrunch.com/2013/02/09/apple-and-google-still-lead-webkit-development-but-more-smaller-companies-contributing/">many more</a> is fighting a losing battle.</p>
+
+<p>With Opera throwing their support behind WebKit as well, my primary concern is that it will become increasingly difficult for Gecko and Trident to keep up.</p>
+
+<h3>Optimism</h3>
+
+<p>Despite this, I don't believe all is doom and gloom by any means.  This is not IE6 all over again.  WebKit is an open source project whose contributors are active participants in the web standards community.</p>
+
+<p>It's also important to remember that <a href="http://quirksmode.org/webkit.html">not all WebKits are created equally</a>, WebKit browsers are fighting to distinguish themselves; innovation in the browser world has never been as strong as it is today.</p>
+
+<p>That being said, the loss of a rendering engine is still a sad day for the web.  R.I.P. Presto.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Stop Messing with the Browser's Default Focus outline]]></title>
@@ -420,62 +487,6 @@ td:nth-child(3), th:nth-child(3) { width: 100px; }
 <p>The markup to create the table is simple and semantic.  I've seen workarounds for this issue that use <code>&lt;div&gt;</code>s instead of <code>&lt;table&gt;</code>s or multiple aligned <code>&lt;table&gt;</code>s and those always felt dirty to me.</p>
 
 <p>The code is free to use and do whatever you want with it.  If you have any suggestions for improvements or find any issues please let me know in the comments.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[maxlength Constraint Validation Oddities in Major Browsers]]></title>
-    <link href="http://tjvantoll.com/2012/10/17/maxlength-constraint-validation-oddities/"/>
-    <updated>2012-10-17T12:48:00-04:00</updated>
-    <id>http://tjvantoll.com/2012/10/17/maxlength-constraint-validation-oddities</id>
-    <content type="html"><![CDATA[<p>The <code>maxlength</code> attribute has been around in browsers for a long time.  When provided all browsers prevent the user entering a value that exceeds the <code>maxlength</code>.</p>
-
-<p>For example you cannot type more than 2 characters in the textbox below:</p>
-
-<p><input type="text" maxlength="2" /></p>
-
-<h3>Constraint Validation</h3>
-
-<p><a href="https://developer.mozilla.org/en-US/docs/HTML/HTML5/Constraint_validation_">Constraint validation</a> is an HTML5 spec that provides native client side form validation in the browser.  As part of its <a href="https://developer.mozilla.org/en-US/docs/HTML/Forms_in_HTML#Constraint_Validation_API">API</a>, all <code>&lt;input&gt;</code> and <code>&lt;textarea&gt;</code> elements have a <code>validity.tooLong</code> property that is <code>true</code> when the length of the <code>value</code> exceeds the <code>maxlength</code>.</p>
-
-<p>But if the browser prevents this then why does the property exist?</p>
-
-<!--more-->
-
-
-<h3>Prefilled value Attribute</h3>
-
-<p>Assume that you're filling the <code>value</code> of form elements with information from a database and you end up with something like this:</p>
-
-<p><code>&lt;input type="text" maxlength="1" value="ABC" /&gt;</code></p>
-
-<p>How will the browser handle this?</p>
-
-<p>All browsers will prevent entry of additional characters, but they do not trim excess characters already present.  Additionally all browsers will allow a form containing the above input to submit.  <em>Note: Opera is the only browser to set the <code>validity.tooLong</code> property to <code>true</code> in this situation.  Despite this, it does not prevent form submission.</em></p>
-
-<p>Why is submission not prevented?  The key is in the <a href="http://www.whatwg.org/specs/web-apps/current-work/#concept-input-value-dirty-flag">specification</a>:</p>
-
-<blockquote><p>Constraint validation: If an element has a maximum allowed value length, its dirty value flag is true, its value was last changed by a user edit (as opposed to a change made by a script), and the code-unit length of the element's value is greater than the element's maximum allowed value length, then the element is suffering from being too long.</p></blockquote>
-
-<p>The <a href="http://www.whatwg.org/specs/web-apps/current-work/#concept-input-value-dirty-flag">dirty flag</a> essentially means the the user has changed the value of an element.  Therefore, in order to be <code>tooLong</code> the element must have been last interacted with by a user edit.</p>
-
-<h3>Actually Triggering tooLong</h3>
-
-<p>So let's take another approach.  What happens if you have the same input:</p>
-
-<p><code>&lt;input type="text" maxlength="1" value="ABC" /&gt;</code></p>
-
-<p>...remove one character, then submit?  You can try it for yourself below:</p>
-
-<iframe style="width: 100%; height: 180px;" src="http://jsfiddle.net/tj_vantoll/epCQe/embedded/result,html/" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
-
-
-<p>Upon edit IE10 and Chrome will set the <code>validity.tooLong</code> property to <code>true</code> and prevent form submission.  If the user attempts to submit a form after removing the "C" they will see the following in those browsers:</p>
-
-<p><img src="/images/posts/2012-10-17/Chrome.png" title="Chrome" alt="Chrome" />
-<img src="/images/posts/2012-10-17/IE10.png" title="IE10" alt="IE10" /></p>
-
-<p>Firefox, Safari, and Opera incorrectly handle this situation and allow the form to be submitted anyways.</p>
 ]]></content>
   </entry>
   

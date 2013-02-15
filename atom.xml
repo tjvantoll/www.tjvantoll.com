@@ -4,7 +4,7 @@
   <title><![CDATA[TJ VanToll]]></title>
   <link href="http://tjvantoll.com/atom.xml" rel="self"/>
   <link href="http://tjvantoll.com/"/>
-  <updated>2013-02-11T21:49:59-05:00</updated>
+  <updated>2013-02-14T22:40:13-05:00</updated>
   <id>http://tjvantoll.com/</id>
   <author>
     <name><![CDATA[TJ VanToll]]></name>
@@ -12,6 +12,74 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Opera Moves to WebKit - Why We Should Care]]></title>
+    <link href="http://tjvantoll.com/2014/02/13/opera-moves-to-webkit-why-we-should-care/"/>
+    <updated>2014-02-13T00:00:00-05:00</updated>
+    <id>http://tjvantoll.com/2014/02/13/opera-moves-to-webkit-why-we-should-care</id>
+    <content type="html"><![CDATA[<p>Opera <a href="http://my.opera.com/ODIN/blog/300-million-users-and-move-to-webkit">announced Wednesday</a> that they are moving from their Presto rendering engine to WebKit.</p>
+
+<p>The reaction I saw from most developers was mostly positive - one less rendering engine to support.</p>
+
+<p>And yes, having one less rendering engine to support will make the lives of web developers easier.  But the loss of one of the web&#8217;s core four rendering engines represents a slippery slope towards a WebKit monoculture.</p>
+
+<h3>WebKit - Our New Overlords?</h3>
+
+<p>On desktop there&#8217;s still a healthy distribution between the 3 remaining rendering engines.  According to <a href="http://gs.statcounter.com/#browser-ww-monthly-201201-201301">StatCounter</a>, as of January 2013 Trident (Internet Explorer) has 30.7% of the market, Gecko (Firefox) has 21.4%, and WebKit picks up the rest:</p>
+
+<p><img src="http://tjvantoll.com/images/posts/2013-02-14/statcounter-desktop.png"></p>
+
+<p>On mobile however, the loss of Presto gives WebKit a near monopoly:</p>
+
+<p><img src="http://tjvantoll.com/images/posts/2013-02-14/statcounter-mobile.png"></p>
+
+<p>WebKit is, or will be, the rendering engine behind all browsers listed other than the <a href="http://en.wikipedia.org/wiki/UC_Browser">UC Browser</a>.  Gecko and Trident&#8217;s mobile browsers are not even popular enough to be put in the key.</p>
+
+<p>This is concerning.</p>
+
+<h3>Why is One Rendering Engine Bad?</h3>
+
+<p>There seems to be a perception amongst web developers that if we had one rendering engine our lives would be so much easier.  And after years of wrestling with asinine browser differences this view is understandable.  But there are some fundamental problems with a single rendering engine having a monopoly.</p>
+
+<h4>Standards</h4>
+
+<p>With one rendering engine the line between bugs and standard behavior becomes blurred.  The only way developers have to verify correctness is to refer to the appropriate specification.  And standardization is less likely to happen in the first place.  For better or worse, when there is one rendering engine its behavior becomes the standard.</p>
+
+<p>Tools are already being developed that target WebKit exclusively.  The following is from <a href="http://html.adobe.com/edge/">Adobe&#8217;s Edge tools</a>:</p>
+
+<blockquote><p>&#8220;Because you design in an environment based on WebKit, your content will display reliably across modern browsers and mobile devices.&#8221;</p></blockquote>
+
+
+<p>This sort of language is detrimental to Gecko and Trident&#8217;s chances of being relevant, especially on mobile.</p>
+
+<h4>Competition</h4>
+
+<p>Competition drives innovation.  Fewer rendering engines means less competition.</p>
+
+<h4>Proprietary</h4>
+
+<p>Have you ever used window.showModalDialog?  It&#8217;s an API <a href="http://tjvantoll.com/2012/05/02/showmodaldialog-what-it-is-and-why-you-should-never-use-it/">riddled with issues</a>, yet, it is now <a href="http://www.whatwg.org/specs/web-apps/current-work/multipage/timers.html#dialogs-implemented-using-separate-documents">standardized in the HTML5 specification</a>.</p>
+
+<p>Why?  When IE6 had a virtual monopoly on the browser world, a lot of applications were written that depended on the API.  And once an API is used on the web, it&#8217;s almost impossible to change or remove it.</p>
+
+<p>For WebKit this is less of a concern than it was with IE6, but there are still a lot of WebKit specific features that are not part of any specification (<a href="http://peter.sh/experiments/vendor-prefixed-css-property-overview/">prefixes</a>, for example).</p>
+
+<h3>Business</h3>
+
+<p>From a business perspective Opera&#8217;s move is an inevitability.  With the complexity of web browsers rapidly approaching Skynet, keeping up with a rendering engine that is backed by the likes of Google, Apple, Adobe, Nokia, RIM, and <a href="http://techcrunch.com/2013/02/09/apple-and-google-still-lead-webkit-development-but-more-smaller-companies-contributing/">many more</a> is fighting a losing battle.</p>
+
+<p>With Opera throwing their support behind WebKit as well, my primary concern is that it will become increasingly difficult for Gecko and Trident to keep up.</p>
+
+<h3>Optimism</h3>
+
+<p>Despite this, I don&#8217;t believe all is doom and gloom by any means.  This is not IE6 all over again.  WebKit is an open source project whose contributors are active participants in the web standards community.</p>
+
+<p>It&#8217;s also important to remember that <a href="http://quirksmode.org/webkit.html">not all WebKits are created equally</a>, WebKit browsers are fighting to distinguish themselves; innovation in the browser world has never been as strong as it is today.</p>
+
+<p>That being said, the loss of a rendering engine is still a sad day for the web.  R.I.P. Presto.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Stop Messing with the Browser's Default Focus outline]]></title>
@@ -2246,15 +2314,6 @@
 
 
 <p>This has the added benefit of being more efficient since you save a property retrieval on every invocation of the loop.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[LESS 101 - The Basics of the CSS Preprocessor]]></title>
-    <link href="http://tjvantoll.com/2012/08/10/less-101-the-basics-of-the-css-preprocessor/"/>
-    <updated>2012-08-10T00:00:00-04:00</updated>
-    <id>http://tjvantoll.com/2012/08/10/less-101-the-basics-of-the-css-preprocessor</id>
-    <content type="html"><![CDATA[<p>I gave a &#8220;LESS 101&#8221; talk to my coworkers at Liquid Web today.  I thought I&#8217;d post the slides here in case anyone else might find them useful.  They are <a href="http://tjvantoll.com/speaking/slides/2012/LESS-101">here</a>.</p>
 ]]></content>
   </entry>
   
