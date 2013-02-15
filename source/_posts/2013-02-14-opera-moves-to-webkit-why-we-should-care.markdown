@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Opera Moves to WebKit - Why We Should Care"
-date: 2014-02-13
+date: 2013-02-14
 comments: true
 categories: [Browsers]
 ---
