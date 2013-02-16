@@ -32,7 +32,7 @@ There seems to be a perception amongst web developers that if we had one renderi
 
 #### Standards
 
-With one rendering engine the line between bugs and standard behavior becomes blurred.  The only way developers have to verify correctness is to refer to the appropriate specification.  And standardization is less likely to happen in the first place.  For better or worse, when there is one rendering engine its behavior becomes the standard.
+With only one rendering engine, the line between bugs and standard behavior becomes blurred.  The only way developers have to verify correctness is to refer to the appropriate specification.  Furthermore, standardization is less likely to happen in the first place.  For better or worse, when there is one rendering engine its behavior becomes the standard.
 
 Tools are already being developed that target WebKit exclusively.  The following is from [Adobe's Edge tools](http://html.adobe.com/edge/):
 
