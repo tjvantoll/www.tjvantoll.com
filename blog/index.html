@@ -9,7 +9,7 @@
   <meta name="author" content="TJ VanToll">
 
   
-  <meta name="description" content="Opera announced Wednesday that they are moving from their Presto rendering engine to WebKit. The reaction I saw from most developers was mostly &hellip;">
+  <meta name="description" content="As there have been numerous bug submissions for this, I feel the need to explain how to properly use jQuery UI&#8217;s tab widget with a &lt;base&gt &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -94,6 +94,254 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2013/02/17/using-jquery-ui-tabs-with-the-base-tag/">Using jQuery UI Tabs with the &lt;base&gt; Tag</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-02-17T21:14:00-05:00" pubdate data-updated="true">Feb 17<span>th</span>, 2013</time>
+        
+         | <a href="/2013/02/17/using-jquery-ui-tabs-with-the-base-tag/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>As there have been <a href="http://bugs.jqueryui.com/ticket/7822">numerous bug submissions</a> for this, I feel the need to explain how to properly use <a href="http://jqueryui.com/tabs">jQuery UI&#8217;s tab widget</a> with a <code>&lt;base&gt;</code> tag.  Let&#8217;s start with what the <code>&lt;base&gt;</code> tag is intended for.</p>
+
+<h3>The &lt;base&gt; Element</h3>
+
+<p><a href="https://developer.mozilla.org/en-US/docs/HTML/Element/base">Per MDN</a> the <code>&lt;base&gt;</code> element specifies the base URL to use for all relative URLs contained within a document.</p>
+
+<p>Consider the following example:</p>
+
+<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;base</span> <span class="na">href=</span><span class="s">&quot;http://foo.com&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'><span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;bar.html&quot;</span><span class="nt">&gt;</span>Bar<span class="nt">&lt;/a&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Let&#8217;s assume this HTML appears on this domain (<code>http://tjvantoll.com</code>).  When the link is clicked on, the browser will navigate to <code>http://foo.com/bar.html</code> rather than <code>http://tjvantoll.com/bar.html</code>.</p>
+
+<p>It&#8217;s important to note that hash links are also relative to the specified base.  Therefore on the following:</p>
+
+<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;base</span> <span class="na">href=</span><span class="s">&quot;http://foo.com&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'><span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;#bar&quot;</span><span class="nt">&gt;</span>Bar<span class="nt">&lt;/a&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>When the link is click on, the browser will navigate to <code>http://foo.com#bar</code> and NOT <code>http://tjvantoll.com#bar</code>.  This detail is important; it&#8217;s the root cause of confusion when using a <code>&lt;base&gt;</code> tag with the tabs widget.</p>
+
+<h3>jQuery UI Tabs</h3>
+
+<p>Here is the intended HTML structure to be used by the tabs widget:</p>
+
+<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">&quot;tabs&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;ul&gt;</span>
+</span><span class='line'>        <span class="nt">&lt;li&gt;&lt;a</span> <span class="na">href=</span><span class="s">&quot;#tab-1&quot;</span><span class="nt">&gt;</span>One<span class="nt">&lt;/a&gt;&lt;/li&gt;</span>
+</span><span class='line'>        <span class="nt">&lt;li&gt;&lt;a</span> <span class="na">href=</span><span class="s">&quot;#tab-2&quot;</span><span class="nt">&gt;</span>Two<span class="nt">&lt;/a&gt;&lt;/li&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;/ul&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">&quot;tab-1&quot;</span><span class="nt">&gt;</span>Contents of tab one.<span class="nt">&lt;/div&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">&quot;tab-2&quot;</span><span class="nt">&gt;</span>Contents of tab two.<span class="nt">&lt;/div&gt;</span>
+</span><span class='line'><span class="nt">&lt;/div&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nt">&lt;script&gt;</span><span class="nx">$</span><span class="p">(</span> <span class="s2">&quot;#tabs&quot;</span> <span class="p">).</span><span class="nx">tabs</span><span class="p">();</span><span class="nt">&lt;/script&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Which produces the following:</p>
+
+<p><img src="/images/posts/2013-02-17/tabs.png" alt="Default look of jQuery UI's tabs"></p>
+
+<p>In this example both links begin with a hash (<code>#</code>), indicating that their content is located on the current page.  If that is not the case, the tabs widget will retrieve the tab&#8217;s contents server side via an XHR call.  Consider the following:</p>
+
+<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">&quot;tabs&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;ul&gt;</span>
+</span><span class='line'>        <span class="nt">&lt;li&gt;&lt;a</span> <span class="na">href=</span><span class="s">&quot;#local&quot;</span><span class="nt">&gt;</span>Local<span class="nt">&lt;/a&gt;&lt;/li&gt;</span>
+</span><span class='line'>        <span class="nt">&lt;li&gt;&lt;a</span> <span class="na">href=</span><span class="s">&quot;external&quot;</span><span class="nt">&gt;</span>External<span class="nt">&lt;/a&gt;&lt;/li&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;/ul&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">&quot;local&quot;</span><span class="nt">&gt;</span>Contents of the local tab.<span class="nt">&lt;/div&gt;</span>
+</span><span class='line'><span class="nt">&lt;/div&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nt">&lt;script&gt;</span><span class="nx">$</span><span class="p">(</span> <span class="s2">&quot;#tabs&quot;</span> <span class="p">).</span><span class="nx">tabs</span><span class="p">();</span><span class="nt">&lt;/script&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Here the local link will work as in the previous example - when it is clicked on, the tabs widget will simply display the contents of the <code>#local</code> container.</p>
+
+<p>However, when the external link is clicked, the tabs widget will perform an XHR request to retrieve the contents.  Assuming this HTML is located on <code>http://tjvantoll.com</code>, an XHR GET will be performed for <code>http://tjvantoll.com/external</code>.  The contents returned are dynamically added to the DOM and displayed.</p>
+
+<p>The markup pattern used here is no accident.  Consider a user that views this HTML without JavaScript enabled.  The local link will move the user&#8217;s focus to the <code>#local</code> container on <code>http://tjvantoll.com</code>.  The external link will do a full page navigation to <code>http://tjvantoll.com/external</code>.  The markup is designed to enhance the default browser behavior and to degrade gracefully when JavaScript isn&#8217;t present.</p>
+
+<h3>&lt;base&gt; + tabs</h3>
+
+<p>Given the descriptions above, the behavior of the <code>&lt;base&gt;</code> tag with the tabs widget shouldn&#8217;t be surprising.  Here&#8217;s the first example given for the tabs widget again.  This time, a <code>&lt;base&gt;</code> tag to <code>http://foo.com</code> has been added:</p>
+
+<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;base</span> <span class="na">href=</span><span class="s">&quot;http://foo.com&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">&quot;tabs&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;ul&gt;</span>
+</span><span class='line'>        <span class="nt">&lt;li&gt;&lt;a</span> <span class="na">href=</span><span class="s">&quot;#tab-1&quot;</span><span class="nt">&gt;</span>One<span class="nt">&lt;/a&gt;&lt;/li&gt;</span>
+</span><span class='line'>        <span class="nt">&lt;li&gt;&lt;a</span> <span class="na">href=</span><span class="s">&quot;#tab-2&quot;</span><span class="nt">&gt;</span>Two<span class="nt">&lt;/a&gt;&lt;/li&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;/ul&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">&quot;tab-1&quot;</span><span class="nt">&gt;</span>Contents of tab one.<span class="nt">&lt;/div&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">&quot;tab-2&quot;</span><span class="nt">&gt;</span>Contents of tab two.<span class="nt">&lt;/div&gt;</span>
+</span><span class='line'><span class="nt">&lt;/div&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nt">&lt;script&gt;</span><span class="nx">$</span><span class="p">(</span> <span class="s2">&quot;#tabs&quot;</span> <span class="p">).</span><span class="nx">tabs</span><span class="p">();</span><span class="nt">&lt;/script&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Let&#8217;s again assume this HTML is located on <code>http://tjvantoll.com</code>.  Because of the <code>&lt;base&gt;</code> tag, the links used in the tabs widget are actually external links to <code>http://foo.com</code>.  Therefore, upon instantiation, the tabs widget will attempt to load the contents of the first tab from <code>http://foo.com</code>.</p>
+
+<p>If you are having trouble understanding, try the example above with JavaScript disabled.  When the first link is clicked on, the browser will navigate to <code>http://foo.com</code> regardless of the domain the page is viewed on.</p>
+
+<h3>Fixes</h3>
+
+<p>From the numerous bug reports, it seems that a lot of people have applications with <code>&lt;base&gt;</code> tags and want hashed links to be relative to the current page.  How can you fix your application?</p>
+
+<p>1) <strong>Remove the <code>&lt;base&gt;</code> tag.</strong>  It&#8217;s that simple.  After the removal, the tabs widget will never attempt to load external content from any links with leading hashes.  Of course, this approach requires changing any other links on the page that are dependent on the <code>&lt;base&gt;</code> tag&#8217;s leading path.</p>
+
+<p>2) <strong>Provide full URLs on links used to build the tabs widget.</strong>  If approach #1 isn&#8217;t feasible, you can also provide a fully qualified URL in the links used to build the tabs widget.  Here&#8217;s the earlier example modified to show this approach:</p>
+
+<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;base</span> <span class="na">href=</span><span class="s">&quot;http://foo.com&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">&quot;tabs&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;ul&gt;</span>
+</span><span class='line'>        <span class="nt">&lt;li&gt;&lt;a</span> <span class="na">href=</span><span class="s">&quot;http://tjvantoll.com#tab-1&quot;</span><span class="nt">&gt;</span>One<span class="nt">&lt;/a&gt;&lt;/li&gt;</span>
+</span><span class='line'>        <span class="nt">&lt;li&gt;&lt;a</span> <span class="na">href=</span><span class="s">&quot;http://tjvantoll.com#tab-2&quot;</span><span class="nt">&gt;</span>Two<span class="nt">&lt;/a&gt;&lt;/li&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;/ul&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">&quot;tab-1&quot;</span><span class="nt">&gt;</span>Contents of tab one.<span class="nt">&lt;/div&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">&quot;tab-2&quot;</span><span class="nt">&gt;</span>Contents of tab two.<span class="nt">&lt;/div&gt;</span>
+</span><span class='line'><span class="nt">&lt;/div&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nt">&lt;script&gt;</span><span class="nx">$</span><span class="p">(</span> <span class="s2">&quot;#tabs&quot;</span> <span class="p">).</span><span class="nx">tabs</span><span class="p">();</span><span class="nt">&lt;/script&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Since the links in the tabs are now fully qualified paths to the current page, the tabs widget will not perform a request to retrieve external content.</p>
+
+<p>A more robust way of handling this would be to inject the current path server side.  For example the following PHP could be used to inject the link used in the first tab above:</p>
+
+<p><code>'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'] . '#tab-1'</code></p>
+
+<p>3) <strong>Add the full URLs via JavaScript.</strong></p>
+
+<div class="warning" style="display: block;">
+    This is not the right way to fix this problem.  I&#8217;m only providing this because I realize the realities of working on enormous projects or projects where you do not have full control over the HTML.
+</div>
+
+
+<p>This is the same approach as #2, but the appropriate links are changed in JavaScript instead of forcing you to fix every link manually.</p>
+
+<p>The hack is shown below, simply call the <code>makeTabs</code> function with the selector used to create the tabs widget:</p>
+
+<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="kd">var</span> <span class="nx">makeTabs</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">selector</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nx">$</span><span class="p">(</span> <span class="nx">selector</span> <span class="p">)</span>
+</span><span class='line'>        <span class="p">.</span><span class="nx">find</span><span class="p">(</span> <span class="s2">&quot;ul a&quot;</span> <span class="p">).</span><span class="nx">each</span><span class="p">(</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>            <span class="kd">var</span> <span class="nx">href</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span> <span class="k">this</span> <span class="p">).</span><span class="nx">attr</span><span class="p">(</span> <span class="s2">&quot;href&quot;</span> <span class="p">),</span>
+</span><span class='line'>                <span class="nx">newHref</span> <span class="o">=</span> <span class="nb">window</span><span class="p">.</span><span class="nx">location</span><span class="p">.</span><span class="nx">origin</span> <span class="o">+</span> <span class="nb">window</span><span class="p">.</span><span class="nx">location</span><span class="p">.</span><span class="nx">pathname</span> <span class="o">+</span> <span class="nx">href</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>            <span class="k">if</span> <span class="p">(</span> <span class="nx">href</span><span class="p">.</span><span class="nx">indexOf</span><span class="p">(</span> <span class="s2">&quot;#&quot;</span> <span class="p">)</span> <span class="o">==</span> <span class="mi">0</span> <span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>                <span class="nx">$</span><span class="p">(</span> <span class="k">this</span> <span class="p">).</span><span class="nx">attr</span><span class="p">(</span> <span class="s2">&quot;href&quot;</span><span class="p">,</span> <span class="nx">newHref</span> <span class="p">);</span>
+</span><span class='line'>            <span class="p">}</span>
+</span><span class='line'>        <span class="p">})</span>
+</span><span class='line'>    <span class="nx">$</span><span class="p">(</span> <span class="nx">selector</span> <span class="p">).</span><span class="nx">tabs</span><span class="p">();</span>
+</span><span class='line'><span class="p">};</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">makeTabs</span><span class="p">(</span> <span class="s2">&quot;#tabs&quot;</span> <span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>As noted by the warning box, you should really fix this the right way.  But desperate times call for desperate measures.  You&#8217;ve been warned.</p>
+
+<h3>The End</h3>
+
+<p>Hopefully if you didn&#8217;t understand how to use the <code>&lt;base&gt;</code> tag and jQuery UI&#8217;s tab widget together you do now.  If you are still having issues after reading through this please let me know in the comments.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -686,49 +934,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2012/11/08/creating-a-polished-vertical-tabs-interaction-with-jquery-ui/">Creating a Polished Vertical Tabs Interaction with jQuery UI</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-11-08T00:00:00-05:00" pubdate data-updated="true">Nov 8<span>th</span>, 2012</time>
-        
-         | <a href="/2012/11/08/creating-a-polished-vertical-tabs-interaction-with-jquery-ui/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>The <a href="http://jqueryui.com/tabs/">jQuery UI tabs widget</a> provides a clean way to implement a tabular UI.  Furthermore, the markup used gives you ample hooks to make the tabs visually into what you want them to be.  The docs provide a <a href="http://jqueryui.com/tabs/#vertical">simple demo</a> of how you can give the tabs a vertical orientation, but I thought I&#8217;d show how you can use what the framework provides to create something a bit more polished.</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/2012/11/08/creating-a-polished-vertical-tabs-interaction-with-jquery-ui/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -742,6 +947,10 @@
     <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2013/02/17/using-jquery-ui-tabs-with-the-base-tag/">Using jQuery UI Tabs with the &lt;base&gt; Tag</a>
+      </li>
     
       <li class="post">
         <a href="/2013/02/14/opera-moves-to-webkit-why-we-should-care/">Opera Moves to WebKit - Why We Should Care</a>
@@ -777,10 +986,6 @@
     
       <li class="post">
         <a href="/2012/11/10/creating-cross-browser-scrollable-tbody/">Creating Cross Browser Scrollable &lt;tbody&gt;s - A CSS Only Approach</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2012/11/08/creating-a-polished-vertical-tabs-interaction-with-jquery-ui/">Creating a Polished Vertical Tabs Interaction with jQuery UI</a>
       </li>
     
   </ul>

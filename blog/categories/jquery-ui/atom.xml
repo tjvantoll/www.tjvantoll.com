@@ -4,7 +4,7 @@
   <title><![CDATA[Category: jQuery UI | TJ VanToll]]></title>
   <link href="http://tjvantoll.com/blog/categories/jquery-ui/atom.xml" rel="self"/>
   <link href="http://tjvantoll.com/"/>
-  <updated>2013-02-16T06:07:42-05:00</updated>
+  <updated>2013-02-17T23:23:34-05:00</updated>
   <id>http://tjvantoll.com/</id>
   <author>
     <name><![CDATA[TJ VanToll]]></name>
@@ -12,6 +12,189 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Using jQuery UI Tabs with the &lt;base&gt; Tag]]></title>
+    <link href="http://tjvantoll.com/2013/02/17/using-jquery-ui-tabs-with-the-base-tag/"/>
+    <updated>2013-02-17T21:14:00-05:00</updated>
+    <id>http://tjvantoll.com/2013/02/17/using-jquery-ui-tabs-with-the-base-tag</id>
+    <content type="html"><![CDATA[<p>As there have been <a href="http://bugs.jqueryui.com/ticket/7822">numerous bug submissions</a> for this, I feel the need to explain how to properly use <a href="http://jqueryui.com/tabs">jQuery UI's tab widget</a> with a <code>&lt;base&gt;</code> tag.  Let's start with what the <code>&lt;base&gt;</code> tag is intended for.</p>
+
+<h3>The &lt;base&gt; Element</h3>
+
+<p><a href="https://developer.mozilla.org/en-US/docs/HTML/Element/base">Per MDN</a> the <code>&lt;base&gt;</code> element specifies the base URL to use for all relative URLs contained within a document.</p>
+
+<p>Consider the following example:</p>
+
+<p><code>html
+&lt;base href="http://foo.com"&gt;
+&lt;a href="bar.html"&gt;Bar&lt;/a&gt;
+</code></p>
+
+<p>Let's assume this HTML appears on this domain (<code>http://tjvantoll.com</code>).  When the link is clicked on, the browser will navigate to <code>http://foo.com/bar.html</code> rather than <code>http://tjvantoll.com/bar.html</code>.</p>
+
+<p>It's important to note that hash links are also relative to the specified base.  Therefore on the following:</p>
+
+<p><code>html
+&lt;base href="http://foo.com"&gt;
+&lt;a href="#bar"&gt;Bar&lt;/a&gt;
+</code></p>
+
+<p>When the link is click on, the browser will navigate to <code>http://foo.com#bar</code> and NOT <code>http://tjvantoll.com#bar</code>.  This detail is important; it's the root cause of confusion when using a <code>&lt;base&gt;</code> tag with the tabs widget.</p>
+
+<h3>jQuery UI Tabs</h3>
+
+<p>Here is the intended HTML structure to be used by the tabs widget:</p>
+
+<p>``` html</p>
+
+<div id="tabs">
+    <ul>
+        <li><a href="#tab-1">One</a></li>
+        <li><a href="#tab-2">Two</a></li>
+    </ul>
+    <div id="tab-1">Contents of tab one.</div>
+    <div id="tab-2">Contents of tab two.</div>
+</div>
+
+
+
+
+<script>$( "#tabs" ).tabs();</script>
+
+
+<p>```</p>
+
+<p>Which produces the following:</p>
+
+<p><img src="http://tjvantoll.com/images/posts/2013-02-17/tabs.png" alt="Default look of jQuery UI's tabs"></p>
+
+<p>In this example both links begin with a hash (<code>#</code>), indicating that their content is located on the current page.  If that is not the case, the tabs widget will retrieve the tab's contents server side via an XHR call.  Consider the following:</p>
+
+<p>``` html</p>
+
+<div id="tabs">
+    <ul>
+        <li><a href="#local">Local</a></li>
+        <li><a href="external">External</a></li>
+    </ul>
+    <div id="local">Contents of the local tab.</div>
+</div>
+
+
+
+
+<script>$( "#tabs" ).tabs();</script>
+
+
+<p>```</p>
+
+<p>Here the local link will work as in the previous example - when it is clicked on, the tabs widget will simply display the contents of the <code>#local</code> container.</p>
+
+<p>However, when the external link is clicked, the tabs widget will perform an XHR request to retrieve the contents.  Assuming this HTML is located on <code>http://tjvantoll.com</code>, an XHR GET will be performed for <code>http://tjvantoll.com/external</code>.  The contents returned are dynamically added to the DOM and displayed.</p>
+
+<p>The markup pattern used here is no accident.  Consider a user that views this HTML without JavaScript enabled.  The local link will move the user's focus to the <code>#local</code> container on <code>http://tjvantoll.com</code>.  The external link will do a full page navigation to <code>http://tjvantoll.com/external</code>.  The markup is designed to enhance the default browser behavior and to degrade gracefully when JavaScript isn't present.</p>
+
+<h3>&lt;base&gt; + tabs</h3>
+
+<p>Given the descriptions above, the behavior of the <code>&lt;base&gt;</code> tag with the tabs widget shouldn't be surprising.  Here's the first example given for the tabs widget again.  This time, a <code>&lt;base&gt;</code> tag to <code>http://foo.com</code> has been added:</p>
+
+<p>``` html
+<base href="http://foo.com"></p>
+
+<div id="tabs">
+    <ul>
+        <li><a href="#tab-1">One</a></li>
+        <li><a href="#tab-2">Two</a></li>
+    </ul>
+    <div id="tab-1">Contents of tab one.</div>
+    <div id="tab-2">Contents of tab two.</div>
+</div>
+
+
+
+
+<script>$( "#tabs" ).tabs();</script>
+
+
+<p>```</p>
+
+<p>Let's again assume this HTML is located on <code>http://tjvantoll.com</code>.  Because of the <code>&lt;base&gt;</code> tag, the links used in the tabs widget are actually external links to <code>http://foo.com</code>.  Therefore, upon instantiation, the tabs widget will attempt to load the contents of the first tab from <code>http://foo.com</code>.</p>
+
+<p>If you are having trouble understanding, try the example above with JavaScript disabled.  When the first link is clicked on, the browser will navigate to <code>http://foo.com</code> regardless of the domain the page is viewed on.</p>
+
+<h3>Fixes</h3>
+
+<p>From the numerous bug reports, it seems that a lot of people have applications with <code>&lt;base&gt;</code> tags and want hashed links to be relative to the current page.  How can you fix your application?</p>
+
+<p>1) <strong>Remove the <code>&lt;base&gt;</code> tag.</strong>  It's that simple.  After the removal, the tabs widget will never attempt to load external content from any links with leading hashes.  Of course, this approach requires changing any other links on the page that are dependent on the <code>&lt;base&gt;</code> tag's leading path.</p>
+
+<p>2) <strong>Provide full URLs on links used to build the tabs widget.</strong>  If approach #1 isn't feasible, you can also provide a fully qualified URL in the links used to build the tabs widget.  Here's the earlier example modified to show this approach:</p>
+
+<p>``` html
+<base href="http://foo.com"></p>
+
+<div id="tabs">
+    <ul>
+        <li><a href="http://tjvantoll.com#tab-1">One</a></li>
+        <li><a href="http://tjvantoll.com#tab-2">Two</a></li>
+    </ul>
+    <div id="tab-1">Contents of tab one.</div>
+    <div id="tab-2">Contents of tab two.</div>
+</div>
+
+
+
+
+<script>$( "#tabs" ).tabs();</script>
+
+
+<p>```</p>
+
+<p>Since the links in the tabs are now fully qualified paths to the current page, the tabs widget will not perform a request to retrieve external content.</p>
+
+<p>A more robust way of handling this would be to inject the current path server side.  For example the following PHP could be used to inject the link used in the first tab above:</p>
+
+<p><code>'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'] . '#tab-1'</code></p>
+
+<p>3) <strong>Add the full URLs via JavaScript.</strong></p>
+
+<div class="warning" style="display: block;">
+    This is not the right way to fix this problem.  I'm only providing this because I realize the realities of working on enormous projects or projects where you do not have full control over the HTML.
+</div>
+
+
+<p>This is the same approach as #2, but the appropriate links are changed in JavaScript instead of forcing you to fix every link manually.</p>
+
+<p>The hack is shown below, simply call the <code>makeTabs</code> function with the selector used to create the tabs widget:</p>
+
+<p>``` javascript
+var makeTabs = function(selector) {</p>
+
+<pre><code>$( selector )
+    .find( "ul a" ).each( function() {
+        var href = $( this ).attr( "href" ),
+            newHref = window.location.origin + window.location.pathname + href;
+
+        if ( href.indexOf( "#" ) == 0 ) {
+            $( this ).attr( "href", newHref );
+        }
+    })
+$( selector ).tabs();
+</code></pre>
+
+<p>};</p>
+
+<p>makeTabs( "#tabs" );
+```</p>
+
+<p>As noted by the warning box, you should really fix this the right way.  But desperate times call for desperate measures.  You've been warned.</p>
+
+<h3>The End</h3>
+
+<p>Hopefully if you didn't understand how to use the <code>&lt;base&gt;</code> tag and jQuery UI's tab widget together you do now.  If you are still having issues after reading through this please let me know in the comments.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Creating a Polished Vertical Tabs Interaction with jQuery UI]]></title>
@@ -509,126 +692,6 @@ input[type=number]::-webkit-inner-spin-button {</p>
 ```</p>
 
 <p>This solves the issue for Webkit, but this remains an issue for Opera and browsers that add <code>input[type=number]</code> support in the future.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Creating a Native HTML 5 Datepicker with a Fallback to jQuery UI]]></title>
-    <link href="http://tjvantoll.com/2012/06/30/creating-a-native-html5-datepicker-with-a-fallback-to-jquery-ui/"/>
-    <updated>2012-06-30T17:06:00-04:00</updated>
-    <id>http://tjvantoll.com/2012/06/30/creating-a-native-html5-datepicker-with-a-fallback-to-jquery-ui</id>
-    <content type="html"><![CDATA[<p>The recently released Chrome 20 features support for native datepickers on <code>&lt;input&gt;</code> nodes with a <code>[type=date]</code> attribute.  The list of browsers that support native datepickers now includes Chrome, Opera 11+, Opera Mobile, and iOS 5+ (see <a href="http://caniuse.com/#feat=input-datetime">caniuse.com</a>).  Therefore, now is a great time to start using them in your web applications.</p>
-
-<!--more-->
-
-
-<h3>Using</h3>
-
-<p>Using the native datepickers is easy, just change the <code>type</code> attribute of your date inputs from <code>text</code> to <code>date</code>.</p>
-
-<p>``` html Converting to a native HTML5 datepicker</p>
-
-<!-- Before -->
-
-
-<p><input type="text" /></p>
-
-<!-- After -->
-
-
-<p><input type="date" />
-```</p>
-
-<p>Here is what the user will see in supported browsers:</p>
-
-<h4>Chrome 20</h4>
-
-<p><img src="/images/posts/2012-06-30/Chrome.png" title="Chrome 20" alt="Chrome 20" /></p>
-
-<h4>Opera 12</h4>
-
-<p><img src="/images/posts/2012-06-30/Opera.png" title="Opera 12" alt="Opera 12" /></p>
-
-<h4>Opera Mobile</h4>
-
-<p><img src="/images/posts/2012-06-30/Opera%20Mobile.png" title="Opera Mobile" alt="Opera Mobile" /></p>
-
-<h4>iOS 5</h4>
-
-<p><img src="/images/posts/2012-06-30/iOS5.png" title="iOS 5" alt="iOS 5" /></p>
-
-<h3>Advantages</h3>
-
-<p>Why would use the native solution?</p>
-
-<p>First and foremost there are no dependencies.  There is no need to bring in a library or toolkit, it's all native.  Therefore, you save some bytes by not having to ship the JavaScript / CSS to make the datepicker work.</p>
-
-<p>Furthermore you can be guaranteed that it will work perfectly on all devices that support the native datepicker.  It's not dependent on JavaScript so it'll even work for users that have JavaScript disabled.</p>
-
-<p>Another key advantage is that devices can give alternative means of input for date controls.  For example note the native date control in iOS 5:</p>
-
-<p><img src="/images/posts/2012-06-30/iOS5.png" title="iOS 5" alt="iOS 5" /></p>
-
-<p>It will be a lot easier for the user to input a date with those controls, plus you can be guaranteed that you'll receive input in the correct format.</p>
-
-<h3>Disadvantages</h3>
-
-<p>The main disadvantage of using a native datepicker is that you have a lot less control.  There are no hooks to control the look of the date picker; you get what the browser wants to give you.  You also have a lot less control over the behavior.  Here's a small sampling of things that jQuery UI's datepicker can do that you cannot do with the native control.</p>
-
-<ul>
-<li>Only allow selection on certain days of the week.</li>
-<li>Control the formatting of the headers in the control (Monday vs Mon vs M).</li>
-<li>View multiple months at the same time.</li>
-</ul>
-
-
-<p>If any of this functionality is important to your application you'll probably want to stick with the jQuery UI solution.</p>
-
-<h3>Best of Both Worlds</h3>
-
-<p><a href="http://modernizr.com">Modernizr</a> gives you the ability to detect whether the browser supports native datepickers.  The following shows how you can use the native datepicker when available, and fallback to jQuery UI's picker in unsupported browsers.</p>
-
-<p>``` javascript Detect native support for datepickers and fallback to jQuery UI
-if (!Modernizr.inputtypes.date) {</p>
-
-<pre><code>$('input[type=date]').datepicker();
-</code></pre>
-
-<p>}
-```</p>
-
-<p>You can see how your browser handles this situation here:</p>
-
-<iframe style="width: 100%; height: 120px;" src="http://jsfiddle.net/p58bt/2/embedded/result,html,js/" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
-
-
-<h3>Another Option</h3>
-
-<p>Another option I like is showing the native date picker only to users that are on touch capable devices.</p>
-
-<p>``` html Native picker for supported touch users only
-<input type="text" id="myDate" /></p>
-
-<script>
-    if (Modernizr.touch && Modernizr.inputtypes.date) {
-        document.getElementById('myDate').type = 'date';
-    } else {
-        $('#myDate').datepicker();
-    }
-</script>
-
-
-<p>```</p>
-
-<p>This gives touch users with <code>input[type=date]</code> support the optimized UI / keyboard and everyone else jQuery UI's picker.</p>
-
-<h3>Conclusion</h3>
-
-<p>With Chrome adding support for native datepickers a large chunk web users now have the ability to use them.  Therefore, now is a great time to consider using them in your applications.</p>
-
-<h3>Update - September 15th, 2012</h3>
-
-<p>I updated one of my code examples from using <code>$('input').attr('type', 'date')</code> to <code>document.getElementById('myDate').type = 'date'</code> after commenter brownieboy pointed out that jQuery actually doesn't allow you to change an input's <code>type</code>.  jQuery does this because IE &lt;= 8 does not allow an the <code>type</code> of an input to be changed at all.  The native JS solution works just fine.</p>
 ]]></content>
   </entry>
   
