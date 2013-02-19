@@ -22,24 +22,40 @@
 	border-radius: 5px;
 	margin-bottom: 1.5em;
 	overflow-x: auto;
+	position: relative;
 
 	h6 {
 		@extend .striped_bg;
 
 		position: relative;
 		top: -1px;
-		color: $custom_header_color;
-		padding: 0.2em 1em;
-		border-bottom: 1px solid $custom_header_color;
+		color: black;
+		padding: 0.2em 1em 0.2em 0.5em;
+		border-bottom: 1px solid black;
 		font-size: 1em; 
 
 		a {
 			position: absolute;
 			top: 0.2em;
-			right: 1em;
-			font-size: 0.7em;
+			right: 0.5em;
+			font-size: 0.8em;
+			font-weight: normal;
 			color: white;
 		}
+	}
+	&::after {
+		position: absolute;
+		right: 1px;
+		bottom: 1px;
+		content: 'Demo';
+		background: white;
+		color: black;
+		border-color: black;
+		border-width: 1px 0 0 1px;
+		border-style: dotted;
+		font-size: 0.8em;
+		padding: 0.2em 0.3em;
+		border-radius: 5px 0 0 0;
 	}
 }
 @media all and (max-width: 500px) {

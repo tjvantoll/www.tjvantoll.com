@@ -75,10 +75,10 @@ And here's the result:
 
 <div class="code_example">
 	<h6>
-		Demo - jQuery UI Vertical Tabs
+		jQuery UI Vertical Tabs
 		<a href="/demos/2012-11-08/verticalTabs.html" target="_blank">Open in New Window</a>
 	</h6>
-	<iframe style="width: 100%; height: 265px;" frameborder="0" src="/demos/2012-11-08/verticalTabs.html"></iframe>
+	<iframe style="width: 100%; height: 275px;" frameborder="0" src="/demos/2012-11-08/verticalTabs.html"></iframe>
 </div>
 
 Feel free to use this or modify it to your liking.

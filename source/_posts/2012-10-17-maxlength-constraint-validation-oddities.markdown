@@ -30,7 +30,7 @@ How will the browser handle this?
 
 All browsers will prevent entry of additional characters, but they do not trim excess characters already present.  Additionally, all browsers will allow a form containing the above input to submit.  *Note: Opera is the only browser to set the `validity.tooLong` property to `true` in this situation.  Despite this, it does not prevent form submission.*
 
-Why is submission not prevented?  The key is in the [specificationn](http://www.whatwg.org/specs/web-apps/current-work/#concept-input-value-dirty-flag):
+Why is submission not prevented?  The key is in the [specification](http://www.whatwg.org/specs/web-apps/current-work/#concept-input-value-dirty-flag):
 
 > Constraint validation: If an element has a maximum allowed value length, its dirty value flag is true, its value was last changed by a user edit (as opposed to a change made by a script), and the code-unit length of the element's value is greater than the element's maximum allowed value length, then the element is suffering from being too long.
 
@@ -46,10 +46,10 @@ So let's take another approach.  What happens if you have the same input:
 
 <div class="code_example">
 	<h6>
-		Demo - Triggering tooLong Errors
+		Triggering tooLong Errors
 		<a href="/demos/2012-10-17/tooLong.html" target="_blank">Open in New Window</a>
 	</h6>
-	<iframe style="width: 100%; height: 110px;" frameborder="0" src="/demos/2012-10-17/tooLong.html"></iframe>
+	<iframe style="width: 100%; height: 130px;" frameborder="0" src="/demos/2012-10-17/tooLong.html"></iframe>
 </div>
 
 Upon edit IE10 and Chrome will set the `validity.tooLong` property to `true` and prevent form submission.  If the user attempts to submit a form after removing the "C" they will see the following in those browsers:
