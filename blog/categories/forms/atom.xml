@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Forms | TJ VanToll]]></title>
   <link href="http://tjvantoll.com/blog/categories/forms/atom.xml" rel="self"/>
   <link href="http://tjvantoll.com/"/>
-  <updated>2013-02-18T21:47:01-05:00</updated>
+  <updated>2013-02-18T23:01:07-05:00</updated>
   <id>http://tjvantoll.com/</id>
   <author>
     <name><![CDATA[TJ VanToll]]></name>
@@ -43,7 +43,7 @@
 
 <p>All browsers will prevent entry of additional characters, but they do not trim excess characters already present.  Additionally, all browsers will allow a form containing the above input to submit.  <em>Note: Opera is the only browser to set the <code>validity.tooLong</code> property to <code>true</code> in this situation.  Despite this, it does not prevent form submission.</em></p>
 
-<p>Why is submission not prevented?  The key is in the <a href="http://www.whatwg.org/specs/web-apps/current-work/#concept-input-value-dirty-flag">specificationn</a>:</p>
+<p>Why is submission not prevented?  The key is in the <a href="http://www.whatwg.org/specs/web-apps/current-work/#concept-input-value-dirty-flag">specification</a>:</p>
 
 <blockquote><p>Constraint validation: If an element has a maximum allowed value length, its dirty value flag is true, its value was last changed by a user edit (as opposed to a change made by a script), and the code-unit length of the element's value is greater than the element's maximum allowed value length, then the element is suffering from being too long.</p></blockquote>
 
@@ -59,10 +59,10 @@
 
 <div class="code_example">
     <h6>
-        Demo - Triggering tooLong Errors
+        Triggering tooLong Errors
         <a href="http://tjvantoll.com/demos/2012-10-17/tooLong.html" target="_blank">Open in New Window</a>
     </h6>
-    <iframe style="width: 100%; height: 110px;" frameborder="0" src="http://tjvantoll.com/demos/2012-10-17/tooLong.html"></iframe>
+    <iframe style="width: 100%; height: 130px;" frameborder="0" src="http://tjvantoll.com/demos/2012-10-17/tooLong.html"></iframe>
 </div>
 
 

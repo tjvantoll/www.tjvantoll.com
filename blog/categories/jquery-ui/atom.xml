@@ -4,7 +4,7 @@
   <title><![CDATA[Category: jQuery UI | TJ VanToll]]></title>
   <link href="http://tjvantoll.com/blog/categories/jquery-ui/atom.xml" rel="self"/>
   <link href="http://tjvantoll.com/"/>
-  <updated>2013-02-18T21:47:01-05:00</updated>
+  <updated>2013-02-18T23:01:07-05:00</updated>
   <id>http://tjvantoll.com/</id>
   <author>
     <name><![CDATA[TJ VanToll]]></name>
@@ -298,10 +298,10 @@ $('#tabs').tabs().addClass('ui-tabs-vertical');
 
 <div class="code_example">
     <h6>
-        Demo - jQuery UI Vertical Tabs
+        jQuery UI Vertical Tabs
         <a href="http://tjvantoll.com/demos/2012-11-08/verticalTabs.html" target="_blank">Open in New Window</a>
     </h6>
-    <iframe style="width: 100%; height: 265px;" frameborder="0" src="http://tjvantoll.com/demos/2012-11-08/verticalTabs.html"></iframe>
+    <iframe style="width: 100%; height: 275px;" frameborder="0" src="http://tjvantoll.com/demos/2012-11-08/verticalTabs.html"></iframe>
 </div>
 
 
