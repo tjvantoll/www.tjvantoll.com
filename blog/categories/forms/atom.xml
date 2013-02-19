@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Forms | TJ VanToll]]></title>
   <link href="http://tjvantoll.com/blog/categories/forms/atom.xml" rel="self"/>
   <link href="http://tjvantoll.com/"/>
-  <updated>2013-02-17T23:23:34-05:00</updated>
+  <updated>2013-02-18T21:47:01-05:00</updated>
   <id>http://tjvantoll.com/</id>
   <author>
     <name><![CDATA[TJ VanToll]]></name>
@@ -18,46 +18,52 @@
     <link href="http://tjvantoll.com/2012/10/17/maxlength-constraint-validation-oddities/"/>
     <updated>2012-10-17T12:48:00-04:00</updated>
     <id>http://tjvantoll.com/2012/10/17/maxlength-constraint-validation-oddities</id>
-    <content type="html"><![CDATA[<p>The <code>maxlength</code> attribute has been around in browsers for a long time.  When provided all browsers prevent the user entering a value that exceeds the <code>maxlength</code>.</p>
+    <content type="html"><![CDATA[<p>The <code>maxlength</code> attribute has been around in browsers for a long time.  When provided, all browsers prevent the user entering a value that exceeds the <code>maxlength</code>.</p>
 
 <p>For example you cannot type more than 2 characters in the textbox below:</p>
 
-<p><input type="text" maxlength="2" /></p>
+<p><input type="text" maxlength="2"></p>
 
 <h3>Constraint Validation</h3>
 
 <p><a href="https://developer.mozilla.org/en-US/docs/HTML/HTML5/Constraint_validation_">Constraint validation</a> is an HTML5 spec that provides native client side form validation in the browser.  As part of its <a href="https://developer.mozilla.org/en-US/docs/HTML/Forms_in_HTML#Constraint_Validation_API">API</a>, all <code>&lt;input&gt;</code> and <code>&lt;textarea&gt;</code> elements have a <code>validity.tooLong</code> property that is <code>true</code> when the length of the <code>value</code> exceeds the <code>maxlength</code>.</p>
 
-<p>But if the browser prevents this then why does the property exist?</p>
+<p>But if the browser prevents this, then why does the property exist?</p>
 
 <!--more-->
 
 
 <h3>Prefilled value Attribute</h3>
 
-<p>Assume that you're filling the <code>value</code> of form elements with information from a database and you end up with something like this:</p>
+<p>Assume that you're populating the <code>value</code> of form elements from a database and you end up with something like this:</p>
 
-<p><code>&lt;input type="text" maxlength="1" value="ABC" /&gt;</code></p>
+<p><code>&lt;input type="text" maxlength="1" value="ABC"&gt;</code></p>
 
 <p>How will the browser handle this?</p>
 
-<p>All browsers will prevent entry of additional characters, but they do not trim excess characters already present.  Additionally all browsers will allow a form containing the above input to submit.  <em>Note: Opera is the only browser to set the <code>validity.tooLong</code> property to <code>true</code> in this situation.  Despite this, it does not prevent form submission.</em></p>
+<p>All browsers will prevent entry of additional characters, but they do not trim excess characters already present.  Additionally, all browsers will allow a form containing the above input to submit.  <em>Note: Opera is the only browser to set the <code>validity.tooLong</code> property to <code>true</code> in this situation.  Despite this, it does not prevent form submission.</em></p>
 
-<p>Why is submission not prevented?  The key is in the <a href="http://www.whatwg.org/specs/web-apps/current-work/#concept-input-value-dirty-flag">specification</a>:</p>
+<p>Why is submission not prevented?  The key is in the <a href="http://www.whatwg.org/specs/web-apps/current-work/#concept-input-value-dirty-flag">specificationn</a>:</p>
 
 <blockquote><p>Constraint validation: If an element has a maximum allowed value length, its dirty value flag is true, its value was last changed by a user edit (as opposed to a change made by a script), and the code-unit length of the element's value is greater than the element's maximum allowed value length, then the element is suffering from being too long.</p></blockquote>
 
-<p>The <a href="http://www.whatwg.org/specs/web-apps/current-work/#concept-input-value-dirty-flag">dirty flag</a> essentially means the the user has changed the value of an element.  Therefore, in order to be <code>tooLong</code> the element must have been last interacted with by a user edit.</p>
+<p>The <a href="http://www.whatwg.org/specs/web-apps/current-work/#concept-input-value-dirty-flag">dirty flag</a> essentially means that the user has changed the value of an element.  Therefore, in order to be <code>tooLong</code>, the element must have been edited.</p>
 
 <h3>Actually Triggering tooLong</h3>
 
 <p>So let's take another approach.  What happens if you have the same input:</p>
 
-<p><code>&lt;input type="text" maxlength="1" value="ABC" /&gt;</code></p>
+<p><code>&lt;input type="text" maxlength="1" value="ABC"&gt;</code></p>
 
 <p>...remove one character, then submit?  You can try it for yourself below:</p>
 
-<iframe style="width: 100%; height: 180px;" src="http://jsfiddle.net/tj_vantoll/epCQe/embedded/result,html/" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
+<div class="code_example">
+    <h6>
+        Demo - Triggering tooLong Errors
+        <a href="http://tjvantoll.com/demos/2012-10-17/tooLong.html" target="_blank">Open in New Window</a>
+    </h6>
+    <iframe style="width: 100%; height: 110px;" frameborder="0" src="http://tjvantoll.com/demos/2012-10-17/tooLong.html"></iframe>
+</div>
 
 
 <p>Upon edit IE10 and Chrome will set the <code>validity.tooLong</code> property to <code>true</code> and prevent form submission.  If the user attempts to submit a form after removing the "C" they will see the following in those browsers:</p>
