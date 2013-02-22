@@ -132,7 +132,7 @@ Currently no major mobile browsers support ```window.showModalDialog```, so if y
 
 ### Why was this added to HTML5?
 
-So why have other browsers added support for this method and why was it added to the HTML5 spec?  It's mostly because in the IE6 days 1.2 bajillion applications were written to be extremely dependent on ```window.showModalDialog```.  I can say that I personally work at an enterprise that has its fair share of those applications, and you can see many comments demanding enterprise application support on the various Chrome bugs (see [#4202](http://code.google.com/p/chromium/issues/detail?id=4202), [#16045](http://code.google.com/p/chromium/issues/detail?id=16045), & [#42939](http://code.google.com/p/chromium/issues/detail?id=42939)).  
+So why have other browsers added support for this method and why was it added to the HTML5 spec?  It's mostly because in the IE6 days tens of thousands of applications were written to be extremely dependent on ```window.showModalDialog```.  I can say that I personally work at an enterprise that has its fair share of those applications, and you can see many comments demanding enterprise application support on the various Chrome bugs (see [#4202](http://code.google.com/p/chromium/issues/detail?id=4202), [#16045](http://code.google.com/p/chromium/issues/detail?id=16045), & [#42939](http://code.google.com/p/chromium/issues/detail?id=42939)).  
 
 Refactoring these applications is no small task, and browsers that want to win market share are catering to them to gain support.
 
