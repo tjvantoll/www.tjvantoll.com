@@ -4,7 +4,7 @@
   <title><![CDATA[Category: HTML | TJ VanToll]]></title>
   <link href="http://tjvantoll.com/blog/categories/html/atom.xml" rel="self"/>
   <link href="http://tjvantoll.com/"/>
-  <updated>2013-02-24T07:12:30-05:00</updated>
+  <updated>2013-02-24T16:12:39-05:00</updated>
   <id>http://tjvantoll.com/</id>
   <author>
     <name><![CDATA[TJ VanToll]]></name>
@@ -23,6 +23,9 @@
 <h3>The &lt;base&gt; Element</h3>
 
 <p><a href="https://developer.mozilla.org/en-US/docs/HTML/Element/base">Per MDN</a> the <code>&lt;base&gt;</code> element specifies the base URL to use for all relative URLs contained within a document.</p>
+
+<!--more-->
+
 
 <p>Consider the following example:</p>
 

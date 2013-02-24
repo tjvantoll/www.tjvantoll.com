@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Browsers | TJ VanToll]]></title>
   <link href="http://tjvantoll.com/blog/categories/browsers/atom.xml" rel="self"/>
   <link href="http://tjvantoll.com/"/>
-  <updated>2013-02-24T07:12:30-05:00</updated>
+  <updated>2013-02-24T16:12:39-05:00</updated>
   <id>http://tjvantoll.com/</id>
   <author>
     <name><![CDATA[TJ VanToll]]></name>
@@ -23,6 +23,9 @@
 <p>The reaction I saw from most developers was mostly positive - one less rendering engine to support.</p>
 
 <p>And yes, having one less rendering engine to support will make the lives of web developers easier.  But the loss of one of the web's core four rendering engines represents a slippery slope towards a WebKit monoculture.</p>
+
+<!--more-->
+
 
 <h3>WebKit - Our New Overlords?</h3>
 
@@ -100,6 +103,9 @@ outline: -webkit-focus-ring-color auto 5px;
 
 <p>}
 ```</p>
+
+<!--more-->
+
 
 <p>Firefox uses a <code>1px dotted #212121</code> outline, other browser use other values.  The focus ring looks like this for Chrome on OS X:</p>
 
