@@ -73,12 +73,6 @@ $('#tabs').tabs().addClass('ui-tabs-vertical');
 
 And here's the result:
 
-<div class="code_example">
-	<h6>
-		jQuery UI Vertical Tabs
-		<a href="/demos/2012-11-08/verticalTabs.html" target="_blank">Open in New Window</a>
-	</h6>
-	<iframe style="width: 100%; height: 275px;" frameborder="0" src="/demos/2012-11-08/verticalTabs.html"></iframe>
-</div>
+{% demo /demos/2012-11-08/verticalTabs.html jQuery_UI_Vertical_Tabs 275 %}
 
 Feel free to use this or modify it to your liking.

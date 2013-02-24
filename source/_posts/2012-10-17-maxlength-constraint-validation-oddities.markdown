@@ -44,13 +44,7 @@ So let's take another approach.  What happens if you have the same input:
 
 ...remove one character, then submit?  You can try it for yourself below:
 
-<div class="code_example">
-	<h6>
-		Triggering tooLong Errors
-		<a href="/demos/2012-10-17/tooLong.html" target="_blank">Open in New Window</a>
-	</h6>
-	<iframe style="width: 100%; height: 130px;" frameborder="0" src="/demos/2012-10-17/tooLong.html"></iframe>
-</div>
+{% demo /demos/2012-10-17/tooLong.html Triggering_tooLong_Errors 130 %}
 
 Upon edit IE10 and Chrome will set the `validity.tooLong` property to `true` and prevent form submission.  If the user attempts to submit a form after removing the "C" they will see the following in those browsers:
 
