@@ -45,15 +45,17 @@
 		}
 	</style>
 	<script>
-		if (!Modernizr.cssanimation) {
-			$('button').on('mouseover', function() {
-				//jQuery UI doesn't support the hotpink keyword, boooooooo
-				$(this).animate({ backgroundColor: '#FF69B4' }, 1000);
-			}).on('mouseout', function() {
-				$(this).stop(true, true);
-				$(this).css('backgroundColor', 'pink');
-			});
-		}
+		$(function() {
+			if (!Modernizr.cssanimation) {
+				$('button').on('mouseover', function() {
+					//jQuery UI doesn't support the hotpink keyword, boooooooo
+					$(this).animate({ backgroundColor: '#FF69B4' }, 1000);
+				}).on('mouseout', function() {
+					$(this).stop(true, true);
+					$(this).css('backgroundColor', 'pink');
+				});
+			}
+		});
 	</script>
 </head>
 <body>
