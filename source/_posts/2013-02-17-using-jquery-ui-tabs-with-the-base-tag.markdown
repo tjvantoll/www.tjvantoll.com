@@ -12,6 +12,8 @@ As there have been [numerous bug submissions](http://bugs.jqueryui.com/ticket/78
 
 [Per MDN](https://developer.mozilla.org/en-US/docs/HTML/Element/base) the `<base>` element specifies the base URL to use for all relative URLs contained within a document.
 
+<!--more-->
+
 Consider the following example:
 
 ``` html

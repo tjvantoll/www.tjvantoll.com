@@ -10,11 +10,12 @@ CSS3 animations allow you to alter the values of CSS properties over time.  They
 
 Let's start with a basic example (note - Whether or not you see the animation depends on whether your browser supports CSS3 animations.  You can check at [caniuse.com](http://caniuse.com/css-animation).
 
-<iframe style="width: 100%; height: 120px;" src="http://jsfiddle.net/RfYMA/1/embedded/result,html,css/" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
+{% demo /demos/2012-02-20/basic.html Basic_Example_of_a_Color_Animation 90 %}
 
 ### Syntax
 
-Let's break this down one section at a time.
+Let's break this down how this works one section at a time.
+
 ``` css Animation CSS
 div {
 	-webkit-animation: color_change 1s infinite alternate;
@@ -118,7 +119,7 @@ button:hover {
 
 To improve upon this, we can add a CSS 3 color animation to gradually make the color transition.  The following example shows each side by side:
 
-<iframe style="width: 100%; height: 250px" src="http://jsfiddle.net/PTfZD/3/embedded/result,html,css/" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
+{% demo /demos/2012-02-20/buttons.html Color_Animation_on_a_Button 125 %}
 
 ### Falling Back Gracefully
 
@@ -154,13 +155,13 @@ if (!Modernizr.cssanimation) {
 	}).on('mouseout', function() {
 		$(this).stop(true, true);
 		$(this).css('backgroundColor', 'pink');
-	});            
+	});
 }
 ```
 
 Live example (this should work across all browsers):
 
-<iframe style="width: 100%; height: 160px" src="http://jsfiddle.net/tj_vantoll/2Yrpe/3/embedded/result,js,css,html" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
+{% demo /demos/2012-02-20/buttonWithFallback.html Color_Animation_Polyfilled 125 %}
 
 If the jQuery UI approach already works cross browser why would you bother doing this with CSS?
 

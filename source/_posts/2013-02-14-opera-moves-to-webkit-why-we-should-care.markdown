@@ -12,6 +12,8 @@ The reaction I saw from most developers was mostly positive - one less rendering
 
 And yes, having one less rendering engine to support will make the lives of web developers easier.  But the loss of one of the web's core four rendering engines represents a slippery slope towards a WebKit monoculture.
 
+<!--more-->
+
 ### WebKit - Our New Overlords?
 
 On desktop there's still a healthy distribution between the 3 remaining rendering engines.  According to [StatCounter](http://gs.statcounter.com/#browser-ww-monthly-201201-201301), as of January 2013 Trident (Internet Explorer) has 30.7% of the market, Gecko (Firefox) has 21.4%, and WebKit picks up the rest:

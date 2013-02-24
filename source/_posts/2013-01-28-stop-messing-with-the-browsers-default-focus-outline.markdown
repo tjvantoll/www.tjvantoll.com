@@ -19,6 +19,8 @@ All browsers have a default value they apply to the currently focused item.  For
 }
 ```
 
+<!--more-->
+
 Firefox uses a `1px dotted #212121` outline, other browser use other values.  The focus ring looks like this for Chrome on OS X:
 
 ![Default Focus Ring in Chrome on OS X](/images/posts/2013-01-28/default.png "Default Focus Ring in Chrome on OS X")
