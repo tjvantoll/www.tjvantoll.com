@@ -9,8 +9,21 @@ footer: true
 On certain occasions I've been known to talk to people in real life.
 
 <div id="speaking-archives">
-	<h2>2012</h2>
+	<h2>2013</h2>
+	<article>
+		<h1>Submitting Bugs the Right Way</h1>
+		<time datetime="2013-03-02">
+			<span class="month">Mar</span>
+			<span class="day">03</span>
+			<span class="year">2013</span>
+		</time>
+		<footer>
+			<a href="http://jqueryto.com">jQuery TO</a> | Toronto, Ontario | 
+			<a href="/speaking/slides/2013/Submitting-Bugs-the-Right-Way">Slides</a>
+		</footer>
+	</article>
 
+	<h2>2012</h2>
 	<article>
 		<h1>Front End Web Efficiency - The Top Ten</h1>
 		<time datetime="2012-10-23">
@@ -19,7 +32,7 @@ On certain occasions I've been known to talk to people in real life.
 			<span class="year">2012</span>
 		</time>
 		<footer>
-			<span class="categories">Lansing Java Users Group</span> | 
+			Lansing Java Users Group | Okemos, MI | 
 			<a href="/speaking/slides/2012/Efficiency-Top-Ten">Slides</a> | 
 			<a href="/speaking/slides/2012/Efficiency-Top-Ten?plain">Slides (No animation)</a>
 		</footer>
@@ -33,7 +46,7 @@ On certain occasions I've been known to talk to people in real life.
 			<span class="year">2012</span>
 		</time>
 		<footer>
-			<span class="categories">Liquid Web</span> | 
+			Liquid Web | Lansing, MI | 
 			<a href="/speaking/slides/2012/LESS-101">Slides</a> | 
 			<a href="/speaking/slides/2012/LESS-101?plain">Slides (No animation)</a>
 		</footer>
@@ -48,7 +61,7 @@ On certain occasions I've been known to talk to people in real life.
 			<span class="year">2012</span>
 		</time>
 		<footer>
-			<span class="categories">Lansing Java Users Group</span> | 
+			Lansing Java Users Group | Okemos, MI | 
 			<a href="/speaking/slides/2012/JavaScript-for-the-Java-Developer">Slides</a>
 		</footer>
 	</article>
@@ -63,7 +76,7 @@ On certain occasions I've been known to talk to people in real life.
 			<span class="year">2011</span>
 		</time>
 		<footer>
-			<span class="categories">Eastern Michigan University</span>
+			Eastern Michigan University | Kalamazoo, MI 
 		</footer>
 	</article>
 </div>

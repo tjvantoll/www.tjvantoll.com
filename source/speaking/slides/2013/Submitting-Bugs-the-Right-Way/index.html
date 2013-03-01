@@ -1,0 +1,641 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=1024" />
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<title>Submitting Bugs the Right Way | TJ VanToll</title>
+	
+	<meta name="description" content="Submitting Bugs the Right Way" />
+	<meta name="author" content="TJ VanToll - tj.vantoll@gmail.com - tjvantoll.com" />
+
+	<link href="http://fonts.googleapis.com/css?family=Open+Sans:regular,semibold,italic,italicsemibold|PT+Sans:400,700,400italic,700italic|PT+Serif:400,700,400italic,700italic" rel="stylesheet" />
+
+	<script src="js/jquery-1.9.0.min.js"></script>
+	<script src="prettify/prettify.js"></script>
+	<link rel="stylesheet" href="css/impress-demo.css" />
+	<link rel="stylesheet" href="prettify/prettify.css" />
+	<link rel="stylesheet/less" href="less/style.less" />
+	<script src="js/less-1.3.3.min.js"></script>
+
+	<script>
+		var firstExampleStep, lastExampleStep;
+		$(function() {
+			var $example1Slides = $('.example_1_slide').hide();
+			$example1Slides.first().show();
+
+			firstExampleStep = $example1Slides[0].id.replace('step-', '');
+			lastExampleStep = $example1Slides[$example1Slides.length - 1].id.replace('step-', '');
+			firstExampleStep = parseInt(firstExampleStep, 10);
+			lastExampleStep = parseInt(lastExampleStep, 10);
+
+			var updateCode = function(event) {
+				var step = event ? event.target.id.replace('step-', '') : $example1Slides[0].id.replace('step-', '');
+				var numericStep = parseInt(step, 10);
+
+				if (event && event.type == 'impress:stepenter' && numericStep <= (firstExampleStep - 1)) {
+					$example1Slides.first().show();
+					return;
+				}
+				if (event && event.type == 'impress:stepleave' && numericStep <= firstExampleStep) {
+					$example1Slides.first().show();
+					return;
+				}
+				if (event && event.type == 'impress:stepenter' && numericStep >= lastExampleStep) {
+					$example1Slides.last().show();
+					return;
+				}
+
+				$example1Slides.hide();
+				$('.active').show();
+			};
+			updateCode();
+
+			$(document)
+				.on('impress:stepleave', updateCode)
+				.on('impress:stepenter', updateCode);
+
+		});
+
+		if (window.location.host.indexOf('local') == -1) {
+			var _gaq = _gaq || [];
+			_gaq.push(['_setAccount', 'UA-29179796-1']);
+			_gaq.push(['_trackPageview']);
+		
+			(function() {
+				var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+				ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+				var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+			})();
+		}
+	</script>
+</head>
+
+<body class="impress-not-supported" onload="prettyPrint();">
+
+<div class="fallback-message">
+	<p>Your browser <b>doesn't support the features required</b> by impress.js, so you are presented with a simplified version of this presentation.</p>
+	<p>For the best experience please use the latest <b>Chrome</b>, <b>Safari</b> or <b>Firefox</b> browser.</p>
+</div>
+
+<div id="impress">
+
+
+<!-- START SLIDES -->
+
+<div class="step slide">
+	<h1>Submitting Bugs the Right Way</h1>
+	<h2>TJ VanToll</h2>
+</div>
+
+<div class="step slide" data-x="1000">
+	<h2>Hi!</h2>
+	<ul>
+		<li>Web Developer - <a href="http://liquidweb.com">Liquid Web</a></li>
+		<li>Lansing, MI</li>
+		<li>Twin two year old sons</li>
+	</ul>
+	<img src="img/chase.jpg">
+	<img src="img/max.jpg">
+	<p class="sorry" style="display: none;"><i>You should feel really sorry for them.</i></p>
+	<script>
+		$(document).on('keypress', function(event) {
+			if (event.keyCode == 114) {
+				$('.sorry').show();
+			}
+		});
+	</script>
+</div>
+
+<style>
+	#jquery-ui {
+		background: #BB6F04;
+	}
+	#jquery-ui ul {
+		color: white;
+	}
+</style>
+<div class="step slide" id="jquery-ui" data-x="2000">
+	<img src="img/jquery-ui.png">
+	<ul>
+		<li>jQuery UI Team Member</li>
+		<li>I triage bugs.</li>
+	</ul>
+</div>
+
+<div class="step slide full_screen" data-x="3000">
+	<h2 style="opacity: 0.8;">Story</h2>
+	<img src="img/story.jpg">
+	<!-- http://www.flickr.com/photos/michaelcasey/3462280483/ -->
+</div>
+
+<div class="step slide" data-x="4000">
+	<h2>A Simple CRUD Table</h2>
+	<img src="img/table.png" style="display: block; margin: 50px; auto;">
+</div>
+
+<div class="step slide" data-x="5000">
+	<h2>Uh Oh</h2>
+<pre class="prettyprint">$('tr').remove();</pre>
+	<img src="img/ie8_error.png" style="display: block; margin: 30px auto;">
+</div>
+
+<div class="step slide full_screen" data-x="6000">
+	<h2 style="top: 85%;">Average Developer's Reaction</h2>
+	<img src="img/reaction.jpg">
+</div>
+
+<div class="step slide full_screen" data-x="7000">
+	<h2>This is JavaScript</h2>
+	<img src="img/tools.jpg">
+</div>
+
+<div class="step slide" data-x="8000">
+	<h2>Hack #1</h2>
+<pre class="prettyprint lang-js">
+var row = $('tr');
+try {
+    row.remove();
+} catch(e) {
+    row.hide();
+}
+</pre>
+</div>
+
+<div class="step slide" data-x="9000">
+	<h2>Hack #2</h2>
+<pre class="prettyprint lang-js">
+var row = $('tr');
+if ($.browser.msie
+    && parseInt($.browser.version, 10) == 8) {
+    $('tr').hide();
+} else {
+    $('tr').remove();
+}
+</pre>
+</div>
+
+<div class="step slide" data-x="10000">
+	<h2>Hack #3</h2>
+<pre class="prettyprint lang-js">
+var row = $('tr');
+if ($.browser.msie
+    && parseInt($.browser.version, 10) == 8) {
+    window.location = window.location;
+}
+
+$('tr').remove();
+</pre>
+</div>
+
+<div class="step slide point" data-x="11000">
+	<h3>Why bother?</h3>
+</div>
+
+<div class="step slide full_screen" data-x="12000">
+	<h2>Make the world a better place</h2>
+	<img src="img/sunrise.jpg">
+	<!-- http://www.flickr.com/photos/66069842@N03/6847080293/ -->
+</div>
+
+<div class="step slide full_screen" data-x="13000">
+	<h2 style="opacity: 0.8;">Learn</h2>
+	<img src="img/books.jpg">
+	<!-- http://www.flickr.com/photos/cransell/1955227307/ -->
+</div>
+
+<div class="step slide point" data-x="14000">
+	<h3>Get your bug fixed!</h3>
+</div>
+
+<div class="step slide point" data-x="15000">
+	<h3>Where to go?</h3>
+</div>
+
+<div class="step slide" data-x="16000">
+	<h2>Bug Trackers - jQuery</h2>
+	<ul>
+		<li>jQuery: <a href="http://bugs.jquery.com/newticket">bugs.jquery.com/newticket</a></li>
+		<li>jQuery UI: <a href="http://bugs.jqueryui.com/newticket">bugs.jqueryui.com/newticket</a></li>
+		<li>jQuery Mobile: <a href="https://github.com/jquery/jquery-mobile/issues/new">github.com/jquery/jquery-mobile/issues</a></li>
+	</ul>
+</div>
+
+<div class="step slide" data-x="17000">
+	<h2>Bug Trackers - Browsers</h2>
+	<ul>
+		<li><a href="https://connect.microsoft.com/IE">Internet Explorer</a></li>
+		<li><a href="https://bugzilla.mozilla.org/">Firefox</a></li>
+		<li><a href="http://www.chromium.org/for-testers/bug-reporting-guidelines">Chrome</a></li>
+		<li><a href="https://bugs.webkit.org/">WebKit</a></li>
+		<li><a href="https://bugs.opera.com/wizard/">Opera</a></li>
+	</ul>
+</div>
+
+<div class="step slide" data-x="18000">
+	<h2>BIG RED BOX!</h2>
+	<img src="img/jQuery_box.png">
+</div>
+
+<div class="step slide point" data-x="19000">
+	<h3 style="margin-top: 210px; line-height: 60px;">Search the bug trackers.  Try to make sure the bug doesn't already exist.</h3>
+</div>
+
+<div class="step slide" data-x="20000">
+	<h2>Use the latest versions</h2>
+	<ul>
+		<li><a href="http://code.jquery.com/jquery-git.js">http://code.jquery.com/jquery-git.js</a></li>
+		<li><a href="http://code.jquery.com/ui/jquery-ui-git.css">http://code.jquery.com/ui/jquery-ui-git.css</a></li>
+		<li><a href="http://code.jquery.com/ui/jquery-ui-git.js">http://code.jquery.com/ui/jquery-ui-git.js</a></li>
+		<li><a href="https://www.google.com/intl/en/chrome/browser/canary.html">Chrome Canary</a></li>
+		<li><a href="http://www.mozilla.org/en-US/firefox/aurora/">Firefox Aurora</a></li>
+	</ul>
+</div>
+
+<div class="step slide point" data-x="21000" style="border: 50px solid red;">
+	<h2 style="color: red; text-align: center">IMPORTANT!</h2>
+	<h3 style="font-weight: bold; margin-top: 200px;">Create a reduced test case.</h3>
+</div>
+
+<div class="step slide" data-x="22000">
+	<h2>Reduced Test Case</h2>
+	<p>The <b>absolute minimum</b> amount of code you can use to recreate the problem.</p>
+</div>
+
+<div class="step slide" data-x="23000">
+	<h2>Reducing</h2>
+	<ul>
+		<li>Remove Code</li>
+		<li>Refresh</li>
+		<li>Repeat</li>
+	</ul>
+</div>
+
+<div class="step slide point" data-x="24000">
+	<h3>Don't link to your live site.</h3>
+</div>
+
+<style>
+	.online_test_case > div {
+		float: left;
+		width: 33%;
+	}
+	.online_test_case a {
+		text-align: center;
+		display: block;
+		padding-top: 35px;
+		padding-bottom: 20px;
+	}
+</style>
+<div class="step slide online_test_case" data-x="25000">
+	<h2>Test Cases - Your Friends</h2>
+	<div>
+		<a href="http://jsfiddle.net">jsFiddle</a>
+		<img src="img/jsfiddle.png">
+	</div>
+	<div>
+		<a href="http://jsbin.com">JS Bin</a>
+		<img src="img/jsbin.png">
+	</div>
+	<div>
+		<a href="http://codepen.io">Codepen</a>
+		<img src="img/codepen.png">
+	</div>
+</div>
+
+<div class="step slide" data-x="26000">
+	<h2>Example</h2>
+	<p><a href="jQuery UI #8677">jQuery UI #8677</a></p>
+	<img src="img/ie10_error.png">
+</div>
+
+<div class="step slide example_1_slide" data-x="27000">
+<pre style="font-size: 0.5em;"><span class="tag">&lt;style&gt;</span><span class="pln">input</span><span class="pun">.</span><span class="pln">textbox </span><span class="pun">{</span><span class="pln"> </span><span class="kwd">width</span><span class="pun">:</span><span class="lit">185px</span><span class="pun">;</span><span class="pln"> </span><span class="kwd">padding</span><span class="pun">:</span><span class="lit">0px</span><span class="pun">;</span><span class="pln"> </span><span class="kwd">margin</span><span class="pun">:</span><span class="lit">0px</span><span class="pun">;</span><span class="pln"> </span><span class="pun">}</span><span class="pln"> </span><span class="tag">&lt;/style&gt;</span><span class="pln">
+</span><span class="tag">&lt;form</span><span class="pln"> </span><span class="atn">name</span><span class="pun">=</span><span class="atv">"aspnetForm"</span><span class="pln"> </span><span class="atn">method</span><span class="pun">=</span><span class="atv">"post"</span><span class="pln"> </span><span class="atn">action</span><span class="pun">=</span><span class="atv">"test.aspx"</span><span class="pln"> </span><span class="atn">id</span><span class="pun">=</span><span class="atv">"aspnetForm"</span><span class="tag">&gt;</span><span class="pln">
+  </span><span class="tag">&lt;div</span><span class="pln"> </span><span class="atn">id</span><span class="pun">=</span><span class="atv">"tabs"</span><span class="tag">&gt;</span><span class="pln">
+    </span><span class="tag">&lt;ul&gt;</span><span class="pln">
+      </span><span class="tag">&lt;li&gt;&lt;a</span><span class="pln"> </span><span class="atn">href</span><span class="pun">=</span><span class="atv">"#tab1"</span><span class="tag">&gt;</span><span class="pln">Settings </span><span class="tag">&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a</span><span class="pln"> </span><span class="atn">href</span><span class="pun">=</span><span class="atv">"#tab2"</span><span class="tag">&gt;</span><span class="pln">Logins </span><span class="tag">&lt;/a&gt;&lt;/li&gt;</span><span class="pln">
+    </span><span class="tag">&lt;/ul&gt;</span><span class="pln">
+    </span><span class="tag">&lt;div</span><span class="pln"> </span><span class="atn">id</span><span class="pun">=</span><span class="atv">"tab1"</span><span class="tag">&gt;</span><span class="pln">
+      </span><span class="tag">&lt;table</span><span class="pln"> </span><span class="atn">border</span><span class="pun">=</span><span class="atv">"0"</span><span class="pln"> </span><span class="atn">cellspacing</span><span class="pun">=</span><span class="atv">"3"</span><span class="pln"> </span><span class="atn">cellpadding</span><span class="pun">=</span><span class="atv">"3"</span><span class="tag">&gt;</span><span class="pln">
+          </span><span class="tag">&lt;tbody&gt;&lt;tr&gt;</span><span class="pln">
+              </span><span class="tag">&lt;td</span><span class="pln"> </span><span class="atn">class</span><span class="pun">=</span><span class="atv">"bold"</span><span class="tag">&gt;</span><span class="pln">Account Name:</span><span class="tag">&lt;span</span><span class="pln"> </span><span class="atn">class</span><span class="pun">=</span><span class="atv">"red"</span><span class="tag">&gt;</span><span class="pln">*</span><span class="tag">&lt;/span&gt;&lt;/td&gt;</span><span class="pln">
+              </span><span class="tag">&lt;td&gt;&lt;input</span><span class="pln"> </span><span class="atn">name</span><span class="pun">=</span><span class="atv">"companyName"</span><span class="pln"> </span><span class="atn">class</span><span class="pun">=</span><span class="atv">"textbox"</span><span class="pln"> </span><span class="atn">id</span><span class="pun">=</span><span class="atv">"txtCompanyName"</span><span class="pln">
+                  </span><span class="atn">type</span><span class="pun">=</span><span class="atv">"text"</span><span class="pln"> </span><span class="atn">maxlength</span><span class="pun">=</span><span class="atv">"200"</span><span class="pln"> </span><span class="atn">value</span><span class="pun">=</span><span class="atv">"yauhen"</span><span class="tag">&gt;&lt;/td&gt;</span><span class="pln">
+            </span><span class="tag">&lt;/tr&gt;</span><span class="pln">
+            </span><span class="tag">&lt;tr</span><span class="pln"> </span><span class="atn">id</span><span class="pun">=</span><span class="atv">"trCompanyURL"</span><span class="tag">&gt;</span><span class="pln">
+              </span><span class="tag">&lt;td</span><span class="pln"> </span><span class="atn">class</span><span class="pun">=</span><span class="atv">"bold"</span><span class="tag">&gt;</span><span class="pln">Company URL:</span><span class="tag">&lt;/td&gt;</span><span class="pln">
+              </span><span class="tag">&lt;td&gt;&lt;input</span><span class="pln"> </span><span class="atn">name</span><span class="pun">=</span><span class="atv">"companyURL"</span><span class="pln"> </span><span class="atn">class</span><span class="pun">=</span><span class="atv">"textbox"</span><span class="pln"> </span><span class="atn">id</span><span class="pun">=</span><span class="atv">"txtCompanyURL"</span><span class="pln">
+                    </span><span class="atn">type</span><span class="pun">=</span><span class="atv">"text"</span><span class="pln"> </span><span class="atn">maxlength</span><span class="pun">=</span><span class="atv">"256"</span><span class="pln"> </span><span class="atn">value</span><span class="pun">=</span><span class="atv">"http://localhost:81"</span><span class="tag">&gt;&lt;/td&gt;</span><span class="pln">
+          </span><span class="tag">&lt;/tr&gt;&lt;/tbody&gt;</span><span class="pln">
+      </span><span class="tag">&lt;/table&gt;</span><span class="pln">
+    </span><span class="tag">&lt;/div&gt;</span><span class="pln">
+    </span><span class="tag">&lt;div</span><span class="pln"> </span><span class="atn">id</span><span class="pun">=</span><span class="atv">"tab2"</span><span class="tag">&gt;</span><span class="pln">tabs2</span><span class="tag">&lt;/div&gt;</span><span class="pln">
+  </span><span class="tag">&lt;/div&gt;</span><span class="pln">
+</span><span class="tag">&lt;/form&gt;</span><span class="pln">
+</span><span class="tag">&lt;script&gt;</span><span class="pln">$</span><span class="pun">(</span><span class="str">'#tabs'</span><span class="pun">).</span><span class="pln">tabs</span><span class="pun">();</span><span class="tag">&lt;/script&gt;</span></pre>
+</pre>
+</div>
+
+<div class="step slide example_1_slide" data-x="27000">
+<pre style="font-size: 0.5em;"><span class="tag">&lt;style&gt;</span><span class="pln">input</span><span class="pun">.</span><span class="pln">textbox </span><span class="pun">{</span><span class="pln"> </span><span class="kwd">width</span><span class="pun">:</span><span class="lit">185px</span><span class="pun">;</span><span class="pln"> </span><span class="kwd">padding</span><span class="pun">:</span><span class="lit">0px</span><span class="pun">;</span><span class="pln"> </span><span class="kwd">margin</span><span class="pun">:</span><span class="lit">0px</span><span class="pun">;</span><span class="pln"> </span><span class="pun">}</span><span class="pln"> </span><span class="tag">&lt;/style&gt;</span><span class="pln">
+</span><span class="axe_it"><span class="tag">&lt;form</span><span class="pln"> </span><span class="atn">name</span><span class="pun">=</span><span class="atv">"aspnetForm"</span><span class="pln"> </span><span class="atn">method</span><span class="pun">=</span><span class="atv">"post"</span><span class="pln"> </span><span class="atn">action</span><span class="pun">=</span><span class="atv">"test.aspx"</span><span class="pln"> </span><span class="atn">id</span><span class="pun">=</span><span class="atv">"aspnetForm"</span><span class="tag">&gt;</span></span><span class="pln">
+  </span><span class="tag">&lt;div</span><span class="pln"> </span><span class="atn">id</span><span class="pun">=</span><span class="atv">"tabs"</span><span class="tag">&gt;</span><span class="pln">
+    </span><span class="tag">&lt;ul&gt;</span><span class="pln">
+      </span><span class="tag">&lt;li&gt;&lt;a</span><span class="pln"> </span><span class="atn">href</span><span class="pun">=</span><span class="atv">"#tab1"</span><span class="tag">&gt;</span><span class="pln">Settings </span><span class="tag">&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a</span><span class="pln"> </span><span class="atn">href</span><span class="pun">=</span><span class="atv">"#tab2"</span><span class="tag">&gt;</span><span class="pln">Logins </span><span class="tag">&lt;/a&gt;&lt;/li&gt;</span><span class="pln">
+    </span><span class="tag">&lt;/ul&gt;</span><span class="pln">
+    </span><span class="tag">&lt;div</span><span class="pln"> </span><span class="atn">id</span><span class="pun">=</span><span class="atv">"tab1"</span><span class="tag">&gt;</span><span class="pln">
+      </span><span class="tag">&lt;table</span><span class="pln"> </span><span class="atn">border</span><span class="pun">=</span><span class="atv">"0"</span><span class="pln"> </span><span class="atn">cellspacing</span><span class="pun">=</span><span class="atv">"3"</span><span class="pln"> </span><span class="atn">cellpadding</span><span class="pun">=</span><span class="atv">"3"</span><span class="tag">&gt;</span><span class="pln">
+          </span><span class="tag">&lt;tbody&gt;&lt;tr&gt;</span><span class="pln">
+              </span><span class="tag">&lt;td</span><span class="pln"> </span><span class="atn">class</span><span class="pun">=</span><span class="atv">"bold"</span><span class="tag">&gt;</span><span class="pln">Account Name:</span><span class="tag">&lt;span</span><span class="pln"> </span><span class="atn">class</span><span class="pun">=</span><span class="atv">"red"</span><span class="tag">&gt;</span><span class="pln">*</span><span class="tag">&lt;/span&gt;&lt;/td&gt;</span><span class="pln">
+              </span><span class="tag">&lt;td&gt;&lt;input</span><span class="pln"> </span><span class="atn">name</span><span class="pun">=</span><span class="atv">"companyName"</span><span class="pln"> </span><span class="atn">class</span><span class="pun">=</span><span class="atv">"textbox"</span><span class="pln"> </span><span class="atn">id</span><span class="pun">=</span><span class="atv">"txtCompanyName"</span><span class="pln">
+                  </span><span class="atn">type</span><span class="pun">=</span><span class="atv">"text"</span><span class="pln"> </span><span class="atn">maxlength</span><span class="pun">=</span><span class="atv">"200"</span><span class="pln"> </span><span class="atn">value</span><span class="pun">=</span><span class="atv">"yauhen"</span><span class="tag">&gt;&lt;/td&gt;</span><span class="pln">
+            </span><span class="tag">&lt;/tr&gt;</span><span class="pln">
+            </span><span class="tag">&lt;tr</span><span class="pln"> </span><span class="atn">id</span><span class="pun">=</span><span class="atv">"trCompanyURL"</span><span class="tag">&gt;</span><span class="pln">
+              </span><span class="tag">&lt;td</span><span class="pln"> </span><span class="atn">class</span><span class="pun">=</span><span class="atv">"bold"</span><span class="tag">&gt;</span><span class="pln">Company URL:</span><span class="tag">&lt;/td&gt;</span><span class="pln">
+              </span><span class="tag">&lt;td&gt;&lt;input</span><span class="pln"> </span><span class="atn">name</span><span class="pun">=</span><span class="atv">"companyURL"</span><span class="pln"> </span><span class="atn">class</span><span class="pun">=</span><span class="atv">"textbox"</span><span class="pln"> </span><span class="atn">id</span><span class="pun">=</span><span class="atv">"txtCompanyURL"</span><span class="pln">
+                    </span><span class="atn">type</span><span class="pun">=</span><span class="atv">"text"</span><span class="pln"> </span><span class="atn">maxlength</span><span class="pun">=</span><span class="atv">"256"</span><span class="pln"> </span><span class="atn">value</span><span class="pun">=</span><span class="atv">"http://localhost:81"</span><span class="tag">&gt;&lt;/td&gt;</span><span class="pln">
+          </span><span class="tag">&lt;/tr&gt;&lt;/tbody&gt;</span><span class="pln">
+      </span><span class="tag">&lt;/table&gt;</span><span class="pln">
+    </span><span class="tag">&lt;/div&gt;</span><span class="pln">
+    </span><span class="tag">&lt;div</span><span class="pln"> </span><span class="atn">id</span><span class="pun">=</span><span class="atv">"tab2"</span><span class="tag">&gt;</span><span class="pln">tabs2</span><span class="tag">&lt;/div&gt;</span><span class="pln">
+  </span><span class="tag">&lt;/div&gt;</span><span class="pln">
+</span><span class="axe_it"><span class="tag">&lt;/form&gt;</span></span><span class="pln">
+</span><span class="tag">&lt;script&gt;</span><span class="pln">$</span><span class="pun">(</span><span class="str">'#tabs'</span><span class="pun">).</span><span class="pln">tabs</span><span class="pun">();</span><span class="tag">&lt;/script&gt;</span></pre>
+</pre>
+</div>
+
+<div class="step slide example_1_slide" data-x="27000">
+<pre class="prettyprint" style="font-size: 0.53em;">
+&lt;style&gt;input.textbox { width:185px; padding:0px; margin:0px; } &lt;/style&gt;
+&lt;div id="tabs"&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href="#tab1"&gt;Settings &lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href="#tab2"&gt;Logins &lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div id="tab1"&gt;
+  &lt;table border="0" cellspacing="3" cellpadding="3"&gt;
+      &lt;tbody&gt;&lt;tr&gt;
+          &lt;td class="bold"&gt;Account Name:&lt;span class="red"&gt;*&lt;/span&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;input name="companyName" class="textbox" id="txtCompanyName"
+              type="text" maxlength="200" value="yauhen"&gt;&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr id="trCompanyURL"&gt;
+          &lt;td class="bold"&gt;Company URL:&lt;/td&gt;
+          &lt;td&gt;&lt;input name="companyURL" class="textbox" id="txtCompanyURL"
+                type="text" maxlength="256" value="http://localhost:81"&gt;&lt;/td&gt;
+      &lt;/tr&gt;&lt;/tbody&gt;
+  &lt;/table&gt;
+&lt;/div&gt;
+&lt;div id="tab2"&gt;tabs2&lt;/div&gt;
+&lt;/div&gt;
+&lt;script&gt;$('#tabs').tabs();&lt;/script&gt;
+</pre>
+</div>
+
+<div class="step slide example_1_slide" data-x="27000">
+<pre class="prettyprint" style="font-size: 0.53em;"><span class="tag">&lt;style&gt;</span><span class="pln">input</span><span class="pun">.</span><span class="pln">textbox </span><span class="pun">{</span><span class="pln"> </span><span class="kwd">width</span><span class="pun">:</span><span class="lit">185px</span><span class="pun">;</span><span class="pln"> </span><span class="kwd">padding</span><span class="pun">:</span><span class="lit">0px</span><span class="pun">;</span><span class="pln"> </span><span class="kwd">margin</span><span class="pun">:</span><span class="lit">0px</span><span class="pun">;</span><span class="pln"> </span><span class="pun">}</span><span class="pln"> </span><span class="tag">&lt;/style&gt;</span><span class="pln">
+</span><span class="tag">&lt;div</span><span class="pln"> </span><span class="atn">id</span><span class="pun">=</span><span class="atv">"tabs"</span><span class="tag">&gt;</span><span class="pln">
+</span><span class="tag">&lt;ul&gt;</span><span class="pln">
+  </span><span class="tag">&lt;li&gt;&lt;a</span><span class="pln"> </span><span class="atn">href</span><span class="pun">=</span><span class="atv">"#tab1"</span><span class="tag">&gt;</span><span class="pln">Settings </span><span class="tag">&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a</span><span class="pln"> </span><span class="atn">href</span><span class="pun">=</span><span class="atv">"#tab2"</span><span class="tag">&gt;</span><span class="pln">Logins </span><span class="tag">&lt;/a&gt;&lt;/li&gt;</span><span class="pln">
+</span><span class="tag">&lt;/ul&gt;</span><span class="pln">
+</span><span class="tag">&lt;div</span><span class="pln"> </span><span class="atn">id</span><span class="pun">=</span><span class="atv">"tab1"</span><span class="tag">&gt;</span><span class="pln">
+  </span><span class="axe_it"><span class="tag">&lt;table</span><span class="pln"> </span><span class="atn">border</span><span class="pun">=</span><span class="atv">"0"</span><span class="pln"> </span><span class="atn">cellspacing</span><span class="pun">=</span><span class="atv">"3"</span><span class="pln"> </span><span class="atn">cellpadding</span><span class="pun">=</span><span class="atv">"3"</span><span class="tag">&gt;</span></span><span class="pln">
+      </span><span class="axe_it"><span class="tag">&lt;tbody&gt;&lt;tr&gt;</span></span><span class="pln">
+          </span><span class="axe_it"><span class="tag">&lt;td</span><span class="pln"> </span><span class="atn">class</span><span class="pun">=</span><span class="atv">"bold"</span><span class="tag">&gt;</span></span><span class="pln">Account Name:</span><span class="tag">&lt;span</span><span class="pln"> </span><span class="atn">class</span><span class="pun">=</span><span class="atv">"red"</span><span class="tag">&gt;</span><span class="pln">*</span><span class="tag">&lt;/span&gt;</span><span class="axe_it"><span class="tag">&lt;/td&gt;</span></span><span class="pln">
+          </span><span class="axe_it"><span class="tag">&lt;td&gt;</span></span><span class="tag">&lt;input</span><span class="pln"> </span><span class="atn">name</span><span class="pun">=</span><span class="atv">"companyName"</span><span class="pln"> </span><span class="atn">class</span><span class="pun">=</span><span class="atv">"textbox"</span><span class="pln"> </span><span class="atn">id</span><span class="pun">=</span><span class="atv">"txtCompanyName"</span><span class="pln">
+              </span><span class="atn">type</span><span class="pun">=</span><span class="atv">"text"</span><span class="pln"> </span><span class="atn">maxlength</span><span class="pun">=</span><span class="atv">"200"</span><span class="pln"> </span><span class="atn">value</span><span class="pun">=</span><span class="atv">"yauhen"</span><span class="tag">&gt;</span><span class="axe_it"><span class="tag">&lt;/td&gt;</span></span><span class="pln">
+        </span><span class="axe_it"><span class="tag">&lt;/tr&gt;</span></span><span class="pln">
+        </span><span class="axe_it"><span class="tag">&lt;tr</span><span class="pln"> </span><span class="atn">id</span><span class="pun">=</span><span class="atv">"trCompanyURL"</span><span class="tag">&gt;</span></span><span class="pln">
+          </span><span class="axe_it"><span class="tag">&lt;td</span><span class="pln"> </span><span class="atn">class</span><span class="pun">=</span><span class="atv">"bold"</span><span class="tag">&gt;</span></span><span class="pln">Company URL:</span><span class="axe_it"><span class="tag">&lt;/td&gt;</span></span><span class="pln">
+          </span><span class="axe_it"><span class="tag">&lt;td&gt;</span></span><span class="tag">&lt;input</span><span class="pln"> </span><span class="atn">name</span><span class="pun">=</span><span class="atv">"companyURL"</span><span class="pln"> </span><span class="atn">class</span><span class="pun">=</span><span class="atv">"textbox"</span><span class="pln"> </span><span class="atn">id</span><span class="pun">=</span><span class="atv">"txtCompanyURL"</span><span class="pln">
+                </span><span class="atn">type</span><span class="pun">=</span><span class="atv">"text"</span><span class="pln"> </span><span class="atn">maxlength</span><span class="pun">=</span><span class="atv">"256"</span><span class="pln"> </span><span class="atn">value</span><span class="pun">=</span><span class="atv">"http://localhost:81"</span><span class="tag">&gt;</span><span class="axe_it"><span class="tag">&lt;/td&gt;</span></span><span class="pln">
+      </span><span class="axe_it"><span class="tag">&lt;/tr&gt;&lt;/tbody&gt;</span></span><span class="pln">
+  </span><span class="axe_it"><span class="tag">&lt;/table&gt;</span></span><span class="pln">
+</span><span class="tag">&lt;/div&gt;</span><span class="pln">
+</span><span class="tag">&lt;div</span><span class="pln"> </span><span class="atn">id</span><span class="pun">=</span><span class="atv">"tab2"</span><span class="tag">&gt;</span><span class="pln">tabs2</span><span class="tag">&lt;/div&gt;</span><span class="pln">
+</span><span class="tag">&lt;/div&gt;</span><span class="pln">
+</span><span class="tag">&lt;script&gt;</span><span class="pln">$</span><span class="pun">(</span><span class="str">'#tabs'</span><span class="pun">).</span><span class="pln">tabs</span><span class="pun">();</span><span class="tag">&lt;/script&gt;</span></pre>
+</div>
+
+<div class="step slide example_1_slide" data-x="27000">
+<pre class="prettyprint" style="font-size: 0.6em;">
+&lt;style&gt;
+  input.textbox { width:185px; padding:0px; margin:0px; }
+&lt;/style&gt;
+&lt;div id="tabs"&gt;
+  &lt;ul&gt;
+    &lt;li&gt;&lt;a href="#tab1"&gt;Settings &lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href="#tab2"&gt;Logins &lt;/a&gt;&lt;/li&gt;
+  &lt;/ul&gt;
+  &lt;div id="tab1"&gt;
+    Account Name:&lt;span class="red"&gt;*&lt;/span&gt;
+    &lt;input name="companyName" class="textbox" id="txtCompanyName"
+        type="text" maxlength="200" value="yauhen"&gt;
+    Company URL:
+    &lt;input name="companyURL" class="textbox" id="txtCompanyURL"
+          type="text" maxlength="256" value="http://localhost:81"&gt;
+  &lt;/div&gt;
+  &lt;div id="tab2"&gt;tabs2&lt;/div&gt;
+&lt;/div&gt;
+&lt;script&gt;$('#tabs').tabs();&lt;/script&gt;
+</pre>
+</div>
+
+<div class="step slide example_1_slide" data-x="27000">
+<pre class="prettyprint" style="font-size: 0.6em;"><span class="tag">&lt;style&gt;</span><span class="pln">
+  input</span><span class="pun">.</span><span class="pln">textbox </span><span class="pun">{</span><span class="pln"> </span><span class="kwd">width</span><span class="pun">:</span><span class="lit">185px</span><span class="pun">;</span><span class="pln"> </span><span class="kwd">padding</span><span class="pun">:</span><span class="lit">0px</span><span class="pun">;</span><span class="pln"> </span><span class="kwd">margin</span><span class="pun">:</span><span class="lit">0px</span><span class="pun">;</span><span class="pln"> </span><span class="pun">}</span><span class="pln">
+</span><span class="tag">&lt;/style&gt;</span><span class="pln">
+</span><span class="tag">&lt;div</span><span class="pln"> </span><span class="atn">id</span><span class="pun">=</span><span class="atv">"tabs"</span><span class="tag">&gt;</span><span class="pln">
+  </span><span class="tag">&lt;ul&gt;</span><span class="pln">
+    </span><span class="tag">&lt;li&gt;&lt;a</span><span class="pln"> </span><span class="atn">href</span><span class="pun">=</span><span class="atv">"#tab1"</span><span class="tag">&gt;</span><span class="pln">Settings </span><span class="tag">&lt;/a&gt;&lt;/li&gt;</span><span class="pln">
+    </span><span class="axe_it"><span class="tag">&lt;li&gt;&lt;a</span><span class="pln"> </span><span class="atn">href</span><span class="pun">=</span><span class="atv">"#tab2"</span><span class="tag">&gt;</span><span class="pln">Logins </span><span class="tag">&lt;/a&gt;&lt;/li&gt;</span></span><span class="pln">
+  </span><span class="tag">&lt;/ul&gt;</span><span class="pln">
+  </span><span class="tag">&lt;div</span><span class="pln"> </span><span class="atn">id</span><span class="pun">=</span><span class="atv">"tab1"</span><span class="tag">&gt;</span><span class="pln">
+    Account Name:</span><span class="tag">&lt;span</span><span class="pln"> </span><span class="atn">class</span><span class="pun">=</span><span class="atv">"red"</span><span class="tag">&gt;</span><span class="pln">*</span><span class="tag">&lt;/span&gt;</span><span class="pln">
+    </span><span class="tag">&lt;input</span><span class="pln"> </span><span class="atn">name</span><span class="pun">=</span><span class="atv">"companyName"</span><span class="pln"> </span><span class="atn">class</span><span class="pun">=</span><span class="atv">"textbox"</span><span class="pln"> </span><span class="atn">id</span><span class="pun">=</span><span class="atv">"txtCompanyName"</span><span class="pln">
+        </span><span class="atn">type</span><span class="pun">=</span><span class="atv">"text"</span><span class="pln"> </span><span class="atn">maxlength</span><span class="pun">=</span><span class="atv">"200"</span><span class="pln"> </span><span class="atn">value</span><span class="pun">=</span><span class="atv">"yauhen"</span><span class="tag">&gt;</span><span class="pln">
+    <span class="axe_it">Company URL:</span></span>
+    <span class="axe_it"><span class="tag">&lt;input</span><span class="pln"> </span><span class="atn">name</span><span class="pun">=</span><span class="atv">"companyURL"</span><span class="pln"> </span><span class="atn">class</span><span class="pun">=</span><span class="atv">"textbox"</span><span class="pln"> </span><span class="atn">id</span><span class="pun">=</span><span class="atv">"txtCompanyURL"</span></span><span class="pln">
+          </span><span class="axe_it"><span class="atn">type</span><span class="pun">=</span><span class="atv">"text"</span><span class="pln"> </span><span class="atn">maxlength</span><span class="pun">=</span><span class="atv">"256"</span><span class="pln"> </span><span class="atn">value</span><span class="pun">=</span><span class="atv">"http://localhost:81"</span><span class="tag">&gt;</span></span><span class="pln">
+  </span><span class="tag">&lt;/div&gt;</span><span class="pln">
+  </span><span class="axe_it"><span class="tag">&lt;div</span><span class="pln"> </span><span class="atn">id</span><span class="pun">=</span><span class="atv">"tab2"</span><span class="tag">&gt;</span><span class="pln">tabs2</span><span class="tag">&lt;/div&gt;</span></span><span class="pln">
+</span><span class="tag">&lt;/div&gt;</span><span class="pln">
+</span><span class="tag">&lt;script&gt;</span><span class="pln">$</span><span class="pun">(</span><span class="str">'#tabs'</span><span class="pun">).</span><span class="pln">tabs</span><span class="pun">();</span><span class="tag">&lt;/script&gt;</span></pre>
+</div>
+
+<div class="step slide example_1_slide" data-x="27000">
+<pre class="prettyprint" style="font-size: 0.63em;">
+&lt;style&gt;
+  input.textbox { width:185px; padding:0px; margin:0px; }
+&lt;/style&gt;
+&lt;div id="tabs"&gt;
+  &lt;ul&gt;
+    &lt;li&gt;&lt;a href="#tab1"&gt;Settings &lt;/a&gt;&lt;/li&gt;
+  &lt;/ul&gt;
+  &lt;div id="tab1"&gt;
+    Account Name:&lt;span class="red"&gt;*&lt;/span&gt;
+    &lt;input name="companyName" class="textbox" id="txtCompanyName"
+        type="text" maxlength="200" value="yauhen"&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+&lt;script&gt;$('#tabs').tabs();&lt;/script&gt;
+</pre>
+</div>
+
+<div class="slide step example_1_slide" data-x="27000">
+<pre class="prettyprint" style="font-size: 0.63em;"><span class="tag">&lt;style&gt;</span><span class="pln">
+  input</span><span class="axe_it"><span class="pun">.</span><span class="pln">textbox </span></span><span class="pun">{</span><span class="pln"> </span><span class="kwd">width</span><span class="pun">:</span><span class="lit">185px</span><span class="pun">;</span><span class="pln"> </span><span class="kwd">padding</span><span class="pun">:</span><span class="lit">0px</span><span class="pun">;</span><span class="pln"> </span><span class="kwd">margin</span><span class="pun">:</span><span class="lit">0px</span><span class="pun">;</span><span class="pln"> </span><span class="pun">}</span><span class="pln">
+</span><span class="tag">&lt;/style&gt;</span><span class="pln">
+</span><span class="tag">&lt;div</span><span class="pln"> </span><span class="atn">id</span><span class="pun">=</span><span class="atv">"tabs"</span><span class="tag">&gt;</span><span class="pln">
+  </span><span class="tag">&lt;ul&gt;</span><span class="pln">
+    </span><span class="tag">&lt;li&gt;&lt;a</span><span class="pln"> </span><span class="atn">href</span><span class="pun">=</span><span class="atv">"#tab1"</span><span class="tag">&gt;</span><span class="pln"><span class="axe_it">Settings </span></span><span class="tag">&lt;/a&gt;&lt;/li&gt;</span><span class="pln">
+  </span><span class="tag">&lt;/ul&gt;</span><span class="pln">
+  </span><span class="tag">&lt;div</span><span class="pln"> </span><span class="atn">id</span><span class="pun">=</span><span class="atv">"tab1"</span><span class="tag">&gt;</span><span class="pln">
+    <span class="axe_it">Account Name:</span></span><span class="axe_it"><span class="tag">&lt;span</span><span class="pln"> </span><span class="atn">class</span><span class="pun">=</span><span class="atv">"red"</span><span class="tag">&gt;</span><span class="pln">*</span><span class="tag">&lt;/span&gt;</span></span><span class="pln">
+    </span><span class="tag">&lt;input</span><span class="pln"> </span><span class="axe_it"><span class="atn">name</span><span class="pun">=</span><span class="atv">"companyName"</span><span class="pln"> </span><span class="atn">class</span><span class="pun">=</span><span class="atv">"textbox"</span><span class="pln"> </span><span class="atn">id</span><span class="pun">=</span><span class="atv">"txtCompanyName"</span></span><span class="pln">
+        </span><span class="axe_it"><span class="atn">type</span><span class="pun">=</span><span class="atv">"text"</span><span class="pln"> </span><span class="atn">maxlength</span><span class="pun">=</span><span class="atv">"200"</span></span><span class="pln"> </span><span class="atn">value</span><span class="pun">=</span><span class="atv">"yauhen"</span><span class="tag">&gt;</span><span class="pln">
+  </span><span class="tag">&lt;/div&gt;</span><span class="pln">
+</span><span class="tag">&lt;/div&gt;</span><span class="pln">
+</span><span class="tag">&lt;script&gt;</span><span class="pln">$</span><span class="pun">(</span><span class="str">'#tabs'</span><span class="pun">).</span><span class="pln">tabs</span><span class="pun">();</span><span class="tag">&lt;/script&gt;</span></pre>
+</div>
+
+<div class="step slide example_1_slide" data-x="27000">
+<pre class="prettyprint" style="font-size: 0.7em;">
+&lt;style&gt;
+  input { width:185px; padding:0px; margin:0px; }
+&lt;/style&gt;
+&lt;div id="tabs"&gt;
+  &lt;ul&gt;
+    &lt;li&gt;&lt;a href="#tab1"&gt;&lt;/a&gt;&lt;/li&gt;
+  &lt;/ul&gt;
+  &lt;div id="tab1"&gt;
+    &lt;input value="yauhen"&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+&lt;script&gt;$('#tabs').tabs();&lt;/script&gt;
+</pre>
+</div>
+
+<div class="step slide example_1_slide" data-x="27000">
+<pre class="prettyprint" style="font-size: 0.7em;"><span class="tag">&lt;style&gt;</span><span class="pln">
+  input </span><span class="pun">{</span><span class="pln"> </span><span class="kwd">width</span><span class="pun">:</span><span class="lit">185px</span><span class="pun">;</span><span class="pln"> </span><span class="axe_it"><span class="kwd">padding</span><span class="pun">:</span><span class="lit">0px</span><span class="pun">;</span><span class="pln"> </span><span class="kwd">margin</span><span class="pun">:</span><span class="lit">0px</span><span class="pun">;</span></span><span class="pln"> </span><span class="pun">}</span><span class="pln">
+</span><span class="tag">&lt;/style&gt;</span><span class="pln">
+</span><span class="tag">&lt;div</span><span class="pln"> </span><span class="atn">id</span><span class="pun">=</span><span class="atv">"tabs"</span><span class="tag">&gt;</span><span class="pln">
+  </span><span class="tag">&lt;ul&gt;</span><span class="pln">
+    </span><span class="tag">&lt;li&gt;&lt;a</span><span class="pln"> </span><span class="atn">href</span><span class="pun">=</span><span class="atv">"#tab1"</span><span class="tag">&gt;&lt;/a&gt;&lt;/li&gt;</span><span class="pln">
+  </span><span class="tag">&lt;/ul&gt;</span><span class="pln">
+  </span><span class="tag">&lt;div</span><span class="pln"> </span><span class="atn">id</span><span class="pun">=</span><span class="atv">"tab1"</span><span class="tag">&gt;</span><span class="pln">
+    </span><span class="tag">&lt;input</span><span class="pln"> </span><span class="atn">value</span><span class="pun">=</span><span class="atv">"<span class="axe_it">yauhen</span>"</span><span class="tag">&gt;</span><span class="pln">
+  </span><span class="tag">&lt;/div&gt;</span><span class="pln">
+</span><span class="tag">&lt;/div&gt;</span><span class="pln">
+</span><span class="tag">&lt;script&gt;</span><span class="pln">$</span><span class="pun">(</span><span class="str">'#tabs'</span><span class="pun">).</span><span class="pln">tabs</span><span class="pun">();</span><span class="tag">&lt;/script&gt;</span></pre>
+</div>
+
+<div class="step slide example_1_slide" data-x="27000">
+<pre class="prettyprint" style="font-size: 0.7em;">
+&lt;style&gt;
+  input { width:185px; }
+&lt;/style&gt;
+&lt;div id="tabs"&gt;
+  &lt;ul&gt;
+    &lt;li&gt;&lt;a href="#tab1"&gt;&lt;/a&gt;&lt;/li&gt;
+  &lt;/ul&gt;
+  &lt;div id="tab1"&gt;
+    &lt;input value="lorem ipsum"&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+&lt;script&gt;$('#tabs').tabs();&lt;/script&gt;
+</pre>
+</div>
+
+<div class="step slide example_1_slide" data-x="27000">
+<h2>Test Case with no jQuery</h2>
+<pre class="prettyprint" style="font-size: 0.7em;">
+&lt;div&gt;
+  &lt;input value="Whatever"&gt;
+&lt;/div&gt;
+&lt;button&gt;Break It&lt;/button&gt;
+&lt;style&gt;
+  input { width: 150px; }
+  div.on input { font-size: 1em; }
+&lt;/style&gt;
+&lt;script&gt;
+  var div = document.getElementsByTagName('div')[0],
+      button = document.getElementsByTagName('button')[0];
+  button.addEventListener('click', function() {
+    div.classList.add('on');
+  });
+&lt;/script&gt;
+</pre>
+</div>
+
+<div class="step slide" data-x="28000">
+	<h2>Reduced version of $('tr').remove()</h2>
+
+<pre class="prettyprint">
+&lt;table&gt;
+    &lt;tr&gt;
+        &lt;td&gt;&lt;a href="#"&gt;Cancel&lt;/a&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+&lt;/table&gt;
+&lt;script&gt;
+    $(document).on('click', '#whatever', function(){});
+    $('table').on('click', 'a', function() {
+        $(this).parents('tr').remove();
+    });
+&lt;/script&gt;
+</pre>
+</div>
+
+<div class="step slide" data-x="29000">
+	<h2>Don't be Rude</h2>
+	<img src="img/rude.png" style="width: 100%;">
+</div>
+
+<div class="step slide" data-x="30000">
+	<p>Bug trackers aren't the best place to discuss feature requests.</p>
+	<img src="img/bubble.png">
+	<img src="img/mikesherov.png" style="width: 100%;">
+	<img src="img/joernzaefferer.png" style="width: 100%;">
+</div>
+
+<div class="step slide" data-x="31000">
+	<h2>Bug tracker != Support</h2>
+	<ul>
+		<li><a href="http://stackoverflow.com">Stack Overflow</a></li>
+		<li><a href="http://forum.jquery.com/">Forums</a></li>
+		<li><a href="http://irc.jquery.org/">#jquery on IRC</a></li>
+	</ul>
+</div>
+
+<div class="step slide" data-x="32000">
+	<h2>Review</h2>
+	<ol>
+		<li>Search for existing bugs.</li>
+		<li>Test against the latest version.</li>
+		<li>Create a reduced test case.</li>
+	</ol>
+</div>
+
+<div class="step slide" id="end" data-x="33000" data-y="-1000" data-z="5000" data-rotate-x="-10" data-rotate-z="-60">
+	<h3>Thanks!</h3>
+	<a href="http://twitter.com/tjvantoll">@tjvantoll</a>
+	<a href="http://tjvantoll.com">http://tjvantoll.com</a>
+</div>
+
+</div><!-- end #impress -->
+
+<div class="hint">
+	<p>Use a spacebar or arrow keys to navigate</p>
+</div>
+<script>
+if ("ontouchstart" in document.documentElement) { 
+	document.querySelector(".hint").innerHTML = "<p>Tap on the left or right to navigate</p>";
+}
+</script>
+
+<script src="js/impress.js"></script>
+<script>impress().init();</script>
+
+</body>
+</html>
