@@ -9,7 +9,7 @@
   <meta name="author" content="TJ VanToll">
 
   
-  <meta name="description" content="Possibly the most frustrating thing that can happen during web development is when things look or behave differently in different browsers for no &hellip;">
+  <meta name="description" content="Possibly the most frustrating thing that can happen during web development is when pages look or behave differently in different browsers for no &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -122,16 +122,16 @@
   </header>
 
 
-<div class="entry-content"><p>Possibly the most frustrating thing that can happen during web development is when things look or behave differently in different browsers for no apparent reason.</p>
+<div class="entry-content"><p>Possibly the most frustrating thing that can happen during web development is when pages look or behave differently in different browsers for no apparent reason.</p>
 
 <p>One of the major features of HTML5 is a <a href="http://www.whatwg.org/specs/web-apps/current-work/multipage/parsing.html">parsing algorithm</a> that specifies not only how to handle well formed markup, but also what to do with invalid HTML.</p>
 
-<p>The <a href="http://www.w3.org/TR/CSS2/syndata.html#parsing-errors">CSS specification</a> actually does the same.  In fact, it goes into explicit detail for how to handle a wide variety of nonsense syntax that it might encounter.  For example&#8230;</p>
+<p>The <a href="http://www.w3.org/TR/CSS2/syndata.html#parsing-errors">CSS specification</a> actually does the same.  In fact, it goes into explicit detail for how to handle a wide variety of nonsense syntax that might occur.  For example&#8230;</p>
 
 <!--more-->
 
 
-<p><strong>Declarations with unkown properties should be ignored.</strong></p>
+<p><strong>Declarations with unknown properties should be ignored.</strong></p>
 
 <figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -139,7 +139,7 @@
 <span class='line-number'>4</span>
 </pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nt">h1</span> <span class="p">{</span> <span class="k">color</span><span class="o">:</span> <span class="nb">red</span><span class="p">;</span> <span class="n">foo</span><span class="o">:</span> <span class="n">bar</span><span class="p">;</span> <span class="p">}</span>
 </span><span class='line'>
-</span><span class='line'><span class="c">/* foo is an unkown property so the browser should interpret this as... */</span>
+</span><span class='line'><span class="c">/* foo is an unknown property so the browser should interpret this as... */</span>
 </span><span class='line'><span class="nt">h1</span> <span class="p">{</span> <span class="k">color</span><span class="o">:</span> <span class="nb">red</span><span class="p">;</span> <span class="p">}</span>
 </span></code></pre></td></tr></table></div></figure>
 
@@ -155,7 +155,7 @@
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>These are just a sampling of what is specified.  The above rules are well documented and consistenly followed by all browsers.  Unfortunately that is not the case as we get into more complicated scenarios.</p>
+<p>These are just a sampling of what is specified.  The above rules are well documented and consistently followed by all browsers.  Unfortunately that is not the case as we get into more complicated scenarios.</p>
 
 <h3>Malformed Strings in CSS</h3>
 
@@ -209,7 +209,7 @@
 <pre><code>border: 2px solid black;
 </code></pre>
 
-<p>Along the same lines you would also expect a border to be around both divs since by then normal parsing of the stylesheet should resume.</p>
+<p>Along the same lines you would also expect a border to be around both divs since the normal parsing of the stylesheet should resume.</p>
 
 <p>Here&#8217;s what a sampling of browsers actually do.</p>
 
@@ -288,19 +288,19 @@
             <td>Black</td>
             <td>Black</td>
             <td>No</td>
-        </tr>        
+        </tr>
     </tbody>
 </table>
 
 
 <p>You can see what your browser does here.</p>
 
-<iframe style="width: 100%; height: 120px;" src="http://jsfiddle.net/tj_vantoll/PHKLz/3/embedded/result,html,css/" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
+<div class="code_example"><h6>Invalid Rule Parsing<a href="/demos/2012-06-10/invalid-rule-parsing.html" target="_blank">Open in New Window</a></h6><iframe style="width: 100%; height: 120px;" frameborder="0" src="/demos/2012-06-10/invalid-rule-parsing.html"></iframe></div>
 
 
 <h3>Results</h3>
 
-<p>WebKit based browsers are evaluating all rules after a semicolon is encountered and all other browsers stop in their tracks and don&#8217;t evaluate any other rules.  The same results occur with some other common fat finger situations.</p>
+<p>WebKit based browsers are evaluating all rules after a semicolon is encountered and all other browsers stop and don&#8217;t evaluate any other rules.  The same results occur with some other common fat finger situations.</p>
 
 <figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -316,7 +316,7 @@
 </span><span class='line'><span class="o">[</span><span class="nt">data-number</span><span class="o">=</span><span class="s1">&#39;two&#39;</span><span class="o">]</span> <span class="p">{</span> <span class="k">color</span><span class="o">:</span> <span class="nb">blue</span><span class="p">;</span> <span class="p">}</span>
 </span><span class='line'><span class="c">/* In WebKit browsers the color: blue; will be evaluated, in others it will not be. */</span>
 </span><span class='line'>
-</span><span class='line'><span class="c">/* Same thing if there&#39;s an malfored selector (notice the missing single quote in the selector. */</span>
+</span><span class='line'><span class="c">/* Same thing if there&#39;s a malfored selector (notice the missing single quote in the selector. */</span>
 </span><span class='line'><span class="o">[</span><span class="nt">data-number</span><span class="o">=</span><span class="nt">one</span><span class="s1">&#39;] { color: red; }</span>
 </span><span class='line'><span class="s1">[data-number=&#39;</span><span class="nt">two</span><span class="err">&#39;</span><span class="o">]</span> <span class="p">{</span> <span class="k">color</span><span class="o">:</span> <span class="nb">blue</span><span class="p">;</span> <span class="p">}</span>
 </span><span class='line'><span class="c">/* Again in Webkit color: blue; will be evaluated, in others it will not be. */</span>
@@ -325,19 +325,19 @@
 
 <h3>What Could Possibly Go Wrong?</h3>
 
-<p>Frankly, since this is an error situtation I don&#8217;t think many developers would care what the browser does with this.  If the rules aren&#8217;t evaluated it becomes pretty clear there&#8217;s an issue and it becomes pretty easy to find and clean up the issue.  What is important to developers is that the results are consistent.  The danger here is if you make a quick fix to a CSS file, fat finger some quotes, and only test in WebKit, you could catastrophically break your styling in non-WebKit browsers.</p>
+<p>Frankly, since this is an error situation I don&#8217;t think many developers would care what the browser does with this.  If the rules aren&#8217;t evaluated it becomes pretty clear there&#8217;s an issue and it becomes pretty easy to find and clean up the issue.  What is important to developers is that the results are consistent.  The danger here is if you make a quick fix to a CSS file, fat finger some quotes, and only test in WebKit, you could catastrophically break your styling in non-WebKit browsers.</p>
 
 <h3>Avoiding Issues</h3>
 
 <p>The obvious way to avoid running into issues is to test your code in all browsers.  However, with the number of browsers and devices there are to test on that&#8217;s not always feasible, especially for trivial changes.</p>
 
-<p>Modern editors with syntax highlighting can help you find malformed strings by creating an obvious syntax highlighting problem.  If yours doesn&#8217;t you might want to consider switching to one that does.</p>
+<p>Modern editors with syntax highlighting can help you find malformed strings by creating an obvious syntax highlighting problem.  If yours doesn&#8217;t, you might want to consider switching to one that does.</p>
 
 <p>Furthermore, tools like <a href="http://csslint.net/">CSS Lint</a> can help detect issues <a href="https://github.com/stubbornella/csslint/wiki/IDE-integration">via your editor / IDE</a> or at build time by <a href="https://github.com/stubbornella/csslint/wiki/Command-line-interface">incorporating them into a Node.js or Ant build process</a>.</p>
 
 <h3>Conclusion</h3>
 
-<p>While the CSS specification tries to standarize what to do with invalid CSS browsers still handle some situations differently.  Make sure your editor or build process can help detect silly typos, and attempt to test your code in a variety of browsers, even for trivial changes.</p>
+<p>While the CSS specification tries to standarize what to do with invalid CSS, browsers still handle some situations differently.  Make sure your editor or build process can help detect silly typos, and attempt to test your code in a variety of browsers, even for trivial changes.</p>
 </div>
 
 
