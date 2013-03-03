@@ -55,9 +55,9 @@ mediaQueryList.addListener(function(mql) {
 });
 ```
 
-[If your browser supports window.matchMedia](http://caniuse.com/#feat=matchmedia) you can see this behavior live below by resizing your browser window under 600px and checking your browser's JavaScript console.
+[If your browser supports window.matchMedia](http://caniuse.com/#feat=matchmedia) you can see this behavior live below by resizing your browser window under 600px on the following demo:
 
-<iframe style="width: 100%; height: 200px;" src="http://jsfiddle.net/tj_vantoll/uYJxy/2/embedded/result,js,css/" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
+{% demo /demos/2012-06-15/matchMedia-example.html matchMedia_Example 200 %}
 
 Interestingly, it turns out you can also use this same technique to listen for the ```print``` media being applied when the user requests the document to be printed ([hat tip to Ben Wells](http://code.google.com/p/chromium/issues/detail?id=105743)):
 
