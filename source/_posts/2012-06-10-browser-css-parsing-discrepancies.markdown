@@ -5,20 +5,20 @@ date: 2012-06-10 22:24
 comments: true
 categories: [Browsers, CSS]
 ---
-Possibly the most frustrating thing that can happen during web development is when things look or behave differently in different browsers for no apparent reason.
+Possibly the most frustrating thing that can happen during web development is when pages look or behave differently in different browsers for no apparent reason.
 
 One of the major features of HTML5 is a [parsing algorithm](http://www.whatwg.org/specs/web-apps/current-work/multipage/parsing.html) that specifies not only how to handle well formed markup, but also what to do with invalid HTML.
 
-The [CSS specification](http://www.w3.org/TR/CSS2/syndata.html#parsing-errors) actually does the same.  In fact, it goes into explicit detail for how to handle a wide variety of nonsense syntax that it might encounter.  For example...
+The [CSS specification](http://www.w3.org/TR/CSS2/syndata.html#parsing-errors) actually does the same.  In fact, it goes into explicit detail for how to handle a wide variety of nonsense syntax that might occur.  For example...
 
 <!--more-->
 
-**Declarations with unkown properties should be ignored.**
+**Declarations with unknown properties should be ignored.**
 
 ``` css
 h1 { color: red; foo: bar; }
 
-/* foo is an unkown property so the browser should interpret this as... */
+/* foo is an unknown property so the browser should interpret this as... */
 h1 { color: red; }
 ```
 
@@ -30,7 +30,7 @@ h1 { float: 'foo'; }
 /* foo is an invalid value for the float property and should be ignored */
 ```
 
-These are just a sampling of what is specified.  The above rules are well documented and consistenly followed by all browsers.  Unfortunately that is not the case as we get into more complicated scenarios.
+These are just a sampling of what is specified.  The above rules are well documented and consistently followed by all browsers.  Unfortunately that is not the case as we get into more complicated scenarios.
 
 ### Malformed Strings in CSS
 
@@ -70,7 +70,7 @@ Per the spec you would expect this to be interpreted since a new line character 
 
     border: 2px solid black;
 
-Along the same lines you would also expect a border to be around both divs since by then normal parsing of the stylesheet should resume.
+Along the same lines you would also expect a border to be around both divs since the normal parsing of the stylesheet should resume.
 
 Here's what a sampling of browsers actually do.
 
@@ -149,17 +149,17 @@ Here's what a sampling of browsers actually do.
             <td>Black</td>
             <td>Black</td>
             <td>No</td>
-        </tr>        
+        </tr>
     </tbody>
 </table>
 
 You can see what your browser does here.
 
-<iframe style="width: 100%; height: 120px;" src="http://jsfiddle.net/tj_vantoll/PHKLz/3/embedded/result,html,css/" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
+{% demo /demos/2012-06-10/invalid-rule-parsing.html Invalid_Rule_Parsing 120 %}
 
 ### Results
 
-WebKit based browsers are evaluating all rules after a semicolon is encountered and all other browsers stop in their tracks and don't evaluate any other rules.  The same results occur with some other common fat finger situations.
+WebKit based browsers are evaluating all rules after a semicolon is encountered and all other browsers stop and don't evaluate any other rules.  The same results occur with some other common fat finger situations.
 
 ``` css
 /* Notice the mix of single and double quote in the url property value. */
@@ -167,7 +167,7 @@ WebKit based browsers are evaluating all rules after a semicolon is encountered 
 [data-number='two'] { color: blue; }
 /* In WebKit browsers the color: blue; will be evaluated, in others it will not be. */
 
-/* Same thing if there's an malfored selector (notice the missing single quote in the selector. */
+/* Same thing if there's a malfored selector (notice the missing single quote in the selector. */
 [data-number=one'] { color: red; }
 [data-number='two'] { color: blue; }
 /* Again in Webkit color: blue; will be evaluated, in others it will not be. */
@@ -175,16 +175,16 @@ WebKit based browsers are evaluating all rules after a semicolon is encountered 
 
 ### What Could Possibly Go Wrong?
 
-Frankly, since this is an error situtation I don't think many developers would care what the browser does with this.  If the rules aren't evaluated it becomes pretty clear there's an issue and it becomes pretty easy to find and clean up the issue.  What is important to developers is that the results are consistent.  The danger here is if you make a quick fix to a CSS file, fat finger some quotes, and only test in WebKit, you could catastrophically break your styling in non-WebKit browsers.
+Frankly, since this is an error situation I don't think many developers would care what the browser does with this.  If the rules aren't evaluated it becomes pretty clear there's an issue and it becomes pretty easy to find and clean up the issue.  What is important to developers is that the results are consistent.  The danger here is if you make a quick fix to a CSS file, fat finger some quotes, and only test in WebKit, you could catastrophically break your styling in non-WebKit browsers.
 
 ### Avoiding Issues
 
 The obvious way to avoid running into issues is to test your code in all browsers.  However, with the number of browsers and devices there are to test on that's not always feasible, especially for trivial changes.
 
-Modern editors with syntax highlighting can help you find malformed strings by creating an obvious syntax highlighting problem.  If yours doesn't you might want to consider switching to one that does.
+Modern editors with syntax highlighting can help you find malformed strings by creating an obvious syntax highlighting problem.  If yours doesn't, you might want to consider switching to one that does.
 
 Furthermore, tools like [CSS Lint](http://csslint.net/) can help detect issues [via your editor / IDE](https://github.com/stubbornella/csslint/wiki/IDE-integration) or at build time by [incorporating them into a Node.js or Ant build process](https://github.com/stubbornella/csslint/wiki/Command-line-interface).
 
 ### Conclusion
 
-While the CSS specification tries to standarize what to do with invalid CSS browsers still handle some situations differently.  Make sure your editor or build process can help detect silly typos, and attempt to test your code in a variety of browsers, even for trivial changes.
+While the CSS specification tries to standarize what to do with invalid CSS, browsers still handle some situations differently.  Make sure your editor or build process can help detect silly typos, and attempt to test your code in a variety of browsers, even for trivial changes.
