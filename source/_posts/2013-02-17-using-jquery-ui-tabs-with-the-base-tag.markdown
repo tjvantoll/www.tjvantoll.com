@@ -140,7 +140,8 @@ var makeTabs = function(selector) {
     $( selector )
         .find( "ul a" ).each( function() {
             var href = $( this ).attr( "href" ),
-                newHref = window.location.origin + window.location.pathname + href;
+                newHref = window.location.protocol + '//' + window.location.hostname + 
+                    window.location.pathname + href;
 
             if ( href.indexOf( "#" ) == 0 ) {
                 $( this ).attr( "href", newHref );
@@ -157,3 +158,7 @@ As noted by the warning box, you should really fix this the right way.  But desp
 ### The End
 
 Hopefully if you didn't understand how to use the `<base>` tag and jQuery UI's tab widget together you do now.  If you are still having issues after reading through this please let me know in the comments.
+
+### Update (March 6th, 2013)
+
+Per comments from rubensa, I've removed `window.location.origin` from my JavaScript workaround since it's a WebKit only property.  He also pointed out that if you might need to explicitly include a port number in the URL if you're using it in your local development.
