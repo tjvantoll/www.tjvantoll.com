@@ -4,7 +4,7 @@
   <title><![CDATA[Category: jQuery UI | TJ VanToll]]></title>
   <link href="http://tjvantoll.com/blog/categories/jquery-ui/atom.xml" rel="self"/>
   <link href="http://tjvantoll.com/"/>
-  <updated>2013-03-03T21:33:26-05:00</updated>
+  <updated>2013-03-06T21:37:54-05:00</updated>
   <id>http://tjvantoll.com/</id>
   <author>
     <name><![CDATA[TJ VanToll]]></name>
@@ -177,7 +177,8 @@ var makeTabs = function(selector) {</p>
 <pre><code>$( selector )
     .find( "ul a" ).each( function() {
         var href = $( this ).attr( "href" ),
-            newHref = window.location.origin + window.location.pathname + href;
+            newHref = window.location.protocol + '//' + window.location.hostname + 
+                window.location.pathname + href;
 
         if ( href.indexOf( "#" ) == 0 ) {
             $( this ).attr( "href", newHref );
@@ -196,6 +197,10 @@ $( selector ).tabs();
 <h3>The End</h3>
 
 <p>Hopefully if you didn't understand how to use the <code>&lt;base&gt;</code> tag and jQuery UI's tab widget together you do now.  If you are still having issues after reading through this please let me know in the comments.</p>
+
+<h3>Update (March 6th, 2013)</h3>
+
+<p>Per comments from rubensa, I've removed <code>window.location.origin</code> from my JavaScript workaround since it's a WebKit only property.  He also pointed out that if you might need to explicitly include a port number in the URL if you're using it in your local development.</p>
 ]]></content>
   </entry>
   
