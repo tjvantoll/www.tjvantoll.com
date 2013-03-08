@@ -20,7 +20,7 @@ Testing for specific browsers is [a](http://www.sitepoint.com/why-browser-sniffi
 
 ### Option 3: Use conditional classes or conditional comments
 
-IE versions <= 10 support <a href="http://msdn.microsoft.com/en-us/library/ms537512(v=vs.85).aspx">conditional comments</a> that can be used to detect Internet Explorer.  For example the [HTML5 boilerplate](http://html5boilerplate.com/) [uses the following](https://github.com/h5bp/html5-boilerplate/blob/master/index.html) to show a warning to users using IE < 7:
+IE versions < 10 support <a href="http://msdn.microsoft.com/en-us/library/ms537512(v=vs.85).aspx">conditional comments</a> that can be used to detect Internet Explorer.  For example the [HTML5 boilerplate](http://html5boilerplate.com/) [uses the following](https://github.com/h5bp/html5-boilerplate/blob/master/index.html) to show a warning to users using IE < 7:
 
 ``` html
 <!--[if lt IE 7]>
