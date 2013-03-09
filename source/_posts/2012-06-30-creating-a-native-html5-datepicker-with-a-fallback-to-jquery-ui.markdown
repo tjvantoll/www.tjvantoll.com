@@ -76,7 +76,7 @@ if (!Modernizr.inputtypes.date) {
 
 You can see how your browser handles this situation here:
 
-<iframe style="width: 100%; height: 120px;" src="http://jsfiddle.net/p58bt/2/embedded/result,html,js/" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
+{% demo /demos/2012-06-30/date.html Native_Datepicker_with_Fallback 120 %}
 
 ### Another Option
 
