@@ -19,7 +19,8 @@ On certain occasions I've been known to talk to people in real life.
 		</time>
 		<footer>
 			<a href="http://jqueryto.com">jQuery TO</a> | Toronto, Ontario | 
-			<a href="/speaking/slides/2013/Submitting-Bugs-the-Right-Way">Slides</a>
+			<a href="/speaking/slides/2013/Submitting-Bugs-the-Right-Way">Slides</a> |
+			<a href="http://www.youtube.com/watch?v=yZkTGMsgLR4&feature=youtu.be">Video</a>
 		</footer>
 	</article>
 
