@@ -4,7 +4,7 @@
   <title><![CDATA[TJ VanToll]]></title>
   <link href="http://tjvantoll.com/atom.xml" rel="self"/>
   <link href="http://tjvantoll.com/"/>
-  <updated>2013-03-10T18:09:55-04:00</updated>
+  <updated>2013-03-14T23:13:56-04:00</updated>
   <id>http://tjvantoll.com/</id>
   <author>
     <name><![CDATA[TJ VanToll]]></name>
@@ -12,6 +12,154 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Better Ways of Comparing a JavaScript String to Multiple Values]]></title>
+    <link href="http://tjvantoll.com/2013/03/14/better-ways-of-comparing-a-javascript-string-to-multiple-values/"/>
+    <updated>2013-03-14T00:00:00-04:00</updated>
+    <id>http://tjvantoll.com/2013/03/14/better-ways-of-comparing-a-javascript-string-to-multiple-values</id>
+    <content type="html"><![CDATA[<p>This is a seemingly simple programming task that we deal with everyday.  Here&#8217;s the situation:</p>
+
+<ul>
+<li>1) You have a string in JavaScript, like <code>var fruit = ''</code>.</li>
+<li>2) You need to know if that string is equal to one of multiple values, say <code>"banana"</code> or <code>"lemon"</code> (because the yellow fruits need special yellow fruit processing or something).</li>
+</ul>
+
+
+<p>Most people accomplish this by doing two string comparisons connected by a logical OR, which looks like this:</p>
+
+<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="k">if</span> <span class="p">(</span><span class="nx">fruit</span> <span class="o">==</span> <span class="s1">&#39;banana&#39;</span> <span class="o">||</span> <span class="nx">fruit</span> <span class="o">==</span> <span class="s1">&#39;lemon&#39;</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nx">handleYellowFruit</span><span class="p">();</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Which works fine, but is a bit clunky.  I mean, you have to type <code>fruit ==</code> two whole times.  It also doesn&#8217;t scale well.  Say your fruit processing product takes off and you need to support more fruit, now you have this:</p>
+
+<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="k">if</span> <span class="p">(</span><span class="nx">fruit</span> <span class="o">==</span> <span class="s1">&#39;banana&#39;</span> <span class="o">||</span> <span class="nx">fruit</span> <span class="o">==</span> <span class="s1">&#39;lemon&#39;</span> <span class="o">||</span> <span class="nx">fruit</span> <span class="o">==</span> <span class="s1">&#39;mango&#39;</span> <span class="o">||</span> <span class="nx">fruit</span> <span class="o">==</span> <span class="s1">&#39;pineapple&#39;</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nx">handleYellowFruit</span><span class="p">();</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This is getting a bit ugly.  Let&#8217;s look at some other ways of accomplishing the same check.</p>
+
+<h3>Switch</h3>
+
+<p>The switch statement can be used to achieve the same ends:</p>
+
+<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="k">switch</span> <span class="p">(</span><span class="nx">fruit</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">case</span> <span class="s1">&#39;banana&#39;</span><span class="o">:</span>
+</span><span class='line'>    <span class="k">case</span> <span class="s1">&#39;lemon&#39;</span><span class="o">:</span>
+</span><span class='line'>    <span class="k">case</span> <span class="s1">&#39;mango&#39;</span><span class="o">:</span>
+</span><span class='line'>    <span class="k">case</span> <span class="s1">&#39;pineapple&#39;</span><span class="o">:</span>
+</span><span class='line'>        <span class="nx">handleYellowFruit</span><span class="p">();</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This approach would be helpful if we have to handle for multiple classifications of fruits.  But for one check it&#8217;s a lot of typing and takes up a lot of space.</p>
+
+<h3>Array Based</h3>
+
+<p>ECMAScript 5 introduced an <code>indexOf</code> method on <code>Array.prototype</code> (<a href="https://developer.mozilla.org/en-US/docs/JavaScript/Reference/Global_Objects/Array/indexOf">docs</a>).  We can use this to create an array on the fly, then see whether the value matches one of the values in the array:</p>
+
+<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="k">if</span> <span class="p">([</span><span class="s1">&#39;banana&#39;</span><span class="p">,</span> <span class="s1">&#39;lemon&#39;</span><span class="p">,</span> <span class="s1">&#39;mango&#39;</span><span class="p">,</span> <span class="s1">&#39;pineapple&#39;</span><span class="p">].</span><span class="nx">indexOf</span><span class="p">(</span><span class="nx">fruit</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nx">handleYellowFruit</span><span class="p">();</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This is better, but still not ideal.  Understanding this code relies on the reader knowing that the <code>indexOf</code> method returns <code>-1</code>, which is not necessarily common knowledge.</p>
+
+<p>Also, because <code>Array.prototype.indexOf</code> was added in ECMAScript 5, it&#8217;s not present in IE &lt;= 8.  Therefore, if you&#8217;re supporting IE &lt;= 8, you either need to add an <code>indexOf</code> method to the prototype yourself or use a library.</p>
+
+<p>Speaking of libraries, most provide a cross browser means of finding values in an array.</p>
+
+<h4>jQuery</h4>
+
+<p><a href="http://jquery.com">jQuery</a> provides an <code>inArray</code> method (<a href="http://api.jquery.com/jQuery.inArray/">docs</a>):</p>
+
+<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="k">if</span> <span class="p">(</span><span class="nx">$</span><span class="p">.</span><span class="nx">inArray</span><span class="p">(</span><span class="nx">fruit</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;banana&#39;</span><span class="p">,</span> <span class="s1">&#39;lemon&#39;</span><span class="p">,</span> <span class="s1">&#39;mango&#39;</span><span class="p">,</span> <span class="s1">&#39;pineapple&#39;</span><span class="p">])</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nx">handleYellowFruit</span><span class="p">();</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>Underscore</h4>
+
+<p><a href="http://underscorejs.org">Underscore.js</a> provides a <code>contains</code> method (<a href="http://underscorejs.org/#contains">docs</a>):</p>
+
+<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="k">if</span> <span class="p">(</span><span class="nx">_</span><span class="p">.</span><span class="nx">contains</span><span class="p">([</span><span class="s1">&#39;banana&#39;</span><span class="p">,</span> <span class="s1">&#39;lemon&#39;</span><span class="p">,</span> <span class="s1">&#39;mango&#39;</span><span class="p">,</span> <span class="s1">&#39;pineapple&#39;</span><span class="p">],</span> <span class="nx">fruit</span><span class="p">))</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nx">handleYellowFruit</span><span class="p">();</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Other libraries provide similar methods.  Personally, I find Underscore&#8217;s API to be the cleanest.  The contains API intuitively returns a boolean and there&#8217;s not much to type.  You might however find yourself needing to remember the order of the parameters (does the array come first or the value?).</p>
+
+<p>The check would be cleaner if the <code>contains</code> method were added to <code>Array.prototype</code> directly:</p>
+
+<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nb">Array</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">contains</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">obj</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">indexOf</span><span class="p">(</span><span class="nx">obj</span><span class="p">)</span> <span class="o">&gt;</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+</span><span class='line'><span class="p">};</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This allows the check to be:</p>
+
+<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="k">if</span> <span class="p">([</span><span class="s1">&#39;banana&#39;</span><span class="p">,</span> <span class="s1">&#39;lemon&#39;</span><span class="p">,</span> <span class="s1">&#39;mango&#39;</span><span class="p">,</span> <span class="s1">&#39;pineapple&#39;</span><span class="p">].</span><span class="nx">contains</span><span class="p">(</span><span class="nx">fruit</span><span class="p">))</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nx">handleYellowFruit</span><span class="p">();</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>Regular Expressions</h3>
+
+<p>An often overlooked means of performing this check is to use regular expressions via <code>String.prototype.match</code> (<a href="https://developer.mozilla.org/en-US/docs/JavaScript/Reference/Global_Objects/String">docs</a>).</p>
+
+<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="k">if</span> <span class="p">(</span><span class="nx">fruit</span><span class="p">.</span><span class="nx">match</span><span class="p">(</span><span class="sr">/^(banana|lemon|mango|pineapple)$/</span><span class="p">))</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nx">handleYellowFruit</span><span class="p">();</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This check clearly requires the least amount of typing.  It is also the most flexible as you can easily alter things like case sensitivity, special character handling, white space, etc.  This will work in all browsers and you don&#8217;t have to worry about messing with the native prototypes.</p>
+
+<p>While this is the most powerful option, it comes at a cost of being less readable.  I had to look up the <code>^</code> (match at the beginning of input) and <code>$</code> (match at the end of input) characters when writing this post.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Using jQuery UI Tabs with the &lt;base&gt; Tag]]></title>
@@ -2315,150 +2463,6 @@
 <p>One difference with doing the logging in the runner rather than in the HTML is that you will not get the console logging when you run the tests in the browser, which is usually what you want.</p>
 
 <p>Either approach can be used and customized to provide the logging you&#8217;d like.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[onscroll Event Issues on Mobile Browsers]]></title>
-    <link href="http://tjvantoll.com/2012/08/19/onscroll-event-issues-on-mobile-browsers/"/>
-    <updated>2012-08-19T00:00:00-04:00</updated>
-    <id>http://tjvantoll.com/2012/08/19/onscroll-event-issues-on-mobile-browsers</id>
-    <content type="html"><![CDATA[<p>All browsers fire an <code>onscroll</code> event on the <code>window</code> object whenever the window is scrolled.  On desktop browsers this event is fired continuously as the user scrolls, but on most all mobile browsers the event is not fired until the <em>scrolling action</em> comes to a complete stop.</p>
-
-<!--more-->
-
-
-<p>You can see this by scrolling in the example below:</p>
-
-<iframe style="width: 100%; height: 300px;" src="http://jsfiddle.net/tj_vantoll/p4pww/13/embedded/result,html,js,css/" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
-
-
-<p>The <code>onscroll</code> event count and the value of <code>window.scrollY</code> (<a href="https://developer.mozilla.org/en-US/docs/DOM/window.scrollY">the number of pixels the document has been scrolled vertically</a>) displayed on the top of the screen in the example are updated in an <code>onscroll</code> event handler.</p>
-
-<p>If you&#8217;re viewing this on any desktop browser you&#8217;ll see that as you scroll the <code>onscroll</code> event is continuously firing, <code>window.scrollY</code> is continuously updating, and the blue box (which is present so you can visibly tell whether the browser re-paints the screen) is continuously moving.</p>
-
-<h3>Enter Mobile</h3>
-
-<p>If you try the same demo on iOS Safari (5.0), the default Android browser &lt;= 2.3, Opera Mobile, or IE on Windows Phone 7 you&#8217;ll notice something quite different.  As you scroll the <code>onscroll</code> event isn&#8217;t fired, <code>window.scrollY</code> isn&#8217;t updated, and the blue box does not move until the scrolling has come to a complete stop.</p>
-
-<p>You can see this in the video below (the video shows iOS Safari but the same behavior occurs in the other listed browsers):</p>
-
-<iframe width="420" height="315" src="http://www.youtube.com/embed/5-vOJEP3x28" frameborder="0" allowfullscreen></iframe>
-
-
-<h3>Why</h3>
-
-<p>These mobile browsers simply do not fire the <code>onscroll</code> event until scrolling has completely stopped.  This includes not only the touch based scrolling itself, but additionally any momentum that the user gives on the scroll.  The event will not fire until it stops.  This is a problem if you want to apply a visual change to the screen as the user scrolls.</p>
-
-<h3>Other Mobile Browsers</h3>
-
-<p>Firefox for Android does fire the <code>onscroll</code> event and updates <code>window.clientY</code> as you scroll, but strangely it doesn&#8217;t re-paint the screen for any changes that have been applied.</p>
-
-<p>The Android browser in Ice Cream Sandwich fires the event but doesn&#8217;t feel very responsive and only sporadically re-paints the DOM to move the blue box.  Luckily, Jelly Bean&#8217;s Android browser handles this example perfectly; everything is updated and rendered smoothly as the user scrolls.</p>
-
-<h3>The Problem</h3>
-
-<p>In my case I wanted to apply a change to the DOM for every pixel that the user scrolled, exactly like moving the blue box in the example above.</p>
-
-<p>So the question is, can we work around this limitation and get desktop <code>onscroll</code> functionality in a mobile friendly way?</p>
-
-<h3>Workaround Attempt - setInterval</h3>
-
-<p>My first attempt was to set an interval that did what I wanted to do in the <code>onscroll</code> event.  Yes the code will run continuously instead of just when the user scrolls, but it&#8217;s somewhere to start.</p>
-
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">setInterval</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-</span><span class='line'>  <span class="c1">// Logic</span>
-</span><span class='line'><span class="p">},</span> <span class="mi">20</span><span class="p">);</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>The problem with this approach is that iOS Safari, Android &lt;= 2.3, and Opera Mobile do not run any functions queued through <code>setInterval</code> or <code>setTimeout</code> while a scroll is being performed.  The execution will simply be paused until the scroll has completed.</p>
-
-<p>Here&#8217;s an example that simply appends an asterisk to a div every 500 milliseconds using <code>setInterval</code>:</p>
-
-<iframe style="width: 100%; height: 300px;" src="http://jsfiddle.net/tj_vantoll/NfkEg/7/embedded/result,js,html,css/" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
-
-
-<p>If you&#8217;re viewing this in a desktop browser and you scroll, you can see that the asterisks will continue to be created.</p>
-
-<p>However, on the affected mobile browsers (iOS Safari, Android &lt;= 2.3, Opera Mobile), because the function queued through <code>setInterval</code> is paused, asterisk creation stops the moment you start scrolling and doesn&#8217;t resume until you stop.</p>
-
-<p>This video shows this behavior on iOS Safari (5.0):</p>
-
-<iframe width="560" height="315" src="http://www.youtube.com/embed/XkLvV9aPcYQ" frameborder="0" allowfullscreen></iframe>
-
-
-<p>This example works perfectly (scrolling doesn&#8217;t stop asterisk creation) on the default Ice Cream Sandwich / Jelly Bean browser, Firefox for Android, and IE for Windows Phone 7.</p>
-
-<h3>Workaround Attempt 2 - Use Touch Events</h3>
-
-<p>Since the <code>setInterval</code> approach failed on the big mobile browsers my next thought was to use touch events instead.</p>
-
-<p>Most mobile browsers fire <a href="http://blog.jquery.com/2012/04/10/getting-touchy-about-patents/">Apple&#8217;s flavor</a> of <a href="https://developer.mozilla.org/en-US/docs/DOM/Touch_events">touch events</a> as the user interacts with the screen via touch (the notable exception being Window&#8217;s Mobile since Microsoft has their own touch model).</p>
-
-<p>In particular the <code>ontouchmove</code> event is fired as the user moves their finger (or stylus, etc) across the screen.  Since users on touch devices need to move their finger across the screen to scroll, this seemed like the perfect alternative to <code>onscroll</code>.</p>
-
-<p>Therefore I modified my example to use <code>ontouchmove</code> instead of <code>onscroll</code>:</p>
-
-<iframe style="width: 100%; height: 300px;" src="http://jsfiddle.net/tj_vantoll/RFdve/10/embedded/result,js,html,css/" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
-
-
-<p>If you scroll on the above example on a desktop browser nothing will be updated since the counters are being driven by the <code>ontouchmove</code> event.  On mobile browsers a wide variety of things happen:</p>
-
-<ul>
-<li>Android: The <code>ontouchmove</code> event does get fired as the user moves the screen.  However the DOM updates are very sporadic and feel very jerky.  This is true of the default Android browser in Gingerbread, Ice Cream Sandwich, and Jelly Bean although it gets better in later versions.</li>
-<li>Firefox for Android: The <code>ontouchmove</code> events fires but DOM updates made in the <code>ontouchmove</code> event take effect sporadicly if at all.  Everything feels very jerky at best.</li>
-<li>Opera Mobile: <code>ontouchmove</code> events occur but DOM changes are not applied until scrolling is complete.</li>
-<li>iOS Safari: On <code>ontouchmove</code> event is fired as the screen is moved and the DOM does get re-painted.  This is only mobile browser where this approach made a substantial difference.</li>
-</ul>
-
-
-<p>One consistent issue with this approach is that the <code>ontouchmove</code> event is only fired when the user&#8217;s finger remains on the screen.  Meaning, if the user gives any momentum to the scroll, <code>ontouchmove</code> events will not be fired while the window is scrolling and their finger is not on the screen.</p>
-
-<p>You can see this in the video below:</p>
-
-<iframe width="420" height="315" src="http://www.youtube.com/embed/wied94KmwKw" frameborder="0" allowfullscreen></iframe>
-
-
-<p>So what does all of this mean about using the <code>ontouchmove</code> event to mimic desktop <code>onscroll</code> functionality?   At the moment there are too many inconsistencies to rely on this behavior in any way.  If you only need to support iOS Safari this approach works reasonably.</p>
-
-<h3>Workaround Attempt 3 - Don&#8217;t <em>Really</em> Scroll</h3>
-
-<p>Another <em>solution</em> out there is to disable native scrolling altogether and use JavaScript to mimic scrolling instead.</p>
-
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">$</span><span class="p">(</span><span class="s1">&#39;window&#39;</span><span class="p">).</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;touchmove&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>    <span class="c1">//Prevent the window from being scrolled.</span>
-</span><span class='line'>    <span class="nx">event</span><span class="p">.</span><span class="nx">preventDefault</span><span class="p">();</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="c1">//Do something like call window.scrollTo to mimic the scrolling</span>
-</span><span class='line'>    <span class="c1">//request the user made.</span>
-</span><span class='line'><span class="p">});</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Unfortunately such techniques are usually utilized to create fixed height/width scrolling areas and are not intended (nor especially practical) for full screens.  If you are only interested in a scrolling event for a small section of the page you might want to look into something such as <a href="http://cubiq.org/iscroll-4">iScroll 4</a>.</p>
-
-<h3>Conclusion</h3>
-
-<p>Unlike desktop browsers, most all mobile browsers simply do not fire an <code>onscroll</code> event until the scrolling action comes to a complete stop.</p>
-
-<p>The only mobile browser that handled this event elegantly in my testing was Android&#8217;s Jelly Bean browser.  Therefore, if you need any sort of cross browser support you&#8217;re simply out of luck; there is simply no cross browser viable workaround to mimic the desktop behavior.  If you have had success implementing this by some other means please let me know in the comments.</p>
-
-<h3>Disclaimer</h3>
-
-<p>I haven&#8217;t been able to test this in Chrome for Android and I know there are other mobile browsers that I&#8217;m missing.  If someone else has this capability I&#8217;d love to know how they handle these situations.</p>
-
-<p>Also while I did verify these findings on physical devices for Firefox for Android, Android 2.3&#8217;s default browser, and Safari on iOS 5; the rest of my testing was limited to simulators / emulators.  From past experience I know that simulator / emulator testing is no substitute for the real thing.  Therefore, if you find any discrepancies in my findings please let me know in the comments so I can update the post.</p>
 ]]></content>
   </entry>
   

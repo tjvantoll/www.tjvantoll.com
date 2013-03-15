@@ -4,7 +4,7 @@
   <title><![CDATA[Category: JavaScript | TJ VanToll]]></title>
   <link href="http://tjvantoll.com/blog/categories/javascript/atom.xml" rel="self"/>
   <link href="http://tjvantoll.com/"/>
-  <updated>2013-03-10T18:09:55-04:00</updated>
+  <updated>2013-03-14T23:13:56-04:00</updated>
   <id>http://tjvantoll.com/</id>
   <author>
     <name><![CDATA[TJ VanToll]]></name>
@@ -12,6 +12,150 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Better Ways of Comparing a JavaScript String to Multiple Values]]></title>
+    <link href="http://tjvantoll.com/2013/03/14/better-ways-of-comparing-a-javascript-string-to-multiple-values/"/>
+    <updated>2013-03-14T00:00:00-04:00</updated>
+    <id>http://tjvantoll.com/2013/03/14/better-ways-of-comparing-a-javascript-string-to-multiple-values</id>
+    <content type="html"><![CDATA[<p>This is a seemingly simple programming task that we deal with everyday.  Here's the situation:</p>
+
+<ul>
+<li>1) You have a string in JavaScript, like <code>var fruit = ''</code>.</li>
+<li>2) You need to know if that string is equal to one of multiple values, say <code>"banana"</code> or <code>"lemon"</code> (because the yellow fruits need special yellow fruit processing or something).</li>
+</ul>
+
+
+<p>Most people accomplish this by doing two string comparisons connected by a logical OR, which looks like this:</p>
+
+<p>``` javascript
+if (fruit == 'banana' || fruit == 'lemon') {</p>
+
+<pre><code>handleYellowFruit();
+</code></pre>
+
+<p>}
+```</p>
+
+<p>Which works fine, but is a bit clunky.  I mean, you have to type <code>fruit ==</code> two whole times.  It also doesn't scale well.  Say your fruit processing product takes off and you need to support more fruit, now you have this:</p>
+
+<p>``` javascript
+if (fruit == 'banana' || fruit == 'lemon' || fruit == 'mango' || fruit == 'pineapple') {</p>
+
+<pre><code>handleYellowFruit();
+</code></pre>
+
+<p>}
+```</p>
+
+<p>This is getting a bit ugly.  Let's look at some other ways of accomplishing the same check.</p>
+
+<h3>Switch</h3>
+
+<p>The switch statement can be used to achieve the same ends:</p>
+
+<p>``` javascript
+switch (fruit) {</p>
+
+<pre><code>case 'banana':
+case 'lemon':
+case 'mango':
+case 'pineapple':
+    handleYellowFruit();
+</code></pre>
+
+<p>}
+```</p>
+
+<p>This approach would be helpful if we have to handle for multiple classifications of fruits.  But for one check it's a lot of typing and takes up a lot of space.</p>
+
+<h3>Array Based</h3>
+
+<p>ECMAScript 5 introduced an <code>indexOf</code> method on <code>Array.prototype</code> (<a href="https://developer.mozilla.org/en-US/docs/JavaScript/Reference/Global_Objects/Array/indexOf">docs</a>).  We can use this to create an array on the fly, then see whether the value matches one of the values in the array:</p>
+
+<p>```javascript
+if (['banana', 'lemon', 'mango', 'pineapple'].indexOf(fruit) >= 0) {</p>
+
+<pre><code>handleYellowFruit();
+</code></pre>
+
+<p>}
+```</p>
+
+<p>This is better, but still not ideal.  Understanding this code relies on the reader knowing that the <code>indexOf</code> method returns <code>-1</code>, which is not necessarily common knowledge.</p>
+
+<p>Also, because <code>Array.prototype.indexOf</code> was added in ECMAScript 5, it's not present in IE &lt;= 8.  Therefore, if you're supporting IE &lt;= 8, you either need to add an <code>indexOf</code> method to the prototype yourself or use a library.</p>
+
+<p>Speaking of libraries, most provide a cross browser means of finding values in an array.</p>
+
+<h4>jQuery</h4>
+
+<p><a href="http://jquery.com">jQuery</a> provides an <code>inArray</code> method (<a href="http://api.jquery.com/jQuery.inArray/">docs</a>):</p>
+
+<p>``` javascript
+if ($.inArray(fruit, ['banana', 'lemon', 'mango', 'pineapple']) >= 0) {</p>
+
+<pre><code>handleYellowFruit();
+</code></pre>
+
+<p>}
+```</p>
+
+<h4>Underscore</h4>
+
+<p><a href="http://underscorejs.org">Underscore.js</a> provides a <code>contains</code> method (<a href="http://underscorejs.org/#contains">docs</a>):</p>
+
+<p>``` javascript
+if (_.contains(['banana', 'lemon', 'mango', 'pineapple'], fruit)) {</p>
+
+<pre><code>handleYellowFruit();
+</code></pre>
+
+<p>}
+```</p>
+
+<p>Other libraries provide similar methods.  Personally, I find Underscore's API to be the cleanest.  The contains API intuitively returns a boolean and there's not much to type.  You might however find yourself needing to remember the order of the parameters (does the array come first or the value?).</p>
+
+<p>The check would be cleaner if the <code>contains</code> method were added to <code>Array.prototype</code> directly:</p>
+
+<p>``` javascript
+Array.prototype.contains = function(obj) {</p>
+
+<pre><code>return this.indexOf(obj) &gt; -1;
+</code></pre>
+
+<p>};
+```</p>
+
+<p>This allows the check to be:</p>
+
+<p>``` javascript
+if (['banana', 'lemon', 'mango', 'pineapple'].contains(fruit)) {</p>
+
+<pre><code>handleYellowFruit();
+</code></pre>
+
+<p>}
+```</p>
+
+<h3>Regular Expressions</h3>
+
+<p>An often overlooked means of performing this check is to use regular expressions via <code>String.prototype.match</code> (<a href="https://developer.mozilla.org/en-US/docs/JavaScript/Reference/Global_Objects/String">docs</a>).</p>
+
+<p>``` javascript
+if (fruit.match(/<sup>(banana|lemon|mango|pineapple)$/))</sup> {</p>
+
+<pre><code>handleYellowFruit();
+</code></pre>
+
+<p>}
+```</p>
+
+<p>This check clearly requires the least amount of typing.  It is also the most flexible as you can easily alter things like case sensitivity, special character handling, white space, etc.  This will work in all browsers and you don't have to worry about messing with the native prototypes.</p>
+
+<p>While this is the most powerful option, it comes at a cost of being less readable.  I had to look up the <code>^</code> (match at the beginning of input) and <code>$</code> (match at the end of input) characters when writing this post.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Detecting Internet Explorer without jQuery]]></title>
@@ -279,158 +423,6 @@ if (!rangeSupport) {
 <p>HTML5 provides native solutions to validating client side data and most all modern browsers support it.  Yet, most people are still relying on the JavaScript hacks we've been using for well over a decade now.</p>
 
 <p>It's time.  Come to the dark side.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Google Analytics - Excluding Your Own Visits in Development and Production]]></title>
-    <link href="http://tjvantoll.com/2012/08/28/google-analytics-excluding-visits-in-development-and-production/"/>
-    <updated>2012-08-28T00:00:00-04:00</updated>
-    <id>http://tjvantoll.com/2012/08/28/google-analytics-excluding-visits-in-development-and-production</id>
-    <content type="html"><![CDATA[<p>Googling how to exclude your own <a href="http://www.google.com/analytics/">Google Analytics</a> traffic returns a plethora of results, however, nearly all of them advocate 1 of 2 approaches:</p>
-
-<ul>
-<li>Creating an IP filter in Google Analytics itself <a href="http://support.google.com/analytics/bin/answer.py?hl=en&amp;answer=1034840&amp;rd=1">(example)</a>.</li>
-<li>Creating a page that sets a cookie which tells Google Analytics to exclude the traffic <a href="http://webmasters.stackexchange.com/questions/15552/how-do-you-exclude-yourself-from-google-analytics-on-your-website-using-cookies">(example)</a>.</li>
-</ul>
-
-
-<h3>Problems</h3>
-
-<p>These approaches are silly in my opinion.  IP addresses change.  In fact, most ISPs change subscriber's IP addresses quite regularly.  Furthermore, most people visit their site on a wide variety of devices in a wide variety of places.  Maintaining a list of IP addresses in Google Analytics would be a nightmare.</p>
-
-<p>The cookie approach works, but it is a pain to have to create and maintain the page that sets the cookie.  It's also problematic because verifying whether the cookie is actually active is difficult.  Do you know where your browser stores your cookies and how to access them?  How about your smart phone?  Because of this you end up constantly having to create the cookie before accessing the site, which is a nuisance.</p>
-
-<h3>JavaScript</h3>
-
-<p>Both these approaches seem especially silly considering how easy it is to simply accomplish this with JavaScript.  You can simply check for the exclusion criteria before including the Google Analytics code snippet.</p>
-
-<!--more-->
-
-
-<h3>Excluding localhost Traffic</h3>
-
-<p>If you test your site on a local server you likely don't want that traffic being logged.  Assuming that your local server is using <code>localhost</code> as the hostname the following will exclude the traffic.</p>
-
-<p>``` javascript Excluding localhost Traffic</p>
-
-<script>
-    if (window.location.host != 'localhost') {
-        var _gaq = _gaq || [];
-        _gaq.push(['_setAccount', 'UA-12345678-1']);
-        _gaq.push(['_trackPageview']);
-
-        (function() {
-            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-        })();
-    }
-</script>
-
-
-<p>```</p>
-
-<h3>Excluding Production Traffic</h3>
-
-<p>While the above works great during development it won't help you when you're accessing your site on its live production server.  For that I would suggest using a request parameter.</p>
-
-<p>For example if your site is <code>http://mysite.com</code> then you could visit <code>http://mysite.com?analytics=off</code> to exclude the logging.  The following script makes it so that any page view with the appropriate <code>analytics=off</code> request parameter is not logged.</p>
-
-<p>``` javascript Excluding Production Traffic via a Request Parameter</p>
-
-<script>
-    var useAnalytics = true;
-
-    try {
-        //Turn off analytics if 'analytics=off' is included as a request parameter.
-        var parameters = window.location.search.split('&');
-        if (parameters[0]) {
-            parameters[0] = parameters[0].replace('?', '');
-        }
-        for (var i = 0; i < parameters.length; i++) {
-            var values = parameters[i].split('=');
-            if (values[0] == 'analytics' && values[1] == 'off') {
-                useAnalytics = false;
-            }
-        }
-    } catch(e) {
-        //Just in case something goes wrong...
-        useAnalytics = true;
-    }
-
-    if (useAnalytics) {
-        var _gaq = _gaq || [];
-        _gaq.push(['_setAccount', 'UA-12345678-1']);
-        _gaq.push(['_trackPageview']);
-
-        (function() {
-            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-        })();
-    }
-</script>
-
-
-<p>```</p>
-
-<p>With this approach you could simply create a bookmark with the request parameter in the URL and use that to access the site.</p>
-
-<p>Furthermore, it would be easy to add on code to <a href="https://developer.mozilla.org/en-US/docs/DOM/document.cookie">set a cookie</a> or utilize <a href="https://developer.mozilla.org/en-US/docs/DOM/Storage#localStorage">localStorage</a> to save the preference so you don't have to always include the request parameter.</p>
-
-<h3>Combining the Approaches</h3>
-
-<p>In case you want to include both of these here's a code snippet that makes it so that both <code>localhost</code> traffic and pages with a <code>analytics=off</code> request parameter are excluded.</p>
-
-<p>``` javascript The Final Exclusion Script</p>
-
-<script>
-    var useAnalytics = true;
-
-    try {
-        //Turn off analytics if 'analytics=off' is included as a request parameter.
-        var parameters = window.location.search.split('&');
-        if (parameters[0]) {
-            parameters[0] = parameters[0].replace('?', '');
-        }
-        for (var i = 0; i < parameters.length; i++) {
-            var values = parameters[i].split('=');
-            if (values[0] == 'analytics' && values[1] == 'off') {
-                useAnalytics = false;
-            }
-        }
-
-        //Turn off analytics if 'localhost' is the host
-        if (window.location.host == 'localhost') {
-            useAnalytics = false;
-        }
-    } catch(e) {
-        //Just in case something goes wrong...
-        useAnalytics = true;
-    }
-
-    if (useAnalytics) {
-        var _gaq = _gaq || [];
-        _gaq.push(['_setAccount', 'UA-29179796-1']);
-        _gaq.push(['_trackPageview']);
-
-        (function() {
-            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-        })();
-    }
-</script>
-
-
-<p>```</p>
-
-<p>If you have any other recommendations for how to exclude Google Analytics traffic let me know in the comments.</p>
-
-<h3>Update (January 1st, 2013)</h3>
-
-<p>Reader Aaron Hillyer has created a WordPress plugin to implement the request parameter exclusion approach, <a href="http://socialmediabar.com/enhanced-google-analytics-tracking">check it out</a>.</p>
 ]]></content>
   </entry>
   
