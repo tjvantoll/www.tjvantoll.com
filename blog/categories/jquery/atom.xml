@@ -4,7 +4,7 @@
   <title><![CDATA[Category: jQuery | TJ VanToll]]></title>
   <link href="http://tjvantoll.com/blog/categories/jquery/atom.xml" rel="self"/>
   <link href="http://tjvantoll.com/"/>
-  <updated>2013-03-14T23:13:56-04:00</updated>
+  <updated>2013-03-28T22:05:13-04:00</updated>
   <id>http://tjvantoll.com/</id>
   <author>
     <name><![CDATA[TJ VanToll]]></name>
@@ -12,6 +12,63 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Shorthand for Preventing Default Event Actions with jQuery]]></title>
+    <link href="http://tjvantoll.com/2013/03/28/shorthand-for-preventing-default-event-actions-with-jquery/"/>
+    <updated>2013-03-28T21:44:00-04:00</updated>
+    <id>http://tjvantoll.com/2013/03/28/shorthand-for-preventing-default-event-actions-with-jquery</id>
+    <content type="html"><![CDATA[<p>The common way of preventing the default action of an event is to call <a href="http://api.jquery.com/event.preventDefault/">preventDefault</a> on its <a href="http://api.jquery.com/category/event-object/">Event Object</a>:</p>
+
+<p>``` html
+<a href="http://google.com">Google</a></p>
+
+<script>
+    // Prevent the default action (navigating to google.com)
+    $( "a" ).on( "click", function( event ) {
+        event.preventDefault();
+    });
+</script>
+
+
+<p>```</p>
+
+<p>...which works just fine.  But if all you need to do is prevent the default action, <code>jQuery.fn.on</code> provides a handy shorthand.  Per <a href="http://api.jquery.com/on/#on-events-selector-data-handlereventObject">its docs</a>:</p>
+
+<p><em>The value <code>false</code> is also allowed as a shorthand for a function that simply does <code>return false</code>.</em></p>
+
+<p>Therefore, the same example could be written as follows:</p>
+
+<p>``` html
+<a href="http://google.com">Google</a></p>
+
+<script>
+    $( "a" ).on( "click", false );
+</script>
+
+
+<p>```</p>
+
+<p>The same approach will also work using delegated events:</p>
+
+<p>``` html
+<nav></p>
+
+<pre><code>&lt;a href="http://google.com"&gt;Google&lt;/a&gt;
+&lt;a href="http://twitter.com"&gt;Twitter&lt;/a&gt;
+&lt;a href="http://facebook.com"&gt;Facebook&lt;/a&gt;
+</code></pre>
+
+<p></nav></p>
+
+<script>
+    $( "nav" ).on( "click", "a", false );
+</script>
+
+
+<p>```</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Detecting Internet Explorer without jQuery]]></title>
