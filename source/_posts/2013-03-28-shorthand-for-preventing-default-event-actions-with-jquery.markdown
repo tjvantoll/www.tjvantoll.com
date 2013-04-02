@@ -43,3 +43,29 @@ The same approach will also work using delegated events:
     $( "nav" ).on( "click", "a", false );
 </script>
 ```
+
+### Update: April 1st, 2013
+
+As noted in the comments, using the `false` shorthand is the equivalent of `event.preventDefault(); event.stopPropagation();`.  Therefore when using the shorthand, the event will not bubble to parent elements (which may or may not be what you want to happen).  The following example illustrates this:
+
+``` html
+<div id="container-1">
+    <a id="a-1" href="http://google.com">Google</a>
+</div>
+<div id="container-2">
+    <a id="a-2" href="http://google.com">Google</a>
+</div>
+<script>
+    $( "#a-1" ).on( "click", function( event ) {
+        event.preventDefault();
+    });
+    // When a#a-1 is clicked this will fire because the event's
+    // propagation is not stopped.
+    $( "#container-1" ).on( "click", function(){} );
+    
+    $( "#a-2" ).on( "click", false );
+    // When a#a-2 is clicked this will not fire because the shorthand
+    // stops propagation.
+    $( "#container-2" ).on( "click", function(){} );
+</script>
+```
