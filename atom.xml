@@ -4,7 +4,7 @@
   <title><![CDATA[TJ VanToll]]></title>
   <link href="http://tjvantoll.com/atom.xml" rel="self"/>
   <link href="http://tjvantoll.com/"/>
-  <updated>2013-03-28T22:05:13-04:00</updated>
+  <updated>2013-04-01T22:49:48-04:00</updated>
   <id>http://tjvantoll.com/</id>
   <author>
     <name><![CDATA[TJ VanToll]]></name>
@@ -71,6 +71,51 @@
 </span><span class='line'><span class="nt">&lt;/nav&gt;</span>
 </span><span class='line'><span class="nt">&lt;script&gt;</span>
 </span><span class='line'>    <span class="nx">$</span><span class="p">(</span> <span class="s2">&quot;nav&quot;</span> <span class="p">).</span><span class="nx">on</span><span class="p">(</span> <span class="s2">&quot;click&quot;</span><span class="p">,</span> <span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="kc">false</span> <span class="p">);</span>
+</span><span class='line'><span class="nt">&lt;/script&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>Update: April 1st, 2013</h3>
+
+<p>As noted in the comments, using the <code>false</code> shorthand is the equivalent of <code>event.preventDefault(); event.stopPropagation();</code>.  Therefore when using the shorthand, the event will not bubble to parent elements (which may or may not be what you want to happen).  The following example illustrates this:</p>
+
+<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">&quot;container-1&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;a</span> <span class="na">id=</span><span class="s">&quot;a-1&quot;</span> <span class="na">href=</span><span class="s">&quot;http://google.com&quot;</span><span class="nt">&gt;</span>Google<span class="nt">&lt;/a&gt;</span>
+</span><span class='line'><span class="nt">&lt;/div&gt;</span>
+</span><span class='line'><span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">&quot;container-2&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;a</span> <span class="na">id=</span><span class="s">&quot;a-2&quot;</span> <span class="na">href=</span><span class="s">&quot;http://google.com&quot;</span><span class="nt">&gt;</span>Google<span class="nt">&lt;/a&gt;</span>
+</span><span class='line'><span class="nt">&lt;/div&gt;</span>
+</span><span class='line'><span class="nt">&lt;script&gt;</span>
+</span><span class='line'>    <span class="nx">$</span><span class="p">(</span> <span class="s2">&quot;#a-1&quot;</span> <span class="p">).</span><span class="nx">on</span><span class="p">(</span> <span class="s2">&quot;click&quot;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span> <span class="nx">event</span> <span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>        <span class="nx">event</span><span class="p">.</span><span class="nx">preventDefault</span><span class="p">();</span>
+</span><span class='line'>    <span class="p">});</span>
+</span><span class='line'>    <span class="c1">// When a#a-1 is clicked this will fire because the event&#39;s</span>
+</span><span class='line'>    <span class="c1">// propagation is not stopped.</span>
+</span><span class='line'>    <span class="nx">$</span><span class="p">(</span> <span class="s2">&quot;#container-1&quot;</span> <span class="p">).</span><span class="nx">on</span><span class="p">(</span> <span class="s2">&quot;click&quot;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(){}</span> <span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="nx">$</span><span class="p">(</span> <span class="s2">&quot;#a-2&quot;</span> <span class="p">).</span><span class="nx">on</span><span class="p">(</span> <span class="s2">&quot;click&quot;</span><span class="p">,</span> <span class="kc">false</span> <span class="p">);</span>
+</span><span class='line'>    <span class="c1">// When a#a-2 is clicked this will not fire because the shorthand</span>
+</span><span class='line'>    <span class="c1">// stops propagation.</span>
+</span><span class='line'>    <span class="nx">$</span><span class="p">(</span> <span class="s2">&quot;#container-2&quot;</span> <span class="p">).</span><span class="nx">on</span><span class="p">(</span> <span class="s2">&quot;click&quot;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(){}</span> <span class="p">);</span>
 </span><span class='line'><span class="nt">&lt;/script&gt;</span>
 </span></code></pre></td></tr></table></div></figure>
 

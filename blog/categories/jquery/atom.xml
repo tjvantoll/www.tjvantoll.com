@@ -4,7 +4,7 @@
   <title><![CDATA[Category: jQuery | TJ VanToll]]></title>
   <link href="http://tjvantoll.com/blog/categories/jquery/atom.xml" rel="self"/>
   <link href="http://tjvantoll.com/"/>
-  <updated>2013-03-28T22:05:13-04:00</updated>
+  <updated>2013-04-01T22:49:48-04:00</updated>
   <id>http://tjvantoll.com/</id>
   <author>
     <name><![CDATA[TJ VanToll]]></name>
@@ -63,6 +63,39 @@
 
 <script>
     $( "nav" ).on( "click", "a", false );
+</script>
+
+
+<p>```</p>
+
+<h3>Update: April 1st, 2013</h3>
+
+<p>As noted in the comments, using the <code>false</code> shorthand is the equivalent of <code>event.preventDefault(); event.stopPropagation();</code>.  Therefore when using the shorthand, the event will not bubble to parent elements (which may or may not be what you want to happen).  The following example illustrates this:</p>
+
+<p>``` html</p>
+
+<div id="container-1">
+    <a id="a-1" href="http://google.com">Google</a>
+</div>
+
+
+<div id="container-2">
+    <a id="a-2" href="http://google.com">Google</a>
+</div>
+
+
+<script>
+    $( "#a-1" ).on( "click", function( event ) {
+        event.preventDefault();
+    });
+    // When a#a-1 is clicked this will fire because the event's
+    // propagation is not stopped.
+    $( "#container-1" ).on( "click", function(){} );
+    
+    $( "#a-2" ).on( "click", false );
+    // When a#a-2 is clicked this will not fire because the shorthand
+    // stops propagation.
+    $( "#container-2" ).on( "click", function(){} );
 </script>
 
 
