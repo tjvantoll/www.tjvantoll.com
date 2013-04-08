@@ -1,4 +1,5 @@
 $.domReady(function() {
+	return; //Need to figure out shy this causes the page to 'shake' in Chrome.
 	if (Modernizr.csstransforms3d && navigator.userAgent.indexOf('MSIE') == -1) {
 		new PictureCube('picture-cube', 
 		[
