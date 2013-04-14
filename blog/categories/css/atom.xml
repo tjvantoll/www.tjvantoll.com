@@ -4,7 +4,7 @@
   <title><![CDATA[Category: CSS | TJ VanToll]]></title>
   <link href="http://tjvantoll.com/blog/categories/css/atom.xml" rel="self"/>
   <link href="http://tjvantoll.com/"/>
-  <updated>2013-04-08T22:12:55-04:00</updated>
+  <updated>2013-04-13T20:37:38-04:00</updated>
   <id>http://tjvantoll.com/</id>
   <author>
     <name><![CDATA[TJ VanToll]]></name>
@@ -12,6 +12,750 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[List of Pseudo-Elements to Style Form Controls]]></title>
+    <link href="http://tjvantoll.com/2013/04/15/list-of-pseudo-elements-to-style-form-controls/"/>
+    <updated>2013-04-15T00:00:00-04:00</updated>
+    <id>http://tjvantoll.com/2013/04/15/list-of-pseudo-elements-to-style-form-controls</id>
+    <content type="html"><![CDATA[<p>Styling form elements is a pain point when developing web applications.  Historically, web developers have had to accept the form controls the browser provided with little hope of customization.  However, web rendering engines are increasingly adding hooks through pseudo-elements to give authors some control over the display.</p>
+
+<p>While all of these pseudo-elements are rendering engine specific (and therefore behind vendor prefixes), they can still be handy for customizing the display for that engine.  The following is my best attempt at compiling a complete list of the pseudo-elements available in Trident, Gecko, and WebKit.  At the time of this writing Blink is a recent fork of WebKit, so the pseudo-elements provided are identical.  I am not aware of any form related pseudo-elements that Presto provides.</p>
+
+<p>Couple of notes before we get started:</p>
+
+<ul>
+<li>All Trident pseudo-elements listed here were added in IE10 and will not work in earlier versions of Internet Explorer.</li>
+<li>In WebKit, to style some pseudo-elements you must set the basis element's <code>-webkit-appearance</code> pseudo-class to <code>none</code>.  For example, to style <code>::-webkit-progress-bar</code> you must apply <code>-webkit-appearance: none;</code> to the appropriate <code>&lt;progress&gt;</code> element.</li>
+</ul>
+
+
+<!-- more -->
+
+
+<h3>Table of Contents</h3>
+
+<ul>
+<li>&lt;input&gt; Elements
+
+<ul>
+<li><a href="#input_checkbox_radio">checkbox / radio</a></li>
+<li><a href="#input_color">color</a></li>
+<li><a href="#input_date">date</a></li>
+<li><a href="#input_file">file</a></li>
+<li><a href="#input_number">number</a></li>
+<li><a href="#input_password">password</a></li>
+<li><a href="#placeholder_attribute">placeholder attribute</a></li>
+<li><a href="#input_range">range</a></li>
+<li><a href="#input_search">search</a></li>
+<li><a href="#input_text">text</a></li>
+</ul>
+</li>
+<li>Other Elements
+
+<ul>
+<li><a href="#keygen_element">keygen</a></li>
+<li><a href="#meter_element">meter</a></li>
+<li><a href="#progress_element">progress</a></li>
+<li><a href="#select_element">select</a></li>
+</ul>
+</li>
+<li>Miscellaneous
+
+<ul>
+<li><a href="#form_validation_messages">Form Validation Messages</a></li>
+</ul>
+</li>
+</ul>
+
+
+<h3 id="input_checkbox_radio">input[type=checkbox] / input[type=radio]</h3>
+
+
+<!-- http://jsfiddle.net/tj_vantoll/8esYJ/ -->
+
+
+<h4>Trident</h4>
+
+<p>Trident provides the <code>::-ms-check</code> pseudo-element for checkbox and radio button controls.  For example:</p>
+
+<p><code>html
+&lt;input type="checkbox"&gt;
+&lt;input type="radio"&gt;
+</code>
+``` css
+::-ms-check {</p>
+
+<pre><code>color: red;
+background: black;
+padding: 1em;
+</code></pre>
+
+<p>}
+```</p>
+
+<p>This displays as follows in IE10 on Windows 8:</p>
+
+<p><img src="http://tjvantoll.com/images/posts/2013-04-15/trident-radio-checkbox.png"></p>
+
+<h3 id="input_color">input[type=color]</h3>
+
+
+<!-- http://jsfiddle.net/tj_vantoll/fQFwc/ -->
+
+
+<h4>WebKit</h4>
+
+<p>Webkit provides 2 pseudo elements for its color picker, <code>::-webkit-color-swatch-wrapper</code> and <code>::-webkit-color-swatch</code>.  You can apply a variety of rules to these elements but I haven't come up with anything useful.  Here's an example just to show it's possible:</p>
+
+<p><code>html
+&lt;input type="color"&gt;
+</code>
+<code>css
+::-webkit-color-swatch-wrapper { border: 2px solid red; }
+::-webkit-color-swatch { opacity: 0.5; }
+</code></p>
+
+<p>This displays as follows in Chrome 26 on OS X:</p>
+
+<p><img src="http://tjvantoll.com/images/posts/2013-04-15/webkit-input-color.png"></p>
+
+<h3 id="input_date">input[type=date]</h3>
+
+
+<!-- http://jsfiddle.net/tj_vantoll/Qx46G/ -->
+
+
+<h4>WebKit</h4>
+
+<p>The following 8 pseudo-elements are made available by WebKit for customizing a date input's textbox:</p>
+
+<ul>
+<li><code>::-webkit-datetime-edit</code></li>
+<li><code>::-webkit-datetime-edit-fields-wrapper</code></li>
+<li><code>::-webkit-datetime-edit-text</code></li>
+<li><code>::-webkit-datetime-edit-month-field</code></li>
+<li><code>::-webkit-datetime-edit-day-field</code></li>
+<li><code>::-webkit-datetime-edit-year-field</code></li>
+<li><code>::-webkit-inner-spin-button</code></li>
+<li><code>::-webkit-calendar-picker-indicator</code></li>
+</ul>
+
+
+<p>Here is the internal structure of these elements:</p>
+
+<p><img src="http://tjvantoll.com/images/posts/2013-04-15/webkit-input-date-shadow.png"></p>
+
+<p>So if you thought the date input could use more spacing and a ridiculous color scheme you could add the following:</p>
+
+<p><code>html
+&lt;input type="date"&gt;
+</code>
+<code>css
+::-webkit-datetime-edit { padding: 1em; }
+::-webkit-datetime-edit-fields-wrapper { background: silver; }
+::-webkit-datetime-edit-text { color: red; padding: 0 0.3em; }
+::-webkit-datetime-edit-month-field { color: blue; }
+::-webkit-datetime-edit-day-field { color: green; }
+::-webkit-datetime-edit-year-field { color: purple; }
+::-webkit-inner-spin-button { display: none; }
+::-webkit-calendar-picker-indicator { background: orange; }
+</code></p>
+
+<p>This displays as follows in Chrome 26 on OS X:</p>
+
+<p><img src="http://tjvantoll.com/images/posts/2013-04-15/webkit-input-date.png"></p>
+
+<h3 id="input_file">input[type=file]</h3>
+
+
+<!-- http://jsfiddle.net/tj_vantoll/nmmGU/ -->
+
+
+<p>All rendering engines automatically generate a button when an <code>&lt;input type="file"&gt;</code> is created.  Historically, that button has been completely un-styleable.  However, recently Trident and WebKit have added hooks through pseudo-elements.</p>
+
+<h4>Trident</h4>
+
+<p>As of IE10 the file input button can be styled using the <code>::-ms-browse</code> pseudo-element.  Basically any CSS rules that you apply a regular button can be applied to the pseudo-element.  For example:</p>
+
+<p><code>html
+&lt;input type="file"&gt;
+</code>
+``` css
+::-ms-browse {</p>
+
+<pre><code>background: black;
+color: red;
+padding: 1em;
+</code></pre>
+
+<p>}
+```</p>
+
+<p>This displays as follows in IE10 on Windows 8:</p>
+
+<p><img src="http://tjvantoll.com/images/posts/2013-04-15/trident-input-file.png"></p>
+
+<h4>WebKit</h4>
+
+<p>WebKit provides a hook for its file input button with the <code>::-webkit-file-upload-button</code> pseudo-element.  Again pretty much any CSS rule can be applied, therefore the Trident example will work here as well:</p>
+
+<p><code>html
+&lt;input type="file"&gt;
+</code>
+``` css
+::-webkit-file-upload-button {</p>
+
+<pre><code>background: black;
+color: red;
+padding: 1em;
+</code></pre>
+
+<p>}
+```</p>
+
+<p>This displays as follows in Chrome 26 on OS X:</p>
+
+<p><img src="http://tjvantoll.com/images/posts/2013-04-15/webkit-input-file.png"></p>
+
+<h3 id="input_number">input[type=number]</h3>
+
+
+<!-- http://jsfiddle.net/tj_vantoll/KwzPm/ -->
+
+
+<h4>WebKit</h4>
+
+<p>WebKit provides a spinner control by default for number picker inputs.  Pseudo-elements <code>::-webkit-textfield-decoration-container</code>, <code>::-webkit-inner-spin-button</code> and <code>::-webkit-outer-spin-button</code> are provided for customization.  While you cannot do a whole lot with these elements, it can be useful to hide the spinner.</p>
+
+<p><code>html
+&lt;input type="number"&gt;
+</code>
+``` css
+::-webkit-textfield-decoration-container { }
+::-webkit-inner-spin-button {</p>
+
+<pre><code>-webkit-appearance: none;
+</code></pre>
+
+<p>}
+::-webkit-outer-spin-button {</p>
+
+<pre><code>-webkit-appearance: none;
+</code></pre>
+
+<p>}
+```</p>
+
+<p>This displays as follows in Chrome 26 on OS X:</p>
+
+<p><img src="http://tjvantoll.com/images/posts/2013-04-15/webkit-input-number.png"></p>
+
+<h3 id="input_password">input[type=password]</h3>
+
+
+<!-- http://jsfiddle.net/tj_vantoll/Xaw9B/ -->
+
+
+<h4>Trident</h4>
+
+<p>Trident provides a control on password inputs that can be pressed to display the password in plain text.  This control is made customizable via the <code>::-ms-reveal</code> pseudo-element.  You can change a number of properties of the control including its <code>color</code>, <code>background</code>, or <code>display</code> to hide it.  The following will hide the control:</p>
+
+<p><code>html
+&lt;input type="password"&gt;
+</code>
+<code>css
+::-ms-reveal { display: none; }
+</code></p>
+
+<p>This displays as follows in IE10 on Windows 8:</p>
+
+<p><img src="http://tjvantoll.com/images/posts/2013-04-15/trident-input-password.png"></p>
+
+<h3 id="placeholder_attribute">placeholder Attribute</h3>
+
+
+<!-- http://jsfiddle.net/tj_vantoll/TAqWZ/ -->
+
+
+<h4>Gecko</h4>
+
+<p>Gecko provides the pseduo-element <code>::-moz-placeholder</code> to style placeholder text.  You can use this to change the placeholder's color or font properties.  For example:</p>
+
+<p><code>html
+&lt;input placeholder="placeholder"&gt;
+</code>
+``` css
+::-moz-placeholder {</p>
+
+<pre><code>color: blue;
+font-family: 'Comic Sans MS';
+</code></pre>
+
+<p>}
+```</p>
+
+<p>This displays as follows in Firefox 20 on OS X:</p>
+
+<p><img src="http://tjvantoll.com/images/posts/2013-04-15/gecko-placeholder.png"></p>
+
+<p><i>Note: Gecko switched from the pseudo-class <code>:-moz-placeholder</code> to the pseudo-element <code>::-moz-placeholder</code> in Firefox 19.</i></p>
+
+<h4>Trident</h4>
+
+<p>Trident offers the ability to style the placeholder text with a pseudo-class rather than a pseudo-element.  However the class, <code>-ms-input-placeholder</code>, can be used the same as the pseudo-elements from the other rendering engines:</p>
+
+<p><code>html
+&lt;input placeholder="placeholder"&gt;
+</code>
+``` css
+:-ms-input-placeholder {</p>
+
+<pre><code>color: blue;
+font-family: 'Comic Sans MS';
+</code></pre>
+
+<p>}
+```</p>
+
+<p>This displays as follows in IE10 on Windows 8:</p>
+
+<p><img src="http://tjvantoll.com/images/posts/2013-04-15/trident-placeholder.png"></p>
+
+<h4>WebKit</h4>
+
+<p>WebKit provides the <code>::-webkit-input-placeholder</code> pseudo-element.  It can also be used to change the color and font of the placeholder text:</p>
+
+<p><code>html
+&lt;input placeholder="placeholder"&gt;
+</code>
+``` css
+::-webkit-input-placeholder {</p>
+
+<pre><code>color: blue;
+font-family: 'Comic Sans MS';
+</code></pre>
+
+<p>}
+```</p>
+
+<p>This displays as follows in Chrome 26 on OS X:</p>
+
+<p><img src="http://tjvantoll.com/images/posts/2013-04-15/webkit-placeholder.png"></p>
+
+<h3 id="input_range">input[type=range]</h3>
+
+
+<!-- http://jsfiddle.net/tj_vantoll/MHrzT/ -->
+
+
+<h4>Gecko</h4>
+
+<p>As of Firefox 22, Gecko provides pseudo-elements <code>::-moz-range-track</code> and <code>::-moz-range-thumb</code> for styling range inputs.  It's possible to apply most CSS rules to these elements, for example:</p>
+
+<p><code>html
+&lt;input type="range"&gt;
+</code>
+``` css
+::-moz-range-track {</p>
+
+<pre><code>border: 2px solid red;
+height: 20px;
+background: orange;
+</code></pre>
+
+<p>}
+::-moz-range-thumb {</p>
+
+<pre><code>background: blue;
+height: 30px;
+</code></pre>
+
+<p>}
+```</p>
+
+<p>This displays as follows in Firefox 22 on OS X:</p>
+
+<p><img src="http://tjvantoll.com/images/posts/2013-04-15/gecko-input-range.png"></p>
+
+<h4>Trident</h4>
+
+<p>Trident provides an impressive number of pseudo-elements to customize its range selector.</p>
+
+<ul>
+<li><code>::-ms-fill-lower</code>: The track portion underneath / before the handle.</li>
+<li><code>::ms-fill-upper</code>: The track portion above / after the handle.</li>
+<li><code>::-ms-ticks-before</code>: An area above / before the range track with tick marks.</li>
+<li><code>::-ms-ticks-after</code>: An area below / after the range track with tick marks.</li>
+<li><code>::-ms-thumb</code>: The handle.</li>
+<li><code>::-ms-track</code>: The range track itself.</li>
+<li><code>::ms-tooltip</code>: The tooltip that appears when the user is selecting a value with the range selector.  Note that this element cannot be styled, only hidden using <code>display: none</code>.</li>
+</ul>
+
+
+<p>This is easier to visualize with an example.  Take the following:</p>
+
+<p><code>html
+&lt;input type="range"&gt;
+</code>
+<code>css
+::-ms-fill-lower { background: orange; }
+::-ms-fill-upper { background: green; }
+::-ms-thumb { background: red; }
+::-ms-ticks-after { display: block; color: blue; }
+::-ms-ticks-before { display: block; color: black; }
+::-ms-track { padding: 20px 0; }
+::-ms-tooltip { display: none; /* display and visibility only */ }
+</code></p>
+
+<p>This will display as follows in IE10 on Windows 8:</p>
+
+<p><img src="http://tjvantoll.com/images/posts/2013-04-15/trident-input-range.png"></p>
+
+<h4>WebKit</h4>
+
+<p>WebKit provides the <code>::-webkit-slider-runnable-track</code> pseudo-element for the track and <code>::-webkit-slider-thumb</code> for the range handle itself.  While you cannot do much with these elements, you can add some colors and padding.</p>
+
+<p><code>html
+&lt;input type="range"&gt;
+</code>
+``` css
+::-webkit-slider-runnable-track {</p>
+
+<pre><code>border: 2px solid red;
+background: green;
+padding: 2em 0;
+</code></pre>
+
+<p>}
+::-webkit-slider-thumb {</p>
+
+<pre><code>outline: 2px solid blue;
+</code></pre>
+
+<p>}
+```</p>
+
+<p>This displays as follows in Chrome 26 on OS X:</p>
+
+<p><img src="http://tjvantoll.com/images/posts/2013-04-15/webkit-input-range.png"></p>
+
+<p>One final note about range inputs.  Trident and Webkit allow you to apply hover states to the thumb pseudo-element (<code>::-webkit-slider-thumb:hover</code> and <code>::-ms-thumb:hover</code> respectively), whereas Gecko currently does not.</p>
+
+<h3 id="input_search">input[type=search]</h3>
+
+
+<!-- http://jsfiddle.net/tj_vantoll/9jL5U/ -->
+
+
+<h4>WebKit</h4>
+
+<p>By default WebKit provides a custom UI for search inputs with cancel and search buttons.  Two pseudo-elements, <code>::-webkit-search-cancel-button</code> and <code>::-webkit-search-results-button</code> are provided for customization, although you can't much of anything with them other than hide them as shown below:</p>
+
+<p><code>html
+&lt;input type="search"&gt;
+</code>
+``` css
+/<em> Remove the rounded corners </em>/
+input[type=search] { -webkit-appearance: none; }</p>
+
+<p>/<em> Hide the cancel button </em>/
+::-webkit-search-cancel-button { -webkit-appearance: none; }</p>
+
+<p>/<em> Hide the magnifying glass </em>/
+::-webkit-search-results-button { -webkit-appearance: none; }
+```</p>
+
+<p>This displays as follows in Chrome 26 on OS X:</p>
+
+<p><img src="http://tjvantoll.com/images/posts/2013-04-15/webkit-input-search.png"></p>
+
+<h3 id="input_text">input[type=text]</h3>
+
+
+<!-- http://jsfiddle.net/tj_vantoll/r4mwz/, http://jsfiddle.net/tj_vantoll/ADEvK/ -->
+
+
+<h4>Trident</h4>
+
+<p>As of IE10 Trident provides the pseudo-element <code>::-ms-value</code> to style a variety the value portion of text inputs (<code>input[type=text]</code>, <code>input[type=password]</code>, etc) and selects.  For example:</p>
+
+<p><code>html
+&lt;input type="text" value="value"&gt;
+&lt;input type="password" value="value"&gt;
+&lt;select&gt;&lt;option selected&gt;option&lt;/option&gt;&lt;/select&gt;
+</code>
+``` css
+::-ms-value {</p>
+
+<pre><code>color: red;
+background: black;
+padding: 1em;
+</code></pre>
+
+<p>}
+```</p>
+
+<p>This displays as follows in IE10 on Windows 8:</p>
+
+<p><img src="http://tjvantoll.com/images/posts/2013-04-15/trident-value.png"></p>
+
+<h5>Clear Control</h5>
+
+<p>In IE10 when a text input has focus and is not empty, a small X control appears in the right hand side of the input.  When clicked, the control will clear the contents of the text input.  The X is styleable with the <code>::-ms-clear</code> pseudo-element.  Therefore you can hide it:</p>
+
+<p><code>html
+&lt;input type="text"&gt;
+</code>
+<code>css
+::-ms-clear { display: none; }
+</code></p>
+
+<p>This displays as follows in IE10 on Windows 8:</p>
+
+<p><img src="http://tjvantoll.com/images/posts/2013-04-15/trident-input-clear.png"></p>
+
+<p>There are a variety of rules that <code>::-ms-clear</code> will accept, so you can theme it as well:</p>
+
+<p><code>html
+&lt;input type="text" value="Lorem Ipsum"&gt;
+</code>
+``` css
+::-ms-clear {</p>
+
+<pre><code>color: red;
+background: black;
+padding: 1em;
+</code></pre>
+
+<p>}
+```</p>
+
+<p>Which displays as follows:</p>
+
+<p><img src="http://tjvantoll.com/images/posts/2013-04-15/trident-input-clear-fancy.png"></p>
+
+<h3 id="keygen_element">&lt;keygen&gt; Element</h3>
+
+
+<!-- http://jsfiddle.net/tj_vantoll/nMRHU/ -->
+
+
+<p>WebKit provides the <code>::-webkit-keygen-select</code> that can be used to customize the dropdown that a keygen element uses.  For example:</p>
+
+<p>``` css
+::-webkit-keygen-select {</p>
+
+<pre><code>background: black;
+color: red;
+</code></pre>
+
+<p>}
+```</p>
+
+<p>This displays as follows on Chrome 26 on OS X:</p>
+
+<p><img src="http://tjvantoll.com/images/posts/2013-04-15/webkit-keygen.png"></p>
+
+<h3 id="meter_element">&lt;meter&gt; Element</h3>
+
+
+<!-- http://jsfiddle.net/tj_vantoll/Wjzwn -->
+
+
+<h4>WebKit</h4>
+
+<p>WebKit provides pseudo-elements <code>::-webkit-meter-bar</code>, <code>::-webkit-meter-even-less-good-value</code>, <code>::-webkit-meter-optimum-value</code>, and <code>::-webkit-meter-suboptimal-value</code> to customize the display of meter elements.</p>
+
+<p>In order for the pseudo-elements to be styled, you must set <code>-webkit-appearance</code> to <code>none</code> on the meter element itself.</p>
+
+<p>Only one of the <code>::-webkit-meter-even-less-good-value</code>, <code>::-webkit-meter-optimum-value</code>, and <code>::-webkit-meter-suboptimal-value</code> elements will be active at a given time depending on the value of the meter.</p>
+
+<p>See the following for an example:</p>
+
+<p><code>html
+&lt;meter low="69" high="80" max="100" optimum="100" value="92"&gt;A&lt;/meter&gt;
+&lt;meter low="69" high="80" max="100" optimum="100" value="72"&gt;C&lt;/meter&gt;
+&lt;meter low="69" high="80" max="100" optimum="100" value="52"&gt;E&lt;/meter&gt;
+</code>
+``` css
+meter { -webkit-appearance: none; }
+::-webkit-meter-bar {</p>
+
+<pre><code>height: 50px;
+background: white;
+border: 2px solid black;
+</code></pre>
+
+<p>}
+::-webkit-meter-optimum-value { background: green; }
+::-webkit-meter-suboptimum-value { background: orange; }
+::-webkit-meter-even-less-good-value { background: blue; }
+```</p>
+
+<p>This displays as follows in Chrome 26 on OS X:</p>
+
+<p><img src="http://tjvantoll.com/images/posts/2013-04-15/webkit-meter.png"></p>
+
+<h3 id="progress_element">&lt;progress&gt; Element</h3>
+
+
+<!-- http://jsfiddle.net/tj_vantoll/hhTPA/ -->
+
+
+<h4>WebKit</h4>
+
+<p>WebKit provides pseudo-elements <code>::-webkit-progress-inner-element</code>, <code>::-webkit-progress-bar</code>, &amp; <code>::-webkit-progress-value</code> to style progress elements in the following hierarchy:</p>
+
+<p><img src="http://tjvantoll.com/images/posts/2013-04-15/webkit-progress-shadow.png"></p>
+
+<p>Like meter, in order to apply any rules to these elements you must set <code>-webkit-appearance: none;</code> on the progress element.  Here's an example:</p>
+
+<p><code>html
+&lt;progress max="100" value="50"&gt;&lt;/progress&gt;
+</code>
+<code>css
+progress { -webkit-appearance: none; }
+::-webkit-progress-inner-element { }
+::-webkit-progress-bar { border: 2px solid black; }
+::-webkit-progress-value { background: red; }
+</code></p>
+
+<p>This displays as follows in Chrome 26 on OS X:</p>
+
+<p><img src="http://tjvantoll.com/images/posts/2013-04-15/webkit-progress.png"></p>
+
+<h4>Gecko</h4>
+
+<p>Gecko provides a <code>::-moz-progress-bar</code> pseudo-element to style the progress bar itself.  For example:</p>
+
+<p><code>html
+&lt;progress max="100" value="50"&gt;&lt;/progress&gt;
+</code>
+<code>css
+::-moz-progress-bar { background: red; }
+</code></p>
+
+<p>This displays as follows in Firefox 19 on OS X:</p>
+
+<p><img src="http://tjvantoll.com/images/posts/2013-04-15/gecko-progress.png"></p>
+
+<h4>Trident</h4>
+
+<p>Like Gecko, Trident provides a single pseudo-element to style the progress bar, <code>::-ms-fill</code>.  For example:</p>
+
+<p><code>html
+&lt;progress max="100" value="50"&gt;&lt;/progress&gt;
+</code>
+<code>css
+::-ms-fill { background: red; }
+</code></p>
+
+<p>This displays as follows in IE10 on Windows 8:</p>
+
+<p><img src="http://tjvantoll.com/images/posts/2013-04-15/trident-progress.png"></p>
+
+<h3 id="select_element">&lt;select&gt; Element</h3>
+
+
+<!-- http://jsfiddle.net/tj_vantoll/f5qTH/ -->
+
+
+<h4>Trident</h4>
+
+<p>As of IE10 Trident gives you a hook to style the arrow within select dropdowns, <code>::-ms-expand</code>.  For example:</p>
+
+<p>``` css
+::-ms-expand {</p>
+
+<pre><code>padding: 2em;
+color: red;
+background: black;
+</code></pre>
+
+<p>}
+```</p>
+
+<p>This displays as follows in IE10 on Windows 8:</p>
+
+<p><img src="http://tjvantoll.com/images/posts/2013-04-15/trident-select.png"></p>
+
+<h3 id="form_validation_messages">Form Validation Messages</h3>
+
+
+<!-- http://jsfiddle.net/tj_vantoll/Eb2zN/ -->
+
+
+<h4>WebKit</h4>
+
+<p>WebKit is the only rendering engine to support styling the validation bubbles created from the <a href="http://www.html5rocks.com/en/tutorials/forms/constraintvalidation">constraint validation API</a>.  The following pseudo-elements are provided:</p>
+
+<ul>
+<li><code>::-webkit-validation-bubble</code></li>
+<li><code>::-webkit-validation-bubble-arrow</code></li>
+<li><code>::-webkit-validation-bubble-arrow-clipper</code></li>
+<li><code>::-webkit-validation-bubble-heading</code></li>
+<li><code>::-webkit-validation-bubble-message</code></li>
+<li><code>::-webkit-validation-bubble-text-block</code></li>
+</ul>
+
+
+<p>It's easier to see what each element does visually.  Here's an example:</p>
+
+<p><code>css
+::-webkit-validation-bubble { padding: 1em; background: orange; }
+::-webkit-validation-bubble-arrow { background: blue; }
+::-webkit-validation-bubble-arrow-clipper { border: 2px solid black; }
+::-webkit-validation-bubble-heading { background: green; }
+::-webkit-validation-bubble-message { color: white; background: purple; }
+::-webkit-validation-bubble-text-block { border: 1px solid red; padding: 1em; }
+</code></p>
+
+<p>This displays as follows in Chrome 26 on OS X:</p>
+
+<p><img src="http://tjvantoll.com/images/posts/2013-04-15/webkit-validation-bubble.png"></p>
+
+<p>Here's a slightly more practical example showing how the bubble can be themed:</p>
+
+<p>``` css
+::-webkit-validation-bubble-message {</p>
+
+<pre><code>color: #eee;
+background: black;
+</code></pre>
+
+<p>}
+::-webkit-validation-bubble-arrow {</p>
+
+<pre><code>background: black;
+border-color: #444;
+box-shadow: none;
+</code></pre>
+
+<p>}
+```</p>
+
+<p>This displays as follows in Chrome 26 on OS X:</p>
+
+<p><img src="http://tjvantoll.com/images/posts/2013-04-15/webkit-validation-bubble-pretty.png"></p>
+
+<h3>That's It!</h3>
+
+<p>Hopefully you will find this list helpful.  If I'm missing elements or some of this information gets out of date let me know in the comments.</p>
+
+<h3>Resources</h3>
+
+<ul>
+<li><a href="https://gist.github.com/afabbro/3759334">https://gist.github.com/afabbro/3759334</a>: A gist from <a href="https://twitter.com/angelinamagnum">@angelinamagnum</a> with a nice list of ALL WebKit pseudo-elements. (<a href="https://twitter.com/paul_irish">@paul_irish</a> actually <code>ack</code>'d the WebKit code base.)</li>
+<li><a href="http://www.wufoo.com/html5/">http://www.wufoo.com/html5/</a>: Wufoo's Current State of HTML Forms</li>
+<li><a href="https://developer.mozilla.org/en-US/docs/CSS/CSS_Reference/Mozilla_Extensions">https://developer.mozilla.org/en-US/docs/CSS/CSS_Reference/Mozilla_Extensions</a>: MDN article on Mozilla's CSS Extensions</li>
+<li><a href="http://dev.bowdenweb.com/css/pseudo/ms-trident-vendor-prefixed-pseudo-elements.html">http://dev.bowdenweb.com/css/pseudo/ms-trident-vendor-prefixed-pseudo-elements.html</a>: List of Trident Vendor-Prefixed Pseudo-Elements</li>
+<li><a href="http://trac.webkit.org/browser/trunk/Source/WebCore/css/html.css">http://trac.webkit.org/browser/trunk/Source/WebCore/css/html.css</a>: WebKit's current user agent stylesheet</li>
+<li><a href="http://trac.webkit.org/wiki/Styling%20Form%20Controls">http://trac.webkit.org/wiki/Styling%20Form%20Controls</a>: Slightly dated guide from WebKit on styling form controls</li>
+</ul>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Stop Messing with the Browser's Default Focus outline]]></title>
@@ -466,112 +1210,6 @@ td:nth-child(3), th:nth-child(3) { width: 100px; }
 <p>The markup to create the table is simple and semantic.  I've seen workarounds for this issue that use <code>&lt;div&gt;</code>s instead of <code>&lt;table&gt;</code>s or multiple aligned <code>&lt;table&gt;</code>s and those always felt dirty to me.</p>
 
 <p>The code is free to use and do whatever you want with it.  If you have any suggestions for improvements or find any issues please let me know in the comments.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Creating a Polished Vertical Tabs Interaction with jQuery UI]]></title>
-    <link href="http://tjvantoll.com/2012/11/08/creating-a-polished-vertical-tabs-interaction-with-jquery-ui/"/>
-    <updated>2012-11-08T00:00:00-05:00</updated>
-    <id>http://tjvantoll.com/2012/11/08/creating-a-polished-vertical-tabs-interaction-with-jquery-ui</id>
-    <content type="html"><![CDATA[<p>The <a href="http://jqueryui.com/tabs/">jQuery UI tabs widget</a> provides a clean way to implement a tabular UI.  Furthermore, the markup used gives you ample hooks to make the tabs visually into what you want them to be.  The docs provide a <a href="http://jqueryui.com/tabs/#vertical">simple demo</a> of how you can give the tabs a vertical orientation, but I thought I'd show how you can use what the framework provides to create something a bit more polished.</p>
-
-<!--more-->
-
-
-<p>The following CSS will vertically arrange the tabs:</p>
-
-<p>``` css
-.ui-tabs.ui-tabs-vertical {</p>
-
-<pre><code>padding: 0;
-width: 42em;
-</code></pre>
-
-<p>}
-.ui-tabs.ui-tabs-vertical .ui-widget-header {</p>
-
-<pre><code>border: none;
-</code></pre>
-
-<p>}
-.ui-tabs.ui-tabs-vertical .ui-tabs-nav {</p>
-
-<pre><code>float: left;
-width: 10em;
-background: #CCC;
-border-radius: 4px 0 0 4px;
-border-right: 1px solid gray;
-</code></pre>
-
-<p>}
-.ui-tabs.ui-tabs-vertical .ui-tabs-nav li {</p>
-
-<pre><code>clear: left;
-width: 100%;
-margin: 0.2em 0;
-border: 1px solid gray;
-border-width: 1px 0 1px 1px;
-border-radius: 4px 0 0 4px;
-overflow: hidden;
-position: relative;
-right: -2px;
-z-index: 2;
-</code></pre>
-
-<p>}
-.ui-tabs.ui-tabs-vertical .ui-tabs-nav li a {</p>
-
-<pre><code>display: block;
-width: 100%;
-padding: 0.6em 1em;
-</code></pre>
-
-<p>}
-.ui-tabs.ui-tabs-vertical .ui-tabs-nav li a:hover {</p>
-
-<pre><code>cursor: pointer;
-</code></pre>
-
-<p>}
-.ui-tabs.ui-tabs-vertical .ui-tabs-nav li.ui-tabs-active {</p>
-
-<pre><code>margin-bottom: 0.2em;
-padding-bottom: 0;
-border-right: 1px solid white;
-</code></pre>
-
-<p>}
-.ui-tabs.ui-tabs-vertical .ui-tabs-nav li:last-child {</p>
-
-<pre><code>margin-bottom: 10px;
-</code></pre>
-
-<p>}
-.ui-tabs.ui-tabs-vertical .ui-tabs-panel {</p>
-
-<pre><code>float: left;
-width: 28em;
-border-left: 1px solid gray;
-border-radius: 0;
-position: relative;
-left: -1px;
-</code></pre>
-
-<p>}
-```</p>
-
-<p>It only relies on a class of <code>ui-tabs-vertical</code> being applied to the elements the <code>tabs</code> widget is created on.</p>
-
-<p><code>javascript
-$('#tabs').tabs().addClass('ui-tabs-vertical');
-</code></p>
-
-<p>And here's the result:</p>
-
-<p><div class="code_example"><h6>jQuery UI Vertical Tabs<a href="/demos/2012-11-08/verticalTabs.html" target="_blank">Open in New Window</a></h6><iframe style="width: 100%; height: 275px;" frameborder="0" src="/demos/2012-11-08/verticalTabs.html"></iframe></div></p>
-
-<p>Feel free to use this or modify it to your liking.</p>
 ]]></content>
   </entry>
   

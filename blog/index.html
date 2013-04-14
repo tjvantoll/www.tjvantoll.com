@@ -9,14 +9,7 @@
   <meta name="author" content="TJ VanToll">
 
   
-  <meta name="description" content="The common way of preventing the default action of an event is to call preventDefault on its Event Object: 1
-2
-3
-4
-5
-6
-7
-&lt;a href=&quot;http:// &hellip;">
+  <meta name="description" content="Styling form elements is a pain point when developing web applications. Historically, web developers have had to accept the form controls the browser &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -92,8 +85,8 @@
 </form>
   
 <ul class="main-navigation">
+<li><a href="/">About</a></li>
   <li><a href="/blog/">Blog</a></li>
-  <li><a href="/">About</a></li>
   <li><a href="/blog/archives/">Archives</a></li>
   <li><a href="/speaking/">Speaking</a></li>
 </ul>
@@ -103,6 +96,59 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2013/04/15/list-of-pseudo-elements-to-style-form-controls/">List of Pseudo-Elements to Style Form Controls</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-04-15T00:00:00-04:00" pubdate data-updated="true">Apr 15<span>th</span>, 2013</time>
+        
+         | <a href="/2013/04/15/list-of-pseudo-elements-to-style-form-controls/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Styling form elements is a pain point when developing web applications.  Historically, web developers have had to accept the form controls the browser provided with little hope of customization.  However, web rendering engines are increasingly adding hooks through pseudo-elements to give authors some control over the display.</p>
+
+<p>While all of these pseudo-elements are rendering engine specific (and therefore behind vendor prefixes), they can still be handy for customizing the display for that engine.  The following is my best attempt at compiling a complete list of the pseudo-elements available in Trident, Gecko, and WebKit.  At the time of this writing Blink is a recent fork of WebKit, so the pseudo-elements provided are identical.  I am not aware of any form related pseudo-elements that Presto provides.</p>
+
+<p>Couple of notes before we get started:</p>
+
+<ul>
+<li>All Trident pseudo-elements listed here were added in IE10 and will not work in earlier versions of Internet Explorer.</li>
+<li>In WebKit, to style some pseudo-elements you must set the basis element&#8217;s <code>-webkit-appearance</code> pseudo-class to <code>none</code>.  For example, to style <code>::-webkit-progress-bar</code> you must apply <code>-webkit-appearance: none;</code> to the appropriate <code>&lt;progress&gt;</code> element.</li>
+</ul>
+
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/2013/04/15/list-of-pseudo-elements-to-style-form-controls/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -787,49 +833,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2013/01/01/enter-should-submit-forms-stop-messing-with-that/">The Enter Key should Submit Forms, Stop Suppressing it</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-01-01T15:54:00-05:00" pubdate data-updated="true">Jan 1<span>st</span>, 2013</time>
-        
-         | <a href="/2013/01/01/enter-should-submit-forms-stop-messing-with-that/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>I try to do most of my work and play on the internet with the keyboard.  In the course of my internet-ing there&#8217;s one unfortunate trend that I&#8217;ve noticed; an increasing number of sites are not allowing the enter key to submit a form.  Before I tell you why you care, let&#8217;s look at how this should work.</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/2013/01/01/enter-should-submit-forms-stop-messing-with-that/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -843,6 +846,10 @@
     <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2013/04/15/list-of-pseudo-elements-to-style-form-controls/">List of Pseudo-Elements to Style Form Controls</a>
+      </li>
     
       <li class="post">
         <a href="/2013/03/28/shorthand-for-preventing-default-event-actions-with-jquery/">Shorthand for Preventing Default Event Actions with jQuery</a>
@@ -878,10 +885,6 @@
     
       <li class="post">
         <a href="/2013/01/05/is-it-safe-to-use-the-body-as-a-top-level-container-yet/">Using the body Element as a Top Level Container - Is it Safe Yet?</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2013/01/01/enter-should-submit-forms-stop-messing-with-that/">The Enter Key should Submit Forms, Stop Suppressing it</a>
       </li>
     
   </ul>

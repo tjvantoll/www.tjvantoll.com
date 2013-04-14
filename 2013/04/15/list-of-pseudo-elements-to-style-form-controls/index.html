@@ -1,0 +1,1148 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>List of Pseudo-Elements to Style Form Controls - TJ VanToll - Tutorials, Thoughts, and Ramblings on Front End Development</title>
+  <meta name="author" content="TJ VanToll">
+
+  
+  <meta name="description" content="Styling form elements is a pain point when developing web applications. Historically, web developers have had to accept the form controls the browser &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://tjvantoll.com/2013/04/15/list-of-pseudo-elements-to-style-form-controls">
+
+  <!--[if ! lte IE 7]><!-->
+    <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <!--<![endif]-->
+  <!--[if lte IE 7]>
+    <link rel="stylesheet" href="/stylesheets/old-ie.css" media="screen, projection">
+  <![endif]-->
+  
+  <!--Custom script concatenation
+  <script src="/javascripts/modernizr-2.5.3.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js"></script>
+  <script src="/javascripts/PictureCube.js"></script>
+  <script src="/javascripts/ender.tipsy.js"></script>
+  <script src="/javascripts/blog.js"></script>
+  -->
+  <script src="/javascripts/build/scripts.js"></script>
+
+  <link href="/atom.xml" rel="alternate" title="TJ VanToll" type="application/atom+xml">
+  <style>
+	/* Fonts from Google"s Web font directory at http://google.com/webfonts */
+	/*@import url(http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic);
+	@import url(http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic);*/
+</style>
+
+  
+  <script type="text/javascript">
+  	if (window.location.host.indexOf('local') == -1) {
+	    var _gaq = _gaq || [];
+	    _gaq.push(['_setAccount', 'UA-29179796-1']);
+	    _gaq.push(['_trackPageview']);
+	
+	    (function() {
+	      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+	      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+	      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	    })();
+    }
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+	<div id="picture-cube"></div>
+	<h1><a href="/">TJ VanToll</a></h1>
+	
+		<h2>Tutorials, Thoughts, and Ramblings on Front End Development</h2> 
+	
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:tjvantoll.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+<li><a href="/">About</a></li>
+  <li><a href="/blog/">Blog</a></li>
+  <li><a href="/blog/archives/">Archives</a></li>
+  <li><a href="/speaking/">Speaking</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">List of Pseudo-Elements to Style Form Controls</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-04-15T00:00:00-04:00" pubdate data-updated="true">Apr 15<span>th</span>, 2013</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>Styling form elements is a pain point when developing web applications.  Historically, web developers have had to accept the form controls the browser provided with little hope of customization.  However, web rendering engines are increasingly adding hooks through pseudo-elements to give authors some control over the display.</p>
+
+<p>While all of these pseudo-elements are rendering engine specific (and therefore behind vendor prefixes), they can still be handy for customizing the display for that engine.  The following is my best attempt at compiling a complete list of the pseudo-elements available in Trident, Gecko, and WebKit.  At the time of this writing Blink is a recent fork of WebKit, so the pseudo-elements provided are identical.  I am not aware of any form related pseudo-elements that Presto provides.</p>
+
+<p>Couple of notes before we get started:</p>
+
+<ul>
+<li>All Trident pseudo-elements listed here were added in IE10 and will not work in earlier versions of Internet Explorer.</li>
+<li>In WebKit, to style some pseudo-elements you must set the basis element&#8217;s <code>-webkit-appearance</code> pseudo-class to <code>none</code>.  For example, to style <code>::-webkit-progress-bar</code> you must apply <code>-webkit-appearance: none;</code> to the appropriate <code>&lt;progress&gt;</code> element.</li>
+</ul>
+
+
+<!-- more -->
+
+
+<h3>Table of Contents</h3>
+
+<ul>
+<li>&lt;input&gt; Elements
+
+<ul>
+<li><a href="#input_checkbox_radio">checkbox / radio</a></li>
+<li><a href="#input_color">color</a></li>
+<li><a href="#input_date">date</a></li>
+<li><a href="#input_file">file</a></li>
+<li><a href="#input_number">number</a></li>
+<li><a href="#input_password">password</a></li>
+<li><a href="#placeholder_attribute">placeholder attribute</a></li>
+<li><a href="#input_range">range</a></li>
+<li><a href="#input_search">search</a></li>
+<li><a href="#input_text">text</a></li>
+</ul>
+</li>
+<li>Other Elements
+
+<ul>
+<li><a href="#keygen_element">keygen</a></li>
+<li><a href="#meter_element">meter</a></li>
+<li><a href="#progress_element">progress</a></li>
+<li><a href="#select_element">select</a></li>
+</ul>
+</li>
+<li>Miscellaneous
+
+<ul>
+<li><a href="#form_validation_messages">Form Validation Messages</a></li>
+</ul>
+</li>
+</ul>
+
+
+<h3 id="input_checkbox_radio">input[type=checkbox] / input[type=radio]</h3>
+
+
+<!-- http://jsfiddle.net/tj_vantoll/8esYJ/ -->
+
+
+<h4>Trident</h4>
+
+<p>Trident provides the <code>::-ms-check</code> pseudo-element for checkbox and radio button controls.  For example:</p>
+
+<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;checkbox&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'><span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;radio&quot;</span><span class="nt">&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="o">:</span><span class="nd">:-ms-check</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">color</span><span class="o">:</span> <span class="nb">red</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">background</span><span class="o">:</span> <span class="nb">black</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">padding</span><span class="o">:</span> <span class="m">1em</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This displays as follows in IE10 on Windows 8:</p>
+
+<p><img src="/images/posts/2013-04-15/trident-radio-checkbox.png"></p>
+
+<h3 id="input_color">input[type=color]</h3>
+
+
+<!-- http://jsfiddle.net/tj_vantoll/fQFwc/ -->
+
+
+<h4>WebKit</h4>
+
+<p>Webkit provides 2 pseudo elements for its color picker, <code>::-webkit-color-swatch-wrapper</code> and <code>::-webkit-color-swatch</code>.  You can apply a variety of rules to these elements but I haven&#8217;t come up with anything useful.  Here&#8217;s an example just to show it&#8217;s possible:</p>
+
+<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;color&quot;</span><span class="nt">&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="o">:</span><span class="nd">:-webkit-color-swatch-wrapper</span> <span class="p">{</span> <span class="k">border</span><span class="o">:</span> <span class="m">2px</span> <span class="k">solid</span> <span class="nb">red</span><span class="p">;</span> <span class="p">}</span>
+</span><span class='line'><span class="o">:</span><span class="nd">:-webkit-color-swatch</span> <span class="p">{</span> <span class="k">opacity</span><span class="o">:</span> <span class="m">0</span><span class="o">.</span><span class="m">5</span><span class="p">;</span> <span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This displays as follows in Chrome 26 on OS X:</p>
+
+<p><img src="/images/posts/2013-04-15/webkit-input-color.png"></p>
+
+<h3 id="input_date">input[type=date]</h3>
+
+
+<!-- http://jsfiddle.net/tj_vantoll/Qx46G/ -->
+
+
+<h4>WebKit</h4>
+
+<p>The following 8 pseudo-elements are made available by WebKit for customizing a date input&#8217;s textbox:</p>
+
+<ul>
+<li><code>::-webkit-datetime-edit</code></li>
+<li><code>::-webkit-datetime-edit-fields-wrapper</code></li>
+<li><code>::-webkit-datetime-edit-text</code></li>
+<li><code>::-webkit-datetime-edit-month-field</code></li>
+<li><code>::-webkit-datetime-edit-day-field</code></li>
+<li><code>::-webkit-datetime-edit-year-field</code></li>
+<li><code>::-webkit-inner-spin-button</code></li>
+<li><code>::-webkit-calendar-picker-indicator</code></li>
+</ul>
+
+
+<p>Here is the internal structure of these elements:</p>
+
+<p><img src="/images/posts/2013-04-15/webkit-input-date-shadow.png"></p>
+
+<p>So if you thought the date input could use more spacing and a ridiculous color scheme you could add the following:</p>
+
+<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;date&quot;</span><span class="nt">&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="o">:</span><span class="nd">:-webkit-datetime-edit</span> <span class="p">{</span> <span class="k">padding</span><span class="o">:</span> <span class="m">1em</span><span class="p">;</span> <span class="p">}</span>
+</span><span class='line'><span class="o">:</span><span class="nd">:-webkit-datetime-edit-fields-wrapper</span> <span class="p">{</span> <span class="k">background</span><span class="o">:</span> <span class="nb">silver</span><span class="p">;</span> <span class="p">}</span>
+</span><span class='line'><span class="o">:</span><span class="nd">:-webkit-datetime-edit-text</span> <span class="p">{</span> <span class="k">color</span><span class="o">:</span> <span class="nb">red</span><span class="p">;</span> <span class="k">padding</span><span class="o">:</span> <span class="m">0</span> <span class="m">0.3em</span><span class="p">;</span> <span class="p">}</span>
+</span><span class='line'><span class="o">:</span><span class="nd">:-webkit-datetime-edit-month-field</span> <span class="p">{</span> <span class="k">color</span><span class="o">:</span> <span class="nb">blue</span><span class="p">;</span> <span class="p">}</span>
+</span><span class='line'><span class="o">:</span><span class="nd">:-webkit-datetime-edit-day-field</span> <span class="p">{</span> <span class="k">color</span><span class="o">:</span> <span class="nb">green</span><span class="p">;</span> <span class="p">}</span>
+</span><span class='line'><span class="o">:</span><span class="nd">:-webkit-datetime-edit-year-field</span> <span class="p">{</span> <span class="k">color</span><span class="o">:</span> <span class="nb">purple</span><span class="p">;</span> <span class="p">}</span>
+</span><span class='line'><span class="o">:</span><span class="nd">:-webkit-inner-spin-button</span> <span class="p">{</span> <span class="k">display</span><span class="o">:</span> <span class="k">none</span><span class="p">;</span> <span class="p">}</span>
+</span><span class='line'><span class="o">:</span><span class="nd">:-webkit-calendar-picker-indicator</span> <span class="p">{</span> <span class="k">background</span><span class="o">:</span> <span class="nb">orange</span><span class="p">;</span> <span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This displays as follows in Chrome 26 on OS X:</p>
+
+<p><img src="/images/posts/2013-04-15/webkit-input-date.png"></p>
+
+<h3 id="input_file">input[type=file]</h3>
+
+
+<!-- http://jsfiddle.net/tj_vantoll/nmmGU/ -->
+
+
+<p>All rendering engines automatically generate a button when an <code>&lt;input type="file"&gt;</code> is created.  Historically, that button has been completely un-styleable.  However, recently Trident and WebKit have added hooks through pseudo-elements.</p>
+
+<h4>Trident</h4>
+
+<p>As of IE10 the file input button can be styled using the <code>::-ms-browse</code> pseudo-element.  Basically any CSS rules that you apply a regular button can be applied to the pseudo-element.  For example:</p>
+
+<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;file&quot;</span><span class="nt">&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="o">:</span><span class="nd">:-ms-browse</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">background</span><span class="o">:</span> <span class="nb">black</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">color</span><span class="o">:</span> <span class="nb">red</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">padding</span><span class="o">:</span> <span class="m">1em</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This displays as follows in IE10 on Windows 8:</p>
+
+<p><img src="/images/posts/2013-04-15/trident-input-file.png"></p>
+
+<h4>WebKit</h4>
+
+<p>WebKit provides a hook for its file input button with the <code>::-webkit-file-upload-button</code> pseudo-element.  Again pretty much any CSS rule can be applied, therefore the Trident example will work here as well:</p>
+
+<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;file&quot;</span><span class="nt">&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="o">:</span><span class="nd">:-webkit-file-upload-button</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">background</span><span class="o">:</span> <span class="nb">black</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">color</span><span class="o">:</span> <span class="nb">red</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">padding</span><span class="o">:</span> <span class="m">1em</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This displays as follows in Chrome 26 on OS X:</p>
+
+<p><img src="/images/posts/2013-04-15/webkit-input-file.png"></p>
+
+<h3 id="input_number">input[type=number]</h3>
+
+
+<!-- http://jsfiddle.net/tj_vantoll/KwzPm/ -->
+
+
+<h4>WebKit</h4>
+
+<p>WebKit provides a spinner control by default for number picker inputs.  Pseudo-elements <code>::-webkit-textfield-decoration-container</code>, <code>::-webkit-inner-spin-button</code> and <code>::-webkit-outer-spin-button</code> are provided for customization.  While you cannot do a whole lot with these elements, it can be useful to hide the spinner.</p>
+
+<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;number&quot;</span><span class="nt">&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="o">:</span><span class="nd">:-webkit-textfield-decoration-container</span> <span class="p">{</span> <span class="p">}</span>
+</span><span class='line'><span class="o">:</span><span class="nd">:-webkit-inner-spin-button</span> <span class="p">{</span>
+</span><span class='line'>    <span class="o">-</span><span class="n">webkit</span><span class="o">-</span><span class="n">appearance</span><span class="o">:</span> <span class="k">none</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="o">:</span><span class="nd">:-webkit-outer-spin-button</span> <span class="p">{</span>
+</span><span class='line'>    <span class="o">-</span><span class="n">webkit</span><span class="o">-</span><span class="n">appearance</span><span class="o">:</span> <span class="k">none</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This displays as follows in Chrome 26 on OS X:</p>
+
+<p><img src="/images/posts/2013-04-15/webkit-input-number.png"></p>
+
+<h3 id="input_password">input[type=password]</h3>
+
+
+<!-- http://jsfiddle.net/tj_vantoll/Xaw9B/ -->
+
+
+<h4>Trident</h4>
+
+<p>Trident provides a control on password inputs that can be pressed to display the password in plain text.  This control is made customizable via the <code>::-ms-reveal</code> pseudo-element.  You can change a number of properties of the control including its <code>color</code>, <code>background</code>, or <code>display</code> to hide it.  The following will hide the control:</p>
+
+<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;password&quot;</span><span class="nt">&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="o">:</span><span class="nd">:-ms-reveal</span> <span class="p">{</span> <span class="k">display</span><span class="o">:</span> <span class="k">none</span><span class="p">;</span> <span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This displays as follows in IE10 on Windows 8:</p>
+
+<p><img src="/images/posts/2013-04-15/trident-input-password.png"></p>
+
+<h3 id="placeholder_attribute">placeholder Attribute</h3>
+
+
+<!-- http://jsfiddle.net/tj_vantoll/TAqWZ/ -->
+
+
+<h4>Gecko</h4>
+
+<p>Gecko provides the pseduo-element <code>::-moz-placeholder</code> to style placeholder text.  You can use this to change the placeholder&#8217;s color or font properties.  For example:</p>
+
+<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;input</span> <span class="na">placeholder=</span><span class="s">&quot;placeholder&quot;</span><span class="nt">&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="o">:</span><span class="nd">:-moz-placeholder</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">color</span><span class="o">:</span> <span class="nb">blue</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">font-family</span><span class="o">:</span> <span class="s1">&#39;Comic Sans MS&#39;</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This displays as follows in Firefox 20 on OS X:</p>
+
+<p><img src="/images/posts/2013-04-15/gecko-placeholder.png"></p>
+
+<p><i>Note: Gecko switched from the pseudo-class <code>:-moz-placeholder</code> to the pseudo-element <code>::-moz-placeholder</code> in Firefox 19.</i></p>
+
+<h4>Trident</h4>
+
+<p>Trident offers the ability to style the placeholder text with a pseudo-class rather than a pseudo-element.  However the class, <code>-ms-input-placeholder</code>, can be used the same as the pseudo-elements from the other rendering engines:</p>
+
+<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;input</span> <span class="na">placeholder=</span><span class="s">&quot;placeholder&quot;</span><span class="nt">&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nd">:-ms-input-placeholder</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">color</span><span class="o">:</span> <span class="nb">blue</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">font-family</span><span class="o">:</span> <span class="s1">&#39;Comic Sans MS&#39;</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This displays as follows in IE10 on Windows 8:</p>
+
+<p><img src="/images/posts/2013-04-15/trident-placeholder.png"></p>
+
+<h4>WebKit</h4>
+
+<p>WebKit provides the <code>::-webkit-input-placeholder</code> pseudo-element.  It can also be used to change the color and font of the placeholder text:</p>
+
+<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;input</span> <span class="na">placeholder=</span><span class="s">&quot;placeholder&quot;</span><span class="nt">&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="o">:</span><span class="nd">:-webkit-input-placeholder</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">color</span><span class="o">:</span> <span class="nb">blue</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">font-family</span><span class="o">:</span> <span class="s1">&#39;Comic Sans MS&#39;</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This displays as follows in Chrome 26 on OS X:</p>
+
+<p><img src="/images/posts/2013-04-15/webkit-placeholder.png"></p>
+
+<h3 id="input_range">input[type=range]</h3>
+
+
+<!-- http://jsfiddle.net/tj_vantoll/MHrzT/ -->
+
+
+<h4>Gecko</h4>
+
+<p>As of Firefox 22, Gecko provides pseudo-elements <code>::-moz-range-track</code> and <code>::-moz-range-thumb</code> for styling range inputs.  It&#8217;s possible to apply most CSS rules to these elements, for example:</p>
+
+<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;range&quot;</span><span class="nt">&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="o">:</span><span class="nd">:-moz-range-track</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">border</span><span class="o">:</span> <span class="m">2px</span> <span class="k">solid</span> <span class="nb">red</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">height</span><span class="o">:</span> <span class="m">20px</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">background</span><span class="o">:</span> <span class="nb">orange</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="o">:</span><span class="nd">:-moz-range-thumb</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">background</span><span class="o">:</span> <span class="nb">blue</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">height</span><span class="o">:</span> <span class="m">30px</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This displays as follows in Firefox 22 on OS X:</p>
+
+<p><img src="/images/posts/2013-04-15/gecko-input-range.png"></p>
+
+<h4>Trident</h4>
+
+<p>Trident provides an impressive number of pseudo-elements to customize its range selector.</p>
+
+<ul>
+<li><code>::-ms-fill-lower</code>: The track portion underneath / before the handle.</li>
+<li><code>::ms-fill-upper</code>: The track portion above / after the handle.</li>
+<li><code>::-ms-ticks-before</code>: An area above / before the range track with tick marks.</li>
+<li><code>::-ms-ticks-after</code>: An area below / after the range track with tick marks.</li>
+<li><code>::-ms-thumb</code>: The handle.</li>
+<li><code>::-ms-track</code>: The range track itself.</li>
+<li><code>::ms-tooltip</code>: The tooltip that appears when the user is selecting a value with the range selector.  Note that this element cannot be styled, only hidden using <code>display: none</code>.</li>
+</ul>
+
+
+<p>This is easier to visualize with an example.  Take the following:</p>
+
+<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;range&quot;</span><span class="nt">&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="o">:</span><span class="nd">:-ms-fill-lower</span> <span class="p">{</span> <span class="k">background</span><span class="o">:</span> <span class="nb">orange</span><span class="p">;</span> <span class="p">}</span>
+</span><span class='line'><span class="o">:</span><span class="nd">:-ms-fill-upper</span> <span class="p">{</span> <span class="k">background</span><span class="o">:</span> <span class="nb">green</span><span class="p">;</span> <span class="p">}</span>
+</span><span class='line'><span class="o">:</span><span class="nd">:-ms-thumb</span> <span class="p">{</span> <span class="k">background</span><span class="o">:</span> <span class="nb">red</span><span class="p">;</span> <span class="p">}</span>
+</span><span class='line'><span class="o">:</span><span class="nd">:-ms-ticks-after</span> <span class="p">{</span> <span class="k">display</span><span class="o">:</span> <span class="k">block</span><span class="p">;</span> <span class="k">color</span><span class="o">:</span> <span class="nb">blue</span><span class="p">;</span> <span class="p">}</span>
+</span><span class='line'><span class="o">:</span><span class="nd">:-ms-ticks-before</span> <span class="p">{</span> <span class="k">display</span><span class="o">:</span> <span class="k">block</span><span class="p">;</span> <span class="k">color</span><span class="o">:</span> <span class="nb">black</span><span class="p">;</span> <span class="p">}</span>
+</span><span class='line'><span class="o">:</span><span class="nd">:-ms-track</span> <span class="p">{</span> <span class="k">padding</span><span class="o">:</span> <span class="m">20px</span> <span class="m">0</span><span class="p">;</span> <span class="p">}</span>
+</span><span class='line'><span class="o">:</span><span class="nd">:-ms-tooltip</span> <span class="p">{</span> <span class="k">display</span><span class="o">:</span> <span class="k">none</span><span class="p">;</span> <span class="c">/* display and visibility only */</span> <span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This will display as follows in IE10 on Windows 8:</p>
+
+<p><img src="/images/posts/2013-04-15/trident-input-range.png"></p>
+
+<h4>WebKit</h4>
+
+<p>WebKit provides the <code>::-webkit-slider-runnable-track</code> pseudo-element for the track and <code>::-webkit-slider-thumb</code> for the range handle itself.  While you cannot do much with these elements, you can add some colors and padding.</p>
+
+<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;range&quot;</span><span class="nt">&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="o">:</span><span class="nd">:-webkit-slider-runnable-track</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">border</span><span class="o">:</span> <span class="m">2px</span> <span class="k">solid</span> <span class="nb">red</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">background</span><span class="o">:</span> <span class="nb">green</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">padding</span><span class="o">:</span> <span class="m">2em</span> <span class="m">0</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="o">:</span><span class="nd">:-webkit-slider-thumb</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">outline</span><span class="o">:</span> <span class="m">2px</span> <span class="k">solid</span> <span class="nb">blue</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This displays as follows in Chrome 26 on OS X:</p>
+
+<p><img src="/images/posts/2013-04-15/webkit-input-range.png"></p>
+
+<p>One final note about range inputs.  Trident and Webkit allow you to apply hover states to the thumb pseudo-element (<code>::-webkit-slider-thumb:hover</code> and <code>::-ms-thumb:hover</code> respectively), whereas Gecko currently does not.</p>
+
+<h3 id="input_search">input[type=search]</h3>
+
+
+<!-- http://jsfiddle.net/tj_vantoll/9jL5U/ -->
+
+
+<h4>WebKit</h4>
+
+<p>By default WebKit provides a custom UI for search inputs with cancel and search buttons.  Two pseudo-elements, <code>::-webkit-search-cancel-button</code> and <code>::-webkit-search-results-button</code> are provided for customization, although you can&#8217;t much of anything with them other than hide them as shown below:</p>
+
+<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;search&quot;</span><span class="nt">&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="c">/* Remove the rounded corners */</span>
+</span><span class='line'><span class="nt">input</span><span class="o">[</span><span class="nt">type</span><span class="o">=</span><span class="nt">search</span><span class="o">]</span> <span class="p">{</span> <span class="o">-</span><span class="n">webkit</span><span class="o">-</span><span class="n">appearance</span><span class="o">:</span> <span class="k">none</span><span class="p">;</span> <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="c">/* Hide the cancel button */</span>
+</span><span class='line'><span class="o">:</span><span class="nd">:-webkit-search-cancel-button</span> <span class="p">{</span> <span class="o">-</span><span class="n">webkit</span><span class="o">-</span><span class="n">appearance</span><span class="o">:</span> <span class="k">none</span><span class="p">;</span> <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="c">/* Hide the magnifying glass */</span>
+</span><span class='line'><span class="o">:</span><span class="nd">:-webkit-search-results-button</span> <span class="p">{</span> <span class="o">-</span><span class="n">webkit</span><span class="o">-</span><span class="n">appearance</span><span class="o">:</span> <span class="k">none</span><span class="p">;</span> <span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This displays as follows in Chrome 26 on OS X:</p>
+
+<p><img src="/images/posts/2013-04-15/webkit-input-search.png"></p>
+
+<h3 id="input_text">input[type=text]</h3>
+
+
+<!-- http://jsfiddle.net/tj_vantoll/r4mwz/, http://jsfiddle.net/tj_vantoll/ADEvK/ -->
+
+
+<h4>Trident</h4>
+
+<p>As of IE10 Trident provides the pseudo-element <code>::-ms-value</code> to style a variety the value portion of text inputs (<code>input[type=text]</code>, <code>input[type=password]</code>, etc) and selects.  For example:</p>
+
+<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;text&quot;</span> <span class="na">value=</span><span class="s">&quot;value&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'><span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;password&quot;</span> <span class="na">value=</span><span class="s">&quot;value&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'><span class="nt">&lt;select&gt;&lt;option</span> <span class="na">selected</span><span class="nt">&gt;</span>option<span class="nt">&lt;/option&gt;&lt;/select&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="o">:</span><span class="nd">:-ms-value</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">color</span><span class="o">:</span> <span class="nb">red</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">background</span><span class="o">:</span> <span class="nb">black</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">padding</span><span class="o">:</span> <span class="m">1em</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This displays as follows in IE10 on Windows 8:</p>
+
+<p><img src="/images/posts/2013-04-15/trident-value.png"></p>
+
+<h5>Clear Control</h5>
+
+<p>In IE10 when a text input has focus and is not empty, a small X control appears in the right hand side of the input.  When clicked, the control will clear the contents of the text input.  The X is styleable with the <code>::-ms-clear</code> pseudo-element.  Therefore you can hide it:</p>
+
+<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;text&quot;</span><span class="nt">&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="o">:</span><span class="nd">:-ms-clear</span> <span class="p">{</span> <span class="k">display</span><span class="o">:</span> <span class="k">none</span><span class="p">;</span> <span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This displays as follows in IE10 on Windows 8:</p>
+
+<p><img src="/images/posts/2013-04-15/trident-input-clear.png"></p>
+
+<p>There are a variety of rules that <code>::-ms-clear</code> will accept, so you can theme it as well:</p>
+
+<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;text&quot;</span> <span class="na">value=</span><span class="s">&quot;Lorem Ipsum&quot;</span><span class="nt">&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="o">:</span><span class="nd">:-ms-clear</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">color</span><span class="o">:</span> <span class="nb">red</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">background</span><span class="o">:</span> <span class="nb">black</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">padding</span><span class="o">:</span> <span class="m">1em</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Which displays as follows:</p>
+
+<p><img src="/images/posts/2013-04-15/trident-input-clear-fancy.png"></p>
+
+<h3 id="keygen_element">&lt;keygen&gt; Element</h3>
+
+
+<!-- http://jsfiddle.net/tj_vantoll/nMRHU/ -->
+
+
+<p>WebKit provides the <code>::-webkit-keygen-select</code> that can be used to customize the dropdown that a keygen element uses.  For example:</p>
+
+<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="o">:</span><span class="nd">:-webkit-keygen-select</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">background</span><span class="o">:</span> <span class="nb">black</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">color</span><span class="o">:</span> <span class="nb">red</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This displays as follows on Chrome 26 on OS X:</p>
+
+<p><img src="/images/posts/2013-04-15/webkit-keygen.png"></p>
+
+<h3 id="meter_element">&lt;meter&gt; Element</h3>
+
+
+<!-- http://jsfiddle.net/tj_vantoll/Wjzwn -->
+
+
+<h4>WebKit</h4>
+
+<p>WebKit provides pseudo-elements <code>::-webkit-meter-bar</code>, <code>::-webkit-meter-even-less-good-value</code>, <code>::-webkit-meter-optimum-value</code>, and <code>::-webkit-meter-suboptimal-value</code> to customize the display of meter elements.</p>
+
+<p>In order for the pseudo-elements to be styled, you must set <code>-webkit-appearance</code> to <code>none</code> on the meter element itself.</p>
+
+<p>Only one of the <code>::-webkit-meter-even-less-good-value</code>, <code>::-webkit-meter-optimum-value</code>, and <code>::-webkit-meter-suboptimal-value</code> elements will be active at a given time depending on the value of the meter.</p>
+
+<p>See the following for an example:</p>
+
+<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;meter</span> <span class="na">low=</span><span class="s">&quot;69&quot;</span> <span class="na">high=</span><span class="s">&quot;80&quot;</span> <span class="na">max=</span><span class="s">&quot;100&quot;</span> <span class="na">optimum=</span><span class="s">&quot;100&quot;</span> <span class="na">value=</span><span class="s">&quot;92&quot;</span><span class="nt">&gt;</span>A<span class="nt">&lt;/meter&gt;</span>
+</span><span class='line'><span class="nt">&lt;meter</span> <span class="na">low=</span><span class="s">&quot;69&quot;</span> <span class="na">high=</span><span class="s">&quot;80&quot;</span> <span class="na">max=</span><span class="s">&quot;100&quot;</span> <span class="na">optimum=</span><span class="s">&quot;100&quot;</span> <span class="na">value=</span><span class="s">&quot;72&quot;</span><span class="nt">&gt;</span>C<span class="nt">&lt;/meter&gt;</span>
+</span><span class='line'><span class="nt">&lt;meter</span> <span class="na">low=</span><span class="s">&quot;69&quot;</span> <span class="na">high=</span><span class="s">&quot;80&quot;</span> <span class="na">max=</span><span class="s">&quot;100&quot;</span> <span class="na">optimum=</span><span class="s">&quot;100&quot;</span> <span class="na">value=</span><span class="s">&quot;52&quot;</span><span class="nt">&gt;</span>E<span class="nt">&lt;/meter&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nt">meter</span> <span class="p">{</span> <span class="o">-</span><span class="n">webkit</span><span class="o">-</span><span class="n">appearance</span><span class="o">:</span> <span class="k">none</span><span class="p">;</span> <span class="p">}</span>
+</span><span class='line'><span class="o">:</span><span class="nd">:-webkit-meter-bar</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">height</span><span class="o">:</span> <span class="m">50px</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">background</span><span class="o">:</span> <span class="nb">white</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">border</span><span class="o">:</span> <span class="m">2px</span> <span class="k">solid</span> <span class="nb">black</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="o">:</span><span class="nd">:-webkit-meter-optimum-value</span> <span class="p">{</span> <span class="k">background</span><span class="o">:</span> <span class="nb">green</span><span class="p">;</span> <span class="p">}</span>
+</span><span class='line'><span class="o">:</span><span class="nd">:-webkit-meter-suboptimum-value</span> <span class="p">{</span> <span class="k">background</span><span class="o">:</span> <span class="nb">orange</span><span class="p">;</span> <span class="p">}</span>
+</span><span class='line'><span class="o">:</span><span class="nd">:-webkit-meter-even-less-good-value</span> <span class="p">{</span> <span class="k">background</span><span class="o">:</span> <span class="nb">blue</span><span class="p">;</span> <span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This displays as follows in Chrome 26 on OS X:</p>
+
+<p><img src="/images/posts/2013-04-15/webkit-meter.png"></p>
+
+<h3 id="progress_element">&lt;progress&gt; Element</h3>
+
+
+<!-- http://jsfiddle.net/tj_vantoll/hhTPA/ -->
+
+
+<h4>WebKit</h4>
+
+<p>WebKit provides pseudo-elements <code>::-webkit-progress-inner-element</code>, <code>::-webkit-progress-bar</code>, &amp; <code>::-webkit-progress-value</code> to style progress elements in the following hierarchy:</p>
+
+<p><img src="/images/posts/2013-04-15/webkit-progress-shadow.png"></p>
+
+<p>Like meter, in order to apply any rules to these elements you must set <code>-webkit-appearance: none;</code> on the progress element.  Here&#8217;s an example:</p>
+
+<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;progress</span> <span class="na">max=</span><span class="s">&quot;100&quot;</span> <span class="na">value=</span><span class="s">&quot;50&quot;</span><span class="nt">&gt;&lt;/progress&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nt">progress</span> <span class="p">{</span> <span class="o">-</span><span class="n">webkit</span><span class="o">-</span><span class="n">appearance</span><span class="o">:</span> <span class="k">none</span><span class="p">;</span> <span class="p">}</span>
+</span><span class='line'><span class="o">:</span><span class="nd">:-webkit-progress-inner-element</span> <span class="p">{</span> <span class="p">}</span>
+</span><span class='line'><span class="o">:</span><span class="nd">:-webkit-progress-bar</span> <span class="p">{</span> <span class="k">border</span><span class="o">:</span> <span class="m">2px</span> <span class="k">solid</span> <span class="nb">black</span><span class="p">;</span> <span class="p">}</span>
+</span><span class='line'><span class="o">:</span><span class="nd">:-webkit-progress-value</span> <span class="p">{</span> <span class="k">background</span><span class="o">:</span> <span class="nb">red</span><span class="p">;</span> <span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This displays as follows in Chrome 26 on OS X:</p>
+
+<p><img src="/images/posts/2013-04-15/webkit-progress.png"></p>
+
+<h4>Gecko</h4>
+
+<p>Gecko provides a <code>::-moz-progress-bar</code> pseudo-element to style the progress bar itself.  For example:</p>
+
+<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;progress</span> <span class="na">max=</span><span class="s">&quot;100&quot;</span> <span class="na">value=</span><span class="s">&quot;50&quot;</span><span class="nt">&gt;&lt;/progress&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="o">:</span><span class="nd">:-moz-progress-bar</span> <span class="p">{</span> <span class="k">background</span><span class="o">:</span> <span class="nb">red</span><span class="p">;</span> <span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This displays as follows in Firefox 19 on OS X:</p>
+
+<p><img src="/images/posts/2013-04-15/gecko-progress.png"></p>
+
+<h4>Trident</h4>
+
+<p>Like Gecko, Trident provides a single pseudo-element to style the progress bar, <code>::-ms-fill</code>.  For example:</p>
+
+<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;progress</span> <span class="na">max=</span><span class="s">&quot;100&quot;</span> <span class="na">value=</span><span class="s">&quot;50&quot;</span><span class="nt">&gt;&lt;/progress&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="o">:</span><span class="nd">:-ms-fill</span> <span class="p">{</span> <span class="k">background</span><span class="o">:</span> <span class="nb">red</span><span class="p">;</span> <span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This displays as follows in IE10 on Windows 8:</p>
+
+<p><img src="/images/posts/2013-04-15/trident-progress.png"></p>
+
+<h3 id="select_element">&lt;select&gt; Element</h3>
+
+
+<!-- http://jsfiddle.net/tj_vantoll/f5qTH/ -->
+
+
+<h4>Trident</h4>
+
+<p>As of IE10 Trident gives you a hook to style the arrow within select dropdowns, <code>::-ms-expand</code>.  For example:</p>
+
+<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="o">:</span><span class="nd">:-ms-expand</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">padding</span><span class="o">:</span> <span class="m">2em</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">color</span><span class="o">:</span> <span class="nb">red</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">background</span><span class="o">:</span> <span class="nb">black</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This displays as follows in IE10 on Windows 8:</p>
+
+<p><img src="/images/posts/2013-04-15/trident-select.png"></p>
+
+<h3 id="form_validation_messages">Form Validation Messages</h3>
+
+
+<!-- http://jsfiddle.net/tj_vantoll/Eb2zN/ -->
+
+
+<h4>WebKit</h4>
+
+<p>WebKit is the only rendering engine to support styling the validation bubbles created from the <a href="http://www.html5rocks.com/en/tutorials/forms/constraintvalidation">constraint validation API</a>.  The following pseudo-elements are provided:</p>
+
+<ul>
+<li><code>::-webkit-validation-bubble</code></li>
+<li><code>::-webkit-validation-bubble-arrow</code></li>
+<li><code>::-webkit-validation-bubble-arrow-clipper</code></li>
+<li><code>::-webkit-validation-bubble-heading</code></li>
+<li><code>::-webkit-validation-bubble-message</code></li>
+<li><code>::-webkit-validation-bubble-text-block</code></li>
+</ul>
+
+
+<p>It&#8217;s easier to see what each element does visually.  Here&#8217;s an example:</p>
+
+<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="o">:</span><span class="nd">:-webkit-validation-bubble</span> <span class="p">{</span> <span class="k">padding</span><span class="o">:</span> <span class="m">1em</span><span class="p">;</span> <span class="k">background</span><span class="o">:</span> <span class="nb">orange</span><span class="p">;</span> <span class="p">}</span>
+</span><span class='line'><span class="o">:</span><span class="nd">:-webkit-validation-bubble-arrow</span> <span class="p">{</span> <span class="k">background</span><span class="o">:</span> <span class="nb">blue</span><span class="p">;</span> <span class="p">}</span>
+</span><span class='line'><span class="o">:</span><span class="nd">:-webkit-validation-bubble-arrow-clipper</span> <span class="p">{</span> <span class="k">border</span><span class="o">:</span> <span class="m">2px</span> <span class="k">solid</span> <span class="nb">black</span><span class="p">;</span> <span class="p">}</span>
+</span><span class='line'><span class="o">:</span><span class="nd">:-webkit-validation-bubble-heading</span> <span class="p">{</span> <span class="k">background</span><span class="o">:</span> <span class="nb">green</span><span class="p">;</span> <span class="p">}</span>
+</span><span class='line'><span class="o">:</span><span class="nd">:-webkit-validation-bubble-message</span> <span class="p">{</span> <span class="k">color</span><span class="o">:</span> <span class="nb">white</span><span class="p">;</span> <span class="k">background</span><span class="o">:</span> <span class="nb">purple</span><span class="p">;</span> <span class="p">}</span>
+</span><span class='line'><span class="o">:</span><span class="nd">:-webkit-validation-bubble-text-block</span> <span class="p">{</span> <span class="k">border</span><span class="o">:</span> <span class="m">1px</span> <span class="k">solid</span> <span class="nb">red</span><span class="p">;</span> <span class="k">padding</span><span class="o">:</span> <span class="m">1em</span><span class="p">;</span> <span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This displays as follows in Chrome 26 on OS X:</p>
+
+<p><img src="/images/posts/2013-04-15/webkit-validation-bubble.png"></p>
+
+<p>Here&#8217;s a slightly more practical example showing how the bubble can be themed:</p>
+
+<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="o">:</span><span class="nd">:-webkit-validation-bubble-message</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">color</span><span class="o">:</span> <span class="m">#eee</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">background</span><span class="o">:</span> <span class="nb">black</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="o">:</span><span class="nd">:-webkit-validation-bubble-arrow</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">background</span><span class="o">:</span> <span class="nb">black</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">border-color</span><span class="o">:</span> <span class="m">#444</span><span class="p">;</span>
+</span><span class='line'>    <span class="n">box</span><span class="o">-</span><span class="n">shadow</span><span class="o">:</span> <span class="k">none</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This displays as follows in Chrome 26 on OS X:</p>
+
+<p><img src="/images/posts/2013-04-15/webkit-validation-bubble-pretty.png"></p>
+
+<h3>That&#8217;s It!</h3>
+
+<p>Hopefully you will find this list helpful.  If I&#8217;m missing elements or some of this information gets out of date let me know in the comments.</p>
+
+<h3>Resources</h3>
+
+<ul>
+<li><a href="https://gist.github.com/afabbro/3759334">https://gist.github.com/afabbro/3759334</a>: A gist from <a href="https://twitter.com/angelinamagnum">@angelinamagnum</a> with a nice list of ALL WebKit pseudo-elements. (<a href="https://twitter.com/paul_irish">@paul_irish</a> actually <code>ack</code>&#8216;d the WebKit code base.)</li>
+<li><a href="http://www.wufoo.com/html5/">http://www.wufoo.com/html5/</a>: Wufoo&#8217;s Current State of HTML Forms</li>
+<li><a href="https://developer.mozilla.org/en-US/docs/CSS/CSS_Reference/Mozilla_Extensions">https://developer.mozilla.org/en-US/docs/CSS/CSS_Reference/Mozilla_Extensions</a>: MDN article on Mozilla&#8217;s CSS Extensions</li>
+<li><a href="http://dev.bowdenweb.com/css/pseudo/ms-trident-vendor-prefixed-pseudo-elements.html">http://dev.bowdenweb.com/css/pseudo/ms-trident-vendor-prefixed-pseudo-elements.html</a>: List of Trident Vendor-Prefixed Pseudo-Elements</li>
+<li><a href="http://trac.webkit.org/browser/trunk/Source/WebCore/css/html.css">http://trac.webkit.org/browser/trunk/Source/WebCore/css/html.css</a>: WebKit&#8217;s current user agent stylesheet</li>
+<li><a href="http://trac.webkit.org/wiki/Styling%20Form%20Controls">http://trac.webkit.org/wiki/Styling%20Form%20Controls</a>: Slightly dated guide from WebKit on styling form controls</li>
+</ul>
+
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">TJ VanToll</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-04-15T00:00:00-04:00" pubdate data-updated="true">Apr 15<span>th</span>, 2013</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/browsers/'>Browsers</a>, <a class='category' href='/blog/categories/css/'>CSS</a>
+  
+</span>
+
+
+    </p>
+    <p class="author_card meta">
+      <img src="/images/me/1.jpg" alt="Me!" id="post_me" />
+      TJ VanToll is an avid web developer working for <a href="http://liquidweb.com">Liquid Web</a> and living in Lansing, MI.  He is an open source advocate that is on the <a href="http://jqueryui.com">jQuery UI</a> team and publishes this blog <a href="https://github.com/tjvantoll/tjvantoll.github.com/tree/source">open source</a>.  When not on the internet he is generally found <a href="/images/kids/2.jpg">brainwashing his children</a> and talking about himself in the third person.  If you like hearing TJ talk about himself you should consider <a href="http://twitter.com/tjvantoll">following him on Twitter</a>.
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://tjvantoll.com/2013/04/15/list-of-pseudo-elements-to-style-form-controls/" data-via="tjvantoll" data-counturl="http://tjvantoll.com/2013/04/15/list-of-pseudo-elements-to-style-form-controls/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/2013/03/28/shorthand-for-preventing-default-event-actions-with-jquery/" title="Previous Post: Shorthand for Preventing Default Event Actions with jQuery">&laquo; Shorthand for Preventing Default Event Actions with jQuery</a>
+      
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2013/04/15/list-of-pseudo-elements-to-style-form-controls/">List of Pseudo-Elements to Style Form Controls</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2013/03/28/shorthand-for-preventing-default-event-actions-with-jquery/">Shorthand for Preventing Default Event Actions with jQuery</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2013/03/14/better-ways-of-comparing-a-javascript-string-to-multiple-values/">Better Ways of Comparing a JavaScript String to Multiple Values</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2013/02/17/using-jquery-ui-tabs-with-the-base-tag/">Using jQuery UI Tabs with the &lt;base&gt; Tag</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2013/02/14/opera-moves-to-webkit-why-we-should-care/">Opera Moves to WebKit - Why We Should Care</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2013/01/28/stop-messing-with-the-browsers-default-focus-outline/">Stop Messing with the Browser's Default Focus outline</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2013/01/18/keyboard-shortcuts-for-os-x-web-developers/">Keyboard Shortcuts for OS X Web Developers</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2013/01/11/detecting-internet-explorer-without-jquery/">Detecting Internet Explorer without jQuery</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2013/01/09/html5-hidden-attribute-browser-support/">HTML 5 hidden Attribute Browser Support</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2013/01/05/is-it-safe-to-use-the-body-as-a-top-level-container-yet/">Using the body Element as a Top Level Container - Is it Safe Yet?</a>
+      </li>
+    
+  </ul>
+</section>
+<section >
+  <h1>Twitter</h1>
+  <a class="twitter-timeline" href="https://twitter.com/tjvantoll" data-widget-id="284127791589494784">Tweets by @tjvantoll</a>
+</section>
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - <a href="/">TJ VanToll</a> -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'tjvantoll';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://tjvantoll.com/2013/04/15/list-of-pseudo-elements-to-style-form-controls/';
+        var disqus_url = 'http://tjvantoll.com/2013/04/15/list-of-pseudo-elements-to-style-form-controls/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>
