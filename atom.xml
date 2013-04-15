@@ -4,7 +4,7 @@
   <title><![CDATA[TJ VanToll]]></title>
   <link href="http://tjvantoll.com/atom.xml" rel="self"/>
   <link href="http://tjvantoll.com/"/>
-  <updated>2013-04-13T20:37:38-04:00</updated>
+  <updated>2013-04-14T22:15:04-04:00</updated>
   <id>http://tjvantoll.com/</id>
   <author>
     <name><![CDATA[TJ VanToll]]></name>
@@ -22,7 +22,7 @@
 
 <p>While all of these pseudo-elements are rendering engine specific (and therefore behind vendor prefixes), they can still be handy for customizing the display for that engine.  The following is my best attempt at compiling a complete list of the pseudo-elements available in Trident, Gecko, and WebKit.  At the time of this writing Blink is a recent fork of WebKit, so the pseudo-elements provided are identical.  I am not aware of any form related pseudo-elements that Presto provides.</p>
 
-<p>Couple of notes before we get started:</p>
+<p>A couple of notes:</p>
 
 <ul>
 <li>All Trident pseudo-elements listed here were added in IE10 and will not work in earlier versions of Internet Explorer.</li>
@@ -339,7 +339,7 @@
 
 <h4>Trident</h4>
 
-<p>Trident offers the ability to style the placeholder text with a pseudo-class rather than a pseudo-element.  However the class, <code>-ms-input-placeholder</code>, can be used the same as the pseudo-elements from the other rendering engines:</p>
+<p>Trident offers the ability to style the placeholder text with a pseudo-class rather than a pseudo-element.  However the pseudo-class, <code>:-ms-input-placeholder</code>, can be used the same as the pseudo-elements from the other rendering engines:</p>
 
 <figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;input</span> <span class="na">placeholder=</span><span class="s">&quot;placeholder&quot;</span><span class="nt">&gt;</span>
@@ -548,7 +548,7 @@
 
 <h4>Trident</h4>
 
-<p>As of IE10 Trident provides the pseudo-element <code>::-ms-value</code> to style a variety the value portion of text inputs (<code>input[type=text]</code>, <code>input[type=password]</code>, etc) and selects.  For example:</p>
+<p>As of IE10 Trident provides the pseudo-element <code>::-ms-value</code> to style the value portion of text inputs (<code>input[type=text]</code>, <code>input[type=password]</code>, etc) and <code>&lt;select&gt;</code>s.  For example:</p>
 
 <figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -625,6 +625,11 @@
 
 
 <p>WebKit provides the <code>::-webkit-keygen-select</code> that can be used to customize the dropdown that a keygen element uses.  For example:</p>
+
+<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;keygen&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
 
 <figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -770,6 +775,15 @@
 <h4>Trident</h4>
 
 <p>As of IE10 Trident gives you a hook to style the arrow within select dropdowns, <code>::-ms-expand</code>.  For example:</p>
+
+<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;select&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;option</span> <span class="na">selected</span><span class="nt">&gt;</span>One<span class="nt">&lt;/option&gt;</span>
+</span><span class='line'><span class="nt">&lt;/select&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
 
 <figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
