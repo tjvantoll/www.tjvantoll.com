@@ -10,7 +10,7 @@ Styling form elements is a pain point when developing web applications.  Histori
 
 While all of these pseudo-elements are rendering engine specific (and therefore behind vendor prefixes), they can still be handy for customizing the display for that engine.  The following is my best attempt at compiling a complete list of the pseudo-elements available in Trident, Gecko, and WebKit.  At the time of this writing Blink is a recent fork of WebKit, so the pseudo-elements provided are identical.  I am not aware of any form related pseudo-elements that Presto provides.
 
-Couple of notes before we get started:
+A couple of notes:
 
 * All Trident pseudo-elements listed here were added in IE10 and will not work in earlier versions of Internet Explorer.
 * In WebKit, to style some pseudo-elements you must set the basis element's `-webkit-appearance` pseudo-class to `none`.  For example, to style `::-webkit-progress-bar` you must apply `-webkit-appearance: none;` to the appropriate `<progress>` element.
@@ -223,7 +223,7 @@ This displays as follows in Firefox 20 on OS X:
 
 #### Trident
 
-Trident offers the ability to style the placeholder text with a pseudo-class rather than a pseudo-element.  However the class, `-ms-input-placeholder`, can be used the same as the pseudo-elements from the other rendering engines:
+Trident offers the ability to style the placeholder text with a pseudo-class rather than a pseudo-element.  However the pseudo-class, `:-ms-input-placeholder`, can be used the same as the pseudo-elements from the other rendering engines:
 
 ``` html
 <input placeholder="placeholder">
@@ -365,7 +365,7 @@ This displays as follows in Chrome 26 on OS X:
 
 #### Trident
 
-As of IE10 Trident provides the pseudo-element `::-ms-value` to style a variety the value portion of text inputs (`input[type=text]`, `input[type=password]`, etc) and selects.  For example:
+As of IE10 Trident provides the pseudo-element `::-ms-value` to style the value portion of text inputs (`input[type=text]`, `input[type=password]`, etc) and `<select>`s.  For example:
 
 ``` html
 <input type="text" value="value">
@@ -420,6 +420,9 @@ Which displays as follows:
 
 WebKit provides the `::-webkit-keygen-select` that can be used to customize the dropdown that a keygen element uses.  For example:
 
+``` html
+<keygen>
+```
 ``` css
 ::-webkit-keygen-select {
     background: black;
@@ -524,6 +527,11 @@ This displays as follows in IE10 on Windows 8:
 
 As of IE10 Trident gives you a hook to style the arrow within select dropdowns, `::-ms-expand`.  For example:
 
+``` html
+<select>
+    <option selected>One</option>
+</select>
+```
 ``` css
 ::-ms-expand {
     padding: 2em;
