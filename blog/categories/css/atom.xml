@@ -4,7 +4,7 @@
   <title><![CDATA[Category: CSS | TJ VanToll]]></title>
   <link href="http://tjvantoll.com/blog/categories/css/atom.xml" rel="self"/>
   <link href="http://tjvantoll.com/"/>
-  <updated>2013-04-14T22:15:04-04:00</updated>
+  <updated>2013-04-17T23:49:22-04:00</updated>
   <id>http://tjvantoll.com/</id>
   <author>
     <name><![CDATA[TJ VanToll]]></name>
@@ -39,6 +39,7 @@
 <li>&lt;input&gt; Elements
 
 <ul>
+<li><a href="#input_button">button</a></li>
 <li><a href="#input_checkbox_radio">checkbox / radio</a></li>
 <li><a href="#input_color">color</a></li>
 <li><a href="#input_date">date</a></li>
@@ -47,13 +48,16 @@
 <li><a href="#input_password">password</a></li>
 <li><a href="#placeholder_attribute">placeholder attribute</a></li>
 <li><a href="#input_range">range</a></li>
+<li><a href="#input_reset">reset</a></li>
 <li><a href="#input_search">search</a></li>
+<li><a href="#input_submit">submit</a></li>
 <li><a href="#input_text">text</a></li>
 </ul>
 </li>
 <li>Other Elements
 
 <ul>
+<li><a href="#button_element">button</a></li>
 <li><a href="#keygen_element">keygen</a></li>
 <li><a href="#meter_element">meter</a></li>
 <li><a href="#progress_element">progress</a></li>
@@ -68,6 +72,13 @@
 </li>
 </ul>
 
+
+<h3 id="input_button">input[type=button]</h3>
+
+
+<h4>Gecko</h4>
+
+<p>See <a href="#button_element">&lt;button&gt;</a></p>
 
 <h3 id="input_checkbox_radio">input[type=checkbox] / input[type=radio]</h3>
 
@@ -442,6 +453,13 @@ padding: 2em 0;
 
 <p>One final note about range inputs.  Trident and Webkit allow you to apply hover states to the thumb pseudo-element (<code>::-webkit-slider-thumb:hover</code> and <code>::-ms-thumb:hover</code> respectively), whereas Gecko currently does not.</p>
 
+<h3 id="input_reset">input[type=reset]</h3>
+
+
+<h4>Gecko</h4>
+
+<p>See <a href="#button_element">&lt;button&gt;</a></p>
+
 <h3 id="input_search">input[type=search]</h3>
 
 
@@ -469,6 +487,13 @@ input[type=search] { -webkit-appearance: none; }</p>
 <p>This displays as follows in Chrome 26 on OS X:</p>
 
 <p><img src="http://tjvantoll.com/images/posts/2013-04-15/webkit-input-search.png"></p>
+
+<h3 id="input_submit">input[type=submit]</h3>
+
+
+<h4>Gecko</h4>
+
+<p>See <a href="#button_element">&lt;button&gt;</a></p>
 
 <h3 id="input_text">input[type=text]</h3>
 
@@ -535,11 +560,58 @@ padding: 1em;
 
 <p><img src="http://tjvantoll.com/images/posts/2013-04-15/trident-input-clear-fancy.png"></p>
 
+<h3 id="button_element">&lt;button&gt; Element</h3>
+
+
+<!-- http://jsfiddle.net/tVqyR/3/ -->
+
+
+<h4>Gecko</h4>
+
+<p>Gecko applies pseudo-elements <code>::-moz-focus-outer</code> and <code>::-moz-focus-inner</code> to inputs of type <code>button</code>, <code>reset</code>, and <code>submit</code>, as well as <code>&lt;button&gt;</code> elements.</p>
+
+<p>There's not much you can do with these pseudo-elements, but there is one important thing to be aware of.  Gecko applies <code>padding</code> and <code>border</code> to <code>::-moz-focus-inner</code> by default:</p>
+
+<p>``` css
+button::-moz-focus-inner,
+input[type="reset"]::-moz-focus-inner,
+input[type="button"]::-moz-focus-inner,
+input[type="submit"]::-moz-focus-inner,
+input[type="file"] > input[type="button"]::-moz-focus-inner {</p>
+
+<pre><code>border: 1px dotted transparent;
+padding: 0 2px;
+</code></pre>
+
+<p>}
+```</p>
+
+<p>These rules can easily create appearance differences between button displays in Gecko and other rendering engines.  This is confusing and there's actually <a href="https://bugzilla.mozilla.org/show_bug.cgi?id=140562">a ticket to remove it</a>.  The ticket has been open since 2002 so don't hold your breath.</p>
+
+<p>The default <code>padding</code> and <code>border</code> can be reset by just setting them to 0:</p>
+
+<p>``` css
+button::-moz-focus-inner,
+input::-moz-focus-inner {</p>
+
+<pre><code>border: 0;
+padding: 0;
+</code></pre>
+
+<p>}
+```</p>
+
+<p>The before and after of this can be seen in the screenshot (below) of Firefox 19 on OS X:</p>
+
+<p><img src="http://tjvantoll.com/images/posts/2013-04-15/gecko-buttons.png"></p>
+
 <h3 id="keygen_element">&lt;keygen&gt; Element</h3>
 
 
 <!-- http://jsfiddle.net/tj_vantoll/nMRHU/ -->
 
+
+<h4>WebKit</h4>
 
 <p>WebKit provides the <code>::-webkit-keygen-select</code> that can be used to customize the dropdown that a keygen element uses.  For example:</p>
 
@@ -763,6 +835,13 @@ box-shadow: none;
 <li><a href="http://dev.bowdenweb.com/css/pseudo/ms-trident-vendor-prefixed-pseudo-elements.html">http://dev.bowdenweb.com/css/pseudo/ms-trident-vendor-prefixed-pseudo-elements.html</a>: List of Trident Vendor-Prefixed Pseudo-Elements</li>
 <li><a href="http://trac.webkit.org/browser/trunk/Source/WebCore/css/html.css">http://trac.webkit.org/browser/trunk/Source/WebCore/css/html.css</a>: WebKit's current user agent stylesheet</li>
 <li><a href="http://trac.webkit.org/wiki/Styling%20Form%20Controls">http://trac.webkit.org/wiki/Styling%20Form%20Controls</a>: Slightly dated guide from WebKit on styling form controls</li>
+</ul>
+
+
+<h3>Updates</h3>
+
+<ul>
+<li>April 17th, 2013: Added sections on <code>::-moz-focus-outer</code> and <code>::-moz-focus-inner</code> per comments from Matthew Brundage.</li>
 </ul>
 
 ]]></content>
