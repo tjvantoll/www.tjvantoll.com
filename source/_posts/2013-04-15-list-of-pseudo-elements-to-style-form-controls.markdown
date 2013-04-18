@@ -20,6 +20,7 @@ A couple of notes:
 ### Table of Contents
 
 * &lt;input&gt; Elements
+    - <a href="#input_button">button</a>
     - <a href="#input_checkbox_radio">checkbox / radio</a>
     - <a href="#input_color">color</a>
     - <a href="#input_date">date</a>
@@ -28,15 +29,24 @@ A couple of notes:
     - <a href="#input_password">password</a>
     - <a href="#placeholder_attribute">placeholder attribute</a>
     - <a href="#input_range">range</a>
+    - <a href="#input_reset">reset</a>
     - <a href="#input_search">search</a>
+    - <a href="#input_submit">submit</a>
     - <a href="#input_text">text</a>
 * Other Elements
+    - <a href="#button_element">button</a>
     - <a href="#keygen_element">keygen</a>
     - <a href="#meter_element">meter</a>
     - <a href="#progress_element">progress</a>
     - <a href="#select_element">select</a>
 * Miscellaneous
     - <a href="#form_validation_messages">Form Validation Messages</a>
+
+<h3 id="input_button">input[type=button]</h3>
+
+#### Gecko
+
+See <a href="#button_element">&lt;button&gt;</a>
 
 <h3 id="input_checkbox_radio">input[type=checkbox] / input[type=radio]</h3><!-- http://jsfiddle.net/tj_vantoll/8esYJ/ -->
 
@@ -337,6 +347,12 @@ This displays as follows in Chrome 26 on OS X:
 
 One final note about range inputs.  Trident and Webkit allow you to apply hover states to the thumb pseudo-element (`::-webkit-slider-thumb:hover` and `::-ms-thumb:hover` respectively), whereas Gecko currently does not.
 
+<h3 id="input_reset">input[type=reset]</h3>
+
+#### Gecko
+
+See <a href="#button_element">&lt;button&gt;</a>
+
 <h3 id="input_search">input[type=search]</h3><!-- http://jsfiddle.net/tj_vantoll/9jL5U/ -->
 
 #### WebKit
@@ -360,6 +376,12 @@ input[type=search] { -webkit-appearance: none; }
 This displays as follows in Chrome 26 on OS X:
 
 <img src="/images/posts/2013-04-15/webkit-input-search.png">
+
+<h3 id="input_submit">input[type=submit]</h3>
+
+#### Gecko
+
+See <a href="#button_element">&lt;button&gt;</a>
 
 <h3 id="input_text">input[type=text]</h3><!-- http://jsfiddle.net/tj_vantoll/r4mwz/, http://jsfiddle.net/tj_vantoll/ADEvK/ -->
 
@@ -416,7 +438,44 @@ Which displays as follows:
 
 <img src="/images/posts/2013-04-15/trident-input-clear-fancy.png">
 
+<h3 id="button_element">&lt;button&gt; Element</h3><!-- http://jsfiddle.net/tVqyR/3/ -->
+
+#### Gecko
+
+Gecko applies pseudo-elements `::-moz-focus-outer` and `::-moz-focus-inner` to inputs of type `button`, `reset`, and `submit`, as well as `<button>` elements.
+
+There's not much you can do with these pseudo-elements, but there is one important thing to be aware of.  Gecko applies `padding` and `border` to `::-moz-focus-inner` by default:
+
+``` css
+button::-moz-focus-inner,
+input[type="reset"]::-moz-focus-inner,
+input[type="button"]::-moz-focus-inner,
+input[type="submit"]::-moz-focus-inner,
+input[type="file"] > input[type="button"]::-moz-focus-inner {
+    border: 1px dotted transparent;
+    padding: 0 2px;
+}
+```
+
+These rules can easily create appearance differences between button displays in Gecko and other rendering engines.  This is confusing and there's actually [a ticket to remove it](https://bugzilla.mozilla.org/show_bug.cgi?id=140562).  The ticket has been open since 2002 so don't hold your breath.
+
+The default `padding` and `border` can be reset by just setting them to 0:
+
+``` css
+button::-moz-focus-inner,
+input::-moz-focus-inner {
+    border: 0;
+    padding: 0;
+}
+```
+
+The before and after of this can be seen in the screenshot (below) of Firefox 19 on OS X:
+
+<img src="/images/posts/2013-04-15/gecko-buttons.png">
+
 <h3 id="keygen_element">&lt;keygen&gt; Element</h3><!-- http://jsfiddle.net/tj_vantoll/nMRHU/ -->
+
+#### WebKit
 
 WebKit provides the `::-webkit-keygen-select` that can be used to customize the dropdown that a keygen element uses.  For example:
 
@@ -602,3 +661,7 @@ Hopefully you will find this list helpful.  If I'm missing elements or some of t
 * [http://dev.bowdenweb.com/css/pseudo/ms-trident-vendor-prefixed-pseudo-elements.html](http://dev.bowdenweb.com/css/pseudo/ms-trident-vendor-prefixed-pseudo-elements.html): List of Trident Vendor-Prefixed Pseudo-Elements
 * [http://trac.webkit.org/browser/trunk/Source/WebCore/css/html.css](http://trac.webkit.org/browser/trunk/Source/WebCore/css/html.css): WebKit's current user agent stylesheet
 * [http://trac.webkit.org/wiki/Styling%20Form%20Controls](http://trac.webkit.org/wiki/Styling%20Form%20Controls): Slightly dated guide from WebKit on styling form controls
+
+### Updates
+
+* April 17th, 2013: Added sections on `::-moz-focus-outer` and `::-moz-focus-inner` per comments from Matthew Brundage.
