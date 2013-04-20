@@ -702,7 +702,7 @@ Hopefully you will find this list helpful.  If I'm missing elements or some of t
 * [http://trac.webkit.org/browser/trunk/Source/WebCore/css/html.css](http://trac.webkit.org/browser/trunk/Source/WebCore/css/html.css): WebKit's current user agent stylesheet
 * [http://trac.webkit.org/wiki/Styling%20Form%20Controls](http://trac.webkit.org/wiki/Styling%20Form%20Controls): Slightly dated guide from WebKit on styling form controls
 
-### Updates
+<h3 id="updates">Updates</h3>
 
-* April 17th, 2013: Added sections on `::-moz-focus-outer` and `::-moz-focus-inner` per comments from Matthew Brundage.
-* April 20th, 2013: Added a section on `::-webkit-resizer` for textareas per comments from Anselm Urban.
+* April 17th, 2013: Added sections on `::-moz-focus-outer` and `::-moz-focus-inner` per comments from Matthew Brundage. [5a776e9edb02d78b0f4e9880523f0752ccf24c3f](https://github.com/tjvantoll/tjvantoll.github.com/commit/5a776e9edb02d78b0f4e9880523f0752ccf24c3f).
+* April 20th, 2013: Added a section on `::-webkit-resizer` for textareas per comments from Anselm Urban. [4c37198821fda83dedac061ac282b532b7f7ce81](https://github.com/tjvantoll/tjvantoll.github.com/commit/4c37198821fda83dedac061ac282b532b7f7ce81)
