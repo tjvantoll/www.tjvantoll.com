@@ -4,7 +4,7 @@
   <title><![CDATA[Category: CSS | TJ VanToll]]></title>
   <link href="http://tjvantoll.com/blog/categories/css/atom.xml" rel="self"/>
   <link href="http://tjvantoll.com/"/>
-  <updated>2013-04-17T23:49:22-04:00</updated>
+  <updated>2013-04-20T17:58:01-04:00</updated>
   <id>http://tjvantoll.com/</id>
   <author>
     <name><![CDATA[TJ VanToll]]></name>
@@ -62,6 +62,7 @@
 <li><a href="#meter_element">meter</a></li>
 <li><a href="#progress_element">progress</a></li>
 <li><a href="#select_element">select</a></li>
+<li><a href="#textarea_element">textarea</a></li>
 </ul>
 </li>
 <li>Miscellaneous
@@ -763,6 +764,55 @@ background: black;
 
 <p><img src="http://tjvantoll.com/images/posts/2013-04-15/trident-select.png"></p>
 
+<h3 id="textarea_element">&lt;textarea&gt; Element</h3>
+
+
+<!-- http://jsfiddle.net/tj_vantoll/YwUeF/ -->
+
+
+<h3>WebKit</h3>
+
+<p>WebKit provides the pseudo-element <code>::-webkit-resizer</code> for the resize control it automatically adds to the bottom right of textarea elements.</p>
+
+<p>It can be hidden by applying <code>display: none</code> or <code>-webkit-appearance: none</code>:</p>
+
+<p><code>html
+&lt;textarea&gt;&lt;/textarea&gt;
+</code>
+``` css
+::-webkit-resizer {</p>
+
+<pre><code>display: none;
+</code></pre>
+
+<p>}
+```</p>
+
+<p>This displays as follows in Chrome 26 on OS X:</p>
+
+<p><img src="http://tjvantoll.com/images/posts/2013-04-15/webkit-textarea-hide.png"></p>
+
+<p>The <code>::-webkit-resizer</code> pseudo-element also allows for some basic styling.  If you thought the resize control could use significantly more color you could add this:</p>
+
+<p><code>html
+&lt;textarea&gt;&lt;/textarea&gt;
+</code>
+``` css
+::-webkit-resizer {</p>
+
+<pre><code>border: 2px solid black;
+background: red;
+box-shadow: 0 0 5px 5px blue;
+outline: 2px solid yellow;
+</code></pre>
+
+<p>}
+```</p>
+
+<p>This displays as follows in Chrome 26 on OS X:</p>
+
+<p><img src="http://tjvantoll.com/images/posts/2013-04-15/webkit-textarea-style.png"></p>
+
 <h3 id="form_validation_messages">Form Validation Messages</h3>
 
 
@@ -838,10 +888,12 @@ box-shadow: none;
 </ul>
 
 
-<h3>Updates</h3>
+<h3 id="updates">Updates</h3>
+
 
 <ul>
-<li>April 17th, 2013: Added sections on <code>::-moz-focus-outer</code> and <code>::-moz-focus-inner</code> per comments from Matthew Brundage.</li>
+<li>April 17th, 2013: Added sections on <code>::-moz-focus-outer</code> and <code>::-moz-focus-inner</code> per comments from Matthew Brundage. <a href="https://github.com/tjvantoll/tjvantoll.github.com/commit/5a776e9edb02d78b0f4e9880523f0752ccf24c3f">5a776e9edb02d78b0f4e9880523f0752ccf24c3f</a>.</li>
+<li>April 20th, 2013: Added a section on <code>::-webkit-resizer</code> for textareas per comments from Anselm Urban. <a href="https://github.com/tjvantoll/tjvantoll.github.com/commit/4c37198821fda83dedac061ac282b532b7f7ce81">4c37198821fda83dedac061ac282b532b7f7ce81</a></li>
 </ul>
 
 ]]></content>

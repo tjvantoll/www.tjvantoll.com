@@ -168,6 +168,7 @@
 <li><a href="#meter_element">meter</a></li>
 <li><a href="#progress_element">progress</a></li>
 <li><a href="#select_element">select</a></li>
+<li><a href="#textarea_element">textarea</a></li>
 </ul>
 </li>
 <li>Miscellaneous
@@ -987,6 +988,62 @@
 
 <p><img src="/images/posts/2013-04-15/trident-select.png"></p>
 
+<h3 id="textarea_element">&lt;textarea&gt; Element</h3>
+
+
+<!-- http://jsfiddle.net/tj_vantoll/YwUeF/ -->
+
+
+<h3>WebKit</h3>
+
+<p>WebKit provides the pseudo-element <code>::-webkit-resizer</code> for the resize control it automatically adds to the bottom right of textarea elements.</p>
+
+<p>It can be hidden by applying <code>display: none</code> or <code>-webkit-appearance: none</code>:</p>
+
+<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;textarea&gt;&lt;/textarea&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="o">:</span><span class="nd">:-webkit-resizer</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">display</span><span class="o">:</span> <span class="k">none</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This displays as follows in Chrome 26 on OS X:</p>
+
+<p><img src="/images/posts/2013-04-15/webkit-textarea-hide.png"></p>
+
+<p>The <code>::-webkit-resizer</code> pseudo-element also allows for some basic styling.  If you thought the resize control could use significantly more color you could add this:</p>
+
+<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;textarea&gt;&lt;/textarea&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="o">:</span><span class="nd">:-webkit-resizer</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">border</span><span class="o">:</span> <span class="m">2px</span> <span class="k">solid</span> <span class="nb">black</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">background</span><span class="o">:</span> <span class="nb">red</span><span class="p">;</span>
+</span><span class='line'>    <span class="n">box</span><span class="o">-</span><span class="n">shadow</span><span class="o">:</span> <span class="m">0</span> <span class="m">0</span> <span class="m">5px</span> <span class="m">5px</span> <span class="nb">blue</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">outline</span><span class="o">:</span> <span class="m">2px</span> <span class="k">solid</span> <span class="nb">yellow</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This displays as follows in Chrome 26 on OS X:</p>
+
+<p><img src="/images/posts/2013-04-15/webkit-textarea-style.png"></p>
+
 <h3 id="form_validation_messages">Form Validation Messages</h3>
 
 
@@ -1071,10 +1128,12 @@
 </ul>
 
 
-<h3>Updates</h3>
+<h3 id="updates">Updates</h3>
+
 
 <ul>
-<li>April 17th, 2013: Added sections on <code>::-moz-focus-outer</code> and <code>::-moz-focus-inner</code> per comments from Matthew Brundage.</li>
+<li>April 17th, 2013: Added sections on <code>::-moz-focus-outer</code> and <code>::-moz-focus-inner</code> per comments from Matthew Brundage. <a href="https://github.com/tjvantoll/tjvantoll.github.com/commit/5a776e9edb02d78b0f4e9880523f0752ccf24c3f">5a776e9edb02d78b0f4e9880523f0752ccf24c3f</a>.</li>
+<li>April 20th, 2013: Added a section on <code>::-webkit-resizer</code> for textareas per comments from Anselm Urban. <a href="https://github.com/tjvantoll/tjvantoll.github.com/commit/4c37198821fda83dedac061ac282b532b7f7ce81">4c37198821fda83dedac061ac282b532b7f7ce81</a></li>
 </ul>
 
 </div>
