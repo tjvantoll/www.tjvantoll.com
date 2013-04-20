@@ -39,6 +39,7 @@ A couple of notes:
     - <a href="#meter_element">meter</a>
     - <a href="#progress_element">progress</a>
     - <a href="#select_element">select</a>
+    - <a href="#textarea_element">textarea</a>
 * Miscellaneous
     - <a href="#form_validation_messages">Form Validation Messages</a>
 
@@ -603,6 +604,45 @@ This displays as follows in IE10 on Windows 8:
 
 <img src="/images/posts/2013-04-15/trident-select.png">
 
+<h3 id="textarea_element">&lt;textarea&gt; Element</h3><!-- http://jsfiddle.net/tj_vantoll/YwUeF/ -->
+
+### WebKit
+
+WebKit provides the pseudo-element `::-webkit-resizer` for the resize control it automatically adds to the bottom right of textarea elements.
+
+It can be hidden by applying `display: none` or `-webkit-appearance: none`:
+
+``` html
+<textarea></textarea>
+```
+``` css
+::-webkit-resizer {
+    display: none;
+}
+```
+
+This displays as follows in Chrome 26 on OS X:
+
+<img src="/images/posts/2013-04-15/webkit-textarea-hide.png">
+
+The `::-webkit-resizer` pseudo-element also allows for some basic styling.  If you thought the resize control could use significantly more color you could add this:
+
+``` html
+<textarea></textarea>
+```
+``` css
+::-webkit-resizer {
+    border: 2px solid black;
+    background: red;
+    box-shadow: 0 0 5px 5px blue;
+    outline: 2px solid yellow;
+}
+```
+
+This displays as follows in Chrome 26 on OS X:
+
+<img src="/images/posts/2013-04-15/webkit-textarea-style.png">
+
 <h3 id="form_validation_messages">Form Validation Messages</h3><!-- http://jsfiddle.net/tj_vantoll/Eb2zN/ -->
 
 #### WebKit
@@ -665,3 +705,4 @@ Hopefully you will find this list helpful.  If I'm missing elements or some of t
 ### Updates
 
 * April 17th, 2013: Added sections on `::-moz-focus-outer` and `::-moz-focus-inner` per comments from Matthew Brundage.
+* April 20th, 2013: Added a section on `::-webkit-resizer` for textareas per comments from Anselm Urban.
