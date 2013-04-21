@@ -11,6 +11,17 @@ On certain occasions I've been known to talk to people in real life.
 <div id="speaking-archives">
 	<h2>2013</h2>
 	<article>
+		<h1> jQuery UI Widgets vs. HTML5</h1>
+		<time datetime="2013-06-13">
+			<span class="month">Jun</span>
+			<span class="day">13</span>
+			<span class="year">2013</span>
+		</time>
+		<footer>
+			<a href="http://events.jquery.org/2013/portland/">jQuery Portland</a> | Portland, Oregon
+		</footer>
+	</article>
+	<article>
 		<h1>Submitting Bugs the Right Way</h1>
 		<time datetime="2013-03-02">
 			<span class="month">Mar</span>
