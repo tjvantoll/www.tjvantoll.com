@@ -9,7 +9,15 @@
   <meta name="author" content="TJ VanToll">
 
   
-  <meta name="description" content="I try to do most of my work and play on the internet with the keyboard. In the course of my internet-ing there&#8217;s one unfortunate trend that I&# &hellip;">
+  <meta name="description" content="View source on almost any web page and you&#8217;ll likely see the following: Common HTML Template1
+2
+3
+4
+5
+6
+7
+8
+&lt;html&gt; &lt;head&gt;&lt;/head& &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -96,6 +104,72 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2013/01/05/is-it-safe-to-use-the-body-as-a-top-level-container-yet/">Using the body Element as a Top Level Container - Is it Safe Yet?</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-01-05T14:21:00-05:00" pubdate data-updated="true">Jan 5<span>th</span>, 2013</time>
+        
+         | <a href="/2013/01/05/is-it-safe-to-use-the-body-as-a-top-level-container-yet/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>View source on almost any web page and you&#8217;ll likely see the following:</p>
+
+<figure class='code'><figcaption class='not_empty'><span>Common HTML Template</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;html&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;head&gt;&lt;/head&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;body&gt;</span>
+</span><span class='line'>        <span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">&quot;wrapper&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>            <span class="c">&lt;!-- All the things --&gt;</span>
+</span><span class='line'>        <span class="nt">&lt;/div&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;/body&gt;</span>
+</span><span class='line'><span class="nt">&lt;/html&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The use of a wrapper or container <code>div</code> around the page is fairly universal.  It is commonly used to perform tasks such as centering a page&#8217;s content or providing a shadow or border to frame it.  But, since the <code>body</code> element is a necessity in the markup, why can&#8217;t it be styled directly instead?  Why is a wrapper <code>div</code> used?</p>
+
+<p>Historically there have been a number of issues with using the <code>body</code> element as a top level container in old versions of Internet Explorers.  If you&#8217;re supporting IE >= 8 you&#8217;re good, but there are some things <a href="#now">you should be aware of</a>.</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/2013/01/05/is-it-safe-to-use-the-body-as-a-top-level-container-yet/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -549,57 +623,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2012/08/30/html5-form-validation-start-using-it-in-production-applications/">HTML5 Form Validation - Start Using it in Production Applications</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-08-30T00:00:00-04:00" pubdate data-updated="true">Aug 30<span>th</span>, 2012</time>
-        
-         | <a href="/2012/08/30/html5-form-validation-start-using-it-in-production-applications/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Forms suck, yet, they make or break the most crucial online transactions.  Building web forms sucks as well; the APIs and lack of customizability has confused and frustrated people for years.  As a byproduct an abundance of horribly unusable forms have been created for everyone to suffer through.</p>
-
-<p>Therefore <em>anything</em> that makes this process easier should be greeted with joy and enthusiasm.</p>
-
-<p>HTML5 does just this by including a built in <a href="https://developer.mozilla.org/en-US/docs/HTML/Forms_in_HTML#Constraint_Validation_API">client side form validation mechanism</a> designed to make implementing client side validation powerful, seamless, and most importantly - easy to implement.</p>
-
-<p>Great!  Despite this, HTML5 form validation is a topic relegated to presentations and demos; I personally have yet to fill out a web form in the wild that actually makes use of it.</p>
-
-<p>Why?</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/2012/08/30/html5-form-validation-start-using-it-in-production-applications/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/3/">&larr; Older</a>
@@ -615,6 +638,10 @@
     <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2013/04/24/showing-a-css-based-loading-animation-while-your-site-loads/">Showing a CSS Based Loading Animation While Your Site Loads</a>
+      </li>
     
       <li class="post">
         <a href="/2013/04/15/list-of-pseudo-elements-to-style-form-controls/">List of Pseudo-Elements to Style Form Controls</a>
@@ -650,10 +677,6 @@
     
       <li class="post">
         <a href="/2013/01/09/html5-hidden-attribute-browser-support/">HTML 5 hidden Attribute Browser Support</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2013/01/05/is-it-safe-to-use-the-body-as-a-top-level-container-yet/">Using the body Element as a Top Level Container - Is it Safe Yet?</a>
       </li>
     
   </ul>

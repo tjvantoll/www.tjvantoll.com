@@ -4,7 +4,7 @@
   <title><![CDATA[TJ VanToll]]></title>
   <link href="http://tjvantoll.com/atom.xml" rel="self"/>
   <link href="http://tjvantoll.com/"/>
-  <updated>2013-04-21T16:34:56-04:00</updated>
+  <updated>2013-04-23T23:29:53-04:00</updated>
   <id>http://tjvantoll.com/</id>
   <author>
     <name><![CDATA[TJ VanToll]]></name>
@@ -12,6 +12,122 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Showing a CSS Based Loading Animation While Your Site Loads]]></title>
+    <link href="http://tjvantoll.com/2013/04/24/showing-a-css-based-loading-animation-while-your-site-loads/"/>
+    <updated>2013-04-24T00:00:00-04:00</updated>
+    <id>http://tjvantoll.com/2013/04/24/showing-a-css-based-loading-animation-while-your-site-loads</id>
+    <content type="html"><![CDATA[<p>Showing a loading indicator on startup is a common pattern in native applications that is becoming more common on the web.  If you need to load a lot of resources when your web application is first loaded, you should give the user a clear indication that this is occurring.</p>
+
+<!-- more -->
+
+
+<p>Here&#8217;s an approach I&#8217;ve used a few times to accomplish this.  I start by giving the <code>&lt;html&gt;</code> element itself a class of <code>"loading"</code>:</p>
+
+<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;html</span> <span class="na">class=</span><span class="s">&quot;loading&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>    <span class="c">&lt;!-- All the things --&gt;</span>
+</span><span class='line'><span class="nt">&lt;/html&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>I then setup two transitions that take effect when the loading class is removed.  I transition the color on the <code>&lt;html&gt;</code> element from a predefined color to its default, <code>transparent</code>.  To avoid seeing content during loading, I make the <code>&lt;body&gt;</code> opaque with <code>opacity: 0</code>.  When loading is complete, that is transitioned to <code>opacity: 1</code> to fade the content in.  The full source is below:</p>
+
+<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nt">html</span> <span class="p">{</span>
+</span><span class='line'>    <span class="o">-</span><span class="n">webkit</span><span class="o">-</span><span class="n">transition</span><span class="o">:</span> <span class="k">background-color</span> <span class="m">1s</span><span class="p">;</span>
+</span><span class='line'>    <span class="n">transition</span><span class="o">:</span> <span class="k">background-color</span> <span class="m">1s</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="nt">html</span><span class="o">,</span> <span class="nt">body</span> <span class="p">{</span>
+</span><span class='line'>    <span class="c">/* For the loading indicator to be vertically centered ensure */</span>
+</span><span class='line'>    <span class="c">/* the html and body elements take up the full viewport */</span>
+</span><span class='line'>    <span class="k">min-height</span><span class="o">:</span> <span class="m">100</span><span class="o">%</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="nt">html</span><span class="nc">.loading</span> <span class="p">{</span>
+</span><span class='line'>    <span class="c">/* Replace #333 with the background-color of your choice */</span>
+</span><span class='line'>    <span class="c">/* Replace loading.gif with the loading image of your choice */</span>
+</span><span class='line'>    <span class="k">background</span><span class="o">:</span> <span class="m">#333</span> <span class="sx">url(&#39;loading.gif&#39;)</span> <span class="k">no-repeat</span> <span class="m">50</span><span class="o">%</span> <span class="m">50</span><span class="o">%</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="c">/* Ensures that the transition only runs in one direction */</span>
+</span><span class='line'>    <span class="o">-</span><span class="n">webkit</span><span class="o">-</span><span class="n">transition</span><span class="o">:</span> <span class="k">background-color</span> <span class="m">0</span><span class="p">;</span>
+</span><span class='line'>    <span class="n">transition</span><span class="o">:</span> <span class="k">background-color</span> <span class="m">0</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="nt">body</span> <span class="p">{</span>
+</span><span class='line'>    <span class="o">-</span><span class="n">webkit</span><span class="o">-</span><span class="n">transition</span><span class="o">:</span> <span class="k">opacity</span> <span class="m">1s</span> <span class="n">ease</span><span class="o">-</span><span class="n">in</span><span class="p">;</span>
+</span><span class='line'>    <span class="n">transition</span><span class="o">:</span> <span class="k">opacity</span> <span class="m">1s</span> <span class="n">ease</span><span class="o">-</span><span class="n">in</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="nt">html</span><span class="nc">.loading</span> <span class="nt">body</span> <span class="p">{</span>
+</span><span class='line'>    <span class="c">/* Make the contents of the body opaque during loading */</span>
+</span><span class='line'>    <span class="k">opacity</span><span class="o">:</span> <span class="m">0</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="c">/* Ensures that the transition only runs in one direction */</span>
+</span><span class='line'>    <span class="o">-</span><span class="n">webkit</span><span class="o">-</span><span class="n">transition</span><span class="o">:</span> <span class="k">opacity</span> <span class="m">0</span><span class="p">;</span>
+</span><span class='line'>    <span class="n">transition</span><span class="o">:</span> <span class="k">opacity</span> <span class="m">0</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The only JavaScript required is to remove the <code>"loading"</code> class from the <code>&lt;html&gt;</code> element.  Do this when your application is initialized and ready to go.</p>
+
+<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="c1">// IE10+</span>
+</span><span class='line'><span class="nb">document</span><span class="p">.</span><span class="nx">getElementsByTagName</span><span class="p">(</span> <span class="s2">&quot;html&quot;</span> <span class="p">)[</span><span class="mi">0</span><span class="p">].</span><span class="nx">classList</span><span class="p">.</span><span class="nx">remove</span><span class="p">(</span> <span class="s2">&quot;loading&quot;</span> <span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">// All browsers</span>
+</span><span class='line'><span class="nb">document</span><span class="p">.</span><span class="nx">getElementsByTagName</span><span class="p">(</span> <span class="s2">&quot;html&quot;</span> <span class="p">)[</span><span class="mi">0</span><span class="p">].</span><span class="nx">className</span><span class="p">.</span><span class="nx">replace</span><span class="p">(</span> <span class="sr">/loading/</span><span class="p">,</span> <span class="s2">&quot;&quot;</span> <span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">// Or with jQuery</span>
+</span><span class='line'><span class="nx">$</span><span class="p">(</span> <span class="s2">&quot;html&quot;</span> <span class="p">).</span><span class="nx">removeClass</span><span class="p">(</span> <span class="s2">&quot;loading&quot;</span> <span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The demo below shows this animation in action.  To simulate a real load it waits 3 seconds before the <code>"loading"</code> class is removed.</p>
+
+<div class="code_example"><h6>Loading Example<a href="http://tjvantoll.com/demos/2013-04-24/loading.html" target="_blank">Open in New Window</a></h6><iframe style="width: 100%; height: 275px;" frameborder="0" src="http://tjvantoll.com/demos/2013-04-24/loading.html"></iframe></div>
+
+
+<p>This will work in <a href="http://caniuse.com/#feat=css-transitions">any browser that supports CSS transitions</a>, which nowadays is really everything other than IE &lt;= 9.  It also degrades gracefully for older browsers.  Unsupported browsers will still see the loading animation, they will simply lose the fade in transition when loading is complete.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[List of Pseudo-Elements to Style Form Controls]]></title>
@@ -2942,74 +3058,6 @@
 <p>This approach handles the most common use cases but it isn&#8217;t perfect.  For example, if you want to disable the <code>&lt;input type="range"&gt;</code> you&#8217;ll have to disable the slider as well.</p>
 
 <p>There is a <a href="http://bugs.jqueryui.com/ticket/5800">feature request to add support for this natively in the slider plugin</a> itself, but it&#8217;s been sitting inactive for quite some time now.  Hopefully over time <code>input[type=range]</code> support will become ubiquitous enough that we can drop these workarounds.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[HTML5 Form Validation - Start Using it in Production Applications]]></title>
-    <link href="http://tjvantoll.com/2012/08/30/html5-form-validation-start-using-it-in-production-applications/"/>
-    <updated>2012-08-30T00:00:00-04:00</updated>
-    <id>http://tjvantoll.com/2012/08/30/html5-form-validation-start-using-it-in-production-applications</id>
-    <content type="html"><![CDATA[<p>Forms suck, yet, they make or break the most crucial online transactions.  Building web forms sucks as well; the APIs and lack of customizability has confused and frustrated people for years.  As a byproduct an abundance of horribly unusable forms have been created for everyone to suffer through.</p>
-
-<p>Therefore <em>anything</em> that makes this process easier should be greeted with joy and enthusiasm.</p>
-
-<p>HTML5 does just this by including a built in <a href="https://developer.mozilla.org/en-US/docs/HTML/Forms_in_HTML#Constraint_Validation_API">client side form validation mechanism</a> designed to make implementing client side validation powerful, seamless, and most importantly - easy to implement.</p>
-
-<p>Great!  Despite this, HTML5 form validation is a topic relegated to presentations and demos; I personally have yet to fill out a web form in the wild that actually makes use of it.</p>
-
-<p>Why?</p>
-
-<!--more-->
-
-
-<h3>Browser Support</h3>
-
-<p>One reason people avoid HTML5 form validation is lack (or perceived lack) of browser support for the new APIs.  However the <a href="http://caniuse.com/#feat=form-validation">list of supported browsers</a> now includes the latest version of every major browser, including:</p>
-
-<ul>
-<li>IE 10</li>
-<li>Firefox 4+</li>
-<li>Chrome 10+</li>
-<li>Safari 5+</li>
-<li>Opera 10+</li>
-<li>Opera Mobile</li>
-<li>Chrome for Android</li>
-<li>Firefox for Android</li>
-</ul>
-
-
-<h3>What to do in unsupported browsers?</h3>
-
-<p>This is <em>the</em> problem.  Despite browser support being relatively good, for most sites there are still going to be a substantial amount of users with browsers that simply do not support the new APIs.  Therefore, if you are intending to support these users you have to start forking your code to support both browsers with native support and browsers without it.</p>
-
-<p>While this can absolutely be done, it&#8217;s time consuming and a bit of a nuisance.  It&#8217;s faster and easier to simply ditch the native validation and use your own.  In this case you don&#8217;t have to worry about multiple code paths; every user in every browser will hit the same codepath and get the same experience.</p>
-
-<h3>What if we did nothing?</h3>
-
-<p>But what if we took a new approach to this problem - simply don&#8217;t do client side validation in unsupported browsers, at all.  This is advantageous for a number of reasons.</p>
-
-<p>1) <strong>No dual maintenance</strong>.  One thing that has always bothered me about doing validation on both the client and server side is that you&#8217;re validating the #1 principle of software development - <a href="http://en.wikipedia.org/wiki/Don't_repeat_yourself"><strong>D</strong>on&#8217;t <strong>R</strong>epeat <strong>Y</strong>ourself</a>.</p>
-
-<p>2) <strong>No dependencies</strong>.  If you only use native browser APIs to provide client side validation you don&#8217;t have to worry about maintaining plugin or library dependencies that might not be maintained.</p>
-
-<p>3) <strong>Faster and easier</strong>.  The browser APIs are simple and easy to use.  Want to make a field required?  <a href="http://wufoo.com/html5/attributes/09-required.html">Add the <code>required</code> attribute</a>.  Want to make a field only accept email address?  <a href="http://wufoo.com/html5/types/1-email.html">Add <code>type=email</code> to your <code>&lt;input&gt;</code> field</a>.</p>
-
-<p>4) <strong>Future Friendly</strong>.  Although currently a number of older browsers (namely IE &lt;= 9) do not support the new APIs, eventually they all will.  Therefore, eventually all users will hit the client side validation as intended.</p>
-
-<h3>But, you can&#8217;t just not validate data&#8230; right?</h3>
-
-<p>Of course you have to validate client submitted data, but you already need to be doing that on the server side anyways.  What this approach requires you to do is simply return formatted error messages from your server side processing and <a href="http://uxdesign.smashingmagazine.com/2011/11/08/extensive-guide-web-form-usability/">display them in a usability friendly way</a>.  You&#8217;re likely doing that already.</p>
-
-<h3>What About Polyfills?</h3>
-
-<p><a href="http://remysharp.com/2010/10/08/what-is-a-polyfill/">Polyfills</a> are great and a number of <a href="https://github.com/Modernizr/Modernizr/wiki/HTML5-Cross-browser-Polyfills">HTML5 form validation polyfills</a> exist.  My problem with polyfills in this case is that they add a dependency that I believe is unnecessary.</p>
-
-<h3>Conclusion</h3>
-
-<p>HTML5 provides native solutions to validating client side data and most all modern browsers support it.  Yet, most people are still relying on the JavaScript hacks we&#8217;ve been using for well over a decade now.</p>
-
-<p>It&#8217;s time.  Come to the dark side.</p>
 ]]></content>
   </entry>
   
