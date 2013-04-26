@@ -71,8 +71,9 @@ aside.sidebar .ad_section h1 {
 .ad_container {
 	border: 1px solid #E1E1E1;
 	background: #F9F9F9;
-	padding: 15px 15px 10px 15px;
+	padding: 15px;
 	position: relative;
+	min-height: 118px;
 
 	a { text-decoration: none; }
 }
@@ -87,7 +88,7 @@ body .one .bsa_it_ad:hover img {
 body .one .bsa_it_ad .bsa_it_i {
 	display: block;
 	float: left;
-	margin: 0 15px 10px 0;
+	margin: 0 15px 15px 0;
 }
 body .one .bsa_it_ad .bsa_it_i img {
 	border: none;
@@ -114,8 +115,10 @@ body .one .bsa_it_p {
 }
 body #bsap_aplink, body #bsap_aplink:hover {
 	display: block;
+	position: absolute;
+	top: 120px;
+	left: 53px;
 	font-size: 10px;
-	margin: 5px 15px 0 0;
 	text-align: right;
 }
 
