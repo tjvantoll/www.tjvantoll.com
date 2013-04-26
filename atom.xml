@@ -4,7 +4,7 @@
   <title><![CDATA[TJ VanToll]]></title>
   <link href="http://tjvantoll.com/atom.xml" rel="self"/>
   <link href="http://tjvantoll.com/"/>
-  <updated>2013-04-25T22:51:59-04:00</updated>
+  <updated>2013-04-26T00:27:50-04:00</updated>
   <id>http://tjvantoll.com/</id>
   <author>
     <name><![CDATA[TJ VanToll]]></name>
@@ -12,6 +12,207 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Using Ternary Operators for More Maintainable Templates]]></title>
+    <link href="http://tjvantoll.com/2013/04/26/using-ternary-operators-for-more-maintainable-templates/"/>
+    <updated>2013-04-26T00:00:00-04:00</updated>
+    <id>http://tjvantoll.com/2013/04/26/using-ternary-operators-for-more-maintainable-templates</id>
+    <content type="html"><![CDATA[<p>With the rise of JavaScript MVC frameworks, writing templates has become a large part of many web developer&#8217;s workflow. As such, I thought I&#8217;d share a tip that has made my templates far more readable and maintainable over the years, ternary operators.<!-- http://jsbin.com/ekiwal/3/edit --></p>
+
+<p><i>Note: For my examples I&#8217;m using <a href="http://underscorejs.org/#template">Underscore&#8217;s templates</a>, but this same tip applies to any templating language, even traditional server side ones like PHP.</i></p>
+
+<!-- more -->
+
+
+<h3>Example</h3>
+
+<p>Let&#8217;s say you have the following data for your application:</p>
+
+<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="kd">var</span> <span class="nx">items</span> <span class="o">=</span> <span class="p">[</span>
+</span><span class='line'>    <span class="p">{</span> <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;Clock&#39;</span><span class="p">,</span> <span class="nx">selected</span><span class="o">:</span> <span class="kc">false</span> <span class="p">},</span>
+</span><span class='line'>    <span class="p">{</span> <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;Chair&#39;</span><span class="p">,</span> <span class="nx">selected</span><span class="o">:</span> <span class="kc">false</span> <span class="p">},</span>
+</span><span class='line'>    <span class="p">{</span> <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;Radio&#39;</span><span class="p">,</span> <span class="nx">selected</span><span class="o">:</span> <span class="kc">true</span> <span class="p">}</span>
+</span><span class='line'><span class="p">];</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>And you want to run this data through a template to generate an HTML list. You might start with something like this:</p>
+
+<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;ul&gt;</span>
+</span><span class='line'>    <span class="err">&lt;</span>% _.each( items, function( item ) { %&gt;
+</span><span class='line'>        <span class="nt">&lt;li&gt;</span>
+</span><span class='line'>            <span class="err">&lt;</span>%- item.name %&gt;
+</span><span class='line'>        <span class="nt">&lt;/li&gt;</span>
+</span><span class='line'>    <span class="err">&lt;</span>% }); %&gt;
+</span><span class='line'><span class="nt">&lt;/ul&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This works fine.  But chances are, for a real application you&#8217;ll need to do something significantly more complicated than this.  As a first step, let&#8217;s say you have to add a CSS hook for selected items. You could accomplish that with an if check around each list item:</p>
+
+<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;ul&gt;</span>
+</span><span class='line'>    <span class="err">&lt;</span>% _.each( items, function( item ) { %&gt;
+</span><span class='line'>        <span class="err">&lt;</span>% if ( item.selected ) { %&gt;
+</span><span class='line'>            <span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">&quot;selected&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>        <span class="err">&lt;</span>% } else { %&gt;
+</span><span class='line'>            <span class="nt">&lt;li&gt;</span>
+</span><span class='line'>        <span class="err">&lt;</span>% } %&gt;
+</span><span class='line'>            <span class="err">&lt;</span>%- item.name %&gt;
+</span><span class='line'>        <span class="nt">&lt;/li&gt;</span>
+</span><span class='line'>    <span class="err">&lt;</span>% }); %&gt;
+</span><span class='line'><span class="nt">&lt;/ul&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Unfortunately this adds 4 lines of code and some unfortunate indentation just to add a simple class. Another alternative is to put the if check within the attribute:</p>
+
+<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;ul&gt;</span>
+</span><span class='line'>    <span class="err">&lt;</span>% _.each( items, function( item ) { %&gt;
+</span><span class='line'>        <span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">&quot;&lt;% if ( item.selected ) { %&gt;selected&lt;% } %&gt;&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>            <span class="err">&lt;</span>%- item.name %&gt;
+</span><span class='line'>        <span class="nt">&lt;/li&gt;</span>
+</span><span class='line'>    <span class="err">&lt;</span>% }); %&gt;
+</span><span class='line'><span class="nt">&lt;/ul&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This isn&#8217;t bad, but personally I find this code difficult to scan. I prefer to handle this situation with a ternary operator:</p>
+
+<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;ul&gt;</span>
+</span><span class='line'>    <span class="err">&lt;</span>% _.each( items, function( item ) { %&gt;
+</span><span class='line'>        <span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">&quot;&lt;%= (item.selected) ? &#39;selected&#39; : &#39;&#39; %&gt;&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>            <span class="err">&lt;</span>%- item.name %&gt;
+</span><span class='line'>        <span class="nt">&lt;/li&gt;</span>
+</span><span class='line'>    <span class="err">&lt;</span>% }); %&gt;
+</span><span class='line'><span class="nt">&lt;/ul&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Yes this is a stylistic thing, but I find this clearer and more readable. This will produce an unnecessary empty class attribute on non-selected items, but I believe the readability of the code to be far more important.</p>
+
+<p>For added fun, ternary operators can be nested. Say your application now has to handle deleted items:</p>
+
+<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="kd">var</span> <span class="nx">items</span> <span class="o">=</span> <span class="p">[</span>
+</span><span class='line'>    <span class="p">{</span> <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;Clock&#39;</span><span class="p">,</span> <span class="nx">selected</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span> <span class="nx">deleted</span><span class="o">:</span> <span class="kc">true</span> <span class="p">},</span>
+</span><span class='line'>    <span class="p">{</span> <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;Chair&#39;</span><span class="p">,</span> <span class="nx">selected</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span> <span class="nx">deleted</span><span class="o">:</span> <span class="kc">false</span> <span class="p">},</span>
+</span><span class='line'>    <span class="p">{</span> <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;Radio&#39;</span><span class="p">,</span> <span class="nx">selected</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span> <span class="nx">deleted</span><span class="o">:</span> <span class="kc">false</span> <span class="p">}</span>
+</span><span class='line'><span class="p">];</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The following template shows how nested ternaries could be used to handle either a selected or deleted hook:</p>
+
+<p><i>Note: This assumes that the selected and deleted states will not occur at the same time.</i></p>
+
+<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;ul&gt;</span>
+</span><span class='line'>    <span class="err">&lt;</span>% _.each( items, function( item ) { %&gt;
+</span><span class='line'>        <span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">&quot;&lt;%= (item.selected) ? &#39;selected&#39; :</span>
+</span><span class='line'><span class="s">                       (item.deleted) ? &#39;deleted&#39; : &#39;&#39; %&gt;&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>            <span class="err">&lt;</span>%- item.name %&gt;
+</span><span class='line'>        <span class="nt">&lt;/li&gt;</span>
+</span><span class='line'>    <span class="err">&lt;</span>% }); %&gt;
+</span><span class='line'><span class="nt">&lt;/ul&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Here are a couple other examples of how you could structure this check. The most important thing is to find something that works for you, or more importantly, the person who will be maintaining your code.</p>
+
+<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;ul&gt;</span>
+</span><span class='line'>    <span class="err">&lt;</span>% _.each( items, function( item ) { %&gt;
+</span><span class='line'>        <span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">&quot;&lt;% if (item.selected) { %&gt;selected&lt;% } %&gt;</span>
+</span><span class='line'><span class="s">                   &lt;% if (item.deleted) { %&gt;deleted&lt;% } %&gt;&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>            <span class="err">&lt;</span>%- item.name %&gt;
+</span><span class='line'>        <span class="nt">&lt;/li&gt;</span>
+</span><span class='line'>    <span class="err">&lt;</span>% }); %&gt;
+</span><span class='line'><span class="nt">&lt;/ul&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;ul&gt;</span>
+</span><span class='line'>    <span class="err">&lt;</span>% _.each( items, function( item ) { %&gt;
+</span><span class='line'>        <span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">&quot;</span>
+</span><span class='line'><span class="s">          &lt;% if (item.selected) { %&gt; selected &lt;% } %&gt;</span>
+</span><span class='line'><span class="s">          &lt;% if (item.deleted)  { %&gt; deleted  &lt;% } %&gt;</span>
+</span><span class='line'><span class="s">        &quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>            <span class="err">&lt;</span>%- item.name %&gt;
+</span><span class='line'>        <span class="nt">&lt;/li&gt;</span>
+</span><span class='line'>    <span class="err">&lt;</span>% }); %&gt;
+</span><span class='line'><span class="nt">&lt;/ul&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Showing a CSS Based Loading Animation While Your Site Loads]]></title>
@@ -2963,101 +3164,6 @@
 <h3>Conclusion</h3>
 
 <p>Attributes with numeric values need to have quotes around them when using them in CSS or JavaScript.  When in doubt use quotes around attribute values; it never hurts, and there are some strange edge cases where omitting the quotes leads to unexpected behavior.  If you&#8217;re looking for a more detailed writeup on when quotes are ok to omit checkout <a href="http://mathiasbynens.be/notes/unquoted-attribute-values">Mathias Bynens&#8217; writeup on the topic</a>.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Using jQuery UI's Slider to Polyfill HTML5's input[type=range]]]></title>
-    <link href="http://tjvantoll.com/2012/09/14/using-jquery-ui-slider-to-polyfill-html5-input-type-range/"/>
-    <updated>2012-09-14T21:25:00-04:00</updated>
-    <id>http://tjvantoll.com/2012/09/14/using-jquery-ui-slider-to-polyfill-html5-input-type-range</id>
-    <content type="html"><![CDATA[<p><a href="http://jqueryui.com/demos/slider">jQuery UI&#8217;s slider plugin</a> looks and behaves much like the browser&#8217;s native <code>input[type=range]</code> control; therefore it makes an excellent choice for <a href="http://remysharp.com/2010/10/08/what-is-a-polyfill/">polyfilling</a> the native behavior.</p>
-
-<h3>How to do it</h3>
-
-<p>The main issue is that the slider must be built on a block level node, not an <code>&lt;input&gt;</code>.  Therefore you must create another container node (in this case a <code>&lt;div&gt;</code>) to create the slider from then hide the original <code>&lt;input&gt;</code>.</p>
-
-<p>Here&#8217;s the script that I used.</p>
-
-<!--more-->
-
-
-
-
-<figure class='code'><figcaption class='not_empty'><span>Polyfill input[type=range] with jQuery UI&#8217;s Slider</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-<span class='line-number'>33</span>
-</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">$</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-</span><span class='line'>    <span class="c1">//Determine whether the browser natively supports input[type=range].</span>
-</span><span class='line'>    <span class="c1">//If you&#39;re using Modernizr this is equivalent to Modernizr.inputtypes.range</span>
-</span><span class='line'>    <span class="kd">var</span> <span class="nx">input</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="s1">&#39;input&#39;</span><span class="p">);</span>
-</span><span class='line'>    <span class="nx">input</span><span class="p">.</span><span class="nx">setAttribute</span><span class="p">(</span><span class="s1">&#39;type&#39;</span><span class="p">,</span> <span class="s1">&#39;range&#39;</span><span class="p">);</span>
-</span><span class='line'>    <span class="kd">var</span> <span class="nx">rangeSupport</span> <span class="o">=</span> <span class="nx">input</span><span class="p">.</span><span class="nx">type</span> <span class="o">!=</span> <span class="s1">&#39;text&#39;</span><span class="p">;</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">rangeSupport</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>        <span class="kd">var</span> <span class="nx">$input</span><span class="p">,</span> <span class="nx">$slider</span><span class="p">;</span>
-</span><span class='line'>
-</span><span class='line'>        <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;input[type=range]&#39;</span><span class="p">).</span><span class="nx">each</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">index</span><span class="p">,</span> <span class="nx">input</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>            <span class="nx">$input</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="nx">input</span><span class="p">);</span>
-</span><span class='line'>
-</span><span class='line'>            <span class="c1">//Create a new div, turn it into a slider, and set its attributes based on</span>
-</span><span class='line'>            <span class="c1">//the attributes of the input.  If the input doesn&#39;t possess those attributes</span>
-</span><span class='line'>            <span class="c1">//use jQuery UI&#39;s defaults.</span>
-</span><span class='line'>            <span class="nx">$slider</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;&lt;div /&gt;&#39;</span><span class="p">).</span><span class="nx">slider</span><span class="p">({</span>
-</span><span class='line'>                <span class="nx">min</span><span class="o">:</span> <span class="nb">parseInt</span><span class="p">(</span><span class="nx">$input</span><span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s1">&#39;min&#39;</span><span class="p">),</span> <span class="mi">10</span><span class="p">)</span> <span class="o">||</span> <span class="mi">0</span><span class="p">,</span>
-</span><span class='line'>                <span class="nx">max</span><span class="o">:</span> <span class="nb">parseInt</span><span class="p">(</span><span class="nx">$input</span><span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s1">&#39;max&#39;</span><span class="p">),</span> <span class="mi">10</span><span class="p">)</span> <span class="o">||</span> <span class="mi">100</span><span class="p">,</span>
-</span><span class='line'>                <span class="nx">value</span><span class="o">:</span> <span class="nb">parseInt</span><span class="p">(</span><span class="nx">$input</span><span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s1">&#39;value&#39;</span><span class="p">),</span> <span class="mi">10</span><span class="p">)</span> <span class="o">||</span> <span class="mi">0</span><span class="p">,</span>
-</span><span class='line'>                <span class="nx">step</span><span class="o">:</span> <span class="nb">parseInt</span><span class="p">(</span><span class="nx">$input</span><span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s1">&#39;step&#39;</span><span class="p">),</span> <span class="mi">10</span><span class="p">)</span> <span class="o">||</span> <span class="mi">1</span><span class="p">,</span>
-</span><span class='line'>                <span class="nx">slide</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">event</span><span class="p">,</span> <span class="nx">ui</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>                    <span class="c1">//Keep the value of the input[type=range] in sync with the slider.</span>
-</span><span class='line'>                    <span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">prev</span><span class="p">(</span><span class="s1">&#39;input&#39;</span><span class="p">).</span><span class="nx">val</span><span class="p">(</span><span class="nx">ui</span><span class="p">.</span><span class="nx">value</span><span class="p">);</span>
-</span><span class='line'>                <span class="p">}</span>
-</span><span class='line'>            <span class="p">});</span>
-</span><span class='line'>
-</span><span class='line'>            <span class="c1">//Append the slider after the input and hide the input.  The user will only</span>
-</span><span class='line'>            <span class="c1">//interact with the slider.        </span>
-</span><span class='line'>            <span class="nx">$input</span><span class="p">.</span><span class="nx">after</span><span class="p">(</span><span class="nx">$slider</span><span class="p">).</span><span class="nx">hide</span><span class="p">();</span>
-</span><span class='line'>        <span class="p">});</span>
-</span><span class='line'>    <span class="p">}</span>
-</span><span class='line'><span class="p">});</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>Future</h3>
-
-<p>This approach handles the most common use cases but it isn&#8217;t perfect.  For example, if you want to disable the <code>&lt;input type="range"&gt;</code> you&#8217;ll have to disable the slider as well.</p>
-
-<p>There is a <a href="http://bugs.jqueryui.com/ticket/5800">feature request to add support for this natively in the slider plugin</a> itself, but it&#8217;s been sitting inactive for quite some time now.  Hopefully over time <code>input[type=range]</code> support will become ubiquitous enough that we can drop these workarounds.</p>
 ]]></content>
   </entry>
   
