@@ -39,17 +39,6 @@ body > header {
 	}
 }
 
-aside.sidebar .ad_section h1 {
-	margin-top: 1em;
-	margin-bottom: 0.5em;
-}
-aside.sidebar .twitter-timeline {
-	margin-top: 10px;
-}
-aside.sidebar:hover a:hover {
-	color: $accent_color;
-}
-
 .entry-content table {
 	margin-bottom: 20px;
 	th { font-weight: bold; text-decoration: underline; }
@@ -67,6 +56,76 @@ header.no_comments {
 body > footer {
 	color: $subtitle-color;
 	text-shadow: none;
+}
+
+
+/*****************************************************/
+/******************** Sidebar ************************/
+/*****************************************************/
+
+/* Ads */
+aside.sidebar .ad_section h1 {
+	margin-top: 1em;
+	margin-bottom: 0.5em;
+}
+.ad_container {
+	border: 1px solid #E1E1E1;
+	background: #F9F9F9;
+	padding: 15px 15px 10px 15px;
+	position: relative;
+
+	a { text-decoration: none; }
+}
+body .one .bsa_it_ad {
+	font-family: inherit;
+	line-height: 100%;
+	text-align: right;
+}
+body .one .bsa_it_ad:hover img {
+	box-shadow: 0 0 3px #000;
+}
+body .one .bsa_it_ad .bsa_it_i {
+	display: block;
+	float: left;
+	margin: 0 15px 0 0;
+}
+body .one .bsa_it_ad .bsa_it_i img {
+	border: none;
+	border-radius: 0;
+}
+body .one .bsa_it_ad .bsa_it_t {
+	display: block;
+	font-size: 12px;
+	font-weight: bold;
+	color: #212121;
+	line-height: 125%;
+	padding: 0 0 5px 0;
+	text-align: center;
+}
+body .one .bsa_it_ad .bsa_it_d {
+	display: block;
+	font-size: 12px;
+	color: #434343;
+	line-height: 135%;
+	text-align: center;
+}
+body .one .bsa_it_p {
+	display: none;
+}
+body #bsap_aplink, body #bsap_aplink:hover {
+	display: block;
+	font-size: 10px;
+	margin: 0 15px 0;
+	text-align: right;
+}
+
+/* Twitter Sidebar widget */
+aside.sidebar .twitter-timeline {
+	margin-top: 10px;
+}
+/* Sidebar link colors */
+aside.sidebar:hover a:hover {
+	color: $accent_color;
 }
 
 
