@@ -625,6 +625,8 @@ This displays as follows in Chrome 26 on OS X:
 
 <img src="/images/posts/2013-04-15/webkit-textarea-hide.png">
 
+<i>Note: Adding `display: none` to `::-webkit-resizer` doesn't actually prevent the user from resizing the textarea, it just hides the control. If you want to disable resizing, set the [resize CSS property](https://developer.mozilla.org/en-US/docs/CSS/resize) to `none`. This has the added benefit of working in all browsers the support resizing textareas.</i>
+
 The `::-webkit-resizer` pseudo-element also allows for some basic styling.  If you thought the resize control could use significantly more color you could add this:
 
 ``` html
