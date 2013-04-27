@@ -4,7 +4,7 @@
   <title><![CDATA[TJ VanToll]]></title>
   <link href="http://tjvantoll.com/atom.xml" rel="self"/>
   <link href="http://tjvantoll.com/"/>
-  <updated>2013-04-26T22:25:17-04:00</updated>
+  <updated>2013-04-26T22:28:10-04:00</updated>
   <id>http://tjvantoll.com/</id>
   <author>
     <name><![CDATA[TJ VanToll]]></name>
@@ -1229,7 +1229,7 @@
 
 <p><img src="http://tjvantoll.com/images/posts/2013-04-15/webkit-textarea-hide.png"></p>
 
-<p><i>Note: Adding <code>display: none</code> to <code>::-webkit-resizer</code> doesn&#8217;t actually prevent the user from resizing the textarea, it just hides the control. If you want to disable resizing, set the <a href="https://developer.mozilla.org/en-US/docs/CSS/resize">resize CSS property</a> to <code>none</code>. This has the added benefit of working in all browsers the support resizing textareas.</i></p>
+<p><i>Note: Adding <code>display: none</code> to <code>::-webkit-resizer</code> doesn&#8217;t actually prevent the user from resizing the textarea, it just hides the control. If you want to disable resizing, set the <a href="https://developer.mozilla.org/en-US/docs/CSS/resize">resize CSS property</a> to <code>none</code>. This also hides the control and has the added benefit of working in all browsers that support resizing textareas.</i></p>
 
 <p>The <code>::-webkit-resizer</code> pseudo-element also allows for some basic styling.  If you thought the resize control could use significantly more color you could add this:</p>
 
