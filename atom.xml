@@ -4,7 +4,7 @@
   <title><![CDATA[TJ VanToll]]></title>
   <link href="http://tjvantoll.com/atom.xml" rel="self"/>
   <link href="http://tjvantoll.com/"/>
-  <updated>2013-04-28T16:01:34-04:00</updated>
+  <updated>2013-04-28T16:06:17-04:00</updated>
   <id>http://tjvantoll.com/</id>
   <author>
     <name><![CDATA[TJ VanToll]]></name>
@@ -3037,7 +3037,7 @@
 <ul>
 <li>The <a href="http://api.jqueryui.com/tooltip/#option-position">position</a> option is used to place the tooltip appropriately around the textbox.  Importantly the <code>collision</code> property is set to <code>none</code>, since, if the tooltip were to be repositioned the arrow would be placed incorrectly.</li>
 <li>The pointers themselves are created using using the <code>::after</code> and <code>::before</code> pseudo-elements.  For some more information on the technique and to see some other variations there&#8217;s an excellent tutorial <a href="http://nicolasgallagher.com/pure-css-speech-bubbles/">here</a>.</li>
-<li>Since the <code>::after</code> and <code>::before</code> pseudo-elements are used to create the pointers, IE &lt; 8 users will not see them.  However, they&#8217;ll simply see the default pointerless tooltip, no harm done. <i>Note: IE8 supports the before/after pseudo-elements but as <code>:before</code> and <code>:after</code> instead of <code>::before</code> and <code>::after</code>. So if you need IE8 support use <code>:before</code> and <code>:after</code>.</li>
+<li>Since the <code>::after</code> and <code>::before</code> pseudo-elements are used to create the pointers, IE &lt; 8 users will not see them.  However, they&#8217;ll simply see the default pointerless tooltip, no harm done. <i>Note: IE8 supports the before/after pseudo-elements but as <code>:before</code> and <code>:after</code> instead of <code>::before</code> and <code>::after</code>. So if you need IE8 support use <code>:before</code> and <code>:after</code>.</i></li>
 </ul>
 
 ]]></content>
