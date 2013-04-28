@@ -38,7 +38,7 @@ Why is this a problem?  <!--more-->Take the following code.
 
 This sets an interval that will increase the `left` property of a box by `0.25` pixels every 20 milliseconds.  Doing so will move the box left across the screen as seen below:
 
-{% demo /demos/2012-08-16/box_move.html Moving_a_box_with_sub_pixels 100 %}
+{% demo /demos/2012-08-16/box_move.html Moving_a_box_with_sub_pixels 135 %}
 
 Great.  Unfortunately in IE < 9 the box will not move.  Within the interval function the value to increment is being retrieved from the element itself, which, in IE < 9 will continuously return the rounded value.
 
