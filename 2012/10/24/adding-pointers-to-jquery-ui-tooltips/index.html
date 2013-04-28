@@ -142,15 +142,17 @@
 
 
 
-<iframe style="width: 100%; height: 350px;" src="http://jsfiddle.net/tj_vantoll/kyBwU/embedded/result,js,html,css/" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
+<div class="code_example"><h6>Pointer Tooltip Example<a href="/demos/2012-10-24/pointer.html" target="_blank">Open in New Window</a></h6><iframe style="width: 100%; height: 300px;" frameborder="0" src="/demos/2012-10-24/pointer.html"></iframe></div>
 
+
+<p><a href="http://jsfiddle.net/tj_vantoll/kyBwU">View Demo on jsFiddle</a></p>
 
 <p>So how is this done?</p>
 
 <ul>
 <li>The <a href="http://api.jqueryui.com/tooltip/#option-position">position</a> option is used to place the tooltip appropriately around the textbox.  Importantly the <code>collision</code> property is set to <code>none</code>, since, if the tooltip were to be repositioned the arrow would be placed incorrectly.</li>
 <li>The pointers themselves are created using using the <code>::after</code> and <code>::before</code> pseudo-elements.  For some more information on the technique and to see some other variations there&#8217;s an excellent tutorial <a href="http://nicolasgallagher.com/pure-css-speech-bubbles/">here</a>.</li>
-<li>Since the <code>::after</code> and <code>::before</code> pseudo-elements are used to create the pointers, IE &lt;= 8 users will not see them.  However, they&#8217;ll simply see the default pointerless tooltip, no harm done.</li>
+<li>Since the <code>::after</code> and <code>::before</code> pseudo-elements are used to create the pointers, IE &lt; 8 users will not see them.  However, they&#8217;ll simply see the default pointerless tooltip, no harm done. <i>Note: IE8 supports the before/after pseudo-elements but as <code>:before</code> and <code>:after</code> instead of <code>::before</code> and <code>::after</code>. So if you need IE8 support use <code>:before</code> and <code>:after</code>.</li>
 </ul>
 
 </div>
