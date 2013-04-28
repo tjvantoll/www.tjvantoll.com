@@ -27,6 +27,8 @@ if (fruit == 'banana' || fruit == 'lemon' || fruit == 'mango' || fruit == 'pinea
 }
 ```
 
+<!--more-->
+
 This is getting a bit ugly.  Let's look at some other ways of accomplishing the same check.
 
 ### Switch

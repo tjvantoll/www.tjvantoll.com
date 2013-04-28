@@ -22,6 +22,8 @@ The common way of preventing the default action of an event is to call [preventD
 
 *The value `false` is also allowed as a shorthand for a function that simply does `return false`.*
 
+<!--more-->
+
 Therefore, the same example could be written as follows:
 
 ``` html
