@@ -4,7 +4,7 @@
   <title><![CDATA[TJ VanToll]]></title>
   <link href="http://tjvantoll.com/atom.xml" rel="self"/>
   <link href="http://tjvantoll.com/"/>
-  <updated>2013-04-26T22:29:11-04:00</updated>
+  <updated>2013-04-27T22:30:06-04:00</updated>
   <id>http://tjvantoll.com/</id>
   <author>
     <name><![CDATA[TJ VanToll]]></name>
@@ -1381,6 +1381,9 @@
 
 <p><em>The value <code>false</code> is also allowed as a shorthand for a function that simply does <code>return false</code>.</em></p>
 
+<!--more-->
+
+
 <p>Therefore, the same example could be written as follows:</p>
 
 <figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
@@ -1495,6 +1498,11 @@
 </span><span class='line'>    <span class="nx">handleYellowFruit</span><span class="p">();</span>
 </span><span class='line'><span class="p">}</span>
 </span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<!--more-->
 
 
 <p>This is getting a bit ugly.  Let&#8217;s look at some other ways of accomplishing the same check.</p>

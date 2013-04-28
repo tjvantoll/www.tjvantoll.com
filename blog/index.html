@@ -300,86 +300,12 @@
 
 <p><em>The value <code>false</code> is also allowed as a shorthand for a function that simply does <code>return false</code>.</em></p>
 
-<p>Therefore, the same example could be written as follows:</p>
-
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;http://google.com&quot;</span><span class="nt">&gt;</span>Google<span class="nt">&lt;/a&gt;</span>
-</span><span class='line'><span class="nt">&lt;script&gt;</span>
-</span><span class='line'>    <span class="nx">$</span><span class="p">(</span> <span class="s2">&quot;a&quot;</span> <span class="p">).</span><span class="nx">on</span><span class="p">(</span> <span class="s2">&quot;click&quot;</span><span class="p">,</span> <span class="kc">false</span> <span class="p">);</span>
-</span><span class='line'><span class="nt">&lt;/script&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>The same approach will also work using delegated events:</p>
-
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;nav&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;http://google.com&quot;</span><span class="nt">&gt;</span>Google<span class="nt">&lt;/a&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;http://twitter.com&quot;</span><span class="nt">&gt;</span>Twitter<span class="nt">&lt;/a&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;http://facebook.com&quot;</span><span class="nt">&gt;</span>Facebook<span class="nt">&lt;/a&gt;</span>
-</span><span class='line'><span class="nt">&lt;/nav&gt;</span>
-</span><span class='line'><span class="nt">&lt;script&gt;</span>
-</span><span class='line'>    <span class="nx">$</span><span class="p">(</span> <span class="s2">&quot;nav&quot;</span> <span class="p">).</span><span class="nx">on</span><span class="p">(</span> <span class="s2">&quot;click&quot;</span><span class="p">,</span> <span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="kc">false</span> <span class="p">);</span>
-</span><span class='line'><span class="nt">&lt;/script&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>Update: April 1st, 2013</h3>
-
-<p>As noted in the comments, using the <code>false</code> shorthand is the equivalent of <code>event.preventDefault(); event.stopPropagation();</code>.  Therefore when using the shorthand, the event will not bubble to parent elements (which may or may not be what you want to happen).  The following example illustrates this:</p>
-
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">&quot;container-1&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;a</span> <span class="na">id=</span><span class="s">&quot;a-1&quot;</span> <span class="na">href=</span><span class="s">&quot;http://google.com&quot;</span><span class="nt">&gt;</span>Google<span class="nt">&lt;/a&gt;</span>
-</span><span class='line'><span class="nt">&lt;/div&gt;</span>
-</span><span class='line'><span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">&quot;container-2&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;a</span> <span class="na">id=</span><span class="s">&quot;a-2&quot;</span> <span class="na">href=</span><span class="s">&quot;http://google.com&quot;</span><span class="nt">&gt;</span>Google<span class="nt">&lt;/a&gt;</span>
-</span><span class='line'><span class="nt">&lt;/div&gt;</span>
-</span><span class='line'><span class="nt">&lt;script&gt;</span>
-</span><span class='line'>    <span class="nx">$</span><span class="p">(</span> <span class="s2">&quot;#a-1&quot;</span> <span class="p">).</span><span class="nx">on</span><span class="p">(</span> <span class="s2">&quot;click&quot;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span> <span class="nx">event</span> <span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>        <span class="nx">event</span><span class="p">.</span><span class="nx">preventDefault</span><span class="p">();</span>
-</span><span class='line'>    <span class="p">});</span>
-</span><span class='line'>    <span class="c1">// When a#a-1 is clicked this will fire because the event&#39;s</span>
-</span><span class='line'>    <span class="c1">// propagation is not stopped.</span>
-</span><span class='line'>    <span class="nx">$</span><span class="p">(</span> <span class="s2">&quot;#container-1&quot;</span> <span class="p">).</span><span class="nx">on</span><span class="p">(</span> <span class="s2">&quot;click&quot;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(){}</span> <span class="p">);</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="nx">$</span><span class="p">(</span> <span class="s2">&quot;#a-2&quot;</span> <span class="p">).</span><span class="nx">on</span><span class="p">(</span> <span class="s2">&quot;click&quot;</span><span class="p">,</span> <span class="kc">false</span> <span class="p">);</span>
-</span><span class='line'>    <span class="c1">// When a#a-2 is clicked this will not fire because the shorthand</span>
-</span><span class='line'>    <span class="c1">// stops propagation.</span>
-</span><span class='line'>    <span class="nx">$</span><span class="p">(</span> <span class="s2">&quot;#container-2&quot;</span> <span class="p">).</span><span class="nx">on</span><span class="p">(</span> <span class="s2">&quot;click&quot;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(){}</span> <span class="p">);</span>
-</span><span class='line'><span class="nt">&lt;/script&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
-
 </div>
   
+  
+    <footer>
+      <a rel="full-article" href="/2013/03/28/shorthand-for-preventing-default-event-actions-with-jquery/">Read on &rarr;</a>
+    </footer>
   
 
 
@@ -445,118 +371,14 @@
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>This is getting a bit ugly.  Let&#8217;s look at some other ways of accomplishing the same check.</p>
-
-<h3>Switch</h3>
-
-<p>The switch statement can be used to achieve the same ends:</p>
-
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="k">switch</span> <span class="p">(</span><span class="nx">fruit</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>    <span class="k">case</span> <span class="s1">&#39;banana&#39;</span><span class="o">:</span>
-</span><span class='line'>    <span class="k">case</span> <span class="s1">&#39;lemon&#39;</span><span class="o">:</span>
-</span><span class='line'>    <span class="k">case</span> <span class="s1">&#39;mango&#39;</span><span class="o">:</span>
-</span><span class='line'>    <span class="k">case</span> <span class="s1">&#39;pineapple&#39;</span><span class="o">:</span>
-</span><span class='line'>        <span class="nx">handleYellowFruit</span><span class="p">();</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
 
 
-<p>This approach would be helpful if we have to handle for multiple classifications of fruits.  But for one check it&#8217;s a lot of typing and takes up a lot of space.</p>
-
-<h3>Array Based</h3>
-
-<p>ECMAScript 5 introduced an <code>indexOf</code> method on <code>Array.prototype</code> (<a href="https://developer.mozilla.org/en-US/docs/JavaScript/Reference/Global_Objects/Array/indexOf">docs</a>).  We can use this to create an array on the fly, then see whether the value matches one of the values in the array:</p>
-
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="k">if</span> <span class="p">([</span><span class="s1">&#39;banana&#39;</span><span class="p">,</span> <span class="s1">&#39;lemon&#39;</span><span class="p">,</span> <span class="s1">&#39;mango&#39;</span><span class="p">,</span> <span class="s1">&#39;pineapple&#39;</span><span class="p">].</span><span class="nx">indexOf</span><span class="p">(</span><span class="nx">fruit</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>    <span class="nx">handleYellowFruit</span><span class="p">();</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>This is better, but still not ideal.  Understanding this code relies on the reader knowing that the <code>indexOf</code> method returns <code>-1</code>, which is not necessarily common knowledge.</p>
-
-<p>Also, because <code>Array.prototype.indexOf</code> was added in ECMAScript 5, it&#8217;s not present in IE &lt;= 8.  Therefore, if you&#8217;re supporting IE &lt;= 8, you either need to add an <code>indexOf</code> method to the prototype yourself or use a library.</p>
-
-<p>Speaking of libraries, most provide a cross browser means of finding values in an array.</p>
-
-<h4>jQuery</h4>
-
-<p><a href="http://jquery.com">jQuery</a> provides an <code>inArray</code> method (<a href="http://api.jquery.com/jQuery.inArray/">docs</a>):</p>
-
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="k">if</span> <span class="p">(</span><span class="nx">$</span><span class="p">.</span><span class="nx">inArray</span><span class="p">(</span><span class="nx">fruit</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;banana&#39;</span><span class="p">,</span> <span class="s1">&#39;lemon&#39;</span><span class="p">,</span> <span class="s1">&#39;mango&#39;</span><span class="p">,</span> <span class="s1">&#39;pineapple&#39;</span><span class="p">])</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>    <span class="nx">handleYellowFruit</span><span class="p">();</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h4>Underscore</h4>
-
-<p><a href="http://underscorejs.org">Underscore.js</a> provides a <code>contains</code> method (<a href="http://underscorejs.org/#contains">docs</a>):</p>
-
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="k">if</span> <span class="p">(</span><span class="nx">_</span><span class="p">.</span><span class="nx">contains</span><span class="p">([</span><span class="s1">&#39;banana&#39;</span><span class="p">,</span> <span class="s1">&#39;lemon&#39;</span><span class="p">,</span> <span class="s1">&#39;mango&#39;</span><span class="p">,</span> <span class="s1">&#39;pineapple&#39;</span><span class="p">],</span> <span class="nx">fruit</span><span class="p">))</span> <span class="p">{</span>
-</span><span class='line'>    <span class="nx">handleYellowFruit</span><span class="p">();</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Other libraries provide similar methods.  Personally, I find Underscore&#8217;s API to be the cleanest.  The contains API intuitively returns a boolean and there&#8217;s not much to type.  You might however find yourself needing to remember the order of the parameters (does the array come first or the value?).</p>
-
-<p>The check would be cleaner if the <code>contains</code> method were added to <code>Array.prototype</code> directly:</p>
-
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nb">Array</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">contains</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">obj</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">indexOf</span><span class="p">(</span><span class="nx">obj</span><span class="p">)</span> <span class="o">&gt;</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
-</span><span class='line'><span class="p">};</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>This allows the check to be:</p>
-
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="k">if</span> <span class="p">([</span><span class="s1">&#39;banana&#39;</span><span class="p">,</span> <span class="s1">&#39;lemon&#39;</span><span class="p">,</span> <span class="s1">&#39;mango&#39;</span><span class="p">,</span> <span class="s1">&#39;pineapple&#39;</span><span class="p">].</span><span class="nx">contains</span><span class="p">(</span><span class="nx">fruit</span><span class="p">))</span> <span class="p">{</span>
-</span><span class='line'>    <span class="nx">handleYellowFruit</span><span class="p">();</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>Regular Expressions</h3>
-
-<p>An often overlooked means of performing this check is to use regular expressions via <code>String.prototype.match</code> (<a href="https://developer.mozilla.org/en-US/docs/JavaScript/Reference/Global_Objects/String">docs</a>).</p>
-
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="k">if</span> <span class="p">(</span><span class="nx">fruit</span><span class="p">.</span><span class="nx">match</span><span class="p">(</span><span class="sr">/^(banana|lemon|mango|pineapple)$/</span><span class="p">))</span> <span class="p">{</span>
-</span><span class='line'>    <span class="nx">handleYellowFruit</span><span class="p">();</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>This check clearly requires the least amount of typing.  It is also the most flexible as you can easily alter things like case sensitivity, special character handling, white space, etc.  This will work in all browsers and you don&#8217;t have to worry about messing with the native prototypes.</p>
-
-<p>While this is the most powerful option, it comes at a cost of being less readable.  I had to look up the <code>^</code> (match at the beginning of input) and <code>$</code> (match at the end of input) characters when writing this post.</p>
 </div>
   
+  
+    <footer>
+      <a rel="full-article" href="/2013/03/14/better-ways-of-comparing-a-javascript-string-to-multiple-values/">Read on &rarr;</a>
+    </footer>
   
 
 
