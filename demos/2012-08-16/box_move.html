@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title></title>
+	<meta charset="utf-8">
+	<style>
+		body {
+			padding: 20px;
+		}
+		div {
+			position: relative;
+			height: 50px;
+			width: 50px;
+			background-color: blue;
+		}
+	</style>
+</head>
+<body>
+	<div id="box"></div>
+	<script>
+		var box = document.getElementById('box');
+		box.style.left = '0px';
+		setInterval(function() {
+			var currentLeft = box.style.left.replace('px', '');
+			currentLeft = parseFloat(currentLeft);
+			box.style.left = currentLeft + 0.25 + 'px';
+		}, 20);
+	</script>
+</body>
+</html>
