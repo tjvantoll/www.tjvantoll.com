@@ -264,7 +264,12 @@ header.home {
 /********************* Speaking **********************/
 /*****************************************************/
 
-#speaking-archives {
+.speaking {
+	p { margin-bottom: 0; }
+	header { margin: 0; }
+	h3 { margin: 0.5em 0; }
+}
+.speaking-archives {
 	@extend #blog-archives;
 	h1 { font-weight: normal; }
 	footer a { color: $link-color; }
