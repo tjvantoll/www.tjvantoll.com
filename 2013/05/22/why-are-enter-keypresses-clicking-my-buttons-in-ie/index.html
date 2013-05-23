@@ -183,11 +183,13 @@
 
 <p>Pressing Enter in this textbox in IE will click the completely unrelated <code>&lt;button&gt;</code>. No other browsers exhibit this behavior.</p>
 
-<p>I have no idea what IE&#8217;s algorithm for selecting a submit button is, but it will find buttons in completely unrelated portions of the DOM. For instance it caused a <a href="http://bugs.jqueryui.com/ticket/9312">jQuery UI bug</a> by causing a dialog&#8217;s close button to be triggered on enter keypresses in unrelated textboxes.</p>
+<p>I have no idea what IE&#8217;s algorithm for selecting a submit button is, but it will find buttons in completely unrelated portions of the DOM. For instance it is responsible for a <a href="http://bugs.jqueryui.com/ticket/9312">jQuery UI bug</a> by causing a dialog&#8217;s close button to be triggered on enter keypresses in unrelated textboxes.</p>
 
-<h3>Workaround</h3>
+<h3>Solution</h3>
 
-<p>Add <code>type="button"</code> to the <code>&lt;button&gt;</code>:</p>
+<p>All <code>&lt;input&gt;</code>s should be within a <code>&lt;form&gt;</code>, and all forms should have a submit button. So if you&#8217;re running into this bug, changing your markup to be semantic will avoid this issue altogether.</p>
+
+<p>If for whatever reason that&#8217;s not an option, you can add <code>type="button"</code> to the <code>&lt;button&gt;</code>:</p>
 
 <figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -198,7 +200,7 @@
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>This will override the default <code>type="submit"</code> and prevent IE from clicking the <code>&lt;button&gt;</code> on Enter keypresses. I would recommend explicitly specifying <code>type="button"</code> for any <code>&lt;button&gt;</code> elements that you do not plan on using to submit <code>&lt;form&gt;</code>s.</p>
+<p>This will override the default <code>type="submit"</code> and prevent IE from clicking the <code>&lt;button&gt;</code> on Enter keypresses.</p>
 
 <p>If anybody has knowledge of the algorithm IE uses to find submittable elements when no <code>&lt;form&gt;</code>s are present please let me know in the comments. I&#8217;m very curious.</p>
 
