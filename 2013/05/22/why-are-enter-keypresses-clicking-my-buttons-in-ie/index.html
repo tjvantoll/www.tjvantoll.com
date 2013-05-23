@@ -5,25 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Using the Attribute Selector with Numeric Values - TJ VanToll - Tutorials, Thoughts, and Ramblings on Front End Development</title>
+  <title>Why are Enter Keypresses Clicking My Buttons in IE? - TJ VanToll - Tutorials, Thoughts, and Ramblings on Front End Development</title>
   <meta name="author" content="TJ VanToll">
 
   
-  <meta name="description" content="What color will the number 3 be in the example below? 1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-&lt;style&gt; td { color: red; } td[colspan=2] { color: blue &hellip;">
+  <meta name="description" content="When you press the Enter key in a textbox, the browser will automatically attempt to perform an implicit submission of the textbox&#8217;s &lt;form& &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -32,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://tjvantoll.com/2012/09/19/using-the-attribute-selector-with-numeric-values">
+  <link rel="canonical" href="http://tjvantoll.com/2013/05/22/why-are-enter-keypresses-clicking-my-buttons-in-ie">
 
   <!--[if ! lte IE 7]><!-->
     <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
@@ -122,7 +108,7 @@
   
   <header>
     
-      <h1 class="entry-title">Using the Attribute Selector with Numeric Values</h1>
+      <h1 class="entry-title">Why are Enter Keypresses Clicking My Buttons in IE?</h1>
     
     
       <p class="meta">
@@ -138,7 +124,7 @@
   
 
 
-<time datetime="2012-09-19T20:42:00-04:00" pubdate data-updated="true">Sep 19<span>th</span>, 2012</time>
+<time datetime="2013-05-22T22:15:00-04:00" pubdate data-updated="true">May 22<span>nd</span>, 2013</time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -147,70 +133,81 @@
   </header>
 
 
-<div class="entry-content"><p>What color will the number 3 be in the example below?</p>
+<div class="entry-content"><p>When you press the Enter key in a textbox, the browser will automatically attempt to perform an <a href="http://www.whatwg.org/specs/web-apps/current-work/multipage/association-of-controls-and-forms.html#implicit-submission">implicit submission</a> of the textbox&#8217;s <code>&lt;form&gt;</code>.</p>
+
+<p>For example, if you press Enter in the textbox of the following <code>&lt;form&gt;</code> it will submit a search query to Google:</p>
 
 <figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;style&gt;</span>
-</span><span class='line'>    <span class="nt">td</span> <span class="p">{</span> <span class="k">color</span><span class="o">:</span> <span class="nb">red</span><span class="p">;</span> <span class="p">}</span>
-</span><span class='line'>    <span class="nt">td</span><span class="o">[</span><span class="nt">colspan</span><span class="o">=</span><span class="nt">2</span><span class="o">]</span> <span class="p">{</span> <span class="k">color</span><span class="o">:</span> <span class="nb">blue</span><span class="p">;</span> <span class="p">}</span>
-</span><span class='line'><span class="nt">&lt;/style&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="nt">&lt;table&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;tr&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;td</span> <span class="na">colspan=</span><span class="s">&quot;2&quot;</span><span class="nt">&gt;</span>1<span class="nt">&lt;/td&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;/tr&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;td&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;td&gt;</span>2<span class="nt">&lt;/td&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;td&gt;</span>3<span class="nt">&lt;/td&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;/tr&gt;</span>
-</span><span class='line'><span class="nt">&lt;/table&gt;</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;form</span> <span class="na">action=</span><span class="s">&quot;http://google.com&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;input</span> <span class="na">name=</span><span class="s">&quot;q&quot;</span> <span class="na">type=</span><span class="s">&quot;text&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;submit&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'><span class="nt">&lt;/form&gt;</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>Turns out it will be red because the <code>td[colspan=2]</code> selector does not match it.  Why?</p>
+
 
 <!--more-->
 
 
-<h3>Attribute Selector</h3>
+<p>The same will occur if you use a <code>&lt;button&gt;</code> element, which has a default <code>type</code> of <code>submit</code>:</p>
 
-<p>Per the <a href="http://www.w3.org/TR/css3-selectors/#attribute-selectors">CSS 3 specification</a> values used in attribute selectors must be either identifiers or strings.</p>
+<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;form</span> <span class="na">action=</span><span class="s">&quot;http://google.com&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;input</span> <span class="na">name=</span><span class="s">&quot;q&quot;</span> <span class="na">type=</span><span class="s">&quot;text&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;button&gt;</span>Submit<span class="nt">&lt;/button&gt;</span>
+</span><span class='line'><span class="nt">&lt;/form&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
 
-<p>String values are those enclosed by single or double quotes (e.g. the <code>2</code> in the selector <code>value="2"</code>).  If a value is not a string the browser attempts to resolve it as an identifier, which the spec defines as such:</p>
 
-<blockquote><p>&#8220;In CSS, identifiers (including element names, classes, and IDs in selectors) can contain only the characters [a-zA-Z0-9] and ISO 10646 characters U+00A0 and higher, plus the hyphen (-) and the underscore (_); they cannot start with a digit, two hyphens, or a hyphen followed by a digit.&#8221;</p><footer><strong>CSS 2.1 Specification</strong> <cite><a href='http://www.w3.org/TR/CSS2/syndata.html#value-def-identifier'>www.w3.org/TR/CSS2/&hellip;</a></cite></footer></blockquote>
+<p>In each of these examples a <code>click</code> event will be triggered on the form&#8217;s <code>input[type="submit"]</code> / <code>button[type="submit"]</code>. This is all expected and speced behavior that is consistently implemented across browsers.</p>
+
+<h3>Internet Explorer</h3>
+
+<p>Internet Explorer has an annoying quirk that still exists as of IE10: submit buttons can be clicked when Enter is pressed in a textbox, even when no <code>&lt;form&gt;</code> is present. Consider the example below:</p>
+
+<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;text&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'><span class="c">&lt;!-- other stuff --&gt;</span>
+</span><span class='line'><span class="nt">&lt;button&gt;</span>Some Unrelated Action<span class="nt">&lt;/button&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
 
 
-<p>So why doesn&#8217;t <code>colspan=2</code> work above?  The key part from the spec is that &#8221;<em>identifiers &#8230; cannot start with a digit</em>&#8221;.  Therefore, since <code>2</code> is not a string and does not qualify as an identifier, the browser ignores it.  This behavior is implemented consistently in all browsers.</p>
+<p>Pressing Enter in this textbox in IE will click the completely unrelated <code>&lt;button&gt;</code>. No other browsers exhibit this behavior.</p>
 
-<p>The fix?  Simply wrap the value in quotes; both <code>td[colspan='2']</code> and <code>td[colspan="2"]</code> will match the cell in the example above.</p>
+<p>I have no idea what IE&#8217;s algorithm for selecting a submit button is, but it will find buttons in completely unrelated portions of the DOM. For instance it caused a <a href="http://bugs.jqueryui.com/ticket/9312">jQuery UI bug</a> by causing a dialog&#8217;s close button to be triggered on enter keypresses in unrelated textboxes.</p>
 
-<h3>Numeric Attributes</h3>
+<h3>Workaround</h3>
 
-<p>Attributes that generally only have numeric values include <code>colspan</code>, <code>rowspan</code>, <code>cellpadding</code>, <code>cellspacing</code>, <code>min</code>, <code>max</code>, and <code>step</code>.  When using any of these attributes in an attribute selector ensure that you wrap the value in quotes.</p>
+<p>Add <code>type="button"</code> to the <code>&lt;button&gt;</code>:</p>
 
-<h3>JavaScript</h3>
+<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;text&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'><span class="c">&lt;!-- other stuff --&gt;</span>
+</span><span class='line'><span class="nt">&lt;button</span> <span class="na">type=</span><span class="s">&quot;button&quot;</span><span class="nt">&gt;</span>Some Unrelated Action<span class="nt">&lt;/button&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
 
-<p>Most selector engines such as jQuery&#8217;s sizzle will make the selector work regardless of whether the quotes are present.  <code>$('td[colspan=2]')</code> will return the cell in question in the example above.</p>
 
-<p>However, if you are using native JavaScript though you will not be so lucky; <code>document.querySelectorAll('td[colspan=2]')</code> actually throws an error.</p>
+<p>This will override the default <code>type="submit"</code> and prevent IE from clicking the <code>&lt;button&gt;</code> on Enter keypresses. I would recommend explicitly specifying <code>type="button"</code> for any <code>&lt;button&gt;</code> elements that you do not plan on using to submit <code>&lt;form&gt;</code>s.</p>
 
-<h3>Conclusion</h3>
+<p>If anybody has knowledge of the algorithm IE uses to find submittable elements when no <code>&lt;form&gt;</code>s are present please let me know in the comments. I&#8217;m very curious.</p>
 
-<p>Attributes with numeric values need to have quotes around them when using them in CSS or JavaScript.  When in doubt use quotes around attribute values; it never hurts, and there are some strange edge cases where omitting the quotes leads to unexpected behavior.  If you&#8217;re looking for a more detailed writeup on when quotes are ok to omit checkout <a href="http://mathiasbynens.be/notes/unquoted-attribute-values">Mathias Bynens&#8217; writeup on the topic</a>.</p>
+<h4>Related Reading</h4>
+
+<ul>
+<li><a href="/2013/01/01/enter-should-submit-forms-stop-messing-with-that/">The Enter Key should Submit Forms, Stop Suppressing it</a></li>
+</ul>
+
 </div>
 
 
@@ -233,12 +230,12 @@
   
 
 
-<time datetime="2012-09-19T20:42:00-04:00" pubdate data-updated="true">Sep 19<span>th</span>, 2012</time>
+<time datetime="2013-05-22T22:15:00-04:00" pubdate data-updated="true">May 22<span>nd</span>, 2013</time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/css/'>CSS</a>
+    <a class='category' href='/blog/categories/browsers/'>Browsers</a>, <a class='category' href='/blog/categories/javascript/'>JavaScript</a>
   
 </span>
 
@@ -251,7 +248,7 @@
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://tjvantoll.com/2012/09/19/using-the-attribute-selector-with-numeric-values/" data-via="tjvantoll" data-counturl="http://tjvantoll.com/2012/09/19/using-the-attribute-selector-with-numeric-values/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://tjvantoll.com/2013/05/22/why-are-enter-keypresses-clicking-my-buttons-in-ie/" data-via="tjvantoll" data-counturl="http://tjvantoll.com/2013/05/22/why-are-enter-keypresses-clicking-my-buttons-in-ie/" >Tweet</a>
   
   
   
@@ -260,10 +257,8 @@
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/2012/09/14/using-jquery-ui-slider-to-polyfill-html5-input-type-range/" title="Previous Post: Using jQuery UI's Slider to Polyfill HTML5's input[type=range]">&laquo; Using jQuery UI's Slider to Polyfill HTML5's input[type=range]</a>
+        <a class="basic-alignment left" href="/2013/04/26/using-ternary-operators-for-more-maintainable-templates/" title="Previous Post: Using Ternary Operators for More Maintainable Templates">&laquo; Using Ternary Operators for More Maintainable Templates</a>
       
-      
-        <a class="basic-alignment right" href="/2012/10/17/maxlength-constraint-validation-oddities/" title="Next Post: maxlength Constraint Validation Oddities in Major Browsers">maxlength Constraint Validation Oddities in Major Browsers &raquo;</a>
       
     </p>
   </footer>
@@ -335,8 +330,8 @@
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://tjvantoll.com/2012/09/19/using-the-attribute-selector-with-numeric-values/';
-        var disqus_url = 'http://tjvantoll.com/2012/09/19/using-the-attribute-selector-with-numeric-values/';
+        var disqus_identifier = 'http://tjvantoll.com/2013/05/22/why-are-enter-keypresses-clicking-my-buttons-in-ie/';
+        var disqus_url = 'http://tjvantoll.com/2013/05/22/why-are-enter-keypresses-clicking-my-buttons-in-ie/';
         var disqus_script = 'embed.js';
       
     (function () {

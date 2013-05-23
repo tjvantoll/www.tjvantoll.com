@@ -9,7 +9,7 @@
   <meta name="author" content="TJ VanToll">
 
   
-  <meta name="description" content="With the rise of JavaScript MVC frameworks, writing templates has become a large part of many web developer&#8217;s workflow. As such, I thought I&# &hellip;">
+  <meta name="description" content="When you press the Enter key in a textbox, the browser will automatically attempt to perform an implicit submission of the textbox&#8217;s &lt;form& &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -105,6 +105,64 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2013/05/22/why-are-enter-keypresses-clicking-my-buttons-in-ie/">Why are Enter Keypresses Clicking My Buttons in IE?</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-05-22T22:15:00-04:00" pubdate data-updated="true">May 22<span>nd</span>, 2013</time>
+        
+         | <a href="/2013/05/22/why-are-enter-keypresses-clicking-my-buttons-in-ie/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>When you press the Enter key in a textbox, the browser will automatically attempt to perform an <a href="http://www.whatwg.org/specs/web-apps/current-work/multipage/association-of-controls-and-forms.html#implicit-submission">implicit submission</a> of the textbox&#8217;s <code>&lt;form&gt;</code>.</p>
+
+<p>For example, if you press Enter in the textbox of the following <code>&lt;form&gt;</code> it will submit a search query to Google:</p>
+
+<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;form</span> <span class="na">action=</span><span class="s">&quot;http://google.com&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;input</span> <span class="na">name=</span><span class="s">&quot;q&quot;</span> <span class="na">type=</span><span class="s">&quot;text&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;submit&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'><span class="nt">&lt;/form&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/2013/05/22/why-are-enter-keypresses-clicking-my-buttons-in-ie/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -586,49 +644,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2013/01/11/detecting-internet-explorer-without-jquery/">Detecting Internet Explorer without jQuery</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-01-11T17:26:00-05:00" pubdate data-updated="true">Jan 11<span>th</span>, 2013</time>
-        
-         | <a href="/2013/01/11/detecting-internet-explorer-without-jquery/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>One of the changes in jQuery&#8217;s <a href="http://blog.jquery.com/2013/01/09/jquery-1-9-rc1-and-migrate-rc1-released/">upcoming 1.9 release</a> is the removal of <a href="http://api.jquery.com/jQuery.browser/">$.browser</a>.  So if you&#8217;re using it to test for Internet Explorer, what do you do?</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/2013/01/11/detecting-internet-explorer-without-jquery/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -650,6 +665,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2013/05/22/why-are-enter-keypresses-clicking-my-buttons-in-ie/">Why are Enter Keypresses Clicking My Buttons in IE?</a>
+      </li>
+    
+      <li class="post">
         <a href="/2013/04/26/using-ternary-operators-for-more-maintainable-templates/">Using Ternary Operators for More Maintainable Templates</a>
       </li>
     
@@ -663,10 +682,6 @@
     
       <li class="post">
         <a href="/2013/03/28/shorthand-for-preventing-default-event-actions-with-jquery/">Shorthand for Preventing Default Event Actions with jQuery</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2013/03/14/better-ways-of-comparing-a-javascript-string-to-multiple-values/">Better Ways of Comparing a JavaScript String to Multiple Values</a>
       </li>
     
   </ul>
