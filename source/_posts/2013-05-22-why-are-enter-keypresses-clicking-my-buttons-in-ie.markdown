@@ -42,11 +42,13 @@ Internet Explorer has an annoying quirk that still exists as of IE10: submit but
 
 Pressing Enter in this textbox in IE will click the completely unrelated `<button>`. No other browsers exhibit this behavior.
 
-I have no idea what IE's algorithm for selecting a submit button is, but it will find buttons in completely unrelated portions of the DOM. For instance it caused a [jQuery UI bug](http://bugs.jqueryui.com/ticket/9312) by causing a dialog's close button to be triggered on enter keypresses in unrelated textboxes.
+I have no idea what IE's algorithm for selecting a submit button is, but it will find buttons in completely unrelated portions of the DOM. For instance it is responsible for a [jQuery UI bug](http://bugs.jqueryui.com/ticket/9312) by causing a dialog's close button to be triggered on enter keypresses in unrelated textboxes.
 
-### Workaround
+### Solution
 
-Add `type="button"` to the `<button>`:
+All `<input>`s should be within a `<form>`, and all forms should have a submit button. So if you're running into this bug, changing your markup to be semantic will avoid this issue altogether.
+
+If for whatever reason that's not an option, you can add `type="button"` to the `<button>`:
 
 ``` html
 <input type="text">
@@ -54,7 +56,7 @@ Add `type="button"` to the `<button>`:
 <button type="button">Some Unrelated Action</button>
 ```
 
-This will override the default `type="submit"` and prevent IE from clicking the `<button>` on Enter keypresses. I would recommend explicitly specifying `type="button"` for any `<button>` elements that you do not plan on using to submit `<form>`s.
+This will override the default `type="submit"` and prevent IE from clicking the `<button>` on Enter keypresses.
 
 If anybody has knowledge of the algorithm IE uses to find submittable elements when no `<form>`s are present please let me know in the comments. I'm very curious.
 
