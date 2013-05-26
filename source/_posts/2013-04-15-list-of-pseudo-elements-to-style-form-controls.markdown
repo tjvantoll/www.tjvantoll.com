@@ -298,7 +298,7 @@ This displays as follows in Firefox 22 on OS X:
 Trident provides an impressive number of pseudo-elements to customize its range selector.
 
 * `::-ms-fill-lower`: The track portion underneath / before the handle.
-* `::ms-fill-upper`: The track portion above / after the handle.
+* `::-ms-fill-upper`: The track portion above / after the handle.
 * `::-ms-ticks-before`: An area above / before the range track with tick marks.
 * `::-ms-ticks-after`: An area below / after the range track with tick marks.
 * `::-ms-thumb`: The handle.
