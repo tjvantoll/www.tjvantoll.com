@@ -4,7 +4,7 @@
   <title><![CDATA[TJ VanToll]]></title>
   <link href="http://tjvantoll.com/atom.xml" rel="self"/>
   <link href="http://tjvantoll.com/"/>
-  <updated>2013-05-22T23:17:57-04:00</updated>
+  <updated>2013-05-26T16:56:23-04:00</updated>
   <id>http://tjvantoll.com/</id>
   <author>
     <name><![CDATA[TJ VanToll]]></name>
@@ -845,7 +845,7 @@
 
 <ul>
 <li><code>::-ms-fill-lower</code>: The track portion underneath / before the handle.</li>
-<li><code>::ms-fill-upper</code>: The track portion above / after the handle.</li>
+<li><code>::-ms-fill-upper</code>: The track portion above / after the handle.</li>
 <li><code>::-ms-ticks-before</code>: An area above / before the range track with tick marks.</li>
 <li><code>::-ms-ticks-after</code>: An area below / after the range track with tick marks.</li>
 <li><code>::-ms-thumb</code>: The handle.</li>

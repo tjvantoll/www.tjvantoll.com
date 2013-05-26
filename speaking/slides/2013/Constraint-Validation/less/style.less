@@ -1,0 +1,120 @@
+.spaced { margin-top: 0.25em; }
+.spaced li { margin-bottom: 0.5em; }
+
+.no_casing { text-transform: none !important; }
+
+img.full_slide {
+	width: 100%;
+	max-width: 100%;
+}
+
+pre {
+	max-height: 450px;
+	overflow: auto;
+}
+pre.inline {
+	display: inline-block;
+	padding: 0.2em;
+	margin: 0;
+	text-align: center;
+}
+pre.constrained {
+	font-size: 0.8em;
+	margin-top: 0;
+	padding-top: 0.1em;
+	padding-bottom: 0.1em;
+}
+
+section .output {
+	background: #F5F2F0;
+	padding: 1em;
+}
+.output:not(.no_reset) {
+	color: black;
+	label, output { color: black; }
+	output {
+		display: inline-block;
+		width: 70px;
+	}
+	input, button {
+		font-size: 1em;
+		max-width: 300px;
+	}
+}
+.no_reset {
+	label, output { color: black; }
+	input { color: black; }
+}
+.output.success {
+	color: white;
+	background: green;
+}
+.output.success h6 {
+	margin: 0;
+	letter-spacing: 0.1em;
+}
+.output .ui-widget-content {
+	border: 1px solid #AAA;
+}
+
+@-webkit-keyframes flip {
+	from{ -webkit-transform: rotatey(0deg); }
+	to{ -webkit-transform: rotatey(360deg); }
+}
+@keyframes flip {
+	from { transform: rotatey(0deg); }
+	to { transform: rotatey(360deg); }
+}
+
+#title-container {
+	overflow: hidden;
+	height: 200px;
+	.left {
+		float: left;
+		img { height: 75%; }
+		width: 21%;
+	}
+	.right {
+		margin-top: 5%;
+		float: left;
+	}
+}
+#title-container img, img.reset {
+	border: 0 !important;
+	background: none !important;
+	box-shadow: none !important;
+	margin-bottom: 35px;
+}
+#title-container img.over {
+	-webkit-animation: flip 3s alternate;
+	animation: flip 3s alternate;
+}
+
+section.me_slide {
+	img {
+		vertical-align: middle;
+		display: inline-block;
+		margin-left: 20px;
+	}
+	img[src*=lansing] {
+		height: 200px;
+	}
+}
+
+
+@-webkit-keyframes spin {
+	from { -webkit-transform: rotateX(0deg); }
+	to { -webkit-transform: rotateX(360deg); }
+}
+@keyframes spin {
+	from { transform: rotateX(0deg); }
+	to { transform: rotateX(360deg); }
+}
+.end {
+	h1 {
+		-webkit-animation: spin 8s infinite;
+		-webkit-animation-delay: 3s;
+		animation: spin 8s infinite;
+		animation-delay: 3s;
+	}
+}
