@@ -27,9 +27,9 @@ footer: true
 		</article>
 		<article>
 			<h1>Constraint Validation: Native Client Side Validation for Web Forms</h1>
-			<time datetime="2013-05-27">
+			<time datetime="2013-05-29">
 				<span class="month">May</span>
-				<span class="day">27</span>
+				<span class="day">29</span>
 				<span class="year">2013</span>
 			</time>
 			<footer>
