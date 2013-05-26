@@ -33,7 +33,8 @@ footer: true
 				<span class="year">2013</span>
 			</time>
 			<footer>
-				<a href="http://www.meetup.com/grwebdev/">Grand Rapids Web Dev Meetup</a> | Grand Rapids, MI
+				<a href="http://www.meetup.com/grwebdev/">Grand Rapids Web Dev Meetup</a> | Grand Rapids, MI | 
+				<a href="/speaking/slides/2013/Constraint-Validation/">Slides</a>
 			</footer>
 		</article>
 	</div>

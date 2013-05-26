@@ -1,0 +1,659 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+
+		<title>The Constraint Validation API | TJ VanToll</title>
+
+		<meta name="description" content="A presentation on HTML5's contstraint validation API">
+		<meta name="author" content="TJ VanToll">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/default.css" id="theme">
+
+		<!-- For syntax highlighting -->
+		<link rel="stylesheet" href="css/prism.css">
+
+		<link rel="stylesheet/less" href="less/style.less">
+		<script src="lib/js/less-1.3.3.min.js"></script>
+
+		<!-- If the query includes 'print-pdf', use the PDF print sheet -->
+		<script>
+			document.write( '<link rel="stylesheet" href="css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
+
+			if (window.location.host.indexOf('local') == -1) {
+				var _gaq = _gaq || [];
+				_gaq.push(['_setAccount', 'UA-29179796-1']);
+				_gaq.push(['_trackPageview']);
+			
+				(function() {
+					var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+					ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+					var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+				})();
+			}
+		</script>
+
+		<!--[if lt IE 9]>
+			<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+	<body>
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+
+				<section>
+					<h1 style="font-size: 3em;">Constraint Validation</h1>
+					<p>Native Client Side Validation for Web Forms</p>
+					<div id="title-container">
+						<div class="left">
+							<img src="img/HTML5-logo.png">
+						</div>
+						<div class="right">
+							<a href="http://tjvantoll.com">TJ VanToll</a> / <a href="http://twitter.com/tjvantoll">@tjvantoll</a><br>
+							Slides: <a href="http://tjvantoll.com/speaking">http://tjvantoll.com/speaking</a>
+						</div>
+					</div>
+				</section>
+
+				<section class="me_slide">
+					<h2>Me</h2>
+					<ul>
+						<li class="fragment">
+							jQuery UI Team Member
+							<img src="img/logo-jquery-ui.png" class="reset">
+						</li>
+						<li class="fragment">
+							Liquid Web
+							<img src="img/liquidweb.png" class="reset">
+						</li>
+						<li class="fragment">
+							Lansing, MI
+							<img src="img/lansing.png" class="reset">
+						</li>
+						<li class="fragment">
+							Blog: <a href="http://tjvantoll.com">http://tjvantoll.com</a>
+						</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>Constraint Validation</h2>
+					<aside class="notes">
+						Show of hands:
+						<ul>
+							<li>How many people have heard the term constraint validation?</li>
+							<li>How many people have written client side validation?</li>
+						</ul>
+					</aside>
+				</section>
+
+				<section>
+					<h2>What is constraint validation?</h2>
+					<p>An <a href="http://www.whatwg.org/specs/web-apps/current-work/#constraint-validation">algorithm</a> run whenever a user submits a form.</p>
+					<img src="img/constraint_validation_algorithm.png" alt="Constraint validation algorithm">
+					<aside class="notes">
+						You can check it out yourself if you'd like some light reading tonight, but I'll be going most everything at a high level.
+					</aside>
+				</section>
+
+				<section>
+					<h2>Basic Form (No constraints)</h2>
+
+<pre class="language-markup">
+<code contenteditable>&lt;form&gt;
+    &lt;input type="text"&gt;
+    &lt;button type="submit"&gt;Go&lt;/button&gt;
+&lt;/form&gt;
+</code></pre>
+					<div class="output"></div>
+					<aside class="notes">
+						<ul>
+							<li>As an example here's a form</li>
+							<li>The browser is not going to enforce anything about the data entered.</li>
+						</ul>
+					</aside>
+				</section>
+
+				<section>
+					<h2>Making the field required - old school</h2>
+<pre class="language-javascript" style="font-size: 0.7em;">
+<code>document.getElementById( "myForm" )
+  .addEventListener( "submit", function( event ) {
+    if ( document.getElementById( "myInput" ).value == "" ) {
+        event.preventDefault();
+        // Show some questionably UX and a11y friendly
+        // error message.
+      }
+  });
+});
+</code></pre>
+					<aside class="notes">
+						This works but doesn't scale well (multiple / dozens of fields), patterns, data types, etc.
+					</aside>
+				</section>
+
+				<section>
+					<h2>Making the field required - HTML5</h2>
+<pre class="language-markup">
+<code contenteditable>&lt;form&gt;
+    &lt;input type="text" required&gt;
+    &lt;button type="submit"&gt;Go&lt;/button&gt;
+&lt;/form&gt;
+</code></pre>
+					<div class="output"></div>
+					<aside class="notes">
+						<ul>
+							<li>This is a common so the HTML5 specification tries to help make this process easier. One of the pieces of constraint validation are new HTML attributes.</li>
+							<li>There's no JS here, adding the required attribute is all you have to do.</li>
+						</ul>
+					</aside>
+				</section>
+
+				<section>
+					<img class="full_width" src="img/browser_screenshots.png" alt="Display of required fields in supporting browsers">
+				</section>
+
+				<section>
+					<img class="full_slide" src="img/caniuse.png" alt="Current browser support of constraint validation">
+					<a href="http://caniuse.com/#feat=form-validation">http://caniuse.com/#feat=form-validation</a>
+					<aside class="notes">
+						Note that Safari has support for the API but it doesn't ever prevent form submissions.
+					</aside>
+				</section>
+
+				<section>
+					<h2>Works with these attributes</h2>
+					<ul>
+						<li>min</li>
+						<li>max</li>
+						<li>maxlength</li>
+						<li>pattern</li>
+						<li>required</li>
+						<li>step</li>
+						<li>type</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>min, max, step</h2>
+<pre class="language-markup">
+<code contenteditable>&lt;form&gt;
+  &lt;input type="number" required
+    min="2" max="10" step="2"&gt;
+  &lt;button type="submit"&gt;Go&lt;/button&gt;
+&lt;/form&gt;
+</code></pre>
+					<div class="output"></div>
+				</section>
+
+				<section>
+					<h2>pattern</h2>
+<pre class="language-markup">
+<code contenteditable>&lt;form&gt;
+  &lt;input type="text"
+    pattern="[0-9].[0-9][0-9]"&gt;
+  &lt;button type="submit"&gt;Go&lt;/button&gt;
+&lt;/form&gt;
+</code></pre>
+					<div class="output"></div>
+				</section>
+
+				<section>
+					<h2>Provide a title attribute for context</h2>
+<pre class="language-markup">
+<code contenteditable>&lt;form&gt;
+  &lt;input type="text"
+    title="In x.xx format"
+    pattern="[0-9].[0-9][0-9]"&gt;
+  &lt;button type="submit"&gt;Go&lt;/button&gt;
+&lt;/form&gt;
+</code></pre>
+					<div class="output"></div>
+				</section>
+
+				<section>
+					<h2>type</h2>
+<pre class="language-markup">
+<code contenteditable>&lt;form&gt;
+  &lt;input type="email" required&gt;
+  &lt;input type="url" required&gt;
+  &lt;button type="submit"&gt;Go&lt;/button&gt;
+&lt;/form&gt;
+</code></pre>
+					<div class="output"></div>
+				</section>
+
+				<section>
+					<h2>Customization?</h2>
+				</section>
+
+				<section>
+					<h2>Constraint Validation API</h2>
+				</section>
+
+				<section>
+					<h2>DOM API</h2>
+					<ul>
+						<li><code>willValidate</code></li>
+						<li><code>validity</code></li>
+						<li><code>validationMessage</code></li>
+						<li><code>checkValidity()</code></li>
+						<li><code>setCustomValidity()</code></li>
+					</ul>
+				</section>
+
+				<section>
+					<h2 style="text-transform: none;">willValidate</h2>
+					<p>Boolean property indicating whether a node is a candidate for constraint validation.</p>
+<pre class="language-markup" style="font-size: 0.7em;">
+<code>&lt;div id="one"&gt;&lt;/div&gt;
+&lt;input type="text" id="two"&gt;
+&lt;input type="text" id="three" disabled&gt;
+&lt;script&gt;
+  document.getElementById( "one" ).willValidate; //undefined
+  document.getElementById( "two" ).willValidate; //true
+  document.getElementById( "three" ).willValidate; //false
+&lt;/script&gt;</code>
+</pre>
+				</section>
+
+				<section>
+					<h2 style="text-transform: none;">validity</h2>
+					<p>A <a href="http://www.whatwg.org/specs/web-apps/current-work/#validitystate">ValidityState</a> object with the following boolean properties:</p>
+					<ul>
+						<li>valueMissing</li>
+						<li>typeMismatch</li>
+						<li>patternMismatch</li>
+						<li>tooLong</li>
+						<li>rangeUnderflow</li>
+						<li>rangeOverflow</li>
+						<li>stepMismatch</li>
+						<li>badInput</li>
+						<li>customError</li>
+						<li>valid</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2 class="no_casing">validationMessage</h2>
+					<p>The message the browser displays to the user when a node's validity is checked and fails.</p>
+<pre class="language-markup constrained" style="font-size: 0.7em;">
+<code>&lt;form&gt;
+  &lt;input type="text" id="one" required&gt;
+&lt;/form&gt;
+&lt;script&gt;
+  document.getElementById( "one" ).validationMessage;
+  // Chrome  --> "Please fill out this field."
+  // Firefox --> "Please fill out this field."
+  // Safari  --> "value missing"
+  // IE      --> "This is a required field."
+  // Opera   --> ""
+&lt;/script&gt;</code>
+</pre>
+				</section>
+
+				<section>
+					<h2 class="no_casing">checkValidity()</h2>
+					<p>Method that determines the validity of &lt;form&gt; nodes and form elements.</p>
+<pre class="language-markup" style="font-size: 0.7em;">
+<code>&lt;form id="form"&gt;
+  &lt;input type="text" id="one" required&gt;
+  &lt;input type="text" id="two"&gt;
+&lt;/form&gt;
+&lt;script&gt;
+  document.getElementById( "one" ).checkValidity(); // false
+  document.getElementById( "two" ).checkValidity(); // true
+  document.getElementById( "form" ).checkValidity(); // false
+&lt;/script&gt;</code>
+</pre>
+				</section>
+
+				<section>
+					<h2 class="no_casing">invalid event</h2>
+<pre class="language-markup" style="font-size: 0.7em;">
+<code contenteditable>&lt;form id="form"&gt;
+  &lt;input type="text" id="input-1" required&gt;
+&lt;/form&gt;
+&lt;script&gt;
+  document.getElementById( "input-1" )
+    .addEventListener( "invalid", function(event) {
+      var text = document.createTextNode( "INVALID!" );
+      event.target.parentNode.appendChild( text );
+    });
+  document.getElementById( "input-1" ).checkValidity();
+&lt;/script&gt;</code>
+</pre>
+					<div class="output"></div>
+					<aside class="notes">
+						No valid event. Can use the change event.
+					</aside>
+				</section>
+
+				<section>
+					<h2 class="no_casing">setCustomValidity</h2>
+					<p>Set validationMessage and create custom validation rules.</p>
+<pre class="language-markup" style="font-size: 0.7em;">
+<code contenteditable>&lt;form id="form"&gt;
+  &lt;input type="text" id="input-2"&gt;
+  &lt;button type="submit"&gt;Go&lt;/button&gt;
+&lt;/form&gt;
+&lt;script&gt;
+  var input = document.getElementById( "input-2" );
+  input.setCustomValidity( "Custom error message" );
+&lt;/script&gt;</code>
+</pre>
+					<div class="output"></div>
+				</section>
+
+				<section>
+					<h2>CSS Hooks</h2>
+				</section>
+
+				<section>
+					<h2 class="no_casing">:required & :optional</h2>
+<pre class="language-markup" style="font-size: 0.7em;">
+<code contenteditable>&lt;form id="form-1"&gt;
+  &lt;input type="text"&gt;
+  &lt;input type="text" required&gt;
+&lt;/form&gt;
+&lt;style&gt;
+  #form-1 :required { border: 2px solid red; }
+  #form-1 :optional { border: 2px solid blue; }
+&lt;/style&gt;</code>
+</pre>
+					<div class="output"></div>
+					<aside class="notes">
+						#form-1 :required + label::after { content: '*required'; color: red; margin-left: 10px; }
+					</aside>
+				</section>
+
+				<section>
+					<h2 class="no_casing">:valid & :invalid</h2>
+<pre class="language-markup" style="font-size: 0.7em;">
+<code contenteditable>&lt;form id="form-2"&gt;
+  &lt;input type="text" required value="Lorem Ipsum"&gt;
+  &lt;input type="text" required&gt;
+&lt;/form&gt;
+&lt;style&gt;
+  #form-2 :valid { border: 2px solid green; }
+  #form-2 :invalid { border: 2px solid red; }
+&lt;/style&gt;</code>
+</pre>
+					<div class="output"></div>
+					<aside class="notes">
+						Per the spec, :valid and :invalid apply to form nodes as well. Only implemented in Firefox though.
+					</aside>
+				</section>
+
+				<section>
+					<h2>Problem</h2>
+					<p>:valid & :invalid apply immediately, before user interaction.</p>
+				</section>
+
+				<section>
+					<h2 class="no_casing">:moz-ui-valid & :moz-ui-invalid</h2>
+					<p>Only match after interaction or attempted submission (<a href="http://mounir.lamouri.fr/2011/05/improving-html5-forms-user-experience-with-moz-ui-invalid-and-moz-ui-valid-pseudo-classes.html">full algorithm</a>).</p>
+<pre class="language-markup constrained" style="font-size: 0.7em; max-height: 350px;">
+<code contenteditable>&lt;form id="form-3"&gt;
+  &lt;input type="text" required value="Lorem Ipsum"&gt;
+  &lt;input type="text" required&gt;
+  &lt;button type="submit"&gt;Go&lt;/button&gt;
+&lt;/form&gt;
+&lt;style&gt;
+  #form-3 :-moz-ui-valid {
+    background: green; color: white;
+  }
+  #form-3 :-moz-ui-invalid {
+    background: red; color: white;
+  }
+&lt;/style&gt;</code>
+</pre>
+					<div class="output"></div>
+				</section>
+
+				<section>
+					<h2>CSS Selectors Level 4 Spec</h2>
+					<img src="img/user_error.png">
+				</section>
+
+				<section>
+					<h2>Styling the Bubbles</h2>
+					<p>WebKit is the only rendering engine that gives you hooks.</p>
+					<ul>
+						<li>::-webkit-validation-bubble</li>
+						<li>::-webkit-validation-bubble-arrow</li>
+						<li>::-webkit-validation-bubble-arrow-clipper</li>
+						<li>::-webkit-validation-bubble-heading</li>
+						<li>::-webkit-validation-bubble-message</li>
+						<li>::-webkit-validation-bubble-text-block</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>Styling the Bubbles</h2>
+<pre class="language-markup constrained" style="font-size: 0.7em;">
+<code contenteditable>&lt;form id="form-4"&gt;
+  &lt;input type="text" required&gt;
+  &lt;button type="submit"&gt;Go&lt;/button&gt;
+&lt;/form&gt;
+&lt;style&gt;
+  #form-4 ::-webkit-validation-bubble {
+    padding: 1em; background: orange;
+  }
+  #form-4 ::-webkit-validation-bubble-arrow {
+    background: blue;
+  }
+  #form-4 ::-webkit-validation-bubble-arrow-clipper {
+    border: 2px solid black;
+  }
+  #form-4 ::-webkit-validation-bubble-heading {
+    background: green;
+  }
+  #form-4 ::-webkit-validation-bubble-message {
+    color: white; background: purple; font-family: 'Comic Sans MS';
+  }
+  #form-4 ::-webkit-validation-bubble-text-block {
+    border: 1px solid red; padding: 1em;
+  }
+&lt;/style&gt;</code>
+</pre>
+					<div class="output"></div>
+				</section>
+
+				<section>
+					<h2>Turning the bubbles off</h2>
+<pre class="constrained language-javascript" style="font-size: 0.7em;">
+<code>var forms = document.getElementsByTagName( "form" );
+for ( var i = 0; i < forms.length; i++ ) {
+    forms[i].addEventListener( "invalid", function( e ) {
+        e.preventDefault();
+        // IMPORTANT! Implement your own means of displaying
+        // errors to users.
+        // e.target.validationMessage has the message
+    }, true );
+}</code></pre>
+				</section>
+
+				<section>
+					<h2>Turning validation off</h2>
+				</section>
+
+				<section>
+					<h2 class="no_casing">novalidate attribute</h2>
+					<p>Boolean attribute that can be applied to &lt;form&gt; elements to prevent validation.</p>
+<pre class="language-markup" style="font-size: 0.7em;">
+<code contenteditable>&lt;form novalidate&gt;
+  &lt;input type="text" required&gt;
+  &lt;button type="submit"&gt;Go&lt;/button&gt;
+&lt;/form&gt;</code>
+</pre>
+					<div class="output"></div>
+				</section>
+
+				<section>
+					<h2 class="no_casing">formnovalidate attribute</h2>
+					<p>Boolean attribute that can be applied to submit buttons to prevent validation.</p>
+<pre class="language-markup" style="font-size: 0.7em;">
+<code contenteditable>&lt;form&gt;
+  &lt;input type="text" required&gt;
+  &lt;button type="submit"&gt;Validate&lt;/button&gt;
+  &lt;button type="submit" formnovalidate&gt;
+    Do NOT Validate&lt;/button&gt;
+&lt;/form&gt;</code>
+</pre>
+					<div class="output"></div>
+				</section>
+
+				<section>
+					<h2>Dealing with Unsupported Browsers</h2>
+					<ul>
+						<li class="fragment">
+							Browsers
+							<ul>
+								<li>IE <= 9</li>
+								<li>Safari</li>
+								<li>iOS Safari</li>
+								<li>Default Android browser</li>
+							</ul>
+						</li>
+						<li class="fragment">
+							Options
+							<ul>
+								<li>Fallback to server side validation</li>
+								<li>Polyfill</li>
+							</ul>
+						</li>
+					</ul>
+					<aside class="notes">
+						<ul>
+							<li>It depends on your user base but this is likely a large chunk of your audience.</li>
+							<li>So, if you want to move forward with constraint validation you have 2 options.</li>
+						</ul>
+					</aside>
+				</section>
+
+				<section>
+					<h2>Option #1</h2>
+					<p>Fallback to server side validation</p>
+				</section>
+
+				<section>
+					<h2>Why validate server side?</h2>
+					<ul>
+						<li>Client side constraints are easily subverted by malicious users.</li>
+						<li class="fragment">HTTP requests do not have to originate from a browser.</p>
+						<pre class="language-markup" style="font-size: 0.7em; padding-bottom: 0">
+<code>curl --data "param1=value1" http://foo.com/bar.do</code>
+						</pre>
+						<li class="fragment">So you must do validation on the server.</li>
+						<li class="fragment">Client side validation is progressive enhancement.</li>
+						<li class="fragment">Client side validation = duplicate effort</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>Option #2</h2>
+					<p>Polyfill</p>
+				</section>
+
+				<section>
+					<h2>H5F</h2>
+					<a href="https://github.com/ryanseddon/H5F">https://github.com/ryanseddon/H5F</a>
+					<img src="img/h5f.png">
+				</section>
+
+				<section>
+					<h2 class="no_casing">Webshims</h2>
+					<a href="http://afarkas.github.io/webshim/demos/">http://afarkas.github.io/webshim/demos/</a>
+					<img src="img/webshims.png">
+				</section>
+
+				<section>
+					<h1>Thanks</h1>
+					<h3><a href="http://tjvantoll.com">TJ VanToll</a> / <a href="http://twitter.com/tjvantoll">@tjvantoll</a></h3>
+				</section>
+			</div>
+		</div>
+
+		<script src="js/jquery-1.9.1.min.js"></script>
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.min.js"></script>
+		<script src="js/prism.js"></script>
+
+		<script>
+
+			// Full list of configuration options available here:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+
+				theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+				transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+
+				rollingLinks: false,
+
+				// Optional libraries used to extend on reveal.js
+				dependencies: [
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'plugin/markdown/showdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+					{ src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+					// { src: 'plugin/search/search.js', async: true, condition: function() { return !!document.body.classList; } }
+					// { src: 'plugin/remotes/remotes.js', async: true, condition: function() { return !!document.body.classList; } }
+				]
+			});
+
+			$('#title-container img')
+				.on('mouseover', function() {
+				var $this = $(this);
+				if (!$this.hasClass('over')) {
+					$this.addClass('over');
+					setTimeout(function() {
+						$this.removeClass('over');
+					}, 3000);
+				}
+			});
+
+			var updateOutput = function() {
+				var $output = $(this).parents('section').find('.output');
+				try {
+					$output.html($(this).text());
+				} catch(e) {}
+			};
+
+			$('code')
+				.each(function() {
+					updateOutput.apply(this);
+				})
+				.on('keydown', function() {
+					var self = this;
+					setTimeout(function() {
+						updateOutput.apply(self);
+					}, 50);
+				})
+				.on('blur', Prism.highlightAll);
+
+			$(document)
+				.on('submit', 'form', function(event) {
+					event.preventDefault();
+					$(this)
+						.parents('.output')
+						.addClass('success')
+						.html('<h6>Successful Submission</h6>');
+				});
+		</script>
+	</body>
+</html>
