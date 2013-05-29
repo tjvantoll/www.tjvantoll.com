@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Why are Enter Keypresses Clicking My Buttons in IE? - TJ VanToll - Tutorials, Thoughts, and Ramblings on Front End Development</title>
+  <title>Showing a Resize Icon on a jQuery UI Dialog - TJ VanToll - Tutorials, Thoughts, and Ramblings on Front End Development</title>
   <meta name="author" content="TJ VanToll">
 
   
-  <meta name="description" content="When you press the Enter key in a textbox, the browser will automatically attempt to perform an implicit submission of the textbox&#8217;s &lt;form& &hellip;">
+  <meta name="description" content="Upon upgrading to jQuery UI 1.10 you might notice a visual change to the dialog widget - the resize icon no longer displays by default: Default &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://tjvantoll.com/2013/05/22/why-are-enter-keypresses-clicking-my-buttons-in-ie">
+  <link rel="canonical" href="http://tjvantoll.com/2013/05/28/showing-a-resize-icon-on-a-jquery-ui-dialog">
 
   <!--[if ! lte IE 7]><!-->
     <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
@@ -108,7 +108,7 @@
   
   <header>
     
-      <h1 class="entry-title">Why are Enter Keypresses Clicking My Buttons in IE?</h1>
+      <h1 class="entry-title">Showing a Resize Icon on a jQuery UI Dialog</h1>
     
     
       <p class="meta">
@@ -124,7 +124,7 @@
   
 
 
-<time datetime="2013-05-22T22:15:00-04:00" pubdate data-updated="true">May 22<span>nd</span>, 2013</time>
+<time datetime="2013-05-28T21:09:00-04:00" pubdate data-updated="true">May 28<span>th</span>, 2013</time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -133,83 +133,49 @@
   </header>
 
 
-<div class="entry-content"><p>When you press the Enter key in a textbox, the browser will automatically attempt to perform an <a href="http://www.whatwg.org/specs/web-apps/current-work/multipage/association-of-controls-and-forms.html#implicit-submission">implicit submission</a> of the textbox&#8217;s <code>&lt;form&gt;</code>.</p>
+<div class="entry-content"><p>Upon <a href="http://jqueryui.com/upgrade-guide/1.10/">upgrading to jQuery UI 1.10</a> you might notice a visual change to the dialog widget - the resize icon no longer displays by default:</p>
 
-<p>For example, if you press Enter in the textbox of the following <code>&lt;form&gt;</code> it will submit a search query to Google:</p>
+<p>Default dialog display in 1.9:</p>
 
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;form</span> <span class="na">action=</span><span class="s">&quot;http://google.com&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;input</span> <span class="na">name=</span><span class="s">&quot;q&quot;</span> <span class="na">type=</span><span class="s">&quot;text&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;submit&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'><span class="nt">&lt;/form&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
+<p><img src="/images/posts/2013-05-28/dialog-1.9.png" alt="Default display of jQuery UI's dialog in version 1.9"></p>
 
+<p>Default dialog display in 1.10:</p>
 
+<p><img src="/images/posts/2013-05-28/dialog-1.10.png" alt="Default display of jQuery UI's dialog in version 1.10"></p>
 
+<p>The dialog is still resizable, the icon is just not displayed anymore. The change was made because when a dialog contains scrolling content, the scrollbar becomes very difficult to use when the resize icon is present, especially in Windows browsers.</p>
 
-<!--more-->
+<p>The image below is of a version 1.9 dialog in IE9, note how the down arrow of the scrollbar and the resize icon are essentially on top of each other:</p>
 
+<p><img src="/images/posts/2013-05-28/ie9-dialog.png" alt="Display of a scrolling jQuery UI dialog in IE9."></p>
 
-<p>The same will occur if you use a <code>&lt;button&gt;</code> element, which has a default <code>type</code> of <code>submit</code>:</p>
+<h3>Adding the Resize Icon Back</h3>
+
+<p>To get the icon back you have to override the rules that position the icon:</p>
 
 <figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;form</span> <span class="na">action=</span><span class="s">&quot;http://google.com&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;input</span> <span class="na">name=</span><span class="s">&quot;q&quot;</span> <span class="na">type=</span><span class="s">&quot;text&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;button&gt;</span>Submit<span class="nt">&lt;/button&gt;</span>
-</span><span class='line'><span class="nt">&lt;/form&gt;</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nc">.ui-dialog</span> <span class="nc">.ui-resizable-se</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">width</span><span class="o">:</span> <span class="m">14px</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">height</span><span class="o">:</span> <span class="m">14px</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">right</span><span class="o">:</span> <span class="m">3px</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">bottom</span><span class="o">:</span> <span class="m">3px</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">background-position</span><span class="o">:</span> <span class="m">-80px</span> <span class="m">-224px</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>In each of these examples a <code>click</code> event will be triggered on the form&#8217;s <code>input[type="submit"]</code> / <code>button[type="submit"]</code>. This is all expected and speced behavior that is consistently implemented across browsers.</p>
+<p>This will display as follows:</p>
 
-<h3>Internet Explorer</h3>
-
-<p>Internet Explorer has an annoying quirk that still exists as of IE10: submit buttons can be clicked when Enter is pressed in a textbox, even when no <code>&lt;form&gt;</code> is present. Consider the example below:</p>
-
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;text&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'><span class="c">&lt;!-- other stuff --&gt;</span>
-</span><span class='line'><span class="nt">&lt;button&gt;</span>Some Unrelated Action<span class="nt">&lt;/button&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
+<div class="code_example"><h6>Dialog with a Resizable Icon<a href="/demos/2013-05-28/dialog.html" target="_blank">Open in New Window</a></h6><iframe style="width: 100%; height: 300px;" frameborder="0" src="/demos/2013-05-28/dialog.html"></iframe></div>
 
 
-<p>Pressing Enter in this textbox in IE will click the completely unrelated <code>&lt;button&gt;</code>. No other browsers exhibit this behavior.</p>
-
-<p>I have no idea what IE&#8217;s algorithm for selecting a submit button is, but it will find buttons in completely unrelated portions of the DOM. For instance it is responsible for a <a href="http://bugs.jqueryui.com/ticket/9312">jQuery UI bug</a> by causing a dialog&#8217;s close button to be triggered on enter keypresses in unrelated textboxes.</p>
-
-<h3>Solution</h3>
-
-<p>All <code>&lt;input&gt;</code>s should be within a <code>&lt;form&gt;</code>, and all forms should have a submit button. So if you&#8217;re running into this bug, changing your markup to be semantic will avoid this issue altogether.</p>
-
-<p>If for whatever reason that&#8217;s not an option, you can add <code>type="button"</code> to the <code>&lt;button&gt;</code>:</p>
-
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;text&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'><span class="c">&lt;!-- other stuff --&gt;</span>
-</span><span class='line'><span class="nt">&lt;button</span> <span class="na">type=</span><span class="s">&quot;button&quot;</span><span class="nt">&gt;</span>Some Unrelated Action<span class="nt">&lt;/button&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>This will override the default <code>type="submit"</code> and prevent IE from clicking the <code>&lt;button&gt;</code> on Enter keypresses.</p>
-
-<p>If anybody has knowledge of the algorithm IE uses to find submittable elements when no <code>&lt;form&gt;</code>s are present please let me know in the comments. I&#8217;m very curious.</p>
-
-<h4>Related Reading</h4>
-
-<ul>
-<li><a href="/2013/01/01/enter-should-submit-forms-stop-messing-with-that/">The Enter Key should Submit Forms, Stop Suppressing it</a></li>
-</ul>
-
+<p>Remember that there is a reason the icon was removed from the default dialog. Therefore, if you have scrolling dialogs you should not add the icon.</p>
 </div>
 
 
@@ -232,12 +198,12 @@
   
 
 
-<time datetime="2013-05-22T22:15:00-04:00" pubdate data-updated="true">May 22<span>nd</span>, 2013</time>
+<time datetime="2013-05-28T21:09:00-04:00" pubdate data-updated="true">May 28<span>th</span>, 2013</time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/browsers/'>Browsers</a>, <a class='category' href='/blog/categories/javascript/'>JavaScript</a>
+    <a class='category' href='/blog/categories/javascript/'>JavaScript</a>, <a class='category' href='/blog/categories/jquery-ui/'>jQuery UI</a>
   
 </span>
 
@@ -250,7 +216,7 @@
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://tjvantoll.com/2013/05/22/why-are-enter-keypresses-clicking-my-buttons-in-ie/" data-via="tjvantoll" data-counturl="http://tjvantoll.com/2013/05/22/why-are-enter-keypresses-clicking-my-buttons-in-ie/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://tjvantoll.com/2013/05/28/showing-a-resize-icon-on-a-jquery-ui-dialog/" data-via="tjvantoll" data-counturl="http://tjvantoll.com/2013/05/28/showing-a-resize-icon-on-a-jquery-ui-dialog/" >Tweet</a>
   
   
   
@@ -259,10 +225,8 @@
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/2013/04/26/using-ternary-operators-for-more-maintainable-templates/" title="Previous Post: Using Ternary Operators for More Maintainable Templates">&laquo; Using Ternary Operators for More Maintainable Templates</a>
+        <a class="basic-alignment left" href="/2013/05/22/why-are-enter-keypresses-clicking-my-buttons-in-ie/" title="Previous Post: Why are Enter Keypresses Clicking My Buttons in IE?">&laquo; Why are Enter Keypresses Clicking My Buttons in IE?</a>
       
-      
-        <a class="basic-alignment right" href="/2013/05/28/showing-a-resize-icon-on-a-jquery-ui-dialog/" title="Next Post: Showing a Resize Icon on a jQuery UI Dialog">Showing a Resize Icon on a jQuery UI Dialog &raquo;</a>
       
     </p>
   </footer>
@@ -334,8 +298,8 @@
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://tjvantoll.com/2013/05/22/why-are-enter-keypresses-clicking-my-buttons-in-ie/';
-        var disqus_url = 'http://tjvantoll.com/2013/05/22/why-are-enter-keypresses-clicking-my-buttons-in-ie/';
+        var disqus_identifier = 'http://tjvantoll.com/2013/05/28/showing-a-resize-icon-on-a-jquery-ui-dialog/';
+        var disqus_url = 'http://tjvantoll.com/2013/05/28/showing-a-resize-icon-on-a-jquery-ui-dialog/';
         var disqus_script = 'embed.js';
       
     (function () {

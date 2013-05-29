@@ -9,7 +9,7 @@
   <meta name="author" content="TJ VanToll">
 
   
-  <meta name="description" content="When you press the Enter key in a textbox, the browser will automatically attempt to perform an implicit submission of the textbox&#8217;s &lt;form& &hellip;">
+  <meta name="description" content="Upon upgrading to jQuery UI 1.10 you might notice a visual change to the dialog widget - the resize icon no longer displays by default: Default &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -105,6 +105,86 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2013/05/28/showing-a-resize-icon-on-a-jquery-ui-dialog/">Showing a Resize Icon on a jQuery UI Dialog</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-05-28T21:09:00-04:00" pubdate data-updated="true">May 28<span>th</span>, 2013</time>
+        
+         | <a href="/2013/05/28/showing-a-resize-icon-on-a-jquery-ui-dialog/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Upon <a href="http://jqueryui.com/upgrade-guide/1.10/">upgrading to jQuery UI 1.10</a> you might notice a visual change to the dialog widget - the resize icon no longer displays by default:</p>
+
+<p>Default dialog display in 1.9:</p>
+
+<p><img src="/images/posts/2013-05-28/dialog-1.9.png" alt="Default display of jQuery UI's dialog in version 1.9"></p>
+
+<p>Default dialog display in 1.10:</p>
+
+<p><img src="/images/posts/2013-05-28/dialog-1.10.png" alt="Default display of jQuery UI's dialog in version 1.10"></p>
+
+<p>The dialog is still resizable, the icon is just not displayed anymore. The change was made because when a dialog contains scrolling content, the scrollbar becomes very difficult to use when the resize icon is present, especially in Windows browsers.</p>
+
+<p>The image below is of a version 1.9 dialog in IE9, note how the down arrow of the scrollbar and the resize icon are essentially on top of each other:</p>
+
+<p><img src="/images/posts/2013-05-28/ie9-dialog.png" alt="Display of a scrolling jQuery UI dialog in IE9."></p>
+
+<h3>Adding the Resize Icon Back</h3>
+
+<p>To get the icon back you have to override the rules that position the icon:</p>
+
+<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nc">.ui-dialog</span> <span class="nc">.ui-resizable-se</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">width</span><span class="o">:</span> <span class="m">14px</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">height</span><span class="o">:</span> <span class="m">14px</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">right</span><span class="o">:</span> <span class="m">3px</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">bottom</span><span class="o">:</span> <span class="m">3px</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">background-position</span><span class="o">:</span> <span class="m">-80px</span> <span class="m">-224px</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This will display as follows:</p>
+
+<div class="code_example"><h6>Dialog with a Resizable Icon<a href="/demos/2013-05-28/dialog.html" target="_blank">Open in New Window</a></h6><iframe style="width: 100%; height: 300px;" frameborder="0" src="/demos/2013-05-28/dialog.html"></iframe></div>
+
+
+<p>Remember that there is a reason the icon was removed from the default dialog. Therefore, if you have scrolling dialogs you should not add the icon.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -596,54 +676,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2013/01/18/keyboard-shortcuts-for-os-x-web-developers/">Keyboard Shortcuts for OS X Web Developers</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-01-18T20:46:00-05:00" pubdate data-updated="true">Jan 18<span>th</span>, 2013</time>
-        
-         | <a href="/2013/01/18/keyboard-shortcuts-for-os-x-web-developers/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Recently some minor <a href="http://en.wikipedia.org/wiki/Repetitive_strain_injury">RSI</a>
--like symptoms in my right hand have forced me to re-evaluate my day to day computer usage.  Since the symptoms are exclusively in my right hand, I decided to start by restricting my mouse usage as much as possible.</p>
-
-<p>To discourage my mouse using tendencies, I decided to only use the mouse left-handed.  After a few minutes I found that my current repertoire of keyboard shortcuts did not meet my new mouse-free workflow.</p>
-
-<p>To build my keyboard portfolio, I&#8217;ve been accumulating a list of shortcuts I find handy near my desk.  I thought I&#8217;d post the list here in case others might find them useful.  This list is not intended to be comprehensive; these are merely shortcuts that I have found helpful.</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/2013/01/18/keyboard-shortcuts-for-os-x-web-developers/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -665,6 +697,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2013/05/28/showing-a-resize-icon-on-a-jquery-ui-dialog/">Showing a Resize Icon on a jQuery UI Dialog</a>
+      </li>
+    
+      <li class="post">
         <a href="/2013/05/22/why-are-enter-keypresses-clicking-my-buttons-in-ie/">Why are Enter Keypresses Clicking My Buttons in IE?</a>
       </li>
     
@@ -678,10 +714,6 @@
     
       <li class="post">
         <a href="/2013/04/15/list-of-pseudo-elements-to-style-form-controls/">List of Pseudo-Elements to Style Form Controls</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2013/03/28/shorthand-for-preventing-default-event-actions-with-jquery/">Shorthand for Preventing Default Event Actions with jQuery</a>
       </li>
     
   </ul>
