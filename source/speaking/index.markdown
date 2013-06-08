@@ -25,6 +25,13 @@ footer: true
 				<a href="http://events.jquery.org/2013/portland/">jQuery Portland</a> | Portland, Oregon
 			</footer>
 		</article>
+	</div>
+
+	<header>
+		<h3>Past</h3>
+	</header>
+	<div class="speaking-archives">
+		<h2>2013</h2>
 		<article>
 			<h1>Constraint Validation: Native Client Side Validation for Web Forms</h1>
 			<time datetime="2013-05-29">
@@ -37,13 +44,7 @@ footer: true
 				<a href="/speaking/slides/2013/Constraint-Validation/">Slides</a>
 			</footer>
 		</article>
-	</div>
 
-	<header>
-		<h3>Past</h3>
-	</header>
-	<div class="speaking-archives">
-		<h2>2013</h2>
 		<article>
 			<h1>Submitting Bugs the Right Way</h1>
 			<time datetime="2013-03-02">

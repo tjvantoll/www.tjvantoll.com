@@ -1,0 +1,245 @@
+.spaced { margin-top: 0.25em; }
+.spaced li { margin-bottom: 0.5em; }
+
+.no_casing { text-transform: none !important; }
+
+pre {
+	max-height: 450px;
+	overflow: auto;
+}
+pre.inline {
+	display: inline-block;
+	padding: 0.2em;
+	margin: 0;
+	text-align: center;
+}
+pre.constrained {
+	font-size: 0.8em;
+	margin-top: 0;
+	padding-top: 0.1em;
+	padding-bottom: 0.1em;
+}
+
+section .output {
+	background: #F5F2F0;
+	padding: 1em;
+}
+.output:not(.no_reset) {
+	label, output { color: black; }
+	output {
+		display: inline-block;
+		width: 70px;
+	}
+	input, button {
+		font-size: 1em;
+	}
+}
+.no_reset {
+	label, output { color: black; }
+	input { color: black; }
+}
+.output.success {
+	color: white;
+	background: green;
+}
+.output.success h6 {
+	margin: 0;
+	letter-spacing: 0.1em;
+}
+.output .ui-widget-content {
+	border: 1px solid #AAA;
+}
+.output .ui-spinner {
+	padding: 0;
+	vertical-align: middle;
+}
+.output .ui-spinner-button {
+	position: absolute;
+}
+
+.main_demo {
+	.output {
+		background: none;
+		padding: 0;
+		input, button { font-size: 0.5em; }
+		.ui-spinner { line-height: 25px; }
+		.ui-progressbar { height: 25px; }
+		.ui-slider {
+			font-size: 0.5em;
+			top: 15px;
+		}
+		.box {
+			min-height: 100px;
+			min-width: 420px;
+			padding: 0.2em;
+			background: white;
+			float: left;
+			margin: 0.2em;
+			input[type=number], input[type=text] { max-width: 150px; }
+			.left {
+				float: left;
+			}
+			.right {
+				float: left;
+				width: 200px;
+				margin-left: 20px;
+				vertical-align: center;
+			}
+			h6 {
+				display: block;
+				text-align: center;
+				color: black;
+				font-size: 0.7em;
+				text-transform: none;
+				font-family: Verdana;
+				margin: 0 0 0.3em 0;
+			}
+		}
+	}
+}
+
+#title-container {
+	position: relative;
+	height: 250px;
+}
+#title-container h4 {
+	font-size: 1.6em;
+}
+#title-container .left {
+	position: absolute;
+	top: 30px;
+	left: 150px;
+}
+#title-container .middle {
+	position: absolute;
+	left: 500px;
+	top: 75px;
+}
+#title-container .middle h4 {
+	color: #b94a48;
+	font-size: 2em;
+}
+#title-container .right {
+	position: absolute;
+	top: 0;
+	right: 225px;
+}
+@-webkit-keyframes flip {
+	from{ -webkit-transform: rotatey(0deg); }
+	to{ -webkit-transform: rotatey(360deg); }
+}
+@keyframes flip {
+	from { transform: rotatey(0deg); }
+	to { transform: rotatey(360deg); }
+}
+#title-container img, img.reset {
+	border: 0 !important;
+	background: none !important;
+	box-shadow: none !important;
+	margin-bottom: 35px;
+}
+#title-container img.over {
+	-webkit-animation: flip 3s alternate;
+	animation: flip 3s alternate;
+}
+#html5-logo {
+	margin-top: 0;
+	height: 120px;
+}
+
+section.me_slide {
+	img {
+		vertical-align: middle;
+		display: inline-block;
+		margin-left: 20px;
+	}
+	img[src*=lansing] {
+		height: 200px;
+	}
+}
+
+.theme_slide {
+	position: relative;
+
+	label {
+		position: absolute;
+		top: 0;
+		right: 40px;
+		font-size: 0.6em;
+	}
+}
+.switcher {
+	position: absolute;
+	right: 5px;
+	top: 40px;
+	font-size: 0.6em;
+}
+
+@-webkit-keyframes spin {
+	from { -webkit-transform: rotateX(0deg); }
+	to { -webkit-transform: rotateX(360deg); }
+}
+@keyframes spin {
+	from { transform: rotateX(0deg); }
+	to { transform: rotateX(360deg); }
+}
+
+.present.end {
+	h1 {
+		-webkit-animation: spin 8s infinite;
+		-webkit-animation-delay: 3s;
+		animation: spin 8s infinite;
+		animation-delay: 3s;
+	}
+}
+
+
+@-webkit-keyframes skew-fun {
+	from { -webkit-transform: skew(0deg); }
+	to { -webkit-transform: skew(10deg); }
+}
+@keyframes skew-fun {
+	from { transform: skew(0deg); }
+	to { transform: skew(10deg); }
+}
+@-webkit-keyframes scale-fun {
+	from { -webkit-transform: scale(0.5); }
+	to { -webkit-transform: scale(2); }
+}
+@keyframes scale-fun {
+	from { transform: scale(0.5); }
+	to { transform: scale(2); }
+}
+
+.present #inline-datepicker {
+	.ui-datepicker-inline {
+		background: hotpink;
+		margin: 0 auto;
+		-webkit-animation: skew-fun 3s alternate infinite;
+		animation: skew-fun 3s alternate infinite;
+
+		.ui-datepicker-title {
+			-webkit-animation: scale-fun 1s alternate infinite;
+			animation: scale-fun 1s alternate infinite;
+		}
+		.ui-datepicker-current-day {
+			-webkit-transform: scale(2);
+			transform: scale(2);
+			z-index: 3000;
+		}
+		thead {
+			span {
+				-webkit-animation: spin 1s infinite;
+				animation: spin 1s infinite;
+				display: inline-block;
+			}
+		}
+		a {
+			-webkit-animation: flip 5s infinite;
+			animation: flip 5s infinite;
+			color: green;
+			text-align: center;
+			background: skyblue;
+		}
+	}
+}
