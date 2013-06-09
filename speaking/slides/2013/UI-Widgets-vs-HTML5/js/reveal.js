@@ -949,7 +949,7 @@ var Reveal = (function(){
 							element.msRequestFullScreen;
 
 		if( requestMethod ) {
-			requestMethod.apply( element );
+			requestMethod.apply( element, [ Element.ALLOW_KEYBOARD_INPUT ] );
 		}
 
 	}
