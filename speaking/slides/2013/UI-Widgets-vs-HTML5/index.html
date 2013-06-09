@@ -26,6 +26,18 @@
 		<!-- If the query includes 'print-pdf', use the PDF print sheet -->
 		<script>
 			document.write( '<link rel="stylesheet" href="css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
+
+			if (window.location.host.indexOf('local') == -1) {
+				var _gaq = _gaq || [];
+				_gaq.push(['_setAccount', 'UA-29179796-1']);
+				_gaq.push(['_trackPageview']);
+			
+				(function() {
+					var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+					ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+					var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+				})();
+			}
 		</script>
 
 		<!--[if lt IE 9]>
@@ -325,7 +337,7 @@
 					</style>
 					<div class="side_by_side">
 						<h4 id="ios_heading" class="no_casing">iOS</h4>
-						<img style="height: 450px;" src="img/ios_date.png">
+						<img style="height: 450px;" src="img/iOS_date.png">
 						<h4 id="chrome_android_heading" class="no_casing">Chrome for Android</h4>
 						<img style="height: 450px;" src="img/chrome_android_date2.png">
 					</div>
@@ -624,7 +636,7 @@
 
 				<section>
 					<h2>iOS</h2>
-					<img src="img/date-conflict-iOS.png">
+					<img src="img/date-conflict-ios.png">
 				</section>
 
 				<section>
