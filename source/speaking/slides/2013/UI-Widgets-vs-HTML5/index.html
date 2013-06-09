@@ -26,6 +26,18 @@
 		<!-- If the query includes 'print-pdf', use the PDF print sheet -->
 		<script>
 			document.write( '<link rel="stylesheet" href="css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
+
+			if (window.location.host.indexOf('local') == -1) {
+				var _gaq = _gaq || [];
+				_gaq.push(['_setAccount', 'UA-29179796-1']);
+				_gaq.push(['_trackPageview']);
+			
+				(function() {
+					var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+					ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+					var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+				})();
+			}
 		</script>
 
 		<!--[if lt IE 9]>
@@ -71,9 +83,6 @@
 							Lansing, MI
 							<img src="img/lansing.png" class="reset">
 						</li>
-						<li class="fragment">
-							Blog: <a href="http://tjvantoll.com">http://tjvantoll.com</a>
-						</li>
 					</ul>
 				</section>
 
@@ -86,17 +95,17 @@
 <pre class="language-markup" hidden>
 <code>
 &lt;div class="box"&gt;
-    &lt;h6&gt;Date Pickers&lt;/h6&gt;
+    &lt;h6&gt;input[type="date"] vs. Datepicker&lt;/h6&gt;
     &lt;input type="date"&gt;
     &lt;input id="datepicker-main"&gt;
 &lt;/div&gt;
 &lt;div class="box"&gt;
-    &lt;h6&gt;Number Pickers&lt;/h6&gt;
+    &lt;h6&gt;input[type="number"] vs. Spinner&lt;/h6&gt;
     &lt;input type="number"&gt;
     &lt;input id="spinner-main"&gt;
 &lt;/div&gt;
 &lt;div class="box"&gt;
-    &lt;h6&gt;Range Pickers&lt;/h6&gt;
+    &lt;h6&gt;input[type="range"] vs. Slider&lt;/h6&gt;
     &lt;div class="left"&gt;
         &lt;input type="range"&gt;
     &lt;/div&gt;
@@ -105,7 +114,7 @@
     &lt;/div&gt;
 &lt;/div&gt;
 &lt;div class="box"&gt;
-    &lt;h6&gt;Autocompletes (Type "b")&lt;/h6&gt;
+    &lt;h6&gt;[datalist] vs. Autocomplete&lt;/h6&gt;
     &lt;input list="datalist-main"&gt;
     &lt;datalist id="datalist-main"&gt;
         &lt;option&gt;Baboon&lt;/option&gt;
@@ -121,7 +130,7 @@
     &lt;input id="autocomplete-main"&gt;
 &lt;/div&gt;
 &lt;div class="box"&gt;
-    &lt;h6&gt;Progressbars&lt;/h6&gt;
+    &lt;h6&gt;progress vs. Progressbar&lt;/h6&gt;
     &lt;progress&gt;&lt;/progress&gt;
     &lt;div id="progressbar-main"&gt;&lt;/div&gt;
 &lt;/div&gt;
@@ -142,7 +151,6 @@
 						<li>input[type=range] vs. slider</li>
 						<li>&lt;datalist&gt; vs. autocomplete</li>
 						<li>&lt;progress&gt; vs. progressbar</li>
-						<li>HTML5 drag & drop vs. draggable & droppable</li>
 					</ul>
 					<aside class="notes">
 						<ul>
@@ -243,8 +251,9 @@
 				</section>
 
 				<section>
-					<h2>input[type=date]</h2>
-					<img src="img/date-support.png">
+					<h2 class="no_casing">input[type=date] Support</h2>
+					<img src="img/date-support.png" style="max-height: 500px;">
+					<a href="http://caniuse.com/#feat=input-datetime">http://caniuse.com/#feat=input-datetime</a>
 				</section>
 
 				<section>
@@ -443,7 +452,7 @@
 &lt;script&gt;
     $( "#datepicker-4" ).datepicker({
         showAnim: "fade",
-        duration: 5000
+        duration: 500
     });
 &lt;/script&gt;
 </code></pre>
@@ -556,37 +565,6 @@
 				</section>
 
 				<section>
-					<h2>Available Pseudo-Elements</h2>
-					<ul>
-						<li class="fragment">
-							WebKit
-							<ul>
-								<li>::-webkit-datetime-edit</li>
-								<li>::-webkit-datetime-edit-fields-wrapper</li>
-								<li>::-webkit-datetime-edit-text</li>
-								<li>::-webkit-datetime-edit-month-field</li>
-								<li>::-webkit-datetime-edit-day-field</li>
-								<li>::-webkit-datetime-edit-year-field</li>
-								<li>::-webkit-inner-spin-button</li>
-								<li>::-webkit-calendar-picker-indicator</li>
-							</ul>
-						</li>
-						<li class="fragment">
-							Presto
-							<ul>
-								<li>Nothing</li>
-							</ul>
-						</li>
-						<li class="fragment">
-							Trident / Gecko
-							<ul>
-								<li>No input[type="date"] support</li>
-							</ul>
-						</li>
-					</ul>
-				</section>
-
-				<section>
 					<h2>Customizing Pseudo-Elements</h2>
 <pre class="language-markup" style="font-size: 0.7em;">
 <code contenteditable>&lt;style&gt;
@@ -618,6 +596,37 @@
 </code></pre>
 
 					<div class="output"></div>
+				</section>
+
+				<section>
+					<h2>Available Pseudo-Elements</h2>
+					<ul>
+						<li class="fragment">
+							WebKit
+							<ul>
+								<li>::-webkit-datetime-edit</li>
+								<li>::-webkit-datetime-edit-fields-wrapper</li>
+								<li>::-webkit-datetime-edit-text</li>
+								<li>::-webkit-datetime-edit-month-field</li>
+								<li>::-webkit-datetime-edit-day-field</li>
+								<li>::-webkit-datetime-edit-year-field</li>
+								<li>::-webkit-inner-spin-button</li>
+								<li>::-webkit-calendar-picker-indicator</li>
+							</ul>
+						</li>
+						<li class="fragment">
+							Presto
+							<ul>
+								<li>Nothing</li>
+							</ul>
+						</li>
+						<li class="fragment">
+							Trident / Gecko
+							<ul>
+								<li>No input[type="date"] support</li>
+							</ul>
+						</li>
+					</ul>
 				</section>
 
 				<section>
@@ -672,8 +681,9 @@
 				</section>
 
 				<section>
-					<h2 class="no_casing">input[type=number]</h2>
-					<img src="img/number-support.png">
+					<h2 class="no_casing">input[type=number] Support</h2>
+					<img src="img/number-support.png" style="max-height: 500px;">
+					<a href="http://caniuse.com/#feat=input-number">http://caniuse.com/#feat=input-number</a>
 				</section>
 
 				<section>
@@ -687,12 +697,6 @@
 
 				<section>
 					<h2>Optimized Mobile Input</h2>
-				</section>
-
-				<section>
-					<h2>Opera Mobile</h2>
-					<pre class="language-markup inline"><code>&lt;input type="number" min="2" max="8" step="2"&gt;</code></pre>
-					<img style="max-height: 400px;" src="img/opera_number.png">
 				</section>
 
 				<section>
@@ -712,6 +716,12 @@
 					<h2>iOS 6</h2>
 					<pre class="language-markup inline"><code>&lt;input type="number" pattern="[0-9]*"&gt;</code></pre>
 					<img style="max-height: 400px;" src="img/iOS_number_pattern.png">
+				</section>
+
+				<section>
+					<h2>Opera Mobile</h2>
+					<pre class="language-markup inline"><code>&lt;input type="number" min="2" max="8" step="2"&gt;</code></pre>
+					<img style="max-height: 400px;" src="img/opera_number.png">
 				</section>
 
 				<section>
@@ -850,10 +860,6 @@
 				</section>
 
 				<section>
-					<h2>Extensible</h2>
-				</section>
-
-				<section>
 					<h2>Time Picker</h2>
 <pre class="language-javascript" style="font-size: 0.7em;">
 <code>$.widget( "ui.timespinner", $.ui.spinner, {
@@ -973,8 +979,9 @@
 				</section>
 
 				<section>
-					<h2 class="no_casing">input[type=range]</h2>
+					<h2 class="no_casing">input[type=range] Support</h2>
 					<img src="img/range_support.png" style="max-height: 500px;">
+					<a href="http://caniuse.com/#feat=input-range">http://caniuse.com/#feat=input-range</a>
 				</section>
 
 				<section>
@@ -1215,6 +1222,11 @@
 				</section>
 
 				<section>
+					<h2>UI Widgets vs. Native Elements</h2>
+					<p>You have to pick one or the other.</p>
+				</section>
+
+				<section>
 					<h2>Solutions?</h2>
 <pre class="language-markup">
 <code>&lt;input type="date" ui="false"&gt;
@@ -1222,7 +1234,7 @@
 				</section>
 
 				<section>
-					<img src="img/hixie_quote.png">
+					<img src="img/hixie_quote.png" style="height: 400px;">
 				</section>
 
 				<section>
@@ -1277,7 +1289,9 @@ document.querySelectorAll( "input" )
 <code contenteditable>&lt;input type="range" id="range-orientation"&gt;
 &lt;style&gt;
     #range-orientation {
-        -webkit-appearance: slider-vertical;
+        /* -webkit-appearance: slider-vertical; */
+        width: 10px;
+        height: 100px;
     }
 &lt;/style&gt;
 </code></pre>
@@ -1318,7 +1332,11 @@ document.querySelectorAll( "input" )
 
 				<section class="end">
 					<h1>Thanks</h1>
-					<h3 class="no_casing"><a href="http://tjvantoll.com">TJ VanToll</a> / <a href="http://twitter.com/tjvantoll">@tjvantoll</a></h3>
+					<ul class="no_casing">
+						<li>TJ VanToll</li>
+						<li>Twitter: <a href="http://twitter.com/tjvantoll">@tjvantoll</a></li>
+						<li>Blog: <a href="http://tjvantoll.com">http://tjvantoll.com</a></li>
+					</ul>
 				</section>
 
 			</div>
@@ -1331,7 +1349,7 @@ document.querySelectorAll( "input" )
 		<script src="lib/js/cultures/globalize.culture.ja.js"></script>
 		<script src="lib/js/jquery.mousewheel.js"></script>
 		<script src="lib/js/head.min.js"></script>
-		<script src="js/reveal.min.js"></script>
+		<script src="js/reveal.js"></script>
 		<script src="js/prism.js"></script>
 
 		<script>
@@ -1363,9 +1381,12 @@ document.querySelectorAll( "input" )
 			// https://github.com/hakimel/reveal.js#configuration
 			Reveal.initialize({
 				controls: true,
-				progress: true,
+				progress: false,
 				history: true,
 				center: true,
+
+				//width: 1024,
+				//height: 768,
 
 				theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
 				transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none

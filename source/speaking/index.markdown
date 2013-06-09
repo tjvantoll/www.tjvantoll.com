@@ -22,7 +22,8 @@ footer: true
 				<span class="year">2013</span>
 			</time>
 			<footer>
-				<a href="http://events.jquery.org/2013/portland/">jQuery Portland</a> | Portland, Oregon
+				<a href="http://events.jquery.org/2013/portland/">jQuery Portland</a> | Portland, Oregon | 
+				<a href="/speaking/slides/2013/UI-Widgets-vs-HTML5">Slides</a>
 			</footer>
 		</article>
 	</div>
