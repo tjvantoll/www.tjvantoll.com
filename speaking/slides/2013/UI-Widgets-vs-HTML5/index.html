@@ -589,7 +589,7 @@
 &lt;input type="date" id="date-5"&gt;
 &lt;script&gt;
     $( "#date-5" ).datepicker({
-        dateFormat: 'yy-mm-dd'
+        dateFormat: "yy-mm-dd"
     });
 &lt;/script&gt;
 </code></pre>
@@ -651,11 +651,9 @@
 				<section>
 					<h2>Using datepicker as a polyfill</h2>
 <pre class="language-markup" style="font-size: 0.7em;">
-<code contenteditable>&lt;input type="text" id="date"&gt;
+<code contenteditable>&lt;input type="date" id="date"&gt;
 &lt;script&gt;
-    if ( Modernizr.inputtypes.date ) {
-        $( "#date" ).attr( "type", "date" );
-    } else {
+    if ( !Modernizr.inputtypes.date ) {
         $( "#date" ).datepicker({
             dateFormat: 'yy-mm-dd'
         });
@@ -954,11 +952,9 @@
 				<section>
 					<h2>Using spinner as a polyfill</h2>
 <pre class="language-markup" style="font-size: 0.7em;">
-<code>&lt;input type="text" id="number-picker"&gt;
+<code>&lt;input type="number" id="number-picker"&gt;
 &lt;script&gt;
-    if ( Modernizr.inputtypes.number ) {
-        $( "#number-picker" ).attr( "type", "number" );
-    } else {
+    if ( !Modernizr.inputtypes.number ) {
         $( "#number-picker" ).spinner();
     }
 &lt;/script&gt;
