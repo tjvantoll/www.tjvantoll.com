@@ -4,7 +4,7 @@
   <title><![CDATA[TJ VanToll]]></title>
   <link href="http://tjvantoll.com/atom.xml" rel="self"/>
   <link href="http://tjvantoll.com/"/>
-  <updated>2013-06-10T21:40:06-04:00</updated>
+  <updated>2013-06-12T09:00:52-07:00</updated>
   <id>http://tjvantoll.com/</id>
   <author>
     <name><![CDATA[TJ VanToll]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[Showing a Resize Icon on a jQuery UI Dialog]]></title>
     <link href="http://tjvantoll.com/2013/05/28/showing-a-resize-icon-on-a-jquery-ui-dialog/"/>
-    <updated>2013-05-28T21:09:00-04:00</updated>
+    <updated>2013-05-28T21:09:00-07:00</updated>
     <id>http://tjvantoll.com/2013/05/28/showing-a-resize-icon-on-a-jquery-ui-dialog</id>
     <content type="html"><![CDATA[<p>Upon <a href="http://jqueryui.com/upgrade-guide/1.10/">upgrading to jQuery UI 1.10</a> you might notice a visual change to the dialog widget - the resize icon no longer displays by default:</p>
 
@@ -67,7 +67,7 @@
   <entry>
     <title type="html"><![CDATA[Why are Enter Keypresses Clicking My Buttons in IE?]]></title>
     <link href="http://tjvantoll.com/2013/05/22/why-are-enter-keypresses-clicking-my-buttons-in-ie/"/>
-    <updated>2013-05-22T22:15:00-04:00</updated>
+    <updated>2013-05-22T22:15:00-07:00</updated>
     <id>http://tjvantoll.com/2013/05/22/why-are-enter-keypresses-clicking-my-buttons-in-ie</id>
     <content type="html"><![CDATA[<p>When you press the Enter key in a textbox, the browser will automatically attempt to perform an <a href="http://www.whatwg.org/specs/web-apps/current-work/multipage/association-of-controls-and-forms.html#implicit-submission">implicit submission</a> of the textbox&#8217;s <code>&lt;form&gt;</code>.</p>
 
@@ -152,7 +152,7 @@
   <entry>
     <title type="html"><![CDATA[Using Ternary Operators for More Maintainable Templates]]></title>
     <link href="http://tjvantoll.com/2013/04/26/using-ternary-operators-for-more-maintainable-templates/"/>
-    <updated>2013-04-26T00:00:00-04:00</updated>
+    <updated>2013-04-26T00:00:00-07:00</updated>
     <id>http://tjvantoll.com/2013/04/26/using-ternary-operators-for-more-maintainable-templates</id>
     <content type="html"><![CDATA[<p>With the rise of JavaScript MVC frameworks, writing templates has become a large part of many web developer&#8217;s workflow. As such, I thought I&#8217;d share a tip that has made my templates far more readable and maintainable over the years, ternary operators.<!-- http://jsbin.com/ekiwal/3/edit --></p>
 
@@ -353,7 +353,7 @@
   <entry>
     <title type="html"><![CDATA[Showing a CSS Based Loading Animation While Your Site Loads]]></title>
     <link href="http://tjvantoll.com/2013/04/24/showing-a-css-based-loading-animation-while-your-site-loads/"/>
-    <updated>2013-04-24T00:00:00-04:00</updated>
+    <updated>2013-04-24T00:00:00-07:00</updated>
     <id>http://tjvantoll.com/2013/04/24/showing-a-css-based-loading-animation-while-your-site-loads</id>
     <content type="html"><![CDATA[<p>Showing a loading indicator on startup is a common pattern in native applications that is becoming more common on the web.  If you need to load a lot of resources when your web application is first loaded, you should give the user a clear indication that this is occurring.</p>
 
@@ -469,7 +469,7 @@
   <entry>
     <title type="html"><![CDATA[List of Pseudo-Elements to Style Form Controls]]></title>
     <link href="http://tjvantoll.com/2013/04/15/list-of-pseudo-elements-to-style-form-controls/"/>
-    <updated>2013-04-15T00:00:00-04:00</updated>
+    <updated>2013-04-15T00:00:00-07:00</updated>
     <id>http://tjvantoll.com/2013/04/15/list-of-pseudo-elements-to-style-form-controls</id>
     <content type="html"><![CDATA[<p>Styling form elements is a pain point when developing web applications.  Historically, web developers have had to accept the form controls the browser provided with little hope of customization.  However, web rendering engines are increasingly adding hooks through pseudo-elements to give authors some control over the display.</p>
 
@@ -1492,7 +1492,7 @@
   <entry>
     <title type="html"><![CDATA[Shorthand for Preventing Default Event Actions with jQuery]]></title>
     <link href="http://tjvantoll.com/2013/03/28/shorthand-for-preventing-default-event-actions-with-jquery/"/>
-    <updated>2013-03-28T21:44:00-04:00</updated>
+    <updated>2013-03-28T21:44:00-07:00</updated>
     <id>http://tjvantoll.com/2013/03/28/shorthand-for-preventing-default-event-actions-with-jquery</id>
     <content type="html"><![CDATA[<p>The common way of preventing the default action of an event is to call <a href="http://api.jquery.com/event.preventDefault/">preventDefault</a> on its <a href="http://api.jquery.com/category/event-object/">Event Object</a>:</p>
 
@@ -1604,7 +1604,7 @@
   <entry>
     <title type="html"><![CDATA[Better Ways of Comparing a JavaScript String to Multiple Values]]></title>
     <link href="http://tjvantoll.com/2013/03/14/better-ways-of-comparing-a-javascript-string-to-multiple-values/"/>
-    <updated>2013-03-14T00:00:00-04:00</updated>
+    <updated>2013-03-14T00:00:00-07:00</updated>
     <id>http://tjvantoll.com/2013/03/14/better-ways-of-comparing-a-javascript-string-to-multiple-values</id>
     <content type="html"><![CDATA[<p>This is a seemingly simple programming task that we deal with everyday.  Here&#8217;s the situation:</p>
 
@@ -1757,7 +1757,7 @@
   <entry>
     <title type="html"><![CDATA[Using jQuery UI Tabs with the &lt;base&gt; Tag]]></title>
     <link href="http://tjvantoll.com/2013/02/17/using-jquery-ui-tabs-with-the-base-tag/"/>
-    <updated>2013-02-17T21:14:00-05:00</updated>
+    <updated>2013-02-17T21:14:00-08:00</updated>
     <id>http://tjvantoll.com/2013/02/17/using-jquery-ui-tabs-with-the-base-tag</id>
     <content type="html"><![CDATA[<p>As there have been <a href="http://bugs.jqueryui.com/ticket/7822">numerous bug submissions</a> for this, I feel the need to explain how to properly use <a href="http://jqueryui.com/tabs">jQuery UI&#8217;s tab widget</a> with a <code>&lt;base&gt;</code> tag.  Let&#8217;s start with what the <code>&lt;base&gt;</code> tag is intended for.</p>
 
@@ -1985,7 +1985,7 @@
   <entry>
     <title type="html"><![CDATA[Opera Moves to WebKit - Why We Should Care]]></title>
     <link href="http://tjvantoll.com/2013/02/14/opera-moves-to-webkit-why-we-should-care/"/>
-    <updated>2013-02-14T00:00:00-05:00</updated>
+    <updated>2013-02-14T00:00:00-08:00</updated>
     <id>http://tjvantoll.com/2013/02/14/opera-moves-to-webkit-why-we-should-care</id>
     <content type="html"><![CDATA[<p>Opera <a href="http://my.opera.com/ODIN/blog/300-million-users-and-move-to-webkit">announced Wednesday</a> that they are moving from their Presto rendering engine to WebKit.</p>
 
@@ -2056,7 +2056,7 @@
   <entry>
     <title type="html"><![CDATA[Stop Messing with the Browser's Default Focus outline]]></title>
     <link href="http://tjvantoll.com/2013/01/28/stop-messing-with-the-browsers-default-focus-outline/"/>
-    <updated>2013-01-28T20:57:00-05:00</updated>
+    <updated>2013-01-28T20:57:00-08:00</updated>
     <id>http://tjvantoll.com/2013/01/28/stop-messing-with-the-browsers-default-focus-outline</id>
     <content type="html"><![CDATA[<p>This is the latest in my series of accessibility best practices after getting frustrated with using a keyboard on the internet.  Last time I talked about <a href="http://tjvantoll.com/2013/01/01/enter-should-submit-forms-stop-messing-with-that/">enter submitting forms</a>, this time I&#8217;m going to explain why removing the browser&#8217;s default focus <code>outline</code> is a bad idea.</p>
 
@@ -2164,7 +2164,7 @@
   <entry>
     <title type="html"><![CDATA[Keyboard Shortcuts for OS X Web Developers]]></title>
     <link href="http://tjvantoll.com/2013/01/18/keyboard-shortcuts-for-os-x-web-developers/"/>
-    <updated>2013-01-18T20:46:00-05:00</updated>
+    <updated>2013-01-18T20:46:00-08:00</updated>
     <id>http://tjvantoll.com/2013/01/18/keyboard-shortcuts-for-os-x-web-developers</id>
     <content type="html"><![CDATA[<p>Recently some minor <a href="http://en.wikipedia.org/wiki/Repetitive_strain_injury">RSI</a>
 -like symptoms in my right hand have forced me to re-evaluate my day to day computer usage.  Since the symptoms are exclusively in my right hand, I decided to start by restricting my mouse usage as much as possible.</p>
@@ -2317,7 +2317,7 @@
   <entry>
     <title type="html"><![CDATA[Detecting Internet Explorer without jQuery]]></title>
     <link href="http://tjvantoll.com/2013/01/11/detecting-internet-explorer-without-jquery/"/>
-    <updated>2013-01-11T17:26:00-05:00</updated>
+    <updated>2013-01-11T17:26:00-08:00</updated>
     <id>http://tjvantoll.com/2013/01/11/detecting-internet-explorer-without-jquery</id>
     <content type="html"><![CDATA[<p>One of the changes in jQuery&#8217;s <a href="http://blog.jquery.com/2013/01/09/jquery-1-9-rc1-and-migrate-rc1-released/">upcoming 1.9 release</a> is the removal of <a href="http://api.jquery.com/jQuery.browser/">$.browser</a>.  So if you&#8217;re using it to test for Internet Explorer, what do you do?</p>
 
@@ -2404,7 +2404,7 @@
   <entry>
     <title type="html"><![CDATA[HTML 5 hidden Attribute Browser Support]]></title>
     <link href="http://tjvantoll.com/2013/01/09/html5-hidden-attribute-browser-support/"/>
-    <updated>2013-01-09T21:27:00-05:00</updated>
+    <updated>2013-01-09T21:27:00-08:00</updated>
     <id>http://tjvantoll.com/2013/01/09/html5-hidden-attribute-browser-support</id>
     <content type="html"><![CDATA[<p>I had trouble finding this from a Google search, so I thought I&#8217;d list the browser support for the <a href="http://www.whatwg.org/specs/web-apps/current-work/multipage/editing.html#the-hidden-attribute">HTML5 hidden attribute</a> here.</p>
 
@@ -2432,7 +2432,7 @@
   <entry>
     <title type="html"><![CDATA[Using the body Element as a Top Level Container - Is it Safe Yet?]]></title>
     <link href="http://tjvantoll.com/2013/01/05/is-it-safe-to-use-the-body-as-a-top-level-container-yet/"/>
-    <updated>2013-01-05T14:21:00-05:00</updated>
+    <updated>2013-01-05T14:21:00-08:00</updated>
     <id>http://tjvantoll.com/2013/01/05/is-it-safe-to-use-the-body-as-a-top-level-container-yet</id>
     <content type="html"><![CDATA[<p>View source on almost any web page and you&#8217;ll likely see the following:</p>
 
@@ -2655,7 +2655,7 @@
   <entry>
     <title type="html"><![CDATA[The Enter Key should Submit Forms, Stop Suppressing it]]></title>
     <link href="http://tjvantoll.com/2013/01/01/enter-should-submit-forms-stop-messing-with-that/"/>
-    <updated>2013-01-01T15:54:00-05:00</updated>
+    <updated>2013-01-01T15:54:00-08:00</updated>
     <id>http://tjvantoll.com/2013/01/01/enter-should-submit-forms-stop-messing-with-that</id>
     <content type="html"><![CDATA[<p>I try to do most of my work and play on the internet with the keyboard.  In the course of my internet-ing there&#8217;s one unfortunate trend that I&#8217;ve noticed; an increasing number of sites are not allowing the enter key to submit a form.  Before I tell you why you care, let&#8217;s look at how this should work.</p>
 
@@ -2845,7 +2845,7 @@
   <entry>
     <title type="html"><![CDATA[Debugging Print Stylesheets: Now Significantly Easier in Chrome]]></title>
     <link href="http://tjvantoll.com/2012/12/12/debugging-print-stylesheets-now-significantly-easier-in-chrome/"/>
-    <updated>2012-12-12T21:55:00-05:00</updated>
+    <updated>2012-12-12T21:55:00-08:00</updated>
     <id>http://tjvantoll.com/2012/12/12/debugging-print-stylesheets-now-significantly-easier-in-chrome</id>
     <content type="html"><![CDATA[<p>Debugging print stylesheets has always been a bit of a pain.  The traditional way of doing so was to manually change the <code>media</code> attribute of all <code>link</code> tags from <code>print</code> to <code>screen</code> or <code>all</code> while testing.</p>
 
@@ -2916,7 +2916,7 @@
   <entry>
     <title type="html"><![CDATA[Creating Cross Browser Scrollable &lt;tbody&gt;s - A CSS Only Approach]]></title>
     <link href="http://tjvantoll.com/2012/11/10/creating-cross-browser-scrollable-tbody/"/>
-    <updated>2012-11-10T15:44:00-05:00</updated>
+    <updated>2012-11-10T15:44:00-08:00</updated>
     <id>http://tjvantoll.com/2012/11/10/creating-cross-browser-scrollable-tbody</id>
     <content type="html"><![CDATA[<p>By default the <code>overflow</code> CSS property does not apply to table group elements (<code>&lt;thead&gt;</code>, <code>&lt;tbody&gt;</code>, or <code>&lt;tfoot&gt;</code>).  <a href="https://developer.mozilla.org/en-US/docs/Firefox_4_for_developers#Miscellaneous_CSS_changes">As of Firefox 4</a> this behavior is consistent across all browser implementations.</p>
 
@@ -3021,7 +3021,7 @@
   <entry>
     <title type="html"><![CDATA[Creating a Polished Vertical Tabs Interaction with jQuery UI]]></title>
     <link href="http://tjvantoll.com/2012/11/08/creating-a-polished-vertical-tabs-interaction-with-jquery-ui/"/>
-    <updated>2012-11-08T00:00:00-05:00</updated>
+    <updated>2012-11-08T00:00:00-08:00</updated>
     <id>http://tjvantoll.com/2012/11/08/creating-a-polished-vertical-tabs-interaction-with-jquery-ui</id>
     <content type="html"><![CDATA[<p>The <a href="http://jqueryui.com/tabs/">jQuery UI tabs widget</a> provides a clean way to implement a tabular UI.  Furthermore, the markup used gives you ample hooks to make the tabs visually into what you want them to be.  The docs provide a <a href="http://jqueryui.com/tabs/#vertical">simple demo</a> of how you can give the tabs a vertical orientation, but I thought I&#8217;d show how you can use what the framework provides to create something a bit more polished.</p>
 
@@ -3152,7 +3152,7 @@
   <entry>
     <title type="html"><![CDATA[Adding Pointers to jQuery UI Tooltips]]></title>
     <link href="http://tjvantoll.com/2012/10/24/adding-pointers-to-jquery-ui-tooltips/"/>
-    <updated>2012-10-24T20:58:00-04:00</updated>
+    <updated>2012-10-24T20:58:00-07:00</updated>
     <id>http://tjvantoll.com/2012/10/24/adding-pointers-to-jquery-ui-tooltips</id>
     <content type="html"><![CDATA[<p>The recent <a href="http://jqueryui.com/changelog/1.9.0/">jQuery UI 1.9 release</a> included a new <a href="http://jqueryui.com/tooltip/">tooltip plugin</a> that can be used to create tooltips much like the native tooltips the browser provides.  The difference is that jQuery UI&#8217;s version are completely customizable.</p>
 
@@ -3182,7 +3182,7 @@
   <entry>
     <title type="html"><![CDATA[Front End Efficiency - The Top Ten]]></title>
     <link href="http://tjvantoll.com/2012/10/23/front-end-efficiency-the-top-ten/"/>
-    <updated>2012-10-23T00:00:00-04:00</updated>
+    <updated>2012-10-23T00:00:00-07:00</updated>
     <id>http://tjvantoll.com/2012/10/23/front-end-efficiency-the-top-ten</id>
     <content type="html"><![CDATA[<p>I gave a &#8220;Front End Efficiency - The Top Ten&#8221; talk to the <a href="http://groups.google.com/group/greaterlansingjug?pli=1">Greater Lansing Java Users Group</a> on October 23rd, 2012.  For those that missed the talk the slides are <a href="http://tjvantoll.com/speaking/slides/2012/Efficiency-Top-Ten/">here</a>.</p>
 ]]></content>

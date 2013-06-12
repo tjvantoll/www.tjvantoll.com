@@ -243,3 +243,112 @@ section.me_slide {
 		}
 	}
 }
+
+@-webkit-keyframes spin-slider {
+	0% {
+		background: blue;
+		-webkit-transform: rotate(0deg);
+	}
+	25% {
+		background: purple;
+		-webkit-transform: rotate(90deg);
+	}
+	50% {
+		background: red;
+		-webkit-transform: rotate(180deg);
+	}
+	75% {
+		background: green;
+		-webkit-transform: rotate(270deg);
+	}
+	100% {
+		background: blue;
+		-webkit-transform: rotate(360deg);
+	}
+}
+@keyframes spin-slider {
+	0% {
+		background: blue;
+		transform: rotate(0deg);
+	}
+	25% {
+		background: purple;
+		transform: rotate(90deg);
+	}
+	50% {
+		background: red;
+		transform: rotate(180deg);
+	}
+	75% {
+		background: green;
+		transform: rotate(270deg);
+	}
+	100% {
+		background: blue;
+		transform: rotate(360deg);
+	}
+}
+.present #crazy-slider {
+	margin: 50px;
+	width: 300px;
+	height: 50px;
+	-webkit-animation: spin-slider 2.5s infinite linear;
+	animation: spin-slider 2.5s infinite linear;
+}
+#crazy-slider .ui-slider-handle {
+	height: 70px;
+	background: black;
+}
+#crazy-control {
+	margin: 20px 50px 100px 50px;
+}
+
+
+@-webkit-keyframes bounce-input {
+	0% { top: -10px; }
+	50% { top: 0; }
+	100% { top: 10px; }
+}
+@-webkit-keyframes skew-input {
+	0% { -webkit-transform: skewX(0deg); }
+	50% { -webkit-transform: skewX(20deg) rotateY(50deg); }
+	100% { -webkit-transform: skewX(-20deg) rotateZ(15deg); }
+}
+@keyframes bounce-input {
+	0% { top: -10px; }
+	50% { top: 0; }
+	100% { top: 10px; }
+}
+@keyframes skew-input {
+	0% { transform: skewX(0deg); }
+	50% { transform: skewX(20deg) rotateY(50deg); }
+	100% { transform: skewX(-20deg) rotateZ(15deg); }
+}
+.present #crazy-spinner-container {
+	margin: 50px;
+	-webkit-animation: bounce-input 1s infinite alternate linear, skew-input 3s alternate infinite linear;
+	animation: bounce-input 1s infinite alternate linear, skew-input 3s alternate infinite linear;
+	position: absolute;
+	left: 65px;
+}
+#crazy-spinner-container input {
+	margin: 10px;
+	font-size: 30px;
+}
+#spinner-demo {
+	position: relative;
+	height: 250px;
+	label {
+		font-size: 0.7em;
+		right: 20px;
+		position: absolute;
+	}
+	#dance-height-widget {
+		right: 100px;
+		top: 80px;
+		position: absolute;
+		overflow: visible;
+		input { width: 100px; }
+	}
+}
+
