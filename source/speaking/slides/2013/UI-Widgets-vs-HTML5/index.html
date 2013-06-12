@@ -908,6 +908,44 @@
 				</section>
 
 				<section>
+					<h2>Just HTML on the DOM</h2>
+<pre class="language-markup" hidden>
+<code>
+&lt;input id="crazy-spinner" value="0"&gt;
+	&lt;label for="dance-height"&gt;Bounce Amount (in pixels):&lt;/label&gt;
+	&lt;input id="dance-height" value="10" min="0" step="10"&gt;
+&lt;script&gt;
+	$( "#crazy-spinner" ).spinner().spinner( "widget" ).attr( "id", "crazy-spinner-container" );
+
+	var update = function() {
+
+		var height = $( "#dance-height" ).val(),
+			rule = '@-webkit-keyframes bounce-input { ' +
+						'0% { top: -' + height + 'px; } ' +
+						'50% { top: 0; } ' +
+						'100% { top: ' + height + 'px; } ' +
+					'}',
+			rule2 = rule.replace( "-webkit-", "" );
+
+		$( "#crazy-spinner-container" ).hide();
+
+		var s = document.createElement( "style" );
+		s.innerHTML = rule + ' ' + rule2;
+		document.getElementsByTagName( "head" )[ 0 ].appendChild( s );
+		setTimeout(function() {
+			$( "#crazy-spinner-container" ).show();
+		});
+	}
+
+	$( "#dance-height" ).spinner({
+		spin: update
+	}).on( "change", update ).spinner( "widget" ).attr( "id", "dance-height-widget" );
+&lt;/script&gt;
+</code></pre>
+					<div class="output" id="spinner-demo"></div>
+				</section>
+
+				<section>
 					<h2>Can we get the best of both worlds?</h2>
 				</section>
 
@@ -1180,6 +1218,37 @@
 					<a href="http://api.jqueryui.com/slider">api.jqueryui.com/slider</a>
 					<br>
 					<img src="img/slider_api.png">
+				</section>
+
+				<section>
+					<h2>Just HTML on the DOM</h2>
+<pre class="language-markup" hidden>
+<code>
+&lt;div id="crazy-control"&gt;&lt;/div&gt;
+&lt;div id="crazy-slider"&gt;&lt;/div&gt;
+&lt;script&gt;
+	$( "#crazy-slider" ).slider();
+	$( "#crazy-control" ).slider({
+		min: 0.1,
+		max: 5,
+		step: 0.1,
+		value: 2.5,
+		slide: function(event, ui) {
+			var rule = '.present #crazy-slider { -webkit-animation: spin-slider ' + ui.value + 's infinite linear; }';
+				rule2 = '.present #crazy-slider { animation: spin-slider ' + ui.value + 's infinite linear; }';
+
+			$( "#crazy-slider" ).hide();
+			var s = document.createElement( "style" );
+			s.innerHTML = rule + rule2;
+			document.getElementsByTagName( "head" )[ 0 ].appendChild( s );
+			setTimeout(function() {
+				$( "#crazy-slider" ).show();
+			});
+		}
+	});
+&lt;/script&gt;
+</code></pre>
+					<div class="output"></div>
 				</section>
 
 				<section>
