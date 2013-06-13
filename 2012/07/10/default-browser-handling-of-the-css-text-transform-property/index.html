@@ -160,7 +160,7 @@
 
 <p>Both <code>foo</code> and <code>bar</code> will appear lowercased in all major browsers.  You can see this for yourself below:</p>
 
-<iframe style="width: 100%; height: 120px;" src="http://jsfiddle.net/tj_vantoll/DxANv/1/embedded/result,html,css/" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
+<div class="code_example"><h6>Default text transform Behavior<a href="/demos/2012-07-10/default.html" target="_blank">Open in New Window</a></h6><iframe style="width: 100%; height: 100px;" frameborder="0" src="/demos/2012-07-10/default.html"></iframe></div>
 
 
 <p>This happens because all browser vendors include <code>text-transform: none</code> in their user agent stylesheet for those elements.  Therefore the <code>text-transform: uppercase</code> rule declared on the parent node is not inherited.</p>
@@ -293,7 +293,7 @@
 
 <p>But unfortunately for whatever reason Option 2 doesn&#8217;t work on the <code>&lt;select&gt;</code> in IE &lt;= 7, Safari, and most interestingly, doesn&#8217;t take effect in Chrome until you click on <code>&lt;select&gt;</code>.  You can verify this behavior for yourself below:</p>
 
-<iframe style="width: 100%; height: 120px;" src="http://jsfiddle.net/tj_vantoll/dUjXB/10/embedded/result,html,css/" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
+<div class="code_example"><h6>Inherited Behavior Discrepancies<a href="/demos/2012-07-10/select-button.html" target="_blank">Open in New Window</a></h6><iframe style="width: 100%; height: 120px;" frameborder="0" src="/demos/2012-07-10/select-button.html"></iframe></div>
 
 
 <p>Fortunately Option 1 does indeed produce the same behavior in IE6+, Firefox, Chrome, Safari, and Opera.  Therefore to normalize <code>text-transform</code> you need to include the following in your stylesheet.</p>
