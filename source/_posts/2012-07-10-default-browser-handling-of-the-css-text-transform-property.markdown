@@ -25,7 +25,7 @@ Where it gets interesting is that all browsers define default `text-transform` p
 
 Both `foo` and `bar` will appear lowercased in all major browsers.  You can see this for yourself below:
 
-<iframe style="width: 100%; height: 120px;" src="http://jsfiddle.net/tj_vantoll/DxANv/1/embedded/result,html,css/" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
+{% demo /demos/2012-07-10/default.html Default_text_transform_Behavior 100 %}
 
 This happens because all browser vendors include `text-transform: none` in their user agent stylesheet for those elements.  Therefore the `text-transform: uppercase` rule declared on the parent node is not inherited.
 
@@ -130,7 +130,7 @@ button, select { text-transform: inherit; }
 
 But unfortunately for whatever reason Option 2 doesn't work on the `<select>` in IE <= 7, Safari, and most interestingly, doesn't take effect in Chrome until you click on `<select>`.  You can verify this behavior for yourself below:
 
-<iframe style="width: 100%; height: 120px;" src="http://jsfiddle.net/tj_vantoll/dUjXB/10/embedded/result,html,css/" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
+{% demo /demos/2012-07-10/select-button.html Inherited_Behavior_Discrepancies 120 %}
 
 Fortunately Option 1 does indeed produce the same behavior in IE6+, Firefox, Chrome, Safari, and Opera.  Therefore to normalize `text-transform` you need to include the following in your stylesheet.
 

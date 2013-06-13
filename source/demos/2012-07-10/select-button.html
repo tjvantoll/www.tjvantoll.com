@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>Inherited text-transform Behavior for select and button elements</title>
+		<style>
+			div { text-transform: uppercase; }
+			button, select { text-transform: inherit; }
+		</style>
+	</head>
+	<body>
+		<p>The text of the &lt;select&gt; and the &lt;button&gt; should be uppercase.</p>
+		<div>
+			<select>
+				<option selected>option</option>
+			</select>
+			<button>button</button>
+		</div>
+	</body>
+</html>
