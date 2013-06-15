@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Accessibility | TJ VanToll]]></title>
   <link href="http://tjvantoll.com/blog/categories/accessibility/atom.xml" rel="self"/>
   <link href="http://tjvantoll.com/"/>
-  <updated>2013-06-13T14:57:21-07:00</updated>
+  <updated>2013-06-15T19:10:13-04:00</updated>
   <id>http://tjvantoll.com/</id>
   <author>
     <name><![CDATA[TJ VanToll]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[Stop Messing with the Browser's Default Focus outline]]></title>
     <link href="http://tjvantoll.com/2013/01/28/stop-messing-with-the-browsers-default-focus-outline/"/>
-    <updated>2013-01-28T20:57:00-08:00</updated>
+    <updated>2013-01-28T20:57:00-05:00</updated>
     <id>http://tjvantoll.com/2013/01/28/stop-messing-with-the-browsers-default-focus-outline</id>
     <content type="html"><![CDATA[<p>This is the latest in my series of accessibility best practices after getting frustrated with using a keyboard on the internet.  Last time I talked about <a href="/2013/01/01/enter-should-submit-forms-stop-messing-with-that/">enter submitting forms</a>, this time I'm going to explain why removing the browser's default focus <code>outline</code> is a bad idea.</p>
 
@@ -115,7 +115,7 @@ color: white;
   <entry>
     <title type="html"><![CDATA[The Enter Key should Submit Forms, Stop Suppressing it]]></title>
     <link href="http://tjvantoll.com/2013/01/01/enter-should-submit-forms-stop-messing-with-that/"/>
-    <updated>2013-01-01T15:54:00-08:00</updated>
+    <updated>2013-01-01T15:54:00-05:00</updated>
     <id>http://tjvantoll.com/2013/01/01/enter-should-submit-forms-stop-messing-with-that</id>
     <content type="html"><![CDATA[<p>I try to do most of my work and play on the internet with the keyboard.  In the course of my internet-ing there's one unfortunate trend that I've noticed; an increasing number of sites are not allowing the enter key to submit a form.  Before I tell you why you care, let's look at how this should work.</p>
 

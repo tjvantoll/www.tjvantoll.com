@@ -4,7 +4,7 @@
   <title><![CDATA[Category: jQuery UI | TJ VanToll]]></title>
   <link href="http://tjvantoll.com/blog/categories/jquery-ui/atom.xml" rel="self"/>
   <link href="http://tjvantoll.com/"/>
-  <updated>2013-06-13T14:57:21-07:00</updated>
+  <updated>2013-06-15T19:10:13-04:00</updated>
   <id>http://tjvantoll.com/</id>
   <author>
     <name><![CDATA[TJ VanToll]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[Showing a Resize Icon on a jQuery UI Dialog]]></title>
     <link href="http://tjvantoll.com/2013/05/28/showing-a-resize-icon-on-a-jquery-ui-dialog/"/>
-    <updated>2013-05-28T21:09:00-07:00</updated>
+    <updated>2013-05-28T21:09:00-04:00</updated>
     <id>http://tjvantoll.com/2013/05/28/showing-a-resize-icon-on-a-jquery-ui-dialog</id>
     <content type="html"><![CDATA[<p>Upon <a href="http://jqueryui.com/upgrade-guide/1.10/">upgrading to jQuery UI 1.10</a> you might notice a visual change to the dialog widget - the resize icon no longer displays by default:</p>
 
@@ -62,7 +62,7 @@ background-position: -80px -224px;
   <entry>
     <title type="html"><![CDATA[Using jQuery UI Tabs with the &lt;base&gt; Tag]]></title>
     <link href="http://tjvantoll.com/2013/02/17/using-jquery-ui-tabs-with-the-base-tag/"/>
-    <updated>2013-02-17T21:14:00-08:00</updated>
+    <updated>2013-02-17T21:14:00-05:00</updated>
     <id>http://tjvantoll.com/2013/02/17/using-jquery-ui-tabs-with-the-base-tag</id>
     <content type="html"><![CDATA[<p>As there have been <a href="http://bugs.jqueryui.com/ticket/7822">numerous bug submissions</a> for this, I feel the need to explain how to properly use <a href="http://jqueryui.com/tabs">jQuery UI's tab widget</a> with a <code>&lt;base&gt;</code> tag.  Let's start with what the <code>&lt;base&gt;</code> tag is intended for.</p>
 
@@ -253,7 +253,7 @@ $( selector ).tabs();
   <entry>
     <title type="html"><![CDATA[Creating a Polished Vertical Tabs Interaction with jQuery UI]]></title>
     <link href="http://tjvantoll.com/2012/11/08/creating-a-polished-vertical-tabs-interaction-with-jquery-ui/"/>
-    <updated>2012-11-08T00:00:00-08:00</updated>
+    <updated>2012-11-08T00:00:00-05:00</updated>
     <id>http://tjvantoll.com/2012/11/08/creating-a-polished-vertical-tabs-interaction-with-jquery-ui</id>
     <content type="html"><![CDATA[<p>The <a href="http://jqueryui.com/tabs/">jQuery UI tabs widget</a> provides a clean way to implement a tabular UI.  Furthermore, the markup used gives you ample hooks to make the tabs visually into what you want them to be.  The docs provide a <a href="http://jqueryui.com/tabs/#vertical">simple demo</a> of how you can give the tabs a vertical orientation, but I thought I'd show how you can use what the framework provides to create something a bit more polished.</p>
 
@@ -359,7 +359,7 @@ $('#tabs').tabs().addClass('ui-tabs-vertical');
   <entry>
     <title type="html"><![CDATA[Adding Pointers to jQuery UI Tooltips]]></title>
     <link href="http://tjvantoll.com/2012/10/24/adding-pointers-to-jquery-ui-tooltips/"/>
-    <updated>2012-10-24T20:58:00-07:00</updated>
+    <updated>2012-10-24T20:58:00-04:00</updated>
     <id>http://tjvantoll.com/2012/10/24/adding-pointers-to-jquery-ui-tooltips</id>
     <content type="html"><![CDATA[<p>The recent <a href="http://jqueryui.com/changelog/1.9.0/">jQuery UI 1.9 release</a> included a new <a href="http://jqueryui.com/tooltip/">tooltip plugin</a> that can be used to create tooltips much like the native tooltips the browser provides.  The difference is that jQuery UI's version are completely customizable.</p>
 
@@ -385,7 +385,7 @@ $('#tabs').tabs().addClass('ui-tabs-vertical');
   <entry>
     <title type="html"><![CDATA[Using jQuery UI's Slider to Polyfill HTML5's input[type=range]]]></title>
     <link href="http://tjvantoll.com/2012/09/14/using-jquery-ui-slider-to-polyfill-html5-input-type-range/"/>
-    <updated>2012-09-14T21:25:00-07:00</updated>
+    <updated>2012-09-14T21:25:00-04:00</updated>
     <id>http://tjvantoll.com/2012/09/14/using-jquery-ui-slider-to-polyfill-html5-input-type-range</id>
     <content type="html"><![CDATA[<p><a href="http://jqueryui.com/demos/slider">jQuery UI's slider plugin</a> looks and behaves much like the browser's native <code>input[type=range]</code> control; therefore it makes an excellent choice for <a href="http://remysharp.com/2010/10/08/what-is-a-polyfill/">polyfilling</a> the native behavior.</p>
 

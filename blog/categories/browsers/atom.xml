@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Browsers | TJ VanToll]]></title>
   <link href="http://tjvantoll.com/blog/categories/browsers/atom.xml" rel="self"/>
   <link href="http://tjvantoll.com/"/>
-  <updated>2013-06-13T14:57:21-07:00</updated>
+  <updated>2013-06-15T19:10:13-04:00</updated>
   <id>http://tjvantoll.com/</id>
   <author>
     <name><![CDATA[TJ VanToll]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[Why are Enter Keypresses Clicking My Buttons in IE?]]></title>
     <link href="http://tjvantoll.com/2013/05/22/why-are-enter-keypresses-clicking-my-buttons-in-ie/"/>
-    <updated>2013-05-22T22:15:00-07:00</updated>
+    <updated>2013-05-22T22:15:00-04:00</updated>
     <id>http://tjvantoll.com/2013/05/22/why-are-enter-keypresses-clicking-my-buttons-in-ie</id>
     <content type="html"><![CDATA[<p>When you press the Enter key in a textbox, the browser will automatically attempt to perform an <a href="http://www.whatwg.org/specs/web-apps/current-work/multipage/association-of-controls-and-forms.html#implicit-submission">implicit submission</a> of the textbox's <code>&lt;form&gt;</code>.</p>
 
@@ -97,7 +97,7 @@
   <entry>
     <title type="html"><![CDATA[List of Pseudo-Elements to Style Form Controls]]></title>
     <link href="http://tjvantoll.com/2013/04/15/list-of-pseudo-elements-to-style-form-controls/"/>
-    <updated>2013-04-15T00:00:00-07:00</updated>
+    <updated>2013-04-15T00:00:00-04:00</updated>
     <id>http://tjvantoll.com/2013/04/15/list-of-pseudo-elements-to-style-form-controls</id>
     <content type="html"><![CDATA[<p>Styling form elements is a pain point when developing web applications.  Historically, web developers have had to accept the form controls the browser provided with little hope of customization.  However, web rendering engines are increasingly adding hooks through pseudo-elements to give authors some control over the display.</p>
 
@@ -986,7 +986,7 @@ box-shadow: none;
   <entry>
     <title type="html"><![CDATA[Opera Moves to WebKit - Why We Should Care]]></title>
     <link href="http://tjvantoll.com/2013/02/14/opera-moves-to-webkit-why-we-should-care/"/>
-    <updated>2013-02-14T00:00:00-08:00</updated>
+    <updated>2013-02-14T00:00:00-05:00</updated>
     <id>http://tjvantoll.com/2013/02/14/opera-moves-to-webkit-why-we-should-care</id>
     <content type="html"><![CDATA[<p>Opera <a href="http://my.opera.com/ODIN/blog/300-million-users-and-move-to-webkit">announced Wednesday</a> that they are moving from their Presto rendering engine to WebKit.</p>
 
@@ -1056,7 +1056,7 @@ box-shadow: none;
   <entry>
     <title type="html"><![CDATA[Stop Messing with the Browser's Default Focus outline]]></title>
     <link href="http://tjvantoll.com/2013/01/28/stop-messing-with-the-browsers-default-focus-outline/"/>
-    <updated>2013-01-28T20:57:00-08:00</updated>
+    <updated>2013-01-28T20:57:00-05:00</updated>
     <id>http://tjvantoll.com/2013/01/28/stop-messing-with-the-browsers-default-focus-outline</id>
     <content type="html"><![CDATA[<p>This is the latest in my series of accessibility best practices after getting frustrated with using a keyboard on the internet.  Last time I talked about <a href="/2013/01/01/enter-should-submit-forms-stop-messing-with-that/">enter submitting forms</a>, this time I'm going to explain why removing the browser's default focus <code>outline</code> is a bad idea.</p>
 
@@ -1155,7 +1155,7 @@ color: white;
   <entry>
     <title type="html"><![CDATA[HTML 5 hidden Attribute Browser Support]]></title>
     <link href="http://tjvantoll.com/2013/01/09/html5-hidden-attribute-browser-support/"/>
-    <updated>2013-01-09T21:27:00-08:00</updated>
+    <updated>2013-01-09T21:27:00-05:00</updated>
     <id>http://tjvantoll.com/2013/01/09/html5-hidden-attribute-browser-support</id>
     <content type="html"><![CDATA[<p>I had trouble finding this from a Google search, so I thought I'd list the browser support for the <a href="http://www.whatwg.org/specs/web-apps/current-work/multipage/editing.html#the-hidden-attribute">HTML5 hidden attribute</a> here.</p>
 

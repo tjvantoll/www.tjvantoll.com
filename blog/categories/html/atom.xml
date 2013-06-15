@@ -4,7 +4,7 @@
   <title><![CDATA[Category: HTML | TJ VanToll]]></title>
   <link href="http://tjvantoll.com/blog/categories/html/atom.xml" rel="self"/>
   <link href="http://tjvantoll.com/"/>
-  <updated>2013-06-13T14:57:21-07:00</updated>
+  <updated>2013-06-15T19:10:13-04:00</updated>
   <id>http://tjvantoll.com/</id>
   <author>
     <name><![CDATA[TJ VanToll]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[Using jQuery UI Tabs with the &lt;base&gt; Tag]]></title>
     <link href="http://tjvantoll.com/2013/02/17/using-jquery-ui-tabs-with-the-base-tag/"/>
-    <updated>2013-02-17T21:14:00-08:00</updated>
+    <updated>2013-02-17T21:14:00-05:00</updated>
     <id>http://tjvantoll.com/2013/02/17/using-jquery-ui-tabs-with-the-base-tag</id>
     <content type="html"><![CDATA[<p>As there have been <a href="http://bugs.jqueryui.com/ticket/7822">numerous bug submissions</a> for this, I feel the need to explain how to properly use <a href="http://jqueryui.com/tabs">jQuery UI's tab widget</a> with a <code>&lt;base&gt;</code> tag.  Let's start with what the <code>&lt;base&gt;</code> tag is intended for.</p>
 
@@ -207,7 +207,7 @@ $( selector ).tabs();
   <entry>
     <title type="html"><![CDATA[Using the body Element as a Top Level Container - Is it Safe Yet?]]></title>
     <link href="http://tjvantoll.com/2013/01/05/is-it-safe-to-use-the-body-as-a-top-level-container-yet/"/>
-    <updated>2013-01-05T14:21:00-08:00</updated>
+    <updated>2013-01-05T14:21:00-05:00</updated>
     <id>http://tjvantoll.com/2013/01/05/is-it-safe-to-use-the-body-as-a-top-level-container-yet</id>
     <content type="html"><![CDATA[<p>View source on almost any web page and you'll likely see the following:</p>
 
@@ -406,7 +406,7 @@ min-height: 100%;
   <entry>
     <title type="html"><![CDATA[The Enter Key should Submit Forms, Stop Suppressing it]]></title>
     <link href="http://tjvantoll.com/2013/01/01/enter-should-submit-forms-stop-messing-with-that/"/>
-    <updated>2013-01-01T15:54:00-08:00</updated>
+    <updated>2013-01-01T15:54:00-05:00</updated>
     <id>http://tjvantoll.com/2013/01/01/enter-should-submit-forms-stop-messing-with-that</id>
     <content type="html"><![CDATA[<p>I try to do most of my work and play on the internet with the keyboard.  In the course of my internet-ing there's one unfortunate trend that I've noticed; an increasing number of sites are not allowing the enter key to submit a form.  Before I tell you why you care, let's look at how this should work.</p>
 
@@ -566,7 +566,7 @@ min-height: 100%;
   <entry>
     <title type="html"><![CDATA[Creating Cross Browser Scrollable &lt;tbody&gt;s - A CSS Only Approach]]></title>
     <link href="http://tjvantoll.com/2012/11/10/creating-cross-browser-scrollable-tbody/"/>
-    <updated>2012-11-10T15:44:00-08:00</updated>
+    <updated>2012-11-10T15:44:00-05:00</updated>
     <id>http://tjvantoll.com/2012/11/10/creating-cross-browser-scrollable-tbody</id>
     <content type="html"><![CDATA[<p>By default the <code>overflow</code> CSS property does not apply to table group elements (<code>&lt;thead&gt;</code>, <code>&lt;tbody&gt;</code>, or <code>&lt;tfoot&gt;</code>).  <a href="https://developer.mozilla.org/en-US/docs/Firefox_4_for_developers#Miscellaneous_CSS_changes">As of Firefox 4</a> this behavior is consistent across all browser implementations.</p>
 
