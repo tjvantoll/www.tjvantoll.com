@@ -9,11 +9,19 @@ footer: true
 <div class="speaking">
 	<p>On certain occasions I've been known to talk to people in real life.</p>
 
-	<header>
+	<header style="display: none;">
 		<h3>Future</h3>
+	</header>
+	<div class="speaking-archives" style="display: none;">
+		<h2>2013</h2>
+	</div>
+
+	<header style="display: none;">
+		<h3>Past</h3>
 	</header>
 	<div class="speaking-archives">
 		<h2>2013</h2>
+
 		<article>
 			<h1>jQuery UI Widgets vs. HTML5</h1>
 			<time datetime="2013-06-13">
@@ -26,13 +34,7 @@ footer: true
 				<a href="/speaking/slides/2013/UI-Widgets-vs-HTML5">Slides</a>
 			</footer>
 		</article>
-	</div>
 
-	<header>
-		<h3>Past</h3>
-	</header>
-	<div class="speaking-archives">
-		<h2>2013</h2>
 		<article>
 			<h1>Constraint Validation: Native Client Side Validation for Web Forms</h1>
 			<time datetime="2013-05-29">
