@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>Initial Display of the Form</title>
+		<style>
+			form {
+			    margin: 20px;
+			}
+			fieldset {
+			    padding: 0;
+			    margin: 0;
+			    border: 0;
+			}
+			legend {
+			    display: block;
+			    width: 100%;
+			    padding: 0;
+			    margin-bottom: 20px;
+			    font-size: 21px;
+			    line-height: 40px;
+			    color: #333333;
+			    border: 0;
+			    border-bottom: 1px solid #e5e5e5;
+			}
+			label {
+			    display: inline-block;
+			    width: 60px;
+			    margin: 10px 0;
+			}
+			input {
+			    display: inline-block;
+			    border-radius: 4px;
+			    padding: 2px 3px;
+			}
+			.actions {
+			    margin-top: 20px;
+			}
+			label,
+			input,
+			button,
+			select,
+			textarea {
+			    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+			    font-size: 14px;
+			    font-weight: normal;
+			    line-height: 20px;
+			}
+			input, label {
+			    height: 20px;
+			}
+
+			.edit, .save {
+			    color: #ffffff;
+			    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+			    background-color: #006dcc;
+			    background-image: linear-gradient(to bottom, #0088cc, #0044cc);
+			    border-color: #0044cc #0044cc #002a80;
+			    border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+			}
+
+			.cancel, .save, input { display: none; }
+
+			.editing .save,
+			.editing .cancel,
+			.editing input {
+			    display: inline-block;
+			}
+			.editing .edit,
+			.editing .display {
+			    display: none;
+			}
+
+			.editing label {
+			    font-weight: bold;
+			}
+		</style>
+	</head>
+	<body>
+		<form>
+		    <fieldset>
+		        <legend>Account Information</legend>
+		        
+		        <div>
+		            <label for="name">Name:</label>
+		            <input type="text" id="name" value="TJ" required>
+		            <span class="display">TJ</span>
+		        </div>
+		        <div>
+		            <label for="email">Email:</label>
+		            <input type="email" id="email" value="tj@somedomain.com" required>
+		            <span class="display">tj@somedomain.com</span>
+		        </div>
+		        <div class="actions">
+		            <button type="button" class="edit">Edit</button>
+		            <button type="submit" class="save">Save</button>
+		            <button type="button" class="cancel">Cancel</button>
+		        </div>
+		    </fieldset>
+		</form>
+		<script src="../assets/jquery/1.9.1/jquery.js"></script>
+		<script>
+			$( ".edit" ).on( "click", function() {
+			    $( this ).parents( "form" ).addClass( "editing" );
+			});
+			$( ".cancel" ).on( "click", function() {
+			    $( this ).parents( "form" ).removeClass( "editing" );
+			});
+		</script>
+	</body>
+</html>
