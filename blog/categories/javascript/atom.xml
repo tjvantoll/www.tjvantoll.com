@@ -4,7 +4,7 @@
   <title><![CDATA[Category: JavaScript | TJ VanToll]]></title>
   <link href="http://tjvantoll.com/blog/categories/javascript/atom.xml" rel="self"/>
   <link href="http://tjvantoll.com/"/>
-  <updated>2013-06-16T23:00:01-04:00</updated>
+  <updated>2013-06-19T22:28:19-04:00</updated>
   <id>http://tjvantoll.com/</id>
   <author>
     <name><![CDATA[TJ VanToll]]></name>
@@ -12,6 +12,190 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Using Semantic Class Names to Show and Hide Elements]]></title>
+    <link href="http://tjvantoll.com/2013/06/19/using-semantic-class-names-to-show-and-hide-elements/"/>
+    <updated>2013-06-19T21:29:00-04:00</updated>
+    <id>http://tjvantoll.com/2013/06/19/using-semantic-class-names-to-show-and-hide-elements</id>
+    <content type="html"><![CDATA[<p>Showing and hiding elements has the potential to get complicated in large applications.</p>
+
+<p>As a small example, say you have the following form that both displays a user's data as well as allows them to edit it:</p>
+
+<p>``` html
+<form></p>
+
+<pre><code>&lt;fieldset&gt;
+    &lt;legend&gt;Account Information&lt;/legend&gt;
+
+    &lt;div&gt;
+        &lt;label for="name"&gt;Name:&lt;/label&gt;
+        &lt;input type="text" id="name" value="TJ" required&gt;
+        &lt;span class="display"&gt;TJ&lt;/span&gt;
+    &lt;/div&gt;
+    &lt;div&gt;
+        &lt;label for="email"&gt;Email:&lt;/label&gt;
+        &lt;input type="email" id="email" value="tj@somedomain.com" required&gt;
+        &lt;span class="display"&gt;tj@somedomain.com&lt;/span&gt;
+    &lt;/div&gt;
+    &lt;div class="actions"&gt;
+        &lt;button type="button" class="edit"&gt;Edit&lt;/button&gt;
+        &lt;button type="submit" class="save"&gt;Save&lt;/button&gt;
+        &lt;button type="button" class="cancel"&gt;Cancel&lt;/button&gt;
+    &lt;/div&gt;
+&lt;/fieldset&gt;
+</code></pre>
+
+<p></form>
+```</p>
+
+<!-- more -->
+
+
+<p>Without any logic both states of the form display:</p>
+
+<p><div class="code_example"><h6>Initial Form Display<a href="/demos/2013-06-19/initialForm.html" target="_blank">Open in New Window</a></h6><iframe style="width: 100%; height: 300px;" frameborder="0" src="/demos/2013-06-19/initialForm.html"></iframe></div></p>
+
+<h3>Adding the Logic</h3>
+
+<p>Here's the goal. The Edit button should:</p>
+
+<ul>
+<li>Show the <code>&lt;input&gt;</code>s.</li>
+<li>Show the Save button.</li>
+<li>Show the Cancel button.</li>
+<li>Hide the Edit button.</li>
+<li>Hide the text in the <code>&lt;span&gt;</code>s.</li>
+</ul>
+
+
+<p>The Cancel button should then undo these changes.</p>
+
+<p>The traditional approach to this problem is to show and hide elements explicitly in JavaScript:</p>
+
+<p>``` javascript
+$( ".edit" ).on( "click", function() {</p>
+
+<pre><code>$( ".display, .edit" ).hide();
+$( ".cancel, .save, input" ).show();
+</code></pre>
+
+<p>});
+$( ".cancel" ).on( "click", function() {</p>
+
+<pre><code>$( ".display, .edit" ).show();
+$( ".cancel, .save, input" ).hide();
+</code></pre>
+
+<p>});
+```</p>
+
+<p>To get the initial state of the form correct you also need some CSS:</p>
+
+<p>``` css
+.cancel, .save, input {</p>
+
+<pre><code>display: none;
+</code></pre>
+
+<p>}
+```</p>
+
+<p>Because the list of elements has to be specified in JavaScript and CSS, this logic will be difficult to maintain. And this is for a trivial example; usually requirements are much more complex.</p>
+
+<p>How can we make this better?</p>
+
+<h3>Semantic Class Names</h3>
+
+<p>Instead of targeting individual elements in JavaScript, let's add a class name to the parent element that makes the most sense, in this case, the <code>&lt;form&gt;</code>:</p>
+
+<p>``` javascript
+$( ".edit" ).on( "click", function() {</p>
+
+<pre><code>$( this ).parents( "form" ).addClass( "editing" );
+</code></pre>
+
+<p>});
+$( ".cancel" ).on( "click", function() {</p>
+
+<pre><code>$( this ).parents( "form" ).removeClass( "editing" );
+</code></pre>
+
+<p>});
+```</p>
+
+<p>Since the logic is simple, this can be written library-free as well (<em>note <code>classList</code> is not available in IE &lt; 10</em>):</p>
+
+<p>``` javascript
+(function() {</p>
+
+<pre><code>var form = document.querySelector( "form" ),
+    editButton = document.querySelector( ".edit" ),
+    cancelButton = document.querySelector( ".cancel" );
+
+editButton.addEventListener( "click", function() {
+    form.classList.add( "editing" ); 
+});
+cancelButton.addEventListener( "click", function() {
+    form.classList.remove( "editing" ); 
+});
+</code></pre>
+
+<p>}());
+```</p>
+
+<h3>Advantages of Using Semantic Classes</h3>
+
+<p>There are 2 major advantages to this approach.</p>
+
+<p>1) All display logic is now handled in CSS:</p>
+
+<p>``` css
+.cancel, .save, input {</p>
+
+<pre><code>display: none;
+</code></pre>
+
+<p>}
+.editing .save,
+.editing .cancel,
+.editing input {</p>
+
+<pre><code>display: inline-block;
+</code></pre>
+
+<p>}
+.editing .edit,
+.editing .display {</p>
+
+<pre><code>display: none;
+</code></pre>
+
+<p>}
+```</p>
+
+<p>2) You have a styling hook that can be used to make further changes to the display. For example, you might want to bold the labels when editing:</p>
+
+<p>``` css
+.editing label {</p>
+
+<pre><code>font-weight: bold;
+</code></pre>
+
+<p>}
+```</p>
+
+<p>The final display of the form looks like this:</p>
+
+<p><div class="code_example"><h6>Semantic Class Approach<a href="/demos/2013-06-19/finalForm.html" target="_blank">Open in New Window</a></h6><iframe style="width: 100%; height: 300px;" frameborder="0" src="/demos/2013-06-19/finalForm.html"></iframe></div></p>
+
+<h3>Conclusion</h3>
+
+<p>This is not a technique that I came up with but I've used it successfully in several large applications and have found that it scales well over time.</p>
+
+<p>Do you have any other tricks you use to show &amp; hide elements? If so, let me know in the comments.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Showing a Resize Icon on a jQuery UI Dialog]]></title>
@@ -27,6 +211,9 @@
 <p>Default dialog display in 1.10:</p>
 
 <p><img src="http://tjvantoll.com/images/posts/2013-05-28/dialog-1.10.png" alt="Default display of jQuery UI's dialog in version 1.10"></p>
+
+<!-- more -->
+
 
 <p>The dialog is still resizable, the icon is just not displayed anymore. The change was made because when a dialog contains scrolling content, the scrollbar becomes very difficult to use when the resize icon is present, especially in Windows browsers (see <a href="http://bugs.jqueryui.com/ticket/4575">bug #4575</a>).</p>
 
@@ -442,89 +629,6 @@ if (fruit.match(/<sup>(banana|lemon|mango|pineapple)$/))</sup> {</p>
 <p>This check clearly requires the least amount of typing.  It is also the most flexible as you can easily alter things like case sensitivity, special character handling, white space, etc.  This will work in all browsers and you don't have to worry about messing with the native prototypes.</p>
 
 <p>While this is the most powerful option, it comes at a cost of being less readable.  I had to look up the <code>^</code> (match at the beginning of input) and <code>$</code> (match at the end of input) characters when writing this post.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Detecting Internet Explorer without jQuery]]></title>
-    <link href="http://tjvantoll.com/2013/01/11/detecting-internet-explorer-without-jquery/"/>
-    <updated>2013-01-11T17:26:00-05:00</updated>
-    <id>http://tjvantoll.com/2013/01/11/detecting-internet-explorer-without-jquery</id>
-    <content type="html"><![CDATA[<p>One of the changes in jQuery's <a href="http://blog.jquery.com/2013/01/09/jquery-1-9-rc1-and-migrate-rc1-released/">upcoming 1.9 release</a> is the removal of <a href="http://api.jquery.com/jQuery.browser/">$.browser</a>.  So if you're using it to test for Internet Explorer, what do you do?</p>
-
-<!--more-->
-
-
-<h3>Option 1: Use the migrate plugin</h3>
-
-<p>If you want to avoid upgrading existing code, use the <a href="https://github.com/jquery/jquery-migrate/">migrate plugin</a> which will preserve <code>$.browser</code> as it was.  Of course this is simply putting off the inevitable, but if you need to upgrade a large code base it's a good temporary measure.  The development version of the plugin will produce a console warning message whenever <code>$.browser</code> is used, which can help you identify where you're using it and migrate accordingly.</p>
-
-<h3>Option 2: Switch to feature detection</h3>
-
-<p>Testing for specific browsers is <a href="http://www.sitepoint.com/why-browser-sniffing-stinks/">a</a> <a href="http://msdn.microsoft.com/en-us/magazine/hh475813.aspx">bad</a> <a href="http://diveintohtml5.info/detect.html">practice</a>.  If you are not supporting IE because of features that it does not possess, test for those features instead of the browser.  The <a href="http://modernizr.com">Modernizr</a> library includes a wide variety of feature tests and is a good place to get started.</p>
-
-<h3>Option 3: Use conditional classes or conditional comments</h3>
-
-<p>IE versions &lt; 10 support <a href="http://msdn.microsoft.com/en-us/library/ms537512(v=vs.85).aspx">conditional comments</a> that can be used to detect Internet Explorer.  For example the <a href="http://html5boilerplate.com/">HTML5 boilerplate</a> <a href="https://github.com/h5bp/html5-boilerplate/blob/master/index.html">uses the following</a> to show a warning to users using IE &lt; 7:</p>
-
-<p>``` html</p>
-
-<!--[if lt IE 7]>
-    <p class="chromeframe">
-        You are using an <strong>outdated</strong> browser. Please
-        <a href="http://browsehappy.com/">upgrade your browser</a>
-        or <a href="http://www.google.com/chromeframe/?redirect=true">
-        activate Google Chrome Frame</a> to improve your experience.
-    </p>
-<![endif]-->
-
-
-<p>```</p>
-
-<p>This approach can be used to add conditional classes on the <code>html</code> element (<a href="http://paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/">via Paul Irish</a>).</p>
-
-<p>``` html Conditional classes on the html element</p>
-
-<!--[if lt IE 7]>      <html class="ie6"> <![endif]-->
-
-
-<!--[if IE 7]>         <html class="ie7"> <![endif]-->
-
-
-<!--[if IE 8]>         <html class="ie8"> <![endif]-->
-
-
-<!--[if gt IE 8]><!-->
-
-
-<p> <html>         <!--<![endif]-->
-```</p>
-
-<p>Now the presence of a class on the <code>html</code> element can be used to derive the version of Internet Explorer the user is using:</p>
-
-<p><code>javascript
-$('html').hasClass('ie6'); //True if the user is using IE6
-</code></p>
-
-<h3>Option 4: Sniff the User Agent</h3>
-
-<p>If for whatever reason you cannot do any of the options above, you <em>can</em> determine IE usage the from <code>navigator</code> object.</p>
-
-<div class="warning" style="display: block;">
-    User agent sniffing should be used as a last resort.  Make sure you at least consider the options above before using this.
-</div>
-
-
-<p>``` javascript Sniffing the user agent string to test for Internet Explorer
-//Test for Internet Explorer
-if (/MSIE\s([\d.]+)/.test(navigator.userAgent)) {</p>
-
-<pre><code>//Get the IE version.  This will be 6 for IE6, 7 for IE7, etc...
-version = new Number(RegExp.$1);
-</code></pre>
-
-<p>}
-```</p>
 ]]></content>
   </entry>
   

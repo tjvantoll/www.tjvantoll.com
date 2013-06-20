@@ -4,7 +4,7 @@
   <title><![CDATA[TJ VanToll]]></title>
   <link href="http://tjvantoll.com/atom.xml" rel="self"/>
   <link href="http://tjvantoll.com/"/>
-  <updated>2013-06-16T23:00:01-04:00</updated>
+  <updated>2013-06-19T22:28:19-04:00</updated>
   <id>http://tjvantoll.com/</id>
   <author>
     <name><![CDATA[TJ VanToll]]></name>
@@ -12,6 +12,226 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Using Semantic Class Names to Show and Hide Elements]]></title>
+    <link href="http://tjvantoll.com/2013/06/19/using-semantic-class-names-to-show-and-hide-elements/"/>
+    <updated>2013-06-19T21:29:00-04:00</updated>
+    <id>http://tjvantoll.com/2013/06/19/using-semantic-class-names-to-show-and-hide-elements</id>
+    <content type="html"><![CDATA[<p>Showing and hiding elements has the potential to get complicated in large applications.</p>
+
+<p>As a small example, say you have the following form that both displays a user&#8217;s data as well as allows them to edit it:</p>
+
+<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;form&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;fieldset&gt;</span>
+</span><span class='line'>        <span class="nt">&lt;legend&gt;</span>Account Information<span class="nt">&lt;/legend&gt;</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="nt">&lt;div&gt;</span>
+</span><span class='line'>            <span class="nt">&lt;label</span> <span class="na">for=</span><span class="s">&quot;name&quot;</span><span class="nt">&gt;</span>Name:<span class="nt">&lt;/label&gt;</span>
+</span><span class='line'>            <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;text&quot;</span> <span class="na">id=</span><span class="s">&quot;name&quot;</span> <span class="na">value=</span><span class="s">&quot;TJ&quot;</span> <span class="na">required</span><span class="nt">&gt;</span>
+</span><span class='line'>            <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">&quot;display&quot;</span><span class="nt">&gt;</span>TJ<span class="nt">&lt;/span&gt;</span>
+</span><span class='line'>        <span class="nt">&lt;/div&gt;</span>
+</span><span class='line'>        <span class="nt">&lt;div&gt;</span>
+</span><span class='line'>            <span class="nt">&lt;label</span> <span class="na">for=</span><span class="s">&quot;email&quot;</span><span class="nt">&gt;</span>Email:<span class="nt">&lt;/label&gt;</span>
+</span><span class='line'>            <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;email&quot;</span> <span class="na">id=</span><span class="s">&quot;email&quot;</span> <span class="na">value=</span><span class="s">&quot;tj@somedomain.com&quot;</span> <span class="na">required</span><span class="nt">&gt;</span>
+</span><span class='line'>            <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">&quot;display&quot;</span><span class="nt">&gt;</span>tj@somedomain.com<span class="nt">&lt;/span&gt;</span>
+</span><span class='line'>        <span class="nt">&lt;/div&gt;</span>
+</span><span class='line'>        <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;actions&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>            <span class="nt">&lt;button</span> <span class="na">type=</span><span class="s">&quot;button&quot;</span> <span class="na">class=</span><span class="s">&quot;edit&quot;</span><span class="nt">&gt;</span>Edit<span class="nt">&lt;/button&gt;</span>
+</span><span class='line'>            <span class="nt">&lt;button</span> <span class="na">type=</span><span class="s">&quot;submit&quot;</span> <span class="na">class=</span><span class="s">&quot;save&quot;</span><span class="nt">&gt;</span>Save<span class="nt">&lt;/button&gt;</span>
+</span><span class='line'>            <span class="nt">&lt;button</span> <span class="na">type=</span><span class="s">&quot;button&quot;</span> <span class="na">class=</span><span class="s">&quot;cancel&quot;</span><span class="nt">&gt;</span>Cancel<span class="nt">&lt;/button&gt;</span>
+</span><span class='line'>        <span class="nt">&lt;/div&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;/fieldset&gt;</span>
+</span><span class='line'><span class="nt">&lt;/form&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<!-- more -->
+
+
+<p>Without any logic both states of the form display:</p>
+
+<div class="code_example"><h6>Initial Form Display<a href="http://tjvantoll.com/demos/2013-06-19/initialForm.html" target="_blank">Open in New Window</a></h6><iframe style="width: 100%; height: 300px;" frameborder="0" src="http://tjvantoll.com/demos/2013-06-19/initialForm.html"></iframe></div>
+
+
+<h3>Adding the Logic</h3>
+
+<p>Here&#8217;s the goal. The Edit button should:</p>
+
+<ul>
+<li>Show the <code>&lt;input&gt;</code>s.</li>
+<li>Show the Save button.</li>
+<li>Show the Cancel button.</li>
+<li>Hide the Edit button.</li>
+<li>Hide the text in the <code>&lt;span&gt;</code>s.</li>
+</ul>
+
+
+<p>The Cancel button should then undo these changes.</p>
+
+<p>The traditional approach to this problem is to show and hide elements explicitly in JavaScript:</p>
+
+<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">$</span><span class="p">(</span> <span class="s2">&quot;.edit&quot;</span> <span class="p">).</span><span class="nx">on</span><span class="p">(</span> <span class="s2">&quot;click&quot;</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nx">$</span><span class="p">(</span> <span class="s2">&quot;.display, .edit&quot;</span> <span class="p">).</span><span class="nx">hide</span><span class="p">();</span>
+</span><span class='line'>    <span class="nx">$</span><span class="p">(</span> <span class="s2">&quot;.cancel, .save, input&quot;</span> <span class="p">).</span><span class="nx">show</span><span class="p">();</span>
+</span><span class='line'><span class="p">});</span>
+</span><span class='line'><span class="nx">$</span><span class="p">(</span> <span class="s2">&quot;.cancel&quot;</span> <span class="p">).</span><span class="nx">on</span><span class="p">(</span> <span class="s2">&quot;click&quot;</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nx">$</span><span class="p">(</span> <span class="s2">&quot;.display, .edit&quot;</span> <span class="p">).</span><span class="nx">show</span><span class="p">();</span>
+</span><span class='line'>    <span class="nx">$</span><span class="p">(</span> <span class="s2">&quot;.cancel, .save, input&quot;</span> <span class="p">).</span><span class="nx">hide</span><span class="p">();</span>
+</span><span class='line'><span class="p">});</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>To get the initial state of the form correct you also need some CSS:</p>
+
+<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nc">.cancel</span><span class="o">,</span> <span class="nc">.save</span><span class="o">,</span> <span class="nt">input</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">display</span><span class="o">:</span> <span class="k">none</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Because the list of elements has to be specified in JavaScript and CSS, this logic will be difficult to maintain. And this is for a trivial example; usually requirements are much more complex.</p>
+
+<p>How can we make this better?</p>
+
+<h3>Semantic Class Names</h3>
+
+<p>Instead of targeting individual elements in JavaScript, let&#8217;s add a class name to the parent element that makes the most sense, in this case, the <code>&lt;form&gt;</code>:</p>
+
+<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">$</span><span class="p">(</span> <span class="s2">&quot;.edit&quot;</span> <span class="p">).</span><span class="nx">on</span><span class="p">(</span> <span class="s2">&quot;click&quot;</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nx">$</span><span class="p">(</span> <span class="k">this</span> <span class="p">).</span><span class="nx">parents</span><span class="p">(</span> <span class="s2">&quot;form&quot;</span> <span class="p">).</span><span class="nx">addClass</span><span class="p">(</span> <span class="s2">&quot;editing&quot;</span> <span class="p">);</span>
+</span><span class='line'><span class="p">});</span>
+</span><span class='line'><span class="nx">$</span><span class="p">(</span> <span class="s2">&quot;.cancel&quot;</span> <span class="p">).</span><span class="nx">on</span><span class="p">(</span> <span class="s2">&quot;click&quot;</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nx">$</span><span class="p">(</span> <span class="k">this</span> <span class="p">).</span><span class="nx">parents</span><span class="p">(</span> <span class="s2">&quot;form&quot;</span> <span class="p">).</span><span class="nx">removeClass</span><span class="p">(</span> <span class="s2">&quot;editing&quot;</span> <span class="p">);</span>
+</span><span class='line'><span class="p">});</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Since the logic is simple, this can be written library-free as well (<em>note <code>classList</code> is not available in IE &lt; 10</em>):</p>
+
+<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>    <span class="kd">var</span> <span class="nx">form</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span> <span class="s2">&quot;form&quot;</span> <span class="p">),</span>
+</span><span class='line'>        <span class="nx">editButton</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span> <span class="s2">&quot;.edit&quot;</span> <span class="p">),</span>
+</span><span class='line'>        <span class="nx">cancelButton</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span> <span class="s2">&quot;.cancel&quot;</span> <span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="nx">editButton</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span> <span class="s2">&quot;click&quot;</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>        <span class="nx">form</span><span class="p">.</span><span class="nx">classList</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span> <span class="s2">&quot;editing&quot;</span> <span class="p">);</span>
+</span><span class='line'>    <span class="p">});</span>
+</span><span class='line'>    <span class="nx">cancelButton</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span> <span class="s2">&quot;click&quot;</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>        <span class="nx">form</span><span class="p">.</span><span class="nx">classList</span><span class="p">.</span><span class="nx">remove</span><span class="p">(</span> <span class="s2">&quot;editing&quot;</span> <span class="p">);</span>
+</span><span class='line'>    <span class="p">});</span>
+</span><span class='line'><span class="p">}());</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>Advantages of Using Semantic Classes</h3>
+
+<p>There are 2 major advantages to this approach.</p>
+
+<p>1) All display logic is now handled in CSS:</p>
+
+<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nc">.cancel</span><span class="o">,</span> <span class="nc">.save</span><span class="o">,</span> <span class="nt">input</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">display</span><span class="o">:</span> <span class="k">none</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="nc">.editing</span> <span class="nc">.save</span><span class="o">,</span>
+</span><span class='line'><span class="nc">.editing</span> <span class="nc">.cancel</span><span class="o">,</span>
+</span><span class='line'><span class="nc">.editing</span> <span class="nt">input</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">display</span><span class="o">:</span> <span class="k">inline</span><span class="o">-</span><span class="k">block</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="nc">.editing</span> <span class="nc">.edit</span><span class="o">,</span>
+</span><span class='line'><span class="nc">.editing</span> <span class="nc">.display</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">display</span><span class="o">:</span> <span class="k">none</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>2) You have a styling hook that can be used to make further changes to the display. For example, you might want to bold the labels when editing:</p>
+
+<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nc">.editing</span> <span class="nt">label</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">font-weight</span><span class="o">:</span> <span class="k">bold</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The final display of the form looks like this:</p>
+
+<div class="code_example"><h6>Semantic Class Approach<a href="http://tjvantoll.com/demos/2013-06-19/finalForm.html" target="_blank">Open in New Window</a></h6><iframe style="width: 100%; height: 300px;" frameborder="0" src="http://tjvantoll.com/demos/2013-06-19/finalForm.html"></iframe></div>
+
+
+<h3>Conclusion</h3>
+
+<p>This is not a technique that I came up with but I&#8217;ve used it successfully in several large applications and have found that it scales well over time.</p>
+
+<p>Do you have any other tricks you use to show &amp; hide elements? If so, let me know in the comments.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Showing a Resize Icon on a jQuery UI Dialog]]></title>
@@ -27,6 +247,9 @@
 <p>Default dialog display in 1.10:</p>
 
 <p><img src="http://tjvantoll.com/images/posts/2013-05-28/dialog-1.10.png" alt="Default display of jQuery UI's dialog in version 1.10"></p>
+
+<!-- more -->
+
 
 <p>The dialog is still resizable, the icon is just not displayed anymore. The change was made because when a dialog contains scrolling content, the scrollbar becomes very difficult to use when the resize icon is present, especially in Windows browsers (see <a href="http://bugs.jqueryui.com/ticket/4575">bug #4575</a>).</p>
 
@@ -3176,15 +3399,6 @@
 <li>Since the <code>::after</code> and <code>::before</code> pseudo-elements are used to create the pointers, IE &lt; 8 users will not see them.  However, they&#8217;ll simply see the default pointerless tooltip, no harm done. <i>Note: IE8 supports the before/after pseudo-elements but as <code>:before</code> and <code>:after</code> instead of <code>::before</code> and <code>::after</code>. So if you need IE8 support use <code>:before</code> and <code>:after</code>.</i></li>
 </ul>
 
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Front End Efficiency - The Top Ten]]></title>
-    <link href="http://tjvantoll.com/2012/10/23/front-end-efficiency-the-top-ten/"/>
-    <updated>2012-10-23T00:00:00-04:00</updated>
-    <id>http://tjvantoll.com/2012/10/23/front-end-efficiency-the-top-ten</id>
-    <content type="html"><![CDATA[<p>I gave a &#8220;Front End Efficiency - The Top Ten&#8221; talk to the <a href="http://groups.google.com/group/greaterlansingjug?pli=1">Greater Lansing Java Users Group</a> on October 23rd, 2012.  For those that missed the talk the slides are <a href="http://tjvantoll.com/speaking/slides/2012/Efficiency-Top-Ten/">here</a>.</p>
 ]]></content>
   </entry>
   

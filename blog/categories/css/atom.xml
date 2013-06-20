@@ -4,7 +4,7 @@
   <title><![CDATA[Category: CSS | TJ VanToll]]></title>
   <link href="http://tjvantoll.com/blog/categories/css/atom.xml" rel="self"/>
   <link href="http://tjvantoll.com/"/>
-  <updated>2013-06-16T23:00:01-04:00</updated>
+  <updated>2013-06-19T22:28:19-04:00</updated>
   <id>http://tjvantoll.com/</id>
   <author>
     <name><![CDATA[TJ VanToll]]></name>
@@ -12,6 +12,190 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Using Semantic Class Names to Show and Hide Elements]]></title>
+    <link href="http://tjvantoll.com/2013/06/19/using-semantic-class-names-to-show-and-hide-elements/"/>
+    <updated>2013-06-19T21:29:00-04:00</updated>
+    <id>http://tjvantoll.com/2013/06/19/using-semantic-class-names-to-show-and-hide-elements</id>
+    <content type="html"><![CDATA[<p>Showing and hiding elements has the potential to get complicated in large applications.</p>
+
+<p>As a small example, say you have the following form that both displays a user's data as well as allows them to edit it:</p>
+
+<p>``` html
+<form></p>
+
+<pre><code>&lt;fieldset&gt;
+    &lt;legend&gt;Account Information&lt;/legend&gt;
+
+    &lt;div&gt;
+        &lt;label for="name"&gt;Name:&lt;/label&gt;
+        &lt;input type="text" id="name" value="TJ" required&gt;
+        &lt;span class="display"&gt;TJ&lt;/span&gt;
+    &lt;/div&gt;
+    &lt;div&gt;
+        &lt;label for="email"&gt;Email:&lt;/label&gt;
+        &lt;input type="email" id="email" value="tj@somedomain.com" required&gt;
+        &lt;span class="display"&gt;tj@somedomain.com&lt;/span&gt;
+    &lt;/div&gt;
+    &lt;div class="actions"&gt;
+        &lt;button type="button" class="edit"&gt;Edit&lt;/button&gt;
+        &lt;button type="submit" class="save"&gt;Save&lt;/button&gt;
+        &lt;button type="button" class="cancel"&gt;Cancel&lt;/button&gt;
+    &lt;/div&gt;
+&lt;/fieldset&gt;
+</code></pre>
+
+<p></form>
+```</p>
+
+<!-- more -->
+
+
+<p>Without any logic both states of the form display:</p>
+
+<p><div class="code_example"><h6>Initial Form Display<a href="/demos/2013-06-19/initialForm.html" target="_blank">Open in New Window</a></h6><iframe style="width: 100%; height: 300px;" frameborder="0" src="/demos/2013-06-19/initialForm.html"></iframe></div></p>
+
+<h3>Adding the Logic</h3>
+
+<p>Here's the goal. The Edit button should:</p>
+
+<ul>
+<li>Show the <code>&lt;input&gt;</code>s.</li>
+<li>Show the Save button.</li>
+<li>Show the Cancel button.</li>
+<li>Hide the Edit button.</li>
+<li>Hide the text in the <code>&lt;span&gt;</code>s.</li>
+</ul>
+
+
+<p>The Cancel button should then undo these changes.</p>
+
+<p>The traditional approach to this problem is to show and hide elements explicitly in JavaScript:</p>
+
+<p>``` javascript
+$( ".edit" ).on( "click", function() {</p>
+
+<pre><code>$( ".display, .edit" ).hide();
+$( ".cancel, .save, input" ).show();
+</code></pre>
+
+<p>});
+$( ".cancel" ).on( "click", function() {</p>
+
+<pre><code>$( ".display, .edit" ).show();
+$( ".cancel, .save, input" ).hide();
+</code></pre>
+
+<p>});
+```</p>
+
+<p>To get the initial state of the form correct you also need some CSS:</p>
+
+<p>``` css
+.cancel, .save, input {</p>
+
+<pre><code>display: none;
+</code></pre>
+
+<p>}
+```</p>
+
+<p>Because the list of elements has to be specified in JavaScript and CSS, this logic will be difficult to maintain. And this is for a trivial example; usually requirements are much more complex.</p>
+
+<p>How can we make this better?</p>
+
+<h3>Semantic Class Names</h3>
+
+<p>Instead of targeting individual elements in JavaScript, let's add a class name to the parent element that makes the most sense, in this case, the <code>&lt;form&gt;</code>:</p>
+
+<p>``` javascript
+$( ".edit" ).on( "click", function() {</p>
+
+<pre><code>$( this ).parents( "form" ).addClass( "editing" );
+</code></pre>
+
+<p>});
+$( ".cancel" ).on( "click", function() {</p>
+
+<pre><code>$( this ).parents( "form" ).removeClass( "editing" );
+</code></pre>
+
+<p>});
+```</p>
+
+<p>Since the logic is simple, this can be written library-free as well (<em>note <code>classList</code> is not available in IE &lt; 10</em>):</p>
+
+<p>``` javascript
+(function() {</p>
+
+<pre><code>var form = document.querySelector( "form" ),
+    editButton = document.querySelector( ".edit" ),
+    cancelButton = document.querySelector( ".cancel" );
+
+editButton.addEventListener( "click", function() {
+    form.classList.add( "editing" ); 
+});
+cancelButton.addEventListener( "click", function() {
+    form.classList.remove( "editing" ); 
+});
+</code></pre>
+
+<p>}());
+```</p>
+
+<h3>Advantages of Using Semantic Classes</h3>
+
+<p>There are 2 major advantages to this approach.</p>
+
+<p>1) All display logic is now handled in CSS:</p>
+
+<p>``` css
+.cancel, .save, input {</p>
+
+<pre><code>display: none;
+</code></pre>
+
+<p>}
+.editing .save,
+.editing .cancel,
+.editing input {</p>
+
+<pre><code>display: inline-block;
+</code></pre>
+
+<p>}
+.editing .edit,
+.editing .display {</p>
+
+<pre><code>display: none;
+</code></pre>
+
+<p>}
+```</p>
+
+<p>2) You have a styling hook that can be used to make further changes to the display. For example, you might want to bold the labels when editing:</p>
+
+<p>``` css
+.editing label {</p>
+
+<pre><code>font-weight: bold;
+</code></pre>
+
+<p>}
+```</p>
+
+<p>The final display of the form looks like this:</p>
+
+<p><div class="code_example"><h6>Semantic Class Approach<a href="/demos/2013-06-19/finalForm.html" target="_blank">Open in New Window</a></h6><iframe style="width: 100%; height: 300px;" frameborder="0" src="/demos/2013-06-19/finalForm.html"></iframe></div></p>
+
+<h3>Conclusion</h3>
+
+<p>This is not a technique that I came up with but I've used it successfully in several large applications and have found that it scales well over time.</p>
+
+<p>Do you have any other tricks you use to show &amp; hide elements? If so, let me know in the comments.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Showing a CSS Based Loading Animation While Your Site Loads]]></title>
@@ -1289,76 +1473,6 @@ min-height: 100%;
 <p>That being said, there's no harm in leaving a wrapper <code>div</code> in place.  So if you have any doubt stick with <code>&lt;div id="wrapper"&gt;&lt;/div&gt;</code>.</p>
 
 <p>Know of any other bugs with styling the <code>body</code> element?  Let me know in the comments.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Debugging Print Stylesheets: Now Significantly Easier in Chrome]]></title>
-    <link href="http://tjvantoll.com/2012/12/12/debugging-print-stylesheets-now-significantly-easier-in-chrome/"/>
-    <updated>2012-12-12T21:55:00-05:00</updated>
-    <id>http://tjvantoll.com/2012/12/12/debugging-print-stylesheets-now-significantly-easier-in-chrome</id>
-    <content type="html"><![CDATA[<p>Debugging print stylesheets has always been a bit of a pain.  The traditional way of doing so was to manually change the <code>media</code> attribute of all <code>link</code> tags from <code>print</code> to <code>screen</code> or <code>all</code> while testing.</p>
-
-<p>``` html</p>
-
-<!-- Before -->
-
-
-<p><link rel="stylesheet" href="print.css" media="print" /></p>
-
-<!-- After -->
-
-
-<p><link rel="stylesheet" href="print.css" media="screen" />
-```</p>
-
-<p>The popular <a href="https://addons.mozilla.org/en-US/firefox/addon/web-developer/">Web Developer Add-on</a> for Firefox even has an option to do this for you automatically.</p>
-
-<!--more-->
-
-
-<p><img src="/images/posts/2012-12-12/Web_Developer.png" title="Web Developer Add-on" alt="Web Developer Add-on" /></p>
-
-<p>Then something changed.</p>
-
-<p>We found out that <a href="https://developers.google.com/speed/docs/best-practices/rtt">unnecessary HTTP requests are bad</a>.  We also found out that there are some <a href="http://www.phpied.com/5-years-later-print-css-still-sucks/">serious performance issues with print stylesheets</a>.</p>
-
-<p>Therefore, following the lead of projects like the <a href="http://html5boilerplate.com/">HTML5 Boilerplate</a> we all switched to writing our print styles inline with the rest of our CSS.</p>
-
-<p>``` css
-@media print {</p>
-
-<pre><code>body { font-size: larger; }
-#ads, #junk { display: none; }
-</code></pre>
-
-<p>}
-```</p>
-
-<p>Inline print styles save HTTP requests and are easier to maintain, but they unfortunately make testing a bit harder.  They don't work with Firefox's Web Developer Add-on and a simple find and replace is now quite a bit harder.</p>
-
-<h3>Good News!</h3>
-
-<p>A means to emulate the <code>print</code> media type has <a href="https://plus.google.com/115133653231679625609/posts/MgpioU84JPe">just landed in Chrome Canary</a>.</p>
-
-<p>To use it, first open up the settings by clicking on the gear in the bottom right corner of the DevTools:</p>
-
-<p><img src="/images/posts/2012-12-12/DevTools_1.png" title="How to open the DevTools settings" alt="How to open the DevTools settings" /></p>
-
-<p>Next, select the Overrides menu, check the "Emulate CSS media" checkbox, and select "print".</p>
-
-<p><img src="/images/posts/2012-12-12/DevTools_2.png" title="How to emulate CSS media in Chrome's DevTools" alt="How to emulate CSS media in Chrome's DevTools" /></p>
-
-<p>That's it!  This will apply both rules defined in external <code>media="print"</code> stylesheets as well as rules within inline <code>@media print {}</code> blocks.  For bonus points, combine this with an application like <a href="http://livereload.com/">LiveReload</a> that can apply CSS changes without refreshing the page and you have a robust means of developing and debugging print stylesheets.</p>
-
-<p>This feature was added in version 25 of Chrome Canary so it hopefully will make it into Chrome stable around Chrome 27.  If you don't have Canary yet you should consider <a href="http://paulirish.com/2012/chrome-canary-for-developers/">installing it side by side</a> with the stable release.</p>
-
-<h3>WON'T SOMEONE THINK ABOUT THE TREES</h3>
-
-<p>Of course, the definitive way of testing print stylesheets is to physically print a web page on actual pieces of paper.  I've done this plenty of times.  And if you've read this far you likely have to.  Hopefully the next time you have to debug printing you can save a bit of paper.</p>
-
-<p><img src="/images/posts/2012-12-12/trees.jpg" title="The less pages you print the more of my type get to live" alt="The less pages you print the more of my type get to live" />
-<a href="http://www.flickr.com/photos/cransell/5119828609/" style="display: block; font-size: 0.8em;">Photo Credit</a></p>
 ]]></content>
   </entry>
   
