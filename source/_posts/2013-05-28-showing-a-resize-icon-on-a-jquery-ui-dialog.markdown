@@ -16,6 +16,8 @@ Default dialog display in 1.10:
 
 <img src="/images/posts/2013-05-28/dialog-1.10.png" alt="Default display of jQuery UI's dialog in version 1.10">
 
+<!-- more -->
+
 The dialog is still resizable, the icon is just not displayed anymore. The change was made because when a dialog contains scrolling content, the scrollbar becomes very difficult to use when the resize icon is present, especially in Windows browsers (see [bug #4575](http://bugs.jqueryui.com/ticket/4575)).
 
 The image below is of a version 1.9 dialog in IE9, note how the down arrow of the scrollbar and the resize icon are essentially on top of each other:
