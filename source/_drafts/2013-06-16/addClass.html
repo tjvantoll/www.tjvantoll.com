@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>Shaking a Form with a CSS Class Name</title>
+		<style>
+			body { padding: 1em; }
+			form {
+				font-size: 1.2em;
+				background: #eee;
+				border: 1px solid black;
+				border-radius: 10px;
+				padding: 1em;
+				width: 150px;
+			}
+			label {
+				display: block;
+			}
+			input {
+				width: 130px; 
+			}
+			label[for="password"] {
+				margin-top: 0.3em;
+			}
+			input[type="submit"] {
+				display: block;
+				margin-top: 1.5em;
+			}
+			@-webkit-keyframes shake {
+				0%, 100% { -webkit-transform: translateX(0); }
+				10%, 30%, 50%, 70%, 90% { -webkit-transform: translateX(-10px); }
+				20%, 40%, 60%, 80% { -webkit-transform: translateX(10px); }
+			}
+			@keyframes shake {
+				0%, 100% { transform: translateX(0); }
+				10%, 30%, 50%, 70%, 90% { transform: translateX(-10px); }
+				20%, 40%, 60%, 80% { transform: translateX(10px); }
+			}
+			.shake {
+				-webkit-animation: shake 0.5s;
+				animation: shake 0.5s;
+			}
+		</style>
+	</head>
+	<body>
+		<form>
+			<div>
+				<label for="username">Username:</label>
+				<input id="username">
+			</div>
+			<div>
+				<label for="password">Password:</label>
+				<input type="password" id="password">
+			</div>
+			<input type="submit">
+		</form>
+		<script>
+			document.querySelector( "form" ).addEventListener( "submit", function( event ) {
+				event.preventDefault();
+				this.classList.remove( "shake" );
+				setTimeout(function() {
+					event.target.classList.add( "shake" );
+				});
+			});
+		</script>
+	</body>
+</html>
