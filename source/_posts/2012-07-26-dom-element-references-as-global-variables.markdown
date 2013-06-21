@@ -271,3 +271,7 @@ Per comments from Rob W I've updated the following:
 
 * I had incorrectly used "Syntax error" to describe the situation when an undeclared variable is referenced.  I updated those to correctly use "ReferenceError".
 * I updated my last example to show that `document.getElementsByName` is a cross browser way of getting reference to DOM nodes by their name attribute.
+
+### References
+
+* [Spanish translation of this article by Maria Ramos](http://www.webhostinghub.com/support/es/misc/dom-element)
