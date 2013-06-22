@@ -4,7 +4,7 @@
   <title><![CDATA[TJ VanToll]]></title>
   <link href="http://tjvantoll.com/atom.xml" rel="self"/>
   <link href="http://tjvantoll.com/"/>
-  <updated>2013-06-20T22:02:20-04:00</updated>
+  <updated>2013-06-21T22:19:59-04:00</updated>
   <id>http://tjvantoll.com/</id>
   <author>
     <name><![CDATA[TJ VanToll]]></name>
@@ -12,6 +12,68 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Internet Explorer, Attribute Selectors, and Really Long Attribute Values]]></title>
+    <link href="http://tjvantoll.com/2013/06/21/internet-explorer-attribute-selectors-and-long-values/"/>
+    <updated>2013-06-21T21:36:00-04:00</updated>
+    <id>http://tjvantoll.com/2013/06/21/internet-explorer-attribute-selectors-and-long-values</id>
+    <content type="html"><![CDATA[<p>In Internet Explorer, <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Attribute_selectors">attribute selectors</a> that inspect the attribute&#8217;s value do not work if the value is >= 4096 characters. This is one of those bugs that you are highly unlikely to run into, but is incredibly painful to track down if you do.</p>
+
+<p>As an example, take the following:</p>
+
+<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;style&gt;</span>
+</span><span class='line'>    <span class="c">/* Elements that have the attribute */</span>
+</span><span class='line'>    <span class="nt">div</span><span class="o">[</span><span class="nt">data-test</span><span class="o">]</span> <span class="p">{</span> <span class="k">background</span><span class="o">:</span> <span class="nb">red</span><span class="p">;</span> <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="c">/* Elements that have the attribute, and its value contains &quot;Nullam&quot; */</span>
+</span><span class='line'>    <span class="nt">div</span><span class="o">[</span><span class="nt">data-test</span><span class="o">*=</span><span class="s2">&quot;Nullam&quot;</span><span class="o">]</span> <span class="p">{</span> <span class="k">color</span><span class="o">:</span> <span class="nb">blue</span><span class="p">;</span> <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="c">/* Elements that have the attribute, and its value starts with &quot;Lorem&quot; */</span>
+</span><span class='line'>    <span class="nt">div</span><span class="o">[</span><span class="nt">data-test</span><span class="o">^=</span><span class="s2">&quot;Lorem&quot;</span><span class="o">]</span> <span class="p">{</span> <span class="k">border</span><span class="o">:</span> <span class="m">1px</span> <span class="k">solid</span> <span class="nb">black</span><span class="p">;</span> <span class="p">}</span>
+</span><span class='line'><span class="nt">&lt;/style&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nt">&lt;div</span> <span class="na">data-test=</span><span class="s">&quot;Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus. Phasellus viverra nulla ut metus varius laoreet. Quisque rutrum. Aenean imperdiet. Etiam ultricies nisi vel augue. Curabitur ullamcorper ultricies nisi. Nam eget dui. Etiam rhoncus. Maecenas tempus, tellus eget condimentum rhoncus, sem quam semper libero, sit amet adipiscing sem neque sed ipsum. Nam quam nunc, blandit vel, luctus pulvinar, hendrerit id, lorem. Maecenas nec odio et ante tincidunt tempus. Donec vitae sapien ut libero venenatis faucibus. Nullam quis ante. Etiam sit amet orci eget eros faucibus tincidunt. Duis leo. Sed fringilla mauris sit amet nibh. Donec sodales sagittis magna. Sed consequat, leo eget bibendum sodales, augue velit cursus nunc, quis gravida magna mi a libero. Fusce vulputate eleifend sapien. Vestibulum purus quam, scelerisque ut, mollis sed, nonummy id, metus. Nullam accumsan lorem in dui. Cras ultricies mi eu turpis hendrerit fringilla. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; In ac dui quis mi consectetuer lacinia. Nam pretium turpis et arcu. Duis arcu tortor, suscipit eget, imperdiet nec, imperdiet iaculis, ipsum. Sed aliquam ultrices mauris. Integer ante arcu, accumsan a, consectetuer eget, posuere ut, mauris. Praesent adipiscing. Phasellus ullamcorper ipsum rutrum nunc. Nunc nonummy metus. Vestibulum volutpat pretium libero. Cras id dui. Aenean ut eros et nisl sagittis vestibulum. Nullam nulla eros, ultricies sit amet, nonummy id, imperdiet feugiat, pede. Sed lectus. Donec mollis hendrerit risus. Phasellus nec sem in justo pellentesque facilisis. Etiam imperdiet imperdiet orci. Nunc nec neque. Phasellus leo dolor, tempus non, auctor et, hendrerit quis, nisi. Curabitur ligula sapien, tincidunt non, euismod vitae, posuere imperdiet, leo. Maecenas malesuada. Praesent congue erat at massa. Sed cursus turpis vitae tortor. Donec posuere vulputate arcu. Phasellus accumsan cursus velit. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Sed aliquam, nisi quis porttitor congue, elit erat euismod orci, ac placerat dolor lectus quis orci. Phasellus consectetuer vestibulum elit. Aenean tellus metus, bibendum sed, posuere ac, mattis non, nunc. Vestibulum fringilla pede sit amet augue. In turpis. Pellentesque posuere. Praesent turpis. Aenean posuere, tortor sed cursus feugiat, nunc augue blandit nunc, eu sollicitudin urna dolor sagittis lacus. Donec elit libero, sodales nec, volutpat a, suscipit non, turpis. Nullam sagittis. Suspendisse pulvinar, augue ac venenatis condimentum, sem libero volutpat nibh, nec pellentesque velit pede quis nunc. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Fusce id purus. Ut varius tincidunt libero. Phasellus dolor. Maecenas vestibulum mollis diam. Pellentesque ut neque. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. In dui magna, posuere eget, vestibulum et, tempor auctor, justo. In ac felis quis tortor malesuada pretium. Pellentesque auctor neque nec urna. Proin sapien ipsum, porta a, auctor quis, euismod ut, mi. Aenean viverra rhoncus pede. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Ut non enim eleifend felis pretium feugiat. Vivamus quis mi. Phasellus a est. Phasellus magna. In hac habitasse platea dictumst. Curabitur at lacus ac velit ornare lobortis. Cur&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>    4095 Characters
+</span><span class='line'><span class="nt">&lt;/div&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nt">&lt;div</span> <span class="na">data-test=</span><span class="s">&quot;Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus. Phasellus viverra nulla ut metus varius laoreet. Quisque rutrum. Aenean imperdiet. Etiam ultricies nisi vel augue. Curabitur ullamcorper ultricies nisi. Nam eget dui. Etiam rhoncus. Maecenas tempus, tellus eget condimentum rhoncus, sem quam semper libero, sit amet adipiscing sem neque sed ipsum. Nam quam nunc, blandit vel, luctus pulvinar, hendrerit id, lorem. Maecenas nec odio et ante tincidunt tempus. Donec vitae sapien ut libero venenatis faucibus. Nullam quis ante. Etiam sit amet orci eget eros faucibus tincidunt. Duis leo. Sed fringilla mauris sit amet nibh. Donec sodales sagittis magna. Sed consequat, leo eget bibendum sodales, augue velit cursus nunc, quis gravida magna mi a libero. Fusce vulputate eleifend sapien. Vestibulum purus quam, scelerisque ut, mollis sed, nonummy id, metus. Nullam accumsan lorem in dui. Cras ultricies mi eu turpis hendrerit fringilla. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; In ac dui quis mi consectetuer lacinia. Nam pretium turpis et arcu. Duis arcu tortor, suscipit eget, imperdiet nec, imperdiet iaculis, ipsum. Sed aliquam ultrices mauris. Integer ante arcu, accumsan a, consectetuer eget, posuere ut, mauris. Praesent adipiscing. Phasellus ullamcorper ipsum rutrum nunc. Nunc nonummy metus. Vestibulum volutpat pretium libero. Cras id dui. Aenean ut eros et nisl sagittis vestibulum. Nullam nulla eros, ultricies sit amet, nonummy id, imperdiet feugiat, pede. Sed lectus. Donec mollis hendrerit risus. Phasellus nec sem in justo pellentesque facilisis. Etiam imperdiet imperdiet orci. Nunc nec neque. Phasellus leo dolor, tempus non, auctor et, hendrerit quis, nisi. Curabitur ligula sapien, tincidunt non, euismod vitae, posuere imperdiet, leo. Maecenas malesuada. Praesent congue erat at massa. Sed cursus turpis vitae tortor. Donec posuere vulputate arcu. Phasellus accumsan cursus velit. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Sed aliquam, nisi quis porttitor congue, elit erat euismod orci, ac placerat dolor lectus quis orci. Phasellus consectetuer vestibulum elit. Aenean tellus metus, bibendum sed, posuere ac, mattis non, nunc. Vestibulum fringilla pede sit amet augue. In turpis. Pellentesque posuere. Praesent turpis. Aenean posuere, tortor sed cursus feugiat, nunc augue blandit nunc, eu sollicitudin urna dolor sagittis lacus. Donec elit libero, sodales nec, volutpat a, suscipit non, turpis. Nullam sagittis. Suspendisse pulvinar, augue ac venenatis condimentum, sem libero volutpat nibh, nec pellentesque velit pede quis nunc. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Fusce id purus. Ut varius tincidunt libero. Phasellus dolor. Maecenas vestibulum mollis diam. Pellentesque ut neque. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. In dui magna, posuere eget, vestibulum et, tempor auctor, justo. In ac felis quis tortor malesuada pretium. Pellentesque auctor neque nec urna. Proin sapien ipsum, porta a, auctor quis, euismod ut, mi. Aenean viverra rhoncus pede. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Ut non enim eleifend felis pretium feugiat. Vivamus quis mi. Phasellus a est. Phasellus magna. In hac habitasse platea dictumst. Curabitur at lacus ac velit ornare lobortis. Cura&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>    4096 Characters
+</span><span class='line'><span class="nt">&lt;/div&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The example has two <code>&lt;div&gt;</code>s and 3 rules applied to both elements via attribute selectors. In Firefox, Chrome, Safari, and Opera all rules apply as they should and the elements display as follows:</p>
+
+<p><img src="http://tjvantoll.com/images/posts/2013-06-21/chrome.png"></p>
+
+<p>In Internet Explorer however, the display looks like this:</p>
+
+<p><img src="http://tjvantoll.com/images/posts/2013-06-21/ie.png"></p>
+
+<p>The selector that looks for the existence of the attribute, <code>div[data-test]</code>, matches both elements and the <code>background: red</code> rule is applied.</p>
+
+<p>However, the two selectors that inspect the attribute&#8217;s values, <code>div[data-test*="Nullam"]</code> and <code>div[data-test^="Lorem"]</code>), mysteriously do not match the <code>&lt;div&gt;</code> with the 4096 character <code>data-test</code> attribute.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Using Semantic Class Names to Show and Hide Elements]]></title>
@@ -3369,36 +3431,6 @@
 
 
 <p>Feel free to use this or modify it to your liking.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Adding Pointers to jQuery UI Tooltips]]></title>
-    <link href="http://tjvantoll.com/2012/10/24/adding-pointers-to-jquery-ui-tooltips/"/>
-    <updated>2012-10-24T20:58:00-04:00</updated>
-    <id>http://tjvantoll.com/2012/10/24/adding-pointers-to-jquery-ui-tooltips</id>
-    <content type="html"><![CDATA[<p>The recent <a href="http://jqueryui.com/changelog/1.9.0/">jQuery UI 1.9 release</a> included a new <a href="http://jqueryui.com/tooltip/">tooltip plugin</a> that can be used to create tooltips much like the native tooltips the browser provides.  The difference is that jQuery UI&#8217;s version are completely customizable.</p>
-
-<p>As such I thought I&#8217;d show a quick example of how you can create a pointer from the tooltip to its associated field.  The following will show a pointer tooltip a the text input.  You can change the location of the tooltip using the buttons.</p>
-
-<!--more-->
-
-
-
-
-<div class="code_example"><h6>Pointer Tooltip Example<a href="http://tjvantoll.com/demos/2012-10-24/pointer.html" target="_blank">Open in New Window</a></h6><iframe style="width: 100%; height: 300px;" frameborder="0" src="http://tjvantoll.com/demos/2012-10-24/pointer.html"></iframe></div>
-
-
-<p><a href="http://jsfiddle.net/tj_vantoll/kyBwU">View Demo on jsFiddle</a></p>
-
-<p>So how is this done?</p>
-
-<ul>
-<li>The <a href="http://api.jqueryui.com/tooltip/#option-position">position</a> option is used to place the tooltip appropriately around the textbox.  Importantly the <code>collision</code> property is set to <code>none</code>, since, if the tooltip were to be repositioned the arrow would be placed incorrectly.</li>
-<li>The pointers themselves are created using using the <code>::after</code> and <code>::before</code> pseudo-elements.  For some more information on the technique and to see some other variations there&#8217;s an excellent tutorial <a href="http://nicolasgallagher.com/pure-css-speech-bubbles/">here</a>.</li>
-<li>Since the <code>::after</code> and <code>::before</code> pseudo-elements are used to create the pointers, IE &lt; 8 users will not see them.  However, they&#8217;ll simply see the default pointerless tooltip, no harm done. <i>Note: IE8 supports the before/after pseudo-elements but as <code>:before</code> and <code>:after</code> instead of <code>::before</code> and <code>::after</code>. So if you need IE8 support use <code>:before</code> and <code>:after</code>.</i></li>
-</ul>
-
 ]]></content>
   </entry>
   
