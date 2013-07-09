@@ -31,7 +31,8 @@ footer: true
 			</time>
 			<footer>
 				<a href="http://events.jquery.org/2013/portland/">jQuery Portland</a> | Portland, Oregon | 
-				<a href="/speaking/slides/2013/UI-Widgets-vs-HTML5">Slides</a>
+				<a href="/speaking/slides/2013/UI-Widgets-vs-HTML5">Slides</a> | 
+				<a href="http://www.youtube.com/watch?v=Q6Bjs4BoBTc">Video</a>
 			</footer>
 		</article>
 
