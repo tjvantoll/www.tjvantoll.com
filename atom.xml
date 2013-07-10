@@ -4,7 +4,7 @@
   <title><![CDATA[TJ VanToll]]></title>
   <link href="http://tjvantoll.com/atom.xml" rel="self"/>
   <link href="http://tjvantoll.com/"/>
-  <updated>2013-07-08T22:17:26-04:00</updated>
+  <updated>2013-07-10T14:00:55-04:00</updated>
   <id>http://tjvantoll.com/</id>
   <author>
     <name><![CDATA[TJ VanToll]]></name>
@@ -12,6 +12,355 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Creating a jQuery UI Dialog with a Submit Button]]></title>
+    <link href="http://tjvantoll.com/2013/07/10/creating-a-jquery-ui-dialog-with-a-submit-button/"/>
+    <updated>2013-07-10T00:00:00-04:00</updated>
+    <id>http://tjvantoll.com/2013/07/10/creating-a-jquery-ui-dialog-with-a-submit-button</id>
+    <content type="html"><![CDATA[<p>Say you have the following submittable <code>&lt;form&gt;</code>:</p>
+
+<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;form</span> <span class="na">id=</span><span class="s">&quot;myForm&quot;</span> <span class="na">action=</span><span class="s">&quot;http://google.com&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;label</span> <span class="na">for=</span><span class="s">&quot;search&quot;</span><span class="nt">&gt;</span>Search For:<span class="nt">&lt;/label&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;text&quot;</span> <span class="na">id=</span><span class="s">&quot;search&quot;</span> <span class="na">name=</span><span class="s">&quot;q&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;button</span> <span class="na">type=</span><span class="s">&quot;submit&quot;</span><span class="nt">&gt;</span>Find<span class="nt">&lt;/button&gt;</span>
+</span><span class='line'><span class="nt">&lt;/form&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>And you want to show the form in a jQuery UI dialog. You can do that with the code below:</p>
+
+<figure class='code'><figcaption class='not_empty'><span>Turning a form into a dialog</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">$</span><span class="p">(</span> <span class="s2">&quot;form&quot;</span> <span class="p">).</span><span class="nx">dialog</span><span class="p">({</span>
+</span><span class='line'>    <span class="nx">open</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>        <span class="c1">// On open, hide the original submit button</span>
+</span><span class='line'>        <span class="nx">$</span><span class="p">(</span> <span class="k">this</span> <span class="p">).</span><span class="nx">find</span><span class="p">(</span> <span class="s2">&quot;[type=submit]&quot;</span> <span class="p">).</span><span class="nx">hide</span><span class="p">();</span>
+</span><span class='line'>    <span class="p">},</span>
+</span><span class='line'>    <span class="nx">buttons</span><span class="o">:</span> <span class="p">[</span>
+</span><span class='line'>        <span class="p">{</span>
+</span><span class='line'>            <span class="nx">text</span><span class="o">:</span> <span class="s2">&quot;Find&quot;</span><span class="p">,</span>
+</span><span class='line'>            <span class="nx">click</span><span class="o">:</span> <span class="nx">$</span><span class="p">.</span><span class="nx">noop</span><span class="p">,</span>
+</span><span class='line'>            <span class="nx">type</span><span class="o">:</span> <span class="s2">&quot;submit&quot;</span>
+</span><span class='line'>        <span class="p">},</span>
+</span><span class='line'>        <span class="p">{</span>
+</span><span class='line'>            <span class="nx">text</span><span class="o">:</span> <span class="s2">&quot;Close&quot;</span><span class="p">,</span>
+</span><span class='line'>            <span class="nx">click</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>                <span class="nx">$</span><span class="p">(</span> <span class="k">this</span> <span class="p">).</span><span class="nx">dialog</span><span class="p">(</span> <span class="s2">&quot;close&quot;</span> <span class="p">);</span>
+</span><span class='line'>            <span class="p">}</span>
+</span><span class='line'>        <span class="p">}</span>
+</span><span class='line'>    <span class="p">]</span>
+</span><span class='line'><span class="p">});</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Which looks like this:</p>
+
+<p><img src="http://tjvantoll.com/images/posts/2013-07-10/form-dialog.png" alt="Display of the form within a jQuery UI dialog"></p>
+
+<h3>The Problem</h3>
+
+<p>There&#8217;s one problem with this - the &#8220;Find&#8221; button doesn&#8217;t work. Because of the generated structure of a jQuery UI dialog, the buttons are not within the <code>&lt;form&gt;</code> itself. Therefore, the buttons are not associated with the <code>&lt;form&gt;</code>. You can see the structure below:</p>
+
+<!-- more -->
+
+
+<p><img src="http://tjvantoll.com/images/posts/2013-07-10/markup.png" alt="Markup of a UI dialog showing the the buttons are not children of the content."></p>
+
+<p>Note that the <code>&lt;button type="submit"&gt;</code> is not within the <code>&lt;form&gt;</code>.</p>
+
+<h3>Solution</h3>
+
+<p>There are a few ways we can work around this. One is avoid the <a href="http://api.jqueryui.com/dialog/#option-buttons">buttons option</a> and leave the original submit button in place. This works, but you lose the formatted display.</p>
+
+<h3>Explicit Click Handler</h3>
+
+<p>Another solution is to add a <code>click</code> handler to the button that submits the form:</p>
+
+<figure class='code'><figcaption class='not_empty'><span>Using a Click Handler to Submit the Form</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="kd">var</span> <span class="nx">form</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span> <span class="s2">&quot;form&quot;</span> <span class="p">).</span><span class="nx">dialog</span><span class="p">({</span>
+</span><span class='line'>    <span class="p">...</span>
+</span><span class='line'>    <span class="nx">buttons</span><span class="o">:</span> <span class="p">[</span>
+</span><span class='line'>        <span class="p">{</span>
+</span><span class='line'>            <span class="nx">text</span><span class="o">:</span> <span class="s2">&quot;Find&quot;</span><span class="p">,</span>
+</span><span class='line'>            <span class="nx">click</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>                <span class="nx">form</span><span class="p">.</span><span class="nx">submit</span><span class="p">();</span>
+</span><span class='line'>            <span class="p">}</span>
+</span><span class='line'>        <span class="p">}</span>
+</span><span class='line'>        <span class="p">...</span>
+</span><span class='line'>    <span class="p">]</span>
+</span><span class='line'><span class="p">});</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This works, but you lose the browsers <a href="http://tjvantoll.com/2013/01/01/enter-should-submit-forms-stop-messing-with-that/">browser&#8217;s default enter key handling</a>. Therefore it has to be replicated as well:</p>
+
+<figure class='code'><figcaption class='not_empty'><span>Adding Enter Key Handling</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="kd">var</span> <span class="nx">form</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span> <span class="s2">&quot;form&quot;</span> <span class="p">).</span><span class="nx">dialog</span><span class="p">({</span> <span class="p">...</span> <span class="p">});</span>
+</span><span class='line'><span class="nx">form</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span> <span class="s2">&quot;keypress&quot;</span><span class="p">,</span> <span class="s2">&quot;input[type=text]&quot;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span> <span class="nx">event</span> <span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">if</span> <span class="p">(</span> <span class="nx">event</span><span class="p">.</span><span class="nx">keyCode</span> <span class="o">==</span> <span class="mi">13</span> <span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>        <span class="nx">form</span><span class="p">.</span><span class="nx">submit</span><span class="p">();</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'><span class="p">});</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>Form Attribute</h4>
+
+<p>An elegant solution to this problem is to use HTML5&#8217;s new <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button#attr-form">form attribute</a>. The attribute allows you to associate a <code>&lt;form&gt;</code> with a <code>&lt;button&gt;</code>, even if the <code>&lt;button&gt;</code> is not a descendant of the <code>&lt;form&gt;</code>. It&#8217;s even smart enough to keep the <a href="http://tjvantoll.com/2013/01/01/enter-should-submit-forms-stop-messing-with-that/">browser&#8217;s default enter key handling</a> in place.</p>
+
+<p>For example here&#8217;s the example <code>&lt;form&gt;</code> with a sibling (rather than child) submit button:</p>
+
+<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;form</span> <span class="na">id=</span><span class="s">&quot;myForm&quot;</span> <span class="na">action=</span><span class="s">&quot;http://google.com&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;label</span> <span class="na">for=</span><span class="s">&quot;search&quot;</span><span class="nt">&gt;</span>Search For:<span class="nt">&lt;/label&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;text&quot;</span> <span class="na">id=</span><span class="s">&quot;search&quot;</span> <span class="na">name=</span><span class="s">&quot;q&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'><span class="nt">&lt;/form&gt;</span>
+</span><span class='line'><span class="nt">&lt;button</span> <span class="na">type=</span><span class="s">&quot;submit&quot;</span> <span class="na">form=</span><span class="s">&quot;myForm&quot;</span><span class="nt">&gt;</span>Find<span class="nt">&lt;/button&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The <code>&lt;button&gt;</code> is outside of the <code>&lt;form&gt;</code>, but because its <code>form</code> attribute is equal to the <code>&lt;form&gt;</code>&#8217;s <code>id</code>, the <code>&lt;button&gt;</code> will submit the <code>&lt;form&gt;</code> regardless.</p>
+
+<h4>Using the Form Attribute on a Dialog</h4>
+
+<p>To add this attribute to the dialog version, we&#8217;ll pass <code>form: "myForm"</code> into the <code>buttons</code> option for the Find button:</p>
+
+<figure class='code'><figcaption class='not_empty'><span>Turning a form into a dialog</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;form</span> <span class="na">id=</span><span class="s">&quot;myForm&quot;</span> <span class="na">action=</span><span class="s">&quot;http://google.com&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;label</span> <span class="na">for=</span><span class="s">&quot;search&quot;</span><span class="nt">&gt;</span>Search For:<span class="nt">&lt;/label&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;text&quot;</span> <span class="na">id=</span><span class="s">&quot;search&quot;</span> <span class="na">name=</span><span class="s">&quot;q&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;button</span> <span class="na">type=</span><span class="s">&quot;submit&quot;</span><span class="nt">&gt;</span>Find<span class="nt">&lt;/button&gt;</span>
+</span><span class='line'><span class="nt">&lt;/form&gt;</span>
+</span><span class='line'><span class="nt">&lt;script&gt;</span>
+</span><span class='line'>    <span class="nx">$</span><span class="p">(</span> <span class="s2">&quot;form&quot;</span> <span class="p">).</span><span class="nx">dialog</span><span class="p">({</span>
+</span><span class='line'>        <span class="nx">open</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>            <span class="c1">// On open, hide the original submit button</span>
+</span><span class='line'>            <span class="nx">$</span><span class="p">(</span> <span class="k">this</span> <span class="p">).</span><span class="nx">find</span><span class="p">(</span> <span class="s2">&quot;[type=submit]&quot;</span> <span class="p">).</span><span class="nx">hide</span><span class="p">();</span>
+</span><span class='line'>        <span class="p">},</span>
+</span><span class='line'>        <span class="nx">buttons</span><span class="o">:</span> <span class="p">[</span>
+</span><span class='line'>            <span class="p">{</span>
+</span><span class='line'>                <span class="nx">text</span><span class="o">:</span> <span class="s2">&quot;Find&quot;</span><span class="p">,</span>
+</span><span class='line'>                <span class="nx">click</span><span class="o">:</span> <span class="nx">$</span><span class="p">.</span><span class="nx">noop</span><span class="p">,</span>
+</span><span class='line'>                <span class="nx">type</span><span class="o">:</span> <span class="s2">&quot;submit&quot;</span><span class="p">,</span>
+</span><span class='line'>                <span class="nx">form</span><span class="o">:</span> <span class="s2">&quot;myForm&quot;</span> <span class="c1">// &lt;-- Make the association</span>
+</span><span class='line'>            <span class="p">},</span>
+</span><span class='line'>            <span class="p">{</span>
+</span><span class='line'>                <span class="nx">text</span><span class="o">:</span> <span class="s2">&quot;Close&quot;</span><span class="p">,</span>
+</span><span class='line'>                <span class="nx">click</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>                    <span class="nx">$</span><span class="p">(</span> <span class="k">this</span> <span class="p">).</span><span class="nx">dialog</span><span class="p">(</span> <span class="s2">&quot;close&quot;</span> <span class="p">);</span>
+</span><span class='line'>                <span class="p">}</span>
+</span><span class='line'>            <span class="p">}</span>
+</span><span class='line'>        <span class="p">]</span>
+</span><span class='line'>    <span class="p">});</span>
+</span><span class='line'><span class="nt">&lt;/script&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><a href="http://tjvantoll.com/demos/2013-07-10/form.html">Live Example</a></p>
+
+<h3>Support</h3>
+
+<p>The <code>form</code> attribute is implemented in Firefox, Chrome, Safari 5.1+, and Opera, HOWEVER, IE (as of version 10) still does not support the attribute.</p>
+
+<p>Because the form attribute is so handy here, I wrote a polyfill that adds support in browsers that don&#8217;t support it natively: <a href="https://gist.github.com/tjvantoll/5911571">https://gist.github.com/tjvantoll/5911571</a>. The source is below:</p>
+
+<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+<span class='line-number'>56</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="cm">/**</span>
+</span><span class='line'><span class="cm"> * The form attribute can be used to associate a submit button with a form, even</span>
+</span><span class='line'><span class="cm"> * if the button is not a child of the &lt;form&gt; itself.</span>
+</span><span class='line'><span class="cm"> * </span>
+</span><span class='line'><span class="cm"> * This polyfill uses a support check taken from Modernizr and polyfills the</span>
+</span><span class='line'><span class="cm"> * functionality using jQuery.</span>
+</span><span class='line'><span class="cm"> */</span>
+</span><span class='line'><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>    <span class="c1">// Via Modernizr</span>
+</span><span class='line'>    <span class="kd">function</span> <span class="nx">formAttributeSupport</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>        <span class="kd">var</span> <span class="nx">form</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span> <span class="s2">&quot;form&quot;</span> <span class="p">),</span>
+</span><span class='line'>            <span class="nx">input</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span> <span class="s2">&quot;input&quot;</span> <span class="p">),</span>
+</span><span class='line'>            <span class="nx">div</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span> <span class="s2">&quot;div&quot;</span> <span class="p">),</span>
+</span><span class='line'>            <span class="nx">id</span> <span class="o">=</span> <span class="s2">&quot;formtest&quot;</span><span class="o">+</span> <span class="p">(</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">().</span><span class="nx">getTime</span><span class="p">()</span> <span class="p">),</span>
+</span><span class='line'>            <span class="nx">attr</span><span class="p">,</span>
+</span><span class='line'>            <span class="nx">bool</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>            <span class="nx">form</span><span class="p">.</span><span class="nx">id</span> <span class="o">=</span> <span class="nx">id</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="c1">// IE6/7 confuses the form idl attribute and the form content attribute</span>
+</span><span class='line'>        <span class="k">if</span> <span class="p">(</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createAttribute</span> <span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>            <span class="nx">attr</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createAttribute</span><span class="p">(</span><span class="s2">&quot;form&quot;</span><span class="p">);</span>
+</span><span class='line'>            <span class="nx">attr</span><span class="p">.</span><span class="nx">nodeValue</span> <span class="o">=</span> <span class="nx">id</span><span class="p">;</span>
+</span><span class='line'>            <span class="nx">input</span><span class="p">.</span><span class="nx">setAttributeNode</span><span class="p">(</span><span class="nx">attr</span><span class="p">);</span>
+</span><span class='line'>            <span class="nx">div</span><span class="p">.</span><span class="nx">appendChild</span><span class="p">(</span><span class="nx">form</span><span class="p">);</span>
+</span><span class='line'>            <span class="nx">div</span><span class="p">.</span><span class="nx">appendChild</span><span class="p">(</span><span class="nx">input</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>            <span class="nb">document</span><span class="p">.</span><span class="nx">documentElement</span><span class="p">.</span><span class="nx">appendChild</span><span class="p">(</span><span class="nx">div</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>            <span class="nx">bool</span> <span class="o">=</span> <span class="nx">form</span><span class="p">.</span><span class="nx">elements</span><span class="p">.</span><span class="nx">length</span> <span class="o">===</span> <span class="mi">1</span> <span class="o">&amp;&amp;</span> <span class="nx">input</span><span class="p">.</span><span class="nx">form</span> <span class="o">==</span> <span class="nx">form</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>            <span class="nx">div</span><span class="p">.</span><span class="nx">parentNode</span><span class="p">.</span><span class="nx">removeChild</span><span class="p">(</span><span class="nx">div</span><span class="p">);</span>
+</span><span class='line'>        <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="k">return</span> <span class="nx">bool</span><span class="p">;</span>
+</span><span class='line'>    <span class="p">};</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">if</span> <span class="p">(</span> <span class="o">!</span><span class="nx">formAttributeSupport</span><span class="p">()</span> <span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>        <span class="nx">$</span><span class="p">(</span> <span class="nb">document</span> <span class="p">)</span>
+</span><span class='line'>            <span class="p">.</span><span class="nx">on</span><span class="p">(</span> <span class="s2">&quot;click&quot;</span><span class="p">,</span> <span class="s2">&quot;[type=submit][form]&quot;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span> <span class="nx">event</span> <span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>                <span class="nx">event</span><span class="p">.</span><span class="nx">preventDefault</span><span class="p">();</span>
+</span><span class='line'>                <span class="kd">var</span> <span class="nx">formId</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span> <span class="k">this</span> <span class="p">).</span><span class="nx">attr</span><span class="p">(</span> <span class="s2">&quot;form&quot;</span> <span class="p">),</span>
+</span><span class='line'>                <span class="nx">$form</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span> <span class="s2">&quot;#&quot;</span> <span class="o">+</span> <span class="nx">formId</span> <span class="p">).</span><span class="nx">submit</span><span class="p">();</span>
+</span><span class='line'>            <span class="p">})</span>
+</span><span class='line'>            <span class="p">.</span><span class="nx">on</span><span class="p">(</span> <span class="s2">&quot;keypress&quot;</span><span class="p">,</span> <span class="s2">&quot;form input&quot;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span> <span class="nx">event</span> <span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>                <span class="kd">var</span> <span class="nx">$form</span><span class="p">;</span>
+</span><span class='line'>                <span class="k">if</span> <span class="p">(</span> <span class="nx">event</span><span class="p">.</span><span class="nx">keyCode</span> <span class="o">==</span> <span class="mi">13</span> <span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>                    <span class="nx">$form</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span> <span class="k">this</span> <span class="p">).</span><span class="nx">parents</span><span class="p">(</span> <span class="s2">&quot;form&quot;</span> <span class="p">);</span>
+</span><span class='line'>                    <span class="k">if</span> <span class="p">(</span> <span class="nx">$form</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span> <span class="s2">&quot;[type=submit]&quot;</span> <span class="p">).</span><span class="nx">length</span> <span class="o">==</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span>
+</span><span class='line'>                        <span class="nx">$</span><span class="p">(</span> <span class="s2">&quot;[type=submit][form=&quot;</span> <span class="o">+</span> <span class="nx">$</span><span class="p">(</span> <span class="k">this</span> <span class="p">).</span><span class="nx">attr</span><span class="p">(</span> <span class="s2">&quot;form&quot;</span> <span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;]&quot;</span> <span class="p">).</span><span class="nx">length</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>                        <span class="nx">$form</span><span class="p">.</span><span class="nx">submit</span><span class="p">();</span>
+</span><span class='line'>                    <span class="p">}</span>
+</span><span class='line'>                <span class="p">}</span>
+</span><span class='line'>            <span class="p">});</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'><span class="p">}());</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This can be included anywhere on the page after jQuery is included.</p>
+
+<p>Note that this polyfill only attempts to add support for the <code>form</code> attribute on submit buttons. The <code>form</code> attribute can also be applied to other form elements such as <code>&lt;input&gt;</code>s, <code>&lt;select&gt;</code>s, and <code>&lt;textarea&gt;</code>s, but that is beyond the scope of this script.</p>
+
+<p>If you encounter any issues with this polyfill let me know in the comments.</p>
+
+<h3>Conclusion</h3>
+
+<p>If you need a dialog with a submit button the easiest solution is to add a <code>click</code> handler that manually submits the form. While this is not ideal, it&#8217;ll work everywhere with no extra effort. Just make sure that you add Enter key handling to text inputs within the <code>&lt;form&gt;</code>.</p>
+
+<p>Long term the <code>form</code> attribute is the solution to this problem. You can try it today as long as you&#8217;re aware that you need to polyfill for IE support.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Internet Explorer, Attribute Selectors, and Really Long Attribute Values]]></title>
@@ -3300,137 +3649,6 @@
 <p>The markup to create the table is simple and semantic.  I&#8217;ve seen workarounds for this issue that use <code>&lt;div&gt;</code>s instead of <code>&lt;table&gt;</code>s or multiple aligned <code>&lt;table&gt;</code>s and those always felt dirty to me.</p>
 
 <p>The code is free to use and do whatever you want with it.  If you have any suggestions for improvements or find any issues please let me know in the comments.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Creating a Polished Vertical Tabs Interaction with jQuery UI]]></title>
-    <link href="http://tjvantoll.com/2012/11/08/creating-a-polished-vertical-tabs-interaction-with-jquery-ui/"/>
-    <updated>2012-11-08T00:00:00-05:00</updated>
-    <id>http://tjvantoll.com/2012/11/08/creating-a-polished-vertical-tabs-interaction-with-jquery-ui</id>
-    <content type="html"><![CDATA[<p>The <a href="http://jqueryui.com/tabs/">jQuery UI tabs widget</a> provides a clean way to implement a tabular UI.  Furthermore, the markup used gives you ample hooks to make the tabs visually into what you want them to be.  The docs provide a <a href="http://jqueryui.com/tabs/#vertical">simple demo</a> of how you can give the tabs a vertical orientation, but I thought I&#8217;d show how you can use what the framework provides to create something a bit more polished.</p>
-
-<!--more-->
-
-
-<p>The following CSS will vertically arrange the tabs:</p>
-
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-<span class='line-number'>33</span>
-<span class='line-number'>34</span>
-<span class='line-number'>35</span>
-<span class='line-number'>36</span>
-<span class='line-number'>37</span>
-<span class='line-number'>38</span>
-<span class='line-number'>39</span>
-<span class='line-number'>40</span>
-<span class='line-number'>41</span>
-<span class='line-number'>42</span>
-<span class='line-number'>43</span>
-<span class='line-number'>44</span>
-<span class='line-number'>45</span>
-<span class='line-number'>46</span>
-<span class='line-number'>47</span>
-<span class='line-number'>48</span>
-<span class='line-number'>49</span>
-<span class='line-number'>50</span>
-</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nc">.ui-tabs.ui-tabs-vertical</span> <span class="p">{</span>
-</span><span class='line'>    <span class="k">padding</span><span class="o">:</span> <span class="m">0</span><span class="p">;</span>
-</span><span class='line'>    <span class="k">width</span><span class="o">:</span> <span class="m">42em</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'><span class="nc">.ui-tabs.ui-tabs-vertical</span> <span class="nc">.ui-widget-header</span> <span class="p">{</span>
-</span><span class='line'>    <span class="k">border</span><span class="o">:</span> <span class="k">none</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'><span class="nc">.ui-tabs.ui-tabs-vertical</span> <span class="nc">.ui-tabs-nav</span> <span class="p">{</span>
-</span><span class='line'>    <span class="k">float</span><span class="o">:</span> <span class="k">left</span><span class="p">;</span>
-</span><span class='line'>    <span class="k">width</span><span class="o">:</span> <span class="m">10em</span><span class="p">;</span>
-</span><span class='line'>    <span class="k">background</span><span class="o">:</span> <span class="m">#CCC</span><span class="p">;</span>
-</span><span class='line'>    <span class="k">border</span><span class="o">-</span><span class="n">radius</span><span class="o">:</span> <span class="m">4px</span> <span class="m">0</span> <span class="m">0</span> <span class="m">4px</span><span class="p">;</span>
-</span><span class='line'>    <span class="k">border-right</span><span class="o">:</span> <span class="m">1px</span> <span class="k">solid</span> <span class="nb">gray</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'><span class="nc">.ui-tabs.ui-tabs-vertical</span> <span class="nc">.ui-tabs-nav</span> <span class="nt">li</span> <span class="p">{</span>
-</span><span class='line'>    <span class="k">clear</span><span class="o">:</span> <span class="k">left</span><span class="p">;</span>
-</span><span class='line'>    <span class="k">width</span><span class="o">:</span> <span class="m">100</span><span class="o">%</span><span class="p">;</span>
-</span><span class='line'>    <span class="k">margin</span><span class="o">:</span> <span class="m">0.2em</span> <span class="m">0</span><span class="p">;</span>
-</span><span class='line'>    <span class="k">border</span><span class="o">:</span> <span class="m">1px</span> <span class="k">solid</span> <span class="nb">gray</span><span class="p">;</span>
-</span><span class='line'>    <span class="k">border-width</span><span class="o">:</span> <span class="m">1px</span> <span class="m">0</span> <span class="m">1px</span> <span class="m">1px</span><span class="p">;</span>
-</span><span class='line'>    <span class="k">border</span><span class="o">-</span><span class="n">radius</span><span class="o">:</span> <span class="m">4px</span> <span class="m">0</span> <span class="m">0</span> <span class="m">4px</span><span class="p">;</span>
-</span><span class='line'>    <span class="k">overflow</span><span class="o">:</span> <span class="k">hidden</span><span class="p">;</span>
-</span><span class='line'>    <span class="k">position</span><span class="o">:</span> <span class="k">relative</span><span class="p">;</span>
-</span><span class='line'>    <span class="k">right</span><span class="o">:</span> <span class="m">-2px</span><span class="p">;</span>
-</span><span class='line'>    <span class="k">z-index</span><span class="o">:</span> <span class="m">2</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'><span class="nc">.ui-tabs.ui-tabs-vertical</span> <span class="nc">.ui-tabs-nav</span> <span class="nt">li</span> <span class="nt">a</span> <span class="p">{</span>
-</span><span class='line'>    <span class="k">display</span><span class="o">:</span> <span class="k">block</span><span class="p">;</span>
-</span><span class='line'>    <span class="k">width</span><span class="o">:</span> <span class="m">100</span><span class="o">%</span><span class="p">;</span>
-</span><span class='line'>    <span class="k">padding</span><span class="o">:</span> <span class="m">0.6em</span> <span class="m">1em</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'><span class="nc">.ui-tabs.ui-tabs-vertical</span> <span class="nc">.ui-tabs-nav</span> <span class="nt">li</span> <span class="nt">a</span><span class="nd">:hover</span> <span class="p">{</span>
-</span><span class='line'>    <span class="k">cursor</span><span class="o">:</span> <span class="k">pointer</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'><span class="nc">.ui-tabs.ui-tabs-vertical</span> <span class="nc">.ui-tabs-nav</span> <span class="nt">li</span><span class="nc">.ui-tabs-active</span> <span class="p">{</span>
-</span><span class='line'>    <span class="k">margin-bottom</span><span class="o">:</span> <span class="m">0.2em</span><span class="p">;</span>
-</span><span class='line'>    <span class="k">padding-bottom</span><span class="o">:</span> <span class="m">0</span><span class="p">;</span>
-</span><span class='line'>    <span class="k">border-right</span><span class="o">:</span> <span class="m">1px</span> <span class="k">solid</span> <span class="nb">white</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'><span class="nc">.ui-tabs.ui-tabs-vertical</span> <span class="nc">.ui-tabs-nav</span> <span class="nt">li</span><span class="nd">:last-child</span> <span class="p">{</span>
-</span><span class='line'>    <span class="k">margin-bottom</span><span class="o">:</span> <span class="m">10px</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'><span class="nc">.ui-tabs.ui-tabs-vertical</span> <span class="nc">.ui-tabs-panel</span> <span class="p">{</span>
-</span><span class='line'>    <span class="k">float</span><span class="o">:</span> <span class="k">left</span><span class="p">;</span>
-</span><span class='line'>    <span class="k">width</span><span class="o">:</span> <span class="m">28em</span><span class="p">;</span>
-</span><span class='line'>    <span class="k">border-left</span><span class="o">:</span> <span class="m">1px</span> <span class="k">solid</span> <span class="nb">gray</span><span class="p">;</span>
-</span><span class='line'>    <span class="k">border</span><span class="o">-</span><span class="n">radius</span><span class="o">:</span> <span class="m">0</span><span class="p">;</span>
-</span><span class='line'>    <span class="k">position</span><span class="o">:</span> <span class="k">relative</span><span class="p">;</span>
-</span><span class='line'>    <span class="k">left</span><span class="o">:</span> <span class="m">-1px</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>It only relies on a class of <code>ui-tabs-vertical</code> being applied to the elements the <code>tabs</code> widget is created on.</p>
-
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#tabs&#39;</span><span class="p">).</span><span class="nx">tabs</span><span class="p">().</span><span class="nx">addClass</span><span class="p">(</span><span class="s1">&#39;ui-tabs-vertical&#39;</span><span class="p">);</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>And here&#8217;s the result:</p>
-
-<div class="code_example"><h6>jQuery UI Vertical Tabs<a href="http://tjvantoll.com/demos/2012-11-08/verticalTabs.html" target="_blank">Open in New Window</a></h6><iframe style="width: 100%; height: 275px;" frameborder="0" src="http://tjvantoll.com/demos/2012-11-08/verticalTabs.html"></iframe></div>
-
-
-<p>Feel free to use this or modify it to your liking.</p>
 ]]></content>
   </entry>
   

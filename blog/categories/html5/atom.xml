@@ -4,7 +4,7 @@
   <title><![CDATA[Category: HTML5 | TJ VanToll]]></title>
   <link href="http://tjvantoll.com/blog/categories/html5/atom.xml" rel="self"/>
   <link href="http://tjvantoll.com/"/>
-  <updated>2013-07-08T22:17:26-04:00</updated>
+  <updated>2013-07-10T14:00:55-04:00</updated>
   <id>http://tjvantoll.com/</id>
   <author>
     <name><![CDATA[TJ VanToll]]></name>
@@ -12,6 +12,249 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Creating a jQuery UI Dialog with a Submit Button]]></title>
+    <link href="http://tjvantoll.com/2013/07/10/creating-a-jquery-ui-dialog-with-a-submit-button/"/>
+    <updated>2013-07-10T00:00:00-04:00</updated>
+    <id>http://tjvantoll.com/2013/07/10/creating-a-jquery-ui-dialog-with-a-submit-button</id>
+    <content type="html"><![CDATA[<p>Say you have the following submittable <code>&lt;form&gt;</code>:</p>
+
+<p>``` html
+<form id="myForm" action="http://google.com"></p>
+
+<pre><code>&lt;label for="search"&gt;Search For:&lt;/label&gt;
+&lt;input type="text" id="search" name="q"&gt;
+&lt;button type="submit"&gt;Find&lt;/button&gt;
+</code></pre>
+
+<p></form>
+```</p>
+
+<p>And you want to show the form in a jQuery UI dialog. You can do that with the code below:</p>
+
+<p>``` javascript Turning a form into a dialog
+$( "form" ).dialog({</p>
+
+<pre><code>open: function() {
+    // On open, hide the original submit button
+    $( this ).find( "[type=submit]" ).hide();
+},
+buttons: [
+    {
+        text: "Find",
+        click: $.noop,
+        type: "submit"
+    },
+    {
+        text: "Close",
+        click: function() {
+            $( this ).dialog( "close" );
+        }
+    }
+]
+</code></pre>
+
+<p>});
+```</p>
+
+<p>Which looks like this:</p>
+
+<p><img src="http://tjvantoll.com/images/posts/2013-07-10/form-dialog.png" alt="Display of the form within a jQuery UI dialog"></p>
+
+<h3>The Problem</h3>
+
+<p>There's one problem with this - the "Find" button doesn't work. Because of the generated structure of a jQuery UI dialog, the buttons are not within the <code>&lt;form&gt;</code> itself. Therefore, the buttons are not associated with the <code>&lt;form&gt;</code>. You can see the structure below:</p>
+
+<!-- more -->
+
+
+<p><img src="http://tjvantoll.com/images/posts/2013-07-10/markup.png" alt="Markup of a UI dialog showing the the buttons are not children of the content."></p>
+
+<p>Note that the <code>&lt;button type="submit"&gt;</code> is not within the <code>&lt;form&gt;</code>.</p>
+
+<h3>Solution</h3>
+
+<p>There are a few ways we can work around this. One is avoid the <a href="http://api.jqueryui.com/dialog/#option-buttons">buttons option</a> and leave the original submit button in place. This works, but you lose the formatted display.</p>
+
+<h3>Explicit Click Handler</h3>
+
+<p>Another solution is to add a <code>click</code> handler to the button that submits the form:</p>
+
+<p>``` js Using a Click Handler to Submit the Form
+var form = $( "form" ).dialog({</p>
+
+<pre><code>...
+buttons: [
+    {
+        text: "Find",
+        click: function() {
+            form.submit();
+        }
+    }
+    ...
+]
+</code></pre>
+
+<p>});
+```</p>
+
+<p>This works, but you lose the browsers <a href="/2013/01/01/enter-should-submit-forms-stop-messing-with-that/">browser's default enter key handling</a>. Therefore it has to be replicated as well:</p>
+
+<p>``` javascript Adding Enter Key Handling
+var form = $( "form" ).dialog({ ... });
+form.on( "keypress", "input[type=text]", function( event ) {</p>
+
+<pre><code>if ( event.keyCode == 13 ) {
+    form.submit();
+}
+</code></pre>
+
+<p>});
+```</p>
+
+<h4>Form Attribute</h4>
+
+<p>An elegant solution to this problem is to use HTML5's new <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button#attr-form">form attribute</a>. The attribute allows you to associate a <code>&lt;form&gt;</code> with a <code>&lt;button&gt;</code>, even if the <code>&lt;button&gt;</code> is not a descendant of the <code>&lt;form&gt;</code>. It's even smart enough to keep the <a href="/2013/01/01/enter-should-submit-forms-stop-messing-with-that/">browser's default enter key handling</a> in place.</p>
+
+<p>For example here's the example <code>&lt;form&gt;</code> with a sibling (rather than child) submit button:</p>
+
+<p>``` html
+<form id="myForm" action="http://google.com"></p>
+
+<pre><code>&lt;label for="search"&gt;Search For:&lt;/label&gt;
+&lt;input type="text" id="search" name="q"&gt;
+</code></pre>
+
+<p></form>
+<button type="submit" form="myForm">Find</button>
+```</p>
+
+<p>The <code>&lt;button&gt;</code> is outside of the <code>&lt;form&gt;</code>, but because its <code>form</code> attribute is equal to the <code>&lt;form&gt;</code>'s <code>id</code>, the <code>&lt;button&gt;</code> will submit the <code>&lt;form&gt;</code> regardless.</p>
+
+<h4>Using the Form Attribute on a Dialog</h4>
+
+<p>To add this attribute to the dialog version, we'll pass <code>form: "myForm"</code> into the <code>buttons</code> option for the Find button:</p>
+
+<p>``` html Turning a form into a dialog
+<form id="myForm" action="http://google.com"></p>
+
+<pre><code>&lt;label for="search"&gt;Search For:&lt;/label&gt;
+&lt;input type="text" id="search" name="q"&gt;
+&lt;button type="submit"&gt;Find&lt;/button&gt;
+</code></pre>
+
+<p></form></p>
+
+<script>
+    $( "form" ).dialog({
+        open: function() {
+            // On open, hide the original submit button
+            $( this ).find( "[type=submit]" ).hide();
+        },
+        buttons: [
+            {
+                text: "Find",
+                click: $.noop,
+                type: "submit",
+                form: "myForm" // <-- Make the association
+            },
+            {
+                text: "Close",
+                click: function() {
+                    $( this ).dialog( "close" );
+                }
+            }
+        ]
+    });
+</script>
+
+
+<p>```</p>
+
+<p><a href="/demos/2013-07-10/form.html">Live Example</a></p>
+
+<h3>Support</h3>
+
+<p>The <code>form</code> attribute is implemented in Firefox, Chrome, Safari 5.1+, and Opera, HOWEVER, IE (as of version 10) still does not support the attribute.</p>
+
+<p>Because the form attribute is so handy here, I wrote a polyfill that adds support in browsers that don't support it natively: <a href="https://gist.github.com/tjvantoll/5911571">https://gist.github.com/tjvantoll/5911571</a>. The source is below:</p>
+
+<p>``` javascript
+/<em>*
+ * The form attribute can be used to associate a submit button with a form, even
+ * if the button is not a child of the <form> itself.
+ *
+ * This polyfill uses a support check taken from Modernizr and polyfills the
+ * functionality using jQuery.
+ </em>/
+(function() {</p>
+
+<pre><code>// Via Modernizr
+function formAttributeSupport() {
+    var form = document.createElement( "form" ),
+        input = document.createElement( "input" ),
+        div = document.createElement( "div" ),
+        id = "formtest"+ ( new Date().getTime() ),
+        attr,
+        bool = false;
+
+        form.id = id;
+
+    // IE6/7 confuses the form idl attribute and the form content attribute
+    if ( document.createAttribute ) {
+        attr = document.createAttribute("form");
+        attr.nodeValue = id;
+        input.setAttributeNode(attr);
+        div.appendChild(form);
+        div.appendChild(input);
+
+        document.documentElement.appendChild(div);
+
+        bool = form.elements.length === 1 &amp;&amp; input.form == form;
+
+        div.parentNode.removeChild(div);
+    }
+
+    return bool;
+};
+
+if ( !formAttributeSupport() ) {
+    $( document )
+        .on( "click", "[type=submit][form]", function( event ) {
+            event.preventDefault();
+            var formId = $( this ).attr( "form" ),
+            $form = $( "#" + formId ).submit();
+        })
+        .on( "keypress", "form input", function( event ) {
+            var $form;
+            if ( event.keyCode == 13 ) {
+                $form = $( this ).parents( "form" );
+                if ( $form.find( "[type=submit]" ).length == 0 &amp;&amp;
+                    $( "[type=submit][form=" + $( this ).attr( "form" ) + "]" ).length &gt; 0 ) {
+                    $form.submit();
+                }
+            }
+        });
+}
+</code></pre>
+
+<p>}());
+```</p>
+
+<p>This can be included anywhere on the page after jQuery is included.</p>
+
+<p>Note that this polyfill only attempts to add support for the <code>form</code> attribute on submit buttons. The <code>form</code> attribute can also be applied to other form elements such as <code>&lt;input&gt;</code>s, <code>&lt;select&gt;</code>s, and <code>&lt;textarea&gt;</code>s, but that is beyond the scope of this script.</p>
+
+<p>If you encounter any issues with this polyfill let me know in the comments.</p>
+
+<h3>Conclusion</h3>
+
+<p>If you need a dialog with a submit button the easiest solution is to add a <code>click</code> handler that manually submits the form. While this is not ideal, it'll work everywhere with no extra effort. Just make sure that you add Enter key handling to text inputs within the <code>&lt;form&gt;</code>.</p>
+
+<p>Long term the <code>form</code> attribute is the solution to this problem. You can try it today as long as you're aware that you need to polyfill for IE support.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[HTML 5 hidden Attribute Browser Support]]></title>
@@ -223,171 +466,6 @@ if (!rangeSupport) {
 <p>HTML5 provides native solutions to validating client side data and most all modern browsers support it.  Yet, most people are still relying on the JavaScript hacks we've been using for well over a decade now.</p>
 
 <p>It's time.  Come to the dark side.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[HTML5 Form Validation - Showing All Error Messages]]></title>
-    <link href="http://tjvantoll.com/2012/08/05/html5-form-validation-showing-all-error-messages/"/>
-    <updated>2012-08-05T16:21:00-04:00</updated>
-    <id>http://tjvantoll.com/2012/08/05/html5-form-validation-showing-all-error-messages</id>
-    <content type="html"><![CDATA[<p><a href="http://caniuse.com/#feat=form-validation">Browsers that support HTML5 form validation</a> have one thing in common; if a <code>&lt;form&gt;</code> is submitted and has errors on multiple fields, the browser will only display the first error to the user.</p>
-
-<p>Turns out the spec leaves the specific means of handling multiple errors up to the browser itself:</p>
-
-<p><blockquote><p>Report the problems with the constraints of at least one of the elements given in unhandled invalid controls to the user. User agents may focus one of those elements in the process, by running the focusing steps for that element, and may change the scrolling position of the document, or perform some other action that brings the element to the user's attention.</p></p><p><p>User agents may report more than one constraint violation. User agents may coalesce related constraint violation reports if appropriate (e.g. if multiple radio buttons in a group are marked as required, only one error need be reported).</p><footer><strong>HTML5 Specification</strong> <cite><a href='http://www.whatwg.org/specs/web-apps/current-work/#the-constraint-validation-api'>www.whatwg.org/specs/web-apps/&hellip;</a></cite></footer></blockquote></p>
-
-<p>The key part here being that user agents (i.e. browsers) <strong>MAY</strong> report more than one constraint violation (i.e. error).  Turns out they all decided not to.</p>
-
-<!--more-->
-
-
-<p>You can see this in your browser below (assuming it <a href="http://caniuse.com/#feat=form-validation">supports HTML5 form validation</a> and is not Safari, more on that later).  Both fields are <code>required</code>, but if you submit the form you will only see an error for the first field.</p>
-
-<pre class="codepen" data-type="result" data-href="FBGvu" data-user="tjvantoll" data-host="http://codepen.io"><code></code></pre>
-
-
-<script async src="http://codepen.io/assets/embed/ei.js"></script>
-
-
-<p>Here's what it looks like on supported browsers if you attempt to submit this empty <code>&lt;form&gt;</code>:</p>
-
-<h5>Chrome 21</h5>
-
-<p><img src="/images/posts/2012-08-05/Chrome.png" title="Chrome" alt="Chrome" /></p>
-
-<h5>Firefox 14</h5>
-
-<p><img src="/images/posts/2012-08-05/Firefox.png" title="Firefox" alt="Firefox" /></p>
-
-<h5>Opera 12</h5>
-
-<p><img src="/images/posts/2012-08-05/Opera.png" title="Opera" alt="Opera" /></p>
-
-<p>As you can see, all three only give an error for the first field.  Firefox at least has the decency to put a red border around all fields with invalid data by default.</p>
-
-<p>The one noticeable browser missing from the list above is Safari.  Even though Safari supports the constraint validation API, the validation itself is turned off.</p>
-
-<h3>Usability</h3>
-
-<p>From a usability perspective showing the users only the first error message is bad.  Imagine how frustrating it would be to continually correct errors just to be presented with the next error in the sequence.  If you've ran into a form such as this before you know what I'm talking about.</p>
-
-<p>Luckily, browsers provide a <a href="http://www.whatwg.org/specs/web-apps/current-work/#the-constraint-validation-api">constraint validation API</a> that can be used to provide this functionality.</p>
-
-<h3>Using the Validation API</h3>
-
-<p>All dom nodes now possess a <a href="http://www.whatwg.org/specs/web-apps/current-work/#dom-cva-willvalidate_">willValidate</a> property that indicates whether the node is a candidate for form validation.</p>
-
-<p>Nodes in which <code>willValidate</code> is <code>true</code> also have a <code>validity</code> property.  The <code>validity</code> property resolves to a <a href="https://developer.mozilla.org/en-US/docs/DOM/ValidityState">ValidityState object</a> which contains information about whether the field has validation errors, as well as the error message the browser will display to the user.</p>
-
-<p>To make things even easier browsers provide an <a href="https://developer.mozilla.org/en-US/docs/CSS/:invalid">:invalid pseduoselector</a> that can be used to select all elements with validation errors.  Let's see how this can be leveraged to show all error messages.</p>
-
-<h3>The Code</h3>
-
-<p>Here's how I accomplished this with a jQuery dependent script.</p>
-
-<p>``` html
-<form></p>
-
-<pre><code>&lt;ul class="errorMessages"&gt;&lt;/ul&gt;
-
-&lt;label for="name"&gt;Name:&lt;/label&gt;
-&lt;input type="text" required /&gt;
-
-&lt;label for="comments"&gt;Comments:&lt;/label&gt;
-&lt;textarea id="comments" required&gt;&lt;/textarea&gt;
-
-&lt;input type="submit" value="Submit" /&gt;
-</code></pre>
-
-<p></form>​</p>
-
-<script>
-$(function() {
-    var createAllErrors = function() {
-        var form = $(this);
-        var errorList = $('ul.errorMessages', form);
-        
-        var showAllErrorMessages = function() {
-            errorList.empty();
-            
-            //Find all invalid fields within the form.
-            form.find(':invalid').each(function(index, node) {
-
-                //Find the field's corresponding label
-                var label = $('label[for=' + node.id + ']');
-
-                //Opera incorrectly does not fill the validationMessage property.
-                var message = node.validationMessage || 'Invalid value.';
-                errorList
-                    .show()
-                    .append('<li><span>' + label.html() + '</span> ' + message + '</li>');
-            });
-        };
-        
-        $('input[type=submit]', form).on('click', showAllErrorMessages);
-        $('input[type=text]', form).on('keypress', function(event) {
-            //keyCode 13 is Enter
-            if (event.keyCode == 13) {
-                showAllErrorMessages();
-            }
-        });
-    };
-    
-    $('form').each(createAllErrors);
-});
-</script>
-
-
-<p>```</p>
-
-<p>You can see the results in your browser below:</p>
-
-<pre class="codepen" data-type="result" data-href="eLvlf" data-user="tjvantoll" data-host="http://codepen.io"><code></code></pre>
-
-
-<p>Here's how it looks in Chrome 21:</p>
-
-<p><img src="/images/posts/2012-08-05/Chrome-full.png" title="Chrome" alt="Chrome" /></p>
-
-<p>A couple things to note:</p>
-
-<p>1) If a user attempts to submit a form and gets validation errors, a <code>submit</code> event is never fired for the <code>&lt;form&gt;</code>.  Therefore, instead of listening for <code>submit</code> on the <code>&lt;form&gt;</code>, I instead listen for a <code>click</code> on the <code>&lt;input type="submit"&gt;</code>.  Since the user is also able to submit the form pressing enter in text inputs, I attach a <code>keypress</code> listener to them to ensure the same logic runs.</p>
-
-<p>2) In my example I start each error message with the contents of the field's <code>&lt;label&gt;</code>.  This is because the messages for each field are often identical.  An alternative approach would be to use another constraint validation API method, <a href="http://www.whatwg.org/specs/web-apps/current-work/#dom-cva-setcustomvalidity">setCustomValidity</a> to set a completely custom message.</p>
-
-<p>3) The <code>:invalid</code> selector will return nothing in all browsers that do not support the constraint validation API.  Therefore this code will simply do nothing in those browsers.</p>
-
-<p>4) Opera incorrectly does not fill the <code>validationMessage</code> property.  Therefore the check <code>var message = node.validationMessage || 'Invalid value.'</code> is necessary so a message is displayed for Opera.</p>
-
-<p>5) I do nothing to style the individual fields based on whether they have valid data.  The HTML5 spec provides a number of CSS hooks to do this and I would recommend reading <a href="http://html5doctor.com/css3-pseudo-classes-and-html5-forms/">CSS Pseudo-Classes and HTML5 Forms</a> from <a href="http://html5doctor.com">html5 Doctor</a> if you're interested in including such styling.</p>
-
-<h3>That's a Lot of Code to Do Something Simple</h3>
-
-<p>Yep.  While browser support is getting to be quite good for HTML5 forms the implementations themselves are still a bit buggy.  Nevertheless, this approach will work for displaying all validation errors to the end user.</p>
-
-<h3>Polyfill</h3>
-
-<p>If you are interested in making the code above work in all browsers one option you have is to polyfill the functionality for unsupported browsers.  One robust choice is the <a href="https://github.com/aFarkas/webshim">webshims</a> library.</p>
-
-<p>To make webshims work with the code above all you need to do is add <code>$.webshims.polyfill('forms');</code>.  The maintainer, <a href="https://github.com/aFarkas">@aFarkas</a> was even kind of enough to provide me with a live example showing this - <a href="http://jsfiddle.net/trixta/HynHy/">http://jsfiddle.net/trixta/HynHy/</a>.</p>
-
-<h3>Update (September 5th, 2012)</h3>
-
-<p>Per some <a href="https://github.com/html5rocks/www.html5rocks.com/issues/175#issuecomment-8301873">critique on Github</a> from <a href="https://github.com/aFarkas">@aFarkas</a> I've made the following changes:</p>
-
-<ul>
-<li>Updated the example code.
-
-<ul>
-<li>Removed a hack I had in place for Safari.</li>
-<li>Switched to use the <code>:invalid</code> pseudoselector to find all invalid fields within a form.</li>
-<li>Make the script handle multiple <code>&lt;form&gt;</code> elements in one DOM.</li>
-</ul>
-</li>
-<li>Added the above section on using webshim to polyfill this behavior for all browsers.</li>
-</ul>
-
 ]]></content>
   </entry>
   

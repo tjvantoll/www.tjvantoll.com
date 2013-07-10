@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>jQuery UI Dialog with Form Attribute</title>
+	<link rel="stylesheet" href="../assets/jquery-ui/1.10.2/jquery-ui.css">
+	<script src="../assets/jquery/1.9.1/jquery.js"></script>
+	<script src="../assets/jquery-ui/1.10.2/jquery-ui.js"></script>
+</head>
+<body>
+	<form id="myForm" action="http://google.com">
+		<label for="search">Search For:</label>
+		<input type="text" id="search" name="q">
+		<button type="submit">Find</button>
+	</form>
+	<script>
+		// Prevent the demo from stealing focus.
+		$.ui.dialog.prototype._focusTabbable = $.noop;
+
+		$( "form" ).dialog({
+			open: function() {
+				// On open, hide the original submit button
+				$( this ).find( "[type=submit]" ).hide();
+			},
+			buttons: [
+				{
+					text: "Find",
+					click: $.noop,
+					type: "submit",
+					form: "myForm"
+				},
+				{
+					text: "Close",
+					click: function() {
+						$( this ).dialog( "close" );
+					}
+				}
+			]
+		});
+	</script>
+</body>
+</html>

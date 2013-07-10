@@ -4,7 +4,7 @@
   <title><![CDATA[Category: JavaScript | TJ VanToll]]></title>
   <link href="http://tjvantoll.com/blog/categories/javascript/atom.xml" rel="self"/>
   <link href="http://tjvantoll.com/"/>
-  <updated>2013-07-08T22:17:26-04:00</updated>
+  <updated>2013-07-10T14:00:55-04:00</updated>
   <id>http://tjvantoll.com/</id>
   <author>
     <name><![CDATA[TJ VanToll]]></name>
@@ -12,6 +12,249 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Creating a jQuery UI Dialog with a Submit Button]]></title>
+    <link href="http://tjvantoll.com/2013/07/10/creating-a-jquery-ui-dialog-with-a-submit-button/"/>
+    <updated>2013-07-10T00:00:00-04:00</updated>
+    <id>http://tjvantoll.com/2013/07/10/creating-a-jquery-ui-dialog-with-a-submit-button</id>
+    <content type="html"><![CDATA[<p>Say you have the following submittable <code>&lt;form&gt;</code>:</p>
+
+<p>``` html
+<form id="myForm" action="http://google.com"></p>
+
+<pre><code>&lt;label for="search"&gt;Search For:&lt;/label&gt;
+&lt;input type="text" id="search" name="q"&gt;
+&lt;button type="submit"&gt;Find&lt;/button&gt;
+</code></pre>
+
+<p></form>
+```</p>
+
+<p>And you want to show the form in a jQuery UI dialog. You can do that with the code below:</p>
+
+<p>``` javascript Turning a form into a dialog
+$( "form" ).dialog({</p>
+
+<pre><code>open: function() {
+    // On open, hide the original submit button
+    $( this ).find( "[type=submit]" ).hide();
+},
+buttons: [
+    {
+        text: "Find",
+        click: $.noop,
+        type: "submit"
+    },
+    {
+        text: "Close",
+        click: function() {
+            $( this ).dialog( "close" );
+        }
+    }
+]
+</code></pre>
+
+<p>});
+```</p>
+
+<p>Which looks like this:</p>
+
+<p><img src="http://tjvantoll.com/images/posts/2013-07-10/form-dialog.png" alt="Display of the form within a jQuery UI dialog"></p>
+
+<h3>The Problem</h3>
+
+<p>There's one problem with this - the "Find" button doesn't work. Because of the generated structure of a jQuery UI dialog, the buttons are not within the <code>&lt;form&gt;</code> itself. Therefore, the buttons are not associated with the <code>&lt;form&gt;</code>. You can see the structure below:</p>
+
+<!-- more -->
+
+
+<p><img src="http://tjvantoll.com/images/posts/2013-07-10/markup.png" alt="Markup of a UI dialog showing the the buttons are not children of the content."></p>
+
+<p>Note that the <code>&lt;button type="submit"&gt;</code> is not within the <code>&lt;form&gt;</code>.</p>
+
+<h3>Solution</h3>
+
+<p>There are a few ways we can work around this. One is avoid the <a href="http://api.jqueryui.com/dialog/#option-buttons">buttons option</a> and leave the original submit button in place. This works, but you lose the formatted display.</p>
+
+<h3>Explicit Click Handler</h3>
+
+<p>Another solution is to add a <code>click</code> handler to the button that submits the form:</p>
+
+<p>``` js Using a Click Handler to Submit the Form
+var form = $( "form" ).dialog({</p>
+
+<pre><code>...
+buttons: [
+    {
+        text: "Find",
+        click: function() {
+            form.submit();
+        }
+    }
+    ...
+]
+</code></pre>
+
+<p>});
+```</p>
+
+<p>This works, but you lose the browsers <a href="/2013/01/01/enter-should-submit-forms-stop-messing-with-that/">browser's default enter key handling</a>. Therefore it has to be replicated as well:</p>
+
+<p>``` javascript Adding Enter Key Handling
+var form = $( "form" ).dialog({ ... });
+form.on( "keypress", "input[type=text]", function( event ) {</p>
+
+<pre><code>if ( event.keyCode == 13 ) {
+    form.submit();
+}
+</code></pre>
+
+<p>});
+```</p>
+
+<h4>Form Attribute</h4>
+
+<p>An elegant solution to this problem is to use HTML5's new <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button#attr-form">form attribute</a>. The attribute allows you to associate a <code>&lt;form&gt;</code> with a <code>&lt;button&gt;</code>, even if the <code>&lt;button&gt;</code> is not a descendant of the <code>&lt;form&gt;</code>. It's even smart enough to keep the <a href="/2013/01/01/enter-should-submit-forms-stop-messing-with-that/">browser's default enter key handling</a> in place.</p>
+
+<p>For example here's the example <code>&lt;form&gt;</code> with a sibling (rather than child) submit button:</p>
+
+<p>``` html
+<form id="myForm" action="http://google.com"></p>
+
+<pre><code>&lt;label for="search"&gt;Search For:&lt;/label&gt;
+&lt;input type="text" id="search" name="q"&gt;
+</code></pre>
+
+<p></form>
+<button type="submit" form="myForm">Find</button>
+```</p>
+
+<p>The <code>&lt;button&gt;</code> is outside of the <code>&lt;form&gt;</code>, but because its <code>form</code> attribute is equal to the <code>&lt;form&gt;</code>'s <code>id</code>, the <code>&lt;button&gt;</code> will submit the <code>&lt;form&gt;</code> regardless.</p>
+
+<h4>Using the Form Attribute on a Dialog</h4>
+
+<p>To add this attribute to the dialog version, we'll pass <code>form: "myForm"</code> into the <code>buttons</code> option for the Find button:</p>
+
+<p>``` html Turning a form into a dialog
+<form id="myForm" action="http://google.com"></p>
+
+<pre><code>&lt;label for="search"&gt;Search For:&lt;/label&gt;
+&lt;input type="text" id="search" name="q"&gt;
+&lt;button type="submit"&gt;Find&lt;/button&gt;
+</code></pre>
+
+<p></form></p>
+
+<script>
+    $( "form" ).dialog({
+        open: function() {
+            // On open, hide the original submit button
+            $( this ).find( "[type=submit]" ).hide();
+        },
+        buttons: [
+            {
+                text: "Find",
+                click: $.noop,
+                type: "submit",
+                form: "myForm" // <-- Make the association
+            },
+            {
+                text: "Close",
+                click: function() {
+                    $( this ).dialog( "close" );
+                }
+            }
+        ]
+    });
+</script>
+
+
+<p>```</p>
+
+<p><a href="/demos/2013-07-10/form.html">Live Example</a></p>
+
+<h3>Support</h3>
+
+<p>The <code>form</code> attribute is implemented in Firefox, Chrome, Safari 5.1+, and Opera, HOWEVER, IE (as of version 10) still does not support the attribute.</p>
+
+<p>Because the form attribute is so handy here, I wrote a polyfill that adds support in browsers that don't support it natively: <a href="https://gist.github.com/tjvantoll/5911571">https://gist.github.com/tjvantoll/5911571</a>. The source is below:</p>
+
+<p>``` javascript
+/<em>*
+ * The form attribute can be used to associate a submit button with a form, even
+ * if the button is not a child of the <form> itself.
+ *
+ * This polyfill uses a support check taken from Modernizr and polyfills the
+ * functionality using jQuery.
+ </em>/
+(function() {</p>
+
+<pre><code>// Via Modernizr
+function formAttributeSupport() {
+    var form = document.createElement( "form" ),
+        input = document.createElement( "input" ),
+        div = document.createElement( "div" ),
+        id = "formtest"+ ( new Date().getTime() ),
+        attr,
+        bool = false;
+
+        form.id = id;
+
+    // IE6/7 confuses the form idl attribute and the form content attribute
+    if ( document.createAttribute ) {
+        attr = document.createAttribute("form");
+        attr.nodeValue = id;
+        input.setAttributeNode(attr);
+        div.appendChild(form);
+        div.appendChild(input);
+
+        document.documentElement.appendChild(div);
+
+        bool = form.elements.length === 1 &amp;&amp; input.form == form;
+
+        div.parentNode.removeChild(div);
+    }
+
+    return bool;
+};
+
+if ( !formAttributeSupport() ) {
+    $( document )
+        .on( "click", "[type=submit][form]", function( event ) {
+            event.preventDefault();
+            var formId = $( this ).attr( "form" ),
+            $form = $( "#" + formId ).submit();
+        })
+        .on( "keypress", "form input", function( event ) {
+            var $form;
+            if ( event.keyCode == 13 ) {
+                $form = $( this ).parents( "form" );
+                if ( $form.find( "[type=submit]" ).length == 0 &amp;&amp;
+                    $( "[type=submit][form=" + $( this ).attr( "form" ) + "]" ).length &gt; 0 ) {
+                    $form.submit();
+                }
+            }
+        });
+}
+</code></pre>
+
+<p>}());
+```</p>
+
+<p>This can be included anywhere on the page after jQuery is included.</p>
+
+<p>Note that this polyfill only attempts to add support for the <code>form</code> attribute on submit buttons. The <code>form</code> attribute can also be applied to other form elements such as <code>&lt;input&gt;</code>s, <code>&lt;select&gt;</code>s, and <code>&lt;textarea&gt;</code>s, but that is beyond the scope of this script.</p>
+
+<p>If you encounter any issues with this polyfill let me know in the comments.</p>
+
+<h3>Conclusion</h3>
+
+<p>If you need a dialog with a submit button the easiest solution is to add a <code>click</code> handler that manually submits the form. While this is not ideal, it'll work everywhere with no extra effort. Just make sure that you add Enter key handling to text inputs within the <code>&lt;form&gt;</code>.</p>
+
+<p>Long term the <code>form</code> attribute is the solution to this problem. You can try it today as long as you're aware that you need to polyfill for IE support.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Using Semantic Class Names to Show and Hide Elements]]></title>
@@ -482,153 +725,6 @@ var items = [</p>
 
 
 <p>```</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Better Ways of Comparing a JavaScript String to Multiple Values]]></title>
-    <link href="http://tjvantoll.com/2013/03/14/better-ways-of-comparing-a-javascript-string-to-multiple-values/"/>
-    <updated>2013-03-14T00:00:00-04:00</updated>
-    <id>http://tjvantoll.com/2013/03/14/better-ways-of-comparing-a-javascript-string-to-multiple-values</id>
-    <content type="html"><![CDATA[<p>This is a seemingly simple programming task that we deal with everyday.  Here's the situation:</p>
-
-<ul>
-<li>1) You have a string in JavaScript, like <code>var fruit = ''</code>.</li>
-<li>2) You need to know if that string is equal to one of multiple values, say <code>"banana"</code> or <code>"lemon"</code> (because the yellow fruits need special yellow fruit processing or something).</li>
-</ul>
-
-
-<p>Most people accomplish this by doing two string comparisons connected by a logical OR, which looks like this:</p>
-
-<p>``` javascript
-if (fruit == 'banana' || fruit == 'lemon') {</p>
-
-<pre><code>handleYellowFruit();
-</code></pre>
-
-<p>}
-```</p>
-
-<p>Which works fine, but is a bit clunky.  I mean, you have to type <code>fruit ==</code> two whole times.  It also doesn't scale well.  Say your fruit processing product takes off and you need to support more fruit, now you have this:</p>
-
-<p>``` javascript
-if (fruit == 'banana' || fruit == 'lemon' || fruit == 'mango' || fruit == 'pineapple') {</p>
-
-<pre><code>handleYellowFruit();
-</code></pre>
-
-<p>}
-```</p>
-
-<!--more-->
-
-
-<p>This is getting a bit ugly.  Let's look at some other ways of accomplishing the same check.</p>
-
-<h3>Switch</h3>
-
-<p>The switch statement can be used to achieve the same ends:</p>
-
-<p>``` javascript
-switch (fruit) {</p>
-
-<pre><code>case 'banana':
-case 'lemon':
-case 'mango':
-case 'pineapple':
-    handleYellowFruit();
-</code></pre>
-
-<p>}
-```</p>
-
-<p>This approach would be helpful if we have to handle for multiple classifications of fruits.  But for one check it's a lot of typing and takes up a lot of space.</p>
-
-<h3>Array Based</h3>
-
-<p>ECMAScript 5 introduced an <code>indexOf</code> method on <code>Array.prototype</code> (<a href="https://developer.mozilla.org/en-US/docs/JavaScript/Reference/Global_Objects/Array/indexOf">docs</a>).  We can use this to create an array on the fly, then see whether the value matches one of the values in the array:</p>
-
-<p>```javascript
-if (['banana', 'lemon', 'mango', 'pineapple'].indexOf(fruit) >= 0) {</p>
-
-<pre><code>handleYellowFruit();
-</code></pre>
-
-<p>}
-```</p>
-
-<p>This is better, but still not ideal.  Understanding this code relies on the reader knowing that the <code>indexOf</code> method returns <code>-1</code>, which is not necessarily common knowledge.</p>
-
-<p>Also, because <code>Array.prototype.indexOf</code> was added in ECMAScript 5, it's not present in IE &lt;= 8.  Therefore, if you're supporting IE &lt;= 8, you either need to add an <code>indexOf</code> method to the prototype yourself or use a library.</p>
-
-<p>Speaking of libraries, most provide a cross browser means of finding values in an array.</p>
-
-<h4>jQuery</h4>
-
-<p><a href="http://jquery.com">jQuery</a> provides an <code>inArray</code> method (<a href="http://api.jquery.com/jQuery.inArray/">docs</a>):</p>
-
-<p>``` javascript
-if ($.inArray(fruit, ['banana', 'lemon', 'mango', 'pineapple']) >= 0) {</p>
-
-<pre><code>handleYellowFruit();
-</code></pre>
-
-<p>}
-```</p>
-
-<h4>Underscore</h4>
-
-<p><a href="http://underscorejs.org">Underscore.js</a> provides a <code>contains</code> method (<a href="http://underscorejs.org/#contains">docs</a>):</p>
-
-<p>``` javascript
-if (_.contains(['banana', 'lemon', 'mango', 'pineapple'], fruit)) {</p>
-
-<pre><code>handleYellowFruit();
-</code></pre>
-
-<p>}
-```</p>
-
-<p>Other libraries provide similar methods.  Personally, I find Underscore's API to be the cleanest.  The contains API intuitively returns a boolean and there's not much to type.  You might however find yourself needing to remember the order of the parameters (does the array come first or the value?).</p>
-
-<p>The check would be cleaner if the <code>contains</code> method were added to <code>Array.prototype</code> directly:</p>
-
-<p>``` javascript
-Array.prototype.contains = function(obj) {</p>
-
-<pre><code>return this.indexOf(obj) &gt; -1;
-</code></pre>
-
-<p>};
-```</p>
-
-<p>This allows the check to be:</p>
-
-<p>``` javascript
-if (['banana', 'lemon', 'mango', 'pineapple'].contains(fruit)) {</p>
-
-<pre><code>handleYellowFruit();
-</code></pre>
-
-<p>}
-```</p>
-
-<h3>Regular Expressions</h3>
-
-<p>An often overlooked means of performing this check is to use regular expressions via <code>String.prototype.match</code> (<a href="https://developer.mozilla.org/en-US/docs/JavaScript/Reference/Global_Objects/String">docs</a>).</p>
-
-<p>``` javascript
-if (fruit.match(/<sup>(banana|lemon|mango|pineapple)$/))</sup> {</p>
-
-<pre><code>handleYellowFruit();
-</code></pre>
-
-<p>}
-```</p>
-
-<p>This check clearly requires the least amount of typing.  It is also the most flexible as you can easily alter things like case sensitivity, special character handling, white space, etc.  This will work in all browsers and you don't have to worry about messing with the native prototypes.</p>
-
-<p>While this is the most powerful option, it comes at a cost of being less readable.  I had to look up the <code>^</code> (match at the beginning of input) and <code>$</code> (match at the end of input) characters when writing this post.</p>
 ]]></content>
   </entry>
   
