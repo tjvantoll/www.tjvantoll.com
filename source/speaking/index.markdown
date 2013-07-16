@@ -9,14 +9,26 @@ footer: true
 <div class="speaking">
 	<p>On certain occasions I've been known to talk to people in real life.</p>
 
-	<header style="display: none;">
+	<header>
 		<h3>Future</h3>
 	</header>
-	<div class="speaking-archives" style="display: none;">
+	<div class="speaking-archives">
 		<h2>2013</h2>
+
+		<article>
+			<h1>Constraint Validation: Native Client Side Validation for Web Forms</h1>
+			<time datetime="2013-10-22">
+				<span class="month">Oct</span>
+				<span class="day">22</span>
+				<span class="year">2013</span>
+			</time>
+			<footer>
+				<a href="http://html5devconf.com/">HTML5 Developer Conference</a> | San Francisco, CA
+			</footer>
+		</article>
 	</div>
 
-	<header style="display: none;">
+	<header>
 		<h3>Past</h3>
 	</header>
 	<div class="speaking-archives">
