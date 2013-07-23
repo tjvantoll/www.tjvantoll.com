@@ -1,0 +1,465 @@
+<!DOCTYPE html> 
+<html>
+    <head>
+        <meta charset="UTF-8"/>
+        <title>TJ VanToll's Resume</title>
+        <link href="css/main.css" rel="stylesheet">
+        
+        <script src="js/jquery-1.8.2.min.js"></script>
+        <script src="js/jquery-mobile-1.3.0.min.js"></script>
+    </head> 
+    <body> 
+        <div data-role="page" id="home">
+            <div data-role="panel" id="mainNav" data-theme="a">
+                <p>
+                    This is the menu. You pick things here.
+                </p>
+                <nav>
+                    <ul data-role="listview">
+                        <li>Home</li>
+                        <li><a href="#contact">Contact</a></li>
+                        <li><a href="#education">Education</a></li>
+                        <li><a href="#experience">Experience</a></li>
+                        <li><a href="#open_source">Open Source</a></li>
+                        <li><a href="#speaking">Speaking</a></li>
+                        <li><a href="#writing">Writing</a></li>
+                    </ul>
+                    <button data-rel="close" data-theme="b" data-icon="delete">Close</button>
+                </nav>
+            </div>
+            <div data-role="header">
+                <a href="#mainNav" data-icon="bars">Menu</a>
+                <h1>TJ VanToll</h1>
+            </div>
+            <div data-role="content">
+                <img id="me" src="image/me.png"/>
+                <p>
+                    Hi! I'm TJ VanToll.
+                </p>
+                <p>
+                    I'm a web developer, speaker, and writer with years of experience building applications small and large.
+                </p>
+                <p>
+                    You can <a href="#mainNav">explore my resume</a>, or play with this cube. Up to you.
+                </p>
+                <div id="cube">cube</div>
+                
+                <div id="stop_section">
+                    <fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
+                        <legend>
+                            View Side Number:
+                        </legend>
+                        <input type="radio" name="choices" id="one" value="1" checked>
+                        <label for="one">1</label>
+                        <input type="radio" name="choices" id="two" value="2">
+                        <label for="two">2</label>
+                        <input type="radio" name="choices" id="three" value="3">
+                        <label for="three">3</label>
+                        <input type="radio" name="choices" id="four" value="4">
+                        <label for="four">4</label>
+                        <input type="radio" name="choices" id="five" value="5">
+                        <label for="five">5</label>
+                        <input type="radio" name="choices" id="six" value="6">
+                        <label for="six">6</label>
+                    </fieldset>
+                    
+                    <button id="cycle_button">
+                        Cycle the Cube!
+                    </button>
+                </div>
+                <div id="cycle_section">
+                    <label for="slider">Spinning Rate (in ms):</label>
+                    <input type="range" id="slider" min="250" max="5000" value="2000" step="250">
+                    <button id="stop_button">
+                        Stop the Cube!
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <div data-role="page" id="contact">
+            <div data-role="panel" id="mainNav" data-theme="a">
+                <p>
+                    This is the menu. You pick things here.
+                </p>
+                <nav>
+                    <ul data-role="listview">
+                        <li><a href="#home">Home</a></li>
+                        <li>Contact</li>
+                        <li><a href="#education">Education</a></li>
+                        <li><a href="#experience">Experience</a></li>
+                        <li><a href="#open_source">Open Source</a></li>
+                        <li><a href="#speaking">Speaking</a></li>
+                        <li><a href="#writing">Writing</a></li>
+                    </ul>
+                    <button data-rel="close" data-theme="b" data-icon="delete">Close</button>
+                </nav>
+            </div>
+            <div data-role="header">
+                <a href="#mainNav" data-icon="bars">Menu</a>
+                <h1>TJ VanToll</h1>
+            </div>
+            <div data-role="content">
+                <h2>
+                    Contact
+                </h2>
+                <p>
+                    This is how you can talk to me.
+                </p>
+                <ul class="info-list">
+                    <li>Twitter: <a href="https://twitter.com/tjvantoll">tjvantoll</a></li>
+                    <li>GitHub: <a href="https://github.com/tjvantoll">tjvantoll</a></li>
+                    <li>Email: <a href="mailto:tj.vantoll@gmail.com">tj.vantoll@gmail.com</a></li>
+                </ul>
+            </div>
+        </div>
+    
+        <div data-role="page" id="education">
+            <div data-role="panel" id="mainNav" data-theme="a">
+                <p>
+                    This is the menu. You pick things here.
+                </p>
+                <nav>
+                    <ul data-role="listview">
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                        <li>Education</li>
+                        <li><a href="#experience">Experience</a></li>
+                        <li><a href="#open_source">Open Source</a></li>
+                        <li><a href="#speaking">Speaking</a></li>
+                        <li><a href="#writing">Writing</a></li>
+                    </ul>
+                    <button data-rel="close" data-theme="b" data-icon="delete">Close</button>
+                </nav>
+            </div>
+            <div data-role="header">
+                <a href="#mainNav" data-icon="bars">Menu</a>
+                <h1>TJ VanToll</h1>
+            </div>
+            <div data-role="content">
+                <h2>
+                    Education
+                </h2>
+                <p>
+                    I've done a bit of "<i>formal</i>" learning.
+                </p>
+                <ul class="info-list">
+                   <li>
+                       <b>Central Michigan University</b>
+                       <ul>
+                           <li>Bachelor of Science, Computer Science, 2007</li>
+                           <li>Graduated Summa Cum Laude, 3.91 GPA</li>
+                       </ul>
+                   </li>
+                   <li>
+                       <b>Java</b>
+                       <ul>
+                           <li>OCJP (<b>O</b>racle <b>C</b>ertified <b>J</b>ava <b>P</b>rogrammer) Certified</li>
+                           <li>OCWCD (<b>O</b>racle <b>C</b>ertified <b>W</b>eb <b>C</b>omponent <b>D</b>eveloper) Certified</li>
+                       </ul>
+                   </li>
+                </ul>
+            </div>
+        </div>
+    
+        <div data-role="page" id="experience">
+            <div data-role="panel" id="mainNav" data-theme="a">
+                <p>
+                    This is the menu. You pick things here.
+                </p>
+                <nav>
+                    <ul data-role="listview">
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                        <li><a href="#education">Education</a></li>
+                        <li>Experience</li>
+                        <li><a href="#open_source">Open Source</a></li>
+                        <li><a href="#speaking">Speaking</a></li>
+                        <li><a href="#writing">Writing</a></li>
+                    </ul>
+                    <button data-rel="close" data-theme="b" data-icon="delete">Close</button>
+                </nav>
+            </div>
+            <div data-role="header">
+                <a href="#mainNav" data-icon="bars">Menu</a>
+                <h1>TJ VanToll</h1>
+            </div>
+            <div data-role="content">
+                <h2>
+                    Experience
+                </h2>
+                <p>
+                    These are places I've driven to on a regular basis.
+                </p>
+                <ul class="info-list">
+                   <li>
+                       <b>LiquidWeb</b>
+                       <ul>
+                           <li>Web Developer: May 2012 - Present</li>
+                           <li>Instituted CSS preprocessing, AMD modules, client side templating, and jshint in the company's workflows.</li>
+                           <li>Led development of a mobile site for customers to manage their servers and account.</li>
+                           <li>Made a marketing demo to celebrate Liquid Web's 15th anniversary - <a href="http://www.liquidweb.com/15-year/">http://www.liquidweb.com/15-year/</a></li>
+                       </ul>
+                   </li>
+                   <li>
+                       <b>Auto-Owners Insurance</b>
+                       <ul>
+                            <li>Software Engineer, 2007 - 2012</li>
+                            <li>Technical lead of a public automobile insurance quoting web application (available at www.auto-owners.com).</li>
+                            <li>Created and managed corporate-wide JavaScript and CSS files used in ~50 applications.</li>
+                            <li>Secured public & internal facing applications against common exploits (XSS, SQL injection, etc).</li>
+                            <li>Optimized the front end code of a variety of applications.</li>
+                       </ul>
+                   </li>
+                </ul>
+            </div>
+        </div>
+        
+        <div data-role="page" id="open_source">
+            <div data-role="panel" id="mainNav" data-theme="a">
+                <p>
+                    This is the menu. You pick things here.
+                </p>
+                <nav>
+                    <ul data-role="listview">
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                        <li><a href="#education">Education</a></li>
+                        <li><a href="#experience">Experience</a></li>
+                        <li>Open Source</li>
+                        <li><a href="#speaking">Speaking</a></li>
+                        <li><a href="#writing">Writing</a></li>
+                    </ul>
+                    <button data-rel="close" data-theme="b" data-icon="delete">Close</button>
+                </nav>
+            </div>
+            <div data-role="header">
+                <a href="#mainNav" data-icon="bars">Menu</a>
+                <h1>TJ VanToll</h1>
+            </div>
+            <div data-role="content">
+                <h2>
+                    Open Source
+                </h2>
+                <p>
+                    This is a list of open source-y things that I've done.
+                </p>
+                <ul class="info-list">
+                    <li>
+                        <b>jQuery</b>
+                        <ul>
+                            <li>Contributed documentation and support to a variety of projects including core, UI, and mobile.</li>
+                            <li>Led jQuery UI bug triage September 2012 - present.</li>
+                            <li>jQuery UI core team member since 2012.</li>
+                            <li>Contributed 20+ bug fixes to jQuery UI.</li>
+                            <li>Currently working on the rewrite of jQuery UI's datepicker.</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <b>Blog</b>
+                        <ul>
+                            <li>Published completely open source: <a href="https://github.com/tjvantoll/tjvantoll.github.com">https://github.com/tjvantoll/tjvantoll.github.com</a>.</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <b>Other</b>
+                        <ul>
+                            <li>Contributed bug fixes and documentation to a number of open source projects such as <a href="https://github.com/necolas/normalize.css">normalize.css</a> and <a href="https://github.com/html5rocks/www.html5rocks.com">html5rocks.com</a>.</li>
+                        </ul>                        
+                    </li>
+                </ul>
+            </div>
+        </div>
+    
+        <div data-role="page" id="speaking">
+            <div data-role="panel" id="mainNav" data-theme="a">
+                <p>
+                    This is the menu. You pick things here.
+                </p>
+                <nav>
+                    <ul data-role="listview">
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                        <li><a href="#education">Education</a></li>
+                        <li><a href="#experience">Experience</a></li>
+                        <li><a href="#open_source">Open Source</a></li>
+                        <li>Speaking</li>
+                        <li><a href="#writing">Writing</a></li>
+                    </ul>
+                    <button data-rel="close" data-theme="b" data-icon="delete">Close</button>
+                </nav>
+            </div>
+            <div data-role="header">
+                <a href="#mainNav" data-icon="bars">Menu</a>
+                <h1>TJ VanToll</h1>
+            </div>
+            <div data-role="content">
+                <h2>
+                    Speaking
+                </h2>
+                <p>
+                    I speak; occassionally people listen. Below is a list of talks that I've given with links to slides and recordings (if they were made).
+                </p>
+                <table data-role="table" data-mode="columntoggle" id="speaking_table" class="ui-body-d ui-responsive table-stripe" data-column-btn-text="Columns to display...">
+                    <thead>
+                        <tr class="ui-bar-b">
+                            <th data-priority="1">Date</th>
+                            <th>Title</th>
+                            <th data-priority="3">Location</th>
+                            <th data-priority="2">Slides</th>
+                            <th data-priority="4">Video</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Jun 2013</td>
+                            <td>jQuery UI Widgets vs. HTML5</td>
+                            <td>Portland, Oregon</td>
+                            <td><a href="http://tjvantoll.com/speaking/slides/2013/UI-Widgets-vs-HTML5">Slides</a></td>
+                            <td><a href="http://www.youtube.com/watch?v=Q6Bjs4BoBTc">Video</a></td>
+                        </tr>
+                        <tr>
+                            <td>May 2013</td>
+                            <td>Constraint Validation: Native Client Side Validation for Web Forms</td>
+                            <td>Grand Rapids, MI</td>
+                            <td><a href="http://tjvantoll.com/speaking/slides/2013/Constraint-Validation/">Slides</a></td>
+                            <td>-</td>
+                        </tr>
+                        <tr>
+                            <td>Mar 2013</td>
+                            <td>Submitting Bugs the Right Way</td>
+                            <td>Toronto, Ontario</td>
+                            <td><a href="http://tjvantoll.com/speaking/slides/2013/Submitting-Bugs-the-Right-Way">Slides</a></td>
+                            <td><a href="http://www.youtube.com/watch?v=yZkTGMsgLR4&feature=youtu.be">Video</a></td>
+                        </tr>
+                        <tr>
+                            <td>Oct 2012</td>
+                            <td>Front End Web Efficiency - The Top Ten</td>
+                            <td>Lansing, MI</td>
+                            <td><a href="http://tjvantoll.com/speaking/slides/2012/Efficiency-Top-Ten?plain">Slides</a></td>
+                            <td>-</td>
+                        </tr>
+                        <tr>
+                            <td>Aug 2012</td>
+                            <td>LESS 101</td>
+                            <td>Lansing, MI</td>
+                            <td><a href="http://tjvantoll.com/speaking/slides/2012/LESS-101?plain">Slides</a></td>
+                            <td>-</td>
+                        </tr>
+                        <tr>
+                            <td>Mar 2012</td>
+                            <td>JavaScript for the Java Developer</td>
+                            <td>Lansing, MI</td>
+                            <td><a href="/speaking/slides/2012/JavaScript-for-the-Java-Developer">Slides</a></td>
+                            <td>-</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    
+        <div data-role="page" id="writing">
+            <div data-role="panel" id="mainNav" data-theme="a">
+                <p>
+                    This is the menu. You pick things here.
+                </p>
+                <nav>
+                    <ul data-role="listview">
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                        <li><a href="#education">Education</a></li>
+                        <li><a href="#experience">Experience</a></li>
+                        <li><a href="#open_source">Open Source</a></li>
+                        <li><a href="#speaking">Speaking</a></li>
+                        <li>Writing</li>
+                    </ul>
+                    <button data-rel="close" data-theme="b" data-icon="delete">Close</button>
+                </nav>
+            </div>
+            <div data-role="header">
+                <a href="#mainNav" data-icon="bars">Menu</a>
+                <h1>TJ VanToll</h1>
+            </div>
+            <div data-role="content">
+                <h2>
+                    Writing
+                </h2>
+                <p>
+                    I write on my personal blog at <a href="http://tjvantoll.com">http://tjvantoll.com</a> and have written for popular publications such as <a href="http://www.html5rocks.com/en/">HTML5 Rocks</a> and <a href="http://msdn.microsoft.com/en-us/magazine/ee729207.aspx">Script Junkie</a>. I am also currently writing a book on <a href="http://jqueryui.com">jQuery UI</a> for <a href="http://manning.com/">Manning</a>.
+                </p>
+                
+                <p>
+                    Below is a list of my popular posts. A full list is at <a href="http://tjvantoll.com/blog/archives/">http://tjvantoll.com/blog/archives/</a>.
+                </p>
+                
+                <ul class="ui-listview" id="formatted-list">
+                    <li class="ui-li ui-li-divider ui-btn ui-bar-b">My Blog</li>
+                    <li>
+                        <a href="http://tjvantoll.com/2013/04/15/list-of-pseudo-elements-to-style-form-controls/">List of Pseudo-Elements to Style Form Controls</a>
+                        <ul>
+                            <li>Written: April 15th, 2013</li>
+                            <li>Featured on <a href="http://html5weekly.com/archive/85.html">HTML5 Weekly</a></li>
+                            <li>Featured on <a href="http://css-weekly.com/issue-55/">CSS Weekly</a></li>
+                            <li>Featured on <a href="http://appendto.com/modern-web-observer/archive/issue-12/">Modern Web Observer</a></li>
+                        </ul>
+                    </li>
+                    <li class="bar"></li>
+                    <li>
+                        <a href="http://tjvantoll.com/2012/07/15/native-html5-number-picker-vs-jquery-uis-spinner-which-to-use/">Native HTML5 Number Picker and jQuery UI’s Spinner - Which to Use?</a>
+                        <ul>
+                            <li>Written: July 15th, 2012</li>
+                        </ul>
+                    </li>
+                    <li class="bar"></li>
+                    <li>
+                        <a href="http://tjvantoll.com/2012/06/30/creating-a-native-html5-datepicker-with-a-fallback-to-jquery-ui/">Creating a Native HTML 5 Datepicker with a Fallback to jQuery UI</a>
+                        <ul>
+                            <li>Written: June 30th, 2012</li>
+                        </ul>
+                    </li>
+                    <li class="bar"></li>
+                    <li>
+                        <a href="http://tjvantoll.com/2012/06/15/detecting-print-requests-with-javascript/">Detecting Print Requests with JavaScript</a>
+                        <ul>
+                            <li>Written: June 15th, 2012</li>
+                        </ul>
+                    </li>
+                    <li class="bar"></li>
+                    <li>
+                        <a href="http://tjvantoll.com/2012/05/02/showmodaldialog-what-it-is-and-why-you-should-never-use-it/">window.showModalDialog: What it is and Why You Should Never Use it</a>
+                        <ul>
+                            <li>Written: May 2nd, 2012</li>
+                        </ul>
+                    </li>
+
+                    <li class="ui-li ui-li-divider ui-btn ui-bar-b">HTML5 Rocks</li>
+                    <li>
+                        <a href="http://www.html5rocks.com/en/tutorials/forms/constraintvalidation/">Constraint Validation: Native Client Side Validation for Web Forms</a>
+                        <ul>
+                            <li>Written: October 17th, 2012</li>
+                        </ul>
+                    </li>
+                    
+                    <li class="ui-li ui-li-divider ui-btn ui-bar-b">Script Junkie</li>
+                    <li>
+                        <a href="http://msdn.microsoft.com/en-us/magazine/dn133614.aspx">HTML5 Datalists: What They Are They and When to Use Them</a>
+                        <ul>
+                            <li>Written: April 16th, 2013</li>
+                            <li>Featured on <a href="http://html5weekly.com/archive/87.html">HTML5 Weekly</a></li>
+                        </ul>
+                    </li>
+                    <li class="bar"></li>
+                    <li>
+                        <a href="http://msdn.microsoft.com/en-us/magazine/dn127078.aspx">Creating Custom Tooltips with jQuery UI</a>
+                        <ul>
+                            <li>Written: March 6th, 2013</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        
+        <script src="js/PictureCube.js"></script>
+        <script src="js/app.js"></script>
+    </body>
+</html>
