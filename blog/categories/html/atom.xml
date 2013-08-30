@@ -1,0 +1,654 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: HTML | TJ VanToll]]></title>
+  <link href="http://tjvantoll.com/blog/categories/html/atom.xml" rel="self"/>
+  <link href="http://tjvantoll.com/"/>
+  <updated>2013-08-30T14:07:29-04:00</updated>
+  <id>http://tjvantoll.com/</id>
+  <author>
+    <name><![CDATA[TJ VanToll]]></name>
+    <email><![CDATA[tj.vantoll@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Using jQuery UI Tabs with the &lt;base&gt; Tag]]></title>
+    <link href="http://tjvantoll.com/2013/02/17/using-jquery-ui-tabs-with-the-base-tag/"/>
+    <updated>2013-02-17T21:14:00-05:00</updated>
+    <id>http://tjvantoll.com/2013/02/17/using-jquery-ui-tabs-with-the-base-tag</id>
+    <content type="html"><![CDATA[<p>As there have been <a href="http://bugs.jqueryui.com/ticket/7822">numerous bug submissions</a> for this, I feel the need to explain how to properly use <a href="http://jqueryui.com/tabs">jQuery UI's tab widget</a> with a <code>&lt;base&gt;</code> tag.  Let's start with what the <code>&lt;base&gt;</code> tag is intended for.</p>
+
+<h3>The &lt;base&gt; Element</h3>
+
+<p><a href="https://developer.mozilla.org/en-US/docs/HTML/Element/base">Per MDN</a> the <code>&lt;base&gt;</code> element specifies the base URL to use for all relative URLs contained within a document.</p>
+
+<!--more-->
+
+
+<p>Consider the following example:</p>
+
+<p><code>html
+&lt;base href="http://foo.com"&gt;
+&lt;a href="bar.html"&gt;Bar&lt;/a&gt;
+</code></p>
+
+<p>Let's assume this HTML appears on this domain (<code>http://tjvantoll.com</code>).  When the link is clicked on, the browser will navigate to <code>http://foo.com/bar.html</code> rather than <code>http://tjvantoll.com/bar.html</code>.</p>
+
+<p>It's important to note that hash links are also relative to the specified base.  Therefore on the following:</p>
+
+<p><code>html
+&lt;base href="http://foo.com"&gt;
+&lt;a href="#bar"&gt;Bar&lt;/a&gt;
+</code></p>
+
+<p>When the link is click on, the browser will navigate to <code>http://foo.com#bar</code> and NOT <code>http://tjvantoll.com#bar</code>.  This detail is important; it's the root cause of confusion when using a <code>&lt;base&gt;</code> tag with the tabs widget.</p>
+
+<h3>jQuery UI Tabs</h3>
+
+<p>Here is the intended HTML structure to be used by the tabs widget:</p>
+
+<p>``` html</p>
+
+<div id="tabs">
+    <ul>
+        <li><a href="#tab-1">One</a></li>
+        <li><a href="#tab-2">Two</a></li>
+    </ul>
+    <div id="tab-1">Contents of tab one.</div>
+    <div id="tab-2">Contents of tab two.</div>
+</div>
+
+
+
+
+<script>$( "#tabs" ).tabs();</script>
+
+
+<p>```</p>
+
+<p>Which produces the following:</p>
+
+<p><img src="http://tjvantoll.com/images/posts/2013-02-17/tabs.png" alt="Default look of jQuery UI's tabs"></p>
+
+<p>In this example both links begin with a hash (<code>#</code>), indicating that their content is located on the current page.  If that is not the case, the tabs widget will retrieve the tab's contents server side via an XHR call.  Consider the following:</p>
+
+<p>``` html</p>
+
+<div id="tabs">
+    <ul>
+        <li><a href="#local">Local</a></li>
+        <li><a href="external">External</a></li>
+    </ul>
+    <div id="local">Contents of the local tab.</div>
+</div>
+
+
+
+
+<script>$( "#tabs" ).tabs();</script>
+
+
+<p>```</p>
+
+<p>Here the local link will work as in the previous example - when it is clicked on, the tabs widget will simply display the contents of the <code>#local</code> container.</p>
+
+<p>However, when the external link is clicked, the tabs widget will perform an XHR request to retrieve the contents.  Assuming this HTML is located on <code>http://tjvantoll.com</code>, an XHR GET will be performed for <code>http://tjvantoll.com/external</code>.  The contents returned are dynamically added to the DOM and displayed.</p>
+
+<p>The markup pattern used here is no accident.  Consider a user that views this HTML without JavaScript enabled.  The local link will move the user's focus to the <code>#local</code> container on <code>http://tjvantoll.com</code>.  The external link will do a full page navigation to <code>http://tjvantoll.com/external</code>.  The markup is designed to enhance the default browser behavior and to degrade gracefully when JavaScript isn't present.</p>
+
+<h3>&lt;base&gt; + tabs</h3>
+
+<p>Given the descriptions above, the behavior of the <code>&lt;base&gt;</code> tag with the tabs widget shouldn't be surprising.  Here's the first example given for the tabs widget again.  This time, a <code>&lt;base&gt;</code> tag to <code>http://foo.com</code> has been added:</p>
+
+<p>``` html
+<base href="http://foo.com"></p>
+
+<div id="tabs">
+    <ul>
+        <li><a href="#tab-1">One</a></li>
+        <li><a href="#tab-2">Two</a></li>
+    </ul>
+    <div id="tab-1">Contents of tab one.</div>
+    <div id="tab-2">Contents of tab two.</div>
+</div>
+
+
+
+
+<script>$( "#tabs" ).tabs();</script>
+
+
+<p>```</p>
+
+<p>Let's again assume this HTML is located on <code>http://tjvantoll.com</code>.  Because of the <code>&lt;base&gt;</code> tag, the links used in the tabs widget are actually external links to <code>http://foo.com</code>.  Therefore, upon instantiation, the tabs widget will attempt to load the contents of the first tab from <code>http://foo.com</code>.</p>
+
+<p>If you are having trouble understanding, try the example above with JavaScript disabled.  When the first link is clicked on, the browser will navigate to <code>http://foo.com</code> regardless of the domain the page is viewed on.</p>
+
+<h3>Fixes</h3>
+
+<p>From the numerous bug reports, it seems that a lot of people have applications with <code>&lt;base&gt;</code> tags and want hashed links to be relative to the current page.  How can you fix your application?</p>
+
+<p>1) <strong>Remove the <code>&lt;base&gt;</code> tag.</strong>  It's that simple.  After the removal, the tabs widget will never attempt to load external content from any links with leading hashes.  Of course, this approach requires changing any other links on the page that are dependent on the <code>&lt;base&gt;</code> tag's leading path.</p>
+
+<p>2) <strong>Provide full URLs on links used to build the tabs widget.</strong>  If approach #1 isn't feasible, you can also provide a fully qualified URL in the links used to build the tabs widget.  Here's the earlier example modified to show this approach:</p>
+
+<p>``` html
+<base href="http://foo.com"></p>
+
+<div id="tabs">
+    <ul>
+        <li><a href="http://tjvantoll.com#tab-1">One</a></li>
+        <li><a href="http://tjvantoll.com#tab-2">Two</a></li>
+    </ul>
+    <div id="tab-1">Contents of tab one.</div>
+    <div id="tab-2">Contents of tab two.</div>
+</div>
+
+
+
+
+<script>$( "#tabs" ).tabs();</script>
+
+
+<p>```</p>
+
+<p>Since the links in the tabs are now fully qualified paths to the current page, the tabs widget will not perform a request to retrieve external content.</p>
+
+<p>A more robust way of handling this would be to inject the current path server side.  For example the following PHP could be used to inject the link used in the first tab above:</p>
+
+<p><code>'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'] . '#tab-1'</code></p>
+
+<p>3) <strong>Add the full URLs via JavaScript.</strong></p>
+
+<div class="warning" style="display: block;">
+    This is not the right way to fix this problem.  I'm only providing this because I realize the realities of working on enormous projects or projects where you do not have full control over the HTML.
+</div>
+
+
+<p>This is the same approach as #2, but the appropriate links are changed in JavaScript instead of forcing you to fix every link manually.</p>
+
+<p>The hack is shown below, simply call the <code>makeTabs</code> function with the selector used to create the tabs widget:</p>
+
+<p>``` javascript
+var makeTabs = function(selector) {</p>
+
+<pre><code>$( selector )
+    .find( "ul a" ).each( function() {
+        var href = $( this ).attr( "href" ),
+            newHref = window.location.protocol + '//' + window.location.hostname + 
+                window.location.pathname + href;
+
+        if ( href.indexOf( "#" ) == 0 ) {
+            $( this ).attr( "href", newHref );
+        }
+    })
+$( selector ).tabs();
+</code></pre>
+
+<p>};</p>
+
+<p>makeTabs( "#tabs" );
+```</p>
+
+<p>As noted by the warning box, you should really fix this the right way.  But desperate times call for desperate measures.  You've been warned.</p>
+
+<h3>The End</h3>
+
+<p>Hopefully if you didn't understand how to use the <code>&lt;base&gt;</code> tag and jQuery UI's tab widget together you do now.  If you are still having issues after reading through this please let me know in the comments.</p>
+
+<h3>Update (March 6th, 2013)</h3>
+
+<p>Per comments from rubensa, I've removed <code>window.location.origin</code> from my JavaScript workaround since it's a WebKit only property.  He also pointed out that if you might need to explicitly include a port number in the URL if you're using it in your local development.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Using the body Element as a Top Level Container - Is it Safe Yet?]]></title>
+    <link href="http://tjvantoll.com/2013/01/05/is-it-safe-to-use-the-body-as-a-top-level-container-yet/"/>
+    <updated>2013-01-05T14:21:00-05:00</updated>
+    <id>http://tjvantoll.com/2013/01/05/is-it-safe-to-use-the-body-as-a-top-level-container-yet</id>
+    <content type="html"><![CDATA[<p>View source on almost any web page and you'll likely see the following:</p>
+
+<p>``` html Common HTML Template
+<html></p>
+
+<pre><code>&lt;head&gt;&lt;/head&gt;
+&lt;body&gt;
+    &lt;div id="wrapper"&gt;
+        &lt;!-- All the things --&gt;
+    &lt;/div&gt;
+&lt;/body&gt;
+</code></pre>
+
+<p></html>
+```</p>
+
+<p>The use of a wrapper or container <code>div</code> around the page is fairly universal.  It is commonly used to perform tasks such as centering a page's content or providing a shadow or border to frame it.  But, since the <code>body</code> element is a necessity in the markup, why can't it be styled directly instead?  Why is a wrapper <code>div</code> used?</p>
+
+<p>Historically there have been a number of issues with using the <code>body</code> element as a top level container in old versions of Internet Explorers.  If you're supporting IE >= 8 you're good, but there are some things <a href="#now">you should be aware of</a>.</p>
+
+<!--more-->
+
+
+<h3>IE 5.5</h3>
+
+<p>To get to the origins of the wrapper <code>div</code> let's go way back.  A pretty common practice is to center the top level container using <code>margin: 0 auto</code>, and this works fine in all browsers... back to IE 5.5.  IE 5.5 did not support <code>auto</code> margins so this approach did not work.</p>
+
+<p>To center the top level container in IE 5.5 you had to make use of <code>text-align: center</code> as such:</p>
+
+<p>``` css Centering the top level container in IE 5.5
+body {</p>
+
+<pre><code>text-align: center;
+</code></pre>
+
+<p>}</p>
+
+<h1>wrapper {</h1>
+
+<pre><code>width: 1000px;
+text-align: left; /* counteract the declaration on body */
+</code></pre>
+
+<p>}
+```</p>
+
+<p><code>text-align: center</code> <em>should</em> only affect inline elements, but IE 5.5 incorrectly applied it to block elements as well.  (Note: The <code>text-align: center</code> bug was fixed in IE6 standards mode, but the behavior remained in Internet Explorer's quirks mode to this day.)</p>
+
+<h3>IE6</h3>
+
+<p>IE6 implemented <code>auto</code> margins, so <code>margin: 0 auto</code> was now safe to use on the <code>body</code>.  Additionally, IE6 fully supports adding a <code>width</code>, <code>padding</code>, <code>margin</code>, and <code>border</code> to the body element.  Take the following CSS:</p>
+
+<p>``` css
+body{</p>
+
+<pre><code>width: 90%;
+border: 2px solid red;
+background-color: black;
+color: white;
+padding: 10px;
+margin: 0 auto;
+</code></pre>
+
+<p>}
+```</p>
+
+<p>The layout renders the same in IE6 as it does in the latest version of Chrome (23 as of this writing).</p>
+
+<div style="overflow: hidden;">
+    <div style="float: left; width: 49%;">
+        <h4>IE6</h4>
+        <img title="Styling the body element in IE6" src="http://tjvantoll.com/images/posts/2013-01-05/IE6.png">
+    </div>
+    <div style="float: right; width: 49%;">
+        <h4>Chrome</h4>
+        <img title="Styling the body element in Chrome" src="http://tjvantoll.com/images/posts/2013-01-05/Chrome.png">
+    </div>
+</div>
+
+
+<p>Believe it or not using the <code>body</code> element as a top level container is actually safe in IE6.</p>
+
+<p><a name="zoom"></a></p>
+
+<h3>IE7</h3>
+
+<p>If there are no issues with IE6 why am I still writing?  IE7 introduced a feature new to Internet Explorer, zoom, and with it came a new bug.</p>
+
+<p>When a <code>margin</code> or <code>width</code> is applied to the <code>body</code> and the user zooms, IE7 incorrectly treats the left edge of the <code>body</code> as the edge of the viewport.  This shift bumps content on the right hand side of the page outside of the screen.  The image below shows the result of a zoomed in window and styled <code>body</code> in IE7.</p>
+
+<p><img src="http://tjvantoll.com/images/posts/2013-01-05/IE7Zoom.png" title="Zooming in IE7" style="max-height: 400px;"></p>
+
+<p>This issue is not present using a wrapper <code>div</code>.</p>
+
+<h3>Beyond IE7</h3>
+
+<p>In my testing beyond IE7 there are no major issues using the <code>body</code> element as a top level container.  There are however a few things to be aware of.</p>
+
+<p><a name="now"></a></p>
+
+<h3>Positioning</h3>
+
+<p>Any absolutely positioned elements will be positioned relative to the viewport rather than the newly placed <code>body</code>.  To fix this set <code>position: relative</code> on the <code>body</code> as such:</p>
+
+<p>``` css Positioning elements relative to the body rather than the viewport
+body {</p>
+
+<pre><code>margin: 0 auto;
+width: 90%;
+position: relative;
+</code></pre>
+
+<p>}
+```</p>
+
+<h3>Backgrounds</h3>
+
+<p>Backgrounds applied to the <code>body</code> will take up whole page regardless of margins.  Consider the following:</p>
+
+<p>``` css
+body {</p>
+
+<pre><code>background: black;
+margin: 0 auto;
+width: 200px;
+</code></pre>
+
+<p>}
+```</p>
+
+<p>The screenshot below shows this.  The background of the entire viewport is black rather than a centered 200px block.</p>
+
+<p><img src="http://tjvantoll.com/images/posts/2013-01-05/background-before.png" title="background on a body element" style="max-height: 300px;"></p>
+
+<p>This can be worked around by applying a <code>background</code> on the <code>html</code> element:</p>
+
+<p>``` css
+html {</p>
+
+<pre><code>background: white;
+height: 100%;
+</code></pre>
+
+<p>}
+body {</p>
+
+<pre><code>background: black;
+margin: 0 auto;
+width: 200px;
+min-height: 100%;
+</code></pre>
+
+<p>}
+```</p>
+
+<p>Note the <code>height</code> that was added to the <code>html</code> element and the <code>min-height</code> added to the <code>body</code>.  This ensures that the <code>background</code> applied to the <code>body</code> element will take up the entire height of the screen.</p>
+
+<p>The rules above will now render as expected:</p>
+
+<p><img src="http://tjvantoll.com/images/posts/2013-01-05/background-after.png" title="background on a body element with background on html element" style="max-height: 300px;"></p>
+
+<h3>scrollHeight and scrollWidth</h3>
+
+<p>In WebKit based browsers the <code>body</code>'s <a href="https://developer.mozilla.org/en-US/docs/DOM/element.scrollHeight">scrollHeight</a> and <a href="https://developer.mozilla.org/en-US/docs/DOM/element.scrollWidth">scrollWidth</a> properties are unaffected by declared <code>height</code> and <code>width</code> styles.  For example:</p>
+
+<p>``` html scrollHeight and scrollWidth on the body element
+<html></p>
+
+<pre><code>&lt;head&gt;&lt;/head&gt;
+&lt;body style="height: 200px; width: 200px;"&gt;
+    &lt;script&gt;
+        console.log(document.body.scrollHeight);
+        console.log(document.body.scrollWidth);
+    &lt;/script&gt;
+&lt;/body&gt;
+</code></pre>
+
+<p></html>
+```</p>
+
+<p>This will log <code>200</code> for both in all modern browsers with the exception of WebKit based ones.  WebKit will return the height and width of the viewport.</p>
+
+<p>While you are unlikely to run into this directly, you may use a library that does.  For example, this <a href="http://bugs.jqueryui.com/ticket/8940">causes an issue</a> trying to constrain <a href="http://jqueryui.com/draggable/">jQuery UI draggables</a> within the <code>body</code>.</p>
+
+<h3>Is it Safe to Use Yet?</h3>
+
+<p>The <a href="#zoom">zoom issue in IE7</a> is bad, but if you're no longer supporting IE7 it's safe to drop the wrapper <code>div</code> and style the <code>body</code> directly.</p>
+
+<p>That being said, there's no harm in leaving a wrapper <code>div</code> in place.  So if you have any doubt stick with <code>&lt;div id="wrapper"&gt;&lt;/div&gt;</code>.</p>
+
+<p>Know of any other bugs with styling the <code>body</code> element?  Let me know in the comments.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[The Enter Key should Submit Forms, Stop Suppressing it]]></title>
+    <link href="http://tjvantoll.com/2013/01/01/enter-should-submit-forms-stop-messing-with-that/"/>
+    <updated>2013-01-01T15:54:00-05:00</updated>
+    <id>http://tjvantoll.com/2013/01/01/enter-should-submit-forms-stop-messing-with-that</id>
+    <content type="html"><![CDATA[<p>I try to do most of my work and play on the internet with the keyboard.  In the course of my internet-ing there's one unfortunate trend that I've noticed; an increasing number of sites are not allowing the enter key to submit a form.  Before I tell you why you care, let's look at how this should work.</p>
+
+<!--more-->
+
+
+<h3>Enter = Submit</h3>
+
+<p>Take the following basic form:</p>
+
+<p>``` html
+<form></p>
+
+<pre><code>&lt;label for="name"&gt;Name:&lt;/label&gt;
+&lt;input type="text" name="name" id="name"&gt;
+&lt;input type="submit" value="Submit"&gt;
+</code></pre>
+
+<p></form>
+```</p>
+
+<p>If you have focus in the textbox and hit enter, the form will be submitted automatically.  This behavior is consistent across all browsers and is known as implicit submission.  So why is this important?</p>
+
+<h3>Accessibility</h3>
+
+<p>Implicit submission is vital to assistive technologies and impaired users that cannot use a mouse at all.  From the HTML5 specification:</p>
+
+<p><blockquote><p>There are pages on the Web that are only usable if there is a way to implicitly submit forms, so user agents [browsers] are strongly encouraged to support this.</p><footer><strong>HTML 5 specification</strong> <cite><a href='http://www.whatwg.org/specs/web-apps/current-work/multipage/association-of-controls-and-forms.html#implicit-submission'>www.whatwg.org/specs/web-apps/&hellip;</a></cite></footer></blockquote></p>
+
+<p>The spec strongly encourages browsers to allow implicit submission; they all do.</p>
+
+<h3>User Expectations</h3>
+
+<p>Many users have an expectation that implicit submission will just work.  Interfering with this leads to a negative user experience for these users.</p>
+
+<h3>How to Prevent Implicit Submission</h3>
+
+<p>What are sites doing to keep this from happening?  Here's a few things I've seen.</p>
+
+<h4>No Submit Buttons</h4>
+
+<p>Many sites do not have a submit button within the form.  From the spec here's how browsers determine what to do when enter is clicked.</p>
+
+<p><blockquote><p>If the user agent supports letting the user submit a form implicitly (for example, on some platforms hitting the "enter" key while a text field is focused implicitly submits the form), then doing so for a form whose default button has a defined activation behavior must cause the user agent to run synthetic click activation steps on that default button.</p><footer><strong>HTML 5 specification</strong> <cite><a href='http://www.whatwg.org/specs/web-apps/current-work/multipage/association-of-controls-and-forms.html#implicit-submission'>www.whatwg.org/specs/web-apps/&hellip;</a></cite></footer></blockquote></p>
+
+<p>Basically, if the user hits enter when a text field is focused, the browser should find the first submit button in the form and click it.</p>
+
+<p><blockquote><p>If the form has no submit button, then the implicit submission mechanism must do nothing if the form has more than one field that blocks implicit submission, and must submit the form element from the form element itself otherwise.</p></p><p><p>For the purpose of the previous paragraph, an element is a field that blocks implicit submission of a form element if it is an input element whose form owner is that form element and whose type attribute is in one of the following states: Text, Search, URL, Telephone, E-mail, Password, Date and Time, Date, Month, Week, Time, Local Date and Time, Number</p><footer><strong>HTML 5 specification</strong> <cite><a href='http://www.whatwg.org/specs/web-apps/current-work/multipage/association-of-controls-and-forms.html#implicit-submission'>www.whatwg.org/specs/web-apps/&hellip;</a></cite></footer></blockquote></p>
+
+<p>So, in a form with no submit buttons, implicit submission will be done if only one input is present.  Therefore, pressing enter in this textbox will submit the form:</p>
+
+<p>``` html
+<form></p>
+
+<pre><code>&lt;label for="name"&gt;Name:&lt;/label&gt;
+&lt;input type="text" name="name" id="name"&gt;
+</code></pre>
+
+<p></form>
+```</p>
+
+<p>But in this form it will not because there are multiple fields:</p>
+
+<p>``` html
+<form></p>
+
+<pre><code>&lt;label for="name"&gt;Name:&lt;/label&gt;
+&lt;input type="text" name="name" id="name"&gt;
+&lt;label for="address"&gt;Address:&lt;/label&gt;
+&lt;input type="text" name="address" id="address"&gt;
+</code></pre>
+
+<p></form>
+```</p>
+
+<p>Therefore, if you have a form with more than one input field, always include a submit button.  Specifically an <code>&lt;input&gt;</code> with the <code>type="submit"</code> attribute, or a <code>&lt;button&gt;</code> element should be present.  (Note: IE7 has a bug where the <code>type</code> attribute of a <code>&lt;button&gt;</code> defaults to <code>button</code> instead of <code>submit</code>.  Therefore for IE7 compatibility you'll need <code>&lt;button type="submit"&gt;</code>.)</p>
+
+<p>If you need to run some JavaScript before the form is submitted (validation, data manipulation, etc), do it in a <code>submit</code> event handler on the form, not a <code>click</code> handler on a button.</p>
+
+<h4>No &lt;form&gt;</h4>
+
+<p>I've seen a few forms that do not use the <code>&lt;form&gt;</code> HTML tag.  Why would they do that?</p>
+
+<p>With modern day browsers and JavaScript libraries it's easy to send data to the server via AJAX.  Because an AJAX request does not require a true <code>&lt;form&gt;</code> tag, it is often omitted.  However, much like implicit submission, surrounding form data with a true <code>&lt;form&gt;</code> tag is vital for accessibility.  Most screen readers have a <a href="http://www.htctu.fhda.edu/trainings/manuals/tutorials/readweb/forms.htm">mode specifically for filling out forms</a>, and by omitting a true <code>&lt;form&gt;</code> tag you risk this mode not being activated.</p>
+
+<h4>Explicit Prevention</h4>
+
+<p>Finally, it's also quite easy to prevent implicit submission in JavaScript.  Take the following example:</p>
+
+<p>``` html
+<form></p>
+
+<pre><code>&lt;label for="name"&gt;Name:&lt;/label&gt;
+&lt;input type="text" name="name" id="name"&gt;
+&lt;input type="submit" value="Submit"&gt;
+</code></pre>
+
+<p></form></p>
+
+<script>
+    document.getElementById('name').addEventListener('keypress', function(event) {
+        if (event.keyCode == 13) {
+            event.preventDefault();
+        }
+    });
+</script>
+
+
+<p>```</p>
+
+<p>This sets up a <code>keypress</code> event handler that prevents the default action (implicit submission) from occurring when the enter key is pressed.</p>
+
+<p>This technique can be handy.  For example, say you have a form with multiple submit buttons.  As we saw earlier, the implicit submission algorithm will click the first submit button that it finds.  Therefore, if you need control over which submit button is clicked, you can use the above technique to listen an for enter keypress, prevent the default action, then explicitly click the appropriate button.</p>
+
+<p>Take the following example:</p>
+
+<p>``` html
+<form></p>
+
+<pre><code>&lt;label for="age"&gt;Age:&lt;/label&gt;
+&lt;input type="number" min="0" max="120" name="age" id="age"&gt;
+&lt;button id="child"&gt;Child&lt;/button&gt;
+&lt;button id="adult"&gt;Adult&lt;/button&gt;
+</code></pre>
+
+<p></form></p>
+
+<script>
+    (function() {
+        var age = document.getElementById('age');
+        age.addEventListener('keypress', function(event) {
+            if (event.keyCode == 13) {
+                event.preventDefault();
+                if (age.value > 20) {
+                    document.getElementById('adult').click();
+                } else {
+                    document.getElementById('child').click();
+                }
+            }
+        });
+    }());
+</script>
+
+
+<p>```</p>
+
+<p>When enter is clicked in the number input, the <code>keypress</code> event handler determines which submit button is appropriate and clicks it.</p>
+
+<p>While this technique can be handy, I've seen it used plenty of times to completely prevent implicit submission from working.  Don't do that.</p>
+
+<h3>Conclusion</h3>
+
+<p>When filling out a form, pressing enter in a textbox should submit the form.  This is known as an implicit form submission.  Despite being vital for assistive technologies and an important user convenience, many web forms prevent it for one reason or another.  If you write web forms, please take a minute to ensure that the enter key can indeed be used to submit them; it'll help make the web a better place for everyone.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Creating Cross Browser Scrollable &lt;tbody&gt;s - A CSS Only Approach]]></title>
+    <link href="http://tjvantoll.com/2012/11/10/creating-cross-browser-scrollable-tbody/"/>
+    <updated>2012-11-10T15:44:00-05:00</updated>
+    <id>http://tjvantoll.com/2012/11/10/creating-cross-browser-scrollable-tbody</id>
+    <content type="html"><![CDATA[<p>By default the <code>overflow</code> CSS property does not apply to table group elements (<code>&lt;thead&gt;</code>, <code>&lt;tbody&gt;</code>, or <code>&lt;tfoot&gt;</code>).  <a href="https://developer.mozilla.org/en-US/docs/Firefox_4_for_developers#Miscellaneous_CSS_changes">As of Firefox 4</a> this behavior is consistent across all browser implementations.</p>
+
+<p>Therefore, if you attempt to apply a CSS <code>height</code> and <code>overflow: scroll</code> to a <code>&lt;tbody&gt;</code> it will have no effect in modern browsers.  You can see this for yourself <a href="http://jsfiddle.net/tj_vantoll/vU494/">here</a>.</p>
+
+<p>But having a scrolling table body with fixed headers is a useful UI element, so how do you work around this?</p>
+
+<!--more-->
+
+
+<h3>The Solution</h3>
+
+<p>Here is my solution:</p>
+
+<p><pre class="codepen" data-height="400" data-type="result" data-href="JEKIu" data-user="tjvantoll"><code></code></pre>
+<script async src="http://codepen.io:/assets/embed/ei.js"></script></p>
+
+<h3>How does it work?</h3>
+
+<p>The first step is to set the <code>&lt;tbody&gt;</code> to <code>display: block</code> so an <code>overflow</code> and <code>height</code> can be applied.  From there the rows in the <code>&lt;thead&gt;</code> need to be set to <code>position: relative</code> and <code>display: block</code> so that they'll sit on top of the now scrollable <code>&lt;tbody&gt;</code>.</p>
+
+<p>That's really about it.</p>
+
+<h3>Unfortunate Part #1: Old Internet Explorer</h3>
+
+<p>When you set a <code>height</code> on a <code>&lt;tbody&gt;</code> Internet Explorer &lt; 10 applies that <code>height</code> to every table cell, which is of course wonderful.</p>
+
+<p>My workaround for this is to conditionally create a wrapper <code>&lt;div&gt;</code>.  When it's present I give it the <code>height</code> and <code>overflow</code> and remove the <code>height</code> from the <code>&lt;tbody&gt;</code>.</p>
+
+<p>``` html Wrap table for IE</p>
+
+
+
+<!--[if lte IE 9]>
+<div class="old_ie_wrapper">
+<!--<![endif]-->
+
+
+<pre><code>&lt;table&gt;
+    &lt;!-- Contents of the table --&gt;
+&lt;/table&gt;
+</code></pre>
+
+<!--[if lte IE 9]>
+</div>
+<!--<![endif]-->
+
+
+<p>```</p>
+
+<p>The headers will scroll with the table body, but the table will at least be usable.  You could also create <a href="http://paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/">conditional classes on the &lt;html&gt; tag</a> to handle this as well.</p>
+
+<h3>Unfortunate Part #2: Widths</h3>
+
+<p>Because the <code>&lt;thead&gt;</code> is relatively positioned each table cell needs an explicit <code>width</code>.</p>
+
+<p><code>css
+td:nth-child(1), th:nth-child(1) { width: 100px; }
+td:nth-child(2), th:nth-child(2) { width: 100px; }
+td:nth-child(3), th:nth-child(3) { width: 100px; }
+</code></p>
+
+<p>But unfortunately that is not enough.  When a scrollbar is present browsers allocate space for it, therefore, the <code>&lt;tbody&gt;</code> ends up having less space available than the <code>&lt;thead&gt;</code>.  Notice the slight misalignment this creates:</p>
+
+<p><img src="/images/posts/2012-11-10/Alignment-Issue.png" title="Alignment issue with scroll bar" alt="Alignment issue with scroll bar" /></p>
+
+<p>The only workaround I could come up with was to set a <code>min-width</code> on all columns except the last one.</p>
+
+<p><code>css
+td:nth-child(1), th:nth-child(1) { min-width: 100px; }
+td:nth-child(2), th:nth-child(2) { min-width: 100px; }
+td:nth-child(3), th:nth-child(3) { width: 100px; }
+</code></p>
+
+<h3>The Good</h3>
+
+<p>Despite these issues the solution does work in all browsers back to IE6 with no JavaScript dependency.</p>
+
+<p>The markup to create the table is simple and semantic.  I've seen workarounds for this issue that use <code>&lt;div&gt;</code>s instead of <code>&lt;table&gt;</code>s or multiple aligned <code>&lt;table&gt;</code>s and those always felt dirty to me.</p>
+
+<p>The code is free to use and do whatever you want with it.  If you have any suggestions for improvements or find any issues please let me know in the comments.</p>
+]]></content>
+  </entry>
+  
+</feed>

@@ -1,0 +1,631 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: jQuery UI | TJ VanToll]]></title>
+  <link href="http://tjvantoll.com/blog/categories/jquery-ui/atom.xml" rel="self"/>
+  <link href="http://tjvantoll.com/"/>
+  <updated>2013-08-30T14:07:29-04:00</updated>
+  <id>http://tjvantoll.com/</id>
+  <author>
+    <name><![CDATA[TJ VanToll]]></name>
+    <email><![CDATA[tj.vantoll@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Creating a jQuery UI Dialog with a Submit Button]]></title>
+    <link href="http://tjvantoll.com/2013/07/10/creating-a-jquery-ui-dialog-with-a-submit-button/"/>
+    <updated>2013-07-10T00:00:00-04:00</updated>
+    <id>http://tjvantoll.com/2013/07/10/creating-a-jquery-ui-dialog-with-a-submit-button</id>
+    <content type="html"><![CDATA[<p>Say you have the following submittable <code>&lt;form&gt;</code>:</p>
+
+<p>``` html
+<form id="myForm" action="http://google.com"></p>
+
+<pre><code>&lt;label for="search"&gt;Search For:&lt;/label&gt;
+&lt;input type="text" id="search" name="q"&gt;
+&lt;button type="submit"&gt;Find&lt;/button&gt;
+</code></pre>
+
+<p></form>
+```</p>
+
+<p>And you want to show the form in a jQuery UI dialog. You can do that with the code below:</p>
+
+<p>``` javascript Turning a form into a dialog
+$( "form" ).dialog({</p>
+
+<pre><code>open: function() {
+    // On open, hide the original submit button
+    $( this ).find( "[type=submit]" ).hide();
+},
+buttons: [
+    {
+        text: "Find",
+        click: $.noop,
+        type: "submit"
+    },
+    {
+        text: "Close",
+        click: function() {
+            $( this ).dialog( "close" );
+        }
+    }
+]
+</code></pre>
+
+<p>});
+```</p>
+
+<p>Which looks like this:</p>
+
+<p><img src="http://tjvantoll.com/images/posts/2013-07-10/form-dialog.png" alt="Display of the form within a jQuery UI dialog"></p>
+
+<h3>The Problem</h3>
+
+<p>There's one problem with this - the "Find" button doesn't work. Because of the generated structure of a jQuery UI dialog, the buttons are not within the <code>&lt;form&gt;</code> itself. Therefore, the buttons are not associated with the <code>&lt;form&gt;</code>. You can see the structure below:</p>
+
+<!-- more -->
+
+
+<p><img src="http://tjvantoll.com/images/posts/2013-07-10/markup.png" alt="Markup of a UI dialog showing the the buttons are not children of the content."></p>
+
+<p>Note that the <code>&lt;button type="submit"&gt;</code> is not within the <code>&lt;form&gt;</code>.</p>
+
+<h3>Solution</h3>
+
+<p>There are a few ways we can work around this. One is avoid the <a href="http://api.jqueryui.com/dialog/#option-buttons">buttons option</a> and leave the original submit button in place. This works, but you lose the formatted display.</p>
+
+<h3>Explicit Click Handler</h3>
+
+<p>Another solution is to add a <code>click</code> handler to the button that submits the form:</p>
+
+<p>``` js Using a Click Handler to Submit the Form
+var form = $( "form" ).dialog({</p>
+
+<pre><code>...
+buttons: [
+    {
+        text: "Find",
+        click: function() {
+            form.submit();
+        }
+    }
+    ...
+]
+</code></pre>
+
+<p>});
+```</p>
+
+<p>This works, but you lose the browsers <a href="/2013/01/01/enter-should-submit-forms-stop-messing-with-that/">browser's default enter key handling</a>. Therefore it has to be replicated as well:</p>
+
+<p>``` javascript Adding Enter Key Handling
+var form = $( "form" ).dialog({ ... });
+form.on( "keypress", "input[type=text]", function( event ) {</p>
+
+<pre><code>if ( event.keyCode == 13 ) {
+    form.submit();
+}
+</code></pre>
+
+<p>});
+```</p>
+
+<h4>Form Attribute</h4>
+
+<p>An elegant solution to this problem is to use HTML5's new <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button#attr-form">form attribute</a>. The attribute allows you to associate a <code>&lt;form&gt;</code> with a <code>&lt;button&gt;</code>, even if the <code>&lt;button&gt;</code> is not a descendant of the <code>&lt;form&gt;</code>. It's even smart enough to keep the <a href="/2013/01/01/enter-should-submit-forms-stop-messing-with-that/">browser's default enter key handling</a> in place.</p>
+
+<p>For example here's the example <code>&lt;form&gt;</code> with a sibling (rather than child) submit button:</p>
+
+<p>``` html
+<form id="myForm" action="http://google.com"></p>
+
+<pre><code>&lt;label for="search"&gt;Search For:&lt;/label&gt;
+&lt;input type="text" id="search" name="q"&gt;
+</code></pre>
+
+<p></form>
+<button type="submit" form="myForm">Find</button>
+```</p>
+
+<p>The <code>&lt;button&gt;</code> is outside of the <code>&lt;form&gt;</code>, but because its <code>form</code> attribute is equal to the <code>&lt;form&gt;</code>'s <code>id</code>, the <code>&lt;button&gt;</code> will submit the <code>&lt;form&gt;</code> regardless.</p>
+
+<h4>Using the Form Attribute on a Dialog</h4>
+
+<p>To add this attribute to the dialog version, we'll pass <code>form: "myForm"</code> into the <code>buttons</code> option for the Find button:</p>
+
+<p>``` html Turning a form into a dialog
+<form id="myForm" action="http://google.com"></p>
+
+<pre><code>&lt;label for="search"&gt;Search For:&lt;/label&gt;
+&lt;input type="text" id="search" name="q"&gt;
+&lt;button type="submit"&gt;Find&lt;/button&gt;
+</code></pre>
+
+<p></form></p>
+
+<script>
+    $( "form" ).dialog({
+        open: function() {
+            // On open, hide the original submit button
+            $( this ).find( "[type=submit]" ).hide();
+        },
+        buttons: [
+            {
+                text: "Find",
+                click: $.noop,
+                type: "submit",
+                form: "myForm" // <-- Make the association
+            },
+            {
+                text: "Close",
+                click: function() {
+                    $( this ).dialog( "close" );
+                }
+            }
+        ]
+    });
+</script>
+
+
+<p>```</p>
+
+<p><a href="/demos/2013-07-10/form.html">Live Example</a></p>
+
+<h3>Support</h3>
+
+<p>The <code>form</code> attribute is implemented in Firefox, Chrome, Safari 5.1+, and Opera, HOWEVER, IE (as of version 10) still does not support the attribute.</p>
+
+<p>Because the form attribute is so handy here, I wrote a polyfill that adds support in browsers that don't support it natively: <a href="https://gist.github.com/tjvantoll/5911571">https://gist.github.com/tjvantoll/5911571</a>. The source is below:</p>
+
+<p>``` javascript
+/<em>*
+ * The form attribute can be used to associate a submit button with a form, even
+ * if the button is not a child of the <form> itself.
+ *
+ * This polyfill uses a support check taken from Modernizr and polyfills the
+ * functionality using jQuery.
+ </em>/
+(function() {</p>
+
+<pre><code>// Via Modernizr
+function formAttributeSupport() {
+    var form = document.createElement( "form" ),
+        input = document.createElement( "input" ),
+        div = document.createElement( "div" ),
+        id = "formtest"+ ( new Date().getTime() ),
+        attr,
+        bool = false;
+
+        form.id = id;
+
+    // IE6/7 confuses the form idl attribute and the form content attribute
+    if ( document.createAttribute ) {
+        attr = document.createAttribute("form");
+        attr.nodeValue = id;
+        input.setAttributeNode(attr);
+        div.appendChild(form);
+        div.appendChild(input);
+
+        document.documentElement.appendChild(div);
+
+        bool = form.elements.length === 1 &amp;&amp; input.form == form;
+
+        div.parentNode.removeChild(div);
+    }
+
+    return bool;
+};
+
+if ( !formAttributeSupport() ) {
+    $( document )
+        .on( "click", "[type=submit][form]", function( event ) {
+            event.preventDefault();
+            var formId = $( this ).attr( "form" ),
+            $form = $( "#" + formId ).submit();
+        })
+        .on( "keypress", "form input", function( event ) {
+            var $form;
+            if ( event.keyCode == 13 ) {
+                $form = $( this ).parents( "form" );
+                if ( $form.find( "[type=submit]" ).length == 0 &amp;&amp;
+                    $( "[type=submit][form=" + $( this ).attr( "form" ) + "]" ).length &gt; 0 ) {
+                    $form.submit();
+                }
+            }
+        });
+}
+</code></pre>
+
+<p>}());
+```</p>
+
+<p>This can be included anywhere on the page after jQuery is included.</p>
+
+<p>Note that this polyfill only attempts to add support for the <code>form</code> attribute on submit buttons. The <code>form</code> attribute can also be applied to other form elements such as <code>&lt;input&gt;</code>s, <code>&lt;select&gt;</code>s, and <code>&lt;textarea&gt;</code>s, but that is beyond the scope of this script.</p>
+
+<p>If you encounter any issues with this polyfill let me know in the comments.</p>
+
+<h3>Conclusion</h3>
+
+<p>If you need a dialog with a submit button the easiest solution is to add a <code>click</code> handler that manually submits the form. While this is not ideal, it'll work everywhere with no extra effort. Just make sure that you add Enter key handling to text inputs within the <code>&lt;form&gt;</code>.</p>
+
+<p>Long term the <code>form</code> attribute is the solution to this problem. You can try it today as long as you're aware that you need to polyfill for IE support.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Showing a Resize Icon on a jQuery UI Dialog]]></title>
+    <link href="http://tjvantoll.com/2013/05/28/showing-a-resize-icon-on-a-jquery-ui-dialog/"/>
+    <updated>2013-05-28T21:09:00-04:00</updated>
+    <id>http://tjvantoll.com/2013/05/28/showing-a-resize-icon-on-a-jquery-ui-dialog</id>
+    <content type="html"><![CDATA[<p>Upon <a href="http://jqueryui.com/upgrade-guide/1.10/">upgrading to jQuery UI 1.10</a> you might notice a visual change to the dialog widget - the resize icon no longer displays by default:</p>
+
+<p>Default dialog display in 1.9:</p>
+
+<p><img src="http://tjvantoll.com/images/posts/2013-05-28/dialog-1.9.png" alt="Default display of jQuery UI's dialog in version 1.9"></p>
+
+<p>Default dialog display in 1.10:</p>
+
+<p><img src="http://tjvantoll.com/images/posts/2013-05-28/dialog-1.10.png" alt="Default display of jQuery UI's dialog in version 1.10"></p>
+
+<!-- more -->
+
+
+<p>The dialog is still resizable, the icon is just not displayed anymore. The change was made because when a dialog contains scrolling content, the scrollbar becomes very difficult to use when the resize icon is present, especially in Windows browsers (see <a href="http://bugs.jqueryui.com/ticket/4575">bug #4575</a>).</p>
+
+<p>The image below is of a version 1.9 dialog in IE9, note how the down arrow of the scrollbar and the resize icon are essentially on top of each other:</p>
+
+<p><img src="http://tjvantoll.com/images/posts/2013-05-28/ie9-dialog.png" alt="Display of a scrolling jQuery UI dialog in IE9."></p>
+
+<h3>Adding the Resize Icon Back</h3>
+
+<p>To get the icon back, you have to override the rules that position the icon:</p>
+
+<p>``` css
+.ui-dialog .ui-resizable-se {</p>
+
+<pre><code>width: 14px;
+height: 14px;
+right: 3px;
+bottom: 3px;
+background-position: -80px -224px;
+</code></pre>
+
+<p>}
+```</p>
+
+<p>This will display as follows:</p>
+
+<p><div class="code_example"><h6>Dialog with a Resizable Icon<a href="/demos/2013-05-28/dialog.html" target="_blank">Open in New Window</a></h6><iframe style="width: 100%; height: 300px;" frameborder="0" src="/demos/2013-05-28/dialog.html"></iframe></div></p>
+
+<p>Remember that there is a reason the icon was removed from the default dialog. If you have scrolling dialogs, you should not add the icon.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Using jQuery UI Tabs with the &lt;base&gt; Tag]]></title>
+    <link href="http://tjvantoll.com/2013/02/17/using-jquery-ui-tabs-with-the-base-tag/"/>
+    <updated>2013-02-17T21:14:00-05:00</updated>
+    <id>http://tjvantoll.com/2013/02/17/using-jquery-ui-tabs-with-the-base-tag</id>
+    <content type="html"><![CDATA[<p>As there have been <a href="http://bugs.jqueryui.com/ticket/7822">numerous bug submissions</a> for this, I feel the need to explain how to properly use <a href="http://jqueryui.com/tabs">jQuery UI's tab widget</a> with a <code>&lt;base&gt;</code> tag.  Let's start with what the <code>&lt;base&gt;</code> tag is intended for.</p>
+
+<h3>The &lt;base&gt; Element</h3>
+
+<p><a href="https://developer.mozilla.org/en-US/docs/HTML/Element/base">Per MDN</a> the <code>&lt;base&gt;</code> element specifies the base URL to use for all relative URLs contained within a document.</p>
+
+<!--more-->
+
+
+<p>Consider the following example:</p>
+
+<p><code>html
+&lt;base href="http://foo.com"&gt;
+&lt;a href="bar.html"&gt;Bar&lt;/a&gt;
+</code></p>
+
+<p>Let's assume this HTML appears on this domain (<code>http://tjvantoll.com</code>).  When the link is clicked on, the browser will navigate to <code>http://foo.com/bar.html</code> rather than <code>http://tjvantoll.com/bar.html</code>.</p>
+
+<p>It's important to note that hash links are also relative to the specified base.  Therefore on the following:</p>
+
+<p><code>html
+&lt;base href="http://foo.com"&gt;
+&lt;a href="#bar"&gt;Bar&lt;/a&gt;
+</code></p>
+
+<p>When the link is click on, the browser will navigate to <code>http://foo.com#bar</code> and NOT <code>http://tjvantoll.com#bar</code>.  This detail is important; it's the root cause of confusion when using a <code>&lt;base&gt;</code> tag with the tabs widget.</p>
+
+<h3>jQuery UI Tabs</h3>
+
+<p>Here is the intended HTML structure to be used by the tabs widget:</p>
+
+<p>``` html</p>
+
+<div id="tabs">
+    <ul>
+        <li><a href="#tab-1">One</a></li>
+        <li><a href="#tab-2">Two</a></li>
+    </ul>
+    <div id="tab-1">Contents of tab one.</div>
+    <div id="tab-2">Contents of tab two.</div>
+</div>
+
+
+
+
+<script>$( "#tabs" ).tabs();</script>
+
+
+<p>```</p>
+
+<p>Which produces the following:</p>
+
+<p><img src="http://tjvantoll.com/images/posts/2013-02-17/tabs.png" alt="Default look of jQuery UI's tabs"></p>
+
+<p>In this example both links begin with a hash (<code>#</code>), indicating that their content is located on the current page.  If that is not the case, the tabs widget will retrieve the tab's contents server side via an XHR call.  Consider the following:</p>
+
+<p>``` html</p>
+
+<div id="tabs">
+    <ul>
+        <li><a href="#local">Local</a></li>
+        <li><a href="external">External</a></li>
+    </ul>
+    <div id="local">Contents of the local tab.</div>
+</div>
+
+
+
+
+<script>$( "#tabs" ).tabs();</script>
+
+
+<p>```</p>
+
+<p>Here the local link will work as in the previous example - when it is clicked on, the tabs widget will simply display the contents of the <code>#local</code> container.</p>
+
+<p>However, when the external link is clicked, the tabs widget will perform an XHR request to retrieve the contents.  Assuming this HTML is located on <code>http://tjvantoll.com</code>, an XHR GET will be performed for <code>http://tjvantoll.com/external</code>.  The contents returned are dynamically added to the DOM and displayed.</p>
+
+<p>The markup pattern used here is no accident.  Consider a user that views this HTML without JavaScript enabled.  The local link will move the user's focus to the <code>#local</code> container on <code>http://tjvantoll.com</code>.  The external link will do a full page navigation to <code>http://tjvantoll.com/external</code>.  The markup is designed to enhance the default browser behavior and to degrade gracefully when JavaScript isn't present.</p>
+
+<h3>&lt;base&gt; + tabs</h3>
+
+<p>Given the descriptions above, the behavior of the <code>&lt;base&gt;</code> tag with the tabs widget shouldn't be surprising.  Here's the first example given for the tabs widget again.  This time, a <code>&lt;base&gt;</code> tag to <code>http://foo.com</code> has been added:</p>
+
+<p>``` html
+<base href="http://foo.com"></p>
+
+<div id="tabs">
+    <ul>
+        <li><a href="#tab-1">One</a></li>
+        <li><a href="#tab-2">Two</a></li>
+    </ul>
+    <div id="tab-1">Contents of tab one.</div>
+    <div id="tab-2">Contents of tab two.</div>
+</div>
+
+
+
+
+<script>$( "#tabs" ).tabs();</script>
+
+
+<p>```</p>
+
+<p>Let's again assume this HTML is located on <code>http://tjvantoll.com</code>.  Because of the <code>&lt;base&gt;</code> tag, the links used in the tabs widget are actually external links to <code>http://foo.com</code>.  Therefore, upon instantiation, the tabs widget will attempt to load the contents of the first tab from <code>http://foo.com</code>.</p>
+
+<p>If you are having trouble understanding, try the example above with JavaScript disabled.  When the first link is clicked on, the browser will navigate to <code>http://foo.com</code> regardless of the domain the page is viewed on.</p>
+
+<h3>Fixes</h3>
+
+<p>From the numerous bug reports, it seems that a lot of people have applications with <code>&lt;base&gt;</code> tags and want hashed links to be relative to the current page.  How can you fix your application?</p>
+
+<p>1) <strong>Remove the <code>&lt;base&gt;</code> tag.</strong>  It's that simple.  After the removal, the tabs widget will never attempt to load external content from any links with leading hashes.  Of course, this approach requires changing any other links on the page that are dependent on the <code>&lt;base&gt;</code> tag's leading path.</p>
+
+<p>2) <strong>Provide full URLs on links used to build the tabs widget.</strong>  If approach #1 isn't feasible, you can also provide a fully qualified URL in the links used to build the tabs widget.  Here's the earlier example modified to show this approach:</p>
+
+<p>``` html
+<base href="http://foo.com"></p>
+
+<div id="tabs">
+    <ul>
+        <li><a href="http://tjvantoll.com#tab-1">One</a></li>
+        <li><a href="http://tjvantoll.com#tab-2">Two</a></li>
+    </ul>
+    <div id="tab-1">Contents of tab one.</div>
+    <div id="tab-2">Contents of tab two.</div>
+</div>
+
+
+
+
+<script>$( "#tabs" ).tabs();</script>
+
+
+<p>```</p>
+
+<p>Since the links in the tabs are now fully qualified paths to the current page, the tabs widget will not perform a request to retrieve external content.</p>
+
+<p>A more robust way of handling this would be to inject the current path server side.  For example the following PHP could be used to inject the link used in the first tab above:</p>
+
+<p><code>'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'] . '#tab-1'</code></p>
+
+<p>3) <strong>Add the full URLs via JavaScript.</strong></p>
+
+<div class="warning" style="display: block;">
+    This is not the right way to fix this problem.  I'm only providing this because I realize the realities of working on enormous projects or projects where you do not have full control over the HTML.
+</div>
+
+
+<p>This is the same approach as #2, but the appropriate links are changed in JavaScript instead of forcing you to fix every link manually.</p>
+
+<p>The hack is shown below, simply call the <code>makeTabs</code> function with the selector used to create the tabs widget:</p>
+
+<p>``` javascript
+var makeTabs = function(selector) {</p>
+
+<pre><code>$( selector )
+    .find( "ul a" ).each( function() {
+        var href = $( this ).attr( "href" ),
+            newHref = window.location.protocol + '//' + window.location.hostname + 
+                window.location.pathname + href;
+
+        if ( href.indexOf( "#" ) == 0 ) {
+            $( this ).attr( "href", newHref );
+        }
+    })
+$( selector ).tabs();
+</code></pre>
+
+<p>};</p>
+
+<p>makeTabs( "#tabs" );
+```</p>
+
+<p>As noted by the warning box, you should really fix this the right way.  But desperate times call for desperate measures.  You've been warned.</p>
+
+<h3>The End</h3>
+
+<p>Hopefully if you didn't understand how to use the <code>&lt;base&gt;</code> tag and jQuery UI's tab widget together you do now.  If you are still having issues after reading through this please let me know in the comments.</p>
+
+<h3>Update (March 6th, 2013)</h3>
+
+<p>Per comments from rubensa, I've removed <code>window.location.origin</code> from my JavaScript workaround since it's a WebKit only property.  He also pointed out that if you might need to explicitly include a port number in the URL if you're using it in your local development.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Creating a Polished Vertical Tabs Interaction with jQuery UI]]></title>
+    <link href="http://tjvantoll.com/2012/11/08/creating-a-polished-vertical-tabs-interaction-with-jquery-ui/"/>
+    <updated>2012-11-08T00:00:00-05:00</updated>
+    <id>http://tjvantoll.com/2012/11/08/creating-a-polished-vertical-tabs-interaction-with-jquery-ui</id>
+    <content type="html"><![CDATA[<p>The <a href="http://jqueryui.com/tabs/">jQuery UI tabs widget</a> provides a clean way to implement a tabular UI.  Furthermore, the markup used gives you ample hooks to make the tabs visually into what you want them to be.  The docs provide a <a href="http://jqueryui.com/tabs/#vertical">simple demo</a> of how you can give the tabs a vertical orientation, but I thought I'd show how you can use what the framework provides to create something a bit more polished.</p>
+
+<!--more-->
+
+
+<p>The following CSS will vertically arrange the tabs:</p>
+
+<p>``` css
+.ui-tabs.ui-tabs-vertical {</p>
+
+<pre><code>padding: 0;
+width: 42em;
+</code></pre>
+
+<p>}
+.ui-tabs.ui-tabs-vertical .ui-widget-header {</p>
+
+<pre><code>border: none;
+</code></pre>
+
+<p>}
+.ui-tabs.ui-tabs-vertical .ui-tabs-nav {</p>
+
+<pre><code>float: left;
+width: 10em;
+background: #CCC;
+border-radius: 4px 0 0 4px;
+border-right: 1px solid gray;
+</code></pre>
+
+<p>}
+.ui-tabs.ui-tabs-vertical .ui-tabs-nav li {</p>
+
+<pre><code>clear: left;
+width: 100%;
+margin: 0.2em 0;
+border: 1px solid gray;
+border-width: 1px 0 1px 1px;
+border-radius: 4px 0 0 4px;
+overflow: hidden;
+position: relative;
+right: -2px;
+z-index: 2;
+</code></pre>
+
+<p>}
+.ui-tabs.ui-tabs-vertical .ui-tabs-nav li a {</p>
+
+<pre><code>display: block;
+width: 100%;
+padding: 0.6em 1em;
+</code></pre>
+
+<p>}
+.ui-tabs.ui-tabs-vertical .ui-tabs-nav li a:hover {</p>
+
+<pre><code>cursor: pointer;
+</code></pre>
+
+<p>}
+.ui-tabs.ui-tabs-vertical .ui-tabs-nav li.ui-tabs-active {</p>
+
+<pre><code>margin-bottom: 0.2em;
+padding-bottom: 0;
+border-right: 1px solid white;
+</code></pre>
+
+<p>}
+.ui-tabs.ui-tabs-vertical .ui-tabs-nav li:last-child {</p>
+
+<pre><code>margin-bottom: 10px;
+</code></pre>
+
+<p>}
+.ui-tabs.ui-tabs-vertical .ui-tabs-panel {</p>
+
+<pre><code>float: left;
+width: 28em;
+border-left: 1px solid gray;
+border-radius: 0;
+position: relative;
+left: -1px;
+</code></pre>
+
+<p>}
+```</p>
+
+<p>It only relies on a class of <code>ui-tabs-vertical</code> being applied to the elements the <code>tabs</code> widget is created on.</p>
+
+<p><code>javascript
+$('#tabs').tabs().addClass('ui-tabs-vertical');
+</code></p>
+
+<p>And here's the result:</p>
+
+<p><div class="code_example"><h6>jQuery UI Vertical Tabs<a href="/demos/2012-11-08/verticalTabs.html" target="_blank">Open in New Window</a></h6><iframe style="width: 100%; height: 275px;" frameborder="0" src="/demos/2012-11-08/verticalTabs.html"></iframe></div></p>
+
+<p>Feel free to use this or modify it to your liking.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Adding Pointers to jQuery UI Tooltips]]></title>
+    <link href="http://tjvantoll.com/2012/10/24/adding-pointers-to-jquery-ui-tooltips/"/>
+    <updated>2012-10-24T20:58:00-04:00</updated>
+    <id>http://tjvantoll.com/2012/10/24/adding-pointers-to-jquery-ui-tooltips</id>
+    <content type="html"><![CDATA[<p>The recent <a href="http://jqueryui.com/changelog/1.9.0/">jQuery UI 1.9 release</a> included a new <a href="http://jqueryui.com/tooltip/">tooltip plugin</a> that can be used to create tooltips much like the native tooltips the browser provides.  The difference is that jQuery UI's version are completely customizable.</p>
+
+<p>As such I thought I'd show a quick example of how you can create a pointer from the tooltip to its associated field.  The following will show a pointer tooltip a the text input.  You can change the location of the tooltip using the buttons.</p>
+
+<!--more-->
+
+
+<p><div class="code_example"><h6>Pointer Tooltip Example<a href="/demos/2012-10-24/pointer.html" target="_blank">Open in New Window</a></h6><iframe style="width: 100%; height: 300px;" frameborder="0" src="/demos/2012-10-24/pointer.html"></iframe></div>
+<a href="http://jsfiddle.net/tj_vantoll/kyBwU">View Demo on jsFiddle</a></p>
+
+<p>So how is this done?</p>
+
+<ul>
+<li>The <a href="http://api.jqueryui.com/tooltip/#option-position">position</a> option is used to place the tooltip appropriately around the textbox.  Importantly the <code>collision</code> property is set to <code>none</code>, since, if the tooltip were to be repositioned the arrow would be placed incorrectly.</li>
+<li>The pointers themselves are created using using the <code>::after</code> and <code>::before</code> pseudo-elements.  For some more information on the technique and to see some other variations there's an excellent tutorial <a href="http://nicolasgallagher.com/pure-css-speech-bubbles/">here</a>.</li>
+<li>Since the <code>::after</code> and <code>::before</code> pseudo-elements are used to create the pointers, IE &lt; 8 users will not see them.  However, they'll simply see the default pointerless tooltip, no harm done. <i>Note: IE8 supports the before/after pseudo-elements but as <code>:before</code> and <code>:after</code> instead of <code>::before</code> and <code>::after</code>. So if you need IE8 support use <code>:before</code> and <code>:after</code>.</i></li>
+</ul>
+
+]]></content>
+  </entry>
+  
+</feed>

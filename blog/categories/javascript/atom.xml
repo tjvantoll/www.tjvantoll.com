@@ -1,0 +1,731 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: JavaScript | TJ VanToll]]></title>
+  <link href="http://tjvantoll.com/blog/categories/javascript/atom.xml" rel="self"/>
+  <link href="http://tjvantoll.com/"/>
+  <updated>2013-08-30T14:07:29-04:00</updated>
+  <id>http://tjvantoll.com/</id>
+  <author>
+    <name><![CDATA[TJ VanToll]]></name>
+    <email><![CDATA[tj.vantoll@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Creating a jQuery UI Dialog with a Submit Button]]></title>
+    <link href="http://tjvantoll.com/2013/07/10/creating-a-jquery-ui-dialog-with-a-submit-button/"/>
+    <updated>2013-07-10T00:00:00-04:00</updated>
+    <id>http://tjvantoll.com/2013/07/10/creating-a-jquery-ui-dialog-with-a-submit-button</id>
+    <content type="html"><![CDATA[<p>Say you have the following submittable <code>&lt;form&gt;</code>:</p>
+
+<p>``` html
+<form id="myForm" action="http://google.com"></p>
+
+<pre><code>&lt;label for="search"&gt;Search For:&lt;/label&gt;
+&lt;input type="text" id="search" name="q"&gt;
+&lt;button type="submit"&gt;Find&lt;/button&gt;
+</code></pre>
+
+<p></form>
+```</p>
+
+<p>And you want to show the form in a jQuery UI dialog. You can do that with the code below:</p>
+
+<p>``` javascript Turning a form into a dialog
+$( "form" ).dialog({</p>
+
+<pre><code>open: function() {
+    // On open, hide the original submit button
+    $( this ).find( "[type=submit]" ).hide();
+},
+buttons: [
+    {
+        text: "Find",
+        click: $.noop,
+        type: "submit"
+    },
+    {
+        text: "Close",
+        click: function() {
+            $( this ).dialog( "close" );
+        }
+    }
+]
+</code></pre>
+
+<p>});
+```</p>
+
+<p>Which looks like this:</p>
+
+<p><img src="http://tjvantoll.com/images/posts/2013-07-10/form-dialog.png" alt="Display of the form within a jQuery UI dialog"></p>
+
+<h3>The Problem</h3>
+
+<p>There's one problem with this - the "Find" button doesn't work. Because of the generated structure of a jQuery UI dialog, the buttons are not within the <code>&lt;form&gt;</code> itself. Therefore, the buttons are not associated with the <code>&lt;form&gt;</code>. You can see the structure below:</p>
+
+<!-- more -->
+
+
+<p><img src="http://tjvantoll.com/images/posts/2013-07-10/markup.png" alt="Markup of a UI dialog showing the the buttons are not children of the content."></p>
+
+<p>Note that the <code>&lt;button type="submit"&gt;</code> is not within the <code>&lt;form&gt;</code>.</p>
+
+<h3>Solution</h3>
+
+<p>There are a few ways we can work around this. One is avoid the <a href="http://api.jqueryui.com/dialog/#option-buttons">buttons option</a> and leave the original submit button in place. This works, but you lose the formatted display.</p>
+
+<h3>Explicit Click Handler</h3>
+
+<p>Another solution is to add a <code>click</code> handler to the button that submits the form:</p>
+
+<p>``` js Using a Click Handler to Submit the Form
+var form = $( "form" ).dialog({</p>
+
+<pre><code>...
+buttons: [
+    {
+        text: "Find",
+        click: function() {
+            form.submit();
+        }
+    }
+    ...
+]
+</code></pre>
+
+<p>});
+```</p>
+
+<p>This works, but you lose the browsers <a href="/2013/01/01/enter-should-submit-forms-stop-messing-with-that/">browser's default enter key handling</a>. Therefore it has to be replicated as well:</p>
+
+<p>``` javascript Adding Enter Key Handling
+var form = $( "form" ).dialog({ ... });
+form.on( "keypress", "input[type=text]", function( event ) {</p>
+
+<pre><code>if ( event.keyCode == 13 ) {
+    form.submit();
+}
+</code></pre>
+
+<p>});
+```</p>
+
+<h4>Form Attribute</h4>
+
+<p>An elegant solution to this problem is to use HTML5's new <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button#attr-form">form attribute</a>. The attribute allows you to associate a <code>&lt;form&gt;</code> with a <code>&lt;button&gt;</code>, even if the <code>&lt;button&gt;</code> is not a descendant of the <code>&lt;form&gt;</code>. It's even smart enough to keep the <a href="/2013/01/01/enter-should-submit-forms-stop-messing-with-that/">browser's default enter key handling</a> in place.</p>
+
+<p>For example here's the example <code>&lt;form&gt;</code> with a sibling (rather than child) submit button:</p>
+
+<p>``` html
+<form id="myForm" action="http://google.com"></p>
+
+<pre><code>&lt;label for="search"&gt;Search For:&lt;/label&gt;
+&lt;input type="text" id="search" name="q"&gt;
+</code></pre>
+
+<p></form>
+<button type="submit" form="myForm">Find</button>
+```</p>
+
+<p>The <code>&lt;button&gt;</code> is outside of the <code>&lt;form&gt;</code>, but because its <code>form</code> attribute is equal to the <code>&lt;form&gt;</code>'s <code>id</code>, the <code>&lt;button&gt;</code> will submit the <code>&lt;form&gt;</code> regardless.</p>
+
+<h4>Using the Form Attribute on a Dialog</h4>
+
+<p>To add this attribute to the dialog version, we'll pass <code>form: "myForm"</code> into the <code>buttons</code> option for the Find button:</p>
+
+<p>``` html Turning a form into a dialog
+<form id="myForm" action="http://google.com"></p>
+
+<pre><code>&lt;label for="search"&gt;Search For:&lt;/label&gt;
+&lt;input type="text" id="search" name="q"&gt;
+&lt;button type="submit"&gt;Find&lt;/button&gt;
+</code></pre>
+
+<p></form></p>
+
+<script>
+    $( "form" ).dialog({
+        open: function() {
+            // On open, hide the original submit button
+            $( this ).find( "[type=submit]" ).hide();
+        },
+        buttons: [
+            {
+                text: "Find",
+                click: $.noop,
+                type: "submit",
+                form: "myForm" // <-- Make the association
+            },
+            {
+                text: "Close",
+                click: function() {
+                    $( this ).dialog( "close" );
+                }
+            }
+        ]
+    });
+</script>
+
+
+<p>```</p>
+
+<p><a href="/demos/2013-07-10/form.html">Live Example</a></p>
+
+<h3>Support</h3>
+
+<p>The <code>form</code> attribute is implemented in Firefox, Chrome, Safari 5.1+, and Opera, HOWEVER, IE (as of version 10) still does not support the attribute.</p>
+
+<p>Because the form attribute is so handy here, I wrote a polyfill that adds support in browsers that don't support it natively: <a href="https://gist.github.com/tjvantoll/5911571">https://gist.github.com/tjvantoll/5911571</a>. The source is below:</p>
+
+<p>``` javascript
+/<em>*
+ * The form attribute can be used to associate a submit button with a form, even
+ * if the button is not a child of the <form> itself.
+ *
+ * This polyfill uses a support check taken from Modernizr and polyfills the
+ * functionality using jQuery.
+ </em>/
+(function() {</p>
+
+<pre><code>// Via Modernizr
+function formAttributeSupport() {
+    var form = document.createElement( "form" ),
+        input = document.createElement( "input" ),
+        div = document.createElement( "div" ),
+        id = "formtest"+ ( new Date().getTime() ),
+        attr,
+        bool = false;
+
+        form.id = id;
+
+    // IE6/7 confuses the form idl attribute and the form content attribute
+    if ( document.createAttribute ) {
+        attr = document.createAttribute("form");
+        attr.nodeValue = id;
+        input.setAttributeNode(attr);
+        div.appendChild(form);
+        div.appendChild(input);
+
+        document.documentElement.appendChild(div);
+
+        bool = form.elements.length === 1 &amp;&amp; input.form == form;
+
+        div.parentNode.removeChild(div);
+    }
+
+    return bool;
+};
+
+if ( !formAttributeSupport() ) {
+    $( document )
+        .on( "click", "[type=submit][form]", function( event ) {
+            event.preventDefault();
+            var formId = $( this ).attr( "form" ),
+            $form = $( "#" + formId ).submit();
+        })
+        .on( "keypress", "form input", function( event ) {
+            var $form;
+            if ( event.keyCode == 13 ) {
+                $form = $( this ).parents( "form" );
+                if ( $form.find( "[type=submit]" ).length == 0 &amp;&amp;
+                    $( "[type=submit][form=" + $( this ).attr( "form" ) + "]" ).length &gt; 0 ) {
+                    $form.submit();
+                }
+            }
+        });
+}
+</code></pre>
+
+<p>}());
+```</p>
+
+<p>This can be included anywhere on the page after jQuery is included.</p>
+
+<p>Note that this polyfill only attempts to add support for the <code>form</code> attribute on submit buttons. The <code>form</code> attribute can also be applied to other form elements such as <code>&lt;input&gt;</code>s, <code>&lt;select&gt;</code>s, and <code>&lt;textarea&gt;</code>s, but that is beyond the scope of this script.</p>
+
+<p>If you encounter any issues with this polyfill let me know in the comments.</p>
+
+<h3>Conclusion</h3>
+
+<p>If you need a dialog with a submit button the easiest solution is to add a <code>click</code> handler that manually submits the form. While this is not ideal, it'll work everywhere with no extra effort. Just make sure that you add Enter key handling to text inputs within the <code>&lt;form&gt;</code>.</p>
+
+<p>Long term the <code>form</code> attribute is the solution to this problem. You can try it today as long as you're aware that you need to polyfill for IE support.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Using Semantic Class Names to Show and Hide Elements]]></title>
+    <link href="http://tjvantoll.com/2013/06/19/using-semantic-class-names-to-show-and-hide-elements/"/>
+    <updated>2013-06-19T21:29:00-04:00</updated>
+    <id>http://tjvantoll.com/2013/06/19/using-semantic-class-names-to-show-and-hide-elements</id>
+    <content type="html"><![CDATA[<p>Showing and hiding elements has the potential to get complicated in large applications.</p>
+
+<p>As a small example, say you have the following form that both displays a user's data as well as allows them to edit it:</p>
+
+<p>``` html
+<form></p>
+
+<pre><code>&lt;fieldset&gt;
+    &lt;legend&gt;Account Information&lt;/legend&gt;
+
+    &lt;div&gt;
+        &lt;label for="name"&gt;Name:&lt;/label&gt;
+        &lt;input type="text" id="name" value="TJ" required&gt;
+        &lt;span class="display"&gt;TJ&lt;/span&gt;
+    &lt;/div&gt;
+    &lt;div&gt;
+        &lt;label for="email"&gt;Email:&lt;/label&gt;
+        &lt;input type="email" id="email" value="tj@somedomain.com" required&gt;
+        &lt;span class="display"&gt;tj@somedomain.com&lt;/span&gt;
+    &lt;/div&gt;
+    &lt;div class="actions"&gt;
+        &lt;button type="button" class="edit"&gt;Edit&lt;/button&gt;
+        &lt;button type="submit" class="save"&gt;Save&lt;/button&gt;
+        &lt;button type="button" class="cancel"&gt;Cancel&lt;/button&gt;
+    &lt;/div&gt;
+&lt;/fieldset&gt;
+</code></pre>
+
+<p></form>
+```</p>
+
+<!-- more -->
+
+
+<p>Without any logic both states of the form display:</p>
+
+<p><div class="code_example"><h6>Initial Form Display<a href="/demos/2013-06-19/initialForm.html" target="_blank">Open in New Window</a></h6><iframe style="width: 100%; height: 300px;" frameborder="0" src="/demos/2013-06-19/initialForm.html"></iframe></div></p>
+
+<h3>Adding the Logic</h3>
+
+<p>Here's the goal. The Edit button should:</p>
+
+<ul>
+<li>Show the <code>&lt;input&gt;</code>s.</li>
+<li>Show the Save button.</li>
+<li>Show the Cancel button.</li>
+<li>Hide the Edit button.</li>
+<li>Hide the text in the <code>&lt;span&gt;</code>s.</li>
+</ul>
+
+
+<p>The Cancel button should then undo these changes.</p>
+
+<p>The traditional approach to this problem is to show and hide elements explicitly in JavaScript:</p>
+
+<p>``` javascript
+$( ".edit" ).on( "click", function() {</p>
+
+<pre><code>$( ".display, .edit" ).hide();
+$( ".cancel, .save, input" ).show();
+</code></pre>
+
+<p>});
+$( ".cancel" ).on( "click", function() {</p>
+
+<pre><code>$( ".display, .edit" ).show();
+$( ".cancel, .save, input" ).hide();
+</code></pre>
+
+<p>});
+```</p>
+
+<p>To get the initial state of the form correct you also need some CSS:</p>
+
+<p>``` css
+.cancel, .save, input {</p>
+
+<pre><code>display: none;
+</code></pre>
+
+<p>}
+```</p>
+
+<p>Because the list of elements has to be specified in JavaScript and CSS, this logic will be difficult to maintain. And this is for a trivial example; usually requirements are much more complex.</p>
+
+<p>How can we make this better?</p>
+
+<h3>Semantic Class Names</h3>
+
+<p>Instead of targeting individual elements in JavaScript, let's add a class name to the parent element that makes the most sense, in this case, the <code>&lt;form&gt;</code>:</p>
+
+<p>``` javascript
+$( ".edit" ).on( "click", function() {</p>
+
+<pre><code>$( this ).parents( "form" ).addClass( "editing" );
+</code></pre>
+
+<p>});
+$( ".cancel" ).on( "click", function() {</p>
+
+<pre><code>$( this ).parents( "form" ).removeClass( "editing" );
+</code></pre>
+
+<p>});
+```</p>
+
+<p>Since the logic is simple, this can be written library-free as well (<em>note <code>classList</code> is not available in IE &lt; 10</em>):</p>
+
+<p>``` javascript
+(function() {</p>
+
+<pre><code>var form = document.querySelector( "form" ),
+    editButton = document.querySelector( ".edit" ),
+    cancelButton = document.querySelector( ".cancel" );
+
+editButton.addEventListener( "click", function() {
+    form.classList.add( "editing" ); 
+});
+cancelButton.addEventListener( "click", function() {
+    form.classList.remove( "editing" ); 
+});
+</code></pre>
+
+<p>}());
+```</p>
+
+<h3>Advantages of Using Semantic Classes</h3>
+
+<p>There are 2 major advantages to this approach.</p>
+
+<p>1) All display logic is now handled in CSS:</p>
+
+<p>``` css
+.cancel, .save, input {</p>
+
+<pre><code>display: none;
+</code></pre>
+
+<p>}
+.editing .save,
+.editing .cancel,
+.editing input {</p>
+
+<pre><code>display: inline-block;
+</code></pre>
+
+<p>}
+.editing .edit,
+.editing .display {</p>
+
+<pre><code>display: none;
+</code></pre>
+
+<p>}
+```</p>
+
+<p>2) You have a styling hook that can be used to make further changes to the display. For example, you might want to bold the labels when editing:</p>
+
+<p>``` css
+.editing label {</p>
+
+<pre><code>font-weight: bold;
+</code></pre>
+
+<p>}
+```</p>
+
+<p>The final display of the form looks like this:</p>
+
+<p><div class="code_example"><h6>Semantic Class Approach<a href="/demos/2013-06-19/finalForm.html" target="_blank">Open in New Window</a></h6><iframe style="width: 100%; height: 300px;" frameborder="0" src="/demos/2013-06-19/finalForm.html"></iframe></div></p>
+
+<h3>Conclusion</h3>
+
+<p>This is not a technique that I came up with but I've used it successfully in several large applications and have found that it scales well over time.</p>
+
+<p>Do you have any other tricks you use to show &amp; hide elements? If so, let me know in the comments.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Showing a Resize Icon on a jQuery UI Dialog]]></title>
+    <link href="http://tjvantoll.com/2013/05/28/showing-a-resize-icon-on-a-jquery-ui-dialog/"/>
+    <updated>2013-05-28T21:09:00-04:00</updated>
+    <id>http://tjvantoll.com/2013/05/28/showing-a-resize-icon-on-a-jquery-ui-dialog</id>
+    <content type="html"><![CDATA[<p>Upon <a href="http://jqueryui.com/upgrade-guide/1.10/">upgrading to jQuery UI 1.10</a> you might notice a visual change to the dialog widget - the resize icon no longer displays by default:</p>
+
+<p>Default dialog display in 1.9:</p>
+
+<p><img src="http://tjvantoll.com/images/posts/2013-05-28/dialog-1.9.png" alt="Default display of jQuery UI's dialog in version 1.9"></p>
+
+<p>Default dialog display in 1.10:</p>
+
+<p><img src="http://tjvantoll.com/images/posts/2013-05-28/dialog-1.10.png" alt="Default display of jQuery UI's dialog in version 1.10"></p>
+
+<!-- more -->
+
+
+<p>The dialog is still resizable, the icon is just not displayed anymore. The change was made because when a dialog contains scrolling content, the scrollbar becomes very difficult to use when the resize icon is present, especially in Windows browsers (see <a href="http://bugs.jqueryui.com/ticket/4575">bug #4575</a>).</p>
+
+<p>The image below is of a version 1.9 dialog in IE9, note how the down arrow of the scrollbar and the resize icon are essentially on top of each other:</p>
+
+<p><img src="http://tjvantoll.com/images/posts/2013-05-28/ie9-dialog.png" alt="Display of a scrolling jQuery UI dialog in IE9."></p>
+
+<h3>Adding the Resize Icon Back</h3>
+
+<p>To get the icon back, you have to override the rules that position the icon:</p>
+
+<p>``` css
+.ui-dialog .ui-resizable-se {</p>
+
+<pre><code>width: 14px;
+height: 14px;
+right: 3px;
+bottom: 3px;
+background-position: -80px -224px;
+</code></pre>
+
+<p>}
+```</p>
+
+<p>This will display as follows:</p>
+
+<p><div class="code_example"><h6>Dialog with a Resizable Icon<a href="/demos/2013-05-28/dialog.html" target="_blank">Open in New Window</a></h6><iframe style="width: 100%; height: 300px;" frameborder="0" src="/demos/2013-05-28/dialog.html"></iframe></div></p>
+
+<p>Remember that there is a reason the icon was removed from the default dialog. If you have scrolling dialogs, you should not add the icon.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Why are Enter Keypresses Clicking My Buttons in IE?]]></title>
+    <link href="http://tjvantoll.com/2013/05/22/why-are-enter-keypresses-clicking-my-buttons-in-ie/"/>
+    <updated>2013-05-22T22:15:00-04:00</updated>
+    <id>http://tjvantoll.com/2013/05/22/why-are-enter-keypresses-clicking-my-buttons-in-ie</id>
+    <content type="html"><![CDATA[<p>When you press the Enter key in a textbox, the browser will automatically attempt to perform an <a href="http://www.whatwg.org/specs/web-apps/current-work/multipage/association-of-controls-and-forms.html#implicit-submission">implicit submission</a> of the textbox's <code>&lt;form&gt;</code>.</p>
+
+<p>For example, if you press Enter in the textbox of the following <code>&lt;form&gt;</code> it will submit a search query to Google:</p>
+
+<p>``` html
+<form action="http://google.com"></p>
+
+<pre><code>&lt;input name="q" type="text"&gt;
+&lt;input type="submit"&gt;
+</code></pre>
+
+<p></form>
+```</p>
+
+<!--more-->
+
+
+<p>The same will occur if you use a <code>&lt;button&gt;</code> element, which has a default <code>type</code> of <code>submit</code>:</p>
+
+<p>``` html
+<form action="http://google.com"></p>
+
+<pre><code>&lt;input name="q" type="text"&gt;
+&lt;button&gt;Submit&lt;/button&gt;
+</code></pre>
+
+<p></form>
+```</p>
+
+<p>In each of these examples a <code>click</code> event will be triggered on the form's <code>input[type="submit"]</code> / <code>button[type="submit"]</code>. This is all expected and speced behavior that is consistently implemented across browsers.</p>
+
+<h3>Internet Explorer</h3>
+
+<p>Internet Explorer has an annoying quirk that still exists as of IE10: submit buttons can be clicked when Enter is pressed in a textbox, even when no <code>&lt;form&gt;</code> is present. Consider the example below:</p>
+
+<p>``` html
+<input type="text"></p>
+
+<!-- other stuff -->
+
+
+<p><button>Some Unrelated Action</button>
+```</p>
+
+<p>Pressing Enter in this textbox in IE will click the completely unrelated <code>&lt;button&gt;</code>. No other browsers exhibit this behavior.</p>
+
+<p>I have no idea what IE's algorithm for selecting a submit button is, but it will find buttons in completely unrelated portions of the DOM. For instance it is responsible for a <a href="http://bugs.jqueryui.com/ticket/9312">jQuery UI bug</a> by causing a dialog's close button to be triggered on enter keypresses in unrelated textboxes.</p>
+
+<h3>Solution</h3>
+
+<p>All <code>&lt;input&gt;</code>s should be within a <code>&lt;form&gt;</code>, and all forms should have a submit button. So if you're running into this bug, changing your markup to be semantic will avoid this issue altogether.</p>
+
+<p>If for whatever reason that's not an option, you can add <code>type="button"</code> to the <code>&lt;button&gt;</code>:</p>
+
+<p>``` html
+<input type="text"></p>
+
+<!-- other stuff -->
+
+
+<p><button type="button">Some Unrelated Action</button>
+```</p>
+
+<p>This will override the default <code>type="submit"</code> and prevent IE from clicking the <code>&lt;button&gt;</code> on Enter keypresses.</p>
+
+<p>If anybody has knowledge of the algorithm IE uses to find submittable elements when no <code>&lt;form&gt;</code>s are present please let me know in the comments. I'm very curious.</p>
+
+<h4>Related Reading</h4>
+
+<ul>
+<li><a href="/2013/01/01/enter-should-submit-forms-stop-messing-with-that/">The Enter Key should Submit Forms, Stop Suppressing it</a></li>
+</ul>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Using Ternary Operators for More Maintainable Templates]]></title>
+    <link href="http://tjvantoll.com/2013/04/26/using-ternary-operators-for-more-maintainable-templates/"/>
+    <updated>2013-04-26T00:00:00-04:00</updated>
+    <id>http://tjvantoll.com/2013/04/26/using-ternary-operators-for-more-maintainable-templates</id>
+    <content type="html"><![CDATA[<p>With the rise of JavaScript MVC frameworks, writing templates has become a large part of many web developer's workflow. As such, I thought I'd share a tip that has made my templates far more readable and maintainable over the years, ternary operators.<!-- http://jsbin.com/ekiwal/3/edit --></p>
+
+<p><i>Note: For my examples I'm using <a href="http://underscorejs.org/#template">Underscore's templates</a>, but this same tip applies to any templating language, even traditional server side ones like PHP.</i></p>
+
+<!-- more -->
+
+
+<h3>Example</h3>
+
+<p>Let's say you have the following data for your application:</p>
+
+<p>``` javascript
+var items = [</p>
+
+<pre><code>{ name: 'Clock', selected: false },
+{ name: 'Chair', selected: false },
+{ name: 'Radio', selected: true }
+</code></pre>
+
+<p>];
+```</p>
+
+<p>And you want to run this data through a template to generate an HTML list. You might start with something like this:</p>
+
+<p>``` html</p>
+
+<ul>
+    <% _.each( items, function( item ) { %>
+        <li>
+            <%- item.name %>
+        </li>
+    <% }); %>
+</ul>
+
+
+<p>```</p>
+
+<p>This works fine.  But chances are, for a real application you'll need to do something significantly more complicated than this.  As a first step, let's say you have to add a CSS hook for selected items. You could accomplish that with an if check around each list item:</p>
+
+<p>``` html</p>
+
+<ul>
+    <% _.each( items, function( item ) { %>
+        <% if ( item.selected ) { %>
+            <li class="selected">
+        <% } else { %>
+            <li>
+        <% } %>
+            <%- item.name %>
+        </li>
+    <% }); %>
+</ul>
+
+
+<p>```</p>
+
+<p>Unfortunately this adds 4 lines of code and some unfortunate indentation just to add a simple class. Another alternative is to put the if check within the attribute:</p>
+
+<p>``` html</p>
+
+<ul>
+    <% _.each( items, function( item ) { %>
+        <li class="<% if ( item.selected ) { %>selected<% } %>">
+            <%- item.name %>
+        </li>
+    <% }); %>
+</ul>
+
+
+<p>```</p>
+
+<p>This isn't bad, but personally I find this code difficult to scan. I prefer to handle this situation with a ternary operator:</p>
+
+<p>``` html</p>
+
+<ul>
+    <% _.each( items, function( item ) { %>
+        <li class="<%= (item.selected) ? 'selected' : '' %>">
+            <%- item.name %>
+        </li>
+    <% }); %>
+</ul>
+
+
+<p>```</p>
+
+<p>Yes this is a stylistic thing, but I find this clearer and more readable. This will produce an unnecessary empty class attribute on non-selected items, but I believe the readability of the code to be far more important.</p>
+
+<p>For added fun, ternary operators can be nested. Say your application now has to handle deleted items:</p>
+
+<p>``` javascript
+var items = [</p>
+
+<pre><code>{ name: 'Clock', selected: false, deleted: true },
+{ name: 'Chair', selected: false, deleted: false },
+{ name: 'Radio', selected: true, deleted: false }
+</code></pre>
+
+<p>];
+```</p>
+
+<p>The following template shows how nested ternaries could be used to handle either a selected or deleted hook:</p>
+
+<p><i>Note: This assumes that the selected and deleted states will not occur at the same time.</i></p>
+
+<p>``` html</p>
+
+<ul>
+    <% _.each( items, function( item ) { %>
+        <li class="<%= (item.selected) ? 'selected' :
+                       (item.deleted) ? 'deleted' : '' %>">
+            <%- item.name %>
+        </li>
+    <% }); %>
+</ul>
+
+
+<p>```</p>
+
+<p>Here are a couple other examples of how you could structure this check. The most important thing is to find something that works for you, or more importantly, the person who will be maintaining your code.</p>
+
+<p>``` html</p>
+
+<ul>
+    <% _.each( items, function( item ) { %>
+        <li class="<% if (item.selected) { %>selected<% } %>
+                   <% if (item.deleted) { %>deleted<% } %>">
+            <%- item.name %>
+        </li>
+    <% }); %>
+</ul>
+
+
+<p>```</p>
+
+<p>``` html</p>
+
+<ul>
+    <% _.each( items, function( item ) { %>
+        <li class="
+          <% if (item.selected) { %> selected <% } %>
+          <% if (item.deleted)  { %> deleted  <% } %>
+        ">
+            <%- item.name %>
+        </li>
+    <% }); %>
+</ul>
+
+
+<p>```</p>
+]]></content>
+  </entry>
+  
+</feed>

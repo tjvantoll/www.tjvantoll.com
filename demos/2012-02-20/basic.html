@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<head>
+	<style>
+		@-webkit-keyframes color_change {
+		  from { background-color: blue; }
+		  to { background-color: red; }
+		}
+		@-moz-keyframes color_change {
+		  from { background-color: blue; }
+		  to { background-color: red; }
+		}
+		@-ms-keyframes color_change {
+		  from { background-color: blue; }
+		  to { background-color: red; }
+		}
+		@-o-keyframes color_change {
+		  from { background-color: blue; }
+		  to { background-color: red; }
+		}
+		@keyframes color_change {
+		  from { background-color: blue; }
+		  to { background-color: red; }
+		}
+
+		div {
+		    background-color: blue;
+		    border: 5px solid white;
+		    border-radius: 50px;
+		    width: 50px;
+		    height: 50px;
+		   -webkit-animation: color_change 1s infinite alternate;
+		   -moz-animation: color_change 1s infinite alternate;  
+		   -ms-animation: color_change 1s infinite alternate;  
+		   -o-animation: color_change 1s infinite alternate;  
+		   animation: color_change 1s infinite alternate;   
+		}
+    </style>
+</head>
+<body>
+    <div></div>
+</body>
+</html>

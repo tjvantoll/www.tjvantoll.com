@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Accessibility | TJ VanToll]]></title>
+  <link href="http://tjvantoll.com/blog/categories/accessibility/atom.xml" rel="self"/>
+  <link href="http://tjvantoll.com/"/>
+  <updated>2013-08-30T14:07:29-04:00</updated>
+  <id>http://tjvantoll.com/</id>
+  <author>
+    <name><![CDATA[TJ VanToll]]></name>
+    <email><![CDATA[tj.vantoll@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Stop Messing with the Browser's Default Focus outline]]></title>
+    <link href="http://tjvantoll.com/2013/01/28/stop-messing-with-the-browsers-default-focus-outline/"/>
+    <updated>2013-01-28T20:57:00-05:00</updated>
+    <id>http://tjvantoll.com/2013/01/28/stop-messing-with-the-browsers-default-focus-outline</id>
+    <content type="html"><![CDATA[<p>This is the latest in my series of accessibility best practices after getting frustrated with using a keyboard on the internet.  Last time I talked about <a href="/2013/01/01/enter-should-submit-forms-stop-messing-with-that/">enter submitting forms</a>, this time I'm going to explain why removing the browser's default focus <code>outline</code> is a bad idea.</p>
+
+<h3>Focus Rings</h3>
+
+<p>All browsers have a default value they apply to the currently focused item.  For example Chrome on OS X uses the following:</p>
+
+<p>``` css
+:focus {</p>
+
+<pre><code>/* -webkit-focus-ring-color = '#5B9DD9' */
+outline: -webkit-focus-ring-color auto 5px;
+</code></pre>
+
+<p>}
+```</p>
+
+<!--more-->
+
+
+<p>Firefox uses a <code>1px dotted #212121</code> outline, other browser use other values.  The focus ring looks like this for Chrome on OS X:</p>
+
+<p><img src="/images/posts/2013-01-28/default.png" title="Default Focus Ring in Chrome on OS X" alt="Default Focus Ring in Chrome on OS X" /></p>
+
+<p>Keyboard users <strong>depend</strong> on this <code>outline</code> to determine where they are on the page.  I cannot stress <strong>depend</strong> enough, without the <code>outline</code> you have no idea where you are.  Don't believe me?  Go to <a href="http://www.cnn.com">cnn.com</a> right now.  Hit tab a few times and try to figure out where the hell you are on the page.</p>
+
+<p>The <code>outline</code> <em>can</em> be removed with the following:</p>
+
+<p>``` css
+:focus {</p>
+
+<pre><code>outline: 0;
+/* or */
+outline: none;
+</code></pre>
+
+<p>}
+```</p>
+
+<p>This is obviously bad per the reasoning above.  The HTML5 specification has the following to say about removing the default <code>outline</code>:</p>
+
+<p><blockquote><p>"...if an alternative focusing style isn't made available instead, the page will be significantly less usable for people who primarily navigate pages using a keyboard, or those with reduced vision who use focus outlines to help them navigate the page."</p><footer><strong>HTML5 Specification</strong> <cite><a href='http://www.whatwg.org/specs/web-apps/current-work/multipage/editing.html#element-level-focus-apis'>www.whatwg.org/specs/web-apps/&hellip;</a></cite></footer></blockquote></p>
+
+<h3>Custom Focus Outlines</h3>
+
+<p>As the spec mentions, you can create your own styling for focused items instead of using the browser's default.  For example the following will change all focused links to white text on a black background:</p>
+
+<p>``` css
+:link:focus, :visited:focus {</p>
+
+<pre><code>outline: none;
+background-color: black;
+color: white;
+</code></pre>
+
+<p>}
+```</p>
+
+<p>Although this is possible, I would <strong>strongly</strong> recommend simply leaving the default browser <code>outline</code> in place.  Changing the default display messes with a user's expectations, which is a big usability no no.  Furthermore, you need to make sure that whatever alternative you put in is sufficiently identifiable for users with reduced vision.</p>
+
+<h3>Why do People Want it Removed?</h3>
+
+<p>At the <a href="http://jqueryui.com">jQuery UI</a> project we get a <a href="https://github.com/jquery/jquery-ui/pull/898">lot</a> <a href="http://bugs.jqueryui.com/ticket/8959">of</a> <a href="http://bugs.jqueryui.com/ticket/6146">requests</a> to remove the browser default <code>outline</code>s from our widgets.</p>
+
+<p>  The most recent tickets have come from the <a href="http://jqueryui.com/slider">slider</a> and <a href="http://jqueryui.com/tabs">tabs</a> widgets.  This is what they look like on the latest Chrome on OS X:</p>
+
+<p><img src="/images/posts/2013-01-28/slider.png" title="Focus ring on jQuery UI slider" alt="Focus ring on jQuery UI slider" />
+<img src="/images/posts/2013-01-28/tabs.png" title="Focus ring on jQuery UI tabs" alt="Focus ring on jQuery UI tabs" /></p>
+
+<p>Some people find this unsightly.  Others are thrown off by the fact that the display varies on different browsers / operating systems.  While these concerns are reasonable, they do not outweigh the importance of the <code>outline</code> for keyboard users and users with reduced vision.</p>
+
+<p>jQuery UI does nothing to alter the browser's default <code>outline</code> on these widgets and I encourage others to do the same.</p>
+
+<h3>CSS Reset</h3>
+
+<p>Unfortunately one of the reasons much of the internet removes the default focus ring is because the <a href="http://meyerweb.com/eric/tools/css/reset/reset200802.css">first version of Eric Meyer's CSS reset</a> included the following:</p>
+
+<p>``` css
+/<em> remember to define focus styles! </em>/
+:focus {</p>
+
+<pre><code>outline: 0;
+</code></pre>
+
+<p>}
+```</p>
+
+<p>As you can see it's made abundantly clear that you should define your own focus styles, but most people simply copied and pasted the file without realizing this.</p>
+
+<p>The <a href="http://meyerweb.com/eric/tools/css/reset/index.html">updated version</a> of the CSS reset no longer features this, but sadly it's a bit too late for a lot of sites.</p>
+
+<p>Sigh.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[The Enter Key should Submit Forms, Stop Suppressing it]]></title>
+    <link href="http://tjvantoll.com/2013/01/01/enter-should-submit-forms-stop-messing-with-that/"/>
+    <updated>2013-01-01T15:54:00-05:00</updated>
+    <id>http://tjvantoll.com/2013/01/01/enter-should-submit-forms-stop-messing-with-that</id>
+    <content type="html"><![CDATA[<p>I try to do most of my work and play on the internet with the keyboard.  In the course of my internet-ing there's one unfortunate trend that I've noticed; an increasing number of sites are not allowing the enter key to submit a form.  Before I tell you why you care, let's look at how this should work.</p>
+
+<!--more-->
+
+
+<h3>Enter = Submit</h3>
+
+<p>Take the following basic form:</p>
+
+<p>``` html
+<form></p>
+
+<pre><code>&lt;label for="name"&gt;Name:&lt;/label&gt;
+&lt;input type="text" name="name" id="name"&gt;
+&lt;input type="submit" value="Submit"&gt;
+</code></pre>
+
+<p></form>
+```</p>
+
+<p>If you have focus in the textbox and hit enter, the form will be submitted automatically.  This behavior is consistent across all browsers and is known as implicit submission.  So why is this important?</p>
+
+<h3>Accessibility</h3>
+
+<p>Implicit submission is vital to assistive technologies and impaired users that cannot use a mouse at all.  From the HTML5 specification:</p>
+
+<p><blockquote><p>There are pages on the Web that are only usable if there is a way to implicitly submit forms, so user agents [browsers] are strongly encouraged to support this.</p><footer><strong>HTML 5 specification</strong> <cite><a href='http://www.whatwg.org/specs/web-apps/current-work/multipage/association-of-controls-and-forms.html#implicit-submission'>www.whatwg.org/specs/web-apps/&hellip;</a></cite></footer></blockquote></p>
+
+<p>The spec strongly encourages browsers to allow implicit submission; they all do.</p>
+
+<h3>User Expectations</h3>
+
+<p>Many users have an expectation that implicit submission will just work.  Interfering with this leads to a negative user experience for these users.</p>
+
+<h3>How to Prevent Implicit Submission</h3>
+
+<p>What are sites doing to keep this from happening?  Here's a few things I've seen.</p>
+
+<h4>No Submit Buttons</h4>
+
+<p>Many sites do not have a submit button within the form.  From the spec here's how browsers determine what to do when enter is clicked.</p>
+
+<p><blockquote><p>If the user agent supports letting the user submit a form implicitly (for example, on some platforms hitting the "enter" key while a text field is focused implicitly submits the form), then doing so for a form whose default button has a defined activation behavior must cause the user agent to run synthetic click activation steps on that default button.</p><footer><strong>HTML 5 specification</strong> <cite><a href='http://www.whatwg.org/specs/web-apps/current-work/multipage/association-of-controls-and-forms.html#implicit-submission'>www.whatwg.org/specs/web-apps/&hellip;</a></cite></footer></blockquote></p>
+
+<p>Basically, if the user hits enter when a text field is focused, the browser should find the first submit button in the form and click it.</p>
+
+<p><blockquote><p>If the form has no submit button, then the implicit submission mechanism must do nothing if the form has more than one field that blocks implicit submission, and must submit the form element from the form element itself otherwise.</p></p><p><p>For the purpose of the previous paragraph, an element is a field that blocks implicit submission of a form element if it is an input element whose form owner is that form element and whose type attribute is in one of the following states: Text, Search, URL, Telephone, E-mail, Password, Date and Time, Date, Month, Week, Time, Local Date and Time, Number</p><footer><strong>HTML 5 specification</strong> <cite><a href='http://www.whatwg.org/specs/web-apps/current-work/multipage/association-of-controls-and-forms.html#implicit-submission'>www.whatwg.org/specs/web-apps/&hellip;</a></cite></footer></blockquote></p>
+
+<p>So, in a form with no submit buttons, implicit submission will be done if only one input is present.  Therefore, pressing enter in this textbox will submit the form:</p>
+
+<p>``` html
+<form></p>
+
+<pre><code>&lt;label for="name"&gt;Name:&lt;/label&gt;
+&lt;input type="text" name="name" id="name"&gt;
+</code></pre>
+
+<p></form>
+```</p>
+
+<p>But in this form it will not because there are multiple fields:</p>
+
+<p>``` html
+<form></p>
+
+<pre><code>&lt;label for="name"&gt;Name:&lt;/label&gt;
+&lt;input type="text" name="name" id="name"&gt;
+&lt;label for="address"&gt;Address:&lt;/label&gt;
+&lt;input type="text" name="address" id="address"&gt;
+</code></pre>
+
+<p></form>
+```</p>
+
+<p>Therefore, if you have a form with more than one input field, always include a submit button.  Specifically an <code>&lt;input&gt;</code> with the <code>type="submit"</code> attribute, or a <code>&lt;button&gt;</code> element should be present.  (Note: IE7 has a bug where the <code>type</code> attribute of a <code>&lt;button&gt;</code> defaults to <code>button</code> instead of <code>submit</code>.  Therefore for IE7 compatibility you'll need <code>&lt;button type="submit"&gt;</code>.)</p>
+
+<p>If you need to run some JavaScript before the form is submitted (validation, data manipulation, etc), do it in a <code>submit</code> event handler on the form, not a <code>click</code> handler on a button.</p>
+
+<h4>No &lt;form&gt;</h4>
+
+<p>I've seen a few forms that do not use the <code>&lt;form&gt;</code> HTML tag.  Why would they do that?</p>
+
+<p>With modern day browsers and JavaScript libraries it's easy to send data to the server via AJAX.  Because an AJAX request does not require a true <code>&lt;form&gt;</code> tag, it is often omitted.  However, much like implicit submission, surrounding form data with a true <code>&lt;form&gt;</code> tag is vital for accessibility.  Most screen readers have a <a href="http://www.htctu.fhda.edu/trainings/manuals/tutorials/readweb/forms.htm">mode specifically for filling out forms</a>, and by omitting a true <code>&lt;form&gt;</code> tag you risk this mode not being activated.</p>
+
+<h4>Explicit Prevention</h4>
+
+<p>Finally, it's also quite easy to prevent implicit submission in JavaScript.  Take the following example:</p>
+
+<p>``` html
+<form></p>
+
+<pre><code>&lt;label for="name"&gt;Name:&lt;/label&gt;
+&lt;input type="text" name="name" id="name"&gt;
+&lt;input type="submit" value="Submit"&gt;
+</code></pre>
+
+<p></form></p>
+
+<script>
+    document.getElementById('name').addEventListener('keypress', function(event) {
+        if (event.keyCode == 13) {
+            event.preventDefault();
+        }
+    });
+</script>
+
+
+<p>```</p>
+
+<p>This sets up a <code>keypress</code> event handler that prevents the default action (implicit submission) from occurring when the enter key is pressed.</p>
+
+<p>This technique can be handy.  For example, say you have a form with multiple submit buttons.  As we saw earlier, the implicit submission algorithm will click the first submit button that it finds.  Therefore, if you need control over which submit button is clicked, you can use the above technique to listen an for enter keypress, prevent the default action, then explicitly click the appropriate button.</p>
+
+<p>Take the following example:</p>
+
+<p>``` html
+<form></p>
+
+<pre><code>&lt;label for="age"&gt;Age:&lt;/label&gt;
+&lt;input type="number" min="0" max="120" name="age" id="age"&gt;
+&lt;button id="child"&gt;Child&lt;/button&gt;
+&lt;button id="adult"&gt;Adult&lt;/button&gt;
+</code></pre>
+
+<p></form></p>
+
+<script>
+    (function() {
+        var age = document.getElementById('age');
+        age.addEventListener('keypress', function(event) {
+            if (event.keyCode == 13) {
+                event.preventDefault();
+                if (age.value > 20) {
+                    document.getElementById('adult').click();
+                } else {
+                    document.getElementById('child').click();
+                }
+            }
+        });
+    }());
+</script>
+
+
+<p>```</p>
+
+<p>When enter is clicked in the number input, the <code>keypress</code> event handler determines which submit button is appropriate and clicks it.</p>
+
+<p>While this technique can be handy, I've seen it used plenty of times to completely prevent implicit submission from working.  Don't do that.</p>
+
+<h3>Conclusion</h3>
+
+<p>When filling out a form, pressing enter in a textbox should submit the form.  This is known as an implicit form submission.  Despite being vital for assistive technologies and an important user convenience, many web forms prevent it for one reason or another.  If you write web forms, please take a minute to ensure that the enter key can indeed be used to submit them; it'll help make the web a better place for everyone.</p>
+]]></content>
+  </entry>
+  
+</feed>

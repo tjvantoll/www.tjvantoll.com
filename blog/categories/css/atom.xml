@@ -1,0 +1,1323 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: CSS | TJ VanToll]]></title>
+  <link href="http://tjvantoll.com/blog/categories/css/atom.xml" rel="self"/>
+  <link href="http://tjvantoll.com/"/>
+  <updated>2013-08-30T14:07:29-04:00</updated>
+  <id>http://tjvantoll.com/</id>
+  <author>
+    <name><![CDATA[TJ VanToll]]></name>
+    <email><![CDATA[tj.vantoll@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Internet Explorer, Attribute Selectors, and Really Long Attribute Values]]></title>
+    <link href="http://tjvantoll.com/2013/06/21/internet-explorer-attribute-selectors-and-long-values/"/>
+    <updated>2013-06-21T21:36:00-04:00</updated>
+    <id>http://tjvantoll.com/2013/06/21/internet-explorer-attribute-selectors-and-long-values</id>
+    <content type="html"><![CDATA[<p>In Internet Explorer, <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Attribute_selectors">attribute selectors</a> that inspect the attribute's value do not work if the value is >= 4096 characters. This is one of those bugs that you are highly unlikely to run into, but is incredibly painful to track down if you do.</p>
+
+<p>As an example, take the following:</p>
+
+<p>``` html</p>
+
+
+
+
+
+<div data-test="Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus. Phasellus viverra nulla ut metus varius laoreet. Quisque rutrum. Aenean imperdiet. Etiam ultricies nisi vel augue. Curabitur ullamcorper ultricies nisi. Nam eget dui. Etiam rhoncus. Maecenas tempus, tellus eget condimentum rhoncus, sem quam semper libero, sit amet adipiscing sem neque sed ipsum. Nam quam nunc, blandit vel, luctus pulvinar, hendrerit id, lorem. Maecenas nec odio et ante tincidunt tempus. Donec vitae sapien ut libero venenatis faucibus. Nullam quis ante. Etiam sit amet orci eget eros faucibus tincidunt. Duis leo. Sed fringilla mauris sit amet nibh. Donec sodales sagittis magna. Sed consequat, leo eget bibendum sodales, augue velit cursus nunc, quis gravida magna mi a libero. Fusce vulputate eleifend sapien. Vestibulum purus quam, scelerisque ut, mollis sed, nonummy id, metus. Nullam accumsan lorem in dui. Cras ultricies mi eu turpis hendrerit fringilla. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; In ac dui quis mi consectetuer lacinia. Nam pretium turpis et arcu. Duis arcu tortor, suscipit eget, imperdiet nec, imperdiet iaculis, ipsum. Sed aliquam ultrices mauris. Integer ante arcu, accumsan a, consectetuer eget, posuere ut, mauris. Praesent adipiscing. Phasellus ullamcorper ipsum rutrum nunc. Nunc nonummy metus. Vestibulum volutpat pretium libero. Cras id dui. Aenean ut eros et nisl sagittis vestibulum. Nullam nulla eros, ultricies sit amet, nonummy id, imperdiet feugiat, pede. Sed lectus. Donec mollis hendrerit risus. Phasellus nec sem in justo pellentesque facilisis. Etiam imperdiet imperdiet orci. Nunc nec neque. Phasellus leo dolor, tempus non, auctor et, hendrerit quis, nisi. Curabitur ligula sapien, tincidunt non, euismod vitae, posuere imperdiet, leo. Maecenas malesuada. Praesent congue erat at massa. Sed cursus turpis vitae tortor. Donec posuere vulputate arcu. Phasellus accumsan cursus velit. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Sed aliquam, nisi quis porttitor congue, elit erat euismod orci, ac placerat dolor lectus quis orci. Phasellus consectetuer vestibulum elit. Aenean tellus metus, bibendum sed, posuere ac, mattis non, nunc. Vestibulum fringilla pede sit amet augue. In turpis. Pellentesque posuere. Praesent turpis. Aenean posuere, tortor sed cursus feugiat, nunc augue blandit nunc, eu sollicitudin urna dolor sagittis lacus. Donec elit libero, sodales nec, volutpat a, suscipit non, turpis. Nullam sagittis. Suspendisse pulvinar, augue ac venenatis condimentum, sem libero volutpat nibh, nec pellentesque velit pede quis nunc. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Fusce id purus. Ut varius tincidunt libero. Phasellus dolor. Maecenas vestibulum mollis diam. Pellentesque ut neque. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. In dui magna, posuere eget, vestibulum et, tempor auctor, justo. In ac felis quis tortor malesuada pretium. Pellentesque auctor neque nec urna. Proin sapien ipsum, porta a, auctor quis, euismod ut, mi. Aenean viverra rhoncus pede. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Ut non enim eleifend felis pretium feugiat. Vivamus quis mi. Phasellus a est. Phasellus magna. In hac habitasse platea dictumst. Curabitur at lacus ac velit ornare lobortis. Cur">
+    4095 Characters
+</div>
+
+
+
+
+<div data-test="Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus. Phasellus viverra nulla ut metus varius laoreet. Quisque rutrum. Aenean imperdiet. Etiam ultricies nisi vel augue. Curabitur ullamcorper ultricies nisi. Nam eget dui. Etiam rhoncus. Maecenas tempus, tellus eget condimentum rhoncus, sem quam semper libero, sit amet adipiscing sem neque sed ipsum. Nam quam nunc, blandit vel, luctus pulvinar, hendrerit id, lorem. Maecenas nec odio et ante tincidunt tempus. Donec vitae sapien ut libero venenatis faucibus. Nullam quis ante. Etiam sit amet orci eget eros faucibus tincidunt. Duis leo. Sed fringilla mauris sit amet nibh. Donec sodales sagittis magna. Sed consequat, leo eget bibendum sodales, augue velit cursus nunc, quis gravida magna mi a libero. Fusce vulputate eleifend sapien. Vestibulum purus quam, scelerisque ut, mollis sed, nonummy id, metus. Nullam accumsan lorem in dui. Cras ultricies mi eu turpis hendrerit fringilla. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; In ac dui quis mi consectetuer lacinia. Nam pretium turpis et arcu. Duis arcu tortor, suscipit eget, imperdiet nec, imperdiet iaculis, ipsum. Sed aliquam ultrices mauris. Integer ante arcu, accumsan a, consectetuer eget, posuere ut, mauris. Praesent adipiscing. Phasellus ullamcorper ipsum rutrum nunc. Nunc nonummy metus. Vestibulum volutpat pretium libero. Cras id dui. Aenean ut eros et nisl sagittis vestibulum. Nullam nulla eros, ultricies sit amet, nonummy id, imperdiet feugiat, pede. Sed lectus. Donec mollis hendrerit risus. Phasellus nec sem in justo pellentesque facilisis. Etiam imperdiet imperdiet orci. Nunc nec neque. Phasellus leo dolor, tempus non, auctor et, hendrerit quis, nisi. Curabitur ligula sapien, tincidunt non, euismod vitae, posuere imperdiet, leo. Maecenas malesuada. Praesent congue erat at massa. Sed cursus turpis vitae tortor. Donec posuere vulputate arcu. Phasellus accumsan cursus velit. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Sed aliquam, nisi quis porttitor congue, elit erat euismod orci, ac placerat dolor lectus quis orci. Phasellus consectetuer vestibulum elit. Aenean tellus metus, bibendum sed, posuere ac, mattis non, nunc. Vestibulum fringilla pede sit amet augue. In turpis. Pellentesque posuere. Praesent turpis. Aenean posuere, tortor sed cursus feugiat, nunc augue blandit nunc, eu sollicitudin urna dolor sagittis lacus. Donec elit libero, sodales nec, volutpat a, suscipit non, turpis. Nullam sagittis. Suspendisse pulvinar, augue ac venenatis condimentum, sem libero volutpat nibh, nec pellentesque velit pede quis nunc. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Fusce id purus. Ut varius tincidunt libero. Phasellus dolor. Maecenas vestibulum mollis diam. Pellentesque ut neque. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. In dui magna, posuere eget, vestibulum et, tempor auctor, justo. In ac felis quis tortor malesuada pretium. Pellentesque auctor neque nec urna. Proin sapien ipsum, porta a, auctor quis, euismod ut, mi. Aenean viverra rhoncus pede. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Ut non enim eleifend felis pretium feugiat. Vivamus quis mi. Phasellus a est. Phasellus magna. In hac habitasse platea dictumst. Curabitur at lacus ac velit ornare lobortis. Cura">
+    4096 Characters
+</div>
+
+
+<p>```</p>
+
+<p>The example has two <code>&lt;div&gt;</code>s and 3 rules applied to both elements via attribute selectors. In Firefox, Chrome, Safari, and Opera all rules apply as they should and the elements display as follows:</p>
+
+<p><img src="http://tjvantoll.com/images/posts/2013-06-21/chrome.png"></p>
+
+<p>In Internet Explorer however, the display looks like this:</p>
+
+<p><img src="http://tjvantoll.com/images/posts/2013-06-21/ie.png"></p>
+
+<p>The selector that looks for the existence of the attribute, <code>div[data-test]</code>, matches both elements and the <code>background: red</code> rule is applied.</p>
+
+<p>However, the two selectors that inspect the attribute's values, <code>div[data-test*="Nullam"]</code> and <code>div[data-test^="Lorem"]</code>), mysteriously do not match the <code>&lt;div&gt;</code> with the 4096 character <code>data-test</code> attribute.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Using Semantic Class Names to Show and Hide Elements]]></title>
+    <link href="http://tjvantoll.com/2013/06/19/using-semantic-class-names-to-show-and-hide-elements/"/>
+    <updated>2013-06-19T21:29:00-04:00</updated>
+    <id>http://tjvantoll.com/2013/06/19/using-semantic-class-names-to-show-and-hide-elements</id>
+    <content type="html"><![CDATA[<p>Showing and hiding elements has the potential to get complicated in large applications.</p>
+
+<p>As a small example, say you have the following form that both displays a user's data as well as allows them to edit it:</p>
+
+<p>``` html
+<form></p>
+
+<pre><code>&lt;fieldset&gt;
+    &lt;legend&gt;Account Information&lt;/legend&gt;
+
+    &lt;div&gt;
+        &lt;label for="name"&gt;Name:&lt;/label&gt;
+        &lt;input type="text" id="name" value="TJ" required&gt;
+        &lt;span class="display"&gt;TJ&lt;/span&gt;
+    &lt;/div&gt;
+    &lt;div&gt;
+        &lt;label for="email"&gt;Email:&lt;/label&gt;
+        &lt;input type="email" id="email" value="tj@somedomain.com" required&gt;
+        &lt;span class="display"&gt;tj@somedomain.com&lt;/span&gt;
+    &lt;/div&gt;
+    &lt;div class="actions"&gt;
+        &lt;button type="button" class="edit"&gt;Edit&lt;/button&gt;
+        &lt;button type="submit" class="save"&gt;Save&lt;/button&gt;
+        &lt;button type="button" class="cancel"&gt;Cancel&lt;/button&gt;
+    &lt;/div&gt;
+&lt;/fieldset&gt;
+</code></pre>
+
+<p></form>
+```</p>
+
+<!-- more -->
+
+
+<p>Without any logic both states of the form display:</p>
+
+<p><div class="code_example"><h6>Initial Form Display<a href="/demos/2013-06-19/initialForm.html" target="_blank">Open in New Window</a></h6><iframe style="width: 100%; height: 300px;" frameborder="0" src="/demos/2013-06-19/initialForm.html"></iframe></div></p>
+
+<h3>Adding the Logic</h3>
+
+<p>Here's the goal. The Edit button should:</p>
+
+<ul>
+<li>Show the <code>&lt;input&gt;</code>s.</li>
+<li>Show the Save button.</li>
+<li>Show the Cancel button.</li>
+<li>Hide the Edit button.</li>
+<li>Hide the text in the <code>&lt;span&gt;</code>s.</li>
+</ul>
+
+
+<p>The Cancel button should then undo these changes.</p>
+
+<p>The traditional approach to this problem is to show and hide elements explicitly in JavaScript:</p>
+
+<p>``` javascript
+$( ".edit" ).on( "click", function() {</p>
+
+<pre><code>$( ".display, .edit" ).hide();
+$( ".cancel, .save, input" ).show();
+</code></pre>
+
+<p>});
+$( ".cancel" ).on( "click", function() {</p>
+
+<pre><code>$( ".display, .edit" ).show();
+$( ".cancel, .save, input" ).hide();
+</code></pre>
+
+<p>});
+```</p>
+
+<p>To get the initial state of the form correct you also need some CSS:</p>
+
+<p>``` css
+.cancel, .save, input {</p>
+
+<pre><code>display: none;
+</code></pre>
+
+<p>}
+```</p>
+
+<p>Because the list of elements has to be specified in JavaScript and CSS, this logic will be difficult to maintain. And this is for a trivial example; usually requirements are much more complex.</p>
+
+<p>How can we make this better?</p>
+
+<h3>Semantic Class Names</h3>
+
+<p>Instead of targeting individual elements in JavaScript, let's add a class name to the parent element that makes the most sense, in this case, the <code>&lt;form&gt;</code>:</p>
+
+<p>``` javascript
+$( ".edit" ).on( "click", function() {</p>
+
+<pre><code>$( this ).parents( "form" ).addClass( "editing" );
+</code></pre>
+
+<p>});
+$( ".cancel" ).on( "click", function() {</p>
+
+<pre><code>$( this ).parents( "form" ).removeClass( "editing" );
+</code></pre>
+
+<p>});
+```</p>
+
+<p>Since the logic is simple, this can be written library-free as well (<em>note <code>classList</code> is not available in IE &lt; 10</em>):</p>
+
+<p>``` javascript
+(function() {</p>
+
+<pre><code>var form = document.querySelector( "form" ),
+    editButton = document.querySelector( ".edit" ),
+    cancelButton = document.querySelector( ".cancel" );
+
+editButton.addEventListener( "click", function() {
+    form.classList.add( "editing" ); 
+});
+cancelButton.addEventListener( "click", function() {
+    form.classList.remove( "editing" ); 
+});
+</code></pre>
+
+<p>}());
+```</p>
+
+<h3>Advantages of Using Semantic Classes</h3>
+
+<p>There are 2 major advantages to this approach.</p>
+
+<p>1) All display logic is now handled in CSS:</p>
+
+<p>``` css
+.cancel, .save, input {</p>
+
+<pre><code>display: none;
+</code></pre>
+
+<p>}
+.editing .save,
+.editing .cancel,
+.editing input {</p>
+
+<pre><code>display: inline-block;
+</code></pre>
+
+<p>}
+.editing .edit,
+.editing .display {</p>
+
+<pre><code>display: none;
+</code></pre>
+
+<p>}
+```</p>
+
+<p>2) You have a styling hook that can be used to make further changes to the display. For example, you might want to bold the labels when editing:</p>
+
+<p>``` css
+.editing label {</p>
+
+<pre><code>font-weight: bold;
+</code></pre>
+
+<p>}
+```</p>
+
+<p>The final display of the form looks like this:</p>
+
+<p><div class="code_example"><h6>Semantic Class Approach<a href="/demos/2013-06-19/finalForm.html" target="_blank">Open in New Window</a></h6><iframe style="width: 100%; height: 300px;" frameborder="0" src="/demos/2013-06-19/finalForm.html"></iframe></div></p>
+
+<h3>Conclusion</h3>
+
+<p>This is not a technique that I came up with but I've used it successfully in several large applications and have found that it scales well over time.</p>
+
+<p>Do you have any other tricks you use to show &amp; hide elements? If so, let me know in the comments.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Showing a CSS Based Loading Animation While Your Site Loads]]></title>
+    <link href="http://tjvantoll.com/2013/04/24/showing-a-css-based-loading-animation-while-your-site-loads/"/>
+    <updated>2013-04-24T00:00:00-04:00</updated>
+    <id>http://tjvantoll.com/2013/04/24/showing-a-css-based-loading-animation-while-your-site-loads</id>
+    <content type="html"><![CDATA[<p>Showing a loading indicator on startup is a common pattern in native applications that is becoming more common on the web.  If you need to load a lot of resources when your web application is first loaded, you should give the user a clear indication that this is occurring.</p>
+
+<!-- more -->
+
+
+<p>Here's an approach I've used a few times to accomplish this.  I start by giving the <code>&lt;html&gt;</code> element itself a class of <code>"loading"</code>:</p>
+
+<p>``` html
+<html class="loading"></p>
+
+<pre><code>&lt;!-- All the things --&gt;
+</code></pre>
+
+<p></html>
+```</p>
+
+<p>I then setup two transitions that take effect when the loading class is removed.  I transition the color on the <code>&lt;html&gt;</code> element from a predefined color to its default, <code>transparent</code>.  To avoid seeing content during loading, I make the <code>&lt;body&gt;</code> opaque with <code>opacity: 0</code>.  When loading is complete, that is transitioned to <code>opacity: 1</code> to fade the content in.  The full source is below:</p>
+
+<p>``` css
+html {</p>
+
+<pre><code>-webkit-transition: background-color 1s;
+transition: background-color 1s;
+</code></pre>
+
+<p>}
+html, body {</p>
+
+<pre><code>/* For the loading indicator to be vertically centered ensure */
+/* the html and body elements take up the full viewport */
+min-height: 100%;
+</code></pre>
+
+<p>}
+html.loading {</p>
+
+<pre><code>/* Replace #333 with the background-color of your choice */
+/* Replace loading.gif with the loading image of your choice */
+background: #333 url('loading.gif') no-repeat 50% 50%;
+
+/* Ensures that the transition only runs in one direction */
+-webkit-transition: background-color 0;
+transition: background-color 0;
+</code></pre>
+
+<p>}
+body {</p>
+
+<pre><code>-webkit-transition: opacity 1s ease-in;
+transition: opacity 1s ease-in;
+</code></pre>
+
+<p>}
+html.loading body {</p>
+
+<pre><code>/* Make the contents of the body opaque during loading */
+opacity: 0;
+
+/* Ensures that the transition only runs in one direction */
+-webkit-transition: opacity 0;
+transition: opacity 0;
+</code></pre>
+
+<p>}
+```</p>
+
+<p>The only JavaScript required is to remove the <code>"loading"</code> class from the <code>&lt;html&gt;</code> element.  Do this when your application is initialized and ready to go.</p>
+
+<p>``` javascript
+// IE10+
+document.getElementsByTagName( "html" )[0].classList.remove( "loading" );</p>
+
+<p>// All browsers
+document.getElementsByTagName( "html" )[0].className.replace( /loading/, "" );</p>
+
+<p>// Or with jQuery
+$( "html" ).removeClass( "loading" );
+```</p>
+
+<p>The demo below shows this animation in action.  To simulate a real load it waits 3 seconds before the <code>"loading"</code> class is removed.</p>
+
+<p><div class="code_example"><h6>Loading Example<a href="/demos/2013-04-24/loading.html" target="_blank">Open in New Window</a></h6><iframe style="width: 100%; height: 275px;" frameborder="0" src="/demos/2013-04-24/loading.html"></iframe></div></p>
+
+<p>This will work in <a href="http://caniuse.com/#feat=css-transitions">any browser that supports CSS transitions</a>, which nowadays is really everything other than IE &lt;= 9.  It also degrades gracefully for older browsers.  Unsupported browsers will still see the loading animation, they will simply lose the fade in transition when loading is complete.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[List of Pseudo-Elements to Style Form Controls]]></title>
+    <link href="http://tjvantoll.com/2013/04/15/list-of-pseudo-elements-to-style-form-controls/"/>
+    <updated>2013-04-15T00:00:00-04:00</updated>
+    <id>http://tjvantoll.com/2013/04/15/list-of-pseudo-elements-to-style-form-controls</id>
+    <content type="html"><![CDATA[<p>Styling form elements is a pain point when developing web applications.  Historically, web developers have had to accept the form controls the browser provided with little hope of customization.  However, web rendering engines are increasingly adding hooks through pseudo-elements to give authors some control over the display.</p>
+
+<p>While all of these pseudo-elements are rendering engine specific (and therefore behind vendor prefixes), they can still be handy for customizing the display for that engine.  The following is my best attempt at compiling a complete list of the pseudo-elements available in Trident, Gecko, and WebKit.  At the time of this writing Blink is a recent fork of WebKit, so the pseudo-elements provided are identical.  I am not aware of any form related pseudo-elements that Presto provides.</p>
+
+<p>A couple of notes:</p>
+
+<ul>
+<li>All Trident pseudo-elements listed here were added in IE10 and will not work in earlier versions of Internet Explorer.</li>
+<li>In WebKit, to style some pseudo-elements you must set the basis element's <code>-webkit-appearance</code> pseudo-class to <code>none</code>.  For example, to style <code>::-webkit-progress-bar</code> you must apply <code>-webkit-appearance: none;</code> to the appropriate <code>&lt;progress&gt;</code> element.</li>
+</ul>
+
+
+<!-- more -->
+
+
+<h3>Table of Contents</h3>
+
+<ul>
+<li>&lt;input&gt; Elements
+
+<ul>
+<li><a href="#input_button">button</a></li>
+<li><a href="#input_checkbox_radio">checkbox / radio</a></li>
+<li><a href="#input_color">color</a></li>
+<li><a href="#input_date">date</a></li>
+<li><a href="#input_file">file</a></li>
+<li><a href="#input_number">number</a></li>
+<li><a href="#input_password">password</a></li>
+<li><a href="#placeholder_attribute">placeholder attribute</a></li>
+<li><a href="#input_range">range</a></li>
+<li><a href="#input_reset">reset</a></li>
+<li><a href="#input_search">search</a></li>
+<li><a href="#input_submit">submit</a></li>
+<li><a href="#input_text">text</a></li>
+</ul>
+</li>
+<li>Other Elements
+
+<ul>
+<li><a href="#button_element">button</a></li>
+<li><a href="#keygen_element">keygen</a></li>
+<li><a href="#meter_element">meter</a></li>
+<li><a href="#progress_element">progress</a></li>
+<li><a href="#select_element">select</a></li>
+<li><a href="#textarea_element">textarea</a></li>
+</ul>
+</li>
+<li>Miscellaneous
+
+<ul>
+<li><a href="#form_validation_messages">Form Validation Messages</a></li>
+</ul>
+</li>
+</ul>
+
+
+<h3 id="input_button">input[type=button]</h3>
+
+
+<h4>Gecko</h4>
+
+<p>See <a href="#button_element">&lt;button&gt;</a></p>
+
+<h3 id="input_checkbox_radio">input[type=checkbox] / input[type=radio]</h3>
+
+
+<!-- http://jsfiddle.net/tj_vantoll/8esYJ/ -->
+
+
+<h4>Trident</h4>
+
+<p>Trident provides the <code>::-ms-check</code> pseudo-element for checkbox and radio button controls.  For example:</p>
+
+<p><code>html
+&lt;input type="checkbox"&gt;
+&lt;input type="radio"&gt;
+</code>
+``` css
+::-ms-check {</p>
+
+<pre><code>color: red;
+background: black;
+padding: 1em;
+</code></pre>
+
+<p>}
+```</p>
+
+<p>This displays as follows in IE10 on Windows 8:</p>
+
+<p><img src="http://tjvantoll.com/images/posts/2013-04-15/trident-radio-checkbox.png"></p>
+
+<h3 id="input_color">input[type=color]</h3>
+
+
+<!-- http://jsfiddle.net/tj_vantoll/fQFwc/ -->
+
+
+<h4>WebKit</h4>
+
+<p>Webkit provides 2 pseudo elements for its color picker, <code>::-webkit-color-swatch-wrapper</code> and <code>::-webkit-color-swatch</code>.  You can apply a variety of rules to these elements but I haven't come up with anything useful.  Here's an example just to show it's possible:</p>
+
+<p><code>html
+&lt;input type="color"&gt;
+</code>
+<code>css
+::-webkit-color-swatch-wrapper { border: 2px solid red; }
+::-webkit-color-swatch { opacity: 0.5; }
+</code></p>
+
+<p>This displays as follows in Chrome 26 on OS X:</p>
+
+<p><img src="http://tjvantoll.com/images/posts/2013-04-15/webkit-input-color.png"></p>
+
+<h3 id="input_date">input[type=date]</h3>
+
+
+<!-- http://jsfiddle.net/tj_vantoll/Qx46G/ -->
+
+
+<h4>WebKit</h4>
+
+<p>The following 8 pseudo-elements are made available by WebKit for customizing a date input's textbox:</p>
+
+<ul>
+<li><code>::-webkit-datetime-edit</code></li>
+<li><code>::-webkit-datetime-edit-fields-wrapper</code></li>
+<li><code>::-webkit-datetime-edit-text</code></li>
+<li><code>::-webkit-datetime-edit-month-field</code></li>
+<li><code>::-webkit-datetime-edit-day-field</code></li>
+<li><code>::-webkit-datetime-edit-year-field</code></li>
+<li><code>::-webkit-inner-spin-button</code></li>
+<li><code>::-webkit-calendar-picker-indicator</code></li>
+</ul>
+
+
+<p>Here is the internal structure of these elements:</p>
+
+<p><img src="http://tjvantoll.com/images/posts/2013-04-15/webkit-input-date-shadow.png"></p>
+
+<p>So if you thought the date input could use more spacing and a ridiculous color scheme you could add the following:</p>
+
+<p><code>html
+&lt;input type="date"&gt;
+</code>
+<code>css
+::-webkit-datetime-edit { padding: 1em; }
+::-webkit-datetime-edit-fields-wrapper { background: silver; }
+::-webkit-datetime-edit-text { color: red; padding: 0 0.3em; }
+::-webkit-datetime-edit-month-field { color: blue; }
+::-webkit-datetime-edit-day-field { color: green; }
+::-webkit-datetime-edit-year-field { color: purple; }
+::-webkit-inner-spin-button { display: none; }
+::-webkit-calendar-picker-indicator { background: orange; }
+</code></p>
+
+<p>This displays as follows in Chrome 26 on OS X:</p>
+
+<p><img src="http://tjvantoll.com/images/posts/2013-04-15/webkit-input-date.png"></p>
+
+<h3 id="input_file">input[type=file]</h3>
+
+
+<!-- http://jsfiddle.net/tj_vantoll/nmmGU/ -->
+
+
+<p>All rendering engines automatically generate a button when an <code>&lt;input type="file"&gt;</code> is created.  Historically, that button has been completely un-styleable.  However, recently Trident and WebKit have added hooks through pseudo-elements.</p>
+
+<h4>Trident</h4>
+
+<p>As of IE10 the file input button can be styled using the <code>::-ms-browse</code> pseudo-element.  Basically any CSS rules that you apply a regular button can be applied to the pseudo-element.  For example:</p>
+
+<p><code>html
+&lt;input type="file"&gt;
+</code>
+``` css
+::-ms-browse {</p>
+
+<pre><code>background: black;
+color: red;
+padding: 1em;
+</code></pre>
+
+<p>}
+```</p>
+
+<p>This displays as follows in IE10 on Windows 8:</p>
+
+<p><img src="http://tjvantoll.com/images/posts/2013-04-15/trident-input-file.png"></p>
+
+<h4>WebKit</h4>
+
+<p>WebKit provides a hook for its file input button with the <code>::-webkit-file-upload-button</code> pseudo-element.  Again pretty much any CSS rule can be applied, therefore the Trident example will work here as well:</p>
+
+<p><code>html
+&lt;input type="file"&gt;
+</code>
+``` css
+::-webkit-file-upload-button {</p>
+
+<pre><code>background: black;
+color: red;
+padding: 1em;
+</code></pre>
+
+<p>}
+```</p>
+
+<p>This displays as follows in Chrome 26 on OS X:</p>
+
+<p><img src="http://tjvantoll.com/images/posts/2013-04-15/webkit-input-file.png"></p>
+
+<h3 id="input_number">input[type=number]</h3>
+
+
+<!-- http://jsfiddle.net/tj_vantoll/KwzPm/ -->
+
+
+<h4>WebKit</h4>
+
+<p>WebKit provides a spinner control by default for number picker inputs.  Pseudo-elements <code>::-webkit-textfield-decoration-container</code>, <code>::-webkit-inner-spin-button</code> and <code>::-webkit-outer-spin-button</code> are provided for customization.  While you cannot do a whole lot with these elements, it can be useful to hide the spinner.</p>
+
+<p><code>html
+&lt;input type="number"&gt;
+</code>
+``` css
+::-webkit-textfield-decoration-container { }
+::-webkit-inner-spin-button {</p>
+
+<pre><code>-webkit-appearance: none;
+</code></pre>
+
+<p>}
+::-webkit-outer-spin-button {</p>
+
+<pre><code>-webkit-appearance: none;
+</code></pre>
+
+<p>}
+```</p>
+
+<p>This displays as follows in Chrome 26 on OS X:</p>
+
+<p><img src="http://tjvantoll.com/images/posts/2013-04-15/webkit-input-number.png"></p>
+
+<h3 id="input_password">input[type=password]</h3>
+
+
+<!-- http://jsfiddle.net/tj_vantoll/Xaw9B/ -->
+
+
+<h4>Trident</h4>
+
+<p>Trident provides a control on password inputs that can be pressed to display the password in plain text.  This control is made customizable via the <code>::-ms-reveal</code> pseudo-element.  You can change a number of properties of the control including its <code>color</code>, <code>background</code>, or <code>display</code> to hide it.  The following will hide the control:</p>
+
+<p><code>html
+&lt;input type="password"&gt;
+</code>
+<code>css
+::-ms-reveal { display: none; }
+</code></p>
+
+<p>This displays as follows in IE10 on Windows 8:</p>
+
+<p><img src="http://tjvantoll.com/images/posts/2013-04-15/trident-input-password.png"></p>
+
+<h3 id="placeholder_attribute">placeholder Attribute</h3>
+
+
+<!-- http://jsfiddle.net/tj_vantoll/TAqWZ/ -->
+
+
+<h4>Gecko</h4>
+
+<p>Gecko provides the pseduo-element <code>::-moz-placeholder</code> to style placeholder text.  You can use this to change the placeholder's color or font properties.  For example:</p>
+
+<p><code>html
+&lt;input placeholder="placeholder"&gt;
+</code>
+``` css
+::-moz-placeholder {</p>
+
+<pre><code>color: blue;
+font-family: 'Comic Sans MS';
+</code></pre>
+
+<p>}
+```</p>
+
+<p>This displays as follows in Firefox 20 on OS X:</p>
+
+<p><img src="http://tjvantoll.com/images/posts/2013-04-15/gecko-placeholder.png"></p>
+
+<p><i>Note: Gecko switched from the pseudo-class <code>:-moz-placeholder</code> to the pseudo-element <code>::-moz-placeholder</code> in Firefox 19.</i></p>
+
+<h4>Trident</h4>
+
+<p>Trident offers the ability to style the placeholder text with a pseudo-class rather than a pseudo-element.  However the pseudo-class, <code>:-ms-input-placeholder</code>, can be used the same as the pseudo-elements from the other rendering engines:</p>
+
+<p><code>html
+&lt;input placeholder="placeholder"&gt;
+</code>
+``` css
+:-ms-input-placeholder {</p>
+
+<pre><code>color: blue;
+font-family: 'Comic Sans MS';
+</code></pre>
+
+<p>}
+```</p>
+
+<p>This displays as follows in IE10 on Windows 8:</p>
+
+<p><img src="http://tjvantoll.com/images/posts/2013-04-15/trident-placeholder.png"></p>
+
+<h4>WebKit</h4>
+
+<p>WebKit provides the <code>::-webkit-input-placeholder</code> pseudo-element.  It can also be used to change the color and font of the placeholder text:</p>
+
+<p><code>html
+&lt;input placeholder="placeholder"&gt;
+</code>
+``` css
+::-webkit-input-placeholder {</p>
+
+<pre><code>color: blue;
+font-family: 'Comic Sans MS';
+</code></pre>
+
+<p>}
+```</p>
+
+<p>This displays as follows in Chrome 26 on OS X:</p>
+
+<p><img src="http://tjvantoll.com/images/posts/2013-04-15/webkit-placeholder.png"></p>
+
+<h3 id="input_range">input[type=range]</h3>
+
+
+<!-- http://jsfiddle.net/tj_vantoll/MHrzT/ -->
+
+
+<h4>Gecko</h4>
+
+<p>As of Firefox 22, Gecko provides pseudo-elements <code>::-moz-range-track</code> and <code>::-moz-range-thumb</code> for styling range inputs.  It's possible to apply most CSS rules to these elements, for example:</p>
+
+<p><code>html
+&lt;input type="range"&gt;
+</code>
+``` css
+::-moz-range-track {</p>
+
+<pre><code>border: 2px solid red;
+height: 20px;
+background: orange;
+</code></pre>
+
+<p>}
+::-moz-range-thumb {</p>
+
+<pre><code>background: blue;
+height: 30px;
+</code></pre>
+
+<p>}
+```</p>
+
+<p>This displays as follows in Firefox 22 on OS X:</p>
+
+<p><img src="http://tjvantoll.com/images/posts/2013-04-15/gecko-input-range.png"></p>
+
+<h4>Trident</h4>
+
+<p>Trident provides an impressive number of pseudo-elements to customize its range selector.</p>
+
+<ul>
+<li><code>::-ms-fill-lower</code>: The track portion underneath / before the handle.</li>
+<li><code>::-ms-fill-upper</code>: The track portion above / after the handle.</li>
+<li><code>::-ms-ticks-before</code>: An area above / before the range track with tick marks.</li>
+<li><code>::-ms-ticks-after</code>: An area below / after the range track with tick marks.</li>
+<li><code>::-ms-thumb</code>: The handle.</li>
+<li><code>::-ms-track</code>: The range track itself.</li>
+<li><code>::ms-tooltip</code>: The tooltip that appears when the user is selecting a value with the range selector.  Note that this element cannot be styled, only hidden using <code>display: none</code>.</li>
+</ul>
+
+
+<p>This is easier to visualize with an example.  Take the following:</p>
+
+<p><code>html
+&lt;input type="range"&gt;
+</code>
+<code>css
+::-ms-fill-lower { background: orange; }
+::-ms-fill-upper { background: green; }
+::-ms-thumb { background: red; }
+::-ms-ticks-after { display: block; color: blue; }
+::-ms-ticks-before { display: block; color: black; }
+::-ms-track { padding: 20px 0; }
+::-ms-tooltip { display: none; /* display and visibility only */ }
+</code></p>
+
+<p>This will display as follows in IE10 on Windows 8:</p>
+
+<p><img src="http://tjvantoll.com/images/posts/2013-04-15/trident-input-range.png"></p>
+
+<h4>WebKit</h4>
+
+<p>WebKit provides the <code>::-webkit-slider-runnable-track</code> pseudo-element for the track and <code>::-webkit-slider-thumb</code> for the range handle itself.  While you cannot do much with these elements, you can add some colors and padding.</p>
+
+<p><code>html
+&lt;input type="range"&gt;
+</code>
+``` css
+::-webkit-slider-runnable-track {</p>
+
+<pre><code>border: 2px solid red;
+background: green;
+padding: 2em 0;
+</code></pre>
+
+<p>}
+::-webkit-slider-thumb {</p>
+
+<pre><code>outline: 2px solid blue;
+</code></pre>
+
+<p>}
+```</p>
+
+<p>This displays as follows in Chrome 26 on OS X:</p>
+
+<p><img src="http://tjvantoll.com/images/posts/2013-04-15/webkit-input-range.png"></p>
+
+<p>One final note about range inputs.  Trident and Webkit allow you to apply hover states to the thumb pseudo-element (<code>::-webkit-slider-thumb:hover</code> and <code>::-ms-thumb:hover</code> respectively), whereas Gecko currently does not.</p>
+
+<h3 id="input_reset">input[type=reset]</h3>
+
+
+<h4>Gecko</h4>
+
+<p>See <a href="#button_element">&lt;button&gt;</a></p>
+
+<h3 id="input_search">input[type=search]</h3>
+
+
+<!-- http://jsfiddle.net/tj_vantoll/9jL5U/ -->
+
+
+<h4>WebKit</h4>
+
+<p>By default WebKit provides a custom UI for search inputs with cancel and search buttons.  Two pseudo-elements, <code>::-webkit-search-cancel-button</code> and <code>::-webkit-search-results-button</code> are provided for customization, although you can't much of anything with them other than hide them as shown below:</p>
+
+<p><code>html
+&lt;input type="search"&gt;
+</code>
+``` css
+/<em> Remove the rounded corners </em>/
+input[type=search] { -webkit-appearance: none; }</p>
+
+<p>/<em> Hide the cancel button </em>/
+::-webkit-search-cancel-button { -webkit-appearance: none; }</p>
+
+<p>/<em> Hide the magnifying glass </em>/
+::-webkit-search-results-button { -webkit-appearance: none; }
+```</p>
+
+<p>This displays as follows in Chrome 26 on OS X:</p>
+
+<p><img src="http://tjvantoll.com/images/posts/2013-04-15/webkit-input-search.png"></p>
+
+<h3 id="input_submit">input[type=submit]</h3>
+
+
+<h4>Gecko</h4>
+
+<p>See <a href="#button_element">&lt;button&gt;</a></p>
+
+<h3 id="input_text">input[type=text]</h3>
+
+
+<!-- http://jsfiddle.net/tj_vantoll/r4mwz/, http://jsfiddle.net/tj_vantoll/ADEvK/ -->
+
+
+<h4>Trident</h4>
+
+<p>As of IE10 Trident provides the pseudo-element <code>::-ms-value</code> to style the value portion of text inputs (<code>input[type=text]</code>, <code>input[type=password]</code>, etc) and <code>&lt;select&gt;</code>s.  For example:</p>
+
+<p><code>html
+&lt;input type="text" value="value"&gt;
+&lt;input type="password" value="value"&gt;
+&lt;select&gt;&lt;option selected&gt;option&lt;/option&gt;&lt;/select&gt;
+</code>
+``` css
+::-ms-value {</p>
+
+<pre><code>color: red;
+background: black;
+padding: 1em;
+</code></pre>
+
+<p>}
+```</p>
+
+<p>This displays as follows in IE10 on Windows 8:</p>
+
+<p><img src="http://tjvantoll.com/images/posts/2013-04-15/trident-value.png"></p>
+
+<h5>Clear Control</h5>
+
+<p>In IE10 when a text input has focus and is not empty, a small X control appears in the right hand side of the input.  When clicked, the control will clear the contents of the text input.  The X is styleable with the <code>::-ms-clear</code> pseudo-element.  Therefore you can hide it:</p>
+
+<p><code>html
+&lt;input type="text"&gt;
+</code>
+<code>css
+::-ms-clear { display: none; }
+</code></p>
+
+<p>This displays as follows in IE10 on Windows 8:</p>
+
+<p><img src="http://tjvantoll.com/images/posts/2013-04-15/trident-input-clear.png"></p>
+
+<p>There are a variety of rules that <code>::-ms-clear</code> will accept, so you can theme it as well:</p>
+
+<p><code>html
+&lt;input type="text" value="Lorem Ipsum"&gt;
+</code>
+``` css
+::-ms-clear {</p>
+
+<pre><code>color: red;
+background: black;
+padding: 1em;
+</code></pre>
+
+<p>}
+```</p>
+
+<p>Which displays as follows:</p>
+
+<p><img src="http://tjvantoll.com/images/posts/2013-04-15/trident-input-clear-fancy.png"></p>
+
+<h3 id="button_element">&lt;button&gt; Element</h3>
+
+
+<!-- http://jsfiddle.net/tVqyR/3/ -->
+
+
+<h4>Gecko</h4>
+
+<p>Gecko applies pseudo-elements <code>::-moz-focus-outer</code> and <code>::-moz-focus-inner</code> to inputs of type <code>button</code>, <code>reset</code>, and <code>submit</code>, as well as <code>&lt;button&gt;</code> elements.</p>
+
+<p>There's not much you can do with these pseudo-elements, but there is one important thing to be aware of.  Gecko applies <code>padding</code> and <code>border</code> to <code>::-moz-focus-inner</code> by default:</p>
+
+<p>``` css
+button::-moz-focus-inner,
+input[type="reset"]::-moz-focus-inner,
+input[type="button"]::-moz-focus-inner,
+input[type="submit"]::-moz-focus-inner,
+input[type="file"] > input[type="button"]::-moz-focus-inner {</p>
+
+<pre><code>border: 1px dotted transparent;
+padding: 0 2px;
+</code></pre>
+
+<p>}
+```</p>
+
+<p>These rules can easily create appearance differences between button displays in Gecko and other rendering engines.  This is confusing and there's actually <a href="https://bugzilla.mozilla.org/show_bug.cgi?id=140562">a ticket to remove it</a>.  The ticket has been open since 2002 so don't hold your breath.</p>
+
+<p>The default <code>padding</code> and <code>border</code> can be reset by just setting them to 0:</p>
+
+<p>``` css
+button::-moz-focus-inner,
+input::-moz-focus-inner {</p>
+
+<pre><code>border: 0;
+padding: 0;
+</code></pre>
+
+<p>}
+```</p>
+
+<p>The before and after of this can be seen in the screenshot (below) of Firefox 19 on OS X:</p>
+
+<p><img src="http://tjvantoll.com/images/posts/2013-04-15/gecko-buttons.png"></p>
+
+<h3 id="keygen_element">&lt;keygen&gt; Element</h3>
+
+
+<!-- http://jsfiddle.net/tj_vantoll/nMRHU/ -->
+
+
+<h4>WebKit</h4>
+
+<p>WebKit provides the <code>::-webkit-keygen-select</code> that can be used to customize the dropdown that a keygen element uses.  For example:</p>
+
+<p><code>html
+&lt;keygen&gt;
+</code>
+``` css
+::-webkit-keygen-select {</p>
+
+<pre><code>background: black;
+color: red;
+</code></pre>
+
+<p>}
+```</p>
+
+<p>This displays as follows on Chrome 26 on OS X:</p>
+
+<p><img src="http://tjvantoll.com/images/posts/2013-04-15/webkit-keygen.png"></p>
+
+<h3 id="meter_element">&lt;meter&gt; Element</h3>
+
+
+<!-- http://jsfiddle.net/tj_vantoll/Wjzwn -->
+
+
+<h4>WebKit</h4>
+
+<p>WebKit provides pseudo-elements <code>::-webkit-meter-bar</code>, <code>::-webkit-meter-even-less-good-value</code>, <code>::-webkit-meter-optimum-value</code>, and <code>::-webkit-meter-suboptimal-value</code> to customize the display of meter elements.</p>
+
+<p>In order for the pseudo-elements to be styled, you must set <code>-webkit-appearance</code> to <code>none</code> on the meter element itself.</p>
+
+<p>Only one of the <code>::-webkit-meter-even-less-good-value</code>, <code>::-webkit-meter-optimum-value</code>, and <code>::-webkit-meter-suboptimal-value</code> elements will be active at a given time depending on the value of the meter.</p>
+
+<p>See the following for an example:</p>
+
+<p><code>html
+&lt;meter low="69" high="80" max="100" optimum="100" value="92"&gt;A&lt;/meter&gt;
+&lt;meter low="69" high="80" max="100" optimum="100" value="72"&gt;C&lt;/meter&gt;
+&lt;meter low="69" high="80" max="100" optimum="100" value="52"&gt;E&lt;/meter&gt;
+</code>
+``` css
+meter { -webkit-appearance: none; }
+::-webkit-meter-bar {</p>
+
+<pre><code>height: 50px;
+background: white;
+border: 2px solid black;
+</code></pre>
+
+<p>}
+::-webkit-meter-optimum-value { background: green; }
+::-webkit-meter-suboptimum-value { background: orange; }
+::-webkit-meter-even-less-good-value { background: blue; }
+```</p>
+
+<p>This displays as follows in Chrome 26 on OS X:</p>
+
+<p><img src="http://tjvantoll.com/images/posts/2013-04-15/webkit-meter.png"></p>
+
+<h3 id="progress_element">&lt;progress&gt; Element</h3>
+
+
+<!-- http://jsfiddle.net/tj_vantoll/hhTPA/ -->
+
+
+<h4>WebKit</h4>
+
+<p>WebKit provides pseudo-elements <code>::-webkit-progress-inner-element</code>, <code>::-webkit-progress-bar</code>, &amp; <code>::-webkit-progress-value</code> to style progress elements in the following hierarchy:</p>
+
+<p><img src="http://tjvantoll.com/images/posts/2013-04-15/webkit-progress-shadow.png"></p>
+
+<p>Like meter, in order to apply any rules to these elements you must set <code>-webkit-appearance: none;</code> on the progress element.  Here's an example:</p>
+
+<p><code>html
+&lt;progress max="100" value="50"&gt;&lt;/progress&gt;
+</code>
+<code>css
+progress { -webkit-appearance: none; }
+::-webkit-progress-inner-element { }
+::-webkit-progress-bar { border: 2px solid black; }
+::-webkit-progress-value { background: red; }
+</code></p>
+
+<p>This displays as follows in Chrome 26 on OS X:</p>
+
+<p><img src="http://tjvantoll.com/images/posts/2013-04-15/webkit-progress.png"></p>
+
+<h4>Gecko</h4>
+
+<p>Gecko provides a <code>::-moz-progress-bar</code> pseudo-element to style the progress bar itself.  For example:</p>
+
+<p><code>html
+&lt;progress max="100" value="50"&gt;&lt;/progress&gt;
+</code>
+<code>css
+::-moz-progress-bar { background: red; }
+</code></p>
+
+<p>This displays as follows in Firefox 19 on OS X:</p>
+
+<p><img src="http://tjvantoll.com/images/posts/2013-04-15/gecko-progress.png"></p>
+
+<h4>Trident</h4>
+
+<p>Like Gecko, Trident provides a single pseudo-element to style the progress bar, <code>::-ms-fill</code>.  For example:</p>
+
+<p><code>html
+&lt;progress max="100" value="50"&gt;&lt;/progress&gt;
+</code>
+<code>css
+::-ms-fill { background: red; }
+</code></p>
+
+<p>This displays as follows in IE10 on Windows 8:</p>
+
+<p><img src="http://tjvantoll.com/images/posts/2013-04-15/trident-progress.png"></p>
+
+<h3 id="select_element">&lt;select&gt; Element</h3>
+
+
+<!-- http://jsfiddle.net/tj_vantoll/f5qTH/ -->
+
+
+<h4>Trident</h4>
+
+<p>As of IE10 Trident gives you a hook to style the arrow within select dropdowns, <code>::-ms-expand</code>.  For example:</p>
+
+<p>``` html
+<select></p>
+
+<pre><code>&lt;option selected&gt;One&lt;/option&gt;
+</code></pre>
+
+<p></select>
+<code>
+</code> css
+::-ms-expand {</p>
+
+<pre><code>padding: 2em;
+color: red;
+background: black;
+</code></pre>
+
+<p>}
+```</p>
+
+<p>This displays as follows in IE10 on Windows 8:</p>
+
+<p><img src="http://tjvantoll.com/images/posts/2013-04-15/trident-select.png"></p>
+
+<h3 id="textarea_element">&lt;textarea&gt; Element</h3>
+
+
+<!-- http://jsfiddle.net/tj_vantoll/YwUeF/ -->
+
+
+<h3>WebKit</h3>
+
+<p>WebKit provides the pseudo-element <code>::-webkit-resizer</code> for the resize control it automatically adds to the bottom right of textarea elements.</p>
+
+<p>It can be hidden by applying <code>display: none</code> or <code>-webkit-appearance: none</code>:</p>
+
+<p><code>html
+&lt;textarea&gt;&lt;/textarea&gt;
+</code>
+``` css
+::-webkit-resizer {</p>
+
+<pre><code>display: none;
+</code></pre>
+
+<p>}
+```</p>
+
+<p>This displays as follows in Chrome 26 on OS X:</p>
+
+<p><img src="http://tjvantoll.com/images/posts/2013-04-15/webkit-textarea-hide.png"></p>
+
+<p><i>Note: Adding <code>display: none</code> to <code>::-webkit-resizer</code> doesn't actually prevent the user from resizing the textarea, it just hides the control. If you want to disable resizing, set the <a href="https://developer.mozilla.org/en-US/docs/CSS/resize">resize CSS property</a> to <code>none</code>. This also hides the control and has the added benefit of working in all browsers that support resizing textareas.</i></p>
+
+<p>The <code>::-webkit-resizer</code> pseudo-element also allows for some basic styling.  If you thought the resize control could use significantly more color you could add this:</p>
+
+<p><code>html
+&lt;textarea&gt;&lt;/textarea&gt;
+</code>
+``` css
+::-webkit-resizer {</p>
+
+<pre><code>border: 2px solid black;
+background: red;
+box-shadow: 0 0 5px 5px blue;
+outline: 2px solid yellow;
+</code></pre>
+
+<p>}
+```</p>
+
+<p>This displays as follows in Chrome 26 on OS X:</p>
+
+<p><img src="http://tjvantoll.com/images/posts/2013-04-15/webkit-textarea-style.png"></p>
+
+<h3 id="form_validation_messages">Form Validation Messages</h3>
+
+
+<!-- http://jsfiddle.net/tj_vantoll/Eb2zN/ -->
+
+
+<h4>WebKit</h4>
+
+<p>WebKit is the only rendering engine to support styling the validation bubbles created from the <a href="http://www.html5rocks.com/en/tutorials/forms/constraintvalidation">constraint validation API</a>.  The following pseudo-elements are provided:</p>
+
+<ul>
+<li><code>::-webkit-validation-bubble</code></li>
+<li><code>::-webkit-validation-bubble-arrow</code></li>
+<li><code>::-webkit-validation-bubble-arrow-clipper</code></li>
+<li><code>::-webkit-validation-bubble-heading</code></li>
+<li><code>::-webkit-validation-bubble-message</code></li>
+<li><code>::-webkit-validation-bubble-text-block</code></li>
+</ul>
+
+
+<p>It's easier to see what each element does visually.  Here's an example:</p>
+
+<p><code>css
+::-webkit-validation-bubble { padding: 1em; background: orange; }
+::-webkit-validation-bubble-arrow { background: blue; }
+::-webkit-validation-bubble-arrow-clipper { border: 2px solid black; }
+::-webkit-validation-bubble-heading { background: green; }
+::-webkit-validation-bubble-message { color: white; background: purple; }
+::-webkit-validation-bubble-text-block { border: 1px solid red; padding: 1em; }
+</code></p>
+
+<p>This displays as follows in Chrome 26 on OS X:</p>
+
+<p><img src="http://tjvantoll.com/images/posts/2013-04-15/webkit-validation-bubble.png"></p>
+
+<p>Here's a slightly more practical example showing how the bubble can be themed:</p>
+
+<p>``` css
+::-webkit-validation-bubble-message {</p>
+
+<pre><code>color: #eee;
+background: black;
+</code></pre>
+
+<p>}
+::-webkit-validation-bubble-arrow {</p>
+
+<pre><code>background: black;
+border-color: #444;
+box-shadow: none;
+</code></pre>
+
+<p>}
+```</p>
+
+<p>This displays as follows in Chrome 26 on OS X:</p>
+
+<p><img src="http://tjvantoll.com/images/posts/2013-04-15/webkit-validation-bubble-pretty.png"></p>
+
+<h3>That's It!</h3>
+
+<p>Hopefully you will find this list helpful.  If I'm missing elements or some of this information gets out of date let me know in the comments.</p>
+
+<h3>Resources</h3>
+
+<ul>
+<li><a href="https://gist.github.com/afabbro/3759334">https://gist.github.com/afabbro/3759334</a>: A gist from <a href="https://twitter.com/angelinamagnum">@angelinamagnum</a> with a nice list of ALL WebKit pseudo-elements. (<a href="https://twitter.com/paul_irish">@paul_irish</a> actually <code>ack</code>'d the WebKit code base.)</li>
+<li><a href="http://www.wufoo.com/html5/">http://www.wufoo.com/html5/</a>: Wufoo's Current State of HTML Forms</li>
+<li><a href="https://developer.mozilla.org/en-US/docs/CSS/CSS_Reference/Mozilla_Extensions">https://developer.mozilla.org/en-US/docs/CSS/CSS_Reference/Mozilla_Extensions</a>: MDN article on Mozilla's CSS Extensions</li>
+<li><a href="http://dev.bowdenweb.com/css/pseudo/ms-trident-vendor-prefixed-pseudo-elements.html">http://dev.bowdenweb.com/css/pseudo/ms-trident-vendor-prefixed-pseudo-elements.html</a>: List of Trident Vendor-Prefixed Pseudo-Elements</li>
+<li><a href="http://trac.webkit.org/browser/trunk/Source/WebCore/css/html.css">http://trac.webkit.org/browser/trunk/Source/WebCore/css/html.css</a>: WebKit's current user agent stylesheet</li>
+<li><a href="http://trac.webkit.org/wiki/Styling%20Form%20Controls">http://trac.webkit.org/wiki/Styling%20Form%20Controls</a>: Slightly dated guide from WebKit on styling form controls</li>
+</ul>
+
+
+<h3 id="updates">Updates</h3>
+
+
+<ul>
+<li>April 17th, 2013: Added sections on <code>::-moz-focus-outer</code> and <code>::-moz-focus-inner</code> per comments from Matthew Brundage. <a href="https://github.com/tjvantoll/tjvantoll.github.com/commit/5a776e9edb02d78b0f4e9880523f0752ccf24c3f">5a776e9edb02d78b0f4e9880523f0752ccf24c3f</a>.</li>
+<li>April 20th, 2013: Added a section on <code>::-webkit-resizer</code> for textareas per comments from Anselm Urban. <a href="https://github.com/tjvantoll/tjvantoll.github.com/commit/4c37198821fda83dedac061ac282b532b7f7ce81">4c37198821fda83dedac061ac282b532b7f7ce81</a></li>
+<li>April 26th, 2013: Added a note that the <code>resize</code> CSS property is the appropriate way to prevent textareas from being resized. <a href="https://github.com/tjvantoll/tjvantoll.github.com/commit/f90720f3aa12c3ec4ca922b5d22f64f03583eb4f">f90720f3aa12c3ec4ca922b5d22f64f03583eb4f</a></li>
+</ul>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Stop Messing with the Browser's Default Focus outline]]></title>
+    <link href="http://tjvantoll.com/2013/01/28/stop-messing-with-the-browsers-default-focus-outline/"/>
+    <updated>2013-01-28T20:57:00-05:00</updated>
+    <id>http://tjvantoll.com/2013/01/28/stop-messing-with-the-browsers-default-focus-outline</id>
+    <content type="html"><![CDATA[<p>This is the latest in my series of accessibility best practices after getting frustrated with using a keyboard on the internet.  Last time I talked about <a href="/2013/01/01/enter-should-submit-forms-stop-messing-with-that/">enter submitting forms</a>, this time I'm going to explain why removing the browser's default focus <code>outline</code> is a bad idea.</p>
+
+<h3>Focus Rings</h3>
+
+<p>All browsers have a default value they apply to the currently focused item.  For example Chrome on OS X uses the following:</p>
+
+<p>``` css
+:focus {</p>
+
+<pre><code>/* -webkit-focus-ring-color = '#5B9DD9' */
+outline: -webkit-focus-ring-color auto 5px;
+</code></pre>
+
+<p>}
+```</p>
+
+<!--more-->
+
+
+<p>Firefox uses a <code>1px dotted #212121</code> outline, other browser use other values.  The focus ring looks like this for Chrome on OS X:</p>
+
+<p><img src="/images/posts/2013-01-28/default.png" title="Default Focus Ring in Chrome on OS X" alt="Default Focus Ring in Chrome on OS X" /></p>
+
+<p>Keyboard users <strong>depend</strong> on this <code>outline</code> to determine where they are on the page.  I cannot stress <strong>depend</strong> enough, without the <code>outline</code> you have no idea where you are.  Don't believe me?  Go to <a href="http://www.cnn.com">cnn.com</a> right now.  Hit tab a few times and try to figure out where the hell you are on the page.</p>
+
+<p>The <code>outline</code> <em>can</em> be removed with the following:</p>
+
+<p>``` css
+:focus {</p>
+
+<pre><code>outline: 0;
+/* or */
+outline: none;
+</code></pre>
+
+<p>}
+```</p>
+
+<p>This is obviously bad per the reasoning above.  The HTML5 specification has the following to say about removing the default <code>outline</code>:</p>
+
+<p><blockquote><p>"...if an alternative focusing style isn't made available instead, the page will be significantly less usable for people who primarily navigate pages using a keyboard, or those with reduced vision who use focus outlines to help them navigate the page."</p><footer><strong>HTML5 Specification</strong> <cite><a href='http://www.whatwg.org/specs/web-apps/current-work/multipage/editing.html#element-level-focus-apis'>www.whatwg.org/specs/web-apps/&hellip;</a></cite></footer></blockquote></p>
+
+<h3>Custom Focus Outlines</h3>
+
+<p>As the spec mentions, you can create your own styling for focused items instead of using the browser's default.  For example the following will change all focused links to white text on a black background:</p>
+
+<p>``` css
+:link:focus, :visited:focus {</p>
+
+<pre><code>outline: none;
+background-color: black;
+color: white;
+</code></pre>
+
+<p>}
+```</p>
+
+<p>Although this is possible, I would <strong>strongly</strong> recommend simply leaving the default browser <code>outline</code> in place.  Changing the default display messes with a user's expectations, which is a big usability no no.  Furthermore, you need to make sure that whatever alternative you put in is sufficiently identifiable for users with reduced vision.</p>
+
+<h3>Why do People Want it Removed?</h3>
+
+<p>At the <a href="http://jqueryui.com">jQuery UI</a> project we get a <a href="https://github.com/jquery/jquery-ui/pull/898">lot</a> <a href="http://bugs.jqueryui.com/ticket/8959">of</a> <a href="http://bugs.jqueryui.com/ticket/6146">requests</a> to remove the browser default <code>outline</code>s from our widgets.</p>
+
+<p>  The most recent tickets have come from the <a href="http://jqueryui.com/slider">slider</a> and <a href="http://jqueryui.com/tabs">tabs</a> widgets.  This is what they look like on the latest Chrome on OS X:</p>
+
+<p><img src="/images/posts/2013-01-28/slider.png" title="Focus ring on jQuery UI slider" alt="Focus ring on jQuery UI slider" />
+<img src="/images/posts/2013-01-28/tabs.png" title="Focus ring on jQuery UI tabs" alt="Focus ring on jQuery UI tabs" /></p>
+
+<p>Some people find this unsightly.  Others are thrown off by the fact that the display varies on different browsers / operating systems.  While these concerns are reasonable, they do not outweigh the importance of the <code>outline</code> for keyboard users and users with reduced vision.</p>
+
+<p>jQuery UI does nothing to alter the browser's default <code>outline</code> on these widgets and I encourage others to do the same.</p>
+
+<h3>CSS Reset</h3>
+
+<p>Unfortunately one of the reasons much of the internet removes the default focus ring is because the <a href="http://meyerweb.com/eric/tools/css/reset/reset200802.css">first version of Eric Meyer's CSS reset</a> included the following:</p>
+
+<p>``` css
+/<em> remember to define focus styles! </em>/
+:focus {</p>
+
+<pre><code>outline: 0;
+</code></pre>
+
+<p>}
+```</p>
+
+<p>As you can see it's made abundantly clear that you should define your own focus styles, but most people simply copied and pasted the file without realizing this.</p>
+
+<p>The <a href="http://meyerweb.com/eric/tools/css/reset/index.html">updated version</a> of the CSS reset no longer features this, but sadly it's a bit too late for a lot of sites.</p>
+
+<p>Sigh.</p>
+]]></content>
+  </entry>
+  
+</feed>

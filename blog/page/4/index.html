@@ -1,0 +1,735 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>TJ VanToll - Tutorials, Thoughts, and Ramblings on Front End Development</title>
+  <meta name="author" content="TJ VanToll">
+
+  
+  <meta name="description" content="All browsers fire an onscroll event on the window object whenever the window is scrolled. On desktop browsers this event is fired continuously as the &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://tjvantoll.com/blog/page/4">
+
+  <!--[if ! lte IE 7]><!-->
+    <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <!--<![endif]-->
+  <!--[if lte IE 7]>
+    <link rel="stylesheet" href="/stylesheets/old-ie.css" media="screen, projection">
+  <![endif]-->
+  
+  <!--Custom script concatenation
+  <script src="/javascripts/modernizr-2.5.3.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js"></script>
+  <script src="/javascripts/PictureCube.js"></script>
+  <script src="/javascripts/ender.tipsy.js"></script>
+  <script src="/javascripts/blog.js"></script>
+  -->
+  <script src="/javascripts/build/scripts.js"></script>
+
+  <link href="/atom.xml" rel="alternate" title="TJ VanToll" type="application/atom+xml">
+  <style>
+	/* Fonts from Google"s Web font directory at http://google.com/webfonts */
+	/*@import url(http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic);
+	@import url(http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic);*/
+</style>
+
+  
+  <script type="text/javascript">
+  	if (window.location.host.indexOf('local') == -1) {
+	    var _gaq = _gaq || [];
+	    _gaq.push(['_setAccount', 'UA-29179796-1']);
+	    _gaq.push(['_trackPageview']);
+	
+	    (function() {
+	      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+	      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+	      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	    })();
+    }
+  </script>
+
+
+</head>
+
+<body   >
+  <script>
+    (function(){
+      var bsa = document.createElement('script');
+         bsa.type = 'text/javascript';
+         bsa.async = true;
+         bsa.src = '//s3.buysellads.com/ac/bsa.js';
+      (document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0]).appendChild(bsa);
+    })();
+  </script>
+  <header role="banner"><hgroup>
+	<div id="picture-cube"></div>
+	<h1><a href="/">TJ VanToll</a></h1>
+	
+		<h2>Tutorials, Thoughts, and Ramblings on Front End Development</h2> 
+	
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:tjvantoll.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+<li><a href="/">About</a></li>
+  <li><a href="/blog/">Blog</a></li>
+  <li><a href="/blog/archives/">Archives</a></li>
+  <li><a href="/speaking/">Speaking</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div class="blog-index">
+  
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2012/08/19/onscroll-event-issues-on-mobile-browsers/">onscroll Event Issues on Mobile Browsers</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-08-19T00:00:00-04:00" pubdate data-updated="true">Aug 19<span>th</span>, 2012</time>
+        
+         | <a href="/2012/08/19/onscroll-event-issues-on-mobile-browsers/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>All browsers fire an <code>onscroll</code> event on the <code>window</code> object whenever the window is scrolled.  On desktop browsers this event is fired continuously as the user scrolls, but on most all mobile browsers the event is not fired until the <em>scrolling action</em> comes to a complete stop.</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/2012/08/19/onscroll-event-issues-on-mobile-browsers/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2012/08/16/subpixel-animation-issues-in-ie-less-than-9/">Subpixel Animation Issues in IE < 9</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-08-16T21:56:00-04:00" pubdate data-updated="true">Aug 16<span>th</span>, 2012</time>
+        
+         | <a href="/2012/08/16/subpixel-animation-issues-in-ie-less-than-9/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>While there are definitely <a href="http://ejohn.org/blog/sub-pixel-problems-in-css/">cross browser discrepancies handling subpixels</a>, this one caught me by surprise.  Take the following:</p>
+
+<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">&quot;box&quot;</span><span class="nt">&gt;&lt;/div&gt;</span>
+</span><span class='line'><span class="nt">&lt;script&gt;</span>
+</span><span class='line'>    <span class="kd">var</span> <span class="nx">box</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">&#39;box&#39;</span><span class="p">);</span>
+</span><span class='line'>    <span class="nx">box</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">left</span> <span class="o">=</span> <span class="s1">&#39;10.25px&#39;</span><span class="p">;</span>
+</span><span class='line'>    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">box</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">left</span><span class="p">);</span>
+</span><span class='line'><span class="nt">&lt;/script&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This simply sets a value for the <code>left</code> CSS property then immediately retrieves it.  In Chrome 22, Firefox 14, Safari 6, Opera 12, IE >= 9, iOS 5, and Android <code>10.25px</code> will be logged.</p>
+
+<p>In IE &lt; 9 <code>10px</code> is logged.  While not all browsers can accurately render the subpixel values, I had assumed all of them would&#8217;ve at least allowed the assignment.  I was wrong.  Internet Explorer will simply round the value to the nearest integer.</p>
+
+<p>Why is this a problem?  </div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/2012/08/16/subpixel-animation-issues-in-ie-less-than-9/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2012/08/10/less-101-the-basics-of-the-css-preprocessor/">LESS 101 - The Basics of the CSS Preprocessor</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-08-10T00:00:00-04:00" pubdate data-updated="true">Aug 10<span>th</span>, 2012</time>
+        
+         | <a href="/2012/08/10/less-101-the-basics-of-the-css-preprocessor/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>I gave a &#8220;LESS 101&#8221; talk to my coworkers at Liquid Web today.  I thought I&#8217;d post the slides here in case anyone else might find them useful.  They are <a href="/speaking/slides/2012/LESS-101">here</a>.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2012/08/05/html5-form-validation-showing-all-error-messages/">HTML5 Form Validation - Showing All Error Messages</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-08-05T16:21:00-04:00" pubdate data-updated="true">Aug 5<span>th</span>, 2012</time>
+        
+         | <a href="/2012/08/05/html5-form-validation-showing-all-error-messages/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><a href="http://caniuse.com/#feat=form-validation">Browsers that support HTML5 form validation</a> have one thing in common; if a <code>&lt;form&gt;</code> is submitted and has errors on multiple fields, the browser will only display the first error to the user.</p>
+
+<p>Turns out the spec leaves the specific means of handling multiple errors up to the browser itself:</p>
+
+<blockquote><p>Report the problems with the constraints of at least one of the elements given in unhandled invalid controls to the user. User agents may focus one of those elements in the process, by running the focusing steps for that element, and may change the scrolling position of the document, or perform some other action that brings the element to the user&#8217;s attention.</p><p>User agents may report more than one constraint violation. User agents may coalesce related constraint violation reports if appropriate (e.g. if multiple radio buttons in a group are marked as required, only one error need be reported).</p><footer><strong>HTML5 Specification</strong> <cite><a href='http://www.whatwg.org/specs/web-apps/current-work/#the-constraint-validation-api'>www.whatwg.org/specs/web-apps/&hellip;</a></cite></footer></blockquote>
+
+
+<p>The key part here being that user agents (i.e. browsers) <strong>MAY</strong> report more than one constraint violation (i.e. error).  Turns out they all decided not to.</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/2012/08/05/html5-form-validation-showing-all-error-messages/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2012/07/19/dom-element-references-as-global-variables/">DOM Element References as Global Variables</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-07-19T22:33:00-04:00" pubdate data-updated="true">Jul 19<span>th</span>, 2012</time>
+        
+         | <a href="/2012/07/19/dom-element-references-as-global-variables/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Quiz: What is logged when the following markup is rendered?</p>
+
+<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;html&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;head&gt;&lt;/head&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;body&gt;</span>
+</span><span class='line'>        <span class="nt">&lt;button</span> <span class="na">id=</span><span class="s">&quot;bar&quot;</span><span class="nt">&gt;</span>Button<span class="nt">&lt;/button&gt;</span>
+</span><span class='line'>        <span class="nt">&lt;script&gt;</span>
+</span><span class='line'>            <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">bar</span><span class="p">);</span>
+</span><span class='line'>        <span class="nt">&lt;/script&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;/body&gt;</span>
+</span><span class='line'><span class="nt">&lt;/html&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><a href="https://developer.mozilla.org/en-US/docs/JavaScript/Reference/Global_Objects/ReferenceError">ReferenceError</a> obviously, right?  Wrong.  All major browser rendering engines will log a reference to the <code>&lt;button&gt;</code> node.  This includes Trident (IE), Gecko (Firefox), WebKit (Chrome, Safari, etc), and Presto (Opera).</p>
+
+<h3>Wait.  What?</h3>
+
+<p>Ah, I get it, there&#8217;s no doctype on that markup.  So this a quirks mode only thing then right?  Wrong.  <a href="https://bugzilla.mozilla.org/show_bug.cgi?id=622491">As of Firefox 14</a> the latest version of all major browsers will produce the same result IN STANDARDS MODE.</p>
+
+<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="cp">&lt;!DOCTYPE html&gt;</span>
+</span><span class='line'><span class="nt">&lt;html&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;head&gt;&lt;/head&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;body&gt;</span>
+</span><span class='line'>        <span class="nt">&lt;button</span> <span class="na">id=</span><span class="s">&quot;bar&quot;</span><span class="nt">&gt;</span>Button<span class="nt">&lt;/button&gt;</span>
+</span><span class='line'>        <span class="nt">&lt;script&gt;</span>
+</span><span class='line'>            <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">bar</span><span class="p">);</span> <span class="c1">//Reference to &lt;button&gt;, even in standards mode</span>
+</span><span class='line'>        <span class="nt">&lt;/script&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;/body&gt;</span>
+</span><span class='line'><span class="nt">&lt;/html&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/2012/07/19/dom-element-references-as-global-variables/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2012/07/15/native-html5-number-picker-vs-jquery-uis-spinner-which-to-use/">Native HTML5 Number Picker and jQuery UI&#8217;s Spinner - Which to Use?</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-07-15T21:07:00-04:00" pubdate data-updated="true">Jul 15<span>th</span>, 2012</time>
+        
+         | <a href="/2012/07/15/native-html5-number-picker-vs-jquery-uis-spinner-which-to-use/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><a href="http://www.w3.org/TR/html5/number-state.html#number-state">HTML5&#8217;s native number picker</a> (<code>&lt;input[type=number]</code>) and jQuery UI 1.9&#8217;s spinner can both be used to create inputs for numeric data.  So which makes sense for your application?  Let&#8217;s start with a brief explanation of each.</p>
+
+<h3><code>input[type=number]</code></h3>
+
+<p>HTML5 adds several new valid <code>type</code> attributes for <code>&lt;input&gt;</code> elements.  One of them, <code>number</code>, can be used to create a number picker.</p>
+
+<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;number&quot;</span> <span class="nt">/&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This will present the user with a number picker in supported browsers, which, as of this writing includes Chrome, Safari, Opera, iOS, Opera Mobile, and Android 4.0+ (<a href="http://caniuse.com/#feat=input-number">full support list</a>).  Here&#8217;s what the user will see in supported browsers:</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/2012/07/15/native-html5-number-picker-vs-jquery-uis-spinner-which-to-use/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2012/07/10/default-browser-handling-of-the-css-text-transform-property/">Default Browser Handling of the CSS text-transform Property</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-07-10T21:05:00-04:00" pubdate data-updated="true">Jul 10<span>th</span>, 2012</time>
+        
+         | <a href="/2012/07/10/default-browser-handling-of-the-css-text-transform-property/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>The <code>text-transform</code> CSS property is most frequently used to uppercase and lowercase text.  According to the <a href="http://www.w3.org/TR/CSS21/text.html#caps-prop">CSS 2.1 specification</a> it is also an inherited property, meaning, when no value is specified on a given element, it should inherit its parent&#8217;s <code>text-transform</code> value.</p>
+
+<p>If no parents have a <code>text-transform</code> property defined, the element will take on the default value of <code>none</code>.</p>
+
+<p>Where it gets interesting is that all browsers define default <code>text-transform</code> properties for certain form elements.  What does this mean?  </div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/2012/07/10/default-browser-handling-of-the-css-text-transform-property/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2012/07/07/the-ideal-less-workflow-with-git/">The Ideal LESS Workflow with git</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-07-07T00:00:00-04:00" pubdate data-updated="true">Jul 7<span>th</span>, 2012</time>
+        
+         | <a href="/2012/07/07/the-ideal-less-workflow-with-git/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>LESS is a CSS pre-processor written in JavaScript.  Unlike its main competitor SASS, it has the ability to run both on the client side via a simple <code>&lt;script&gt;</code> tag, as well as server-side in Node.js.  The fact that LESS files can be processed client side is advantageous for a number of reasons:</p>
+
+<h4><strong>There are no dependencies.</strong></h4>
+
+<p>To develop LESS files all you need is your browser.  SASS requires Ruby to be running on your system to generate the CSS files.</p>
+
+<p>While some would argue that this isn&#8217;t a big deal (Ruby is pre-installed on OS X for example), it can potentially put off beginners or those not familiar with the command line.  A lot of people that write CSS wear a designer hat more than a developer hat.  Even if <em>you</em> know what you&#8217;re doing, if you&#8217;re on a team with less technical people oftentimes the simplest approach will make everyone happy.</p>
+
+<h4><strong>You can auto-reload changes to less files without reloading the browser and without external dependencies.</strong></h4>
+
+<p>With LESS you can easily watch for changes by appending <code>#!watch</code> to the URL or by running <code>less.watch()</code> from the console.  There&#8217;s no additional setup and no need to reload your browser, changes take effect automatically.</p>
+
+<p>If you want files to be regenerated using SASS you must tell SASS which files to watch via the command line or use an app that does that for you.  If you want CSS changes to happen without reloading your browser you need to enlist the help of an app / extension such as <a href="http://livereload.com">LiveReload</a>.  While this works fine this is yet another dependency.</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/2012/07/07/the-ideal-less-workflow-with-git/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2012/06/30/creating-a-native-html5-datepicker-with-a-fallback-to-jquery-ui/">Creating a Native HTML 5 Datepicker with a Fallback to jQuery UI</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-06-30T17:06:00-04:00" pubdate data-updated="true">Jun 30<span>th</span>, 2012</time>
+        
+         | <a href="/2012/06/30/creating-a-native-html5-datepicker-with-a-fallback-to-jquery-ui/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>The recently released Chrome 20 features support for native datepickers on <code>&lt;input&gt;</code> nodes with a <code>[type=date]</code> attribute.  The list of browsers that support native datepickers now includes Chrome, Opera 11+, Opera Mobile, and iOS 5+ (see <a href="http://caniuse.com/#feat=input-datetime">caniuse.com</a>).  Therefore, now is a great time to start using them in your web applications.</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/2012/06/30/creating-a-native-html5-datepicker-with-a-fallback-to-jquery-ui/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2012/06/15/detecting-print-requests-with-javascript/">Detecting Print Requests with JavaScript</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-06-15T00:00:00-04:00" pubdate data-updated="true">Jun 15<span>th</span>, 2012</time>
+        
+         | <a href="/2012/06/15/detecting-print-requests-with-javascript/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>CSS has a well supported mechanism for applying changes only when the user is printing a document, <a href="http://coding.smashingmagazine.com/2011/11/24/how-to-set-up-a-print-style-sheet/">print stylesheets</a>.  They allow you to alter the presentation of a web page for the printer by applying rules that will only be interpreted for printing.  This is great for common tasks like hiding non-essential content, using more print friendly typography, and adjusting the layout to better suit the size and shape of paper.</p>
+
+<p>Print stylesheets are great for making presentational changes for printing, but sometimes you need the full power of JavaScript.  And in order to do respond to print requests in JavaScript you need the browser to notify you that a print request occurred.</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/2012/06/15/detecting-print-requests-with-javascript/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  <div class="pagination">
+    
+      <a class="prev" href="/blog/page/5/">&larr; Older</a>
+    
+    <a href="/blog/archives">Blog Archives</a>
+    
+    <a class="next" href="/blog/page/3/">Newer &rarr;</a>
+    
+  </div>
+</div>
+<aside class="sidebar">
+  
+    <section class="ad_section">
+	<h1>Support the Site</h1>
+	<div class="ad_container">
+		<div id="bsap_1285803" class="bsarocks bsap_cb7a6f705dfe7532dde49b4c2c5adf2d"></div>
+		<a href="http://adpacks.com" id="bsap_aplink">via Ad Packs</a>
+	</div>
+</section><section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2013/08/14/new-beginnings/">New Beginnings</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2013/07/10/creating-a-jquery-ui-dialog-with-a-submit-button/">Creating a jQuery UI Dialog with a Submit Button</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2013/06/21/internet-explorer-attribute-selectors-and-long-values/">Internet Explorer, Attribute Selectors, and Really Long Attribute Values</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2013/06/19/using-semantic-class-names-to-show-and-hide-elements/">Using Semantic Class Names to Show and Hide Elements</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2013/05/28/showing-a-resize-icon-on-a-jquery-ui-dialog/">Showing a Resize Icon on a jQuery UI Dialog</a>
+      </li>
+    
+  </ul>
+</section>
+<section >
+  <h1>Twitter</h1>
+  <a class="twitter-timeline" href="https://twitter.com/tjvantoll" data-widget-id="284127791589494784">Tweets by @tjvantoll</a>
+</section>
+
+  
+</aside>
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - <a href="/">TJ VanToll</a> -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'tjvantoll';
+      
+        
+        var disqus_script = 'count.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

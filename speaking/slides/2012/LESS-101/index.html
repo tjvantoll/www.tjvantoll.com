@@ -1,0 +1,389 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=1024" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <title>LESS 101</title>
+    
+    <meta name="description" content="Presentation about the basics of LESS - A CSS Preprocessor." />
+    <meta name="author" content="TJ VanToll - tj.vantoll@gmail.com - tjvantoll.com" />
+
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:regular,semibold,italic,italicsemibold|PT+Sans:400,700,400italic,700italic|PT+Serif:400,700,400italic,700italic" rel="stylesheet" />
+
+    <link href="css/impress-demo.css" rel="stylesheet" />
+
+    <link href="prettify/prettify.css" rel="stylesheet" />
+    <script src="prettify/prettify.js"></script>
+
+    <link rel="stylesheet/less" href="less/style.less" />
+    <script src="js/less-1.3.0.min.js"></script>
+
+    <script type="text/javascript">
+        if (window.location.host.indexOf('local') == -1) {
+            var _gaq = _gaq || [];
+            _gaq.push(['_setAccount', 'UA-29179796-1']);
+            _gaq.push(['_trackPageview']);
+        
+            (function() {
+                var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+                ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+                var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+            })();
+        }
+    </script>
+</head>
+
+<body class="impress-not-supported" onload="prettyPrint();">
+
+<div class="fallback-message">
+    <p>Your browser <b>doesn't support the features required</b> by impress.js, so you are presented with a simplified version of this presentation.</p>
+    <p>For the best experience please use the latest <b>Chrome</b>, <b>Safari</b> or <b>Firefox</b> browser.</p>
+</div>
+
+<div id="impress">
+
+    <div id="slide-1" class="step slide" data-x="-1000" data-y="-1500">
+        <h1>LESS 101</h1>
+        <h2>Ted VanToll</h2>
+    </div>
+
+    <div class="step slide" data-x="0" data-y="-1500">
+        <h2>CSS Preprocessor</h2>
+        <ul>
+            <li>Write LESS, generate cross browser friendly CSS.</li>
+            <li>Extension of CSS, therefore any valid CSS is valid LESS.</li>
+            <li>Written in JavaScript - Runs in the browser or via Node.js</li>
+        </ul>
+    </div>
+
+    <div class="step slide" data-x="1000" data-y="-1500">
+        <h2>Client Side Usage</h2>
+
+        <p>Development:</p>
+<pre class="prettyprint linenums lang-html">
+&lt;link rel="stylesheet/less" href="css/styles.less"&gt;
+&lt;script src="less.js"&gt;&lt;/script&gt;
+</pre>
+
+        <p>Production:</p>
+<pre class="prettyprint linenums">
+&lt;link rel="stylesheet" href="css/styles.css"&gt;
+</pre>
+    </div>
+
+    <div class="step slide" data-x="2000" data-y="-1500">
+        <h2>Watch Mode</h2>
+
+        <p>Watch for .less file changes client-side re-paint the page automatically.</p>
+
+        <p>To activate it you have 2 options:</p>
+        <ul class="small">
+            <li>Append <code>#!watch</code> to the URL.</li>
+            <li>Run <code>less.watch()</code> from the console.</li>
+        </ul>
+    </div>
+
+    <div class="step slide" data-x="3000" data-y="-1500">
+        <h2>Command Line</h2>
+
+        <p>Default functionality:</p>
+<pre class="prettyprint">
+$ lessc style.less
+</pre>
+
+        <p>Choose the output location:</p>
+<pre class="prettyprint">
+$ lessc style.less > myFile.css
+</pre>
+
+        <p>Also minify the CSS output:</p>
+<pre class="prettyprint">
+$ lessc -x style.less > style.css
+</pre>
+    </div>
+
+    <div class="step slide" data-x="4000" data-y="-1500">
+        <h3>So what can you do with LESS?</h3>
+    </div>
+
+    <div class="step slide" data-x="2500" data-y="-1000" data-z="4000" data-rotate-y="25" data-rotate-z="20">
+        <h2>Variables!!!!</h2>
+
+        <p>LESS:</p>
+<pre class="prettyprint linenums lang-css">
+@my_favorite_color: #abc123;
+
+body {
+    color: @my_favorite_color;
+}
+</pre>
+
+        <p>CSS:</p>
+<pre class="prettyprint linenums lang-css">
+body {
+    color: #abc123;
+}
+</pre>
+
+        <p>Note that variables in LESS are actually constants; they cannot be redefined.</p>
+    </div>
+
+    <div class="step slide" data-x="3500" data-y="-1000" data-z="4000" data-rotate-y="25" data-rotate-z="20">
+        <h2>Comments</h2>
+        <p>Multi line comments of single line comments can be used.</p>
+<pre class="prettyprint linenums lang-css">
+/* Multi
+   Line
+   Comment */
+body { color: red; } //Single line comment
+</pre>
+        <p>Multi line comments are preserved in the outputted CSS, single line ones are removed.</p>
+        <p>If you minify the CSS all comments are wiped.</p>
+    </div>
+
+    <div class="step slide" data-x="4500" data-y="-1000" data-z="4000" data-rotate-y="25" data-rotate-z="20">
+        <h2>Nesting</h2>
+
+        <p>With LESS you can nest rules instead writing out full rules every time.  Therefore the following CSS...
+
+<pre class="prettyprint linenums lang-css">
+#header { color: red; }
+#header p { font-size: 1.2em; }
+#header p span { color: blue; }
+</pre>
+        
+        <p><i>Could</i> be rewritten as...</p>
+
+<pre class="prettyprint linenums lang-css">
+#header {
+    color: red;
+    p {
+        font-size: 1.2em;
+        span {
+            color: blue;
+        }
+    }
+}
+</pre>
+    </div>
+
+    <div class="step slide" data-x="5500" data-y="-1000" data-z="4000" data-rotate-y="25" data-rotate-z="20">
+        <h2>Fancier Nesting</h2>
+        <p>You can use the <code>&</code> operator to have nested selectors concatenated to their parent's selector (instead of acting as a descendant).</p>
+
+        <p>CSS</p>
+<pre class="prettyprint linenums lang-css">
+a { color: blue; }
+a:hover { color: red; }
+a.noHover { color: blue; }
+</pre>
+
+        <p>LESS</p>
+<pre class="prettyprint linenums lang-css">
+a {
+    color: blue;
+    &:hover { color: red; }
+    &.noHover { color: blue; }
+}
+</pre>
+    </div>
+
+    <div class="step slide" data-x="6500" data-y="-1000" data-z="4000" data-rotate-y="25" data-rotate-z="20">
+        <h2>Math</h2>
+
+        <p>Any number, color, or variable can be operated on.</p>
+
+<pre class="prettyprint linenums lang-css">
+@default_border_width: 1px;
+
+.container {
+    border: (@default_border_width + 2) solid black;
+}
+</pre>
+
+        <p>CSS</p>
+<pre class="prettyprint linenums lang-css">
+.container {
+    border: 3px solid black;
+}
+</pre>
+    </div>
+
+    <div class="step slide" data-x="7500" data-y="-1000" data-z="4000" data-rotate-y="25" data-rotate-z="20">
+        <h2>Math on Colors</h2>
+
+<pre class="prettyprint linenums lang-css">
+@base_color: #222;
+.container {
+    color: @base_color * 4;
+    background-color: @base_color + '#111';
+}
+</pre>
+
+        <p>CSS</p>
+<pre class="prettyprint linenums lang-css">
+.container {
+    color: #888888;
+    background-color: #333333;
+}
+</pre>
+    </div>
+
+    <div class="step slide" data-x="8500" data-y="-1000" data-z="4000" data-rotate-y="25" data-rotate-z="20">
+        <h2>More Color Stuff</h2>
+        <p>LESS provides a number of useful functions to transform colors.</p>
+<pre class="prettyprint linenums lang-css">
+lighten(@color, 10%);     // return a color which is 10% *lighter* than @color
+darken(@color, 10%);      // return a color which is 10% *darker* than @color
+
+saturate(@color, 10%);    // return a color 10% *more* saturated than @color
+desaturate(@color, 10%);  // return a color 10% *less* saturated than @color
+
+fadein(@color, 10%);      // return a color 10% *less* transparent than @color
+fadeout(@color, 10%);     // return a color 10% *more* transparent than @color
+fade(@color, 50%);        // return @color with 50% transparency
+
+spin(@color, 10);         // return a color with a 10 degree larger in hue than @color
+spin(@color, -10);        // return a color with a 10 degree smaller hue than @color
+
+mix(@color1, @color2);    // return a mix of @color1 and @color2
+</pre>
+    </div>
+
+    <div class="step slide color_example" data-x="9500" data-y="-1000" data-z="4000" data-rotate-y="25" data-rotate-z="20">
+        <h2>Color Function Example</h2>
+<pre class="prettyprint linenums lang-css">
+@base_color: blue;
+h4 { color: @base_color; }
+h5 { color: lighten(@base_color, 20%); }
+h6 { color: darken(@base_color, 20%); }
+</pre>
+        <h4>h4</h4>
+        <h5>h5</h5>
+        <h6>h6</h6>
+    </div>
+
+    <div class="step slide color_example_2" data-x="10500" data-y="-1000" data-z="4000" data-rotate-y="25" data-rotate-z="20">
+        <h2>More Color Examples</h2>
+<pre class="prettyprint linenums lang-css">
+h4 { color: mix(red, blue, 50%); }
+h5 { color: fadeout(red, 70%); }
+</pre>
+        <h4>h4</h4>
+        <h5>h5</h5>
+    </div>
+
+    <div class="step slide" data-x="8000" data-y="-1000" data-z="-1000" data-rotate-y="120" data-rotate-z="20">
+        <h2>Mixins</h2>
+        <p>Include the properties from one ruleset in another.</p>
+
+<pre class="prettyprint linenums lang-css">
+.colorful {
+    color: green;
+    background-color: hotpink;
+    border: 6px solid skyblue;
+}
+
+.colorful_spaced {
+    .colorful;
+    padding: 20px;
+}
+</pre>
+        
+        <p>Any <code>class</code> or <code>id</code> ruleset can be mixed-in as such.</p>
+    </div>
+
+    <div class="step slide" data-x="8000" data-y="0" data-z="-2000" data-rotate-y="120" data-rotate-z="20">
+        <h2>Parametric Mixins</h2>
+        <p>Mixins can take parmeters for configuration.</p>
+
+<pre class="prettyprint linenums lang-css">
+.color_maker(@color) {
+    color: @color;
+    background-color: @color;
+}
+
+#my_element {
+    .color_maker(yellow);
+}
+</pre>
+        <p>CSS</p>
+<pre class="prettyprint linenums lang-css">
+#my_element {
+    color: yellow;
+    background-color: yellow;
+}
+</pre>
+    </div>
+
+    <div class="step slide" data-x="8000" data-y="1000" data-z="-3000" data-rotate-y="120" data-rotate-z="20">
+        <h2>Default Parameters for Mixins</h2>
+        <p>Mixins parameters can optionally have default vales.</p>
+
+<pre class="prettyprint linenums lang-css">
+.has_margin(@margin: 5px) {
+    margin: @margin;
+}
+
+h4 { .has_margin; }
+h5 { .has_margin(3px); }
+</pre>
+        <p>CSS</p>
+<pre class="prettyprint linenums lang-css">
+h4 { margin: 5px; }
+h5 { margin: 3px; }
+</pre>
+    </div>
+
+    <div class="step slide" data-x="8000" data-y="2000" data-z="-4000" data-rotate-y="120" data-rotate-z="20">
+        <h2>Importing</h2>
+        <p>You can import <code>.less</code> files and all variables and mixins will be available in the main file.  The <code>.less</code> extension is optional so both of these work:
+
+<pre class="prettyprint linenums lang-css">
+@import 'myFile.less';
+@import 'myFile';
+</pre>
+        <p>You can also import CSS files by the same mechanism.</p>
+
+<pre class="prettyprint linenums lang-css">
+@import 'myFile.css';
+</pre>
+    </div>
+
+    <div class="step slide" data-x="8000" data-y="3000" data-z="-5000" data-rotate-y="120" data-rotate-z="20">
+        <h2>String Interpolation</h2>
+        <p>Variables can be embedded inside strings using the <code>@{name}</code> construct.</p>
+<pre class="prettyprint linenums lang-css">
+@base_image_url: 'http://www.liquidweb.com/images/';
+
+.logo {
+    background-image: url('@{base_image_url}/logo.png');
+}
+</pre>
+    </div>
+
+    <div class="step slide" data-x="8000" data-y="4000" data-z="-6000" data-rotate-y="120" data-rotate-z="20">
+        <h2>More</h2>
+        <p><a href="http://lesscss.org">http://lesscss.org</a></p>
+    </div>
+
+    <div class="step slide end" data-x="6000" data-y="2000" data-z="-4000" data-rotate-y="120" data-rotate-z="180" scale="0.5">
+        <p>The End</p>
+    </div>
+</div>
+
+<div class="hint">
+    <p>Use a spacebar or arrow keys to navigate</p>
+</div>
+<script>
+if ("ontouchstart" in document.documentElement) { 
+    document.querySelector(".hint").innerHTML = "<p>Tap on the left or right to navigate</p>";
+}
+</script>
+
+<script src="js/impress.js"></script>
+<script>impress().init();</script>
+
+</body>
+</html>

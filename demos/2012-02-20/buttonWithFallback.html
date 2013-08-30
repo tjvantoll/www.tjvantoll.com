@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<head>
+	<link href="http://code.jquery.com/ui/1.8.16/themes/base/jquery-ui.css" rel="stylesheet" />
+	<script src="http://code.jquery.com/jquery-1.7.1.js"></script>
+	<script src="http://code.jquery.com/ui/1.8.16/jquery-ui.js"></script>
+	<script src="modernizr-2.6.2.min.js"></script>
+	<style>
+		@-webkit-keyframes color_change {
+			from { background-color: pink; }
+			to { background-color: hotpink; }
+		}
+		@-moz-keyframes color_change {
+			from { background-color: pink; }
+			to { background-color: hotpink; }
+		}
+		@-ms-keyframes color_change {
+			from { background-color: pink; }
+			to { background-color: hotpink; }
+		}
+		@-o-keyframes color_change {
+			from { background-color: pink; }
+			to { background-color: hotpink; }
+		}
+		@keyframes color_change {
+			from { background-color: pink; }
+			to { background-color: hotpink; }
+		}
+
+		button {
+			padding: 20px;
+			font-size: 20px;
+			background-color: pink;
+			color: white;
+			border-radius: 20px;
+			cursor: pointer;
+			font-weight: bold;
+			margin: 10px;
+		}
+		button:hover {
+			-webkit-animation: color_change 1s;
+			-moz-animation: color_change 1s;
+			-ms-animation: color_change 1s;
+			-o-animation: color_change 1s;
+			animation: color_change 1s;
+		}
+	</style>
+	<script>
+		$(function() {
+			if (!Modernizr.cssanimation) {
+				$('button').on('mouseover', function() {
+					//jQuery UI doesn't support the hotpink keyword, boooooooo
+					$(this).animate({ backgroundColor: '#FF69B4' }, 1000);
+				}).on('mouseout', function() {
+					$(this).stop(true, true);
+					$(this).css('backgroundColor', 'pink');
+				});
+			}
+		});
+	</script>
+</head>
+<body>
+	<button>Animation</button>
+</body>
+</html>

@@ -1,0 +1,411 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Creating a Native HTML 5 Datepicker with a Fallback to jQuery UI - TJ VanToll - Tutorials, Thoughts, and Ramblings on Front End Development</title>
+  <meta name="author" content="TJ VanToll">
+
+  
+  <meta name="description" content="The recently released Chrome 20 features support for native datepickers on &lt;input&gt; nodes with a [type=date] attribute. The list of browsers &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://tjvantoll.com/2012/06/30/creating-a-native-html5-datepicker-with-a-fallback-to-jquery-ui">
+
+  <!--[if ! lte IE 7]><!-->
+    <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <!--<![endif]-->
+  <!--[if lte IE 7]>
+    <link rel="stylesheet" href="/stylesheets/old-ie.css" media="screen, projection">
+  <![endif]-->
+  
+  <!--Custom script concatenation
+  <script src="/javascripts/modernizr-2.5.3.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js"></script>
+  <script src="/javascripts/PictureCube.js"></script>
+  <script src="/javascripts/ender.tipsy.js"></script>
+  <script src="/javascripts/blog.js"></script>
+  -->
+  <script src="/javascripts/build/scripts.js"></script>
+
+  <link href="/atom.xml" rel="alternate" title="TJ VanToll" type="application/atom+xml">
+  <style>
+	/* Fonts from Google"s Web font directory at http://google.com/webfonts */
+	/*@import url(http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic);
+	@import url(http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic);*/
+</style>
+
+  
+  <script type="text/javascript">
+  	if (window.location.host.indexOf('local') == -1) {
+	    var _gaq = _gaq || [];
+	    _gaq.push(['_setAccount', 'UA-29179796-1']);
+	    _gaq.push(['_trackPageview']);
+	
+	    (function() {
+	      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+	      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+	      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	    })();
+    }
+  </script>
+
+
+</head>
+
+<body   >
+  <script>
+    (function(){
+      var bsa = document.createElement('script');
+         bsa.type = 'text/javascript';
+         bsa.async = true;
+         bsa.src = '//s3.buysellads.com/ac/bsa.js';
+      (document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0]).appendChild(bsa);
+    })();
+  </script>
+  <header role="banner"><hgroup>
+	<div id="picture-cube"></div>
+	<h1><a href="/">TJ VanToll</a></h1>
+	
+		<h2>Tutorials, Thoughts, and Ramblings on Front End Development</h2> 
+	
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:tjvantoll.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+<li><a href="/">About</a></li>
+  <li><a href="/blog/">Blog</a></li>
+  <li><a href="/blog/archives/">Archives</a></li>
+  <li><a href="/speaking/">Speaking</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Creating a Native HTML 5 Datepicker with a Fallback to jQuery UI</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-06-30T17:06:00-04:00" pubdate data-updated="true">Jun 30<span>th</span>, 2012</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>The recently released Chrome 20 features support for native datepickers on <code>&lt;input&gt;</code> nodes with a <code>[type=date]</code> attribute.  The list of browsers that support native datepickers now includes Chrome, Opera 11+, Opera Mobile, and iOS 5+ (see <a href="http://caniuse.com/#feat=input-datetime">caniuse.com</a>).  Therefore, now is a great time to start using them in your web applications.</p>
+
+<!--more-->
+
+
+<h3>Using</h3>
+
+<p>Using the native datepickers is easy, just change the <code>type</code> attribute of your date inputs from <code>text</code> to <code>date</code>.</p>
+
+<figure class='code'><figcaption class='not_empty'><span>Converting to a native HTML5 datepicker</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="c">&lt;!-- Before --&gt;</span>
+</span><span class='line'><span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;text&quot;</span> <span class="nt">/&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="c">&lt;!-- After --&gt;</span>
+</span><span class='line'><span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;date&quot;</span> <span class="nt">/&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Here is what the user will see in supported browsers:</p>
+
+<h4>Chrome 20</h4>
+
+<p><img src="/images/posts/2012-06-30/Chrome.png" title="Chrome 20" alt="Chrome 20" /></p>
+
+<h4>Opera 12</h4>
+
+<p><img src="/images/posts/2012-06-30/Opera.png" title="Opera 12" alt="Opera 12" /></p>
+
+<h4>Opera Mobile</h4>
+
+<p><img src="/images/posts/2012-06-30/Opera%20Mobile.png" title="Opera Mobile" alt="Opera Mobile" /></p>
+
+<h4>iOS 5</h4>
+
+<p><img src="/images/posts/2012-06-30/iOS5.png" title="iOS 5" alt="iOS 5" /></p>
+
+<h3>Advantages</h3>
+
+<p>Why would use the native solution?</p>
+
+<p>First and foremost there are no dependencies.  There is no need to bring in a library or toolkit, it&#8217;s all native.  Therefore, you save some bytes by not having to ship the JavaScript / CSS to make the datepicker work.</p>
+
+<p>Furthermore you can be guaranteed that it will work perfectly on all devices that support the native datepicker.  It&#8217;s not dependent on JavaScript so it&#8217;ll even work for users that have JavaScript disabled.</p>
+
+<p>Another key advantage is that devices can give alternative means of input for date controls.  For example note the native date control in iOS 5:</p>
+
+<p><img src="/images/posts/2012-06-30/iOS5.png" title="iOS 5" alt="iOS 5" /></p>
+
+<p>It will be a lot easier for the user to input a date with those controls, plus you can be guaranteed that you&#8217;ll receive input in the correct format.</p>
+
+<h3>Disadvantages</h3>
+
+<p>The main disadvantage of using a native datepicker is that you have a lot less control.  There are no hooks to control the look of the date picker; you get what the browser wants to give you.  You also have a lot less control over the behavior.  Here&#8217;s a small sampling of things that jQuery UI&#8217;s datepicker can do that you cannot do with the native control.</p>
+
+<ul>
+<li>Only allow selection on certain days of the week.</li>
+<li>Control the formatting of the headers in the control (Monday vs Mon vs M).</li>
+<li>View multiple months at the same time.</li>
+</ul>
+
+
+<p>If any of this functionality is important to your application you&#8217;ll probably want to stick with the jQuery UI solution.</p>
+
+<h3>Best of Both Worlds</h3>
+
+<p><a href="http://modernizr.com">Modernizr</a> gives you the ability to detect whether the browser supports native datepickers.  The following shows how you can use the native datepicker when available, and fallback to jQuery UI&#8217;s picker in unsupported browsers.</p>
+
+<figure class='code'><figcaption class='not_empty'><span>Detect native support for datepickers and fallback to jQuery UI</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">Modernizr</span><span class="p">.</span><span class="nx">inputtypes</span><span class="p">.</span><span class="nx">date</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;input[type=date]&#39;</span><span class="p">).</span><span class="nx">datepicker</span><span class="p">();</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>You can see how your browser handles this situation here:</p>
+
+<div class="code_example"><h6>Native Datepicker with Fallback<a href="/demos/2012-06-30/date.html" target="_blank">Open in New Window</a></h6><iframe style="width: 100%; height: 120px;" frameborder="0" src="/demos/2012-06-30/date.html"></iframe></div>
+
+
+<h3>Another Option</h3>
+
+<p>Another option I like is showing the native date picker only to users that are on touch capable devices.</p>
+
+<figure class='code'><figcaption class='not_empty'><span>Native picker for supported touch users only</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;text&quot;</span> <span class="na">id=</span><span class="s">&quot;myDate&quot;</span> <span class="nt">/&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nt">&lt;script&gt;</span>
+</span><span class='line'>    <span class="k">if</span> <span class="p">(</span><span class="nx">Modernizr</span><span class="p">.</span><span class="nx">touch</span> <span class="o">&amp;&amp;</span> <span class="nx">Modernizr</span><span class="p">.</span><span class="nx">inputtypes</span><span class="p">.</span><span class="nx">date</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>        <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">&#39;myDate&#39;</span><span class="p">).</span><span class="nx">type</span> <span class="o">=</span> <span class="s1">&#39;date&#39;</span><span class="p">;</span>
+</span><span class='line'>    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span><span class='line'>        <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#myDate&#39;</span><span class="p">).</span><span class="nx">datepicker</span><span class="p">();</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'><span class="nt">&lt;/script&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This gives touch users with <code>input[type=date]</code> support the optimized UI / keyboard and everyone else jQuery UI&#8217;s picker.</p>
+
+<h3>Conclusion</h3>
+
+<p>With Chrome adding support for native datepickers a large chunk web users now have the ability to use them.  Therefore, now is a great time to consider using them in your applications.</p>
+
+<h3>Update - September 15th, 2012</h3>
+
+<p>I updated one of my code examples from using <code>$('input').attr('type', 'date')</code> to <code>document.getElementById('myDate').type = 'date'</code> after commenter brownieboy pointed out that jQuery actually doesn&#8217;t allow you to change an input&#8217;s <code>type</code>.  jQuery does this because IE &lt;= 8 does not allow an the <code>type</code> of an input to be changed at all.  The native JS solution works just fine.</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">TJ VanToll</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-06-30T17:06:00-04:00" pubdate data-updated="true">Jun 30<span>th</span>, 2012</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/browsers/'>Browsers</a>, <a class='category' href='/blog/categories/jquery-ui/'>jQuery UI</a>
+  
+</span>
+
+
+    </p>
+    <p class="author_card meta">
+      <img src="/images/me/1.jpg" alt="Me!" id="post_me" />
+      TJ VanToll is a web developer, speaker, and writer living in Lansing, MI and working as a developer advocate for <a href="http://telerik.com">Telerik</a>. He is an open source advocate that is on the <a href="http://jqueryui.com">jQuery UI</a> team and publishes this blog <a href="https://github.com/tjvantoll/tjvantoll.github.com">open source</a>. When not on the internet he is generally found <a href="/images/kids/2.jpg">brainwashing his children</a> and talking about himself in the third person. If you like hearing TJ talk about himself you should consider <a href="http://twitter.com/tjvantoll">following him on Twitter</a>.
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://tjvantoll.com/2012/06/30/creating-a-native-html5-datepicker-with-a-fallback-to-jquery-ui/" data-via="tjvantoll" data-counturl="http://tjvantoll.com/2012/06/30/creating-a-native-html5-datepicker-with-a-fallback-to-jquery-ui/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/2012/06/15/detecting-print-requests-with-javascript/" title="Previous Post: Detecting Print Requests with JavaScript">&laquo; Detecting Print Requests with JavaScript</a>
+      
+      
+        <a class="basic-alignment right" href="/2012/07/07/the-ideal-less-workflow-with-git/" title="Next Post: The Ideal LESS Workflow with git">The Ideal LESS Workflow with git &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section class="ad_section">
+	<h1>Support the Site</h1>
+	<div class="ad_container">
+		<div id="bsap_1285803" class="bsarocks bsap_cb7a6f705dfe7532dde49b4c2c5adf2d"></div>
+		<a href="http://adpacks.com" id="bsap_aplink">via Ad Packs</a>
+	</div>
+</section><section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2013/08/14/new-beginnings/">New Beginnings</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2013/07/10/creating-a-jquery-ui-dialog-with-a-submit-button/">Creating a jQuery UI Dialog with a Submit Button</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2013/06/21/internet-explorer-attribute-selectors-and-long-values/">Internet Explorer, Attribute Selectors, and Really Long Attribute Values</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2013/06/19/using-semantic-class-names-to-show-and-hide-elements/">Using Semantic Class Names to Show and Hide Elements</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2013/05/28/showing-a-resize-icon-on-a-jquery-ui-dialog/">Showing a Resize Icon on a jQuery UI Dialog</a>
+      </li>
+    
+  </ul>
+</section>
+<section >
+  <h1>Twitter</h1>
+  <a class="twitter-timeline" href="https://twitter.com/tjvantoll" data-widget-id="284127791589494784">Tweets by @tjvantoll</a>
+</section>
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - <a href="/">TJ VanToll</a> -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'tjvantoll';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://tjvantoll.com/2012/06/30/creating-a-native-html5-datepicker-with-a-fallback-to-jquery-ui/';
+        var disqus_url = 'http://tjvantoll.com/2012/06/30/creating-a-native-html5-datepicker-with-a-fallback-to-jquery-ui/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

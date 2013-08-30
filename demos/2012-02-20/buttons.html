@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<head>
+	<style>
+		@-webkit-keyframes color_change {
+			from { background-color: pink; }
+			to { background-color: hotpink; }
+		}
+		@-moz-keyframes color_change {
+			from { background-color: pink; }
+			to { background-color: hotpink; }
+		}
+		@-ms-keyframes color_change {
+			from { background-color: pink; }
+			to { background-color: hotpink; }
+		}
+		@-o-keyframes color_change {
+			from { background-color: pink; }
+			to { background-color: hotpink; }
+		}
+		@keyframes color_change {
+			from { background-color: pink; }
+			to { background-color: hotpink; }
+		}
+
+		button {
+			padding: 20px;
+			font-size: 20px;
+			background-color: pink;
+			color: white;
+			border-radius: 20px;
+			cursor: pointer;
+			font-weight: bold;
+			margin: 10px;
+		}
+		button:hover {
+			background-color: hotpink;
+		}
+
+		button.yes:hover {
+			-webkit-animation: color_change 1s;
+			-moz-animation: color_change 1s;
+			-ms-animation: color_change 1s;
+			-o-animation: color_change 1s;
+			animation: color_change 1s;
+		}
+	</style>
+</head>
+<body>
+	<button class="no">No Animation</button>
+	<button class="yes">Animation</button>
+</body>
+</html>

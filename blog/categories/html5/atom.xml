@@ -1,0 +1,472 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: HTML5 | TJ VanToll]]></title>
+  <link href="http://tjvantoll.com/blog/categories/html5/atom.xml" rel="self"/>
+  <link href="http://tjvantoll.com/"/>
+  <updated>2013-08-30T14:07:29-04:00</updated>
+  <id>http://tjvantoll.com/</id>
+  <author>
+    <name><![CDATA[TJ VanToll]]></name>
+    <email><![CDATA[tj.vantoll@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Creating a jQuery UI Dialog with a Submit Button]]></title>
+    <link href="http://tjvantoll.com/2013/07/10/creating-a-jquery-ui-dialog-with-a-submit-button/"/>
+    <updated>2013-07-10T00:00:00-04:00</updated>
+    <id>http://tjvantoll.com/2013/07/10/creating-a-jquery-ui-dialog-with-a-submit-button</id>
+    <content type="html"><![CDATA[<p>Say you have the following submittable <code>&lt;form&gt;</code>:</p>
+
+<p>``` html
+<form id="myForm" action="http://google.com"></p>
+
+<pre><code>&lt;label for="search"&gt;Search For:&lt;/label&gt;
+&lt;input type="text" id="search" name="q"&gt;
+&lt;button type="submit"&gt;Find&lt;/button&gt;
+</code></pre>
+
+<p></form>
+```</p>
+
+<p>And you want to show the form in a jQuery UI dialog. You can do that with the code below:</p>
+
+<p>``` javascript Turning a form into a dialog
+$( "form" ).dialog({</p>
+
+<pre><code>open: function() {
+    // On open, hide the original submit button
+    $( this ).find( "[type=submit]" ).hide();
+},
+buttons: [
+    {
+        text: "Find",
+        click: $.noop,
+        type: "submit"
+    },
+    {
+        text: "Close",
+        click: function() {
+            $( this ).dialog( "close" );
+        }
+    }
+]
+</code></pre>
+
+<p>});
+```</p>
+
+<p>Which looks like this:</p>
+
+<p><img src="http://tjvantoll.com/images/posts/2013-07-10/form-dialog.png" alt="Display of the form within a jQuery UI dialog"></p>
+
+<h3>The Problem</h3>
+
+<p>There's one problem with this - the "Find" button doesn't work. Because of the generated structure of a jQuery UI dialog, the buttons are not within the <code>&lt;form&gt;</code> itself. Therefore, the buttons are not associated with the <code>&lt;form&gt;</code>. You can see the structure below:</p>
+
+<!-- more -->
+
+
+<p><img src="http://tjvantoll.com/images/posts/2013-07-10/markup.png" alt="Markup of a UI dialog showing the the buttons are not children of the content."></p>
+
+<p>Note that the <code>&lt;button type="submit"&gt;</code> is not within the <code>&lt;form&gt;</code>.</p>
+
+<h3>Solution</h3>
+
+<p>There are a few ways we can work around this. One is avoid the <a href="http://api.jqueryui.com/dialog/#option-buttons">buttons option</a> and leave the original submit button in place. This works, but you lose the formatted display.</p>
+
+<h3>Explicit Click Handler</h3>
+
+<p>Another solution is to add a <code>click</code> handler to the button that submits the form:</p>
+
+<p>``` js Using a Click Handler to Submit the Form
+var form = $( "form" ).dialog({</p>
+
+<pre><code>...
+buttons: [
+    {
+        text: "Find",
+        click: function() {
+            form.submit();
+        }
+    }
+    ...
+]
+</code></pre>
+
+<p>});
+```</p>
+
+<p>This works, but you lose the browsers <a href="/2013/01/01/enter-should-submit-forms-stop-messing-with-that/">browser's default enter key handling</a>. Therefore it has to be replicated as well:</p>
+
+<p>``` javascript Adding Enter Key Handling
+var form = $( "form" ).dialog({ ... });
+form.on( "keypress", "input[type=text]", function( event ) {</p>
+
+<pre><code>if ( event.keyCode == 13 ) {
+    form.submit();
+}
+</code></pre>
+
+<p>});
+```</p>
+
+<h4>Form Attribute</h4>
+
+<p>An elegant solution to this problem is to use HTML5's new <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button#attr-form">form attribute</a>. The attribute allows you to associate a <code>&lt;form&gt;</code> with a <code>&lt;button&gt;</code>, even if the <code>&lt;button&gt;</code> is not a descendant of the <code>&lt;form&gt;</code>. It's even smart enough to keep the <a href="/2013/01/01/enter-should-submit-forms-stop-messing-with-that/">browser's default enter key handling</a> in place.</p>
+
+<p>For example here's the example <code>&lt;form&gt;</code> with a sibling (rather than child) submit button:</p>
+
+<p>``` html
+<form id="myForm" action="http://google.com"></p>
+
+<pre><code>&lt;label for="search"&gt;Search For:&lt;/label&gt;
+&lt;input type="text" id="search" name="q"&gt;
+</code></pre>
+
+<p></form>
+<button type="submit" form="myForm">Find</button>
+```</p>
+
+<p>The <code>&lt;button&gt;</code> is outside of the <code>&lt;form&gt;</code>, but because its <code>form</code> attribute is equal to the <code>&lt;form&gt;</code>'s <code>id</code>, the <code>&lt;button&gt;</code> will submit the <code>&lt;form&gt;</code> regardless.</p>
+
+<h4>Using the Form Attribute on a Dialog</h4>
+
+<p>To add this attribute to the dialog version, we'll pass <code>form: "myForm"</code> into the <code>buttons</code> option for the Find button:</p>
+
+<p>``` html Turning a form into a dialog
+<form id="myForm" action="http://google.com"></p>
+
+<pre><code>&lt;label for="search"&gt;Search For:&lt;/label&gt;
+&lt;input type="text" id="search" name="q"&gt;
+&lt;button type="submit"&gt;Find&lt;/button&gt;
+</code></pre>
+
+<p></form></p>
+
+<script>
+    $( "form" ).dialog({
+        open: function() {
+            // On open, hide the original submit button
+            $( this ).find( "[type=submit]" ).hide();
+        },
+        buttons: [
+            {
+                text: "Find",
+                click: $.noop,
+                type: "submit",
+                form: "myForm" // <-- Make the association
+            },
+            {
+                text: "Close",
+                click: function() {
+                    $( this ).dialog( "close" );
+                }
+            }
+        ]
+    });
+</script>
+
+
+<p>```</p>
+
+<p><a href="/demos/2013-07-10/form.html">Live Example</a></p>
+
+<h3>Support</h3>
+
+<p>The <code>form</code> attribute is implemented in Firefox, Chrome, Safari 5.1+, and Opera, HOWEVER, IE (as of version 10) still does not support the attribute.</p>
+
+<p>Because the form attribute is so handy here, I wrote a polyfill that adds support in browsers that don't support it natively: <a href="https://gist.github.com/tjvantoll/5911571">https://gist.github.com/tjvantoll/5911571</a>. The source is below:</p>
+
+<p>``` javascript
+/<em>*
+ * The form attribute can be used to associate a submit button with a form, even
+ * if the button is not a child of the <form> itself.
+ *
+ * This polyfill uses a support check taken from Modernizr and polyfills the
+ * functionality using jQuery.
+ </em>/
+(function() {</p>
+
+<pre><code>// Via Modernizr
+function formAttributeSupport() {
+    var form = document.createElement( "form" ),
+        input = document.createElement( "input" ),
+        div = document.createElement( "div" ),
+        id = "formtest"+ ( new Date().getTime() ),
+        attr,
+        bool = false;
+
+        form.id = id;
+
+    // IE6/7 confuses the form idl attribute and the form content attribute
+    if ( document.createAttribute ) {
+        attr = document.createAttribute("form");
+        attr.nodeValue = id;
+        input.setAttributeNode(attr);
+        div.appendChild(form);
+        div.appendChild(input);
+
+        document.documentElement.appendChild(div);
+
+        bool = form.elements.length === 1 &amp;&amp; input.form == form;
+
+        div.parentNode.removeChild(div);
+    }
+
+    return bool;
+};
+
+if ( !formAttributeSupport() ) {
+    $( document )
+        .on( "click", "[type=submit][form]", function( event ) {
+            event.preventDefault();
+            var formId = $( this ).attr( "form" ),
+            $form = $( "#" + formId ).submit();
+        })
+        .on( "keypress", "form input", function( event ) {
+            var $form;
+            if ( event.keyCode == 13 ) {
+                $form = $( this ).parents( "form" );
+                if ( $form.find( "[type=submit]" ).length == 0 &amp;&amp;
+                    $( "[type=submit][form=" + $( this ).attr( "form" ) + "]" ).length &gt; 0 ) {
+                    $form.submit();
+                }
+            }
+        });
+}
+</code></pre>
+
+<p>}());
+```</p>
+
+<p>This can be included anywhere on the page after jQuery is included.</p>
+
+<p>Note that this polyfill only attempts to add support for the <code>form</code> attribute on submit buttons. The <code>form</code> attribute can also be applied to other form elements such as <code>&lt;input&gt;</code>s, <code>&lt;select&gt;</code>s, and <code>&lt;textarea&gt;</code>s, but that is beyond the scope of this script.</p>
+
+<p>If you encounter any issues with this polyfill let me know in the comments.</p>
+
+<h3>Conclusion</h3>
+
+<p>If you need a dialog with a submit button the easiest solution is to add a <code>click</code> handler that manually submits the form. While this is not ideal, it'll work everywhere with no extra effort. Just make sure that you add Enter key handling to text inputs within the <code>&lt;form&gt;</code>.</p>
+
+<p>Long term the <code>form</code> attribute is the solution to this problem. You can try it today as long as you're aware that you need to polyfill for IE support.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[HTML 5 hidden Attribute Browser Support]]></title>
+    <link href="http://tjvantoll.com/2013/01/09/html5-hidden-attribute-browser-support/"/>
+    <updated>2013-01-09T21:27:00-05:00</updated>
+    <id>http://tjvantoll.com/2013/01/09/html5-hidden-attribute-browser-support</id>
+    <content type="html"><![CDATA[<p>I had trouble finding this from a Google search, so I thought I'd list the browser support for the <a href="http://www.whatwg.org/specs/web-apps/current-work/multipage/editing.html#the-hidden-attribute">HTML5 hidden attribute</a> here.</p>
+
+<ul>
+<li>Chrome 6+</li>
+<li>Firefox 4+</li>
+<li>Safari 5.1+</li>
+<li>Opera 11+</li>
+<li>iOS 5+</li>
+<li>Android Browser 4+</li>
+</ul>
+
+
+<p>IE still does not support the <code>hidden</code> attribute as of IE 10.  For any unsupported browser you can easily add support by just including the following CSS:</p>
+
+<p><code>css Polyfiling the hidden attribute.
+[hidden] { display: none; }
+</code></p>
+
+<p>This will work back to IE6, which doesn't support the <a href="https://developer.mozilla.org/en-US/docs/CSS/Attribute_selectors">attribute selector</a>.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[maxlength Constraint Validation Oddities in Major Browsers]]></title>
+    <link href="http://tjvantoll.com/2012/10/17/maxlength-constraint-validation-oddities/"/>
+    <updated>2012-10-17T12:48:00-04:00</updated>
+    <id>http://tjvantoll.com/2012/10/17/maxlength-constraint-validation-oddities</id>
+    <content type="html"><![CDATA[<p>The <code>maxlength</code> attribute has been around in browsers for a long time.  When provided, all browsers prevent the user entering a value that exceeds the <code>maxlength</code>.</p>
+
+<p>For example you cannot type more than 2 characters in the textbox below:</p>
+
+<p><input type="text" maxlength="2"></p>
+
+<h3>Constraint Validation</h3>
+
+<p><a href="https://developer.mozilla.org/en-US/docs/HTML/HTML5/Constraint_validation_">Constraint validation</a> is an HTML5 spec that provides native client side form validation in the browser.  As part of its <a href="https://developer.mozilla.org/en-US/docs/HTML/Forms_in_HTML#Constraint_Validation_API">API</a>, all <code>&lt;input&gt;</code> and <code>&lt;textarea&gt;</code> elements have a <code>validity.tooLong</code> property that is <code>true</code> when the length of the <code>value</code> exceeds the <code>maxlength</code>.</p>
+
+<p>But if the browser prevents this, then why does the property exist?</p>
+
+<!--more-->
+
+
+<h3>Prefilled value Attribute</h3>
+
+<p>Assume that you're populating the <code>value</code> of form elements from a database and you end up with something like this:</p>
+
+<p><code>&lt;input type="text" maxlength="1" value="ABC"&gt;</code></p>
+
+<p>How will the browser handle this?</p>
+
+<p>All browsers will prevent entry of additional characters, but they do not trim excess characters already present.  Additionally, all browsers will allow a form containing the above input to submit.  <em>Note: Opera is the only browser to set the <code>validity.tooLong</code> property to <code>true</code> in this situation.  Despite this, it does not prevent form submission.</em></p>
+
+<p>Why is submission not prevented?  The key is in the <a href="http://www.whatwg.org/specs/web-apps/current-work/#concept-input-value-dirty-flag">specification</a>:</p>
+
+<blockquote><p>Constraint validation: If an element has a maximum allowed value length, its dirty value flag is true, its value was last changed by a user edit (as opposed to a change made by a script), and the code-unit length of the element's value is greater than the element's maximum allowed value length, then the element is suffering from being too long.</p></blockquote>
+
+<p>The <a href="http://www.whatwg.org/specs/web-apps/current-work/#concept-input-value-dirty-flag">dirty flag</a> essentially means that the user has changed the value of an element.  Therefore, in order to be <code>tooLong</code>, the element must have been edited.</p>
+
+<h3>Actually Triggering tooLong</h3>
+
+<p>So let's take another approach.  What happens if you have the same input:</p>
+
+<p><code>&lt;input type="text" maxlength="1" value="ABC"&gt;</code></p>
+
+<p>...remove one character, then submit?  You can try it for yourself below:</p>
+
+<p><div class="code_example"><h6>Triggering tooLong Errors<a href="/demos/2012-10-17/tooLong.html" target="_blank">Open in New Window</a></h6><iframe style="width: 100%; height: 130px;" frameborder="0" src="/demos/2012-10-17/tooLong.html"></iframe></div></p>
+
+<p>Upon edit IE10 and Chrome will set the <code>validity.tooLong</code> property to <code>true</code> and prevent form submission.  If the user attempts to submit a form after removing the "C" they will see the following in those browsers:</p>
+
+<p><img src="/images/posts/2012-10-17/Chrome.png" title="Chrome" alt="Chrome" />
+<img src="/images/posts/2012-10-17/IE10.png" title="IE10" alt="IE10" /></p>
+
+<p>Firefox, Safari, and Opera incorrectly handle this situation and allow the form to be submitted anyways.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Using jQuery UI's Slider to Polyfill HTML5's input[type=range]]]></title>
+    <link href="http://tjvantoll.com/2012/09/14/using-jquery-ui-slider-to-polyfill-html5-input-type-range/"/>
+    <updated>2012-09-14T21:25:00-04:00</updated>
+    <id>http://tjvantoll.com/2012/09/14/using-jquery-ui-slider-to-polyfill-html5-input-type-range</id>
+    <content type="html"><![CDATA[<p><a href="http://jqueryui.com/demos/slider">jQuery UI's slider plugin</a> looks and behaves much like the browser's native <code>input[type=range]</code> control; therefore it makes an excellent choice for <a href="http://remysharp.com/2010/10/08/what-is-a-polyfill/">polyfilling</a> the native behavior.</p>
+
+<h3>How to do it</h3>
+
+<p>The main issue is that the slider must be built on a block level node, not an <code>&lt;input&gt;</code>.  Therefore you must create another container node (in this case a <code>&lt;div&gt;</code>) to create the slider from then hide the original <code>&lt;input&gt;</code>.</p>
+
+<p>Here's the script that I used.</p>
+
+<!--more-->
+
+
+<p>``` javascript Polyfill input[type=range] with jQuery UI's Slider
+$(function() {</p>
+
+<pre><code>//Determine whether the browser natively supports input[type=range].
+//If you're using Modernizr this is equivalent to Modernizr.inputtypes.range
+var input = document.createElement('input');
+input.setAttribute('type', 'range');
+var rangeSupport = input.type != 'text';
+
+if (!rangeSupport) {
+    var $input, $slider;
+
+    $('input[type=range]').each(function(index, input) {
+        $input = $(input);
+
+        //Create a new div, turn it into a slider, and set its attributes based on
+        //the attributes of the input.  If the input doesn't possess those attributes
+        //use jQuery UI's defaults.
+        $slider = $('&lt;div /&gt;').slider({
+            min: parseInt($input.attr('min'), 10) || 0,
+            max: parseInt($input.attr('max'), 10) || 100,
+            value: parseInt($input.attr('value'), 10) || 0,
+            step: parseInt($input.attr('step'), 10) || 1,
+            slide: function(event, ui) {
+                //Keep the value of the input[type=range] in sync with the slider.
+                $(this).prev('input').val(ui.value);
+            }
+        });
+
+        //Append the slider after the input and hide the input.  The user will only
+        //interact with the slider.        
+        $input.after($slider).hide();
+    });
+}
+</code></pre>
+
+<p>});
+```</p>
+
+<h3>Future</h3>
+
+<p>This approach handles the most common use cases but it isn't perfect.  For example, if you want to disable the <code>&lt;input type="range"&gt;</code> you'll have to disable the slider as well.</p>
+
+<p>There is a <a href="http://bugs.jqueryui.com/ticket/5800">feature request to add support for this natively in the slider plugin</a> itself, but it's been sitting inactive for quite some time now.  Hopefully over time <code>input[type=range]</code> support will become ubiquitous enough that we can drop these workarounds.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[HTML5 Form Validation - Start Using it in Production Applications]]></title>
+    <link href="http://tjvantoll.com/2012/08/30/html5-form-validation-start-using-it-in-production-applications/"/>
+    <updated>2012-08-30T00:00:00-04:00</updated>
+    <id>http://tjvantoll.com/2012/08/30/html5-form-validation-start-using-it-in-production-applications</id>
+    <content type="html"><![CDATA[<p>Forms suck, yet, they make or break the most crucial online transactions.  Building web forms sucks as well; the APIs and lack of customizability has confused and frustrated people for years.  As a byproduct an abundance of horribly unusable forms have been created for everyone to suffer through.</p>
+
+<p>Therefore <em>anything</em> that makes this process easier should be greeted with joy and enthusiasm.</p>
+
+<p>HTML5 does just this by including a built in <a href="https://developer.mozilla.org/en-US/docs/HTML/Forms_in_HTML#Constraint_Validation_API">client side form validation mechanism</a> designed to make implementing client side validation powerful, seamless, and most importantly - easy to implement.</p>
+
+<p>Great!  Despite this, HTML5 form validation is a topic relegated to presentations and demos; I personally have yet to fill out a web form in the wild that actually makes use of it.</p>
+
+<p>Why?</p>
+
+<!--more-->
+
+
+<h3>Browser Support</h3>
+
+<p>One reason people avoid HTML5 form validation is lack (or perceived lack) of browser support for the new APIs.  However the <a href="http://caniuse.com/#feat=form-validation">list of supported browsers</a> now includes the latest version of every major browser, including:</p>
+
+<ul>
+<li>IE 10</li>
+<li>Firefox 4+</li>
+<li>Chrome 10+</li>
+<li>Safari 5+</li>
+<li>Opera 10+</li>
+<li>Opera Mobile</li>
+<li>Chrome for Android</li>
+<li>Firefox for Android</li>
+</ul>
+
+
+<h3>What to do in unsupported browsers?</h3>
+
+<p>This is <em>the</em> problem.  Despite browser support being relatively good, for most sites there are still going to be a substantial amount of users with browsers that simply do not support the new APIs.  Therefore, if you are intending to support these users you have to start forking your code to support both browsers with native support and browsers without it.</p>
+
+<p>While this can absolutely be done, it's time consuming and a bit of a nuisance.  It's faster and easier to simply ditch the native validation and use your own.  In this case you don't have to worry about multiple code paths; every user in every browser will hit the same codepath and get the same experience.</p>
+
+<h3>What if we did nothing?</h3>
+
+<p>But what if we took a new approach to this problem - simply don't do client side validation in unsupported browsers, at all.  This is advantageous for a number of reasons.</p>
+
+<p>1) <strong>No dual maintenance</strong>.  One thing that has always bothered me about doing validation on both the client and server side is that you're validating the #1 principle of software development - <a href="http://en.wikipedia.org/wiki/Don't_repeat_yourself"><strong>D</strong>on't <strong>R</strong>epeat <strong>Y</strong>ourself</a>.</p>
+
+<p>2) <strong>No dependencies</strong>.  If you only use native browser APIs to provide client side validation you don't have to worry about maintaining plugin or library dependencies that might not be maintained.</p>
+
+<p>3) <strong>Faster and easier</strong>.  The browser APIs are simple and easy to use.  Want to make a field required?  <a href="http://wufoo.com/html5/attributes/09-required.html">Add the <code>required</code> attribute</a>.  Want to make a field only accept email address?  <a href="http://wufoo.com/html5/types/1-email.html">Add <code>type=email</code> to your <code>&lt;input&gt;</code> field</a>.</p>
+
+<p>4) <strong>Future Friendly</strong>.  Although currently a number of older browsers (namely IE &lt;= 9) do not support the new APIs, eventually they all will.  Therefore, eventually all users will hit the client side validation as intended.</p>
+
+<h3>But, you can't just not validate data... right?</h3>
+
+<p>Of course you have to validate client submitted data, but you already need to be doing that on the server side anyways.  What this approach requires you to do is simply return formatted error messages from your server side processing and <a href="http://uxdesign.smashingmagazine.com/2011/11/08/extensive-guide-web-form-usability/">display them in a usability friendly way</a>.  You're likely doing that already.</p>
+
+<h3>What About Polyfills?</h3>
+
+<p><a href="http://remysharp.com/2010/10/08/what-is-a-polyfill/">Polyfills</a> are great and a number of <a href="https://github.com/Modernizr/Modernizr/wiki/HTML5-Cross-browser-Polyfills">HTML5 form validation polyfills</a> exist.  My problem with polyfills in this case is that they add a dependency that I believe is unnecessary.</p>
+
+<h3>Conclusion</h3>
+
+<p>HTML5 provides native solutions to validating client side data and most all modern browsers support it.  Yet, most people are still relying on the JavaScript hacks we've been using for well over a decade now.</p>
+
+<p>It's time.  Come to the dark side.</p>
+]]></content>
+  </entry>
+  
+</feed>

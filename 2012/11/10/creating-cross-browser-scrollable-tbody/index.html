@@ -1,0 +1,389 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Creating Cross Browser Scrollable &lt;tbody&gt;s - A CSS Only Approach - TJ VanToll - Tutorials, Thoughts, and Ramblings on Front End Development</title>
+  <meta name="author" content="TJ VanToll">
+
+  
+  <meta name="description" content="By default the overflow CSS property does not apply to table group elements (&lt;thead&gt;, &lt;tbody&gt;, or &lt;tfoot&gt;). As of Firefox 4 this &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://tjvantoll.com/2012/11/10/creating-cross-browser-scrollable-tbody">
+
+  <!--[if ! lte IE 7]><!-->
+    <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <!--<![endif]-->
+  <!--[if lte IE 7]>
+    <link rel="stylesheet" href="/stylesheets/old-ie.css" media="screen, projection">
+  <![endif]-->
+  
+  <!--Custom script concatenation
+  <script src="/javascripts/modernizr-2.5.3.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js"></script>
+  <script src="/javascripts/PictureCube.js"></script>
+  <script src="/javascripts/ender.tipsy.js"></script>
+  <script src="/javascripts/blog.js"></script>
+  -->
+  <script src="/javascripts/build/scripts.js"></script>
+
+  <link href="/atom.xml" rel="alternate" title="TJ VanToll" type="application/atom+xml">
+  <style>
+	/* Fonts from Google"s Web font directory at http://google.com/webfonts */
+	/*@import url(http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic);
+	@import url(http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic);*/
+</style>
+
+  
+  <script type="text/javascript">
+  	if (window.location.host.indexOf('local') == -1) {
+	    var _gaq = _gaq || [];
+	    _gaq.push(['_setAccount', 'UA-29179796-1']);
+	    _gaq.push(['_trackPageview']);
+	
+	    (function() {
+	      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+	      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+	      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	    })();
+    }
+  </script>
+
+
+</head>
+
+<body   >
+  <script>
+    (function(){
+      var bsa = document.createElement('script');
+         bsa.type = 'text/javascript';
+         bsa.async = true;
+         bsa.src = '//s3.buysellads.com/ac/bsa.js';
+      (document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0]).appendChild(bsa);
+    })();
+  </script>
+  <header role="banner"><hgroup>
+	<div id="picture-cube"></div>
+	<h1><a href="/">TJ VanToll</a></h1>
+	
+		<h2>Tutorials, Thoughts, and Ramblings on Front End Development</h2> 
+	
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:tjvantoll.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+<li><a href="/">About</a></li>
+  <li><a href="/blog/">Blog</a></li>
+  <li><a href="/blog/archives/">Archives</a></li>
+  <li><a href="/speaking/">Speaking</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Creating Cross Browser Scrollable &lt;tbody&gt;s - A CSS Only Approach</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-11-10T15:44:00-05:00" pubdate data-updated="true">Nov 10<span>th</span>, 2012</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>By default the <code>overflow</code> CSS property does not apply to table group elements (<code>&lt;thead&gt;</code>, <code>&lt;tbody&gt;</code>, or <code>&lt;tfoot&gt;</code>).  <a href="https://developer.mozilla.org/en-US/docs/Firefox_4_for_developers#Miscellaneous_CSS_changes">As of Firefox 4</a> this behavior is consistent across all browser implementations.</p>
+
+<p>Therefore, if you attempt to apply a CSS <code>height</code> and <code>overflow: scroll</code> to a <code>&lt;tbody&gt;</code> it will have no effect in modern browsers.  You can see this for yourself <a href="http://jsfiddle.net/tj_vantoll/vU494/">here</a>.</p>
+
+<p>But having a scrolling table body with fixed headers is a useful UI element, so how do you work around this?</p>
+
+<!--more-->
+
+
+<h3>The Solution</h3>
+
+<p>Here is my solution:</p>
+
+<pre class="codepen" data-height="400" data-type="result" data-href="JEKIu" data-user="tjvantoll"><code></code></pre>
+
+
+<script async src="http://codepen.io:/assets/embed/ei.js"></script>
+
+
+<h3>How does it work?</h3>
+
+<p>The first step is to set the <code>&lt;tbody&gt;</code> to <code>display: block</code> so an <code>overflow</code> and <code>height</code> can be applied.  From there the rows in the <code>&lt;thead&gt;</code> need to be set to <code>position: relative</code> and <code>display: block</code> so that they&#8217;ll sit on top of the now scrollable <code>&lt;tbody&gt;</code>.</p>
+
+<p>That&#8217;s really about it.</p>
+
+<h3>Unfortunate Part #1: Old Internet Explorer</h3>
+
+<p>When you set a <code>height</code> on a <code>&lt;tbody&gt;</code> Internet Explorer &lt; 10 applies that <code>height</code> to every table cell, which is of course wonderful.</p>
+
+<p>My workaround for this is to conditionally create a wrapper <code>&lt;div&gt;</code>.  When it&#8217;s present I give it the <code>height</code> and <code>overflow</code> and remove the <code>height</code> from the <code>&lt;tbody&gt;</code>.</p>
+
+<figure class='code'><figcaption class='not_empty'><span>Wrap table for IE</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;style&gt;</span>
+</span><span class='line'>    <span class="nc">.old_ie_wrapper</span> <span class="p">{</span> <span class="k">height</span><span class="o">:</span> <span class="m">300px</span><span class="p">;</span> <span class="k">overflow</span><span class="o">:</span> <span class="k">auto</span><span class="p">;</span> <span class="p">}</span>
+</span><span class='line'>    <span class="nc">.old_ie_wrapper</span> <span class="nt">tbody</span> <span class="p">{</span> <span class="k">height</span><span class="o">:</span> <span class="k">auto</span><span class="p">;</span> <span class="p">}</span>
+</span><span class='line'><span class="nt">&lt;/style&gt;</span>
+</span><span class='line'><span class="c">&lt;!--[if lte IE 9]&gt;</span>
+</span><span class='line'><span class="c">&lt;div class=&quot;old_ie_wrapper&quot;&gt;</span>
+</span><span class='line'><span class="c">&lt;!--&lt;![endif]--&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;table&gt;</span>
+</span><span class='line'>      <span class="c">&lt;!-- Contents of the table --&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;/table&gt;</span>
+</span><span class='line'><span class="c">&lt;!--[if lte IE 9]&gt;</span>
+</span><span class='line'><span class="c">&lt;/div&gt;</span>
+</span><span class='line'><span class="c">&lt;!--&lt;![endif]--&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The headers will scroll with the table body, but the table will at least be usable.  You could also create <a href="http://paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/">conditional classes on the &lt;html&gt; tag</a> to handle this as well.</p>
+
+<h3>Unfortunate Part #2: Widths</h3>
+
+<p>Because the <code>&lt;thead&gt;</code> is relatively positioned each table cell needs an explicit <code>width</code>.</p>
+
+<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nt">td</span><span class="nd">:nth-child</span><span class="o">(</span><span class="nt">1</span><span class="o">),</span> <span class="nt">th</span><span class="nd">:nth-child</span><span class="o">(</span><span class="nt">1</span><span class="o">)</span> <span class="p">{</span> <span class="k">width</span><span class="o">:</span> <span class="m">100px</span><span class="p">;</span> <span class="p">}</span>
+</span><span class='line'><span class="nt">td</span><span class="nd">:nth-child</span><span class="o">(</span><span class="nt">2</span><span class="o">),</span> <span class="nt">th</span><span class="nd">:nth-child</span><span class="o">(</span><span class="nt">2</span><span class="o">)</span> <span class="p">{</span> <span class="k">width</span><span class="o">:</span> <span class="m">100px</span><span class="p">;</span> <span class="p">}</span>
+</span><span class='line'><span class="nt">td</span><span class="nd">:nth-child</span><span class="o">(</span><span class="nt">3</span><span class="o">),</span> <span class="nt">th</span><span class="nd">:nth-child</span><span class="o">(</span><span class="nt">3</span><span class="o">)</span> <span class="p">{</span> <span class="k">width</span><span class="o">:</span> <span class="m">100px</span><span class="p">;</span> <span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>But unfortunately that is not enough.  When a scrollbar is present browsers allocate space for it, therefore, the <code>&lt;tbody&gt;</code> ends up having less space available than the <code>&lt;thead&gt;</code>.  Notice the slight misalignment this creates:</p>
+
+<p><img src="/images/posts/2012-11-10/Alignment-Issue.png" title="Alignment issue with scroll bar" alt="Alignment issue with scroll bar" /></p>
+
+<p>The only workaround I could come up with was to set a <code>min-width</code> on all columns except the last one.</p>
+
+<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nt">td</span><span class="nd">:nth-child</span><span class="o">(</span><span class="nt">1</span><span class="o">),</span> <span class="nt">th</span><span class="nd">:nth-child</span><span class="o">(</span><span class="nt">1</span><span class="o">)</span> <span class="p">{</span> <span class="k">min-width</span><span class="o">:</span> <span class="m">100px</span><span class="p">;</span> <span class="p">}</span>
+</span><span class='line'><span class="nt">td</span><span class="nd">:nth-child</span><span class="o">(</span><span class="nt">2</span><span class="o">),</span> <span class="nt">th</span><span class="nd">:nth-child</span><span class="o">(</span><span class="nt">2</span><span class="o">)</span> <span class="p">{</span> <span class="k">min-width</span><span class="o">:</span> <span class="m">100px</span><span class="p">;</span> <span class="p">}</span>
+</span><span class='line'><span class="nt">td</span><span class="nd">:nth-child</span><span class="o">(</span><span class="nt">3</span><span class="o">),</span> <span class="nt">th</span><span class="nd">:nth-child</span><span class="o">(</span><span class="nt">3</span><span class="o">)</span> <span class="p">{</span> <span class="k">width</span><span class="o">:</span> <span class="m">100px</span><span class="p">;</span> <span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>The Good</h3>
+
+<p>Despite these issues the solution does work in all browsers back to IE6 with no JavaScript dependency.</p>
+
+<p>The markup to create the table is simple and semantic.  I&#8217;ve seen workarounds for this issue that use <code>&lt;div&gt;</code>s instead of <code>&lt;table&gt;</code>s or multiple aligned <code>&lt;table&gt;</code>s and those always felt dirty to me.</p>
+
+<p>The code is free to use and do whatever you want with it.  If you have any suggestions for improvements or find any issues please let me know in the comments.</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">TJ VanToll</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-11-10T15:44:00-05:00" pubdate data-updated="true">Nov 10<span>th</span>, 2012</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/browsers/'>Browsers</a>, <a class='category' href='/blog/categories/css/'>CSS</a>, <a class='category' href='/blog/categories/html/'>HTML</a>
+  
+</span>
+
+
+    </p>
+    <p class="author_card meta">
+      <img src="/images/me/1.jpg" alt="Me!" id="post_me" />
+      TJ VanToll is a web developer, speaker, and writer living in Lansing, MI and working as a developer advocate for <a href="http://telerik.com">Telerik</a>. He is an open source advocate that is on the <a href="http://jqueryui.com">jQuery UI</a> team and publishes this blog <a href="https://github.com/tjvantoll/tjvantoll.github.com">open source</a>. When not on the internet he is generally found <a href="/images/kids/2.jpg">brainwashing his children</a> and talking about himself in the third person. If you like hearing TJ talk about himself you should consider <a href="http://twitter.com/tjvantoll">following him on Twitter</a>.
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://tjvantoll.com/2012/11/10/creating-cross-browser-scrollable-tbody/" data-via="tjvantoll" data-counturl="http://tjvantoll.com/2012/11/10/creating-cross-browser-scrollable-tbody/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/2012/11/08/creating-a-polished-vertical-tabs-interaction-with-jquery-ui/" title="Previous Post: Creating a Polished Vertical Tabs Interaction with jQuery UI">&laquo; Creating a Polished Vertical Tabs Interaction with jQuery UI</a>
+      
+      
+        <a class="basic-alignment right" href="/2012/12/12/debugging-print-stylesheets-now-significantly-easier-in-chrome/" title="Next Post: Debugging Print Stylesheets: Now Significantly Easier in Chrome">Debugging Print Stylesheets: Now Significantly Easier in Chrome &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section class="ad_section">
+	<h1>Support the Site</h1>
+	<div class="ad_container">
+		<div id="bsap_1285803" class="bsarocks bsap_cb7a6f705dfe7532dde49b4c2c5adf2d"></div>
+		<a href="http://adpacks.com" id="bsap_aplink">via Ad Packs</a>
+	</div>
+</section><section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2013/08/14/new-beginnings/">New Beginnings</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2013/07/10/creating-a-jquery-ui-dialog-with-a-submit-button/">Creating a jQuery UI Dialog with a Submit Button</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2013/06/21/internet-explorer-attribute-selectors-and-long-values/">Internet Explorer, Attribute Selectors, and Really Long Attribute Values</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2013/06/19/using-semantic-class-names-to-show-and-hide-elements/">Using Semantic Class Names to Show and Hide Elements</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2013/05/28/showing-a-resize-icon-on-a-jquery-ui-dialog/">Showing a Resize Icon on a jQuery UI Dialog</a>
+      </li>
+    
+  </ul>
+</section>
+<section >
+  <h1>Twitter</h1>
+  <a class="twitter-timeline" href="https://twitter.com/tjvantoll" data-widget-id="284127791589494784">Tweets by @tjvantoll</a>
+</section>
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - <a href="/">TJ VanToll</a> -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'tjvantoll';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://tjvantoll.com/2012/11/10/creating-cross-browser-scrollable-tbody/';
+        var disqus_url = 'http://tjvantoll.com/2012/11/10/creating-cross-browser-scrollable-tbody/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>
