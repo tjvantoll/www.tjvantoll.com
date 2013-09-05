@@ -25,7 +25,7 @@ And in that `<iframe>`, you want to know what element has focus.
 </script>
 ```
 
-In all browser except IE9, this will log the element that has focus in the parent document (the `<body>` by default). In IE9 this will inexplicably throw an `"Unspecified Error"`.
+In all browsers except IE9, this will log the element that has focus in the parent document (the `<body>` by default). In IE9 this will inexplicably throw an `"Unspecified Error"`.
 
 Yes, you read right; ACCESSING the `activeElement` property of a parent `document` throws an error in IE9.
 
