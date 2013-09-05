@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Browsers | TJ VanToll]]></title>
   <link href="http://tjvantoll.com/blog/categories/browsers/atom.xml" rel="self"/>
   <link href="http://tjvantoll.com/"/>
-  <updated>2013-08-30T14:41:42-04:00</updated>
+  <updated>2013-09-05T09:43:21-04:00</updated>
   <id>http://tjvantoll.com/</id>
   <author>
     <name><![CDATA[TJ VanToll]]></name>
@@ -12,6 +12,110 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Bugs with document.activeElement in Internet Explorer]]></title>
+    <link href="http://tjvantoll.com/2013/08/30/bugs-with-document-activeelement-in-internet-explorer/"/>
+    <updated>2013-08-30T14:46:00-04:00</updated>
+    <id>http://tjvantoll.com/2013/08/30/bugs-with-document-activeelement-in-internet-explorer</id>
+    <content type="html"><![CDATA[<p>There are two <em>fun</em> bugs related to <code>document.activeElement</code> in IE that have come up recently in jQuery UI. To help save others some pain, I felt these needed to be documented.</p>
+
+<h3>Accessing <code>document.activeElement</code> from an <code>&lt;iframe&gt;</code> in IE9</h3>
+
+<p>Let's say you have an <code>&lt;iframe&gt;</code>.</p>
+
+<p>``` html</p>
+
+<iframe src="other.html"></iframe>
+
+
+<p>```</p>
+
+<p>And in that <code>&lt;iframe&gt;</code>, you want to know what element has focus.</p>
+
+<p>``` html
+/<em> other.html </em>/</p>
+
+<script>
+    console.log( parent.document.activeElement );
+</script>
+
+
+<p>```</p>
+
+<p>In all browser except IE9, this will log the element that has focus in the parent document (the <code>&lt;body&gt;</code> by default). In IE9 this will inexplicably throw an <code>"Unspecified Error"</code>.</p>
+
+<p>Yes, you read right; ACCESSING the <code>activeElement</code> property of a parent <code>document</code> throws an error in IE9.</p>
+
+<p>What can you to about it? Since the access causes the error, the only recourse is a try / catch.</p>
+
+<p>``` javascript
+var activeElement;
+try {</p>
+
+<pre><code>activeElement = parent.document.activeElement;
+</code></pre>
+
+<p>} catch( error ) {</p>
+
+<pre><code>activeElement = parent.document.body;
+</code></pre>
+
+<p>}
+```</p>
+
+<p>Luckily this is a problem unique to IE9; the same behavior is not present in IE 7, 8, or 10.</p>
+
+<h3>Blurring the <code>&lt;body&gt;</code> Switches Windows in IE9 and IE10</h3>
+
+<p>If you call <code>document.body.blur()</code> in IE9 or IE10, you will switch application windows. Yes you again read right; if you have IE and Notepad open, calling <code>document.body.blur()</code> will switch focus to Notepad. If you don't believe me, open IE9 or IE10 and try for yourself - run <code>document.body.blur()</code> in the console.</p>
+
+<p>Why is this problematic?</p>
+
+<p>Recall from the earlier section that the default <code>activeElement</code> is the <code>&lt;body&gt;</code>. Therefore, if you generically call <code>document.activeElement.blur()</code>, you will likely end up switching application windows for your users.</p>
+
+<p>The workaround for this is to ensure the <code>activeElement</code> is not the <code>&lt;body&gt;</code> before calling <code>blur()</code>.</p>
+
+<p>``` javascript
+if ( document.activeElement.nodeName.toLowerCase() !== "body" ) {</p>
+
+<pre><code>document.activeElement.blur();
+</code></pre>
+
+<p>}
+```</p>
+
+<p>Luckily this problem has been fixed in IE11; <code>document.body.blur()</code> no longer switches windows.</p>
+
+<h3>Putting it all Together</h3>
+
+<p>This is <a href="https://github.com/jquery/jquery-ui/commit/eae2c4b358af3ebfae258abfe77eeace48fcefcb">the commit</a> I ended up using for the jQuery UI bugs.</p>
+
+<p>From:
+<code>javascript
+$( document.activeElement ).blur();
+</code></p>
+
+<p>To:
+``` javascript
+// support: IE9
+// IE9 throws an "Unspecified error" accessing document.activeElement from an <iframe>
+try {</p>
+
+<pre><code>// Support: IE9+
+// If the &lt;body&gt; is blurred, IE will switch windows, see #9520
+if ( document.activeElement &amp;&amp; document.activeElement.nodeName.toLowerCase() !== "body" ) {
+    // Blur any element that currently has focus, see #4261
+    $( document.activeElement ).blur();
+}
+</code></pre>
+
+<p>} catch ( error ) {}
+```</p>
+
+<p>Sigh.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Internet Explorer, Attribute Selectors, and Really Long Attribute Values]]></title>
@@ -1093,105 +1197,6 @@ box-shadow: none;
 <p>It's also important to remember that <a href="http://quirksmode.org/webkit.html">not all WebKits are created equally</a>, WebKit browsers are fighting to distinguish themselves; innovation in the browser world has never been as strong as it is today.</p>
 
 <p>That being said, the loss of a rendering engine is still a sad day for the web.  R.I.P. Presto.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Stop Messing with the Browser's Default Focus outline]]></title>
-    <link href="http://tjvantoll.com/2013/01/28/stop-messing-with-the-browsers-default-focus-outline/"/>
-    <updated>2013-01-28T20:57:00-05:00</updated>
-    <id>http://tjvantoll.com/2013/01/28/stop-messing-with-the-browsers-default-focus-outline</id>
-    <content type="html"><![CDATA[<p>This is the latest in my series of accessibility best practices after getting frustrated with using a keyboard on the internet.  Last time I talked about <a href="/2013/01/01/enter-should-submit-forms-stop-messing-with-that/">enter submitting forms</a>, this time I'm going to explain why removing the browser's default focus <code>outline</code> is a bad idea.</p>
-
-<h3>Focus Rings</h3>
-
-<p>All browsers have a default value they apply to the currently focused item.  For example Chrome on OS X uses the following:</p>
-
-<p>``` css
-:focus {</p>
-
-<pre><code>/* -webkit-focus-ring-color = '#5B9DD9' */
-outline: -webkit-focus-ring-color auto 5px;
-</code></pre>
-
-<p>}
-```</p>
-
-<!--more-->
-
-
-<p>Firefox uses a <code>1px dotted #212121</code> outline, other browser use other values.  The focus ring looks like this for Chrome on OS X:</p>
-
-<p><img src="/images/posts/2013-01-28/default.png" title="Default Focus Ring in Chrome on OS X" alt="Default Focus Ring in Chrome on OS X" /></p>
-
-<p>Keyboard users <strong>depend</strong> on this <code>outline</code> to determine where they are on the page.  I cannot stress <strong>depend</strong> enough, without the <code>outline</code> you have no idea where you are.  Don't believe me?  Go to <a href="http://www.cnn.com">cnn.com</a> right now.  Hit tab a few times and try to figure out where the hell you are on the page.</p>
-
-<p>The <code>outline</code> <em>can</em> be removed with the following:</p>
-
-<p>``` css
-:focus {</p>
-
-<pre><code>outline: 0;
-/* or */
-outline: none;
-</code></pre>
-
-<p>}
-```</p>
-
-<p>This is obviously bad per the reasoning above.  The HTML5 specification has the following to say about removing the default <code>outline</code>:</p>
-
-<p><blockquote><p>"...if an alternative focusing style isn't made available instead, the page will be significantly less usable for people who primarily navigate pages using a keyboard, or those with reduced vision who use focus outlines to help them navigate the page."</p><footer><strong>HTML5 Specification</strong> <cite><a href='http://www.whatwg.org/specs/web-apps/current-work/multipage/editing.html#element-level-focus-apis'>www.whatwg.org/specs/web-apps/&hellip;</a></cite></footer></blockquote></p>
-
-<h3>Custom Focus Outlines</h3>
-
-<p>As the spec mentions, you can create your own styling for focused items instead of using the browser's default.  For example the following will change all focused links to white text on a black background:</p>
-
-<p>``` css
-:link:focus, :visited:focus {</p>
-
-<pre><code>outline: none;
-background-color: black;
-color: white;
-</code></pre>
-
-<p>}
-```</p>
-
-<p>Although this is possible, I would <strong>strongly</strong> recommend simply leaving the default browser <code>outline</code> in place.  Changing the default display messes with a user's expectations, which is a big usability no no.  Furthermore, you need to make sure that whatever alternative you put in is sufficiently identifiable for users with reduced vision.</p>
-
-<h3>Why do People Want it Removed?</h3>
-
-<p>At the <a href="http://jqueryui.com">jQuery UI</a> project we get a <a href="https://github.com/jquery/jquery-ui/pull/898">lot</a> <a href="http://bugs.jqueryui.com/ticket/8959">of</a> <a href="http://bugs.jqueryui.com/ticket/6146">requests</a> to remove the browser default <code>outline</code>s from our widgets.</p>
-
-<p>  The most recent tickets have come from the <a href="http://jqueryui.com/slider">slider</a> and <a href="http://jqueryui.com/tabs">tabs</a> widgets.  This is what they look like on the latest Chrome on OS X:</p>
-
-<p><img src="/images/posts/2013-01-28/slider.png" title="Focus ring on jQuery UI slider" alt="Focus ring on jQuery UI slider" />
-<img src="/images/posts/2013-01-28/tabs.png" title="Focus ring on jQuery UI tabs" alt="Focus ring on jQuery UI tabs" /></p>
-
-<p>Some people find this unsightly.  Others are thrown off by the fact that the display varies on different browsers / operating systems.  While these concerns are reasonable, they do not outweigh the importance of the <code>outline</code> for keyboard users and users with reduced vision.</p>
-
-<p>jQuery UI does nothing to alter the browser's default <code>outline</code> on these widgets and I encourage others to do the same.</p>
-
-<h3>CSS Reset</h3>
-
-<p>Unfortunately one of the reasons much of the internet removes the default focus ring is because the <a href="http://meyerweb.com/eric/tools/css/reset/reset200802.css">first version of Eric Meyer's CSS reset</a> included the following:</p>
-
-<p>``` css
-/<em> remember to define focus styles! </em>/
-:focus {</p>
-
-<pre><code>outline: 0;
-</code></pre>
-
-<p>}
-```</p>
-
-<p>As you can see it's made abundantly clear that you should define your own focus styles, but most people simply copied and pasted the file without realizing this.</p>
-
-<p>The <a href="http://meyerweb.com/eric/tools/css/reset/index.html">updated version</a> of the CSS reset no longer features this, but sadly it's a bit too late for a lot of sites.</p>
-
-<p>Sigh.</p>
 ]]></content>
   </entry>
   

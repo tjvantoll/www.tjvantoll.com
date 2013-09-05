@@ -5,17 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Subpixel Animation Issues in IE < 9 - TJ VanToll - Tutorials, Thoughts, and Ramblings on Front End Development</title>
+  <title>Bugs with document.activeElement in Internet Explorer - TJ VanToll - Tutorials, Thoughts, and Ramblings on Front End Development</title>
   <meta name="author" content="TJ VanToll">
 
   
-  <meta name="description" content="While there are definitely cross browser discrepancies handling subpixels, this one caught me by surprise. Take the following: 1
-2
-3
-4
-5
-6
-&lt;div id &hellip;">
+  <meta name="description" content="There are two fun bugs related to document.activeElement in IE that have come up recently in jQuery UI. To help save others some pain, I felt these &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -24,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://tjvantoll.com/2012/08/16/subpixel-animation-issues-in-ie-less-than-9">
+  <link rel="canonical" href="http://tjvantoll.com/2013/08/30/bugs-with-document-activeelement-in-internet-explorer">
 
   <!--[if ! lte IE 7]><!-->
     <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
@@ -114,7 +108,7 @@
   
   <header>
     
-      <h1 class="entry-title">Subpixel Animation Issues in IE < 9</h1>
+      <h1 class="entry-title">Bugs with document.activeElement in Internet Explorer</h1>
     
     
       <p class="meta">
@@ -130,7 +124,7 @@
   
 
 
-<time datetime="2012-08-16T21:56:00-04:00" pubdate data-updated="true">Aug 16<span>th</span>, 2012</time>
+<time datetime="2013-08-30T14:46:00-04:00" pubdate data-updated="true">Aug 30<span>th</span>, 2013</time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -139,7 +133,35 @@
   </header>
 
 
-<div class="entry-content"><p>While there are definitely <a href="http://ejohn.org/blog/sub-pixel-problems-in-css/">cross browser discrepancies handling subpixels</a>, this one caught me by surprise.  Take the following:</p>
+<div class="entry-content"><p>There are two <em>fun</em> bugs related to <code>document.activeElement</code> in IE that have come up recently in jQuery UI. To help save others some pain, I felt these needed to be documented.</p>
+
+<h3>Accessing <code>document.activeElement</code> from an <code>&lt;iframe&gt;</code> in IE9</h3>
+
+<p>Let&#8217;s say you have an <code>&lt;iframe&gt;</code>.</p>
+
+<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;iframe</span> <span class="na">src=</span><span class="s">&quot;other.html&quot;</span><span class="nt">&gt;&lt;/iframe&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>And in that <code>&lt;iframe&gt;</code>, you want to know what element has focus.</p>
+
+<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'>/* other.html */
+</span><span class='line'><span class="nt">&lt;script&gt;</span>
+</span><span class='line'>    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span> <span class="nx">parent</span><span class="p">.</span><span class="nb">document</span><span class="p">.</span><span class="nx">activeElement</span> <span class="p">);</span>
+</span><span class='line'><span class="nt">&lt;/script&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>In all browser except IE9, this will log the element that has focus in the parent document (the <code>&lt;body&gt;</code> by default). In IE9 this will inexplicably throw an <code>"Unspecified Error"</code>.</p>
+
+<p>Yes, you read right; ACCESSING the <code>activeElement</code> property of a parent <code>document</code> throws an error in IE9.</p>
+
+<p>What can you to about it? Since the access causes the error, the only recourse is a try / catch.</p>
 
 <figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -147,20 +169,50 @@
 <span class='line-number'>4</span>
 <span class='line-number'>5</span>
 <span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">&quot;box&quot;</span><span class="nt">&gt;&lt;/div&gt;</span>
-</span><span class='line'><span class="nt">&lt;script&gt;</span>
-</span><span class='line'>    <span class="kd">var</span> <span class="nx">box</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">&#39;box&#39;</span><span class="p">);</span>
-</span><span class='line'>    <span class="nx">box</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">left</span> <span class="o">=</span> <span class="s1">&#39;10.25px&#39;</span><span class="p">;</span>
-</span><span class='line'>    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">box</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">left</span><span class="p">);</span>
-</span><span class='line'><span class="nt">&lt;/script&gt;</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="kd">var</span> <span class="nx">activeElement</span><span class="p">;</span>
+</span><span class='line'><span class="k">try</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nx">activeElement</span> <span class="o">=</span> <span class="nx">parent</span><span class="p">.</span><span class="nb">document</span><span class="p">.</span><span class="nx">activeElement</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span> <span class="k">catch</span><span class="p">(</span> <span class="nx">error</span> <span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nx">activeElement</span> <span class="o">=</span> <span class="nx">parent</span><span class="p">.</span><span class="nb">document</span><span class="p">.</span><span class="nx">body</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>This simply sets a value for the <code>left</code> CSS property then immediately retrieves it.  In Chrome 22, Firefox 14, Safari 6, Opera 12, IE >= 9, iOS 5, and Android <code>10.25px</code> will be logged.</p>
+<p>Luckily this is a problem unique to IE9; the same behavior is not present in IE 7, 8, or 10.</p>
 
-<p>In IE &lt; 9 <code>10px</code> is logged.  While not all browsers can accurately render the subpixel values, I had assumed all of them would&#8217;ve at least allowed the assignment.  I was wrong.  Internet Explorer will simply round the value to the nearest integer.</p>
+<h3>Blurring the <code>&lt;body&gt;</code> Switches Windows in IE9 and IE10</h3>
 
-<p>Why is this a problem?  <!--more-->Take the following code.</p>
+<p>If you call <code>document.body.blur()</code> in IE9 or IE10, you will switch application windows. Yes you again read right; if you have IE and Notepad open, calling <code>document.body.blur()</code> will switch focus to Notepad. If you don&#8217;t believe me, open IE9 or IE10 and try for yourself - run <code>document.body.blur()</code> in the console.</p>
+
+<p>Why is this problematic?</p>
+
+<p>Recall from the earlier section that the default <code>activeElement</code> is the <code>&lt;body&gt;</code>. Therefore, if you generically call <code>document.activeElement.blur()</code>, you will likely end up switching application windows for your users.</p>
+
+<p>The workaround for this is to ensure the <code>activeElement</code> is not the <code>&lt;body&gt;</code> before calling <code>blur()</code>.</p>
+
+<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="k">if</span> <span class="p">(</span> <span class="nb">document</span><span class="p">.</span><span class="nx">activeElement</span><span class="p">.</span><span class="nx">nodeName</span><span class="p">.</span><span class="nx">toLowerCase</span><span class="p">()</span> <span class="o">!==</span> <span class="s2">&quot;body&quot;</span> <span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nb">document</span><span class="p">.</span><span class="nx">activeElement</span><span class="p">.</span><span class="nx">blur</span><span class="p">();</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Luckily this problem has been fixed in IE11; <code>document.body.blur()</code> no longer switches windows.</p>
+
+<h3>Putting it all Together</h3>
+
+<p>This is <a href="https://github.com/jquery/jquery-ui/commit/eae2c4b358af3ebfae258abfe77eeace48fcefcb">the commit</a> I ended up using for the jQuery UI bugs.</p>
+
+<p>From:</p>
+
+<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">$</span><span class="p">(</span> <span class="nb">document</span><span class="p">.</span><span class="nx">activeElement</span> <span class="p">).</span><span class="nx">blur</span><span class="p">();</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>To:</p>
 
 <figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -172,50 +224,20 @@
 <span class='line-number'>8</span>
 <span class='line-number'>9</span>
 <span class='line-number'>10</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">&quot;box&quot;</span><span class="nt">&gt;&lt;/div&gt;</span>
-</span><span class='line'><span class="nt">&lt;script&gt;</span>
-</span><span class='line'>    <span class="kd">var</span> <span class="nx">box</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">&#39;box&#39;</span><span class="p">);</span>
-</span><span class='line'>    <span class="nx">box</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">left</span> <span class="o">=</span> <span class="s1">&#39;0px&#39;</span><span class="p">;</span>
-</span><span class='line'>    <span class="nx">setInterval</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-</span><span class='line'>        <span class="kd">var</span> <span class="nx">currentLeft</span> <span class="o">=</span> <span class="nx">box</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">left</span><span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="s1">&#39;px&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">);</span>
-</span><span class='line'>        <span class="nx">currentLeft</span> <span class="o">=</span> <span class="nb">parseFloat</span><span class="p">(</span><span class="nx">currentLeft</span><span class="p">);</span>
-</span><span class='line'>        <span class="nx">box</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">left</span> <span class="o">=</span> <span class="nx">currentLeft</span> <span class="o">+</span> <span class="mf">0.25</span> <span class="o">+</span> <span class="s1">&#39;px&#39;</span><span class="p">;</span>
-</span><span class='line'>    <span class="p">},</span> <span class="mi">20</span><span class="p">);</span>
-</span><span class='line'><span class="nt">&lt;/script&gt;</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="c1">// support: IE9</span>
+</span><span class='line'><span class="c1">// IE9 throws an &quot;Unspecified error&quot; accessing document.activeElement from an &lt;iframe&gt;</span>
+</span><span class='line'><span class="k">try</span> <span class="p">{</span>
+</span><span class='line'>    <span class="c1">// Support: IE9+</span>
+</span><span class='line'>    <span class="c1">// If the &lt;body&gt; is blurred, IE will switch windows, see #9520</span>
+</span><span class='line'>    <span class="k">if</span> <span class="p">(</span> <span class="nb">document</span><span class="p">.</span><span class="nx">activeElement</span> <span class="o">&amp;&amp;</span> <span class="nb">document</span><span class="p">.</span><span class="nx">activeElement</span><span class="p">.</span><span class="nx">nodeName</span><span class="p">.</span><span class="nx">toLowerCase</span><span class="p">()</span> <span class="o">!==</span> <span class="s2">&quot;body&quot;</span> <span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>        <span class="c1">// Blur any element that currently has focus, see #4261</span>
+</span><span class='line'>        <span class="nx">$</span><span class="p">(</span> <span class="nb">document</span><span class="p">.</span><span class="nx">activeElement</span> <span class="p">).</span><span class="nx">blur</span><span class="p">();</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'><span class="p">}</span> <span class="k">catch</span> <span class="p">(</span> <span class="nx">error</span> <span class="p">)</span> <span class="p">{}</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>This sets an interval that will increase the <code>left</code> property of a box by <code>0.25</code> pixels every 20 milliseconds.  Doing so will move the box left across the screen as seen below:</p>
-
-<div class="code_example"><h6>Moving a box with sub pixels<a href="/demos/2012-08-16/box_move.html" target="_blank">Open in New Window</a></h6><iframe style="width: 100%; height: 135px;" frameborder="0" src="/demos/2012-08-16/box_move.html"></iframe></div>
-
-
-<p>Great.  Unfortunately in IE &lt; 9 the box will not move.  Within the interval function the value to increment is being retrieved from the element itself, which, in IE &lt; 9 will continuously return the rounded value.</p>
-
-<p>The way around this is simply to use store off the value of the property outside of the animation loop itself.</p>
-
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">&quot;box&quot;</span><span class="nt">&gt;&lt;/div&gt;</span>
-</span><span class='line'><span class="nt">&lt;script&gt;</span>
-</span><span class='line'>    <span class="kd">var</span> <span class="nx">left</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-</span><span class='line'>    <span class="kd">var</span> <span class="nx">box</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">&#39;box&#39;</span><span class="p">);</span>
-</span><span class='line'>    <span class="nx">setInterval</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-</span><span class='line'>        <span class="nx">box</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">left</span> <span class="o">=</span> <span class="nx">left</span> <span class="o">+</span> <span class="s1">&#39;px&#39;</span><span class="p">;</span>
-</span><span class='line'>        <span class="nx">left</span> <span class="o">+=</span> <span class="mf">0.25</span><span class="p">;</span>
-</span><span class='line'>    <span class="p">},</span> <span class="mi">20</span><span class="p">);</span>
-</span><span class='line'><span class="nt">&lt;/script&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>This has the added benefit of being more efficient since you save a property retrieval on every invocation of the loop.</p>
+<p>Sigh.</p>
 </div>
 
 
@@ -238,7 +260,7 @@
   
 
 
-<time datetime="2012-08-16T21:56:00-04:00" pubdate data-updated="true">Aug 16<span>th</span>, 2012</time>
+<time datetime="2013-08-30T14:46:00-04:00" pubdate data-updated="true">Aug 30<span>th</span>, 2013</time>
       
 
 <span class="categories">
@@ -256,7 +278,7 @@
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://tjvantoll.com/2012/08/16/subpixel-animation-issues-in-ie-less-than-9/" data-via="tjvantoll" data-counturl="http://tjvantoll.com/2012/08/16/subpixel-animation-issues-in-ie-less-than-9/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://tjvantoll.com/2013/08/30/bugs-with-document-activeelement-in-internet-explorer/" data-via="tjvantoll" data-counturl="http://tjvantoll.com/2013/08/30/bugs-with-document-activeelement-in-internet-explorer/" >Tweet</a>
   
   
   
@@ -265,10 +287,8 @@
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/2012/08/10/less-101-the-basics-of-the-css-preprocessor/" title="Previous Post: LESS 101 - The Basics of the CSS Preprocessor">&laquo; LESS 101 - The Basics of the CSS Preprocessor</a>
+        <a class="basic-alignment left" href="/2013/08/14/new-beginnings/" title="Previous Post: New Beginnings">&laquo; New Beginnings</a>
       
-      
-        <a class="basic-alignment right" href="/2012/08/19/onscroll-event-issues-on-mobile-browsers/" title="Next Post: onscroll Event Issues on Mobile Browsers">onscroll Event Issues on Mobile Browsers &raquo;</a>
       
     </p>
   </footer>
@@ -340,8 +360,8 @@
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://tjvantoll.com/2012/08/16/subpixel-animation-issues-in-ie-less-than-9/';
-        var disqus_url = 'http://tjvantoll.com/2012/08/16/subpixel-animation-issues-in-ie-less-than-9/';
+        var disqus_identifier = 'http://tjvantoll.com/2013/08/30/bugs-with-document-activeelement-in-internet-explorer/';
+        var disqus_url = 'http://tjvantoll.com/2013/08/30/bugs-with-document-activeelement-in-internet-explorer/';
         var disqus_script = 'embed.js';
       
     (function () {
