@@ -280,6 +280,7 @@ header.home {
 /*********************** Code ************************/
 /*****************************************************/
 
+h3 code { font-size: 0.9em; }
 figure.code figcaption.empty {
 	border: none;
 }
@@ -300,7 +301,7 @@ figure.code figcaption.empty {
 
 		.line-numbers {
 			background-color: $custom_header_color !important;
-			text-shadow: none;			
+			text-shadow: none;
 		}
 		code {
 			background-color: $custom_header_color !important;
