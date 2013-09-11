@@ -264,15 +264,43 @@ header.home {
 /********************* Speaking **********************/
 /*****************************************************/
 
-.speaking {
-	// p { margin-bottom: 0; }
-	header { margin: 0; }
-	h3 { margin: 0.5em 0; }
+@mixin top-divider {
+	background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAABCAYAAACsXeyTAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAFUlEQVQIHWNIS0sr/v//PwMMDzY+ADqMahlW4J91AAAAAElFTkSuQmCC') top left repeat-x;
 }
-.speaking-archives {
-	@extend #blog-archives;
-	h1 { font-weight: normal; }
-	footer a { color: $link-color; }
+.speaking {
+	p { margin-bottom: 3em; }
+	header { margin: 0; }
+
+	article {
+		padding: 1.5em 0;
+		margin-left: 0;
+		overflow: hidden;
+		@include top-divider;
+	}
+	h2 {
+		padding-top: 0;
+		font-weight: normal;
+		margin-bottom: 0.5em;
+		background: none;
+	}
+	img {
+		width: 150px;
+		float: left;
+		margin-right: 25px;
+		margin-bottom: 20px;
+	}
+	ul {
+		float: left;
+		margin: 0;
+		padding-left: 1em;
+		color: $text-color-light;
+		span {
+			display: block;
+			color: $text-color;
+		}
+		a { color: $link-color; }
+	}
+	li:not(:first-child) { margin-top: 0.4em; }
 }
 
 
