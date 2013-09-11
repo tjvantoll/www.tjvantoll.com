@@ -21,7 +21,7 @@ sharing: false
 				<span>June 13th, 2013:</span> 
 				<a href="http://events.jquery.org/2013/portland/">jQuery Portland</a> | 
 				Portland, Oregon | 
-				<a href="/speaking/slides/2013/UI-Widgets-vs-HTML5">Slides</a> | 
+				<a href="/speaking/slides/UI-Widgets-vs-HTML5/Portland">Slides</a> | 
 				<a href="http://www.youtube.com/watch?v=Q6Bjs4BoBTc">Video</a>
 			</li>
 		</ul>
@@ -40,7 +40,7 @@ sharing: false
 				<span>May 29th, 2013:</span> 
 				<a href="http://www.meetup.com/grwebdev/">Grand Rapids Web Dev Meetup</a> | 
 				Grand Rapids, MI | 
-				<a href="/speaking/slides/2013/Constraint-Validation/">Slides</a>
+				<a href="/speaking/slides/Constraint-Validation/Grand-Rapids">Slides</a>
 			</li>
 		</ul>
 	</article>
@@ -53,7 +53,7 @@ sharing: false
 				<span>March 3rd, 2013:</span> 
 				<a href="http://jqueryto.com">jQuery TO</a> | 
 				Toronto, Ontario | 
-				<a href="/speaking/slides/2013/Submitting-Bugs-the-Right-Way">Slides</a> |
+				<a href="/speaking/slides/Submitting-Bugs-the-Right-Way/Toronto">Slides</a> |
 				<a href="http://www.youtube.com/watch?v=yZkTGMsgLR4&feature=youtu.be">Video</a>
 			</li>
 		</ul>
@@ -67,8 +67,8 @@ sharing: false
 				<span>October 23rd, 2012:</span> 
 				Lansing Java Users Group | 
 				Okemos, MI | 
-				<a href="/speaking/slides/2012/Efficiency-Top-Ten">Slides</a> | 
-				<a href="/speaking/slides/2012/Efficiency-Top-Ten?plain">Slides (No animation)</a>
+				<a href="/speaking/slides/Efficiency-Top-Ten/Okemos">Slides</a> | 
+				<a href="/speaking/slides/Efficiency-Top-Ten/Okemos?plain">Slides (No animation)</a>
 			</li>
 		</ul>
 	</article>
@@ -81,8 +81,8 @@ sharing: false
 				<span>August 9th, 2012:</span> 
 				Liquid Web | 
 				Lansing, MI | 
-				<a href="/speaking/slides/2012/LESS-101">Slides</a> | 
-				<a href="/speaking/slides/2012/LESS-101?plain">Slides (No animation)</a>
+				<a href="/speaking/slides/LESS-101/Lansing">Slides</a> | 
+				<a href="/speaking/slides/LESS-101/Lansing?plain">Slides (No animation)</a>
 			</li>
 		</ul>
 	</article>
@@ -95,7 +95,7 @@ sharing: false
 				<span>March 20th, 2012:</span> 
 				Lansing Java Users Group | 
 				Okemos, MI | 
-				<a href="/speaking/slides/2012/JavaScript-for-the-Java-Developer">Slides</a>
+				<a href="/speaking/slides/JavaScript-for-the-Java-Developer/Okemos">Slides</a>
 			</li>
 		</ul>
 	</article>
