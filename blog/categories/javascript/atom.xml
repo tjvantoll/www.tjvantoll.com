@@ -4,7 +4,7 @@
   <title><![CDATA[Category: JavaScript | TJ VanToll]]></title>
   <link href="http://tjvantoll.com/blog/categories/javascript/atom.xml" rel="self"/>
   <link href="http://tjvantoll.com/"/>
-  <updated>2013-09-11T13:34:55-04:00</updated>
+  <updated>2013-09-11T13:58:29-04:00</updated>
   <id>http://tjvantoll.com/</id>
   <author>
     <name><![CDATA[TJ VanToll]]></name>
@@ -46,6 +46,9 @@
 <p>In all browsers except IE9, this will log the element that has focus in the parent document (the <code>&lt;body&gt;</code> by default). In IE9 this will inexplicably throw an <code>"Unspecified Error"</code>.</p>
 
 <p>Yes, you read right; ACCESSING the <code>activeElement</code> property of a parent <code>document</code> throws an error in IE9.</p>
+
+<!--more-->
+
 
 <p>What can you to about it? Since the access causes the error, the only recourse is a try / catch.</p>
 

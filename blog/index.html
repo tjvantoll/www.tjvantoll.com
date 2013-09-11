@@ -164,85 +164,12 @@
 
 <p>Yes, you read right; ACCESSING the <code>activeElement</code> property of a parent <code>document</code> throws an error in IE9.</p>
 
-<p>What can you to about it? Since the access causes the error, the only recourse is a try / catch.</p>
-
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="kd">var</span> <span class="nx">activeElement</span><span class="p">;</span>
-</span><span class='line'><span class="k">try</span> <span class="p">{</span>
-</span><span class='line'>    <span class="nx">activeElement</span> <span class="o">=</span> <span class="nx">parent</span><span class="p">.</span><span class="nb">document</span><span class="p">.</span><span class="nx">activeElement</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span> <span class="k">catch</span><span class="p">(</span> <span class="nx">error</span> <span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>    <span class="nx">activeElement</span> <span class="o">=</span> <span class="nx">parent</span><span class="p">.</span><span class="nb">document</span><span class="p">.</span><span class="nx">body</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Luckily this is a problem unique to IE9; the same behavior is not present in IE 7, 8, or 10.</p>
-
-<h3>Blurring the <code>&lt;body&gt;</code> Switches Windows in IE9 and IE10</h3>
-
-<p>If you call <code>document.body.blur()</code> in IE9 or IE10, you will switch application windows. Yes you again read right; if you have IE and Notepad open, calling <code>document.body.blur()</code> will switch focus to Notepad. If you don&#8217;t believe me, open IE9 or IE10 and try for yourself - run <code>document.body.blur()</code> in the console.</p>
-
-<p>Why is this problematic?</p>
-
-<p>Recall from the earlier section that the default <code>activeElement</code> is the <code>&lt;body&gt;</code>. Therefore, if you generically call <code>document.activeElement.blur()</code>, you will likely end up switching application windows for your users.</p>
-
-<p>The workaround for this is to ensure the <code>activeElement</code> is not the <code>&lt;body&gt;</code> before calling <code>blur()</code>.</p>
-
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="k">if</span> <span class="p">(</span> <span class="nb">document</span><span class="p">.</span><span class="nx">activeElement</span><span class="p">.</span><span class="nx">nodeName</span><span class="p">.</span><span class="nx">toLowerCase</span><span class="p">()</span> <span class="o">!==</span> <span class="s2">&quot;body&quot;</span> <span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>    <span class="nb">document</span><span class="p">.</span><span class="nx">activeElement</span><span class="p">.</span><span class="nx">blur</span><span class="p">();</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Luckily this problem has been fixed in IE11; <code>document.body.blur()</code> no longer switches windows.</p>
-
-<h3>Putting it all Together</h3>
-
-<p>This is <a href="https://github.com/jquery/jquery-ui/commit/eae2c4b358af3ebfae258abfe77eeace48fcefcb">the commit</a> I ended up using for the jQuery UI bugs.</p>
-
-<p>From:</p>
-
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">$</span><span class="p">(</span> <span class="nb">document</span><span class="p">.</span><span class="nx">activeElement</span> <span class="p">).</span><span class="nx">blur</span><span class="p">();</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>To:</p>
-
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="c1">// support: IE9</span>
-</span><span class='line'><span class="c1">// IE9 throws an &quot;Unspecified error&quot; accessing document.activeElement from an &lt;iframe&gt;</span>
-</span><span class='line'><span class="k">try</span> <span class="p">{</span>
-</span><span class='line'>    <span class="c1">// Support: IE9+</span>
-</span><span class='line'>    <span class="c1">// If the &lt;body&gt; is blurred, IE will switch windows, see #9520</span>
-</span><span class='line'>    <span class="k">if</span> <span class="p">(</span> <span class="nb">document</span><span class="p">.</span><span class="nx">activeElement</span> <span class="o">&amp;&amp;</span> <span class="nb">document</span><span class="p">.</span><span class="nx">activeElement</span><span class="p">.</span><span class="nx">nodeName</span><span class="p">.</span><span class="nx">toLowerCase</span><span class="p">()</span> <span class="o">!==</span> <span class="s2">&quot;body&quot;</span> <span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>        <span class="c1">// Blur any element that currently has focus, see #4261</span>
-</span><span class='line'>        <span class="nx">$</span><span class="p">(</span> <span class="nb">document</span><span class="p">.</span><span class="nx">activeElement</span> <span class="p">).</span><span class="nx">blur</span><span class="p">();</span>
-</span><span class='line'>    <span class="p">}</span>
-</span><span class='line'><span class="p">}</span> <span class="k">catch</span> <span class="p">(</span> <span class="nx">error</span> <span class="p">)</span> <span class="p">{}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Sigh.</p>
 </div>
   
+  
+    <footer>
+      <a rel="full-article" href="/2013/08/30/bugs-with-document-activeelement-in-internet-explorer/">Read on &rarr;</a>
+    </footer>
   
 
 
