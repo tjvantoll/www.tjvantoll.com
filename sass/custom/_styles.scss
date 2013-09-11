@@ -293,14 +293,25 @@ header.home {
 		float: left;
 		margin: 0;
 		padding-left: 1em;
-		color: $text-color-light;
+		//color: $text-color-light;
 		span {
 			display: block;
-			color: $text-color;
+			//color: $text-color;
 		}
 		a { color: $link-color; }
 	}
 	li:not(:first-child) { margin-top: 0.4em; }
+}
+
+address {
+	display: inline-block;
+	padding-right: 20px;
+	background-position: right center;
+	background-repeat: no-repeat;
+
+	&.country-bulgaria { background-image: url(/images/flags/bg.png); }
+	&.country-canada { background-image: url(/images/flags/ca.png); }
+	&.country-us { background-image: url(/images/flags/us.png); }
 }
 
 

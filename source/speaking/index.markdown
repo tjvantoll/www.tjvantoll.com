@@ -15,12 +15,12 @@ sharing: false
 			<li>
 				<span>October 2nd, 2013:</span>
 				<a href="http://www.devreach.com/">DevReach</a> |
-				Sofia, Bulgaria
+				<address class="country-bulgaria">Sofia, Bulgaria</address>
 			</li>
 			<li>
 				<span>June 13th, 2013:</span> 
 				<a href="http://events.jquery.org/2013/portland/">jQuery Portland</a> | 
-				Portland, Oregon | 
+				<address class="country-us">Portland, Oregon</address> | 
 				<a href="/speaking/slides/UI-Widgets-vs-HTML5/Portland">Slides</a> | 
 				<a href="http://www.youtube.com/watch?v=Q6Bjs4BoBTc">Video</a>
 			</li>
@@ -34,12 +34,12 @@ sharing: false
 			<li>
 				<span>October 22nd, 2013:</span> 
 				<a href="http://html5devconf.com/">HTML5 Developer Conference</a> | 
-				San Francisco, CA
+				<address class="country-us">San Francisco, CA</address>
 			</li>
 			<li>
 				<span>May 29th, 2013:</span> 
 				<a href="http://www.meetup.com/grwebdev/">Grand Rapids Web Dev Meetup</a> | 
-				Grand Rapids, MI | 
+				<address class="country-us">Grand Rapids, MI</address> | 
 				<a href="/speaking/slides/Constraint-Validation/Grand-Rapids">Slides</a>
 			</li>
 		</ul>
@@ -52,7 +52,7 @@ sharing: false
 			<li>
 				<span>March 3rd, 2013:</span> 
 				<a href="http://jqueryto.com">jQuery TO</a> | 
-				Toronto, Ontario | 
+				<address class="country-canada">Toronto, Ontario</address> | 
 				<a href="/speaking/slides/Submitting-Bugs-the-Right-Way/Toronto">Slides</a> |
 				<a href="http://www.youtube.com/watch?v=yZkTGMsgLR4&feature=youtu.be">Video</a>
 			</li>
@@ -66,7 +66,7 @@ sharing: false
 			<li>
 				<span>October 23rd, 2012:</span> 
 				Lansing Java Users Group | 
-				Okemos, MI | 
+				<address class="country-us">Okemos, MI</address> | 
 				<a href="/speaking/slides/Efficiency-Top-Ten/Okemos">Slides</a> | 
 				<a href="/speaking/slides/Efficiency-Top-Ten/Okemos?plain">Slides (No animation)</a>
 			</li>
@@ -80,7 +80,7 @@ sharing: false
 			<li>
 				<span>August 9th, 2012:</span> 
 				Liquid Web | 
-				Lansing, MI | 
+				<address class="country-us">Lansing, MI</address> | 
 				<a href="/speaking/slides/LESS-101/Lansing">Slides</a> | 
 				<a href="/speaking/slides/LESS-101/Lansing?plain">Slides (No animation)</a>
 			</li>
@@ -94,7 +94,7 @@ sharing: false
 			<li>
 				<span>March 20th, 2012:</span> 
 				Lansing Java Users Group | 
-				Okemos, MI | 
+				<address class="country-us">Okemos, MI</address> | 
 				<a href="/speaking/slides/JavaScript-for-the-Java-Developer/Okemos">Slides</a>
 			</li>
 		</ul>
