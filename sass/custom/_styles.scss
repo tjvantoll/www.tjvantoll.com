@@ -293,11 +293,7 @@ header.home {
 		float: left;
 		margin: 0;
 		padding-left: 1em;
-		//color: $text-color-light;
-		span {
-			display: block;
-			//color: $text-color;
-		}
+		span { display: block; }
 		a { color: $link-color; }
 	}
 	li:not(:first-child) { margin-top: 0.4em; }
