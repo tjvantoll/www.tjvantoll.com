@@ -1,0 +1,649 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=1024" />
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<title>Front End Web Efficiency - The Top Ten | TJ VanToll</title>
+	
+	<meta name="description" content="Front End Web Efficiency - Discussion of the 10 key techniques to make responsive and efficient web applications." />
+	<meta name="author" content="TJ VanToll - tj.vantoll@gmail.com - tjvantoll.com" />
+
+	<link href="http://fonts.googleapis.com/css?family=Open+Sans:regular,semibold,italic,italicsemibold|PT+Sans:400,700,400italic,700italic|PT+Serif:400,700,400italic,700italic" rel="stylesheet" />
+
+	<script src="prettify/prettify.js"></script>
+	<link rel="stylesheet/less" href="less/style.less" />
+	<script src="js/less-1.3.0.min.js"></script>
+
+	<script type="text/javascript">
+		if (window.location.host.indexOf('local') == -1) {
+			var _gaq = _gaq || [];
+			_gaq.push(['_setAccount', 'UA-29179796-1']);
+			_gaq.push(['_trackPageview']);
+		
+			(function() {
+				var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+				ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+				var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+			})();
+		}
+	</script>
+</head>
+
+<body class="impress-not-supported" onload="prettyPrint();">
+
+<div class="fallback-message">
+	<p>Your browser <b>doesn't support the features required</b> by impress.js, so you are presented with a simplified version of this presentation.</p>
+	<p>For the best experience please use the latest <b>Chrome</b>, <b>Safari</b> or <b>Firefox</b> browser.</p>
+</div>
+
+<div id="impress">
+
+	<div id="slide-1" class="step slide" data-x="-1000" data-y="-1500">
+		<h1>Front End Web Efficiency<br />The Top Ten</h1>
+		<h2>TJ VanToll</h2>
+	</div>
+
+	<div class="step slide" data-x="500" data-y="-500">
+		<h2>About Me</h2>
+		<ul>
+			<li>I'm a web developer at <a href="http://liquidweb.com">Liquid Web.</a></li>
+			<li>I have twin boys and I like to use their pictures in my slides.</li>
+		</ul>
+		<img src="img/chase.jpg" />
+		<img src="img/max.jpg" />
+	</div>
+
+	<div class="step slide" data-x="0" data-y="-1500">
+		<h2>The Front End</h2>
+		<h3>Why should you care about performance?</h3>
+
+		<ul>
+			<li>According to research performed by Yahoo, on average 80% of end-user response time is spent on the front end. (<a href="http://developer.yahoo.com/performance/rules.html/">source</a>)</li>
+			<li>A study by Web Performance Today found that 74% of users will leave a site after waiting just 5 seconds for it to load. (<a href="http://www.webperformancetoday.com/2011/07/20/new-findings-mobile-web-users-are-more-disappointed-than-ever/">source</a>)</li>
+		</ul>
+	</div>
+
+	<div class="step slide full_screen" data-x="1000" data-y="-1500">
+		<h2>Where to start?</h2>
+		<img src="img/chaseConfused.jpg" />
+	</div>
+
+	<div class="step slide" data-x="1500" data-y="-2500">
+		<p>Making a site fast may seem complex.</p>
+		<img src="img/complex.png" />
+	</div>
+
+	<div class="step slide" data-x="2000" data-y="-1500">
+		<h2>Practicality</h2>
+		<ul>
+			<li>A couple small changes can go a long way.</li>
+			<li>It's important to focus on the things that really matter.</li>
+		</ul>
+	</div>
+
+	<div class="step slide" data-x="3000" data-y="-1500">
+		<p>There is a lot of bad information out there.  These things are very rarely a bottleneck:</p>
+		<ul>
+			<li>Sheer amount of JavaScript present</li>
+			<li>JavaScript performance</li>
+			<li>CSS</li>
+		</ul>
+	</div>
+
+	<div class="step slide" data-x="3500" data-z="1000" data-y="-500">
+		<h2>The Practical Top 10 List</h2>
+
+		<p>Where does the list come from?</p>
+
+		<ul>
+			<li>My experience</li>
+			<li>Research of best practices published by <a href="https://developers.google.com/speed/">Google</a>, <a href="http://developer.yahoo.com/performance/rules.html">Yahoo</a>, and others.</li>
+			<li>and...</li>
+		</ul>
+	</div>
+
+	<div class="step slide full_screen" data-x="4500" data-z="1000" data-y="-500">
+		<h2>Lots of bad 3G experiences.</h2>
+		<img src="img/mobile.jpg" />
+	</div>
+
+	<div class="step slide point" data-x="4000" data-y="-1500">
+		<h3>Let's Get Started</h3>
+	</div>
+
+	<div class="step slide" data-x="2500" data-y="-1000" data-z="4000" data-rotate-y="25" data-rotate-z="20">
+		<h2>#1) Reduce HTTP Requests</h2>
+
+		<p>The majority of loading time is spent downloading the various components that make up a web page - images, CSS, JavaScript, etc.</p>
+		<img src="img/httpRequests.png" />
+	</div>
+
+	<div class="step slide" data-x="3800" data-y="-1000" data-z="4000" data-rotate-y="0" data-rotate-z="20">
+		<h2>RTTs > Size</h2>
+		<ul>
+			<li>RTT = <b>R</b>ound <b>T</b>rip <b>T</b>ime.</li>
+			<li>For small download file sizes, RTT is <b>the</b> major contributor to latency on "fast" connections. (<a href="https://developers.google.com/speed/docs/best-practices/rtt">Source</a>).</li>
+			<li>The average mobile RTT time in the US is ~350 ms (<a href="http://www.slideshare.net/patrickmeenan/velocity-2012-taming-the-mobile-beast">Source</a>).</li>
+		</ul>
+	</div>
+
+	<div class="step slide" data-x="5100" data-y="-1000" data-z="4000" data-rotate-y="-25" data-rotate-z="20">
+		<h2>Download Times</h2>
+
+		<p>Compare that to download numbers.</p>
+		<ul>
+			<li>On average U.S. users download at 4.93 megs per second (<a href="http://mashable.com/2011/09/21/fastest-download-speeds-infographic/">Source</a>).</li>
+			<li>~1.5 mbsp on mobile even (<a href="http://www.slideshare.net/patrickmeenan/velocity-2012-taming-the-mobile-beast">Source</a>).</li>
+		</ul>
+	</div>
+
+	<div class="step slide" data-x="6400" data-y="-1000" data-z="4000" data-rotate-y="-50" data-rotate-z="20">
+		<h2>Page Size</h2>
+		<p>According to the HTTP archive the average web page size in 2011 was 965 kb (<a href="http://tech.slashdot.org/story/11/12/22/2015231/average-web-page-approaches-1mb">Source</a>).</p>
+	</div>
+
+	<div class="step slide" data-x="7700" data-y="-1000" data-z="4000" data-rotate-y="-75" data-rotate-z="20">
+		<h2>Connections</h2>
+		<ul>
+			<li>To mitigate the RTT problem browsers download resources in parallel.</li>
+			<li>Most modern browsers use 6 connections per hostname (<a href="http://www.browserscope.org/?category=network">Source</a>).  Note that IE7 only allows for 2.</li>
+			<li>Each connection pays the cost of a TCP handshake, which is potentially expensive (typically 200+ ms on 3G <a href="http://www.slideshare.net/patrickmeenan/velocity-2012-taming-the-mobile-beast">Source</a>).</li>
+		</ul>
+	</div>
+
+	<div class="step slide point" data-x="9000" data-y="-1000" data-z="4000" data-rotate-y="-100" data-rotate-z="20">
+		<h3>Moral of the Story</h3>
+	</div>
+
+	<div class="step slide full_screen" data-x="10300" data-y="-1000" data-z="4000" data-rotate-y="-125" data-rotate-z="20">
+		<h2>Lots of small downloads = slow</h2>
+		<img src="img/littleThings.jpg" />
+	</div>
+
+	<div class="step slide point" data-x="11600" data-y="-1000" data-z="4000" data-rotate-y="-150" data-rotate-z="20">
+		<h3>How do you reduce HTTP requests?</h3>
+	</div>
+
+	<div class="step slide full_screen" data-x="8000" data-y="-1000" data-z="-1000" data-rotate-y="0" data-rotate-z="20">
+		<h2>Combine Things!</h2>
+		<img src="img/combine.jpg" />
+	</div>
+
+	<div class="step slide" data-x="8000" data-y="0" data-z="-2000" data-rotate-y="0" data-rotate-z="20">
+		<h2>JavaScript</h2>
+
+		<p>There are a plethora of options.  Incorporate one into your workflow (source control hook, build script, release, etc...)</p>
+
+		<ul>
+			<li><a href="http://requirejs.org/docs/optimization.html">require.js optimizer</a></li>
+			<li><a href="http://shrinksafe.dojotoolkit.org/">Dojo Shrinksafe</a></li>
+			<li><a href="http://developer.yahoo.com/yui/compressor/">YUI Compressor</a></li>
+			<li><a href="https://developers.google.com/closure/compiler/">Google Closure Compiler</a></li>
+		</ul>
+	</div>
+
+	<div class="step slide" data-x="8000" data-y="1000" data-z="-3000" data-rotate-y="0" data-rotate-z="20">
+		<h2>CSS</h2>
+		<ul>
+			<li>Many of the JavaScript minifier / combiners also handle CSS (for example require.js optimizer, Dojo, & YUI).</li>
+			<li>CSS preprocessors such as <a href="http://sass-lang.com/">SASS</a>, <a href="http://lesscss.org/">LESS</a>, and <a href="http://learnboost.github.com/stylus/">Stylus</a> can also handle the combining and minification for you.</li>
+			<li>Don't use @import.  It does an HTTP request to retrieve the specified file.</li>
+		</ul>
+	</div>
+
+	<div class="step slide" data-x="8000" data-y="2000" data-z="-4000" data-rotate-y="0" data-rotate-z="20">
+		<h2>Images</h2>
+		<ul>
+			<li>Use <a href="http://css-tricks.com/css-sprites/">CSS sprites</a>. (<a href="http://l1.yimg.com/a/i/ww/met/sprite_pg_nontheme_20111020_ltr.png">Example from yahoo.com</a>)
+			<li>Use <a href="https://developer.mozilla.org/en-US/docs/data_URIs">data URIs</a>.  (Example - magnifying glass on <a href="http://www.google.com/m">Google mobile</a>) to inline images.</li>
+			<li>Use <a href="http://css-tricks.com/flat-icons-icon-fonts/">icon fonts</a> to avoid images.</li>
+		</ul>
+	</div>
+
+	<div class="step slide" data-x="8000" data-y="3000" data-z="-5000" data-rotate-y="0" data-rotate-z="20">
+		<h2>Images Continued</h2>
+		<p>Don't use images to make things that can easily be made in CSS.  If you want a rainbow circular ball with shadows, make it with CSS.</p>
+		<div class="rainbow_ball"></div>
+		<p>Don't worry, old IE users don't need rainbow balls.</p>
+	</div>
+
+	<div class="step slide" data-x="8000" data-y="4000" data-z="-6000" data-rotate-y="0" data-rotate-z="20">
+		<h2>How to Measure</h2>
+		<img src="img/httpInspector.png" />
+		<p>Chrome Dev Tools' <font color="blue">network tab</font>.  You can see the <font style="text-shadow: 1px 1px 1px black;" color="yellow">number of requests</font>, <font color="red">filter by request type</font>, as well as <font color="green">view download and latency times</font>.
+	</div>
+
+	<div class="step slide full_screen" data-x="8000" data-y="5000" data-z="-7000" data-rotate-y="0" data-rotate-z="20">
+		<h2>That was a long #1.</h2>
+		<img src="img/asleep.jpg" />
+	</div>
+
+	<div class="step slide point" data-x="8000" data-y="6000" data-z="-8000" data-rotate-y="0" data-rotate-z="20">
+		<h3>Questions?</h3>
+	</div>
+
+	<div class="step slide" data-x="6000" data-y="4000" data-z="-14000" data-rotate-y="60" data-rotate-z="20">
+		<h2>#2) Implement Caching</h2>
+		<ul>
+			<li>Browsers use a cache to reduce the number and size of HTTP requests when loading web pages.  You probably know this.</li>
+			<li>Doing it right is not hard, but has the potential to ruin a user's experience without you knowing about it.</li>
+			<li>Caching is immensely important for frequently revisited sites. Yahoo found that 75% - 85% of their pages views were from users with a primed cache (<a href="http://developer.yahoo.com/performance/rules.html">Source</a>).</li>
+		</ul>
+	</div>
+
+	<div class="step slide" data-x="5000" data-y="3000" data-z="-14000" data-rotate-y="120" data-rotate-z="50">
+		<h2>Browsers and Caching</h2>
+		<ul>
+			<li>Browsers look for the <code>Expires</code>, <code>Cache-Control</code>, <code>Last-Modified</code>, and <code>ETag</code> HTTP headers returned on requested resources to determine how to cache them.</li>
+			<li>Browsers have algorithms for handling resources that have none of these headers present.  You don't want this.  Set the headers.</li>
+		</ul>
+	</div>
+
+	<div class="step slide" data-x="4000" data-y="2000" data-z="-14000" data-rotate-y="120" data-rotate-z="80">
+		<h2>Expires & Cache-Control</h2>
+		<p>Specify how long the browser can use the cached resource without checking to see if a new version is available (<a href="https://developers.google.com/speed/docs/best-practices/caching">Source</a>).</p>
+		<p>The only <a href="http://stackoverflow.com/questions/5799906/whats-the-difference-between-expires-and-cache-control-headers">difference between the two</a> is syntax options; it's redundant to specify both</a>.  <b>Set a far future expiry using one of these headers on everything not dynamic</b>.</p>
+	</div>
+
+	<div class="step slide" data-x="3000" data-y="2000" data-z="-14000" data-rotate-y="120" data-rotate-z="110">
+		<h2>Expires & Cache-Control - Setting</h2>
+
+		<p>Using Apache?  Use the .htaccess from the <a href="http://html5boilerplate.com">HTML5 Boilerplate</a> to get useful snippets (<a href="https://github.com/h5bp/html5-boilerplate/blob/master/.htaccess">full source</a>).  For example:</p>
+<pre class="prettyprint">
+# CSS and JavaScript
+  ExpiresByType text/css                  "access plus 1 year"
+  ExpiresByType application/javascript    "access plus 1 year"
+</pre>
+		<p>Not using Apache?  There are examples for other server configurations <a href="https://github.com/h5bp/server-configs">here</a>.</p>
+	</div>
+
+	<div class="step slide full_screen" data-x="2000" data-y="2000" data-z="-14000" data-rotate-y="120" data-rotate-z="140">
+		<h2>Before you get started...</h2>
+		<img src="img/flashlight.jpg" />
+	</div>
+
+	<div class="step slide" data-x="500" data-y="2000" data-z="-14000" data-rotate-y="120" data-rotate-z="170">
+		<h2>HTTP Headers - Strong</h2>
+		<ul>
+			<li><code>Expires</code> and <code>Cache-Control</code> are strong headers, meaning, once the browser has downloaded a resource it will not issue any GET requests to check for newer versions until the resource has expired.</li>
+			<li>What happens when you want users to get an updated copy of a resource?</li>
+		</ul>
+	</div>
+
+	<div class="step slide full_screen" data-x="-1000" data-y="2000" data-z="-14000" data-rotate-y="120" data-rotate-z="140">
+		<h2>Bust the Cache</h2>
+		<img src="img/bust.jpg" />
+	</div>
+
+	<div class="step slide" data-x="-2500" data-y="2000" data-z="-14000" data-rotate-y="120" data-rotate-z="110">
+		<h2>Cache Busting</h2>
+		<p>Browsers cache based off full URL paths.  Therefore, you can change the path whenever you want to bust the cache.  This is easily done server side.</p>
+		<p>For example:</p>
+
+<pre class="prettyprint lang-html">
+&lt;!-- Inject a version number using a server-side templating language of your choice --&gt;
+&lt;script src="/path/to/foo.js?version=1.2.3"&gt;&lt;/script&gt;
+&lt;script src="/path/to/1.2.3/foo.js"&gt;&lt;/script&gt;
+</pre>
+	</div>
+
+	<div class="step slide" data-x="-4000" data-y="2000" data-z="-14000" data-rotate-y="120" data-rotate-z="80">
+		<h2>Last-Modified</h2>
+		<ul>
+			<li>Make sure the <code>Last-Modified</code> header is being included on all resources (most web servers take care of this automatically).</li>
+			<li>The browser will use this header when a page is refreshed by doing a conditional GET on the resource.  The resource will not need to be download if it has not been modified (in which a 304 response will be returned).</li>
+		</ul>
+	</div>
+
+	<div class="step slide point" data-x="-5500" data-y="2000" data-z="-14000" data-rotate-y="120" data-rotate-z="50">
+		<h3>Questions?</h3>
+	</div>
+
+	<div class="step slide" data-x="-8000" data-y="4000" data-z="-25000" data-rotate-x="-120" data-rotate-y="160" data-rotate-z="60">
+		<h2>#3) Optimize Images</h2>
+
+		<ul>
+			<li>Images make up the largest chunk of most web pages (<a href="https://developers.google.com/speed/articles/web-metrics">Source</a>).  Therefore, it's important to reduce their footprint as much as possible.</li>
+			<li>How?</li>
+		</ul>
+	</div>
+
+	<div class="step slide full_screen" data-x="-9000" data-y="4000" data-z="-25000" data-rotate-x="-120" data-rotate-y="190" data-rotate-z="60">
+		<h2>Compress!</h2>
+		<img src="img/compress.jpg" />
+	</div>
+
+	<div class="step slide" data-x="-10000" data-y="4000" data-z="-25000" data-rotate-x="-120" data-rotate-y="220" data-rotate-z="60">
+		<h2>Compression</h2>
+
+		<p>There are numerous lossless compress algorithms you can simply run against your code base.  There are Windows, OS X, Linux, and free web based optimizers out there, but here are a few examples:</p>
+
+		<ul>
+			<li><a href="http://optipng.sourceforge.net/">OptiPNG</a></li>
+			<li><a href="http://jpegclub.org/">JPEGClub</a></li>
+			<li><a href="http://imageoptim.com/">ImageOptim</a> (OS X app)</li>
+		</ul>
+	</div>
+
+	<div class="step slide" data-x="-11000" data-y="4000" data-z="-25000" data-rotate-x="-120" data-rotate-y="250" data-rotate-z="60">
+		<h2>Tip #1</h2>
+
+		<p>Don't scale images in HTML / CSS.</p>
+
+<pre class="prettyprint lang-html">
+&lt;img src="image1.jpg" height="100" width="100" /&gt;
+&lt;img src="image2.jpg" /&gt;
+&lt;style&gt;
+	[src='image2.jpg'] { height: 100px; width: 100px; }
+&lt;/style&gt;
+</pre>
+
+		<p>For both images above a 100 x 100 pixel image will be displayed on the screen, but for both the full size image will be downloaded from the server.  Resize the image on the server instead.</p>
+	</div>
+
+	<div class="step slide" data-x="-12000" data-y="4000" data-z="-25000" data-rotate-x="-120" data-rotate-y="280" data-rotate-z="60">
+		<h2>Tip #2</h2>
+
+		<ul>
+			<li>Images that do not display on the screen are still downloaded by the browser.  This includes images hidden via <code>display: none</code>, <code>visibility: hidden</code>, as well as images simply off the screen.</li>
+			<li>Images provided as CSS values such as <code>background-image</code> will not be downloaded until they're needed.</li>
+		</li>
+	</div>
+
+	<div class="step slide" data-x="-9000" data-y="6000" data-z="-6000" data-rotate-x="-20" data-rotate-y="200" data-rotate-z="60">
+		<h2>#4) Optimize 3rd Party Dependencies</h2>
+
+		<ul>
+			<li>3rd party means that you are hitting a server you do not have control over for resource(s).</li>
+			<li>Social media buttons and ads are the common examples.</li>
+		</ul>
+	</div>
+
+	<div class="step slide" data-x="-8000" data-y="7000" data-z="-6000" data-rotate-x="10" data-rotate-y="200" data-rotate-z="60">
+		<h2>Defer Loading</h2>
+
+		<p>Loading of 3rd party scripts should <b>always</b> be deferred until after the DOM has loaded (i.e. after the <code>DOMContentLoaded</code> event has fired).</p>
+
+<pre class="prettyprint lang-html">
+&lt;-- Simple download of a script from Twitter, WHAT COULD GO WRONG? --&gt;
+&lt;script src="//platform.twitter.com/widgets.js" &gt;&lt;/script&gt;
+</pre>
+	</div>
+
+	<div class="step slide full_screen" data-x="-7000" data-y="8000" data-z="-6000" data-rotate-x="40" data-rotate-y="200" data-rotate-z="60">
+		<h2 style="top: 80%;">THE TWITTER IS DOWN!</h2>
+		<img src="img/surprised.jpg" />
+	</div>
+
+	<div class="step slide" data-x="-6000" data-y="9000" data-z="-6000" data-rotate-x="70" data-rotate-y="200" data-rotate-z="60">
+		<h2>Blocking Scripts</h2>
+
+		<p>Browsers block for JavaScript execution because it could potentially affect the HTML parser (think <code>document.write</code>).  Fix?  Use the <code>defer</code> and <code>async</code> attributes.</p>
+
+<pre class="prettyprint lang-html">
+&lt;script src="//platform.twitter.com/widgets.js" async &gt;&lt;/script&gt;
+</pre>
+	</div>
+
+	<div class="step slide" data-x="-5000" data-y="10000" data-z="-6000" data-rotate-x="100" data-rotate-y="200" data-rotate-z="60">
+		<h2>defer and async</h2>
+
+		<p><code>defer</code>: Script execution will be delayed until HTML parsing is complete.</p>
+		<p><code>async</code>: Script execution will occur whenever the resource becomes available, regardless of whether HTML parsing is available.</p>
+
+		<p><a href="http://peter.sh/experiments/asynchronous-and-deferred-javascript-execution-explained/">Nice visualization of the difference</a>.</p>
+	</div>
+
+	<div class="step slide" data-x="-4000" data-y="11000" data-z="-6000" data-rotate-x="130" data-rotate-y="200" data-rotate-z="60">
+		<h2>Social Buttons</h2>
+
+		<ul>
+			<li>Including the Facebook, Twitter, and Google Plus buttons costs 19 HTTP requests and 246.7K in bandwidth (<a href="http://www.zurb.com/article/883/small-painful-buttons-why-social-media-bu">Source</a>).</li>
+			<li>Think about whether you really need them.</li>
+		</ul>
+	</div>
+
+	<div class="step slide" data-x="-4000" data-y="6000" data-z="-6000" data-rotate-x="130" data-rotate-y="250" data-rotate-z="60">
+		<h2>#5) Gzip</h2>
+
+		<ul>
+			<li>Gzip is a compression algorithm understood by browsers and web servers.</li>
+			<li>Should be used on HTML, CSS, and JS resources.  Do not use on images or other binary formats.</li>
+			<li>Most useful on large files; it can actually increase the size of small files (<a href="https://developers.google.com/speed/docs/best-practices/payload#GzipCompression">Source</a>).
+		</ul>
+	</div>
+
+	<div class="step slide" data-x="-4000" data-y="6000" data-z="-7000" data-rotate-x="80" data-rotate-y="250" data-rotate-z="60">
+		<h2>Gzip = Big Deal</h2>
+
+		<p>jQuery 1.8.2 goes from 93K --> 32K after GZip compression.  Gzip is a big deal.</p>
+	</div>
+
+	<div class="step slide" data-x="-4000" data-y="6000" data-z="-8000" data-rotate-x="30" data-rotate-y="250" data-rotate-z="60">
+		<h2>Gzip: How to use it?</h2>
+
+		<img src="img/gzip.png" />
+		<p><font color="red">Red</font>: Browser tells web server is accepts gzipped resources.</p>
+		<p><font color="blue">Blue</font>: Web server returns a gzip encoded JavaScript resource.</p>
+	</div>
+
+	<div class="step slide" data-x="-4000" data-y="6000" data-z="-9000" data-rotate-x="-20" data-rotate-y="250" data-rotate-z="60">
+		<h2>Gzip Continued</h2>
+		<p>Ensure your web server is setting the <code>Content-Encoding</code> header appropriately.</p>
+		<p><a href="https://github.com/h5bp/html5-boilerplate/blob/master/.htaccess">HTML5 boilerplate's .htaccess</a> includes the configuration for Apache servers.</p>
+	</div>
+
+	<div class="step slide" data-x="-3000" data-y="4000" data-z="-4000" data-rotate-x="-20" data-rotate-y="250" data-rotate-z="60">
+		<h2>#6) Use a CDN</h2>
+		<ul>
+			<li>CDN = <b>C</b>ontent <b>D</b>elivery <b>N</b>etwork</li>
+			<li>Collection of web servers distibuted across multiple locations to deliver content more efficiently to users (<a href="http://developer.yahoo.com/performance/rules.html">Source</a>).</li>
+			<li>Geographically closer servers = lower download times</li>
+		</ul>
+	</div>
+
+	<div class="step slide" data-x="-3000" data-y="4000" data-z="-3000" data-rotate-x="-20" data-rotate-y="250" data-rotate-z="120">
+		<h2>CDN</h2>
+		<ul>
+			<li>A good CDN will select a server to deliver content from based on network proximity.</li>
+			<li>Because the content is on another domain it is not subject to the connections per hostname limit.</li>
+		</ul>
+	</div>
+
+	<div class="step slide" data-x="-3000" data-y="4000" data-z="-2000" data-rotate-x="-20" data-rotate-y="250" data-rotate-z="180">
+		<h2>Examples</h2>
+		<p>Google Maps uses multiple domains to workaround the browser's connection per hostname limit.</p>
+		<img src="img/googleMaps.png" />
+		<p>When Yahoo moved static content from application servers to a CDN they saw end-user response time improvements of 20% or more (<a href="http://developer.yahoo.com/performance/rules.html">Source</a>).
+	</div>
+
+	<div class="step slide full_screen" data-x="-20000" data-y="5000" data-z="-2000" data-rotate-x="10" data-rotate-y="80" data-rotate-z="180" style="width: 600px;">
+		<h2>#7) Placement of Resources</h2>
+		<img src="img/together.jpg" />
+	</div>
+
+	<div class="step slide" data-x="-22000" data-y="5000" data-z="-2000" data-rotate-x="10" data-rotate-y="80" data-rotate-z="180">
+		<h2>CSS on Top</h2>
+
+		<ul>
+			<li>Makes pages <i>appear</i> to load faster because it allows the page to load progressively (<a href="http://developer.yahoo.com/performance/rules.html">Source</a>).</li>
+			<li>Putting stylesheets near the bottom of the document can prevent progressive rendering of HTML in many browsers (they block to avoid having to do a repaint of the page when styling changes).</li>
+			<li>If the browser doesn't block, the user will often get a FOUC (<b>F</b>lash <b>O</b>f <b>U</b>nstyled <b>C</b>ontent) since the page will be repainted after the HTML has been rendered.</li>
+		</ul>
+	</div>
+
+	<div class="step slide" data-x="-24000" data-y="5000" data-z="-2000" data-rotate-x="10" data-rotate-y="80" data-rotate-z="180">
+		<h2>JavaScript on the Bottom</h2>
+
+		<ul>
+			<li>Browsers block on script loading.  To ensure the user can see content as soon as possible JavaScript should not be executed until the page's HTML has been parsed.</li>
+			<li>This can also be accomplished by using the <code>async</code> and <code>defer</code> attributes.  However, putting scripts at the bottom handles all browsers, not just ones that support <a href="http://caniuse.com/#feat=script-async">async</a> and <a href="http://caniuse.com/#feat=script-defer">defer</a>.
+		</ul>
+	</div>
+
+	<div class="step slide" data-x="-26000" data-y="5000" data-z="-2000" data-rotate-x="10" data-rotate-y="80" data-rotate-z="180">
+		<h2>Make CSS and JS External</h2>
+
+		<ul>
+			<li>Inline <code>style</code> and <code>script</code> blocks cannot be cached, external files can.</li>
+		</ul>
+	</div>
+
+	<div class="step slide" data-x="-28000" data-y="5000" data-z="-2000" data-rotate-x="10" data-rotate-y="80" data-rotate-z="180">
+		<h2>Ultra Optimization</h2>
+
+		<ul>
+			<li>Put all CSS and JS inline on first request to avoid extra HTTP requests to get the external files.  Then, preload the external files for subsequent requests.  Use a cookie so server-side code knows whether to include the content inline or external.</li>
+			<li>You'll likely only need if you're developing a high traffic mobile landing page (e.g. <a href="http://www.google.com/m/gp">http://www.google.com/m/gp</a> or <a href="http://m.bing.com/">http://m.bing.com/</a>).</li>
+			<li><a href="http://www.stevesouders.com/blog/2011/03/28/storager-case-study-bing-google/">Read more about this technique</a> (it gets totally cooler with <code>localStorage</code>).</a></li>
+		</ul>
+	</div>
+
+	<div class="step slide full_screen" data-x="-18000" data-y="3000" data-z="-2000" data-rotate-x="10" data-rotate-y="80" data-rotate-z="120">
+		<h2>#8) The DOM is a Mess</h2>
+		<img src="img/dom.jpg" />
+	</div>
+
+	<div class="step slide" data-x="-18000" data-y="4500" data-z="-2000" data-rotate-x="10" data-rotate-y="80" data-rotate-z="60">
+		<h2>Which is faster?  By how much?</h2>
+<p>Option 1:</p>
+<pre class="prettyprint">
+var foo = document.getElementById('foo');
+for (var i = 0; i < 1000; i++) {
+	foo.innerHTML += 'a';
+}
+</pre>
+<p>Option 2:</p>
+<pre class="prettyprint">
+var foo = document.getElementById('foo');
+var html = '';
+for (var i = 0; i < 1000; i++) {
+	html += 'a';
+}
+foo.innerHTML = html;
+</pre>
+	</div>
+
+	<div class="step slide" data-x="-18000" data-y="6000" data-z="-2000" data-rotate-x="10" data-rotate-y="80" data-rotate-z="0">
+		<p>1000 times faster!?</p>
+		<img src="img/domResults.png" style="width: 800px;" />
+		<p><a href="http://jsperf.com/bulk-changes-to-the-dom">Run it yourself</a></p>
+	</div>
+
+	<div class="step slide" data-x="-18000" data-y="7500" data-z="-2000" data-rotate-x="10" data-rotate-y="80" data-rotate-z="-60">
+		<h2>Why is the DOM Slow?</h2>
+		<p>The browser has to do A LOT whenever the DOM is changed.</p>
+		<ul class="small">
+			<li>Recompute styles based on parent-child relationships.</li>
+			<li>Recompute dimensions.</li>
+			<li>Notify browser extensions and client scripts of the DOM change.</li>
+			<li>Update JavaScript variables that are handles to DOM nodes.</li>
+			<li><a href="http://stackoverflow.com/questions/6817093/but-whys-the-browser-dom-still-so-slow-after-10-years-of-effort">More...</a></li>
+		</ul>
+	</div>
+
+	<div class="step slide" data-x="-18000" data-y="9000" data-z="-2000" data-rotate-x="10" data-rotate-y="80" data-rotate-z="-120">
+		<h2>What to do?</h2>
+		<ul class="small">
+			<li>Modify the DOM as little as possible.</li>
+			<li>Try to make big changes "offline" (aka off the DOM).</li>
+			<li>Don't treat the DOM as storage, just use JavaScript variables.</li>
+		</ul>
+	</div>
+
+	<div class="step slide full_screen" data-x="-22000" data-y="7000" data-z="-1000" data-rotate-x="70" data-rotate-y="0" data-rotate-z="-120" style="width: 600px;">
+		<h2>#9) Delegate</h2>
+		<img src="img/delegation.jpg" />
+	</div>
+
+	<div class="step slide" data-x="-22000" data-y="7000" data-z="-2500" data-rotate-x="70" data-rotate-y="0" data-rotate-z="-120">
+		<h2>Example</h2>
+		<p>Turn all table cells red on hover.</p>
+<pre class="prettyprint lang-js">
+var cells = document.getElementsByTagName('td');
+for (var i = 0; i < cells.length; i++) {
+	cells[i].addEventListener('mouseover', function(event) {
+		event.target.style.backgroundColor = 'red';
+	}, false);
+}
+
+//With jQuery
+$('td').bind('mouseover', function() {
+	$(this).css('backgroundColor', 'red');
+});
+</pre>
+		<p>One event per DOM node.  More events firing leads to a slower user experience if the event is doing something non-trivial.  More events attached leads to more memory consumption.</p>
+	</div>
+
+	<div class="step slide" data-x="-22000" data-y="7000" data-z="-4000" data-rotate-x="70" data-rotate-y="0" data-rotate-z="-120">
+		<h2>Better</h2>
+<pre class="prettyprint lang-js">
+var tables = document.getElementsByTagName('table');
+for (var i = 0; i < tables.length; i++) {
+	tables[i].addEventListener('mouseover', function(event) {
+		if (event.target.nodeName == 'TD') {
+			event.target.style.backgroundColor = 'red';
+		}
+	}, false);
+}
+
+//Or with jQuery
+$('table').on('td', 'mouseover', function() {
+	$(this).css('backgroundColor', 'red');
+});
+</pre>
+		<p>Less events means less memory consumption and a faster user experience.</p>
+	</div>
+
+	<div class="step slide" data-x="-17000" data-y="4000" data-z="-4000" data-rotate-x="40" data-rotate-y="30" data-rotate-z="-120">
+		<h2>#10) Honorable Mentions</h2>
+
+		<ul>
+			<li>Don't set cookies on domains static resources are sent from (useless header will be sent on every request).</li>
+			<li>Don't have an enormous DOM (longer to download, more strain on the browser to render and manage).</li>
+			<li>Don't have 404's, duh.  Avoid redirects as much as possible.</li>
+			<li>Preload stuff you know the user will need.</li>
+		</ul>
+	</div>
+
+	<div class="step slide" data-x="-15000" data-y="3000" data-z="-4000" data-rotate-x="40" data-rotate-y="30" data-rotate-z="30">
+		<h2>Tools</h2>
+
+		<ul>
+			<li><a href="https://developers.google.com/chrome-developer-tools/docs/overview">Chrome Dev Tools</a></li>
+			<li><a href="http://getfirebug.com/">FireBug</a></li>
+			<li><a href="http://developer.yahoo.com/yslow/">YSlow</a></li>
+			<li><a href="https://developers.google.com/speed/pagespeed/">Google Page Speed</a></li>
+		</ul>
+	</div>
+
+	<div class="step slide point" data-x="-13000" data-y="3000" data-z="-4000" data-rotate-x="40" data-rotate-y="30" data-rotate-z="180">
+		<h3>Questions?</h3>
+	</div>
+
+	<div class="step slide full_screen" data-x="-11000" data-y="3000" data-z="-4000" data-rotate-x="40" data-rotate-y="30" data-rotate-z="30" style="width: 500px;">
+		<h2>Make Users Happy</h2>
+		<img src="img/usersHappy.jpg" />
+	</div>
+
+	<div class="step slide point" id="end" data-x="-9000" data-y="3000" data-z="-4000" data-rotate-x="50" data-rotate-y="60" data-rotate-z="-120" data-scale="10">
+		<h3>Thanks!</h3>
+		<a href="https://twitter.com/tjvantoll">@tjvantoll</a>
+	</div>
+</div>
+
+<div class="hint">
+	<p>Use a spacebar or arrow keys to navigate</p>
+</div>
+<script>
+if ("ontouchstart" in document.documentElement) { 
+	document.querySelector(".hint").innerHTML = "<p>Tap on the left or right to navigate</p>";
+}
+</script>
+
+<script src="js/impress.js"></script>
+<script>impress().init();</script>
+
+</body>
+</html>
