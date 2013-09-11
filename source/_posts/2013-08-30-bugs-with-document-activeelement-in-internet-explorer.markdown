@@ -29,6 +29,8 @@ In all browsers except IE9, this will log the element that has focus in the pare
 
 Yes, you read right; ACCESSING the `activeElement` property of a parent `document` throws an error in IE9.
 
+<!--more-->
+
 What can you to about it? Since the access causes the error, the only recourse is a try / catch.
 
 ``` javascript
