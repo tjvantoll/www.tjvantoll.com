@@ -15,7 +15,7 @@ CSS3 3D transforms were recently added in Firefox 10 and [IE10's 3rd platform pr
 
 So I decided I wanted to start messing around with this.
 <!--more-->
-<link href="/stylesheets/posts/2012-02-27.css" rel="stylesheet" />
+<link href="/stylesheets/custom/posts/2012-02-27.css" rel="stylesheet" />
 Note: Google Chrome supports 3D transforms, but [Modernizr will report a false positive](https://github.com/Modernizr/Modernizr/issues/240) if [Chrome has disabled GPU acceleration](http://blog.chromium.org/2011/03/gpu-acceleration-old-drivers.html).  So if you're using Chrome you may or may not see a warning at the top of the screen saying that the demos won't work (since I use Modernizr to detect whether to display that warning).  I've also found that if Chrome does disable hardware acceleration, some of the demos in this post are a bit choppy, and occasionally don't work.  That's one of the downsides with working something so new, all the kinks haven't been worked out quite yet.
 
 ### Getting Started
