@@ -4,7 +4,7 @@
   <title><![CDATA[Category: CSS | TJ VanToll]]></title>
   <link href="http://tjvantoll.com/blog/categories/css/atom.xml" rel="self"/>
   <link href="http://tjvantoll.com/"/>
-  <updated>2013-09-11T13:58:29-04:00</updated>
+  <updated>2013-09-12T21:33:17-04:00</updated>
   <id>http://tjvantoll.com/</id>
   <author>
     <name><![CDATA[TJ VanToll]]></name>
@@ -12,6 +12,149 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Building Custom Text Strikethroughs with CSS]]></title>
+    <link href="http://tjvantoll.com/2013/09/12/building-custom-text-strikethroughs-with-css/"/>
+    <updated>2013-09-12T15:25:00-04:00</updated>
+    <id>http://tjvantoll.com/2013/09/12/building-custom-text-strikethroughs-with-css</id>
+    <content type="html"><![CDATA[<p><link href="http://tjvantoll.com/stylesheets/custom/posts/2013-09-12.css" rel="stylesheet">
+Adding a strikethrough to a line of text in CSS is easy.</p>
+
+<p>``` html</p>
+
+
+
+<p>Hello World</p>
+
+
+<p>```</p>
+
+<p>Which displays as follows:</p>
+
+<p class="example example-one">Hello World</p>
+
+
+<p>But what if you want the strikethrough line to be a different height, color, or whatever?</p>
+
+<!--more-->
+
+
+<h3>The Spec</h3>
+
+<p>The <a href="http://dev.w3.org/csswg/css-text-decor-3">CSS text-decoration spec</a> defines two new properties for customizing strikethroughs - <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/text-decoration-color"><code>text-decoration-color</code></a> and <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/text-decoration-style"><code>text-decoration-style</code></a>.</p>
+
+<p><code>text-decoration-style</code> can have values of <code>solid</code>, <code>double</code>, <code>dotted</code>, <code>dashed</code>, and my favorite - <code>wavy</code>.</p>
+
+<p>Unfortunately these two properties are only implemented in Firefox and are behind a <code>-moz-</code> prefix. Here's how you can use the various <code>text-decoration-style</code> values in Firefox:</p>
+
+<p>``` html</p>
+
+
+
+<p id="solid">solid</p>
+
+
+<p id="double">double</p>
+
+
+<p id="dotted">dotted</p>
+
+
+<p id="dashed">dashed</p>
+
+
+<p id="wavy">wavy</p>
+
+
+<p>```</p>
+
+<p>Which looks like this (note the <em>sweet</em> <code>wavy</code> display):</p>
+
+<p><img src="http://tjvantoll.com/images/posts/2013-09-12/firefox-text.png"></p>
+
+<h3>How to Do it Today... and Better</h3>
+
+<p>While the spec changes are certainly interesting, you can accomplish much more today with some basic CSS.</p>
+
+<p>The easiest approach is to draw a line with the <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/::before"><code>::before</code></a> or <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/::after"><code>::after</code></a> pseudo-elements and position them on top of the element itself. Here, this is implemented with a CSS class name:</p>
+
+<p>``` css
+.strike {</p>
+
+<pre><code>position: relative;
+display: inline-block;
+</code></pre>
+
+<p>}
+.strike::before {</p>
+
+<pre><code>content: '';
+border-bottom: 2px solid red;
+width: 100%;
+position: absolute;
+right: 0;
+top: 50%;
+</code></pre>
+
+<p>}
+```</p>
+
+<p>This displays as follows:</p>
+
+<p class="example strike">Hello World</p>
+
+
+<p>From here you can play with the <code>border-color</code> and <code>border-height</code> properties to achieve the effect you'd like.</p>
+
+<p>The one major caveat to this approach is it does not work on text that spans multiple lines. If you need multi-line strikeouts, you're stuck with plain old <code>text-decoration</code>.</p>
+
+<p>But as long as your text is on one line, you can use this technique and be as crazy as you'd like. Here's an example that utilizes <code>::before</code> and <code>::after</code> and <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/transform">CSS transforms</a> to create a cross out effect on the text.</p>
+
+<p>``` css
+.cross {</p>
+
+<pre><code>position: relative;
+display: inline-block;
+</code></pre>
+
+<p>}
+.cross::before, .cross::after {</p>
+
+<pre><code>content: '';
+width: 100%;
+position: absolute;
+right: 0;
+top: 50%;
+</code></pre>
+
+<p>}
+.cross::before {</p>
+
+<pre><code>border-bottom: 2px solid green;
+-webkit-transform: skewY(-10deg);
+transform: skewY(-10deg);
+</code></pre>
+
+<p>}
+.cross::after {</p>
+
+<pre><code>border-bottom: 2px solid blue;
+-webkit-transform: skewY(10deg);
+transform: skewY(10deg);
+</code></pre>
+
+<p>}
+```</p>
+
+<p>Which displays as such.</p>
+
+<p class="example cross">Hello World</p>
+
+
+<p>So yeah, go crazy.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Internet Explorer, Attribute Selectors, and Really Long Attribute Values]]></title>
@@ -1218,105 +1361,6 @@ box-shadow: none;
 <li>April 26th, 2013: Added a note that the <code>resize</code> CSS property is the appropriate way to prevent textareas from being resized. <a href="https://github.com/tjvantoll/tjvantoll.github.com/commit/f90720f3aa12c3ec4ca922b5d22f64f03583eb4f">f90720f3aa12c3ec4ca922b5d22f64f03583eb4f</a></li>
 </ul>
 
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Stop Messing with the Browser's Default Focus outline]]></title>
-    <link href="http://tjvantoll.com/2013/01/28/stop-messing-with-the-browsers-default-focus-outline/"/>
-    <updated>2013-01-28T20:57:00-05:00</updated>
-    <id>http://tjvantoll.com/2013/01/28/stop-messing-with-the-browsers-default-focus-outline</id>
-    <content type="html"><![CDATA[<p>This is the latest in my series of accessibility best practices after getting frustrated with using a keyboard on the internet.  Last time I talked about <a href="/2013/01/01/enter-should-submit-forms-stop-messing-with-that/">enter submitting forms</a>, this time I'm going to explain why removing the browser's default focus <code>outline</code> is a bad idea.</p>
-
-<h3>Focus Rings</h3>
-
-<p>All browsers have a default value they apply to the currently focused item.  For example Chrome on OS X uses the following:</p>
-
-<p>``` css
-:focus {</p>
-
-<pre><code>/* -webkit-focus-ring-color = '#5B9DD9' */
-outline: -webkit-focus-ring-color auto 5px;
-</code></pre>
-
-<p>}
-```</p>
-
-<!--more-->
-
-
-<p>Firefox uses a <code>1px dotted #212121</code> outline, other browser use other values.  The focus ring looks like this for Chrome on OS X:</p>
-
-<p><img src="/images/posts/2013-01-28/default.png" title="Default Focus Ring in Chrome on OS X" alt="Default Focus Ring in Chrome on OS X" /></p>
-
-<p>Keyboard users <strong>depend</strong> on this <code>outline</code> to determine where they are on the page.  I cannot stress <strong>depend</strong> enough, without the <code>outline</code> you have no idea where you are.  Don't believe me?  Go to <a href="http://www.cnn.com">cnn.com</a> right now.  Hit tab a few times and try to figure out where the hell you are on the page.</p>
-
-<p>The <code>outline</code> <em>can</em> be removed with the following:</p>
-
-<p>``` css
-:focus {</p>
-
-<pre><code>outline: 0;
-/* or */
-outline: none;
-</code></pre>
-
-<p>}
-```</p>
-
-<p>This is obviously bad per the reasoning above.  The HTML5 specification has the following to say about removing the default <code>outline</code>:</p>
-
-<p><blockquote><p>"...if an alternative focusing style isn't made available instead, the page will be significantly less usable for people who primarily navigate pages using a keyboard, or those with reduced vision who use focus outlines to help them navigate the page."</p><footer><strong>HTML5 Specification</strong> <cite><a href='http://www.whatwg.org/specs/web-apps/current-work/multipage/editing.html#element-level-focus-apis'>www.whatwg.org/specs/web-apps/&hellip;</a></cite></footer></blockquote></p>
-
-<h3>Custom Focus Outlines</h3>
-
-<p>As the spec mentions, you can create your own styling for focused items instead of using the browser's default.  For example the following will change all focused links to white text on a black background:</p>
-
-<p>``` css
-:link:focus, :visited:focus {</p>
-
-<pre><code>outline: none;
-background-color: black;
-color: white;
-</code></pre>
-
-<p>}
-```</p>
-
-<p>Although this is possible, I would <strong>strongly</strong> recommend simply leaving the default browser <code>outline</code> in place.  Changing the default display messes with a user's expectations, which is a big usability no no.  Furthermore, you need to make sure that whatever alternative you put in is sufficiently identifiable for users with reduced vision.</p>
-
-<h3>Why do People Want it Removed?</h3>
-
-<p>At the <a href="http://jqueryui.com">jQuery UI</a> project we get a <a href="https://github.com/jquery/jquery-ui/pull/898">lot</a> <a href="http://bugs.jqueryui.com/ticket/8959">of</a> <a href="http://bugs.jqueryui.com/ticket/6146">requests</a> to remove the browser default <code>outline</code>s from our widgets.</p>
-
-<p>  The most recent tickets have come from the <a href="http://jqueryui.com/slider">slider</a> and <a href="http://jqueryui.com/tabs">tabs</a> widgets.  This is what they look like on the latest Chrome on OS X:</p>
-
-<p><img src="/images/posts/2013-01-28/slider.png" title="Focus ring on jQuery UI slider" alt="Focus ring on jQuery UI slider" />
-<img src="/images/posts/2013-01-28/tabs.png" title="Focus ring on jQuery UI tabs" alt="Focus ring on jQuery UI tabs" /></p>
-
-<p>Some people find this unsightly.  Others are thrown off by the fact that the display varies on different browsers / operating systems.  While these concerns are reasonable, they do not outweigh the importance of the <code>outline</code> for keyboard users and users with reduced vision.</p>
-
-<p>jQuery UI does nothing to alter the browser's default <code>outline</code> on these widgets and I encourage others to do the same.</p>
-
-<h3>CSS Reset</h3>
-
-<p>Unfortunately one of the reasons much of the internet removes the default focus ring is because the <a href="http://meyerweb.com/eric/tools/css/reset/reset200802.css">first version of Eric Meyer's CSS reset</a> included the following:</p>
-
-<p>``` css
-/<em> remember to define focus styles! </em>/
-:focus {</p>
-
-<pre><code>outline: 0;
-</code></pre>
-
-<p>}
-```</p>
-
-<p>As you can see it's made abundantly clear that you should define your own focus styles, but most people simply copied and pasted the file without realizing this.</p>
-
-<p>The <a href="http://meyerweb.com/eric/tools/css/reset/index.html">updated version</a> of the CSS reset no longer features this, but sadly it's a bit too late for a lot of sites.</p>
-
-<p>Sigh.</p>
 ]]></content>
   </entry>
   

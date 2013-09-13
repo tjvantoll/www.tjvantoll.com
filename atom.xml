@@ -4,7 +4,7 @@
   <title><![CDATA[TJ VanToll]]></title>
   <link href="http://tjvantoll.com/atom.xml" rel="self"/>
   <link href="http://tjvantoll.com/"/>
-  <updated>2013-09-11T13:58:29-04:00</updated>
+  <updated>2013-09-12T21:33:17-04:00</updated>
   <id>http://tjvantoll.com/</id>
   <author>
     <name><![CDATA[TJ VanToll]]></name>
@@ -12,6 +12,208 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Building Custom Text Strikethroughs with CSS]]></title>
+    <link href="http://tjvantoll.com/2013/09/12/building-custom-text-strikethroughs-with-css/"/>
+    <updated>2013-09-12T15:25:00-04:00</updated>
+    <id>http://tjvantoll.com/2013/09/12/building-custom-text-strikethroughs-with-css</id>
+    <content type="html"><![CDATA[<p><link href="http://tjvantoll.com/stylesheets/custom/posts/2013-09-12.css" rel="stylesheet">
+Adding a strikethrough to a line of text in CSS is easy.</p>
+
+<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;style&gt;</span>
+</span><span class='line'>    <span class="nt">p</span> <span class="p">{</span> <span class="k">text-decoration</span><span class="o">:</span> <span class="k">line-through</span><span class="p">;</span> <span class="p">}</span>
+</span><span class='line'><span class="nt">&lt;/style&gt;</span>
+</span><span class='line'><span class="nt">&lt;p&gt;</span>Hello World<span class="nt">&lt;/p&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Which displays as follows:</p>
+
+<p class="example example-one">Hello World</p>
+
+
+<p>But what if you want the strikethrough line to be a different height, color, or whatever?</p>
+
+<!--more-->
+
+
+<h3>The Spec</h3>
+
+<p>The <a href="http://dev.w3.org/csswg/css-text-decor-3">CSS text-decoration spec</a> defines two new properties for customizing strikethroughs - <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/text-decoration-color"><code>text-decoration-color</code></a> and <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/text-decoration-style"><code>text-decoration-style</code></a>.</p>
+
+<p><code>text-decoration-style</code> can have values of <code>solid</code>, <code>double</code>, <code>dotted</code>, <code>dashed</code>, and my favorite - <code>wavy</code>.</p>
+
+<p>Unfortunately these two properties are only implemented in Firefox and are behind a <code>-moz-</code> prefix. Here&#8217;s how you can use the various <code>text-decoration-style</code> values in Firefox:</p>
+
+<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;style&gt;</span>
+</span><span class='line'>    <span class="nt">p</span> <span class="p">{</span>
+</span><span class='line'>        <span class="k">text-decoration</span><span class="o">:</span> <span class="k">line-through</span><span class="p">;</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>    <span class="nf">#solid</span> <span class="p">{</span>
+</span><span class='line'>        <span class="o">-</span><span class="n">moz</span><span class="o">-</span><span class="k">text-decoration</span><span class="o">-</span><span class="k">color</span><span class="o">:</span> <span class="nb">red</span><span class="p">;</span>
+</span><span class='line'>        <span class="o">-</span><span class="n">moz</span><span class="o">-</span><span class="k">text-decoration</span><span class="o">-</span><span class="n">style</span><span class="o">:</span> <span class="k">solid</span><span class="p">;</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>    <span class="nf">#double</span> <span class="p">{</span>
+</span><span class='line'>        <span class="o">-</span><span class="n">moz</span><span class="o">-</span><span class="k">text-decoration</span><span class="o">-</span><span class="k">color</span><span class="o">:</span> <span class="nb">blue</span><span class="p">;</span>
+</span><span class='line'>        <span class="o">-</span><span class="n">moz</span><span class="o">-</span><span class="k">text-decoration</span><span class="o">-</span><span class="n">style</span><span class="o">:</span> <span class="k">double</span><span class="p">;</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>    <span class="nf">#dotted</span> <span class="p">{</span>
+</span><span class='line'>        <span class="o">-</span><span class="n">moz</span><span class="o">-</span><span class="k">text-decoration</span><span class="o">-</span><span class="k">color</span><span class="o">:</span> <span class="nb">green</span><span class="p">;</span>
+</span><span class='line'>        <span class="o">-</span><span class="n">moz</span><span class="o">-</span><span class="k">text-decoration</span><span class="o">-</span><span class="n">style</span><span class="o">:</span> <span class="k">dotted</span><span class="p">;</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>    <span class="nf">#dashed</span> <span class="p">{</span>
+</span><span class='line'>        <span class="o">-</span><span class="n">moz</span><span class="o">-</span><span class="k">text-decoration</span><span class="o">-</span><span class="k">color</span><span class="o">:</span> <span class="nb">purple</span><span class="p">;</span>
+</span><span class='line'>        <span class="o">-</span><span class="n">moz</span><span class="o">-</span><span class="k">text-decoration</span><span class="o">-</span><span class="n">style</span><span class="o">:</span> <span class="k">dashed</span><span class="p">;</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>    <span class="nf">#wavy</span> <span class="p">{</span>
+</span><span class='line'>        <span class="o">-</span><span class="n">moz</span><span class="o">-</span><span class="k">text-decoration</span><span class="o">-</span><span class="k">color</span><span class="o">:</span> <span class="nb">orange</span><span class="p">;</span>
+</span><span class='line'>        <span class="o">-</span><span class="n">moz</span><span class="o">-</span><span class="k">text-decoration</span><span class="o">-</span><span class="n">style</span><span class="o">:</span> <span class="n">wavy</span><span class="p">;</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'><span class="nt">&lt;/style&gt;</span>
+</span><span class='line'><span class="nt">&lt;p</span> <span class="na">id=</span><span class="s">&quot;solid&quot;</span><span class="nt">&gt;</span>solid<span class="nt">&lt;/p&gt;</span>
+</span><span class='line'><span class="nt">&lt;p</span> <span class="na">id=</span><span class="s">&quot;double&quot;</span><span class="nt">&gt;</span>double<span class="nt">&lt;/p&gt;</span>
+</span><span class='line'><span class="nt">&lt;p</span> <span class="na">id=</span><span class="s">&quot;dotted&quot;</span><span class="nt">&gt;</span>dotted<span class="nt">&lt;/p&gt;</span>
+</span><span class='line'><span class="nt">&lt;p</span> <span class="na">id=</span><span class="s">&quot;dashed&quot;</span><span class="nt">&gt;</span>dashed<span class="nt">&lt;/p&gt;</span>
+</span><span class='line'><span class="nt">&lt;p</span> <span class="na">id=</span><span class="s">&quot;wavy&quot;</span><span class="nt">&gt;</span>wavy<span class="nt">&lt;/p&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Which looks like this (note the <em>sweet</em> <code>wavy</code> display):</p>
+
+<p><img src="http://tjvantoll.com/images/posts/2013-09-12/firefox-text.png"></p>
+
+<h3>How to Do it Today&#8230; and Better</h3>
+
+<p>While the spec changes are certainly interesting, you can accomplish much more today with some basic CSS.</p>
+
+<p>The easiest approach is to draw a line with the <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/::before"><code>::before</code></a> or <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/::after"><code>::after</code></a> pseudo-elements and position them on top of the element itself. Here, this is implemented with a CSS class name:</p>
+
+<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nc">.strike</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">position</span><span class="o">:</span> <span class="k">relative</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">display</span><span class="o">:</span> <span class="k">inline</span><span class="o">-</span><span class="k">block</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="nc">.strike</span><span class="o">:</span><span class="nd">:before</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">content</span><span class="o">:</span> <span class="s1">&#39;&#39;</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">border-bottom</span><span class="o">:</span> <span class="m">2px</span> <span class="k">solid</span> <span class="nb">red</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">width</span><span class="o">:</span> <span class="m">100</span><span class="o">%</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">position</span><span class="o">:</span> <span class="k">absolute</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">right</span><span class="o">:</span> <span class="m">0</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">top</span><span class="o">:</span> <span class="m">50</span><span class="o">%</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This displays as follows:</p>
+
+<p class="example strike">Hello World</p>
+
+
+<p>From here you can play with the <code>border-color</code> and <code>border-height</code> properties to achieve the effect you&#8217;d like.</p>
+
+<p>The one major caveat to this approach is it does not work on text that spans multiple lines. If you need multi-line strikeouts, you&#8217;re stuck with plain old <code>text-decoration</code>.</p>
+
+<p>But as long as your text is on one line, you can use this technique and be as crazy as you&#8217;d like. Here&#8217;s an example that utilizes <code>::before</code> and <code>::after</code> and <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/transform">CSS transforms</a> to create a cross out effect on the text.</p>
+
+<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nc">.cross</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">position</span><span class="o">:</span> <span class="k">relative</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">display</span><span class="o">:</span> <span class="k">inline</span><span class="o">-</span><span class="k">block</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="nc">.cross</span><span class="o">:</span><span class="nd">:before</span><span class="o">,</span> <span class="nc">.cross</span><span class="o">:</span><span class="nd">:after</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">content</span><span class="o">:</span> <span class="s1">&#39;&#39;</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">width</span><span class="o">:</span> <span class="m">100</span><span class="o">%</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">position</span><span class="o">:</span> <span class="k">absolute</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">right</span><span class="o">:</span> <span class="m">0</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">top</span><span class="o">:</span> <span class="m">50</span><span class="o">%</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="nc">.cross</span><span class="o">:</span><span class="nd">:before</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">border-bottom</span><span class="o">:</span> <span class="m">2px</span> <span class="k">solid</span> <span class="nb">green</span><span class="p">;</span>
+</span><span class='line'>    <span class="o">-</span><span class="n">webkit</span><span class="o">-</span><span class="n">transform</span><span class="o">:</span> <span class="n">skewY</span><span class="p">(</span><span class="m">-10</span><span class="n">deg</span><span class="p">);</span>
+</span><span class='line'>    <span class="n">transform</span><span class="o">:</span> <span class="n">skewY</span><span class="p">(</span><span class="m">-10</span><span class="n">deg</span><span class="p">);</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="nc">.cross</span><span class="o">:</span><span class="nd">:after</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">border-bottom</span><span class="o">:</span> <span class="m">2px</span> <span class="k">solid</span> <span class="nb">blue</span><span class="p">;</span>
+</span><span class='line'>    <span class="o">-</span><span class="n">webkit</span><span class="o">-</span><span class="n">transform</span><span class="o">:</span> <span class="n">skewY</span><span class="p">(</span><span class="m">10</span><span class="n">deg</span><span class="p">);</span>
+</span><span class='line'>    <span class="n">transform</span><span class="o">:</span> <span class="n">skewY</span><span class="p">(</span><span class="m">10</span><span class="n">deg</span><span class="p">);</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Which displays as such.</p>
+
+<p class="example cross">Hello World</p>
+
+
+<p>So yeah, go crazy.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Bugs with document.activeElement in Internet Explorer]]></title>
@@ -3412,196 +3614,6 @@
 <p>That being said, there&#8217;s no harm in leaving a wrapper <code>div</code> in place.  So if you have any doubt stick with <code>&lt;div id="wrapper"&gt;&lt;/div&gt;</code>.</p>
 
 <p>Know of any other bugs with styling the <code>body</code> element?  Let me know in the comments.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[The Enter Key should Submit Forms, Stop Suppressing it]]></title>
-    <link href="http://tjvantoll.com/2013/01/01/enter-should-submit-forms-stop-messing-with-that/"/>
-    <updated>2013-01-01T15:54:00-05:00</updated>
-    <id>http://tjvantoll.com/2013/01/01/enter-should-submit-forms-stop-messing-with-that</id>
-    <content type="html"><![CDATA[<p>I try to do most of my work and play on the internet with the keyboard.  In the course of my internet-ing there&#8217;s one unfortunate trend that I&#8217;ve noticed; an increasing number of sites are not allowing the enter key to submit a form.  Before I tell you why you care, let&#8217;s look at how this should work.</p>
-
-<!--more-->
-
-
-<h3>Enter = Submit</h3>
-
-<p>Take the following basic form:</p>
-
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;form&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;label</span> <span class="na">for=</span><span class="s">&quot;name&quot;</span><span class="nt">&gt;</span>Name:<span class="nt">&lt;/label&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;text&quot;</span> <span class="na">name=</span><span class="s">&quot;name&quot;</span> <span class="na">id=</span><span class="s">&quot;name&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;submit&quot;</span> <span class="na">value=</span><span class="s">&quot;Submit&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'><span class="nt">&lt;/form&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>If you have focus in the textbox and hit enter, the form will be submitted automatically.  This behavior is consistent across all browsers and is known as implicit submission.  So why is this important?</p>
-
-<h3>Accessibility</h3>
-
-<p>Implicit submission is vital to assistive technologies and impaired users that cannot use a mouse at all.  From the HTML5 specification:</p>
-
-<blockquote><p>There are pages on the Web that are only usable if there is a way to implicitly submit forms, so user agents [browsers] are strongly encouraged to support this.</p><footer><strong>HTML 5 specification</strong> <cite><a href='http://www.whatwg.org/specs/web-apps/current-work/multipage/association-of-controls-and-forms.html#implicit-submission'>www.whatwg.org/specs/web-apps/&hellip;</a></cite></footer></blockquote>
-
-
-<p>The spec strongly encourages browsers to allow implicit submission; they all do.</p>
-
-<h3>User Expectations</h3>
-
-<p>Many users have an expectation that implicit submission will just work.  Interfering with this leads to a negative user experience for these users.</p>
-
-<h3>How to Prevent Implicit Submission</h3>
-
-<p>What are sites doing to keep this from happening?  Here&#8217;s a few things I&#8217;ve seen.</p>
-
-<h4>No Submit Buttons</h4>
-
-<p>Many sites do not have a submit button within the form.  From the spec here&#8217;s how browsers determine what to do when enter is clicked.</p>
-
-<blockquote><p>If the user agent supports letting the user submit a form implicitly (for example, on some platforms hitting the &#8220;enter&#8221; key while a text field is focused implicitly submits the form), then doing so for a form whose default button has a defined activation behavior must cause the user agent to run synthetic click activation steps on that default button.</p><footer><strong>HTML 5 specification</strong> <cite><a href='http://www.whatwg.org/specs/web-apps/current-work/multipage/association-of-controls-and-forms.html#implicit-submission'>www.whatwg.org/specs/web-apps/&hellip;</a></cite></footer></blockquote>
-
-
-<p>Basically, if the user hits enter when a text field is focused, the browser should find the first submit button in the form and click it.</p>
-
-<blockquote><p>If the form has no submit button, then the implicit submission mechanism must do nothing if the form has more than one field that blocks implicit submission, and must submit the form element from the form element itself otherwise.</p><p>For the purpose of the previous paragraph, an element is a field that blocks implicit submission of a form element if it is an input element whose form owner is that form element and whose type attribute is in one of the following states: Text, Search, URL, Telephone, E-mail, Password, Date and Time, Date, Month, Week, Time, Local Date and Time, Number</p><footer><strong>HTML 5 specification</strong> <cite><a href='http://www.whatwg.org/specs/web-apps/current-work/multipage/association-of-controls-and-forms.html#implicit-submission'>www.whatwg.org/specs/web-apps/&hellip;</a></cite></footer></blockquote>
-
-
-<p>So, in a form with no submit buttons, implicit submission will be done if only one input is present.  Therefore, pressing enter in this textbox will submit the form:</p>
-
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;form&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;label</span> <span class="na">for=</span><span class="s">&quot;name&quot;</span><span class="nt">&gt;</span>Name:<span class="nt">&lt;/label&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;text&quot;</span> <span class="na">name=</span><span class="s">&quot;name&quot;</span> <span class="na">id=</span><span class="s">&quot;name&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'><span class="nt">&lt;/form&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>But in this form it will not because there are multiple fields:</p>
-
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;form&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;label</span> <span class="na">for=</span><span class="s">&quot;name&quot;</span><span class="nt">&gt;</span>Name:<span class="nt">&lt;/label&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;text&quot;</span> <span class="na">name=</span><span class="s">&quot;name&quot;</span> <span class="na">id=</span><span class="s">&quot;name&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;label</span> <span class="na">for=</span><span class="s">&quot;address&quot;</span><span class="nt">&gt;</span>Address:<span class="nt">&lt;/label&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;text&quot;</span> <span class="na">name=</span><span class="s">&quot;address&quot;</span> <span class="na">id=</span><span class="s">&quot;address&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'><span class="nt">&lt;/form&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Therefore, if you have a form with more than one input field, always include a submit button.  Specifically an <code>&lt;input&gt;</code> with the <code>type="submit"</code> attribute, or a <code>&lt;button&gt;</code> element should be present.  (Note: IE7 has a bug where the <code>type</code> attribute of a <code>&lt;button&gt;</code> defaults to <code>button</code> instead of <code>submit</code>.  Therefore for IE7 compatibility you&#8217;ll need <code>&lt;button type="submit"&gt;</code>.)</p>
-
-<p>If you need to run some JavaScript before the form is submitted (validation, data manipulation, etc), do it in a <code>submit</code> event handler on the form, not a <code>click</code> handler on a button.</p>
-
-<h4>No &lt;form&gt;</h4>
-
-<p>I&#8217;ve seen a few forms that do not use the <code>&lt;form&gt;</code> HTML tag.  Why would they do that?</p>
-
-<p>With modern day browsers and JavaScript libraries it&#8217;s easy to send data to the server via AJAX.  Because an AJAX request does not require a true <code>&lt;form&gt;</code> tag, it is often omitted.  However, much like implicit submission, surrounding form data with a true <code>&lt;form&gt;</code> tag is vital for accessibility.  Most screen readers have a <a href="http://www.htctu.fhda.edu/trainings/manuals/tutorials/readweb/forms.htm">mode specifically for filling out forms</a>, and by omitting a true <code>&lt;form&gt;</code> tag you risk this mode not being activated.</p>
-
-<h4>Explicit Prevention</h4>
-
-<p>Finally, it&#8217;s also quite easy to prevent implicit submission in JavaScript.  Take the following example:</p>
-
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;form&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;label</span> <span class="na">for=</span><span class="s">&quot;name&quot;</span><span class="nt">&gt;</span>Name:<span class="nt">&lt;/label&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;text&quot;</span> <span class="na">name=</span><span class="s">&quot;name&quot;</span> <span class="na">id=</span><span class="s">&quot;name&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;submit&quot;</span> <span class="na">value=</span><span class="s">&quot;Submit&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'><span class="nt">&lt;/form&gt;</span>
-</span><span class='line'><span class="nt">&lt;script&gt;</span>
-</span><span class='line'>    <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">).</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">&#39;keypress&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>        <span class="k">if</span> <span class="p">(</span><span class="nx">event</span><span class="p">.</span><span class="nx">keyCode</span> <span class="o">==</span> <span class="mi">13</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>            <span class="nx">event</span><span class="p">.</span><span class="nx">preventDefault</span><span class="p">();</span>
-</span><span class='line'>        <span class="p">}</span>
-</span><span class='line'>    <span class="p">});</span>
-</span><span class='line'><span class="nt">&lt;/script&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>This sets up a <code>keypress</code> event handler that prevents the default action (implicit submission) from occurring when the enter key is pressed.</p>
-
-<p>This technique can be handy.  For example, say you have a form with multiple submit buttons.  As we saw earlier, the implicit submission algorithm will click the first submit button that it finds.  Therefore, if you need control over which submit button is clicked, you can use the above technique to listen an for enter keypress, prevent the default action, then explicitly click the appropriate button.</p>
-
-<p>Take the following example:</p>
-
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;form&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;label</span> <span class="na">for=</span><span class="s">&quot;age&quot;</span><span class="nt">&gt;</span>Age:<span class="nt">&lt;/label&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;number&quot;</span> <span class="na">min=</span><span class="s">&quot;0&quot;</span> <span class="na">max=</span><span class="s">&quot;120&quot;</span> <span class="na">name=</span><span class="s">&quot;age&quot;</span> <span class="na">id=</span><span class="s">&quot;age&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;button</span> <span class="na">id=</span><span class="s">&quot;child&quot;</span><span class="nt">&gt;</span>Child<span class="nt">&lt;/button&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;button</span> <span class="na">id=</span><span class="s">&quot;adult&quot;</span><span class="nt">&gt;</span>Adult<span class="nt">&lt;/button&gt;</span>
-</span><span class='line'><span class="nt">&lt;/form&gt;</span>
-</span><span class='line'><span class="nt">&lt;script&gt;</span>
-</span><span class='line'>    <span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-</span><span class='line'>        <span class="kd">var</span> <span class="nx">age</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">&#39;age&#39;</span><span class="p">);</span>
-</span><span class='line'>        <span class="nx">age</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">&#39;keypress&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>            <span class="k">if</span> <span class="p">(</span><span class="nx">event</span><span class="p">.</span><span class="nx">keyCode</span> <span class="o">==</span> <span class="mi">13</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>                <span class="nx">event</span><span class="p">.</span><span class="nx">preventDefault</span><span class="p">();</span>
-</span><span class='line'>                <span class="k">if</span> <span class="p">(</span><span class="nx">age</span><span class="p">.</span><span class="nx">value</span> <span class="o">&gt;</span> <span class="mi">20</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>                    <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">&#39;adult&#39;</span><span class="p">).</span><span class="nx">click</span><span class="p">();</span>
-</span><span class='line'>                <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-</span><span class='line'>                    <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">&#39;child&#39;</span><span class="p">).</span><span class="nx">click</span><span class="p">();</span>
-</span><span class='line'>                <span class="p">}</span>
-</span><span class='line'>            <span class="p">}</span>
-</span><span class='line'>        <span class="p">});</span>
-</span><span class='line'>    <span class="p">}());</span>
-</span><span class='line'><span class="nt">&lt;/script&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>When enter is clicked in the number input, the <code>keypress</code> event handler determines which submit button is appropriate and clicks it.</p>
-
-<p>While this technique can be handy, I&#8217;ve seen it used plenty of times to completely prevent implicit submission from working.  Don&#8217;t do that.</p>
-
-<h3>Conclusion</h3>
-
-<p>When filling out a form, pressing enter in a textbox should submit the form.  This is known as an implicit form submission.  Despite being vital for assistive technologies and an important user convenience, many web forms prevent it for one reason or another.  If you write web forms, please take a minute to ensure that the enter key can indeed be used to submit them; it&#8217;ll help make the web a better place for everyone.</p>
 ]]></content>
   </entry>
   
