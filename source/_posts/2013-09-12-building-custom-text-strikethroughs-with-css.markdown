@@ -95,7 +95,9 @@ This displays as follows:
 
 From here you can play with the `border-color` and `border-height` properties to achieve the effect you'd like.
 
-Because you have the full power of CSS you can be as crazy as you'd like. Here's an example that utilizes `::before` and `::after` and [CSS transforms](https://developer.mozilla.org/en-US/docs/Web/CSS/transform) to create a cross out effect on the text.
+The one major caveat to this approach is it does not work on text that spans multiple lines. If you need multi-line strikeouts, you're stuck with plain old `text-decoration`.
+
+But as long as your text is on one line, you can use this technique and be as crazy as you'd like. Here's an example that utilizes `::before` and `::after` and [CSS transforms](https://developer.mozilla.org/en-US/docs/Web/CSS/transform) to create a cross out effect on the text.
 
 ``` css
 .cross {
