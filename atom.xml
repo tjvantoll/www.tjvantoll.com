@@ -4,7 +4,7 @@
   <title><![CDATA[TJ VanToll]]></title>
   <link href="http://tjvantoll.com/atom.xml" rel="self"/>
   <link href="http://tjvantoll.com/"/>
-  <updated>2013-09-16T08:51:01-04:00</updated>
+  <updated>2013-09-18T16:07:31-04:00</updated>
   <id>http://tjvantoll.com/</id>
   <author>
     <name><![CDATA[TJ VanToll]]></name>
@@ -12,6 +12,52 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Hey Developers - You Should Spell Check Your Documentation]]></title>
+    <link href="http://tjvantoll.com/2013/09/18/hey-developers-you-should-spell-check-your-documentation/"/>
+    <updated>2013-09-18T09:56:00-04:00</updated>
+    <id>http://tjvantoll.com/2013/09/18/hey-developers-you-should-spell-check-your-documentation</id>
+    <content type="html"><![CDATA[<p>As developers we write code. Therefore, the thought of using a spell checker brings to mind something like this:</p>
+
+<p><img src="http://tjvantoll.com/images/posts/2013-09-18/spell-check.png"></p>
+
+<p>&#8230;which is why text editors don&#8217;t have spell checking on by default. And that&#8217;s fine when writing code, however, most developers write at least <em>some</em> documentation.</p>
+
+<p>Increasingly this documentation is markdown, XML, or JSON files stored in a git repository. Therefore, you likely use the same editor to write documentation as you do to write code - and unfortunately, writing documentation without a spell checker inevitably leads to spelling errors.</p>
+
+<p>Bad spelling makes your documentation look less professional, and less professional documentation reflects badly on your library, product, or whatever. Therefore I thought I&#8217;d share what I do in Sublime Text to help prevent mistakes.</p>
+
+<h3>What I Do</h3>
+
+<p>Like most editors, Sublime Text has spell checking built in, but it is turned off by default. You can turn it on by adding <code>"spell_check": true</code> to your user preferences file, which is opened with <code>Command</code> + <code>,</code> on OS X and <code>Control</code> + <code>,</code> on Windows.</p>
+
+<p>Because spell checking is a configurable property, turning it on and off is a matter of toggling the property&#8217;s value:</p>
+
+<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="cm">/* Writing docs */</span>
+</span><span class='line'><span class="s2">&quot;spell_check&quot;</span><span class="o">:</span> <span class="kc">true</span>
+</span><span class='line'>
+</span><span class='line'><span class="cm">/* Writing code */</span>
+</span><span class='line'><span class="s2">&quot;spell_check&quot;</span><span class="o">:</span> <span class="kc">false</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Like most spell checkers, you can right click misspelled words to get suggested fixes:</p>
+
+<p><img src="http://tjvantoll.com/images/posts/2013-09-18/corrections.png"></p>
+
+<p>You can also tell Sublime to ignore certain words:</p>
+
+<p><img src="http://tjvantoll.com/images/posts/2013-09-18/ignore.png"></p>
+
+<p>The hardest part of course is actually remembering to turn the spell checker on. But, even if you only remember occasionally, you can still catch a lot of misspellings.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Building Custom Text Strikethroughs with CSS]]></title>
@@ -3391,229 +3437,6 @@ Adding a strikethrough to a line of text in CSS is easy.</p>
 
 
 <p>This will work back to IE6, which doesn&#8217;t support the <a href="https://developer.mozilla.org/en-US/docs/CSS/Attribute_selectors">attribute selector</a>.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Using the body Element as a Top Level Container - Is it Safe Yet?]]></title>
-    <link href="http://tjvantoll.com/2013/01/05/is-it-safe-to-use-the-body-as-a-top-level-container-yet/"/>
-    <updated>2013-01-05T14:21:00-05:00</updated>
-    <id>http://tjvantoll.com/2013/01/05/is-it-safe-to-use-the-body-as-a-top-level-container-yet</id>
-    <content type="html"><![CDATA[<p>View source on almost any web page and you&#8217;ll likely see the following:</p>
-
-<figure class='code'><figcaption class='not_empty'><span>Common HTML Template</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;html&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;head&gt;&lt;/head&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;body&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">&quot;wrapper&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'>            <span class="c">&lt;!-- All the things --&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;/div&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;/body&gt;</span>
-</span><span class='line'><span class="nt">&lt;/html&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>The use of a wrapper or container <code>div</code> around the page is fairly universal.  It is commonly used to perform tasks such as centering a page&#8217;s content or providing a shadow or border to frame it.  But, since the <code>body</code> element is a necessity in the markup, why can&#8217;t it be styled directly instead?  Why is a wrapper <code>div</code> used?</p>
-
-<p>Historically there have been a number of issues with using the <code>body</code> element as a top level container in old versions of Internet Explorers.  If you&#8217;re supporting IE >= 8 you&#8217;re good, but there are some things <a href="#now">you should be aware of</a>.</p>
-
-<!--more-->
-
-
-<h3>IE 5.5</h3>
-
-<p>To get to the origins of the wrapper <code>div</code> let&#8217;s go way back.  A pretty common practice is to center the top level container using <code>margin: 0 auto</code>, and this works fine in all browsers&#8230; back to IE 5.5.  IE 5.5 did not support <code>auto</code> margins so this approach did not work.</p>
-
-<p>To center the top level container in IE 5.5 you had to make use of <code>text-align: center</code> as such:</p>
-
-<figure class='code'><figcaption class='not_empty'><span>Centering the top level container in IE 5.5</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nt">body</span> <span class="p">{</span>
-</span><span class='line'>    <span class="k">text-align</span><span class="o">:</span> <span class="k">center</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'><span class="nf">#wrapper</span> <span class="p">{</span>
-</span><span class='line'>    <span class="k">width</span><span class="o">:</span> <span class="m">1000px</span><span class="p">;</span>
-</span><span class='line'>    <span class="k">text-align</span><span class="o">:</span> <span class="k">left</span><span class="p">;</span> <span class="c">/* counteract the declaration on body */</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p><code>text-align: center</code> <em>should</em> only affect inline elements, but IE 5.5 incorrectly applied it to block elements as well.  (Note: The <code>text-align: center</code> bug was fixed in IE6 standards mode, but the behavior remained in Internet Explorer&#8217;s quirks mode to this day.)</p>
-
-<h3>IE6</h3>
-
-<p>IE6 implemented <code>auto</code> margins, so <code>margin: 0 auto</code> was now safe to use on the <code>body</code>.  Additionally, IE6 fully supports adding a <code>width</code>, <code>padding</code>, <code>margin</code>, and <code>border</code> to the body element.  Take the following CSS:</p>
-
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nt">body</span><span class="p">{</span>
-</span><span class='line'>    <span class="k">width</span><span class="o">:</span> <span class="m">90</span><span class="o">%</span><span class="p">;</span>
-</span><span class='line'>    <span class="k">border</span><span class="o">:</span> <span class="m">2px</span> <span class="k">solid</span> <span class="nb">red</span><span class="p">;</span>
-</span><span class='line'>    <span class="k">background-color</span><span class="o">:</span> <span class="nb">black</span><span class="p">;</span>
-</span><span class='line'>    <span class="k">color</span><span class="o">:</span> <span class="nb">white</span><span class="p">;</span>
-</span><span class='line'>    <span class="k">padding</span><span class="o">:</span> <span class="m">10px</span><span class="p">;</span>
-</span><span class='line'>    <span class="k">margin</span><span class="o">:</span> <span class="m">0</span> <span class="k">auto</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>The layout renders the same in IE6 as it does in the latest version of Chrome (23 as of this writing).</p>
-
-<div style="overflow: hidden;">
-    <div style="float: left; width: 49%;">
-        <h4>IE6</h4>
-        <img title="Styling the body element in IE6" src="http://tjvantoll.com/images/posts/2013-01-05/IE6.png">
-    </div>
-    <div style="float: right; width: 49%;">
-        <h4>Chrome</h4>
-        <img title="Styling the body element in Chrome" src="http://tjvantoll.com/images/posts/2013-01-05/Chrome.png">
-    </div>
-</div>
-
-
-<p>Believe it or not using the <code>body</code> element as a top level container is actually safe in IE6.</p>
-
-<p><a name="zoom"></a></p>
-
-<h3>IE7</h3>
-
-<p>If there are no issues with IE6 why am I still writing?  IE7 introduced a feature new to Internet Explorer, zoom, and with it came a new bug.</p>
-
-<p>When a <code>margin</code> or <code>width</code> is applied to the <code>body</code> and the user zooms, IE7 incorrectly treats the left edge of the <code>body</code> as the edge of the viewport.  This shift bumps content on the right hand side of the page outside of the screen.  The image below shows the result of a zoomed in window and styled <code>body</code> in IE7.</p>
-
-<p><img src="http://tjvantoll.com/images/posts/2013-01-05/IE7Zoom.png" title="Zooming in IE7" style="max-height: 400px;"></p>
-
-<p>This issue is not present using a wrapper <code>div</code>.</p>
-
-<h3>Beyond IE7</h3>
-
-<p>In my testing beyond IE7 there are no major issues using the <code>body</code> element as a top level container.  There are however a few things to be aware of.</p>
-
-<p><a name="now"></a></p>
-
-<h3>Positioning</h3>
-
-<p>Any absolutely positioned elements will be positioned relative to the viewport rather than the newly placed <code>body</code>.  To fix this set <code>position: relative</code> on the <code>body</code> as such:</p>
-
-<figure class='code'><figcaption class='not_empty'><span>Positioning elements relative to the body rather than the viewport</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nt">body</span> <span class="p">{</span>
-</span><span class='line'>    <span class="k">margin</span><span class="o">:</span> <span class="m">0</span> <span class="k">auto</span><span class="p">;</span>
-</span><span class='line'>    <span class="k">width</span><span class="o">:</span> <span class="m">90</span><span class="o">%</span><span class="p">;</span>
-</span><span class='line'>    <span class="k">position</span><span class="o">:</span> <span class="k">relative</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>Backgrounds</h3>
-
-<p>Backgrounds applied to the <code>body</code> will take up whole page regardless of margins.  Consider the following:</p>
-
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nt">body</span> <span class="p">{</span>
-</span><span class='line'>    <span class="k">background</span><span class="o">:</span> <span class="nb">black</span><span class="p">;</span>
-</span><span class='line'>    <span class="k">margin</span><span class="o">:</span> <span class="m">0</span> <span class="k">auto</span><span class="p">;</span>
-</span><span class='line'>    <span class="k">width</span><span class="o">:</span> <span class="m">200px</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>The screenshot below shows this.  The background of the entire viewport is black rather than a centered 200px block.</p>
-
-<p><img src="http://tjvantoll.com/images/posts/2013-01-05/background-before.png" title="background on a body element" style="max-height: 300px;"></p>
-
-<p>This can be worked around by applying a <code>background</code> on the <code>html</code> element:</p>
-
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nt">html</span> <span class="p">{</span>
-</span><span class='line'>    <span class="k">background</span><span class="o">:</span> <span class="nb">white</span><span class="p">;</span>
-</span><span class='line'>    <span class="k">height</span><span class="o">:</span> <span class="m">100</span><span class="o">%</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'><span class="nt">body</span> <span class="p">{</span>
-</span><span class='line'>    <span class="k">background</span><span class="o">:</span> <span class="nb">black</span><span class="p">;</span>
-</span><span class='line'>    <span class="k">margin</span><span class="o">:</span> <span class="m">0</span> <span class="k">auto</span><span class="p">;</span>
-</span><span class='line'>    <span class="k">width</span><span class="o">:</span> <span class="m">200px</span><span class="p">;</span>
-</span><span class='line'>    <span class="k">min-height</span><span class="o">:</span> <span class="m">100</span><span class="o">%</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Note the <code>height</code> that was added to the <code>html</code> element and the <code>min-height</code> added to the <code>body</code>.  This ensures that the <code>background</code> applied to the <code>body</code> element will take up the entire height of the screen.</p>
-
-<p>The rules above will now render as expected:</p>
-
-<p><img src="http://tjvantoll.com/images/posts/2013-01-05/background-after.png" title="background on a body element with background on html element" style="max-height: 300px;"></p>
-
-<h3>scrollHeight and scrollWidth</h3>
-
-<p>In WebKit based browsers the <code>body</code>&#8217;s <a href="https://developer.mozilla.org/en-US/docs/DOM/element.scrollHeight">scrollHeight</a> and <a href="https://developer.mozilla.org/en-US/docs/DOM/element.scrollWidth">scrollWidth</a> properties are unaffected by declared <code>height</code> and <code>width</code> styles.  For example:</p>
-
-<figure class='code'><figcaption class='not_empty'><span>scrollHeight and scrollWidth on the body element</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;html&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;head&gt;&lt;/head&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;body</span> <span class="na">style=</span><span class="s">&quot;height: 200px; width: 200px;&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;script&gt;</span>
-</span><span class='line'>          <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nb">document</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">scrollHeight</span><span class="p">);</span>
-</span><span class='line'>          <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nb">document</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">scrollWidth</span><span class="p">);</span>
-</span><span class='line'>        <span class="nt">&lt;/script&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;/body&gt;</span>
-</span><span class='line'><span class="nt">&lt;/html&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>This will log <code>200</code> for both in all modern browsers with the exception of WebKit based ones.  WebKit will return the height and width of the viewport.</p>
-
-<p>While you are unlikely to run into this directly, you may use a library that does.  For example, this <a href="http://bugs.jqueryui.com/ticket/8940">causes an issue</a> trying to constrain <a href="http://jqueryui.com/draggable/">jQuery UI draggables</a> within the <code>body</code>.</p>
-
-<h3>Is it Safe to Use Yet?</h3>
-
-<p>The <a href="#zoom">zoom issue in IE7</a> is bad, but if you&#8217;re no longer supporting IE7 it&#8217;s safe to drop the wrapper <code>div</code> and style the <code>body</code> directly.</p>
-
-<p>That being said, there&#8217;s no harm in leaving a wrapper <code>div</code> in place.  So if you have any doubt stick with <code>&lt;div id="wrapper"&gt;&lt;/div&gt;</code>.</p>
-
-<p>Know of any other bugs with styling the <code>body</code> element?  Let me know in the comments.</p>
 ]]></content>
   </entry>
   

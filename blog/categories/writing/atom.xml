@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Writing | TJ VanToll]]></title>
+  <link href="http://tjvantoll.com/blog/categories/writing/atom.xml" rel="self"/>
+  <link href="http://tjvantoll.com/"/>
+  <updated>2013-09-18T16:07:31-04:00</updated>
+  <id>http://tjvantoll.com/</id>
+  <author>
+    <name><![CDATA[TJ VanToll]]></name>
+    <email><![CDATA[tj.vantoll@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Hey Developers - You Should Spell Check Your Documentation]]></title>
+    <link href="http://tjvantoll.com/2013/09/18/hey-developers-you-should-spell-check-your-documentation/"/>
+    <updated>2013-09-18T09:56:00-04:00</updated>
+    <id>http://tjvantoll.com/2013/09/18/hey-developers-you-should-spell-check-your-documentation</id>
+    <content type="html"><![CDATA[<p>As developers we write code. Therefore, the thought of using a spell checker brings to mind something like this:</p>
+
+<p><img src="http://tjvantoll.com/images/posts/2013-09-18/spell-check.png"></p>
+
+<p>...which is why text editors don't have spell checking on by default. And that's fine when writing code, however, most developers write at least <em>some</em> documentation.</p>
+
+<p>Increasingly this documentation is markdown, XML, or JSON files stored in a git repository. Therefore, you likely use the same editor to write documentation as you do to write code - and unfortunately, writing documentation without a spell checker inevitably leads to spelling errors.</p>
+
+<p>Bad spelling makes your documentation look less professional, and less professional documentation reflects badly on your library, product, or whatever. Therefore I thought I'd share what I do in Sublime Text to help prevent mistakes.</p>
+
+<h3>What I Do</h3>
+
+<p>Like most editors, Sublime Text has spell checking built in, but it is turned off by default. You can turn it on by adding <code>"spell_check": true</code> to your user preferences file, which is opened with <code>Command</code> + <code>,</code> on OS X and <code>Control</code> + <code>,</code> on Windows.</p>
+
+<p>Because spell checking is a configurable property, turning it on and off is a matter of toggling the property's value:</p>
+
+<p>``` js
+/<em> Writing docs </em>/
+"spell_check": true</p>
+
+<p>/<em> Writing code </em>/
+"spell_check": false
+```</p>
+
+<p>Like most spell checkers, you can right click misspelled words to get suggested fixes:</p>
+
+<p><img src="http://tjvantoll.com/images/posts/2013-09-18/corrections.png"></p>
+
+<p>You can also tell Sublime to ignore certain words:</p>
+
+<p><img src="http://tjvantoll.com/images/posts/2013-09-18/ignore.png"></p>
+
+<p>The hardest part of course is actually remembering to turn the spell checker on. But, even if you only remember occasionally, you can still catch a lot of misspellings.</p>
+]]></content>
+  </entry>
+  
+</feed>

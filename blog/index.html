@@ -9,13 +9,7 @@
   <meta name="author" content="TJ VanToll">
 
   
-  <meta name="description" content="Adding a strikethrough to a line of text in CSS is easy. 1
-2
-3
-4
-&lt;style&gt; p { text-decoration: line-through; }
-&lt;/style&gt;
-&lt;p&gt;Hello &hellip;">
+  <meta name="description" content="As developers we write code. Therefore, the thought of using a spell checker brings to mind something like this: &#8230;which is why text editors don &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -111,6 +105,81 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2013/09/18/hey-developers-you-should-spell-check-your-documentation/">Hey Developers - You Should Spell Check Your Documentation</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-09-18T09:56:00-04:00" pubdate data-updated="true">Sep 18<span>th</span>, 2013</time>
+        
+         | <a href="/2013/09/18/hey-developers-you-should-spell-check-your-documentation/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>As developers we write code. Therefore, the thought of using a spell checker brings to mind something like this:</p>
+
+<p><img src="/images/posts/2013-09-18/spell-check.png"></p>
+
+<p>&#8230;which is why text editors don&#8217;t have spell checking on by default. And that&#8217;s fine when writing code, however, most developers write at least <em>some</em> documentation.</p>
+
+<p>Increasingly this documentation is markdown, XML, or JSON files stored in a git repository. Therefore, you likely use the same editor to write documentation as you do to write code - and unfortunately, writing documentation without a spell checker inevitably leads to spelling errors.</p>
+
+<p>Bad spelling makes your documentation look less professional, and less professional documentation reflects badly on your library, product, or whatever. Therefore I thought I&#8217;d share what I do in Sublime Text to help prevent mistakes.</p>
+
+<h3>What I Do</h3>
+
+<p>Like most editors, Sublime Text has spell checking built in, but it is turned off by default. You can turn it on by adding <code>"spell_check": true</code> to your user preferences file, which is opened with <code>Command</code> + <code>,</code> on OS X and <code>Control</code> + <code>,</code> on Windows.</p>
+
+<p>Because spell checking is a configurable property, turning it on and off is a matter of toggling the property&#8217;s value:</p>
+
+<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="cm">/* Writing docs */</span>
+</span><span class='line'><span class="s2">&quot;spell_check&quot;</span><span class="o">:</span> <span class="kc">true</span>
+</span><span class='line'>
+</span><span class='line'><span class="cm">/* Writing code */</span>
+</span><span class='line'><span class="s2">&quot;spell_check&quot;</span><span class="o">:</span> <span class="kc">false</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Like most spell checkers, you can right click misspelled words to get suggested fixes:</p>
+
+<p><img src="/images/posts/2013-09-18/corrections.png"></p>
+
+<p>You can also tell Sublime to ignore certain words:</p>
+
+<p><img src="/images/posts/2013-09-18/ignore.png"></p>
+
+<p>The hardest part of course is actually remembering to turn the spell checker on. But, even if you only remember occasionally, you can still catch a lot of misspellings.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -729,49 +798,6 @@ Adding a strikethrough to a line of text in CSS is easy.</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2013/04/24/showing-a-css-based-loading-animation-while-your-site-loads/">Showing a CSS Based Loading Animation While Your Site Loads</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-04-24T00:00:00-04:00" pubdate data-updated="true">Apr 24<span>th</span>, 2013</time>
-        
-         | <a href="/2013/04/24/showing-a-css-based-loading-animation-while-your-site-loads/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Showing a loading indicator on startup is a common pattern in native applications that is becoming more common on the web.  If you need to load a lot of resources when your web application is first loaded, you should give the user a clear indication that this is occurring.</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/2013/04/24/showing-a-css-based-loading-animation-while-your-site-loads/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -793,6 +819,10 @@ Adding a strikethrough to a line of text in CSS is easy.</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2013/09/18/hey-developers-you-should-spell-check-your-documentation/">Hey Developers - You Should Spell Check Your Documentation</a>
+      </li>
+    
+      <li class="post">
         <a href="/2013/09/12/building-custom-text-strikethroughs-with-css/">Building Custom Text Strikethroughs with CSS</a>
       </li>
     
@@ -806,10 +836,6 @@ Adding a strikethrough to a line of text in CSS is easy.</p>
     
       <li class="post">
         <a href="/2013/07/10/creating-a-jquery-ui-dialog-with-a-submit-button/">Creating a jQuery UI Dialog with a Submit Button</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2013/06/21/internet-explorer-attribute-selectors-and-long-values/">Internet Explorer, Attribute Selectors, and Really Long Attribute Values</a>
       </li>
     
   </ul>

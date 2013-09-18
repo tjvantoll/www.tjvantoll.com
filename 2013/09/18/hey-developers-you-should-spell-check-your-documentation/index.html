@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>HTML 5 hidden Attribute Browser Support - TJ VanToll - Tutorials, Thoughts, and Ramblings on Front End Development</title>
+  <title>Hey Developers - You Should Spell Check Your Documentation - TJ VanToll - Tutorials, Thoughts, and Ramblings on Front End Development</title>
   <meta name="author" content="TJ VanToll">
 
   
-  <meta name="description" content="I had trouble finding this from a Google search, so I thought I&#8217;d list the browser support for the HTML5 hidden attribute here. Chrome 6+ &hellip;">
+  <meta name="description" content="As developers we write code. Therefore, the thought of using a spell checker brings to mind something like this: &#8230;which is why text editors don &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://tjvantoll.com/2013/01/09/html5-hidden-attribute-browser-support">
+  <link rel="canonical" href="http://tjvantoll.com/2013/09/18/hey-developers-you-should-spell-check-your-documentation">
 
   <!--[if ! lte IE 7]><!-->
     <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
@@ -108,7 +108,7 @@
   
   <header>
     
-      <h1 class="entry-title">HTML 5 hidden Attribute Browser Support</h1>
+      <h1 class="entry-title">Hey Developers - You Should Spell Check Your Documentation</h1>
     
     
       <p class="meta">
@@ -124,7 +124,7 @@
   
 
 
-<time datetime="2013-01-09T21:27:00-05:00" pubdate data-updated="true">Jan 9<span>th</span>, 2013</time>
+<time datetime="2013-09-18T09:56:00-04:00" pubdate data-updated="true">Sep 18<span>th</span>, 2013</time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -133,26 +133,44 @@
   </header>
 
 
-<div class="entry-content"><p>I had trouble finding this from a Google search, so I thought I&#8217;d list the browser support for the <a href="http://www.whatwg.org/specs/web-apps/current-work/multipage/editing.html#the-hidden-attribute">HTML5 hidden attribute</a> here.</p>
+<div class="entry-content"><p>As developers we write code. Therefore, the thought of using a spell checker brings to mind something like this:</p>
 
-<ul>
-<li>Chrome 6+</li>
-<li>Firefox 4+</li>
-<li>Safari 5.1+</li>
-<li>Opera 11+</li>
-<li>iOS 5+</li>
-<li>Android Browser 4+</li>
-</ul>
+<p><img src="/images/posts/2013-09-18/spell-check.png"></p>
 
+<p>&#8230;which is why text editors don&#8217;t have spell checking on by default. And that&#8217;s fine when writing code, however, most developers write at least <em>some</em> documentation.</p>
 
-<p>IE still does not support the <code>hidden</code> attribute as of IE 10.  For any unsupported browser you can easily add support by just including the following CSS:</p>
+<p>Increasingly this documentation is markdown, XML, or JSON files stored in a git repository. Therefore, you likely use the same editor to write documentation as you do to write code - and unfortunately, writing documentation without a spell checker inevitably leads to spelling errors.</p>
 
-<figure class='code'><figcaption class='not_empty'><span>Polyfiling the hidden attribute.</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="o">[</span><span class="nt">hidden</span><span class="o">]</span> <span class="p">{</span> <span class="k">display</span><span class="o">:</span> <span class="k">none</span><span class="p">;</span> <span class="p">}</span>
+<p>Bad spelling makes your documentation look less professional, and less professional documentation reflects badly on your library, product, or whatever. Therefore I thought I&#8217;d share what I do in Sublime Text to help prevent mistakes.</p>
+
+<h3>What I Do</h3>
+
+<p>Like most editors, Sublime Text has spell checking built in, but it is turned off by default. You can turn it on by adding <code>"spell_check": true</code> to your user preferences file, which is opened with <code>Command</code> + <code>,</code> on OS X and <code>Control</code> + <code>,</code> on Windows.</p>
+
+<p>Because spell checking is a configurable property, turning it on and off is a matter of toggling the property&#8217;s value:</p>
+
+<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="cm">/* Writing docs */</span>
+</span><span class='line'><span class="s2">&quot;spell_check&quot;</span><span class="o">:</span> <span class="kc">true</span>
+</span><span class='line'>
+</span><span class='line'><span class="cm">/* Writing code */</span>
+</span><span class='line'><span class="s2">&quot;spell_check&quot;</span><span class="o">:</span> <span class="kc">false</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>This will work back to IE6, which doesn&#8217;t support the <a href="https://developer.mozilla.org/en-US/docs/CSS/Attribute_selectors">attribute selector</a>.</p>
+<p>Like most spell checkers, you can right click misspelled words to get suggested fixes:</p>
+
+<p><img src="/images/posts/2013-09-18/corrections.png"></p>
+
+<p>You can also tell Sublime to ignore certain words:</p>
+
+<p><img src="/images/posts/2013-09-18/ignore.png"></p>
+
+<p>The hardest part of course is actually remembering to turn the spell checker on. But, even if you only remember occasionally, you can still catch a lot of misspellings.</p>
 </div>
 
 
@@ -175,12 +193,12 @@
   
 
 
-<time datetime="2013-01-09T21:27:00-05:00" pubdate data-updated="true">Jan 9<span>th</span>, 2013</time>
+<time datetime="2013-09-18T09:56:00-04:00" pubdate data-updated="true">Sep 18<span>th</span>, 2013</time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/browsers/'>Browsers</a>, <a class='category' href='/blog/categories/html5/'>HTML5</a>
+    <a class='category' href='/blog/categories/writing/'>Writing</a>
   
 </span>
 
@@ -193,7 +211,7 @@
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://tjvantoll.com/2013/01/09/html5-hidden-attribute-browser-support/" data-via="tjvantoll" data-counturl="http://tjvantoll.com/2013/01/09/html5-hidden-attribute-browser-support/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://tjvantoll.com/2013/09/18/hey-developers-you-should-spell-check-your-documentation/" data-via="tjvantoll" data-counturl="http://tjvantoll.com/2013/09/18/hey-developers-you-should-spell-check-your-documentation/" >Tweet</a>
   
   
   
@@ -202,10 +220,8 @@
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/2013/01/05/is-it-safe-to-use-the-body-as-a-top-level-container-yet/" title="Previous Post: Using the body Element as a Top Level Container - Is it Safe Yet?">&laquo; Using the body Element as a Top Level Container - Is it Safe Yet?</a>
+        <a class="basic-alignment left" href="/2013/09/12/building-custom-text-strikethroughs-with-css/" title="Previous Post: Building Custom Text Strikethroughs with CSS">&laquo; Building Custom Text Strikethroughs with CSS</a>
       
-      
-        <a class="basic-alignment right" href="/2013/01/11/detecting-internet-explorer-without-jquery/" title="Next Post: Detecting Internet Explorer without jQuery">Detecting Internet Explorer without jQuery &raquo;</a>
       
     </p>
   </footer>
@@ -277,8 +293,8 @@
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://tjvantoll.com/2013/01/09/html5-hidden-attribute-browser-support/';
-        var disqus_url = 'http://tjvantoll.com/2013/01/09/html5-hidden-attribute-browser-support/';
+        var disqus_identifier = 'http://tjvantoll.com/2013/09/18/hey-developers-you-should-spell-check-your-documentation/';
+        var disqus_url = 'http://tjvantoll.com/2013/09/18/hey-developers-you-should-spell-check-your-documentation/';
         var disqus_script = 'embed.js';
       
     (function () {
