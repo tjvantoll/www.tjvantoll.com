@@ -4,7 +4,39 @@ title: Blog Archive
 footer: false
 comments: false
 ---
+<!--
+-----------------------------------------------------------------------
 
+Script Junkie:
+
+April 16th, 2013
+HTML5 Datalists: What They Are They and When to Use Them
+http://msdn.microsoft.com/en-us/magazine/dn133614.aspx
+
+March 6th, 2013
+Creating Custom Tooltips with jQuery UI
+http://msdn.microsoft.com/en-us/magazine/dn127078.aspx
+
+-----------------------------------------------------------------------
+
+HTML5 Rocks: 
+
+October 17th, 2012:
+Constraint Validation: Native Client Side Validation for Web Forms
+http://www.html5rocks.com/en/tutorials/forms/constraintvalidation/
+
+-----------------------------------------------------------------------
+
+Kendo UI:
+http://www.kendoui.com/blogs/teamblog/posts/13-09-12/jquery-ui-vs-kendo-ui-what-is-the-difference.aspx
+
+-----------------------------------------------------------------------
+
+Icenium:
+http://www.icenium.com/blog/icenium-team-blog/2013/09/19/getting-started-with-jquery-mobile-and-icenium
+
+-----------------------------------------------------------------------
+-->
 <div id="blog-archives">
 {% for post in site.posts reverse %}
 {% capture this_year %}{{ post.date | date: "%Y" }}{% endcapture %}
