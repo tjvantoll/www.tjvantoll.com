@@ -15,7 +15,8 @@ sharing: false
 			<li>
 				<span>October 2nd, 2013:</span>
 				<a href="http://www.devreach.com/">DevReach</a> |
-				<address class="country-bulgaria">Sofia, Bulgaria</address>
+				<address class="country-bulgaria">Sofia, Bulgaria</address> |
+				<a href="/speaking/slides/UI-Widgets-vs-HTML5/Sofia">Slides</a>
 			</li>
 			<li>
 				<span>June 13th, 2013:</span> 
