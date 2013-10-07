@@ -649,6 +649,10 @@ This displays as follows in Chrome 26 on OS X:
 
 #### WebKit
 
+<div class="warning" style="display: block;">
+    <p><b>Update</b>: Chrome 28 removed support for these pseudo-elements.</p>
+</div>
+
 WebKit is the only rendering engine to support styling the validation bubbles created from the [constraint validation API](http://www.html5rocks.com/en/tutorials/forms/constraintvalidation).  The following pseudo-elements are provided:
 
 * `::-webkit-validation-bubble`
