@@ -4,7 +4,7 @@
   <title><![CDATA[TJ VanToll]]></title>
   <link href="http://tjvantoll.com/atom.xml" rel="self"/>
   <link href="http://tjvantoll.com/"/>
-  <updated>2013-09-27T08:54:52-04:00</updated>
+  <updated>2013-10-07T16:53:05-04:00</updated>
   <id>http://tjvantoll.com/</id>
   <author>
     <name><![CDATA[TJ VanToll]]></name>
@@ -2412,6 +2412,11 @@ Adding a strikethrough to a line of text in CSS is easy.</p>
 
 <h4>WebKit</h4>
 
+<div class="warning" style="display: block;">
+    <b>Update</b>: Chrome 28 removed support for these pseudo-elements.
+</div>
+
+
 <p>WebKit is the only rendering engine to support styling the validation bubbles created from the <a href="http://www.html5rocks.com/en/tutorials/forms/constraintvalidation">constraint validation API</a>.  The following pseudo-elements are provided:</p>
 
 <ul>
@@ -2495,6 +2500,7 @@ Adding a strikethrough to a line of text in CSS is easy.</p>
 <li>April 17th, 2013: Added sections on <code>::-moz-focus-outer</code> and <code>::-moz-focus-inner</code> per comments from Matthew Brundage. <a href="https://github.com/tjvantoll/tjvantoll.github.com/commit/5a776e9edb02d78b0f4e9880523f0752ccf24c3f">5a776e9edb02d78b0f4e9880523f0752ccf24c3f</a>.</li>
 <li>April 20th, 2013: Added a section on <code>::-webkit-resizer</code> for textareas per comments from Anselm Urban. <a href="https://github.com/tjvantoll/tjvantoll.github.com/commit/4c37198821fda83dedac061ac282b532b7f7ce81">4c37198821fda83dedac061ac282b532b7f7ce81</a></li>
 <li>April 26th, 2013: Added a note that the <code>resize</code> CSS property is the appropriate way to prevent textareas from being resized. <a href="https://github.com/tjvantoll/tjvantoll.github.com/commit/f90720f3aa12c3ec4ca922b5d22f64f03583eb4f">f90720f3aa12c3ec4ca922b5d22f64f03583eb4f</a></li>
+<li>October 7th, 2013: Note that Chrome 28 removed the ability to style validation bubbles. <a href="https://github.com/tjvantoll/tjvantoll.github.com/commit/372393f46419abd3bb882ce529ec71948442be56">372393f46419abd3bb882ce529ec71948442be56</a></li>
 </ul>
 
 ]]></content>
