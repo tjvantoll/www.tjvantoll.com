@@ -650,7 +650,7 @@ This displays as follows in Chrome 26 on OS X:
 #### WebKit
 
 <div class="warning" style="display: block;">
-    <p><b>Update</b>: Chrome 28 removed support for these pseudo-elements.</p>
+    <b>Update</b>: Chrome 28 removed support for these pseudo-elements.
 </div>
 
 WebKit is the only rendering engine to support styling the validation bubbles created from the [constraint validation API](http://www.html5rocks.com/en/tutorials/forms/constraintvalidation).  The following pseudo-elements are provided:
@@ -713,3 +713,4 @@ Hopefully you will find this list helpful.  If I'm missing elements or some of t
 * April 17th, 2013: Added sections on `::-moz-focus-outer` and `::-moz-focus-inner` per comments from Matthew Brundage. [5a776e9edb02d78b0f4e9880523f0752ccf24c3f](https://github.com/tjvantoll/tjvantoll.github.com/commit/5a776e9edb02d78b0f4e9880523f0752ccf24c3f).
 * April 20th, 2013: Added a section on `::-webkit-resizer` for textareas per comments from Anselm Urban. [4c37198821fda83dedac061ac282b532b7f7ce81](https://github.com/tjvantoll/tjvantoll.github.com/commit/4c37198821fda83dedac061ac282b532b7f7ce81)
 * April 26th, 2013: Added a note that the `resize` CSS property is the appropriate way to prevent textareas from being resized. [f90720f3aa12c3ec4ca922b5d22f64f03583eb4f](https://github.com/tjvantoll/tjvantoll.github.com/commit/f90720f3aa12c3ec4ca922b5d22f64f03583eb4f)
+* October 7th, 2013: Note that Chrome 28 removed the ability to style validation bubbles. [372393f46419abd3bb882ce529ec71948442be56](https://github.com/tjvantoll/tjvantoll.github.com/commit/372393f46419abd3bb882ce529ec71948442be56)
