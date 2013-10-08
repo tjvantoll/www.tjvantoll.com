@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>Showing All Error Messages</title>
+
+	<style>
+		body {
+			padding-top: 15px;
+		}
+		div {
+			width: 400px;
+		}
+		label {
+			display: inline-block;
+			width: 100px;
+			text-align: right; 
+			margin-bottom: 10px;
+			margin-right: 3px;
+		}
+		input[type=text], textarea {
+			width: 200px;
+		}
+		label[for=comments] {
+			margin-bottom: 0;
+		}
+		textarea { 
+			height: 30px;
+			vertical-align: middle;
+		}
+		.buttons {
+			padding-top: 10px;
+			text-align: center;
+		}
+
+		.errorMessages {
+			display: none;
+			list-style-type: disc;
+			margin: 0 10px 15px 10px;
+			padding: 8px 35px 8px 30px;
+			color: #B94A48;
+			background-color: #F2DEDE;
+			border: 2px solid #EED3D7;
+			border-radius: 4px;
+			text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+		}
+		.errorMessages span {
+			font-weight: bold;
+		}
+	</style>
+</head>
+<body>
+
+<form>
+	<ul class="errorMessages"></ul>
+	
+	<div>
+		<label for="name">Name:</label>
+		<input id="name" type="text" required>
+	</div>
+
+	<div>
+		<label for="comments">Comments:</label>
+		<textarea id="comments" required></textarea>
+	</div>
+	
+	<div class="buttons">
+		<button>Submit</button>
+	</div>
+</form>​
+
+<script src="../assets/jquery/1.9.1/jquery.js"></script>
+<script>
+	var createAllErrors = function() {
+		var form = $( this ),
+			errorList = $( "ul.errorMessages", form );
+
+		var showAllErrorMessages = function() {
+			errorList.empty();
+
+			// Find all invalid fields within the form.
+			var invalidFields = form.find( ":invalid" ).each( function( index, node ) {
+
+				// Find the field's corresponding label
+				var label = $( "label[for=" + node.id + "] "),
+					// Opera incorrectly does not fill the validationMessage property.
+					message = node.validationMessage || 'Invalid value.';
+
+				errorList
+					.show()
+					.append( "<li><span>" + label.html() + "</span> " + message + "</li>" );
+			});
+		};
+
+		// Support Safari
+		form.on( "submit", function( event ) {
+			if ( this.checkValidity && !this.checkValidity() ) {
+				$( this ).find( ":invalid" ).first().focus();
+				event.preventDefault();
+			}
+		});
+
+		$( "input[type=submit], button:not([type=button])", form )
+			.on( "click", showAllErrorMessages);
+
+		$( "input", form ).on( "keypress", function( event ) {
+			var type = $( this ).attr( "type" );
+			if ( /date|email|month|number|search|tel|text|time|url|week/.test ( type )
+			  && event.keyCode == 13 ) {
+				showAllErrorMessages();
+			}
+		});
+	};
+	
+	$( "form" ).each( createAllErrors );
+</script>
+
+</body>
+</html>

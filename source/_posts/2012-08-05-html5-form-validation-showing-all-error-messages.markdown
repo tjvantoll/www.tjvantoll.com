@@ -22,8 +22,7 @@ The key part here being that user agents (i.e. browsers) **MAY** report more tha
 
 You can see this in your browser below (assuming it [supports HTML5 form validation](http://caniuse.com/#feat=form-validation) and is not Safari, more on that later).  Both fields are `required`, but if you submit the form you will only see an error for the first field.
 
-<pre class="codepen" data-type="result" data-href="FBGvu" data-user="tjvantoll" data-host="http://codepen.io"><code></code></pre>
-<script async src="http://codepen.io/assets/embed/ei.js"></script>
+{% demo /demos/2012-08-05/initial.html HTML5_required_Validation_Example 170 %}
 
 Here's what it looks like on supported browsers if you attempt to submit this empty `<form>`:
 
@@ -65,55 +64,70 @@ Here's how I accomplished this with a jQuery dependent script.
 <form>
     <ul class="errorMessages"></ul>
     
-    <label for="name">Name:</label>
-    <input type="text" required />
+    <div>
+        <label for="name">Name:</label>
+        <input id="name" type="text" required>
+    </div>
 
-    <label for="comments">Comments:</label>
-    <textarea id="comments" required></textarea>
-
-    <input type="submit" value="Submit" />
+    <div>
+        <label for="comments">Comments:</label>
+        <textarea id="comments" required></textarea>
+    </div>
+    
+    <div class="buttons">
+        <button>Submit</button>
+    </div>
 </form>​
 
 <script>
-$(function() {
     var createAllErrors = function() {
-        var form = $(this);
-        var errorList = $('ul.errorMessages', form);
-        
+        var form = $( this ),
+            errorList = $( "ul.errorMessages", form );
+
         var showAllErrorMessages = function() {
             errorList.empty();
-            
-            //Find all invalid fields within the form.
-            form.find(':invalid').each(function(index, node) {
 
-                //Find the field's corresponding label
-                var label = $('label[for=' + node.id + ']');
+            // Find all invalid fields within the form.
+            var invalidFields = form.find( ":invalid" ).each( function( index, node ) {
 
-                //Opera incorrectly does not fill the validationMessage property.
-                var message = node.validationMessage || 'Invalid value.';
+                // Find the field's corresponding label
+                var label = $( "label[for=" + node.id + "] "),
+                    // Opera incorrectly does not fill the validationMessage property.
+                    message = node.validationMessage || 'Invalid value.';
+
                 errorList
                     .show()
-                    .append('<li><span>' + label.html() + '</span> ' + message + '</li>');
+                    .append( "<li><span>" + label.html() + "</span> " + message + "</li>" );
             });
         };
-        
-        $('input[type=submit]', form).on('click', showAllErrorMessages);
-        $('input[type=text]', form).on('keypress', function(event) {
-            //keyCode 13 is Enter
-            if (event.keyCode == 13) {
+
+        // Support Safari
+        form.on( "submit", function( event ) {
+            if ( this.checkValidity && !this.checkValidity() ) {
+                $( this ).find( ":invalid" ).first().focus();
+                event.preventDefault();
+            }
+        });
+
+        $( "input[type=submit], button:not([type=button])", form )
+            .on( "click", showAllErrorMessages);
+
+        $( "input", form ).on( "keypress", function( event ) {
+            var type = $( this ).attr( "type" );
+            if ( /date|email|month|number|search|tel|text|time|url|week/.test ( type )
+              && event.keyCode == 13 ) {
                 showAllErrorMessages();
             }
         });
     };
     
-    $('form').each(createAllErrors);
-});
+    $( "form" ).each( createAllErrors );
 </script>
 ```
 
 You can see the results in your browser below:
 
-<pre class="codepen" data-type="result" data-href="eLvlf" data-user="tjvantoll" data-host="http://codepen.io"><code></code></pre>
+{% demo /demos/2012-08-05/all.html Showing_All_Error_Messages 220 %}
 
 Here's how it looks in Chrome 21:
 
