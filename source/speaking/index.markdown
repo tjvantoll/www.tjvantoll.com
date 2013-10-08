@@ -35,7 +35,8 @@ sharing: false
 			<li>
 				<span>October 22nd, 2013:</span> 
 				<a href="http://html5devconf.com/">HTML5 Developer Conference</a> | 
-				<address class="country-us">San Francisco, CA</address>
+				<address class="country-us">San Francisco, CA</address> |
+				<a href="/speaking/slides/Constraint-Validation/San-Francisco">Slides</a>
 			</li>
 			<li>
 				<span>May 29th, 2013:</span> 

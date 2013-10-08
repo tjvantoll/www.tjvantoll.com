@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>Only show :valid & :invalid after interaction</title>
+	<style>
+		.interacted :valid:not(button), .interacted:valid {
+			border: 2px solid green;
+		}
+		.interacted :invalid, .interacted:invalid {
+			border: 2px solid red;
+		}
+	</style>
+</head>
+<body>
+
+<form>
+	<input required>
+	<input required>
+	<button>Go</button>
+</form>
+
+<script src="../js/jquery-1.10.2.min.js"></script>
+<script>
+	$( "input" ).on( "blur", function() {
+		$( this ).addClass( "interacted" );
+	});
+
+	$( "input[type=submit], button:not([type=button])" )
+		.on( "click", function() {
+			$( this ).parents( "form" ).addClass( "interacted" );
+		});
+
+	$( "input" ).on( "keypress", function( event ) {
+		var type = $( this ).attr( "type" );
+		if ( /date|email|month|number|search|tel|text|time|url|week/.test ( type )
+		  && event.keyCode == 13 ) {
+			$( this ).parents( "form" ).addClass( "interacted" );
+		}
+	});
+</script>
+
+</body>
+</html>
