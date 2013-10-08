@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>Initial Form</title>
+
+	<style>
+		body {
+			padding-top: 15px;
+		}
+		div {
+			width: 400px;
+		}
+		label {
+			display: inline-block;
+			width: 100px;
+			text-align: right; 
+			margin-bottom: 10px;
+			margin-right: 3px;
+		}
+		input[type=text], textarea {
+			width: 200px;
+		}
+		label[for=comments] {
+			margin-bottom: 0;
+		}
+		textarea { 
+			height: 30px;
+			vertical-align: middle;
+		}
+		.buttons {
+			padding-top: 10px;
+			text-align: center;
+		}
+	</style>
+</head>
+<body>
+
+<form>
+	<ul class="errorMessages"></ul>
+	
+	<div>
+		<label for="name">Name:</label>
+		<input id="name" type="text" required>
+	</div>
+
+	<div>
+		<label for="comments">Comments:</label>
+		<textarea id="comments" required></textarea>
+	</div>
+	
+	<div class="buttons">
+		<button>Submit</button>
+	</div>
+</form>​
+
+</body>
+</html>
