@@ -551,13 +551,13 @@
   &lt;button&gt;Go&lt;/button&gt;
 &lt;/form&gt;
 &lt;script&gt;
-  function border( event ) {
-    event.target.style.border = "2px solid red";
+  function background( event ) {
+    event.target.style.background = "red";
   }
   document.getElementById( "test-1" )
-    .addEventListener( "invalid", border );
+    .addEventListener( "invalid", background );
   document.getElementById( "test-2" )
-    .addEventListener( "invalid", border );
+    .addEventListener( "invalid", background );
 &lt;/script&gt;</code>
 </pre>
 					<div class="output"></div>
@@ -597,8 +597,8 @@
   &lt;input type="text" required&gt;
 &lt;/form&gt;
 &lt;style&gt;
-  #form-1 :required { border: 2px solid red; }
-  #form-1 :optional { border: 2px solid blue; }
+  #form-1 :required { background: red; }
+  #form-1 :optional { background: blue; }
 &lt;/style&gt;</code>
 </pre>
 					<div class="output"></div>
@@ -615,8 +615,8 @@
   &lt;input type="text" required&gt;
 &lt;/form&gt;
 &lt;style&gt;
-  #form-2 :valid { border: 2px solid green; }
-  #form-2 :invalid { border: 2px solid red; }
+  #form-2 :valid { background: green; }
+  #form-2 :invalid { background: red; }
 &lt;/style&gt;</code>
 </pre>
 					<div class="output"></div>
@@ -633,8 +633,8 @@
   &lt;input type="text" required&gt;
 &lt;/form&gt;
 &lt;style&gt;
-  #form-a:valid { border: 2px solid green; }
-  #form-a:invalid { border: 2px solid red; }
+  #form-a:valid { background: green; }
+  #form-a:invalid { background: red; }
 &lt;/style&gt;</code>
 </pre>
 					<div class="output"></div>
