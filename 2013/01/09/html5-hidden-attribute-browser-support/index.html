@@ -9,7 +9,8 @@
   <meta name="author" content="TJ VanToll">
 
   
-  <meta name="description" content="I had trouble finding this from a Google search, so I thought I&#8217;d list the browser support for the HTML5 hidden attribute here. Chrome 6+ &hellip;">
+  <meta name="description" content="I had trouble finding this from a Google search, so I thought I&#8217;d list the browser support for the HTML5 hidden attribute here. IE 11+
+Chrome 6 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -136,6 +137,7 @@
 <div class="entry-content"><p>I had trouble finding this from a Google search, so I thought I&#8217;d list the browser support for the <a href="http://www.whatwg.org/specs/web-apps/current-work/multipage/editing.html#the-hidden-attribute">HTML5 hidden attribute</a> here.</p>
 
 <ul>
+<li>IE 11+</li>
 <li>Chrome 6+</li>
 <li>Firefox 4+</li>
 <li>Safari 5.1+</li>
@@ -145,7 +147,7 @@
 </ul>
 
 
-<p>IE still does not support the <code>hidden</code> attribute as of IE 10.  For any unsupported browser you can easily add support by just including the following CSS:</p>
+<p>For any unsupported browser you can easily add support by just including the following CSS:</p>
 
 <figure class='code'><figcaption class='not_empty'><span>Polyfiling the hidden attribute.</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class='css'><span class='line'><span class="o">[</span><span class="nt">hidden</span><span class="o">]</span> <span class="p">{</span> <span class="k">display</span><span class="o">:</span> <span class="k">none</span><span class="p">;</span> <span class="p">}</span>
@@ -153,6 +155,14 @@
 
 
 <p>This will work back to IE6, which doesn&#8217;t support the <a href="https://developer.mozilla.org/en-US/docs/CSS/Attribute_selectors">attribute selector</a>.</p>
+
+<h3 id="updates">Updates</h3>
+
+
+<ul>
+<li>November 13th, 2013: Added that IE11 now supports the <code>hidden</code> attribute per comment from Michał Gołębiowski.</li>
+</ul>
+
 </div>
 
 
