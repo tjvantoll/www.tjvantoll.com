@@ -134,6 +134,31 @@ body #bsap_aplink, body #bsap_aplink:hover {
 	}
 }
 
+#book_section {
+	position: relative;
+	height: 150px;
+	text-align: center;
+	img { height: 140px; }
+	.image_link {
+		position: absolute;
+		top: 10px;
+		left: 0;
+		text-decoration: none;
+	}
+	.text_link {
+		position: absolute;
+		top: 15px;
+		left: 127px;
+	}
+	p {
+		position: absolute;
+		top: 67px;
+		width: 140px;
+		left: 120px;
+	}
+	a { white-space: normal; }
+}
+
 /* Twitter Sidebar widget */
 aside.sidebar .twitter-timeline {
 	margin-top: 10px;
