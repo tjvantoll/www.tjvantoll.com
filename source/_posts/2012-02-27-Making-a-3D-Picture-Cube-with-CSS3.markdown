@@ -5,9 +5,6 @@ comments: true
 categories: CSS
 ---
 <script src="{{ root_url }}/javascripts/prefixfree.min.js"></script>
-<div class="warning">
-	Your browser doesn't support CSS 3D transformations, therefore some of these demos might not work as intended.  Please try viewing this page in the latest version of Firefox, Safari, or an iOS device.
-</div>
 
 Let's face it, the mere concept of doing something in 3D in the browser is pretty awesome.  For those of us that remember the good old days of font tags and spacer gifs… well, let's just say we've come a long way.
 
@@ -212,18 +209,6 @@ PictureCube.js is available to be forked or used on Github - [https://github.com
 
 Here's a final cube for you to play with.  Happy hacking.
 
-<script>
-	$.domReady(function(){
-		window.playgroundCube = new PictureCube('playground-cube', [
-			{ src: '/images/izzie/1.jpg' },
-			{ src: '/images/izzie/2.jpg' },
-			{ src: '/images/izzie/3.jpg' },
-			{ src: '/images/izzie/4.jpg' },
-			{ src: '/images/izzie/5.jpg' },
-			{ src: '/images/izzie/6.jpg' }
-		]);
-	});
-</script>
 <div id="playground">
 	<div id="playground-cube"></div>
 	
