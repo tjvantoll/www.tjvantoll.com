@@ -19,8 +19,8 @@
   {% capture canonical %}{{ site.url }}{% if site.permalink contains '.html' %}{{ page.url }}{% else %}{{ page.url | remove:'index.html' | strip_slash }}{% endif %}{% endcapture %}
   <link rel="canonical" href="{{ canonical }}">
 
-  <!--[if ! lte IE 7]><!-->
-    <link href="{{ root_url }}/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <!--[if !lte IE 7]><!-->
+    <link href="{{ root_url }}/stylesheets/screen.css" media="screen, projection" rel="stylesheet">
   <!--<![endif]-->
   <!--[if lte IE 7]>
     <link rel="stylesheet" href="{{ root_url }}/stylesheets/old-ie.css" media="screen, projection">
@@ -31,8 +31,6 @@
   <script src="{{ root_url }}/javascripts/ender.js"></script>
   <script src="{{ root_url }}/javascripts/octopress.js"></script>
   <script src="{{ root_url }}/javascripts/PictureCube.js"></script>
-  <script src="{{ root_url }}/javascripts/ender.tipsy.js"></script>
-  <script src="{{ root_url }}/javascripts/blog.js"></script>
   -->
   <script src="{{ root_url }}/javascripts/build/scripts.js"></script>
 

@@ -3,7 +3,6 @@
 $accent_color: #CF481C;
 $custom_header_color: #333;
 
-@import "custom/partials/tipsy";
 @import "custom/partials/PictureCube";
 @import "custom/partials/helpers";
 
@@ -20,15 +19,6 @@ body > header {
 		}
 		a:hover, a:visited {
 			color: $custom_header_color;
-		}
-	}
-
-	#picture-cube {
-		float: right;
-		margin-right: 20px;
-		
-		@media only screen and (max-width: 550px) {
-			display: none;
 		}
 	}
 }
