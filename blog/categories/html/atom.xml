@@ -4,7 +4,7 @@
   <title><![CDATA[Category: HTML | TJ VanToll]]></title>
   <link href="http://tjvantoll.com/blog/categories/html/atom.xml" rel="self"/>
   <link href="http://tjvantoll.com/"/>
-  <updated>2013-12-04T15:34:06-05:00</updated>
+  <updated>2013-12-06T15:31:29-05:00</updated>
   <id>http://tjvantoll.com/</id>
   <author>
     <name><![CDATA[TJ VanToll]]></name>
@@ -12,6 +12,139 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Why Is Styling Form Elements So Damn Hard?]]></title>
+    <link href="http://tjvantoll.com/2013/12/06/why-is-styling-form-elements-so-damn-hard/"/>
+    <updated>2013-12-06T12:54:00-05:00</updated>
+    <id>http://tjvantoll.com/2013/12/06/why-is-styling-form-elements-so-damn-hard</id>
+    <content type="html"><![CDATA[<p>The web has come a long way. We can now build powerful 3D animations, design sites that work on a vast array of screen sizes, and even <a href="https://brendaneich.com/2013/03/the-web-is-the-game-platform/">play high end games</a> - all without leaving our browser.</p>
+
+<p>Despite this, developers still cannot change the background color of an <code>&lt;option&gt;</code> or the size of a checkbox. Why is this?</p>
+
+<p>Basically, it comes down to the fact that the HTML specification dictates how form controls should <em>function</em>, and not how they should look. Therefore UAs (User Agents, aka browsers) are free to come up with a UI they feel best performs the functionality. And as such, there are vast differences in the UIs used.</p>
+
+<p>Giving browsers control over the display of form controls has had an enormous impact on the development of the web - good and bad. Let's discuss the good first.</p>
+
+<!--more-->
+
+
+<h3>Why Letting Browser Control Form Elements is Awesome</h3>
+
+<p>To start our discussion, consider this simple <code>&lt;select&gt;</code> element.</p>
+
+<p>``` html
+<select></p>
+
+<pre><code>&lt;option&gt;One&lt;/option&gt;
+&lt;option&gt;Two&lt;/option&gt;
+&lt;option&gt;Three&lt;/option&gt;
+</code></pre>
+
+<p></select>
+```</p>
+
+<p>Here's a sampling of a few different renderings. The two on the left are Chrome and Firefox for OS X, the two on the right are IE and Chrome for Windows.</p>
+
+<p><img src="http://tjvantoll.com/images/posts/2013-12-06/selects.png" alt="View of selects on multiple platforms"></p>
+
+<p>While there are slightly different approaches here, these controls look relatively the same. However, the story is completely different when you consider mobile devices. The image below shows the <code>&lt;select&gt;</code> rendering on some common mobile OSs (Android on the left, iOS on the right).</p>
+
+<p><img src="http://tjvantoll.com/images/posts/2013-12-06/selects-mobile.png" alt="View of selects on multiple platforms"></p>
+
+<p>Because mobile browsers are not locked down to specific displays, they are free to present <code>&lt;select&gt;</code> menus in a way that best fits the device they're running on. This is the single greatest advantage of giving browsers complete control over the look of form controls. Just think of how horrible an experience working with desktop sized <code>&lt;select&gt;</code> menus would be on a mobile device.</p>
+
+<p>Furthermore, browsers can present users with familiar OS controls. As an example, iOS uses the same datepicker for <code>&lt;input type="date"&gt;</code> as it does for its calendar app. This familiarity helps users complete forms quicker.</p>
+
+<p>While these truly custom UIs are great for mobile users, they present a major issue for developers.</p>
+
+<h3>Why Letting Browser Control Form Elements is Horrible</h3>
+
+<p>Because we now have a multitude of ways form controls are displayed, it is literally impossible to control the look, feel, and positioning of these controls across platforms. If you consider all the <code>&lt;select&gt;</code> renderings shown above, what would applying a <code>padding</code> or <code>margin</code> to an <code>&lt;option&gt;</code> element even mean?</p>
+
+<p>This is a problem, because making slight alterations to form controls is a common request web developers have. As such, the question of how to address this has been going around the <a href="http://www.whatwg.org/mailing-list#specs">WHATWG mailing list</a> and <a href="http://lists.w3.org/">W3C mailing list</a> recently.</p>
+
+<p>There are a number of ideas being thrown out there, so I thought I'd summarize a few of them.</p>
+
+<h3>Pseudo Elements</h3>
+
+<p>A number of browsers now offer styling hooks through vendor prefixed pseudo elements. (I created a <a href="/2013/12/06/why-is-styling-form-elements-so-damn-hard/">full list</a> if you'd like to peruse them). For instance <code>::-ms-check</code> lets you play with the look of checkboxes and radio buttons in IE.</p>
+
+<p>``` html</p>
+
+
+
+<p><input type="checkbox">
+<input type="radio">
+```</p>
+
+<p>Which renders as follows.</p>
+
+<p><img src="http://tjvantoll.com/images/posts/2013-04-15/trident-radio-checkbox.png" alt="Display of altered checkboxes in IE"></p>
+
+<p>For the specification, the idea is that we could standardize all of the common styling points. So <code>::check</code> would be able to style checkboxes and radio buttons on all platforms, not just IE. And since the shadow DOM spec includes a <a href="http://www.w3.org/TR/shadow-dom/#custom-pseudo-elements">mechanism for exposing custom pseudo-elements</a>, this seems like a perfect solution.</p>
+
+<p>While this sounds great, there are two fundamental problems.</p>
+
+<p><strong>1)</strong> Because of mobile, there is almost nothing in common with the look of <em>any</em> form control across all platforms. For instance, a common request of developers is the ability to customize the calendar presented by <code>&lt;input type="date"&gt;</code>, however consider the display of the calendar on just the three platforms shown below.</p>
+
+<p><img src="http://tjvantoll.com/images/posts/2013-12-06/calendars.png" alt="Display of date input on Chrome, iOS, and Chrome for Android"></p>
+
+<p>Even if you wanted to standardize something, what would it be?</p>
+
+<p><strong>2)</strong> By standardizing pseudo elements you limit the flexibility currently afforded to browsers to innovate. IE's <code>::-ms-check</code> pseudo-element is actually a perfect example of this. If <code>::check</code> were indeed standardized, it would prevent browsers from using a completely different representation of a checkbox, such as an iOS style switch (unless they violated the spec).</p>
+
+<p>Therefore while this solution seems appealing, it doesn't appear to be a viable solution to styling form controls on the web.</p>
+
+<h3>Using Shadow DOM</h3>
+
+<p>The <a href="http://www.w3.org/TR/shadow-dom/">shadow DOM</a> specification has made another - more drastic - solution possible. Since browsers internally implement form elements through shadow DOM, you have the ability to inject your own shadow root to use instead of the browser's.</p>
+
+<p>And as of Chrome 31, this is now something you can actually do. The following example creates a native <code>&lt;input type="date"&gt;</code>, gives it a new shadow root to use, and implements the calendar using <a href="http://jqueryui.com/datepicker/">jQuery UI's datepicker</a>.</p>
+
+<p>``` html</p>
+
+
+
+<p><input type="date"></p>
+
+<script>
+    var dateRoot = document.querySelector( "input" )
+        .webkitCreateShadowRoot();
+
+    $( "input" ).datepicker({
+        dateFormat: "yy-mm-dd",
+        onSelect: function( dateText ) {
+            dateRoot.innerHTML = dateText;
+        }
+    });
+</script>
+
+
+<p>```</p>
+
+<p>And here's the example live, although you need Chrome 31+ for it to actually work.</p>
+
+<iframe width="100%" height="300" src="http://jsfiddle.net/tj_vantoll/6qadQ/embedded/result,html,js,css" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
+
+
+<p>You may notice that there is one big issue with this example. While we do get a custom datepicker, we lose the <code>&lt;input&gt;</code> behavior, including the ability to type in a value.</p>
+
+<p>Another downside is this uses the JavaScript based calendar on all platforms - even mobile ones. Therefore if you try run this example on Chrome for Android you get the jQuery UI's calendar rather than the more mobile friendly calendar most developers want.</p>
+
+<h3>Moving Forward</h3>
+
+<p>How do we move forward and make form controls on the web styleable?</p>
+
+<p>Standardizing pseudo elements seems attractive because they're easy to use. Who wants to create a new shadow root for an element just to change a few colors? However, I personally feel that there are just too many platform differences for this to be a viable option.</p>
+
+<p>Using shadow roots has potential. While it's a bit of work, the really hard stuff could be abstracted into libraries. The problem is currently we have no good way of inheriting the basic functionality of an <code>&lt;input&gt;</code>, and reinventing the wheel in an accessible way is challenging.</p>
+
+<p>As developers we want some magical solution where we can make style the desktop based controls and somehow leave mobile ones alone. And unfortunately this is a very hard problem to solve.</p>
+
+<p>If you have any ideas please chime in on the mailing lists.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Using jQuery UI Tabs with the &lt;base&gt; Tag]]></title>

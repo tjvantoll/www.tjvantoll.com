@@ -9,7 +9,7 @@
   <meta name="author" content="TJ VanToll">
 
   
-  <meta name="description" content="Showing a loading indicator on startup is a common pattern in native applications that is becoming more common on the web. If you need to load a lot &hellip;">
+  <meta name="description" content="With the rise of JavaScript MVC frameworks, writing templates has become a large part of many web developer&#8217;s workflow. As such, I thought I&# &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -103,6 +103,51 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2013/04/26/using-ternary-operators-for-more-maintainable-templates/">Using Ternary Operators for More Maintainable Templates</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-04-26T00:00:00-04:00" pubdate data-updated="true">Apr 26<span>th</span>, 2013</time>
+        
+         | <a href="/2013/04/26/using-ternary-operators-for-more-maintainable-templates/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>With the rise of JavaScript MVC frameworks, writing templates has become a large part of many web developer&#8217;s workflow. As such, I thought I&#8217;d share a tip that has made my templates far more readable and maintainable over the years, ternary operators.<!-- http://jsbin.com/ekiwal/3/edit --></p>
+
+<p><i>Note: For my examples I&#8217;m using <a href="http://underscorejs.org/#template">Underscore&#8217;s templates</a>, but this same tip applies to any templating language, even traditional server side ones like PHP.</i></p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/2013/04/26/using-ternary-operators-for-more-maintainable-templates/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -582,72 +627,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2013/01/09/html5-hidden-attribute-browser-support/">HTML 5 hidden Attribute Browser Support</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-01-09T21:27:00-05:00" pubdate data-updated="true">Jan 9<span>th</span>, 2013</time>
-        
-         | <a href="/2013/01/09/html5-hidden-attribute-browser-support/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>I had trouble finding this from a Google search, so I thought I&#8217;d list the browser support for the <a href="http://www.whatwg.org/specs/web-apps/current-work/multipage/editing.html#the-hidden-attribute">HTML5 hidden attribute</a> here.</p>
-
-<ul>
-<li>IE 11+</li>
-<li>Chrome 6+</li>
-<li>Firefox 4+</li>
-<li>Safari 5.1+</li>
-<li>Opera 11+</li>
-<li>iOS 5+</li>
-<li>Android Browser 4+</li>
-</ul>
-
-
-<p>For any unsupported browser you can easily add support by just including the following CSS:</p>
-
-<figure class='code'><figcaption class='not_empty'><span>Polyfiling the hidden attribute.</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="o">[</span><span class="nt">hidden</span><span class="o">]</span> <span class="p">{</span> <span class="k">display</span><span class="o">:</span> <span class="k">none</span><span class="p">;</span> <span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>This will work back to IE6, which doesn&#8217;t support the <a href="https://developer.mozilla.org/en-US/docs/CSS/Attribute_selectors">attribute selector</a>.</p>
-
-<h3 id="updates">Updates</h3>
-
-
-<ul>
-<li>November 13th, 2013: Added that IE11 now supports the <code>hidden</code> attribute per comment from Michał Gołębiowski.</li>
-</ul>
-
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/3/">&larr; Older</a>
@@ -682,6 +661,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2013/12/06/why-is-styling-form-elements-so-damn-hard/">Why Is Styling Form Elements So Damn Hard?</a>
+      </li>
+    
+      <li class="post">
         <a href="/2013/09/18/hey-developers-you-should-spell-check-your-documentation/">Hey Developers - You Should Spell Check Your Documentation</a>
       </li>
     
@@ -695,10 +678,6 @@
     
       <li class="post">
         <a href="/2013/08/14/new-beginnings/">New Beginnings</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2013/07/10/creating-a-jquery-ui-dialog-with-a-submit-button/">Creating a jQuery UI Dialog with a Submit Button</a>
       </li>
     
   </ul>

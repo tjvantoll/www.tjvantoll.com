@@ -4,7 +4,7 @@
   <title><![CDATA[TJ VanToll]]></title>
   <link href="http://tjvantoll.com/atom.xml" rel="self"/>
   <link href="http://tjvantoll.com/"/>
-  <updated>2013-12-04T15:34:06-05:00</updated>
+  <updated>2013-12-06T15:31:29-05:00</updated>
   <id>http://tjvantoll.com/</id>
   <author>
     <name><![CDATA[TJ VanToll]]></name>
@@ -12,6 +12,176 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Why Is Styling Form Elements So Damn Hard?]]></title>
+    <link href="http://tjvantoll.com/2013/12/06/why-is-styling-form-elements-so-damn-hard/"/>
+    <updated>2013-12-06T12:54:00-05:00</updated>
+    <id>http://tjvantoll.com/2013/12/06/why-is-styling-form-elements-so-damn-hard</id>
+    <content type="html"><![CDATA[<p>The web has come a long way. We can now build powerful 3D animations, design sites that work on a vast array of screen sizes, and even <a href="https://brendaneich.com/2013/03/the-web-is-the-game-platform/">play high end games</a> - all without leaving our browser.</p>
+
+<p>Despite this, developers still cannot change the background color of an <code>&lt;option&gt;</code> or the size of a checkbox. Why is this?</p>
+
+<p>Basically, it comes down to the fact that the HTML specification dictates how form controls should <em>function</em>, and not how they should look. Therefore UAs (User Agents, aka browsers) are free to come up with a UI they feel best performs the functionality. And as such, there are vast differences in the UIs used.</p>
+
+<p>Giving browsers control over the display of form controls has had an enormous impact on the development of the web - good and bad. Let&#8217;s discuss the good first.</p>
+
+<!--more-->
+
+
+<h3>Why Letting Browser Control Form Elements is Awesome</h3>
+
+<p>To start our discussion, consider this simple <code>&lt;select&gt;</code> element.</p>
+
+<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;select&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;option&gt;</span>One<span class="nt">&lt;/option&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;option&gt;</span>Two<span class="nt">&lt;/option&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;option&gt;</span>Three<span class="nt">&lt;/option&gt;</span>
+</span><span class='line'><span class="nt">&lt;/select&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Here&#8217;s a sampling of a few different renderings. The two on the left are Chrome and Firefox for OS X, the two on the right are IE and Chrome for Windows.</p>
+
+<p><img src="http://tjvantoll.com/images/posts/2013-12-06/selects.png" alt="View of selects on multiple platforms"></p>
+
+<p>While there are slightly different approaches here, these controls look relatively the same. However, the story is completely different when you consider mobile devices. The image below shows the <code>&lt;select&gt;</code> rendering on some common mobile OSs (Android on the left, iOS on the right).</p>
+
+<p><img src="http://tjvantoll.com/images/posts/2013-12-06/selects-mobile.png" alt="View of selects on multiple platforms"></p>
+
+<p>Because mobile browsers are not locked down to specific displays, they are free to present <code>&lt;select&gt;</code> menus in a way that best fits the device they&#8217;re running on. This is the single greatest advantage of giving browsers complete control over the look of form controls. Just think of how horrible an experience working with desktop sized <code>&lt;select&gt;</code> menus would be on a mobile device.</p>
+
+<p>Furthermore, browsers can present users with familiar OS controls. As an example, iOS uses the same datepicker for <code>&lt;input type="date"&gt;</code> as it does for its calendar app. This familiarity helps users complete forms quicker.</p>
+
+<p>While these truly custom UIs are great for mobile users, they present a major issue for developers.</p>
+
+<h3>Why Letting Browser Control Form Elements is Horrible</h3>
+
+<p>Because we now have a multitude of ways form controls are displayed, it is literally impossible to control the look, feel, and positioning of these controls across platforms. If you consider all the <code>&lt;select&gt;</code> renderings shown above, what would applying a <code>padding</code> or <code>margin</code> to an <code>&lt;option&gt;</code> element even mean?</p>
+
+<p>This is a problem, because making slight alterations to form controls is a common request web developers have. As such, the question of how to address this has been going around the <a href="http://www.whatwg.org/mailing-list#specs">WHATWG mailing list</a> and <a href="http://lists.w3.org/">W3C mailing list</a> recently.</p>
+
+<p>There are a number of ideas being thrown out there, so I thought I&#8217;d summarize a few of them.</p>
+
+<h3>Pseudo Elements</h3>
+
+<p>A number of browsers now offer styling hooks through vendor prefixed pseudo elements. (I created a <a href="http://tjvantoll.com/2013/12/06/why-is-styling-form-elements-so-damn-hard/">full list</a> if you&#8217;d like to peruse them). For instance <code>::-ms-check</code> lets you play with the look of checkboxes and radio buttons in IE.</p>
+
+<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;style&gt;</span>
+</span><span class='line'>    <span class="o">:</span><span class="nd">:-ms-check</span> <span class="p">{</span>
+</span><span class='line'>        <span class="k">color</span><span class="o">:</span> <span class="nb">red</span><span class="p">;</span>
+</span><span class='line'>        <span class="k">background</span><span class="o">:</span> <span class="nb">black</span><span class="p">;</span>
+</span><span class='line'>        <span class="k">padding</span><span class="o">:</span> <span class="m">1em</span><span class="p">;</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'><span class="nt">&lt;/style&gt;</span>
+</span><span class='line'><span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;checkbox&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'><span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;radio&quot;</span><span class="nt">&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Which renders as follows.</p>
+
+<p><img src="http://tjvantoll.com/images/posts/2013-04-15/trident-radio-checkbox.png" alt="Display of altered checkboxes in IE"></p>
+
+<p>For the specification, the idea is that we could standardize all of the common styling points. So <code>::check</code> would be able to style checkboxes and radio buttons on all platforms, not just IE. And since the shadow DOM spec includes a <a href="http://www.w3.org/TR/shadow-dom/#custom-pseudo-elements">mechanism for exposing custom pseudo-elements</a>, this seems like a perfect solution.</p>
+
+<p>While this sounds great, there are two fundamental problems.</p>
+
+<p><strong>1)</strong> Because of mobile, there is almost nothing in common with the look of <em>any</em> form control across all platforms. For instance, a common request of developers is the ability to customize the calendar presented by <code>&lt;input type="date"&gt;</code>, however consider the display of the calendar on just the three platforms shown below.</p>
+
+<p><img src="http://tjvantoll.com/images/posts/2013-12-06/calendars.png" alt="Display of date input on Chrome, iOS, and Chrome for Android"></p>
+
+<p>Even if you wanted to standardize something, what would it be?</p>
+
+<p><strong>2)</strong> By standardizing pseudo elements you limit the flexibility currently afforded to browsers to innovate. IE&#8217;s <code>::-ms-check</code> pseudo-element is actually a perfect example of this. If <code>::check</code> were indeed standardized, it would prevent browsers from using a completely different representation of a checkbox, such as an iOS style switch (unless they violated the spec).</p>
+
+<p>Therefore while this solution seems appealing, it doesn&#8217;t appear to be a viable solution to styling form controls on the web.</p>
+
+<h3>Using Shadow DOM</h3>
+
+<p>The <a href="http://www.w3.org/TR/shadow-dom/">shadow DOM</a> specification has made another - more drastic - solution possible. Since browsers internally implement form elements through shadow DOM, you have the ability to inject your own shadow root to use instead of the browser&#8217;s.</p>
+
+<p>And as of Chrome 31, this is now something you can actually do. The following example creates a native <code>&lt;input type="date"&gt;</code>, gives it a new shadow root to use, and implements the calendar using <a href="http://jqueryui.com/datepicker/">jQuery UI&#8217;s datepicker</a>.</p>
+
+<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;style&gt;</span>
+</span><span class='line'>    <span class="nt">input</span> <span class="p">{</span>
+</span><span class='line'>        <span class="k">height</span><span class="o">:</span> <span class="m">2em</span><span class="p">;</span>
+</span><span class='line'>        <span class="k">width</span><span class="o">:</span> <span class="m">15em</span><span class="p">;</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'><span class="nt">&lt;/style&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;date&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nt">&lt;script&gt;</span>
+</span><span class='line'>    <span class="kd">var</span> <span class="nx">dateRoot</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span> <span class="s2">&quot;input&quot;</span> <span class="p">)</span>
+</span><span class='line'>        <span class="p">.</span><span class="nx">webkitCreateShadowRoot</span><span class="p">();</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="nx">$</span><span class="p">(</span> <span class="s2">&quot;input&quot;</span> <span class="p">).</span><span class="nx">datepicker</span><span class="p">({</span>
+</span><span class='line'>        <span class="nx">dateFormat</span><span class="o">:</span> <span class="s2">&quot;yy-mm-dd&quot;</span><span class="p">,</span>
+</span><span class='line'>        <span class="nx">onSelect</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span> <span class="nx">dateText</span> <span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>            <span class="nx">dateRoot</span><span class="p">.</span><span class="nx">innerHTML</span> <span class="o">=</span> <span class="nx">dateText</span><span class="p">;</span>
+</span><span class='line'>        <span class="p">}</span>
+</span><span class='line'>    <span class="p">});</span>
+</span><span class='line'><span class="nt">&lt;/script&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>And here&#8217;s the example live, although you need Chrome 31+ for it to actually work.</p>
+
+<iframe width="100%" height="300" src="http://jsfiddle.net/tj_vantoll/6qadQ/embedded/result,html,js,css" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
+
+
+<p>You may notice that there is one big issue with this example. While we do get a custom datepicker, we lose the <code>&lt;input&gt;</code> behavior, including the ability to type in a value.</p>
+
+<p>Another downside is this uses the JavaScript based calendar on all platforms - even mobile ones. Therefore if you try run this example on Chrome for Android you get the jQuery UI&#8217;s calendar rather than the more mobile friendly calendar most developers want.</p>
+
+<h3>Moving Forward</h3>
+
+<p>How do we move forward and make form controls on the web styleable?</p>
+
+<p>Standardizing pseudo elements seems attractive because they&#8217;re easy to use. Who wants to create a new shadow root for an element just to change a few colors? However, I personally feel that there are just too many platform differences for this to be a viable option.</p>
+
+<p>Using shadow roots has potential. While it&#8217;s a bit of work, the really hard stuff could be abstracted into libraries. The problem is currently we have no good way of inheriting the basic functionality of an <code>&lt;input&gt;</code>, and reinventing the wheel in an accessible way is challenging.</p>
+
+<p>As developers we want some magical solution where we can make style the desktop based controls and somehow leave mobile ones alone. And unfortunately this is a very hard problem to solve.</p>
+
+<p>If you have any ideas please chime in on the mailing lists.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Hey Developers - You Should Spell Check Your Documentation]]></title>
@@ -3414,43 +3584,6 @@ Adding a strikethrough to a line of text in CSS is easy.</p>
 </span><span class='line'>    <span class="nx">version</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Number</span><span class="p">(</span><span class="nb">RegExp</span><span class="p">.</span><span class="nx">$1</span><span class="p">);</span>
 </span><span class='line'><span class="p">}</span>
 </span></code></pre></td></tr></table></div></figure>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[HTML 5 hidden Attribute Browser Support]]></title>
-    <link href="http://tjvantoll.com/2013/01/09/html5-hidden-attribute-browser-support/"/>
-    <updated>2013-01-09T21:27:00-05:00</updated>
-    <id>http://tjvantoll.com/2013/01/09/html5-hidden-attribute-browser-support</id>
-    <content type="html"><![CDATA[<p>I had trouble finding this from a Google search, so I thought I&#8217;d list the browser support for the <a href="http://www.whatwg.org/specs/web-apps/current-work/multipage/editing.html#the-hidden-attribute">HTML5 hidden attribute</a> here.</p>
-
-<ul>
-<li>IE 11+</li>
-<li>Chrome 6+</li>
-<li>Firefox 4+</li>
-<li>Safari 5.1+</li>
-<li>Opera 11+</li>
-<li>iOS 5+</li>
-<li>Android Browser 4+</li>
-</ul>
-
-
-<p>For any unsupported browser you can easily add support by just including the following CSS:</p>
-
-<figure class='code'><figcaption class='not_empty'><span>Polyfiling the hidden attribute.</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="o">[</span><span class="nt">hidden</span><span class="o">]</span> <span class="p">{</span> <span class="k">display</span><span class="o">:</span> <span class="k">none</span><span class="p">;</span> <span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>This will work back to IE6, which doesn&#8217;t support the <a href="https://developer.mozilla.org/en-US/docs/CSS/Attribute_selectors">attribute selector</a>.</p>
-
-<h3 id="updates">Updates</h3>
-
-
-<ul>
-<li>November 13th, 2013: Added that IE11 now supports the <code>hidden</code> attribute per comment from Michał Gołębiowski.</li>
-</ul>
 
 ]]></content>
   </entry>

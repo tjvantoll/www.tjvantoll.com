@@ -9,7 +9,7 @@
   <meta name="author" content="TJ VanToll">
 
   
-  <meta name="description" content="Forms suck, yet, they make or break the most crucial online transactions. Building web forms sucks as well; the APIs and lack of customizability has &hellip;">
+  <meta name="description" content="jQuery UI&#8217;s slider plugin looks and behaves much like the browser&#8217;s native input[type=range] control; therefore it makes an excellent &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -103,6 +103,55 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2012/09/14/using-jquery-ui-slider-to-polyfill-html5-input-type-range/">Using jQuery UI&#8217;s Slider to Polyfill HTML5&#8217;s input[type=range]</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-09-14T21:25:00-04:00" pubdate data-updated="true">Sep 14<span>th</span>, 2012</time>
+        
+         | <a href="/2012/09/14/using-jquery-ui-slider-to-polyfill-html5-input-type-range/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><a href="http://jqueryui.com/demos/slider">jQuery UI&#8217;s slider plugin</a> looks and behaves much like the browser&#8217;s native <code>input[type=range]</code> control; therefore it makes an excellent choice for <a href="http://remysharp.com/2010/10/08/what-is-a-polyfill/">polyfilling</a> the native behavior.</p>
+
+<h3>How to do it</h3>
+
+<p>The main issue is that the slider must be built on a block level node, not an <code>&lt;input&gt;</code>.  Therefore you must create another container node (in this case a <code>&lt;div&gt;</code>) to create the slider from then hide the original <code>&lt;input&gt;</code>.</p>
+
+<p>Here&#8217;s the script that I used.</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/2012/09/14/using-jquery-ui-slider-to-polyfill-html5-input-type-range/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -627,51 +676,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2012/07/10/default-browser-handling-of-the-css-text-transform-property/">Default Browser Handling of the CSS text-transform Property</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-07-10T21:05:00-04:00" pubdate data-updated="true">Jul 10<span>th</span>, 2012</time>
-        
-         | <a href="/2012/07/10/default-browser-handling-of-the-css-text-transform-property/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>The <code>text-transform</code> CSS property is most frequently used to uppercase and lowercase text.  According to the <a href="http://www.w3.org/TR/CSS21/text.html#caps-prop">CSS 2.1 specification</a> it is also an inherited property, meaning, when no value is specified on a given element, it should inherit its parent&#8217;s <code>text-transform</code> value.</p>
-
-<p>If no parents have a <code>text-transform</code> property defined, the element will take on the default value of <code>none</code>.</p>
-
-<p>Where it gets interesting is that all browsers define default <code>text-transform</code> properties for certain form elements.  What does this mean?  </div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/2012/07/10/default-browser-handling-of-the-css-text-transform-property/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/5/">&larr; Older</a>
@@ -706,6 +710,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2013/12/06/why-is-styling-form-elements-so-damn-hard/">Why Is Styling Form Elements So Damn Hard?</a>
+      </li>
+    
+      <li class="post">
         <a href="/2013/09/18/hey-developers-you-should-spell-check-your-documentation/">Hey Developers - You Should Spell Check Your Documentation</a>
       </li>
     
@@ -719,10 +727,6 @@
     
       <li class="post">
         <a href="/2013/08/14/new-beginnings/">New Beginnings</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2013/07/10/creating-a-jquery-ui-dialog-with-a-submit-button/">Creating a jQuery UI Dialog with a Submit Button</a>
       </li>
     
   </ul>
