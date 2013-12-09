@@ -4,7 +4,7 @@
   <title><![CDATA[Category: CSS | TJ VanToll]]></title>
   <link href="http://tjvantoll.com/blog/categories/css/atom.xml" rel="self"/>
   <link href="http://tjvantoll.com/"/>
-  <updated>2013-12-08T23:10:12-05:00</updated>
+  <updated>2013-12-08T23:12:38-05:00</updated>
   <id>http://tjvantoll.com/</id>
   <author>
     <name><![CDATA[TJ VanToll]]></name>
@@ -141,8 +141,6 @@
 <p>Using shadow roots has potential. While it's a bit of work, the really hard stuff could be abstracted into libraries. The problem is currently we have no good way of inheriting the basic functionality of an <code>&lt;input&gt;</code>, and reinventing the wheel in an accessible way is challenging.</p>
 
 <p>As developers we want some magical solution where we can make style the desktop based controls and somehow leave mobile ones alone. And unfortunately this is a very hard problem to solve.</p>
-
-<p>If you have any ideas please chime in on the mailing lists.</p>
 ]]></content>
   </entry>
   
