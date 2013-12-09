@@ -130,5 +130,3 @@ Standardizing pseudo elements seems attractive because they're easy to use. Who 
 Using shadow roots has potential. While it's a bit of work, the really hard stuff could be abstracted into libraries. The problem is currently we have no good way of inheriting the basic functionality of an `<input>`, and reinventing the wheel in an accessible way is challenging.
 
 As developers we want some magical solution where we can make style the desktop based controls and somehow leave mobile ones alone. And unfortunately this is a very hard problem to solve.
-
-If you have any ideas please chime in on the mailing lists.
