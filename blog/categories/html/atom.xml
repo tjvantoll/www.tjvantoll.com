@@ -4,7 +4,7 @@
   <title><![CDATA[Category: HTML | TJ VanToll]]></title>
   <link href="http://tjvantoll.com/blog/categories/html/atom.xml" rel="self"/>
   <link href="http://tjvantoll.com/"/>
-  <updated>2013-12-06T15:31:29-05:00</updated>
+  <updated>2013-12-08T23:10:12-05:00</updated>
   <id>http://tjvantoll.com/</id>
   <author>
     <name><![CDATA[TJ VanToll]]></name>
@@ -94,7 +94,7 @@
 
 <p><strong>2)</strong> By standardizing pseudo elements you limit the flexibility currently afforded to browsers to innovate. IE's <code>::-ms-check</code> pseudo-element is actually a perfect example of this. If <code>::check</code> were indeed standardized, it would prevent browsers from using a completely different representation of a checkbox, such as an iOS style switch (unless they violated the spec).</p>
 
-<p>Therefore while this solution seems appealing, it doesn't appear to be a viable solution to styling form controls on the web.</p>
+<p>Therefore while this solution seems appealing, it doesn't appear to be a complete solution to styling form controls on the web.</p>
 
 <h3>Using Shadow DOM</h3>
 
@@ -136,7 +136,7 @@
 
 <p>How do we move forward and make form controls on the web styleable?</p>
 
-<p>Standardizing pseudo elements seems attractive because they're easy to use. Who wants to create a new shadow root for an element just to change a few colors? However, I personally feel that there are just too many platform differences for this to be a viable option.</p>
+<p>Standardizing pseudo elements seems attractive because they're easy to use. Who wants to create a new shadow root for an element just to change a few colors? The large number of platform differences makes challenging, but it may be possible for simple elements.</p>
 
 <p>Using shadow roots has potential. While it's a bit of work, the really hard stuff could be abstracted into libraries. The problem is currently we have no good way of inheriting the basic functionality of an <code>&lt;input&gt;</code>, and reinventing the wheel in an accessible way is challenging.</p>
 
