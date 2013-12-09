@@ -82,7 +82,7 @@ Even if you wanted to standardize something, what would it be?
 
 **2)** By standardizing pseudo elements you limit the flexibility currently afforded to browsers to innovate. IE's `::-ms-check` pseudo-element is actually a perfect example of this. If `::check` were indeed standardized, it would prevent browsers from using a completely different representation of a checkbox, such as an iOS style switch (unless they violated the spec).
 
-Therefore while this solution seems appealing, it doesn't appear to be a viable solution to styling form controls on the web.
+Therefore while this solution seems appealing, it doesn't appear to be a complete solution to styling form controls on the web.
 
 ### Using Shadow DOM
 
@@ -125,7 +125,7 @@ Another downside is this uses the JavaScript based calendar on all platforms - e
 
 How do we move forward and make form controls on the web styleable?
 
-Standardizing pseudo elements seems attractive because they're easy to use. Who wants to create a new shadow root for an element just to change a few colors? However, I personally feel that there are just too many platform differences for this to be a viable option.
+Standardizing pseudo elements seems attractive because they're easy to use. Who wants to create a new shadow root for an element just to change a few colors? The large number of platform differences makes challenging, but it may be possible for simple elements.
 
 Using shadow roots has potential. While it's a bit of work, the really hard stuff could be abstracted into libraries. The problem is currently we have no good way of inheriting the basic functionality of an `<input>`, and reinventing the wheel in an accessible way is challenging.
 
