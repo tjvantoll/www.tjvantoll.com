@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Speaking | TJ VanToll]]></title>
   <link href="http://tjvantoll.com/blog/categories/speaking/atom.xml" rel="self"/>
   <link href="http://tjvantoll.com/"/>
-  <updated>2013-12-08T23:12:38-05:00</updated>
+  <updated>2014-01-23T10:42:13-05:00</updated>
   <id>http://tjvantoll.com/</id>
   <author>
     <name><![CDATA[TJ VanToll]]></name>
@@ -12,6 +12,51 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Speaking Tip: Use the iPad's Clock App as a Timer]]></title>
+    <link href="http://tjvantoll.com/2014/01/23/speaking-tip-use-the-ipad-clock-app-as-a-timer/"/>
+    <updated>2014-01-23T09:42:00-05:00</updated>
+    <id>http://tjvantoll.com/2014/01/23/speaking-tip-use-the-ipad-clock-app-as-a-timer</id>
+    <content type="html"><![CDATA[<p>I <a href="/speaking/">have been speaking</a> for some time now, and I've learned that keeping track of time is hard. And it's important; no one likes attending the talk that goes ten minutes over, or the talk that awkwardly ends half way through.</p>
+
+<p>Most presentation software - PowerPoint, Keynote, etc - shows the elapsed time, but I find that the display isn't obvious enough. For example, here's the presenter mode in PowerPoint:</p>
+
+<p><img src="http://tjvantoll.com/images/posts/2014-01-23/powerpoint.png" alt="View of PowerPoint's presenter mode"></p>
+
+<p>When I'm already nervous I don't want to pick out the time from an already busy screen. I want to use as little brain processing as possible.</p>
+
+<p>Furthermore, I usually use custom, HTML-based slide decks, or I'm doing a demo with no slides at all; therefore I don't have <em>any</em> timer available. Some conferences provide some timing help, but it's definitely not something you can rely on.</p>
+
+<p>This was a problem for me for a while. I rushed to finish my first big conference talk - just to discover I finished 15 minutes early. After some experimenting I finally found something that has worked for me, so I thought I'd share it.</p>
+
+<h3>iPad</h3>
+
+<p>I bring my iPad to my talks and use iOS's Clock app, set to the Stopwatch tab.</p>
+
+<p><img src="http://tjvantoll.com/images/posts/2014-01-23/clock.png" alt="View of iOS's clock app"></p>
+
+<p>This helps me out for a few reasons:</p>
+
+<ul>
+<li>The iPad is big, so the time is easy to see.</li>
+<li>Since the cover of the iPad is a stand, I can prop it somewhere near where I'm speaking.</li>
+</ul>
+
+
+<p>You can also use the Timer tab, but for some reason I've found that counting up (rather than counting down) is easier for my brain to process. If you go this route, there are two important thing to remember:</p>
+
+<ul>
+<li>Make sure the iPad is charged.</li>
+<li>Set the iPad to never sleep; specifically set Settings --> General --> Auto-Lock to "Never". This screen is shown below. This keeps your screen from turning off a few minutes into your talk.</li>
+</ul>
+
+
+<p><img src="http://tjvantoll.com/images/posts/2014-01-23/settings.png" alt="View of iOS's Auto-Lock settings"></p>
+
+<p>Obviously there's no <em>right</em> way to keep track of time, but I thought I'd share what has worked for me.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Front End Efficiency - The Top Ten]]></title>
