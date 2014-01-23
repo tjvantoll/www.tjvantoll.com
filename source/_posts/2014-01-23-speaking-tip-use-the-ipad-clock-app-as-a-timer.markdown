@@ -14,9 +14,9 @@ Most presentation software - PowerPoint, Keynote, etc - shows the elapsed time, 
 
 When I'm already nervous I don't want to pick out the time from an already busy screen. I want to use as little brain processing as possible.
 
-Furthermore, I usually use custom, HTML-based slide decks, or I'm doing a demo with no slides at all; therefore I don't have *any* timer available. Some conferences provide some timing help, but it's definitely not something you can rely on.
+Furthermore, I usually present with custom, HTML-based slide decks, or do demos with no slides at all; therefore I usually don't have *any* timer available. Some conferences provide some timing help, but it's definitely not something you can rely on.
 
-This was a problem for me for a while. I rushed to finish my first big conference talk - just to discover I finished 15 minutes early. After some experimenting I finally found something that has worked for me, so I thought I'd share it.
+This was a problem for me for a while. I rushed to finish my first big conference talk - just to discover I had finished 15 minutes early. After some experimenting I finally found something that has worked for me, so I thought I'd share it.
 
 ### iPad
 
