@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Adding Pointers to jQuery UI Tooltips - TJ VanToll - Tutorials, Thoughts, and Ramblings on Front End Development</title>
+  <title>Only the gzip Size Matters - TJ VanToll - Tutorials, Thoughts, and Ramblings on Front End Development</title>
   <meta name="author" content="TJ VanToll">
 
   
-  <meta name="description" content="The recent jQuery UI 1.9 release included a new tooltip plugin that can be used to create tooltips much like the native tooltips the browser provides &hellip;">
+  <meta name="description" content="Let&#8217;s just get it out there: the only size that matters for a CSS or JavaScript file is its gzipped size. And by gzipped size I mean: the size &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://tjvantoll.com/2012/10/24/adding-pointers-to-jquery-ui-tooltips">
+  <link rel="canonical" href="http://tjvantoll.com/2014/01/27/only-the-gzip-size-matters">
 
   <!--[if !lte IE 7]><!-->
     <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet">
@@ -106,7 +106,7 @@
   
   <header>
     
-      <h1 class="entry-title">Adding Pointers to jQuery UI Tooltips</h1>
+      <h1 class="entry-title">Only the gzip Size Matters</h1>
     
     
       <p class="meta">
@@ -122,7 +122,7 @@
   
 
 
-<time datetime="2012-10-24T20:58:00-04:00" pubdate data-updated="true">Oct 24<span>th</span>, 2012</time>
+<time datetime="2014-01-27T19:32:00-05:00" pubdate data-updated="true">Jan 27<span>th</span>, 2014</time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -131,28 +131,65 @@
   </header>
 
 
-<div class="entry-content"><p>The recent <a href="http://jqueryui.com/changelog/1.9.0/">jQuery UI 1.9 release</a> included a new <a href="http://jqueryui.com/tooltip/">tooltip plugin</a> that can be used to create tooltips much like the native tooltips the browser provides.  The difference is that jQuery UI&#8217;s version are completely customizable.</p>
+<div class="entry-content"><p>Let&#8217;s just get it out there: the only size that matters for a CSS or JavaScript file is its gzipped size.</p>
 
-<p>As such I thought I&#8217;d show a quick example of how you can create a pointer from the tooltip to its associated field.  The following will show a pointer tooltip a the text input.  You can change the location of the tooltip using the buttons.</p>
+<p>And by gzipped size I mean: the size of the file after it&#8217;s compressed using <a href="http://en.wikipedia.org/wiki/Gzip">gzip</a>&#8217;s compression algorithm. All browsers since IE6 have supported gzipped assets, and enabling gzip on web servers has been a <a href="https://developers.google.com/speed/docs/best-practices/payload#GzipCompression">best practice</a> for years now; therefore it&#8217;s relatively safe to assume that everyone who cares about the size of CSS or JavaScript files is gzipping them.</p>
 
-<!--more-->
+<p>This means that if you&#8217;re trying to find how big a front-end library is, the answer you need is not in Finder or Windows Explorer. While the uncompressed file size can give you a rough idea, you have no idea what the user will actually download until you gzip the files.</p>
+
+<h3>Running gzip</h3>
+
+<p>If you&#8217;re on OS X or Linux, you can run the <code>gzip</code> command on any file to compress it. For example the following shows the before and after of compressing jQuery 2.1.0.</p>
+
+<p><img src="/images/posts/2014-01-27/jquery.png" alt="Running gzip on jQuery from the command line"></p>
+
+<p>There are two things to note here:</p>
+
+<ol>
+<li><code>gzip</code> made quite the difference in file size - 82K down to 29K.</li>
+<li><code>gzip</code> replaces the original file; <code>jquery.js</code> is now <code>jquery.js.gz</code>.</li>
+</ol>
 
 
+<p>Because replacing the original file is a bit annoying, you can make <code>gzip</code> generate a new file with a <a href="http://unix.stackexchange.com/questions/46786/how-to-tell-gzip-to-keep-original-file#answer-58814">little shell magic</a>, shown below.</p>
 
+<p><img src="/images/posts/2014-01-27/jquery-new-file.png" alt="Running gzip on jQuery from the command line and generating a new file"></p>
 
-<div class="code_example"><h6>Pointer Tooltip Example<a href="/demos/2012-10-24/pointer.html" target="_blank">Open in New Window</a></h6><iframe style="width: 100%; height: 300px;" frameborder="0" src="/demos/2012-10-24/pointer.html"></iframe></div>
+<h3>Why It Matters</h3>
 
+<p>There is no set percentage that <code>gzip</code> will reduce the size of a JavaScript or CSS file by. There is no way to know for sure other than running <code>gzip</code>.</p>
 
-<p><a href="http://jsfiddle.net/tj_vantoll/kyBwU">View Demo on jsFiddle</a></p>
+<p>To show this, let&#8217;s look at the <a href="https://twitter.com/nelsonic/status/426724640090640384">specific situation</a> that made me feel the need to write this.</p>
 
-<p>So how is this done?</p>
+<p><img src="/images/posts/2014-01-27/twitter.png" alt="View of Twitter discussion of the size of the jQuery Mobile library"></p>
 
-<ul>
-<li>The <a href="http://api.jqueryui.com/tooltip/#option-position">position</a> option is used to place the tooltip appropriately around the textbox.  Importantly the <code>collision</code> property is set to <code>none</code>, since, if the tooltip were to be repositioned the arrow would be placed incorrectly.</li>
-<li>The pointers themselves are created using using the <code>::after</code> and <code>::before</code> pseudo-elements.  For some more information on the technique and to see some other variations there&#8217;s an excellent tutorial <a href="http://nicolasgallagher.com/pure-css-speech-bubbles/">here</a>.</li>
-<li>Since the <code>::after</code> and <code>::before</code> pseudo-elements are used to create the pointers, IE &lt; 8 users will not see them.  However, they&#8217;ll simply see the default pointerless tooltip, no harm done. <i>Note: IE8 supports the before/after pseudo-elements but as <code>:before</code> and <code>:after</code> instead of <code>::before</code> and <code>::after</code>. So if you need IE8 support use <code>:before</code> and <code>:after</code>.</i></li>
-</ul>
+<p>414K! Yikes! But remember, this is the file size that is shown in Finder, not the size that the user is actually going to download from a server with gzip enabled.</p>
 
+<p>To see what the user will actually download, we have to run <code>gzip</code>. Below we run <code>gzip</code> on each of jQuery Mobile&#8217;s files.</p>
+
+<p><img src="/images/posts/2014-01-27/jquery-mobile.png" alt="Running gzip on jQuery Mobile files"></p>
+
+<p>As you can see, <code>gzip</code> reduced our two files down to a combined 88K. Quite the difference! Take note of one more thing: the drastic difference running <code>gzip</code> made on <code>jquery.mobile.css</code> - 216K to 25K. A savings of 88.5%!</p>
+
+<p>Why was the compression so successful here?</p>
+
+<p><a href="http://blog.jquerymobile.com/2013/12/23/jquery-mobile-1-4-0-released/">jQuery Mobile 1.4</a> made a big change to the way they handle images - namely, they now embed images directly within their css file to avoid separate HTTP requests. Because of this change, <a href="http://code.jquery.com/mobile/1.4.0/jquery.mobile-1.4.0.min.css">their CSS file</a> is packed full of <a href="https://developer.mozilla.org/en-US/docs/data_URIs">data URIs</a>.</p>
+
+<p>How does this relate to <code>gzip</code>?</p>
+
+<p>At a high level, the compression algorithm that runs under the hoods of <code>gzip</code> finds repeated strings and replaces them with symbols. Because of this, the files that compress best are the ones with a lot of repeated strings - such as a file with a bunch of data URIs.</p>
+
+<p>Just look at all the repeated strings in jQuery Mobile&#8217;s CSS. <code>gzip</code> is practically salivating.</p>
+
+<p><img src="/images/posts/2014-01-27/jquery-mobile-source.png" alt="View of jQuery mobile 1.4's CSS source"></p>
+
+<p><em>Note: If you concatenate your files <code>gzip</code> gets better. Bigger files = more repeated strings to substitute.</em></p>
+
+<h3>Wrapping Up</h3>
+
+<p>Anyways, the point is: if you&#8217;re assessing the size of a library, framework, or whatever - run <code>gzip</code> on it first. Since it&#8217;s what the user actually downloads, it&#8217;s the only size that matters for front-end assets.</p>
+
+<p>Because size is paramount in jQuery core, they actually make <a href="http://bugs.jquery.com/ticket/12229">changes</a> to improve how well the library is optimized by <code>gzip</code>&#8217;s compression algorithm.</p>
 </div>
 
 
@@ -175,12 +212,12 @@
   
 
 
-<time datetime="2012-10-24T20:58:00-04:00" pubdate data-updated="true">Oct 24<span>th</span>, 2012</time>
+<time datetime="2014-01-27T19:32:00-05:00" pubdate data-updated="true">Jan 27<span>th</span>, 2014</time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/css/'>CSS</a>, <a class='category' href='/blog/categories/jquery-ui/'>jQuery UI</a>
+    <a class='category' href='/blog/categories/efficiency/'>Efficiency</a>, <a class='category' href='/blog/categories/javascript/'>JavaScript</a>
   
 </span>
 
@@ -193,7 +230,7 @@
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://tjvantoll.com/2012/10/24/adding-pointers-to-jquery-ui-tooltips/" data-via="tjvantoll" data-counturl="http://tjvantoll.com/2012/10/24/adding-pointers-to-jquery-ui-tooltips/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://tjvantoll.com/2014/01/27/only-the-gzip-size-matters/" data-via="tjvantoll" data-counturl="http://tjvantoll.com/2014/01/27/only-the-gzip-size-matters/" >Tweet</a>
   
   
   
@@ -202,10 +239,8 @@
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/2012/10/23/front-end-efficiency-the-top-ten/" title="Previous Post: Front End Efficiency - The Top Ten">&laquo; Front End Efficiency - The Top Ten</a>
+        <a class="basic-alignment left" href="/2014/01/23/speaking-tip-use-the-ipad-clock-app-as-a-timer/" title="Previous Post: Speaking Tip: Use the iPad's Clock App as a Timer">&laquo; Speaking Tip: Use the iPad's Clock App as a Timer</a>
       
-      
-        <a class="basic-alignment right" href="/2012/11/08/creating-a-polished-vertical-tabs-interaction-with-jquery-ui/" title="Next Post: Creating a Polished Vertical Tabs Interaction with jQuery UI">Creating a Polished Vertical Tabs Interaction with jQuery UI &raquo;</a>
       
     </p>
   </footer>
@@ -288,8 +323,8 @@
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://tjvantoll.com/2012/10/24/adding-pointers-to-jquery-ui-tooltips/';
-        var disqus_url = 'http://tjvantoll.com/2012/10/24/adding-pointers-to-jquery-ui-tooltips/';
+        var disqus_identifier = 'http://tjvantoll.com/2014/01/27/only-the-gzip-size-matters/';
+        var disqus_url = 'http://tjvantoll.com/2014/01/27/only-the-gzip-size-matters/';
         var disqus_script = 'embed.js';
       
     (function () {

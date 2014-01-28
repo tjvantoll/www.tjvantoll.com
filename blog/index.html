@@ -9,7 +9,7 @@
   <meta name="author" content="TJ VanToll">
 
   
-  <meta name="description" content="I have been speaking for some time now, and I&#8217;ve learned that keeping track of time is hard. And it&#8217;s important; no one likes attending &hellip;">
+  <meta name="description" content="Let&#8217;s just get it out there: the only size that matters for a CSS or JavaScript file is its gzipped size. And by gzipped size I mean: the size &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -103,6 +103,102 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2014/01/27/only-the-gzip-size-matters/">Only the gzip Size Matters</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-01-27T19:32:00-05:00" pubdate data-updated="true">Jan 27<span>th</span>, 2014</time>
+        
+         | <a href="/2014/01/27/only-the-gzip-size-matters/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Let&#8217;s just get it out there: the only size that matters for a CSS or JavaScript file is its gzipped size.</p>
+
+<p>And by gzipped size I mean: the size of the file after it&#8217;s compressed using <a href="http://en.wikipedia.org/wiki/Gzip">gzip</a>&#8217;s compression algorithm. All browsers since IE6 have supported gzipped assets, and enabling gzip on web servers has been a <a href="https://developers.google.com/speed/docs/best-practices/payload#GzipCompression">best practice</a> for years now; therefore it&#8217;s relatively safe to assume that everyone who cares about the size of CSS or JavaScript files is gzipping them.</p>
+
+<p>This means that if you&#8217;re trying to find how big a front-end library is, the answer you need is not in Finder or Windows Explorer. While the uncompressed file size can give you a rough idea, you have no idea what the user will actually download until you gzip the files.</p>
+
+<h3>Running gzip</h3>
+
+<p>If you&#8217;re on OS X or Linux, you can run the <code>gzip</code> command on any file to compress it. For example the following shows the before and after of compressing jQuery 2.1.0.</p>
+
+<p><img src="/images/posts/2014-01-27/jquery.png" alt="Running gzip on jQuery from the command line"></p>
+
+<p>There are two things to note here:</p>
+
+<ol>
+<li><code>gzip</code> made quite the difference in file size - 82K down to 29K.</li>
+<li><code>gzip</code> replaces the original file; <code>jquery.js</code> is now <code>jquery.js.gz</code>.</li>
+</ol>
+
+
+<p>Because replacing the original file is a bit annoying, you can make <code>gzip</code> generate a new file with a <a href="http://unix.stackexchange.com/questions/46786/how-to-tell-gzip-to-keep-original-file#answer-58814">little shell magic</a>, shown below.</p>
+
+<p><img src="/images/posts/2014-01-27/jquery-new-file.png" alt="Running gzip on jQuery from the command line and generating a new file"></p>
+
+<h3>Why It Matters</h3>
+
+<p>There is no set percentage that <code>gzip</code> will reduce the size of a JavaScript or CSS file by. There is no way to know for sure other than running <code>gzip</code>.</p>
+
+<p>To show this, let&#8217;s look at the <a href="https://twitter.com/nelsonic/status/426724640090640384">specific situation</a> that made me feel the need to write this.</p>
+
+<p><img src="/images/posts/2014-01-27/twitter.png" alt="View of Twitter discussion of the size of the jQuery Mobile library"></p>
+
+<p>414K! Yikes! But remember, this is the file size that is shown in Finder, not the size that the user is actually going to download from a server with gzip enabled.</p>
+
+<p>To see what the user will actually download, we have to run <code>gzip</code>. Below we run <code>gzip</code> on each of jQuery Mobile&#8217;s files.</p>
+
+<p><img src="/images/posts/2014-01-27/jquery-mobile.png" alt="Running gzip on jQuery Mobile files"></p>
+
+<p>As you can see, <code>gzip</code> reduced our two files down to a combined 88K. Quite the difference! Take note of one more thing: the drastic difference running <code>gzip</code> made on <code>jquery.mobile.css</code> - 216K to 25K. A savings of 88.5%!</p>
+
+<p>Why was the compression so successful here?</p>
+
+<p><a href="http://blog.jquerymobile.com/2013/12/23/jquery-mobile-1-4-0-released/">jQuery Mobile 1.4</a> made a big change to the way they handle images - namely, they now embed images directly within their css file to avoid separate HTTP requests. Because of this change, <a href="http://code.jquery.com/mobile/1.4.0/jquery.mobile-1.4.0.min.css">their CSS file</a> is packed full of <a href="https://developer.mozilla.org/en-US/docs/data_URIs">data URIs</a>.</p>
+
+<p>How does this relate to <code>gzip</code>?</p>
+
+<p>At a high level, the compression algorithm that runs under the hoods of <code>gzip</code> finds repeated strings and replaces them with symbols. Because of this, the files that compress best are the ones with a lot of repeated strings - such as a file with a bunch of data URIs.</p>
+
+<p>Just look at all the repeated strings in jQuery Mobile&#8217;s CSS. <code>gzip</code> is practically salivating.</p>
+
+<p><img src="/images/posts/2014-01-27/jquery-mobile-source.png" alt="View of jQuery mobile 1.4's CSS source"></p>
+
+<p><em>Note: If you concatenate your files <code>gzip</code> gets better. Bigger files = more repeated strings to substitute.</em></p>
+
+<h3>Wrapping Up</h3>
+
+<p>Anyways, the point is: if you&#8217;re assessing the size of a library, framework, or whatever - run <code>gzip</code> on it first. Since it&#8217;s what the user actually downloads, it&#8217;s the only size that matters for front-end assets.</p>
+
+<p>Because size is paramount in jQuery core, they actually make <a href="http://bugs.jquery.com/ticket/12229">changes</a> to improve how well the library is optimized by <code>gzip</code>&#8217;s compression algorithm.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -765,57 +861,6 @@ Adding a strikethrough to a line of text in CSS is easy.</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2013/05/28/showing-a-resize-icon-on-a-jquery-ui-dialog/">Showing a Resize Icon on a jQuery UI Dialog</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-05-28T21:09:00-04:00" pubdate data-updated="true">May 28<span>th</span>, 2013</time>
-        
-         | <a href="/2013/05/28/showing-a-resize-icon-on-a-jquery-ui-dialog/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Upon <a href="http://jqueryui.com/upgrade-guide/1.10/">upgrading to jQuery UI 1.10</a> you might notice a visual change to the dialog widget - the resize icon no longer displays by default:</p>
-
-<p>Default dialog display in 1.9:</p>
-
-<p><img src="/images/posts/2013-05-28/dialog-1.9.png" alt="Default display of jQuery UI's dialog in version 1.9"></p>
-
-<p>Default dialog display in 1.10:</p>
-
-<p><img src="/images/posts/2013-05-28/dialog-1.10.png" alt="Default display of jQuery UI's dialog in version 1.10"></p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/2013/05/28/showing-a-resize-icon-on-a-jquery-ui-dialog/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -848,6 +893,10 @@ Adding a strikethrough to a line of text in CSS is easy.</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2014/01/27/only-the-gzip-size-matters/">Only the gzip Size Matters</a>
+      </li>
+    
+      <li class="post">
         <a href="/2014/01/23/speaking-tip-use-the-ipad-clock-app-as-a-timer/">Speaking Tip: Use the iPad&#8217;s Clock App as a Timer</a>
       </li>
     
@@ -861,10 +910,6 @@ Adding a strikethrough to a line of text in CSS is easy.</p>
     
       <li class="post">
         <a href="/2013/09/12/building-custom-text-strikethroughs-with-css/">Building Custom Text Strikethroughs with CSS</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2013/08/30/bugs-with-document-activeelement-in-internet-explorer/">Bugs with document.activeElement in Internet Explorer</a>
       </li>
     
   </ul>
