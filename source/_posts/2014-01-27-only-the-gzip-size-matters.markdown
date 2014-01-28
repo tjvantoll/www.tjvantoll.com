@@ -10,7 +10,7 @@ Let's just get it out there: the only size that matters for a CSS or JavaScript 
 
 And by gzipped size I mean: the size of the file after it's compressed using [gzip](http://en.wikipedia.org/wiki/Gzip)'s compression algorithm. All browsers since IE6 have supported gzipped assets, and enabling gzip on web servers has been a [best practice](https://developers.google.com/speed/docs/best-practices/payload#GzipCompression) for years now; therefore it's relatively safe to assume that everyone who cares about the size of CSS or JavaScript files is gzipping them.
 
-This means that if you're trying to find how big a front-end library is, the answer you need is not in Finder or Windows Explorer. While the uncompressed file size can give you a rough idea, you have no idea what the user will actually download until you gzip the files.
+So if you're trying to find how big a front-end library is, the answer you need is not in Finder or Windows Explorer. While the uncompressed file size can give you a rough idea, you have no idea what the user will actually download until you gzip the files.
 
 ### Running gzip
 
