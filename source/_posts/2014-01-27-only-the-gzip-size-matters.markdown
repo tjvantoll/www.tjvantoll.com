@@ -12,6 +12,8 @@ And by gzipped size I mean: the size of the file after it's compressed using [gz
 
 So if you're trying to find how big a front-end library is, the answer you need is not in Finder or Windows Explorer. While the uncompressed file size can give you a rough idea, you have no idea what the user will actually download until you gzip the files.
 
+<!--more-->
+
 ### Running gzip
 
 If you're on OS X or Linux, you can run the `gzip` command on any file to compress it. For example the following shows the before and after of compressing jQuery 2.1.0.

@@ -18,6 +18,8 @@ Furthermore, I usually present with custom, HTML-based slide decks, or do demos 
 
 This was a problem for me for a while. I rushed to finish my first big conference talk - just to discover I had finished 15 minutes early. After some experimenting I finally found something that has worked for me, so I thought I'd share it.
 
+<!--more-->
+
 ### iPad
 
 I bring my iPad to my talks and use iOS's Clock app, set to the Stopwatch tab.

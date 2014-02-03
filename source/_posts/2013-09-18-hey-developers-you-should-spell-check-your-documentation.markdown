@@ -16,6 +16,8 @@ Increasingly this documentation is markdown, XML, or JSON files stored in a git 
 
 Bad spelling makes your documentation look less professional, and less professional documentation reflects badly on your library, product, or whatever. Therefore I thought I'd share what I do in Sublime Text to help prevent mistakes.
 
+<!--more-->
+
 ### What I Do
 
 Like most editors, Sublime Text has spell checking built in, but it is turned off by default. You can turn it on by adding `"spell_check": true` to your user preferences file, which is opened with `Command` + `,` on OS X and `Control` + `,` on Windows.
