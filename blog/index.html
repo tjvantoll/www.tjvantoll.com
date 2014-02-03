@@ -141,61 +141,12 @@
 
 <p>So if you&#8217;re trying to find how big a front-end library is, the answer you need is not in Finder or Windows Explorer. While the uncompressed file size can give you a rough idea, you have no idea what the user will actually download until you gzip the files.</p>
 
-<h3>Running gzip</h3>
-
-<p>If you&#8217;re on OS X or Linux, you can run the <code>gzip</code> command on any file to compress it. For example the following shows the before and after of compressing jQuery 2.1.0.</p>
-
-<p><img src="/images/posts/2014-01-27/jquery.png" alt="Running gzip on jQuery from the command line"></p>
-
-<p>There are two things to note here:</p>
-
-<ol>
-<li><code>gzip</code> made quite the difference in file size - 82K down to 29K.</li>
-<li><code>gzip</code> replaces the original file; <code>jquery.js</code> is now <code>jquery.js.gz</code>.</li>
-</ol>
-
-
-<p>Because replacing the original file is a bit annoying, you can make <code>gzip</code> generate a new file with a <a href="http://unix.stackexchange.com/questions/46786/how-to-tell-gzip-to-keep-original-file#answer-58814">little shell magic</a>, shown below.</p>
-
-<p><img src="/images/posts/2014-01-27/jquery-new-file.png" alt="Running gzip on jQuery from the command line and generating a new file"></p>
-
-<h3>Why It Matters</h3>
-
-<p>There is no set percentage that <code>gzip</code> will reduce the size of a JavaScript or CSS file by. There is no way to know for sure other than running <code>gzip</code>.</p>
-
-<p>To show this, let&#8217;s look at the <a href="https://twitter.com/nelsonic/status/426724640090640384">specific situation</a> that made me feel the need to write this.</p>
-
-<p><img src="/images/posts/2014-01-27/twitter.png" alt="View of Twitter discussion of the size of the jQuery Mobile library"></p>
-
-<p>414K! Yikes! But remember, this is the file size that is shown in Finder, not the size that the user is actually going to download from a server with gzip enabled.</p>
-
-<p>To see what the user will actually download, we have to run <code>gzip</code>. Below we run <code>gzip</code> on each of jQuery Mobile&#8217;s files.</p>
-
-<p><img src="/images/posts/2014-01-27/jquery-mobile.png" alt="Running gzip on jQuery Mobile files"></p>
-
-<p>As you can see, <code>gzip</code> reduced our two files down to a combined 88K. Quite the difference! Take note of one more thing: the drastic difference running <code>gzip</code> made on <code>jquery.mobile.css</code> - 216K to 25K. A savings of 88.5%!</p>
-
-<p>Why was the compression so successful here?</p>
-
-<p><a href="http://blog.jquerymobile.com/2013/12/23/jquery-mobile-1-4-0-released/">jQuery Mobile 1.4</a> made a big change to the way they handle images - namely, they now embed images directly within their css file to avoid separate HTTP requests. Because of this change, <a href="http://code.jquery.com/mobile/1.4.0/jquery.mobile-1.4.0.min.css">their CSS file</a> is packed full of <a href="https://developer.mozilla.org/en-US/docs/data_URIs">data URIs</a>.</p>
-
-<p>How does this relate to <code>gzip</code>?</p>
-
-<p>At a high level, the compression algorithm that runs under the hoods of <code>gzip</code> finds repeated strings and replaces them with symbols. Because of this, the files that compress best are the ones with a lot of repeated strings - such as a file with a bunch of data URIs.</p>
-
-<p>Just look at all the repeated strings in jQuery Mobile&#8217;s CSS. <code>gzip</code> is practically salivating.</p>
-
-<p><img src="/images/posts/2014-01-27/jquery-mobile-source.png" alt="View of jQuery mobile 1.4's CSS source"></p>
-
-<p><em>Note: If you concatenate your files <code>gzip</code> gets better. Bigger files = more repeated strings to substitute.</em></p>
-
-<h3>Wrapping Up</h3>
-
-<p>Anyways, the point is: if you&#8217;re assessing the size of a library, framework, or whatever - run <code>gzip</code> on it first. Since it&#8217;s what the user actually downloads, it&#8217;s the only size that matters for front-end assets.</p>
-
-<p>Because size is paramount in jQuery core, they actually make <a href="http://bugs.jquery.com/ticket/12229">changes</a> to improve how well the library is optimized by <code>gzip</code>&#8217;s compression algorithm.</p>
 </div>
   
+  
+    <footer>
+      <a rel="full-article" href="/2014/01/27/only-the-gzip-size-matters/">Read on &rarr;</a>
+    </footer>
   
 
 
@@ -243,33 +194,12 @@
 
 <p>This was a problem for me for a while. I rushed to finish my first big conference talk - just to discover I had finished 15 minutes early. After some experimenting I finally found something that has worked for me, so I thought I&#8217;d share it.</p>
 
-<h3>iPad</h3>
-
-<p>I bring my iPad to my talks and use iOS&#8217;s Clock app, set to the Stopwatch tab.</p>
-
-<p><img src="/images/posts/2014-01-23/clock.png" alt="View of iOS's clock app"></p>
-
-<p>This helps me out for a few reasons:</p>
-
-<ul>
-<li>The iPad is big, so the time is easy to see.</li>
-<li>Since the cover of the iPad is a stand, I can prop it somewhere near where I&#8217;m speaking.</li>
-</ul>
-
-
-<p>You can also use the Timer tab, but for some reason I&#8217;ve found that counting up (rather than counting down) is easier for my brain to process. If you go this route, there are two important thing to remember:</p>
-
-<ul>
-<li>Make sure the iPad is charged.</li>
-<li>Set the iPad to never sleep; specifically set Settings &#8211;> General &#8211;> Auto-Lock to &#8220;Never&#8221;. This screen is shown below. This keeps your screen from turning off a few minutes into your talk.</li>
-</ul>
-
-
-<p><img src="/images/posts/2014-01-23/settings.png" alt="View of iOS's Auto-Lock settings"></p>
-
-<p>Obviously there&#8217;s no <em>right</em> way to keep track of time, but I thought I&#8217;d share what has worked for me.</p>
 </div>
   
+  
+    <footer>
+      <a rel="full-article" href="/2014/01/23/speaking-tip-use-the-ipad-clock-app-as-a-timer/">Read on &rarr;</a>
+    </footer>
   
 
 
@@ -364,36 +294,12 @@
 
 <p>Bad spelling makes your documentation look less professional, and less professional documentation reflects badly on your library, product, or whatever. Therefore I thought I&#8217;d share what I do in Sublime Text to help prevent mistakes.</p>
 
-<h3>What I Do</h3>
-
-<p>Like most editors, Sublime Text has spell checking built in, but it is turned off by default. You can turn it on by adding <code>"spell_check": true</code> to your user preferences file, which is opened with <code>Command</code> + <code>,</code> on OS X and <code>Control</code> + <code>,</code> on Windows.</p>
-
-<p>Because spell checking is a configurable property, turning it on and off is a matter of toggling the property&#8217;s value:</p>
-
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="cm">/* Writing docs */</span>
-</span><span class='line'><span class="s2">&quot;spell_check&quot;</span><span class="o">:</span> <span class="kc">true</span>
-</span><span class='line'>
-</span><span class='line'><span class="cm">/* Writing code */</span>
-</span><span class='line'><span class="s2">&quot;spell_check&quot;</span><span class="o">:</span> <span class="kc">false</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Like most spell checkers, you can right click misspelled words to get suggested fixes:</p>
-
-<p><img src="/images/posts/2013-09-18/corrections.png"></p>
-
-<p>You can also tell Sublime to ignore certain words:</p>
-
-<p><img src="/images/posts/2013-09-18/ignore.png"></p>
-
-<p>The hardest part of course is actually remembering to turn the spell checker on. But, even if you only remember occasionally, you can still catch a lot of misspellings.</p>
 </div>
   
+  
+    <footer>
+      <a rel="full-article" href="/2013/09/18/hey-developers-you-should-spell-check-your-documentation/">Read on &rarr;</a>
+    </footer>
   
 
 

@@ -4,7 +4,7 @@
   <title><![CDATA[Category: JavaScript | TJ VanToll]]></title>
   <link href="http://tjvantoll.com/blog/categories/javascript/atom.xml" rel="self"/>
   <link href="http://tjvantoll.com/"/>
-  <updated>2014-02-03T09:22:27-05:00</updated>
+  <updated>2014-02-03T09:38:50-05:00</updated>
   <id>http://tjvantoll.com/</id>
   <author>
     <name><![CDATA[TJ VanToll]]></name>
@@ -23,6 +23,9 @@
 <p>And by gzipped size I mean: the size of the file after it's compressed using <a href="http://en.wikipedia.org/wiki/Gzip">gzip</a>'s compression algorithm. All browsers since IE6 have supported gzipped assets, and enabling gzip on web servers has been a <a href="https://developers.google.com/speed/docs/best-practices/payload#GzipCompression">best practice</a> for years now; therefore it's relatively safe to assume that everyone who cares about the size of CSS or JavaScript files is gzipping them.</p>
 
 <p>So if you're trying to find how big a front-end library is, the answer you need is not in Finder or Windows Explorer. While the uncompressed file size can give you a rough idea, you have no idea what the user will actually download until you gzip the files.</p>
+
+<!--more-->
+
 
 <h3>Running gzip</h3>
 
