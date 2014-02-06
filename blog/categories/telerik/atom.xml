@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Telerik | TJ VanToll]]></title>
   <link href="http://tjvantoll.com/blog/categories/telerik/atom.xml" rel="self"/>
   <link href="http://tjvantoll.com/"/>
-  <updated>2014-02-06T13:46:05-05:00</updated>
+  <updated>2014-02-06T14:35:32-05:00</updated>
   <id>http://tjvantoll.com/</id>
   <author>
     <name><![CDATA[TJ VanToll]]></name>
@@ -131,7 +131,7 @@ FB.api( "/me/friends", { fields: "id, name, picture" });
 
 <p>To show this API in action, I built an AppBuilder app that logs the user in, and displays their friends in a <a href="http://demos.telerik.com/kendo-ui/mobile/listview/index.html">Kendo UI Mobile ListView</a>. The app is available at <a href="https://github.com/tjvantoll/Facebook-Connect">https://github.com/tjvantoll/Facebook-Connect</a>.</p>
 
-<p>If you try this out, please let me know if everything works alright for you. If there are any additional integrations or examples you'd like to see let me know that as well.</p>
+<p>If you try this out, please let me know if everything works alright for you in the comments below. If there are any additional integrations or examples you'd like to see, let me know that as well.</p>
 ]]></content>
   </entry>
   
