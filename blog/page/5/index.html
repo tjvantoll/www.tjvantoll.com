@@ -9,16 +9,7 @@
   <meta name="author" content="TJ VanToll">
 
   
-  <meta name="description" content="Quiz: What is logged when the following markup is rendered? 1
-2
-3
-4
-5
-6
-7
-8
-9
-&lt;html&gt; &lt;head&gt;&lt;/head&gt; &lt;body&gt; &lt;button id=&quot &hellip;">
+  <meta name="description" content="Browsers that support HTML5 form validation have one thing in common; if a &lt;form&gt; is submitted and has errors on multiple fields, the browser &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -113,6 +104,56 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2012/08/05/html5-form-validation-showing-all-error-messages/">HTML5 Form Validation - Showing All Error Messages</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-08-05T16:21:00-04:00" pubdate data-updated="true">Aug 5<span>th</span>, 2012</time>
+        
+         | <a href="/2012/08/05/html5-form-validation-showing-all-error-messages/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><a href="http://caniuse.com/#feat=form-validation">Browsers that support HTML5 form validation</a> have one thing in common; if a <code>&lt;form&gt;</code> is submitted and has errors on multiple fields, the browser will only display the first error to the user.</p>
+
+<p>Turns out the spec leaves the specific means of handling multiple errors up to the browser itself:</p>
+
+<blockquote><p>Report the problems with the constraints of at least one of the elements given in unhandled invalid controls to the user. User agents may focus one of those elements in the process, by running the focusing steps for that element, and may change the scrolling position of the document, or perform some other action that brings the element to the user&#8217;s attention.</p><p>User agents may report more than one constraint violation. User agents may coalesce related constraint violation reports if appropriate (e.g. if multiple radio buttons in a group are marked as required, only one error need be reported).</p><footer><strong>HTML5 Specification</strong> <cite><a href='http://www.whatwg.org/specs/web-apps/current-work/#the-constraint-validation-api'>www.whatwg.org/specs/web-apps/&hellip;</a></cite></footer></blockquote>
+
+
+<p>The key part here being that user agents (i.e. browsers) <strong>MAY</strong> report more than one constraint violation (i.e. error).  Turns out they all decided not to.</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/2012/08/05/html5-form-validation-showing-all-error-messages/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -585,64 +626,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2012/03/17/Styling-Disabled-Form-Fields/">Styling Disabled Form Fields</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-03-17T00:00:00-04:00" pubdate data-updated="true">Mar 17<span>th</span>, 2012</time>
-        
-         | <a href="/2012/03/17/Styling-Disabled-Form-Fields/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Form fields can be disabled by simply adding the <code>disabled</code> attribute.</p>
-
-<figure class='code'><figcaption class='not_empty'><span>Simple Disabled Fields</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;text&quot;</span> <span class="na">disabled</span> <span class="nt">/&gt;</span>
-</span><span class='line'><span class="nt">&lt;textarea</span> <span class="na">disabled</span><span class="nt">&gt;&lt;/textarea&gt;</span>
-</span><span class='line'><span class="nt">&lt;select</span> <span class="na">disabled</span><span class="nt">&gt;&lt;/select&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Disabled fields cannot be interacted with by the user; the browser will not allow the field to receive focus or be tabbed to.  For an intuitive UI it&#8217;s important that disabled fields are clearly evident to the user.  Users are easily confused and frustrated when attempting to interact with fields that they are not able to.</p>
-
-<p>To apply custom styling to disabled fields you can add CSS rules that target <code>input:disabled</code>, <code>select:disabled</code>, &amp; <code>textarea:disabled</code>. (Note: IE doesn&#8217;t support the <a href="https://developer.mozilla.org/En/CSS/%3Adisabled">disabled pseduo class</a> until IE9, so you&#8217;ll need to use <code>input[disabled]</code>, <code>select[disabled]</code>, &amp; <code>textarea[disabled]</code> <a href="https://developer.mozilla.org/en/CSS/Attribute_selectors">attribute selectors</a> if IE &lt; 9 support is important for you.  It&#8217;ll work just the same.)</p>
-
-<p>While you <i>can</i> provide custom disabled field styling, it&#8217;s not generally a good idea.  All browsers come with default styling for these fields that attempt to mesh with native UI elements in the OS.  Also, users have a certain expectation for what disabled fields look like in their preferred web browser and it&#8217;s best not to mess with that.</p>
-
-<p>Unfortunately some browser&#8217;s default styling is less than ideal.  </div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/2012/03/17/Styling-Disabled-Form-Fields/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/6/">&larr; Older</a>
@@ -677,6 +660,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2014/02/06/connecting-appbuilder-projects-to-facebook/">Connecting AppBuilder Projects to Facebook</a>
+      </li>
+    
+      <li class="post">
         <a href="/2014/01/27/only-the-gzip-size-matters/">Only the gzip Size Matters</a>
       </li>
     
@@ -690,10 +677,6 @@
     
       <li class="post">
         <a href="/2013/09/18/hey-developers-you-should-spell-check-your-documentation/">Hey Developers - You Should Spell Check Your Documentation</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2013/09/12/building-custom-text-strikethroughs-with-css/">Building Custom Text Strikethroughs with CSS</a>
       </li>
     
   </ul>

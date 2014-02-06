@@ -9,7 +9,7 @@
   <meta name="author" content="TJ VanToll">
 
   
-  <meta name="description" content="Upon upgrading to jQuery UI 1.10 you might notice a visual change to the dialog widget - the resize icon no longer displays by default: Default &hellip;">
+  <meta name="description" content="Showing and hiding elements has the potential to get complicated in large applications. As a small example, say you have the following form that both &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -104,6 +104,98 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2013/06/19/using-semantic-class-names-to-show-and-hide-elements/">Using Semantic Class Names to Show and Hide Elements</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-06-19T21:29:00-04:00" pubdate data-updated="true">Jun 19<span>th</span>, 2013</time>
+        
+         | <a href="/2013/06/19/using-semantic-class-names-to-show-and-hide-elements/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Showing and hiding elements has the potential to get complicated in large applications.</p>
+
+<p>As a small example, say you have the following form that both displays a user&#8217;s data as well as allows them to edit it:</p>
+
+<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;form&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;fieldset&gt;</span>
+</span><span class='line'>        <span class="nt">&lt;legend&gt;</span>Account Information<span class="nt">&lt;/legend&gt;</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="nt">&lt;div&gt;</span>
+</span><span class='line'>            <span class="nt">&lt;label</span> <span class="na">for=</span><span class="s">&quot;name&quot;</span><span class="nt">&gt;</span>Name:<span class="nt">&lt;/label&gt;</span>
+</span><span class='line'>            <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;text&quot;</span> <span class="na">id=</span><span class="s">&quot;name&quot;</span> <span class="na">value=</span><span class="s">&quot;TJ&quot;</span> <span class="na">required</span><span class="nt">&gt;</span>
+</span><span class='line'>            <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">&quot;display&quot;</span><span class="nt">&gt;</span>TJ<span class="nt">&lt;/span&gt;</span>
+</span><span class='line'>        <span class="nt">&lt;/div&gt;</span>
+</span><span class='line'>        <span class="nt">&lt;div&gt;</span>
+</span><span class='line'>            <span class="nt">&lt;label</span> <span class="na">for=</span><span class="s">&quot;email&quot;</span><span class="nt">&gt;</span>Email:<span class="nt">&lt;/label&gt;</span>
+</span><span class='line'>            <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;email&quot;</span> <span class="na">id=</span><span class="s">&quot;email&quot;</span> <span class="na">value=</span><span class="s">&quot;tj@somedomain.com&quot;</span> <span class="na">required</span><span class="nt">&gt;</span>
+</span><span class='line'>            <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">&quot;display&quot;</span><span class="nt">&gt;</span>tj@somedomain.com<span class="nt">&lt;/span&gt;</span>
+</span><span class='line'>        <span class="nt">&lt;/div&gt;</span>
+</span><span class='line'>        <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;actions&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>            <span class="nt">&lt;button</span> <span class="na">type=</span><span class="s">&quot;button&quot;</span> <span class="na">class=</span><span class="s">&quot;edit&quot;</span><span class="nt">&gt;</span>Edit<span class="nt">&lt;/button&gt;</span>
+</span><span class='line'>            <span class="nt">&lt;button</span> <span class="na">type=</span><span class="s">&quot;submit&quot;</span> <span class="na">class=</span><span class="s">&quot;save&quot;</span><span class="nt">&gt;</span>Save<span class="nt">&lt;/button&gt;</span>
+</span><span class='line'>            <span class="nt">&lt;button</span> <span class="na">type=</span><span class="s">&quot;button&quot;</span> <span class="na">class=</span><span class="s">&quot;cancel&quot;</span><span class="nt">&gt;</span>Cancel<span class="nt">&lt;/button&gt;</span>
+</span><span class='line'>        <span class="nt">&lt;/div&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;/fieldset&gt;</span>
+</span><span class='line'><span class="nt">&lt;/form&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/2013/06/19/using-semantic-class-names-to-show-and-hide-elements/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -586,66 +678,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2013/01/28/stop-messing-with-the-browsers-default-focus-outline/">Stop Messing with the Browser&#8217;s Default Focus outline</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-01-28T20:57:00-05:00" pubdate data-updated="true">Jan 28<span>th</span>, 2013</time>
-        
-         | <a href="/2013/01/28/stop-messing-with-the-browsers-default-focus-outline/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>This is the latest in my series of accessibility best practices after getting frustrated with using a keyboard on the internet.  Last time I talked about <a href="/2013/01/01/enter-should-submit-forms-stop-messing-with-that/">enter submitting forms</a>, this time I&#8217;m going to explain why removing the browser&#8217;s default focus <code>outline</code> is a bad idea.</p>
-
-<h3>Focus Rings</h3>
-
-<p>All browsers have a default value they apply to the currently focused item.  For example Chrome on OS X uses the following:</p>
-
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nd">:focus</span> <span class="p">{</span>
-</span><span class='line'>    <span class="c">/* -webkit-focus-ring-color = &#39;#5B9DD9&#39; */</span>
-</span><span class='line'>    <span class="k">outline</span><span class="o">:</span> <span class="o">-</span><span class="n">webkit</span><span class="o">-</span><span class="n">focus</span><span class="o">-</span><span class="n">ring</span><span class="o">-</span><span class="k">color</span> <span class="k">auto</span> <span class="m">5px</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/2013/01/28/stop-messing-with-the-browsers-default-focus-outline/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/3/">&larr; Older</a>
@@ -680,6 +712,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2014/02/06/connecting-appbuilder-projects-to-facebook/">Connecting AppBuilder Projects to Facebook</a>
+      </li>
+    
+      <li class="post">
         <a href="/2014/01/27/only-the-gzip-size-matters/">Only the gzip Size Matters</a>
       </li>
     
@@ -693,10 +729,6 @@
     
       <li class="post">
         <a href="/2013/09/18/hey-developers-you-should-spell-check-your-documentation/">Hey Developers - You Should Spell Check Your Documentation</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2013/09/12/building-custom-text-strikethroughs-with-css/">Building Custom Text Strikethroughs with CSS</a>
       </li>
     
   </ul>

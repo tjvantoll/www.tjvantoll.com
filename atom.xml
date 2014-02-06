@@ -4,7 +4,7 @@
   <title><![CDATA[TJ VanToll]]></title>
   <link href="http://tjvantoll.com/atom.xml" rel="self"/>
   <link href="http://tjvantoll.com/"/>
-  <updated>2014-02-03T09:38:50-05:00</updated>
+  <updated>2014-02-06T13:46:05-05:00</updated>
   <id>http://tjvantoll.com/</id>
   <author>
     <name><![CDATA[TJ VanToll]]></name>
@@ -12,6 +12,131 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Connecting AppBuilder Projects to Facebook]]></title>
+    <link href="http://tjvantoll.com/2014/02/06/connecting-appbuilder-projects-to-facebook/"/>
+    <updated>2014-02-06T13:08:00-05:00</updated>
+    <id>http://tjvantoll.com/2014/02/06/connecting-appbuilder-projects-to-facebook</id>
+    <content type="html"><![CDATA[<p>One commonly requested, and non-trivial requirement PhoneGap/Cordova apps often have is Facebook integration. To perform the actual integration, hybrid Cordova apps have an advantage over traditional web apps: they can leverage the platform&#8217;s native Facebook APIs.</p>
+
+<p>The bridge between the JavaScript APIs and the native APIs takes the form of a Cordova plugin, named - crazily enough - the <a href="https://github.com/phonegap/phonegap-facebook-plugin">Cordova Facebook Plugin</a>. In this article we&#8217;ll give a step-by-step guide to integrating this plugin into an <a href="http://www.telerik.com/appbuilder">AppBuilder</a> application; then we&#8217;ll see what we can do with it.</p>
+
+<p><em>Note: If you want to cut straight to the chase, the final example with the integration complete is available at <a href="https://github.com/tjvantoll/Facebook-Connect">https://github.com/tjvantoll/Facebook-Connect</a>. You can <a href="http://blogs.telerik.com/appbuilder/posts/13-12-19/git-started-with-github-in-mist">clone this project directly in AppBuilder</a>.</em></p>
+
+<!--more-->
+
+
+<h3>Adding the Plugin</h3>
+
+<p>The first step to adding the plugin is to download it from <a href="https://github.com/phonegap/phonegap-facebook-plugin">https://github.com/phonegap/phonegap-facebook-plugin</a> - just click the <em>Download ZIP</em> button.</p>
+
+<p>Then, with your project open in AppBuilder, select the <code>Plugins</code> directory, and select <em>Add</em> &#8211;> <em>From Archive</em> from the menu bar.</p>
+
+<p><img src="http://tjvantoll.com/images/posts/2014-02-06/step-1.png" alt="Location of the From Archive menu" /></p>
+
+<p>Select the ZIP file we just downloaded and click <em>Upload</em>.</p>
+
+<p><img src="http://tjvantoll.com/images/posts/2014-02-06/step-2.png" alt="Add from archive dialog with newly download zip selected" /></p>
+
+<p>Now add the following two <code>&lt;script&gt;</code> tags to your project&#8217;s <code>index.html</code> file:</p>
+
+<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;cdv-plugin-fb-connect.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
+</span><span class='line'><span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;facebook-js-sdk.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The plugin is now a part of your project, but before we dig into the its APIs, we have a bit of configuration we have to change.</p>
+
+<h3>Configuring the Plugin</h3>
+
+<p>In order for the Cordova plugin to speak to the native Facebook APIs, it has to know the id and name of <em>your</em> Facebook application. To get this, head over to <a href="https://developers.facebook.com/">https://developers.facebook.com/</a> and login to your app&#8217;s dashboard settings. (If you don&#8217;t have an app built in Facebook, you&#8217;ll need to create one.) Here&#8217;s what my app looks like:</p>
+
+<p><img src="http://tjvantoll.com/images/posts/2014-02-06/facebook-dashboard.png" alt="The dashboard of my Facebook application" /></p>
+
+<p>The two things we&#8217;re interested in are the <strong>App ID</strong> and the <strong>Display Name</strong>. Take note of these and head back to AppBuilder, as we need to add these configuration variables to the plugin&#8217;s <code>plugin.xml</code> file. Start by opening up <code>plugin.xml</code> and removing the two <code>&lt;preference&gt;</code> tags shown below.</p>
+
+<p><img src="http://tjvantoll.com/images/posts/2014-02-06/step-3.png" alt="Visualization of earlier described steps" /></p>
+
+<p>In Cordova plugins, <code>plugin.xml</code> files&#8217; <code>&lt;preference&gt;</code> tags are placeholders; they&#8217;re a way of indicating that you need to change these strings elsewhere in the file. In the case of this plugin, you&#8217;ll find <code>APP_ID</code> and <code>APP_NAME</code> used a few times as shown in the image below. You&#8217;ll need to update the placeholder values with your app&#8217;s actual data.</p>
+
+<p><img src="http://tjvantoll.com/images/posts/2014-02-06/step-4.png" alt="Visualization of earlier described steps" /></p>
+
+<p>And that&#8217;s it! We now have Facebook integrated into our app, including the ability to use the full <a href="https://developers.facebook.com/docs/javascript/">Facebook JavaScript SDK</a>. So what can we do with it?</p>
+
+<h3>Using the Facebook JavaScript SDK</h3>
+
+<p>Facebook&#8217;s APIs are provided through a <code>FB</code> global variable, and the first thing you must do with it is call <code>FB.init()</code>.</p>
+
+<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">FB</span><span class="p">.</span><span class="nx">init</span><span class="p">({</span>
+</span><span class='line'>    <span class="nx">appId</span><span class="o">:</span> <span class="s2">&quot;204075246457176&quot;</span><span class="p">,</span>
+</span><span class='line'>    <span class="nx">nativeInterface</span><span class="o">:</span> <span class="nx">CDV</span><span class="p">.</span><span class="nx">FB</span>
+</span><span class='line'><span class="p">});</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>You can see that we again need to provide our Facebook&#8217;s app id. We also need to set a <code>nativeInterface</code> property to <code>CDV.FB</code>. You won&#8217;t find this property on Facebook&#8217;s documentation, but it&#8217;s what tells the Cordova plugin to step in and do its thing.</p>
+
+<p>From here, there are several things we can do, but most of them require the user to be logged into Facebook. We can check whether the user is logged in using <code>FB.getLoginStatus()</code>.</p>
+
+<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">FB</span><span class="p">.</span><span class="nx">getLoginStatus</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span> <span class="nx">response</span> <span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">if</span> <span class="p">(</span> <span class="nx">response</span><span class="p">.</span><span class="nx">status</span> <span class="o">===</span> <span class="s2">&quot;connected&quot;</span> <span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>        <span class="nx">alert</span><span class="p">(</span> <span class="s2">&quot;logged in&quot;</span> <span class="p">);</span>
+</span><span class='line'>    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span><span class='line'>        <span class="nx">alert</span><span class="p">(</span> <span class="s2">&quot;not logged in&quot;</span> <span class="p">);</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'><span class="p">});</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Or we can just prompt the user to login with <code>FB.login()</code>. Like most of Facebook&#8217;s API methods, the first argument to <code>FB.login()</code> is a callback function to run when the login completes. The second argument is an object with a single <code>scope</code> property. The <code>scope</code> property needs to contain a comma delimited list of permissions your application needs. Here, we&#8217;re asking the user to give us access to their email address.</p>
+
+<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">FB</span><span class="p">.</span><span class="nx">login</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span> <span class="nx">response</span> <span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="c1">// Handle the response</span>
+</span><span class='line'><span class="p">},</span> <span class="p">{</span> <span class="nx">scope</span><span class="o">:</span> <span class="s2">&quot;email&quot;</span> <span class="p">});</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><em>Note: Refer to Facebook&#8217;s SDK documentation for a <a href="https://developers.facebook.com/docs/reference/login/extended-permissions">full list of the permissions you can request</a>.</em></p>
+
+<p>When you call <code>FB.login()</code>, if the user is <em>not</em> logged in, they&#8217;ll see a Facebook login form in a popup.</p>
+
+<p><img src="http://tjvantoll.com/images/posts/2014-02-06/nexus-7-no-login.png" alt="Facebook login on Nexus 7" /></p>
+
+<p>If they are logged in, they&#8217;ll have to confirm that they want to give your application access to the information you requested.</p>
+
+<p><img src="http://tjvantoll.com/images/posts/2014-02-06/nexus-7-login.png" alt="Facebook login on Nexus 7" /></p>
+
+<p>Once they have given access, you can use Facebook&#8217;s API to access what you need. For example the following retrieves the id, name, and picture of the user&#8217;s friends.</p>
+
+<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">FB</span><span class="p">.</span><span class="nx">api</span><span class="p">(</span> <span class="s2">&quot;/me/friends&quot;</span><span class="p">,</span> <span class="p">{</span> <span class="nx">fields</span><span class="o">:</span> <span class="s2">&quot;id, name, picture&quot;</span> <span class="p">});</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>Wrapping up</h3>
+
+<p>To show this API in action, I built an AppBuilder app that logs the user in, and displays their friends in a <a href="http://demos.telerik.com/kendo-ui/mobile/listview/index.html">Kendo UI Mobile ListView</a>. The app is available at <a href="https://github.com/tjvantoll/Facebook-Connect">https://github.com/tjvantoll/Facebook-Connect</a>.</p>
+
+<p>If you try this out, please let me know if everything works alright for you. If there are any additional integrations or examples you&#8217;d like to see let me know that as well.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Only the gzip Size Matters]]></title>
@@ -3356,114 +3481,6 @@ Adding a strikethrough to a line of text in CSS is easy.</p>
 <p>It&#8217;s also important to remember that <a href="http://quirksmode.org/webkit.html">not all WebKits are created equally</a>, WebKit browsers are fighting to distinguish themselves; innovation in the browser world has never been as strong as it is today.</p>
 
 <p>That being said, the loss of a rendering engine is still a sad day for the web.  R.I.P. Presto.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Stop Messing with the Browser's Default Focus outline]]></title>
-    <link href="http://tjvantoll.com/2013/01/28/stop-messing-with-the-browsers-default-focus-outline/"/>
-    <updated>2013-01-28T20:57:00-05:00</updated>
-    <id>http://tjvantoll.com/2013/01/28/stop-messing-with-the-browsers-default-focus-outline</id>
-    <content type="html"><![CDATA[<p>This is the latest in my series of accessibility best practices after getting frustrated with using a keyboard on the internet.  Last time I talked about <a href="http://tjvantoll.com/2013/01/01/enter-should-submit-forms-stop-messing-with-that/">enter submitting forms</a>, this time I&#8217;m going to explain why removing the browser&#8217;s default focus <code>outline</code> is a bad idea.</p>
-
-<h3>Focus Rings</h3>
-
-<p>All browsers have a default value they apply to the currently focused item.  For example Chrome on OS X uses the following:</p>
-
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nd">:focus</span> <span class="p">{</span>
-</span><span class='line'>    <span class="c">/* -webkit-focus-ring-color = &#39;#5B9DD9&#39; */</span>
-</span><span class='line'>    <span class="k">outline</span><span class="o">:</span> <span class="o">-</span><span class="n">webkit</span><span class="o">-</span><span class="n">focus</span><span class="o">-</span><span class="n">ring</span><span class="o">-</span><span class="k">color</span> <span class="k">auto</span> <span class="m">5px</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-
-
-<!--more-->
-
-
-<p>Firefox uses a <code>1px dotted #212121</code> outline, other browser use other values.  The focus ring looks like this for Chrome on OS X:</p>
-
-<p><img src="http://tjvantoll.com/images/posts/2013-01-28/default.png" title="Default Focus Ring in Chrome on OS X" alt="Default Focus Ring in Chrome on OS X" /></p>
-
-<p>Keyboard users <strong>depend</strong> on this <code>outline</code> to determine where they are on the page.  I cannot stress <strong>depend</strong> enough, without the <code>outline</code> you have no idea where you are.  Don&#8217;t believe me?  Go to <a href="http://www.cnn.com">cnn.com</a> right now.  Hit tab a few times and try to figure out where the hell you are on the page.</p>
-
-<p>The <code>outline</code> <em>can</em> be removed with the following:</p>
-
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nd">:focus</span> <span class="p">{</span>
-</span><span class='line'>    <span class="k">outline</span><span class="o">:</span> <span class="m">0</span><span class="p">;</span>
-</span><span class='line'>    <span class="c">/* or */</span>
-</span><span class='line'>    <span class="k">outline</span><span class="o">:</span> <span class="k">none</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>This is obviously bad per the reasoning above.  The HTML5 specification has the following to say about removing the default <code>outline</code>:</p>
-
-<blockquote><p>&#8220;&#8230;if an alternative focusing style isn&#8217;t made available instead, the page will be significantly less usable for people who primarily navigate pages using a keyboard, or those with reduced vision who use focus outlines to help them navigate the page.&#8221;</p><footer><strong>HTML5 Specification</strong> <cite><a href='http://www.whatwg.org/specs/web-apps/current-work/multipage/editing.html#element-level-focus-apis'>www.whatwg.org/specs/web-apps/&hellip;</a></cite></footer></blockquote>
-
-
-<h3>Custom Focus Outlines</h3>
-
-<p>As the spec mentions, you can create your own styling for focused items instead of using the browser&#8217;s default.  For example the following will change all focused links to white text on a black background:</p>
-
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nd">:link:focus</span><span class="o">,</span> <span class="nd">:visited:focus</span> <span class="p">{</span>
-</span><span class='line'>    <span class="k">outline</span><span class="o">:</span> <span class="k">none</span><span class="p">;</span>
-</span><span class='line'>    <span class="k">background-color</span><span class="o">:</span> <span class="nb">black</span><span class="p">;</span>
-</span><span class='line'>    <span class="k">color</span><span class="o">:</span> <span class="nb">white</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Although this is possible, I would <strong>strongly</strong> recommend simply leaving the default browser <code>outline</code> in place.  Changing the default display messes with a user&#8217;s expectations, which is a big usability no no.  Furthermore, you need to make sure that whatever alternative you put in is sufficiently identifiable for users with reduced vision.</p>
-
-<h3>Why do People Want it Removed?</h3>
-
-<p>At the <a href="http://jqueryui.com">jQuery UI</a> project we get a <a href="https://github.com/jquery/jquery-ui/pull/898">lot</a> <a href="http://bugs.jqueryui.com/ticket/8959">of</a> <a href="http://bugs.jqueryui.com/ticket/6146">requests</a> to remove the browser default <code>outline</code>s from our widgets.</p>
-
-<p>  The most recent tickets have come from the <a href="http://jqueryui.com/slider">slider</a> and <a href="http://jqueryui.com/tabs">tabs</a> widgets.  This is what they look like on the latest Chrome on OS X:</p>
-
-<p><img src="http://tjvantoll.com/images/posts/2013-01-28/slider.png" title="Focus ring on jQuery UI slider" alt="Focus ring on jQuery UI slider" />
-<img src="http://tjvantoll.com/images/posts/2013-01-28/tabs.png" title="Focus ring on jQuery UI tabs" alt="Focus ring on jQuery UI tabs" /></p>
-
-<p>Some people find this unsightly.  Others are thrown off by the fact that the display varies on different browsers / operating systems.  While these concerns are reasonable, they do not outweigh the importance of the <code>outline</code> for keyboard users and users with reduced vision.</p>
-
-<p>jQuery UI does nothing to alter the browser&#8217;s default <code>outline</code> on these widgets and I encourage others to do the same.</p>
-
-<h3>CSS Reset</h3>
-
-<p>Unfortunately one of the reasons much of the internet removes the default focus ring is because the <a href="http://meyerweb.com/eric/tools/css/reset/reset200802.css">first version of Eric Meyer&#8217;s CSS reset</a> included the following:</p>
-
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="c">/* remember to define focus styles! */</span>
-</span><span class='line'><span class="nd">:focus</span> <span class="p">{</span>
-</span><span class='line'>    <span class="k">outline</span><span class="o">:</span> <span class="m">0</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>As you can see it&#8217;s made abundantly clear that you should define your own focus styles, but most people simply copied and pasted the file without realizing this.</p>
-
-<p>The <a href="http://meyerweb.com/eric/tools/css/reset/index.html">updated version</a> of the CSS reset no longer features this, but sadly it&#8217;s a bit too late for a lot of sites.</p>
-
-<p>Sigh.</p>
 ]]></content>
   </entry>
   

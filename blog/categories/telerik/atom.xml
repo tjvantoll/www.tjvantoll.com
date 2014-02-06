@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Telerik | TJ VanToll]]></title>
+  <link href="http://tjvantoll.com/blog/categories/telerik/atom.xml" rel="self"/>
+  <link href="http://tjvantoll.com/"/>
+  <updated>2014-02-06T13:46:05-05:00</updated>
+  <id>http://tjvantoll.com/</id>
+  <author>
+    <name><![CDATA[TJ VanToll]]></name>
+    <email><![CDATA[tj.vantoll@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Connecting AppBuilder Projects to Facebook]]></title>
+    <link href="http://tjvantoll.com/2014/02/06/connecting-appbuilder-projects-to-facebook/"/>
+    <updated>2014-02-06T13:08:00-05:00</updated>
+    <id>http://tjvantoll.com/2014/02/06/connecting-appbuilder-projects-to-facebook</id>
+    <content type="html"><![CDATA[<p>One commonly requested, and non-trivial requirement PhoneGap/Cordova apps often have is Facebook integration. To perform the actual integration, hybrid Cordova apps have an advantage over traditional web apps: they can leverage the platform's native Facebook APIs.</p>
+
+<p>The bridge between the JavaScript APIs and the native APIs takes the form of a Cordova plugin, named - crazily enough - the <a href="https://github.com/phonegap/phonegap-facebook-plugin">Cordova Facebook Plugin</a>. In this article we'll give a step-by-step guide to integrating this plugin into an <a href="http://www.telerik.com/appbuilder">AppBuilder</a> application; then we'll see what we can do with it.</p>
+
+<p><em>Note: If you want to cut straight to the chase, the final example with the integration complete is available at <a href="https://github.com/tjvantoll/Facebook-Connect">https://github.com/tjvantoll/Facebook-Connect</a>. You can <a href="http://blogs.telerik.com/appbuilder/posts/13-12-19/git-started-with-github-in-mist">clone this project directly in AppBuilder</a>.</em></p>
+
+<!--more-->
+
+
+<h3>Adding the Plugin</h3>
+
+<p>The first step to adding the plugin is to download it from <a href="https://github.com/phonegap/phonegap-facebook-plugin">https://github.com/phonegap/phonegap-facebook-plugin</a> - just click the <em>Download ZIP</em> button.</p>
+
+<p>Then, with your project open in AppBuilder, select the <code>Plugins</code> directory, and select <em>Add</em> --> <em>From Archive</em> from the menu bar.</p>
+
+<p><img src="/images/posts/2014-02-06/step-1.png" alt="Location of the From Archive menu" /></p>
+
+<p>Select the ZIP file we just downloaded and click <em>Upload</em>.</p>
+
+<p><img src="/images/posts/2014-02-06/step-2.png" alt="Add from archive dialog with newly download zip selected" /></p>
+
+<p>Now add the following two <code>&lt;script&gt;</code> tags to your project's <code>index.html</code> file:</p>
+
+<p>``` html</p>
+
+<script src="cdv-plugin-fb-connect.js"></script>
+
+
+<script src="facebook-js-sdk.js"></script>
+
+
+<p>```</p>
+
+<p>The plugin is now a part of your project, but before we dig into the its APIs, we have a bit of configuration we have to change.</p>
+
+<h3>Configuring the Plugin</h3>
+
+<p>In order for the Cordova plugin to speak to the native Facebook APIs, it has to know the id and name of <em>your</em> Facebook application. To get this, head over to <a href="https://developers.facebook.com/">https://developers.facebook.com/</a> and login to your app's dashboard settings. (If you don't have an app built in Facebook, you'll need to create one.) Here's what my app looks like:</p>
+
+<p><img src="/images/posts/2014-02-06/facebook-dashboard.png" alt="The dashboard of my Facebook application" /></p>
+
+<p>The two things we're interested in are the <strong>App ID</strong> and the <strong>Display Name</strong>. Take note of these and head back to AppBuilder, as we need to add these configuration variables to the plugin's <code>plugin.xml</code> file. Start by opening up <code>plugin.xml</code> and removing the two <code>&lt;preference&gt;</code> tags shown below.</p>
+
+<p><img src="/images/posts/2014-02-06/step-3.png" alt="Visualization of earlier described steps" /></p>
+
+<p>In Cordova plugins, <code>plugin.xml</code> files' <code>&lt;preference&gt;</code> tags are placeholders; they're a way of indicating that you need to change these strings elsewhere in the file. In the case of this plugin, you'll find <code>APP_ID</code> and <code>APP_NAME</code> used a few times as shown in the image below. You'll need to update the placeholder values with your app's actual data.</p>
+
+<p><img src="/images/posts/2014-02-06/step-4.png" alt="Visualization of earlier described steps" /></p>
+
+<p>And that's it! We now have Facebook integrated into our app, including the ability to use the full <a href="https://developers.facebook.com/docs/javascript/">Facebook JavaScript SDK</a>. So what can we do with it?</p>
+
+<h3>Using the Facebook JavaScript SDK</h3>
+
+<p>Facebook's APIs are provided through a <code>FB</code> global variable, and the first thing you must do with it is call <code>FB.init()</code>.</p>
+
+<p>``` javascript
+FB.init({</p>
+
+<pre><code>appId: "204075246457176",
+nativeInterface: CDV.FB
+</code></pre>
+
+<p>});
+```</p>
+
+<p>You can see that we again need to provide our Facebook's app id. We also need to set a <code>nativeInterface</code> property to <code>CDV.FB</code>. You won't find this property on Facebook's documentation, but it's what tells the Cordova plugin to step in and do its thing.</p>
+
+<p>From here, there are several things we can do, but most of them require the user to be logged into Facebook. We can check whether the user is logged in using <code>FB.getLoginStatus()</code>.</p>
+
+<p>``` javascript
+FB.getLoginStatus(function( response ) {</p>
+
+<pre><code>if ( response.status === "connected" ) {
+    alert( "logged in" );
+} else {
+    alert( "not logged in" );
+}
+</code></pre>
+
+<p>});
+```</p>
+
+<p>Or we can just prompt the user to login with <code>FB.login()</code>. Like most of Facebook's API methods, the first argument to <code>FB.login()</code> is a callback function to run when the login completes. The second argument is an object with a single <code>scope</code> property. The <code>scope</code> property needs to contain a comma delimited list of permissions your application needs. Here, we're asking the user to give us access to their email address.</p>
+
+<p>``` javascript
+FB.login(function( response ) {</p>
+
+<pre><code>// Handle the response
+</code></pre>
+
+<p>}, { scope: "email" });
+```</p>
+
+<p><em>Note: Refer to Facebook's SDK documentation for a <a href="https://developers.facebook.com/docs/reference/login/extended-permissions">full list of the permissions you can request</a>.</em></p>
+
+<p>When you call <code>FB.login()</code>, if the user is <em>not</em> logged in, they'll see a Facebook login form in a popup.</p>
+
+<p><img src="/images/posts/2014-02-06/nexus-7-no-login.png" alt="Facebook login on Nexus 7" /></p>
+
+<p>If they are logged in, they'll have to confirm that they want to give your application access to the information you requested.</p>
+
+<p><img src="/images/posts/2014-02-06/nexus-7-login.png" alt="Facebook login on Nexus 7" /></p>
+
+<p>Once they have given access, you can use Facebook's API to access what you need. For example the following retrieves the id, name, and picture of the user's friends.</p>
+
+<p><code>javascript
+FB.api( "/me/friends", { fields: "id, name, picture" });
+</code></p>
+
+<h3>Wrapping up</h3>
+
+<p>To show this API in action, I built an AppBuilder app that logs the user in, and displays their friends in a <a href="http://demos.telerik.com/kendo-ui/mobile/listview/index.html">Kendo UI Mobile ListView</a>. The app is available at <a href="https://github.com/tjvantoll/Facebook-Connect">https://github.com/tjvantoll/Facebook-Connect</a>.</p>
+
+<p>If you try this out, please let me know if everything works alright for you. If there are any additional integrations or examples you'd like to see let me know that as well.</p>
+]]></content>
+  </entry>
+  
+</feed>
