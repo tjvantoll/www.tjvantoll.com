@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>CSS Animations vs. jQuery</title>
+	<!-- http://jsfiddle.net/tj_vantoll/LAASw/ -->
+
+	<style>
+		div {
+			background: red;
+			height: 200px;
+			width: 200px;
+			position: absolute;
+		}
+		#one {
+			background: red;
+			left: 0;
+		}
+
+		@-webkit-keyframes slide {
+			0% { left: 0; }
+			100% { left: 500px; }
+		}
+		@keyframes slide {
+			0% { left: 0; }
+			100% { left: 500px; }
+		}
+		#two {
+			top: 250px;
+			left: 0;
+			background: blue;
+		}
+
+		#two.go {
+			-webkit-animation: slide 10000ms linear;
+			animation: slide 10000ms linear;
+		}
+	</style>
+</head>
+<body>
+
+<div id="one"></div>
+<div id="two"></div>
+
+<script src="jquery.js"></script>
+<script>
+
+	$( "#one" ).animate({ left: 500 }, {
+		duration: 10000,
+		easing: "linear"
+	});
+	$( "#two" ).addClass( "go" );
+</script>
+
+</body>
+</html>

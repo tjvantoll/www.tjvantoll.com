@@ -9,6 +9,19 @@ sharing: false
 	<p>On certain occasions I've been known to talk to people in real life.</p>
 
 	<article>
+		<img src="/speaking/thumbnail/jquery-defense.png">
+		<h2>Making the Case for jQuery in a Browser Utopia</h2>
+		<ul>
+			<li>
+				<span>February 12th, 2014:</span>
+				<a href="http://events.jquery.org/2014/san-diego/">jQuery San Diego</a> |
+				<address class="country-us">San Diego, California</address> |
+				<a href="/speaking/slides/jQuery-Defense/San-Diego/">Slides</a>
+			</li>
+		</ul>
+	</article>
+
+	<article>
 		<img src="/speaking/thumbnail/jquery-ui-vs-html5.png">
 		<h2>jQuery UI Widgets vs. HTML5</h2>
 		<ul>
@@ -69,8 +82,7 @@ sharing: false
 				<span>October 23rd, 2012:</span> 
 				Lansing Java Users Group | 
 				<address class="country-us">Okemos, MI</address> | 
-				<a href="/speaking/slides/Efficiency-Top-Ten/Okemos">Slides</a> | 
-				<a href="/speaking/slides/Efficiency-Top-Ten/Okemos?plain">Slides (No animation)</a>
+				<a href="/speaking/slides/Efficiency-Top-Ten/Okemos?plain">Slides</a>
 			</li>
 		</ul>
 	</article>
@@ -83,8 +95,7 @@ sharing: false
 				<span>August 9th, 2012:</span> 
 				Liquid Web | 
 				<address class="country-us">Lansing, MI</address> | 
-				<a href="/speaking/slides/LESS-101/Lansing">Slides</a> | 
-				<a href="/speaking/slides/LESS-101/Lansing?plain">Slides (No animation)</a>
+				<a href="/speaking/slides/LESS-101/Lansing?plain">Slides</a>
 			</li>
 		</ul>
 	</article>

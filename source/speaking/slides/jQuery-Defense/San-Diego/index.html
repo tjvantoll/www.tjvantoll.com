@@ -1,0 +1,874 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+
+		<title>Making the Case for jQuery in a Browser Utopia | TJ VanToll</title>
+
+		<meta name="author" content="TJ VanToll">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/default.css" id="theme">
+
+		<!-- For syntax highlighting -->
+		<link rel="stylesheet" href="css/prism.css">
+
+		<link rel="stylesheet/less" href="less/style.less">
+		<script src="js/less-1.4.1.min.js"></script>
+
+		<!-- If the query includes 'print-pdf', use the PDF print sheet -->
+		<script>
+			document.write( '<link rel="stylesheet" href="css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
+
+			if (window.location.host.indexOf('local') == -1) {
+				var _gaq = _gaq || [];
+				_gaq.push(['_setAccount', 'UA-29179796-1']);
+				_gaq.push(['_trackPageview']);
+			
+				(function() {
+					var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+					ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+					var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+				})();
+			}
+		</script>
+
+		<!--[if lt IE 9]>
+			<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+	<body>
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+
+<section class="first-slide">
+	<div class="title-box">
+		<h1>Making the Case for jQuery in a Browser Utopia</h1>
+	</div>
+
+	<hr>
+
+	<div class="me-left">
+		<img src="img/me.jpg" class="reset">
+		<p>TJ VanToll</p>
+	</div>
+	<div class="me-right">
+		<ul>
+			<li><a href="http://tjvantoll.com">http://tjvantoll.com</a></li>
+			<li><a href="http://twitter.com/tjvantoll">@tjvantoll</a></li>
+			<li>
+				Developer Advocate
+				<img src="img/telerik-logo.png" class="reset">
+			</li>
+			<li>
+				Team Member
+				<img src="img/logo-jquery-ui.png" class="reset">
+			</li>
+		</ul>
+	</div>
+</section>
+
+<section>
+	<style>
+		.link-list { list-style: none !important; }
+		.link-list img { margin-bottom: 0 !important; }
+		.link-list a { font-size: 0.6em; display: block; }
+	</style>
+	<ul class="link-list">
+		<li>
+			<img src="img/haters-2.png" class="reset">
+			<a href="http://www.sitepoint.com/jquip-lightweight-jquery/">http://www.sitepoint.com/jquip-lightweight-jquery/</a>
+		</li>
+		<li>
+			<img src="img/haters-3.png" class="reset">
+			<a href="http://cubiq.org/do-you-really-need-jquery-for-mobile-dev">http://cubiq.org/do-you-really-need-jquery-for-mobile-dev</a>
+		</li>
+		<li>
+			<img src="img/haters-1.png" class="reset">
+			<a href="http://blog.ponyfoo.com/2013/07/09/getting-over-jquery">http://blog.ponyfoo.com/2013/07/09/getting-over-jquery</a>
+		</li>
+	</ul>
+	<aside class="notes">
+		jQuery has been getting a lot of flak lately from the web development world.
+	</aside>
+</section>
+
+<section>
+	<ul class="link-list">
+		<li>
+			<img src="img/haters-ui-1.png" class="reset">
+			<a href="https://twitter.com/driven_by_data/status/388223218194317312">https://twitter.com/driven_by_data/status/388223218194317312</a>
+		</li>
+		<li>
+			<img src="img/haters-ui-2.png" class="reset">
+			<a href="http://blog.ponyfoo.com/2013/07/09/getting-over-jquery">http://blog.ponyfoo.com/2013/07/09/getting-over-jquery</a>
+		</li>
+		<li>
+			<img src="img/haters-ui-3.png" class="reset">
+			<a href="https://twitter.com/dariocravero/status/380438562992558080">https://twitter.com/dariocravero/status/380438562992558080</a>
+		</li>
+	</ul>
+</section>
+
+<section>
+	<h2><a href="http://youmightnotneedjquery.com/">youmightnotneedjquery.com</a></h2>
+	<img src="img/youmightnotneedjquery.png">
+	<aside class="notes">
+		<p>Most of these posts are nicely written. Their argument is not that jQuery is necessarily a bad library, but rather that we have moved beyond jQuery. We no longer need it.</p>
+		<p> The web development world is different from when jQuery was written in 2006. (IE 6, Firefox 1.5, Safari 2)</p>
+	</aside>
+</section>
+
+<section>
+	<h3 class="no_casing">List of Current Fixes by <a href="https://twitter.com/rwaldron">@rwaldron</a></h3>
+	<img src="img/rwaldron-gist.png">
+	<a href="https://gist.github.com/rwaldron/8720084#file-reasons-md">https://gist.github.com/rwaldron/8720084#file-reasons-md</a>
+</section>
+
+<section>
+	<h3 class="no_casing">Defense from <a href="https://twitter.com/jdalton">@jdalton</a> & <a href="https://twitter.com/paulirish">@paulirish</a></h3>
+	<img src="img/irish-dalton.png">
+	<a href="https://docs.google.com/document/d/1LPaPA30bLUB_publLIMF0RlhdnPx_ePXm7oW02iiT6o/edit">https://docs.google.com/document/d/1LPaPA30bLUB_publLIMF0RlhdnPx_ePXm7oW02iiT6o/edit</a>
+</section>
+
+<section>
+	<h3 class="statement">jQuery is about a whole lot more than just normalizing browser behavior.</h3>
+</section>
+
+<section id="utopia">
+	<h2 style="position: relative; z-index: 99999999">Browser Utopia</h2>
+	<ul class="spaced">
+		<li>All features implemented</li>
+		<li>No bugs</li>
+	</ul>
+</section>
+
+<section>
+	<h3 class="statement">jQuery is worth using, even if (when?) it fixes 0 browser bugs.</h3>
+</section>
+
+<section>
+	<h2>&lt;disclaimers&gt;</h2>
+</section>
+
+<section>
+	<h2>I'm on the jQuery team.</h2>
+	<img src="img/logo-jquery-ui.png" class="reset">
+</section>
+
+<section>
+	<h2>I'm writing a book on jQuery UI.</h2>
+	<img src="img/book-cover.jpg" class="reset"><br>
+	<a href="http://manning.com/vantoll">manning.com/vantoll</a>
+</section>
+
+<section>
+	<h2>&lt;/disclaimers&gt;</h2>
+	<aside class="notes">
+		Being on the jQuery team has given me perspective. Because I often have to work with the native APIs and the DOM without any abstractions, I have a far more respect for the functionality that jQuery provides.
+	</aside>
+</section>
+
+<section>
+	<h2>Main anti-jQuery arguments:</h2>
+	<ol class="argument-list">
+		<li>
+			<b>API Parity</b><br>
+			The native platform does everything now.
+		</li>
+		<li>
+			<b>Too Big / Bloated</b><br>
+			File size is too big, especially for mobile.
+		</li>
+		<li>
+			<b>Performance</b><br>
+			Native is faster.
+		</li>
+	</ol>
+</section>
+
+<section>
+	<h2>Main anti-jQuery arguments:</h2>
+	<ol class="argument-list">
+		<li class="highlight">
+			<b>API Parity</b><br>
+			The native platform does everything now.
+		</li>
+		<li>
+			<b>Too Big / Bloated</b><br>
+			File size is too big, especially for mobile.
+		</li>
+		<li>
+			<b>Performance</b><br>
+			Native is faster.
+		</li>
+	</ol>
+</section>
+
+<section>
+	<h2>API Parity</h2>
+
+	<pre class="language-js"><code>$ === document.querySelectorAll()?</code></pre>
+</section>
+
+<section>
+	<h2>Problems With DOM APIs</h2>
+	<ul class="spaced">
+		<li>Still verbose</li>
+		<li>Not easy to use</li>
+		<li>Lots of gotchas</li>
+	</ul>
+	<aside class="notes">
+		While the DOM APIs have drastically improved...
+	</aside>
+</section>
+
+<section>
+	<h2>Problems With DOM APIs</h2>
+	<ul class="spaced">
+		<li style="font-size: 1.5em; color: skyblue;">Still verbose</li>
+		<li>Not easy to use</li>
+		<li>Lots of gotchas</li>
+	</ul>
+	<aside class="notes">
+		<p>How many people think they could - on the first try - code an XHR request with a callback with no syntax errors?</p>
+	</aside>
+</section>
+
+<section>
+	<h3 class="statement">Without Googling, try to code an XHR that gets a JSON file with a callback.</p>
+</section>
+
+<section>
+	<h2>My first attempt</h2>
+
+<pre class="language-javascript constrained"><code>var xhr = new XMLHTTPRequest();
+xhr.onload = function( data ) {
+    console.log( data );
+};
+xhr.open( "test.json" );
+xhr.send();
+</code></pre>
+	<aside class="notes">
+		<ul>
+			<li>XMLHttpRequest (capitalization)</li>
+			<li>data --> this.responseText</li>
+			<li>open() takes "get"</li>
+		</ul>
+	</aside>
+</section>
+
+<section>
+	<h2>Correct</h2>
+
+<pre class="language-javascript constrained"><code>var xhr = new XMLHttpRequest();
+xhr.onload = function() {
+    console.log( this.responseText );
+};
+xhr.open( "get", "test.json" );
+xhr.send();
+</code></pre>
+	<aside class="notes">
+		How many people can retrieve this JSON file using jQuery?
+	</aside>
+</section>
+
+<section>
+	<h2>jQuery</h2>
+
+<pre class="language-javascript constrained"><code>$.getJSON( "test.json" ).then(function( data ) {
+    console.log( data );
+});
+</code></pre>
+	<aside class="notes">
+		Less verbose APIs are easier to remember, easier to explain to beginners.
+	</aside>
+</section>
+
+<section>
+	<h2>Problems With DOM APIs</h2>
+	<ul class="spaced">
+		<li>Still verbose</li>
+		<li style="font-size: 1.5em; color: skyblue;">Not easy to use</li>
+		<li>Lots of gotchas</li>
+	</ul>
+</section>
+
+<section>
+	<h2>Add a class name to all paragraphs (jQuery)</h2>
+
+<pre class="language-javascript constrained"><code>$( "p" ).addClass( "foo" );
+</code></pre>
+</section>
+
+<section>
+	<h2>Add a class name to all paragraphs</h2>
+	<h2 class="fragment">(wrong)</h2>
+
+<pre class="language-javascript constrained"><code>document.querySelectorAll( "p" ).classList.add( "foo" );
+</code></pre>
+</section>
+
+<section>
+	<h2>Add a class name to all paragraphs</h2>
+	<h2 class="fragment">(wrong)</h2>
+
+<pre class="language-javascript constrained"><code>document.querySelectorAll( "p" )
+    .forEach(function() {
+        this.classList.add( "foo" );
+    });
+</code></pre>
+	<aside class="notes">
+		StaticNodeList, not an Array
+
+		http://stackoverflow.com/questions/2600343/why-does-document-queryselectorall-return-a-staticnodelist-rather-than-a-real-ar
+	</aside>
+</section>
+
+<section>
+	<h2>Add a class name to all paragraphs</h2>
+	<h2 class="fragment">(right)</h2>
+
+<pre class="language-javascript constrained"><code>var paragraphs = document.querySelectorAll( "p" );
+for ( var i = 0; i < paragraphs.length; i++ ) {
+    paragraphs[ i ].classList.add( "foo" );
+};
+</code></pre>
+</section>
+
+<section>
+	<h2>Add a class name to all paragraphs (right)</h2>
+
+<pre class="language-javascript constrained"><code>function find( selector ) {
+    return Array.prototype.slice.call(
+        document.querySelectorAll( selector )
+    );
+}
+
+find( "p" ).forEach(function( p ) {
+    p.classList.add( "foo" );
+});
+</code></pre>
+</section>
+
+<section>
+	<h2>Problems With DOM APIs</h2>
+	<ul class="spaced">
+		<li>Still verbose</li>
+		<li>Not easy to use</li>
+		<li style="font-size: 1.5em; color: skyblue;">Lots of gotchas</li>
+	</ul>
+</section>
+
+<section>
+	<h2>Gotcha #1</h2>
+
+<pre class="language-markup constrained"><code>&lt;div&gt;
+    &lt;p&gt;Hello World&lt;/p&gt;
+&lt;/div&gt;
+&lt;script&gt;
+    var div = document.querySelector( "div" );
+    console.log( div.firstChild );
+&lt;/script&gt;
+</code></pre>
+</section>
+
+<section>
+	<h2>Gotcha #1 - Answer</h2>
+
+<pre class="language-markup constrained"><code>&lt;div&gt;
+    &lt;p&gt;Hello World&lt;/p&gt;
+&lt;/div&gt;
+&lt;script&gt;
+    var div = document.querySelector( "div" );
+    console.log( div.firstElementChild );
+&lt;/script&gt;
+</code></pre>
+</section>
+
+<section>
+	<h2>Gotcha #2</h2>
+
+<pre class="language-markup constrained"><code>&lt;div&gt;
+    &lt;p&gt;Hello World&lt;/p&gt;
+&lt;/div&gt;
+&lt;script&gt;
+    var div = document.querySelector( "div" );
+    console.log( div.querySelectorAll( "> p" ) );
+&lt;/script&gt;
+</code></pre>
+	<a href="http://jsfiddle.net/tj_vantoll/Nt7Vq/">http://jsfiddle.net/tj_vantoll/Nt7Vq/</a>
+	<p class="fragment">Result: <i>Uncaught SyntaxError: Failed to execute query: '> p' is not a valid selector.</i></p>
+
+	<aside class="notes">
+		Leading combinators
+		http://reference.sitepoint.com/css/combinators
+	</aside>
+</section>
+
+<section>
+	<h2>querySelectorAll cannot handle leading <a href="http://reference.sitepoint.com/css/combinators">combinators</a>.</h2>
+	<pre><code>&gt;</code></pre>
+	<pre><code>+</code></pre>
+	<pre><code>~</code></pre>
+</section>
+
+<section>
+	<h2>Gotcha #3</h2>
+
+<pre class="language-markup constrained"><code>&lt;div&gt;
+    &lt;p&gt;Hello World&lt;/p&gt;
+&lt;/div&gt;
+&lt;script&gt;
+    var div = document.querySelector( "div" );
+    console.log( div.querySelectorAll( "div p" ) );
+&lt;/script&gt;
+</code></pre>
+	<a href="http://jsfiddle.net/tj_vantoll/8mw87/">http://jsfiddle.net/tj_vantoll/8mw87/</a>
+	<p class="fragment">Result: <i>NodeList[1] (&lt;p&gt;)</i></p>
+
+	<aside class="notes">
+		This is due to the fact that element-rooted queries are handled by “finding all the elements that match the given selector — rooted in the document — then filtering by the ones that have the specified element as an ancestor.
+		http://ejohn.org/blog/thoughts-on-queryselectorall/
+	</aside>
+</section>
+
+<section>
+	<h2>querySelectorAll's limitations</h2>
+	<a href="https://github.com/jquery/jquery/blob/master/src/selector-native.js">selector-native.js</a>
+	<img src="img/sizzle-comments.png">
+</section>
+
+<section>
+	<h3 class="statement">None of those examples were bugs; they're all specced behavior.</h3>
+</section>
+
+<section>
+	<h2>Main anti-jQuery arguments:</h2>
+	<ol class="argument-list">
+		<li>
+			<b>API Parity</b><br>
+			The native platform does everything now.
+		</li>
+		<li class="highlight">
+			<b>Too Big / Bloated</b><br>
+			File size is too big, especially for mobile.
+		</li>
+		<li>
+			<b>Performance</b><br>
+			Native is faster.
+		</li>
+	</ol>
+</section>
+
+<section>
+	<h2 style="line-height: 1.1;">jQuery Core File Size<br>(minified and gzipped)</h2>
+	<style>
+		#version-list b { display: inline-block; width: 125px; }
+	</style>
+	<ul id="version-list" class="spaced">
+		<li><b>1.11.0:</b> 32.64 KB</li>
+		<li><b>2.1.0:</b> 28.66 KB</li>
+	</ul>
+</section>
+
+<section>
+	<h2>Is that too big for mobile?</h2>
+</section>
+
+<section>
+	<pre class="language-markup"><code>&lt;script src="jquery.js"&gt;&lt;/script&gt;</code></pre>
+</section>
+
+<section>
+	<h2>At a high level, the browser:</h2>
+	<ul class="spaced">
+		<li>Downloads the script</li>
+		<li>Parses / Executes the script</li>
+	</ul>
+</section>
+
+<section>
+	<h2>At a high level, the browser:</h2>
+	<ul class="spaced">
+		<li class="emphasize">Downloads the script</li>
+		<li>Parses / Executes the script</li>
+	</ul>
+</section>
+
+<section>
+	<h2>Importance of reducing round trips</h2>
+	<ul class="spaced">
+		<li>In 2012, the average mobile RTT (Round Trip Time) time was 344ms in the US and 372ms in the UK.</li>
+		<li>In 2012 the average mobile download throughput was 1.6 Mbps in the US and 1.4 Mbps in the UK.</li>
+	</ul>
+	<a href="http://www.slideshare.net/patrickmeenan/velocity-2012-taming-the-mobile-beast">(source)</a>
+</section>
+
+<section>
+	<h2>Reducing round trips > Reducing file size</h2>
+	<aside class="notes">
+		So what does this mean for jQuery?
+	</aside>
+</section>
+
+<section>
+	<h2>Yahoo's Performance Best Practices</h2>
+	<img src="img/yahoo.png"><br>
+	<a href="http://developer.yahoo.com/performance/rules.html">http://developer.yahoo.com/performance/rules.html</a>
+</section>
+
+<section>
+	<h2>Concatenate jQuery with your app's other scripts</h2>
+
+<pre class="language-markup"><code>&lt;!-- before --&gt;
+&lt;script src="jquery.js"&gt;&lt;/script&gt;
+&lt;script src="app.js"&gt;&lt;/script&gt;
+
+&lt;!-- after --&gt;
+&lt;script src="app.js"&gt;&lt;/script&gt;
+</code></pre>
+	<aside class="notes">
+		If you're using jQuery then you have another JavaScript file for the things that your app does.
+	</aside>
+</section>
+
+<section>
+	<h2>Don't load jQuery from a 3rd party CDN.</h2>
+<pre class="language-markup really-constrained"><code>&lt;script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"&gt;&lt;/script&gt;
+</code></pre>
+	<p>Three RTTs!</p>
+	<ul>
+		<li>DNS lookup</li>
+		<li>TCP connection</li>
+		<li>HTTP GET</li>
+	</ul>
+</section>
+
+<section>
+	<h3 class="no_casing">Cache hits are rare. You must match on</h3>
+	<ul>
+		<li>CDN provider (Google, Microsoft, jQuery)</li>
+		<li>http vs. https</li>
+		<li>Version number</li>
+	</ul>
+	<img src="img/jquery-stats.png">
+	<br><a href="http://www.stevesouders.com/blog/2013/03/18/http-archive-jquery/">(source)</a>
+	<aside class="notes">
+		<ul>
+			<li>Extra round trip for file</li>
+			<li>Potentially an extra round trip for the DNS lookup</li>
+		</ul>
+	</aside>
+</section>
+
+<section>
+	<h2>There are more important things</h2>
+	<ul class="spaced">
+		<li>The average web site is now 1701KB (as of December 2013) (<a href="http://httparchive.org/trends.php#bytesTotal&reqTotal)">source</a>).</li>
+		<li>At 28.56KB, jQuery core is 1.67% of that.</li>
+		<li>Gzip generally reduces the response size of resources by ~70% (<a href="http://developer.yahoo.com/performance/rules.html">source</a>).</li>
+		<li>In 2012 only 46% of resources were served with appropriate cache headers (<a href="http://www.stevesouders.com/blog/2012/03/22/cache-them-if-you-can/">source</a>).
+	</ul>
+</section>
+
+<section>
+	<h2>At a high level, the browser:</h2>
+	<ul class="spaced">
+		<li>Downloads the script</li>
+		<li class="emphasize">Parses / Executes the script</li>
+	</ul>
+</section>
+
+<section>
+	<h2>Parsing JavaScript files is a multiple-step process.</h2>
+	<p>Text --> Bytes --> AST --> JIT Compilation -> Execution</p>
+	<aside class="notes">
+		abstract syntax tree
+	</aside>
+</section>
+
+<section>
+	<h2>Rough idea of parse times</h2>
+<pre class="language-markup constrained"><code>&lt;script&gt;var start = new Date();&lt;/script&gt;
+&lt;script&gt;
+    /* jQuery's minified source code in its entirety */
+&lt;/script&gt;
+&lt;script&gt;alert( new Date() - start );&lt;/script&gt;
+</code></pre>
+</section>
+
+<section>
+	<p>Raw data of 5 loads in each browser. Times are in ms.</p>
+<pre class="language-text really-constrained"><code>Browser                 | jQuery 1.10.2            | jQuery 2.0.3 
+------------------------|--------------------------|-------------------------
+IE 11                   | 18, 20, 20, 20, 24       | 18, 21, 14, 16, 15
+Chrome 31               | 20, 8, 6, 5, 7           | 15, 8, 5, 7, 6
+Safari 7                | 11, 4, 4, 4, 4           | 9, 5, 3, 3, 2
+Firefox 26              | 12, 13, 13, 12, 13       | 12, 12, 11, 12, 12
+
+iOS7 Safari             | 60, 39, 58, 56, 58       | 40, 32, 37, 69, 40
+Android 2.2             | 1080, 266, 434, 271, 470 | 928, 264, 494, 315, 220
+Android 4.0             | 531, 141, 153, 112, 105  | 453, 106, 104, 145, 148
+Chrome 31 (Android 4.4) | 271, 126, 101, 68, 53    | 219, 86, 38, 86, 123</code></pre>
+</section>
+
+<section>
+	<h3 class="statement">The painfully slow parsing and interpretation of scripts on mobile browsers - particularly older Android ones - is the only compelling reason to prefer small JavaScript libraries.</h3>
+</section>
+
+<section>
+	<h2>Moore's Law</h2>
+	<blockquote>Moore's law is the observation that, over the history of computing hardware, the number of transistors on integrated circuits doubles approximately every two years.</blockquote>
+	<a href="http://en.wikipedia.org/wiki/Moore's_law">http://en.wikipedia.org/wiki/Moore's_law</a>
+	<aside class="notes">
+		jQuery reduces the amount of code that YOU have to write and ship.
+	</aside>
+</section>
+
+<section>
+	<h2>Include only what you need</h2>
+	<ul>
+		<li>AMD in jQuery, jQuery UI, jQuery Mobile, Kendo UI</li>
+	</ul>
+</section>
+
+<section>
+	<h2>Main anti-jQuery arguments:</h2>
+	<style>
+		#argument-list li {
+			margin: 0.5em 0;
+		}
+	</style>
+	<ol id="argument-list">
+		<li>
+			<b>API Parity</b><br>
+			The native platform does everything now.
+		</li>
+		<li>
+			<b>Too Big / Bloated</b><br>
+			File size is too big, especially for mobile.
+		</li>
+		<li style="font-size: 1.2em; color: skyblue;">
+			<b>Performance</b><br>
+			Native is faster.
+		</li>
+	</ol>
+</section>
+
+<section>
+	<blockquote>Remember, jQuery is an amazing library that makes all of our lives easier. But you should always choose to use native DOM methods if they are available to you.</blockquote>
+	<a href="http://www.leebrimelow.com/native-methods-jquery/">http://www.leebrimelow.com/native-methods-jquery/</a>
+</section>
+
+<section>
+	<h3>Uh, no</h1>
+</section>
+
+<section>
+	<h3 class="statement">Native methods will almost always be faster, but in the vast, vast, VAST majority of situations it doesn't matter.</h3>
+</section>
+
+<section>
+	<img src="img/comparison.png">
+	<a href="http://jsperf.com/jquery-vs-queryselectorall-selection">http://jsperf.com/jquery-vs-queryselectorall-selection</a>
+</section>
+
+<section>
+	<blockquote>Premature optimization is the root of all evil.</blockquote>-<a href="http://en.wikipedia.org/wiki/Donald_Knuth">Donald Knuth</a>
+</section>
+
+<section>
+	<blockquote>I tried using the browser’s native innerHtml and getElementByClassName API methods instead of jQuery’s html and append. I thought native APIs might be easier for the browser to optimize and what I read confirmed that. But for whatever reason, it didn’t make much of a difference for Trello.</blockquote>
+	<a href="http://blog.fogcreek.com/we-spent-a-week-making-trello-boards-load-extremely-fast-heres-how-we-did-it/">http://blog.fogcreek.com/we-spent-a-week-making-trello-boards-load-extremely-fast-heres-how-we-did-it/</a>
+</section>
+
+<section>
+	<h2>jQuery optimizes common code paths</h2>
+	<a href="https://github.com/jquery/sizzle/blob/master/src/sizzle.js">sizzle.js</a>
+<pre class="language-javascript really-constrained"><code>// Easily-parseable/retrievable ID or TAG or CLASS selectors
+var rquickExpr = /^(?:#([\w-]+)|(\w+)|\.([\w-]+))$/;
+
+// Shortcuts
+if ( (match = rquickExpr.exec( selector )) ) {
+    // Speed-up: Sizzle("#ID")
+    if ( (m = match[1]) ) {
+        ...
+    }
+
+    // Speed-up: Sizzle("TAG")
+    } else if ( match[2] ) {
+        ...
+    }
+
+    // Speed-up: Sizzle(".CLASS")
+    } else if ( (m = match[3]) && support.getElementsByClassName && context.getElementsByClassName ) {
+        ...
+    }
+}</code></pre>
+</section>
+
+<section>
+	<p>jQuery doesn't force you to use its APIs. If you detect a slow code path, switch to native methods.</p>
+<pre class="language-javascript constrained"><code>$( "div" ).each(function() {
+    this.classList.add( "red" ); 
+});
+
+$( "div" ).on( "click", function() {
+    this.classList.add( "red" ); 
+});
+</code></pre>
+</section>
+
+<section>
+	<h2>Wrapping Up</h2>
+</section>
+
+<section>
+	<h2>Main anti-jQuery arguments:</h2>
+	<ol id="argument-list">
+		<li>
+			<b>API Parity</b><br>
+			The native platform does everything now.
+		</li>
+		<li>
+			<b>Too Big / Bloated</b><br>
+			File size is too big, especially for mobile.
+		</li>
+		<li>
+			<b>Performance</b><br>
+			Native is faster.
+		</li>
+	</ol>
+</section>
+
+<section>
+	<h2>Main anti-jQuery arguments:</h2>
+	<ol id="argument-list">
+		<li>
+			<b>API Parity</b><br>
+			<span style="color: skyblue;">Native APIs are verbose, not easy to use, and there are lots of gotchas.</span>
+		</li>
+		<li>
+			<b>Too Big / Bloated</b><br>
+			<span style="color: skyblue;">Make sure you concatenate, minify, cache, and gzip your scripts.</span>
+		</li>
+		<li>
+			<b>Performance</b><br>
+			<span style="color: skyblue;">Don't prematurely optimize. If you detect delays in your UI, optimize then.</span>
+		</li>
+	</ol>
+</section>
+
+<section>
+	<h2 class="no_casing">jQuery isn't for everyone</h2>
+	<ul class="spaced">
+		<li>If you have a single button with a click handler, don't use jQuery.</li>
+		<li>If you're writing a library, consider whether you really need jQuery as a dependency (just as you would any other library).</li>
+	</ul>
+</section>
+
+<section>
+	<h3 class="no_casing">jQuery's APIs are easier to</h3>
+	<ul>
+		<li>write</li>
+		<li>maintain</li>
+		<li>refactor</li>
+		<li>debug</li>
+		<li>test</li>
+		<li>grep</li>
+		<li>Google</li>
+		<li>teach</li>
+		<li>understand</li>
+		<li>extend</li>
+	</ul>
+	<aside class="notes">
+		But it's important to remember that in the software development industry we're paid to ship software, and if jQuery makes it easier for you to do that, then use it; and don't feel guilty about it.
+	</aside>
+</section>
+
+<section>
+	<div style="background: #0769AD; display: inline-block;">
+		<img src="img/logo-jquery.png" class="reset">
+	</div>
+	<p>write less, do more.</p>
+</section>
+
+<section>
+	<h1>Thanks</h1>
+	<h3 class="no_casing"><a href="http://tjvantoll.com">TJ VanToll</a> / <a href="http://twitter.com/tjvantoll">@tjvantoll</a></h3>
+</section>
+
+			</div>
+		</div>
+
+		<script src="js/jquery-1.10.2.min.js"></script>
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.js"></script>
+		<script src="js/prism.js"></script>
+		<script src="js/cornify.js"></script>
+
+		<script>
+
+			// Full list of configuration options available here:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+
+				theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+				transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+
+				rollingLinks: false,
+
+				// Optional libraries used to extend on reveal.js
+				dependencies: [
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'plugin/markdown/showdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+					{ src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+				]
+			});
+
+			var updateOutput = function() {
+				var $output = $(this).parents('section').find('.output');
+				try {
+					$output.html($(this).text());
+				} catch(e) {}
+			};
+
+			$('code')
+				.each(function() {
+					updateOutput.apply(this);
+				})
+				.on('keydown', function() {
+					var self = this;
+					setTimeout(function() {
+						updateOutput.apply(self);
+					}, 50);
+				})
+				.on('blur', Prism.highlightAll);
+
+			var tracker;
+			Reveal.addEventListener( "slidechanged", function( event ) {
+				if ( event.currentSlide.id == "utopia" ) {
+					tracker = setInterval(function() {
+						cornify_add();
+					}, 1000 );
+				} else {
+					clearInterval( tracker );
+					$( "img[src*=cornify]" ).remove();
+				}
+			});
+		</script>
+	</body>
+</html>
