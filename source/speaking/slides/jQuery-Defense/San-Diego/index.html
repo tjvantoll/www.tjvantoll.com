@@ -71,6 +71,7 @@
 			</li>
 		</ul>
 	</div>
+	<aside class="notes">PUMPED! CONVICTION!</aside>
 </section>
 
 <section>
@@ -99,28 +100,21 @@
 </section>
 
 <section>
-	<ul class="link-list">
-		<li>
-			<img src="img/haters-ui-1.png" class="reset">
-			<a href="https://twitter.com/driven_by_data/status/388223218194317312">https://twitter.com/driven_by_data/status/388223218194317312</a>
-		</li>
-		<li>
-			<img src="img/haters-ui-2.png" class="reset">
-			<a href="http://blog.ponyfoo.com/2013/07/09/getting-over-jquery">http://blog.ponyfoo.com/2013/07/09/getting-over-jquery</a>
-		</li>
-		<li>
-			<img src="img/haters-ui-3.png" class="reset">
-			<a href="https://twitter.com/dariocravero/status/380438562992558080">https://twitter.com/dariocravero/status/380438562992558080</a>
-		</li>
-	</ul>
-</section>
-
-<section>
 	<h2><a href="http://youmightnotneedjquery.com/">youmightnotneedjquery.com</a></h2>
 	<img src="img/youmightnotneedjquery.png">
 	<aside class="notes">
-		<p>Most of these posts are nicely written. Their argument is not that jQuery is necessarily a bad library, but rather that we have moved beyond jQuery. We no longer need it.</p>
-		<p> The web development world is different from when jQuery was written in 2006. (IE 6, Firefox 1.5, Safari 2)</p>
+		<p>And the thing is, I actually agree with most of what these posts are saying.</p>
+	</aside>
+</section>
+
+<section>
+	<h2 class="no_casing">jQuery isn't for everyone</h2>
+	<ul class="spaced">
+		<li>If you have a single button with a click handler, don't use jQuery.</li>
+		<li>If you're writing a library, consider whether you really need jQuery as a dependency (just as you would any other library).</li>
+	</ul>
+	<aside class="notes">
+		While I agree that jQuery isn't for everyone, I still think it's beneficial to the majority of application developers, and plenty of others have chimed in to show what jQuery still does for you.
 	</aside>
 </section>
 
@@ -149,7 +143,9 @@
 </section>
 
 <section>
-	<h3 class="statement">jQuery is worth using, even if (when?) it fixes 0 browser bugs.</h3>
+	<h2>My Points:</h2>
+	<h3 class="statement">1) jQuery is worth using, even if (when?) it fixes 0 browser bugs.</h3>
+	<h3 class="statement">2) jQuery is - and will continue to be - relevant for the majority of web applications.</h3>
 </section>
 
 <section>
@@ -170,7 +166,7 @@
 <section>
 	<h2>&lt;/disclaimers&gt;</h2>
 	<aside class="notes">
-		Being on the jQuery team has given me perspective. Because I often have to work with the native APIs and the DOM without any abstractions, I have a far more respect for the functionality that jQuery provides.
+		So I definitely have a vested interest in the success of jQuery. But on the flip side, because I work on the jQuery projects, I often have to work with the native APIs and the DOM without any abstractions; therefore I have a far more respect for the functionality that jQuery provides.
 	</aside>
 </section>
 
@@ -211,16 +207,9 @@
 </section>
 
 <section>
-	<h2>API Parity</h2>
-
-	<pre class="language-js"><code>$ === document.querySelectorAll()?</code></pre>
-</section>
-
-<section>
 	<h2>Problems With DOM APIs</h2>
 	<ul class="spaced">
-		<li>Still verbose</li>
-		<li>Not easy to use</li>
+		<li>Verbose and not easy to use</li>
 		<li>Lots of gotchas</li>
 	</ul>
 	<aside class="notes">
@@ -231,70 +220,7 @@
 <section>
 	<h2>Problems With DOM APIs</h2>
 	<ul class="spaced">
-		<li style="font-size: 1.5em; color: skyblue;">Still verbose</li>
-		<li>Not easy to use</li>
-		<li>Lots of gotchas</li>
-	</ul>
-	<aside class="notes">
-		<p>How many people think they could - on the first try - code an XHR request with a callback with no syntax errors?</p>
-	</aside>
-</section>
-
-<section>
-	<h3 class="statement">Without Googling, try to code an XHR that gets a JSON file with a callback.</p>
-</section>
-
-<section>
-	<h2>My first attempt</h2>
-
-<pre class="language-javascript constrained"><code>var xhr = new XMLHTTPRequest();
-xhr.onload = function( data ) {
-    console.log( data );
-};
-xhr.open( "test.json" );
-xhr.send();
-</code></pre>
-	<aside class="notes">
-		<ul>
-			<li>XMLHttpRequest (capitalization)</li>
-			<li>data --> this.responseText</li>
-			<li>open() takes "get"</li>
-		</ul>
-	</aside>
-</section>
-
-<section>
-	<h2>Correct</h2>
-
-<pre class="language-javascript constrained"><code>var xhr = new XMLHttpRequest();
-xhr.onload = function() {
-    console.log( this.responseText );
-};
-xhr.open( "get", "test.json" );
-xhr.send();
-</code></pre>
-	<aside class="notes">
-		How many people can retrieve this JSON file using jQuery?
-	</aside>
-</section>
-
-<section>
-	<h2>jQuery</h2>
-
-<pre class="language-javascript constrained"><code>$.getJSON( "test.json" ).then(function( data ) {
-    console.log( data );
-});
-</code></pre>
-	<aside class="notes">
-		Less verbose APIs are easier to remember, easier to explain to beginners.
-	</aside>
-</section>
-
-<section>
-	<h2>Problems With DOM APIs</h2>
-	<ul class="spaced">
-		<li>Still verbose</li>
-		<li style="font-size: 1.5em; color: skyblue;">Not easy to use</li>
+		<li style="font-size: 1.5em; color: skyblue;">Verbose and not easy to use</li>
 		<li>Lots of gotchas</li>
 	</ul>
 </section>
@@ -359,8 +285,7 @@ find( "p" ).forEach(function( p ) {
 <section>
 	<h2>Problems With DOM APIs</h2>
 	<ul class="spaced">
-		<li>Still verbose</li>
-		<li>Not easy to use</li>
+		<li>Verbose and not easy to use</li>
 		<li style="font-size: 1.5em; color: skyblue;">Lots of gotchas</li>
 	</ul>
 </section>
@@ -446,6 +371,25 @@ find( "p" ).forEach(function( p ) {
 
 <section>
 	<h3 class="statement">None of those examples were bugs; they're all specced behavior.</h3>
+</section>
+
+<section>
+	<h3 class="no_casing">jQuery's APIs are easier to</h3>
+	<ul>
+		<li>write</li>
+		<li>maintain</li>
+		<li>refactor</li>
+		<li>debug</li>
+		<li>test</li>
+		<li>grep</li>
+		<li>Google</li>
+		<li>teach</li>
+		<li>understand</li>
+		<li>extend</li>
+	</ul>
+	<aside class="notes">
+		None of this does us any good if jQuery is too big to use.
+	</aside>
 </section>
 
 <section>
@@ -568,16 +512,6 @@ find( "p" ).forEach(function( p ) {
 </section>
 
 <section>
-	<h2>There are more important things</h2>
-	<ul class="spaced">
-		<li>The average web site is now 1701KB (as of December 2013) (<a href="http://httparchive.org/trends.php#bytesTotal&reqTotal)">source</a>).</li>
-		<li>At 28.56KB, jQuery core is 1.67% of that.</li>
-		<li>Gzip generally reduces the response size of resources by ~70% (<a href="http://developer.yahoo.com/performance/rules.html">source</a>).</li>
-		<li>In 2012 only 46% of resources were served with appropriate cache headers (<a href="http://www.stevesouders.com/blog/2012/03/22/cache-them-if-you-can/">source</a>).
-	</ul>
-</section>
-
-<section>
 	<h2>At a high level, the browser:</h2>
 	<ul class="spaced">
 		<li>Downloads the script</li>
@@ -639,6 +573,26 @@ Chrome 31 (Android 4.4) | 271, 126, 101, 68, 53    | 219, 86, 38, 86, 123</code>
 </section>
 
 <section>
+	<h2>There are more important things</h2>
+	<ul class="spaced">
+		<li>The average web site is now 1701KB (as of December 2013) (<a href="http://httparchive.org/trends.php#bytesTotal&reqTotal)">source</a>).</li>
+		<li>At 28.56KB, jQuery core is 1.67% of that.</li>
+	</ul>
+</section>
+
+<section>
+	<h2>Worry about the size of jQuery after you</h2>
+	<ul>
+		<li>minify your assets,</li>
+		<li>concatenate your assets,</li>
+		<li>gzip your assets,</li>
+		<li>set appropriate cache headers,</li>
+		<li>remove unnecessary HTTP requests as much as possible (e.g. images)</li>
+	</ul>
+	<p>...and you're still seeing performance issues</p>
+</section>
+
+<section>
 	<h2>Main anti-jQuery arguments:</h2>
 	<style>
 		#argument-list li {
@@ -667,10 +621,6 @@ Chrome 31 (Android 4.4) | 271, 126, 101, 68, 53    | 219, 86, 38, 86, 123</code>
 </section>
 
 <section>
-	<h3>Uh, no</h1>
-</section>
-
-<section>
 	<h3 class="statement">Native methods will almost always be faster, but in the vast, vast, VAST majority of situations it doesn't matter.</h3>
 </section>
 
@@ -681,6 +631,7 @@ Chrome 31 (Android 4.4) | 271, 126, 101, 68, 53    | 219, 86, 38, 86, 123</code>
 
 <section>
 	<blockquote>Premature optimization is the root of all evil.</blockquote>-<a href="http://en.wikipedia.org/wiki/Donald_Knuth">Donald Knuth</a>
+	<aside class="notes">Ka-NOOTH</aside>
 </section>
 
 <section>
@@ -727,68 +678,18 @@ $( "div" ).on( "click", function() {
 
 <section>
 	<h2>Wrapping Up</h2>
-</section>
-
-<section>
-	<h2>Main anti-jQuery arguments:</h2>
-	<ol id="argument-list">
-		<li>
-			<b>API Parity</b><br>
-			The native platform does everything now.
-		</li>
-		<li>
-			<b>Too Big / Bloated</b><br>
-			File size is too big, especially for mobile.
-		</li>
-		<li>
-			<b>Performance</b><br>
-			Native is faster.
-		</li>
-	</ol>
-</section>
-
-<section>
-	<h2>Main anti-jQuery arguments:</h2>
-	<ol id="argument-list">
-		<li>
-			<b>API Parity</b><br>
-			<span style="color: skyblue;">Native APIs are verbose, not easy to use, and there are lots of gotchas.</span>
-		</li>
-		<li>
-			<b>Too Big / Bloated</b><br>
-			<span style="color: skyblue;">Make sure you concatenate, minify, cache, and gzip your scripts.</span>
-		</li>
-		<li>
-			<b>Performance</b><br>
-			<span style="color: skyblue;">Don't prematurely optimize. If you detect delays in your UI, optimize then.</span>
-		</li>
-	</ol>
-</section>
-
-<section>
-	<h2 class="no_casing">jQuery isn't for everyone</h2>
-	<ul class="spaced">
-		<li>If you have a single button with a click handler, don't use jQuery.</li>
-		<li>If you're writing a library, consider whether you really need jQuery as a dependency (just as you would any other library).</li>
-	</ul>
-</section>
-
-<section>
-	<h3 class="no_casing">jQuery's APIs are easier to</h3>
-	<ul>
-		<li>write</li>
-		<li>maintain</li>
-		<li>refactor</li>
-		<li>debug</li>
-		<li>test</li>
-		<li>grep</li>
-		<li>Google</li>
-		<li>teach</li>
-		<li>understand</li>
-		<li>extend</li>
-	</ul>
 	<aside class="notes">
-		But it's important to remember that in the software development industry we're paid to ship software, and if jQuery makes it easier for you to do that, then use it; and don't feel guilty about it.
+		And just to wrap up, overall...
+	</aside>
+</section>
+
+<section>
+	<h2>My Points:</h2>
+	<h3 class="statement">1) jQuery is worth using, even if (when?) it fixes 0 browser bugs.</h3>
+	<h3 class="statement">2) jQuery is - and will continue to be - relevant for the majority of web applications.</h3>
+	<aside class="notes">
+		Like any library in any language, you should absolutely think before you add jQuery to your application. Don't do it just because. But at the same time, you shouldn't remove a library just because either.
+		In the software development industry we're paid to ship software, plain and simple. And if jQuery makes it easier for you to do that, then use it; and don't feel guilty about it. *SWITCH*
 	</aside>
 </section>
 
@@ -797,6 +698,9 @@ $( "div" ).on( "click", function() {
 		<img src="img/logo-jquery.png" class="reset">
 	</div>
 	<p>write less, do more.</p>
+	<aside class="notes">
+		jQuery's motto is as true today as it was in 2006 - write less, do more.
+	</aside>
 </section>
 
 <section>
