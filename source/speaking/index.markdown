@@ -9,6 +9,19 @@ sharing: false
 	<p>On certain occasions I've been known to talk to people in real life.</p>
 
 	<article>
+		<img src="/speaking/thumbnail/html5-form-validation.png">
+		<h2>Validating Forms With HTML5</h2>
+		<ul>
+			<li>
+				<span>February 25th, 2014:</span>
+				<a href="http://www.meetup.com/AtlantaHTML5/events/166212742/">Atlanta HTML5 User Group</a> |
+				<address class="country-us">Atlanta, Georgia</address> |
+				<a href="/speaking/slides/Constraint-Validation/Atlanta/">Slides</a>
+			</li>
+		</ul>
+	</article>
+
+	<article>
 		<img src="/speaking/thumbnail/jquery-defense.png">
 		<h2>Making the Case for jQuery in a Browser Utopia</h2>
 		<ul>
@@ -25,6 +38,12 @@ sharing: false
 		<img src="/speaking/thumbnail/jquery-ui-vs-html5.png">
 		<h2>jQuery UI Widgets vs. HTML5</h2>
 		<ul>
+			<li>
+				<span>February 24th, 2014:</span>
+				<a href="http://devnexus.com/">DevNexus</a> |
+				<address class="country-us">Atlanta, Georgia</address> |
+				<a href="/speaking/slides/UI-Widgets-vs-HTML5/Atlanta">Slides</a>
+			</li>
 			<li>
 				<span>October 2nd, 2013:</span>
 				<a href="http://www.devreach.com/">DevReach</a> |

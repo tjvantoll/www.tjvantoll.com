@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>jQuery validation Plugin</title>
+
+	<style>
+		* { box-sizing: border-box; }
+		body {
+			font-size: 1.2em;
+		}
+		body input, body button {
+			font-size: 1.2em;
+		}
+
+		form > div {
+			margin: 1em;
+		}
+		form button {
+			width: 100%;
+		}
+		label { display: block; }
+		input {
+			width: 100%;
+			padding: 0.2em;
+		}
+		button {
+			padding: 0.2em;
+		}
+
+		input.error {
+			background: red;
+			color: white;
+		}
+		label.error {
+			color: red;
+		}
+	</style>
+</head>
+<body>
+
+<form>
+	<div>
+		<label for="name">Name:</label>
+		<input type="text" name="name" id="name" required>
+	</div>
+	<div>
+		<label for="email">Email:</label>
+		<input type="email" name="email" id="email" required>
+	</div>
+	<div>
+		<button>Submit</button>
+	</div>
+</form>
+
+<script src="jquery.js"></script>
+<script src="jquery.validate.js"></script>
+<script>
+	$( "form" ).validate({
+		/*messages: {
+			name: "Name is required.",
+			email: {
+				required: "Email is required.",
+				email: "You must provide a valid email address."
+			}
+		},*/
+		submitHandler: function() {
+			alert( "Successful submission" );
+		}
+	});
+</script>
+
+</body>
+</html>
