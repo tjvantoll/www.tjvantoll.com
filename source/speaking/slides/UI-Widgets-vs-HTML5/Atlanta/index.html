@@ -298,7 +298,7 @@
 <pre class="language-markup" style="font-size: 0.8em;">
 <code contenteditable>&lt;form&gt;
     &lt;input type="date" id="date-1"
-      min="2013-03-03" max="2013-03-20" step="2"&gt;
+      min="2014-03-03" max="2014-03-20" step="2"&gt;
 &lt;/form&gt;
 </code></pre>
 					<div class="output"></div>
@@ -336,9 +336,9 @@
 <pre class="language-markup" style="font-size: 0.8em;">
 <code contenteditable>&lt;input type="date" id="date-3" list="dates-3"&gt;
 &lt;datalist id="dates-3"&gt;
-	&lt;option&gt;2013-01-01&lt;/option&gt;
-    &lt;option&gt;2013-10-31&lt;/option&gt;
-    &lt;option&gt;2013-12-25&lt;/option&gt;
+	&lt;option&gt;2014-01-01&lt;/option&gt;
+    &lt;option&gt;2014-10-31&lt;/option&gt;
+    &lt;option&gt;2014-12-25&lt;/option&gt;
 &lt;/datalist&gt;
 </code></pre>
 					<div class="output"></div>
@@ -364,17 +364,11 @@
 						}
 					</style>
 					<div class="side_by_side">
-						<h4 id="ios_heading" class="no_casing">iOS 6</h4>
-						<img style="height: 450px;" src="img/iOS_date.png">
+						<h4 id="ios_heading" class="no_casing">iOS 7</h4>
+						<img style="height: 450px;" src="img/iOS_7_date.png">
 						<h4 id="chrome_android_heading" class="no_casing">Chrome for Android</h4>
 						<img style="height: 450px;" src="img/chrome_android_date2.png">
 					</div>
-				</section>
-
-				<section>
-					<h2 class="no_casing">iOS 7</h2>
-					<pre class="language-markup inline"><code>&lt;input type="date"&gt;</code></pre>
-					<img style="max-height: 400px; display: block; margin: 20px auto 0 auto" src="img/iOS_7_date.png">
 				</section>
 
 				<section>
@@ -404,8 +398,8 @@
 <code>&lt;input type="text" id="date-min-max"&gt;
 &lt;script&gt;
     $( "#date-min-max" ).datepicker({
-        minDate: new Date( 2013, 01, 01 ),
-        maxDate: new Date( 2013, 01, 10 )
+        minDate: new Date( 2014, 01, 01 ),
+        maxDate: new Date( 2014, 01, 10 )
     });
 &lt;/script&gt;
 </code></pre>
@@ -772,21 +766,9 @@
 				</section>
 
 				<section>
-					<h2 class="no_casing">iOS 6</h2>
-					<pre class="language-markup inline"><code>&lt;input type="number"&gt;</code></pre>
-					<img style="max-height: 400px; display: block; margin: 20px auto 0 auto" src="img/iOS_number.png">
-				</section>
-
-				<section>
 					<h2 class="no_casing">iOS 7</h2>
 					<pre class="language-markup inline"><code>&lt;input type="number"&gt;</code></pre>
 					<img style="max-height: 400px; display: block; margin: 20px auto 0 auto" src="img/iOS_7_number.png">
-				</section>
-
-				<section>
-					<h2 class="no_casing">iOS 6</h2>
-					<pre class="language-markup inline"><code>&lt;input type="number" pattern="[0-9]*"&gt;</code></pre>
-					<img style="max-height: 400px;" src="img/iOS_number_pattern.png">
 				</section>
 
 				<section>
@@ -802,7 +784,7 @@
 				</section>
 
 				<section>
-					<h2>Opera Mobile (pre-Chromium)</h2>
+					<h2>Opera Mobile (pre-Blink)</h2>
 					<pre class="language-markup inline"><code>&lt;input type="number" min="2" max="8" step="2"&gt;</code></pre>
 					<img style="max-height: 400px;" src="img/opera_number.png">
 				</section>
@@ -1064,13 +1046,13 @@
 				</section>
 
 				<section>
-					<h2>Presto</h2>
-					<img src="img/presto_number_conflict.png">
+					<h2>Firefox 28</h2>
+					<img src="img/firefox_number_conflict.png">
 				</section>
 
 				<section>
 					<h2>Can we get the best of both worlds?</h2>
-					<p class="fragment">Not really...</p>
+					<p class="fragment">No</p>
 				</section>
 
 				<section>
@@ -1125,13 +1107,6 @@
 				</section>
 
 				<section>
-					<h2 class="no_casing">iOS 6</h2>
-					<pre class="language-markup inline"><code>&lt;input type="range"&gt;</code></pre>
-					<br>
-					<img src="img/iOS_range.png" style="max-height: 400px;">
-				</section>
-
-				<section>
 					<h2 class="no_casing">iOS 7</h2>
 					<pre class="language-markup inline"><code>&lt;input type="range"&gt;</code></pre>
 					<br>
@@ -1146,7 +1121,7 @@
 				</section>
 
 				<section>
-					<h2>IE10</h2>
+					<h2>IE10, IE11</h2>
 					<pre class="language-markup inline"><code>&lt;input type="range"&gt;</code></pre>
 					<br>
 					<img src="img/ie10_range.png" style="max-height: 400px;">
@@ -1182,7 +1157,7 @@
 				</section>
 
 				<section>
-					<h2>Datalists in IE10</h2>
+					<h2>Datalists in IE10, IE11</h2>
 					<img src="img/ie10_range_datalist.png">
 				</section>
 
@@ -1381,6 +1356,11 @@
 					<h2>Extensible</h2>
 					By <a href="https://twitter.com/ignaty" style="display: block; margin-bottom: 20px;">@ignaty</a>
 <pre class="codepen" data-height="300" data-type="result" data-href="EruAe" data-user="ignaty" data-safe="false"><code></code><a href="http://codepen.io/ignaty/pen/EruAe">Check out this Pen!</a></pre>
+				</section>
+
+				<section>
+					<h2>Using slider as a polyfill</h2>
+					<a href="http://tjvantoll.com/2012/09/14/using-jquery-ui-slider-to-polyfill-html5-input-type-range/">http://tjvantoll.com/2012/09/14/using-jquery-ui-slider-to-polyfill-html5-input-type-range/</a>
 				</section>
 
 				<section>
