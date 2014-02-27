@@ -16,7 +16,8 @@ sharing: false
 				<span>February 25th, 2014:</span>
 				<a href="http://www.meetup.com/AtlantaHTML5/events/166212742/">Atlanta HTML5 User Group</a> |
 				<address class="country-us">Atlanta, Georgia</address> |
-				<a href="/speaking/slides/Constraint-Validation/Atlanta/">Slides</a>
+				<a href="/speaking/slides/Constraint-Validation/Atlanta/">Slides</a> |
+				<a href="https://www.youtube.com/watch?v=OkjNjJf1Tos">Video</a>
 			</li>
 		</ul>
 	</article>
@@ -42,7 +43,8 @@ sharing: false
 				<span>February 24th, 2014:</span>
 				<a href="http://devnexus.com/">DevNexus</a> |
 				<address class="country-us">Atlanta, Georgia</address> |
-				<a href="/speaking/slides/UI-Widgets-vs-HTML5/Atlanta">Slides</a>
+				<a href="/speaking/slides/UI-Widgets-vs-HTML5/Atlanta">Slides</a> |
+				<a href="https://www.youtube.com/watch?v=mv2woR7KnNM">Video</a>
 			</li>
 			<li>
 				<span>October 2nd, 2013:</span>
