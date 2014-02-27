@@ -5,6 +5,9 @@ date: 2012-05-02 22:37
 comments: true
 categories: [JavaScript, Browsers]
 ---
+
+<div class="warning" style="display: block;">Update February 27th, 2014: In case you aren't convinced by the argument below, <a href="https://developer.mozilla.org/en-US/Firefox/Releases/28/Site_Compatibility">Firefox 28 deprecated <code>showModalDialog</code></a> and <a href="https://code.google.com/p/chromium/issues/detail?id=345831">Chrome 35 removed it</a>.</div>
+
 Ah, 1997.  The first browser war was in full force, and Microsoft was busy adding proprietary new features to compete with Netscape Navigator.  One of those features was introducing a common OS UI element into the browser - modal dialogs.  Internet Explorer 4 launched with a ```showModalDialog``` method on the global ```window``` object.  When called it displays a dialog that the user has to deal with before interacting with the rest of the page.
 
 Fast forward a few years and Internet Explorer had won the war, 95+ percent of us were using IE6.  Consequently a whole lot of web applications were designed around many of the proprietary features that IE had added.  Interestingly several of these have recently been added to the HTML5 specification including [innerHTML](http://www.w3.org/TR/html5/embedded-content-0.html#dom-innerhtml), [insertAdjacentHTML](http://html5.org/specs/dom-parsing.html#insertadjacenthtml%28%29), [outerHTML](http://html5.org/specs/dom-parsing.html#outerhtml), and… [window.showModalDialog](http://www.whatwg.org/specs/web-apps/current-work/multipage/timers.html#dialogs-implemented-using-separate-documents).
