@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Effect of iOS 7.1's minimal-ui Meta Tag"
+title: "Effect of iOS 7.1's minimal-ui Viewport Property"
 date: 2014-03-11
 comments: true
 categories: [Mobile, HTML, iOS]
