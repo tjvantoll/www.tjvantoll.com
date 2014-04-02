@@ -29,7 +29,8 @@ sharing: false
 				<span>February 12th, 2014:</span>
 				<a href="http://events.jquery.org/2014/san-diego/">jQuery San Diego</a> |
 				<address class="country-us">San Diego, California</address> |
-				<a href="/speaking/slides/jQuery-Defense/San-Diego/">Slides</a>
+				<a href="/speaking/slides/jQuery-Defense/San-Diego/">Slides</a> | 
+				<a href="https://www.youtube.com/watch?v=OBLvBcGgVQc">Video</a>
 			</li>
 		</ul>
 	</article>
