@@ -9,6 +9,19 @@ sharing: false
 	<p>On certain occasions I've been known to talk to people in real life.</p>
 
 	<article>
+		<img src="/speaking/thumbnail/state-of-hybrid.png">
+		<h2>The State of Hybrid</h2>
+		<ul>
+			<li>
+				<span>April 28th, 2014:</span>
+				<a href="http://www.meetup.com/grwebdev/events/165953762/">Grand Rapids Web Dev Meetup</a> |
+				<address class="country-us">Grand Rapids, Michigan</address> |
+				<a href="/speaking/slides/State-of-Hybrid/Grand-Rapids/">Slides</a>
+			</li>
+		</ul>
+	</article>
+
+	<article>
 		<img src="/speaking/thumbnail/html5-form-validation.png">
 		<h2>Validating Forms With HTML5</h2>
 		<ul>
