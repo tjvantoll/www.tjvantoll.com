@@ -4,7 +4,7 @@
   <title><![CDATA[TJ VanToll]]></title>
   <link href="http://tjvantoll.com/atom.xml" rel="self"/>
   <link href="http://tjvantoll.com/"/>
-  <updated>2014-04-28T16:32:12-04:00</updated>
+  <updated>2014-05-01T12:24:30-04:00</updated>
   <id>http://tjvantoll.com/</id>
   <author>
     <name><![CDATA[TJ VanToll]]></name>
@@ -12,6 +12,207 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Using Semantic HTML to Drive Display Logic]]></title>
+    <link href="http://tjvantoll.com/2014/05/01/using-semantic-html-to-drive-display-logic/"/>
+    <updated>2014-05-01T00:00:00-04:00</updated>
+    <id>http://tjvantoll.com/2014/05/01/using-semantic-html-to-drive-display-logic</id>
+    <content type="html"><![CDATA[<p>Today I want to share a quick tip for driving display logic in UI components—and I think it&#8217;s easier to see in an example.</p>
+
+<p>Suppose you are tasked with implementing a form that can be used by two types of users: admins and regular users. Admins should be able to delete, and regular users should see an informational message. The display of this form is shown below:</p>
+
+<p><img src="http://tjvantoll.com/images/posts/2014-05-01/user-types.png" alt="Display of the admin and regular user modes of a form"></p>
+
+<p><em>Note: You can view the final example of this code at <a href="http://jsfiddle.net/tj_vantoll/77TbG/">http://jsfiddle.net/tj_vantoll/77TbG/</a> if you&#8217;d like to follow along.</em></p>
+
+<!--more-->
+
+
+<p>Here&#8217;s the HTML we&#8217;ll use:</p>
+
+<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;form</span> <span class="na">id=</span><span class="s">&quot;information-form&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;fieldset&gt;</span>
+</span><span class='line'>        <span class="nt">&lt;legend&gt;</span>Information<span class="nt">&lt;/legend&gt;</span>
+</span><span class='line'>        <span class="nt">&lt;div&gt;</span>
+</span><span class='line'>            <span class="nt">&lt;label</span> <span class="na">for=</span><span class="s">&quot;name&quot;</span><span class="nt">&gt;</span>Name:<span class="nt">&lt;/label&gt;</span>
+</span><span class='line'>            <span class="nt">&lt;input</span> <span class="na">id=</span><span class="s">&quot;name&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>        <span class="nt">&lt;/div&gt;</span>
+</span><span class='line'>        <span class="nt">&lt;div&gt;</span>
+</span><span class='line'>            <span class="nt">&lt;label</span> <span class="na">for=</span><span class="s">&quot;address&quot;</span><span class="nt">&gt;</span>Address:<span class="nt">&lt;/label&gt;</span>
+</span><span class='line'>            <span class="nt">&lt;input</span> <span class="na">id=</span><span class="s">&quot;address&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>        <span class="nt">&lt;/div&gt;</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="nt">&lt;button&gt;</span>Update<span class="nt">&lt;/button&gt;</span>
+</span><span class='line'>        <span class="nt">&lt;button</span> <span class="na">id=</span><span class="s">&quot;delete&quot;</span><span class="nt">&gt;</span>Delete<span class="nt">&lt;/button&gt;</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="nt">&lt;p</span> <span class="na">id=</span><span class="s">&quot;admin-message&quot;</span><span class="nt">&gt;</span>To delete this user, please contact an administrator.<span class="nt">&lt;/p&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;/fieldset&gt;</span>
+</span><span class='line'><span class="nt">&lt;/form&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>And we&#8217;ll use two buttons to switch between the two user types.</p>
+
+<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;button</span> <span class="na">id=</span><span class="s">&quot;admin&quot;</span><span class="nt">&gt;</span>Display as admin<span class="nt">&lt;/button&gt;</span>
+</span><span class='line'><span class="nt">&lt;button</span> <span class="na">id=</span><span class="s">&quot;regular-user&quot;</span><span class="nt">&gt;</span>Display as regular user<span class="nt">&lt;/button&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>So, the question is&#8230; what JavaScript do you implement to show/hide the delete button and informational message? The following shows an approach I often see: targeting individual elements in JavaScript, and altering their display.</p>
+
+<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="kd">var</span> <span class="nx">adminButton</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span> <span class="s2">&quot;#admin&quot;</span> <span class="p">),</span>
+</span><span class='line'>    <span class="nx">regularButton</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span> <span class="s2">&quot;#regular-user&quot;</span> <span class="p">),</span>
+</span><span class='line'>    <span class="nx">deleteButton</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span> <span class="s2">&quot;#delete&quot;</span> <span class="p">),</span>
+</span><span class='line'>    <span class="nx">adminMessage</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span> <span class="s2">&quot;#admin-message&quot;</span> <span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">adminButton</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span> <span class="s2">&quot;click&quot;</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nx">deleteButton</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">display</span> <span class="o">=</span> <span class="s2">&quot;inline-block&quot;</span><span class="p">;</span>
+</span><span class='line'>    <span class="nx">adminMessage</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">display</span> <span class="o">=</span> <span class="s2">&quot;none&quot;</span><span class="p">;</span>
+</span><span class='line'><span class="p">});</span>
+</span><span class='line'><span class="nx">regularButton</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span> <span class="s2">&quot;click&quot;</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nx">deleteButton</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">display</span> <span class="o">=</span> <span class="s2">&quot;none&quot;</span><span class="p">;</span>
+</span><span class='line'>    <span class="nx">adminMessage</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">display</span> <span class="o">=</span> <span class="s2">&quot;block&quot;</span><span class="p">;</span>
+</span><span class='line'><span class="p">});</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This works, but it&#8217;s verbose, as you have to target each element that should be shown or hidden whenever the user types changes. From a more abstract perspective, it also breaks the <a href="http://en.wikipedia.org/wiki/Separation_of_concerns">separation of concerns design principle</a>, since CSS changes are being done in JavaScript.</p>
+
+<p>To improve this, let&#8217;s switch the JavaScript to manage a single CSS class name on the form.</p>
+
+<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="kd">var</span> <span class="nx">adminButton</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span> <span class="s2">&quot;#admin&quot;</span> <span class="p">),</span>
+</span><span class='line'>    <span class="nx">regularButton</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span> <span class="s2">&quot;#regular-user&quot;</span> <span class="p">),</span>
+</span><span class='line'>    <span class="nx">form</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span> <span class="s2">&quot;#information-form&quot;</span> <span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">adminButton</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span> <span class="s2">&quot;click&quot;</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nx">form</span><span class="p">.</span><span class="nx">classList</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span> <span class="s2">&quot;admin&quot;</span> <span class="p">);</span>
+</span><span class='line'><span class="p">});</span>
+</span><span class='line'><span class="nx">regularButton</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span> <span class="s2">&quot;click&quot;</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nx">form</span><span class="p">.</span><span class="nx">classList</span><span class="p">.</span><span class="nx">remove</span><span class="p">(</span> <span class="s2">&quot;admin&quot;</span> <span class="p">);</span>
+</span><span class='line'><span class="p">});</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>At the moment, nothing shows or hides when you click buttons, but with the <code>"admin"</code> class name in place, you have the hook you need to implement the logic in CSS.</p>
+
+<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nf">#delete</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">display</span><span class="o">:</span> <span class="k">none</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="nc">.admin</span> <span class="nf">#admin-message</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">display</span><span class="o">:</span> <span class="k">none</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="nc">.admin</span> <span class="nf">#delete</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">display</span><span class="o">:</span> <span class="k">inline</span><span class="o">-</span><span class="k">block</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>JavaScript manages the state of the element, which gives CSS the ability to control the display based on that state. This approach is not only cleaner, it is also more flexible. If you need to change colors for admin, or spacing, you now have a CSS hook you can use to do so.</p>
+
+<p>This same approach works with HTML attributes as well. For instance, let&#8217;s switch from using a CSS class name, to a <code>data-admin</code> attribute on the <code>&lt;form&gt;</code>. With that approach you use the following JavaScript:</p>
+
+<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="kd">var</span> <span class="nx">adminButton</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span> <span class="s2">&quot;#admin&quot;</span> <span class="p">),</span>
+</span><span class='line'>    <span class="nx">regularButton</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span> <span class="s2">&quot;#regular-user&quot;</span> <span class="p">),</span>
+</span><span class='line'>    <span class="nx">form</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span> <span class="s2">&quot;#information-form&quot;</span> <span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">adminButton</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span> <span class="s2">&quot;click&quot;</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nx">form</span><span class="p">.</span><span class="nx">setAttribute</span><span class="p">(</span> <span class="s2">&quot;data-admin&quot;</span><span class="p">,</span> <span class="kc">true</span> <span class="p">);</span>
+</span><span class='line'><span class="p">});</span>
+</span><span class='line'><span class="nx">regularButton</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span> <span class="s2">&quot;click&quot;</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nx">form</span><span class="p">.</span><span class="nx">setAttribute</span><span class="p">(</span> <span class="s2">&quot;data-admin&quot;</span><span class="p">,</span> <span class="kc">false</span> <span class="p">);</span>
+</span><span class='line'><span class="p">});</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>And the following CSS:</p>
+
+<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nf">#delete</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">display</span><span class="o">:</span> <span class="k">none</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="o">[</span><span class="nt">data-admin</span><span class="o">=</span><span class="s2">&quot;true&quot;</span><span class="o">]</span> <span class="nf">#admin-message</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">display</span><span class="o">:</span> <span class="k">none</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="o">[</span><span class="nt">data-admin</span><span class="o">=</span><span class="s2">&quot;true&quot;</span><span class="o">]</span> <span class="nf">#delete</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">display</span><span class="o">:</span> <span class="k">inline</span><span class="o">-</span><span class="k">block</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Use whatever makes sense for your use case. The overarching idea is to use JavaScript to apply semantic HTML that reflects an element&#8217;s state, and to let CSS control the display from there. Personally I&#8217;ve found this to be the best way to handle display logic in UI components—especially complex ones.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Effect of iOS 7.1's minimal-ui Viewport Property]]></title>
@@ -3203,234 +3404,6 @@ Adding a strikethrough to a line of text in CSS is easy.</p>
 <p>This check clearly requires the least amount of typing.  It is also the most flexible as you can easily alter things like case sensitivity, special character handling, white space, etc.  This will work in all browsers and you don&#8217;t have to worry about messing with the native prototypes.</p>
 
 <p>While this is the most powerful option, it comes at a cost of being less readable.  I had to look up the <code>^</code> (match at the beginning of input) and <code>$</code> (match at the end of input) characters when writing this post.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Using jQuery UI Tabs with the &lt;base&gt; Tag]]></title>
-    <link href="http://tjvantoll.com/2013/02/17/using-jquery-ui-tabs-with-the-base-tag/"/>
-    <updated>2013-02-17T21:14:00-05:00</updated>
-    <id>http://tjvantoll.com/2013/02/17/using-jquery-ui-tabs-with-the-base-tag</id>
-    <content type="html"><![CDATA[<p>As there have been <a href="http://bugs.jqueryui.com/ticket/7822">numerous bug submissions</a> for this, I feel the need to explain how to properly use <a href="http://jqueryui.com/tabs">jQuery UI&#8217;s tab widget</a> with a <code>&lt;base&gt;</code> tag.  Let&#8217;s start with what the <code>&lt;base&gt;</code> tag is intended for.</p>
-
-<h3>The &lt;base&gt; Element</h3>
-
-<p><a href="https://developer.mozilla.org/en-US/docs/HTML/Element/base">Per MDN</a> the <code>&lt;base&gt;</code> element specifies the base URL to use for all relative URLs contained within a document.</p>
-
-<!--more-->
-
-
-<p>Consider the following example:</p>
-
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;base</span> <span class="na">href=</span><span class="s">&quot;http://foo.com&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'><span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;bar.html&quot;</span><span class="nt">&gt;</span>Bar<span class="nt">&lt;/a&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Let&#8217;s assume this HTML appears on this domain (<code>http://tjvantoll.com</code>).  When the link is clicked on, the browser will navigate to <code>http://foo.com/bar.html</code> rather than <code>http://tjvantoll.com/bar.html</code>.</p>
-
-<p>It&#8217;s important to note that hash links are also relative to the specified base.  Therefore on the following:</p>
-
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;base</span> <span class="na">href=</span><span class="s">&quot;http://foo.com&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'><span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;#bar&quot;</span><span class="nt">&gt;</span>Bar<span class="nt">&lt;/a&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>When the link is click on, the browser will navigate to <code>http://foo.com#bar</code> and NOT <code>http://tjvantoll.com#bar</code>.  This detail is important; it&#8217;s the root cause of confusion when using a <code>&lt;base&gt;</code> tag with the tabs widget.</p>
-
-<h3>jQuery UI Tabs</h3>
-
-<p>Here is the intended HTML structure to be used by the tabs widget:</p>
-
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">&quot;tabs&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;ul&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;li&gt;&lt;a</span> <span class="na">href=</span><span class="s">&quot;#tab-1&quot;</span><span class="nt">&gt;</span>One<span class="nt">&lt;/a&gt;&lt;/li&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;li&gt;&lt;a</span> <span class="na">href=</span><span class="s">&quot;#tab-2&quot;</span><span class="nt">&gt;</span>Two<span class="nt">&lt;/a&gt;&lt;/li&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;/ul&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">&quot;tab-1&quot;</span><span class="nt">&gt;</span>Contents of tab one.<span class="nt">&lt;/div&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">&quot;tab-2&quot;</span><span class="nt">&gt;</span>Contents of tab two.<span class="nt">&lt;/div&gt;</span>
-</span><span class='line'><span class="nt">&lt;/div&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="nt">&lt;script&gt;</span><span class="nx">$</span><span class="p">(</span> <span class="s2">&quot;#tabs&quot;</span> <span class="p">).</span><span class="nx">tabs</span><span class="p">();</span><span class="nt">&lt;/script&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Which produces the following:</p>
-
-<p><img src="http://tjvantoll.com/images/posts/2013-02-17/tabs.png" alt="Default look of jQuery UI's tabs"></p>
-
-<p>In this example both links begin with a hash (<code>#</code>), indicating that their content is located on the current page.  If that is not the case, the tabs widget will retrieve the tab&#8217;s contents server side via an XHR call.  Consider the following:</p>
-
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">&quot;tabs&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;ul&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;li&gt;&lt;a</span> <span class="na">href=</span><span class="s">&quot;#local&quot;</span><span class="nt">&gt;</span>Local<span class="nt">&lt;/a&gt;&lt;/li&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;li&gt;&lt;a</span> <span class="na">href=</span><span class="s">&quot;external&quot;</span><span class="nt">&gt;</span>External<span class="nt">&lt;/a&gt;&lt;/li&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;/ul&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">&quot;local&quot;</span><span class="nt">&gt;</span>Contents of the local tab.<span class="nt">&lt;/div&gt;</span>
-</span><span class='line'><span class="nt">&lt;/div&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="nt">&lt;script&gt;</span><span class="nx">$</span><span class="p">(</span> <span class="s2">&quot;#tabs&quot;</span> <span class="p">).</span><span class="nx">tabs</span><span class="p">();</span><span class="nt">&lt;/script&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Here the local link will work as in the previous example - when it is clicked on, the tabs widget will simply display the contents of the <code>#local</code> container.</p>
-
-<p>However, when the external link is clicked, the tabs widget will perform an XHR request to retrieve the contents.  Assuming this HTML is located on <code>http://tjvantoll.com</code>, an XHR GET will be performed for <code>http://tjvantoll.com/external</code>.  The contents returned are dynamically added to the DOM and displayed.</p>
-
-<p>The markup pattern used here is no accident.  Consider a user that views this HTML without JavaScript enabled.  The local link will move the user&#8217;s focus to the <code>#local</code> container on <code>http://tjvantoll.com</code>.  The external link will do a full page navigation to <code>http://tjvantoll.com/external</code>.  The markup is designed to enhance the default browser behavior and to degrade gracefully when JavaScript isn&#8217;t present.</p>
-
-<h3>&lt;base&gt; + tabs</h3>
-
-<p>Given the descriptions above, the behavior of the <code>&lt;base&gt;</code> tag with the tabs widget shouldn&#8217;t be surprising.  Here&#8217;s the first example given for the tabs widget again.  This time, a <code>&lt;base&gt;</code> tag to <code>http://foo.com</code> has been added:</p>
-
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;base</span> <span class="na">href=</span><span class="s">&quot;http://foo.com&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">&quot;tabs&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;ul&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;li&gt;&lt;a</span> <span class="na">href=</span><span class="s">&quot;#tab-1&quot;</span><span class="nt">&gt;</span>One<span class="nt">&lt;/a&gt;&lt;/li&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;li&gt;&lt;a</span> <span class="na">href=</span><span class="s">&quot;#tab-2&quot;</span><span class="nt">&gt;</span>Two<span class="nt">&lt;/a&gt;&lt;/li&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;/ul&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">&quot;tab-1&quot;</span><span class="nt">&gt;</span>Contents of tab one.<span class="nt">&lt;/div&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">&quot;tab-2&quot;</span><span class="nt">&gt;</span>Contents of tab two.<span class="nt">&lt;/div&gt;</span>
-</span><span class='line'><span class="nt">&lt;/div&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="nt">&lt;script&gt;</span><span class="nx">$</span><span class="p">(</span> <span class="s2">&quot;#tabs&quot;</span> <span class="p">).</span><span class="nx">tabs</span><span class="p">();</span><span class="nt">&lt;/script&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Let&#8217;s again assume this HTML is located on <code>http://tjvantoll.com</code>.  Because of the <code>&lt;base&gt;</code> tag, the links used in the tabs widget are actually external links to <code>http://foo.com</code>.  Therefore, upon instantiation, the tabs widget will attempt to load the contents of the first tab from <code>http://foo.com</code>.</p>
-
-<p>If you are having trouble understanding, try the example above with JavaScript disabled.  When the first link is clicked on, the browser will navigate to <code>http://foo.com</code> regardless of the domain the page is viewed on.</p>
-
-<h3>Fixes</h3>
-
-<p>From the numerous bug reports, it seems that a lot of people have applications with <code>&lt;base&gt;</code> tags and want hashed links to be relative to the current page.  How can you fix your application?</p>
-
-<p>1) <strong>Remove the <code>&lt;base&gt;</code> tag.</strong>  It&#8217;s that simple.  After the removal, the tabs widget will never attempt to load external content from any links with leading hashes.  Of course, this approach requires changing any other links on the page that are dependent on the <code>&lt;base&gt;</code> tag&#8217;s leading path.</p>
-
-<p>2) <strong>Provide full URLs on links used to build the tabs widget.</strong>  If approach #1 isn&#8217;t feasible, you can also provide a fully qualified URL in the links used to build the tabs widget.  Here&#8217;s the earlier example modified to show this approach:</p>
-
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;base</span> <span class="na">href=</span><span class="s">&quot;http://foo.com&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">&quot;tabs&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;ul&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;li&gt;&lt;a</span> <span class="na">href=</span><span class="s">&quot;http://tjvantoll.com#tab-1&quot;</span><span class="nt">&gt;</span>One<span class="nt">&lt;/a&gt;&lt;/li&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;li&gt;&lt;a</span> <span class="na">href=</span><span class="s">&quot;http://tjvantoll.com#tab-2&quot;</span><span class="nt">&gt;</span>Two<span class="nt">&lt;/a&gt;&lt;/li&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;/ul&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">&quot;tab-1&quot;</span><span class="nt">&gt;</span>Contents of tab one.<span class="nt">&lt;/div&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">&quot;tab-2&quot;</span><span class="nt">&gt;</span>Contents of tab two.<span class="nt">&lt;/div&gt;</span>
-</span><span class='line'><span class="nt">&lt;/div&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="nt">&lt;script&gt;</span><span class="nx">$</span><span class="p">(</span> <span class="s2">&quot;#tabs&quot;</span> <span class="p">).</span><span class="nx">tabs</span><span class="p">();</span><span class="nt">&lt;/script&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Since the links in the tabs are now fully qualified paths to the current page, the tabs widget will not perform a request to retrieve external content.</p>
-
-<p>A more robust way of handling this would be to inject the current path server side.  For example the following PHP could be used to inject the link used in the first tab above:</p>
-
-<p><code>'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'] . '#tab-1'</code></p>
-
-<p>3) <strong>Add the full URLs via JavaScript.</strong></p>
-
-<div class="warning" style="display: block;">
-    This is not the right way to fix this problem.  I&#8217;m only providing this because I realize the realities of working on enormous projects or projects where you do not have full control over the HTML.
-</div>
-
-
-<p>This is the same approach as #2, but the appropriate links are changed in JavaScript instead of forcing you to fix every link manually.</p>
-
-<p>The hack is shown below, simply call the <code>makeTabs</code> function with the selector used to create the tabs widget:</p>
-
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="kd">var</span> <span class="nx">makeTabs</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">selector</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>    <span class="nx">$</span><span class="p">(</span> <span class="nx">selector</span> <span class="p">)</span>
-</span><span class='line'>        <span class="p">.</span><span class="nx">find</span><span class="p">(</span> <span class="s2">&quot;ul a&quot;</span> <span class="p">).</span><span class="nx">each</span><span class="p">(</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-</span><span class='line'>            <span class="kd">var</span> <span class="nx">href</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span> <span class="k">this</span> <span class="p">).</span><span class="nx">attr</span><span class="p">(</span> <span class="s2">&quot;href&quot;</span> <span class="p">),</span>
-</span><span class='line'>                <span class="nx">newHref</span> <span class="o">=</span> <span class="nb">window</span><span class="p">.</span><span class="nx">location</span><span class="p">.</span><span class="nx">protocol</span> <span class="o">+</span> <span class="s1">&#39;//&#39;</span> <span class="o">+</span> <span class="nb">window</span><span class="p">.</span><span class="nx">location</span><span class="p">.</span><span class="nx">hostname</span> <span class="o">+</span>
-</span><span class='line'>                    <span class="nb">window</span><span class="p">.</span><span class="nx">location</span><span class="p">.</span><span class="nx">pathname</span> <span class="o">+</span> <span class="nx">href</span><span class="p">;</span>
-</span><span class='line'>
-</span><span class='line'>            <span class="k">if</span> <span class="p">(</span> <span class="nx">href</span><span class="p">.</span><span class="nx">indexOf</span><span class="p">(</span> <span class="s2">&quot;#&quot;</span> <span class="p">)</span> <span class="o">==</span> <span class="mi">0</span> <span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>                <span class="nx">$</span><span class="p">(</span> <span class="k">this</span> <span class="p">).</span><span class="nx">attr</span><span class="p">(</span> <span class="s2">&quot;href&quot;</span><span class="p">,</span> <span class="nx">newHref</span> <span class="p">);</span>
-</span><span class='line'>            <span class="p">}</span>
-</span><span class='line'>        <span class="p">})</span>
-</span><span class='line'>    <span class="nx">$</span><span class="p">(</span> <span class="nx">selector</span> <span class="p">).</span><span class="nx">tabs</span><span class="p">();</span>
-</span><span class='line'><span class="p">};</span>
-</span><span class='line'>
-</span><span class='line'><span class="nx">makeTabs</span><span class="p">(</span> <span class="s2">&quot;#tabs&quot;</span> <span class="p">);</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>As noted by the warning box, you should really fix this the right way.  But desperate times call for desperate measures.  You&#8217;ve been warned.</p>
-
-<h3>The End</h3>
-
-<p>Hopefully if you didn&#8217;t understand how to use the <code>&lt;base&gt;</code> tag and jQuery UI&#8217;s tab widget together you do now.  If you are still having issues after reading through this please let me know in the comments.</p>
-
-<h3>Update (March 6th, 2013)</h3>
-
-<p>Per comments from rubensa, I&#8217;ve removed <code>window.location.origin</code> from my JavaScript workaround since it&#8217;s a WebKit only property.  He also pointed out that if you might need to explicitly include a port number in the URL if you&#8217;re using it in your local development.</p>
 ]]></content>
   </entry>
   

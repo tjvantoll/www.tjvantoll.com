@@ -4,7 +4,7 @@
   <title><![CDATA[Category: HTML | TJ VanToll]]></title>
   <link href="http://tjvantoll.com/blog/categories/html/atom.xml" rel="self"/>
   <link href="http://tjvantoll.com/"/>
-  <updated>2014-04-28T16:32:12-04:00</updated>
+  <updated>2014-05-01T12:24:30-04:00</updated>
   <id>http://tjvantoll.com/</id>
   <author>
     <name><![CDATA[TJ VanToll]]></name>
@@ -12,6 +12,183 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Using Semantic HTML to Drive Display Logic]]></title>
+    <link href="http://tjvantoll.com/2014/05/01/using-semantic-html-to-drive-display-logic/"/>
+    <updated>2014-05-01T00:00:00-04:00</updated>
+    <id>http://tjvantoll.com/2014/05/01/using-semantic-html-to-drive-display-logic</id>
+    <content type="html"><![CDATA[<p>Today I want to share a quick tip for driving display logic in UI components—and I think it's easier to see in an example.</p>
+
+<p>Suppose you are tasked with implementing a form that can be used by two types of users: admins and regular users. Admins should be able to delete, and regular users should see an informational message. The display of this form is shown below:</p>
+
+<p><img src="http://tjvantoll.com/images/posts/2014-05-01/user-types.png" alt="Display of the admin and regular user modes of a form"></p>
+
+<p><em>Note: You can view the final example of this code at <a href="http://jsfiddle.net/tj_vantoll/77TbG/">http://jsfiddle.net/tj_vantoll/77TbG/</a> if you'd like to follow along.</em></p>
+
+<!--more-->
+
+
+<p>Here's the HTML we'll use:</p>
+
+<p>``` html
+<form id="information-form"></p>
+
+<pre><code>&lt;fieldset&gt;
+    &lt;legend&gt;Information&lt;/legend&gt;
+    &lt;div&gt;
+        &lt;label for="name"&gt;Name:&lt;/label&gt;
+        &lt;input id="name"&gt;
+    &lt;/div&gt;
+    &lt;div&gt;
+        &lt;label for="address"&gt;Address:&lt;/label&gt;
+        &lt;input id="address"&gt;
+    &lt;/div&gt;
+
+    &lt;button&gt;Update&lt;/button&gt;
+    &lt;button id="delete"&gt;Delete&lt;/button&gt;
+
+    &lt;p id="admin-message"&gt;To delete this user, please contact an administrator.&lt;/p&gt;
+&lt;/fieldset&gt;
+</code></pre>
+
+<p></form>
+```</p>
+
+<p>And we'll use two buttons to switch between the two user types.</p>
+
+<p><code>html
+&lt;button id="admin"&gt;Display as admin&lt;/button&gt;
+&lt;button id="regular-user"&gt;Display as regular user&lt;/button&gt;
+</code></p>
+
+<p>So, the question is... what JavaScript do you implement to show/hide the delete button and informational message? The following shows an approach I often see: targeting individual elements in JavaScript, and altering their display.</p>
+
+<p>``` javascript
+var adminButton = document.querySelector( "#admin" ),</p>
+
+<pre><code>regularButton = document.querySelector( "#regular-user" ),
+deleteButton = document.querySelector( "#delete" ),
+adminMessage = document.querySelector( "#admin-message" );
+</code></pre>
+
+<p>adminButton.addEventListener( "click", function() {</p>
+
+<pre><code>deleteButton.style.display = "inline-block";
+adminMessage.style.display = "none";
+</code></pre>
+
+<p>});
+regularButton.addEventListener( "click", function() {</p>
+
+<pre><code>deleteButton.style.display = "none";
+adminMessage.style.display = "block";
+</code></pre>
+
+<p>});
+```</p>
+
+<p>This works, but it's verbose, as you have to target each element that should be shown or hidden whenever the user types changes. From a more abstract perspective, it also breaks the <a href="http://en.wikipedia.org/wiki/Separation_of_concerns">separation of concerns design principle</a>, since CSS changes are being done in JavaScript.</p>
+
+<p>To improve this, let's switch the JavaScript to manage a single CSS class name on the form.</p>
+
+<p>``` javascript
+var adminButton = document.querySelector( "#admin" ),</p>
+
+<pre><code>regularButton = document.querySelector( "#regular-user" ),
+form = document.querySelector( "#information-form" );
+</code></pre>
+
+<p>adminButton.addEventListener( "click", function() {</p>
+
+<pre><code>form.classList.add( "admin" );
+</code></pre>
+
+<p>});
+regularButton.addEventListener( "click", function() {</p>
+
+<pre><code>form.classList.remove( "admin" );
+</code></pre>
+
+<p>});
+```</p>
+
+<p>At the moment, nothing shows or hides when you click buttons, but with the <code>"admin"</code> class name in place, you have the hook you need to implement the logic in CSS.</p>
+
+<p>``` css</p>
+
+<h1>delete {</h1>
+
+<pre><code>display: none;
+</code></pre>
+
+<p>}
+.admin #admin-message {</p>
+
+<pre><code>display: none;
+</code></pre>
+
+<p>}
+.admin #delete {</p>
+
+<pre><code>display: inline-block;
+</code></pre>
+
+<p>}
+```</p>
+
+<p>JavaScript manages the state of the element, which gives CSS the ability to control the display based on that state. This approach is not only cleaner, it is also more flexible. If you need to change colors for admin, or spacing, you now have a CSS hook you can use to do so.</p>
+
+<p>This same approach works with HTML attributes as well. For instance, let's switch from using a CSS class name, to a <code>data-admin</code> attribute on the <code>&lt;form&gt;</code>. With that approach you use the following JavaScript:</p>
+
+<p>``` javascript
+var adminButton = document.querySelector( "#admin" ),</p>
+
+<pre><code>regularButton = document.querySelector( "#regular-user" ),
+form = document.querySelector( "#information-form" );
+</code></pre>
+
+<p>adminButton.addEventListener( "click", function() {</p>
+
+<pre><code>form.setAttribute( "data-admin", true );
+</code></pre>
+
+<p>});
+regularButton.addEventListener( "click", function() {</p>
+
+<pre><code>form.setAttribute( "data-admin", false );
+</code></pre>
+
+<p>});
+```</p>
+
+<p>And the following CSS:</p>
+
+<p>``` css</p>
+
+<h1>delete {</h1>
+
+<pre><code>display: none;
+</code></pre>
+
+<p>}
+[data-admin="true"] #admin-message {</p>
+
+<pre><code>display: none;
+</code></pre>
+
+<p>}
+[data-admin="true"] #delete {</p>
+
+<pre><code>display: inline-block;
+</code></pre>
+
+<p>}
+```</p>
+
+<p>Use whatever makes sense for your use case. The overarching idea is to use JavaScript to apply semantic HTML that reflects an element's state, and to let CSS control the display from there. Personally I've found this to be the best way to handle display logic in UI components—especially complex ones.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Effect of iOS 7.1's minimal-ui Viewport Property]]></title>
@@ -551,166 +728,6 @@ min-height: 100%;
 <p>That being said, there's no harm in leaving a wrapper <code>div</code> in place.  So if you have any doubt stick with <code>&lt;div id="wrapper"&gt;&lt;/div&gt;</code>.</p>
 
 <p>Know of any other bugs with styling the <code>body</code> element?  Let me know in the comments.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[The Enter Key should Submit Forms, Stop Suppressing it]]></title>
-    <link href="http://tjvantoll.com/2013/01/01/enter-should-submit-forms-stop-messing-with-that/"/>
-    <updated>2013-01-01T15:54:00-05:00</updated>
-    <id>http://tjvantoll.com/2013/01/01/enter-should-submit-forms-stop-messing-with-that</id>
-    <content type="html"><![CDATA[<p>I try to do most of my work and play on the internet with the keyboard.  In the course of my internet-ing there's one unfortunate trend that I've noticed; an increasing number of sites are not allowing the enter key to submit a form.  Before I tell you why you care, let's look at how this should work.</p>
-
-<!--more-->
-
-
-<h3>Enter = Submit</h3>
-
-<p>Take the following basic form:</p>
-
-<p>``` html
-<form></p>
-
-<pre><code>&lt;label for="name"&gt;Name:&lt;/label&gt;
-&lt;input type="text" name="name" id="name"&gt;
-&lt;input type="submit" value="Submit"&gt;
-</code></pre>
-
-<p></form>
-```</p>
-
-<p>If you have focus in the textbox and hit enter, the form will be submitted automatically.  This behavior is consistent across all browsers and is known as implicit submission.  So why is this important?</p>
-
-<h3>Accessibility</h3>
-
-<p>Implicit submission is vital to assistive technologies and impaired users that cannot use a mouse at all.  From the HTML5 specification:</p>
-
-<p><blockquote><p>There are pages on the Web that are only usable if there is a way to implicitly submit forms, so user agents [browsers] are strongly encouraged to support this.</p><footer><strong>HTML 5 specification</strong> <cite><a href='http://www.whatwg.org/specs/web-apps/current-work/multipage/association-of-controls-and-forms.html#implicit-submission'>www.whatwg.org/specs/web-apps/&hellip;</a></cite></footer></blockquote></p>
-
-<p>The spec strongly encourages browsers to allow implicit submission; they all do.</p>
-
-<h3>User Expectations</h3>
-
-<p>Many users have an expectation that implicit submission will just work.  Interfering with this leads to a negative user experience for these users.</p>
-
-<h3>How to Prevent Implicit Submission</h3>
-
-<p>What are sites doing to keep this from happening?  Here's a few things I've seen.</p>
-
-<h4>No Submit Buttons</h4>
-
-<p>Many sites do not have a submit button within the form.  From the spec here's how browsers determine what to do when enter is clicked.</p>
-
-<p><blockquote><p>If the user agent supports letting the user submit a form implicitly (for example, on some platforms hitting the "enter" key while a text field is focused implicitly submits the form), then doing so for a form whose default button has a defined activation behavior must cause the user agent to run synthetic click activation steps on that default button.</p><footer><strong>HTML 5 specification</strong> <cite><a href='http://www.whatwg.org/specs/web-apps/current-work/multipage/association-of-controls-and-forms.html#implicit-submission'>www.whatwg.org/specs/web-apps/&hellip;</a></cite></footer></blockquote></p>
-
-<p>Basically, if the user hits enter when a text field is focused, the browser should find the first submit button in the form and click it.</p>
-
-<p><blockquote><p>If the form has no submit button, then the implicit submission mechanism must do nothing if the form has more than one field that blocks implicit submission, and must submit the form element from the form element itself otherwise.</p></p><p><p>For the purpose of the previous paragraph, an element is a field that blocks implicit submission of a form element if it is an input element whose form owner is that form element and whose type attribute is in one of the following states: Text, Search, URL, Telephone, E-mail, Password, Date and Time, Date, Month, Week, Time, Local Date and Time, Number</p><footer><strong>HTML 5 specification</strong> <cite><a href='http://www.whatwg.org/specs/web-apps/current-work/multipage/association-of-controls-and-forms.html#implicit-submission'>www.whatwg.org/specs/web-apps/&hellip;</a></cite></footer></blockquote></p>
-
-<p>So, in a form with no submit buttons, implicit submission will be done if only one input is present.  Therefore, pressing enter in this textbox will submit the form:</p>
-
-<p>``` html
-<form></p>
-
-<pre><code>&lt;label for="name"&gt;Name:&lt;/label&gt;
-&lt;input type="text" name="name" id="name"&gt;
-</code></pre>
-
-<p></form>
-```</p>
-
-<p>But in this form it will not because there are multiple fields:</p>
-
-<p>``` html
-<form></p>
-
-<pre><code>&lt;label for="name"&gt;Name:&lt;/label&gt;
-&lt;input type="text" name="name" id="name"&gt;
-&lt;label for="address"&gt;Address:&lt;/label&gt;
-&lt;input type="text" name="address" id="address"&gt;
-</code></pre>
-
-<p></form>
-```</p>
-
-<p>Therefore, if you have a form with more than one input field, always include a submit button.  Specifically an <code>&lt;input&gt;</code> with the <code>type="submit"</code> attribute, or a <code>&lt;button&gt;</code> element should be present.  (Note: IE7 has a bug where the <code>type</code> attribute of a <code>&lt;button&gt;</code> defaults to <code>button</code> instead of <code>submit</code>.  Therefore for IE7 compatibility you'll need <code>&lt;button type="submit"&gt;</code>.)</p>
-
-<p>If you need to run some JavaScript before the form is submitted (validation, data manipulation, etc), do it in a <code>submit</code> event handler on the form, not a <code>click</code> handler on a button.</p>
-
-<h4>No &lt;form&gt;</h4>
-
-<p>I've seen a few forms that do not use the <code>&lt;form&gt;</code> HTML tag.  Why would they do that?</p>
-
-<p>With modern day browsers and JavaScript libraries it's easy to send data to the server via AJAX.  Because an AJAX request does not require a true <code>&lt;form&gt;</code> tag, it is often omitted.  However, much like implicit submission, surrounding form data with a true <code>&lt;form&gt;</code> tag is vital for accessibility.  Most screen readers have a <a href="http://www.htctu.fhda.edu/trainings/manuals/tutorials/readweb/forms.htm">mode specifically for filling out forms</a>, and by omitting a true <code>&lt;form&gt;</code> tag you risk this mode not being activated.</p>
-
-<h4>Explicit Prevention</h4>
-
-<p>Finally, it's also quite easy to prevent implicit submission in JavaScript.  Take the following example:</p>
-
-<p>``` html
-<form></p>
-
-<pre><code>&lt;label for="name"&gt;Name:&lt;/label&gt;
-&lt;input type="text" name="name" id="name"&gt;
-&lt;input type="submit" value="Submit"&gt;
-</code></pre>
-
-<p></form></p>
-
-<script>
-    document.getElementById('name').addEventListener('keypress', function(event) {
-        if (event.keyCode == 13) {
-            event.preventDefault();
-        }
-    });
-</script>
-
-
-<p>```</p>
-
-<p>This sets up a <code>keypress</code> event handler that prevents the default action (implicit submission) from occurring when the enter key is pressed.</p>
-
-<p>This technique can be handy.  For example, say you have a form with multiple submit buttons.  As we saw earlier, the implicit submission algorithm will click the first submit button that it finds.  Therefore, if you need control over which submit button is clicked, you can use the above technique to listen an for enter keypress, prevent the default action, then explicitly click the appropriate button.</p>
-
-<p>Take the following example:</p>
-
-<p>``` html
-<form></p>
-
-<pre><code>&lt;label for="age"&gt;Age:&lt;/label&gt;
-&lt;input type="number" min="0" max="120" name="age" id="age"&gt;
-&lt;button id="child"&gt;Child&lt;/button&gt;
-&lt;button id="adult"&gt;Adult&lt;/button&gt;
-</code></pre>
-
-<p></form></p>
-
-<script>
-    (function() {
-        var age = document.getElementById('age');
-        age.addEventListener('keypress', function(event) {
-            if (event.keyCode == 13) {
-                event.preventDefault();
-                if (age.value > 20) {
-                    document.getElementById('adult').click();
-                } else {
-                    document.getElementById('child').click();
-                }
-            }
-        });
-    }());
-</script>
-
-
-<p>```</p>
-
-<p>When enter is clicked in the number input, the <code>keypress</code> event handler determines which submit button is appropriate and clicks it.</p>
-
-<p>While this technique can be handy, I've seen it used plenty of times to completely prevent implicit submission from working.  Don't do that.</p>
-
-<h3>Conclusion</h3>
-
-<p>When filling out a form, pressing enter in a textbox should submit the form.  This is known as an implicit form submission.  Despite being vital for assistive technologies and an important user convenience, many web forms prevent it for one reason or another.  If you write web forms, please take a minute to ensure that the enter key can indeed be used to submit them; it'll help make the web a better place for everyone.</p>
 ]]></content>
   </entry>
   

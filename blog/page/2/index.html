@@ -9,7 +9,12 @@
   <meta name="author" content="TJ VanToll">
 
   
-  <meta name="description" content="In Internet Explorer, attribute selectors that inspect the attribute&#8217;s value do not work if the value is >= 4096 characters. This is one of &hellip;">
+  <meta name="description" content="Say you have the following submittable &lt;form&gt;: 1
+2
+3
+4
+5
+&lt;form id=&quot;myForm&quot; action=&quot;http://google.com&quot;&gt; &lt;label for &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -95,6 +100,113 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title" itemprop="name headline"><a href="/2013/07/10/creating-a-jquery-ui-dialog-with-a-submit-button/">Creating a jQuery UI Dialog with a Submit Button</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-07-10T00:00:00-04:00" pubdate data-updated="true">Jul 10<span>th</span>, 2013</time>
+        
+         | <a href="/2013/07/10/creating-a-jquery-ui-dialog-with-a-submit-button/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Say you have the following submittable <code>&lt;form&gt;</code>:</p>
+
+<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;form</span> <span class="na">id=</span><span class="s">&quot;myForm&quot;</span> <span class="na">action=</span><span class="s">&quot;http://google.com&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;label</span> <span class="na">for=</span><span class="s">&quot;search&quot;</span><span class="nt">&gt;</span>Search For:<span class="nt">&lt;/label&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;text&quot;</span> <span class="na">id=</span><span class="s">&quot;search&quot;</span> <span class="na">name=</span><span class="s">&quot;q&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;button</span> <span class="na">type=</span><span class="s">&quot;submit&quot;</span><span class="nt">&gt;</span>Find<span class="nt">&lt;/button&gt;</span>
+</span><span class='line'><span class="nt">&lt;/form&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>And you want to show the form in a jQuery UI dialog. You can do that with the code below:</p>
+
+<figure class='code'><figcaption class='not_empty'><span>Turning a form into a dialog</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">$</span><span class="p">(</span> <span class="s2">&quot;form&quot;</span> <span class="p">).</span><span class="nx">dialog</span><span class="p">({</span>
+</span><span class='line'>    <span class="nx">open</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>        <span class="c1">// On open, hide the original submit button</span>
+</span><span class='line'>        <span class="nx">$</span><span class="p">(</span> <span class="k">this</span> <span class="p">).</span><span class="nx">find</span><span class="p">(</span> <span class="s2">&quot;[type=submit]&quot;</span> <span class="p">).</span><span class="nx">hide</span><span class="p">();</span>
+</span><span class='line'>    <span class="p">},</span>
+</span><span class='line'>    <span class="nx">buttons</span><span class="o">:</span> <span class="p">[</span>
+</span><span class='line'>        <span class="p">{</span>
+</span><span class='line'>            <span class="nx">text</span><span class="o">:</span> <span class="s2">&quot;Find&quot;</span><span class="p">,</span>
+</span><span class='line'>            <span class="nx">click</span><span class="o">:</span> <span class="nx">$</span><span class="p">.</span><span class="nx">noop</span><span class="p">,</span>
+</span><span class='line'>            <span class="nx">type</span><span class="o">:</span> <span class="s2">&quot;submit&quot;</span>
+</span><span class='line'>        <span class="p">},</span>
+</span><span class='line'>        <span class="p">{</span>
+</span><span class='line'>            <span class="nx">text</span><span class="o">:</span> <span class="s2">&quot;Close&quot;</span><span class="p">,</span>
+</span><span class='line'>            <span class="nx">click</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>                <span class="nx">$</span><span class="p">(</span> <span class="k">this</span> <span class="p">).</span><span class="nx">dialog</span><span class="p">(</span> <span class="s2">&quot;close&quot;</span> <span class="p">);</span>
+</span><span class='line'>            <span class="p">}</span>
+</span><span class='line'>        <span class="p">}</span>
+</span><span class='line'>    <span class="p">]</span>
+</span><span class='line'><span class="p">});</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Which looks like this:</p>
+
+<p><img src="/images/posts/2013-07-10/form-dialog.png" alt="Display of the form within a jQuery UI dialog"></p>
+
+<h3>The Problem</h3>
+
+<p>There&#8217;s one problem with this - the &#8220;Find&#8221; button doesn&#8217;t work. Because of the generated structure of a jQuery UI dialog, the buttons are not within the <code>&lt;form&gt;</code> itself. Therefore, the buttons are not associated with the <code>&lt;form&gt;</code>. You can see the structure below:</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/2013/07/10/creating-a-jquery-ui-dialog-with-a-submit-button/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -666,53 +778,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title" itemprop="name headline"><a href="/2013/02/17/using-jquery-ui-tabs-with-the-base-tag/">Using jQuery UI Tabs with the &lt;base&gt; Tag</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-02-17T21:14:00-05:00" pubdate data-updated="true">Feb 17<span>th</span>, 2013</time>
-        
-         | <a href="/2013/02/17/using-jquery-ui-tabs-with-the-base-tag/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>As there have been <a href="http://bugs.jqueryui.com/ticket/7822">numerous bug submissions</a> for this, I feel the need to explain how to properly use <a href="http://jqueryui.com/tabs">jQuery UI&#8217;s tab widget</a> with a <code>&lt;base&gt;</code> tag.  Let&#8217;s start with what the <code>&lt;base&gt;</code> tag is intended for.</p>
-
-<h3>The &lt;base&gt; Element</h3>
-
-<p><a href="https://developer.mozilla.org/en-US/docs/HTML/Element/base">Per MDN</a> the <code>&lt;base&gt;</code> element specifies the base URL to use for all relative URLs contained within a document.</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/2013/02/17/using-jquery-ui-tabs-with-the-base-tag/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/3/">&larr; Older</a>
@@ -746,6 +811,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2014/05/01/using-semantic-html-to-drive-display-logic/">Using Semantic HTML to Drive Display Logic</a>
+      </li>
+    
+      <li class="post">
         <a href="/2014/03/11/effect-of-ios-7-dot-1s-minimal-ui-meta-tag/">Effect of iOS 7.1&#8217;s minimal-ui Viewport Property</a>
       </li>
     
@@ -759,10 +828,6 @@
     
       <li class="post">
         <a href="/2014/01/23/speaking-tip-use-the-ipad-clock-app-as-a-timer/">Speaking Tip: Use the iPad&#8217;s Clock App as a Timer</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2013/12/06/why-is-styling-form-elements-so-damn-hard/">Why Is Styling Form Elements So Damn Hard?</a>
       </li>
     
   </ul>

@@ -4,7 +4,7 @@
   <title><![CDATA[Category: CSS | TJ VanToll]]></title>
   <link href="http://tjvantoll.com/blog/categories/css/atom.xml" rel="self"/>
   <link href="http://tjvantoll.com/"/>
-  <updated>2014-04-28T16:32:12-04:00</updated>
+  <updated>2014-05-01T12:24:30-04:00</updated>
   <id>http://tjvantoll.com/</id>
   <author>
     <name><![CDATA[TJ VanToll]]></name>
@@ -12,6 +12,183 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Using Semantic HTML to Drive Display Logic]]></title>
+    <link href="http://tjvantoll.com/2014/05/01/using-semantic-html-to-drive-display-logic/"/>
+    <updated>2014-05-01T00:00:00-04:00</updated>
+    <id>http://tjvantoll.com/2014/05/01/using-semantic-html-to-drive-display-logic</id>
+    <content type="html"><![CDATA[<p>Today I want to share a quick tip for driving display logic in UI components—and I think it's easier to see in an example.</p>
+
+<p>Suppose you are tasked with implementing a form that can be used by two types of users: admins and regular users. Admins should be able to delete, and regular users should see an informational message. The display of this form is shown below:</p>
+
+<p><img src="http://tjvantoll.com/images/posts/2014-05-01/user-types.png" alt="Display of the admin and regular user modes of a form"></p>
+
+<p><em>Note: You can view the final example of this code at <a href="http://jsfiddle.net/tj_vantoll/77TbG/">http://jsfiddle.net/tj_vantoll/77TbG/</a> if you'd like to follow along.</em></p>
+
+<!--more-->
+
+
+<p>Here's the HTML we'll use:</p>
+
+<p>``` html
+<form id="information-form"></p>
+
+<pre><code>&lt;fieldset&gt;
+    &lt;legend&gt;Information&lt;/legend&gt;
+    &lt;div&gt;
+        &lt;label for="name"&gt;Name:&lt;/label&gt;
+        &lt;input id="name"&gt;
+    &lt;/div&gt;
+    &lt;div&gt;
+        &lt;label for="address"&gt;Address:&lt;/label&gt;
+        &lt;input id="address"&gt;
+    &lt;/div&gt;
+
+    &lt;button&gt;Update&lt;/button&gt;
+    &lt;button id="delete"&gt;Delete&lt;/button&gt;
+
+    &lt;p id="admin-message"&gt;To delete this user, please contact an administrator.&lt;/p&gt;
+&lt;/fieldset&gt;
+</code></pre>
+
+<p></form>
+```</p>
+
+<p>And we'll use two buttons to switch between the two user types.</p>
+
+<p><code>html
+&lt;button id="admin"&gt;Display as admin&lt;/button&gt;
+&lt;button id="regular-user"&gt;Display as regular user&lt;/button&gt;
+</code></p>
+
+<p>So, the question is... what JavaScript do you implement to show/hide the delete button and informational message? The following shows an approach I often see: targeting individual elements in JavaScript, and altering their display.</p>
+
+<p>``` javascript
+var adminButton = document.querySelector( "#admin" ),</p>
+
+<pre><code>regularButton = document.querySelector( "#regular-user" ),
+deleteButton = document.querySelector( "#delete" ),
+adminMessage = document.querySelector( "#admin-message" );
+</code></pre>
+
+<p>adminButton.addEventListener( "click", function() {</p>
+
+<pre><code>deleteButton.style.display = "inline-block";
+adminMessage.style.display = "none";
+</code></pre>
+
+<p>});
+regularButton.addEventListener( "click", function() {</p>
+
+<pre><code>deleteButton.style.display = "none";
+adminMessage.style.display = "block";
+</code></pre>
+
+<p>});
+```</p>
+
+<p>This works, but it's verbose, as you have to target each element that should be shown or hidden whenever the user types changes. From a more abstract perspective, it also breaks the <a href="http://en.wikipedia.org/wiki/Separation_of_concerns">separation of concerns design principle</a>, since CSS changes are being done in JavaScript.</p>
+
+<p>To improve this, let's switch the JavaScript to manage a single CSS class name on the form.</p>
+
+<p>``` javascript
+var adminButton = document.querySelector( "#admin" ),</p>
+
+<pre><code>regularButton = document.querySelector( "#regular-user" ),
+form = document.querySelector( "#information-form" );
+</code></pre>
+
+<p>adminButton.addEventListener( "click", function() {</p>
+
+<pre><code>form.classList.add( "admin" );
+</code></pre>
+
+<p>});
+regularButton.addEventListener( "click", function() {</p>
+
+<pre><code>form.classList.remove( "admin" );
+</code></pre>
+
+<p>});
+```</p>
+
+<p>At the moment, nothing shows or hides when you click buttons, but with the <code>"admin"</code> class name in place, you have the hook you need to implement the logic in CSS.</p>
+
+<p>``` css</p>
+
+<h1>delete {</h1>
+
+<pre><code>display: none;
+</code></pre>
+
+<p>}
+.admin #admin-message {</p>
+
+<pre><code>display: none;
+</code></pre>
+
+<p>}
+.admin #delete {</p>
+
+<pre><code>display: inline-block;
+</code></pre>
+
+<p>}
+```</p>
+
+<p>JavaScript manages the state of the element, which gives CSS the ability to control the display based on that state. This approach is not only cleaner, it is also more flexible. If you need to change colors for admin, or spacing, you now have a CSS hook you can use to do so.</p>
+
+<p>This same approach works with HTML attributes as well. For instance, let's switch from using a CSS class name, to a <code>data-admin</code> attribute on the <code>&lt;form&gt;</code>. With that approach you use the following JavaScript:</p>
+
+<p>``` javascript
+var adminButton = document.querySelector( "#admin" ),</p>
+
+<pre><code>regularButton = document.querySelector( "#regular-user" ),
+form = document.querySelector( "#information-form" );
+</code></pre>
+
+<p>adminButton.addEventListener( "click", function() {</p>
+
+<pre><code>form.setAttribute( "data-admin", true );
+</code></pre>
+
+<p>});
+regularButton.addEventListener( "click", function() {</p>
+
+<pre><code>form.setAttribute( "data-admin", false );
+</code></pre>
+
+<p>});
+```</p>
+
+<p>And the following CSS:</p>
+
+<p>``` css</p>
+
+<h1>delete {</h1>
+
+<pre><code>display: none;
+</code></pre>
+
+<p>}
+[data-admin="true"] #admin-message {</p>
+
+<pre><code>display: none;
+</code></pre>
+
+<p>}
+[data-admin="true"] #delete {</p>
+
+<pre><code>display: inline-block;
+</code></pre>
+
+<p>}
+```</p>
+
+<p>Use whatever makes sense for your use case. The overarching idea is to use JavaScript to apply semantic HTML that reflects an element's state, and to let CSS control the display from there. Personally I've found this to be the best way to handle display logic in UI components—especially complex ones.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Why Is Styling Form Elements So Damn Hard?]]></title>
@@ -511,98 +688,6 @@ cancelButton.addEventListener( "click", function() {
 <p>This is not a technique that I came up with but I've used it successfully in several large applications and have found that it scales well over time.</p>
 
 <p>Do you have any other tricks you use to show &amp; hide elements? If so, let me know in the comments.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Showing a CSS Based Loading Animation While Your Site Loads]]></title>
-    <link href="http://tjvantoll.com/2013/04/24/showing-a-css-based-loading-animation-while-your-site-loads/"/>
-    <updated>2013-04-24T00:00:00-04:00</updated>
-    <id>http://tjvantoll.com/2013/04/24/showing-a-css-based-loading-animation-while-your-site-loads</id>
-    <content type="html"><![CDATA[<p>Showing a loading indicator on startup is a common pattern in native applications that is becoming more common on the web.  If you need to load a lot of resources when your web application is first loaded, you should give the user a clear indication that this is occurring.</p>
-
-<!-- more -->
-
-
-<p>Here's an approach I've used a few times to accomplish this.  I start by giving the <code>&lt;html&gt;</code> element itself a class of <code>"loading"</code>:</p>
-
-<p>``` html
-<html class="loading"></p>
-
-<pre><code>&lt;!-- All the things --&gt;
-</code></pre>
-
-<p></html>
-```</p>
-
-<p>I then setup two transitions that take effect when the loading class is removed.  I transition the color on the <code>&lt;html&gt;</code> element from a predefined color to its default, <code>transparent</code>.  To avoid seeing content during loading, I make the <code>&lt;body&gt;</code> opaque with <code>opacity: 0</code>.  When loading is complete, that is transitioned to <code>opacity: 1</code> to fade the content in.  The full source is below:</p>
-
-<p>``` css
-html {</p>
-
-<pre><code>-webkit-transition: background-color 1s;
-transition: background-color 1s;
-</code></pre>
-
-<p>}
-html, body {</p>
-
-<pre><code>/* For the loading indicator to be vertically centered ensure */
-/* the html and body elements take up the full viewport */
-min-height: 100%;
-</code></pre>
-
-<p>}
-html.loading {</p>
-
-<pre><code>/* Replace #333 with the background-color of your choice */
-/* Replace loading.gif with the loading image of your choice */
-background: #333 url('loading.gif') no-repeat 50% 50%;
-
-/* Ensures that the transition only runs in one direction */
--webkit-transition: background-color 0;
-transition: background-color 0;
-</code></pre>
-
-<p>}
-body {</p>
-
-<pre><code>-webkit-transition: opacity 1s ease-in;
-transition: opacity 1s ease-in;
-</code></pre>
-
-<p>}
-html.loading body {</p>
-
-<pre><code>/* Make the contents of the body opaque during loading */
-opacity: 0;
-
-/* Ensures that the transition only runs in one direction */
--webkit-transition: opacity 0;
-transition: opacity 0;
-</code></pre>
-
-<p>}
-```</p>
-
-<p>The only JavaScript required is to remove the <code>"loading"</code> class from the <code>&lt;html&gt;</code> element.  Do this when your application is initialized and ready to go.</p>
-
-<p>``` javascript
-// IE10+
-document.getElementsByTagName( "html" )[0].classList.remove( "loading" );</p>
-
-<p>// All browsers
-document.getElementsByTagName( "html" )[0].className.replace( /loading/, "" );</p>
-
-<p>// Or with jQuery
-$( "html" ).removeClass( "loading" );
-```</p>
-
-<p>The demo below shows this animation in action.  To simulate a real load it waits 3 seconds before the <code>"loading"</code> class is removed.</p>
-
-<p><div class="code_example"><h6>Loading Example<a href="/demos/2013-04-24/loading.html" target="_blank">Open in New Window</a></h6><iframe style="width: 100%; height: 275px;" frameborder="0" src="/demos/2013-04-24/loading.html"></iframe></div></p>
-
-<p>This will work in <a href="http://caniuse.com/#feat=css-transitions">any browser that supports CSS transitions</a>, which nowadays is really everything other than IE &lt;= 9.  It also degrades gracefully for older browsers.  Unsupported browsers will still see the loading animation, they will simply lose the fade in transition when loading is complete.</p>
 ]]></content>
   </entry>
   

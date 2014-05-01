@@ -9,7 +9,7 @@
   <meta name="author" content="TJ VanToll">
 
   
-  <meta name="description" content="I gave a &#8220;JavaScript for the Java Developer&#8221; talk to the Greater Lansing Java Users Group on March 20th, 2012. For those that missed the &hellip;">
+  <meta name="description" content="Update February 27th, 2014: In case you aren&#8217;t convinced by the argument below, Firefox 28 deprecated showModalDialog and Chrome 35 removed it &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -95,6 +95,58 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title" itemprop="name headline"><a href="/2012/05/02/showmodaldialog-what-it-is-and-why-you-should-never-use-it/">window.showModalDialog: What It is and Why You Should Never Use It</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-05-02T22:37:00-04:00" pubdate data-updated="true">May 2<span>nd</span>, 2012</time>
+        
+         | <a href="/2012/05/02/showmodaldialog-what-it-is-and-why-you-should-never-use-it/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><div class="warning" style="display: block;">Update February 27th, 2014: In case you aren&#8217;t convinced by the argument below, <a href="https://developer.mozilla.org/en-US/Firefox/Releases/28/Site_Compatibility">Firefox 28 deprecated <code>showModalDialog</code></a> and <a href="https://code.google.com/p/chromium/issues/detail?id=345831">Chrome 35 removed it</a>.</div>
+
+
+<p>Ah, 1997.  The first browser war was in full force, and Microsoft was busy adding proprietary new features to compete with Netscape Navigator.  One of those features was introducing a common OS UI element into the browser - modal dialogs.  Internet Explorer 4 launched with a <code>showModalDialog</code> method on the global <code>window</code> object.  When called it displays a dialog that the user has to deal with before interacting with the rest of the page.</p>
+
+<p>Fast forward a few years and Internet Explorer had won the war, 95+ percent of us were using IE6.  Consequently a whole lot of web applications were designed around many of the proprietary features that IE had added.  Interestingly several of these have recently been added to the HTML5 specification including <a href="http://www.w3.org/TR/html5/embedded-content-0.html#dom-innerhtml">innerHTML</a>, <a href="http://html5.org/specs/dom-parsing.html#insertadjacenthtml%28%29">insertAdjacentHTML</a>, <a href="http://html5.org/specs/dom-parsing.html#outerhtml">outerHTML</a>, and… <a href="http://www.whatwg.org/specs/web-apps/current-work/multipage/timers.html#dialogs-implemented-using-separate-documents">window.showModalDialog</a>.</p>
+
+<p>So now that <code>window.showModalDialog</code> has been standardized should you be using it?</p>
+
+<p><strong>No.</strong></p>
+
+<p>In general the idea of putting a native dialog implementation into the browser was a really good idea, but  <code>window.showModalDialog</code> was a bad implementation that is riddled with issues and poor browser support.</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/2012/05/02/showmodaldialog-what-it-is-and-why-you-should-never-use-it/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -372,6 +424,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2014/05/01/using-semantic-html-to-drive-display-logic/">Using Semantic HTML to Drive Display Logic</a>
+      </li>
+    
+      <li class="post">
         <a href="/2014/03/11/effect-of-ios-7-dot-1s-minimal-ui-meta-tag/">Effect of iOS 7.1&#8217;s minimal-ui Viewport Property</a>
       </li>
     
@@ -385,10 +441,6 @@
     
       <li class="post">
         <a href="/2014/01/23/speaking-tip-use-the-ipad-clock-app-as-a-timer/">Speaking Tip: Use the iPad&#8217;s Clock App as a Timer</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2013/12/06/why-is-styling-form-elements-so-damn-hard/">Why Is Styling Form Elements So Damn Hard?</a>
       </li>
     
   </ul>
