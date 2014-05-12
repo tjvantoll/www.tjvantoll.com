@@ -4,10 +4,10 @@
 
 url: http://tjvantoll.com
 title: TJ VanToll
-subtitle: Tutorials, Thoughts, and Ramblings on Front End Development
+subtitle: Tutorials, Thoughts, and Ramblings on Front-End Development
 author: TJ VanToll
 simple_search: http://google.com/search
-description: TJ VanToll's blog about front end technologies.
+description: TJ VanToll's blog about front-end technologies.
 
 # Default date format is "ordinal" (resulting in "July 22nd 2007")
 # You can customize the format as defined in
