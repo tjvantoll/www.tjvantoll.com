@@ -51,6 +51,8 @@ sharing: false
 	<article>
 		<img src="/speaking/thumbnail/jquery-ui-vs-html5.png">
 		<h2>jQuery UI Widgets vs. HTML5</h2>
+		<!-- http://html5weekly.com/issues/94 -->
+		<!-- http://appendto.com/modern-web-observer/archive/modern-web-observer-issue-16/ -->
 		<ul>
 			<li>
 				<span>February 24th, 2014:</span>
