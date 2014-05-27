@@ -4,7 +4,7 @@
   <title><![CDATA[TJ VanToll]]></title>
   <link href="http://tjvantoll.com/atom.xml" rel="self"/>
   <link href="http://tjvantoll.com/"/>
-  <updated>2014-05-23T15:34:55-04:00</updated>
+  <updated>2014-05-27T11:33:33-04:00</updated>
   <id>http://tjvantoll.com/</id>
   <author>
     <name><![CDATA[TJ VanToll]]></name>
@@ -391,6 +391,9 @@
 <p>Because replacing the original file is a bit annoying, you can make <code>gzip</code> generate a new file with a <a href="http://unix.stackexchange.com/questions/46786/how-to-tell-gzip-to-keep-original-file#answer-58814">little shell magic</a>, shown below.</p>
 
 <p><img src="http://tjvantoll.com/images/posts/2014-01-27/jquery-new-file.png" alt="Running gzip on jQuery from the command line and generating a new file"></p>
+
+<div class="warning">Commenter yalue <a href="http://tjvantoll.com/2014/01/27/only-the-gzip-size-matters/#comment-1278948548">pointed out</a> that the <code>gzip</code> command has a <code>--keep</code> option that preserves the original file. So you can run <code>gzip jquery.js --keep</code> instead of <code>gzip < jquery.js > jquery.js.gz</code>.</div>
+
 
 <h3>Why It Matters</h3>
 

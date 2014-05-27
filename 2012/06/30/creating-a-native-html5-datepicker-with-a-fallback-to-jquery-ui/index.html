@@ -138,10 +138,10 @@
 <span class='line-number'>4</span>
 <span class='line-number'>5</span>
 </pre></td><td class='code'><pre><code class='html'><span class='line'><span class="c">&lt;!-- Before --&gt;</span>
-</span><span class='line'><span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;text&quot;</span> <span class="nt">/&gt;</span>
+</span><span class='line'><span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;text&quot;</span><span class="nt">&gt;</span>
 </span><span class='line'>
 </span><span class='line'><span class="c">&lt;!-- After --&gt;</span>
-</span><span class='line'><span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;date&quot;</span> <span class="nt">/&gt;</span>
+</span><span class='line'><span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;date&quot;</span><span class="nt">&gt;</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
@@ -197,15 +197,21 @@
 <figure class='code'><figcaption class='not_empty'><span>Detect native support for datepickers and fallback to jQuery UI</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
 </pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">Modernizr</span><span class="p">.</span><span class="nx">inputtypes</span><span class="p">.</span><span class="nx">date</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>    <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;input[type=date]&#39;</span><span class="p">).</span><span class="nx">datepicker</span><span class="p">();</span>
+</span><span class='line'>    <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;input[type=date]&#39;</span><span class="p">).</span><span class="nx">datepicker</span><span class="p">({</span>
+</span><span class='line'>        <span class="c1">// Consistent format with the HTML5 picker</span>
+</span><span class='line'>        <span class="nx">dateFormat</span><span class="o">:</span> <span class="s1">&#39;yy-mm-dd&#39;</span>
+</span><span class='line'>    <span class="p">});</span>
 </span><span class='line'><span class="p">}</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
 <p>You can see how your browser handles this situation here:</p>
 
-<div class="code_example"><h6>Native Datepicker with Fallback<a href="/demos/2012-06-30/date.html" target="_blank">Open in New Window</a></h6><iframe style="width: 100%; height: 120px;" frameborder="0" src="/demos/2012-06-30/date.html"></iframe></div>
+<div class="code_example"><h6>Native Datepicker with Fallback<a href="/demos/2012-06-30/date.html" target="_blank">Open in New Window</a></h6><iframe style="width: 100%; height: 300px;" frameborder="0" src="/demos/2012-06-30/date.html"></iframe></div>
 
 
 <h3>Another Option</h3>
@@ -221,13 +227,19 @@
 <span class='line-number'>7</span>
 <span class='line-number'>8</span>
 <span class='line-number'>9</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;text&quot;</span> <span class="na">id=</span><span class="s">&quot;myDate&quot;</span> <span class="nt">/&gt;</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;date&quot;</span><span class="nt">&gt;</span>
 </span><span class='line'>
 </span><span class='line'><span class="nt">&lt;script&gt;</span>
-</span><span class='line'>    <span class="k">if</span> <span class="p">(</span><span class="nx">Modernizr</span><span class="p">.</span><span class="nx">touch</span> <span class="o">&amp;&amp;</span> <span class="nx">Modernizr</span><span class="p">.</span><span class="nx">inputtypes</span><span class="p">.</span><span class="nx">date</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>        <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">&#39;myDate&#39;</span><span class="p">).</span><span class="nx">type</span> <span class="o">=</span> <span class="s1">&#39;date&#39;</span><span class="p">;</span>
-</span><span class='line'>    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-</span><span class='line'>        <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#myDate&#39;</span><span class="p">).</span><span class="nx">datepicker</span><span class="p">();</span>
+</span><span class='line'>    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">Modernizr</span><span class="p">.</span><span class="nx">touch</span> <span class="o">||</span> <span class="o">!</span><span class="nx">Modernizr</span><span class="p">.</span><span class="nx">inputtypes</span><span class="p">.</span><span class="nx">date</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>        <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;input[type=date]&#39;</span><span class="p">)</span>
+</span><span class='line'>            <span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s1">&#39;type&#39;</span><span class="p">,</span> <span class="s1">&#39;text&#39;</span><span class="p">)</span>
+</span><span class='line'>            <span class="p">.</span><span class="nx">datepicker</span><span class="p">({</span>
+</span><span class='line'>                <span class="c1">// Consistent format with the HTML5 picker</span>
+</span><span class='line'>                <span class="nx">dateFormat</span><span class="o">:</span> <span class="s1">&#39;yy-mm-dd&#39;</span>
+</span><span class='line'>            <span class="p">});</span>
 </span><span class='line'>    <span class="p">}</span>
 </span><span class='line'><span class="nt">&lt;/script&gt;</span>
 </span></code></pre></td></tr></table></div></figure>
@@ -242,6 +254,10 @@
 <h3>Update - September 15th, 2012</h3>
 
 <p>I updated one of my code examples from using <code>$('input').attr('type', 'date')</code> to <code>document.getElementById('myDate').type = 'date'</code> after commenter brownieboy pointed out that jQuery actually doesn&#8217;t allow you to change an input&#8217;s <code>type</code>.  jQuery does this because IE &lt;= 8 does not allow an the <code>type</code> of an input to be changed at all.  The native JS solution works just fine.</p>
+
+<h3>Update - May 27th, 2014</h3>
+
+<p>I updated the examples to set the <a href="http://api.jqueryui.com/datepicker/#option-dateFormat"><code>dateFormat</code> of the datepicker</a> to <code>"yy-mm-dd"</code>, as that&#8217;s consistent with what the HTML5 picker uses. That way you get a consistent format regardless of which picker you use.</p>
 </div>
 
 

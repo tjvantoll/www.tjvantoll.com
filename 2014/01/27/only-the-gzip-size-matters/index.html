@@ -150,6 +150,9 @@
 
 <p><img src="/images/posts/2014-01-27/jquery-new-file.png" alt="Running gzip on jQuery from the command line and generating a new file"></p>
 
+<div class="warning">Commenter yalue <a href="/2014/01/27/only-the-gzip-size-matters/#comment-1278948548">pointed out</a> that the <code>gzip</code> command has a <code>--keep</code> option that preserves the original file. So you can run <code>gzip jquery.js --keep</code> instead of <code>gzip < jquery.js > jquery.js.gz</code>.</div>
+
+
 <h3>Why It Matters</h3>
 
 <p>There is no set percentage that <code>gzip</code> will reduce the size of a JavaScript or CSS file by. There is no way to know for sure other than running <code>gzip</code>.</p>
