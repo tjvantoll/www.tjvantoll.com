@@ -16,10 +16,10 @@ Using the native datepickers is easy, just change the `type` attribute of your d
 
 ``` html Converting to a native HTML5 datepicker
 <!-- Before -->
-<input type="text" />
+<input type="text">
 
 <!-- After -->
-<input type="date" />
+<input type="date">
 ```
 
 Here is what the user will see in supported browsers:
@@ -70,26 +70,32 @@ If any of this functionality is important to your application you'll probably wa
 
 ``` javascript Detect native support for datepickers and fallback to jQuery UI
 if (!Modernizr.inputtypes.date) {
-    $('input[type=date]').datepicker();
+    $('input[type=date]').datepicker({
+        // Consistent format with the HTML5 picker
+        dateFormat: 'yy-mm-dd'
+    });
 }
 ```
 
 You can see how your browser handles this situation here:
 
-{% demo /demos/2012-06-30/date.html Native_Datepicker_with_Fallback 120 %}
+{% demo /demos/2012-06-30/date.html Native_Datepicker_with_Fallback 300 %}
 
 ### Another Option
 
 Another option I like is showing the native date picker only to users that are on touch capable devices.
 
 ``` html Native picker for supported touch users only
-<input type="text" id="myDate" />
+<input type="date">
 
 <script>
-    if (Modernizr.touch && Modernizr.inputtypes.date) {
-        document.getElementById('myDate').type = 'date';
-    } else {
-        $('#myDate').datepicker();
+    if (!Modernizr.touch || !Modernizr.inputtypes.date) {
+        $('input[type=date]')
+            .attr('type', 'text')
+            .datepicker({
+                // Consistent format with the HTML5 picker
+                dateFormat: 'yy-mm-dd'
+            });
     }
 </script>
 ```
@@ -103,3 +109,7 @@ With Chrome adding support for native datepickers a large chunk web users now ha
 ### Update - September 15th, 2012
 
 I updated one of my code examples from using ```$('input').attr('type', 'date')``` to ```document.getElementById('myDate').type = 'date'``` after commenter brownieboy pointed out that jQuery actually doesn't allow you to change an input's `type`.  jQuery does this because IE <= 8 does not allow an the `type` of an input to be changed at all.  The native JS solution works just fine.
+
+### Update - May 27th, 2014
+
+I updated the examples to set the [`dateFormat` of the datepicker](http://api.jqueryui.com/datepicker/#option-dateFormat) to `"yy-mm-dd"`, as that's consistent with what the HTML5 picker uses. That way you get a consistent format regardless of which picker you use.
