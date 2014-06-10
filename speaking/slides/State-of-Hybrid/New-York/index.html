@@ -1,0 +1,469 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>The State of Hybrid</title>
+
+		<meta name="description" content="A presentation on the state of hybrid web development">
+		<meta name="author" content="TJ VanToll">
+
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<link rel="stylesheet" href="css/reveal.min.css">
+		<link rel="stylesheet" href="css/theme/default.css" id="theme">
+		<link rel="stylesheet" href="css/style.css">
+
+		<!-- If the query includes 'print-pdf', include the PDF print sheet -->
+		<script>
+			if( window.location.search.match( /print-pdf/gi ) ) {
+				var link = document.createElement( 'link' );
+				link.rel = 'stylesheet';
+				link.type = 'text/css';
+				link.href = 'css/print/pdf.css';
+				document.getElementsByTagName( 'head' )[0].appendChild( link );
+			}
+
+			if (window.location.host.indexOf('local') == -1) {
+				var _gaq = _gaq || [];
+				_gaq.push(['_setAccount', 'UA-29179796-1']);
+				_gaq.push(['_trackPageview']);
+			
+				(function() {
+					var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+					ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+					var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+				})();
+			}
+		</script>
+
+		<!--[if lt IE 9]>
+			<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+
+
+<section data-markdown><script type="text/template">
+	# The State of Hybrid
+	### TJ VanToll | [@tjvantoll](https://twitter.com/tjvantoll) | [tjvantoll.com](http://tjvantoll.com)
+	<img src="img/telerik-logo.png" style="height: 100px;">
+</script></section>
+
+<section>
+	<h2>Agenda</h2>
+	<ul class="spaced">
+		<li>The past</li>
+		<li>Now
+			<ul>
+				<li>Tools</li>
+				<li>Performance</li>
+			</ul>
+		</li>
+		<li>The future</li>
+	</ul>
+</section>
+
+<section>
+	<blockquote><p>"The full Safari engine is inside of iPhone. And so, you can write amazing Web 2.0 and Ajax apps that look exactly and behave exactly like apps on the iPhone."</p></blockquote>
+	<div class="fragment">
+		<p>Steve Jobs, 2007</p>
+		<a href="http://www.cultofmac.com/125180/steve-jobs-was-originally-dead-set-against-third-party-apps-for-the-iphone">(source)</a>
+	</div>
+</section>
+
+<section>
+	<h3>iOS 1 had no app store.</h3>
+</section>
+
+<section>
+	<h2>iOS 2 did. It worked out alright.</h2>
+	<img src="img/app-store-growth.png" style="max-height: 500px;">
+	<a href="http://www.businessinsider.com/chart-of-the-day-apple-app-store-revenues-2013-6">http://www.businessinsider.com/chart-of-the-day-apple-app-store-revenues-2013-6</a>
+</section>
+
+<section>
+	<img src="img/app-store-headlines.png">
+	<a href="http://www.apple.com/pr/library/2014/01/07App-Store-Sales-Top-10-Billion-in-2013.html?sr=hotnews.rss">http://www.apple.com/pr/library/2014/01/07App-Store-Sales-Top-10-Billion-in-2013.html?sr=hotnews.rss</a>
+</section>
+
+<section>
+	<h3 style="line-height: 1.2">In 2013, the iOS App Store revenue was higher than the GDP of 60 countries.</h3>
+	<img src="img/jaw-drop.gif">
+</section>
+
+<section>
+	<h2>Others had similiar ideas</h2>
+	<img style="max-height: 200px;" src="img/google-play.jpg">
+	<img style="max-height: 200px;" src="img/blackberry-app-world.jpg">
+	<br>
+	<img style="max-height: 200px;" src="img/windows-store.jpg">
+	<img style="max-height: 200px;" src="img/amazon.jpg">
+</section>
+
+<section>
+	<img src="img/platforms.png" style="max-height: 500px;">
+	<p>Table is from Brian Leroux's <a href="http://brian.io/slides/debug-mobile/">excellent Debugging Mobile talk</a>.</p>
+</section>
+
+<section data-markdown><script type="text/template">
+	## Gartner Hype Cycle
+	<img src="img/hype-cycle-1.png">
+	<br>
+	Image Source: <http://bimandintegrateddesign.com/tag/gartners-hype-cycle/>
+</script></section>
+
+<section>
+	<h2>Hybrid</h2>
+	<img src="img/hype-cycle-2.png">
+</section>
+
+<section>
+	<h2>PhoneGap</h2>
+	<img src="img/phonegap-logo.png">
+</section>
+
+<section>
+	<img src="img/happy.gif">
+</section>
+
+<section>
+	<img src="img/hype-cycle-3.png">
+</section>
+
+<section data-markdown><script type="text/template">
+	> "the biggest mistake that we made, as a company, is betting too much on HTML5 as opposed to native"
+
+	*Mark Zuckerberg, 2012*
+</script></section>
+
+<section data-markdown><script type="text/template">
+	<img src="img/linked-in-heading.png"><br>
+	Source <http://venturebeat.com/2013/04/17/linkedin-mobile-web-breakup/>
+</script></section>
+
+<section>
+	<h2>Why?</h2>
+</section>
+
+<section>
+	<blockquote>“The lack of <b>tooling</b> in mobile browsers makes it very difficult to dig down and find out what the real issues are. Hence <b>tooling</b>, or rather, lack-thereof is a key issue.”</blockquote>
+	<p>Tobie Langel, Facebook Engineer, <a href="http://lists.w3.org/Archives/Public/public-coremob/2012Sep/0021.html">September 2012</a></p>
+</section>
+
+<section>
+	<blockquote>"[t]ooling support — having a debugger that actually works, performance tools that tell you where the memory is running out."</blockquote>
+	<p>Kiran Prasad, LinkedIn senior director of mobile engineering, <a href="http://venturebeat.com/2013/04/17/linkedin-mobile-web-breakup">April 2013</a>
+</section>
+
+<section>
+	<blockquote>"Our research on HTML5 vs native apps in Q3 2013 showed that the key issue in HTML5 development, is not performance or API reach, but the lack of mature development tools."</blockquote>
+	<a href="http://www.visionmobile.com/product/developer-economics-q1-2014-state-developer-nation/">Vision Mobile, 2014 Developer Economics Q1 survey</a>
+</section>
+
+<section>
+	<img src="img/hype-cycle-4.png">
+</section>
+
+<section data-markdown><script type="text/template">
+	## An explosion of tooling
+	<img src="img/tools.png">
+</script></section>
+
+<section data-markdown><script type="text/template">
+	## The Market
+	<img src="img/mobile-market-tweet.png"><br>
+	<https://twitter.com/BenedictEvans/status/450495875211472896>
+</script></section>
+
+<section>
+	<img src="img/analyst-graph.png">
+</section>
+
+<section>
+	<img src="img/rain-money.gif">
+</section>
+
+<section data-markdown><script type="text/template">
+	## My Job
+	> "How does Kendo UI Mobile compare to ChocolateChip?"
+</script></section>
+
+<section data-markdown><script type="text/template">
+	### My First Thought
+	<img src="img/cookie-monster.jpg">
+</script></section>
+
+<section data-markdown><script type="text/template">
+	### The Correct Thought
+	<img src="img/chocolate-chip.png">
+</script></section>
+
+<section>
+	<h2>Ionic</h2>
+	<img class="fragment" src="img/dialga.png">
+</section>
+
+<section>
+	<h2>Ionic</h2>
+	<img src="img/ionic.png" style="max-height: 600px;">
+</section>
+
+<section>
+	<h2>Kendo UI Mobile</h2>
+	<img src="img/kendo-ui.png" style="max-height: 500px;">
+	<p class="fragment">
+		Now free and open source as part of <a href="https://github.com/telerik/kendo-ui-core">Kendo UI Core</a>.
+	</p>
+</section>
+
+<section>
+	<h3 style="line-height: 1.2;">Tooling improvement #1:<br>UI frameworks</h3>
+</section>
+
+<section>
+	<h2>Demo</h2>
+	<a href="http://cuteness.io">cuteness.io</a>
+</section>
+
+<section>
+	<h3 style="line-height: 1.2">Tooling improvement #2:<br>remote debugging</h3>
+</section>
+
+<section>
+	<h2>Weinre</h2>
+	<img src="img/weinre.png" style="max-height: 600px;"><br>
+	<a href="http://people.apache.org/~pmuellr/weinre/docs/latest/Home.html">http://people.apache.org/~pmuellr/weinre/docs/latest/Home.html</a>
+</section>
+
+<section>
+	<h2>iOS Remote Debugging (iOS 6+)</h2>
+	<p>Settings --> Safari --> Advanced</p>
+	<img src="img/iphone-settings.png">
+</section>
+
+<section>
+	<h2>iOS Remote Debugging (iOS 6+)</h2>
+	<img src="img/ios-remote.png">
+</section>
+
+<section>
+	<h2>Demo</h2>
+</section>
+
+<section>
+	<h2>Chrome for Android Remote Debugging (Android 4.4+)</h2>
+	<p>"[T]ap Build number seven times. Yup, just tap it 7 times, even if it seems crazy."</p>
+	<video loop="" muted="" controls="" src="img/7tap-optimized.mp4" width="332" height="310" onended="this.play()"></video><br>
+	<p>Via <a href="https://developers.google.com/chrome-developer-tools/docs/remote-debugging">https://developers.google.com/chrome-developer-tools/docs/remote-debugging</a></p>
+</section>
+
+<section>
+	<h2>about:inspect</h2>
+	<img src="img/about-inspect.png">
+</section>
+
+<section>
+	<h2>Chrome for Android Remote Debugging (Android 4.4+)</h2>
+	<img src="img/chrome-remote.png">
+</section>
+
+<section>
+	<h2>Demo</h2>
+</section>
+
+<section>
+	<h2>jsHybugger</h2>
+	<img src="img/jshybugger.png">
+	<p>Works on Android 2.3.3+</p>
+</section>
+
+<section>
+	<h3>Tooling improvement #3: Companion Apps</h3>
+	<img src="img/telerik-companion-app.png">
+	<img src="img/phonegap-developer-app.png">
+</section>
+
+<section>
+	<h2>Demo</h2>
+	<img src="img/appbuilder-companion-multiple.gif">
+</section>
+
+<section>
+	<h3>Tooling improvement #4: Cloud-Based Builds</h3>
+	<img src="img/clouds.png">
+</section>
+
+<section>
+	<h2>LiveSync</h2>
+	<img src="img/livesync.png">
+</section>
+
+<section>
+	<h2>Demo</h2>
+	<img src="img/appbuilder-apps.gif">
+</section>
+
+<section>
+	<h2>Demo</h2>
+	<img src="img/appbuilder-status-bar.gif">
+</section>
+
+<section>
+	<h2>Tooling improvement #5: Backend Services</h2>
+	<img src="img/backend-services.png">
+</section>
+
+<section>
+	<h2>Demo</h2>
+</section>
+
+<section>
+	<h2>Finding the Right BaaS</h2>
+	<p><a href="http://www.developereconomics.com/finding-right-baas/">http://www.developereconomics.com/finding-right-baas/</a>
+	<blockquote>"we’re tracking at least fifty BaaS offerings, and it seems more options appear nearly every month"</blockquote>
+</section>
+
+<section>
+	<h2>Performance</h2>
+	<img src="img/performance.gif" style="height: 400px;">
+</section>
+
+<section>
+	<h3>iOS Performance: The Bad News</h3>
+	<p>The iOS 7 <code>UIWebView</code> incurs a 3.5x JavaScript performance penalty over the same app run in iOS Safari.</p>
+</section>
+
+<section>
+	<h2>SunSpider</h2>
+	<p>785.0ms vs. 3677.1ms — Safari is ~350% faster!</p>
+	<img src="img/iOS Safari (SunSpider).jpg">
+	<img src="img/Chrome for iOS (SunSpider).jpg">
+</section>
+
+<section>
+	<h2><a href="http://browserbench.org/Speedometer/">Speedometer</a></h2>
+	<p>Safari is ~20% faster.</p>
+	<img src="img/iOS Safari (speedometer).jpg">
+	<img src="img/Chrome for iOS (speedometer).jpg">
+</section>
+
+<section>
+	<h2>OMG <code>WKWebView</code>! OMG! OMG!</h2>
+	<img src="img/9-to-5-mac.png" style="max-width: 500px;">
+	<img src="img/happy-coach-original.gif" style="max-width: 300px;">
+	<a href="http://9to5mac.com/2014/06/03/ios-8-webkit-changes-finally-allow-all-apps-to-have-the-same-performance-as-safari/">http://9to5mac.com/2014/06/03/ios-8-webkit-changes-finally-allow-all-apps-to-have-the-same-performance-as-safari/</a>
+</section>
+
+<section>
+	<h2>Performance on Android</h2>
+	<p>Android 4.4 switched to a new Chromium-based WebView.</p>
+	<img src="img/happy-coach.gif">
+</section>
+
+<section>
+	<h2>Moore's Law</h2>
+	<div style="background-color: white;">
+		<img src="img/moores-law.png" style="max-height: 600px;">
+	</div>
+	<a href="http://en.wikipedia.org/wiki/Moore's_law">http://en.wikipedia.org/wiki/Moore's_law</a>
+</section>
+
+<section>
+	<h3 style="line-height: 1.4">The performance of hybrid application will never be on par with native applications, but as speeds improve, hybrid becomes “good enough” for an increasing number of applications.</h3>
+</section>
+
+<section>
+	<h2>The future</h2>
+</section>
+
+<section>
+	<h3>Is the hybrid development growing or shrinking?</h3>
+</section>
+
+<section>
+	<h2>trends.google.com: PhoneGap</h2>
+	<img src="img/phonegap-trend.png">
+</section>
+
+<section>
+	<h2>What is hybrid?</h2>
+</section>
+
+<section>
+	<h2>Cross-Compile Solutions</h2>
+	<img style="max-height: 200px;" src="img/xamarin.png">
+	<img style="max-height: 200px;" src="img/titanium.png">
+</section>
+
+<section>
+	<h2>Mix and match?</h2>
+	<img src="img/smashing.png"><br>
+	<a href="http://mobile.smashingmagazine.com/2013/10/17/best-of-both-worlds-mixing-html5-native-code/">http://mobile.smashingmagazine.com/2013/10/17/best-of-both-worlds-mixing-html5-native-code/</a>
+</section>
+
+<section>
+	<h2>iTunes</h2>
+	<img src="img/itunes-display.jpg">
+</section>
+
+<section>
+	<img src="img/fragmentation.png">
+</section>
+
+<style>
+	.reveal .book img {
+		position: absolute;
+		top: 240px;
+		left: 220px;
+	}
+	.reveal .book ul {
+		position: absolute;
+		top: 280px;
+		left: 400px;
+	}
+</style>
+<section data-markdown style="min-height: 450px;"><script type="text/template">
+	# Thanks
+	### TJ VanToll | [@tjvantoll](https://twitter.com/tjvantoll) | [tjvantoll.com](http://tjvantoll.com)
+	<div class="book">
+		<img src="img/book.jpg">
+		<ul>
+			<li>jQuery UI in Action</li>
+			<li><a href="http://manning.com/vantoll">manning.com/vantoll</a></li>
+			<li>45% off with code qcon14bf!</li>
+		</ul>
+	</div>
+</script></section>
+
+
+			</div>
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.min.js"></script>
+
+		<script>
+			Reveal.initialize({
+				controls: false,
+				progress: true,
+				history: true,
+				center: true,
+				theme: Reveal.getQueryHash().theme,
+				transition: Reveal.getQueryHash().transition || 'default',
+				dependencies: [
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+					{ src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+				]
+			});
+		</script>
+	</body>
+</html>
