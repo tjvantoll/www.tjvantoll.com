@@ -13,6 +13,12 @@ sharing: false
 		<h2>The State of Hybrid</h2>
 		<ul>
 			<li>
+				<span>June 12th, 2014:</span>
+				<a href="https://qconnewyork.com">QCon NY</a> |
+				<address class="country-us">New York, New York</address> |
+				<a href="/speaking/slides/State-of-Hybrid/New-York/">Slides</a>
+			</li>
+			<li>
 				<span>April 28th, 2014:</span>
 				<a href="http://www.meetup.com/grwebdev/events/165953762/">Grand Rapids Web Dev Meetup</a> |
 				<address class="country-us">Grand Rapids, Michigan</address> |
