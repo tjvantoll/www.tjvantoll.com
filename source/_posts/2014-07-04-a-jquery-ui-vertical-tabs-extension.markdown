@@ -10,7 +10,7 @@ The single coolest thing in jQuery UI is the [extension mechanism](http://learn.
 
 The first of these is an extension to display a [jQuery UI tabs widget](http://jqueryui.com/tabs/) vertically. The extension is simple: it adds a single `orientation` option that you can set to `"horizontal"` or `"vertical"`. Here it is in action:
 
-<iframe width="100%" height="325" src="http://jsfiddle.net/tj_vantoll/dbYHL/embedded/result,html,js" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
+{% demo /demos/2014-07-04/index.html jQuery_UI_Vertical_Tabs_Extension 325 %}
 
 The extension [supports AMD usage](https://github.com/tjvantoll/jquery-ui-vertical-tabs#amd-usage), including [the new AMD modules introduced in jQuery UI 1.11](http://learn.jquery.com/jquery-ui/environments/amd/). If you're a Bower user, you can install the extension with `bower install jquery-ui-vertical-tabs`.
 

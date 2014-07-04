@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<title>jQuery UI Vertical Tabs Extension</title>
+
+	<link rel="stylesheet" href="../assets/jquery-ui/1.11.0/jquery-ui.min.css">
+	<link rel="stylesheet" href="../assets/vertical-tabs/vertical-tabs.css">
+	<style>
+		.ui-buttonset { margin-top: 3em; }
+	</style>
+</head>
+<body>
+
+<div id="tabs">
+	<ul>
+		<li><a href="#tabs-1">One</a></li>
+		<li><a href="#tabs-2">Two</a></li>
+		<li><a href="#tabs-3">Three</a></li>
+	</ul>
+	<div id="tabs-1">
+		One Contents
+	</div>
+	<div id="tabs-2">
+		Two Contents
+	</div>
+	<div id="tabs-3">
+		Three Contents
+	</div>
+</div>
+
+<div id="toggle">
+	<label for="horizontal">Horizontal</label>
+	<input type="radio" name="orientation" id="horizontal">
+	<label for="vertical">Vertical</label>
+	<input type="radio" name="orientation" id="vertical" checked>
+</div>
+
+<script src="../assets/jquery/2.1.1/jquery.min.js"></script>
+<script src="../assets/jquery-ui/1.11.0/jquery-ui.min.js"></script>
+<script src="../assets/vertical-tabs/vertical-tabs.js"></script>
+
+<script>
+	$( "#tabs" ).tabs({ orientation: "vertical" });
+
+	// For toggling between the two orientations only
+	$( "#toggle" )
+		.buttonset()
+		.on( "change", "input", function() {
+			$( "#tabs" ).tabs( "option", "orientation", this.id );
+		});
+</script>
+
+</body>
+</html>
