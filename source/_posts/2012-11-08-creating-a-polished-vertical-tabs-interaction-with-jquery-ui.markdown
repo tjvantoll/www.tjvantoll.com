@@ -6,6 +6,8 @@ comments: true
 categories: [jQuery UI, CSS]
 ---
 
+<div class="warning">I recently published an official extension that uses the technique explained below. <a href="/2014/07/04/a-jquery-ui-vertical-tabs-extension/">Learn more</a>.</div>
+
 The [jQuery UI tabs widget](http://jqueryui.com/tabs/) provides a clean way to implement a tabular UI.  Furthermore, the markup used gives you ample hooks to make the tabs visually into what you want them to be.  The docs provide a [simple demo](http://jqueryui.com/tabs/#vertical) of how you can give the tabs a vertical orientation, but I thought I'd show how you can use what the framework provides to create something a bit more polished.
 
 <!--more-->
