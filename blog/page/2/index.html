@@ -9,12 +9,7 @@
   <meta name="author" content="TJ VanToll">
 
   
-  <meta name="description" content="Say you have the following submittable &lt;form&gt;: 1
-2
-3
-4
-5
-&lt;form id=&quot;myForm&quot; action=&quot;http://google.com&quot;&gt; &lt;label for &hellip;">
+  <meta name="description" content="I&#8217;m excited to announce that I&#8217;ll be joining Telerik as a Developer Advocate for Icenium. I&#8217;ve been doing a lot of speaking and &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -100,6 +95,48 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title" itemprop="name headline"><a href="/2013/08/14/new-beginnings/">New Beginnings</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-08-14T00:00:00-04:00" pubdate data-updated="true">Aug 14<span>th</span>, 2013</time>
+        
+         | <a href="/2013/08/14/new-beginnings/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>I&#8217;m excited to announce that I&#8217;ll be joining <a href="http://telerik.com">Telerik</a> as a Developer Advocate for <a href="http://icenium.com">Icenium</a>. I&#8217;ve been doing a lot of <a href="/blog/archives/">speaking</a> and <a href="/speaking/">writing</a> in my free time, and this opportunity will give me a chance to do that as part of my day job.</p>
+
+<p>While I&#8217;m excited, I&#8217;m also sad to leave behind some great people at <a href="http://liquidweb.com">Liquid Web</a>. They were a great company and a fun place to work, but at the end of the day getting paid to speak and write has been a goal of mine, and this was an opportunity I couldn&#8217;t pass up.</p>
+
+<p>I&#8217;ll be talking at two events in October - <a href="http://www.devreach.com/">DevReach</a> and <a href="http://html5devconf.com/">HTML5DevConf</a>. If you&#8217;re going to be there make sure to stop by and say hi.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -705,79 +742,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title" itemprop="name headline"><a href="/2013/03/14/better-ways-of-comparing-a-javascript-string-to-multiple-values/">Better Ways of Comparing a JavaScript String to Multiple Values</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-03-14T00:00:00-04:00" pubdate data-updated="true">Mar 14<span>th</span>, 2013</time>
-        
-         | <a href="/2013/03/14/better-ways-of-comparing-a-javascript-string-to-multiple-values/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>This is a seemingly simple programming task that we deal with everyday.  Here&#8217;s the situation:</p>
-
-<ul>
-<li>1) You have a string in JavaScript, like <code>var fruit = ''</code>.</li>
-<li>2) You need to know if that string is equal to one of multiple values, say <code>"banana"</code> or <code>"lemon"</code> (because the yellow fruits need special yellow fruit processing or something).</li>
-</ul>
-
-
-<p>Most people accomplish this by doing two string comparisons connected by a logical OR, which looks like this:</p>
-
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="k">if</span> <span class="p">(</span><span class="nx">fruit</span> <span class="o">==</span> <span class="s1">&#39;banana&#39;</span> <span class="o">||</span> <span class="nx">fruit</span> <span class="o">==</span> <span class="s1">&#39;lemon&#39;</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>    <span class="nx">handleYellowFruit</span><span class="p">();</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Which works fine, but is a bit clunky.  I mean, you have to type <code>fruit ==</code> two whole times.  It also doesn&#8217;t scale well.  Say your fruit processing product takes off and you need to support more fruit, now you have this:</p>
-
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="k">if</span> <span class="p">(</span><span class="nx">fruit</span> <span class="o">==</span> <span class="s1">&#39;banana&#39;</span> <span class="o">||</span> <span class="nx">fruit</span> <span class="o">==</span> <span class="s1">&#39;lemon&#39;</span> <span class="o">||</span> <span class="nx">fruit</span> <span class="o">==</span> <span class="s1">&#39;mango&#39;</span> <span class="o">||</span> <span class="nx">fruit</span> <span class="o">==</span> <span class="s1">&#39;pineapple&#39;</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>    <span class="nx">handleYellowFruit</span><span class="p">();</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/2013/03/14/better-ways-of-comparing-a-javascript-string-to-multiple-values/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/3/">&larr; Older</a>
@@ -812,6 +776,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2014/07/04/a-jquery-ui-vertical-tabs-extension/">A jQuery UI Vertical Tabs Extension</a>
+      </li>
+    
+      <li class="post">
         <a href="/2014/05/01/using-semantic-html-to-drive-display-logic/">Using Semantic HTML to Drive Display Logic</a>
       </li>
     
@@ -825,10 +793,6 @@
     
       <li class="post">
         <a href="/2014/01/27/only-the-gzip-size-matters/">Only the gzip Size Matters</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2014/01/23/speaking-tip-use-the-ipad-clock-app-as-a-timer/">Speaking Tip: Use the iPad&#8217;s Clock App as a Timer</a>
       </li>
     
   </ul>

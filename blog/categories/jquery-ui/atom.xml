@@ -4,7 +4,7 @@
   <title><![CDATA[Category: jQuery UI | TJ VanToll]]></title>
   <link href="http://tjvantoll.com/blog/categories/jquery-ui/atom.xml" rel="self"/>
   <link href="http://tjvantoll.com/"/>
-  <updated>2014-06-29T23:04:26-04:00</updated>
+  <updated>2014-07-04T10:41:50-04:00</updated>
   <id>http://tjvantoll.com/</id>
   <author>
     <name><![CDATA[TJ VanToll]]></name>
@@ -12,6 +12,24 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[A jQuery UI Vertical Tabs Extension]]></title>
+    <link href="http://tjvantoll.com/2014/07/04/a-jquery-ui-vertical-tabs-extension/"/>
+    <updated>2014-07-04T10:13:00-04:00</updated>
+    <id>http://tjvantoll.com/2014/07/04/a-jquery-ui-vertical-tabs-extension</id>
+    <content type="html"><![CDATA[<p>The single coolest thing in jQuery UI is the <a href="http://learn.jquery.com/jquery-ui/widget-factory/extending-widgets/">extension mechanism</a> built into the <a href="http://api.jqueryui.com/jquery.widget/">widget factory</a>. In my <a href="http://tjvantoll.com/jquery-ui-in-action.html">upcoming book</a> on jQuery UI I devote an entire chapter to building extensions, and now that the book is <em>mostly</em> done, I want to publish some of the extensions I built for the world to use.</p>
+
+<p>The first of these is an extension to display a <a href="http://jqueryui.com/tabs/">jQuery UI tabs widget</a> vertically. The extension is simple: it adds a single <code>orientation</code> option that you can set to <code>"horizontal"</code> or <code>"vertical"</code>. Here it is in action:</p>
+
+<iframe width="100%" height="325" src="http://jsfiddle.net/tj_vantoll/dbYHL/embedded/result,html,js" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
+
+
+<p>The extension <a href="https://github.com/tjvantoll/jquery-ui-vertical-tabs#amd-usage">supports AMD usage</a>, including <a href="http://learn.jquery.com/jquery-ui/environments/amd/">the new AMD modules introduced in jQuery UI 1.11</a>. If you're a Bower user, you can install the extension with <code>bower install jquery-ui-vertical-tabs</code>.</p>
+
+<p>Please <a href="https://github.com/tjvantoll/jquery-ui-vertical-tabs">check out the extension on GitHub</a>. Try it; report issues; and star it if you like it. The extension is released under the MIT license, so it use it in any project you'd like. I'll have more of these coming in the near future.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Creating a jQuery UI Dialog with a Submit Button]]></title>
@@ -501,7 +519,10 @@ $( selector ).tabs();
     <link href="http://tjvantoll.com/2012/11/08/creating-a-polished-vertical-tabs-interaction-with-jquery-ui/"/>
     <updated>2012-11-08T00:00:00-05:00</updated>
     <id>http://tjvantoll.com/2012/11/08/creating-a-polished-vertical-tabs-interaction-with-jquery-ui</id>
-    <content type="html"><![CDATA[<p>The <a href="http://jqueryui.com/tabs/">jQuery UI tabs widget</a> provides a clean way to implement a tabular UI.  Furthermore, the markup used gives you ample hooks to make the tabs visually into what you want them to be.  The docs provide a <a href="http://jqueryui.com/tabs/#vertical">simple demo</a> of how you can give the tabs a vertical orientation, but I thought I'd show how you can use what the framework provides to create something a bit more polished.</p>
+    <content type="html"><![CDATA[<div class="warning">I recently published an official extension that uses the technique explained below. <a href="http://tjvantoll.com/2014/07/04/a-jquery-ui-vertical-tabs-extension/">Learn more</a>.</div>
+
+
+<p>The <a href="http://jqueryui.com/tabs/">jQuery UI tabs widget</a> provides a clean way to implement a tabular UI.  Furthermore, the markup used gives you ample hooks to make the tabs visually into what you want them to be.  The docs provide a <a href="http://jqueryui.com/tabs/#vertical">simple demo</a> of how you can give the tabs a vertical orientation, but I thought I'd show how you can use what the framework provides to create something a bit more polished.</p>
 
 <!--more-->
 
@@ -599,32 +620,6 @@ $('#tabs').tabs().addClass('ui-tabs-vertical');
 <p><div class="code_example"><h6>jQuery UI Vertical Tabs<a href="/demos/2012-11-08/verticalTabs.html" target="_blank">Open in New Window</a></h6><iframe style="width: 100%; height: 275px;" frameborder="0" src="/demos/2012-11-08/verticalTabs.html"></iframe></div></p>
 
 <p>Feel free to use this or modify it to your liking.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Adding Pointers to jQuery UI Tooltips]]></title>
-    <link href="http://tjvantoll.com/2012/10/24/adding-pointers-to-jquery-ui-tooltips/"/>
-    <updated>2012-10-24T20:58:00-04:00</updated>
-    <id>http://tjvantoll.com/2012/10/24/adding-pointers-to-jquery-ui-tooltips</id>
-    <content type="html"><![CDATA[<p>The recent <a href="http://jqueryui.com/changelog/1.9.0/">jQuery UI 1.9 release</a> included a new <a href="http://jqueryui.com/tooltip/">tooltip plugin</a> that can be used to create tooltips much like the native tooltips the browser provides.  The difference is that jQuery UI's version are completely customizable.</p>
-
-<p>As such I thought I'd show a quick example of how you can create a pointer from the tooltip to its associated field.  The following will show a pointer tooltip a the text input.  You can change the location of the tooltip using the buttons.</p>
-
-<!--more-->
-
-
-<p><div class="code_example"><h6>Pointer Tooltip Example<a href="/demos/2012-10-24/pointer.html" target="_blank">Open in New Window</a></h6><iframe style="width: 100%; height: 300px;" frameborder="0" src="/demos/2012-10-24/pointer.html"></iframe></div>
-<a href="http://jsfiddle.net/tj_vantoll/kyBwU">View Demo on jsFiddle</a></p>
-
-<p>So how is this done?</p>
-
-<ul>
-<li>The <a href="http://api.jqueryui.com/tooltip/#option-position">position</a> option is used to place the tooltip appropriately around the textbox.  Importantly the <code>collision</code> property is set to <code>none</code>, since, if the tooltip were to be repositioned the arrow would be placed incorrectly.</li>
-<li>The pointers themselves are created using using the <code>::after</code> and <code>::before</code> pseudo-elements.  For some more information on the technique and to see some other variations there's an excellent tutorial <a href="http://nicolasgallagher.com/pure-css-speech-bubbles/">here</a>.</li>
-<li>Since the <code>::after</code> and <code>::before</code> pseudo-elements are used to create the pointers, IE &lt; 8 users will not see them.  However, they'll simply see the default pointerless tooltip, no harm done. <i>Note: IE8 supports the before/after pseudo-elements but as <code>:before</code> and <code>:after</code> instead of <code>::before</code> and <code>::after</code>. So if you need IE8 support use <code>:before</code> and <code>:after</code>.</i></li>
-</ul>
-
 ]]></content>
   </entry>
   
