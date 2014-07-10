@@ -61,19 +61,6 @@ function getNav(){var a=$("nav[role=navigation] fieldset[role=search]").after('<
 window.PictureCube=function(a,b,c){if(!a)return;c=c||{};var d=typeof a=="string"?document.getElementById(a):a;d.className+=" PictureCube-container";var e=["front","back","right","left","top","bottom"];var f='<div class="cube show-front">';for(var g=0;g<e.length;g++){f+='<figure class="'+e[g]+'">'+'<img src="'+b[g].src+'" title="'+b[g].title+'" />'+"</figure>"}f+="</div>";d.innerHTML=f;this.cube=d.childNodes[0],this.cycleTimeoutId=null,this.images=b,this.options=c;this.cube.setAttribute("data-cube-picture-number",1);var h=this;var i=function(a){var b=parseInt(a.target.getAttribute("data-cube-picture-number"),10);if(!b)return;var d=h.cube.childNodes[b-1].childNodes[0];if(c.onchange){c.onchange(b,d,h)}};var j=["webkitTransitionEnd","transitionend","otransitionend"];for(var g=0;g<j.length;g++){this.cube.addEventListener(j[g],i)}};PictureCube.prototype.goto=function(a){switch(a){case 1:this.cube.className="show-front";break;case 2:this.cube.className="show-back";break;case 3:this.cube.className="show-right";break;case 4:this.cube.className="show-left";break;case 5:this.cube.className="show-top";break;case 6:this.cube.className="show-bottom";break}this.cube.className+=" cube";this.cube.setAttribute("data-cube-picture-number",a)};PictureCube.prototype.cycle=function(a){if(this.cycleTimeoutId!==null){this.clearCycle()}var b=this.cube.getAttribute("data-cube-picture-number");this.cycleTimeoutId=setInterval(function(a){return function(){a.goto(b);b++;if(b==a.images.length+1){b=1}}}(this),a)};PictureCube.prototype.clearCycle=function(){clearTimeout(this.cycleTimeoutId)}
 
 $.domReady(function(){
-	if (document.getElementById('browser-picture-cube')) {
-		new PictureCube('browser-picture-cube', 
-			[
-				{ src: '/images/browsers/chrome.png', title: 'Chrome' },
-				{ src: '/images/browsers/firefox.png', title: 'Firefox' },
-				{ src: '/images/browsers/IE8.png', title: 'IE8' },
-				{ src: '/images/browsers/Safari.png', title: 'Safari' },
-				{ src: '/images/browsers/Opera.png', title: 'Opera' },
-				{ src: '/images/browsers/IE9.png', title: 'IE9' }
-			]
-		).cycle(2500);
-	}
-
 	if (document.getElementById('playground-cube')) {
 		window.playgroundCube = new PictureCube('playground-cube', [
 			{ src: '/images/izzie/1.jpg' },
