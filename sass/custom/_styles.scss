@@ -178,15 +178,21 @@ aside.sidebar:hover a:hover {
 	margin: 10px;
 }
 
-.post_list {
-	margin-bottom: 0;
-	span {
-		display: inline-block;
-		padding-right: 2px;
+.home-heading {
+	a {
+		color: black;
+		text-decoration: none;
 	}
-	a:not(.external) {
-		display: inline-block;
-		margin-bottom: 1em;
+	& + ul {
+		span {
+			display: block;
+			&::after {
+				content: ":";
+			}
+		}
+		li {
+			margin-bottom: 0.3em;
+		}
 	}
 }
 
