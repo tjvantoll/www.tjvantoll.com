@@ -179,7 +179,7 @@ aside.sidebar:hover a:hover {
 }
 
 .home-heading {
-	a {
+	a:not(:hover) {
 		color: black;
 		text-decoration: none;
 	}
@@ -208,64 +208,6 @@ header.home {
 			font-size: 0.65em;
 			font-weight: normal;
 		}
-	}
-}
-
-.project-contents {
-	overflow: hidden;
-	border: 1px solid lighten($custom_header_color, 10%);
-	padding: 1em;
-	margin-bottom: 1em;
-	border-radius: 10px;
-	min-height: 5em;
-
-	a {
-		font-size: 1.3em;
-	}
-	p {
-		margin-top: 0.2em;
-		margin-bottom: 0;
-	}
-	.wording {
-		float: left;
-		padding-left: 1em;
-		width: 70%;
-		width: -moz-calc(100% - 175px);
-		width: -webkit-calc(100% - 175px);
-		width: calc(100% - 175px);
-	}
-
-	.image {
-		float: left;
-		width: 125px;
-		margin: 0 auto;
-
-		img {
-			border-radius: 0;
-			border: none;
-			box-shadow: none;
-		}
-	}
-}
-@media all and (max-width: 500px) {
-	.project-contents .image {
-		display: none;
-	}
-	.project-contents .wording {
-		clear: left;
-		width: 100%;
-		padding: 0;
-	}
-	.project-contents:hover {
-		-webkit-transform: none;
-		transform: none;
-	}
-}
-
-#browser-picture-cube {
-	margin: 0 auto;
-	img {
-		background-color: white;
 	}
 }
 
