@@ -9,7 +9,7 @@
   <meta name="author" content="TJ VanToll">
 
   
-  <meta name="description" content="I&#8217;m excited to announce that I&#8217;ll be joining Telerik as a Developer Advocate for Icenium. I&#8217;ve been doing a lot of speaking and &hellip;">
+  <meta name="description" content="There are two fun bugs related to document.activeElement in IE that have come up recently in jQuery UI. To help save others some pain, I felt these &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -95,6 +95,75 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title" itemprop="name headline"><a href="/2013/08/30/bugs-with-document-activeelement-in-internet-explorer/">Bugs with document.activeElement in Internet Explorer</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-08-30T14:46:00-04:00" pubdate data-updated="true">Aug 30<span>th</span>, 2013</time>
+        
+         | <a href="/2013/08/30/bugs-with-document-activeelement-in-internet-explorer/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>There are two <em>fun</em> bugs related to <code>document.activeElement</code> in IE that have come up recently in jQuery UI. To help save others some pain, I felt these needed to be documented.</p>
+
+<h3>Accessing <code>document.activeElement</code> from an <code>&lt;iframe&gt;</code> in IE9</h3>
+
+<p>Let&#8217;s say you have an <code>&lt;iframe&gt;</code>.</p>
+
+<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;iframe</span> <span class="na">src=</span><span class="s">&quot;other.html&quot;</span><span class="nt">&gt;&lt;/iframe&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>And in that <code>&lt;iframe&gt;</code>, you want to know what element has focus.</p>
+
+<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'>/* other.html */
+</span><span class='line'><span class="nt">&lt;script&gt;</span>
+</span><span class='line'>    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span> <span class="nx">parent</span><span class="p">.</span><span class="nb">document</span><span class="p">.</span><span class="nx">activeElement</span> <span class="p">);</span>
+</span><span class='line'><span class="nt">&lt;/script&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>In all browsers except IE9, this will log the element that has focus in the parent document (the <code>&lt;body&gt;</code> by default). In IE9 this will inexplicably throw an <code>"Unspecified Error"</code>.</p>
+
+<p>Yes, you read right; ACCESSING the <code>activeElement</code> property of a parent <code>document</code> throws an error in IE9.</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/2013/08/30/bugs-with-document-activeelement-in-internet-explorer/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -678,70 +747,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title" itemprop="name headline"><a href="/2013/03/28/shorthand-for-preventing-default-event-actions-with-jquery/">Shorthand for Preventing Default Event Actions with jQuery</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-03-28T21:44:00-04:00" pubdate data-updated="true">Mar 28<span>th</span>, 2013</time>
-        
-         | <a href="/2013/03/28/shorthand-for-preventing-default-event-actions-with-jquery/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>The common way of preventing the default action of an event is to call <a href="http://api.jquery.com/event.preventDefault/">preventDefault</a> on its <a href="http://api.jquery.com/category/event-object/">Event Object</a>:</p>
-
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;http://google.com&quot;</span><span class="nt">&gt;</span>Google<span class="nt">&lt;/a&gt;</span>
-</span><span class='line'><span class="nt">&lt;script&gt;</span>
-</span><span class='line'>    <span class="c1">// Prevent the default action (navigating to google.com)</span>
-</span><span class='line'>    <span class="nx">$</span><span class="p">(</span> <span class="s2">&quot;a&quot;</span> <span class="p">).</span><span class="nx">on</span><span class="p">(</span> <span class="s2">&quot;click&quot;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span> <span class="nx">event</span> <span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>        <span class="nx">event</span><span class="p">.</span><span class="nx">preventDefault</span><span class="p">();</span>
-</span><span class='line'>    <span class="p">});</span>
-</span><span class='line'><span class="nt">&lt;/script&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>&#8230;which works just fine.  But if all you need to do is prevent the default action, <code>jQuery.fn.on</code> provides a handy shorthand.  Per <a href="http://api.jquery.com/on/#on-events-selector-data-handlereventObject">its docs</a>:</p>
-
-<p><em>The value <code>false</code> is also allowed as a shorthand for a function that simply does <code>return false</code>.</em></p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/2013/03/28/shorthand-for-preventing-default-event-actions-with-jquery/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/3/">&larr; Older</a>
@@ -776,6 +781,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2014/07/18/an-addendum-to-why-web-components-arent-ready-for-production-yet/">An Addendum to Why Web Components Aren&#8217;t Ready for Production Yet</a>
+      </li>
+    
+      <li class="post">
         <a href="/2014/07/04/a-jquery-ui-vertical-tabs-extension/">A jQuery UI Vertical Tabs Extension</a>
       </li>
     
@@ -789,10 +798,6 @@
     
       <li class="post">
         <a href="/2014/02/06/connecting-appbuilder-projects-to-facebook/">Connecting AppBuilder Projects to Facebook</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2014/01/27/only-the-gzip-size-matters/">Only the gzip Size Matters</a>
       </li>
     
   </ul>

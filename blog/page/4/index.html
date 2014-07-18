@@ -9,7 +9,7 @@
   <meta name="author" content="TJ VanToll">
 
   
-  <meta name="description" content="By default the overflow CSS property does not apply to table group elements (&lt;thead&gt;, &lt;tbody&gt;, or &lt;tfoot&gt;). As of Firefox 4 this &hellip;">
+  <meta name="description" content="Debugging print stylesheets has always been a bit of a pain. The traditional way of doing so was to manually change the media attribute of all link &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -95,6 +95,64 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title" itemprop="name headline"><a href="/2012/12/12/debugging-print-stylesheets-now-significantly-easier-in-chrome/">Debugging Print Stylesheets: Now Significantly Easier in Chrome</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-12-12T21:55:00-05:00" pubdate data-updated="true">Dec 12<span>th</span>, 2012</time>
+        
+         | <a href="/2012/12/12/debugging-print-stylesheets-now-significantly-easier-in-chrome/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Debugging print stylesheets has always been a bit of a pain.  The traditional way of doing so was to manually change the <code>media</code> attribute of all <code>link</code> tags from <code>print</code> to <code>screen</code> or <code>all</code> while testing.</p>
+
+<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="c">&lt;!-- Before --&gt;</span>
+</span><span class='line'><span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">&quot;stylesheet&quot;</span> <span class="na">href=</span><span class="s">&quot;print.css&quot;</span> <span class="na">media=</span><span class="s">&quot;print&quot;</span> <span class="nt">/&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="c">&lt;!-- After --&gt;</span>
+</span><span class='line'><span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">&quot;stylesheet&quot;</span> <span class="na">href=</span><span class="s">&quot;print.css&quot;</span> <span class="na">media=</span><span class="s">&quot;screen&quot;</span> <span class="nt">/&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The popular <a href="https://addons.mozilla.org/en-US/firefox/addon/web-developer/">Web Developer Add-on</a> for Firefox even has an option to do this for you automatically.</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/2012/12/12/debugging-print-stylesheets-now-significantly-easier-in-chrome/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -560,77 +618,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title" itemprop="name headline"><a href="/2012/08/22/logging-test-failures-in-a-phantomjs-qunit-runner/">Logging Test Failures in a PhantomJS QUnit Runner</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-08-22T00:00:00-04:00" pubdate data-updated="true">Aug 22<span>nd</span>, 2012</time>
-        
-         | <a href="/2012/08/22/logging-test-failures-in-a-phantomjs-qunit-runner/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><a href="http://phantomjs.com">PhantomJS</a> provides an easy means of automating <a href="http://qunitjs.com">QUnit</a> tests; it even provides a <a href="https://github.com/ariya/phantomjs/blob/master/examples/run-qunit.js">test runner</a> that you can simply copy into your project to run them.</p>
-
-<p>The output of said runner displays the number of tests ran and the number that passed.  For example, here&#8217;s an example of the output when I use the default runner on jQuery UI&#8217;s spinner test suite:</p>
-
-<figure class='code'><figcaption class='not_empty'><span>PhantomJS + QUnit Run Output</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='text'><span class='line'>tj-cpu:spinner tj$ phantomjs run-qunit.js spinner.html
-</span><span class='line'>Tests completed in 492 milliseconds
-</span><span class='line'>489 tests of 489 passed, 0 failed.
-</span><span class='line'>&#39;waitFor()&#39; finished in 587ms.
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Which is great, but if something fails you only get the following:</p>
-
-<figure class='code'><figcaption class='not_empty'><span>PhantomJS + QUnit Run Output with Failures</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='text'><span class='line'>tj-cpu:myproject tj$ phantomjs run-qunit.js spinner.html
-</span><span class='line'>&#39;waitFor()&#39; finished in 630ms.
-</span><span class='line'>Tests completed in 535 milliseconds.
-</span><span class='line'>486 tests of 489 passed, 3 failed.
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>The provided runner doesn&#8217;t provide any additional information about the tests that failed.  Luckily PhantomJS and QUnit make it trivial to customize the output to meet your needs.</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/2012/08/22/logging-test-failures-in-a-phantomjs-qunit-runner/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/5/">&larr; Older</a>
@@ -665,6 +652,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2014/07/18/an-addendum-to-why-web-components-arent-ready-for-production-yet/">An Addendum to Why Web Components Aren&#8217;t Ready for Production Yet</a>
+      </li>
+    
+      <li class="post">
         <a href="/2014/07/04/a-jquery-ui-vertical-tabs-extension/">A jQuery UI Vertical Tabs Extension</a>
       </li>
     
@@ -678,10 +669,6 @@
     
       <li class="post">
         <a href="/2014/02/06/connecting-appbuilder-projects-to-facebook/">Connecting AppBuilder Projects to Facebook</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2014/01/27/only-the-gzip-size-matters/">Only the gzip Size Matters</a>
       </li>
     
   </ul>

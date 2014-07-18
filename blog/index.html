@@ -9,7 +9,7 @@
   <meta name="author" content="TJ VanToll">
 
   
-  <meta name="description" content="The single coolest thing in jQuery UI is the extension mechanism built into the widget factory. In my upcoming book on jQuery UI I devote an entire &hellip;">
+  <meta name="description" content="Yesterday I published an article on the Telerik Developer Network about the state of web components. In it I argued that web components are not ready &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -95,6 +95,102 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title" itemprop="name headline"><a href="/2014/07/18/an-addendum-to-why-web-components-arent-ready-for-production-yet/">An Addendum to Why Web Components Aren&#8217;t Ready for Production Yet</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-07-18T14:14:00-04:00" pubdate data-updated="true">Jul 18<span>th</span>, 2014</time>
+        
+         | <a href="/2014/07/18/an-addendum-to-why-web-components-arent-ready-for-production-yet/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Yesterday I <a href="http://developer.telerik.com/featured/web-components-arent-ready-production-yet/">published an article on the Telerik Developer Network</a> about the state of web components. In it I argued that web components are not ready for the majority of web developers to use in production.</p>
+
+<p>I was overwhelmed by the amount of feeback—positive and negative—that I received after the article went live. In my opinion this is one of the great things about writing on the web. Opinionated posts tend to attract feedback from smart people with vested interests in the technology being discussed. Although putting yourself out there for criticism is hard, it&#8217;s also a spectacular way to learn. Here I want to summarize what I learned from writing about web components, and take a minute to respond to some of the criticism I received.</p>
+
+<h3>The Title</h3>
+
+<blockquote class="twitter-tweet" lang="en"><p>Why Web Components Aren’t Ready for Production… Yet <a href="http://t.co/0liPap0bWx">http://t.co/0liPap0bWx</a> sensible research, dangerous title. STOP! More at <a href="https://twitter.com/forwardJS">@forwardJS</a></p>&mdash; Christian Heilmann (@codepo8) <a href="https://twitter.com/codepo8/statuses/489781679272509440">July 17, 2014</a></blockquote>
+
+
+<p>Several people said that my title was far too generic and link baity. This is somewhat fair, but I think the article gives the necessary context to explain why I chose a generic title. From the article&#8230;</p>
+
+<blockquote><p>&#8220;All of Polymer’s elements, and most (all?) of the elements listed on http://customelements.io/ and http://component.kitchen/ depend on Polymer, which depends on the platform in its entirety.&#8221;</p></blockquote>
+
+<p>Put yourselves in the shoes of a developer debating whether to use web components in your app. The first thing you&#8217;re going to want to do is see an existing component, and the overwhelming majority of published components are Polymer based. Even if you don&#8217;t end up using Polymer, if you use just one Polymer-based element, you are subject to the performance penalties I outline in my article.</p>
+
+<p>Although the conclusion of the article is that web components aren&#8217;t ready for production, that isn&#8217;t necessarily because the technology behind them isn&#8217;t ready. A large part of the problem is that there isn&#8217;t enough documentation available to developers. What are the performance repercussions of each of the various web components polyfills? How do you build performant web components? This is research that needs to be done before the average developer can take web components seriously.</p>
+
+<h3>Not all web components solutions are created equally</h3>
+
+<p>Several people called me out for grouping all web components solutions together. Although I acknowledged that there are alternative libraries out there, I didn&#8217;t do a very good job differentiating them from Polymer in terms of performance.</p>
+
+<blockquote data-conversation="none" class="twitter-tweet" lang="en"><p><a href="https://twitter.com/tjvantoll">@tjvantoll</a> <a href="https://twitter.com/codepo8">@codepo8</a> <a href="https://twitter.com/slightlylate">@slightlylate</a> <a href="https://twitter.com/WebReflection">@WebReflection</a> X-Tag used only Custom Elements since day 1, judging them as one is *extremely* misleading.</p>&mdash; Daniel (@csuwildcat) <a href="https://twitter.com/csuwildcat/statuses/489790523201187842">July 17, 2014</a></blockquote>
+
+
+<p>I knew that X-Tag used a subset of web components polyfills, and I mention that in the article, but I didn&#8217;t realize they <em>only</em> use custom elements. This is exactly the sort of thing I&#8217;d love to see more information on. Why did X-Tag choose to only go with custom elements? Performance? File size?</p>
+
+<p>I also discovered several other projects that are web components based. <a href="http://bosonic.github.io/index.html">Bosonic</a> takes a transpilation approach, and converts HTML-based web component files into JS and CSS code that works back to IE9. This is another project I&#8217;d love to hear more information about, especially their design choices.</p>
+
+<p><img src="/images/posts/2014-07-18/bosonic.png"></p>
+
+<p>I was also pointed at an <a href="http://webreflection.blogspot.co.uk/2014/07/a-w3c-custom-elements-alternative.html">alternative custom elements polyfill from Andrea Giammarchi</a>. The polyfill is less than 2K minified and gzipped, and supports an impressive range of browsers. This is another project worth experimenting with.</p>
+
+<h3>My tone</h3>
+
+<p>The last thing I want to discuss is my tone in the article, as that was called out by a few people.</p>
+
+<blockquote class="twitter-tweet" lang="en"><p><a href="https://twitter.com/tjvantoll">@tjvantoll</a> <a href="https://twitter.com/csuwildcat">@csuwildcat</a> <a href="https://twitter.com/codepo8">@codepo8</a> <a href="https://twitter.com/WebReflection">@WebReflection</a> : OK, fine, but downer pieces like yours that don&#39;t do that work don&#39;t contribute to that.</p>&mdash; Alex Russell (@slightlylate) <a href="https://twitter.com/slightlylate/statuses/489793567007571969">July 17, 2014</a></blockquote>
+
+
+
+
+<blockquote class="twitter-tweet" lang="en"><p>Why Web Components aren&#39;t ready for production yet - <a href="https://twitter.com/tjvantoll">@tjvantoll</a> - <a href="http://t.co/4EEQIHtmWe">http://t.co/4EEQIHtmWe</a> Valid points, bit too negatively brought imho</p>&mdash; Leon de Rijke (@leonderijke) <a href="https://twitter.com/leonderijke/statuses/489856563327537152">July 17, 2014</a></blockquote>
+
+
+<p>I want to make it <em>very clear</em> that I am not trying to be a web component naysayer. I am excited about web components, and the article presents my honest feedback from someone that wants to move forward with them in major libraries, but ran into roadblocks. In my opinion, putting this feedback in the open starts conversations that we need to have to start seriously considering web components.</p>
+
+<p>Per the feedback I received, and based on my own experience, the sanest place for developers to start is with custom elements, as it has a relatively sane polyfill. Or as <a href="https://twitter.com/csuwildcat">@csuwildcat</a> puts it&#8230;</p>
+
+<blockquote data-conversation="none" class="twitter-tweet" lang="en"><p><a href="https://twitter.com/tjvantoll">@tjvantoll</a> <a href="https://twitter.com/WebReflection">@WebReflection</a> <a href="https://twitter.com/slightlylate">@slightlylate</a> <a href="https://twitter.com/codepo8">@codepo8</a> shout this: deploy UI as custom elements today, &amp; when Shadow DOM is native, hide the guts.</p>&mdash; Daniel (@csuwildcat) <a href="https://twitter.com/csuwildcat/statuses/489800753997828097">July 17, 2014</a></blockquote>
+
+
+<p>Consider it shouted. This is certainly something we need more people to experiment with, myself included.</p>
+
+<h3>Thanks</h3>
+
+<p>Finally I want to thank everyone that contributed feedback in some fashion. Writing on the internet is a great way to learn from others, and that&#8217;s certainly true in this case. With that in mind I want to encourage people that have used web components to share their experiences—especially those that have attempted to use them in production. Let&#8217;s make this happen.</p>
+
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -551,75 +647,6 @@ Adding a strikethrough to a line of text in CSS is easy.</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title" itemprop="name headline"><a href="/2013/08/30/bugs-with-document-activeelement-in-internet-explorer/">Bugs with document.activeElement in Internet Explorer</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-08-30T14:46:00-04:00" pubdate data-updated="true">Aug 30<span>th</span>, 2013</time>
-        
-         | <a href="/2013/08/30/bugs-with-document-activeelement-in-internet-explorer/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>There are two <em>fun</em> bugs related to <code>document.activeElement</code> in IE that have come up recently in jQuery UI. To help save others some pain, I felt these needed to be documented.</p>
-
-<h3>Accessing <code>document.activeElement</code> from an <code>&lt;iframe&gt;</code> in IE9</h3>
-
-<p>Let&#8217;s say you have an <code>&lt;iframe&gt;</code>.</p>
-
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;iframe</span> <span class="na">src=</span><span class="s">&quot;other.html&quot;</span><span class="nt">&gt;&lt;/iframe&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>And in that <code>&lt;iframe&gt;</code>, you want to know what element has focus.</p>
-
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'>/* other.html */
-</span><span class='line'><span class="nt">&lt;script&gt;</span>
-</span><span class='line'>    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span> <span class="nx">parent</span><span class="p">.</span><span class="nb">document</span><span class="p">.</span><span class="nx">activeElement</span> <span class="p">);</span>
-</span><span class='line'><span class="nt">&lt;/script&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>In all browsers except IE9, this will log the element that has focus in the parent document (the <code>&lt;body&gt;</code> by default). In IE9 this will inexplicably throw an <code>"Unspecified Error"</code>.</p>
-
-<p>Yes, you read right; ACCESSING the <code>activeElement</code> property of a parent <code>document</code> throws an error in IE9.</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/2013/08/30/bugs-with-document-activeelement-in-internet-explorer/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -652,6 +679,10 @@ Adding a strikethrough to a line of text in CSS is easy.</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2014/07/18/an-addendum-to-why-web-components-arent-ready-for-production-yet/">An Addendum to Why Web Components Aren&#8217;t Ready for Production Yet</a>
+      </li>
+    
+      <li class="post">
         <a href="/2014/07/04/a-jquery-ui-vertical-tabs-extension/">A jQuery UI Vertical Tabs Extension</a>
       </li>
     
@@ -665,10 +696,6 @@ Adding a strikethrough to a line of text in CSS is easy.</p>
     
       <li class="post">
         <a href="/2014/02/06/connecting-appbuilder-projects-to-facebook/">Connecting AppBuilder Projects to Facebook</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2014/01/27/only-the-gzip-size-matters/">Only the gzip Size Matters</a>
       </li>
     
   </ul>

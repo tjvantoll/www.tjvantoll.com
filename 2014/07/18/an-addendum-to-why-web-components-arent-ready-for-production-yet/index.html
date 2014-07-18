@@ -1,0 +1,350 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>An Addendum to Why Web Components Aren't Ready for Production Yet - TJ VanToll - Tutorials, Thoughts, and Ramblings on Front-End Development</title>
+  <meta name="author" content="TJ VanToll">
+
+  
+  <meta name="description" content="Yesterday I published an article on the Telerik Developer Network about the state of web components. In it I argued that web components are not ready &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://tjvantoll.com/2014/07/18/an-addendum-to-why-web-components-arent-ready-for-production-yet">
+  <link rel="author" href="https://plus.google.com/+TJVanToll">
+
+  <!--[if !lte IE 7]><!-->
+    <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet">
+  <!--<![endif]-->
+  <!--[if lte IE 7]>
+    <link rel="stylesheet" href="/stylesheets/old-ie.css" media="screen, projection">
+  <![endif]-->
+  
+  <!--Custom script concatenation
+  <script src="/javascripts/modernizr-2.5.3.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js"></script>
+  <script src="/javascripts/PictureCube.js"></script>
+  <script src="/javascripts/blog.js"></script>
+  -->
+  <script src="/javascripts/build/scripts.js"></script>
+
+  <link href="/atom.xml" rel="alternate" title="TJ VanToll" type="application/atom+xml">
+  <style>
+	/* Fonts from Google"s Web font directory at http://google.com/webfonts */
+	/*@import url(http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic);
+	@import url(http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic);*/
+</style>
+
+  
+  <script type="text/javascript">
+  	if (window.location.host.indexOf('local') == -1) {
+	    var _gaq = _gaq || [];
+	    _gaq.push(['_setAccount', 'UA-29179796-1']);
+	    _gaq.push(['_trackPageview']);
+	
+	    (function() {
+	      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+	      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+	      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	    })();
+    }
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+	<h1><a href="/">TJ VanToll</a></h1>
+	
+		<h2>Tutorials, Thoughts, and Ramblings on Front-End Development</h2> 
+	
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:tjvantoll.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+<li><a href="/">About</a></li>
+  <li><a href="/blog/">Blog</a></li>
+  <li><a href="/blog/archives/">Archives</a></li>
+  <li><a href="/speaking/">Speaking</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article itemscope itemtype="http://schema.org/BlogPosting" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title" itemprop="name headline">An Addendum to Why Web Components Aren't Ready for Production Yet</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-07-18T14:14:00-04:00" pubdate data-updated="true">Jul 18<span>th</span>, 2014</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>Yesterday I <a href="http://developer.telerik.com/featured/web-components-arent-ready-production-yet/">published an article on the Telerik Developer Network</a> about the state of web components. In it I argued that web components are not ready for the majority of web developers to use in production.</p>
+
+<p>I was overwhelmed by the amount of feeback—positive and negative—that I received after the article went live. In my opinion this is one of the great things about writing on the web. Opinionated posts tend to attract feedback from smart people with vested interests in the technology being discussed. Although putting yourself out there for criticism is hard, it&#8217;s also a spectacular way to learn. Here I want to summarize what I learned from writing about web components, and take a minute to respond to some of the criticism I received.</p>
+
+<h3>The Title</h3>
+
+<blockquote class="twitter-tweet" lang="en"><p>Why Web Components Aren’t Ready for Production… Yet <a href="http://t.co/0liPap0bWx">http://t.co/0liPap0bWx</a> sensible research, dangerous title. STOP! More at <a href="https://twitter.com/forwardJS">@forwardJS</a></p>&mdash; Christian Heilmann (@codepo8) <a href="https://twitter.com/codepo8/statuses/489781679272509440">July 17, 2014</a></blockquote>
+
+
+<p>Several people said that my title was far too generic and link baity. This is somewhat fair, but I think the article gives the necessary context to explain why I chose a generic title. From the article&#8230;</p>
+
+<blockquote><p>&#8220;All of Polymer’s elements, and most (all?) of the elements listed on http://customelements.io/ and http://component.kitchen/ depend on Polymer, which depends on the platform in its entirety.&#8221;</p></blockquote>
+
+<p>Put yourselves in the shoes of a developer debating whether to use web components in your app. The first thing you&#8217;re going to want to do is see an existing component, and the overwhelming majority of published components are Polymer based. Even if you don&#8217;t end up using Polymer, if you use just one Polymer-based element, you are subject to the performance penalties I outline in my article.</p>
+
+<p>Although the conclusion of the article is that web components aren&#8217;t ready for production, that isn&#8217;t necessarily because the technology behind them isn&#8217;t ready. A large part of the problem is that there isn&#8217;t enough documentation available to developers. What are the performance repercussions of each of the various web components polyfills? How do you build performant web components? This is research that needs to be done before the average developer can take web components seriously.</p>
+
+<h3>Not all web components solutions are created equally</h3>
+
+<p>Several people called me out for grouping all web components solutions together. Although I acknowledged that there are alternative libraries out there, I didn&#8217;t do a very good job differentiating them from Polymer in terms of performance.</p>
+
+<blockquote data-conversation="none" class="twitter-tweet" lang="en"><p><a href="https://twitter.com/tjvantoll">@tjvantoll</a> <a href="https://twitter.com/codepo8">@codepo8</a> <a href="https://twitter.com/slightlylate">@slightlylate</a> <a href="https://twitter.com/WebReflection">@WebReflection</a> X-Tag used only Custom Elements since day 1, judging them as one is *extremely* misleading.</p>&mdash; Daniel (@csuwildcat) <a href="https://twitter.com/csuwildcat/statuses/489790523201187842">July 17, 2014</a></blockquote>
+
+
+<p>I knew that X-Tag used a subset of web components polyfills, and I mention that in the article, but I didn&#8217;t realize they <em>only</em> use custom elements. This is exactly the sort of thing I&#8217;d love to see more information on. Why did X-Tag choose to only go with custom elements? Performance? File size?</p>
+
+<p>I also discovered several other projects that are web components based. <a href="http://bosonic.github.io/index.html">Bosonic</a> takes a transpilation approach, and converts HTML-based web component files into JS and CSS code that works back to IE9. This is another project I&#8217;d love to hear more information about, especially their design choices.</p>
+
+<p><img src="/images/posts/2014-07-18/bosonic.png"></p>
+
+<p>I was also pointed at an <a href="http://webreflection.blogspot.co.uk/2014/07/a-w3c-custom-elements-alternative.html">alternative custom elements polyfill from Andrea Giammarchi</a>. The polyfill is less than 2K minified and gzipped, and supports an impressive range of browsers. This is another project worth experimenting with.</p>
+
+<h3>My tone</h3>
+
+<p>The last thing I want to discuss is my tone in the article, as that was called out by a few people.</p>
+
+<blockquote class="twitter-tweet" lang="en"><p><a href="https://twitter.com/tjvantoll">@tjvantoll</a> <a href="https://twitter.com/csuwildcat">@csuwildcat</a> <a href="https://twitter.com/codepo8">@codepo8</a> <a href="https://twitter.com/WebReflection">@WebReflection</a> : OK, fine, but downer pieces like yours that don&#39;t do that work don&#39;t contribute to that.</p>&mdash; Alex Russell (@slightlylate) <a href="https://twitter.com/slightlylate/statuses/489793567007571969">July 17, 2014</a></blockquote>
+
+
+
+
+<blockquote class="twitter-tweet" lang="en"><p>Why Web Components aren&#39;t ready for production yet - <a href="https://twitter.com/tjvantoll">@tjvantoll</a> - <a href="http://t.co/4EEQIHtmWe">http://t.co/4EEQIHtmWe</a> Valid points, bit too negatively brought imho</p>&mdash; Leon de Rijke (@leonderijke) <a href="https://twitter.com/leonderijke/statuses/489856563327537152">July 17, 2014</a></blockquote>
+
+
+<p>I want to make it <em>very clear</em> that I am not trying to be a web component naysayer. I am excited about web components, and the article presents my honest feedback from someone that wants to move forward with them in major libraries, but ran into roadblocks. In my opinion, putting this feedback in the open starts conversations that we need to have to start seriously considering web components.</p>
+
+<p>Per the feedback I received, and based on my own experience, the sanest place for developers to start is with custom elements, as it has a relatively sane polyfill. Or as <a href="https://twitter.com/csuwildcat">@csuwildcat</a> puts it&#8230;</p>
+
+<blockquote data-conversation="none" class="twitter-tweet" lang="en"><p><a href="https://twitter.com/tjvantoll">@tjvantoll</a> <a href="https://twitter.com/WebReflection">@WebReflection</a> <a href="https://twitter.com/slightlylate">@slightlylate</a> <a href="https://twitter.com/codepo8">@codepo8</a> shout this: deploy UI as custom elements today, &amp; when Shadow DOM is native, hide the guts.</p>&mdash; Daniel (@csuwildcat) <a href="https://twitter.com/csuwildcat/statuses/489800753997828097">July 17, 2014</a></blockquote>
+
+
+<p>Consider it shouted. This is certainly something we need more people to experiment with, myself included.</p>
+
+<h3>Thanks</h3>
+
+<p>Finally I want to thank everyone that contributed feedback in some fashion. Writing on the internet is a great way to learn from others, and that&#8217;s certainly true in this case. With that in mind I want to encourage people that have used web components to share their experiences—especially those that have attempted to use them in production. Let&#8217;s make this happen.</p>
+
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span itemprop="name" class="fn">TJ VanToll</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-07-18T14:14:00-04:00" pubdate data-updated="true">Jul 18<span>th</span>, 2014</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/web-components/'>Web Components</a>
+  
+</span>
+
+
+    </p>
+    <p class="author_card meta">
+      <img src="/images/me/1.jpg" alt="Me!" rel="author" id="post_me">
+      TJ VanToll is a web developer, speaker, and writer living in Lansing, MI and working as a developer advocate for <a href="http://telerik.com">Telerik</a>. He is an open source advocate that is on the <a href="http://jqueryui.com">jQuery UI</a> team and publishes this blog <a href="https://github.com/tjvantoll/tjvantoll.github.com">open source</a>. TJ is also the author of an upcoming book from <a href="http://www.manning.com/?a_aid=tj-vantoll">Manning</a>: <a href="/jquery-ui-in-action.html">jQuery UI in Action</a>. When not online, TJ is generally found <a href="/images/kids/2.jpg">brainwashing his children</a> and talking about himself in the third person. If you like hearing TJ talk about himself, you should consider following him on <a href="http://twitter.com/tjvantoll">Twitter</a> or <a href="https://plus.google.com/+TJVanToll?rel=author" rel="author">Google+</a>.
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://tjvantoll.com/2014/07/18/an-addendum-to-why-web-components-arent-ready-for-production-yet/" data-via="tjvantoll" data-counturl="http://tjvantoll.com/2014/07/18/an-addendum-to-why-web-components-arent-ready-for-production-yet/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/2014/07/04/a-jquery-ui-vertical-tabs-extension/" title="Previous Post: A jQuery UI Vertical Tabs Extension">&laquo; A jQuery UI Vertical Tabs Extension</a>
+      
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section class="ad_section">
+	<h1>Support the Site</h1>
+	<div class="ad_container">
+		<script defer async src="http://cdn.adpacks.com/adpacks.js?legacyid=1285803&zoneid=1386&key=cb7a6f705dfe7532dde49b4c2c5adf2d&serve=C6SI42Y&placement=tjvantollcom&circle=dev" id="_adpacks_js"></script>
+	</div>
+</section><section>
+	<h1>Check Out My Book</h1> 
+	<div id="book_section">
+		<a href="/jquery-ui-in-action.html" class="image_link">
+			<img src="/images/book.jpg" alt="My jQuery UI in Action cover">
+		</a>
+		<a href="/jquery-ui-in-action.html" class="text_link">
+			jQuery UI in Action<br>
+		</a>
+		<b>Covers jQuery UI 1.11!</b>
+		<p>Published by <a href="http://www.manning.com/?a_aid=tj-vantoll">Manning</a>.</p>
+	</div>
+</section><section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2014/07/18/an-addendum-to-why-web-components-arent-ready-for-production-yet/">An Addendum to Why Web Components Aren't Ready for Production Yet</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/07/04/a-jquery-ui-vertical-tabs-extension/">A jQuery UI Vertical Tabs Extension</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/05/01/using-semantic-html-to-drive-display-logic/">Using Semantic HTML to Drive Display Logic</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/03/11/effect-of-ios-7-dot-1s-minimal-ui-meta-tag/">Effect of iOS 7.1's minimal-ui Viewport Property</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/02/06/connecting-appbuilder-projects-to-facebook/">Connecting AppBuilder Projects to Facebook</a>
+      </li>
+    
+  </ul>
+</section>
+<section >
+  <h1>Twitter</h1>
+  <a class="twitter-timeline" href="https://twitter.com/tjvantoll" data-widget-id="284127791589494784">Tweets by @tjvantoll</a>
+</section>
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2014 - <a href="/">TJ VanToll</a> -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'tjvantoll';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://tjvantoll.com/2014/07/18/an-addendum-to-why-web-components-arent-ready-for-production-yet/';
+        var disqus_url = 'http://tjvantoll.com/2014/07/18/an-addendum-to-why-web-components-arent-ready-for-production-yet/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>
