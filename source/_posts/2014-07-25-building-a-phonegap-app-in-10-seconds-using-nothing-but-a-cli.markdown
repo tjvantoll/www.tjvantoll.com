@@ -29,3 +29,5 @@ $ cd gif
 $ sed -i '' 's/Apache Cordova/gif/g' index.html
 $ appbuilder livesync ios --companion
 ```
+
+What's really cool is that as of [the last AppBuilder release](http://blogs.telerik.com/appbuilder/posts/14-07-02/telerik-appbuilder-release-sharing-projects-cordova-update-nativescript-preview-and-more), you can now share your code across the AppBuilder clients. That means, I can collborate on Burke's project from the CLI, and he can collaborate on mine from the browser—which I think is pretty cool.
