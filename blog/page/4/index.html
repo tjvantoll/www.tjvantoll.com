@@ -9,7 +9,7 @@
   <meta name="author" content="TJ VanToll">
 
   
-  <meta name="description" content="Debugging print stylesheets has always been a bit of a pain. The traditional way of doing so was to manually change the media attribute of all link &hellip;">
+  <meta name="description" content="I try to do most of my work and play on the internet with the keyboard. In the course of my internet-ing there&#8217;s one unfortunate trend that I&# &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -95,6 +95,49 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title" itemprop="name headline"><a href="/2013/01/01/enter-should-submit-forms-stop-messing-with-that/">The Enter Key should Submit Forms, Stop Suppressing it</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-01-01T15:54:00-05:00" pubdate data-updated="true">Jan 1<span>st</span>, 2013</time>
+        
+         | <a href="/2013/01/01/enter-should-submit-forms-stop-messing-with-that/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>I try to do most of my work and play on the internet with the keyboard.  In the course of my internet-ing there&#8217;s one unfortunate trend that I&#8217;ve noticed; an increasing number of sites are not allowing the enter key to submit a form.  Before I tell you why you care, let&#8217;s look at how this should work.</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/2013/01/01/enter-should-submit-forms-stop-messing-with-that/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -559,65 +602,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title" itemprop="name headline"><a href="/2012/08/28/google-analytics-excluding-visits-in-development-and-production/">Google Analytics - Excluding Your Own Visits in Development and Production</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-08-28T00:00:00-04:00" pubdate data-updated="true">Aug 28<span>th</span>, 2012</time>
-        
-         | <a href="/2012/08/28/google-analytics-excluding-visits-in-development-and-production/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Googling how to exclude your own <a href="http://www.google.com/analytics/">Google Analytics</a> traffic returns a plethora of results, however, nearly all of them advocate 1 of 2 approaches:</p>
-
-<ul>
-<li>Creating an IP filter in Google Analytics itself <a href="http://support.google.com/analytics/bin/answer.py?hl=en&amp;answer=1034840&amp;rd=1">(example)</a>.</li>
-<li>Creating a page that sets a cookie which tells Google Analytics to exclude the traffic <a href="http://webmasters.stackexchange.com/questions/15552/how-do-you-exclude-yourself-from-google-analytics-on-your-website-using-cookies">(example)</a>.</li>
-</ul>
-
-
-<h3>Problems</h3>
-
-<p>These approaches are silly in my opinion.  IP addresses change.  In fact, most ISPs change subscriber&#8217;s IP addresses quite regularly.  Furthermore, most people visit their site on a wide variety of devices in a wide variety of places.  Maintaining a list of IP addresses in Google Analytics would be a nightmare.</p>
-
-<p>The cookie approach works, but it is a pain to have to create and maintain the page that sets the cookie.  It&#8217;s also problematic because verifying whether the cookie is actually active is difficult.  Do you know where your browser stores your cookies and how to access them?  How about your smart phone?  Because of this you end up constantly having to create the cookie before accessing the site, which is a nuisance.</p>
-
-<h3>JavaScript</h3>
-
-<p>Both these approaches seem especially silly considering how easy it is to simply accomplish this with JavaScript.  You can simply check for the exclusion criteria before including the Google Analytics code snippet.</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/2012/08/28/google-analytics-excluding-visits-in-development-and-production/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/5/">&larr; Older</a>
@@ -654,6 +638,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2014/07/25/building-a-phonegap-app-in-10-seconds-using-nothing-but-a-cli/">Building a PhoneGap App in 10 Seconds Using Nothing But a CLI</a>
+      </li>
+    
+      <li class="post">
         <a href="/2014/07/18/an-addendum-to-why-web-components-arent-ready-for-production-yet/">An Addendum to Why Web Components Aren&#8217;t Ready for Production Yet</a>
       </li>
     
@@ -667,10 +655,6 @@
     
       <li class="post">
         <a href="/2014/03/11/effect-of-ios-7-dot-1s-minimal-ui-meta-tag/">Effect of iOS 7.1&#8217;s minimal-ui Viewport Property</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2014/02/06/connecting-appbuilder-projects-to-facebook/">Connecting AppBuilder Projects to Facebook</a>
       </li>
     
   </ul>

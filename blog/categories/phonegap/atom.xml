@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: PhoneGap | TJ VanToll]]></title>
+  <link href="http://tjvantoll.com/blog/categories/phonegap/atom.xml" rel="self"/>
+  <link href="http://tjvantoll.com/"/>
+  <updated>2014-07-25T11:17:53-04:00</updated>
+  <id>http://tjvantoll.com/</id>
+  <author>
+    <name><![CDATA[TJ VanToll]]></name>
+    <email><![CDATA[tj.vantoll@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Building a PhoneGap App in 10 Seconds Using Nothing But a CLI]]></title>
+    <link href="http://tjvantoll.com/2014/07/25/building-a-phonegap-app-in-10-seconds-using-nothing-but-a-cli/"/>
+    <updated>2014-07-25T10:17:00-04:00</updated>
+    <id>http://tjvantoll.com/2014/07/25/building-a-phonegap-app-in-10-seconds-using-nothing-but-a-cli</id>
+    <content type="html"><![CDATA[<p>You may have seen Burke Holland's <a href="https://medium.com/@burkeholland/building-and-deploying-a-phonegap-app-in-36-seconds-6552399c12a8">"Building A PhoneGap App in 36 Seconds Using Nothing But a Browser"</a> article on Medium this morning. Although most people probably viewed the post as an interesting—and surprisingly fast—way of building an app, I saw the article as a direct challenge.</p>
+
+<p>You see, although I work with AppBuilder in the browser from time to time, I prefer the AppBuilder CLI. And with the CLI, I can put Burke's 36 second time to shame. Below I build a PhoneGap app, performing the same steps Burke did, in TEN seconds:</p>
+
+<p><img src="http://tjvantoll.com/images/posts/2014-07-25/10-seconds.gif" alt="10 seconds to build an app"></p>
+
+<h3>Full Disclosure</h3>
+
+<ul>
+<li>This was done using the <a href="https://github.com/Icenium/icenium-cli">Telerik AppBuilder CLI</a>.</li>
+<li>I did <strong>NOT</strong> speed up the screen capture.</li>
+<li>I <strong>DID</strong> practice this a few times.</li>
+<li>I <strong>DID</strong> have to lookup the syntax for the <code>sed</code> command, because it makes no sense.</li>
+<li>I <strong>DID</strong> use the <a href="http://www.telerik.com/appbuilder/companion-app">AppBuilder Companion app</a>, which I had pre-installed on my iPhone.</li>
+<li>I <strong>DID</strong> rely on the Bash history for speed, which I deem fair, because that's a thing CLIs do.</li>
+</ul>
+
+
+<p>With the AppBuilder CLI installed (<code>npm install -g appbuilder</code>), and with the <a href="https://itunes.apple.com/us/app/telerik-appbuilder/id527547398?mt=8">AppBuilder iOS app</a> installed, you can run this yourself with the following four commands:</p>
+
+<p><code>
+$ appbuilder create hybrid gif --template=Blank
+$ cd gif
+$ sed -i '' 's/Apache Cordova/gif/g' index.html
+$ appbuilder livesync ios --companion
+</code></p>
+]]></content>
+  </entry>
+  
+</feed>

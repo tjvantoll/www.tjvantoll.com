@@ -9,7 +9,13 @@
   <meta name="author" content="TJ VanToll">
 
   
-  <meta name="description" content="There are two fun bugs related to document.activeElement in IE that have come up recently in jQuery UI. To help save others some pain, I felt these &hellip;">
+  <meta name="description" content="Adding a strikethrough to a line of text in CSS is easy. 1
+2
+3
+4
+&lt;style&gt; p { text-decoration: line-through; }
+&lt;/style&gt;
+&lt;p&gt;Hello &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -95,6 +101,68 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title" itemprop="name headline"><a href="/2013/09/12/building-custom-text-strikethroughs-with-css/">Building Custom Text Strikethroughs with CSS</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-09-12T15:25:00-04:00" pubdate data-updated="true">Sep 12<span>th</span>, 2013</time>
+        
+         | <a href="/2013/09/12/building-custom-text-strikethroughs-with-css/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><link href="/stylesheets/custom/posts/2013-09-12.css" rel="stylesheet">
+Adding a strikethrough to a line of text in CSS is easy.</p>
+
+<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;style&gt;</span>
+</span><span class='line'>    <span class="nt">p</span> <span class="p">{</span> <span class="k">text-decoration</span><span class="o">:</span> <span class="k">line-through</span><span class="p">;</span> <span class="p">}</span>
+</span><span class='line'><span class="nt">&lt;/style&gt;</span>
+</span><span class='line'><span class="nt">&lt;p&gt;</span>Hello World<span class="nt">&lt;/p&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Which displays as follows:</p>
+
+<p class="example example-one">Hello World</p>
+
+
+<p>But what if you want the strikethrough line to be a different height, color, or whatever?</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/2013/09/12/building-custom-text-strikethroughs-with-css/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -694,59 +762,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title" itemprop="name headline"><a href="/2013/04/15/list-of-pseudo-elements-to-style-form-controls/">List of Pseudo-Elements to Style Form Controls</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-04-15T00:00:00-04:00" pubdate data-updated="true">Apr 15<span>th</span>, 2013</time>
-        
-         | <a href="/2013/04/15/list-of-pseudo-elements-to-style-form-controls/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Styling form elements is a pain point when developing web applications.  Historically, web developers have had to accept the form controls the browser provided with little hope of customization.  However, web rendering engines are increasingly adding hooks through pseudo-elements to give authors some control over the display.</p>
-
-<p>While all of these pseudo-elements are rendering engine specific (and therefore behind vendor prefixes), they can still be handy for customizing the display for that engine.  The following is my best attempt at compiling a complete list of the pseudo-elements available in Trident, Gecko, and WebKit.  At the time of this writing Blink is a recent fork of WebKit, so the pseudo-elements provided are identical.  I am not aware of any form related pseudo-elements that Presto provides.</p>
-
-<p>A couple of notes:</p>
-
-<ul>
-<li>All Trident pseudo-elements listed here were added in IE10 and will not work in earlier versions of Internet Explorer.</li>
-<li>In WebKit, to style some pseudo-elements you must set the basis element&#8217;s <code>-webkit-appearance</code> pseudo-class to <code>none</code>.  For example, to style <code>::-webkit-progress-bar</code> you must apply <code>-webkit-appearance: none;</code> to the appropriate <code>&lt;progress&gt;</code> element.</li>
-</ul>
-
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/2013/04/15/list-of-pseudo-elements-to-style-form-controls/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/3/">&larr; Older</a>
@@ -783,6 +798,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2014/07/25/building-a-phonegap-app-in-10-seconds-using-nothing-but-a-cli/">Building a PhoneGap App in 10 Seconds Using Nothing But a CLI</a>
+      </li>
+    
+      <li class="post">
         <a href="/2014/07/18/an-addendum-to-why-web-components-arent-ready-for-production-yet/">An Addendum to Why Web Components Aren&#8217;t Ready for Production Yet</a>
       </li>
     
@@ -796,10 +815,6 @@
     
       <li class="post">
         <a href="/2014/03/11/effect-of-ios-7-dot-1s-minimal-ui-meta-tag/">Effect of iOS 7.1&#8217;s minimal-ui Viewport Property</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2014/02/06/connecting-appbuilder-projects-to-facebook/">Connecting AppBuilder Projects to Facebook</a>
       </li>
     
   </ul>

@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Hey Developers - You Should Spell Check Your Documentation - TJ VanToll - Tutorials, Thoughts, and Ramblings on Front-End Development</title>
+  <title>Building a PhoneGap App in 10 Seconds Using Nothing But a CLI - TJ VanToll - Tutorials, Thoughts, and Ramblings on Front-End Development</title>
   <meta name="author" content="TJ VanToll">
 
   
-  <meta name="description" content="As developers we write code. Therefore, the thought of using a spell checker brings to mind something like this: &#8230;which is why text editors don &hellip;">
+  <meta name="description" content="You may have seen Burke Holland&#8217;s &#8220;Building A PhoneGap App in 36 Seconds Using Nothing But a Browser&#8221; article on Medium this &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://tjvantoll.com/2013/09/18/hey-developers-you-should-spell-check-your-documentation">
+  <link rel="canonical" href="http://tjvantoll.com/2014/07/25/building-a-phonegap-app-in-10-seconds-using-nothing-but-a-cli">
   <link rel="author" href="https://plus.google.com/+TJVanToll">
 
   <!--[if !lte IE 7]><!-->
@@ -98,7 +98,7 @@
   
   <header>
     
-      <h1 class="entry-title" itemprop="name headline">Hey Developers - You Should Spell Check Your Documentation</h1>
+      <h1 class="entry-title" itemprop="name headline">Building a PhoneGap App in 10 Seconds Using Nothing But a CLI</h1>
     
     
       <p class="meta">
@@ -114,7 +114,7 @@
   
 
 
-<time datetime="2013-09-18T09:56:00-04:00" pubdate data-updated="true">Sep 18<span>th</span>, 2013</time>
+<time datetime="2014-07-25T10:17:00-04:00" pubdate data-updated="true">Jul 25<span>th</span>, 2014</time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -123,47 +123,35 @@
   </header>
 
 
-<div class="entry-content"><p>As developers we write code. Therefore, the thought of using a spell checker brings to mind something like this:</p>
+<div class="entry-content"><p>You may have seen Burke Holland&#8217;s <a href="https://medium.com/@burkeholland/building-and-deploying-a-phonegap-app-in-36-seconds-6552399c12a8">&#8220;Building A PhoneGap App in 36 Seconds Using Nothing But a Browser&#8221;</a> article on Medium this morning. Although most people probably viewed the post as an interesting—and surprisingly fast—way of building an app, I saw the article as a direct challenge.</p>
 
-<p><img src="/images/posts/2013-09-18/spell-check.png"></p>
+<p>You see, although I work with AppBuilder in the browser from time to time, I prefer the AppBuilder CLI. And with the CLI, I can put Burke&#8217;s 36 second time to shame. Below I build a PhoneGap app, performing the same steps Burke did, in TEN seconds:</p>
 
-<p>&#8230;which is why text editors don&#8217;t have spell checking on by default. And that&#8217;s fine when writing code, however, most developers write at least <em>some</em> documentation.</p>
+<p><img src="/images/posts/2014-07-25/10-seconds.gif" alt="10 seconds to build an app"></p>
 
-<p>Increasingly this documentation is markdown, XML, or JSON files stored in a git repository. Therefore, you likely use the same editor to write documentation as you do to write code - and unfortunately, writing documentation without a spell checker inevitably leads to spelling errors.</p>
+<h3>Full Disclosure</h3>
 
-<p>Bad spelling makes your documentation look less professional, and less professional documentation reflects badly on your library, product, or whatever. Therefore I thought I&#8217;d share what I do in Sublime Text to help prevent mistakes.</p>
+<ul>
+<li>This was done using the <a href="https://github.com/Icenium/icenium-cli">Telerik AppBuilder CLI</a>.</li>
+<li>I did <strong>NOT</strong> speed up the screen capture.</li>
+<li>I <strong>DID</strong> practice this a few times.</li>
+<li>I <strong>DID</strong> have to lookup the syntax for the <code>sed</code> command, because it makes no sense.</li>
+<li>I <strong>DID</strong> use the <a href="http://www.telerik.com/appbuilder/companion-app">AppBuilder Companion app</a>, which I had pre-installed on my iPhone.</li>
+<li>I <strong>DID</strong> rely on the Bash history for speed, which I deem fair, because that&#8217;s a thing CLIs do.</li>
+</ul>
 
-<!--more-->
 
+<p>With the AppBuilder CLI installed (<code>npm install -g appbuilder</code>), and with the <a href="https://itunes.apple.com/us/app/telerik-appbuilder/id527547398?mt=8">AppBuilder iOS app</a> installed, you can run this yourself with the following four commands:</p>
 
-<h3>What I Do</h3>
-
-<p>Like most editors, Sublime Text has spell checking built in, but it is turned off by default. You can turn it on by adding <code>"spell_check": true</code> to your user preferences file, which is opened with <code>Command</code> + <code>,</code> on OS X and <code>Control</code> + <code>,</code> on Windows.</p>
-
-<p>Because spell checking is a configurable property, turning it on and off is a matter of toggling the property&#8217;s value:</p>
-
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="cm">/* Writing docs */</span>
-</span><span class='line'><span class="s2">&quot;spell_check&quot;</span><span class="o">:</span> <span class="kc">true</span>
-</span><span class='line'>
-</span><span class='line'><span class="cm">/* Writing code */</span>
-</span><span class='line'><span class="s2">&quot;spell_check&quot;</span><span class="o">:</span> <span class="kc">false</span>
-</span></code></pre></td></tr></table></div></figure>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ appbuilder create hybrid gif --template=Blank
+</span><span class='line'>$ cd gif
+</span><span class='line'>$ sed -i '' 's/Apache Cordova/gif/g' index.html
+</span><span class='line'>$ appbuilder livesync ios --companion</span></code></pre></td></tr></table></div></figure>
 
-
-<p>Like most spell checkers, you can right click misspelled words to get suggested fixes:</p>
-
-<p><img src="/images/posts/2013-09-18/corrections.png"></p>
-
-<p>You can also tell Sublime to ignore certain words:</p>
-
-<p><img src="/images/posts/2013-09-18/ignore.png"></p>
-
-<p>The hardest part of course is actually remembering to turn the spell checker on. But, even if you only remember occasionally, you can still catch a lot of misspellings.</p>
 </div>
 
 
@@ -186,12 +174,12 @@
   
 
 
-<time datetime="2013-09-18T09:56:00-04:00" pubdate data-updated="true">Sep 18<span>th</span>, 2013</time>
+<time datetime="2014-07-25T10:17:00-04:00" pubdate data-updated="true">Jul 25<span>th</span>, 2014</time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/writing/'>Writing</a>
+    <a class='category' href='/blog/categories/appbuilder/'>AppBuilder</a>, <a class='category' href='/blog/categories/phonegap/'>PhoneGap</a>
   
 </span>
 
@@ -204,7 +192,7 @@
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://tjvantoll.com/2013/09/18/hey-developers-you-should-spell-check-your-documentation/" data-via="tjvantoll" data-counturl="http://tjvantoll.com/2013/09/18/hey-developers-you-should-spell-check-your-documentation/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://tjvantoll.com/2014/07/25/building-a-phonegap-app-in-10-seconds-using-nothing-but-a-cli/" data-via="tjvantoll" data-counturl="http://tjvantoll.com/2014/07/25/building-a-phonegap-app-in-10-seconds-using-nothing-but-a-cli/" >Tweet</a>
   
   
   
@@ -213,10 +201,8 @@
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/2013/09/12/building-custom-text-strikethroughs-with-css/" title="Previous Post: Building Custom Text Strikethroughs with CSS">&laquo; Building Custom Text Strikethroughs with CSS</a>
+        <a class="basic-alignment left" href="/2014/07/18/an-addendum-to-why-web-components-arent-ready-for-production-yet/" title="Previous Post: An Addendum to Why Web Components Aren't Ready for Production Yet">&laquo; An Addendum to Why Web Components Aren't Ready for Production Yet</a>
       
-      
-        <a class="basic-alignment right" href="/2013/12/06/why-is-styling-form-elements-so-damn-hard/" title="Next Post: Why Is Styling Form Elements So Damn Hard?">Why Is Styling Form Elements So Damn Hard? &raquo;</a>
       
     </p>
   </footer>
@@ -297,8 +283,8 @@
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://tjvantoll.com/2013/09/18/hey-developers-you-should-spell-check-your-documentation/';
-        var disqus_url = 'http://tjvantoll.com/2013/09/18/hey-developers-you-should-spell-check-your-documentation/';
+        var disqus_identifier = 'http://tjvantoll.com/2014/07/25/building-a-phonegap-app-in-10-seconds-using-nothing-but-a-cli/';
+        var disqus_url = 'http://tjvantoll.com/2014/07/25/building-a-phonegap-app-in-10-seconds-using-nothing-but-a-cli/';
         var disqus_script = 'embed.js';
       
     (function () {

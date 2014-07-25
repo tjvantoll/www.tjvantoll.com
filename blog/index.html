@@ -9,7 +9,7 @@
   <meta name="author" content="TJ VanToll">
 
   
-  <meta name="description" content="Yesterday I published an article on the Telerik Developer Network about the state of web components. In it I argued that web components are not ready &hellip;">
+  <meta name="description" content="You may have seen Burke Holland&#8217;s &#8220;Building A PhoneGap App in 36 Seconds Using Nothing But a Browser&#8221; article on Medium this &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -95,6 +95,72 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title" itemprop="name headline"><a href="/2014/07/25/building-a-phonegap-app-in-10-seconds-using-nothing-but-a-cli/">Building a PhoneGap App in 10 Seconds Using Nothing But a CLI</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-07-25T10:17:00-04:00" pubdate data-updated="true">Jul 25<span>th</span>, 2014</time>
+        
+         | <a href="/2014/07/25/building-a-phonegap-app-in-10-seconds-using-nothing-but-a-cli/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>You may have seen Burke Holland&#8217;s <a href="https://medium.com/@burkeholland/building-and-deploying-a-phonegap-app-in-36-seconds-6552399c12a8">&#8220;Building A PhoneGap App in 36 Seconds Using Nothing But a Browser&#8221;</a> article on Medium this morning. Although most people probably viewed the post as an interesting—and surprisingly fast—way of building an app, I saw the article as a direct challenge.</p>
+
+<p>You see, although I work with AppBuilder in the browser from time to time, I prefer the AppBuilder CLI. And with the CLI, I can put Burke&#8217;s 36 second time to shame. Below I build a PhoneGap app, performing the same steps Burke did, in TEN seconds:</p>
+
+<p><img src="/images/posts/2014-07-25/10-seconds.gif" alt="10 seconds to build an app"></p>
+
+<h3>Full Disclosure</h3>
+
+<ul>
+<li>This was done using the <a href="https://github.com/Icenium/icenium-cli">Telerik AppBuilder CLI</a>.</li>
+<li>I did <strong>NOT</strong> speed up the screen capture.</li>
+<li>I <strong>DID</strong> practice this a few times.</li>
+<li>I <strong>DID</strong> have to lookup the syntax for the <code>sed</code> command, because it makes no sense.</li>
+<li>I <strong>DID</strong> use the <a href="http://www.telerik.com/appbuilder/companion-app">AppBuilder Companion app</a>, which I had pre-installed on my iPhone.</li>
+<li>I <strong>DID</strong> rely on the Bash history for speed, which I deem fair, because that&#8217;s a thing CLIs do.</li>
+</ul>
+
+
+<p>With the AppBuilder CLI installed (<code>npm install -g appbuilder</code>), and with the <a href="https://itunes.apple.com/us/app/telerik-appbuilder/id527547398?mt=8">AppBuilder iOS app</a> installed, you can run this yourself with the following four commands:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ appbuilder create hybrid gif --template=Blank
+</span><span class='line'>$ cd gif
+</span><span class='line'>$ sed -i '' 's/Apache Cordova/gif/g' index.html
+</span><span class='line'>$ appbuilder livesync ios --companion</span></code></pre></td></tr></table></div></figure>
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -585,68 +651,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title" itemprop="name headline"><a href="/2013/09/12/building-custom-text-strikethroughs-with-css/">Building Custom Text Strikethroughs with CSS</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-09-12T15:25:00-04:00" pubdate data-updated="true">Sep 12<span>th</span>, 2013</time>
-        
-         | <a href="/2013/09/12/building-custom-text-strikethroughs-with-css/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><link href="/stylesheets/custom/posts/2013-09-12.css" rel="stylesheet">
-Adding a strikethrough to a line of text in CSS is easy.</p>
-
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;style&gt;</span>
-</span><span class='line'>    <span class="nt">p</span> <span class="p">{</span> <span class="k">text-decoration</span><span class="o">:</span> <span class="k">line-through</span><span class="p">;</span> <span class="p">}</span>
-</span><span class='line'><span class="nt">&lt;/style&gt;</span>
-</span><span class='line'><span class="nt">&lt;p&gt;</span>Hello World<span class="nt">&lt;/p&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Which displays as follows:</p>
-
-<p class="example example-one">Hello World</p>
-
-
-<p>But what if you want the strikethrough line to be a different height, color, or whatever?</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/2013/09/12/building-custom-text-strikethroughs-with-css/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -681,6 +685,10 @@ Adding a strikethrough to a line of text in CSS is easy.</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2014/07/25/building-a-phonegap-app-in-10-seconds-using-nothing-but-a-cli/">Building a PhoneGap App in 10 Seconds Using Nothing But a CLI</a>
+      </li>
+    
+      <li class="post">
         <a href="/2014/07/18/an-addendum-to-why-web-components-arent-ready-for-production-yet/">An Addendum to Why Web Components Aren&#8217;t Ready for Production Yet</a>
       </li>
     
@@ -694,10 +702,6 @@ Adding a strikethrough to a line of text in CSS is easy.</p>
     
       <li class="post">
         <a href="/2014/03/11/effect-of-ios-7-dot-1s-minimal-ui-meta-tag/">Effect of iOS 7.1&#8217;s minimal-ui Viewport Property</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2014/02/06/connecting-appbuilder-projects-to-facebook/">Connecting AppBuilder Projects to Facebook</a>
       </li>
     
   </ul>
