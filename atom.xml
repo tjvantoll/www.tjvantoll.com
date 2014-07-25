@@ -4,7 +4,7 @@
   <title><![CDATA[TJ VanToll]]></title>
   <link href="http://tjvantoll.com/atom.xml" rel="self"/>
   <link href="http://tjvantoll.com/"/>
-  <updated>2014-07-25T11:17:53-04:00</updated>
+  <updated>2014-07-25T11:29:24-04:00</updated>
   <id>http://tjvantoll.com/</id>
   <author>
     <name><![CDATA[TJ VanToll]]></name>
@@ -47,6 +47,8 @@
 </span><span class='line'>$ sed -i '' 's/Apache Cordova/gif/g' index.html
 </span><span class='line'>$ appbuilder livesync ios --companion</span></code></pre></td></tr></table></div></figure>
 
+
+<p>What&#8217;s really cool is that as of <a href="http://blogs.telerik.com/appbuilder/posts/14-07-02/telerik-appbuilder-release-sharing-projects-cordova-update-nativescript-preview-and-more">the last AppBuilder release</a>, you can now share your code across the AppBuilder clients. That means, I can collborate on Burke&#8217;s project from the CLI, and he can collaborate on mine from the browser—which I think is pretty cool.</p>
 ]]></content>
   </entry>
   
