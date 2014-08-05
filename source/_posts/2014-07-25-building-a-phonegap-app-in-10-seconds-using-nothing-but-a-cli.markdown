@@ -12,6 +12,8 @@ You see, although I work with AppBuilder in the browser from time to time, I pre
 
 <img src="/images/posts/2014-07-25/10-seconds.gif" alt="10 seconds to build an app">
 
+<!--more-->
+
 ### Full Disclosure
 
 * This was done using the [Telerik AppBuilder CLI](https://github.com/Icenium/icenium-cli).

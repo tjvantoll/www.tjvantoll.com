@@ -10,6 +10,8 @@ Yesterday I [published an article on the Telerik Developer Network](http://devel
 
 I was overwhelmed by the amount of feeback—positive and negative—that I received after the article went live. In my opinion this is one of the great things about writing on the web. Opinionated posts tend to attract feedback from smart people with vested interests in the technology being discussed. Although putting yourself out there for criticism is hard, it's also a spectacular way to learn. Here I want to summarize what I learned from writing about web components, and take a minute to respond to some of the criticism I received.
 
+<!--more-->
+
 ### The Title
 
 <blockquote class="twitter-tweet" lang="en"><p>Why Web Components Aren’t Ready for Production… Yet <a href="http://t.co/0liPap0bWx">http://t.co/0liPap0bWx</a> sensible research, dangerous title. STOP! More at <a href="https://twitter.com/forwardJS">@forwardJS</a></p>&mdash; Christian Heilmann (@codepo8) <a href="https://twitter.com/codepo8/statuses/489781679272509440">July 17, 2014</a></blockquote>
