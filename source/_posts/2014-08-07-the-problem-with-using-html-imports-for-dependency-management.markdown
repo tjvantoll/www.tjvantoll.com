@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "The Problem With Using HTML Imports For Dependency Management"
-date: 2014-07-16 08:22
+date: 2014-08-07
 comments: true
 categories: [Web Components]
 ---
@@ -18,9 +18,9 @@ The cool thing here is not what you see—a `<link>` tag that imports a custom e
 
 ### OMG Awesome! What's the problem?
 
-HTML imports transfer the dependency management burden from component consumers to component authors. This sounds good, until you think about *how* to actually reconcile those dependencies.
+HTML imports transfer the dependency management burden from component consumers to component authors. This sounds good, until you think about *how* to reconcile those dependencies.
 
-Suppose you want to write a component that depends on jQuery. How might you do that? Well the easiest way is to package jquery.js within your web component, and to reference it in your HTML import with a simple `<script>` tag:
+Suppose you want to write a component that depends on jQuery. How might you do that? Well, the easiest way is to package jquery.js within your web component, and to reference it in your HTML import with a simple `<script>` tag:
 
 ``` html
 <script src="jquery.js"></script>
@@ -36,11 +36,11 @@ The problem is that the de-duping mechanism only works on *exact* URL matches. D
 
 The crux of the issue is, dependencies in HTML imports aren't strings like "jquery" and "bootstrap", they're URLs like "http://code.jquery.com/jquery-2.1.1.min.js" and "http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"—and there's no way of knowing what the consumer of the component expects.
 
-What's an HTML import with external dependencies to do? [Polymer's documentation](http://www.polymer-project.org/resources/faq.html) gives the following recommendation in its FAQ:
+What's an HTML import with external dependencies to do? [Polymer's documentation](http://www.polymer-project.org/resources/faq.html#loadlibs) gives the following recommendation in its FAQ:
 
 > "If multiple libraries want to share a dependency, they will have to agree on a system. Feature detection, or an agreed upon common location for a ‘jquery.html’ file in a CDN, etc."
 
-At first glance this is laughable, as getting libraries to agree on *anything* in the web world has been painfully difficult, but I guess it's at least worth a discussion. What are our options for managing external dependencies in HTML imports?
+At first glance this is laughable, as getting libraries to agree on *anything* in the web world has been painfully difficult, but it's at least worth a discussion. What are our options for managing external dependencies in HTML imports?
 
 ### Options for managing external dependencies
 
@@ -70,7 +70,7 @@ The next option you have is enforcing a specific directory structure on the cons
     └── formatted-time.html
 ```
 
-With this structure in place, your formatted-time.html file can reference moment.js using `<link rel="import" href="../momentjs/moment.js">`. This is exactly the strategy Polymer itself uses, as all Polymer core elements include an import of `<link rel="import" href="../polymer/polymer.html">` to get the dependencies they need.
+With this structure in place, your formatted-time.html file can reference moment.js using `<link rel="import" href="../momentjs/moment.js">`. This is the strategy Polymer itself uses, as all Polymer core elements include an import of `<link rel="import" href="../polymer/polymer.html">` to get the dependencies they need.
 
 This approach works well if your users manage their dependencies through a package manager such as Bower, as the package manager provides a defined structure you can rely on. But the reality is only a small fraction of the web uses Bower, and the developers that do often have build scripts in place to move files to locations that their servers and development environments require.
 
