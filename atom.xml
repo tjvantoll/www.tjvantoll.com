@@ -4,7 +4,7 @@
   <title><![CDATA[TJ VanToll]]></title>
   <link href="http://tjvantoll.com/atom.xml" rel="self"/>
   <link href="http://tjvantoll.com/"/>
-  <updated>2014-08-05T15:10:31-04:00</updated>
+  <updated>2014-08-08T11:11:10-04:00</updated>
   <id>http://tjvantoll.com/</id>
   <author>
     <name><![CDATA[TJ VanToll]]></name>
@@ -12,105 +12,6 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
-  
-  <entry>
-    <title type="html"><![CDATA[The Problem With Using HTML Imports For Dependency Management]]></title>
-    <link href="http://tjvantoll.com/2014/08/07/the-problem-with-using-html-imports-for-dependency-management/"/>
-    <updated>2014-08-07T00:00:00-04:00</updated>
-    <id>http://tjvantoll.com/2014/08/07/the-problem-with-using-html-imports-for-dependency-management</id>
-    <content type="html"><![CDATA[<p>HTML imports are cool. If you haven&#8217;t heard of them before, you should read <a href="http://www.html5rocks.com/en/tutorials/webcomponents/imports/">Eric Bidelman&#8217;s excellent introduction to them</a>, but they&#8217;re pretty self explanatory with a bit of code. For example the following is how a jQuery UI dialog works in <a href="https://github.com/tjvantoll/ui-web-components">my proof-of-concept web components port</a>:</p>
-
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">&quot;import&quot;</span> <span class="na">href=</span><span class="s">&quot;ui-dialog.html&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="nt">&lt;ui</span><span class="na">-dialog</span> <span class="na">title=</span><span class="s">&quot;Hello World&quot;</span><span class="nt">&gt;</span><span class="err">&lt;</span>/ui-dialog&gt;
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>The cool thing here is not what you see—a <code>&lt;link&gt;</code> tag that imports a custom element—but rather, what you don&#8217;t. Normally when using jQuery UI widgets, you have to worry about a number of JavaScript and CSS dependencies, such as jQuery Core, the widget factory, a CSS theme, and more. With HTML imports you don&#8217;t, as the import takes care of bundling everything you need.</p>
-
-<h3>OMG Awesome! What&#8217;s the problem?</h3>
-
-<p>HTML imports transfer the dependency management burden from component consumers to component authors. This sounds good, until you think about <em>how</em> to reconcile those dependencies.</p>
-
-<p>Suppose you want to write a component that depends on jQuery. How might you do that? Well, the easiest way is to package jquery.js within your web component, and to reference it in your HTML import with a simple <code>&lt;script&gt;</code> tag:</p>
-
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;jquery.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>This works, but it has a serious repercussion: jquery.js is bundled with your component. That means, with this approach, if a user imports five jQuery-dependent components, the browser will download jQuery five times. And because reducing HTTP requests is a vital web performance optimization, this is <a href="https://www.youtube.com/watch?v=H8OxKx6zKkQ">kind of a big deal</a>.</p>
-
-<h3>What about de-duping?</h3>
-
-<p>De-duping, besides being an awesome word to say, is a mechanism built into HTML imports to prevent multiple requests for the same resource. That is, if multiple imports reference the same URL, the browser is smart enough to only retrieve the resource once.</p>
-
-<p>The problem is that the de-duping mechanism only works on <em>exact</em> URL matches. Different domains, different protocols, different versions, and so forth are each enough to subvert the de-duping process.</p>
-
-<p>The crux of the issue is, dependencies in HTML imports aren&#8217;t strings like &#8220;jquery&#8221; and &#8220;bootstrap&#8221;, they&#8217;re URLs like &#8220;http://code.jquery.com/jquery-2.1.1.min.js&#8221; and &#8220;http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js&#8221;—and there&#8217;s no way of knowing what the consumer of the component expects.</p>
-
-<p>What&#8217;s an HTML import with external dependencies to do? <a href="http://www.polymer-project.org/resources/faq.html#loadlibs">Polymer&#8217;s documentation</a> gives the following recommendation in its FAQ:</p>
-
-<blockquote><p>&#8220;If multiple libraries want to share a dependency, they will have to agree on a system. Feature detection, or an agreed upon common location for a ‘jquery.html’ file in a CDN, etc.&#8221;</p></blockquote>
-
-<p>At first glance this is laughable, as getting libraries to agree on <em>anything</em> in the web world has been painfully difficult, but it&#8217;s at least worth a discussion. What are our options for managing external dependencies in HTML imports?</p>
-
-<h3>Options for managing external dependencies</h3>
-
-<p>To discuss our options, let&#8217;s suppose that you want to build a <code>&lt;formatted-time&gt;</code> custom element as an HTML import, and you want to use <a href="http://momentjs.com/">Moment.js</a> as part of your implementation.</p>
-
-<p>Assuming that you don&#8217;t package Moment.js as part of your component, and we&#8217;ve already seen why that&#8217;s a bad idea, here are your options.</p>
-
-<h4>Option 1: Use a CDN</h4>
-
-<p>You could refer to Moment.js on some CDN, for instance the following <code>&lt;script&gt;</code> tag imports Moment.js from <a href="http://cdnjs.com/">cdnjs</a>:</p>
-
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;//cdnjs.cloudflare.com/ajax/libs/moment.js/2.7.0/moment.min.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>This approach works, but it has some major disadvantages. For one, the CDN approach only prevents multiple downloads of Moment.js if everyone magically chooses to retrieve Moment.js from the exact same URL—same CDN provider, same protocol, same version, and so forth. Second, the CDN reference also prevents the usage of script concatenation tooling, which is an essential performance optimization, especially for mobile. Because of this, I don&#8217;t see CDNs as a viable option for managing external dependencies.</p>
-
-<h4>Option 2: Enforce a folder structure</h4>
-
-<p>The next option you have is enforcing a specific directory structure on the consumer of your component. For instance, you could enforce that users have a folder structure that looks like this:</p>
-
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'>.
-</span><span class='line'>├── momentjs
-</span><span class='line'>│   └── moment.js
-</span><span class='line'>└── formatted-time
-</span><span class='line'>    └── formatted-time.html
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>With this structure in place, your formatted-time.html file can reference moment.js using <code>&lt;link rel="import" href="../momentjs/moment.js"&gt;</code>. This is the strategy Polymer itself uses, as all Polymer core elements include an import of <code>&lt;link rel="import" href="../polymer/polymer.html"&gt;</code> to get the dependencies they need.</p>
-
-<p>This approach works well if your users manage their dependencies through a package manager such as Bower, as the package manager provides a defined structure you can rely on. But the reality is only a small fraction of the web uses Bower, and the developers that do often have build scripts in place to move files to locations that their servers and development environments require.</p>
-
-<p>Enforcing a directory structure for dependencies can theoretically work, but it requires the community to agree on and standardize a directory structure to use, which is a tall task.</p>
-
-<p>Worse, even agreeing on a directory structure isn&#8217;t enough, as the exact file paths must match to prevent multiple downloads. If component A references <code>"../momentjs/moment.js"</code>, and component B references <code>"../momentjs/min/moment.min.js"</code>, the browser sees two different resources that need to be individually downloaded.</p>
-
-<h4>Option 3: Don&#8217;t use HTML imports for external dependencies</h4>
-
-<p>The final option you have is to avoid using HTML imports to manage external dependencies. For the <code>&lt;formatted-time&gt;</code> example, this means not referencing moment.js in your component at all; you just assume that it&#8217;s there and note that it&#8217;s a requirement in your documentation—exactly like you do today.</p>
-
-<p>Of course, this subverts the main purpose of building an HTML import—building a self-contained module—but at the moment I don&#8217;t see a better option.</p>
-
-<h3>Where to go from here?</h3>
-
-<p>I don&#8217;t have the solution, but I think we need to be having this discussion if we want to see high quality HTML imports that don&#8217;t have negative performance consequences. I&#8217;d love to hear your thoughts on this in the comments.</p>
-]]></content>
-  </entry>
   
   <entry>
     <title type="html"><![CDATA[Building a PhoneGap App in 10 Seconds Using Nothing But a CLI]]></title>
@@ -2226,6 +2127,122 @@ Adding a strikethrough to a line of text in CSS is easy.</p>
 </span><span class='line'><span class="nt">&lt;/ul&gt;</span>
 </span></code></pre></td></tr></table></div></figure>
 
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Showing a CSS Based Loading Animation While Your Site Loads]]></title>
+    <link href="http://tjvantoll.com/2013/04/24/showing-a-css-based-loading-animation-while-your-site-loads/"/>
+    <updated>2013-04-24T00:00:00-04:00</updated>
+    <id>http://tjvantoll.com/2013/04/24/showing-a-css-based-loading-animation-while-your-site-loads</id>
+    <content type="html"><![CDATA[<p>Showing a loading indicator on startup is a common pattern in native applications that is becoming more common on the web.  If you need to load a lot of resources when your web application is first loaded, you should give the user a clear indication that this is occurring.</p>
+
+<!-- more -->
+
+
+<p>Here&#8217;s an approach I&#8217;ve used a few times to accomplish this.  I start by giving the <code>&lt;html&gt;</code> element itself a class of <code>"loading"</code>:</p>
+
+<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;html</span> <span class="na">class=</span><span class="s">&quot;loading&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>    <span class="c">&lt;!-- All the things --&gt;</span>
+</span><span class='line'><span class="nt">&lt;/html&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>I then setup two transitions that take effect when the loading class is removed.  I transition the color on the <code>&lt;html&gt;</code> element from a predefined color to its default, <code>transparent</code>.  To avoid seeing content during loading, I make the <code>&lt;body&gt;</code> opaque with <code>opacity: 0</code>.  When loading is complete, that is transitioned to <code>opacity: 1</code> to fade the content in.  The full source is below:</p>
+
+<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nt">html</span> <span class="p">{</span>
+</span><span class='line'>    <span class="o">-</span><span class="n">webkit</span><span class="o">-</span><span class="n">transition</span><span class="o">:</span> <span class="k">background-color</span> <span class="m">1s</span><span class="p">;</span>
+</span><span class='line'>    <span class="n">transition</span><span class="o">:</span> <span class="k">background-color</span> <span class="m">1s</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="nt">html</span><span class="o">,</span> <span class="nt">body</span> <span class="p">{</span>
+</span><span class='line'>    <span class="c">/* For the loading indicator to be vertically centered ensure */</span>
+</span><span class='line'>    <span class="c">/* the html and body elements take up the full viewport */</span>
+</span><span class='line'>    <span class="k">min-height</span><span class="o">:</span> <span class="m">100</span><span class="o">%</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="nt">html</span><span class="nc">.loading</span> <span class="p">{</span>
+</span><span class='line'>    <span class="c">/* Replace #333 with the background-color of your choice */</span>
+</span><span class='line'>    <span class="c">/* Replace loading.gif with the loading image of your choice */</span>
+</span><span class='line'>    <span class="k">background</span><span class="o">:</span> <span class="m">#333</span> <span class="sx">url(&#39;loading.gif&#39;)</span> <span class="k">no-repeat</span> <span class="m">50</span><span class="o">%</span> <span class="m">50</span><span class="o">%</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="c">/* Ensures that the transition only runs in one direction */</span>
+</span><span class='line'>    <span class="o">-</span><span class="n">webkit</span><span class="o">-</span><span class="n">transition</span><span class="o">:</span> <span class="k">background-color</span> <span class="m">0</span><span class="p">;</span>
+</span><span class='line'>    <span class="n">transition</span><span class="o">:</span> <span class="k">background-color</span> <span class="m">0</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="nt">body</span> <span class="p">{</span>
+</span><span class='line'>    <span class="o">-</span><span class="n">webkit</span><span class="o">-</span><span class="n">transition</span><span class="o">:</span> <span class="k">opacity</span> <span class="m">1s</span> <span class="n">ease</span><span class="o">-</span><span class="n">in</span><span class="p">;</span>
+</span><span class='line'>    <span class="n">transition</span><span class="o">:</span> <span class="k">opacity</span> <span class="m">1s</span> <span class="n">ease</span><span class="o">-</span><span class="n">in</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="nt">html</span><span class="nc">.loading</span> <span class="nt">body</span> <span class="p">{</span>
+</span><span class='line'>    <span class="c">/* Make the contents of the body opaque during loading */</span>
+</span><span class='line'>    <span class="k">opacity</span><span class="o">:</span> <span class="m">0</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="c">/* Ensures that the transition only runs in one direction */</span>
+</span><span class='line'>    <span class="o">-</span><span class="n">webkit</span><span class="o">-</span><span class="n">transition</span><span class="o">:</span> <span class="k">opacity</span> <span class="m">0</span><span class="p">;</span>
+</span><span class='line'>    <span class="n">transition</span><span class="o">:</span> <span class="k">opacity</span> <span class="m">0</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The only JavaScript required is to remove the <code>"loading"</code> class from the <code>&lt;html&gt;</code> element.  Do this when your application is initialized and ready to go.</p>
+
+<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="c1">// IE10+</span>
+</span><span class='line'><span class="nb">document</span><span class="p">.</span><span class="nx">getElementsByTagName</span><span class="p">(</span> <span class="s2">&quot;html&quot;</span> <span class="p">)[</span><span class="mi">0</span><span class="p">].</span><span class="nx">classList</span><span class="p">.</span><span class="nx">remove</span><span class="p">(</span> <span class="s2">&quot;loading&quot;</span> <span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">// All browsers</span>
+</span><span class='line'><span class="nb">document</span><span class="p">.</span><span class="nx">getElementsByTagName</span><span class="p">(</span> <span class="s2">&quot;html&quot;</span> <span class="p">)[</span><span class="mi">0</span><span class="p">].</span><span class="nx">className</span><span class="p">.</span><span class="nx">replace</span><span class="p">(</span> <span class="sr">/loading/</span><span class="p">,</span> <span class="s2">&quot;&quot;</span> <span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">// Or with jQuery</span>
+</span><span class='line'><span class="nx">$</span><span class="p">(</span> <span class="s2">&quot;html&quot;</span> <span class="p">).</span><span class="nx">removeClass</span><span class="p">(</span> <span class="s2">&quot;loading&quot;</span> <span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The demo below shows this animation in action.  To simulate a real load it waits 3 seconds before the <code>"loading"</code> class is removed.</p>
+
+<div class="code_example"><h6>Loading Example<a href="http://tjvantoll.com/demos/2013-04-24/loading.html" target="_blank">Open in New Window</a></h6><iframe style="width: 100%; height: 275px;" frameborder="0" src="http://tjvantoll.com/demos/2013-04-24/loading.html"></iframe></div>
+
+
+<p>This will work in <a href="http://caniuse.com/#feat=css-transitions">any browser that supports CSS transitions</a>, which nowadays is really everything other than IE &lt;= 9.  It also degrades gracefully for older browsers.  Unsupported browsers will still see the loading animation, they will simply lose the fade in transition when loading is complete.</p>
 ]]></content>
   </entry>
   

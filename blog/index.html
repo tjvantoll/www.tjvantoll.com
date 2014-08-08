@@ -9,7 +9,7 @@
   <meta name="author" content="TJ VanToll">
 
   
-  <meta name="description" content="HTML imports are cool. If you haven&#8217;t heard of them before, you should read Eric Bidelman&#8217;s excellent introduction to them, but they&# &hellip;">
+  <meta name="description" content="You may have seen Burke Holland&#8217;s &#8220;Building A PhoneGap App in 36 Seconds Using Nothing But a Browser&#8221; article on Medium this &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -95,134 +95,6 @@
     <div id="content">
       <div class="blog-index">
   
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title" itemprop="name headline"><a href="/2014/08/07/the-problem-with-using-html-imports-for-dependency-management/">The Problem With Using HTML Imports For Dependency Management</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-08-07T00:00:00-04:00" pubdate data-updated="true">Aug 7<span>th</span>, 2014</time>
-        
-         | <a href="/2014/08/07/the-problem-with-using-html-imports-for-dependency-management/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>HTML imports are cool. If you haven&#8217;t heard of them before, you should read <a href="http://www.html5rocks.com/en/tutorials/webcomponents/imports/">Eric Bidelman&#8217;s excellent introduction to them</a>, but they&#8217;re pretty self explanatory with a bit of code. For example the following is how a jQuery UI dialog works in <a href="https://github.com/tjvantoll/ui-web-components">my proof-of-concept web components port</a>:</p>
-
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">&quot;import&quot;</span> <span class="na">href=</span><span class="s">&quot;ui-dialog.html&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="nt">&lt;ui</span><span class="na">-dialog</span> <span class="na">title=</span><span class="s">&quot;Hello World&quot;</span><span class="nt">&gt;</span><span class="err">&lt;</span>/ui-dialog&gt;
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>The cool thing here is not what you see—a <code>&lt;link&gt;</code> tag that imports a custom element—but rather, what you don&#8217;t. Normally when using jQuery UI widgets, you have to worry about a number of JavaScript and CSS dependencies, such as jQuery Core, the widget factory, a CSS theme, and more. With HTML imports you don&#8217;t, as the import takes care of bundling everything you need.</p>
-
-<h3>OMG Awesome! What&#8217;s the problem?</h3>
-
-<p>HTML imports transfer the dependency management burden from component consumers to component authors. This sounds good, until you think about <em>how</em> to reconcile those dependencies.</p>
-
-<p>Suppose you want to write a component that depends on jQuery. How might you do that? Well, the easiest way is to package jquery.js within your web component, and to reference it in your HTML import with a simple <code>&lt;script&gt;</code> tag:</p>
-
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;jquery.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>This works, but it has a serious repercussion: jquery.js is bundled with your component. That means, with this approach, if a user imports five jQuery-dependent components, the browser will download jQuery five times. And because reducing HTTP requests is a vital web performance optimization, this is <a href="https://www.youtube.com/watch?v=H8OxKx6zKkQ">kind of a big deal</a>.</p>
-
-<h3>What about de-duping?</h3>
-
-<p>De-duping, besides being an awesome word to say, is a mechanism built into HTML imports to prevent multiple requests for the same resource. That is, if multiple imports reference the same URL, the browser is smart enough to only retrieve the resource once.</p>
-
-<p>The problem is that the de-duping mechanism only works on <em>exact</em> URL matches. Different domains, different protocols, different versions, and so forth are each enough to subvert the de-duping process.</p>
-
-<p>The crux of the issue is, dependencies in HTML imports aren&#8217;t strings like &#8220;jquery&#8221; and &#8220;bootstrap&#8221;, they&#8217;re URLs like &#8220;http://code.jquery.com/jquery-2.1.1.min.js&#8221; and &#8220;http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js&#8221;—and there&#8217;s no way of knowing what the consumer of the component expects.</p>
-
-<p>What&#8217;s an HTML import with external dependencies to do? <a href="http://www.polymer-project.org/resources/faq.html#loadlibs">Polymer&#8217;s documentation</a> gives the following recommendation in its FAQ:</p>
-
-<blockquote><p>&#8220;If multiple libraries want to share a dependency, they will have to agree on a system. Feature detection, or an agreed upon common location for a ‘jquery.html’ file in a CDN, etc.&#8221;</p></blockquote>
-
-<p>At first glance this is laughable, as getting libraries to agree on <em>anything</em> in the web world has been painfully difficult, but it&#8217;s at least worth a discussion. What are our options for managing external dependencies in HTML imports?</p>
-
-<h3>Options for managing external dependencies</h3>
-
-<p>To discuss our options, let&#8217;s suppose that you want to build a <code>&lt;formatted-time&gt;</code> custom element as an HTML import, and you want to use <a href="http://momentjs.com/">Moment.js</a> as part of your implementation.</p>
-
-<p>Assuming that you don&#8217;t package Moment.js as part of your component, and we&#8217;ve already seen why that&#8217;s a bad idea, here are your options.</p>
-
-<h4>Option 1: Use a CDN</h4>
-
-<p>You could refer to Moment.js on some CDN, for instance the following <code>&lt;script&gt;</code> tag imports Moment.js from <a href="http://cdnjs.com/">cdnjs</a>:</p>
-
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;//cdnjs.cloudflare.com/ajax/libs/moment.js/2.7.0/moment.min.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>This approach works, but it has some major disadvantages. For one, the CDN approach only prevents multiple downloads of Moment.js if everyone magically chooses to retrieve Moment.js from the exact same URL—same CDN provider, same protocol, same version, and so forth. Second, the CDN reference also prevents the usage of script concatenation tooling, which is an essential performance optimization, especially for mobile. Because of this, I don&#8217;t see CDNs as a viable option for managing external dependencies.</p>
-
-<h4>Option 2: Enforce a folder structure</h4>
-
-<p>The next option you have is enforcing a specific directory structure on the consumer of your component. For instance, you could enforce that users have a folder structure that looks like this:</p>
-
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'>.
-</span><span class='line'>├── momentjs
-</span><span class='line'>│   └── moment.js
-</span><span class='line'>└── formatted-time
-</span><span class='line'>    └── formatted-time.html
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>With this structure in place, your formatted-time.html file can reference moment.js using <code>&lt;link rel="import" href="../momentjs/moment.js"&gt;</code>. This is the strategy Polymer itself uses, as all Polymer core elements include an import of <code>&lt;link rel="import" href="../polymer/polymer.html"&gt;</code> to get the dependencies they need.</p>
-
-<p>This approach works well if your users manage their dependencies through a package manager such as Bower, as the package manager provides a defined structure you can rely on. But the reality is only a small fraction of the web uses Bower, and the developers that do often have build scripts in place to move files to locations that their servers and development environments require.</p>
-
-<p>Enforcing a directory structure for dependencies can theoretically work, but it requires the community to agree on and standardize a directory structure to use, which is a tall task.</p>
-
-<p>Worse, even agreeing on a directory structure isn&#8217;t enough, as the exact file paths must match to prevent multiple downloads. If component A references <code>"../momentjs/moment.js"</code>, and component B references <code>"../momentjs/min/moment.min.js"</code>, the browser sees two different resources that need to be individually downloaded.</p>
-
-<h4>Option 3: Don&#8217;t use HTML imports for external dependencies</h4>
-
-<p>The final option you have is to avoid using HTML imports to manage external dependencies. For the <code>&lt;formatted-time&gt;</code> example, this means not referencing moment.js in your component at all; you just assume that it&#8217;s there and note that it&#8217;s a requirement in your documentation—exactly like you do today.</p>
-
-<p>Of course, this subverts the main purpose of building an HTML import—building a self-contained module—but at the moment I don&#8217;t see a better option.</p>
-
-<h3>Where to go from here?</h3>
-
-<p>I don&#8217;t have the solution, but I think we need to be having this discussion if we want to see high quality HTML imports that don&#8217;t have negative performance consequences. I&#8217;d love to hear your thoughts on this in the comments.</p>
-</div>
-  
-  
-
-
-    </article>
   
   
     <article>
@@ -658,6 +530,57 @@
 
     </article>
   
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title" itemprop="name headline"><a href="/2013/09/18/hey-developers-you-should-spell-check-your-documentation/">Hey Developers - You Should Spell Check Your Documentation</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-09-18T09:56:00-04:00" pubdate data-updated="true">Sep 18<span>th</span>, 2013</time>
+        
+         | <a href="/2013/09/18/hey-developers-you-should-spell-check-your-documentation/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>As developers we write code. Therefore, the thought of using a spell checker brings to mind something like this:</p>
+
+<p><img src="/images/posts/2013-09-18/spell-check.png"></p>
+
+<p>&#8230;which is why text editors don&#8217;t have spell checking on by default. And that&#8217;s fine when writing code, however, most developers write at least <em>some</em> documentation.</p>
+
+<p>Increasingly this documentation is markdown, XML, or JSON files stored in a git repository. Therefore, you likely use the same editor to write documentation as you do to write code - and unfortunately, writing documentation without a spell checker inevitably leads to spelling errors.</p>
+
+<p>Bad spelling makes your documentation look less professional, and less professional documentation reflects badly on your library, product, or whatever. Therefore I thought I&#8217;d share what I do in Sublime Text to help prevent mistakes.</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/2013/09/18/hey-developers-you-should-spell-check-your-documentation/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -692,10 +615,6 @@
   <ul id="recent_posts">
     
       <li class="post">
-        <a href="/2014/08/07/the-problem-with-using-html-imports-for-dependency-management/">The Problem With Using HTML Imports For Dependency Management</a>
-      </li>
-    
-      <li class="post">
         <a href="/2014/07/25/building-a-phonegap-app-in-10-seconds-using-nothing-but-a-cli/">Building a PhoneGap App in 10 Seconds Using Nothing But a CLI</a>
       </li>
     
@@ -709,6 +628,10 @@
     
       <li class="post">
         <a href="/2014/05/01/using-semantic-html-to-drive-display-logic/">Using Semantic HTML to Drive Display Logic</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/03/11/effect-of-ios-7-dot-1s-minimal-ui-meta-tag/">Effect of iOS 7.1&#8217;s minimal-ui Viewport Property</a>
       </li>
     
   </ul>
