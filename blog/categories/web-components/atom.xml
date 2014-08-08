@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Web Components | TJ VanToll]]></title>
   <link href="http://tjvantoll.com/blog/categories/web-components/atom.xml" rel="self"/>
   <link href="http://tjvantoll.com/"/>
-  <updated>2014-07-25T11:29:24-04:00</updated>
+  <updated>2014-08-05T15:10:31-04:00</updated>
   <id>http://tjvantoll.com/</id>
   <author>
     <name><![CDATA[TJ VanToll]]></name>
@@ -14,6 +14,104 @@
 
   
   <entry>
+    <title type="html"><![CDATA[The Problem With Using HTML Imports For Dependency Management]]></title>
+    <link href="http://tjvantoll.com/2014/08/07/the-problem-with-using-html-imports-for-dependency-management/"/>
+    <updated>2014-08-07T00:00:00-04:00</updated>
+    <id>http://tjvantoll.com/2014/08/07/the-problem-with-using-html-imports-for-dependency-management</id>
+    <content type="html"><![CDATA[<p>HTML imports are cool. If you haven't heard of them before, you should read <a href="http://www.html5rocks.com/en/tutorials/webcomponents/imports/">Eric Bidelman's excellent introduction to them</a>, but they're pretty self explanatory with a bit of code. For example the following is how a jQuery UI dialog works in <a href="https://github.com/tjvantoll/ui-web-components">my proof-of-concept web components port</a>:</p>
+
+<p>``` html
+<link rel="import" href="ui-dialog.html"></p>
+
+<p><ui-dialog title="Hello World"></ui-dialog>
+```</p>
+
+<p>The cool thing here is not what you see—a <code>&lt;link&gt;</code> tag that imports a custom element—but rather, what you don't. Normally when using jQuery UI widgets, you have to worry about a number of JavaScript and CSS dependencies, such as jQuery Core, the widget factory, a CSS theme, and more. With HTML imports you don't, as the import takes care of bundling everything you need.</p>
+
+<h3>OMG Awesome! What's the problem?</h3>
+
+<p>HTML imports transfer the dependency management burden from component consumers to component authors. This sounds good, until you think about <em>how</em> to reconcile those dependencies.</p>
+
+<p>Suppose you want to write a component that depends on jQuery. How might you do that? Well, the easiest way is to package jquery.js within your web component, and to reference it in your HTML import with a simple <code>&lt;script&gt;</code> tag:</p>
+
+<p>``` html</p>
+
+<script src="jquery.js"></script>
+
+
+<p>```</p>
+
+<p>This works, but it has a serious repercussion: jquery.js is bundled with your component. That means, with this approach, if a user imports five jQuery-dependent components, the browser will download jQuery five times. And because reducing HTTP requests is a vital web performance optimization, this is <a href="https://www.youtube.com/watch?v=H8OxKx6zKkQ">kind of a big deal</a>.</p>
+
+<h3>What about de-duping?</h3>
+
+<p>De-duping, besides being an awesome word to say, is a mechanism built into HTML imports to prevent multiple requests for the same resource. That is, if multiple imports reference the same URL, the browser is smart enough to only retrieve the resource once.</p>
+
+<p>The problem is that the de-duping mechanism only works on <em>exact</em> URL matches. Different domains, different protocols, different versions, and so forth are each enough to subvert the de-duping process.</p>
+
+<p>The crux of the issue is, dependencies in HTML imports aren't strings like "jquery" and "bootstrap", they're URLs like "http://code.jquery.com/jquery-2.1.1.min.js" and "http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"—and there's no way of knowing what the consumer of the component expects.</p>
+
+<p>What's an HTML import with external dependencies to do? <a href="http://www.polymer-project.org/resources/faq.html#loadlibs">Polymer's documentation</a> gives the following recommendation in its FAQ:</p>
+
+<blockquote><p>"If multiple libraries want to share a dependency, they will have to agree on a system. Feature detection, or an agreed upon common location for a ‘jquery.html’ file in a CDN, etc."</p></blockquote>
+
+<p>At first glance this is laughable, as getting libraries to agree on <em>anything</em> in the web world has been painfully difficult, but it's at least worth a discussion. What are our options for managing external dependencies in HTML imports?</p>
+
+<h3>Options for managing external dependencies</h3>
+
+<p>To discuss our options, let's suppose that you want to build a <code>&lt;formatted-time&gt;</code> custom element as an HTML import, and you want to use <a href="http://momentjs.com/">Moment.js</a> as part of your implementation.</p>
+
+<p>Assuming that you don't package Moment.js as part of your component, and we've already seen why that's a bad idea, here are your options.</p>
+
+<h4>Option 1: Use a CDN</h4>
+
+<p>You could refer to Moment.js on some CDN, for instance the following <code>&lt;script&gt;</code> tag imports Moment.js from <a href="http://cdnjs.com/">cdnjs</a>:</p>
+
+<p>```</p>
+
+<script src="http://tjvantoll.com//cdnjs.cloudflare.com/ajax/libs/moment.js/2.7.0/moment.min.js"></script>
+
+
+<p>```</p>
+
+<p>This approach works, but it has some major disadvantages. For one, the CDN approach only prevents multiple downloads of Moment.js if everyone magically chooses to retrieve Moment.js from the exact same URL—same CDN provider, same protocol, same version, and so forth. Second, the CDN reference also prevents the usage of script concatenation tooling, which is an essential performance optimization, especially for mobile. Because of this, I don't see CDNs as a viable option for managing external dependencies.</p>
+
+<h4>Option 2: Enforce a folder structure</h4>
+
+<p>The next option you have is enforcing a specific directory structure on the consumer of your component. For instance, you could enforce that users have a folder structure that looks like this:</p>
+
+<p>```
+.
+├── momentjs
+│   └── moment.js
+└── formatted-time</p>
+
+<pre><code>└── formatted-time.html
+</code></pre>
+
+<p>```</p>
+
+<p>With this structure in place, your formatted-time.html file can reference moment.js using <code>&lt;link rel="import" href="../momentjs/moment.js"&gt;</code>. This is the strategy Polymer itself uses, as all Polymer core elements include an import of <code>&lt;link rel="import" href="../polymer/polymer.html"&gt;</code> to get the dependencies they need.</p>
+
+<p>This approach works well if your users manage their dependencies through a package manager such as Bower, as the package manager provides a defined structure you can rely on. But the reality is only a small fraction of the web uses Bower, and the developers that do often have build scripts in place to move files to locations that their servers and development environments require.</p>
+
+<p>Enforcing a directory structure for dependencies can theoretically work, but it requires the community to agree on and standardize a directory structure to use, which is a tall task.</p>
+
+<p>Worse, even agreeing on a directory structure isn't enough, as the exact file paths must match to prevent multiple downloads. If component A references <code>"../momentjs/moment.js"</code>, and component B references <code>"../momentjs/min/moment.min.js"</code>, the browser sees two different resources that need to be individually downloaded.</p>
+
+<h4>Option 3: Don't use HTML imports for external dependencies</h4>
+
+<p>The final option you have is to avoid using HTML imports to manage external dependencies. For the <code>&lt;formatted-time&gt;</code> example, this means not referencing moment.js in your component at all; you just assume that it's there and note that it's a requirement in your documentation—exactly like you do today.</p>
+
+<p>Of course, this subverts the main purpose of building an HTML import—building a self-contained module—but at the moment I don't see a better option.</p>
+
+<h3>Where to go from here?</h3>
+
+<p>I don't have the solution, but I think we need to be having this discussion if we want to see high quality HTML imports that don't have negative performance consequences. I'd love to hear your thoughts on this in the comments.</p>
+]]></content>
+  </entry>
+  
+  <entry>
     <title type="html"><![CDATA[An Addendum to Why Web Components Aren't Ready for Production Yet]]></title>
     <link href="http://tjvantoll.com/2014/07/18/an-addendum-to-why-web-components-arent-ready-for-production-yet/"/>
     <updated>2014-07-18T14:14:00-04:00</updated>
@@ -21,6 +119,9 @@
     <content type="html"><![CDATA[<p>Yesterday I <a href="http://developer.telerik.com/featured/web-components-arent-ready-production-yet/">published an article on the Telerik Developer Network</a> about the state of web components. In it I argued that web components are not ready for the majority of web developers to use in production.</p>
 
 <p>I was overwhelmed by the amount of feeback—positive and negative—that I received after the article went live. In my opinion this is one of the great things about writing on the web. Opinionated posts tend to attract feedback from smart people with vested interests in the technology being discussed. Although putting yourself out there for criticism is hard, it's also a spectacular way to learn. Here I want to summarize what I learned from writing about web components, and take a minute to respond to some of the criticism I received.</p>
+
+<!--more-->
+
 
 <h3>The Title</h3>
 

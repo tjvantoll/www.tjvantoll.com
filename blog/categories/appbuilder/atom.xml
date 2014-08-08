@@ -4,7 +4,7 @@
   <title><![CDATA[Category: AppBuilder | TJ VanToll]]></title>
   <link href="http://tjvantoll.com/blog/categories/appbuilder/atom.xml" rel="self"/>
   <link href="http://tjvantoll.com/"/>
-  <updated>2014-07-25T11:29:24-04:00</updated>
+  <updated>2014-08-05T15:10:31-04:00</updated>
   <id>http://tjvantoll.com/</id>
   <author>
     <name><![CDATA[TJ VanToll]]></name>
@@ -23,6 +23,9 @@
 <p>You see, although I work with AppBuilder in the browser from time to time, I prefer the AppBuilder CLI. And with the CLI, I can put Burke's 36 second time to shame. Below I build a PhoneGap app, performing the same steps Burke did, in TEN seconds:</p>
 
 <p><img src="http://tjvantoll.com/images/posts/2014-07-25/10-seconds.gif" alt="10 seconds to build an app"></p>
+
+<!--more-->
+
 
 <h3>Full Disclosure</h3>
 
