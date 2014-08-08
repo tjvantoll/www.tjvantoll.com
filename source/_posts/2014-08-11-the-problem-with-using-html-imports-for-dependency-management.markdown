@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "The Problem With Using HTML Imports For Dependency Management"
-date: 2014-08-07
+date: 2014-08-11
 comments: true
 categories: [Web Components]
 ---
