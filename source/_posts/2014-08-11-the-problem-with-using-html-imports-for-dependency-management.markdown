@@ -42,7 +42,7 @@ What's an HTML import with external dependencies to do? [Polymer's documentation
 
 > "If multiple libraries want to share a dependency, they will have to agree on a system. Feature detection, or an agreed upon common location for a ‘jquery.html’ file in a CDN, etc."
 
-At first glance this is laughable, as getting libraries to agree on *anything* in the web world has been painfully difficult, but it's definitely worth a discussion. Let's look at each of these options in detail.
+Getting libraries to agree on *anything* in the web world has been painfully difficult, but it's definitely worth a discussion. Let's look at each of these options in detail.
 
 ### Options for managing external dependencies
 
@@ -97,9 +97,9 @@ The next option is feature detection, or determining whether your dependency has
 </script>
 ```
 
-This approach avoids the problem of loading Moment.js multiple times, but there's still a major problem: the path to use for moment.js. Because you need to do a feature check, and because `document.write`s are not permitted in HTML import files, you must load feature-checked dependencies asynchronously. And when you do that, the path of the dependency is not relative to the current HTML import file; it's relevant to the root of the application — and there's no way of knowing what that is in a distributable component. You could use a CDN path, but that's subject to the problems discussed in **Option 1**.
+This approach avoids the problem of loading Moment.js multiple times, but there's still a major problem: the path to use for moment.js. Because you need to do a feature check, and because `document.write`s are not permitted in HTML import files, you must load feature-checked dependencies asynchronously. And when you do that, the path of the dependency is not relative to the current HTML import file; it's relevant to the root of the application—and there's no way of knowing what that is in a distributable component. You could use a CDN path, but that's subject to the problems discussed in **Option 1**.
 
-Doing a feature check also prevents the usage of HTML import build tools such as [Vulcanize](https://github.com/Polymer/vulcanize), which inlines all HTML import dependencies into a single file — a vital performance optimization for anyone using HTML imports in a production setting. In theory build tools like Vulcanize could help manage these dependencies in the future, but at the moment such a mechanism does not exist.
+Doing a feature check also prevents the usage of HTML import build tools such as [Vulcanize](https://github.com/Polymer/vulcanize), which inlines all HTML import dependencies into a single file—a vital performance optimization for anyone using HTML imports in a production setting. In theory build tools like Vulcanize could help manage these dependencies in the future, but at the moment such a mechanism does not exist.
 
 #### Option 4: Don't use HTML imports for external dependencies
 
@@ -107,6 +107,6 @@ The final option you have is to avoid using HTML imports to manage external depe
 
 Of course, this subverts the main purpose of building an HTML import—building a self-contained module—but at the moment I don't see a better option.
 
-### Where to go from here?
+### Where to go from here?`
 
 I don't have the solution, but I think we need to be having this discussion if we want to see high quality HTML imports that don't have negative performance consequences. I'd love to hear your thoughts on this in the comments.
