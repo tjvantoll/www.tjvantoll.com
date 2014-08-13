@@ -4,7 +4,7 @@
   <title><![CDATA[TJ VanToll]]></title>
   <link href="http://tjvantoll.com/atom.xml" rel="self"/>
   <link href="http://tjvantoll.com/"/>
-  <updated>2014-08-12T08:49:41-04:00</updated>
+  <updated>2014-08-13T15:17:06-04:00</updated>
   <id>http://tjvantoll.com/</id>
   <author>
     <name><![CDATA[TJ VanToll]]></name>
@@ -129,6 +129,8 @@
 </span><span class='line'><span class="o">&lt;</span><span class="err">/script&gt;</span>
 </span></code></pre></td></tr></table></div></figure>
 
+
+<blockquote><p><strong>Update August 13th, 2014</strong>—As is, this code is not enough to prevent loading Moment.js multiple times, as two modules could request the script before it has been asynchronously fetched and parsed. To avoid multiple requests correctly you&#8217;d need to <a href="#comment-1540666406">additionally add some boolean logic</a>. Thanks <a href="https://twitter.com/webreflection">@webreflection</a>!</p></blockquote>
 
 <p>This approach avoids the problem of loading Moment.js multiple times, but there&#8217;s still a major problem: the path to use for moment.js. Because you need to do a feature check, and because <code>document.write</code>s are not permitted in HTML import files, you must load feature-checked dependencies asynchronously. And when you do that, the path of the dependency is not relative to the current HTML import file; it&#8217;s relevant to the root of the application—and there&#8217;s no way of knowing what that is in a distributable component. You could use a CDN path, but that&#8217;s subject to the problems discussed in <strong>Option 1</strong>.</p>
 
