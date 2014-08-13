@@ -97,6 +97,8 @@ The next option is feature detection, or determining whether your dependency has
 </script>
 ```
 
+> **Update August 13th, 2014**—As is, this code is not enough to prevent loading Moment.js multiple times, as two modules could request the script before it has been asynchronously fetched and parsed. To avoid multiple requests correctly you'd need to [additionally add some boolean logic](#comment-1540666406). Thanks [@webreflection](https://twitter.com/webreflection)!
+
 This approach avoids the problem of loading Moment.js multiple times, but there's still a major problem: the path to use for moment.js. Because you need to do a feature check, and because `document.write`s are not permitted in HTML import files, you must load feature-checked dependencies asynchronously. And when you do that, the path of the dependency is not relative to the current HTML import file; it's relevant to the root of the application—and there's no way of knowing what that is in a distributable component. You could use a CDN path, but that's subject to the problems discussed in **Option 1**.
 
 Doing a feature check also prevents the usage of HTML import build tools such as [Vulcanize](https://github.com/Polymer/vulcanize), which inlines all HTML import dependencies into a single file—a vital performance optimization for anyone using HTML imports in a production setting. In theory build tools like Vulcanize could help manage these dependencies in the future, but at the moment such a mechanism does not exist.
