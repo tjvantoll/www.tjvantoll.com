@@ -7,6 +7,7 @@
 </header>
 
 http://mobilewebweekly.co/issues/10
+http://html5weekly.com/issues/150
 
 <p>The most popular articles on my blog:</p>
 <ul class="post_list">
