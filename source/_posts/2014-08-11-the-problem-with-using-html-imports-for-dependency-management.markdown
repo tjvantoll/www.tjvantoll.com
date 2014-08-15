@@ -109,6 +109,6 @@ The final option you have is to avoid using HTML imports to manage external depe
 
 Of course, this subverts the main purpose of building an HTML import—building a self-contained module—but at the moment I don't see a better option.
 
-### Where to go from here?`
+### Where to go from here?
 
 I don't have the solution, but I think we need to be having this discussion if we want to see high quality HTML imports that don't have negative performance consequences. I'd love to hear your thoughts on this in the comments.
