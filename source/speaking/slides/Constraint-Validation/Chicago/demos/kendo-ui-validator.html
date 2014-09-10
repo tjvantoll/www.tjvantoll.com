@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Kendo UI Validator</title>
+
+	<link rel="stylesheet" href="../bower_components/kendo-ui-core/styles/kendo.common-bootstrap.min.css">
+	<link rel="stylesheet" href="../bower_components/kendo-ui-core/styles/kendo.bootstrap.min.css">
+	<link rel="stylesheet" href="demos.css">
+	<style>
+		.k-invalid {
+			background: red;
+		}
+	</style>
+</head>
+<body>
+
+<form>
+	<div>
+		<label for="name">Name:</label>
+		<input type="text" name="name" id="name" required
+			data-required-msg="Name is required.">
+	</div>
+	<div>
+		<label for="email">Email:</label>
+		<input type="email" name="email" id="email" required
+			data-required-msg="Email is required."
+			data-email-msg="Please provide a valid email address.">
+	</div>
+	<div>
+		<button>Submit</button>
+	</div>
+</form>
+
+<script src="../bower_components/jquery/dist/jquery.js"></script>
+<script src="../bower_components/kendo-ui-core/js/kendo.ui.core.min.js"></script>
+<script>
+	$( "form" ).kendoValidator({
+		/*
+		messages: {
+			required: function( input ) {
+				var element = input[ 0 ],
+					label = $( element.form ).find( "[for=" + element.id + "]" );
+				return label.text().replace( ":", "" ) + " is required.";
+			},
+			email: "Please provide a valid email address"
+		}*/
+	});
+</script>
+
+</body>
+</html>

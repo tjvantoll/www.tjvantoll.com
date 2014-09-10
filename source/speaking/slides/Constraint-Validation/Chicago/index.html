@@ -1,0 +1,518 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<title>HTML5 Form Validation: Why no one uses it, and how you can!</title>
+
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+	<link rel="stylesheet" href="bower_components/reveal.js/css/reveal.min.css">
+	<link rel="stylesheet" href="bower_components/reveal.js/css/theme/default.css" id="theme">
+	<link rel="stylesheet" href="bower_components/prism/themes/prism.css">
+	<link rel="stylesheet" href="style.css">
+</head>
+
+<body><div class="reveal"><div class="slides">
+
+<section>
+	<h1>HTML5 Form Validation</h1>
+	<h2>Why no one uses it, and how you can!</h2>
+	<p style="font-size: 1.1em; margin-bottom: -0.5em; margin-top: 1.5em;">TJ VanToll | <a href="https://twitter.com/tjvantoll">@tjvantoll</a></p>
+	<img src="images/telerik-logo.png" style="height: 150px; margin-top: 0;">
+	<aside class="notes">
+		- My name is TJ VanToll I work for Telerik (poll room)
+		- We're a software development company, and we specialize in UI tools. Kendo UI?
+		- So I work on Kendo UI 
+		- I'm also a member of the jQuery UI team
+	</aside>
+</section>
+
+<section>
+	<h2>Forms are hard</h2>
+</section>
+
+<section>
+	<h2>Traditional form validation is hard</h2>
+	<pre>
+<code class="language-javascript">document.getElementById( "myForm" )
+    .addEventListener( "submit", function( event ) {
+        if ( document.getElementById( "myInput" ).value == "" ) {
+            event.preventDefault();
+            // Show some questionably UX and a11y
+            // friendly error message.
+        }
+    });
+});
+</code></pre>
+	<aside class="notes">
+		
+	</aside>
+</section>
+
+<section>
+	<h2>HTML5 form validation is totally cool</h2>
+	<pre>
+<code class="language-markup" contenteditable>&lt;form&gt;
+    &lt;input required&gt;
+    &lt;button&gt;Submit&lt;/button&gt;
+&lt;/form&gt;</code>
+	</pre>
+	<div class="output"></div>
+	<aside class="notes">
+		- I find most conference talks are about things you can't use or things that aren't applicable.
+		- Form validation is practical
+		- Everyone does it
+		- Poll the room
+	</aside>
+</section>
+
+<section>
+	<h2>Native Form Validation: A quick history</h2>
+	<ul class="spaced">
+		<li>2003: <a href="http://platform.html5.org/history/">Initially specced</a></li>
+		<li>2009: <a href="http://caniuse.com/#search=form validation">Implemented in Opera 10.1</a></li>
+		<li>2011: <a href="http://caniuse.com/#search=form validation">Implemented in Firefox 4</a></li>
+		<li>2011: <a href="http://www.chromestatus.com/features/6091813840486400">Implemented in Chrome 10</a></li>
+		<li>2012: <a href="http://caniuse.com/#search=form validation">Implemented in IE10</a></li>
+	</ul>
+</section>
+
+<section>
+	<img src="images/html5-rocks.png">
+</section>
+
+<section>
+	<blockquote style="font-size: 2em; line-height: 1.2; padding: 0.2em; margin-bottom: 0.5em;">“No one uses HTML5 form validation”</blockquote>
+	<h3>-Me</h3>
+</section>
+
+<section>
+	<h2>What I want</h2>
+	<img src="images/chase-good.png">
+</section>
+
+<section>
+	<h2>Reality</h2>
+	<img src="images/chase-bad.png">
+</section>
+
+<section>
+	<h2>Why does no one use it?</h2>
+</section>
+
+<section>
+	<h2>Problems:</h2>
+	<ol class="spaced">
+		<li>Browser support is weird</li>
+		<li>Customizing error messages is verbose</li>
+		<li>Aggregating error messages is tricky</li>
+		<li>The :invalid pseudo-class isn't what you want</li>
+		<li>You cannot style the bubbles</li>
+	</ol>
+</section>
+
+<section>
+	<h2>Problem #1: Browser support is weird</h2>
+</section>
+
+<section>
+	<img src="images/can-i-use.png">
+	<a href="http://caniuse.com/#feat=form-validation">http://caniuse.com/#feat=form-validation</a>
+	<aside class="notes">
+		- IE 6–9 have zero support for HTML5 form validation.
+	</aside>
+</section>
+
+<style>
+	.strike { text-decoration: line-through; }
+</style>
+<section>
+	<img style="height: 400px;" src="images/benjamin-button.jpg">
+	<h3 style="line-height: 1.5">The curious case of <span class="strike">Benjamin Button</span> constraint validation on Safari, iOS Safari, and the Android browser.</h3>
+</section>
+
+<section>
+	<h3>Safari/iOS Safari/Android Browser let this submit empty</h3>
+	<pre>
+<code contenteditable class="language-markup">&lt;form&gt;
+    &lt;input required&gt;
+    &lt;button&gt;Submit&lt;/button&gt;
+&lt;/form&gt;</code>
+	</pre>
+	<div class="output"></div>
+</section>
+
+<section>
+	<h2>Two scenarios to account for</h2>
+	<ul class="spaced">
+		<li>Old IE</li>
+		<li>Safari / iOS Safari / Android Browser</li>
+	</ul>
+</section>
+
+<section>
+	<h2>Your server is your fallback</h2>
+</section>
+
+<section>
+	<h2>Client-side validation is no substitute for server-side validation</h2>
+	<pre class="language-markup" style="font-size: 0.7em; padding-bottom: 0;">
+		<code style="position: relative; left: -20px;">curl --data "param1=DELETE * FROM *" http://foo.com/bar.do</code>
+	</pre>
+</section>
+
+<section>
+	<h2>Your server is your fallback</h2>
+	<p><a target="_blank" href="demos/base-form.html">Example</a></p>
+</section>
+
+<section>
+	<h2 style="line-height: 1.2">Problem #2: Customizing error messages is verbose</h2>
+</section>
+
+<section>
+	<h3 style="line-height: 1.2">setCustomValidity() is an odd API</h3>
+</section>
+
+<section>
+	<h2>Customizing messages</h2>
+<pre class="language-markup constrained">
+<code contenteditable>&lt;form&gt;
+    &lt;input required type="email" id="baz"&gt;
+    &lt;button&gt;Go&lt;/button&gt;
+&lt;/form&gt;
+&lt;script&gt;
+    var baz = document.querySelector( "#baz" );
+    function setErrorMessage() {
+        if ( baz.validity.valueMissing ) {
+            baz.setCustomValidity( "Email is required" );
+        } else if ( baz.validity.typeMismatch ) {
+            baz.setCustomValidity( "Please provide a valid email address" );
+        }
+    };
+    setErrorMessage();
+    baz.addEventListener( "change", setErrorMessage );
+&lt;/script&gt;</code>
+</pre>
+	<div class="output"></div>
+</section>
+
+<section>
+	<h2>x-moz-errormessage</h2>
+<pre class="language-markup constrained">
+<code contenteditable>&lt;form&gt;
+    &lt;input required x-moz-errormessage="INVALID!"&gt;
+    &lt;button&gt;Go&lt;/button&gt;
+&lt;/form&gt;</code>
+</pre>
+	<div class="output"></div>
+</section>
+
+<section>
+	<h3 style="line-height: 1.1">W3C Bug #10923: Add an attribute to override UI's validation message</h3>
+	<img src="images/hickson-reponse.png">
+</section>
+
+<section>
+	<h2>title attribute</h2>
+<pre class="language-markup">
+<code contenteditable>&lt;form&gt;
+    &lt;input pattern="[0-9]{5}" title="Enter 5 numbers"&gt;
+    &lt;button&gt;Go&lt;/button&gt;
+&lt;/form&gt;</code>
+</pre>
+	<div class="output"></div>
+</section>
+
+<section>
+	<h2 style="line-height: 1.2">Problem #3: Aggregating error messages is tricky</h2>
+</section>
+
+<section>
+	<h3 style="line-height: 1.2;">There is no way to determine when the user attempted to submit a form.</h3>
+</section>
+
+<section>
+	<pre>
+<code contenteditable class="language-markup">&lt;form id="foo"&gt;
+    &lt;input required&gt;
+    &lt;button&gt;Go&lt;/button&gt;
+    &lt;script&gt;
+        document.querySelector( "#foo" )
+            .addEventListener( "submit", function() {
+                alert( "hi!" );
+            });
+    &lt;/script&gt;
+&lt;/form&gt;</code>
+	</pre>
+	<div class="output"></div>
+</section>
+
+<section>
+	<h3>Aggregating Messages</h3>
+	<p><a target="_blank" href="demos/message-aggregation.html">Demo</a></p>
+</section>
+
+<section>
+	<h3>Coming soon: invalid event on &lt;form&gt; elements!</h3>
+	<img src="images/form-invalid.png">
+</section>
+
+<section>
+	<h2 style="line-height: 1.2">Problem #4: The :invalid pseudo-class isn't what you want</h2>
+</section>
+
+<section>
+	<h2 class="no_casing">:invalid applies immediately!</h2>
+<pre class="language-markup">
+<code contenteditable>&lt;form&gt;
+    &lt;input type="text" id="foo" required&gt;
+&lt;/form&gt;
+&lt;style&gt;
+    #foo:invalid { background: red; }
+&lt;/style&gt;</code>
+</pre>
+	<div class="output"></div>
+</section>
+
+<section>
+	<h2>:moz-ui-invalid</h2>
+	<p>Only match after interaction or attempted submission (<a href="http://mounir.lamouri.fr/2011/05/improving-html5-forms-user-experience-with-moz-ui-invalid-and-moz-ui-valid-pseudo-classes.html">full algorithm</a>).</p>
+<pre class="language-markup constrained">
+<code contenteditable>&lt;form&gt;
+    &lt;input type="text" id="bar" required&gt;
+    &lt;button&gt;Go&lt;/button&gt;
+&lt;/form&gt;
+&lt;style&gt;
+    #bar:-moz-ui-invalid { background: red; }
+&lt;/style&gt;</code>
+</pre>
+	<div class="output"></div>
+</section>
+
+<section>
+	<h2>CSS Selectors Level 4 Spec</h2>
+	<img src="images/user-error.png">
+</section>
+
+<section>
+	<h3>Only use :invalid after interaction</h3>
+	<a target="_blank" href="demos/interact.html">Demo</a>
+</section>
+
+<section>
+	<h2 style="line-height: 1.2">Problem #5: You cannot style the bubbles</h2>
+</section>
+
+<section>
+	<h2>Bubbles!</h2>
+	<img src="images/bubbles.png">
+</section>
+
+<section>
+	<h2>Old WebKit Hooks</h2>
+	<p>WebKit used to have these pseudo-elements.</p>
+	<ul>
+		<li>::-webkit-validation-bubble</li>
+		<li>::-webkit-validation-bubble-arrow</li>
+		<li>::-webkit-validation-bubble-arrow-clipper</li>
+		<li>::-webkit-validation-bubble-heading</li>
+		<li>::-webkit-validation-bubble-message</li>
+		<li>::-webkit-validation-bubble-text-block</li>
+	</ul>
+</section>
+
+<section>
+	<h2>You used to be able to do this</h2>
+	<img src="images/webkit-validation-bubble.png">
+	<img src="images/webkit-validation-bubble-pretty.png">
+</section>
+
+<section>
+	<h2>Styling the Bubbles</h2>
+	<p>Chrome 28 removed the pseudo-elements for styling form validation messages.</p>
+</section>
+
+<section>
+	<h2>Turning the bubbles off</h2>
+<pre class="language-markup">
+<code contenteditable>&lt;form&gt;
+    &lt;input required id="field-x"&gt;
+    &lt;button&gt;Go&lt;/button&gt;
+&lt;/form&gt;
+&lt;script&gt;
+    document.getElementById( "field-x" )
+        .addEventListener( "invalid", function( event ) {
+            event.preventDefault();
+        });
+&lt;/script&gt;</code></pre>
+	<div class="output"></div>
+</section>
+
+<section>
+	<h2>Turning the bubbles off (for a whole form)</h2>
+<pre class="language-markup">
+<code contenteditable>&lt;form id="form-x"&gt;
+    &lt;input required&gt;
+    &lt;button&gt;Go&lt;/button&gt;
+&lt;/form&gt;
+&lt;script&gt;
+    document.getElementById( "form-x" )
+        .addEventListener( "invalid", function( event ) {
+            event.preventDefault();
+        }, true );
+&lt;/script&gt;</code></pre>
+	<div class="output"></div>
+</section>
+
+<section>
+	<h3>Building your own bubbles</h3>
+	<a target="_blank" href="demos/bubbles.html">Demo</a>
+</section>
+
+<section>
+	<h2>Problems:</h2>
+	<ol class="spaced">
+		<li>Browser support is weird
+		<li>Customizing error messages is verbose</li>
+		<li>Aggregating error messages is tricky</li>
+		<li>The :invalid pseudo-class isn't what you want</li>
+		<li>You cannot style the bubbles</li>
+	</ol>
+</section>
+
+<section>
+	<h2>Production usage: your options</h2>
+	<ol class="spaced">
+		<li>Server-side fallback only</li>
+		<li>Polyfill</li>
+		<li>Use a library based on HTML5</li>
+	</ol>
+</section>
+
+<section>
+	<h2>Option #1: Server-side fallback only</h2>
+	<a target="_blank" href="demos/base-form.html">Demo</a>
+</section>
+
+<section>
+	<h2>Option #2: Polyfill</h2>
+</section>
+
+<section>
+	<h2>Webshims</h2>
+	<a target="_blank" href="demos/webshims.html">Demo</a>
+</section>
+
+<section>
+	<h2>Webshims configuration</h2>
+	<img src="images/webshims-config.png" style="height: 500px;">
+	<p>See <a href="http://afarkas.github.io/webshim/demos/#Forms-forms">http://afarkas.github.io/webshim/demos/</a></p>
+</section>
+
+<section>
+	<h2>Option #3: Use a library based on HTML5</h2>
+</section>
+
+<section>
+	<h2>jQuery validation plugin</h2>
+	<ul class="spaced">
+		<li>Written in 2006 by Jörn Zaefferer (whom still maintains it).</li>
+		<li><a href="http://jqueryvalidation.org/">http://jqueryvalidation.org/</a></li>
+		<li><a target="_blank" href="demos/jquery-validation.html">Demo</a></li>
+	</ul>
+</section>
+
+<section>
+	<h2>Kendo UI Validator</h2>
+	<ul class="spaced">
+		<li>Part of <a href="https://github.com/telerik/kendo-ui-core">Kendo UI Core</a>.</li>
+		<li><a href="http://demos.telerik.com/kendo-ui/validator/">http://demos.telerik.com/kendo-ui/validator/</a></li>
+		<li><a target="_blank" href="demos/kendo-ui-validator.html">Demo</a></li>
+	</ul>
+</section>
+
+<section>
+	<h2>Production usage: your options</h2>
+	<ol class="spaced">
+		<li>Server-side fallback only</li>
+		<li>Polyfill</li>
+		<li>Use a library based on HTML5</li>
+	</ol>
+</section>
+
+<section>
+	<h3>&lt;shameless-plug&gt;</h3>
+	<img src="images/book-cover.jpg"><br>
+	<p>Use code jqchtwcf for 43% off</p>
+	<p><a style="margin-top: -10px; margin-bottom: 0.5em; display: block;" href="http://manning.com/vantoll/">http://manning.com/vantoll</a></p>
+	<h3>&lt;/shameless-plug&gt;</h3>
+</section>
+
+<section>
+	<h1>Thanks</h1>
+	<h3><a href="http://tjvantoll.com">TJ VanToll</a> / <a href="http://twitter.com/tjvantoll">@tjvantoll</a></h3>
+</section>
+
+</div><!-- .reveal --></div><!-- .slides -->
+
+<script src="bower_components/jquery/dist/jquery.min.js"></script>
+<script src="bower_components/reveal.js/lib/js/head.min.js"></script>
+<script src="bower_components/reveal.js/js/reveal.min.js"></script>
+<script src="bower_components/prism/prism.js"></script>
+
+<script>
+	Reveal.initialize({
+		controls: false,
+		progress: true,
+		history: true,
+		center: true,
+
+		theme: Reveal.getQueryHash().theme,
+		transition: Reveal.getQueryHash().transition || 'default',
+
+		// Optional libraries used to extend on reveal.js
+		dependencies: [
+			{ src: "bower_components/reveal.js/lib/js/classList.js", condition: function() { return !document.body.classList; } },
+			{ src: "bower_components/reveal.js/plugin/markdown/marked.js", condition: function() { return !!document.querySelector( "[data-markdown]" ); } },
+			{ src: "bower_components/reveal.js/plugin/markdown/markdown.js", condition: function() { return !!document.querySelector( "[data-markdown]" ); } },
+			{ src: "bower_components/reveal.js/plugin/zoom-js/zoom.js", async: true, condition: function() { return !!document.body.classList; } },
+			{ src: "bower_components/reveal.js/plugin/notes/notes.js", async: true, condition: function() { return !!document.body.classList; } }
+		]
+	});
+
+	var updateOutput = function() {
+		var output = $( this ).parents( "section" ).find( ".output" );
+		try {
+			output.html( $( this ).text() );
+		} catch(e) {}
+	};
+
+	$( "code" )
+		.each(function() {
+			updateOutput.apply( this );
+		})
+		.on( "keydown", function() {
+			var self = this;
+			setTimeout(function() {
+				updateOutput.apply( self );
+			}, 50);
+		})
+		.on( "blur", Prism.highlightAll );
+
+	$( document )
+		.on( "submit", "form", function( event ) {
+			event.preventDefault();
+			$( this )
+				.parents( ".output" )
+				.addClass( "success" )
+				.html( "<h6>Successful Submission</h6>" );
+		});
+</script>
+
+</body>
+</html>

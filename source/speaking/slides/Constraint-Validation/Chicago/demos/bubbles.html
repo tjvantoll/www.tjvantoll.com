@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Building your own bubbles</title>
+
+	<link rel="stylesheet" href="../bower_components/kendo-ui-core/styles/kendo.common-bootstrap.min.css">
+	<link rel="stylesheet" href="../bower_components/kendo-ui-core/styles/kendo.bootstrap.min.css">
+</head>
+<body>
+
+<form>
+	<label for="email">Email:</label>
+	<input class="k-textbox" type="email" id="email" required>
+
+	<button class="k-button">Go</button>
+</form>
+
+<script src="../bower_components/jquery/dist/jquery.js"></script>
+<script src="../bower_components/kendo-ui-core/js/kendo.ui.core.min.js"></script>
+<script>
+	var email = $( "#email" )
+		.kendoTooltip({
+			content: function() {
+				return email[ 0 ].validationMessage;
+			}
+		})
+		.on( "blur", function() {
+			email.kendoTooltip( "hide" );
+			email.kendoTooltip( "refresh" );
+		})
+		.on( "focus", function() {
+			email.kendoTooltip( "show" );
+		})
+		.on( "invalid", function( event ) {
+			// Suppress the default bubbles
+			event.preventDefault();
+		});
+
+
+	// Manually detect form submission attempts
+	// to set focus appropriately.
+	$( "input[type=submit], button:not([type=button])" )
+		.on( "click", function() {
+			$( ":invalid" ).first().focus();
+		});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Webshims</title>
+
+	<link rel="stylesheet" href="demos.css">
+</head>
+<body>
+
+<form>
+	<div>
+		<label for="name">Name:</label>
+		<input id="name" name="name" required>
+	</div>
+	<div>
+		<label for="email">Email:</label>
+		<input id="email" name="email" type="email" required>
+	</div>
+	<div>
+		<button>Submit</button>
+	</div>
+</form>
+
+<script src="../bower_components/jquery/dist/jquery.js"></script>
+<script src="../bower_components/webshim/js-webshim/minified/polyfiller.js"></script>
+<script>
+	webshim.polyfill( "forms" );
+</script>
+</body>
+</html>
