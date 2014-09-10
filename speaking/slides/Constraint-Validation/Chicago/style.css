@@ -1,0 +1,57 @@
+.reveal section img {
+	border: none;
+	background: none;
+	box-shadow: none;
+}
+.reveal h1, .reveal h2, .reveal h3, .reveal h4 {
+	text-transform: none;
+}
+.reveal .spaced li {
+	margin: 1em 0;
+}
+
+
+.reveal pre {
+	max-height: 450px;
+	overflow: auto;
+	font-size: 0.9em;
+	box-sizing: border-box;
+	width: 100%;
+	padding-bottom: 0;
+}
+pre.inline {
+	display: inline-block;
+	padding: 0.2em;
+	margin: 0;
+	text-align: center;
+}
+pre.constrained {
+	font-size: 0.8em;
+	margin-top: 0;
+	padding-top: 0.1em;
+	padding-bottom: 0.1em;
+}
+
+section .output {
+	background: #F5F2F0;
+	padding: 1em;
+	box-sizing: border-box;
+	width: 100%;
+}
+section .output input, section .output button {
+	font-size: 1em;
+}
+
+.output.success {
+	color: white;
+	background: green;
+}
+.output.success h6 {
+	margin: 0;
+	letter-spacing: 0.1em;
+}
+
+img.full-slide {
+	width: 100%;
+	max-width: 100%;
+}

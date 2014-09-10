@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>Only show :invalid after interaction</title>
+
+	<link rel="stylesheet" href="demos.css">
+	<style>
+		.interacted :invalid, .interacted:invalid {
+			background: red;
+		}
+	</style>
+</head>
+<body>
+
+<form>
+	<div>
+		<input required>
+	</div>
+	<div>
+		<button>Go</button>
+	</div>
+</form>
+
+<script src="../bower_components/jquery/dist/jquery.js"></script>
+<script>
+	$( "input, select, textarea" ).on( "blur", function() {
+		$( this ).addClass( "interacted" );
+	});
+
+	// Manually detect form submission attempts
+	$( "input[type=submit], button:not([type=button])" )
+		.on( "click", function() {
+			$( this ).parents( "form" ).addClass( "interacted" );
+		});
+</script>
+
+</body>
+</html>

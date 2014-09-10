@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Demo One</title>
+
+	<link rel="stylesheet" href="demos.css">
+	<style>
+		.invalid {
+			color: red;
+		}
+	</style>
+</head>
+<body>
+
+<form>
+	<ul class="error-messages"></ul>
+
+	<div>
+		<label for="name">Name:</label>
+		<input id="name" name="name" required>
+	</div>
+	<div>
+		<label for="email">Email:</label>
+		<input id="email" name="email" type="email" required>
+	</div>
+	<div>
+		<button>Submit</button>
+	</div>
+</form>
+
+<script src="../bower_components/jquery/dist/jquery.js"></script>
+<script>
+	(function() {
+		$( "form" ).on( "submit", function( event ) {
+			event.preventDefault();
+			$.post( "api.php", {
+				name: this.name.value,
+				email: this.email.value
+			}).then( success, failure );
+		});
+
+		function success() {
+			$( "form" ).replaceWith( "<img src='../images/supercorn.gif'>" );
+		}
+		function failure( xhr ) {
+			var errors = xhr.responseJSON.errors,
+				errorList = $( ".error-messages" ).empty().show();
+
+			// Reset state from previous run
+			$( ".invalid" ).removeClass( "invalid" );
+			$( "[aria-invalid]" ).removeAttr( "aria-invalid" );
+
+			Object.keys( errors ).forEach(function( key ) {
+				var label = $( "label[for=" + key + "]" ),
+					field = $( "[name=" + key + "]" ),
+					messages = errors[ key ];
+
+				if ( messages.length > 0 ) {
+					label.addClass( "invalid" );
+					field.attr( "aria-invalid", true );
+				}
+
+				errors[ key ].forEach(function( message ) {
+					errorList.append( "<li>" + message + "</li>" );
+				});
+			});
+
+			// Focus the first invalid field
+			$( ".invalid:first" ).next( "input" ).focus();
+		}
+	}());
+</script>
+</body>
+</html>
