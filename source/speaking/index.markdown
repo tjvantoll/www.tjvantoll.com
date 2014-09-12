@@ -9,6 +9,19 @@ sharing: false
 	<p>On certain occasions I've been known to talk to people in real life.</p>
 
 	<article>
+		<img src="/speaking/thumbnail/html5-validation-no-one.png">
+		<h2>HTML5 Form Validation: Why no one uses it, and how you can!</h2>
+		<ul>
+			<li>
+				<span>September 12th, 2014:</span>
+				<a href="http://events.jquery.org/2014/chicago/">jQuery Chicago</a> |
+				<address class="country-us">Chicago, Illinois</address> |
+				<a href="/speaking/slides/Constraint-Validation/Chicago/">Slides</a>
+			</li>
+		</ul>
+	</article>
+
+	<article>
 		<img src="/speaking/thumbnail/state-of-hybrid.png">
 		<h2>The State of Hybrid</h2>
 		<ul>
