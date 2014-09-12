@@ -4,7 +4,7 @@
   <title><![CDATA[Category: QUnit | TJ VanToll]]></title>
   <link href="http://tjvantoll.com/blog/categories/qunit/atom.xml" rel="self"/>
   <link href="http://tjvantoll.com/"/>
-  <updated>2014-09-10T16:37:57-04:00</updated>
+  <updated>2014-09-12T06:48:14-05:00</updated>
   <id>http://tjvantoll.com/</id>
   <author>
     <name><![CDATA[TJ VanToll]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[Logging Test Failures in a PhantomJS QUnit Runner]]></title>
     <link href="http://tjvantoll.com/2012/08/22/logging-test-failures-in-a-phantomjs-qunit-runner/"/>
-    <updated>2012-08-22T00:00:00-04:00</updated>
+    <updated>2012-08-22T00:00:00-05:00</updated>
     <id>http://tjvantoll.com/2012/08/22/logging-test-failures-in-a-phantomjs-qunit-runner</id>
     <content type="html"><![CDATA[<p><a href="http://phantomjs.com">PhantomJS</a> provides an easy means of automating <a href="http://qunitjs.com">QUnit</a> tests; it even provides a <a href="https://github.com/ariya/phantomjs/blob/master/examples/run-qunit.js">test runner</a> that you can simply copy into your project to run them.</p>
 
