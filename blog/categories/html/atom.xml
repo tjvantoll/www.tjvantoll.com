@@ -4,7 +4,7 @@
   <title><![CDATA[Category: HTML | TJ VanToll]]></title>
   <link href="http://tjvantoll.com/blog/categories/html/atom.xml" rel="self"/>
   <link href="http://tjvantoll.com/"/>
-  <updated>2014-09-13T07:49:01-05:00</updated>
+  <updated>2014-09-18T13:13:40-04:00</updated>
   <id>http://tjvantoll.com/</id>
   <author>
     <name><![CDATA[TJ VanToll]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[Using Semantic HTML to Drive Display Logic]]></title>
     <link href="http://tjvantoll.com/2014/05/01/using-semantic-html-to-drive-display-logic/"/>
-    <updated>2014-05-01T00:00:00-05:00</updated>
+    <updated>2014-05-01T00:00:00-04:00</updated>
     <id>http://tjvantoll.com/2014/05/01/using-semantic-html-to-drive-display-logic</id>
     <content type="html"><![CDATA[<p>Today I want to share a quick tip for driving display logic in UI components—and I think it's easier to see in an example.</p>
 
@@ -193,7 +193,7 @@ regularButton.addEventListener( "click", function() {</p>
   <entry>
     <title type="html"><![CDATA[Effect of iOS 7.1's minimal-ui Viewport Property]]></title>
     <link href="http://tjvantoll.com/2014/03/11/effect-of-ios-7-dot-1s-minimal-ui-meta-tag/"/>
-    <updated>2014-03-11T00:00:00-05:00</updated>
+    <updated>2014-03-11T00:00:00-04:00</updated>
     <id>http://tjvantoll.com/2014/03/11/effect-of-ios-7-dot-1s-minimal-ui-meta-tag</id>
     <content type="html"><![CDATA[<p>One of the major, and <a href="http://www.mobilexweb.com/blog/safari-ios7-html5-problems-apis-review">not well-received</a> changes introduced in iOS7 was the lack of a true full screen mode. Apple's answer was the introduction of a <code>minimal-ui</code> viewport property in iOS 7.1, which was released yesterday.</p>
 
@@ -213,7 +213,7 @@ regularButton.addEventListener( "click", function() {</p>
   <entry>
     <title type="html"><![CDATA[Why Is Styling Form Elements So Damn Hard?]]></title>
     <link href="http://tjvantoll.com/2013/12/06/why-is-styling-form-elements-so-damn-hard/"/>
-    <updated>2013-12-06T12:54:00-06:00</updated>
+    <updated>2013-12-06T12:54:00-05:00</updated>
     <id>http://tjvantoll.com/2013/12/06/why-is-styling-form-elements-so-damn-hard</id>
     <content type="html"><![CDATA[<p>The web has come a long way. We can now build powerful 3D animations, design sites that work on a vast array of screen sizes, and even <a href="https://brendaneich.com/2013/03/the-web-is-the-game-platform/">play high end games</a> - all without leaving our browser.</p>
 
@@ -344,7 +344,7 @@ regularButton.addEventListener( "click", function() {</p>
   <entry>
     <title type="html"><![CDATA[Using jQuery UI Tabs with the &lt;base&gt; Tag]]></title>
     <link href="http://tjvantoll.com/2013/02/17/using-jquery-ui-tabs-with-the-base-tag/"/>
-    <updated>2013-02-17T21:14:00-06:00</updated>
+    <updated>2013-02-17T21:14:00-05:00</updated>
     <id>http://tjvantoll.com/2013/02/17/using-jquery-ui-tabs-with-the-base-tag</id>
     <content type="html"><![CDATA[<p>As there have been <a href="http://bugs.jqueryui.com/ticket/7822">numerous bug submissions</a> for this, I feel the need to explain how to properly use <a href="http://jqueryui.com/tabs">jQuery UI's tab widget</a> with a <code>&lt;base&gt;</code> tag.  Let's start with what the <code>&lt;base&gt;</code> tag is intended for.</p>
 
@@ -535,7 +535,7 @@ $( selector ).tabs();
   <entry>
     <title type="html"><![CDATA[Using the body Element as a Top Level Container - Is it Safe Yet?]]></title>
     <link href="http://tjvantoll.com/2013/01/05/is-it-safe-to-use-the-body-as-a-top-level-container-yet/"/>
-    <updated>2013-01-05T14:21:00-06:00</updated>
+    <updated>2013-01-05T14:21:00-05:00</updated>
     <id>http://tjvantoll.com/2013/01/05/is-it-safe-to-use-the-body-as-a-top-level-container-yet</id>
     <content type="html"><![CDATA[<p>View source on almost any web page and you'll likely see the following:</p>
 

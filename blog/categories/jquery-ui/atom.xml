@@ -4,7 +4,7 @@
   <title><![CDATA[Category: jQuery UI | TJ VanToll]]></title>
   <link href="http://tjvantoll.com/blog/categories/jquery-ui/atom.xml" rel="self"/>
   <link href="http://tjvantoll.com/"/>
-  <updated>2014-09-13T07:49:01-05:00</updated>
+  <updated>2014-09-18T13:13:40-04:00</updated>
   <id>http://tjvantoll.com/</id>
   <author>
     <name><![CDATA[TJ VanToll]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[A jQuery UI Vertical Tabs Extension]]></title>
     <link href="http://tjvantoll.com/2014/07/04/a-jquery-ui-vertical-tabs-extension/"/>
-    <updated>2014-07-04T10:13:00-05:00</updated>
+    <updated>2014-07-04T10:13:00-04:00</updated>
     <id>http://tjvantoll.com/2014/07/04/a-jquery-ui-vertical-tabs-extension</id>
     <content type="html"><![CDATA[<p>The single coolest thing in jQuery UI is the <a href="http://learn.jquery.com/jquery-ui/widget-factory/extending-widgets/">extension mechanism</a> built into the <a href="http://api.jqueryui.com/jquery.widget/">widget factory</a>. In my <a href="http://tjvantoll.com/jquery-ui-in-action.html">upcoming book</a> on jQuery UI I devote an entire chapter to building extensions, and now that the book is <em>mostly</em> done, I want to publish some of the extensions I built for the world to use.</p>
 
@@ -33,7 +33,7 @@
   <entry>
     <title type="html"><![CDATA[Creating a jQuery UI Dialog with a Submit Button]]></title>
     <link href="http://tjvantoll.com/2013/07/10/creating-a-jquery-ui-dialog-with-a-submit-button/"/>
-    <updated>2013-07-10T00:00:00-05:00</updated>
+    <updated>2013-07-10T00:00:00-04:00</updated>
     <id>http://tjvantoll.com/2013/07/10/creating-a-jquery-ui-dialog-with-a-submit-button</id>
     <content type="html"><![CDATA[<p>Say you have the following submittable <code>&lt;form&gt;</code>:</p>
 
@@ -276,7 +276,7 @@ if ( !formAttributeSupport() ) {
   <entry>
     <title type="html"><![CDATA[Showing a Resize Icon on a jQuery UI Dialog]]></title>
     <link href="http://tjvantoll.com/2013/05/28/showing-a-resize-icon-on-a-jquery-ui-dialog/"/>
-    <updated>2013-05-28T21:09:00-05:00</updated>
+    <updated>2013-05-28T21:09:00-04:00</updated>
     <id>http://tjvantoll.com/2013/05/28/showing-a-resize-icon-on-a-jquery-ui-dialog</id>
     <content type="html"><![CDATA[<p>Upon <a href="http://jqueryui.com/upgrade-guide/1.10/">upgrading to jQuery UI 1.10</a> you might notice a visual change to the dialog widget - the resize icon no longer displays by default:</p>
 
@@ -325,7 +325,7 @@ background-position: -80px -224px;
   <entry>
     <title type="html"><![CDATA[Using jQuery UI Tabs with the &lt;base&gt; Tag]]></title>
     <link href="http://tjvantoll.com/2013/02/17/using-jquery-ui-tabs-with-the-base-tag/"/>
-    <updated>2013-02-17T21:14:00-06:00</updated>
+    <updated>2013-02-17T21:14:00-05:00</updated>
     <id>http://tjvantoll.com/2013/02/17/using-jquery-ui-tabs-with-the-base-tag</id>
     <content type="html"><![CDATA[<p>As there have been <a href="http://bugs.jqueryui.com/ticket/7822">numerous bug submissions</a> for this, I feel the need to explain how to properly use <a href="http://jqueryui.com/tabs">jQuery UI's tab widget</a> with a <code>&lt;base&gt;</code> tag.  Let's start with what the <code>&lt;base&gt;</code> tag is intended for.</p>
 
@@ -516,7 +516,7 @@ $( selector ).tabs();
   <entry>
     <title type="html"><![CDATA[Creating a Polished Vertical Tabs Interaction with jQuery UI]]></title>
     <link href="http://tjvantoll.com/2012/11/08/creating-a-polished-vertical-tabs-interaction-with-jquery-ui/"/>
-    <updated>2012-11-08T00:00:00-06:00</updated>
+    <updated>2012-11-08T00:00:00-05:00</updated>
     <id>http://tjvantoll.com/2012/11/08/creating-a-polished-vertical-tabs-interaction-with-jquery-ui</id>
     <content type="html"><![CDATA[<div class="warning">I recently published an official extension that uses the technique explained below. <a href="http://tjvantoll.com/2014/07/04/a-jquery-ui-vertical-tabs-extension/">Learn more</a>.</div>
 
