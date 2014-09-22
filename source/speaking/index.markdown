@@ -16,7 +16,8 @@ sharing: false
 				<span>September 12th, 2014:</span>
 				<a href="http://events.jquery.org/2014/chicago/">jQuery Chicago</a> |
 				<address class="country-us">Chicago, Illinois</address> |
-				<a href="/speaking/slides/Constraint-Validation/Chicago/">Slides</a> |
+				<a href="/speaking/slides/Constraint-Validation/Chicago/">Slides</a> | 
+				<a href="https://www.youtube.com/watch?v=8qvjhMr6UGM&list=PL-0yjdC10QYpmXI3l-PGK1od4kTWOjm_A&index=12">Video</a> | 
 				<a href="https://storify.com/tjvantoll/jquery-chicago-talk">Feedback</a>
 			</li>
 		</ul>
