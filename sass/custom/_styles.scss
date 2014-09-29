@@ -115,8 +115,9 @@ body .one {
 		padding-bottom: 1em;
 	}
 	img {
-		height: 140px;
-		width: 115px;
+		height: 150px;
+		width: 120px;
+		border: none;
 	}
 	a { white-space: normal; }
 	> div { padding: 0 0.5em; }
@@ -132,9 +133,10 @@ aside.sidebar:hover a:hover {
 /******************** About Page *********************/
 /*****************************************************/
 
-#home_me {
+#home-me {
 	float: right;
 	margin: 10px;
+	border: none;
 }
 
 .home-heading {
