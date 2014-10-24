@@ -4,7 +4,7 @@
   <title><![CDATA[Category: CSS | TJ VanToll]]></title>
   <link href="http://tjvantoll.com/blog/categories/css/atom.xml" rel="self"/>
   <link href="http://tjvantoll.com/"/>
-  <updated>2014-09-29T09:35:33-04:00</updated>
+  <updated>2014-10-24T09:55:47-07:00</updated>
   <id>http://tjvantoll.com/</id>
   <author>
     <name><![CDATA[TJ VanToll]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[Using Semantic HTML to Drive Display Logic]]></title>
     <link href="http://tjvantoll.com/2014/05/01/using-semantic-html-to-drive-display-logic/"/>
-    <updated>2014-05-01T00:00:00-04:00</updated>
+    <updated>2014-05-01T00:00:00-07:00</updated>
     <id>http://tjvantoll.com/2014/05/01/using-semantic-html-to-drive-display-logic</id>
     <content type="html"><![CDATA[<p>Today I want to share a quick tip for driving display logic in UI components—and I think it's easier to see in an example.</p>
 
@@ -193,7 +193,7 @@ regularButton.addEventListener( "click", function() {</p>
   <entry>
     <title type="html"><![CDATA[Why Is Styling Form Elements So Damn Hard?]]></title>
     <link href="http://tjvantoll.com/2013/12/06/why-is-styling-form-elements-so-damn-hard/"/>
-    <updated>2013-12-06T12:54:00-05:00</updated>
+    <updated>2013-12-06T12:54:00-08:00</updated>
     <id>http://tjvantoll.com/2013/12/06/why-is-styling-form-elements-so-damn-hard</id>
     <content type="html"><![CDATA[<p>The web has come a long way. We can now build powerful 3D animations, design sites that work on a vast array of screen sizes, and even <a href="https://brendaneich.com/2013/03/the-web-is-the-game-platform/">play high end games</a> - all without leaving our browser.</p>
 
@@ -324,7 +324,7 @@ regularButton.addEventListener( "click", function() {</p>
   <entry>
     <title type="html"><![CDATA[Building Custom Text Strikethroughs with CSS]]></title>
     <link href="http://tjvantoll.com/2013/09/12/building-custom-text-strikethroughs-with-css/"/>
-    <updated>2013-09-12T15:25:00-04:00</updated>
+    <updated>2013-09-12T15:25:00-07:00</updated>
     <id>http://tjvantoll.com/2013/09/12/building-custom-text-strikethroughs-with-css</id>
     <content type="html"><![CDATA[<p><link href="http://tjvantoll.com/stylesheets/custom/posts/2013-09-12.css" rel="stylesheet">
 Adding a strikethrough to a line of text in CSS is easy.</p>
@@ -467,7 +467,7 @@ transform: skewY(10deg);
   <entry>
     <title type="html"><![CDATA[Internet Explorer, Attribute Selectors, and Really Long Attribute Values]]></title>
     <link href="http://tjvantoll.com/2013/06/21/internet-explorer-attribute-selectors-and-long-values/"/>
-    <updated>2013-06-21T21:36:00-04:00</updated>
+    <updated>2013-06-21T21:36:00-07:00</updated>
     <id>http://tjvantoll.com/2013/06/21/internet-explorer-attribute-selectors-and-long-values</id>
     <content type="html"><![CDATA[<p>In Internet Explorer, <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Attribute_selectors">attribute selectors</a> that inspect the attribute's value do not work if the value is >= 4096 characters. This is one of those bugs that you are highly unlikely to run into, but is incredibly painful to track down if you do.</p>
 
@@ -510,7 +510,7 @@ transform: skewY(10deg);
   <entry>
     <title type="html"><![CDATA[Using Semantic Class Names to Show and Hide Elements]]></title>
     <link href="http://tjvantoll.com/2013/06/19/using-semantic-class-names-to-show-and-hide-elements/"/>
-    <updated>2013-06-19T21:29:00-04:00</updated>
+    <updated>2013-06-19T21:29:00-07:00</updated>
     <id>http://tjvantoll.com/2013/06/19/using-semantic-class-names-to-show-and-hide-elements</id>
     <content type="html"><![CDATA[<p>Showing and hiding elements has the potential to get complicated in large applications.</p>
 

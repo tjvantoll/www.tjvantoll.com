@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Web Components | TJ VanToll]]></title>
   <link href="http://tjvantoll.com/blog/categories/web-components/atom.xml" rel="self"/>
   <link href="http://tjvantoll.com/"/>
-  <updated>2014-09-29T09:35:33-04:00</updated>
+  <updated>2014-10-24T09:55:47-07:00</updated>
   <id>http://tjvantoll.com/</id>
   <author>
     <name><![CDATA[TJ VanToll]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[The Problem With Using HTML Imports For Dependency Management]]></title>
     <link href="http://tjvantoll.com/2014/08/12/the-problem-with-using-html-imports-for-dependency-management/"/>
-    <updated>2014-08-12T00:00:00-04:00</updated>
+    <updated>2014-08-12T00:00:00-07:00</updated>
     <id>http://tjvantoll.com/2014/08/12/the-problem-with-using-html-imports-for-dependency-management</id>
     <content type="html"><![CDATA[<p>HTML imports are cool. If you haven't heard of them before, you should read <a href="http://www.html5rocks.com/en/tutorials/webcomponents/imports/">Eric Bidelman's excellent introduction to them</a>, but they're pretty self explanatory with a bit of code. For example the following is how a jQuery UI dialog works in <a href="https://github.com/tjvantoll/ui-web-components">my proof-of-concept web components port</a>:</p>
 
@@ -143,7 +143,7 @@
   <entry>
     <title type="html"><![CDATA[An Addendum to Why Web Components Aren't Ready for Production Yet]]></title>
     <link href="http://tjvantoll.com/2014/07/18/an-addendum-to-why-web-components-arent-ready-for-production-yet/"/>
-    <updated>2014-07-18T14:14:00-04:00</updated>
+    <updated>2014-07-18T14:14:00-07:00</updated>
     <id>http://tjvantoll.com/2014/07/18/an-addendum-to-why-web-components-arent-ready-for-production-yet</id>
     <content type="html"><![CDATA[<p>Yesterday I <a href="http://developer.telerik.com/featured/web-components-arent-ready-production-yet/">published an article on the Telerik Developer Network</a> about the state of web components. In it I argued that web components are not ready for the majority of web developers to use in production.</p>
 

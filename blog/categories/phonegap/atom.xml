@@ -4,7 +4,7 @@
   <title><![CDATA[Category: PhoneGap | TJ VanToll]]></title>
   <link href="http://tjvantoll.com/blog/categories/phonegap/atom.xml" rel="self"/>
   <link href="http://tjvantoll.com/"/>
-  <updated>2014-09-29T09:35:33-04:00</updated>
+  <updated>2014-10-24T09:55:47-07:00</updated>
   <id>http://tjvantoll.com/</id>
   <author>
     <name><![CDATA[TJ VanToll]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[Building a PhoneGap App in 10 Seconds Using Nothing But a CLI]]></title>
     <link href="http://tjvantoll.com/2014/07/25/building-a-phonegap-app-in-10-seconds-using-nothing-but-a-cli/"/>
-    <updated>2014-07-25T10:17:00-04:00</updated>
+    <updated>2014-07-25T10:17:00-07:00</updated>
     <id>http://tjvantoll.com/2014/07/25/building-a-phonegap-app-in-10-seconds-using-nothing-but-a-cli</id>
     <content type="html"><![CDATA[<p>You may have seen Burke Holland's <a href="https://medium.com/@burkeholland/building-and-deploying-a-phonegap-app-in-36-seconds-6552399c12a8">"Building A PhoneGap App in 36 Seconds Using Nothing But a Browser"</a> article on Medium this morning. Although most people probably viewed the post as an interesting—and surprisingly fast—way of building an app, I saw the article as a direct challenge.</p>
 
