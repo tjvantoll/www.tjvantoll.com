@@ -15,7 +15,7 @@ sharing: false
 			<li>
 				<span>October 24th, 2014:</span>
 				<a href="http://pgday.phonegap.com/us2014/">PhoneGap Day US</a> |
-				<address class="country-us">San San Francisco</address> |
+				<address class="country-us">San Francisco</address> |
 				<a href="/speaking/slides/State-of-Hybrid/San-Francisco/">Slides</a>
 			</li>
 		</ul>
