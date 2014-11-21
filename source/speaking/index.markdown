@@ -9,13 +9,26 @@ sharing: false
 	<p>On certain occasions I've been known to talk to people in real life.</p>
 
 	<article>
+		<img src="/speaking/thumbnail/telerik-platform.png">
+		<h2>Building Cross-Platform Apps with the Telerik Platform</h2>
+		<ul>
+			<li>
+				<span>November 21st, 2014:</span>
+				<a href="http://www.m3conf.com/">M3 Conf</a> |
+				<address class="country-us">Columbus, Ohio</address> |
+				<a href="/speaking/slides/Telerik-Platform/Columbus/">Slides</a>
+			</li>
+		</ul>
+	</article>
+
+	<article>
 		<img src="/speaking/thumbnail/state-of-hybrid-tooling.png">
 		<h2>The State of Hybrid Tooling</h2>
 		<ul>
 			<li>
 				<span>October 24th, 2014:</span>
 				<a href="http://pgday.phonegap.com/us2014/">PhoneGap Day US</a> |
-				<address class="country-us">San Francisco</address> |
+				<address class="country-us">San Francisco, California</address> |
 				<a href="/speaking/slides/State-of-Hybrid/San-Francisco/">Slides</a> | 
 				<a href="https://storify.com/tjvantoll/phonegap-day-us-2014">Feedback</a>
 			</li>
