@@ -4,7 +4,7 @@
   <title><![CDATA[TJ VanToll]]></title>
   <link href="http://tjvantoll.com/atom.xml" rel="self"/>
   <link href="http://tjvantoll.com/"/>
-  <updated>2014-10-25T09:40:29-07:00</updated>
+  <updated>2014-11-21T10:45:18-05:00</updated>
   <id>http://tjvantoll.com/</id>
   <author>
     <name><![CDATA[TJ VanToll]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[The Problem With Using HTML Imports For Dependency Management]]></title>
     <link href="http://tjvantoll.com/2014/08/12/the-problem-with-using-html-imports-for-dependency-management/"/>
-    <updated>2014-08-12T00:00:00-07:00</updated>
+    <updated>2014-08-12T00:00:00-04:00</updated>
     <id>http://tjvantoll.com/2014/08/12/the-problem-with-using-html-imports-for-dependency-management</id>
     <content type="html"><![CDATA[<p>HTML imports are cool. If you haven&#8217;t heard of them before, you should read <a href="http://www.html5rocks.com/en/tutorials/webcomponents/imports/">Eric Bidelman&#8217;s excellent introduction to them</a>, but they&#8217;re pretty self explanatory with a bit of code. For example the following is how a jQuery UI dialog works in <a href="https://github.com/tjvantoll/ui-web-components">my proof-of-concept web components port</a>:</p>
 
@@ -151,7 +151,7 @@
   <entry>
     <title type="html"><![CDATA[Building a PhoneGap App in 10 Seconds Using Nothing But a CLI]]></title>
     <link href="http://tjvantoll.com/2014/07/25/building-a-phonegap-app-in-10-seconds-using-nothing-but-a-cli/"/>
-    <updated>2014-07-25T10:17:00-07:00</updated>
+    <updated>2014-07-25T10:17:00-04:00</updated>
     <id>http://tjvantoll.com/2014/07/25/building-a-phonegap-app-in-10-seconds-using-nothing-but-a-cli</id>
     <content type="html"><![CDATA[<p>You may have seen Burke Holland&#8217;s <a href="https://medium.com/@burkeholland/building-and-deploying-a-phonegap-app-in-36-seconds-6552399c12a8">&#8220;Building A PhoneGap App in 36 Seconds Using Nothing But a Browser&#8221;</a> article on Medium this morning. Although most people probably viewed the post as an interesting—and surprisingly fast—way of building an app, I saw the article as a direct challenge.</p>
 
@@ -193,7 +193,7 @@
   <entry>
     <title type="html"><![CDATA[An Addendum to Why Web Components Aren't Ready for Production Yet]]></title>
     <link href="http://tjvantoll.com/2014/07/18/an-addendum-to-why-web-components-arent-ready-for-production-yet/"/>
-    <updated>2014-07-18T14:14:00-07:00</updated>
+    <updated>2014-07-18T14:14:00-04:00</updated>
     <id>http://tjvantoll.com/2014/07/18/an-addendum-to-why-web-components-arent-ready-for-production-yet</id>
     <content type="html"><![CDATA[<p>Yesterday I <a href="http://developer.telerik.com/featured/web-components-arent-ready-production-yet/">published an article on the Telerik Developer Network</a> about the state of web components. In it I argued that web components are not ready for the majority of web developers to use in production.</p>
 
@@ -263,7 +263,7 @@
   <entry>
     <title type="html"><![CDATA[A jQuery UI Vertical Tabs Extension]]></title>
     <link href="http://tjvantoll.com/2014/07/04/a-jquery-ui-vertical-tabs-extension/"/>
-    <updated>2014-07-04T10:13:00-07:00</updated>
+    <updated>2014-07-04T10:13:00-04:00</updated>
     <id>http://tjvantoll.com/2014/07/04/a-jquery-ui-vertical-tabs-extension</id>
     <content type="html"><![CDATA[<p>The single coolest thing in jQuery UI is the <a href="http://learn.jquery.com/jquery-ui/widget-factory/extending-widgets/">extension mechanism</a> built into the <a href="http://api.jqueryui.com/jquery.widget/">widget factory</a>. In my <a href="http://tjvantoll.com/jquery-ui-in-action.html">upcoming book</a> on jQuery UI I devote an entire chapter to building extensions, and now that the book is <em>mostly</em> done, I want to publish some of the extensions I built for the world to use.</p>
 
@@ -281,7 +281,7 @@
   <entry>
     <title type="html"><![CDATA[Using Semantic HTML to Drive Display Logic]]></title>
     <link href="http://tjvantoll.com/2014/05/01/using-semantic-html-to-drive-display-logic/"/>
-    <updated>2014-05-01T00:00:00-07:00</updated>
+    <updated>2014-05-01T00:00:00-04:00</updated>
     <id>http://tjvantoll.com/2014/05/01/using-semantic-html-to-drive-display-logic</id>
     <content type="html"><![CDATA[<p>Today I want to share a quick tip for driving display logic in UI components—and I think it&#8217;s easier to see in an example.</p>
 
@@ -482,7 +482,7 @@
   <entry>
     <title type="html"><![CDATA[Effect of iOS 7.1's minimal-ui Viewport Property]]></title>
     <link href="http://tjvantoll.com/2014/03/11/effect-of-ios-7-dot-1s-minimal-ui-meta-tag/"/>
-    <updated>2014-03-11T00:00:00-07:00</updated>
+    <updated>2014-03-11T00:00:00-04:00</updated>
     <id>http://tjvantoll.com/2014/03/11/effect-of-ios-7-dot-1s-minimal-ui-meta-tag</id>
     <content type="html"><![CDATA[<p>One of the major, and <a href="http://www.mobilexweb.com/blog/safari-ios7-html5-problems-apis-review">not well-received</a> changes introduced in iOS7 was the lack of a true full screen mode. Apple&#8217;s answer was the introduction of a <code>minimal-ui</code> viewport property in iOS 7.1, which was released yesterday.</p>
 
@@ -503,7 +503,7 @@
   <entry>
     <title type="html"><![CDATA[Connecting AppBuilder Projects to Facebook]]></title>
     <link href="http://tjvantoll.com/2014/02/06/connecting-appbuilder-projects-to-facebook/"/>
-    <updated>2014-02-06T13:08:00-08:00</updated>
+    <updated>2014-02-06T13:08:00-05:00</updated>
     <id>http://tjvantoll.com/2014/02/06/connecting-appbuilder-projects-to-facebook</id>
     <content type="html"><![CDATA[<p>One commonly requested, and non-trivial requirement PhoneGap/Cordova apps often have is Facebook integration. To perform the actual integration, hybrid Cordova apps have an advantage over traditional web apps: they can leverage the platform&#8217;s native Facebook APIs.</p>
 
@@ -628,7 +628,7 @@
   <entry>
     <title type="html"><![CDATA[Only the gzip Size Matters]]></title>
     <link href="http://tjvantoll.com/2014/01/27/only-the-gzip-size-matters/"/>
-    <updated>2014-01-27T19:32:00-08:00</updated>
+    <updated>2014-01-27T19:32:00-05:00</updated>
     <id>http://tjvantoll.com/2014/01/27/only-the-gzip-size-matters</id>
     <content type="html"><![CDATA[<p>Let&#8217;s just get it out there: the only size that matters for a CSS or JavaScript file is its gzipped size.</p>
 
@@ -701,7 +701,7 @@
   <entry>
     <title type="html"><![CDATA[Speaking Tip: Use the iPad's Clock App as a Timer]]></title>
     <link href="http://tjvantoll.com/2014/01/23/speaking-tip-use-the-ipad-clock-app-as-a-timer/"/>
-    <updated>2014-01-23T09:42:00-08:00</updated>
+    <updated>2014-01-23T09:42:00-05:00</updated>
     <id>http://tjvantoll.com/2014/01/23/speaking-tip-use-the-ipad-clock-app-as-a-timer</id>
     <content type="html"><![CDATA[<p>I <a href="http://tjvantoll.com/speaking/">have been speaking</a> for some time now, and I&#8217;ve learned that keeping track of time is hard. And it&#8217;s important; no one likes attending the talk that goes ten minutes over, or the talk that awkwardly ends half way through.</p>
 
@@ -749,7 +749,7 @@
   <entry>
     <title type="html"><![CDATA[Why Is Styling Form Elements So Damn Hard?]]></title>
     <link href="http://tjvantoll.com/2013/12/06/why-is-styling-form-elements-so-damn-hard/"/>
-    <updated>2013-12-06T12:54:00-08:00</updated>
+    <updated>2013-12-06T12:54:00-05:00</updated>
     <id>http://tjvantoll.com/2013/12/06/why-is-styling-form-elements-so-damn-hard</id>
     <content type="html"><![CDATA[<p>The web has come a long way. We can now build powerful 3D animations, design sites that work on a vast array of screen sizes, and even <a href="https://brendaneich.com/2013/03/the-web-is-the-game-platform/">play high end games</a> - all without leaving our browser.</p>
 
@@ -917,7 +917,7 @@
   <entry>
     <title type="html"><![CDATA[Hey Developers - You Should Spell Check Your Documentation]]></title>
     <link href="http://tjvantoll.com/2013/09/18/hey-developers-you-should-spell-check-your-documentation/"/>
-    <updated>2013-09-18T09:56:00-07:00</updated>
+    <updated>2013-09-18T09:56:00-04:00</updated>
     <id>http://tjvantoll.com/2013/09/18/hey-developers-you-should-spell-check-your-documentation</id>
     <content type="html"><![CDATA[<p>As developers we write code. Therefore, the thought of using a spell checker brings to mind something like this:</p>
 
@@ -966,7 +966,7 @@
   <entry>
     <title type="html"><![CDATA[Building Custom Text Strikethroughs with CSS]]></title>
     <link href="http://tjvantoll.com/2013/09/12/building-custom-text-strikethroughs-with-css/"/>
-    <updated>2013-09-12T15:25:00-07:00</updated>
+    <updated>2013-09-12T15:25:00-04:00</updated>
     <id>http://tjvantoll.com/2013/09/12/building-custom-text-strikethroughs-with-css</id>
     <content type="html"><![CDATA[<p><link href="http://tjvantoll.com/stylesheets/custom/posts/2013-09-12.css" rel="stylesheet">
 Adding a strikethrough to a line of text in CSS is easy.</p>
@@ -1168,7 +1168,7 @@ Adding a strikethrough to a line of text in CSS is easy.</p>
   <entry>
     <title type="html"><![CDATA[Bugs with document.activeElement in Internet Explorer]]></title>
     <link href="http://tjvantoll.com/2013/08/30/bugs-with-document-activeelement-in-internet-explorer/"/>
-    <updated>2013-08-30T14:46:00-07:00</updated>
+    <updated>2013-08-30T14:46:00-04:00</updated>
     <id>http://tjvantoll.com/2013/08/30/bugs-with-document-activeelement-in-internet-explorer</id>
     <content type="html"><![CDATA[<p>There are two <em>fun</em> bugs related to <code>document.activeElement</code> in IE that have come up recently in jQuery UI. To help save others some pain, I felt these needed to be documented.</p>
 
@@ -1284,7 +1284,7 @@ Adding a strikethrough to a line of text in CSS is easy.</p>
   <entry>
     <title type="html"><![CDATA[New Beginnings]]></title>
     <link href="http://tjvantoll.com/2013/08/14/new-beginnings/"/>
-    <updated>2013-08-14T00:00:00-07:00</updated>
+    <updated>2013-08-14T00:00:00-04:00</updated>
     <id>http://tjvantoll.com/2013/08/14/new-beginnings</id>
     <content type="html"><![CDATA[<p>I&#8217;m excited to announce that I&#8217;ll be joining <a href="http://telerik.com">Telerik</a> as a Developer Advocate for <a href="http://icenium.com">Icenium</a>. I&#8217;ve been doing a lot of <a href="http://tjvantoll.com/blog/archives/">speaking</a> and <a href="http://tjvantoll.com/speaking/">writing</a> in my free time, and this opportunity will give me a chance to do that as part of my day job.</p>
 
@@ -1297,7 +1297,7 @@ Adding a strikethrough to a line of text in CSS is easy.</p>
   <entry>
     <title type="html"><![CDATA[Creating a jQuery UI Dialog with a Submit Button]]></title>
     <link href="http://tjvantoll.com/2013/07/10/creating-a-jquery-ui-dialog-with-a-submit-button/"/>
-    <updated>2013-07-10T00:00:00-07:00</updated>
+    <updated>2013-07-10T00:00:00-04:00</updated>
     <id>http://tjvantoll.com/2013/07/10/creating-a-jquery-ui-dialog-with-a-submit-button</id>
     <content type="html"><![CDATA[<p>Say you have the following submittable <code>&lt;form&gt;</code>:</p>
 
@@ -1646,7 +1646,7 @@ Adding a strikethrough to a line of text in CSS is easy.</p>
   <entry>
     <title type="html"><![CDATA[Internet Explorer, Attribute Selectors, and Really Long Attribute Values]]></title>
     <link href="http://tjvantoll.com/2013/06/21/internet-explorer-attribute-selectors-and-long-values/"/>
-    <updated>2013-06-21T21:36:00-07:00</updated>
+    <updated>2013-06-21T21:36:00-04:00</updated>
     <id>http://tjvantoll.com/2013/06/21/internet-explorer-attribute-selectors-and-long-values</id>
     <content type="html"><![CDATA[<p>In Internet Explorer, <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Attribute_selectors">attribute selectors</a> that inspect the attribute&#8217;s value do not work if the value is >= 4096 characters. This is one of those bugs that you are highly unlikely to run into, but is incredibly painful to track down if you do.</p>
 
@@ -1708,7 +1708,7 @@ Adding a strikethrough to a line of text in CSS is easy.</p>
   <entry>
     <title type="html"><![CDATA[Using Semantic Class Names to Show and Hide Elements]]></title>
     <link href="http://tjvantoll.com/2013/06/19/using-semantic-class-names-to-show-and-hide-elements/"/>
-    <updated>2013-06-19T21:29:00-07:00</updated>
+    <updated>2013-06-19T21:29:00-04:00</updated>
     <id>http://tjvantoll.com/2013/06/19/using-semantic-class-names-to-show-and-hide-elements</id>
     <content type="html"><![CDATA[<p>Showing and hiding elements has the potential to get complicated in large applications.</p>
 
@@ -1928,7 +1928,7 @@ Adding a strikethrough to a line of text in CSS is easy.</p>
   <entry>
     <title type="html"><![CDATA[Showing a Resize Icon on a jQuery UI Dialog]]></title>
     <link href="http://tjvantoll.com/2013/05/28/showing-a-resize-icon-on-a-jquery-ui-dialog/"/>
-    <updated>2013-05-28T21:09:00-07:00</updated>
+    <updated>2013-05-28T21:09:00-04:00</updated>
     <id>http://tjvantoll.com/2013/05/28/showing-a-resize-icon-on-a-jquery-ui-dialog</id>
     <content type="html"><![CDATA[<p>Upon <a href="http://jqueryui.com/upgrade-guide/1.10/">upgrading to jQuery UI 1.10</a> you might notice a visual change to the dialog widget - the resize icon no longer displays by default:</p>
 
@@ -1982,7 +1982,7 @@ Adding a strikethrough to a line of text in CSS is easy.</p>
   <entry>
     <title type="html"><![CDATA[Why are Enter Keypresses Clicking My Buttons in IE?]]></title>
     <link href="http://tjvantoll.com/2013/05/22/why-are-enter-keypresses-clicking-my-buttons-in-ie/"/>
-    <updated>2013-05-22T22:15:00-07:00</updated>
+    <updated>2013-05-22T22:15:00-04:00</updated>
     <id>http://tjvantoll.com/2013/05/22/why-are-enter-keypresses-clicking-my-buttons-in-ie</id>
     <content type="html"><![CDATA[<p>When you press the Enter key in a textbox, the browser will automatically attempt to perform an <a href="http://www.whatwg.org/specs/web-apps/current-work/multipage/association-of-controls-and-forms.html#implicit-submission">implicit submission</a> of the textbox&#8217;s <code>&lt;form&gt;</code>.</p>
 
@@ -2067,7 +2067,7 @@ Adding a strikethrough to a line of text in CSS is easy.</p>
   <entry>
     <title type="html"><![CDATA[Using Ternary Operators for More Maintainable Templates]]></title>
     <link href="http://tjvantoll.com/2013/04/26/using-ternary-operators-for-more-maintainable-templates/"/>
-    <updated>2013-04-26T00:00:00-07:00</updated>
+    <updated>2013-04-26T00:00:00-04:00</updated>
     <id>http://tjvantoll.com/2013/04/26/using-ternary-operators-for-more-maintainable-templates</id>
     <content type="html"><![CDATA[<p>With the rise of JavaScript MVC frameworks, writing templates has become a large part of many web developer&#8217;s workflow. As such, I thought I&#8217;d share a tip that has made my templates far more readable and maintainable over the years, ternary operators.<!-- http://jsbin.com/ekiwal/3/edit --></p>
 
