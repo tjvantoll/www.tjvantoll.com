@@ -125,7 +125,7 @@ jQuery UI has a lot of good 101-level material scattered throughout the web, but
 
 My desire to share this information is what gave me the motivation to keep going. If I set out to write a 101-level book on jQuery UI I would've lost the desire to write by week three.
 
-To me motivation was everything. People frequently ask me if I'll write another book, and my answer is that I need a topic compelling enough to spend a year of my life on—aka something pretty damn compelling.
+To me motivation was everything. There were *many* nights that I had no desire to write but had to find a way to write a few pages. People frequently ask me if I'll write another book, and my answer is that I need a topic compelling enough to spend a year of my life on—something that I want to write about bad enough to put myself through the process again.
 
 I'm sure there is a dollar amount that would give me enough motivation, and who knows, after *jQuery UI in Action* becomes the next *Fifty Shades of Grey* maybe I'll take all of this back.
 
