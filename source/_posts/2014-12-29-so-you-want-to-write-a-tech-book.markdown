@@ -143,7 +143,7 @@ An even cooler, and somewhat surreal moment happened when [Amazon sent me an ema
 
 But the biggest unexpected perk for me was learning to be a better writer. Manning has a lot of really smart editors—people that produce books for a living. Over the last year and a half I've learned about the best way to structure content, how to teach through writing effectively, how to attract a potential reader's interest, and ways to hold a reader's attention.
 
-I've learned a lot about grammar that I'm pretty sure they didn't teach me in high school. I now know what en and em dashes are and how to use them. I know that you can use `Option` + `Shift` + `-` to type an em dash on a Mac. I know what an Oxford comma is and why I don't like people that omit them. I have a stance on open grammar style issues, like whether to capitalize complete sentences after a colon and whether to places spaces around em dashes (nope on both, by the way).
+I've learned a lot about grammar that I'm pretty sure they didn't teach me in high school. I now know what en and em dashes are and how to use them. I know that you can use `Option` + `Shift` + `-` to type an em dash on a Mac. I know what an Oxford comma is and why I don't like people that omit them. I have a stance on open grammar style issues, like whether to capitalize complete sentences after a colon and whether to place spaces around em dashes (nope on both, by the way).
 
 I'm certainly not a grammar expert, and I definitely don't feel like a professional writer, but I'm far more knowledgeable than I was when I started, and that's kind of cool. Even if you're a coder, writing effectively is still an incredibly valuable skill—even if you're just using it to argue for tabs over spaces in a GitHub comment.
 
