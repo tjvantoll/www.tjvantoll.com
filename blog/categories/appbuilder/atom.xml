@@ -4,7 +4,7 @@
   <title><![CDATA[Category: AppBuilder | TJ VanToll]]></title>
   <link href="http://tjvantoll.com/blog/categories/appbuilder/atom.xml" rel="self"/>
   <link href="http://tjvantoll.com/"/>
-  <updated>2014-12-29T08:48:28-05:00</updated>
+  <updated>2015-01-09T08:54:34-05:00</updated>
   <id>http://tjvantoll.com/</id>
   <author>
     <name><![CDATA[TJ VanToll]]></name>
@@ -12,6 +12,40 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Updating Google Play and iOS App Store Version Numbers with the AppBuilder CLI]]></title>
+    <link href="http://tjvantoll.com/2015/01/09/updating-google-play-and-ios-app-store-version-numbers-with-the-appbuilder-cli/"/>
+    <updated>2015-01-09T07:50:00-05:00</updated>
+    <id>http://tjvantoll.com/2015/01/09/updating-google-play-and-ios-app-store-version-numbers-with-the-appbuilder-cli</id>
+    <content type="html"><![CDATA[<p>I had some issues updating iOS and Android version numbers yesterday so I thought I'd write up what I learned. Here's the scenario: you already have an <a href="http://www.telerik.com/appbuilder">AppBuilder</a> app deployed to the iOS app store and Google Play, and you want to increase the app's version number from 1.0 to 1.0.1.</p>
+
+<p>Doing so turns out to be as simple as running two commands:</p>
+
+<p><code>
+$ appbuilder prop set BundleVersion 1.0.1
+$ appbuilder prop set AndroidVersionCode 2
+</code></p>
+
+<p>The <a href="http://docs.telerik.com/platform/appbuilder/configuring-your-project/project-properties-general#general-project-properties-in-the-appbuilder-command-line-interface"><strong><code>BundleVersion</code></strong></a> is publicly visible version number; it's what users see in Google Play and the iOS App Store. Under the hood, <code>BundleVersion</code> changes the <a href="https://developer.apple.com/library/ios/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html#//apple_ref/doc/uid/20001431-102364"><code>CFBundleVersion</code></a> in your iOS app's Info.plist, and <a href="http://developer.android.com/guide/topics/manifest/manifest-element.html#vname"><code>android:versionName</code></a> in your Android app's AndroidManifest.xml.</p>
+
+<p>The <a href="http://docs.telerik.com/platform/appbuilder/configuring-your-project/project-properties-for-android-devices#android-project-properties-in-the-appbuilder-command-line-interface"><strong><code>AndroidVersionCode</code></strong></a> corresponds to <a href="http://developer.android.com/guide/topics/manifest/manifest-element.html#vcode"><code>android:versionCode</code></a> in the Android app's AndroidManifest.xml, and is an integer value that Google requires you to update with each version of your app. You can increment it by 1, 10, or 10000—as long as it goes up. Google requires this because they let you set your <code>android:versionName</code> to any random string (unlike iOS, whose <code>CFBundleVersion</code> must be a number and has <a href="https://developer.apple.com/library/ios/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html#//apple_ref/doc/uid/20001431-102364">well defined rules</a>).</p>
+
+<p>Running the <code>appbuilder prop</code> command updates your project's .abproject with these changes, so you'll want to commit those updates to your source control program of choice.</p>
+
+<h2>What's this projectVersion property?</h2>
+
+<p>If you're like me and peruse configuration files more than the average person, you may have noticed a <code>projectVersion</code> property in your .abproject. Ignore this property, or at least try to. It's a meta property that AppBuilder maintains for its own purposes, and is not intended to be directly edited.</p>
+
+<p>In fact, the entire .abproject is not intended to be directly edited. If you need to change something you see in .abproject do so with the <code>appbuilder prop</code> command. If you don't know what the property names mean, or the supported values, run <code>appbuilder prop print --help</code>.</p>
+
+<p>Some property changes do nothing more than update the appropriate value your app's .abproject, but some property changes do more. For instance, running <code>appbuilder prop set FrameworkVersion 3.7.0</code> changes the <code>FrameworkVersion</code> in .abproject, but it also upgrades the cordova.*.js scripts within your project to version 3.7.0.</p>
+
+<h2>Wrapping up</h2>
+
+<p>I hope this was helpful. If you have any other questions about this feel free to ask in the comments. Thanks to <a href="https://twitter.com/admatha">Iva Koevska</a> for setting me straight on all of this.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Building a PhoneGap App in 10 Seconds Using Nothing But a CLI]]></title>

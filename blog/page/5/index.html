@@ -9,7 +9,21 @@
   <meta name="author" content="TJ VanToll">
 
   
-  <meta name="description" content="jQuery UI&#8217;s slider plugin looks and behaves much like the browser&#8217;s native input[type=range] control; therefore it makes an excellent &hellip;">
+  <meta name="description" content="What color will the number 3 be in the example below? 1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+&lt;style&gt; td { color: red; } td[colspan=2] { color: blue &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -95,6 +109,82 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title" itemprop="name headline"><a href="/2012/09/19/using-the-attribute-selector-with-numeric-values/">Using the Attribute Selector with Numeric Values</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-09-19T20:42:00-04:00" pubdate data-updated="true">Sep 19<span>th</span>, 2012</time>
+        
+         | <a href="/2012/09/19/using-the-attribute-selector-with-numeric-values/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>What color will the number 3 be in the example below?</p>
+
+<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;style&gt;</span>
+</span><span class='line'>    <span class="nt">td</span> <span class="p">{</span> <span class="k">color</span><span class="o">:</span> <span class="nb">red</span><span class="p">;</span> <span class="p">}</span>
+</span><span class='line'>    <span class="nt">td</span><span class="o">[</span><span class="nt">colspan</span><span class="o">=</span><span class="nt">2</span><span class="o">]</span> <span class="p">{</span> <span class="k">color</span><span class="o">:</span> <span class="nb">blue</span><span class="p">;</span> <span class="p">}</span>
+</span><span class='line'><span class="nt">&lt;/style&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nt">&lt;table&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;tr&gt;</span>
+</span><span class='line'>        <span class="nt">&lt;td</span> <span class="na">colspan=</span><span class="s">&quot;2&quot;</span><span class="nt">&gt;</span>1<span class="nt">&lt;/td&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;/tr&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;td&gt;</span>
+</span><span class='line'>        <span class="nt">&lt;td&gt;</span>2<span class="nt">&lt;/td&gt;</span>
+</span><span class='line'>        <span class="nt">&lt;td&gt;</span>3<span class="nt">&lt;/td&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;/tr&gt;</span>
+</span><span class='line'><span class="nt">&lt;/table&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Turns out it will be red because the <code>td[colspan=2]</code> selector does not match it.  Why?</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/2012/09/19/using-the-attribute-selector-with-numeric-values/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -614,60 +704,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title" itemprop="name headline"><a href="/2012/07/15/native-html5-number-picker-vs-jquery-uis-spinner-which-to-use/">Native HTML5 Number Picker and jQuery UI&#8217;s Spinner - Which to Use?</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-07-15T21:07:00-04:00" pubdate data-updated="true">Jul 15<span>th</span>, 2012</time>
-        
-         | <a href="/2012/07/15/native-html5-number-picker-vs-jquery-uis-spinner-which-to-use/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><a href="http://www.w3.org/TR/html5/number-state.html#number-state">HTML5&#8217;s native number picker</a> (<code>&lt;input[type=number]</code>) and jQuery UI 1.9&#8217;s spinner can both be used to create inputs for numeric data.  So which makes sense for your application?  Let&#8217;s start with a brief explanation of each.</p>
-
-<h3><code>input[type=number]</code></h3>
-
-<p>HTML5 adds several new valid <code>type</code> attributes for <code>&lt;input&gt;</code> elements.  One of them, <code>number</code>, can be used to create a number picker.</p>
-
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;number&quot;</span> <span class="nt">/&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>This will present the user with a number picker in supported browsers, which, as of this writing includes Chrome, Safari, Opera, iOS, Opera Mobile, and Android 4.0+ (<a href="http://caniuse.com/#feat=input-number">full support list</a>).  Here&#8217;s what the user will see in supported browsers:</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/2012/07/15/native-html5-number-picker-vs-jquery-uis-spinner-which-to-use/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/6/">&larr; Older</a>
@@ -704,6 +740,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2015/01/09/updating-google-play-and-ios-app-store-version-numbers-with-the-appbuilder-cli/">Updating Google Play and iOS App Store Version Numbers with the AppBuilder CLI</a>
+      </li>
+    
+      <li class="post">
         <a href="/2014/12/29/so-you-want-to-write-a-tech-book/">So You Want to Write a Tech Book</a>
       </li>
     
@@ -719,10 +759,6 @@
         <a href="/2014/07/18/an-addendum-to-why-web-components-arent-ready-for-production-yet/">An Addendum to Why Web Components Aren&#8217;t Ready for Production Yet</a>
       </li>
     
-      <li class="post">
-        <a href="/2014/07/04/a-jquery-ui-vertical-tabs-extension/">A jQuery UI Vertical Tabs Extension</a>
-      </li>
-    
   </ul>
 </section>
 
@@ -732,7 +768,7 @@
     </div>
   </div>
   <footer role="contentinfo"><p>
-  Copyright &copy; 2014 - <a href="/">TJ VanToll</a> -
+  Copyright &copy; 2015 - <a href="/">TJ VanToll</a> -
   <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
 </p>
 

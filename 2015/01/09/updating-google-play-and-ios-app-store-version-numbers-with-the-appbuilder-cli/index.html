@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>New Beginnings - TJ VanToll - Tutorials, Thoughts, and Ramblings on Front-End Development</title>
+  <title>Updating Google Play and iOS App Store Version Numbers with the AppBuilder CLI - TJ VanToll - Tutorials, Thoughts, and Ramblings on Front-End Development</title>
   <meta name="author" content="TJ VanToll">
 
   
-  <meta name="description" content="I&#8217;m excited to announce that I&#8217;ll be joining Telerik as a Developer Advocate for Icenium. I&#8217;ve been doing a lot of speaking and &hellip;">
+  <meta name="description" content="I had some issues updating iOS and Android version numbers yesterday so I thought I&#8217;d write up what I learned. Here&#8217;s the scenario: you &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://tjvantoll.com/2013/08/14/new-beginnings">
+  <link rel="canonical" href="http://tjvantoll.com/2015/01/09/updating-google-play-and-ios-app-store-version-numbers-with-the-appbuilder-cli">
   <link rel="author" href="https://plus.google.com/+TJVanToll">
 
   <!--[if !lte IE 7]><!-->
@@ -98,7 +98,7 @@
   
   <header>
     
-      <h1 class="entry-title" itemprop="name headline">New Beginnings</h1>
+      <h1 class="entry-title" itemprop="name headline">Updating Google Play and iOS App Store Version Numbers with the AppBuilder CLI</h1>
     
     
       <p class="meta">
@@ -114,7 +114,7 @@
   
 
 
-<time datetime="2013-08-14T00:00:00-04:00" pubdate data-updated="true">Aug 14<span>th</span>, 2013</time>
+<time datetime="2015-01-09T07:50:00-05:00" pubdate data-updated="true">Jan 9<span>th</span>, 2015</time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -123,11 +123,33 @@
   </header>
 
 
-<div class="entry-content"><p>I&#8217;m excited to announce that I&#8217;ll be joining <a href="http://telerik.com">Telerik</a> as a Developer Advocate for <a href="http://icenium.com">Icenium</a>. I&#8217;ve been doing a lot of <a href="/blog/archives/">speaking</a> and <a href="/speaking/">writing</a> in my free time, and this opportunity will give me a chance to do that as part of my day job.</p>
+<div class="entry-content"><p>I had some issues updating iOS and Android version numbers yesterday so I thought I&#8217;d write up what I learned. Here&#8217;s the scenario: you already have an <a href="http://www.telerik.com/appbuilder">AppBuilder</a> app deployed to the iOS app store and Google Play, and you want to increase the app&#8217;s version number from 1.0 to 1.0.1.</p>
 
-<p>While I&#8217;m excited, I&#8217;m also sad to leave behind some great people at <a href="http://liquidweb.com">Liquid Web</a>. They were a great company and a fun place to work, but at the end of the day getting paid to speak and write has been a goal of mine, and this was an opportunity I couldn&#8217;t pass up.</p>
+<p>Doing so turns out to be as simple as running two commands:</p>
 
-<p>I&#8217;ll be talking at two events in October - <a href="http://www.devreach.com/">DevReach</a> and <a href="http://html5devconf.com/">HTML5DevConf</a>. If you&#8217;re going to be there make sure to stop by and say hi.</p>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ appbuilder prop set BundleVersion 1.0.1
+</span><span class='line'>$ appbuilder prop set AndroidVersionCode 2</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The <a href="http://docs.telerik.com/platform/appbuilder/configuring-your-project/project-properties-general#general-project-properties-in-the-appbuilder-command-line-interface"><strong><code>BundleVersion</code></strong></a> is publicly visible version number; it&#8217;s what users see in Google Play and the iOS App Store. Under the hood, <code>BundleVersion</code> changes the <a href="https://developer.apple.com/library/ios/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html#//apple_ref/doc/uid/20001431-102364"><code>CFBundleVersion</code></a> in your iOS app&#8217;s Info.plist, and <a href="http://developer.android.com/guide/topics/manifest/manifest-element.html#vname"><code>android:versionName</code></a> in your Android app&#8217;s AndroidManifest.xml.</p>
+
+<p>The <a href="http://docs.telerik.com/platform/appbuilder/configuring-your-project/project-properties-for-android-devices#android-project-properties-in-the-appbuilder-command-line-interface"><strong><code>AndroidVersionCode</code></strong></a> corresponds to <a href="http://developer.android.com/guide/topics/manifest/manifest-element.html#vcode"><code>android:versionCode</code></a> in the Android app&#8217;s AndroidManifest.xml, and is an integer value that Google requires you to update with each version of your app. You can increment it by 1, 10, or 10000—as long as it goes up. Google requires this because they let you set your <code>android:versionName</code> to any random string (unlike iOS, whose <code>CFBundleVersion</code> must be a number and has <a href="https://developer.apple.com/library/ios/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html#//apple_ref/doc/uid/20001431-102364">well defined rules</a>).</p>
+
+<p>Running the <code>appbuilder prop</code> command updates your project&#8217;s .abproject with these changes, so you&#8217;ll want to commit those updates to your source control program of choice.</p>
+
+<h2>What&#8217;s this projectVersion property?</h2>
+
+<p>If you&#8217;re like me and peruse configuration files more than the average person, you may have noticed a <code>projectVersion</code> property in your .abproject. Ignore this property, or at least try to. It&#8217;s a meta property that AppBuilder maintains for its own purposes, and is not intended to be directly edited.</p>
+
+<p>In fact, the entire .abproject is not intended to be directly edited. If you need to change something you see in .abproject do so with the <code>appbuilder prop</code> command. If you don&#8217;t know what the property names mean, or the supported values, run <code>appbuilder prop print --help</code>.</p>
+
+<p>Some property changes do nothing more than update the appropriate value your app&#8217;s .abproject, but some property changes do more. For instance, running <code>appbuilder prop set FrameworkVersion 3.7.0</code> changes the <code>FrameworkVersion</code> in .abproject, but it also upgrades the cordova.*.js scripts within your project to version 3.7.0.</p>
+
+<h2>Wrapping up</h2>
+
+<p>I hope this was helpful. If you have any other questions about this feel free to ask in the comments. Thanks to <a href="https://twitter.com/admatha">Iva Koevska</a> for setting me straight on all of this.</p>
 </div>
 
 
@@ -150,8 +172,14 @@
   
 
 
-<time datetime="2013-08-14T00:00:00-04:00" pubdate data-updated="true">Aug 14<span>th</span>, 2013</time>
+<time datetime="2015-01-09T07:50:00-05:00" pubdate data-updated="true">Jan 9<span>th</span>, 2015</time>
       
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/android/'>Android</a>, <a class='category' href='/blog/categories/appbuilder/'>AppBuilder</a>, <a class='category' href='/blog/categories/ios/'>iOS</a>
+  
+</span>
 
 
     </p>
@@ -162,7 +190,7 @@
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://tjvantoll.com/2013/08/14/new-beginnings/" data-via="tjvantoll" data-counturl="http://tjvantoll.com/2013/08/14/new-beginnings/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://tjvantoll.com/2015/01/09/updating-google-play-and-ios-app-store-version-numbers-with-the-appbuilder-cli/" data-via="tjvantoll" data-counturl="http://tjvantoll.com/2015/01/09/updating-google-play-and-ios-app-store-version-numbers-with-the-appbuilder-cli/" >Tweet</a>
   
   
   
@@ -171,10 +199,8 @@
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/2013/07/10/creating-a-jquery-ui-dialog-with-a-submit-button/" title="Previous Post: Creating a jQuery UI Dialog with a Submit Button">&laquo; Creating a jQuery UI Dialog with a Submit Button</a>
+        <a class="basic-alignment left" href="/2014/12/29/so-you-want-to-write-a-tech-book/" title="Previous Post: So You Want to Write a Tech Book">&laquo; So You Want to Write a Tech Book</a>
       
-      
-        <a class="basic-alignment right" href="/2013/08/30/bugs-with-document-activeelement-in-internet-explorer/" title="Next Post: Bugs with document.activeElement in Internet Explorer">Bugs with document.activeElement in Internet Explorer &raquo;</a>
       
     </p>
   </footer>
@@ -255,8 +281,8 @@
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://tjvantoll.com/2013/08/14/new-beginnings/';
-        var disqus_url = 'http://tjvantoll.com/2013/08/14/new-beginnings/';
+        var disqus_identifier = 'http://tjvantoll.com/2015/01/09/updating-google-play-and-ios-app-store-version-numbers-with-the-appbuilder-cli/';
+        var disqus_url = 'http://tjvantoll.com/2015/01/09/updating-google-play-and-ios-app-store-version-numbers-with-the-appbuilder-cli/';
         var disqus_script = 'embed.js';
       
     (function () {

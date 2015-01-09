@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: iOS | TJ VanToll]]></title>
-  <link href="http://tjvantoll.com/blog/categories/ios/atom.xml" rel="self"/>
+  <title><![CDATA[Category: Android | TJ VanToll]]></title>
+  <link href="http://tjvantoll.com/blog/categories/android/atom.xml" rel="self"/>
   <link href="http://tjvantoll.com/"/>
   <updated>2015-01-09T08:54:34-05:00</updated>
   <id>http://tjvantoll.com/</id>
@@ -44,26 +44,6 @@ $ appbuilder prop set AndroidVersionCode 2
 <h2>Wrapping up</h2>
 
 <p>I hope this was helpful. If you have any other questions about this feel free to ask in the comments. Thanks to <a href="https://twitter.com/admatha">Iva Koevska</a> for setting me straight on all of this.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Effect of iOS 7.1's minimal-ui Viewport Property]]></title>
-    <link href="http://tjvantoll.com/2014/03/11/effect-of-ios-7-dot-1s-minimal-ui-meta-tag/"/>
-    <updated>2014-03-11T00:00:00-04:00</updated>
-    <id>http://tjvantoll.com/2014/03/11/effect-of-ios-7-dot-1s-minimal-ui-meta-tag</id>
-    <content type="html"><![CDATA[<p>One of the major, and <a href="http://www.mobilexweb.com/blog/safari-ios7-html5-problems-apis-review">not well-received</a> changes introduced in iOS7 was the lack of a true full screen mode. Apple's answer was the introduction of a <code>minimal-ui</code> viewport property in iOS 7.1, which was released yesterday.</p>
-
-<p>I wanted to quickly show the effect this property has. Adding it is as easy as appending <code>minimal-ui</code> to the <code>content</code> attribute of your site's <code>&lt;meta&gt;</code> tag.</p>
-
-<p><code>html
-&lt;meta name="viewport" content="width=device-width, initial-scale=1, minimal-ui"&gt;
-</code></p>
-
-<p>The two images below show a before and after of applying the property to a test page.</p>
-
-<p><img src="/images/posts/2014-03-11/before.png" alt="Without minimal-ui property status bars display" />
-<img src="/images/posts/2014-03-11/after.png" alt="With minimal-ui status bars do not show" /></p>
 ]]></content>
   </entry>
   

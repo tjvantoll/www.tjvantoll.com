@@ -4,7 +4,7 @@
   <title><![CDATA[TJ VanToll]]></title>
   <link href="http://tjvantoll.com/atom.xml" rel="self"/>
   <link href="http://tjvantoll.com/"/>
-  <updated>2014-12-29T08:48:28-05:00</updated>
+  <updated>2015-01-09T08:54:34-05:00</updated>
   <id>http://tjvantoll.com/</id>
   <author>
     <name><![CDATA[TJ VanToll]]></name>
@@ -12,6 +12,41 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Updating Google Play and iOS App Store Version Numbers with the AppBuilder CLI]]></title>
+    <link href="http://tjvantoll.com/2015/01/09/updating-google-play-and-ios-app-store-version-numbers-with-the-appbuilder-cli/"/>
+    <updated>2015-01-09T07:50:00-05:00</updated>
+    <id>http://tjvantoll.com/2015/01/09/updating-google-play-and-ios-app-store-version-numbers-with-the-appbuilder-cli</id>
+    <content type="html"><![CDATA[<p>I had some issues updating iOS and Android version numbers yesterday so I thought I&#8217;d write up what I learned. Here&#8217;s the scenario: you already have an <a href="http://www.telerik.com/appbuilder">AppBuilder</a> app deployed to the iOS app store and Google Play, and you want to increase the app&#8217;s version number from 1.0 to 1.0.1.</p>
+
+<p>Doing so turns out to be as simple as running two commands:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ appbuilder prop set BundleVersion 1.0.1
+</span><span class='line'>$ appbuilder prop set AndroidVersionCode 2</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The <a href="http://docs.telerik.com/platform/appbuilder/configuring-your-project/project-properties-general#general-project-properties-in-the-appbuilder-command-line-interface"><strong><code>BundleVersion</code></strong></a> is publicly visible version number; it&#8217;s what users see in Google Play and the iOS App Store. Under the hood, <code>BundleVersion</code> changes the <a href="https://developer.apple.com/library/ios/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html#//apple_ref/doc/uid/20001431-102364"><code>CFBundleVersion</code></a> in your iOS app&#8217;s Info.plist, and <a href="http://developer.android.com/guide/topics/manifest/manifest-element.html#vname"><code>android:versionName</code></a> in your Android app&#8217;s AndroidManifest.xml.</p>
+
+<p>The <a href="http://docs.telerik.com/platform/appbuilder/configuring-your-project/project-properties-for-android-devices#android-project-properties-in-the-appbuilder-command-line-interface"><strong><code>AndroidVersionCode</code></strong></a> corresponds to <a href="http://developer.android.com/guide/topics/manifest/manifest-element.html#vcode"><code>android:versionCode</code></a> in the Android app&#8217;s AndroidManifest.xml, and is an integer value that Google requires you to update with each version of your app. You can increment it by 1, 10, or 10000—as long as it goes up. Google requires this because they let you set your <code>android:versionName</code> to any random string (unlike iOS, whose <code>CFBundleVersion</code> must be a number and has <a href="https://developer.apple.com/library/ios/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html#//apple_ref/doc/uid/20001431-102364">well defined rules</a>).</p>
+
+<p>Running the <code>appbuilder prop</code> command updates your project&#8217;s .abproject with these changes, so you&#8217;ll want to commit those updates to your source control program of choice.</p>
+
+<h2>What&#8217;s this projectVersion property?</h2>
+
+<p>If you&#8217;re like me and peruse configuration files more than the average person, you may have noticed a <code>projectVersion</code> property in your .abproject. Ignore this property, or at least try to. It&#8217;s a meta property that AppBuilder maintains for its own purposes, and is not intended to be directly edited.</p>
+
+<p>In fact, the entire .abproject is not intended to be directly edited. If you need to change something you see in .abproject do so with the <code>appbuilder prop</code> command. If you don&#8217;t know what the property names mean, or the supported values, run <code>appbuilder prop print --help</code>.</p>
+
+<p>Some property changes do nothing more than update the appropriate value your app&#8217;s .abproject, but some property changes do more. For instance, running <code>appbuilder prop set FrameworkVersion 3.7.0</code> changes the <code>FrameworkVersion</code> in .abproject, but it also upgrades the cordova.*.js scripts within your project to version 3.7.0.</p>
+
+<h2>Wrapping up</h2>
+
+<p>I hope this was helpful. If you have any other questions about this feel free to ask in the comments. Thanks to <a href="https://twitter.com/admatha">Iva Koevska</a> for setting me straight on all of this.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[So You Want to Write a Tech Book]]></title>
@@ -2138,91 +2173,6 @@ Adding a strikethrough to a line of text in CSS is easy.</p>
 
 
 <p>Remember that there is a reason the icon was removed from the default dialog. If you have scrolling dialogs, you should not add the icon.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Why are Enter Keypresses Clicking My Buttons in IE?]]></title>
-    <link href="http://tjvantoll.com/2013/05/22/why-are-enter-keypresses-clicking-my-buttons-in-ie/"/>
-    <updated>2013-05-22T22:15:00-04:00</updated>
-    <id>http://tjvantoll.com/2013/05/22/why-are-enter-keypresses-clicking-my-buttons-in-ie</id>
-    <content type="html"><![CDATA[<p>When you press the Enter key in a textbox, the browser will automatically attempt to perform an <a href="http://www.whatwg.org/specs/web-apps/current-work/multipage/association-of-controls-and-forms.html#implicit-submission">implicit submission</a> of the textbox&#8217;s <code>&lt;form&gt;</code>.</p>
-
-<p>For example, if you press Enter in the textbox of the following <code>&lt;form&gt;</code> it will submit a search query to Google:</p>
-
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;form</span> <span class="na">action=</span><span class="s">&quot;http://google.com&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;input</span> <span class="na">name=</span><span class="s">&quot;q&quot;</span> <span class="na">type=</span><span class="s">&quot;text&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;submit&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'><span class="nt">&lt;/form&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-
-
-<!--more-->
-
-
-<p>The same will occur if you use a <code>&lt;button&gt;</code> element, which has a default <code>type</code> of <code>submit</code>:</p>
-
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;form</span> <span class="na">action=</span><span class="s">&quot;http://google.com&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;input</span> <span class="na">name=</span><span class="s">&quot;q&quot;</span> <span class="na">type=</span><span class="s">&quot;text&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;button&gt;</span>Submit<span class="nt">&lt;/button&gt;</span>
-</span><span class='line'><span class="nt">&lt;/form&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>In each of these examples a <code>click</code> event will be triggered on the form&#8217;s <code>input[type="submit"]</code> / <code>button[type="submit"]</code>. This is all expected and speced behavior that is consistently implemented across browsers.</p>
-
-<h3>Internet Explorer</h3>
-
-<p>Internet Explorer has an annoying quirk that still exists as of IE10: submit buttons can be clicked when Enter is pressed in a textbox, even when no <code>&lt;form&gt;</code> is present. Consider the example below:</p>
-
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;text&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'><span class="c">&lt;!-- other stuff --&gt;</span>
-</span><span class='line'><span class="nt">&lt;button&gt;</span>Some Unrelated Action<span class="nt">&lt;/button&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Pressing Enter in this textbox in IE will click the completely unrelated <code>&lt;button&gt;</code>. No other browsers exhibit this behavior.</p>
-
-<p>I have no idea what IE&#8217;s algorithm for selecting a submit button is, but it will find buttons in completely unrelated portions of the DOM. For instance it is responsible for a <a href="http://bugs.jqueryui.com/ticket/9312">jQuery UI bug</a> by causing a dialog&#8217;s close button to be triggered on enter keypresses in unrelated textboxes.</p>
-
-<h3>Solution</h3>
-
-<p>All <code>&lt;input&gt;</code>s should be within a <code>&lt;form&gt;</code>, and all forms should have a submit button. So if you&#8217;re running into this bug, changing your markup to be semantic will avoid this issue altogether.</p>
-
-<p>If for whatever reason that&#8217;s not an option, you can add <code>type="button"</code> to the <code>&lt;button&gt;</code>:</p>
-
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;text&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'><span class="c">&lt;!-- other stuff --&gt;</span>
-</span><span class='line'><span class="nt">&lt;button</span> <span class="na">type=</span><span class="s">&quot;button&quot;</span><span class="nt">&gt;</span>Some Unrelated Action<span class="nt">&lt;/button&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>This will override the default <code>type="submit"</code> and prevent IE from clicking the <code>&lt;button&gt;</code> on Enter keypresses.</p>
-
-<p>If anybody has knowledge of the algorithm IE uses to find submittable elements when no <code>&lt;form&gt;</code>s are present please let me know in the comments. I&#8217;m very curious.</p>
-
-<h4>Related Reading</h4>
-
-<ul>
-<li><a href="http://tjvantoll.com/2013/01/01/enter-should-submit-forms-stop-messing-with-that/">The Enter Key should Submit Forms, Stop Suppressing it</a></li>
-</ul>
-
 ]]></content>
   </entry>
   

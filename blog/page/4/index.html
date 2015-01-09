@@ -9,8 +9,7 @@
   <meta name="author" content="TJ VanToll">
 
   
-  <meta name="description" content="I had trouble finding this from a Google search, so I thought I&#8217;d list the browser support for the HTML5 hidden attribute here. IE 11+
-Chrome 6 &hellip;">
+  <meta name="description" content="One of the changes in jQuery&#8217;s upcoming 1.9 release is the removal of $.browser. So if you&#8217;re using it to test for Internet Explorer, &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -96,6 +95,49 @@ Chrome 6 &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title" itemprop="name headline"><a href="/2013/01/11/detecting-internet-explorer-without-jquery/">Detecting Internet Explorer without jQuery</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-01-11T17:26:00-05:00" pubdate data-updated="true">Jan 11<span>th</span>, 2013</time>
+        
+         | <a href="/2013/01/11/detecting-internet-explorer-without-jquery/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>One of the changes in jQuery&#8217;s <a href="http://blog.jquery.com/2013/01/09/jquery-1-9-rc1-and-migrate-rc1-released/">upcoming 1.9 release</a> is the removal of <a href="http://api.jquery.com/jQuery.browser/">$.browser</a>.  So if you&#8217;re using it to test for Internet Explorer, what do you do?</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/2013/01/11/detecting-internet-explorer-without-jquery/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -559,82 +601,6 @@ Chrome 6 &hellip;">
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title" itemprop="name headline"><a href="/2012/09/19/using-the-attribute-selector-with-numeric-values/">Using the Attribute Selector with Numeric Values</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-09-19T20:42:00-04:00" pubdate data-updated="true">Sep 19<span>th</span>, 2012</time>
-        
-         | <a href="/2012/09/19/using-the-attribute-selector-with-numeric-values/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>What color will the number 3 be in the example below?</p>
-
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;style&gt;</span>
-</span><span class='line'>    <span class="nt">td</span> <span class="p">{</span> <span class="k">color</span><span class="o">:</span> <span class="nb">red</span><span class="p">;</span> <span class="p">}</span>
-</span><span class='line'>    <span class="nt">td</span><span class="o">[</span><span class="nt">colspan</span><span class="o">=</span><span class="nt">2</span><span class="o">]</span> <span class="p">{</span> <span class="k">color</span><span class="o">:</span> <span class="nb">blue</span><span class="p">;</span> <span class="p">}</span>
-</span><span class='line'><span class="nt">&lt;/style&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="nt">&lt;table&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;tr&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;td</span> <span class="na">colspan=</span><span class="s">&quot;2&quot;</span><span class="nt">&gt;</span>1<span class="nt">&lt;/td&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;/tr&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;td&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;td&gt;</span>2<span class="nt">&lt;/td&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;td&gt;</span>3<span class="nt">&lt;/td&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;/tr&gt;</span>
-</span><span class='line'><span class="nt">&lt;/table&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Turns out it will be red because the <code>td[colspan=2]</code> selector does not match it.  Why?</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/2012/09/19/using-the-attribute-selector-with-numeric-values/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/5/">&larr; Older</a>
@@ -671,6 +637,10 @@ Chrome 6 &hellip;">
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2015/01/09/updating-google-play-and-ios-app-store-version-numbers-with-the-appbuilder-cli/">Updating Google Play and iOS App Store Version Numbers with the AppBuilder CLI</a>
+      </li>
+    
+      <li class="post">
         <a href="/2014/12/29/so-you-want-to-write-a-tech-book/">So You Want to Write a Tech Book</a>
       </li>
     
@@ -686,10 +656,6 @@ Chrome 6 &hellip;">
         <a href="/2014/07/18/an-addendum-to-why-web-components-arent-ready-for-production-yet/">An Addendum to Why Web Components Aren&#8217;t Ready for Production Yet</a>
       </li>
     
-      <li class="post">
-        <a href="/2014/07/04/a-jquery-ui-vertical-tabs-extension/">A jQuery UI Vertical Tabs Extension</a>
-      </li>
-    
   </ul>
 </section>
 
@@ -699,7 +665,7 @@ Chrome 6 &hellip;">
     </div>
   </div>
   <footer role="contentinfo"><p>
-  Copyright &copy; 2014 - <a href="/">TJ VanToll</a> -
+  Copyright &copy; 2015 - <a href="/">TJ VanToll</a> -
   <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
 </p>
 
