@@ -1,0 +1,426 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Getting Started with Kendo UI Core - TJ VanToll - Tutorials, Thoughts, and Ramblings on Front-End Development</title>
+  <meta name="author" content="TJ VanToll">
+
+  
+  <meta name="description" content="I&#8217;ve been using Kendo UI Core in a bunch of projects lately, so I thought I&#8217;d document the process I use to get Kendo UI Core up and &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://tjvantoll.com/2015/01/18/getting-started-with-kendo-ui-core">
+  <link rel="author" href="https://plus.google.com/+TJVanToll">
+
+  <!--[if !lte IE 7]><!-->
+    <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet">
+  <!--<![endif]-->
+  <!--[if lte IE 7]>
+    <link rel="stylesheet" href="/stylesheets/old-ie.css" media="screen, projection">
+  <![endif]-->
+  
+  <!--Custom script concatenation
+  <script src="/javascripts/modernizr-2.5.3.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js"></script>
+  <script src="/javascripts/PictureCube.js"></script>
+  <script src="/javascripts/blog.js"></script>
+  -->
+  <script src="/javascripts/build/scripts.js"></script>
+
+  <link href="/atom.xml" rel="alternate" title="TJ VanToll" type="application/atom+xml">
+  <style>
+	/* Fonts from Google"s Web font directory at http://google.com/webfonts */
+	/*@import url(http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic);
+	@import url(http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic);*/
+</style>
+
+  
+  <script type="text/javascript">
+  	if (window.location.host.indexOf('local') == -1) {
+	    var _gaq = _gaq || [];
+	    _gaq.push(['_setAccount', 'UA-29179796-1']);
+	    _gaq.push(['_trackPageview']);
+	
+	    (function() {
+	      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+	      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+	      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	    })();
+    }
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+	<h1><a href="/">TJ VanToll</a></h1>
+	
+		<h2>Tutorials, Thoughts, and Ramblings on Front-End Development</h2> 
+	
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:tjvantoll.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+<li><a href="/">About</a></li>
+  <li><a href="/blog/">Blog</a></li>
+  <li><a href="/blog/archives/">Archives</a></li>
+  <li><a href="/speaking/">Speaking</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article itemscope itemtype="http://schema.org/BlogPosting" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title" itemprop="name headline">Getting Started with Kendo UI Core</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-01-18T00:00:00-05:00" pubdate data-updated="true">Jan 18<span>th</span>, 2015</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>I&#8217;ve been using <a href="https://github.com/telerik/kendo-ui-core">Kendo UI Core</a> in a bunch of projects lately, so I thought I&#8217;d document the process I use to get Kendo UI Core up and running. Note that the workflow I show isn&#8217;t the “right” way of doing things, just the workflow I like.</p>
+
+<h2>Step 1) Download</h2>
+
+<p>I start by downloading Kendo UI Core from Bower, as it&#8217;s my preferred package manager for web apps:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ bower install kendo-ui-core</span></code></pre></td></tr></table></div></figure>
+
+
+<p>You can alternatively <a href="https://github.com/telerik/kendo-ui-core/archive/master.zip">download Kendo UI Core from GitHub</a>, but Bower is my jam. (Not to be confused with <a href="http://jamjs.org/">Jam</a>, which—believe it or not—is actually the name of a competing JavaScript package manager. Who knew?)</p>
+
+<h2>Step 2) Scaffold HTML</h2>
+
+<p>Next I create an index.html and paste in the following boilerplate HTML:</p>
+
+<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="cp">&lt;!doctype html&gt;</span>
+</span><span class='line'><span class="nt">&lt;html</span> <span class="na">lang=</span><span class="s">&quot;en&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'><span class="nt">&lt;head&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">&quot;utf-8&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;title&gt;</span>My Project<span class="nt">&lt;/title&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;meta</span> <span class="na">name=</span><span class="s">&quot;viewport&quot;</span> <span class="na">content=</span><span class="s">&quot;width=device-width, initial-scale=1&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">&quot;stylesheet&quot;</span> <span class="na">href=</span><span class="s">&quot;bower_components/kendo-ui-core/src/styles/web/kendo.common.core.css&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">&quot;stylesheet&quot;</span> <span class="na">href=</span><span class="s">&quot;bower_components/kendo-ui-core/src/styles/web/kendo.flat.css&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'><span class="nt">&lt;/head&gt;</span>
+</span><span class='line'><span class="nt">&lt;body&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;bower_components/jquery/dist/jquery.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
+</span><span class='line'><span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;bower_components/kendo-ui-core/src/js/kendo.ui.core.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nt">&lt;/body&gt;</span>
+</span><span class='line'><span class="nt">&lt;/html&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>A couple things to note here. First, my HTML follows the <a href="http://contribute.jquery.org/style-guide/html/">jQuery HTML style guide</a>, which yes, actually is a thing.</p>
+
+<p>Second, and more relevantly, I use the Kendo UI flat theme. (The import of kendo.flat.min.css file controls which theme the library uses.) Kendo UI has like 15 themes or something, but I&#8217;m a fan of the flat one. If you want to try out different themes all you have to do is switch “flat” in “kendo.flat.css” to the name of another theme. For instance changing “kendo.flat.min.css“ to “kendo.material.min.css” switches your app to Kendo UI&#8217;s new material design inspired theme.</p>
+
+<p><img src="/images/posts/2015-01-19/kendo-ui-themes.png">
+<i>See how the Flat theme is highlighted? That&#8217;s because it&#8217;s the best one.</i></p>
+
+<p>Finally, note that I&#8217;m including the <em>source</em> files for jQuery and Kendo UI—not the minified ones. I do this because it makes debugging easier, and because I&#8217;m going to tackle minification later.</p>
+
+<p>This markup makes for a decent starting point for demos and quick tests. I even keep this HTML stored as a <a href="http://sublimetext.info/docs/en/extensibility/snippets.html">Sublime snippet</a> for when I need to get a quick test case up and running. And this workflow works great, but for bigger projects I want a little more structure, and a structure that&#8217;s ready to scale for bigger projects. Here&#8217;s how I do that.</p>
+
+<h2>Step 3) Package Management</h2>
+
+<p>I like using AMD and <a href="http://requirejs.org/">RequireJS</a> to manage my app&#8217;s dependencies, and luckily Kendo UI Core is intelligently broken into AMD modules. To start with AMD I download RequireJS from Bower:</p>
+
+<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'>$ bower install requirejs
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Next I create an app.js file to serve as the main JavaScript file for my app. At this point my project&#8217;s folder structure looks a little something like this:</p>
+
+<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'>.
+</span><span class='line'>├── bower_components
+</span><span class='line'>│   ├── jquery
+</span><span class='line'>│   │   └── ...
+</span><span class='line'>│   ├── kendo-ui-core
+</span><span class='line'>│   │   └── ...
+</span><span class='line'>│   └── requirejs
+</span><span class='line'>│       └── ...
+</span><span class='line'>├── index.html
+</span><span class='line'>└── js
+</span><span class='line'>    └── app.js
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>With this structure in place I switch my index.html to use a single <code>&lt;script&gt;</code> tag:</p>
+
+<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;bower_components/requirejs/require.js&quot;</span> <span class="na">data-main=</span><span class="s">&quot;js/app&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Then I paste the following code in as a starting point for app.js:</p>
+
+<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">require</span><span class="p">.</span><span class="nx">config</span><span class="p">({</span>
+</span><span class='line'>    <span class="nx">paths</span><span class="o">:</span> <span class="p">{</span>
+</span><span class='line'>        <span class="s2">&quot;jquery&quot;</span><span class="o">:</span> <span class="s2">&quot;/bower_components/jquery/dist/jquery&quot;</span><span class="p">,</span>
+</span><span class='line'>        <span class="s2">&quot;kendo-ui-core&quot;</span><span class="o">:</span> <span class="s2">&quot;/bower_components/kendo-ui-core/src/js&quot;</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'><span class="p">});</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">require</span><span class="p">([</span> <span class="s2">&quot;jquery&quot;</span><span class="p">,</span> <span class="s2">&quot;kendo-ui-core/kendo.ui.core&quot;</span> <span class="p">],</span> <span class="kd">function</span><span class="p">(</span> <span class="nx">$</span> <span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">});</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This gives me an entry point for my app that loads jQuery and Kendo UI Core dynamically. If my app only needs one portion of Kendo UI Core I only specify the modules I need in the <code>require()</code> call. For instance if I only want a <a href="http://demos.telerik.com/kendo-ui/maskedtextbox/index">MaskedTextBox</a> I only require <code>"jquery"</code> and <code>"kendo-ui-core/kendo.maskedtextbox"</code>—i.e. <code>require([ "jquery", "kendo-ui-core/kendo.maskedtextbox" ])</code>.</p>
+
+<p>Eventually I&#8217;ll add the <a href="http://requirejs.org/docs/optimization.html">RequireJS Optimizer</a> to my app to optimize into a single <code>&lt;script&gt;</code> tag for production, but that won&#8217;t happen until I&#8217;m ready to deploy my project, and I wanted to focus this article on getting started. If you&#8217;re interested in the optimization workflow I use, check out my article on <a href="http://developer.telerik.com/featured/using-ui-libraries-without-the-bloat/">Using UI Libraries Without the Bloat</a>.</p>
+
+<p>For now I hope what I have here was helpful. If you have any other questions about using Kendo UI let me know in the comments.</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span itemprop="name" class="fn">TJ VanToll</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-01-18T00:00:00-05:00" pubdate data-updated="true">Jan 18<span>th</span>, 2015</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/javascript/'>JavaScript</a>, <a class='category' href='/blog/categories/kendo-ui/'>Kendo UI</a>
+  
+</span>
+
+
+    </p>
+    <p class="author_card meta">
+      <img src="/images/me/1.jpg" alt="Me!" id="post_me">
+      TJ VanToll is a developer advocate for <a href="http://telerik.com">Telerik</a>, a <a href="http://jqueryui.com/about/">jQuery team member</a>, and the author of <a href="http://tjvantoll.com/jquery-ui-in-action.html">jQuery UI in Action</a>. TJ has over a decade of web development experience—specializing in performance and the mobile web—and <a href="/speaking">speaks</a> about his research at conferences around the world. When not online, TJ is generally found talking about himself in the third person. If you like hearing TJ talk about himself, you should consider following him on <a href="http://twitter.com/tjvantoll">Twitter</a> or <a href="https://plus.google.com/+TJVanToll?rel=author" rel="author">Google+</a>.
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://tjvantoll.com/2015/01/18/getting-started-with-kendo-ui-core/" data-via="tjvantoll" data-counturl="http://tjvantoll.com/2015/01/18/getting-started-with-kendo-ui-core/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/2015/01/09/updating-google-play-and-ios-app-store-version-numbers-with-the-appbuilder-cli/" title="Previous Post: Updating Google Play and iOS App Store Version Numbers with the AppBuilder CLI">&laquo; Updating Google Play and iOS App Store Version Numbers with the AppBuilder CLI</a>
+      
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1 id="comments">Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section class="ad-section">
+	<h1>Support the Site</h1>
+	<div class="ad-container">
+		<script defer async src="http://cdn.adpacks.com/adpacks.js?legacyid=1285803&zoneid=1386&key=cb7a6f705dfe7532dde49b4c2c5adf2d&serve=C6SI42Y&placement=tjvantollcom&circle=dev" id="_adpacks_js"></script>
+	</div>
+</section><section class="ad-section">
+	<h1>Check Out My Book</h1> 
+	<div id="book-section">
+		<a href="/jquery-ui-in-action.html" class="image-link">
+			<img src="/images/book.jpg" alt="My jQuery UI in Action cover">
+		</a>
+		<div>
+			<a href="/jquery-ui-in-action.html" class="text_link">
+				jQuery UI in Action<br>
+			</a>
+			<strong>Covers jQuery UI 1.11!</strong>
+			<p>Published by <a href="http://www.manning.com/?a_aid=tj-vantoll">Manning</a>.</p>
+		</div>
+	</div>
+</section><section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2015/01/18/getting-started-with-kendo-ui-core/">Getting Started with Kendo UI Core</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2015/01/09/updating-google-play-and-ios-app-store-version-numbers-with-the-appbuilder-cli/">Updating Google Play and iOS App Store Version Numbers with the AppBuilder CLI</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/12/29/so-you-want-to-write-a-tech-book/">So You Want to Write a Tech Book</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/08/12/the-problem-with-using-html-imports-for-dependency-management/">The Problem With Using HTML Imports For Dependency Management</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/07/25/building-a-phonegap-app-in-10-seconds-using-nothing-but-a-cli/">Building a PhoneGap App in 10 Seconds Using Nothing But a CLI</a>
+      </li>
+    
+  </ul>
+</section>
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2015 - <a href="/">TJ VanToll</a> -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'tjvantoll';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://tjvantoll.com/2015/01/18/getting-started-with-kendo-ui-core/';
+        var disqus_url = 'http://tjvantoll.com/2015/01/18/getting-started-with-kendo-ui-core/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

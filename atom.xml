@@ -4,7 +4,7 @@
   <title><![CDATA[TJ VanToll]]></title>
   <link href="http://tjvantoll.com/atom.xml" rel="self"/>
   <link href="http://tjvantoll.com/"/>
-  <updated>2015-01-09T08:54:34-05:00</updated>
+  <updated>2015-01-18T07:39:20-05:00</updated>
   <id>http://tjvantoll.com/</id>
   <author>
     <name><![CDATA[TJ VanToll]]></name>
@@ -12,6 +12,151 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Getting Started with Kendo UI Core]]></title>
+    <link href="http://tjvantoll.com/2015/01/18/getting-started-with-kendo-ui-core/"/>
+    <updated>2015-01-18T00:00:00-05:00</updated>
+    <id>http://tjvantoll.com/2015/01/18/getting-started-with-kendo-ui-core</id>
+    <content type="html"><![CDATA[<p>I&#8217;ve been using <a href="https://github.com/telerik/kendo-ui-core">Kendo UI Core</a> in a bunch of projects lately, so I thought I&#8217;d document the process I use to get Kendo UI Core up and running. Note that the workflow I show isn&#8217;t the “right” way of doing things, just the workflow I like.</p>
+
+<h2>Step 1) Download</h2>
+
+<p>I start by downloading Kendo UI Core from Bower, as it&#8217;s my preferred package manager for web apps:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ bower install kendo-ui-core</span></code></pre></td></tr></table></div></figure>
+
+
+<p>You can alternatively <a href="https://github.com/telerik/kendo-ui-core/archive/master.zip">download Kendo UI Core from GitHub</a>, but Bower is my jam. (Not to be confused with <a href="http://jamjs.org/">Jam</a>, which—believe it or not—is actually the name of a competing JavaScript package manager. Who knew?)</p>
+
+<h2>Step 2) Scaffold HTML</h2>
+
+<p>Next I create an index.html and paste in the following boilerplate HTML:</p>
+
+<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="cp">&lt;!doctype html&gt;</span>
+</span><span class='line'><span class="nt">&lt;html</span> <span class="na">lang=</span><span class="s">&quot;en&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'><span class="nt">&lt;head&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">&quot;utf-8&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;title&gt;</span>My Project<span class="nt">&lt;/title&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;meta</span> <span class="na">name=</span><span class="s">&quot;viewport&quot;</span> <span class="na">content=</span><span class="s">&quot;width=device-width, initial-scale=1&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">&quot;stylesheet&quot;</span> <span class="na">href=</span><span class="s">&quot;bower_components/kendo-ui-core/src/styles/web/kendo.common.core.css&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">&quot;stylesheet&quot;</span> <span class="na">href=</span><span class="s">&quot;bower_components/kendo-ui-core/src/styles/web/kendo.flat.css&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'><span class="nt">&lt;/head&gt;</span>
+</span><span class='line'><span class="nt">&lt;body&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;bower_components/jquery/dist/jquery.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
+</span><span class='line'><span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;bower_components/kendo-ui-core/src/js/kendo.ui.core.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nt">&lt;/body&gt;</span>
+</span><span class='line'><span class="nt">&lt;/html&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>A couple things to note here. First, my HTML follows the <a href="http://contribute.jquery.org/style-guide/html/">jQuery HTML style guide</a>, which yes, actually is a thing.</p>
+
+<p>Second, and more relevantly, I use the Kendo UI flat theme. (The import of kendo.flat.min.css file controls which theme the library uses.) Kendo UI has like 15 themes or something, but I&#8217;m a fan of the flat one. If you want to try out different themes all you have to do is switch “flat” in “kendo.flat.css” to the name of another theme. For instance changing “kendo.flat.min.css“ to “kendo.material.min.css” switches your app to Kendo UI&#8217;s new material design inspired theme.</p>
+
+<p><img src="http://tjvantoll.com/images/posts/2015-01-19/kendo-ui-themes.png">
+<i>See how the Flat theme is highlighted? That&#8217;s because it&#8217;s the best one.</i></p>
+
+<p>Finally, note that I&#8217;m including the <em>source</em> files for jQuery and Kendo UI—not the minified ones. I do this because it makes debugging easier, and because I&#8217;m going to tackle minification later.</p>
+
+<p>This markup makes for a decent starting point for demos and quick tests. I even keep this HTML stored as a <a href="http://sublimetext.info/docs/en/extensibility/snippets.html">Sublime snippet</a> for when I need to get a quick test case up and running. And this workflow works great, but for bigger projects I want a little more structure, and a structure that&#8217;s ready to scale for bigger projects. Here&#8217;s how I do that.</p>
+
+<h2>Step 3) Package Management</h2>
+
+<p>I like using AMD and <a href="http://requirejs.org/">RequireJS</a> to manage my app&#8217;s dependencies, and luckily Kendo UI Core is intelligently broken into AMD modules. To start with AMD I download RequireJS from Bower:</p>
+
+<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'>$ bower install requirejs
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Next I create an app.js file to serve as the main JavaScript file for my app. At this point my project&#8217;s folder structure looks a little something like this:</p>
+
+<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'>.
+</span><span class='line'>├── bower_components
+</span><span class='line'>│   ├── jquery
+</span><span class='line'>│   │   └── ...
+</span><span class='line'>│   ├── kendo-ui-core
+</span><span class='line'>│   │   └── ...
+</span><span class='line'>│   └── requirejs
+</span><span class='line'>│       └── ...
+</span><span class='line'>├── index.html
+</span><span class='line'>└── js
+</span><span class='line'>    └── app.js
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>With this structure in place I switch my index.html to use a single <code>&lt;script&gt;</code> tag:</p>
+
+<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;bower_components/requirejs/require.js&quot;</span> <span class="na">data-main=</span><span class="s">&quot;js/app&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Then I paste the following code in as a starting point for app.js:</p>
+
+<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">require</span><span class="p">.</span><span class="nx">config</span><span class="p">({</span>
+</span><span class='line'>    <span class="nx">paths</span><span class="o">:</span> <span class="p">{</span>
+</span><span class='line'>        <span class="s2">&quot;jquery&quot;</span><span class="o">:</span> <span class="s2">&quot;/bower_components/jquery/dist/jquery&quot;</span><span class="p">,</span>
+</span><span class='line'>        <span class="s2">&quot;kendo-ui-core&quot;</span><span class="o">:</span> <span class="s2">&quot;/bower_components/kendo-ui-core/src/js&quot;</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'><span class="p">});</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">require</span><span class="p">([</span> <span class="s2">&quot;jquery&quot;</span><span class="p">,</span> <span class="s2">&quot;kendo-ui-core/kendo.ui.core&quot;</span> <span class="p">],</span> <span class="kd">function</span><span class="p">(</span> <span class="nx">$</span> <span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">});</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This gives me an entry point for my app that loads jQuery and Kendo UI Core dynamically. If my app only needs one portion of Kendo UI Core I only specify the modules I need in the <code>require()</code> call. For instance if I only want a <a href="http://demos.telerik.com/kendo-ui/maskedtextbox/index">MaskedTextBox</a> I only require <code>"jquery"</code> and <code>"kendo-ui-core/kendo.maskedtextbox"</code>—i.e. <code>require([ "jquery", "kendo-ui-core/kendo.maskedtextbox" ])</code>.</p>
+
+<p>Eventually I&#8217;ll add the <a href="http://requirejs.org/docs/optimization.html">RequireJS Optimizer</a> to my app to optimize into a single <code>&lt;script&gt;</code> tag for production, but that won&#8217;t happen until I&#8217;m ready to deploy my project, and I wanted to focus this article on getting started. If you&#8217;re interested in the optimization workflow I use, check out my article on <a href="http://developer.telerik.com/featured/using-ui-libraries-without-the-bloat/">Using UI Libraries Without the Bloat</a>.</p>
+
+<p>For now I hope what I have here was helpful. If you have any other questions about using Kendo UI let me know in the comments.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Updating Google Play and iOS App Store Version Numbers with the AppBuilder CLI]]></title>
@@ -2119,60 +2264,6 @@ Adding a strikethrough to a line of text in CSS is easy.</p>
 <p>This is not a technique that I came up with but I&#8217;ve used it successfully in several large applications and have found that it scales well over time.</p>
 
 <p>Do you have any other tricks you use to show &amp; hide elements? If so, let me know in the comments.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Showing a Resize Icon on a jQuery UI Dialog]]></title>
-    <link href="http://tjvantoll.com/2013/05/28/showing-a-resize-icon-on-a-jquery-ui-dialog/"/>
-    <updated>2013-05-28T21:09:00-04:00</updated>
-    <id>http://tjvantoll.com/2013/05/28/showing-a-resize-icon-on-a-jquery-ui-dialog</id>
-    <content type="html"><![CDATA[<p>Upon <a href="http://jqueryui.com/upgrade-guide/1.10/">upgrading to jQuery UI 1.10</a> you might notice a visual change to the dialog widget - the resize icon no longer displays by default:</p>
-
-<p>Default dialog display in 1.9:</p>
-
-<p><img src="http://tjvantoll.com/images/posts/2013-05-28/dialog-1.9.png" alt="Default display of jQuery UI's dialog in version 1.9"></p>
-
-<p>Default dialog display in 1.10:</p>
-
-<p><img src="http://tjvantoll.com/images/posts/2013-05-28/dialog-1.10.png" alt="Default display of jQuery UI's dialog in version 1.10"></p>
-
-<!-- more -->
-
-
-<p>The dialog is still resizable, the icon is just not displayed anymore. The change was made because when a dialog contains scrolling content, the scrollbar becomes very difficult to use when the resize icon is present, especially in Windows browsers (see <a href="http://bugs.jqueryui.com/ticket/4575">bug #4575</a>).</p>
-
-<p>The image below is of a version 1.9 dialog in IE9, note how the down arrow of the scrollbar and the resize icon are essentially on top of each other:</p>
-
-<p><img src="http://tjvantoll.com/images/posts/2013-05-28/ie9-dialog.png" alt="Display of a scrolling jQuery UI dialog in IE9."></p>
-
-<h3>Adding the Resize Icon Back</h3>
-
-<p>To get the icon back, you have to override the rules that position the icon:</p>
-
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nc">.ui-dialog</span> <span class="nc">.ui-resizable-se</span> <span class="p">{</span>
-</span><span class='line'>    <span class="k">width</span><span class="o">:</span> <span class="m">14px</span><span class="p">;</span>
-</span><span class='line'>    <span class="k">height</span><span class="o">:</span> <span class="m">14px</span><span class="p">;</span>
-</span><span class='line'>    <span class="k">right</span><span class="o">:</span> <span class="m">3px</span><span class="p">;</span>
-</span><span class='line'>    <span class="k">bottom</span><span class="o">:</span> <span class="m">3px</span><span class="p">;</span>
-</span><span class='line'>    <span class="k">background-position</span><span class="o">:</span> <span class="m">-80px</span> <span class="m">-224px</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>This will display as follows:</p>
-
-<div class="code_example"><h6>Dialog with a Resizable Icon<a href="http://tjvantoll.com/demos/2013-05-28/dialog.html" target="_blank">Open in New Window</a></h6><iframe style="width: 100%; height: 300px;" frameborder="0" src="http://tjvantoll.com/demos/2013-05-28/dialog.html"></iframe></div>
-
-
-<p>Remember that there is a reason the icon was removed from the default dialog. If you have scrolling dialogs, you should not add the icon.</p>
 ]]></content>
   </entry>
   

@@ -9,7 +9,7 @@
   <meta name="author" content="TJ VanToll">
 
   
-  <meta name="description" content="I had some issues updating iOS and Android version numbers yesterday so I thought I&#8217;d write up what I learned. Here&#8217;s the scenario: you &hellip;">
+  <meta name="description" content="I&#8217;ve been using Kendo UI Core in a bunch of projects lately, so I thought I&#8217;d document the process I use to get Kendo UI Core up and &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -95,6 +95,180 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title" itemprop="name headline"><a href="/2015/01/18/getting-started-with-kendo-ui-core/">Getting Started with Kendo UI Core</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-01-18T00:00:00-05:00" pubdate data-updated="true">Jan 18<span>th</span>, 2015</time>
+        
+         | <a href="/2015/01/18/getting-started-with-kendo-ui-core/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>I&#8217;ve been using <a href="https://github.com/telerik/kendo-ui-core">Kendo UI Core</a> in a bunch of projects lately, so I thought I&#8217;d document the process I use to get Kendo UI Core up and running. Note that the workflow I show isn&#8217;t the “right” way of doing things, just the workflow I like.</p>
+
+<h2>Step 1) Download</h2>
+
+<p>I start by downloading Kendo UI Core from Bower, as it&#8217;s my preferred package manager for web apps:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ bower install kendo-ui-core</span></code></pre></td></tr></table></div></figure>
+
+
+<p>You can alternatively <a href="https://github.com/telerik/kendo-ui-core/archive/master.zip">download Kendo UI Core from GitHub</a>, but Bower is my jam. (Not to be confused with <a href="http://jamjs.org/">Jam</a>, which—believe it or not—is actually the name of a competing JavaScript package manager. Who knew?)</p>
+
+<h2>Step 2) Scaffold HTML</h2>
+
+<p>Next I create an index.html and paste in the following boilerplate HTML:</p>
+
+<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="cp">&lt;!doctype html&gt;</span>
+</span><span class='line'><span class="nt">&lt;html</span> <span class="na">lang=</span><span class="s">&quot;en&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'><span class="nt">&lt;head&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">&quot;utf-8&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;title&gt;</span>My Project<span class="nt">&lt;/title&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;meta</span> <span class="na">name=</span><span class="s">&quot;viewport&quot;</span> <span class="na">content=</span><span class="s">&quot;width=device-width, initial-scale=1&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">&quot;stylesheet&quot;</span> <span class="na">href=</span><span class="s">&quot;bower_components/kendo-ui-core/src/styles/web/kendo.common.core.css&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">&quot;stylesheet&quot;</span> <span class="na">href=</span><span class="s">&quot;bower_components/kendo-ui-core/src/styles/web/kendo.flat.css&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'><span class="nt">&lt;/head&gt;</span>
+</span><span class='line'><span class="nt">&lt;body&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;bower_components/jquery/dist/jquery.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
+</span><span class='line'><span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;bower_components/kendo-ui-core/src/js/kendo.ui.core.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nt">&lt;/body&gt;</span>
+</span><span class='line'><span class="nt">&lt;/html&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>A couple things to note here. First, my HTML follows the <a href="http://contribute.jquery.org/style-guide/html/">jQuery HTML style guide</a>, which yes, actually is a thing.</p>
+
+<p>Second, and more relevantly, I use the Kendo UI flat theme. (The import of kendo.flat.min.css file controls which theme the library uses.) Kendo UI has like 15 themes or something, but I&#8217;m a fan of the flat one. If you want to try out different themes all you have to do is switch “flat” in “kendo.flat.css” to the name of another theme. For instance changing “kendo.flat.min.css“ to “kendo.material.min.css” switches your app to Kendo UI&#8217;s new material design inspired theme.</p>
+
+<p><img src="/images/posts/2015-01-19/kendo-ui-themes.png">
+<i>See how the Flat theme is highlighted? That&#8217;s because it&#8217;s the best one.</i></p>
+
+<p>Finally, note that I&#8217;m including the <em>source</em> files for jQuery and Kendo UI—not the minified ones. I do this because it makes debugging easier, and because I&#8217;m going to tackle minification later.</p>
+
+<p>This markup makes for a decent starting point for demos and quick tests. I even keep this HTML stored as a <a href="http://sublimetext.info/docs/en/extensibility/snippets.html">Sublime snippet</a> for when I need to get a quick test case up and running. And this workflow works great, but for bigger projects I want a little more structure, and a structure that&#8217;s ready to scale for bigger projects. Here&#8217;s how I do that.</p>
+
+<h2>Step 3) Package Management</h2>
+
+<p>I like using AMD and <a href="http://requirejs.org/">RequireJS</a> to manage my app&#8217;s dependencies, and luckily Kendo UI Core is intelligently broken into AMD modules. To start with AMD I download RequireJS from Bower:</p>
+
+<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'>$ bower install requirejs
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Next I create an app.js file to serve as the main JavaScript file for my app. At this point my project&#8217;s folder structure looks a little something like this:</p>
+
+<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'>.
+</span><span class='line'>├── bower_components
+</span><span class='line'>│   ├── jquery
+</span><span class='line'>│   │   └── ...
+</span><span class='line'>│   ├── kendo-ui-core
+</span><span class='line'>│   │   └── ...
+</span><span class='line'>│   └── requirejs
+</span><span class='line'>│       └── ...
+</span><span class='line'>├── index.html
+</span><span class='line'>└── js
+</span><span class='line'>    └── app.js
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>With this structure in place I switch my index.html to use a single <code>&lt;script&gt;</code> tag:</p>
+
+<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;bower_components/requirejs/require.js&quot;</span> <span class="na">data-main=</span><span class="s">&quot;js/app&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Then I paste the following code in as a starting point for app.js:</p>
+
+<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">require</span><span class="p">.</span><span class="nx">config</span><span class="p">({</span>
+</span><span class='line'>    <span class="nx">paths</span><span class="o">:</span> <span class="p">{</span>
+</span><span class='line'>        <span class="s2">&quot;jquery&quot;</span><span class="o">:</span> <span class="s2">&quot;/bower_components/jquery/dist/jquery&quot;</span><span class="p">,</span>
+</span><span class='line'>        <span class="s2">&quot;kendo-ui-core&quot;</span><span class="o">:</span> <span class="s2">&quot;/bower_components/kendo-ui-core/src/js&quot;</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'><span class="p">});</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">require</span><span class="p">([</span> <span class="s2">&quot;jquery&quot;</span><span class="p">,</span> <span class="s2">&quot;kendo-ui-core/kendo.ui.core&quot;</span> <span class="p">],</span> <span class="kd">function</span><span class="p">(</span> <span class="nx">$</span> <span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">});</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This gives me an entry point for my app that loads jQuery and Kendo UI Core dynamically. If my app only needs one portion of Kendo UI Core I only specify the modules I need in the <code>require()</code> call. For instance if I only want a <a href="http://demos.telerik.com/kendo-ui/maskedtextbox/index">MaskedTextBox</a> I only require <code>"jquery"</code> and <code>"kendo-ui-core/kendo.maskedtextbox"</code>—i.e. <code>require([ "jquery", "kendo-ui-core/kendo.maskedtextbox" ])</code>.</p>
+
+<p>Eventually I&#8217;ll add the <a href="http://requirejs.org/docs/optimization.html">RequireJS Optimizer</a> to my app to optimize into a single <code>&lt;script&gt;</code> tag for production, but that won&#8217;t happen until I&#8217;m ready to deploy my project, and I wanted to focus this article on getting started. If you&#8217;re interested in the optimization workflow I use, check out my article on <a href="http://developer.telerik.com/featured/using-ui-libraries-without-the-bloat/">Using UI Libraries Without the Bloat</a>.</p>
+
+<p>For now I hope what I have here was helpful. If you have any other questions about using Kendo UI let me know in the comments.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -690,53 +864,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title" itemprop="name headline"><a href="/2014/01/27/only-the-gzip-size-matters/">Only the gzip Size Matters</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-01-27T19:32:00-05:00" pubdate data-updated="true">Jan 27<span>th</span>, 2014</time>
-        
-         | <a href="/2014/01/27/only-the-gzip-size-matters/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Let&#8217;s just get it out there: the only size that matters for a CSS or JavaScript file is its gzipped size.</p>
-
-<p>And by gzipped size I mean: the size of the file after it&#8217;s compressed using <a href="http://en.wikipedia.org/wiki/Gzip">gzip</a>&#8217;s compression algorithm. All browsers since IE6 have supported gzipped assets, and enabling gzip on web servers has been a <a href="https://developers.google.com/speed/docs/best-practices/payload#GzipCompression">best practice</a> for years now; therefore it&#8217;s relatively safe to assume that everyone who cares about the size of CSS or JavaScript files is gzipping them.</p>
-
-<p>So if you&#8217;re trying to find how big a front-end library is, the answer you need is not in Finder or Windows Explorer. While the uncompressed file size can give you a rough idea, you have no idea what the user will actually download until you gzip the files.</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/2014/01/27/only-the-gzip-size-matters/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -771,6 +898,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2015/01/18/getting-started-with-kendo-ui-core/">Getting Started with Kendo UI Core</a>
+      </li>
+    
+      <li class="post">
         <a href="/2015/01/09/updating-google-play-and-ios-app-store-version-numbers-with-the-appbuilder-cli/">Updating Google Play and iOS App Store Version Numbers with the AppBuilder CLI</a>
       </li>
     
@@ -784,10 +915,6 @@
     
       <li class="post">
         <a href="/2014/07/25/building-a-phonegap-app-in-10-seconds-using-nothing-but-a-cli/">Building a PhoneGap App in 10 Seconds Using Nothing But a CLI</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2014/07/18/an-addendum-to-why-web-components-arent-ready-for-production-yet/">An Addendum to Why Web Components Aren&#8217;t Ready for Production Yet</a>
       </li>
     
   </ul>

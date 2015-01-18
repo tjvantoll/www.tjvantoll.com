@@ -4,7 +4,7 @@
   <title><![CDATA[Category: JavaScript | TJ VanToll]]></title>
   <link href="http://tjvantoll.com/blog/categories/javascript/atom.xml" rel="self"/>
   <link href="http://tjvantoll.com/"/>
-  <updated>2015-01-09T08:54:34-05:00</updated>
+  <updated>2015-01-18T07:39:20-05:00</updated>
   <id>http://tjvantoll.com/</id>
   <author>
     <name><![CDATA[TJ VanToll]]></name>
@@ -12,6 +12,126 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Getting Started with Kendo UI Core]]></title>
+    <link href="http://tjvantoll.com/2015/01/18/getting-started-with-kendo-ui-core/"/>
+    <updated>2015-01-18T00:00:00-05:00</updated>
+    <id>http://tjvantoll.com/2015/01/18/getting-started-with-kendo-ui-core</id>
+    <content type="html"><![CDATA[<p>I've been using <a href="https://github.com/telerik/kendo-ui-core">Kendo UI Core</a> in a bunch of projects lately, so I thought I'd document the process I use to get Kendo UI Core up and running. Note that the workflow I show isn't the “right” way of doing things, just the workflow I like.</p>
+
+<h2>Step 1) Download</h2>
+
+<p>I start by downloading Kendo UI Core from Bower, as it's my preferred package manager for web apps:</p>
+
+<p><code>
+$ bower install kendo-ui-core
+</code></p>
+
+<p>You can alternatively <a href="https://github.com/telerik/kendo-ui-core/archive/master.zip">download Kendo UI Core from GitHub</a>, but Bower is my jam. (Not to be confused with <a href="http://jamjs.org/">Jam</a>, which—believe it or not—is actually the name of a competing JavaScript package manager. Who knew?)</p>
+
+<h2>Step 2) Scaffold HTML</h2>
+
+<p>Next I create an index.html and paste in the following boilerplate HTML:</p>
+
+<p>``` html
+&lt;!doctype html>
+<html lang="en">
+<head></p>
+
+<pre><code>&lt;meta charset="utf-8"&gt;
+&lt;title&gt;My Project&lt;/title&gt;
+&lt;meta name="viewport" content="width=device-width, initial-scale=1"&gt;
+
+&lt;link rel="stylesheet" href="bower_components/kendo-ui-core/src/styles/web/kendo.common.core.css"&gt;
+&lt;link rel="stylesheet" href="bower_components/kendo-ui-core/src/styles/web/kendo.flat.css"&gt;
+</code></pre>
+
+<p></head>
+<body></p>
+
+<script src="bower_components/jquery/dist/jquery.js"></script>
+
+
+<script src="bower_components/kendo-ui-core/src/js/kendo.ui.core.js"></script>
+
+
+<p></body>
+</html>
+```</p>
+
+<p>A couple things to note here. First, my HTML follows the <a href="http://contribute.jquery.org/style-guide/html/">jQuery HTML style guide</a>, which yes, actually is a thing.</p>
+
+<p>Second, and more relevantly, I use the Kendo UI flat theme. (The import of kendo.flat.min.css file controls which theme the library uses.) Kendo UI has like 15 themes or something, but I'm a fan of the flat one. If you want to try out different themes all you have to do is switch “flat” in “kendo.flat.css” to the name of another theme. For instance changing “kendo.flat.min.css“ to “kendo.material.min.css” switches your app to Kendo UI's new material design inspired theme.</p>
+
+<p><img src="http://tjvantoll.com/images/posts/2015-01-19/kendo-ui-themes.png">
+<i>See how the Flat theme is highlighted? That's because it's the best one.</i></p>
+
+<p>Finally, note that I'm including the <em>source</em> files for jQuery and Kendo UI—not the minified ones. I do this because it makes debugging easier, and because I'm going to tackle minification later.</p>
+
+<p>This markup makes for a decent starting point for demos and quick tests. I even keep this HTML stored as a <a href="http://sublimetext.info/docs/en/extensibility/snippets.html">Sublime snippet</a> for when I need to get a quick test case up and running. And this workflow works great, but for bigger projects I want a little more structure, and a structure that's ready to scale for bigger projects. Here's how I do that.</p>
+
+<h2>Step 3) Package Management</h2>
+
+<p>I like using AMD and <a href="http://requirejs.org/">RequireJS</a> to manage my app's dependencies, and luckily Kendo UI Core is intelligently broken into AMD modules. To start with AMD I download RequireJS from Bower:</p>
+
+<p><code>
+$ bower install requirejs
+</code></p>
+
+<p>Next I create an app.js file to serve as the main JavaScript file for my app. At this point my project's folder structure looks a little something like this:</p>
+
+<p>```
+.
+├── bower_components
+│   ├── jquery
+│   │   └── ...
+│   ├── kendo-ui-core
+│   │   └── ...
+│   └── requirejs
+│       └── ...
+├── index.html
+└── js</p>
+
+<pre><code>└── app.js
+</code></pre>
+
+<p>```</p>
+
+<p>With this structure in place I switch my index.html to use a single <code>&lt;script&gt;</code> tag:</p>
+
+<p>``` html</p>
+
+<script src="bower_components/requirejs/require.js" data-main="js/app"></script>
+
+
+<p>```</p>
+
+<p>Then I paste the following code in as a starting point for app.js:</p>
+
+<p>``` javascript
+require.config({</p>
+
+<pre><code>paths: {
+    "jquery": "/bower_components/jquery/dist/jquery",
+    "kendo-ui-core": "/bower_components/kendo-ui-core/src/js"
+}
+</code></pre>
+
+<p>});</p>
+
+<p>require([ "jquery", "kendo-ui-core/kendo.ui.core" ], function( $ ) {</p>
+
+<p>});
+```</p>
+
+<p>This gives me an entry point for my app that loads jQuery and Kendo UI Core dynamically. If my app only needs one portion of Kendo UI Core I only specify the modules I need in the <code>require()</code> call. For instance if I only want a <a href="http://demos.telerik.com/kendo-ui/maskedtextbox/index">MaskedTextBox</a> I only require <code>"jquery"</code> and <code>"kendo-ui-core/kendo.maskedtextbox"</code>—i.e. <code>require([ "jquery", "kendo-ui-core/kendo.maskedtextbox" ])</code>.</p>
+
+<p>Eventually I'll add the <a href="http://requirejs.org/docs/optimization.html">RequireJS Optimizer</a> to my app to optimize into a single <code>&lt;script&gt;</code> tag for production, but that won't happen until I'm ready to deploy my project, and I wanted to focus this article on getting started. If you're interested in the optimization workflow I use, check out my article on <a href="http://developer.telerik.com/featured/using-ui-libraries-without-the-bloat/">Using UI Libraries Without the Bloat</a>.</p>
+
+<p>For now I hope what I have here was helpful. If you have any other questions about using Kendo UI let me know in the comments.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[A jQuery UI Vertical Tabs Extension]]></title>
@@ -450,190 +570,6 @@ if ( !formAttributeSupport() ) {
 <p>If you need a dialog with a submit button the easiest solution is to add a <code>click</code> handler that manually submits the form. While this is not ideal, it'll work everywhere with no extra effort. Just make sure that you add Enter key handling to text inputs within the <code>&lt;form&gt;</code>.</p>
 
 <p>Long term the <code>form</code> attribute is the solution to this problem. You can try it today as long as you're aware that you need to polyfill for IE support.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Using Semantic Class Names to Show and Hide Elements]]></title>
-    <link href="http://tjvantoll.com/2013/06/19/using-semantic-class-names-to-show-and-hide-elements/"/>
-    <updated>2013-06-19T21:29:00-04:00</updated>
-    <id>http://tjvantoll.com/2013/06/19/using-semantic-class-names-to-show-and-hide-elements</id>
-    <content type="html"><![CDATA[<p>Showing and hiding elements has the potential to get complicated in large applications.</p>
-
-<p>As a small example, say you have the following form that both displays a user's data as well as allows them to edit it:</p>
-
-<p>``` html
-<form></p>
-
-<pre><code>&lt;fieldset&gt;
-    &lt;legend&gt;Account Information&lt;/legend&gt;
-
-    &lt;div&gt;
-        &lt;label for="name"&gt;Name:&lt;/label&gt;
-        &lt;input type="text" id="name" value="TJ" required&gt;
-        &lt;span class="display"&gt;TJ&lt;/span&gt;
-    &lt;/div&gt;
-    &lt;div&gt;
-        &lt;label for="email"&gt;Email:&lt;/label&gt;
-        &lt;input type="email" id="email" value="tj@somedomain.com" required&gt;
-        &lt;span class="display"&gt;tj@somedomain.com&lt;/span&gt;
-    &lt;/div&gt;
-    &lt;div class="actions"&gt;
-        &lt;button type="button" class="edit"&gt;Edit&lt;/button&gt;
-        &lt;button type="submit" class="save"&gt;Save&lt;/button&gt;
-        &lt;button type="button" class="cancel"&gt;Cancel&lt;/button&gt;
-    &lt;/div&gt;
-&lt;/fieldset&gt;
-</code></pre>
-
-<p></form>
-```</p>
-
-<!-- more -->
-
-
-<p>Without any logic both states of the form display:</p>
-
-<p><div class="code_example"><h6>Initial Form Display<a href="/demos/2013-06-19/initialForm.html" target="_blank">Open in New Window</a></h6><iframe style="width: 100%; height: 300px;" frameborder="0" src="/demos/2013-06-19/initialForm.html"></iframe></div></p>
-
-<h3>Adding the Logic</h3>
-
-<p>Here's the goal. The Edit button should:</p>
-
-<ul>
-<li>Show the <code>&lt;input&gt;</code>s.</li>
-<li>Show the Save button.</li>
-<li>Show the Cancel button.</li>
-<li>Hide the Edit button.</li>
-<li>Hide the text in the <code>&lt;span&gt;</code>s.</li>
-</ul>
-
-
-<p>The Cancel button should then undo these changes.</p>
-
-<p>The traditional approach to this problem is to show and hide elements explicitly in JavaScript:</p>
-
-<p>``` javascript
-$( ".edit" ).on( "click", function() {</p>
-
-<pre><code>$( ".display, .edit" ).hide();
-$( ".cancel, .save, input" ).show();
-</code></pre>
-
-<p>});
-$( ".cancel" ).on( "click", function() {</p>
-
-<pre><code>$( ".display, .edit" ).show();
-$( ".cancel, .save, input" ).hide();
-</code></pre>
-
-<p>});
-```</p>
-
-<p>To get the initial state of the form correct you also need some CSS:</p>
-
-<p>``` css
-.cancel, .save, input {</p>
-
-<pre><code>display: none;
-</code></pre>
-
-<p>}
-```</p>
-
-<p>Because the list of elements has to be specified in JavaScript and CSS, this logic will be difficult to maintain. And this is for a trivial example; usually requirements are much more complex.</p>
-
-<p>How can we make this better?</p>
-
-<h3>Semantic Class Names</h3>
-
-<p>Instead of targeting individual elements in JavaScript, let's add a class name to the parent element that makes the most sense, in this case, the <code>&lt;form&gt;</code>:</p>
-
-<p>``` javascript
-$( ".edit" ).on( "click", function() {</p>
-
-<pre><code>$( this ).parents( "form" ).addClass( "editing" );
-</code></pre>
-
-<p>});
-$( ".cancel" ).on( "click", function() {</p>
-
-<pre><code>$( this ).parents( "form" ).removeClass( "editing" );
-</code></pre>
-
-<p>});
-```</p>
-
-<p>Since the logic is simple, this can be written library-free as well (<em>note <code>classList</code> is not available in IE &lt; 10</em>):</p>
-
-<p>``` javascript
-(function() {</p>
-
-<pre><code>var form = document.querySelector( "form" ),
-    editButton = document.querySelector( ".edit" ),
-    cancelButton = document.querySelector( ".cancel" );
-
-editButton.addEventListener( "click", function() {
-    form.classList.add( "editing" ); 
-});
-cancelButton.addEventListener( "click", function() {
-    form.classList.remove( "editing" ); 
-});
-</code></pre>
-
-<p>}());
-```</p>
-
-<h3>Advantages of Using Semantic Classes</h3>
-
-<p>There are 2 major advantages to this approach.</p>
-
-<p>1) All display logic is now handled in CSS:</p>
-
-<p>``` css
-.cancel, .save, input {</p>
-
-<pre><code>display: none;
-</code></pre>
-
-<p>}
-.editing .save,
-.editing .cancel,
-.editing input {</p>
-
-<pre><code>display: inline-block;
-</code></pre>
-
-<p>}
-.editing .edit,
-.editing .display {</p>
-
-<pre><code>display: none;
-</code></pre>
-
-<p>}
-```</p>
-
-<p>2) You have a styling hook that can be used to make further changes to the display. For example, you might want to bold the labels when editing:</p>
-
-<p>``` css
-.editing label {</p>
-
-<pre><code>font-weight: bold;
-</code></pre>
-
-<p>}
-```</p>
-
-<p>The final display of the form looks like this:</p>
-
-<p><div class="code_example"><h6>Semantic Class Approach<a href="/demos/2013-06-19/finalForm.html" target="_blank">Open in New Window</a></h6><iframe style="width: 100%; height: 300px;" frameborder="0" src="/demos/2013-06-19/finalForm.html"></iframe></div></p>
-
-<h3>Conclusion</h3>
-
-<p>This is not a technique that I came up with but I've used it successfully in several large applications and have found that it scales well over time.</p>
-
-<p>Do you have any other tricks you use to show &amp; hide elements? If so, let me know in the comments.</p>
 ]]></content>
   </entry>
   

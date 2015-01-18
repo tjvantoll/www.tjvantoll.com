@@ -9,7 +9,7 @@
   <meta name="author" content="TJ VanToll">
 
   
-  <meta name="description" content="I have been speaking for some time now, and I&#8217;ve learned that keeping track of time is hard. And it&#8217;s important; no one likes attending &hellip;">
+  <meta name="description" content="Let&#8217;s just get it out there: the only size that matters for a CSS or JavaScript file is its gzipped size. And by gzipped size I mean: the size &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -95,6 +95,53 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title" itemprop="name headline"><a href="/2014/01/27/only-the-gzip-size-matters/">Only the gzip Size Matters</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-01-27T19:32:00-05:00" pubdate data-updated="true">Jan 27<span>th</span>, 2014</time>
+        
+         | <a href="/2014/01/27/only-the-gzip-size-matters/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Let&#8217;s just get it out there: the only size that matters for a CSS or JavaScript file is its gzipped size.</p>
+
+<p>And by gzipped size I mean: the size of the file after it&#8217;s compressed using <a href="http://en.wikipedia.org/wiki/Gzip">gzip</a>&#8217;s compression algorithm. All browsers since IE6 have supported gzipped assets, and enabling gzip on web servers has been a <a href="https://developers.google.com/speed/docs/best-practices/payload#GzipCompression">best practice</a> for years now; therefore it&#8217;s relatively safe to assume that everyone who cares about the size of CSS or JavaScript files is gzipping them.</p>
+
+<p>So if you&#8217;re trying to find how big a front-end library is, the answer you need is not in Finder or Windows Explorer. While the uncompressed file size can give you a rough idea, you have no idea what the user will actually download until you gzip the files.</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/2014/01/27/only-the-gzip-size-matters/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -712,57 +759,6 @@ Adding a strikethrough to a line of text in CSS is easy.</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title" itemprop="name headline"><a href="/2013/05/28/showing-a-resize-icon-on-a-jquery-ui-dialog/">Showing a Resize Icon on a jQuery UI Dialog</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-05-28T21:09:00-04:00" pubdate data-updated="true">May 28<span>th</span>, 2013</time>
-        
-         | <a href="/2013/05/28/showing-a-resize-icon-on-a-jquery-ui-dialog/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Upon <a href="http://jqueryui.com/upgrade-guide/1.10/">upgrading to jQuery UI 1.10</a> you might notice a visual change to the dialog widget - the resize icon no longer displays by default:</p>
-
-<p>Default dialog display in 1.9:</p>
-
-<p><img src="/images/posts/2013-05-28/dialog-1.9.png" alt="Default display of jQuery UI's dialog in version 1.9"></p>
-
-<p>Default dialog display in 1.10:</p>
-
-<p><img src="/images/posts/2013-05-28/dialog-1.10.png" alt="Default display of jQuery UI's dialog in version 1.10"></p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/2013/05/28/showing-a-resize-icon-on-a-jquery-ui-dialog/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/3/">&larr; Older</a>
@@ -799,6 +795,10 @@ Adding a strikethrough to a line of text in CSS is easy.</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2015/01/18/getting-started-with-kendo-ui-core/">Getting Started with Kendo UI Core</a>
+      </li>
+    
+      <li class="post">
         <a href="/2015/01/09/updating-google-play-and-ios-app-store-version-numbers-with-the-appbuilder-cli/">Updating Google Play and iOS App Store Version Numbers with the AppBuilder CLI</a>
       </li>
     
@@ -812,10 +812,6 @@ Adding a strikethrough to a line of text in CSS is easy.</p>
     
       <li class="post">
         <a href="/2014/07/25/building-a-phonegap-app-in-10-seconds-using-nothing-but-a-cli/">Building a PhoneGap App in 10 Seconds Using Nothing But a CLI</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2014/07/18/an-addendum-to-why-web-components-arent-ready-for-production-yet/">An Addendum to Why Web Components Aren&#8217;t Ready for Production Yet</a>
       </li>
     
   </ul>
