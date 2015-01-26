@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Kendo UI | TJ VanToll]]></title>
   <link href="http://tjvantoll.com/blog/categories/kendo-ui/atom.xml" rel="self"/>
   <link href="http://tjvantoll.com/"/>
-  <updated>2015-01-18T07:39:20-05:00</updated>
+  <updated>2015-01-26T09:24:01-05:00</updated>
   <id>http://tjvantoll.com/</id>
   <author>
     <name><![CDATA[TJ VanToll]]></name>
@@ -64,7 +64,7 @@ $ bower install kendo-ui-core
 
 <p>Second, and more relevantly, I use the Kendo UI flat theme. (The import of kendo.flat.min.css file controls which theme the library uses.) Kendo UI has like 15 themes or something, but I'm a fan of the flat one. If you want to try out different themes all you have to do is switch “flat” in “kendo.flat.css” to the name of another theme. For instance changing “kendo.flat.min.css“ to “kendo.material.min.css” switches your app to Kendo UI's new material design inspired theme.</p>
 
-<p><img src="http://tjvantoll.com/images/posts/2015-01-19/kendo-ui-themes.png">
+<p><img src="http://tjvantoll.com/images/posts/2015-01-18/kendo-ui-themes.png">
 <i>See how the Flat theme is highlighted? That's because it's the best one.</i></p>
 
 <p>Finally, note that I'm including the <em>source</em> files for jQuery and Kendo UI—not the minified ones. I do this because it makes debugging easier, and because I'm going to tackle minification later.</p>
