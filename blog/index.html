@@ -9,7 +9,7 @@
   <meta name="author" content="TJ VanToll">
 
   
-  <meta name="description" content="I&#8217;ve been using Kendo UI Core in a bunch of projects lately, so I thought I&#8217;d document the process I use to get Kendo UI Core up and &hellip;">
+  <meta name="description" content="I woke up this morning to discover that the Telerik marketplace had a new WKWebView plugin: Instantly speed up your PhoneGap/Cordova app on iOS 8 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -95,6 +95,74 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title" itemprop="name headline"><a href="/2015/01/26/wkwebview-plugin/">Speed Up Your Cordova App with the WKWebView Plugin</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-01-26T00:00:00-05:00" pubdate data-updated="true">Jan 26<span>th</span>, 2015</time>
+        
+         | <a href="/2015/01/26/wkwebview-plugin/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>I woke up this morning to discover that the Telerik marketplace had a new WKWebView plugin:</p>
+
+<blockquote class="twitter-tweet" lang="en"><p>Instantly speed up your PhoneGap/Cordova app on iOS 8 with the new WKWebView plugin: <a href="http://t.co/hft7Y5GDUJ">http://t.co/hft7Y5GDUJ</a></p>&mdash; Rob Lauer (@rdlauer) <a href="https://twitter.com/rdlauer/status/559713567315075072">January 26, 2015</a></blockquote>
+
+
+<p>I had written about the <a href="http://developer.telerik.com/featured/why-ios-8s-wkwebview-is-a-big-deal-for-hybrid-development/">performance benefits of WKWebView</a> before, and Eddy Verbruggen—the author of the WKWebView plugin—has done <a href="https://twitter.com/eddyverbruggen/status/531192220498792448">some performance benchmarks</a> as well, so I knew the plugin would give a performance boost, but I had to see the benefits for myself.</p>
+
+<p>So I did. I added the plugin to a few Cordova projects with <code>cordova plugin add https://github.com/Telerik-Verified-Plugins/WKWebView</code> and to a few AppBuilder ones with <code>appbuilder plugin add "WKWebView Polyfill" --release</code>.</p>
+
+<blockquote>
+    <ul>
+        <li>The <code>--release</code> flag is necessary because the WKWebView plugin currently conflicts with AppBuilder&#8217;s LiveSync functionality. LiveSync is only included on debug builds, so the <code>--release</code> flag avoids the conflict. This does mean that you need to perform builds that also include the <code>--release</code> flag to test the WKWebView—e.g. <code>appbuilder build ios --release</code> or <code>appbuilder deploy ios --release</code>.</li>
+        <li>AppBuilder apps must run Cordova 3.7 to take advantage of the WKWebView plugin. You can check which version of Cordova your AppBuilder app uses with <code>appbuilder prop print FrameworkVersion</code>, and change it to 3.7 with <code>appbuilder prop set FrameworkVersion 3.7.0</code>.</li>
+    </ul>
+</blockquote>
+
+
+<p>Installation is the only step to run the WKWebView plugin, which is pretty awesome. You just build your app with the plugin installed and that&#8217;s it.</p>
+
+<p>I could immediately tell that the performance difference was <em>noticeable</em>. It wasn&#8217;t life altering, but it was there. I decided to make a brief video to show the difference in action, and to convince myself the change I seeing wasn&#8217;t just in my head.</p>
+
+<p>In the video below I run the same app twice, once with the WKWebView plugin installed (on the right), and once with it not (on the left). I made sure this app avoided the network, and I slowed the video down to 50% speed to make it easier to watch.</p>
+
+<iframe width="100%" height="315" src="//www.youtube.com/embed/4jYAjhYyH74" frameborder="0" allowfullscreen></iframe>
+
+
+<p>The video summarizes what the statistics have shown, and what I saw from playing with the plugin today: adding the WKWebView gives your hybrid app a small performance boost, basically for free. How much of a boost your app gets depends on what you&#8217;re doing, with JavaScript-processing-heavy apps getting the most help, but even mundane apps like mine stand to benefit.</p>
+
+<p>Now there are a few caveats that keep this plugin from being a true drop-in solution—for example third-party Cordova plugins that explicitly reference the UIWebView will be problematic—so you&#8217;ll want to make sure to read through <a href="http://plugins.telerik.com/plugin/wkwebview">the WKWebView plugin&#8217;s documentation</a> before you update your production apps.</p>
+
+<p>That being said, it&#8217;s my opinion that everyone with a Cordova app should try adding the plugin. Assuming you don&#8217;t hit one of the edge cases, installing the plugin gives your apps a free performance boost, so why not?</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -817,53 +885,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title" itemprop="name headline"><a href="/2014/02/06/connecting-appbuilder-projects-to-facebook/">Connecting AppBuilder Projects to Facebook</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-02-06T13:08:00-05:00" pubdate data-updated="true">Feb 6<span>th</span>, 2014</time>
-        
-         | <a href="/2014/02/06/connecting-appbuilder-projects-to-facebook/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>One commonly requested, and non-trivial requirement PhoneGap/Cordova apps often have is Facebook integration. To perform the actual integration, hybrid Cordova apps have an advantage over traditional web apps: they can leverage the platform&#8217;s native Facebook APIs.</p>
-
-<p>The bridge between the JavaScript APIs and the native APIs takes the form of a Cordova plugin, named - crazily enough - the <a href="https://github.com/phonegap/phonegap-facebook-plugin">Cordova Facebook Plugin</a>. In this article we&#8217;ll give a step-by-step guide to integrating this plugin into an <a href="http://www.telerik.com/appbuilder">AppBuilder</a> application; then we&#8217;ll see what we can do with it.</p>
-
-<p><em>Note: If you want to cut straight to the chase, the final example with the integration complete is available at <a href="https://github.com/tjvantoll/Facebook-Connect">https://github.com/tjvantoll/Facebook-Connect</a>. You can <a href="http://blogs.telerik.com/appbuilder/posts/13-12-19/git-started-with-github-in-mist">clone this project directly in AppBuilder</a>.</em></p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/2014/02/06/connecting-appbuilder-projects-to-facebook/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -898,6 +919,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2015/01/26/wkwebview-plugin/">Speed Up Your Cordova App with the WKWebView Plugin</a>
+      </li>
+    
+      <li class="post">
         <a href="/2015/01/18/getting-started-with-kendo-ui-core/">Getting Started with Kendo UI Core</a>
       </li>
     
@@ -911,10 +936,6 @@
     
       <li class="post">
         <a href="/2014/08/12/the-problem-with-using-html-imports-for-dependency-management/">The Problem With Using HTML Imports For Dependency Management</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2014/07/25/building-a-phonegap-app-in-10-seconds-using-nothing-but-a-cli/">Building a PhoneGap App in 10 Seconds Using Nothing But a CLI</a>
       </li>
     
   </ul>

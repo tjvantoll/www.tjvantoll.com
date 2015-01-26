@@ -9,8 +9,7 @@
   <meta name="author" content="TJ VanToll">
 
   
-  <meta name="description" content="Recently some minor RSI
--like symptoms in my right hand have forced me to re-evaluate my day to day computer usage. Since the symptoms are &hellip;">
+  <meta name="description" content="This is the latest in my series of accessibility best practices after getting frustrated with using a keyboard on the internet. Last time I talked &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -96,6 +95,66 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title" itemprop="name headline"><a href="/2013/01/28/stop-messing-with-the-browsers-default-focus-outline/">Stop Messing with the Browser&#8217;s Default Focus outline</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-01-28T20:57:00-05:00" pubdate data-updated="true">Jan 28<span>th</span>, 2013</time>
+        
+         | <a href="/2013/01/28/stop-messing-with-the-browsers-default-focus-outline/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>This is the latest in my series of accessibility best practices after getting frustrated with using a keyboard on the internet.  Last time I talked about <a href="/2013/01/01/enter-should-submit-forms-stop-messing-with-that/">enter submitting forms</a>, this time I&#8217;m going to explain why removing the browser&#8217;s default focus <code>outline</code> is a bad idea.</p>
+
+<h3>Focus Rings</h3>
+
+<p>All browsers have a default value they apply to the currently focused item.  For example Chrome on OS X uses the following:</p>
+
+<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nd">:focus</span> <span class="p">{</span>
+</span><span class='line'>    <span class="c">/* -webkit-focus-ring-color = &#39;#5B9DD9&#39; */</span>
+</span><span class='line'>    <span class="k">outline</span><span class="o">:</span> <span class="o">-</span><span class="n">webkit</span><span class="o">-</span><span class="n">focus</span><span class="o">-</span><span class="n">ring</span><span class="o">-</span><span class="k">color</span> <span class="k">auto</span> <span class="m">5px</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/2013/01/28/stop-messing-with-the-browsers-default-focus-outline/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -559,44 +618,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title" itemprop="name headline"><a href="/2012/10/23/front-end-efficiency-the-top-ten/">Front End Efficiency - The Top Ten</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-10-23T00:00:00-04:00" pubdate data-updated="true">Oct 23<span>rd</span>, 2012</time>
-        
-         | <a href="/2012/10/23/front-end-efficiency-the-top-ten/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>I gave a &#8220;Front End Efficiency - The Top Ten&#8221; talk to the <a href="http://groups.google.com/group/greaterlansingjug?pli=1">Greater Lansing Java Users Group</a> on October 23rd, 2012.  For those that missed the talk the slides are <a href="/speaking/slides/2012/Efficiency-Top-Ten/">here</a>.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/5/">&larr; Older</a>
@@ -633,6 +654,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2015/01/26/wkwebview-plugin/">Speed Up Your Cordova App with the WKWebView Plugin</a>
+      </li>
+    
+      <li class="post">
         <a href="/2015/01/18/getting-started-with-kendo-ui-core/">Getting Started with Kendo UI Core</a>
       </li>
     
@@ -646,10 +671,6 @@
     
       <li class="post">
         <a href="/2014/08/12/the-problem-with-using-html-imports-for-dependency-management/">The Problem With Using HTML Imports For Dependency Management</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2014/07/25/building-a-phonegap-app-in-10-seconds-using-nothing-but-a-cli/">Building a PhoneGap App in 10 Seconds Using Nothing But a CLI</a>
       </li>
     
   </ul>

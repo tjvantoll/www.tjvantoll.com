@@ -5,25 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Using the Attribute Selector with Numeric Values - TJ VanToll - Tutorials, Thoughts, and Ramblings on Front-End Development</title>
+  <title>Speed Up Your Cordova App with the WKWebView Plugin - TJ VanToll - Tutorials, Thoughts, and Ramblings on Front-End Development</title>
   <meta name="author" content="TJ VanToll">
 
   
-  <meta name="description" content="What color will the number 3 be in the example below? 1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-&lt;style&gt; td { color: red; } td[colspan=2] { color: blue &hellip;">
+  <meta name="description" content="I woke up this morning to discover that the Telerik marketplace had a new WKWebView plugin: Instantly speed up your PhoneGap/Cordova app on iOS 8 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -32,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://tjvantoll.com/2012/09/19/using-the-attribute-selector-with-numeric-values">
+  <link rel="canonical" href="http://tjvantoll.com/2015/01/26/wkwebview-plugin">
   <link rel="author" href="https://plus.google.com/+TJVanToll">
 
   <!--[if !lte IE 7]><!-->
@@ -112,7 +98,7 @@
   
   <header>
     
-      <h1 class="entry-title" itemprop="name headline">Using the Attribute Selector with Numeric Values</h1>
+      <h1 class="entry-title" itemprop="name headline">Speed Up Your Cordova App with the WKWebView Plugin</h1>
     
     
       <p class="meta">
@@ -128,7 +114,7 @@
   
 
 
-<time datetime="2012-09-19T20:42:00-04:00" pubdate data-updated="true">Sep 19<span>th</span>, 2012</time>
+<time datetime="2015-01-26T00:00:00-05:00" pubdate data-updated="true">Jan 26<span>th</span>, 2015</time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -137,70 +123,37 @@
   </header>
 
 
-<div class="entry-content"><p>What color will the number 3 be in the example below?</p>
+<div class="entry-content"><p>I woke up this morning to discover that the Telerik marketplace had a new WKWebView plugin:</p>
 
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;style&gt;</span>
-</span><span class='line'>    <span class="nt">td</span> <span class="p">{</span> <span class="k">color</span><span class="o">:</span> <span class="nb">red</span><span class="p">;</span> <span class="p">}</span>
-</span><span class='line'>    <span class="nt">td</span><span class="o">[</span><span class="nt">colspan</span><span class="o">=</span><span class="nt">2</span><span class="o">]</span> <span class="p">{</span> <span class="k">color</span><span class="o">:</span> <span class="nb">blue</span><span class="p">;</span> <span class="p">}</span>
-</span><span class='line'><span class="nt">&lt;/style&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="nt">&lt;table&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;tr&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;td</span> <span class="na">colspan=</span><span class="s">&quot;2&quot;</span><span class="nt">&gt;</span>1<span class="nt">&lt;/td&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;/tr&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;td&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;td&gt;</span>2<span class="nt">&lt;/td&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;td&gt;</span>3<span class="nt">&lt;/td&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;/tr&gt;</span>
-</span><span class='line'><span class="nt">&lt;/table&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
+<blockquote class="twitter-tweet" lang="en"><p>Instantly speed up your PhoneGap/Cordova app on iOS 8 with the new WKWebView plugin: <a href="http://t.co/hft7Y5GDUJ">http://t.co/hft7Y5GDUJ</a></p>&mdash; Rob Lauer (@rdlauer) <a href="https://twitter.com/rdlauer/status/559713567315075072">January 26, 2015</a></blockquote>
 
 
-<p>Turns out it will be red because the <code>td[colspan=2]</code> selector does not match it.  Why?</p>
+<p>I had written about the <a href="http://developer.telerik.com/featured/why-ios-8s-wkwebview-is-a-big-deal-for-hybrid-development/">performance benefits of WKWebView</a> before, and Eddy Verbruggen—the author of the WKWebView plugin—has done <a href="https://twitter.com/eddyverbruggen/status/531192220498792448">some performance benchmarks</a> as well, so I knew the plugin would give a performance boost, but I had to see the benefits for myself.</p>
 
-<!--more-->
+<p>So I did. I added the plugin to a few Cordova projects with <code>cordova plugin add https://github.com/Telerik-Verified-Plugins/WKWebView</code> and to a few AppBuilder ones with <code>appbuilder plugin add "WKWebView Polyfill" --release</code>.</p>
 
-
-<h3>Attribute Selector</h3>
-
-<p>Per the <a href="http://www.w3.org/TR/css3-selectors/#attribute-selectors">CSS 3 specification</a> values used in attribute selectors must be either identifiers or strings.</p>
-
-<p>String values are those enclosed by single or double quotes (e.g. the <code>2</code> in the selector <code>value="2"</code>).  If a value is not a string the browser attempts to resolve it as an identifier, which the spec defines as such:</p>
-
-<blockquote><p>&#8220;In CSS, identifiers (including element names, classes, and IDs in selectors) can contain only the characters [a-zA-Z0-9] and ISO 10646 characters U+00A0 and higher, plus the hyphen (-) and the underscore (_); they cannot start with a digit, two hyphens, or a hyphen followed by a digit.&#8221;</p><footer><strong>CSS 2.1 Specification</strong> <cite><a href='http://www.w3.org/TR/CSS2/syndata.html#value-def-identifier'>www.w3.org/TR/CSS2/&hellip;</a></cite></footer></blockquote>
+<blockquote>
+    <ul>
+        <li>The <code>--release</code> flag is necessary because the WKWebView plugin currently conflicts with AppBuilder&#8217;s LiveSync functionality. LiveSync is only included on debug builds, so the <code>--release</code> flag avoids the conflict. This does mean that you need to perform builds that also include the <code>--release</code> flag to test the WKWebView—e.g. <code>appbuilder build ios --release</code> or <code>appbuilder deploy ios --release</code>.</li>
+        <li>AppBuilder apps must run Cordova 3.7 to take advantage of the WKWebView plugin. You can check which version of Cordova your AppBuilder app uses with <code>appbuilder prop print FrameworkVersion</code>, and change it to 3.7 with <code>appbuilder prop set FrameworkVersion 3.7.0</code>.</li>
+    </ul>
+</blockquote>
 
 
-<p>So why doesn&#8217;t <code>colspan=2</code> work above?  The key part from the spec is that &#8221;<em>identifiers &#8230; cannot start with a digit</em>&#8221;.  Therefore, since <code>2</code> is not a string and does not qualify as an identifier, the browser ignores it.  This behavior is implemented consistently in all browsers.</p>
+<p>Installation is the only step to run the WKWebView plugin, which is pretty awesome. You just build your app with the plugin installed and that&#8217;s it.</p>
 
-<p>The fix?  Simply wrap the value in quotes; both <code>td[colspan='2']</code> and <code>td[colspan="2"]</code> will match the cell in the example above.</p>
+<p>I could immediately tell that the performance difference was <em>noticeable</em>. It wasn&#8217;t life altering, but it was there. I decided to make a brief video to show the difference in action, and to convince myself the change I seeing wasn&#8217;t just in my head.</p>
 
-<h3>Numeric Attributes</h3>
+<p>In the video below I run the same app twice, once with the WKWebView plugin installed (on the right), and once with it not (on the left). I made sure this app avoided the network, and I slowed the video down to 50% speed to make it easier to watch.</p>
 
-<p>Attributes that generally only have numeric values include <code>colspan</code>, <code>rowspan</code>, <code>cellpadding</code>, <code>cellspacing</code>, <code>min</code>, <code>max</code>, and <code>step</code>.  When using any of these attributes in an attribute selector ensure that you wrap the value in quotes.</p>
+<iframe width="100%" height="315" src="//www.youtube.com/embed/4jYAjhYyH74" frameborder="0" allowfullscreen></iframe>
 
-<h3>JavaScript</h3>
 
-<p>Most selector engines such as jQuery&#8217;s sizzle will make the selector work regardless of whether the quotes are present.  <code>$('td[colspan=2]')</code> will return the cell in question in the example above.</p>
+<p>The video summarizes what the statistics have shown, and what I saw from playing with the plugin today: adding the WKWebView gives your hybrid app a small performance boost, basically for free. How much of a boost your app gets depends on what you&#8217;re doing, with JavaScript-processing-heavy apps getting the most help, but even mundane apps like mine stand to benefit.</p>
 
-<p>However, if you are using native JavaScript though you will not be so lucky; <code>document.querySelectorAll('td[colspan=2]')</code> actually throws an error.</p>
+<p>Now there are a few caveats that keep this plugin from being a true drop-in solution—for example third-party Cordova plugins that explicitly reference the UIWebView will be problematic—so you&#8217;ll want to make sure to read through <a href="http://plugins.telerik.com/plugin/wkwebview">the WKWebView plugin&#8217;s documentation</a> before you update your production apps.</p>
 
-<h3>Conclusion</h3>
-
-<p>Attributes with numeric values need to have quotes around them when using them in CSS or JavaScript.  When in doubt use quotes around attribute values; it never hurts, and there are some strange edge cases where omitting the quotes leads to unexpected behavior.  If you&#8217;re looking for a more detailed writeup on when quotes are ok to omit checkout <a href="http://mathiasbynens.be/notes/unquoted-attribute-values">Mathias Bynens&#8217; writeup on the topic</a>.</p>
+<p>That being said, it&#8217;s my opinion that everyone with a Cordova app should try adding the plugin. Assuming you don&#8217;t hit one of the edge cases, installing the plugin gives your apps a free performance boost, so why not?</p>
 </div>
 
 
@@ -223,12 +176,12 @@
   
 
 
-<time datetime="2012-09-19T20:42:00-04:00" pubdate data-updated="true">Sep 19<span>th</span>, 2012</time>
+<time datetime="2015-01-26T00:00:00-05:00" pubdate data-updated="true">Jan 26<span>th</span>, 2015</time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/css/'>CSS</a>
+    <a class='category' href='/blog/categories/appbuilder/'>AppBuilder</a>, <a class='category' href='/blog/categories/cordova/'>Cordova</a>
   
 </span>
 
@@ -241,7 +194,7 @@
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://tjvantoll.com/2012/09/19/using-the-attribute-selector-with-numeric-values/" data-via="tjvantoll" data-counturl="http://tjvantoll.com/2012/09/19/using-the-attribute-selector-with-numeric-values/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://tjvantoll.com/2015/01/26/wkwebview-plugin/" data-via="tjvantoll" data-counturl="http://tjvantoll.com/2015/01/26/wkwebview-plugin/" >Tweet</a>
   
   
   
@@ -250,10 +203,8 @@
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/2012/09/14/using-jquery-ui-slider-to-polyfill-html5-input-type-range/" title="Previous Post: Using jQuery UI's Slider to Polyfill HTML5's input[type=range]">&laquo; Using jQuery UI's Slider to Polyfill HTML5's input[type=range]</a>
+        <a class="basic-alignment left" href="/2015/01/18/getting-started-with-kendo-ui-core/" title="Previous Post: Getting Started with Kendo UI Core">&laquo; Getting Started with Kendo UI Core</a>
       
-      
-        <a class="basic-alignment right" href="/2012/10/17/maxlength-constraint-validation-oddities/" title="Next Post: maxlength Constraint Validation Oddities in Major Browsers">maxlength Constraint Validation Oddities in Major Browsers &raquo;</a>
       
     </p>
   </footer>
@@ -334,8 +285,8 @@
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://tjvantoll.com/2012/09/19/using-the-attribute-selector-with-numeric-values/';
-        var disqus_url = 'http://tjvantoll.com/2012/09/19/using-the-attribute-selector-with-numeric-values/';
+        var disqus_identifier = 'http://tjvantoll.com/2015/01/26/wkwebview-plugin/';
+        var disqus_url = 'http://tjvantoll.com/2015/01/26/wkwebview-plugin/';
         var disqus_script = 'embed.js';
       
     (function () {
