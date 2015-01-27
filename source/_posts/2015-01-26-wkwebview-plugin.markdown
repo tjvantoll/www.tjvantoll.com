@@ -29,8 +29,8 @@ In the video below I run the same app twice, once with the WKWebView plugin inst
 
 <iframe width="100%" height="315" src="//www.youtube.com/embed/4jYAjhYyH74" frameborder="0" allowfullscreen></iframe>
 
-The video summarizes what the statistics have shown, and what I saw from playing with the plugin today: adding the WKWebView gives your hybrid app a small performance boost, basically for free. How much of a boost your app gets depends on what you're doing, with JavaScript-processing-heavy apps getting the most help, but even mundane apps like mine stand to benefit.
+Now, this test isn't intended to be conclusive, statistically significant, or anything like that, and your experiences may vary. However, the performance difference shown in the video is consistent with what the statistics have shown, and what I've seen from playing with the plugin today: adding the WKWebView gives your hybrid app a small performance boost, basically for free. How much of a boost your app gets depends on what you're doing, with JavaScript-processing-heavy apps getting the most help, but even mundane apps like mine stand to benefit.
 
-Now there are a few caveats that keep this plugin from being a true drop-in solution—for example third-party Cordova plugins that explicitly reference the UIWebView will be problematic—so you'll want to make sure to read through [the WKWebView plugin's documentation](http://plugins.telerik.com/plugin/wkwebview) before you update your production apps.
+There are a few caveats that keep this plugin from being a true drop-in solution—for example third-party Cordova plugins that explicitly reference the UIWebView will be problematic—so you'll want to make sure to read through [the WKWebView plugin's documentation](http://plugins.telerik.com/plugin/wkwebview) before you update your production apps.
 
 That being said, it's my opinion that everyone with a Cordova app should try adding the plugin. Assuming you don't hit one of the edge cases, installing the plugin gives your apps a free performance boost, so why not?
