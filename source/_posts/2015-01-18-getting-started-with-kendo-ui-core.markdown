@@ -46,7 +46,7 @@ A couple things to note here. First, my HTML follows the [jQuery HTML style guid
 
 Second, and more relevantly, I use the Kendo UI flat theme. (The import of kendo.flat.min.css file controls which theme the library uses.) Kendo UI has like 15 themes or something, but I'm a fan of the flat one. If you want to try out different themes all you have to do is switch “flat” in “kendo.flat.css” to the name of another theme. For instance changing “kendo.flat.min.css“ to “kendo.material.min.css” switches your app to Kendo UI's new material design inspired theme.
 
-<img src="/images/posts/2015-01-18/kendo-ui-themes.png">
+<img src="/images/posts/2015-01-18/kendo-ui-themes.png" alt="">
 <i>See how the Flat theme is highlighted? That's because it's the best one.</i>
 
 Finally, note that I'm including the *source* files for jQuery and Kendo UI—not the minified ones. I do this because it makes debugging easier, and because I'm going to tackle minification later.
