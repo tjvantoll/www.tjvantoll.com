@@ -4,7 +4,7 @@
   <title><![CDATA[Category: HTML5 | TJ VanToll]]></title>
   <link href="http://tjvantoll.com/blog/categories/html5/atom.xml" rel="self"/>
   <link href="http://tjvantoll.com/"/>
-  <updated>2015-01-28T09:27:56-05:00</updated>
+  <updated>2015-01-28T09:42:33-05:00</updated>
   <id>http://tjvantoll.com/</id>
   <author>
     <name><![CDATA[TJ VanToll]]></name>
@@ -44,7 +44,7 @@
 
 <p>So typically you use some sort of server-side check to make sure the user-provided username is available. Straightfoward. But the next part is tricky, and where <code>reportValidity()</code> comes into play. If you determine that the username is not available, how do you display that error to the user using the HTML5 form validation mechanisms?</p>
 
-<p>It <em>seems</em> like this task should be easy, and it is—at least it only requires two lines of code—but it can be unintuitive to say the least. The first thing you need to do is mark the <code>&lt;input&gt;</code> as invalid, which you can do my calling <code>setCustomValidity()</code> on it with the error message you want to use:</p>
+<p>It <em>seems</em> like this task should be easy, and it is—at least it only requires two lines of code—but it can be unintuitive to say the least. The first thing you need to do is mark the <code>&lt;input&gt;</code> as invalid, which you can do by calling <code>setCustomValidity()</code> on it with the error message you want to use:</p>
 
 <p>``` javascript
 document.querySelector( "input" )</p>

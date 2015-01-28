@@ -154,7 +154,7 @@
 
 <p>So typically you use some sort of server-side check to make sure the user-provided username is available. Straightfoward. But the next part is tricky, and where <code>reportValidity()</code> comes into play. If you determine that the username is not available, how do you display that error to the user using the HTML5 form validation mechanisms?</p>
 
-<p>It <em>seems</em> like this task should be easy, and it is—at least it only requires two lines of code—but it can be unintuitive to say the least. The first thing you need to do is mark the <code>&lt;input&gt;</code> as invalid, which you can do my calling <code>setCustomValidity()</code> on it with the error message you want to use:</p>
+<p>It <em>seems</em> like this task should be easy, and it is—at least it only requires two lines of code—but it can be unintuitive to say the least. The first thing you need to do is mark the <code>&lt;input&gt;</code> as invalid, which you can do by calling <code>setCustomValidity()</code> on it with the error message you want to use:</p>
 
 <figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
