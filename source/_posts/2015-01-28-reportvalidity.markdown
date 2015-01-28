@@ -29,7 +29,7 @@ The username is required so you use a `required` attribute. But there's another 
 
 So typically you use some sort of server-side check to make sure the user-provided username is available. Straightfoward. But the next part is tricky, and where `reportValidity()` comes into play. If you determine that the username is not available, how do you display that error to the user using the HTML5 form validation mechanisms?
 
-It *seems* like this task should be easy, and it is—at least it only requires two lines of code—but it can be unintuitive to say the least. The first thing you need to do is mark the `<input>` as invalid, which you can do my calling `setCustomValidity()` on it with the error message you want to use:
+It *seems* like this task should be easy, and it is—at least it only requires two lines of code—but it can be unintuitive to say the least. The first thing you need to do is mark the `<input>` as invalid, which you can do by calling `setCustomValidity()` on it with the error message you want to use:
 
 ``` javascript
 document.querySelector( "input" )
