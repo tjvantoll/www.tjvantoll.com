@@ -4,7 +4,7 @@
   <title><![CDATA[Category: HTML5 | TJ VanToll]]></title>
   <link href="http://tjvantoll.com/blog/categories/html5/atom.xml" rel="self"/>
   <link href="http://tjvantoll.com/"/>
-  <updated>2015-01-27T08:27:38-05:00</updated>
+  <updated>2015-01-28T09:27:56-05:00</updated>
   <id>http://tjvantoll.com/</id>
   <author>
     <name><![CDATA[TJ VanToll]]></name>
@@ -12,6 +12,114 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[A reportValidity() Use Case and Polyfill]]></title>
+    <link href="http://tjvantoll.com/2015/01/28/reportvalidity/"/>
+    <updated>2015-01-28T00:00:00-05:00</updated>
+    <id>http://tjvantoll.com/2015/01/28/reportvalidity</id>
+    <content type="html"><![CDATA[<p>Last week Chrome 40 was released, and while the greater web community <a href="https://twitter.com/addyosmani/status/558051510840356864">was celebrating service workers landing</a>, a little known DOM method made its first appearance in a browser: <code>reportValidity()</code>.</p>
+
+<p>Because I don't think many people know what <code>reportValidity()</code> does, I thought I'd write a quick article about it. Personally I think the best way to explain <code>reportValidity()</code> is with a real-world example, so let's start there.</p>
+
+<h2><code>reportValidity()</code> use case: a registration form</h2>
+
+<p>Suppose that you're building a registration form and you require a username:</p>
+
+<p>``` html
+<form></p>
+
+<pre><code>&lt;label&gt;
+    Username:
+    &lt;input required&gt;
+&lt;/label&gt;
+...
+&lt;button&gt;Submit&lt;/button&gt;
+</code></pre>
+
+<p></form>
+```</p>
+
+<p>The username is required so you use a <code>required</code> attribute. But there's another common username requirement that you can't handle with an HTML attribute: uniqueness. You can't have two “bieber_fan_2003”s in your system after all.</p>
+
+<p>So typically you use some sort of server-side check to make sure the user-provided username is available. Straightfoward. But the next part is tricky, and where <code>reportValidity()</code> comes into play. If you determine that the username is not available, how do you display that error to the user using the HTML5 form validation mechanisms?</p>
+
+<p>It <em>seems</em> like this task should be easy, and it is—at least it only requires two lines of code—but it can be unintuitive to say the least. The first thing you need to do is mark the <code>&lt;input&gt;</code> as invalid, which you can do my calling <code>setCustomValidity()</code> on it with the error message you want to use:</p>
+
+<p>``` javascript
+document.querySelector( "input" )</p>
+
+<pre><code>.setCustomValidity( "This username is not available" );
+</code></pre>
+
+<p>```</p>
+
+<p>This tells the browser that the text in the <code>&lt;input&gt;</code> is invalid (<code>setCustomValidity()</code> considers an empty string valid, and non-empty strings invalid), but it does not <em>report</em> the error to the user—aka the user doesn't see any bubbles. That is what <code>reportValidity()</code> does:</p>
+
+<p><code>javascript
+document.querySelector( "form" ).reportValidity();
+</code></p>
+
+<p><code>reportValidity()</code> displays the form's first error to the user using the browser's native validation bubbles. Here's what it looks like:</p>
+
+<p><img src="http://tjvantoll.com/images/posts/2015-01-28/error-message.png" alt=""></p>
+
+<h2>Report errors without <code>reportValidity()</code></h2>
+
+<p>You may be wondering, if this is such a common use case, how did you report errors before <code>reportValidity()</code>? The completely unintuitive way to do that is by...  wait for it.... clicking the <code>&lt;form&gt;</code>'s submit button in JavaScript:</p>
+
+<p><code>javascript
+document.querySelector( "button" ).submit();
+</code></p>
+
+<p>OF COURSE, right? Here's a <a href="http://jsfiddle.net/tj_vantoll/fdofmt7o/">live example</a> that proves this technique works, in case you don't believe me.</p>
+
+<p>Basically, clicking the submit button mimics an actual user submission, which triggers the HTML form validation algorithm, which reports the first error to the user. The thing is, if you wanted to report errors to the user you'd never think to use JavaScript to click the submit button, you'd look for a method named something like, oh I don't know, <code>reportValidity()</code>.</p>
+
+<h2>Polyfill</h2>
+
+<p>Because <code>reportValidity()</code> and “clicking” a submit button in JavaScript are essentially equivalent actions, you can write a polyfill that takes advantage of this similarity. The following code does just that. You can include it to gain the ability to use <code>reportValidity()</code> in Firefox and IE 10+ (the first version of IE with an HTML5 form validation implementation):</p>
+
+<p>``` javascript
+if ( !HTMLFormElement.prototype.reportValidity ) {</p>
+
+<pre><code>HTMLFormElement.prototype.reportValidity = function() {
+    var submitButtons = this.querySelectorAll( "button, input[type=submit]" );
+    for ( var i = 0; i &lt; submitButtons.length; i++ ) {
+        // Filter out &lt;button type="button"&gt;, as querySelectorAll can't
+        // handle :not filtering
+        if ( submitButtons[ i ].type === "submit" ) {
+            submitButtons[ i ].click();
+            return;
+        }
+    }
+}
+</code></pre>
+
+<p>}
+```</p>
+
+<blockquote><p>This also adds support to Safari, but Safari does not have a native error reporting mechanism (i.e. bubbles), so you have to add your own. I went through some strategies to do so at a talk I gave last year. Here are <a href="http://tjvantoll.com/speaking/slides/Constraint-Validation/Chicago/">the slides</a> and here's the <a href="https://www.youtube.com/watch?v=8qvjhMr6UGM&amp;list=PL-0yjdC10QYpmXI3l-PGK1od4kTWOjm_A&amp;index=12">video</a> if you're interested.</p></blockquote>
+
+<p>This polyfill relies on all forms having a submit button because having one is a <a href="http://www.smashingmagazine.com/2014/05/21/mobile-accessibility-why-care-what-can-you-do/">best practice</a>, but you could easily alter the script to insert a hidden submit button into the DOM if you really wanted to.</p>
+
+<h2>Who cares?</h2>
+
+<p>Ok, I'll admit that a single DOM method being shipped isn't life altering, but it's a small thing that makes HTML5 form validation a little easier to implement. I've been <a href="http://tjvantoll.com/speaking/slides/Constraint-Validation/Atlanta/">advocating the usage of HTML form validation</a> for a long time now, but <a href="https://www.youtube.com/watch?v=8qvjhMr6UGM&amp;list=PL-0yjdC10QYpmXI3l-PGK1od4kTWOjm_A&amp;index=12">very few people actually use it in production</a>. I'm hoping that <code>reportValidity()</code> is a sign that browsers vendors care and are willing to put some effort into making HTML5 form validation easier to use.</p>
+
+<p>Seeing <code>reportValidity()</code> land in Chrome was great, but I want more. Firefox <a href="https://bugzilla.mozilla.org/show_bug.cgi?id=1088761">has a ticket for <code>reportValidity()</code></a>, but I have no clue if IE has this method on their roadmap. WebKit can't consider <code>reportValidity()</code> until they actually have a means of reporting errors—i.e. bubbles. WebKit has a <a href="https://bugs.webkit.org/show_bug.cgi?id=28649">ticket to add bubbles</a>, but it has been inactive since 2010.</p>
+
+<p>Oh, and browser vendors, if you're listening, I have two other things on my form validation wish list that none of you have implemented yet:</p>
+
+<ul>
+<li>1) There's a new <code>invalid</code> event on <code>&lt;form&gt;</code> elements (see <a href="http://www.w3.org/html/wg/drafts/html/master/forms.html#form-submission-algorithm">step 4 on this form submission algorithm</a>) that makes <a href="http://tjvantoll.com/speaking/slides/Constraint-Validation/Chicago/#/28">aggregating error messages</a> a lot easier.</li>
+<li>2) There's a <a href="http://dev.w3.org/csswg/selectors-4/#user-pseudos"><code>:user-error</code> pseudo-class</a> in the CSS Selectors 4 spec that's <a href="http://tjvantoll.com/speaking/slides/Constraint-Validation/Chicago/#/33">far more useful than <code>:invalid</code></a>.</li>
+</ul>
+
+
+<p>Let's make it happen!</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Creating a jQuery UI Dialog with a Submit Button]]></title>
@@ -407,74 +515,6 @@ if (!rangeSupport) {
 <p>This approach handles the most common use cases but it isn't perfect.  For example, if you want to disable the <code>&lt;input type="range"&gt;</code> you'll have to disable the slider as well.</p>
 
 <p>There is a <a href="http://bugs.jqueryui.com/ticket/5800">feature request to add support for this natively in the slider plugin</a> itself, but it's been sitting inactive for quite some time now.  Hopefully over time <code>input[type=range]</code> support will become ubiquitous enough that we can drop these workarounds.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[HTML5 Form Validation - Start Using it in Production Applications]]></title>
-    <link href="http://tjvantoll.com/2012/08/30/html5-form-validation-start-using-it-in-production-applications/"/>
-    <updated>2012-08-30T00:00:00-04:00</updated>
-    <id>http://tjvantoll.com/2012/08/30/html5-form-validation-start-using-it-in-production-applications</id>
-    <content type="html"><![CDATA[<p>Forms suck, yet, they make or break the most crucial online transactions.  Building web forms sucks as well; the APIs and lack of customizability has confused and frustrated people for years.  As a byproduct an abundance of horribly unusable forms have been created for everyone to suffer through.</p>
-
-<p>Therefore <em>anything</em> that makes this process easier should be greeted with joy and enthusiasm.</p>
-
-<p>HTML5 does just this by including a built in <a href="https://developer.mozilla.org/en-US/docs/HTML/Forms_in_HTML#Constraint_Validation_API">client side form validation mechanism</a> designed to make implementing client side validation powerful, seamless, and most importantly - easy to implement.</p>
-
-<p>Great!  Despite this, HTML5 form validation is a topic relegated to presentations and demos; I personally have yet to fill out a web form in the wild that actually makes use of it.</p>
-
-<p>Why?</p>
-
-<!--more-->
-
-
-<h3>Browser Support</h3>
-
-<p>One reason people avoid HTML5 form validation is lack (or perceived lack) of browser support for the new APIs.  However the <a href="http://caniuse.com/#feat=form-validation">list of supported browsers</a> now includes the latest version of every major browser, including:</p>
-
-<ul>
-<li>IE 10</li>
-<li>Firefox 4+</li>
-<li>Chrome 10+</li>
-<li>Safari 5+</li>
-<li>Opera 10+</li>
-<li>Opera Mobile</li>
-<li>Chrome for Android</li>
-<li>Firefox for Android</li>
-</ul>
-
-
-<h3>What to do in unsupported browsers?</h3>
-
-<p>This is <em>the</em> problem.  Despite browser support being relatively good, for most sites there are still going to be a substantial amount of users with browsers that simply do not support the new APIs.  Therefore, if you are intending to support these users you have to start forking your code to support both browsers with native support and browsers without it.</p>
-
-<p>While this can absolutely be done, it's time consuming and a bit of a nuisance.  It's faster and easier to simply ditch the native validation and use your own.  In this case you don't have to worry about multiple code paths; every user in every browser will hit the same codepath and get the same experience.</p>
-
-<h3>What if we did nothing?</h3>
-
-<p>But what if we took a new approach to this problem - simply don't do client side validation in unsupported browsers, at all.  This is advantageous for a number of reasons.</p>
-
-<p>1) <strong>No dual maintenance</strong>.  One thing that has always bothered me about doing validation on both the client and server side is that you're validating the #1 principle of software development - <a href="http://en.wikipedia.org/wiki/Don't_repeat_yourself"><strong>D</strong>on't <strong>R</strong>epeat <strong>Y</strong>ourself</a>.</p>
-
-<p>2) <strong>No dependencies</strong>.  If you only use native browser APIs to provide client side validation you don't have to worry about maintaining plugin or library dependencies that might not be maintained.</p>
-
-<p>3) <strong>Faster and easier</strong>.  The browser APIs are simple and easy to use.  Want to make a field required?  <a href="http://wufoo.com/html5/attributes/09-required.html">Add the <code>required</code> attribute</a>.  Want to make a field only accept email address?  <a href="http://wufoo.com/html5/types/1-email.html">Add <code>type=email</code> to your <code>&lt;input&gt;</code> field</a>.</p>
-
-<p>4) <strong>Future Friendly</strong>.  Although currently a number of older browsers (namely IE &lt;= 9) do not support the new APIs, eventually they all will.  Therefore, eventually all users will hit the client side validation as intended.</p>
-
-<h3>But, you can't just not validate data... right?</h3>
-
-<p>Of course you have to validate client submitted data, but you already need to be doing that on the server side anyways.  What this approach requires you to do is simply return formatted error messages from your server side processing and <a href="http://uxdesign.smashingmagazine.com/2011/11/08/extensive-guide-web-form-usability/">display them in a usability friendly way</a>.  You're likely doing that already.</p>
-
-<h3>What About Polyfills?</h3>
-
-<p><a href="http://remysharp.com/2010/10/08/what-is-a-polyfill/">Polyfills</a> are great and a number of <a href="https://github.com/Modernizr/Modernizr/wiki/HTML5-Cross-browser-Polyfills">HTML5 form validation polyfills</a> exist.  My problem with polyfills in this case is that they add a dependency that I believe is unnecessary.</p>
-
-<h3>Conclusion</h3>
-
-<p>HTML5 provides native solutions to validating client side data and most all modern browsers support it.  Yet, most people are still relying on the JavaScript hacks we've been using for well over a decade now.</p>
-
-<p>It's time.  Come to the dark side.</p>
 ]]></content>
   </entry>
   

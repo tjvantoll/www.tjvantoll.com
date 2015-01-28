@@ -1,0 +1,405 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>A reportValidity() Use Case and Polyfill - TJ VanToll - Tutorials, Thoughts, and Ramblings on Front-End Development</title>
+  <meta name="author" content="TJ VanToll">
+
+  
+  <meta name="description" content="Last week Chrome 40 was released, and while the greater web community was celebrating service workers landing, a little known DOM method made its &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://tjvantoll.com/2015/01/28/reportvalidity">
+  <link rel="author" href="https://plus.google.com/+TJVanToll">
+
+  <!--[if !lte IE 7]><!-->
+    <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet">
+  <!--<![endif]-->
+  <!--[if lte IE 7]>
+    <link rel="stylesheet" href="/stylesheets/old-ie.css" media="screen, projection">
+  <![endif]-->
+  
+  <!--Custom script concatenation
+  <script src="/javascripts/modernizr-2.5.3.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js"></script>
+  <script src="/javascripts/PictureCube.js"></script>
+  <script src="/javascripts/blog.js"></script>
+  -->
+  <script src="/javascripts/build/scripts.js"></script>
+
+  <link href="/atom.xml" rel="alternate" title="TJ VanToll" type="application/atom+xml">
+  <style>
+	/* Fonts from Google"s Web font directory at http://google.com/webfonts */
+	/*@import url(http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic);
+	@import url(http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic);*/
+</style>
+
+  
+  <script type="text/javascript">
+  	if (window.location.host.indexOf('local') == -1) {
+	    var _gaq = _gaq || [];
+	    _gaq.push(['_setAccount', 'UA-29179796-1']);
+	    _gaq.push(['_trackPageview']);
+	
+	    (function() {
+	      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+	      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+	      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	    })();
+    }
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+	<h1><a href="/">TJ VanToll</a></h1>
+	
+		<h2>Tutorials, Thoughts, and Ramblings on Front-End Development</h2> 
+	
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:tjvantoll.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+<li><a href="/">About</a></li>
+  <li><a href="/blog/">Blog</a></li>
+  <li><a href="/blog/archives/">Archives</a></li>
+  <li><a href="/speaking/">Speaking</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article itemscope itemtype="http://schema.org/BlogPosting" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title" itemprop="name headline">A reportValidity() Use Case and Polyfill</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-01-28T00:00:00-05:00" pubdate data-updated="true">Jan 28<span>th</span>, 2015</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>Last week Chrome 40 was released, and while the greater web community <a href="https://twitter.com/addyosmani/status/558051510840356864">was celebrating service workers landing</a>, a little known DOM method made its first appearance in a browser: <code>reportValidity()</code>.</p>
+
+<p>Because I don&#8217;t think many people know what <code>reportValidity()</code> does, I thought I&#8217;d write a quick article about it. Personally I think the best way to explain <code>reportValidity()</code> is with a real-world example, so let&#8217;s start there.</p>
+
+<h2><code>reportValidity()</code> use case: a registration form</h2>
+
+<p>Suppose that you&#8217;re building a registration form and you require a username:</p>
+
+<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;form&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;label&gt;</span>
+</span><span class='line'>        Username:
+</span><span class='line'>        <span class="nt">&lt;input</span> <span class="na">required</span><span class="nt">&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;/label&gt;</span>
+</span><span class='line'>    ...
+</span><span class='line'>    <span class="nt">&lt;button&gt;</span>Submit<span class="nt">&lt;/button&gt;</span>
+</span><span class='line'><span class="nt">&lt;/form&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The username is required so you use a <code>required</code> attribute. But there&#8217;s another common username requirement that you can&#8217;t handle with an HTML attribute: uniqueness. You can&#8217;t have two “bieber_fan_2003”s in your system after all.</p>
+
+<p>So typically you use some sort of server-side check to make sure the user-provided username is available. Straightfoward. But the next part is tricky, and where <code>reportValidity()</code> comes into play. If you determine that the username is not available, how do you display that error to the user using the HTML5 form validation mechanisms?</p>
+
+<p>It <em>seems</em> like this task should be easy, and it is—at least it only requires two lines of code—but it can be unintuitive to say the least. The first thing you need to do is mark the <code>&lt;input&gt;</code> as invalid, which you can do my calling <code>setCustomValidity()</code> on it with the error message you want to use:</p>
+
+<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span> <span class="s2">&quot;input&quot;</span> <span class="p">)</span>
+</span><span class='line'>    <span class="p">.</span><span class="nx">setCustomValidity</span><span class="p">(</span> <span class="s2">&quot;This username is not available&quot;</span> <span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This tells the browser that the text in the <code>&lt;input&gt;</code> is invalid (<code>setCustomValidity()</code> considers an empty string valid, and non-empty strings invalid), but it does not <em>report</em> the error to the user—aka the user doesn&#8217;t see any bubbles. That is what <code>reportValidity()</code> does:</p>
+
+<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span> <span class="s2">&quot;form&quot;</span> <span class="p">).</span><span class="nx">reportValidity</span><span class="p">();</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><code>reportValidity()</code> displays the form&#8217;s first error to the user using the browser&#8217;s native validation bubbles. Here&#8217;s what it looks like:</p>
+
+<p><img src="/images/posts/2015-01-28/error-message.png" alt=""></p>
+
+<h2>Report errors without <code>reportValidity()</code></h2>
+
+<p>You may be wondering, if this is such a common use case, how did you report errors before <code>reportValidity()</code>? The completely unintuitive way to do that is by&#8230;  wait for it&#8230;. clicking the <code>&lt;form&gt;</code>&#8217;s submit button in JavaScript:</p>
+
+<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span> <span class="s2">&quot;button&quot;</span> <span class="p">).</span><span class="nx">submit</span><span class="p">();</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>OF COURSE, right? Here&#8217;s a <a href="http://jsfiddle.net/tj_vantoll/fdofmt7o/">live example</a> that proves this technique works, in case you don&#8217;t believe me.</p>
+
+<p>Basically, clicking the submit button mimics an actual user submission, which triggers the HTML form validation algorithm, which reports the first error to the user. The thing is, if you wanted to report errors to the user you&#8217;d never think to use JavaScript to click the submit button, you&#8217;d look for a method named something like, oh I don&#8217;t know, <code>reportValidity()</code>.</p>
+
+<h2>Polyfill</h2>
+
+<p>Because <code>reportValidity()</code> and “clicking” a submit button in JavaScript are essentially equivalent actions, you can write a polyfill that takes advantage of this similarity. The following code does just that. You can include it to gain the ability to use <code>reportValidity()</code> in Firefox and IE 10+ (the first version of IE with an HTML5 form validation implementation):</p>
+
+<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="k">if</span> <span class="p">(</span> <span class="o">!</span><span class="nx">HTMLFormElement</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">reportValidity</span> <span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nx">HTMLFormElement</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">reportValidity</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>        <span class="kd">var</span> <span class="nx">submitButtons</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">querySelectorAll</span><span class="p">(</span> <span class="s2">&quot;button, input[type=submit]&quot;</span> <span class="p">);</span>
+</span><span class='line'>        <span class="k">for</span> <span class="p">(</span> <span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">submitButtons</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span> <span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>            <span class="c1">// Filter out &lt;button type=&quot;button&quot;&gt;, as querySelectorAll can&#39;t</span>
+</span><span class='line'>            <span class="c1">// handle :not filtering</span>
+</span><span class='line'>            <span class="k">if</span> <span class="p">(</span> <span class="nx">submitButtons</span><span class="p">[</span> <span class="nx">i</span> <span class="p">].</span><span class="nx">type</span> <span class="o">===</span> <span class="s2">&quot;submit&quot;</span> <span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>                <span class="nx">submitButtons</span><span class="p">[</span> <span class="nx">i</span> <span class="p">].</span><span class="nx">click</span><span class="p">();</span>
+</span><span class='line'>                <span class="k">return</span><span class="p">;</span>
+</span><span class='line'>            <span class="p">}</span>
+</span><span class='line'>        <span class="p">}</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<blockquote><p>This also adds support to Safari, but Safari does not have a native error reporting mechanism (i.e. bubbles), so you have to add your own. I went through some strategies to do so at a talk I gave last year. Here are <a href="http://tjvantoll.com/speaking/slides/Constraint-Validation/Chicago/">the slides</a> and here&#8217;s the <a href="https://www.youtube.com/watch?v=8qvjhMr6UGM&amp;list=PL-0yjdC10QYpmXI3l-PGK1od4kTWOjm_A&amp;index=12">video</a> if you&#8217;re interested.</p></blockquote>
+
+<p>This polyfill relies on all forms having a submit button because having one is a <a href="http://www.smashingmagazine.com/2014/05/21/mobile-accessibility-why-care-what-can-you-do/">best practice</a>, but you could easily alter the script to insert a hidden submit button into the DOM if you really wanted to.</p>
+
+<h2>Who cares?</h2>
+
+<p>Ok, I&#8217;ll admit that a single DOM method being shipped isn&#8217;t life altering, but it&#8217;s a small thing that makes HTML5 form validation a little easier to implement. I&#8217;ve been <a href="http://tjvantoll.com/speaking/slides/Constraint-Validation/Atlanta/">advocating the usage of HTML form validation</a> for a long time now, but <a href="https://www.youtube.com/watch?v=8qvjhMr6UGM&amp;list=PL-0yjdC10QYpmXI3l-PGK1od4kTWOjm_A&amp;index=12">very few people actually use it in production</a>. I&#8217;m hoping that <code>reportValidity()</code> is a sign that browsers vendors care and are willing to put some effort into making HTML5 form validation easier to use.</p>
+
+<p>Seeing <code>reportValidity()</code> land in Chrome was great, but I want more. Firefox <a href="https://bugzilla.mozilla.org/show_bug.cgi?id=1088761">has a ticket for <code>reportValidity()</code></a>, but I have no clue if IE has this method on their roadmap. WebKit can&#8217;t consider <code>reportValidity()</code> until they actually have a means of reporting errors—i.e. bubbles. WebKit has a <a href="https://bugs.webkit.org/show_bug.cgi?id=28649">ticket to add bubbles</a>, but it has been inactive since 2010.</p>
+
+<p>Oh, and browser vendors, if you&#8217;re listening, I have two other things on my form validation wish list that none of you have implemented yet:</p>
+
+<ul>
+<li>1) There&#8217;s a new <code>invalid</code> event on <code>&lt;form&gt;</code> elements (see <a href="http://www.w3.org/html/wg/drafts/html/master/forms.html#form-submission-algorithm">step 4 on this form submission algorithm</a>) that makes <a href="http://tjvantoll.com/speaking/slides/Constraint-Validation/Chicago/#/28">aggregating error messages</a> a lot easier.</li>
+<li>2) There&#8217;s a <a href="http://dev.w3.org/csswg/selectors-4/#user-pseudos"><code>:user-error</code> pseudo-class</a> in the CSS Selectors 4 spec that&#8217;s <a href="http://tjvantoll.com/speaking/slides/Constraint-Validation/Chicago/#/33">far more useful than <code>:invalid</code></a>.</li>
+</ul>
+
+
+<p>Let&#8217;s make it happen!</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span itemprop="name" class="fn">TJ VanToll</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-01-28T00:00:00-05:00" pubdate data-updated="true">Jan 28<span>th</span>, 2015</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/forms/'>Forms</a>, <a class='category' href='/blog/categories/html5/'>HTML5</a>, <a class='category' href='/blog/categories/javascript/'>JavaScript</a>
+  
+</span>
+
+
+    </p>
+    <p class="author_card meta">
+      <img src="/images/me/1.jpg" alt="Me!" id="post_me">
+      TJ VanToll is a developer advocate for <a href="http://telerik.com">Telerik</a>, a <a href="http://jqueryui.com/about/">jQuery team member</a>, and the author of <a href="http://tjvantoll.com/jquery-ui-in-action.html">jQuery UI in Action</a>. TJ has over a decade of web development experience—specializing in performance and the mobile web—and <a href="/speaking">speaks</a> about his research at conferences around the world. When not online, TJ is generally found talking about himself in the third person. If you like hearing TJ talk about himself, you should consider following him on <a href="http://twitter.com/tjvantoll">Twitter</a> or <a href="https://plus.google.com/+TJVanToll?rel=author" rel="author">Google+</a>.
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://tjvantoll.com/2015/01/28/reportvalidity/" data-via="tjvantoll" data-counturl="http://tjvantoll.com/2015/01/28/reportvalidity/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/2015/01/26/wkwebview-plugin/" title="Previous Post: Speed Up Your Cordova App with the WKWebView Plugin">&laquo; Speed Up Your Cordova App with the WKWebView Plugin</a>
+      
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1 id="comments">Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section class="ad-section">
+	<h1>Support the Site</h1>
+	<div class="ad-container">
+		<script defer async src="http://cdn.adpacks.com/adpacks.js?legacyid=1285803&zoneid=1386&key=cb7a6f705dfe7532dde49b4c2c5adf2d&serve=C6SI42Y&placement=tjvantollcom&circle=dev" id="_adpacks_js"></script>
+	</div>
+</section><section class="ad-section">
+	<h1>Check Out My Book</h1> 
+	<div id="book-section">
+		<a href="/jquery-ui-in-action.html" class="image-link">
+			<img src="/images/book.jpg" alt="My jQuery UI in Action cover">
+		</a>
+		<div>
+			<a href="/jquery-ui-in-action.html" class="text_link">
+				jQuery UI in Action<br>
+			</a>
+			<strong>Covers jQuery UI 1.11!</strong>
+			<p>Published by <a href="http://www.manning.com/?a_aid=tj-vantoll">Manning</a>.</p>
+		</div>
+	</div>
+</section><section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2015/01/28/reportvalidity/">A reportValidity() Use Case and Polyfill</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2015/01/26/wkwebview-plugin/">Speed Up Your Cordova App with the WKWebView Plugin</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2015/01/18/getting-started-with-kendo-ui-core/">Getting Started with Kendo UI Core</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2015/01/09/updating-google-play-and-ios-app-store-version-numbers-with-the-appbuilder-cli/">Updating Google Play and iOS App Store Version Numbers with the AppBuilder CLI</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/12/29/so-you-want-to-write-a-tech-book/">So You Want to Write a Tech Book</a>
+      </li>
+    
+  </ul>
+</section>
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2015 - <a href="/">TJ VanToll</a> -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'tjvantoll';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://tjvantoll.com/2015/01/28/reportvalidity/';
+        var disqus_url = 'http://tjvantoll.com/2015/01/28/reportvalidity/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

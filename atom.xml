@@ -4,7 +4,7 @@
   <title><![CDATA[TJ VanToll]]></title>
   <link href="http://tjvantoll.com/atom.xml" rel="self"/>
   <link href="http://tjvantoll.com/"/>
-  <updated>2015-01-27T08:27:38-05:00</updated>
+  <updated>2015-01-28T09:27:56-05:00</updated>
   <id>http://tjvantoll.com/</id>
   <author>
     <name><![CDATA[TJ VanToll]]></name>
@@ -12,6 +12,130 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[A reportValidity() Use Case and Polyfill]]></title>
+    <link href="http://tjvantoll.com/2015/01/28/reportvalidity/"/>
+    <updated>2015-01-28T00:00:00-05:00</updated>
+    <id>http://tjvantoll.com/2015/01/28/reportvalidity</id>
+    <content type="html"><![CDATA[<p>Last week Chrome 40 was released, and while the greater web community <a href="https://twitter.com/addyosmani/status/558051510840356864">was celebrating service workers landing</a>, a little known DOM method made its first appearance in a browser: <code>reportValidity()</code>.</p>
+
+<p>Because I don&#8217;t think many people know what <code>reportValidity()</code> does, I thought I&#8217;d write a quick article about it. Personally I think the best way to explain <code>reportValidity()</code> is with a real-world example, so let&#8217;s start there.</p>
+
+<h2><code>reportValidity()</code> use case: a registration form</h2>
+
+<p>Suppose that you&#8217;re building a registration form and you require a username:</p>
+
+<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;form&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;label&gt;</span>
+</span><span class='line'>        Username:
+</span><span class='line'>        <span class="nt">&lt;input</span> <span class="na">required</span><span class="nt">&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;/label&gt;</span>
+</span><span class='line'>    ...
+</span><span class='line'>    <span class="nt">&lt;button&gt;</span>Submit<span class="nt">&lt;/button&gt;</span>
+</span><span class='line'><span class="nt">&lt;/form&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The username is required so you use a <code>required</code> attribute. But there&#8217;s another common username requirement that you can&#8217;t handle with an HTML attribute: uniqueness. You can&#8217;t have two “bieber_fan_2003”s in your system after all.</p>
+
+<p>So typically you use some sort of server-side check to make sure the user-provided username is available. Straightfoward. But the next part is tricky, and where <code>reportValidity()</code> comes into play. If you determine that the username is not available, how do you display that error to the user using the HTML5 form validation mechanisms?</p>
+
+<p>It <em>seems</em> like this task should be easy, and it is—at least it only requires two lines of code—but it can be unintuitive to say the least. The first thing you need to do is mark the <code>&lt;input&gt;</code> as invalid, which you can do my calling <code>setCustomValidity()</code> on it with the error message you want to use:</p>
+
+<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span> <span class="s2">&quot;input&quot;</span> <span class="p">)</span>
+</span><span class='line'>    <span class="p">.</span><span class="nx">setCustomValidity</span><span class="p">(</span> <span class="s2">&quot;This username is not available&quot;</span> <span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This tells the browser that the text in the <code>&lt;input&gt;</code> is invalid (<code>setCustomValidity()</code> considers an empty string valid, and non-empty strings invalid), but it does not <em>report</em> the error to the user—aka the user doesn&#8217;t see any bubbles. That is what <code>reportValidity()</code> does:</p>
+
+<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span> <span class="s2">&quot;form&quot;</span> <span class="p">).</span><span class="nx">reportValidity</span><span class="p">();</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><code>reportValidity()</code> displays the form&#8217;s first error to the user using the browser&#8217;s native validation bubbles. Here&#8217;s what it looks like:</p>
+
+<p><img src="http://tjvantoll.com/images/posts/2015-01-28/error-message.png" alt=""></p>
+
+<h2>Report errors without <code>reportValidity()</code></h2>
+
+<p>You may be wondering, if this is such a common use case, how did you report errors before <code>reportValidity()</code>? The completely unintuitive way to do that is by&#8230;  wait for it&#8230;. clicking the <code>&lt;form&gt;</code>&#8217;s submit button in JavaScript:</p>
+
+<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span> <span class="s2">&quot;button&quot;</span> <span class="p">).</span><span class="nx">submit</span><span class="p">();</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>OF COURSE, right? Here&#8217;s a <a href="http://jsfiddle.net/tj_vantoll/fdofmt7o/">live example</a> that proves this technique works, in case you don&#8217;t believe me.</p>
+
+<p>Basically, clicking the submit button mimics an actual user submission, which triggers the HTML form validation algorithm, which reports the first error to the user. The thing is, if you wanted to report errors to the user you&#8217;d never think to use JavaScript to click the submit button, you&#8217;d look for a method named something like, oh I don&#8217;t know, <code>reportValidity()</code>.</p>
+
+<h2>Polyfill</h2>
+
+<p>Because <code>reportValidity()</code> and “clicking” a submit button in JavaScript are essentially equivalent actions, you can write a polyfill that takes advantage of this similarity. The following code does just that. You can include it to gain the ability to use <code>reportValidity()</code> in Firefox and IE 10+ (the first version of IE with an HTML5 form validation implementation):</p>
+
+<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="k">if</span> <span class="p">(</span> <span class="o">!</span><span class="nx">HTMLFormElement</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">reportValidity</span> <span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nx">HTMLFormElement</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">reportValidity</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>        <span class="kd">var</span> <span class="nx">submitButtons</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">querySelectorAll</span><span class="p">(</span> <span class="s2">&quot;button, input[type=submit]&quot;</span> <span class="p">);</span>
+</span><span class='line'>        <span class="k">for</span> <span class="p">(</span> <span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">submitButtons</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span> <span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>            <span class="c1">// Filter out &lt;button type=&quot;button&quot;&gt;, as querySelectorAll can&#39;t</span>
+</span><span class='line'>            <span class="c1">// handle :not filtering</span>
+</span><span class='line'>            <span class="k">if</span> <span class="p">(</span> <span class="nx">submitButtons</span><span class="p">[</span> <span class="nx">i</span> <span class="p">].</span><span class="nx">type</span> <span class="o">===</span> <span class="s2">&quot;submit&quot;</span> <span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>                <span class="nx">submitButtons</span><span class="p">[</span> <span class="nx">i</span> <span class="p">].</span><span class="nx">click</span><span class="p">();</span>
+</span><span class='line'>                <span class="k">return</span><span class="p">;</span>
+</span><span class='line'>            <span class="p">}</span>
+</span><span class='line'>        <span class="p">}</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<blockquote><p>This also adds support to Safari, but Safari does not have a native error reporting mechanism (i.e. bubbles), so you have to add your own. I went through some strategies to do so at a talk I gave last year. Here are <a href="http://tjvantoll.com/speaking/slides/Constraint-Validation/Chicago/">the slides</a> and here&#8217;s the <a href="https://www.youtube.com/watch?v=8qvjhMr6UGM&amp;list=PL-0yjdC10QYpmXI3l-PGK1od4kTWOjm_A&amp;index=12">video</a> if you&#8217;re interested.</p></blockquote>
+
+<p>This polyfill relies on all forms having a submit button because having one is a <a href="http://www.smashingmagazine.com/2014/05/21/mobile-accessibility-why-care-what-can-you-do/">best practice</a>, but you could easily alter the script to insert a hidden submit button into the DOM if you really wanted to.</p>
+
+<h2>Who cares?</h2>
+
+<p>Ok, I&#8217;ll admit that a single DOM method being shipped isn&#8217;t life altering, but it&#8217;s a small thing that makes HTML5 form validation a little easier to implement. I&#8217;ve been <a href="http://tjvantoll.com/speaking/slides/Constraint-Validation/Atlanta/">advocating the usage of HTML form validation</a> for a long time now, but <a href="https://www.youtube.com/watch?v=8qvjhMr6UGM&amp;list=PL-0yjdC10QYpmXI3l-PGK1od4kTWOjm_A&amp;index=12">very few people actually use it in production</a>. I&#8217;m hoping that <code>reportValidity()</code> is a sign that browsers vendors care and are willing to put some effort into making HTML5 form validation easier to use.</p>
+
+<p>Seeing <code>reportValidity()</code> land in Chrome was great, but I want more. Firefox <a href="https://bugzilla.mozilla.org/show_bug.cgi?id=1088761">has a ticket for <code>reportValidity()</code></a>, but I have no clue if IE has this method on their roadmap. WebKit can&#8217;t consider <code>reportValidity()</code> until they actually have a means of reporting errors—i.e. bubbles. WebKit has a <a href="https://bugs.webkit.org/show_bug.cgi?id=28649">ticket to add bubbles</a>, but it has been inactive since 2010.</p>
+
+<p>Oh, and browser vendors, if you&#8217;re listening, I have two other things on my form validation wish list that none of you have implemented yet:</p>
+
+<ul>
+<li>1) There&#8217;s a new <code>invalid</code> event on <code>&lt;form&gt;</code> elements (see <a href="http://www.w3.org/html/wg/drafts/html/master/forms.html#form-submission-algorithm">step 4 on this form submission algorithm</a>) that makes <a href="http://tjvantoll.com/speaking/slides/Constraint-Validation/Chicago/#/28">aggregating error messages</a> a lot easier.</li>
+<li>2) There&#8217;s a <a href="http://dev.w3.org/csswg/selectors-4/#user-pseudos"><code>:user-error</code> pseudo-class</a> in the CSS Selectors 4 spec that&#8217;s <a href="http://tjvantoll.com/speaking/slides/Constraint-Validation/Chicago/#/33">far more useful than <code>:invalid</code></a>.</li>
+</ul>
+
+
+<p>Let&#8217;s make it happen!</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Speed Up Your Cordova App with the WKWebView Plugin]]></title>
@@ -114,7 +238,7 @@
 
 <p>Second, and more relevantly, I use the Kendo UI flat theme. (The import of kendo.flat.min.css file controls which theme the library uses.) Kendo UI has like 15 themes or something, but I&#8217;m a fan of the flat one. If you want to try out different themes all you have to do is switch “flat” in “kendo.flat.css” to the name of another theme. For instance changing “kendo.flat.min.css“ to “kendo.material.min.css” switches your app to Kendo UI&#8217;s new material design inspired theme.</p>
 
-<p><img src="http://tjvantoll.com/images/posts/2015-01-18/kendo-ui-themes.png">
+<p><img src="http://tjvantoll.com/images/posts/2015-01-18/kendo-ui-themes.png" alt="">
 <i>See how the Flat theme is highlighted? That&#8217;s because it&#8217;s the best one.</i></p>
 
 <p>Finally, note that I&#8217;m including the <em>source</em> files for jQuery and Kendo UI—not the minified ones. I do this because it makes debugging easier, and because I&#8217;m going to tackle minification later.</p>
@@ -2021,68 +2145,6 @@ Adding a strikethrough to a line of text in CSS is easy.</p>
 <p>If you need a dialog with a submit button the easiest solution is to add a <code>click</code> handler that manually submits the form. While this is not ideal, it&#8217;ll work everywhere with no extra effort. Just make sure that you add Enter key handling to text inputs within the <code>&lt;form&gt;</code>.</p>
 
 <p>Long term the <code>form</code> attribute is the solution to this problem. You can try it today as long as you&#8217;re aware that you need to polyfill for IE support.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Internet Explorer, Attribute Selectors, and Really Long Attribute Values]]></title>
-    <link href="http://tjvantoll.com/2013/06/21/internet-explorer-attribute-selectors-and-long-values/"/>
-    <updated>2013-06-21T21:36:00-04:00</updated>
-    <id>http://tjvantoll.com/2013/06/21/internet-explorer-attribute-selectors-and-long-values</id>
-    <content type="html"><![CDATA[<p>In Internet Explorer, <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Attribute_selectors">attribute selectors</a> that inspect the attribute&#8217;s value do not work if the value is >= 4096 characters. This is one of those bugs that you are highly unlikely to run into, but is incredibly painful to track down if you do.</p>
-
-<p>As an example, take the following:</p>
-
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;style&gt;</span>
-</span><span class='line'>    <span class="c">/* Elements that have the attribute */</span>
-</span><span class='line'>    <span class="nt">div</span><span class="o">[</span><span class="nt">data-test</span><span class="o">]</span> <span class="p">{</span> <span class="k">background</span><span class="o">:</span> <span class="nb">red</span><span class="p">;</span> <span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="c">/* Elements that have the attribute, and its value contains &quot;Nullam&quot; */</span>
-</span><span class='line'>    <span class="nt">div</span><span class="o">[</span><span class="nt">data-test</span><span class="o">*=</span><span class="s2">&quot;Nullam&quot;</span><span class="o">]</span> <span class="p">{</span> <span class="k">color</span><span class="o">:</span> <span class="nb">blue</span><span class="p">;</span> <span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="c">/* Elements that have the attribute, and its value starts with &quot;Lorem&quot; */</span>
-</span><span class='line'>    <span class="nt">div</span><span class="o">[</span><span class="nt">data-test</span><span class="o">^=</span><span class="s2">&quot;Lorem&quot;</span><span class="o">]</span> <span class="p">{</span> <span class="k">border</span><span class="o">:</span> <span class="m">1px</span> <span class="k">solid</span> <span class="nb">black</span><span class="p">;</span> <span class="p">}</span>
-</span><span class='line'><span class="nt">&lt;/style&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="nt">&lt;div</span> <span class="na">data-test=</span><span class="s">&quot;Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus. Phasellus viverra nulla ut metus varius laoreet. Quisque rutrum. Aenean imperdiet. Etiam ultricies nisi vel augue. Curabitur ullamcorper ultricies nisi. Nam eget dui. Etiam rhoncus. Maecenas tempus, tellus eget condimentum rhoncus, sem quam semper libero, sit amet adipiscing sem neque sed ipsum. Nam quam nunc, blandit vel, luctus pulvinar, hendrerit id, lorem. Maecenas nec odio et ante tincidunt tempus. Donec vitae sapien ut libero venenatis faucibus. Nullam quis ante. Etiam sit amet orci eget eros faucibus tincidunt. Duis leo. Sed fringilla mauris sit amet nibh. Donec sodales sagittis magna. Sed consequat, leo eget bibendum sodales, augue velit cursus nunc, quis gravida magna mi a libero. Fusce vulputate eleifend sapien. Vestibulum purus quam, scelerisque ut, mollis sed, nonummy id, metus. Nullam accumsan lorem in dui. Cras ultricies mi eu turpis hendrerit fringilla. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; In ac dui quis mi consectetuer lacinia. Nam pretium turpis et arcu. Duis arcu tortor, suscipit eget, imperdiet nec, imperdiet iaculis, ipsum. Sed aliquam ultrices mauris. Integer ante arcu, accumsan a, consectetuer eget, posuere ut, mauris. Praesent adipiscing. Phasellus ullamcorper ipsum rutrum nunc. Nunc nonummy metus. Vestibulum volutpat pretium libero. Cras id dui. Aenean ut eros et nisl sagittis vestibulum. Nullam nulla eros, ultricies sit amet, nonummy id, imperdiet feugiat, pede. Sed lectus. Donec mollis hendrerit risus. Phasellus nec sem in justo pellentesque facilisis. Etiam imperdiet imperdiet orci. Nunc nec neque. Phasellus leo dolor, tempus non, auctor et, hendrerit quis, nisi. Curabitur ligula sapien, tincidunt non, euismod vitae, posuere imperdiet, leo. Maecenas malesuada. Praesent congue erat at massa. Sed cursus turpis vitae tortor. Donec posuere vulputate arcu. Phasellus accumsan cursus velit. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Sed aliquam, nisi quis porttitor congue, elit erat euismod orci, ac placerat dolor lectus quis orci. Phasellus consectetuer vestibulum elit. Aenean tellus metus, bibendum sed, posuere ac, mattis non, nunc. Vestibulum fringilla pede sit amet augue. In turpis. Pellentesque posuere. Praesent turpis. Aenean posuere, tortor sed cursus feugiat, nunc augue blandit nunc, eu sollicitudin urna dolor sagittis lacus. Donec elit libero, sodales nec, volutpat a, suscipit non, turpis. Nullam sagittis. Suspendisse pulvinar, augue ac venenatis condimentum, sem libero volutpat nibh, nec pellentesque velit pede quis nunc. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Fusce id purus. Ut varius tincidunt libero. Phasellus dolor. Maecenas vestibulum mollis diam. Pellentesque ut neque. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. In dui magna, posuere eget, vestibulum et, tempor auctor, justo. In ac felis quis tortor malesuada pretium. Pellentesque auctor neque nec urna. Proin sapien ipsum, porta a, auctor quis, euismod ut, mi. Aenean viverra rhoncus pede. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Ut non enim eleifend felis pretium feugiat. Vivamus quis mi. Phasellus a est. Phasellus magna. In hac habitasse platea dictumst. Curabitur at lacus ac velit ornare lobortis. Cur&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'>    4095 Characters
-</span><span class='line'><span class="nt">&lt;/div&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="nt">&lt;div</span> <span class="na">data-test=</span><span class="s">&quot;Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus. Phasellus viverra nulla ut metus varius laoreet. Quisque rutrum. Aenean imperdiet. Etiam ultricies nisi vel augue. Curabitur ullamcorper ultricies nisi. Nam eget dui. Etiam rhoncus. Maecenas tempus, tellus eget condimentum rhoncus, sem quam semper libero, sit amet adipiscing sem neque sed ipsum. Nam quam nunc, blandit vel, luctus pulvinar, hendrerit id, lorem. Maecenas nec odio et ante tincidunt tempus. Donec vitae sapien ut libero venenatis faucibus. Nullam quis ante. Etiam sit amet orci eget eros faucibus tincidunt. Duis leo. Sed fringilla mauris sit amet nibh. Donec sodales sagittis magna. Sed consequat, leo eget bibendum sodales, augue velit cursus nunc, quis gravida magna mi a libero. Fusce vulputate eleifend sapien. Vestibulum purus quam, scelerisque ut, mollis sed, nonummy id, metus. Nullam accumsan lorem in dui. Cras ultricies mi eu turpis hendrerit fringilla. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; In ac dui quis mi consectetuer lacinia. Nam pretium turpis et arcu. Duis arcu tortor, suscipit eget, imperdiet nec, imperdiet iaculis, ipsum. Sed aliquam ultrices mauris. Integer ante arcu, accumsan a, consectetuer eget, posuere ut, mauris. Praesent adipiscing. Phasellus ullamcorper ipsum rutrum nunc. Nunc nonummy metus. Vestibulum volutpat pretium libero. Cras id dui. Aenean ut eros et nisl sagittis vestibulum. Nullam nulla eros, ultricies sit amet, nonummy id, imperdiet feugiat, pede. Sed lectus. Donec mollis hendrerit risus. Phasellus nec sem in justo pellentesque facilisis. Etiam imperdiet imperdiet orci. Nunc nec neque. Phasellus leo dolor, tempus non, auctor et, hendrerit quis, nisi. Curabitur ligula sapien, tincidunt non, euismod vitae, posuere imperdiet, leo. Maecenas malesuada. Praesent congue erat at massa. Sed cursus turpis vitae tortor. Donec posuere vulputate arcu. Phasellus accumsan cursus velit. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Sed aliquam, nisi quis porttitor congue, elit erat euismod orci, ac placerat dolor lectus quis orci. Phasellus consectetuer vestibulum elit. Aenean tellus metus, bibendum sed, posuere ac, mattis non, nunc. Vestibulum fringilla pede sit amet augue. In turpis. Pellentesque posuere. Praesent turpis. Aenean posuere, tortor sed cursus feugiat, nunc augue blandit nunc, eu sollicitudin urna dolor sagittis lacus. Donec elit libero, sodales nec, volutpat a, suscipit non, turpis. Nullam sagittis. Suspendisse pulvinar, augue ac venenatis condimentum, sem libero volutpat nibh, nec pellentesque velit pede quis nunc. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Fusce id purus. Ut varius tincidunt libero. Phasellus dolor. Maecenas vestibulum mollis diam. Pellentesque ut neque. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. In dui magna, posuere eget, vestibulum et, tempor auctor, justo. In ac felis quis tortor malesuada pretium. Pellentesque auctor neque nec urna. Proin sapien ipsum, porta a, auctor quis, euismod ut, mi. Aenean viverra rhoncus pede. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Ut non enim eleifend felis pretium feugiat. Vivamus quis mi. Phasellus a est. Phasellus magna. In hac habitasse platea dictumst. Curabitur at lacus ac velit ornare lobortis. Cura&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'>    4096 Characters
-</span><span class='line'><span class="nt">&lt;/div&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>The example has two <code>&lt;div&gt;</code>s and 3 rules applied to both elements via attribute selectors. In Firefox, Chrome, Safari, and Opera all rules apply as they should and the elements display as follows:</p>
-
-<p><img src="http://tjvantoll.com/images/posts/2013-06-21/chrome.png"></p>
-
-<p>In Internet Explorer however, the display looks like this:</p>
-
-<p><img src="http://tjvantoll.com/images/posts/2013-06-21/ie.png"></p>
-
-<p>The selector that looks for the existence of the attribute, <code>div[data-test]</code>, matches both elements and the <code>background: red</code> rule is applied.</p>
-
-<p>However, the two selectors that inspect the attribute&#8217;s values, <code>div[data-test*="Nullam"]</code> and <code>div[data-test^="Lorem"]</code>), mysteriously do not match the <code>&lt;div&gt;</code> with the 4096 character <code>data-test</code> attribute.</p>
 ]]></content>
   </entry>
   
