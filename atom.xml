@@ -4,7 +4,7 @@
   <title><![CDATA[TJ VanToll]]></title>
   <link href="http://tjvantoll.com/atom.xml" rel="self"/>
   <link href="http://tjvantoll.com/"/>
-  <updated>2015-01-28T09:42:33-05:00</updated>
+  <updated>2015-01-28T09:49:01-05:00</updated>
   <id>http://tjvantoll.com/</id>
   <author>
     <name><![CDATA[TJ VanToll]]></name>
@@ -123,9 +123,9 @@
 
 <p>Ok, I&#8217;ll admit that a single DOM method being shipped isn&#8217;t life altering, but it&#8217;s a small thing that makes HTML5 form validation a little easier to implement. I&#8217;ve been <a href="http://tjvantoll.com/speaking/slides/Constraint-Validation/Atlanta/">advocating the usage of HTML form validation</a> for a long time now, but <a href="https://www.youtube.com/watch?v=8qvjhMr6UGM&amp;list=PL-0yjdC10QYpmXI3l-PGK1od4kTWOjm_A&amp;index=12">very few people actually use it in production</a>. I&#8217;m hoping that <code>reportValidity()</code> is a sign that browsers vendors care and are willing to put some effort into making HTML5 form validation easier to use.</p>
 
-<p>Seeing <code>reportValidity()</code> land in Chrome was great, but I want more. Firefox <a href="https://bugzilla.mozilla.org/show_bug.cgi?id=1088761">has a ticket for <code>reportValidity()</code></a>, but I have no clue if IE has this method on their roadmap. WebKit can&#8217;t consider <code>reportValidity()</code> until they actually have a means of reporting errors—i.e. bubbles. WebKit has a <a href="https://bugs.webkit.org/show_bug.cgi?id=28649">ticket to add bubbles</a>, but it has been inactive since 2010.</p>
+<p>Firefox <a href="https://bugzilla.mozilla.org/show_bug.cgi?id=1088761">has a ticket for <code>reportValidity()</code></a>, but I have no clue if IE has this method on their roadmap. WebKit can&#8217;t consider <code>reportValidity()</code> until they actually have a means of reporting errors—i.e. bubbles. WebKit has a <a href="https://bugs.webkit.org/show_bug.cgi?id=28649">ticket to add bubbles</a>, but it has been inactive since 2010.</p>
 
-<p>Oh, and browser vendors, if you&#8217;re listening, I have two other things on my form validation wish list that none of you have implemented yet:</p>
+<p>Oh, and browser vendors, if you&#8217;re listening, I have two other things on my form validation wish list that still have zero implementations:</p>
 
 <ul>
 <li>1) There&#8217;s a new <code>invalid</code> event on <code>&lt;form&gt;</code> elements (see <a href="http://www.w3.org/html/wg/drafts/html/master/forms.html#form-submission-algorithm">step 4 on this form submission algorithm</a>) that makes <a href="http://tjvantoll.com/speaking/slides/Constraint-Validation/Chicago/#/28">aggregating error messages</a> a lot easier.</li>
