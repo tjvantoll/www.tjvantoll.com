@@ -14,16 +14,14 @@ Because I don't think many people know what `reportValidity()` does, I thought I
 
 Suppose that you're building a registration form and you require a username:
 
-``` html
-<form>
-    <label>
+<pre class="language-markup line-numbers"><code>&lt;form&gt;
+    &lt;label&gt;
         Username:
-        <input required>
-    </label>
+        &lt;input required&gt;
+    &lt;/label&gt;
     ...
-    <button>Submit</button>
-</form>
-```
+    &lt;button&gt;Submit&lt;/button&gt;
+&lt;/form&gt;</code></pre>
 
 The username is required so you use a `required` attribute. But there's another common username requirement that you can't handle with an HTML attribute: uniqueness. You can't have two “bieber_fan_2003”s in your system after all.
 
@@ -31,16 +29,12 @@ So typically you use some sort of server-side check to make sure the user-provid
 
 It *seems* like this task should be easy, and it is—at least it only requires two lines of code—but it can be unintuitive to say the least. The first thing you need to do is mark the `<input>` as invalid, which you can do by calling `setCustomValidity()` on it with the error message you want to use:
 
-``` javascript
-document.querySelector( "input" )
-    .setCustomValidity( "This username is not available" );
-```
+<pre class="language-javascript"><code>document.querySelector( "input" )
+    .setCustomValidity( "This username is not available" );</code></pre>
 
 This tells the browser that the text in the `<input>` is invalid (`setCustomValidity()` considers an empty string valid, and non-empty strings invalid), but it does not *report* the error to the user—aka the user doesn't see any bubbles. That is what `reportValidity()` does:
 
-``` javascript
-document.querySelector( "form" ).reportValidity();
-```
+<pre class="language-javascript"><code>document.querySelector( "form" ).reportValidity();</code></pre>
 
 `reportValidity()` displays the form's first error to the user using the browser's native validation bubbles. Here's what it looks like:
 
@@ -50,9 +44,7 @@ document.querySelector( "form" ).reportValidity();
 
 You may be wondering, if this is such a common use case, how did you report errors before `reportValidity()`? The completely unintuitive way to do that is by...  wait for it.... clicking the `<form>`'s submit button in JavaScript:
 
-``` javascript
-document.querySelector( "button" ).submit();
-```
+<pre class="language-javascript"><code>document.querySelector( "button" ).submit();</code></pre>
 
 OF COURSE, right? Here's a [live example](http://jsfiddle.net/tj_vantoll/fdofmt7o/) that proves this technique works, in case you don't believe me.
 
@@ -62,12 +54,11 @@ Basically, clicking the submit button mimics an actual user submission, which tr
 
 Because `reportValidity()` and “clicking” a submit button in JavaScript are essentially equivalent actions, you can write a polyfill that takes advantage of this similarity. The following code does just that. You can include it to gain the ability to use `reportValidity()` in Firefox and IE 10+ (the first version of IE with an HTML5 form validation implementation):
 
-``` javascript
-if ( !HTMLFormElement.prototype.reportValidity ) {
+<pre class="language-javascript line-numbers"><code>if ( !HTMLFormElement.prototype.reportValidity ) {
     HTMLFormElement.prototype.reportValidity = function() {
         var submitButtons = this.querySelectorAll( "button, input[type=submit]" );
         for ( var i = 0; i < submitButtons.length; i++ ) {
-            // Filter out <button type="button">, as querySelectorAll can't
+            // Filter out &lt;button type="button"&gt;, as querySelectorAll can't
             // handle :not filtering
             if ( submitButtons[ i ].type === "submit" ) {
                 submitButtons[ i ].click();
@@ -75,8 +66,7 @@ if ( !HTMLFormElement.prototype.reportValidity ) {
             }
         }
     }
-}
-```
+}</code></pre>
 
 > This also adds support to Safari, but Safari does not have a native error reporting mechanism (i.e. bubbles), so you have to add your own. I went through some strategies to do so at a talk I gave last year. Here are [the slides](http://tjvantoll.com/speaking/slides/Constraint-Validation/Chicago/) and here's the [video](https://www.youtube.com/watch?v=8qvjhMr6UGM&list=PL-0yjdC10QYpmXI3l-PGK1od4kTWOjm_A&index=12) if you're interested.
 

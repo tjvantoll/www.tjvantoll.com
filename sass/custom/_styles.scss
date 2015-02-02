@@ -5,6 +5,21 @@ $custom_header_color: #333;
 
 @import "custom/partials/PictureCube";
 @import "custom/partials/helpers";
+@import "custom/partials/prism";
+
+// Tweaks to Prism
+pre[class*="language-"] {
+	position: static;
+	font-size: 0.9em;
+	margin-bottom: 1.6em;
+
+	pre[class*=language-]>code[data-language]::before {
+		content: "";
+	}
+}
+.token.lf::before {
+	content: "";
+}
 
 body > header {
 	@extend .striped_bg;
@@ -276,4 +291,8 @@ pre {
 		width: 100px;
 		margin-right: 1em;
 	}
+}
+img.plain {
+	box-shadow: none;
+	border: none;
 }
