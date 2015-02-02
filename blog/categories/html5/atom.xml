@@ -4,7 +4,7 @@
   <title><![CDATA[Category: HTML5 | TJ VanToll]]></title>
   <link href="http://tjvantoll.com/blog/categories/html5/atom.xml" rel="self"/>
   <link href="http://tjvantoll.com/"/>
-  <updated>2015-01-28T09:49:01-05:00</updated>
+  <updated>2015-02-02T13:40:10-05:00</updated>
   <id>http://tjvantoll.com/</id>
   <author>
     <name><![CDATA[TJ VanToll]]></name>
@@ -26,19 +26,15 @@
 
 <p>Suppose that you're building a registration form and you require a username:</p>
 
-<p>``` html
-<form></p>
+<pre class="language-markup line-numbers"><code>&lt;form&gt;
+    &lt;label&gt;
+        Username:
+        &lt;input required&gt;
+    &lt;/label&gt;
+    ...
+    &lt;button&gt;Submit&lt;/button&gt;
+&lt;/form&gt;</code></pre>
 
-<pre><code>&lt;label&gt;
-    Username:
-    &lt;input required&gt;
-&lt;/label&gt;
-...
-&lt;button&gt;Submit&lt;/button&gt;
-</code></pre>
-
-<p></form>
-```</p>
 
 <p>The username is required so you use a <code>required</code> attribute. But there's another common username requirement that you can't handle with an HTML attribute: uniqueness. You can't have two “bieber_fan_2003”s in your system after all.</p>
 
@@ -46,19 +42,14 @@
 
 <p>It <em>seems</em> like this task should be easy, and it is—at least it only requires two lines of code—but it can be unintuitive to say the least. The first thing you need to do is mark the <code>&lt;input&gt;</code> as invalid, which you can do by calling <code>setCustomValidity()</code> on it with the error message you want to use:</p>
 
-<p>``` javascript
-document.querySelector( "input" )</p>
+<pre class="language-javascript"><code>document.querySelector( "input" )
+    .setCustomValidity( "This username is not available" );</code></pre>
 
-<pre><code>.setCustomValidity( "This username is not available" );
-</code></pre>
-
-<p>```</p>
 
 <p>This tells the browser that the text in the <code>&lt;input&gt;</code> is invalid (<code>setCustomValidity()</code> considers an empty string valid, and non-empty strings invalid), but it does not <em>report</em> the error to the user—aka the user doesn't see any bubbles. That is what <code>reportValidity()</code> does:</p>
 
-<p><code>javascript
-document.querySelector( "form" ).reportValidity();
-</code></p>
+<pre class="language-javascript"><code>document.querySelector( "form" ).reportValidity();</code></pre>
+
 
 <p><code>reportValidity()</code> displays the form's first error to the user using the browser's native validation bubbles. Here's what it looks like:</p>
 
@@ -68,9 +59,8 @@ document.querySelector( "form" ).reportValidity();
 
 <p>You may be wondering, if this is such a common use case, how did you report errors before <code>reportValidity()</code>? The completely unintuitive way to do that is by...  wait for it.... clicking the <code>&lt;form&gt;</code>'s submit button in JavaScript:</p>
 
-<p><code>javascript
-document.querySelector( "button" ).submit();
-</code></p>
+<pre class="language-javascript"><code>document.querySelector( "button" ).submit();</code></pre>
+
 
 <p>OF COURSE, right? Here's a <a href="http://jsfiddle.net/tj_vantoll/fdofmt7o/">live example</a> that proves this technique works, in case you don't believe me.</p>
 
@@ -80,24 +70,20 @@ document.querySelector( "button" ).submit();
 
 <p>Because <code>reportValidity()</code> and “clicking” a submit button in JavaScript are essentially equivalent actions, you can write a polyfill that takes advantage of this similarity. The following code does just that. You can include it to gain the ability to use <code>reportValidity()</code> in Firefox and IE 10+ (the first version of IE with an HTML5 form validation implementation):</p>
 
-<p>``` javascript
-if ( !HTMLFormElement.prototype.reportValidity ) {</p>
-
-<pre><code>HTMLFormElement.prototype.reportValidity = function() {
-    var submitButtons = this.querySelectorAll( "button, input[type=submit]" );
-    for ( var i = 0; i &lt; submitButtons.length; i++ ) {
-        // Filter out &lt;button type="button"&gt;, as querySelectorAll can't
-        // handle :not filtering
-        if ( submitButtons[ i ].type === "submit" ) {
-            submitButtons[ i ].click();
-            return;
+<pre class="language-javascript line-numbers"><code>if ( !HTMLFormElement.prototype.reportValidity ) {
+    HTMLFormElement.prototype.reportValidity = function() {
+        var submitButtons = this.querySelectorAll( "button, input[type=submit]" );
+        for ( var i = 0; i < submitButtons.length; i++ ) {
+            // Filter out &lt;button type="button"&gt;, as querySelectorAll can't
+            // handle :not filtering
+            if ( submitButtons[ i ].type === "submit" ) {
+                submitButtons[ i ].click();
+                return;
+            }
         }
     }
-}
-</code></pre>
+}</code></pre>
 
-<p>}
-```</p>
 
 <blockquote><p>This also adds support to Safari, but Safari does not have a native error reporting mechanism (i.e. bubbles), so you have to add your own. I went through some strategies to do so at a talk I gave last year. Here are <a href="http://tjvantoll.com/speaking/slides/Constraint-Validation/Chicago/">the slides</a> and here's the <a href="https://www.youtube.com/watch?v=8qvjhMr6UGM&amp;list=PL-0yjdC10QYpmXI3l-PGK1od4kTWOjm_A&amp;index=12">video</a> if you're interested.</p></blockquote>
 
