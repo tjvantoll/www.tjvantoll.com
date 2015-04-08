@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Forms | TJ VanToll's Blog]]></title>
   <link href="http://tjvantoll.com/blog/categories/forms/atom.xml" rel="self"/>
   <link href="http://tjvantoll.com/"/>
-  <updated>2015-03-19T14:29:48-04:00</updated>
+  <updated>2015-04-08T16:35:16-04:00</updated>
   <id>http://tjvantoll.com/</id>
   <author>
     <name><![CDATA[TJ VanToll]]></name>
@@ -21,6 +21,9 @@
     <content type="html"><![CDATA[<p>Last week Chrome 40 was released, and while the greater web community <a href="https://twitter.com/addyosmani/status/558051510840356864">was celebrating service workers landing</a>, a little known DOM method made its first appearance in a browser: <code>reportValidity()</code>.</p>
 
 <p>Because I don't think many people know what <code>reportValidity()</code> does, I thought I'd write a quick article about it. Personally I think the best way to explain <code>reportValidity()</code> is with a real-world example, so let's start there.</p>
+
+<!-- more -->
+
 
 <h2><code>reportValidity()</code> use case: a registration form</h2>
 

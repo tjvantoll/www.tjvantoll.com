@@ -4,7 +4,7 @@
   <title><![CDATA[TJ VanToll's Blog]]></title>
   <link href="http://tjvantoll.com/atom.xml" rel="self"/>
   <link href="http://tjvantoll.com/"/>
-  <updated>2015-03-19T14:29:48-04:00</updated>
+  <updated>2015-04-08T16:35:16-04:00</updated>
   <id>http://tjvantoll.com/</id>
   <author>
     <name><![CDATA[TJ VanToll]]></name>
@@ -121,6 +121,9 @@ exports.pageLoaded = function(args) {
 
 <p>Because I don&#8217;t think many people know what <code>reportValidity()</code> does, I thought I&#8217;d write a quick article about it. Personally I think the best way to explain <code>reportValidity()</code> is with a real-world example, so let&#8217;s start there.</p>
 
+<!-- more -->
+
+
 <h2><code>reportValidity()</code> use case: a registration form</h2>
 
 <p>Suppose that you&#8217;re building a registration form and you require a username:</p>
@@ -218,6 +221,9 @@ exports.pageLoaded = function(args) {
 
 <p>I had written about the <a href="http://developer.telerik.com/featured/why-ios-8s-wkwebview-is-a-big-deal-for-hybrid-development/">performance benefits of WKWebView</a> before, and Eddy Verbruggen—the author of the WKWebView plugin—has done <a href="https://twitter.com/eddyverbruggen/status/531192220498792448">some performance benchmarks</a> as well, so I knew the plugin would give a performance boost, but I had to see the benefits for myself.</p>
 
+<!-- more -->
+
+
 <p>So I did. I added the plugin to a few Cordova projects with <code>cordova plugin add https://github.com/Telerik-Verified-Plugins/WKWebView</code> and to a few AppBuilder ones with <code>appbuilder plugin add "WKWebView Polyfill" --release</code>.</p>
 
 <blockquote>
@@ -251,6 +257,9 @@ exports.pageLoaded = function(args) {
     <updated>2015-01-18T00:00:00-05:00</updated>
     <id>http://tjvantoll.com/2015/01/18/getting-started-with-kendo-ui-core</id>
     <content type="html"><![CDATA[<p>I&#8217;ve been using <a href="https://github.com/telerik/kendo-ui-core">Kendo UI Core</a> in a bunch of projects lately, so I thought I&#8217;d document the process I use to get Kendo UI Core up and running. Note that the workflow I show isn&#8217;t the “right” way of doing things, just the workflow I like.</p>
+
+<!-- more -->
+
 
 <h2>Step 1) Download</h2>
 
@@ -405,6 +414,11 @@ exports.pageLoaded = function(args) {
 </span><span class='line'>$ appbuilder prop set AndroidVersionCode 2</span></code></pre></td></tr></table></div></figure>
 
 
+
+
+<!-- more -->
+
+
 <p>The <a href="http://docs.telerik.com/platform/appbuilder/configuring-your-project/project-properties-general#general-project-properties-in-the-appbuilder-command-line-interface"><strong><code>BundleVersion</code></strong></a> is publicly visible version number; it&#8217;s what users see in Google Play and the iOS App Store. Under the hood, <code>BundleVersion</code> changes the <a href="https://developer.apple.com/library/ios/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html#//apple_ref/doc/uid/20001431-102364"><code>CFBundleVersion</code></a> in your iOS app&#8217;s Info.plist, and <a href="http://developer.android.com/guide/topics/manifest/manifest-element.html#vname"><code>android:versionName</code></a> in your Android app&#8217;s AndroidManifest.xml.</p>
 
 <p>The <a href="http://docs.telerik.com/platform/appbuilder/configuring-your-project/project-properties-for-android-devices#android-project-properties-in-the-appbuilder-command-line-interface"><strong><code>AndroidVersionCode</code></strong></a> corresponds to <a href="http://developer.android.com/guide/topics/manifest/manifest-element.html#vcode"><code>android:versionCode</code></a> in the Android app&#8217;s AndroidManifest.xml, and is an integer value that Google requires you to update with each version of your app. You can increment it by 1, 10, or 10000—as long as it goes up. Google requires this because they let you set your <code>android:versionName</code> to any random string (unlike iOS, whose <code>CFBundleVersion</code> must be a number and has <a href="https://developer.apple.com/library/ios/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html#//apple_ref/doc/uid/20001431-102364">well defined rules</a>).</p>
@@ -435,6 +449,9 @@ exports.pageLoaded = function(args) {
 <p>When I finished <em><a href="http://tjvantoll.com/jquery-ui-in-action.html">jQuery UI in Action</a></em> I decided I wanted to write a retrospective to help other aspiring authors. I wanted to release the retrospective around the same time as the book (*cough* late September), but as it turns out, it&#8217;s super easy to legitimize procrastination after you finish writing a book. Playing through the entire suite of Sonic the Hedgehog Genesis games suddenly seems like a <em>great</em> idea. (It is, by the way.)</p>
 
 <p>But I did finally get around to doing this. What follows is a semi-coherent series of sentences about my experiences writing a tech book. The target reader is someone curious about how tech books are authored—especially masochistic readers that might be interested in writing a book themselves one day.</p>
+
+<!-- more -->
+
 
 <h2>A timeline</h2>
 

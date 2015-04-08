@@ -173,90 +173,12 @@
 
 <p>Because I don&#8217;t think many people know what <code>reportValidity()</code> does, I thought I&#8217;d write a quick article about it. Personally I think the best way to explain <code>reportValidity()</code> is with a real-world example, so let&#8217;s start there.</p>
 
-<h2><code>reportValidity()</code> use case: a registration form</h2>
-
-<p>Suppose that you&#8217;re building a registration form and you require a username:</p>
-
-<pre class="language-markup line-numbers"><code>&lt;form&gt;
-    &lt;label&gt;
-        Username:
-        &lt;input required&gt;
-    &lt;/label&gt;
-    ...
-    &lt;button&gt;Submit&lt;/button&gt;
-&lt;/form&gt;</code></pre>
-
-
-<p>The username is required so you use a <code>required</code> attribute. But there&#8217;s another common username requirement that you can&#8217;t handle with an HTML attribute: uniqueness. You can&#8217;t have two “bieber_fan_2003”s in your system after all.</p>
-
-<p>So typically you use some sort of server-side check to make sure the user-provided username is available. Straightfoward. But the next part is tricky, and where <code>reportValidity()</code> comes into play. If you determine that the username is not available, how do you display that error to the user using the HTML5 form validation mechanisms?</p>
-
-<p>It <em>seems</em> like this task should be easy, and it is—at least it only requires two lines of code—but it can be unintuitive to say the least. The first thing you need to do is mark the <code>&lt;input&gt;</code> as invalid, which you can do by calling <code>setCustomValidity()</code> on it with the error message you want to use:</p>
-
-<pre class="language-javascript"><code>document.querySelector( "input" )
-    .setCustomValidity( "This username is not available" );</code></pre>
-
-
-<p>This tells the browser that the text in the <code>&lt;input&gt;</code> is invalid (<code>setCustomValidity()</code> considers an empty string valid, and non-empty strings invalid), but it does not <em>report</em> the error to the user—aka the user doesn&#8217;t see any bubbles. That is what <code>reportValidity()</code> does:</p>
-
-<pre class="language-javascript"><code>document.querySelector( "form" ).reportValidity();</code></pre>
-
-
-<p><code>reportValidity()</code> displays the form&#8217;s first error to the user using the browser&#8217;s native validation bubbles. Here&#8217;s what it looks like:</p>
-
-<p><img src="/images/posts/2015-01-28/error-message.png" alt=""></p>
-
-<h2>Report errors without <code>reportValidity()</code></h2>
-
-<p>You may be wondering, if this is such a common use case, how did you report errors before <code>reportValidity()</code>? The completely unintuitive way to do that is by&#8230;  wait for it&#8230;. clicking the <code>&lt;form&gt;</code>&#8217;s submit button in JavaScript:</p>
-
-<pre class="language-javascript"><code>document.querySelector( "button" ).submit();</code></pre>
-
-
-<p>OF COURSE, right? Here&#8217;s a <a href="http://jsfiddle.net/tj_vantoll/fdofmt7o/">live example</a> that proves this technique works, in case you don&#8217;t believe me.</p>
-
-<p>Basically, clicking the submit button mimics an actual user submission, which triggers the HTML form validation algorithm, which reports the first error to the user. The thing is, if you wanted to report errors to the user you&#8217;d never think to use JavaScript to click the submit button, you&#8217;d look for a method named something like, oh I don&#8217;t know, <code>reportValidity()</code>.</p>
-
-<h2>Polyfill</h2>
-
-<p>Because <code>reportValidity()</code> and “clicking” a submit button in JavaScript are essentially equivalent actions, you can write a polyfill that takes advantage of this similarity. The following code does just that. You can include it to gain the ability to use <code>reportValidity()</code> in Firefox and IE 10+ (the first version of IE with an HTML5 form validation implementation):</p>
-
-<pre class="language-javascript line-numbers"><code>if ( !HTMLFormElement.prototype.reportValidity ) {
-    HTMLFormElement.prototype.reportValidity = function() {
-        var submitButtons = this.querySelectorAll( "button, input[type=submit]" );
-        for ( var i = 0; i < submitButtons.length; i++ ) {
-            // Filter out &lt;button type="button"&gt;, as querySelectorAll can't
-            // handle :not filtering
-            if ( submitButtons[ i ].type === "submit" ) {
-                submitButtons[ i ].click();
-                return;
-            }
-        }
-    }
-}</code></pre>
-
-
-<blockquote><p>This also adds support to Safari, but Safari does not have a native error reporting mechanism (i.e. bubbles), so you have to add your own. I went through some strategies to do so at a talk I gave last year. Here are <a href="http://tjvantoll.com/speaking/slides/Constraint-Validation/Chicago/">the slides</a> and here&#8217;s the <a href="https://www.youtube.com/watch?v=8qvjhMr6UGM&amp;list=PL-0yjdC10QYpmXI3l-PGK1od4kTWOjm_A&amp;index=12">video</a> if you&#8217;re interested.</p></blockquote>
-
-<p>This polyfill relies on all forms having a submit button because having one is a <a href="http://www.smashingmagazine.com/2014/05/21/mobile-accessibility-why-care-what-can-you-do/">best practice</a>, but you could easily alter the script to insert a hidden submit button into the DOM if you really wanted to.</p>
-
-<h2>Who cares?</h2>
-
-<p>Ok, I&#8217;ll admit that a single DOM method being shipped isn&#8217;t life altering, but it&#8217;s a small thing that makes HTML5 form validation a little easier to implement. I&#8217;ve been <a href="http://tjvantoll.com/speaking/slides/Constraint-Validation/Atlanta/">advocating the usage of HTML form validation</a> for a long time now, but <a href="https://www.youtube.com/watch?v=8qvjhMr6UGM&amp;list=PL-0yjdC10QYpmXI3l-PGK1od4kTWOjm_A&amp;index=12">very few people actually use it in production</a>. I&#8217;m hoping that <code>reportValidity()</code> is a sign that browsers vendors care and are willing to put some effort into making HTML5 form validation easier to use.</p>
-
-<p>Firefox <a href="https://bugzilla.mozilla.org/show_bug.cgi?id=1088761">has a ticket for <code>reportValidity()</code></a>, but I have no clue if IE has this method on their roadmap. WebKit can&#8217;t consider <code>reportValidity()</code> until they actually have a means of reporting errors—i.e. bubbles. WebKit has a <a href="https://bugs.webkit.org/show_bug.cgi?id=28649">ticket to add bubbles</a>, but it has been inactive since 2010.</p>
-
-<p>Oh, and browser vendors, if you&#8217;re listening, I have two other things on my form validation wish list that still have zero implementations:</p>
-
-<ul>
-<li>1) There&#8217;s a new <code>invalid</code> event on <code>&lt;form&gt;</code> elements (see <a href="http://www.w3.org/html/wg/drafts/html/master/forms.html#form-submission-algorithm">step 4 on this form submission algorithm</a>) that makes <a href="http://tjvantoll.com/speaking/slides/Constraint-Validation/Chicago/#/28">aggregating error messages</a> a lot easier.</li>
-<li>2) There&#8217;s a <a href="http://dev.w3.org/csswg/selectors-4/#user-pseudos"><code>:user-error</code> pseudo-class</a> in the CSS Selectors 4 spec that&#8217;s <a href="http://tjvantoll.com/speaking/slides/Constraint-Validation/Chicago/#/33">far more useful than <code>:invalid</code></a>.</li>
-</ul>
-
-
-<p>Let&#8217;s make it happen!</p>
 </div>
   
+  
+    <footer>
+      <a rel="full-article" href="/2015/01/28/reportvalidity/">Read on &rarr;</a>
+    </footer>
   
 
 
@@ -299,32 +221,12 @@
 
 <p>I had written about the <a href="http://developer.telerik.com/featured/why-ios-8s-wkwebview-is-a-big-deal-for-hybrid-development/">performance benefits of WKWebView</a> before, and Eddy Verbruggen—the author of the WKWebView plugin—has done <a href="https://twitter.com/eddyverbruggen/status/531192220498792448">some performance benchmarks</a> as well, so I knew the plugin would give a performance boost, but I had to see the benefits for myself.</p>
 
-<p>So I did. I added the plugin to a few Cordova projects with <code>cordova plugin add https://github.com/Telerik-Verified-Plugins/WKWebView</code> and to a few AppBuilder ones with <code>appbuilder plugin add "WKWebView Polyfill" --release</code>.</p>
-
-<blockquote>
-    <ul>
-        <li>The <code>--release</code> flag is necessary because the WKWebView plugin currently conflicts with AppBuilder&#8217;s LiveSync functionality. LiveSync is only included on debug builds, so the <code>--release</code> flag avoids the conflict. This does mean that you need to perform builds that also include the <code>--release</code> flag to test the WKWebView—e.g. <code>appbuilder build ios --release</code> or <code>appbuilder deploy ios --release</code>.</li>
-        <li>AppBuilder apps must run Cordova 3.7 to take advantage of the WKWebView plugin. You can check which version of Cordova your AppBuilder app uses with <code>appbuilder prop print FrameworkVersion</code>, and change it to 3.7 with <code>appbuilder prop set FrameworkVersion 3.7.0</code>.</li>
-    </ul>
-</blockquote>
-
-
-<p>Installation is the only step to run the WKWebView plugin, which is pretty awesome. You just build your app with the plugin installed and that&#8217;s it.</p>
-
-<p>I could immediately tell that the performance difference was <em>noticeable</em>. It wasn&#8217;t life altering, but it was there. I decided to make a brief video to show the difference in action, and to convince myself the change I seeing wasn&#8217;t just in my head.</p>
-
-<p>In the video below I run the same app twice, once with the WKWebView plugin installed (on the right), and once with it not (on the left). I made sure this app avoided the network, and I slowed the video down to 50% speed to make it easier to watch.</p>
-
-<iframe width="100%" height="315" src="//www.youtube.com/embed/4jYAjhYyH74" frameborder="0" allowfullscreen></iframe>
-
-
-<p>Now, this test isn&#8217;t intended to be conclusive, statistically significant, or anything like that, and your experiences may vary. However, the performance difference shown in the video is consistent with what the statistics have shown, and what I&#8217;ve seen from playing with the plugin today: adding the WKWebView gives your hybrid app a small performance boost, basically for free. How much of a boost your app gets depends on what you&#8217;re doing, with JavaScript-processing-heavy apps getting the most help, but even mundane apps like mine stand to benefit.</p>
-
-<p>There are a few caveats that keep this plugin from being a true drop-in solution—for example third-party Cordova plugins that explicitly reference the UIWebView will be problematic—so you&#8217;ll want to make sure to read through <a href="http://plugins.telerik.com/plugin/wkwebview">the WKWebView plugin&#8217;s documentation</a> before you update your production apps.</p>
-
-<p>That being said, it&#8217;s my opinion that everyone with a Cordova app should try adding the plugin. Assuming you don&#8217;t hit one of the edge cases, installing the plugin gives your apps a free performance boost, so why not?</p>
 </div>
   
+  
+    <footer>
+      <a rel="full-article" href="/2015/01/26/wkwebview-plugin/">Read on &rarr;</a>
+    </footer>
   
 
 
@@ -362,143 +264,12 @@
 
   <div class="entry-content"><p>I&#8217;ve been using <a href="https://github.com/telerik/kendo-ui-core">Kendo UI Core</a> in a bunch of projects lately, so I thought I&#8217;d document the process I use to get Kendo UI Core up and running. Note that the workflow I show isn&#8217;t the “right” way of doing things, just the workflow I like.</p>
 
-<h2>Step 1) Download</h2>
-
-<p>I start by downloading Kendo UI Core from Bower, as it&#8217;s my preferred package manager for web apps:</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ bower install kendo-ui-core</span></code></pre></td></tr></table></div></figure>
-
-
-<p>You can alternatively <a href="https://github.com/telerik/kendo-ui-core/archive/master.zip">download Kendo UI Core from GitHub</a>, but Bower is my jam. (Not to be confused with <a href="http://jamjs.org/">Jam</a>, which—believe it or not—is actually the name of a competing JavaScript package manager. Who knew?)</p>
-
-<h2>Step 2) Scaffold HTML</h2>
-
-<p>Next I create an index.html and paste in the following boilerplate HTML:</p>
-
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="cp">&lt;!doctype html&gt;</span>
-</span><span class='line'><span class="nt">&lt;html</span> <span class="na">lang=</span><span class="s">&quot;en&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'><span class="nt">&lt;head&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">&quot;utf-8&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;title&gt;</span>My Project<span class="nt">&lt;/title&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;meta</span> <span class="na">name=</span><span class="s">&quot;viewport&quot;</span> <span class="na">content=</span><span class="s">&quot;width=device-width, initial-scale=1&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">&quot;stylesheet&quot;</span> <span class="na">href=</span><span class="s">&quot;bower_components/kendo-ui-core/src/styles/web/kendo.common.core.css&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">&quot;stylesheet&quot;</span> <span class="na">href=</span><span class="s">&quot;bower_components/kendo-ui-core/src/styles/web/kendo.flat.css&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'><span class="nt">&lt;/head&gt;</span>
-</span><span class='line'><span class="nt">&lt;body&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;bower_components/jquery/dist/jquery.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
-</span><span class='line'><span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;bower_components/kendo-ui-core/src/js/kendo.ui.core.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="nt">&lt;/body&gt;</span>
-</span><span class='line'><span class="nt">&lt;/html&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>A couple things to note here. First, my HTML follows the <a href="http://contribute.jquery.org/style-guide/html/">jQuery HTML style guide</a>, which yes, actually is a thing.</p>
-
-<p>Second, and more relevantly, I use the Kendo UI flat theme. (The import of kendo.flat.min.css file controls which theme the library uses.) Kendo UI has like 15 themes or something, but I&#8217;m a fan of the flat one. If you want to try out different themes all you have to do is switch “flat” in “kendo.flat.css” to the name of another theme. For instance changing “kendo.flat.min.css“ to “kendo.material.min.css” switches your app to Kendo UI&#8217;s new material design inspired theme.</p>
-
-<p><img src="/images/posts/2015-01-18/kendo-ui-themes.png" alt="">
-<i>See how the Flat theme is highlighted? That&#8217;s because it&#8217;s the best one.</i></p>
-
-<p>Finally, note that I&#8217;m including the <em>source</em> files for jQuery and Kendo UI—not the minified ones. I do this because it makes debugging easier, and because I&#8217;m going to tackle minification later.</p>
-
-<p>This markup makes for a decent starting point for demos and quick tests. I even keep this HTML stored as a <a href="http://sublimetext.info/docs/en/extensibility/snippets.html">Sublime snippet</a> for when I need to get a quick test case up and running. And this workflow works great, but for bigger projects I want a little more structure, and a structure that&#8217;s ready to scale for bigger projects. Here&#8217;s how I do that.</p>
-
-<h2>Step 3) Package Management</h2>
-
-<p>I like using AMD and <a href="http://requirejs.org/">RequireJS</a> to manage my app&#8217;s dependencies, and luckily Kendo UI Core is intelligently broken into AMD modules. To start with AMD I download RequireJS from Bower:</p>
-
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'>$ bower install requirejs
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Next I create an app.js file to serve as the main JavaScript file for my app. At this point my project&#8217;s folder structure looks a little something like this:</p>
-
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'>.
-</span><span class='line'>├── bower_components
-</span><span class='line'>│   ├── jquery
-</span><span class='line'>│   │   └── ...
-</span><span class='line'>│   ├── kendo-ui-core
-</span><span class='line'>│   │   └── ...
-</span><span class='line'>│   └── requirejs
-</span><span class='line'>│       └── ...
-</span><span class='line'>├── index.html
-</span><span class='line'>└── js
-</span><span class='line'>    └── app.js
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>With this structure in place I switch my index.html to use a single <code>&lt;script&gt;</code> tag:</p>
-
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;bower_components/requirejs/require.js&quot;</span> <span class="na">data-main=</span><span class="s">&quot;js/app&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Then I paste the following code in as a starting point for app.js:</p>
-
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">require</span><span class="p">.</span><span class="nx">config</span><span class="p">({</span>
-</span><span class='line'>    <span class="nx">paths</span><span class="o">:</span> <span class="p">{</span>
-</span><span class='line'>        <span class="s2">&quot;jquery&quot;</span><span class="o">:</span> <span class="s2">&quot;/bower_components/jquery/dist/jquery&quot;</span><span class="p">,</span>
-</span><span class='line'>        <span class="s2">&quot;kendo-ui-core&quot;</span><span class="o">:</span> <span class="s2">&quot;/bower_components/kendo-ui-core/src/js&quot;</span>
-</span><span class='line'>    <span class="p">}</span>
-</span><span class='line'><span class="p">});</span>
-</span><span class='line'>
-</span><span class='line'><span class="nx">require</span><span class="p">([</span> <span class="s2">&quot;jquery&quot;</span><span class="p">,</span> <span class="s2">&quot;kendo-ui-core/kendo.ui.core&quot;</span> <span class="p">],</span> <span class="kd">function</span><span class="p">(</span> <span class="nx">$</span> <span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>
-</span><span class='line'><span class="p">});</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>This gives me an entry point for my app that loads jQuery and Kendo UI Core dynamically. If my app only needs one portion of Kendo UI Core I only specify the modules I need in the <code>require()</code> call. For instance if I only want a <a href="http://demos.telerik.com/kendo-ui/maskedtextbox/index">MaskedTextBox</a> I only require <code>"jquery"</code> and <code>"kendo-ui-core/kendo.maskedtextbox"</code>—i.e. <code>require([ "jquery", "kendo-ui-core/kendo.maskedtextbox" ])</code>.</p>
-
-<p>Eventually I&#8217;ll add the <a href="http://requirejs.org/docs/optimization.html">RequireJS Optimizer</a> to my app to optimize into a single <code>&lt;script&gt;</code> tag for production, but that won&#8217;t happen until I&#8217;m ready to deploy my project, and I wanted to focus this article on getting started. If you&#8217;re interested in the optimization workflow I use, check out my article on <a href="http://developer.telerik.com/featured/using-ui-libraries-without-the-bloat/">Using UI Libraries Without the Bloat</a>.</p>
-
-<p>For now I hope what I have here was helpful. If you have any other questions about using Kendo UI let me know in the comments.</p>
 </div>
   
+  
+    <footer>
+      <a rel="full-article" href="/2015/01/18/getting-started-with-kendo-ui-core/">Read on &rarr;</a>
+    </footer>
   
 
 
@@ -544,25 +315,14 @@
 </span><span class='line'>$ appbuilder prop set AndroidVersionCode 2</span></code></pre></td></tr></table></div></figure>
 
 
-<p>The <a href="http://docs.telerik.com/platform/appbuilder/configuring-your-project/project-properties-general#general-project-properties-in-the-appbuilder-command-line-interface"><strong><code>BundleVersion</code></strong></a> is publicly visible version number; it&#8217;s what users see in Google Play and the iOS App Store. Under the hood, <code>BundleVersion</code> changes the <a href="https://developer.apple.com/library/ios/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html#//apple_ref/doc/uid/20001431-102364"><code>CFBundleVersion</code></a> in your iOS app&#8217;s Info.plist, and <a href="http://developer.android.com/guide/topics/manifest/manifest-element.html#vname"><code>android:versionName</code></a> in your Android app&#8217;s AndroidManifest.xml.</p>
 
-<p>The <a href="http://docs.telerik.com/platform/appbuilder/configuring-your-project/project-properties-for-android-devices#android-project-properties-in-the-appbuilder-command-line-interface"><strong><code>AndroidVersionCode</code></strong></a> corresponds to <a href="http://developer.android.com/guide/topics/manifest/manifest-element.html#vcode"><code>android:versionCode</code></a> in the Android app&#8217;s AndroidManifest.xml, and is an integer value that Google requires you to update with each version of your app. You can increment it by 1, 10, or 10000—as long as it goes up. Google requires this because they let you set your <code>android:versionName</code> to any random string (unlike iOS, whose <code>CFBundleVersion</code> must be a number and has <a href="https://developer.apple.com/library/ios/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html#//apple_ref/doc/uid/20001431-102364">well defined rules</a>).</p>
 
-<p>Running the <code>appbuilder prop</code> command updates your project&#8217;s .abproject with these changes, so you&#8217;ll want to commit those updates to your source control program of choice.</p>
-
-<h2>What&#8217;s this projectVersion property?</h2>
-
-<p>If you&#8217;re like me and peruse configuration files more than the average person, you may have noticed a <code>projectVersion</code> property in your .abproject. Ignore this property, or at least try to. It&#8217;s a meta property that AppBuilder maintains for its own purposes, and is not intended to be directly edited.</p>
-
-<p>In fact, the entire .abproject is not intended to be directly edited. If you need to change something you see in .abproject do so with the <code>appbuilder prop</code> command. If you don&#8217;t know what the property names mean, or the supported values, run <code>appbuilder prop print --help</code>.</p>
-
-<p>Some property changes do nothing more than update the appropriate value your app&#8217;s .abproject, but some property changes do more. For instance, running <code>appbuilder prop set FrameworkVersion 3.7.0</code> changes the <code>FrameworkVersion</code> in .abproject, but it also upgrades the cordova.*.js scripts within your project to version 3.7.0.</p>
-
-<h2>Wrapping up</h2>
-
-<p>I hope this was helpful. If you have any other questions about this feel free to ask in the comments. Thanks to <a href="https://twitter.com/admatha">Iva Koevska</a> for setting me straight on all of this.</p>
 </div>
   
+  
+    <footer>
+      <a rel="full-article" href="/2015/01/09/updating-google-play-and-ios-app-store-version-numbers-with-the-appbuilder-cli/">Read on &rarr;</a>
+    </footer>
   
 
 
@@ -604,156 +364,12 @@
 
 <p>But I did finally get around to doing this. What follows is a semi-coherent series of sentences about my experiences writing a tech book. The target reader is someone curious about how tech books are authored—especially masochistic readers that might be interested in writing a book themselves one day.</p>
 
-<h2>A timeline</h2>
-
-<p>The most frequent questions I get about the book are related to time, so let&#8217;s start there. Here&#8217;s how <em>jQuery UI in Action</em> went down:</p>
-
-<ul>
-<li><strong>April 29th, 2013</strong>: <a href="http://www.manning.com/?a_aid=tj-vantoll">Manning</a> (the publisher) first contacted me</li>
-<li><strong>June 26th, 2013</strong>: I signed a contract to write the book</li>
-<li><strong>August 1st, 2013</strong>: I started writing chapter 1</li>
-<li><strong>March 26th, 2014</strong>: I completed the first draft of the entire book</li>
-<li><strong>September 30th, 2014</strong>: <em>jQuery UI in Action</em> was published</li>
-</ul>
-
-
-<p>For those of you counting that&#8217;s <strong>462 days</strong> from contract to publication. To give you some perspective on how long that is, or possibly just to confuse you with a questionably related statistic, that&#8217;s also approximately <a href="http://www.vaughns-1-pagers.com/biology/gestation-periods.htm">the gestational period for a grey rhino</a>. It&#8217;s a long time.</p>
-
-<p>And it definitely seemed long, but after talking to other tech authors this sort of timeline seems to be fairly average. Ilya Grigorik wrote <a href="http://www.amazon.com/High-Performance-Browser-Networking-performance/dp/1449344763/ref=sr_1_1?s=books&amp;ie=UTF8&amp;qid=1419611457&amp;sr=1-1&amp;keywords=high+performance+browser+networking"><em>High Performance Browser Networking</em></a> (which is almost exactly the same length as <em>jQuery UI in Action</em>) in 381 days, which is 81 fewer days than it took me&#8230; but his book has “Performance” in the title, so I&#8217;d say that checks out.</p>
-
-<blockquote><p>That stat is from Ilya&#8217;s <a href="https://www.igvita.com/2013/09/29/retrospective-high-performance-browser-networking/">amazing retrospective of his work on his book</a>. You should read it, especially if you&#8217;re interested in detailed data related to the writing process.</p></blockquote>
-
-<p>Of course, writing time can vary considerably depending on the book&#8217;s length. <em>jQuery UI in Action</em> is twelve chapters long with six appendices. In total the book is <strong>361 pages</strong>, the vast majority of which were written over eight months.</p>
-
-<p>
-    <img src="/images/posts/2014-12-29/last-page.png" alt="The last page of jQuery UI in Action">
-    <i>See, it is 361 pages. Manning counts the index pages so I will too; don&#8217;t judge me.</i>
-</p>
-
-
-<h2>Day to day</h2>
-
-<p>With the high-level overview out of the way let&#8217;s get into my day-to-day work. Honestly I wish I had a cool story for how this book was written, but the reality is extremely mundane. It was basically me, my laptop, and an inordinate amount of time in my basement.</p>
-
-<p style="float: right; width: 50%; margin: 1em 0 1em 1em;">
-    <img src="/images/posts/2014-12-29/desk.jpg" alt="The desk in my basement" style="max-height: 400px;">
-    <i>This is where the magic happens.</i>
-</p>
-
-
-<p>And by inordinate I mean roughly <strong>two hours a day, seven days a week</strong>. I would occasionally take a day off, and I would occasionally work a few extra hours, but overall I was fairly consistent about working <strong>~14 hours per week</strong> on the book.</p>
-
-<p>Before writing <em>jQuery UI in Action</em> I had this vision of tech authors that exclusively wrote books. But since writing <em>jQuery UI in Action</em> I&#8217;ve had the pleasure of meeting several other authors, and I&#8217;ve learned that almost every tech author has a full time job of some variety. Writing books alone is not enough to pay the bills—not even close. And that&#8217;s not necessarily a bad thing (I&#8217;ll get into that later), but it does mean writing a tech book is almost exclusively done in addition to a full-time job.</p>
-
-<p>Personally I was somewhat fortunate because my job was (and is) remote and extraordinarily flexible. (I work as a developer advocate for Telerik.) Working remote afforded me a little extra time everyday, and I was able to use that time to work on the book periodically, which turned out to be invaluable. What worked best for me was handling logistical things during the day—answering emails, performing edits, responding to reviews, and such—so that I could devote my nights to writing without distractions.</p>
-
-<p>Overall, the main thing I learned is that writing a tech book is time and effort on top of your current work and family commitments. In addition to my day job, my four-year-old twin boys made sure that the overwhelming majority of my writing happened between 9:00 PM and midnight, after the boys went to bed.</p>
-
-<p>In general I would advise anyone debating authoring a tech book to make sure your family is on board first. My significant other was extraordinarily helpful and considerate during the process, but I&#8217;m pretty sure she wanted to murder me by the end. Actually, in hindsight, I&#8217;m more than pretty sure—“I&#8217;m going to murder you if you don&#8217;t finish” might be a direct quote. But for the book&#8217;s sake I had to keep her happy, and not just for the reasons you would expect—she&#8217;s a lot better at CSS than me, and I needed her to make my examples work more than a few times.</p>
-
-<h3>Editing</h3>
-
-<p>From my earlier timeline you may have noticed that there was a roughly five-month gap between the time the first draft of the book was complete and publication. A couple things were going on during that time, but it was mostly editing. I can&#8217;t speak for other publishers, but Manning has a lot of processes that are all about producing the best possible book. Off the top of my head this includes the following:</p>
-
-<ul>
-<li>A review of the original book proposal and TOC (table of contents) by a group of potential readers</li>
-<li>A review after each chapter by my editor</li>
-<li>External reviews by ~8 individuals at three points throughout the book (after chapters 4, 8, and 12 were completed, respectively)</li>
-<li>A copy edit pass for grammar and formatting</li>
-<li>A dedicated technical review</li>
-<li>Two proofreading passes</li>
-</ul>
-
-
-<p>I have mixed feelings about having this much ceremony to publish a book. On the positive side I have never been more proud of anything I&#8217;ve written in my life. I made a number of beneficial changes to the structure and contents of the book based on the external reviews; I was ecstatic that <a href="http://bassistance.de/">Jörn Zaefferer</a> agreed to tech review the book; and I learned a lot from going through the copy editing process.</p>
-
-<p>But that being said these review processes can take an extraordinary amount of time and energy. Time spent tweaking wording for clarity could be spent finishing the book sooner, and the <a href="http://en.wikipedia.org/wiki/Diminishing_returns">law of diminishing returns</a> is at play here. Over time I found that the processes aren&#8217;t bad as long as you focus on trends and avoid nit picking every little sentence. If one person doesn&#8217;t like your sentence don&#8217;t worry about it, but three people are confused by an example it&#8217;s probably worth addressing.</p>
-
-<h2>Tips for writing a book</h2>
-
-<p>I have other tips so I thought I might as well make a section for them. As with my other unsolicited advise, take these tips for what they are: things that worked for me that may or may not work for you.</p>
-
-<h3>Tip #1: Write, write write</h3>
-
-<p>Writing a 300+ page book is absurdly time consuming, so wasting time staring at the screen doesn&#8217;t do you any good. Of course this is easier said than done, and writer&#8217;s block is a real thing, but getting a first draft done as fast as possible is incredibly important. A first draft can be reviewed for high-level problems, for structure, and for continuity with the rest of the book. There&#8217;s no point taking an hour to write a perfect introductory paragraph if it&#8217;s going to have to change later. (Remember those five months of editing I just talked about. You&#8217;ll have time to get things as perfect as you&#8217;d like.)</p>
-
-<p>My advice is to try to make your writing a stream of consciousness as much as possible. Write like you&#8217;re explaining something to your friend sitting right next to you. You may end up writing some nonsense, but you might surprise yourself by just how coherent and conversational your stream of consciousness is.</p>
-
-<h3>Tip #2: Drink</h3>
-
-<p>This tip isn&#8217;t for everyone, but for some a drink or two can help put your mind at ease and help get words onto paper. (Figuratively of course, if you&#8217;re literally writing random words on physical paper that&#8217;s a sign that you&#8217;ve had too many.) Personally I found that the occasional beer could help my creative processes substantially.</p>
-
-<p>There&#8217;s actually some science to back this up. Studies are now increasingly showing that <a href="http://blog.pickcrew.com/coffee-vs-beer-effects-on-creativity/">alcohol tends to produce better ideas, and that coffee can give you a burst of energy to complete tasks</a>. The phrase “beer for the idea and coffee for the execution” is actually a thing. Ernest Hemingway may have said it best:</p>
-
-<blockquote><p>Write drunk; edit sober.</p></blockquote>
-
-<p>Note: There&#8217;s a <a href="http://en.wikiquote.org/wiki/Talk:Ernest_Hemingway">good chance Hemingway didn&#8217;t <em>actually</em> say this</a>, but it sound <em>way</em> cooler to attribute the quote to Hemingway, so let&#8217;s assume that he did.</p>
-
-<h3>Tip #3: Don&#8217;t worry about grammar or formatting</h3>
-
-<p>The theme of the previous tips was to help produce a first draft as fast as possible, and this is a continuation of that message. Simply put, while writing a first draft, don&#8217;t worry about your grammar. You can sort out the “it&#8217;s” versus “its”, “affect” versus “effect”, and other such issues later.</p>
-
-<p>Along the same lines, don&#8217;t worry about formatting, indentation, style guides, structure, fonts, code clarity, or any of that stuff. Just write. You can clean all of that up during editing (with coffee of course).</p>
-
-<h3>Tip #4: Sleep on it</h3>
-
-<p>The stresses and timelines associated with writing a book can make you feel like you need to write every day no matter what. But writer&#8217;s block is a real thing, and some days it&#8217;s impossible to write words no matter how hard you try. Worse, nights that you spend hours accomplishing nothing are extremely detrimental to your morale. You wake up the next day tired and more stressed from the time you just lost.</p>
-
-<p>Over time I started giving up on days where I knew nothing would happen and went to sleep. I did this not only for the obvious benefit of being more rested the next day, but because I also found sleeping to help with the my creative processes. I can think of several occasions that I had no idea how to approach a certain topic, but I woke up with a couple of good ideas.</p>
-
-<h3>Tip #5: Don&#8217;t do it for the money</h3>
-
-<p>I have made some money off of <em>jQuery UI in Action</em>, but from an $/hour perspective, I would&#8217;ve been far better doing freelance work, or possibly working at the local McDonald&#8217;s. I think it&#8217;s fairly common knowledge that tech authors don&#8217;t make a whole lot of money, so I&#8217;m guessing that doesn&#8217;t surprise you, but I&#8217;m actually going to make a somewhat different point.</p>
-
-<p>Even if tech books paid exorbitant royalties I still think it would be a bad idea to write just for the money. In my opinion you should have some personal reason for wanting to write, for putting yourself through the excruciating process that is producing a tech book. If you don&#8217;t have something pushing you to continue writing you&#8217;re likely going to 1) give up, 2) regret the experience, or 3) both.</p>
-
-<p>That being said there are several good non-financial reasons to write a book: career advancement, notoriety, industry status, and the satisfaction associated with teaching others are a few that come to mind. I&#8217;ll share my personal motivation to give you a better idea of what I mean.</p>
-
-<h2>Why I wrote a book</h2>
-
-<p>My primary reason for writing <em>jQuery UI in Action</em> was to get what I know about jQuery UI down on paper. I would use the term memoir, but I&#8217;m not dying, and I&#8217;m still working with jQuery UI, so it doesn&#8217;t fit. But you get the idea.</p>
-
-<p style="float: right; width: 300px; margin: 0 0 1em 1em;">
-    <img src="/images/posts/2014-12-29/usage-stats.png" alt="jQuery UI usage statisics" style="max-height: 400px;">
-    <br>
-    <i>jQuery UI&#8217;s usage statistics as of December 2014—~15% of the top million sites!</i>
-</p>
-
-
-<p>jQuery UI is no longer hip; it&#8217;s no longer sexy; but it&#8217;s an incredibly robust, extensible, well documented, and accessible library that is used in an astounding number of applications—including a number of mine. I&#8217;ve been involved with jQuery and jQuery UI in some fashion for about six years now. I&#8217;ve went from an overenthusiastic user, to a community member, to a contributor, to a team member, to someone that has been fortunate enough to get to know the people behind code. It&#8217;s a project that I&#8217;m proud to say I&#8217;m associated with.</p>
-
-<p>jQuery UI has a lot of good 101-level material scattered throughout the web, but nothing that I felt did the library justice. I also felt that I was in a unique position—as a team member and tech writer—to make the guide I wanted to exist a reality.</p>
-
-<p>My desire to share this information is what gave me the motivation to keep going. If I set out to write a 101-level book on jQuery UI I would&#8217;ve lost the desire to write by week three.</p>
-
-<p>To me motivation was everything. There were <em>many</em> nights that I had no desire to write but had to find a way to write a few pages. People frequently ask me if I&#8217;ll write another book, and my answer is that I need a topic compelling enough to spend a year of my life on—something that I want to write about bad enough to put myself through the process again.</p>
-
-<p>I&#8217;m sure there is a dollar amount that would give me enough motivation, and who knows, after <em>jQuery UI in Action</em> becomes the next <em>Fifty Shades of Grey</em> maybe I&#8217;ll take all of this back.</p>
-
-<h2>Unexpected perks to writing a book</h2>
-
-<p>There are some other non-financial benefits to writing a book that I hadn&#8217;t really thought much of. First of all, getting a book in the mail with your name on it in the mail is a pretty amazing experience.</p>
-
-<p style="float: right; width: 300px; margin: 0 0 1em 1em;">
-    <img src="/images/posts/2014-12-29/print-book.jpg" alt="jQuery UI in Action—the physical book" style="max-height: 400px;">
-    <br>
-    <i>I can&#8217;t lie, holding a copy of your own book is pretty damn cool.</i>
-</p>
-
-
-<p>An even cooler, and somewhat surreal moment happened when <a href="https://twitter.com/tjvantoll/status/521996479314296832">Amazon sent me an email that recommended my own book to me</a>. It was also cool when I <a href="https://twitter.com/tjvantoll/status/536549375670231040">randomly discovered that <em>jQuery UI in Action</em> had four 5-star reviews on its Amazon page</a></p>
-
-<p>But the biggest unexpected perk for me was learning to be a better writer. Manning has a lot of really smart editors—people that produce books for a living. Over the last year and a half I&#8217;ve learned about the best way to structure content, how to teach through writing effectively, how to attract a potential reader&#8217;s interest, and ways to hold a reader&#8217;s attention.</p>
-
-<p>I&#8217;ve learned a lot about grammar that I&#8217;m pretty sure they didn&#8217;t teach me in high school. I now know what en and em dashes are and how to use them. I know that you can use <code>Option</code> + <code>Shift</code> + <code>-</code> to type an em dash on a Mac. I know what an Oxford comma is and why I don&#8217;t like people that omit them. I have a stance on open grammar style issues, like whether to capitalize complete sentences after a colon and whether to place spaces around em dashes (nope on both, by the way).</p>
-
-<p>I&#8217;m certainly not a grammar expert, and I definitely don&#8217;t feel like a professional writer, but I&#8217;m far more knowledgeable than I was when I started, and that&#8217;s kind of cool. Even if you&#8217;re a coder, writing effectively is still an incredibly valuable skill—even if you&#8217;re just using it to argue for tabs over spaces in a GitHub comment.</p>
-
-<h2>Wrapping Up</h2>
-
-<p>I&#8217;m not sure I have a concise or coherent way of summing all of this up. I warned you there would be rambling and hopefully I didn&#8217;t disappoint. If for some reason you enjoyed this you may enjoy <a href="http://tjvantoll.com/jquery-ui-in-action.html">reading <em>jQuery UI in Action</em></a>. If you <em>have</em> read and enjoyed <em>jQuery UI in Action</em>, I&#8217;d love a <a href="http://www.amazon.com/jQuery-UI-Action-T-VanToll/dp/1617291935/">review on Amazon</a>. It&#8217;s amazing how much seeing a positive review can put a smile on my face. Having gone through the process myself I&#8217;m making a concerted effort to leave positive reviews on books I&#8217;ve enjoyed reading—tech books and otherwise.</p>
 </div>
   
+  
+    <footer>
+      <a rel="full-article" href="/2014/12/29/so-you-want-to-write-a-tech-book/">Read on &rarr;</a>
+    </footer>
   
 
 

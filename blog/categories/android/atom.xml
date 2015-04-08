@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Android | TJ VanToll's Blog]]></title>
   <link href="http://tjvantoll.com/blog/categories/android/atom.xml" rel="self"/>
   <link href="http://tjvantoll.com/"/>
-  <updated>2015-03-19T14:29:48-04:00</updated>
+  <updated>2015-04-08T16:35:16-04:00</updated>
   <id>http://tjvantoll.com/</id>
   <author>
     <name><![CDATA[TJ VanToll]]></name>
@@ -26,6 +26,9 @@
 $ appbuilder prop set BundleVersion 1.0.1
 $ appbuilder prop set AndroidVersionCode 2
 </code></p>
+
+<!-- more -->
+
 
 <p>The <a href="http://docs.telerik.com/platform/appbuilder/configuring-your-project/project-properties-general#general-project-properties-in-the-appbuilder-command-line-interface"><strong><code>BundleVersion</code></strong></a> is publicly visible version number; it's what users see in Google Play and the iOS App Store. Under the hood, <code>BundleVersion</code> changes the <a href="https://developer.apple.com/library/ios/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html#//apple_ref/doc/uid/20001431-102364"><code>CFBundleVersion</code></a> in your iOS app's Info.plist, and <a href="http://developer.android.com/guide/topics/manifest/manifest-element.html#vname"><code>android:versionName</code></a> in your Android app's AndroidManifest.xml.</p>
 

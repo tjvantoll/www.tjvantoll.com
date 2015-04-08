@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Kendo UI | TJ VanToll's Blog]]></title>
   <link href="http://tjvantoll.com/blog/categories/kendo-ui/atom.xml" rel="self"/>
   <link href="http://tjvantoll.com/"/>
-  <updated>2015-03-19T14:29:48-04:00</updated>
+  <updated>2015-04-08T16:35:16-04:00</updated>
   <id>http://tjvantoll.com/</id>
   <author>
     <name><![CDATA[TJ VanToll]]></name>
@@ -19,6 +19,9 @@
     <updated>2015-01-18T00:00:00-05:00</updated>
     <id>http://tjvantoll.com/2015/01/18/getting-started-with-kendo-ui-core</id>
     <content type="html"><![CDATA[<p>I've been using <a href="https://github.com/telerik/kendo-ui-core">Kendo UI Core</a> in a bunch of projects lately, so I thought I'd document the process I use to get Kendo UI Core up and running. Note that the workflow I show isn't the “right” way of doing things, just the workflow I like.</p>
+
+<!-- more -->
+
 
 <h2>Step 1) Download</h2>
 
