@@ -12,6 +12,8 @@ I woke up this morning to discover that the Telerik marketplace had a new WKWebV
 
 I had written about the [performance benefits of WKWebView](http://developer.telerik.com/featured/why-ios-8s-wkwebview-is-a-big-deal-for-hybrid-development/) before, and Eddy Verbruggen—the author of the WKWebView plugin—has done [some performance benchmarks](https://twitter.com/eddyverbruggen/status/531192220498792448) as well, so I knew the plugin would give a performance boost, but I had to see the benefits for myself.
 
+<!-- more -->
+
 So I did. I added the plugin to a few Cordova projects with `cordova plugin add https://github.com/Telerik-Verified-Plugins/WKWebView` and to a few AppBuilder ones with `appbuilder plugin add "WKWebView Polyfill" --release`.
 
 <blockquote>

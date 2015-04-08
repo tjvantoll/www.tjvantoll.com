@@ -10,6 +10,8 @@ Last week Chrome 40 was released, and while the greater web community [was celeb
 
 Because I don't think many people know what `reportValidity()` does, I thought I'd write a quick article about it. Personally I think the best way to explain `reportValidity()` is with a real-world example, so let's start there.
 
+<!-- more -->
+
 ## `reportValidity()` use case: a registration form
 
 Suppose that you're building a registration form and you require a username:

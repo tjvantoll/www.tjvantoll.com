@@ -15,6 +15,8 @@ $ appbuilder prop set BundleVersion 1.0.1
 $ appbuilder prop set AndroidVersionCode 2
 ```
 
+<!-- more -->
+
 The [**`BundleVersion`**](http://docs.telerik.com/platform/appbuilder/configuring-your-project/project-properties-general#general-project-properties-in-the-appbuilder-command-line-interface) is publicly visible version number; it's what users see in Google Play and the iOS App Store. Under the hood, `BundleVersion` changes the [`CFBundleVersion`](https://developer.apple.com/library/ios/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html#//apple_ref/doc/uid/20001431-102364) in your iOS app's Info.plist, and [`android:versionName`](http://developer.android.com/guide/topics/manifest/manifest-element.html#vname) in your Android app's AndroidManifest.xml.
 
 The [**`AndroidVersionCode`**](http://docs.telerik.com/platform/appbuilder/configuring-your-project/project-properties-for-android-devices#android-project-properties-in-the-appbuilder-command-line-interface) corresponds to [`android:versionCode`](http://developer.android.com/guide/topics/manifest/manifest-element.html#vcode) in the Android app's AndroidManifest.xml, and is an integer value that Google requires you to update with each version of your app. You can increment it by 1, 10, or 10000—as long as it goes up. Google requires this because they let you set your `android:versionName` to any random string (unlike iOS, whose `CFBundleVersion` must be a number and has [well defined rules](https://developer.apple.com/library/ios/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html#//apple_ref/doc/uid/20001431-102364)).
