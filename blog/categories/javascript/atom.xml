@@ -4,7 +4,7 @@
   <title><![CDATA[Category: JavaScript | TJ VanToll's Blog]]></title>
   <link href="http://tjvantoll.com/blog/categories/javascript/atom.xml" rel="self"/>
   <link href="http://tjvantoll.com/"/>
-  <updated>2015-04-08T16:35:16-04:00</updated>
+  <updated>2015-04-21T16:09:34-07:00</updated>
   <id>http://tjvantoll.com/</id>
   <author>
     <name><![CDATA[TJ VanToll]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[A reportValidity() Use Case and Polyfill]]></title>
     <link href="http://tjvantoll.com/2015/01/28/reportvalidity/"/>
-    <updated>2015-01-28T00:00:00-05:00</updated>
+    <updated>2015-01-28T00:00:00-08:00</updated>
     <id>http://tjvantoll.com/2015/01/28/reportvalidity</id>
     <content type="html"><![CDATA[<p>Last week Chrome 40 was released, and while the greater web community <a href="https://twitter.com/addyosmani/status/558051510840356864">was celebrating service workers landing</a>, a little known DOM method made its first appearance in a browser: <code>reportValidity()</code>.</p>
 
@@ -113,7 +113,7 @@
   <entry>
     <title type="html"><![CDATA[Getting Started with Kendo UI Core]]></title>
     <link href="http://tjvantoll.com/2015/01/18/getting-started-with-kendo-ui-core/"/>
-    <updated>2015-01-18T00:00:00-05:00</updated>
+    <updated>2015-01-18T00:00:00-08:00</updated>
     <id>http://tjvantoll.com/2015/01/18/getting-started-with-kendo-ui-core</id>
     <content type="html"><![CDATA[<p>I've been using <a href="https://github.com/telerik/kendo-ui-core">Kendo UI Core</a> in a bunch of projects lately, so I thought I'd document the process I use to get Kendo UI Core up and running. Note that the workflow I show isn't the “right” way of doing things, just the workflow I like.</p>
 
@@ -236,7 +236,7 @@ require.config({</p>
   <entry>
     <title type="html"><![CDATA[A jQuery UI Vertical Tabs Extension]]></title>
     <link href="http://tjvantoll.com/2014/07/04/a-jquery-ui-vertical-tabs-extension/"/>
-    <updated>2014-07-04T10:13:00-04:00</updated>
+    <updated>2014-07-04T10:13:00-07:00</updated>
     <id>http://tjvantoll.com/2014/07/04/a-jquery-ui-vertical-tabs-extension</id>
     <content type="html"><![CDATA[<p>The single coolest thing in jQuery UI is the <a href="http://learn.jquery.com/jquery-ui/widget-factory/extending-widgets/">extension mechanism</a> built into the <a href="http://api.jqueryui.com/jquery.widget/">widget factory</a>. In my <a href="http://tjvantoll.com/jquery-ui-in-action.html">upcoming book</a> on jQuery UI I devote an entire chapter to building extensions, and now that the book is <em>mostly</em> done, I want to publish some of the extensions I built for the world to use.</p>
 
@@ -253,7 +253,7 @@ require.config({</p>
   <entry>
     <title type="html"><![CDATA[Only the gzip Size Matters]]></title>
     <link href="http://tjvantoll.com/2014/01/27/only-the-gzip-size-matters/"/>
-    <updated>2014-01-27T19:32:00-05:00</updated>
+    <updated>2014-01-27T19:32:00-08:00</updated>
     <id>http://tjvantoll.com/2014/01/27/only-the-gzip-size-matters</id>
     <content type="html"><![CDATA[<p>Let's just get it out there: the only size that matters for a CSS or JavaScript file is its gzipped size.</p>
 
@@ -326,7 +326,7 @@ require.config({</p>
   <entry>
     <title type="html"><![CDATA[Bugs with document.activeElement in Internet Explorer]]></title>
     <link href="http://tjvantoll.com/2013/08/30/bugs-with-document-activeelement-in-internet-explorer/"/>
-    <updated>2013-08-30T14:46:00-04:00</updated>
+    <updated>2013-08-30T14:46:00-07:00</updated>
     <id>http://tjvantoll.com/2013/08/30/bugs-with-document-activeelement-in-internet-explorer</id>
     <content type="html"><![CDATA[<p>There are two <em>fun</em> bugs related to <code>document.activeElement</code> in IE that have come up recently in jQuery UI. To help save others some pain, I felt these needed to be documented.</p>
 

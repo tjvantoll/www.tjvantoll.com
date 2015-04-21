@@ -4,7 +4,7 @@
   <title><![CDATA[TJ VanToll's Blog]]></title>
   <link href="http://tjvantoll.com/atom.xml" rel="self"/>
   <link href="http://tjvantoll.com/"/>
-  <updated>2015-04-08T16:35:16-04:00</updated>
+  <updated>2015-04-21T16:09:34-07:00</updated>
   <id>http://tjvantoll.com/</id>
   <author>
     <name><![CDATA[TJ VanToll]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[NativeScript Quick Tip: Managing iOS Navigation Bars]]></title>
     <link href="http://tjvantoll.com/2015/03/19/nativescript-ios-navigation-bars/"/>
-    <updated>2015-03-19T00:00:00-04:00</updated>
+    <updated>2015-03-19T00:00:00-07:00</updated>
     <id>http://tjvantoll.com/2015/03/19/nativescript-ios-navigation-bars</id>
     <content type="html"><![CDATA[<p>I&#8217;ve gotten a whole lot of questions about adding navigation bars to NativeScript iOS apps, so I thought I&#8217;d write a quick post about it. First of all, a <code>&lt;NavBar&gt;</code> element is coming in NativeScript 1.0 (May), so everything I&#8217;m describing will be a lot easier to do soon. But I still find this temporary workaround worth discussing as it shows off how easy the NativeScript runtime makes it to tinker with native APIs.</p>
 
@@ -115,7 +115,7 @@ exports.pageLoaded = function(args) {
   <entry>
     <title type="html"><![CDATA[A reportValidity() Use Case and Polyfill]]></title>
     <link href="http://tjvantoll.com/2015/01/28/reportvalidity/"/>
-    <updated>2015-01-28T00:00:00-05:00</updated>
+    <updated>2015-01-28T00:00:00-08:00</updated>
     <id>http://tjvantoll.com/2015/01/28/reportvalidity</id>
     <content type="html"><![CDATA[<p>Last week Chrome 40 was released, and while the greater web community <a href="https://twitter.com/addyosmani/status/558051510840356864">was celebrating service workers landing</a>, a little known DOM method made its first appearance in a browser: <code>reportValidity()</code>.</p>
 
@@ -212,7 +212,7 @@ exports.pageLoaded = function(args) {
   <entry>
     <title type="html"><![CDATA[Speed Up Your Cordova App with the WKWebView Plugin]]></title>
     <link href="http://tjvantoll.com/2015/01/26/wkwebview-plugin/"/>
-    <updated>2015-01-26T00:00:00-05:00</updated>
+    <updated>2015-01-26T00:00:00-08:00</updated>
     <id>http://tjvantoll.com/2015/01/26/wkwebview-plugin</id>
     <content type="html"><![CDATA[<p>I woke up this morning to discover that the Telerik marketplace had a new WKWebView plugin:</p>
 
@@ -254,7 +254,7 @@ exports.pageLoaded = function(args) {
   <entry>
     <title type="html"><![CDATA[Getting Started with Kendo UI Core]]></title>
     <link href="http://tjvantoll.com/2015/01/18/getting-started-with-kendo-ui-core/"/>
-    <updated>2015-01-18T00:00:00-05:00</updated>
+    <updated>2015-01-18T00:00:00-08:00</updated>
     <id>http://tjvantoll.com/2015/01/18/getting-started-with-kendo-ui-core</id>
     <content type="html"><![CDATA[<p>I&#8217;ve been using <a href="https://github.com/telerik/kendo-ui-core">Kendo UI Core</a> in a bunch of projects lately, so I thought I&#8217;d document the process I use to get Kendo UI Core up and running. Note that the workflow I show isn&#8217;t the “right” way of doing things, just the workflow I like.</p>
 
@@ -402,7 +402,7 @@ exports.pageLoaded = function(args) {
   <entry>
     <title type="html"><![CDATA[Updating Google Play and iOS App Store Version Numbers with the AppBuilder CLI]]></title>
     <link href="http://tjvantoll.com/2015/01/09/updating-google-play-and-ios-app-store-version-numbers-with-the-appbuilder-cli/"/>
-    <updated>2015-01-09T07:50:00-05:00</updated>
+    <updated>2015-01-09T07:50:00-08:00</updated>
     <id>http://tjvantoll.com/2015/01/09/updating-google-play-and-ios-app-store-version-numbers-with-the-appbuilder-cli</id>
     <content type="html"><![CDATA[<p>I had some issues updating iOS and Android version numbers yesterday so I thought I&#8217;d write up what I learned. Here&#8217;s the scenario: you already have an <a href="http://www.telerik.com/appbuilder">AppBuilder</a> app deployed to the iOS app store and Google Play, and you want to increase the app&#8217;s version number from 1.0 to 1.0.1.</p>
 
@@ -442,7 +442,7 @@ exports.pageLoaded = function(args) {
   <entry>
     <title type="html"><![CDATA[So You Want to Write a Tech Book]]></title>
     <link href="http://tjvantoll.com/2014/12/29/so-you-want-to-write-a-tech-book/"/>
-    <updated>2014-12-29T00:00:00-05:00</updated>
+    <updated>2014-12-29T00:00:00-08:00</updated>
     <id>http://tjvantoll.com/2014/12/29/so-you-want-to-write-a-tech-book</id>
     <content type="html"><![CDATA[<p><img src="http://tjvantoll.com/images/posts/2014-12-29/shelf.jpg" alt="Books on my shelf" style="border: none;"></p>
 
@@ -607,7 +607,7 @@ exports.pageLoaded = function(args) {
   <entry>
     <title type="html"><![CDATA[The Problem With Using HTML Imports For Dependency Management]]></title>
     <link href="http://tjvantoll.com/2014/08/12/the-problem-with-using-html-imports-for-dependency-management/"/>
-    <updated>2014-08-12T00:00:00-04:00</updated>
+    <updated>2014-08-12T00:00:00-07:00</updated>
     <id>http://tjvantoll.com/2014/08/12/the-problem-with-using-html-imports-for-dependency-management</id>
     <content type="html"><![CDATA[<p>HTML imports are cool. If you haven&#8217;t heard of them before, you should read <a href="http://www.html5rocks.com/en/tutorials/webcomponents/imports/">Eric Bidelman&#8217;s excellent introduction to them</a>, but they&#8217;re pretty self explanatory with a bit of code. For example the following is how a jQuery UI dialog works in <a href="https://github.com/tjvantoll/ui-web-components">my proof-of-concept web components port</a>:</p>
 
@@ -742,7 +742,7 @@ exports.pageLoaded = function(args) {
   <entry>
     <title type="html"><![CDATA[Building a PhoneGap App in 10 Seconds Using Nothing But a CLI]]></title>
     <link href="http://tjvantoll.com/2014/07/25/building-a-phonegap-app-in-10-seconds-using-nothing-but-a-cli/"/>
-    <updated>2014-07-25T10:17:00-04:00</updated>
+    <updated>2014-07-25T10:17:00-07:00</updated>
     <id>http://tjvantoll.com/2014/07/25/building-a-phonegap-app-in-10-seconds-using-nothing-but-a-cli</id>
     <content type="html"><![CDATA[<p>You may have seen Burke Holland&#8217;s <a href="https://medium.com/@burkeholland/building-and-deploying-a-phonegap-app-in-36-seconds-6552399c12a8">&#8220;Building A PhoneGap App in 36 Seconds Using Nothing But a Browser&#8221;</a> article on Medium this morning. Although most people probably viewed the post as an interesting—and surprisingly fast—way of building an app, I saw the article as a direct challenge.</p>
 
@@ -784,7 +784,7 @@ exports.pageLoaded = function(args) {
   <entry>
     <title type="html"><![CDATA[An Addendum to Why Web Components Aren't Ready for Production Yet]]></title>
     <link href="http://tjvantoll.com/2014/07/18/an-addendum-to-why-web-components-arent-ready-for-production-yet/"/>
-    <updated>2014-07-18T14:14:00-04:00</updated>
+    <updated>2014-07-18T14:14:00-07:00</updated>
     <id>http://tjvantoll.com/2014/07/18/an-addendum-to-why-web-components-arent-ready-for-production-yet</id>
     <content type="html"><![CDATA[<p>Yesterday I <a href="http://developer.telerik.com/featured/web-components-arent-ready-production-yet/">published an article on the Telerik Developer Network</a> about the state of web components. In it I argued that web components are not ready for the majority of web developers to use in production.</p>
 
@@ -854,7 +854,7 @@ exports.pageLoaded = function(args) {
   <entry>
     <title type="html"><![CDATA[A jQuery UI Vertical Tabs Extension]]></title>
     <link href="http://tjvantoll.com/2014/07/04/a-jquery-ui-vertical-tabs-extension/"/>
-    <updated>2014-07-04T10:13:00-04:00</updated>
+    <updated>2014-07-04T10:13:00-07:00</updated>
     <id>http://tjvantoll.com/2014/07/04/a-jquery-ui-vertical-tabs-extension</id>
     <content type="html"><![CDATA[<p>The single coolest thing in jQuery UI is the <a href="http://learn.jquery.com/jquery-ui/widget-factory/extending-widgets/">extension mechanism</a> built into the <a href="http://api.jqueryui.com/jquery.widget/">widget factory</a>. In my <a href="http://tjvantoll.com/jquery-ui-in-action.html">upcoming book</a> on jQuery UI I devote an entire chapter to building extensions, and now that the book is <em>mostly</em> done, I want to publish some of the extensions I built for the world to use.</p>
 
@@ -872,7 +872,7 @@ exports.pageLoaded = function(args) {
   <entry>
     <title type="html"><![CDATA[Using Semantic HTML to Drive Display Logic]]></title>
     <link href="http://tjvantoll.com/2014/05/01/using-semantic-html-to-drive-display-logic/"/>
-    <updated>2014-05-01T00:00:00-04:00</updated>
+    <updated>2014-05-01T00:00:00-07:00</updated>
     <id>http://tjvantoll.com/2014/05/01/using-semantic-html-to-drive-display-logic</id>
     <content type="html"><![CDATA[<p>Today I want to share a quick tip for driving display logic in UI components—and I think it&#8217;s easier to see in an example.</p>
 
@@ -1073,7 +1073,7 @@ exports.pageLoaded = function(args) {
   <entry>
     <title type="html"><![CDATA[Effect of iOS 7.1's minimal-ui Viewport Property]]></title>
     <link href="http://tjvantoll.com/2014/03/11/effect-of-ios-7-dot-1s-minimal-ui-meta-tag/"/>
-    <updated>2014-03-11T00:00:00-04:00</updated>
+    <updated>2014-03-11T00:00:00-07:00</updated>
     <id>http://tjvantoll.com/2014/03/11/effect-of-ios-7-dot-1s-minimal-ui-meta-tag</id>
     <content type="html"><![CDATA[<p>One of the major, and <a href="http://www.mobilexweb.com/blog/safari-ios7-html5-problems-apis-review">not well-received</a> changes introduced in iOS7 was the lack of a true full screen mode. Apple&#8217;s answer was the introduction of a <code>minimal-ui</code> viewport property in iOS 7.1, which was released yesterday.</p>
 
@@ -1094,7 +1094,7 @@ exports.pageLoaded = function(args) {
   <entry>
     <title type="html"><![CDATA[Connecting AppBuilder Projects to Facebook]]></title>
     <link href="http://tjvantoll.com/2014/02/06/connecting-appbuilder-projects-to-facebook/"/>
-    <updated>2014-02-06T13:08:00-05:00</updated>
+    <updated>2014-02-06T13:08:00-08:00</updated>
     <id>http://tjvantoll.com/2014/02/06/connecting-appbuilder-projects-to-facebook</id>
     <content type="html"><![CDATA[<p>One commonly requested, and non-trivial requirement PhoneGap/Cordova apps often have is Facebook integration. To perform the actual integration, hybrid Cordova apps have an advantage over traditional web apps: they can leverage the platform&#8217;s native Facebook APIs.</p>
 
@@ -1219,7 +1219,7 @@ exports.pageLoaded = function(args) {
   <entry>
     <title type="html"><![CDATA[Only the gzip Size Matters]]></title>
     <link href="http://tjvantoll.com/2014/01/27/only-the-gzip-size-matters/"/>
-    <updated>2014-01-27T19:32:00-05:00</updated>
+    <updated>2014-01-27T19:32:00-08:00</updated>
     <id>http://tjvantoll.com/2014/01/27/only-the-gzip-size-matters</id>
     <content type="html"><![CDATA[<p>Let&#8217;s just get it out there: the only size that matters for a CSS or JavaScript file is its gzipped size.</p>
 
@@ -1292,7 +1292,7 @@ exports.pageLoaded = function(args) {
   <entry>
     <title type="html"><![CDATA[Speaking Tip: Use the iPad's Clock App as a Timer]]></title>
     <link href="http://tjvantoll.com/2014/01/23/speaking-tip-use-the-ipad-clock-app-as-a-timer/"/>
-    <updated>2014-01-23T09:42:00-05:00</updated>
+    <updated>2014-01-23T09:42:00-08:00</updated>
     <id>http://tjvantoll.com/2014/01/23/speaking-tip-use-the-ipad-clock-app-as-a-timer</id>
     <content type="html"><![CDATA[<p>I <a href="http://tjvantoll.com/speaking/">have been speaking</a> for some time now, and I&#8217;ve learned that keeping track of time is hard. And it&#8217;s important; no one likes attending the talk that goes ten minutes over, or the talk that awkwardly ends half way through.</p>
 
@@ -1340,7 +1340,7 @@ exports.pageLoaded = function(args) {
   <entry>
     <title type="html"><![CDATA[Why Is Styling Form Elements So Damn Hard?]]></title>
     <link href="http://tjvantoll.com/2013/12/06/why-is-styling-form-elements-so-damn-hard/"/>
-    <updated>2013-12-06T12:54:00-05:00</updated>
+    <updated>2013-12-06T12:54:00-08:00</updated>
     <id>http://tjvantoll.com/2013/12/06/why-is-styling-form-elements-so-damn-hard</id>
     <content type="html"><![CDATA[<p>The web has come a long way. We can now build powerful 3D animations, design sites that work on a vast array of screen sizes, and even <a href="https://brendaneich.com/2013/03/the-web-is-the-game-platform/">play high end games</a> - all without leaving our browser.</p>
 
@@ -1508,7 +1508,7 @@ exports.pageLoaded = function(args) {
   <entry>
     <title type="html"><![CDATA[Hey Developers - You Should Spell Check Your Documentation]]></title>
     <link href="http://tjvantoll.com/2013/09/18/hey-developers-you-should-spell-check-your-documentation/"/>
-    <updated>2013-09-18T09:56:00-04:00</updated>
+    <updated>2013-09-18T09:56:00-07:00</updated>
     <id>http://tjvantoll.com/2013/09/18/hey-developers-you-should-spell-check-your-documentation</id>
     <content type="html"><![CDATA[<p>As developers we write code. Therefore, the thought of using a spell checker brings to mind something like this:</p>
 
@@ -1557,7 +1557,7 @@ exports.pageLoaded = function(args) {
   <entry>
     <title type="html"><![CDATA[Building Custom Text Strikethroughs with CSS]]></title>
     <link href="http://tjvantoll.com/2013/09/12/building-custom-text-strikethroughs-with-css/"/>
-    <updated>2013-09-12T15:25:00-04:00</updated>
+    <updated>2013-09-12T15:25:00-07:00</updated>
     <id>http://tjvantoll.com/2013/09/12/building-custom-text-strikethroughs-with-css</id>
     <content type="html"><![CDATA[<p><link href="http://tjvantoll.com/stylesheets/custom/posts/2013-09-12.css" rel="stylesheet">
 Adding a strikethrough to a line of text in CSS is easy.</p>
@@ -1759,7 +1759,7 @@ Adding a strikethrough to a line of text in CSS is easy.</p>
   <entry>
     <title type="html"><![CDATA[Bugs with document.activeElement in Internet Explorer]]></title>
     <link href="http://tjvantoll.com/2013/08/30/bugs-with-document-activeelement-in-internet-explorer/"/>
-    <updated>2013-08-30T14:46:00-04:00</updated>
+    <updated>2013-08-30T14:46:00-07:00</updated>
     <id>http://tjvantoll.com/2013/08/30/bugs-with-document-activeelement-in-internet-explorer</id>
     <content type="html"><![CDATA[<p>There are two <em>fun</em> bugs related to <code>document.activeElement</code> in IE that have come up recently in jQuery UI. To help save others some pain, I felt these needed to be documented.</p>
 
@@ -1875,7 +1875,7 @@ Adding a strikethrough to a line of text in CSS is easy.</p>
   <entry>
     <title type="html"><![CDATA[New Beginnings]]></title>
     <link href="http://tjvantoll.com/2013/08/14/new-beginnings/"/>
-    <updated>2013-08-14T00:00:00-04:00</updated>
+    <updated>2013-08-14T00:00:00-07:00</updated>
     <id>http://tjvantoll.com/2013/08/14/new-beginnings</id>
     <content type="html"><![CDATA[<p>I&#8217;m excited to announce that I&#8217;ll be joining <a href="http://telerik.com">Telerik</a> as a Developer Advocate for <a href="http://icenium.com">Icenium</a>. I&#8217;ve been doing a lot of <a href="http://tjvantoll.com/blog/archives/">speaking</a> and <a href="http://tjvantoll.com/speaking/">writing</a> in my free time, and this opportunity will give me a chance to do that as part of my day job.</p>
 

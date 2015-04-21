@@ -4,7 +4,7 @@
   <title><![CDATA[Category: NativeScript | TJ VanToll's Blog]]></title>
   <link href="http://tjvantoll.com/blog/categories/nativescript/atom.xml" rel="self"/>
   <link href="http://tjvantoll.com/"/>
-  <updated>2015-04-08T16:35:16-04:00</updated>
+  <updated>2015-04-21T16:09:34-07:00</updated>
   <id>http://tjvantoll.com/</id>
   <author>
     <name><![CDATA[TJ VanToll]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[NativeScript Quick Tip: Managing iOS Navigation Bars]]></title>
     <link href="http://tjvantoll.com/2015/03/19/nativescript-ios-navigation-bars/"/>
-    <updated>2015-03-19T00:00:00-04:00</updated>
+    <updated>2015-03-19T00:00:00-07:00</updated>
     <id>http://tjvantoll.com/2015/03/19/nativescript-ios-navigation-bars</id>
     <content type="html"><![CDATA[<p>I've gotten a whole lot of questions about adding navigation bars to NativeScript iOS apps, so I thought I'd write a quick post about it. First of all, a <code>&lt;NavBar&gt;</code> element is coming in NativeScript 1.0 (May), so everything I'm describing will be a lot easier to do soon. But I still find this temporary workaround worth discussing as it shows off how easy the NativeScript runtime makes it to tinker with native APIs.</p>
 
