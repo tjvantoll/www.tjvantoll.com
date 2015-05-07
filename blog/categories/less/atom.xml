@@ -4,7 +4,7 @@
   <title><![CDATA[Category: LESS | TJ VanToll's Blog]]></title>
   <link href="http://tjvantoll.com/blog/categories/less/atom.xml" rel="self"/>
   <link href="http://tjvantoll.com/"/>
-  <updated>2015-04-21T16:09:34-07:00</updated>
+  <updated>2015-05-07T09:18:26-04:00</updated>
   <id>http://tjvantoll.com/</id>
   <author>
     <name><![CDATA[TJ VanToll]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[LESS 101 - The Basics of the CSS Preprocessor]]></title>
     <link href="http://tjvantoll.com/2012/08/10/less-101-the-basics-of-the-css-preprocessor/"/>
-    <updated>2012-08-10T00:00:00-07:00</updated>
+    <updated>2012-08-10T00:00:00-04:00</updated>
     <id>http://tjvantoll.com/2012/08/10/less-101-the-basics-of-the-css-preprocessor</id>
     <content type="html"><![CDATA[<p>I gave a "LESS 101" talk to my coworkers at Liquid Web today.  I thought I'd post the slides here in case anyone else might find them useful.  They are <a href="/speaking/slides/2012/LESS-101">here</a>.</p>
 ]]></content>
@@ -25,7 +25,7 @@
   <entry>
     <title type="html"><![CDATA[The Ideal LESS Workflow with git]]></title>
     <link href="http://tjvantoll.com/2012/07/07/the-ideal-less-workflow-with-git/"/>
-    <updated>2012-07-07T00:00:00-07:00</updated>
+    <updated>2012-07-07T00:00:00-04:00</updated>
     <id>http://tjvantoll.com/2012/07/07/the-ideal-less-workflow-with-git</id>
     <content type="html"><![CDATA[<p>LESS is a CSS pre-processor written in JavaScript.  Unlike its main competitor SASS, it has the ability to run both on the client side via a simple <code>&lt;script&gt;</code> tag, as well as server-side in Node.js.  The fact that LESS files can be processed client side is advantageous for a number of reasons:</p>
 

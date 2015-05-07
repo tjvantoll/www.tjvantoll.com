@@ -4,7 +4,7 @@
   <title><![CDATA[Category: HTML5 | TJ VanToll's Blog]]></title>
   <link href="http://tjvantoll.com/blog/categories/html5/atom.xml" rel="self"/>
   <link href="http://tjvantoll.com/"/>
-  <updated>2015-04-21T16:09:34-07:00</updated>
+  <updated>2015-05-07T09:18:26-04:00</updated>
   <id>http://tjvantoll.com/</id>
   <author>
     <name><![CDATA[TJ VanToll]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[A reportValidity() Use Case and Polyfill]]></title>
     <link href="http://tjvantoll.com/2015/01/28/reportvalidity/"/>
-    <updated>2015-01-28T00:00:00-08:00</updated>
+    <updated>2015-01-28T00:00:00-05:00</updated>
     <id>http://tjvantoll.com/2015/01/28/reportvalidity</id>
     <content type="html"><![CDATA[<p>Last week Chrome 40 was released, and while the greater web community <a href="https://twitter.com/addyosmani/status/558051510840356864">was celebrating service workers landing</a>, a little known DOM method made its first appearance in a browser: <code>reportValidity()</code>.</p>
 
@@ -113,7 +113,7 @@
   <entry>
     <title type="html"><![CDATA[Creating a jQuery UI Dialog with a Submit Button]]></title>
     <link href="http://tjvantoll.com/2013/07/10/creating-a-jquery-ui-dialog-with-a-submit-button/"/>
-    <updated>2013-07-10T00:00:00-07:00</updated>
+    <updated>2013-07-10T00:00:00-04:00</updated>
     <id>http://tjvantoll.com/2013/07/10/creating-a-jquery-ui-dialog-with-a-submit-button</id>
     <content type="html"><![CDATA[<p>Say you have the following submittable <code>&lt;form&gt;</code>:</p>
 
@@ -356,7 +356,7 @@ if ( !formAttributeSupport() ) {
   <entry>
     <title type="html"><![CDATA[HTML 5 hidden Attribute Browser Support]]></title>
     <link href="http://tjvantoll.com/2013/01/09/html5-hidden-attribute-browser-support/"/>
-    <updated>2013-01-09T21:27:00-08:00</updated>
+    <updated>2013-01-09T21:27:00-05:00</updated>
     <id>http://tjvantoll.com/2013/01/09/html5-hidden-attribute-browser-support</id>
     <content type="html"><![CDATA[<p>I had trouble finding this from a Google search, so I thought I'd list the browser support for the <a href="http://www.whatwg.org/specs/web-apps/current-work/multipage/editing.html#the-hidden-attribute">HTML5 hidden attribute</a> here.</p>
 
@@ -392,7 +392,7 @@ if ( !formAttributeSupport() ) {
   <entry>
     <title type="html"><![CDATA[maxlength Constraint Validation Oddities in Major Browsers]]></title>
     <link href="http://tjvantoll.com/2012/10/17/maxlength-constraint-validation-oddities/"/>
-    <updated>2012-10-17T12:48:00-07:00</updated>
+    <updated>2012-10-17T12:48:00-04:00</updated>
     <id>http://tjvantoll.com/2012/10/17/maxlength-constraint-validation-oddities</id>
     <content type="html"><![CDATA[<p>The <code>maxlength</code> attribute has been around in browsers for a long time.  When provided, all browsers prevent the user entering a value that exceeds the <code>maxlength</code>.</p>
 
@@ -447,7 +447,7 @@ if ( !formAttributeSupport() ) {
   <entry>
     <title type="html"><![CDATA[Using jQuery UI's Slider to Polyfill HTML5's input[type=range]]]></title>
     <link href="http://tjvantoll.com/2012/09/14/using-jquery-ui-slider-to-polyfill-html5-input-type-range/"/>
-    <updated>2012-09-14T21:25:00-07:00</updated>
+    <updated>2012-09-14T21:25:00-04:00</updated>
     <id>http://tjvantoll.com/2012/09/14/using-jquery-ui-slider-to-polyfill-html5-input-type-range</id>
     <content type="html"><![CDATA[<p><a href="http://jqueryui.com/demos/slider">jQuery UI's slider plugin</a> looks and behaves much like the browser's native <code>input[type=range]</code> control; therefore it makes an excellent choice for <a href="http://remysharp.com/2010/10/08/what-is-a-polyfill/">polyfilling</a> the native behavior.</p>
 

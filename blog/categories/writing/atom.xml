@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Writing | TJ VanToll's Blog]]></title>
   <link href="http://tjvantoll.com/blog/categories/writing/atom.xml" rel="self"/>
   <link href="http://tjvantoll.com/"/>
-  <updated>2015-04-21T16:09:34-07:00</updated>
+  <updated>2015-05-07T09:18:26-04:00</updated>
   <id>http://tjvantoll.com/</id>
   <author>
     <name><![CDATA[TJ VanToll]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[So You Want to Write a Tech Book]]></title>
     <link href="http://tjvantoll.com/2014/12/29/so-you-want-to-write-a-tech-book/"/>
-    <updated>2014-12-29T00:00:00-08:00</updated>
+    <updated>2014-12-29T00:00:00-05:00</updated>
     <id>http://tjvantoll.com/2014/12/29/so-you-want-to-write-a-tech-book</id>
     <content type="html"><![CDATA[<p><img src="http://tjvantoll.com/images/posts/2014-12-29/shelf.jpg" alt="Books on my shelf" style="border: none;"></p>
 
@@ -181,7 +181,7 @@
   <entry>
     <title type="html"><![CDATA[Hey Developers - You Should Spell Check Your Documentation]]></title>
     <link href="http://tjvantoll.com/2013/09/18/hey-developers-you-should-spell-check-your-documentation/"/>
-    <updated>2013-09-18T09:56:00-07:00</updated>
+    <updated>2013-09-18T09:56:00-04:00</updated>
     <id>http://tjvantoll.com/2013/09/18/hey-developers-you-should-spell-check-your-documentation</id>
     <content type="html"><![CDATA[<p>As developers we write code. Therefore, the thought of using a spell checker brings to mind something like this:</p>
 

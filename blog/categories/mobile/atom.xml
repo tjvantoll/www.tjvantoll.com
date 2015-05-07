@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Mobile | TJ VanToll's Blog]]></title>
   <link href="http://tjvantoll.com/blog/categories/mobile/atom.xml" rel="self"/>
   <link href="http://tjvantoll.com/"/>
-  <updated>2015-04-21T16:09:34-07:00</updated>
+  <updated>2015-05-07T09:18:26-04:00</updated>
   <id>http://tjvantoll.com/</id>
   <author>
     <name><![CDATA[TJ VanToll]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[Effect of iOS 7.1's minimal-ui Viewport Property]]></title>
     <link href="http://tjvantoll.com/2014/03/11/effect-of-ios-7-dot-1s-minimal-ui-meta-tag/"/>
-    <updated>2014-03-11T00:00:00-07:00</updated>
+    <updated>2014-03-11T00:00:00-04:00</updated>
     <id>http://tjvantoll.com/2014/03/11/effect-of-ios-7-dot-1s-minimal-ui-meta-tag</id>
     <content type="html"><![CDATA[<p>One of the major, and <a href="http://www.mobilexweb.com/blog/safari-ios7-html5-problems-apis-review">not well-received</a> changes introduced in iOS7 was the lack of a true full screen mode. Apple's answer was the introduction of a <code>minimal-ui</code> viewport property in iOS 7.1, which was released yesterday.</p>
 
@@ -36,7 +36,7 @@
   <entry>
     <title type="html"><![CDATA[onscroll Event Issues on Mobile Browsers]]></title>
     <link href="http://tjvantoll.com/2012/08/19/onscroll-event-issues-on-mobile-browsers/"/>
-    <updated>2012-08-19T00:00:00-07:00</updated>
+    <updated>2012-08-19T00:00:00-04:00</updated>
     <id>http://tjvantoll.com/2012/08/19/onscroll-event-issues-on-mobile-browsers</id>
     <content type="html"><![CDATA[<p>All browsers fire an <code>onscroll</code> event on the <code>window</code> object whenever the window is scrolled.  On desktop browsers this event is fired continuously as the user scrolls, but on most all mobile browsers the event is not fired until the <em>scrolling action</em> comes to a complete stop.</p>
 
