@@ -9,7 +9,7 @@
   <meta name="author" content="TJ VanToll">
 
   
-  <meta name="description" content="One of the great things about NativeScript is that you can use the JavaScript tools you already know to help build your native iOS and Android apps. &hellip;">
+  <meta name="description" content="One of the great things about NativeScript is you can use the JavaScript tools you already know to help build your native iOS and Android apps. In my &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -123,21 +123,19 @@
   </header>
 
 
-<div class="entry-content"><p>One of the great things about NativeScript is that you can use the JavaScript tools you already know to help build your native iOS and Android apps. In my case I recently added two tools I was already familiar with—<a href="http://jshint.com/">JSHint</a> and <a href="http://jscs.info/">JSCS</a>—to my NativeScript apps to automate <a href="http://en.wikipedia.org/wiki/Lint_%28software%29">linting</a>. In this article I&#8217;ll show you how to do it too.</p>
+<div class="entry-content"><p>One of the great things about <a href="https://www.nativescript.org/">NativeScript</a> is you can use the JavaScript tools you already know to help build your native iOS and Android apps. In my case I recently added two tools I was already familiar with—<a href="http://jshint.com/">JSHint</a> and <a href="http://jscs.info/">JSCS</a>—to my NativeScript apps to automate <a href="http://en.wikipedia.org/wiki/Lint_%28software%29">linting</a>. In this article I&#8217;ll show you how to do it too.</p>
 
 <!-- more -->
 
 
 <h2>Setting up Gulp</h2>
 
-<p>There are a number of tools you can use to automate tasks in JavaScript apps,including <a href="http://gulpjs.com/">Gulp</a>, <a href="http://gruntjs.com/">Grunt</a>, and even <a href="http://blog.keithcirkel.co.uk/how-to-use-npm-as-a-build-tool/">npm</a>, but I&#8217;m a fan of Gulp so that&#8217;s what I&#8217;ll be using in this article. You could setup a similar workflow with Grunt, npm, Brocolli, etc without that much work.</p>
-
-<p>First, if you don&#8217;t have Gulp installed globally you&#8217;ll need to grab it from npm:</p>
+<p>There are a number of tools you can use to automate tasks in NativeScript apps—including <a href="http://gulpjs.com/">Gulp</a>, <a href="http://gruntjs.com/">Grunt</a>, and even <a href="http://blog.keithcirkel.co.uk/how-to-use-npm-as-a-build-tool/">npm</a>—but I&#8217;m a fan of Gulp so that&#8217;s what I&#8217;ll be using in this article. First, if you don&#8217;t have Gulp installed globally you&#8217;ll need to grab it from npm:</p>
 
 <pre class="language-shell"><code>npm install -g gulp</code></pre>
 
 
-<p>To start using Gulp in your NativeScript projects you need to make sure each project has a <code>package.json</code> file in its root:</p>
+<p>Next, to start using Gulp in your NativeScript projects you need to make sure each project has a <code>package.json</code> file in its root:</p>
 
 <pre class="language-shell"><code>.
 ├── app
@@ -147,9 +145,9 @@
     └── ...</code></pre>
 
 
-<p>If you don&#8217;t already have a <code>package.json</code> file, run <a href="https://docs.npmjs.com/cli/init"><code>npm init</code></a> in the project&#8217;s root and npm will help you build one.</p>
+<p>If your project doesn&#8217;t already have a <code>package.json</code> file, run <a href="https://docs.npmjs.com/cli/init"><code>npm init</code></a> in the project&#8217;s root and npm will help you build one.</p>
 
-<p>Next, install Gulp locally along with its <a href="https://www.npmjs.com/package/gulp-jshint">JSHint</a> and <a href="https://www.npmjs.com/package/gulp-jscs">JSCS</a> packages:</p>
+<p>After that, install Gulp locally along with its <a href="https://www.npmjs.com/package/gulp-jshint">JSHint</a> and <a href="https://www.npmjs.com/package/gulp-jscs">JSCS</a> packages:</p>
 
 <pre class="language-shell"><code>npm install gulp gulp-jshint gulp-jscs --save-dev</code></pre>
 
@@ -166,7 +164,7 @@
 }</code></pre>
 
 
-<p>With the installation out the way now it&#8217;s time to write the code that uses these tools.</p>
+<p>With the installation out the way, now it&#8217;s time to write the code that uses these tools.</p>
 
 <h2>Writing the task</h2>
 
@@ -181,7 +179,7 @@
     └── ...</code></pre>
 
 
-<p>Start by creating a <code>gulpfile.js</code> with the following contents:</p>
+<p>Paste the following code into your newly created <code>gulpfile.js</code>:</p>
 
 <pre class="language-javascript"><code>var gulp = require("gulp");
 var jscs = require("gulp-jscs");
@@ -219,7 +217,7 @@ gulp.task("lint", ["jshint", "jscs"]);</code></pre>
 
 <h2>Configuring JSHint and JSCS</h2>
 
-<p>JSHint and JSCS each have comprehensive sets of options for specifying exactly how they should lint your code. To specify these options head back to the root of your project and create two files: <code>.jshintrc</code> and <code>.jscsrc</code>:</p>
+<p>JSHint and JSCS each have comprehensive sets of options for specifying exactly how they should lint your code. To specify these options, head back to the root of your project and create two files: <code>.jshintrc</code> and <code>.jscsrc</code>:</p>
 
 <pre class="language-shell"><code>.
 ├── app
