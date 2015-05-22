@@ -6,19 +6,17 @@ comments: true
 categories: [NativeScript, JavaScript]
 ---
 
-One of the great things about NativeScript is that you can use the JavaScript tools you already know to help build your native iOS and Android apps. In my case I recently added two tools I was already familiar with—[JSHint](http://jshint.com/) and [JSCS](http://jscs.info/)—to my NativeScript apps to automate [linting](http://en.wikipedia.org/wiki/Lint_%28software%29). In this article I'll show you how to do it too.
+One of the great things about [NativeScript](https://www.nativescript.org/) is you can use the JavaScript tools you already know to help build your native iOS and Android apps. In my case I recently added two tools I was already familiar with—[JSHint](http://jshint.com/) and [JSCS](http://jscs.info/)—to my NativeScript apps to automate [linting](http://en.wikipedia.org/wiki/Lint_%28software%29). In this article I'll show you how to do it too.
 
 <!-- more -->
 
 ## Setting up Gulp
 
-There are a number of tools you can use to automate tasks in JavaScript apps,including [Gulp](http://gulpjs.com/), [Grunt](http://gruntjs.com/), and even [npm](http://blog.keithcirkel.co.uk/how-to-use-npm-as-a-build-tool/), but I'm a fan of Gulp so that's what I'll be using in this article. You could setup a similar workflow with Grunt, npm, Brocolli, etc without that much work.
-
-First, if you don't have Gulp installed globally you'll need to grab it from npm:
+There are a number of tools you can use to automate tasks in NativeScript apps—including [Gulp](http://gulpjs.com/), [Grunt](http://gruntjs.com/), and even [npm](http://blog.keithcirkel.co.uk/how-to-use-npm-as-a-build-tool/)—but I'm a fan of Gulp so that's what I'll be using in this article. First, if you don't have Gulp installed globally you'll need to grab it from npm:
 
 <pre class="language-shell"><code>npm install -g gulp</code></pre>
 
-To start using Gulp in your NativeScript projects you need to make sure each project has a `package.json` file in its root:
+Next, to start using Gulp in your NativeScript projects you need to make sure each project has a `package.json` file in its root:
 
 <pre class="language-shell"><code>.
 ├── app
@@ -27,9 +25,9 @@ To start using Gulp in your NativeScript projects you need to make sure each pro
 └── platforms
     └── ...</code></pre>
 
-If you don't already have a `package.json` file, run [`npm init`](https://docs.npmjs.com/cli/init) in the project's root and npm will help you build one.
+If your project doesn't already have a `package.json` file, run [`npm init`](https://docs.npmjs.com/cli/init) in the project's root and npm will help you build one.
 
-Next, install Gulp locally along with its [JSHint](https://www.npmjs.com/package/gulp-jshint) and [JSCS](https://www.npmjs.com/package/gulp-jscs) packages:
+After that, install Gulp locally along with its [JSHint](https://www.npmjs.com/package/gulp-jshint) and [JSCS](https://www.npmjs.com/package/gulp-jscs) packages:
 
 <pre class="language-shell"><code>npm install gulp gulp-jshint gulp-jscs --save-dev</code></pre>
 
@@ -44,7 +42,7 @@ The `--save-dev` flag tells npm to remember these dependencies in your newly cre
   }
 }</code></pre>
 
-With the installation out the way now it's time to write the code that uses these tools.
+With the installation out the way, now it's time to write the code that uses these tools.
 
 ## Writing the task
 
@@ -58,7 +56,7 @@ To write a Gulp task that runs JSHint and JSCS you'll need to create a `gulpfile
 └── platforms
     └── ...</code></pre>
 
-Start by creating a `gulpfile.js` with the following contents:
+Paste the following code into your newly created `gulpfile.js`:
 
 <pre class="language-javascript"><code>var gulp = require("gulp");
 var jscs = require("gulp-jscs");
@@ -95,7 +93,7 @@ With the `gulpfile.js` file in place the last thing you need to do is add a few 
 
 ## Configuring JSHint and JSCS
 
-JSHint and JSCS each have comprehensive sets of options for specifying exactly how they should lint your code. To specify these options head back to the root of your project and create two files: `.jshintrc` and `.jscsrc`:
+JSHint and JSCS each have comprehensive sets of options for specifying exactly how they should lint your code. To specify these options, head back to the root of your project and create two files: `.jshintrc` and `.jscsrc`:
 
 <pre class="language-shell"><code>.
 ├── app
