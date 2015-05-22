@@ -9,7 +9,7 @@
   <meta name="author" content="TJ VanToll">
 
   
-  <meta name="description" content="As there have been numerous bug submissions for this, I feel the need to explain how to properly use jQuery UI&#8217;s tab widget with a &lt;base&gt &hellip;">
+  <meta name="description" content="This is a seemingly simple programming task that we deal with everyday. Here&#8217;s the situation: 1) You have a string in JavaScript, like var &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -95,6 +95,79 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title" itemprop="name headline"><a href="/2013/03/14/better-ways-of-comparing-a-javascript-string-to-multiple-values/">Better Ways of Comparing a JavaScript String to Multiple Values</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-03-14T00:00:00-04:00" pubdate data-updated="true">Mar 14<span>th</span>, 2013</time>
+        
+         | <a href="/2013/03/14/better-ways-of-comparing-a-javascript-string-to-multiple-values/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>This is a seemingly simple programming task that we deal with everyday.  Here&#8217;s the situation:</p>
+
+<ul>
+<li>1) You have a string in JavaScript, like <code>var fruit = ''</code>.</li>
+<li>2) You need to know if that string is equal to one of multiple values, say <code>"banana"</code> or <code>"lemon"</code> (because the yellow fruits need special yellow fruit processing or something).</li>
+</ul>
+
+
+<p>Most people accomplish this by doing two string comparisons connected by a logical OR, which looks like this:</p>
+
+<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="k">if</span> <span class="p">(</span><span class="nx">fruit</span> <span class="o">==</span> <span class="s1">&#39;banana&#39;</span> <span class="o">||</span> <span class="nx">fruit</span> <span class="o">==</span> <span class="s1">&#39;lemon&#39;</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nx">handleYellowFruit</span><span class="p">();</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Which works fine, but is a bit clunky.  I mean, you have to type <code>fruit ==</code> two whole times.  It also doesn&#8217;t scale well.  Say your fruit processing product takes off and you need to support more fruit, now you have this:</p>
+
+<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="k">if</span> <span class="p">(</span><span class="nx">fruit</span> <span class="o">==</span> <span class="s1">&#39;banana&#39;</span> <span class="o">||</span> <span class="nx">fruit</span> <span class="o">==</span> <span class="s1">&#39;lemon&#39;</span> <span class="o">||</span> <span class="nx">fruit</span> <span class="o">==</span> <span class="s1">&#39;mango&#39;</span> <span class="o">||</span> <span class="nx">fruit</span> <span class="o">==</span> <span class="s1">&#39;pineapple&#39;</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nx">handleYellowFruit</span><span class="p">();</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/2013/03/14/better-ways-of-comparing-a-javascript-string-to-multiple-values/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -574,53 +647,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title" itemprop="name headline"><a href="/2012/11/10/creating-cross-browser-scrollable-tbody/">Creating Cross Browser Scrollable &lt;tbody&gt;s - A CSS Only Approach</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-11-10T15:44:00-05:00" pubdate data-updated="true">Nov 10<span>th</span>, 2012</time>
-        
-         | <a href="/2012/11/10/creating-cross-browser-scrollable-tbody/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>By default the <code>overflow</code> CSS property does not apply to table group elements (<code>&lt;thead&gt;</code>, <code>&lt;tbody&gt;</code>, or <code>&lt;tfoot&gt;</code>).  <a href="https://developer.mozilla.org/en-US/docs/Firefox_4_for_developers#Miscellaneous_CSS_changes">As of Firefox 4</a> this behavior is consistent across all browser implementations.</p>
-
-<p>Therefore, if you attempt to apply a CSS <code>height</code> and <code>overflow: scroll</code> to a <code>&lt;tbody&gt;</code> it will have no effect in modern browsers.  You can see this for yourself <a href="http://jsfiddle.net/tj_vantoll/vU494/">here</a>.</p>
-
-<p>But having a scrolling table body with fixed headers is a useful UI element, so how do you work around this?</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/2012/11/10/creating-cross-browser-scrollable-tbody/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/5/">&larr; Older</a>
@@ -657,6 +683,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2015/05/22/linting-javascript-in-nativescript-apps/">Linting JavaScript in NativeScript Apps</a>
+      </li>
+    
+      <li class="post">
         <a href="/2015/03/19/nativescript-ios-navigation-bars/">NativeScript Quick Tip: Managing iOS Navigation Bars</a>
       </li>
     
@@ -670,10 +700,6 @@
     
       <li class="post">
         <a href="/2015/01/18/getting-started-with-kendo-ui-core/">Getting Started with Kendo UI Core</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2015/01/09/updating-google-play-and-ios-app-store-version-numbers-with-the-appbuilder-cli/">Updating Google Play and iOS App Store Version Numbers with the AppBuilder CLI</a>
       </li>
     
   </ul>

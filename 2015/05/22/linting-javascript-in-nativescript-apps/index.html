@@ -1,0 +1,483 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Linting JavaScript in NativeScript Apps - TJ VanToll's Blog - Tutorials, Thoughts, and Ramblings on Front-End Development</title>
+  <meta name="author" content="TJ VanToll">
+
+  
+  <meta name="description" content="One of the great things about NativeScript is that you can use the JavaScript tools you already know to help build your native iOS and Android apps. &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://tjvantoll.com/2015/05/22/linting-javascript-in-nativescript-apps">
+  <link rel="author" href="https://plus.google.com/+TJVanToll">
+
+  <!--[if !lte IE 7]><!-->
+    <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet">
+  <!--<![endif]-->
+  <!--[if lte IE 7]>
+    <link rel="stylesheet" href="/stylesheets/old-ie.css" media="screen, projection">
+  <![endif]-->
+  
+  <!--Custom script concatenation
+  <script src="/javascripts/modernizr-2.5.3.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js"></script>
+  <script src="/javascripts/PictureCube.js"></script>
+  <script src="/javascripts/blog.js"></script>
+  -->
+  <script src="/javascripts/build/scripts.js"></script>
+
+  <link href="/atom.xml" rel="alternate" title="TJ VanToll's Blog" type="application/atom+xml">
+  <style>
+	/* Fonts from Google"s Web font directory at http://google.com/webfonts */
+	/*@import url(http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic);
+	@import url(http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic);*/
+</style>
+
+  
+  <script type="text/javascript">
+  	if (window.location.host.indexOf('local') == -1) {
+	    var _gaq = _gaq || [];
+	    _gaq.push(['_setAccount', 'UA-29179796-1']);
+	    _gaq.push(['_trackPageview']);
+	
+	    (function() {
+	      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+	      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+	      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	    })();
+    }
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+	<h1><a href="/">TJ VanToll's Blog</a></h1>
+	
+		<h2>Tutorials, Thoughts, and Ramblings on Front-End Development</h2> 
+	
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:tjvantoll.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+<li><a href="/">About</a></li>
+  <li><a href="/blog/">Blog</a></li>
+  <li><a href="/blog/archives/">Archives</a></li>
+  <li><a href="/speaking/">Speaking</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article itemscope itemtype="http://schema.org/BlogPosting" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title" itemprop="name headline">Linting JavaScript in NativeScript Apps</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-05-22T00:00:00-04:00" pubdate data-updated="true">May 22<span>nd</span>, 2015</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>One of the great things about NativeScript is that you can use the JavaScript tools you already know to help build your native iOS and Android apps. In my case I recently added two tools I was already familiar with—<a href="http://jshint.com/">JSHint</a> and <a href="http://jscs.info/">JSCS</a>—to my NativeScript apps to automate <a href="http://en.wikipedia.org/wiki/Lint_%28software%29">linting</a>. In this article I&#8217;ll show you how to do it too.</p>
+
+<!-- more -->
+
+
+<h2>Setting up Gulp</h2>
+
+<p>There are a number of tools you can use to automate tasks in JavaScript apps,including <a href="http://gulpjs.com/">Gulp</a>, <a href="http://gruntjs.com/">Grunt</a>, and even <a href="http://blog.keithcirkel.co.uk/how-to-use-npm-as-a-build-tool/">npm</a>, but I&#8217;m a fan of Gulp so that&#8217;s what I&#8217;ll be using in this article. You could setup a similar workflow with Grunt, npm, Brocolli, etc without that much work.</p>
+
+<p>First, if you don&#8217;t have Gulp installed globally you&#8217;ll need to grab it from npm:</p>
+
+<pre class="language-shell"><code>npm install -g gulp</code></pre>
+
+
+<p>To start using Gulp in your NativeScript projects you need to make sure each project has a <code>package.json</code> file in its root:</p>
+
+<pre class="language-shell"><code>.
+├── app
+│   └── ...
+├── package.json ────────────── here
+└── platforms
+    └── ...</code></pre>
+
+
+<p>If you don&#8217;t already have a <code>package.json</code> file, run <a href="https://docs.npmjs.com/cli/init"><code>npm init</code></a> in the project&#8217;s root and npm will help you build one.</p>
+
+<p>Next, install Gulp locally along with its <a href="https://www.npmjs.com/package/gulp-jshint">JSHint</a> and <a href="https://www.npmjs.com/package/gulp-jscs">JSCS</a> packages:</p>
+
+<pre class="language-shell"><code>npm install gulp gulp-jshint gulp-jscs --save-dev</code></pre>
+
+
+<p>The <code>--save-dev</code> flag tells npm to remember these dependencies in your newly created <code>package.json</code> file. If you open your project&#8217;s <code>package.json</code> you should now see a <code>"devDependencies"</code> key at the bottom that looks something like this:</p>
+
+<pre class="language-javascript"><code>{
+  ...
+  "devDependencies": {
+    "gulp": "^3.8.11",
+    "gulp-jscs": "^1.6.0",
+    "gulp-jshint": "^1.10.0"
+  }
+}</code></pre>
+
+
+<p>With the installation out the way now it&#8217;s time to write the code that uses these tools.</p>
+
+<h2>Writing the task</h2>
+
+<p>To write a Gulp task that runs JSHint and JSCS you&#8217;ll need to create a <code>gulpfile.js</code> file in your project&#8217;s root:</p>
+
+<pre class="language-shell"><code>.
+├── app
+│   └── ...
+├── gulpfile.js ────────────── here
+├── package.json
+└── platforms
+    └── ...</code></pre>
+
+
+<p>Start by creating a <code>gulpfile.js</code> with the following contents:</p>
+
+<pre class="language-javascript"><code>var gulp = require("gulp");
+var jscs = require("gulp-jscs");
+var jshint = require("gulp-jshint");
+
+var filesToLint = [
+    "app/**/*.js",
+
+    // Exclude node modules from linting
+    "!app/node_modules/**/*.js",
+
+    // Exclude NativeScript modules from linting
+    "!app/tns_modules/**/*.js"
+];
+
+gulp.task("jscs", function() {
+    gulp.src(filesToLint)
+        .pipe(jscs());
+});
+
+gulp.task("jshint", function() {
+    return gulp.src(filesToLint)
+        .pipe(jshint())
+        .pipe(jshint.reporter());
+});
+
+gulp.task("lint", ["jshint", "jscs"]);</code></pre>
+
+
+<p>This code defines three Gulp tasks: <code>jscs</code>, <code>jshint</code>, and <code>lint</code>. As you might expect, <code>gulp jscs</code> runs JSCS, <code>gulp jshint</code> runs JSHint, and <code>gulp lint</code> runs both.</p>
+
+<p>The <code>filesToLint</code> array specifies which files the linters should hit. By default this is set to lint all JavaScript files in the <code>app</code> directory—excluding any npm modules you have in the <code>node_modules</code> folder, and any NativeScript modules in <code>tns_modules</code> folder—but you may wish to customize this depending on how you&#8217;ve structured your app.</p>
+
+<p>With the <code>gulpfile.js</code> file in place the last thing you need to do is add a few configuration files.</p>
+
+<h2>Configuring JSHint and JSCS</h2>
+
+<p>JSHint and JSCS each have comprehensive sets of options for specifying exactly how they should lint your code. To specify these options head back to the root of your project and create two files: <code>.jshintrc</code> and <code>.jscsrc</code>:</p>
+
+<pre class="language-shell"><code>.
+├── app
+│   └── ...
+├── gulpfile.js
+├── package.json
+├── platforms
+│   └── ...
+├── .jshintrc ────────────── here
+└── .jscsrc ────────────── here</code></pre>
+
+
+<p>The contents of these configuration files will depend on your personal coding preferences. I&#8217;ll share my preferences if you&#8217;d like to use them as a starting point, and you can look over <a href="http://jshint.com/docs/options/">JSHint&#8217;s option docs</a> and <a href="http://jscs.info/rules.html">JSCS&#8217;s option docs</a> to configure them to your liking.</p>
+
+<p>Here&#8217;s my <code>.jshintrc</code>:</p>
+
+<pre class="language-javascript"><code>{
+  "boss": true,
+  "curly": true,
+  "esnext": true,
+  "eqeqeq": true,
+  "eqnull": true,
+  "expr": true,
+  "immed": true,
+  "noarg": true,
+  "quotmark": "double",
+  "smarttabs": true,
+  "trailing": true,
+  "unused": true
+}</code></pre>
+
+
+<p>And here&#8217;s my <code>.jscsrc</code>:</p>
+
+<pre class="language-javascript"><code>{
+  "disallowMixedSpacesAndTabs": true,
+  "disallowMultipleLineBreaks": true,
+  "disallowMultipleSpaces": true,
+  "disallowMultipleVarDecl": true,
+  "disallowNamedUnassignedFunctions": true,
+  "disallowNewlineBeforeBlockStatements": true,
+  "disallowSpacesInCallExpression": true,
+  "disallowSpacesInFunctionDeclaration": {
+    "beforeOpeningRoundBrace": true
+  },
+  "disallowTrailingWhitespace": true,
+  "esnext": true,
+  "requireCommaBeforeLineBreak": true,
+  "requireCurlyBraces": ["if", "else", "for", "while", "try", "catch"],
+  "requireSemicolons": true,
+  "requireSpaceBetweenArguments": true,
+  "requireSpacesInConditionalExpression": true,
+  "requireSpacesInForStatement": true,
+  "requireSpacesInsideObjectBrackets": "all",
+  "validateIndentation": "\t",
+  "validateQuoteMarks": "\""
+}</code></pre>
+
+
+<p>After you have these files in place head back to your terminal and run <code>gulp lint</code>. If all went well you should see something like this:</p>
+
+<pre class="language-shell"><code>$ gulp lint
+[12:06:49] Using gulpfile /path/to/my-project/gulpfile.js
+[12:06:49] Starting 'jshint'...
+[12:06:49] Starting 'jscs'...
+[12:06:49] Finished 'jscs' after 84 ms
+[12:06:49] Finished 'jshint' after 305 ms
+[12:06:49] Starting 'lint'...
+[12:06:49] Finished 'lint' after 13 μs</code></pre>
+
+
+<p>If you head back into your app and create a problem, such as changing <code>var</code> to <code>vax</code>, <code>gulp lint</code> should now point out the error:</p>
+
+<pre class="language-shell"><code>$ gulp lint
+[12:09:24] Using gulpfile /path/to/my-project/gulpfile.js
+[12:09:24] Starting 'jshint'...
+[12:09:24] Starting 'jscs'...
+[12:09:24] Finished 'jscs' after 70 ms
+[12:09:24] Finished 'jshint' after 255 ms
+[12:09:24] Starting 'lint'...
+[12:09:24] Finished 'lint' after 6.09 μs
+
+events.js:72
+        throw er; // Unhandled 'error' event
+              ^
+Error: Unexpected identifier at my-file.js :
+     2 |
+     3 |exports.loaded = function(args) {
+     4 | vax page = args.object;
+--------------^
+     5 | page.bindingContext = viewModel;
+     6 |};</code></pre>
+
+
+<h2>Wrapping up</h2>
+
+<p>That&#8217;s it! If you have any other questions about this setup let me know in the comments. If you&#8217;re looking for an example of this setup in a real app, check out JustMeme, which is <a href="https://github.com/NativeScript/sample-JustMeme">available on GitHub</a> as well as the <a href="https://itunes.apple.com/us/app/justmeme/id989340374?mt=8">iOS app store</a>.</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span itemprop="name" class="fn">TJ VanToll</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-05-22T00:00:00-04:00" pubdate data-updated="true">May 22<span>nd</span>, 2015</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/javascript/'>JavaScript</a>, <a class='category' href='/blog/categories/nativescript/'>NativeScript</a>
+  
+</span>
+
+
+    </p>
+    <p class="author_card meta">
+      <img src="/images/me/1.jpg" alt="Me!" id="post_me">
+      TJ VanToll is a developer advocate for <a href="http://telerik.com">Telerik</a>, a <a href="http://jqueryui.com/about/">jQuery team member</a>, and the author of <a href="http://tjvantoll.com/jquery-ui-in-action.html">jQuery UI in Action</a>. TJ has over a decade of web development experience—specializing in performance and the mobile web—and <a href="/speaking">speaks</a> about his research at conferences around the world. When not online, TJ is generally found talking about himself in the third person. If you like hearing TJ talk about himself, you should consider following him on <a href="http://twitter.com/tjvantoll">Twitter</a> or <a href="https://plus.google.com/+TJVanToll?rel=author" rel="author">Google+</a>.
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://tjvantoll.com/2015/05/22/linting-javascript-in-nativescript-apps/" data-via="tjvantoll" data-counturl="http://tjvantoll.com/2015/05/22/linting-javascript-in-nativescript-apps/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/2015/03/19/nativescript-ios-navigation-bars/" title="Previous Post: NativeScript Quick Tip: Managing iOS Navigation Bars">&laquo; NativeScript Quick Tip: Managing iOS Navigation Bars</a>
+      
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1 id="comments">Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section class="ad-section">
+	<h1>Support the Site</h1>
+	<div class="ad-container">
+		<script defer async src="http://cdn.adpacks.com/adpacks.js?legacyid=1285803&zoneid=1386&key=cb7a6f705dfe7532dde49b4c2c5adf2d&serve=C6SI42Y&placement=tjvantollcom&circle=dev" id="_adpacks_js"></script>
+	</div>
+</section><section class="ad-section">
+	<h1>Check Out My Book</h1> 
+	<div id="book-section">
+		<a href="/jquery-ui-in-action.html" class="image-link">
+			<img src="/images/book.jpg" alt="My jQuery UI in Action cover">
+		</a>
+		<div>
+			<a href="/jquery-ui-in-action.html" class="text_link">
+				jQuery UI in Action<br>
+			</a>
+			<strong>Covers jQuery UI 1.11!</strong>
+			<p>Published by <a href="http://www.manning.com/?a_aid=tj-vantoll">Manning</a>.</p>
+		</div>
+	</div>
+</section><section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2015/05/22/linting-javascript-in-nativescript-apps/">Linting JavaScript in NativeScript Apps</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2015/03/19/nativescript-ios-navigation-bars/">NativeScript Quick Tip: Managing iOS Navigation Bars</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2015/01/28/reportvalidity/">A reportValidity() Use Case and Polyfill</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2015/01/26/wkwebview-plugin/">Speed Up Your Cordova App with the WKWebView Plugin</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2015/01/18/getting-started-with-kendo-ui-core/">Getting Started with Kendo UI Core</a>
+      </li>
+    
+  </ul>
+</section>
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2015 - <a href="/">TJ VanToll</a> -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'tjvantoll';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://tjvantoll.com/2015/05/22/linting-javascript-in-nativescript-apps/';
+        var disqus_url = 'http://tjvantoll.com/2015/05/22/linting-javascript-in-nativescript-apps/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

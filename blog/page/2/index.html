@@ -9,7 +9,7 @@
   <meta name="author" content="TJ VanToll">
 
   
-  <meta name="description" content="Today I want to share a quick tip for driving display logic in UI components—and I think it&#8217;s easier to see in an example. Suppose you are &hellip;">
+  <meta name="description" content="The single coolest thing in jQuery UI is the extension mechanism built into the widget factory. In my upcoming book on jQuery UI I devote an entire &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -95,6 +95,53 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title" itemprop="name headline"><a href="/2014/07/04/a-jquery-ui-vertical-tabs-extension/">A jQuery UI Vertical Tabs Extension</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-07-04T10:13:00-04:00" pubdate data-updated="true">Jul 4<span>th</span>, 2014</time>
+        
+         | <a href="/2014/07/04/a-jquery-ui-vertical-tabs-extension/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>The single coolest thing in jQuery UI is the <a href="http://learn.jquery.com/jquery-ui/widget-factory/extending-widgets/">extension mechanism</a> built into the <a href="http://api.jqueryui.com/jquery.widget/">widget factory</a>. In my <a href="http://tjvantoll.com/jquery-ui-in-action.html">upcoming book</a> on jQuery UI I devote an entire chapter to building extensions, and now that the book is <em>mostly</em> done, I want to publish some of the extensions I built for the world to use.</p>
+
+<p>The first of these is an extension to display a <a href="http://jqueryui.com/tabs/">jQuery UI tabs widget</a> vertically. The extension is simple: it adds a single <code>orientation</code> option that you can set to <code>"horizontal"</code> or <code>"vertical"</code>. Here it is in action:</p>
+
+<div class="code_example"><h6>jQuery UI Vertical Tabs Extension<a href="/demos/2014-07-04/index.html" target="_blank">Open in New Window</a></h6><iframe style="width: 100%; height: 325px;" frameborder="0" src="/demos/2014-07-04/index.html"></iframe></div>
+
+
+<p>The extension <a href="https://github.com/tjvantoll/jquery-ui-vertical-tabs#amd-usage">supports AMD usage</a>, including <a href="http://learn.jquery.com/jquery-ui/environments/amd/">the new AMD modules introduced in jQuery UI 1.11</a>. If you&#8217;re a Bower user, you can install the extension with <code>bower install jquery-ui-vertical-tabs</code>.</p>
+
+<p>Please <a href="https://github.com/tjvantoll/jquery-ui-vertical-tabs">check out the extension on GitHub</a>. Try it; report issues; and star it if you like it. The extension is released under the MIT license, so it use it in any project you&#8217;d like. I&#8217;ll have more of these coming in the near future.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -573,48 +620,6 @@ Adding a strikethrough to a line of text in CSS is easy.</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title" itemprop="name headline"><a href="/2013/08/14/new-beginnings/">New Beginnings</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-08-14T00:00:00-04:00" pubdate data-updated="true">Aug 14<span>th</span>, 2013</time>
-        
-         | <a href="/2013/08/14/new-beginnings/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>I&#8217;m excited to announce that I&#8217;ll be joining <a href="http://telerik.com">Telerik</a> as a Developer Advocate for <a href="http://icenium.com">Icenium</a>. I&#8217;ve been doing a lot of <a href="/blog/archives/">speaking</a> and <a href="/speaking/">writing</a> in my free time, and this opportunity will give me a chance to do that as part of my day job.</p>
-
-<p>While I&#8217;m excited, I&#8217;m also sad to leave behind some great people at <a href="http://liquidweb.com">Liquid Web</a>. They were a great company and a fun place to work, but at the end of the day getting paid to speak and write has been a goal of mine, and this was an opportunity I couldn&#8217;t pass up.</p>
-
-<p>I&#8217;ll be talking at two events in October - <a href="http://www.devreach.com/">DevReach</a> and <a href="http://html5devconf.com/">HTML5DevConf</a>. If you&#8217;re going to be there make sure to stop by and say hi.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/3/">&larr; Older</a>
@@ -651,6 +656,10 @@ Adding a strikethrough to a line of text in CSS is easy.</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2015/05/22/linting-javascript-in-nativescript-apps/">Linting JavaScript in NativeScript Apps</a>
+      </li>
+    
+      <li class="post">
         <a href="/2015/03/19/nativescript-ios-navigation-bars/">NativeScript Quick Tip: Managing iOS Navigation Bars</a>
       </li>
     
@@ -664,10 +673,6 @@ Adding a strikethrough to a line of text in CSS is easy.</p>
     
       <li class="post">
         <a href="/2015/01/18/getting-started-with-kendo-ui-core/">Getting Started with Kendo UI Core</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2015/01/09/updating-google-play-and-ios-app-store-version-numbers-with-the-appbuilder-cli/">Updating Google Play and iOS App Store Version Numbers with the AppBuilder CLI</a>
       </li>
     
   </ul>

@@ -4,7 +4,7 @@
   <title><![CDATA[Category: NativeScript | TJ VanToll's Blog]]></title>
   <link href="http://tjvantoll.com/blog/categories/nativescript/atom.xml" rel="self"/>
   <link href="http://tjvantoll.com/"/>
-  <updated>2015-05-14T08:43:12-04:00</updated>
+  <updated>2015-05-22T12:24:23-04:00</updated>
   <id>http://tjvantoll.com/</id>
   <author>
     <name><![CDATA[TJ VanToll]]></name>
@@ -12,6 +12,208 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Linting JavaScript in NativeScript Apps]]></title>
+    <link href="http://tjvantoll.com/2015/05/22/linting-javascript-in-nativescript-apps/"/>
+    <updated>2015-05-22T00:00:00-04:00</updated>
+    <id>http://tjvantoll.com/2015/05/22/linting-javascript-in-nativescript-apps</id>
+    <content type="html"><![CDATA[<p>One of the great things about NativeScript is that you can use the JavaScript tools you already know to help build your native iOS and Android apps. In my case I recently added two tools I was already familiar with—<a href="http://jshint.com/">JSHint</a> and <a href="http://jscs.info/">JSCS</a>—to my NativeScript apps to automate <a href="http://en.wikipedia.org/wiki/Lint_%28software%29">linting</a>. In this article I'll show you how to do it too.</p>
+
+<!-- more -->
+
+
+<h2>Setting up Gulp</h2>
+
+<p>There are a number of tools you can use to automate tasks in JavaScript apps,including <a href="http://gulpjs.com/">Gulp</a>, <a href="http://gruntjs.com/">Grunt</a>, and even <a href="http://blog.keithcirkel.co.uk/how-to-use-npm-as-a-build-tool/">npm</a>, but I'm a fan of Gulp so that's what I'll be using in this article. You could setup a similar workflow with Grunt, npm, Brocolli, etc without that much work.</p>
+
+<p>First, if you don't have Gulp installed globally you'll need to grab it from npm:</p>
+
+<pre class="language-shell"><code>npm install -g gulp</code></pre>
+
+
+<p>To start using Gulp in your NativeScript projects you need to make sure each project has a <code>package.json</code> file in its root:</p>
+
+<pre class="language-shell"><code>.
+├── app
+│   └── ...
+├── package.json ────────────── here
+└── platforms
+    └── ...</code></pre>
+
+
+<p>If you don't already have a <code>package.json</code> file, run <a href="https://docs.npmjs.com/cli/init"><code>npm init</code></a> in the project's root and npm will help you build one.</p>
+
+<p>Next, install Gulp locally along with its <a href="https://www.npmjs.com/package/gulp-jshint">JSHint</a> and <a href="https://www.npmjs.com/package/gulp-jscs">JSCS</a> packages:</p>
+
+<pre class="language-shell"><code>npm install gulp gulp-jshint gulp-jscs --save-dev</code></pre>
+
+
+<p>The <code>--save-dev</code> flag tells npm to remember these dependencies in your newly created <code>package.json</code> file. If you open your project's <code>package.json</code> you should now see a <code>"devDependencies"</code> key at the bottom that looks something like this:</p>
+
+<pre class="language-javascript"><code>{
+  ...
+  "devDependencies": {
+    "gulp": "^3.8.11",
+    "gulp-jscs": "^1.6.0",
+    "gulp-jshint": "^1.10.0"
+  }
+}</code></pre>
+
+
+<p>With the installation out the way now it's time to write the code that uses these tools.</p>
+
+<h2>Writing the task</h2>
+
+<p>To write a Gulp task that runs JSHint and JSCS you'll need to create a <code>gulpfile.js</code> file in your project's root:</p>
+
+<pre class="language-shell"><code>.
+├── app
+│   └── ...
+├── gulpfile.js ────────────── here
+├── package.json
+└── platforms
+    └── ...</code></pre>
+
+
+<p>Start by creating a <code>gulpfile.js</code> with the following contents:</p>
+
+<pre class="language-javascript"><code>var gulp = require("gulp");
+var jscs = require("gulp-jscs");
+var jshint = require("gulp-jshint");
+
+var filesToLint = [
+    "app/**/*.js",
+
+    // Exclude node modules from linting
+    "!app/node_modules/**/*.js",
+
+    // Exclude NativeScript modules from linting
+    "!app/tns_modules/**/*.js"
+];
+
+gulp.task("jscs", function() {
+    gulp.src(filesToLint)
+        .pipe(jscs());
+});
+
+gulp.task("jshint", function() {
+    return gulp.src(filesToLint)
+        .pipe(jshint())
+        .pipe(jshint.reporter());
+});
+
+gulp.task("lint", ["jshint", "jscs"]);</code></pre>
+
+
+<p>This code defines three Gulp tasks: <code>jscs</code>, <code>jshint</code>, and <code>lint</code>. As you might expect, <code>gulp jscs</code> runs JSCS, <code>gulp jshint</code> runs JSHint, and <code>gulp lint</code> runs both.</p>
+
+<p>The <code>filesToLint</code> array specifies which files the linters should hit. By default this is set to lint all JavaScript files in the <code>app</code> directory—excluding any npm modules you have in the <code>node_modules</code> folder, and any NativeScript modules in <code>tns_modules</code> folder—but you may wish to customize this depending on how you've structured your app.</p>
+
+<p>With the <code>gulpfile.js</code> file in place the last thing you need to do is add a few configuration files.</p>
+
+<h2>Configuring JSHint and JSCS</h2>
+
+<p>JSHint and JSCS each have comprehensive sets of options for specifying exactly how they should lint your code. To specify these options head back to the root of your project and create two files: <code>.jshintrc</code> and <code>.jscsrc</code>:</p>
+
+<pre class="language-shell"><code>.
+├── app
+│   └── ...
+├── gulpfile.js
+├── package.json
+├── platforms
+│   └── ...
+├── .jshintrc ────────────── here
+└── .jscsrc ────────────── here</code></pre>
+
+
+<p>The contents of these configuration files will depend on your personal coding preferences. I'll share my preferences if you'd like to use them as a starting point, and you can look over <a href="http://jshint.com/docs/options/">JSHint's option docs</a> and <a href="http://jscs.info/rules.html">JSCS's option docs</a> to configure them to your liking.</p>
+
+<p>Here's my <code>.jshintrc</code>:</p>
+
+<pre class="language-javascript"><code>{
+  "boss": true,
+  "curly": true,
+  "esnext": true,
+  "eqeqeq": true,
+  "eqnull": true,
+  "expr": true,
+  "immed": true,
+  "noarg": true,
+  "quotmark": "double",
+  "smarttabs": true,
+  "trailing": true,
+  "unused": true
+}</code></pre>
+
+
+<p>And here's my <code>.jscsrc</code>:</p>
+
+<pre class="language-javascript"><code>{
+  "disallowMixedSpacesAndTabs": true,
+  "disallowMultipleLineBreaks": true,
+  "disallowMultipleSpaces": true,
+  "disallowMultipleVarDecl": true,
+  "disallowNamedUnassignedFunctions": true,
+  "disallowNewlineBeforeBlockStatements": true,
+  "disallowSpacesInCallExpression": true,
+  "disallowSpacesInFunctionDeclaration": {
+    "beforeOpeningRoundBrace": true
+  },
+  "disallowTrailingWhitespace": true,
+  "esnext": true,
+  "requireCommaBeforeLineBreak": true,
+  "requireCurlyBraces": ["if", "else", "for", "while", "try", "catch"],
+  "requireSemicolons": true,
+  "requireSpaceBetweenArguments": true,
+  "requireSpacesInConditionalExpression": true,
+  "requireSpacesInForStatement": true,
+  "requireSpacesInsideObjectBrackets": "all",
+  "validateIndentation": "\t",
+  "validateQuoteMarks": "\""
+}</code></pre>
+
+
+<p>After you have these files in place head back to your terminal and run <code>gulp lint</code>. If all went well you should see something like this:</p>
+
+<pre class="language-shell"><code>$ gulp lint
+[12:06:49] Using gulpfile /path/to/my-project/gulpfile.js
+[12:06:49] Starting 'jshint'...
+[12:06:49] Starting 'jscs'...
+[12:06:49] Finished 'jscs' after 84 ms
+[12:06:49] Finished 'jshint' after 305 ms
+[12:06:49] Starting 'lint'...
+[12:06:49] Finished 'lint' after 13 μs</code></pre>
+
+
+<p>If you head back into your app and create a problem, such as changing <code>var</code> to <code>vax</code>, <code>gulp lint</code> should now point out the error:</p>
+
+<pre class="language-shell"><code>$ gulp lint
+[12:09:24] Using gulpfile /path/to/my-project/gulpfile.js
+[12:09:24] Starting 'jshint'...
+[12:09:24] Starting 'jscs'...
+[12:09:24] Finished 'jscs' after 70 ms
+[12:09:24] Finished 'jshint' after 255 ms
+[12:09:24] Starting 'lint'...
+[12:09:24] Finished 'lint' after 6.09 μs
+
+events.js:72
+        throw er; // Unhandled 'error' event
+              ^
+Error: Unexpected identifier at my-file.js :
+     2 |
+     3 |exports.loaded = function(args) {
+     4 | vax page = args.object;
+--------------^
+     5 | page.bindingContext = viewModel;
+     6 |};</code></pre>
+
+
+<h2>Wrapping up</h2>
+
+<p>That's it! If you have any other questions about this setup let me know in the comments. If you're looking for an example of this setup in a real app, check out JustMeme, which is <a href="https://github.com/NativeScript/sample-JustMeme">available on GitHub</a> as well as the <a href="https://itunes.apple.com/us/app/justmeme/id989340374?mt=8">iOS app store</a>.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[NativeScript Quick Tip: Managing iOS Navigation Bars]]></title>
