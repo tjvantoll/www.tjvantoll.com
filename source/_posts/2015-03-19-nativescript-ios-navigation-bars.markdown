@@ -6,7 +6,7 @@ comments: true
 categories: [NativeScript]
 ---
 
-I've gotten a whole lot of questions about adding navigation bars to NativeScript iOS apps, so I thought I'd write a quick post about it. First of all, a `<NavBar>` element is coming in NativeScript 1.0 (May), so everything I'm describing will be a lot easier to do soon. But I still find this temporary workaround worth discussing as it shows off how easy the NativeScript runtime makes it to tinker with native APIs.
+I've gotten a whole lot of questions about adding navigation bars to NativeScript iOS apps, so I thought I'd write a quick post about it.
 
 <!-- more -->
 
@@ -32,6 +32,9 @@ exports.pageLoaded = function(args) {
 
 	// Make sure we're on iOS before making iOS-specific changes
 	if (page.ios) {
+
+		// Tell the frame module that the navigation bar should always display
+		frameModule.topmost().ios.navBarVisibility = "always";
 
 		// Change the UIViewController's title property
 		page.ios.title = "My Awesome App";
@@ -65,6 +68,9 @@ exports.pageLoaded = function(args) {
 	// Make sure we're on iOS before making iOS-specific changes
 	if (page.ios) {
 
+		// Tell the frame module that the navigation bar should always display
+		frameModule.topmost().ios.navBarVisibility = "always";
+
 		// Change the UIViewController's title property
 		page.ios.title = "My Awesome App";
 
@@ -89,4 +95,4 @@ Again, all that you're doing here is invoking iOS APIs with the NativeScript run
 
 Anything iOS allows you to do. Seriously. Obviously when you make these very iOS-specific changes some knowledge of iOS is required, and some knowledge of [how NativeScript handles marshalling between Objective-C and JavaScript](http://docs.nativescript.org/runtimes/ios/marshalling/Marshalling-Overview.html) certainly helps, but I still think it's cool that you can access these native APIs so easily—in JavaScript even!
 
-The appeal of NativeScript is that over time more and more of these common tasks are going to be abstracted into platform-agnostic modules so that you don't have to know the platform-specific details. [There are already dozen of modules out there](https://github.com/nativescript/cross-platform-modules), and new ones are being added with each release. For example when `<NavBar>` lands in NativeScript 1.0 you won't need this article anymore :)
+The appeal of NativeScript is that over time more and more of these common tasks are going to be abstracted into platform-agnostic modules so that you don't have to know the platform-specific details. [There are already dozen of modules out there](https://github.com/nativescript/cross-platform-modules), and new ones are being added with each release.
