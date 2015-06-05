@@ -9,7 +9,7 @@
   <meta name="author" content="TJ VanToll">
 
   
-  <meta name="description" content="The single coolest thing in jQuery UI is the extension mechanism built into the widget factory. In my upcoming book on jQuery UI I devote an entire &hellip;">
+  <meta name="description" content="Yesterday I published an article on the Telerik Developer Network about the state of web components. In it I argued that web components are not ready &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -95,6 +95,51 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title" itemprop="name headline"><a href="/2014/07/18/an-addendum-to-why-web-components-arent-ready-for-production-yet/">An Addendum to Why Web Components Aren&#8217;t Ready for Production Yet</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-07-18T14:14:00-04:00" pubdate data-updated="true">Jul 18<span>th</span>, 2014</time>
+        
+         | <a href="/2014/07/18/an-addendum-to-why-web-components-arent-ready-for-production-yet/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Yesterday I <a href="http://developer.telerik.com/featured/web-components-arent-ready-production-yet/">published an article on the Telerik Developer Network</a> about the state of web components. In it I argued that web components are not ready for the majority of web developers to use in production.</p>
+
+<p>I was overwhelmed by the amount of feeback—positive and negative—that I received after the article went live. In my opinion this is one of the great things about writing on the web. Opinionated posts tend to attract feedback from smart people with vested interests in the technology being discussed. Although putting yourself out there for criticism is hard, it&#8217;s also a spectacular way to learn. Here I want to summarize what I learned from writing about web components, and take a minute to respond to some of the criticism I received.</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/2014/07/18/an-addendum-to-why-web-components-arent-ready-for-production-yet/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -551,75 +596,6 @@ Adding a strikethrough to a line of text in CSS is easy.</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title" itemprop="name headline"><a href="/2013/08/30/bugs-with-document-activeelement-in-internet-explorer/">Bugs with document.activeElement in Internet Explorer</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-08-30T14:46:00-04:00" pubdate data-updated="true">Aug 30<span>th</span>, 2013</time>
-        
-         | <a href="/2013/08/30/bugs-with-document-activeelement-in-internet-explorer/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>There are two <em>fun</em> bugs related to <code>document.activeElement</code> in IE that have come up recently in jQuery UI. To help save others some pain, I felt these needed to be documented.</p>
-
-<h3>Accessing <code>document.activeElement</code> from an <code>&lt;iframe&gt;</code> in IE9</h3>
-
-<p>Let&#8217;s say you have an <code>&lt;iframe&gt;</code>.</p>
-
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;iframe</span> <span class="na">src=</span><span class="s">&quot;other.html&quot;</span><span class="nt">&gt;&lt;/iframe&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>And in that <code>&lt;iframe&gt;</code>, you want to know what element has focus.</p>
-
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'>/* other.html */
-</span><span class='line'><span class="nt">&lt;script&gt;</span>
-</span><span class='line'>    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span> <span class="nx">parent</span><span class="p">.</span><span class="nb">document</span><span class="p">.</span><span class="nx">activeElement</span> <span class="p">);</span>
-</span><span class='line'><span class="nt">&lt;/script&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>In all browsers except IE9, this will log the element that has focus in the parent document (the <code>&lt;body&gt;</code> by default). In IE9 this will inexplicably throw an <code>"Unspecified Error"</code>.</p>
-
-<p>Yes, you read right; ACCESSING the <code>activeElement</code> property of a parent <code>document</code> throws an error in IE9.</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/2013/08/30/bugs-with-document-activeelement-in-internet-explorer/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/3/">&larr; Older</a>
@@ -656,6 +632,10 @@ Adding a strikethrough to a line of text in CSS is easy.</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2015/06/05/nativescript-showing-and-hiding-elements/">NativeScript Quick Tip: Showing and Hiding Elements</a>
+      </li>
+    
+      <li class="post">
         <a href="/2015/05/22/linting-javascript-in-nativescript-apps/">Linting JavaScript in NativeScript Apps</a>
       </li>
     
@@ -669,10 +649,6 @@ Adding a strikethrough to a line of text in CSS is easy.</p>
     
       <li class="post">
         <a href="/2015/01/26/wkwebview-plugin/">Speed Up Your Cordova App with the WKWebView Plugin</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2015/01/18/getting-started-with-kendo-ui-core/">Getting Started with Kendo UI Core</a>
       </li>
     
   </ul>

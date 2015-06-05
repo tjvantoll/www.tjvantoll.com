@@ -4,7 +4,7 @@
   <title><![CDATA[Category: NativeScript | TJ VanToll's Blog]]></title>
   <link href="http://tjvantoll.com/blog/categories/nativescript/atom.xml" rel="self"/>
   <link href="http://tjvantoll.com/"/>
-  <updated>2015-05-26T20:10:50-04:00</updated>
+  <updated>2015-06-05T12:55:17-04:00</updated>
   <id>http://tjvantoll.com/</id>
   <author>
     <name><![CDATA[TJ VanToll]]></name>
@@ -12,6 +12,59 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[NativeScript Quick Tip: Showing and Hiding Elements]]></title>
+    <link href="http://tjvantoll.com/2015/06/05/nativescript-showing-and-hiding-elements/"/>
+    <updated>2015-06-05T00:00:00-04:00</updated>
+    <id>http://tjvantoll.com/2015/06/05/nativescript-showing-and-hiding-elements</id>
+    <content type="html"><![CDATA[<p>NativeScript supports the <code>"collapsed"</code> and <code>"visible"</code> states of the CSS <code>visibility</code> property. This means you can hide an element by setting its <code>"visibility"</code> property to <code>"collapsed"</code> in CSS. For example you can use the following CSS to hide all buttons.</p>
+
+<pre class="language-css"><code>button {
+    visibility: collapsed;
+}</code></pre>
+
+
+<blockquote><p><strong>Warning</strong>: Currently NativeScript is inconsistent with the CSS spec, as the CSS spec defines <code>visibility: collapse</code>, and NativeScript uses <code>visiblity: collapsed</code>. I have <a href="https://github.com/NativeScript/NativeScript/issues/285">an issue open</a> to resolve this discrepancy.</p></blockquote>
+
+<!-- more -->
+
+
+<p>Hiding an element in CSS works, but if you need to hide an element you almost certainly need to show it at some point. For this, NativeScript exposes a <code>visibility</code> <em>attribute</em>, which is just a light wrapper around the CSS property. For instance you could also use the following syntax to hide a button:</p>
+
+<pre class="language-markup line-numbers"><code>&lt;Button text="I'm hidden" visibility="collapsed" /&gt;</code></pre>
+
+
+<p>This is handy because having an attribute lets you to use <a href="http://docs.nativescript.org/bindings#using-expressions-for-bindings">data-binding expressions</a> to control the value of the attribute, which is the technique I almost always use to control visibility. To give a concrete example, in the code below I use a flag in my data model, <code>"showDetails"</code>, to determine the visibility of a <code>&lt;Label&gt;</code>.</p>
+
+<pre class="language-markup"><code>&lt;Page loaded="loaded"&gt;
+    &lt;StackLayout&gt;
+        &lt;Button text="{{ showDetails ? 'Hide' : 'Show' }}" tap="toggle" /&gt;
+        &lt;Label text="Lorem ipsum..." visibility="{{ showDetails ? 'visible' : 'collapsed' }}" /&gt;
+    &lt;/StackLayout&gt;
+&lt;/Page&gt;</code></pre>
+
+
+
+
+<pre class="language-javascript"><code>var observable = require("data/observable");
+var pageData = new observable.Observable();
+
+exports.loaded = function(args) {
+    pageData.set("showDetails", true);
+    args.object.bindingContext = pageData;
+}
+
+exports.toggle = function() {
+    pageData.set("showDetails", !pageData.get("showDetails"));
+}</code></pre>
+
+
+<p>The key here is the ternary used as part of the <code>&lt;Label&gt;</code>'s <code>visibility</code> attribute: <code>{{ showDetails ? 'visible' : 'collapsed' }}</code>. When the data model's <code>"showDetails"</code> property is true NativeScript shows the label, and when the property is false NativeScript hides the label.</p>
+
+<p>That's all there is to it. If you have any other techniques you use to show/hide elements let me know in the comments. If you have suggestions for a cleaner API feel free to <a href="https://github.com/NativeScript/NativeScript/issues/new">suggest it on GitHub</a>, or better yet, <a href="https://www.nativescript.org/contribute">send a PR</a> :)</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Linting JavaScript in NativeScript Apps]]></title>

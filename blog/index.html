@@ -9,7 +9,7 @@
   <meta name="author" content="TJ VanToll">
 
   
-  <meta name="description" content="One of the great things about NativeScript is you can use the JavaScript tools you already know to help build your native iOS and Android apps. In my &hellip;">
+  <meta name="description" content="NativeScript supports the "collapsed" and "visible" states of the CSS visibility property. This means you can hide an element by setting its " &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -95,6 +95,56 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title" itemprop="name headline"><a href="/2015/06/05/nativescript-showing-and-hiding-elements/">NativeScript Quick Tip: Showing and Hiding Elements</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-06-05T00:00:00-04:00" pubdate data-updated="true">Jun 5<span>th</span>, 2015</time>
+        
+         | <a href="/2015/06/05/nativescript-showing-and-hiding-elements/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>NativeScript supports the <code>"collapsed"</code> and <code>"visible"</code> states of the CSS <code>visibility</code> property. This means you can hide an element by setting its <code>"visibility"</code> property to <code>"collapsed"</code> in CSS. For example you can use the following CSS to hide all buttons.</p>
+
+<pre class="language-css"><code>button {
+    visibility: collapsed;
+}</code></pre>
+
+
+<blockquote><p><strong>Warning</strong>: Currently NativeScript is inconsistent with the CSS spec, as the CSS spec defines <code>visibility: collapse</code>, and NativeScript uses <code>visiblity: collapsed</code>. I have <a href="https://github.com/NativeScript/NativeScript/issues/285">an issue open</a> to resolve this discrepancy.</p></blockquote>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/2015/06/05/nativescript-showing-and-hiding-elements/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -519,51 +569,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title" itemprop="name headline"><a href="/2014/07/18/an-addendum-to-why-web-components-arent-ready-for-production-yet/">An Addendum to Why Web Components Aren&#8217;t Ready for Production Yet</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-07-18T14:14:00-04:00" pubdate data-updated="true">Jul 18<span>th</span>, 2014</time>
-        
-         | <a href="/2014/07/18/an-addendum-to-why-web-components-arent-ready-for-production-yet/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Yesterday I <a href="http://developer.telerik.com/featured/web-components-arent-ready-production-yet/">published an article on the Telerik Developer Network</a> about the state of web components. In it I argued that web components are not ready for the majority of web developers to use in production.</p>
-
-<p>I was overwhelmed by the amount of feeback—positive and negative—that I received after the article went live. In my opinion this is one of the great things about writing on the web. Opinionated posts tend to attract feedback from smart people with vested interests in the technology being discussed. Although putting yourself out there for criticism is hard, it&#8217;s also a spectacular way to learn. Here I want to summarize what I learned from writing about web components, and take a minute to respond to some of the criticism I received.</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/2014/07/18/an-addendum-to-why-web-components-arent-ready-for-production-yet/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -598,6 +603,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2015/06/05/nativescript-showing-and-hiding-elements/">NativeScript Quick Tip: Showing and Hiding Elements</a>
+      </li>
+    
+      <li class="post">
         <a href="/2015/05/22/linting-javascript-in-nativescript-apps/">Linting JavaScript in NativeScript Apps</a>
       </li>
     
@@ -611,10 +620,6 @@
     
       <li class="post">
         <a href="/2015/01/26/wkwebview-plugin/">Speed Up Your Cordova App with the WKWebView Plugin</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2015/01/18/getting-started-with-kendo-ui-core/">Getting Started with Kendo UI Core</a>
       </li>
     
   </ul>

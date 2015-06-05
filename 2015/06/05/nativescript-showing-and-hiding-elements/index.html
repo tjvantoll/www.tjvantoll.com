@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Speaking Tip: Use the iPad's Clock App as a Timer - TJ VanToll's Blog - Tutorials, Thoughts, and Ramblings on Front-End Development</title>
+  <title>NativeScript Quick Tip: Showing and Hiding Elements - TJ VanToll's Blog - Tutorials, Thoughts, and Ramblings on Front-End Development</title>
   <meta name="author" content="TJ VanToll">
 
   
-  <meta name="description" content="I have been speaking for some time now, and I&#8217;ve learned that keeping track of time is hard. And it&#8217;s important; no one likes attending &hellip;">
+  <meta name="description" content="NativeScript supports the "collapsed" and "visible" states of the CSS visibility property. This means you can hide an element by setting its " &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://tjvantoll.com/2014/01/23/speaking-tip-use-the-ipad-clock-app-as-a-timer">
+  <link rel="canonical" href="http://tjvantoll.com/2015/06/05/nativescript-showing-and-hiding-elements">
   <link rel="author" href="https://plus.google.com/+TJVanToll">
 
   <!--[if !lte IE 7]><!-->
@@ -98,7 +98,7 @@
   
   <header>
     
-      <h1 class="entry-title" itemprop="name headline">Speaking Tip: Use the iPad's Clock App as a Timer</h1>
+      <h1 class="entry-title" itemprop="name headline">NativeScript Quick Tip: Showing and Hiding Elements</h1>
     
     
       <p class="meta">
@@ -114,7 +114,7 @@
   
 
 
-<time datetime="2014-01-23T09:42:00-05:00" pubdate data-updated="true">Jan 23<span>rd</span>, 2014</time>
+<time datetime="2015-06-05T00:00:00-04:00" pubdate data-updated="true">Jun 5<span>th</span>, 2015</time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -123,46 +123,51 @@
   </header>
 
 
-<div class="entry-content"><p>I <a href="/speaking/">have been speaking</a> for some time now, and I&#8217;ve learned that keeping track of time is hard. And it&#8217;s important; no one likes attending the talk that goes ten minutes over, or the talk that awkwardly ends half way through.</p>
+<div class="entry-content"><p>NativeScript supports the <code>"collapsed"</code> and <code>"visible"</code> states of the CSS <code>visibility</code> property. This means you can hide an element by setting its <code>"visibility"</code> property to <code>"collapsed"</code> in CSS. For example you can use the following CSS to hide all buttons.</p>
 
-<p>Most presentation software - PowerPoint, Keynote, etc - shows the elapsed time, but I find that the display isn&#8217;t obvious enough. For example, here&#8217;s the presenter mode in PowerPoint:</p>
-
-<p><img src="/images/posts/2014-01-23/powerpoint.png" alt="View of PowerPoint's presenter mode"></p>
-
-<p>When I&#8217;m already nervous I don&#8217;t want to pick out the time from an already busy screen. I want to use as little brain processing as possible.</p>
-
-<p>Furthermore, I usually present with custom, HTML-based slide decks, or do demos with no slides at all; therefore I usually don&#8217;t have <em>any</em> timer available. Some conferences provide some timing help, but it&#8217;s definitely not something you can rely on.</p>
-
-<p>This was a problem for me for a while. I rushed to finish my first big conference talk - just to discover I had finished 15 minutes early. After some experimenting I finally found something that has worked for me, so I thought I&#8217;d share it.</p>
-
-<!--more-->
+<pre class="language-css"><code>button {
+    visibility: collapsed;
+}</code></pre>
 
 
-<h3>iPad</h3>
+<blockquote><p><strong>Warning</strong>: Currently NativeScript is inconsistent with the CSS spec, as the CSS spec defines <code>visibility: collapse</code>, and NativeScript uses <code>visiblity: collapsed</code>. I have <a href="https://github.com/NativeScript/NativeScript/issues/285">an issue open</a> to resolve this discrepancy.</p></blockquote>
 
-<p>I bring my iPad to my talks and use iOS&#8217;s Clock app, set to the Stopwatch tab.</p>
-
-<p><img src="/images/posts/2014-01-23/clock.png" alt="View of iOS's clock app"></p>
-
-<p>This helps me out for a few reasons:</p>
-
-<ul>
-<li>The iPad is big, so the time is easy to see.</li>
-<li>Since the cover of the iPad is a stand, I can prop it somewhere near where I&#8217;m speaking.</li>
-</ul>
+<!-- more -->
 
 
-<p>You can also use the Timer tab, but for some reason I&#8217;ve found that counting up (rather than counting down) is easier for my brain to process. If you go this route, there are two important thing to remember:</p>
+<p>Hiding an element in CSS works, but if you need to hide an element you almost certainly need to show it at some point. For this, NativeScript exposes a <code>visibility</code> <em>attribute</em>, which is just a light wrapper around the CSS property. For instance you could also use the following syntax to hide a button:</p>
 
-<ul>
-<li>Make sure the iPad is charged.</li>
-<li>Set the iPad to never sleep; specifically set Settings &#8211;> General &#8211;> Auto-Lock to &#8220;Never&#8221;. This screen is shown below. This keeps your screen from turning off a few minutes into your talk.</li>
-</ul>
+<pre class="language-markup line-numbers"><code>&lt;Button text="I'm hidden" visibility="collapsed" /&gt;</code></pre>
 
 
-<p><img src="/images/posts/2014-01-23/settings.png" alt="View of iOS's Auto-Lock settings"></p>
+<p>This is handy because having an attribute lets you to use <a href="http://docs.nativescript.org/bindings#using-expressions-for-bindings">data-binding expressions</a> to control the value of the attribute, which is the technique I almost always use to control visibility. To give a concrete example, in the code below I use a flag in my data model, <code>"showDetails"</code>, to determine the visibility of a <code>&lt;Label&gt;</code>.</p>
 
-<p>Obviously there&#8217;s no <em>right</em> way to keep track of time, but I thought I&#8217;d share what has worked for me.</p>
+<pre class="language-markup"><code>&lt;Page loaded="loaded"&gt;
+    &lt;StackLayout&gt;
+        &lt;Button text="{{ showDetails ? 'Hide' : 'Show' }}" tap="toggle" /&gt;
+        &lt;Label text="Lorem ipsum..." visibility="{{ showDetails ? 'visible' : 'collapsed' }}" /&gt;
+    &lt;/StackLayout&gt;
+&lt;/Page&gt;</code></pre>
+
+
+
+
+<pre class="language-javascript"><code>var observable = require("data/observable");
+var pageData = new observable.Observable();
+
+exports.loaded = function(args) {
+    pageData.set("showDetails", true);
+    args.object.bindingContext = pageData;
+}
+
+exports.toggle = function() {
+    pageData.set("showDetails", !pageData.get("showDetails"));
+}</code></pre>
+
+
+<p>The key here is the ternary used as part of the <code>&lt;Label&gt;</code>&#8217;s <code>visibility</code> attribute: <code>{{ showDetails ? 'visible' : 'collapsed' }}</code>. When the data model&#8217;s <code>"showDetails"</code> property is true NativeScript shows the label, and when the property is false NativeScript hides the label.</p>
+
+<p>That&#8217;s all there is to it. If you have any other techniques you use to show/hide elements let me know in the comments. If you have suggestions for a cleaner API feel free to <a href="https://github.com/NativeScript/NativeScript/issues/new">suggest it on GitHub</a>, or better yet, <a href="https://www.nativescript.org/contribute">send a PR</a> :)</p>
 </div>
 
 
@@ -185,12 +190,12 @@
   
 
 
-<time datetime="2014-01-23T09:42:00-05:00" pubdate data-updated="true">Jan 23<span>rd</span>, 2014</time>
+<time datetime="2015-06-05T00:00:00-04:00" pubdate data-updated="true">Jun 5<span>th</span>, 2015</time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/speaking/'>Speaking</a>
+    <a class='category' href='/blog/categories/nativescript/'>NativeScript</a>
   
 </span>
 
@@ -203,7 +208,7 @@
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://tjvantoll.com/2014/01/23/speaking-tip-use-the-ipad-clock-app-as-a-timer/" data-via="tjvantoll" data-counturl="http://tjvantoll.com/2014/01/23/speaking-tip-use-the-ipad-clock-app-as-a-timer/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://tjvantoll.com/2015/06/05/nativescript-showing-and-hiding-elements/" data-via="tjvantoll" data-counturl="http://tjvantoll.com/2015/06/05/nativescript-showing-and-hiding-elements/" >Tweet</a>
   
   
   
@@ -212,10 +217,8 @@
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/2013/12/06/why-is-styling-form-elements-so-damn-hard/" title="Previous Post: Why Is Styling Form Elements So Damn Hard?">&laquo; Why Is Styling Form Elements So Damn Hard?</a>
+        <a class="basic-alignment left" href="/2015/05/22/linting-javascript-in-nativescript-apps/" title="Previous Post: Linting JavaScript in NativeScript Apps">&laquo; Linting JavaScript in NativeScript Apps</a>
       
-      
-        <a class="basic-alignment right" href="/2014/01/27/only-the-gzip-size-matters/" title="Next Post: Only the gzip Size Matters">Only the gzip Size Matters &raquo;</a>
       
     </p>
   </footer>
@@ -296,8 +299,8 @@
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://tjvantoll.com/2014/01/23/speaking-tip-use-the-ipad-clock-app-as-a-timer/';
-        var disqus_url = 'http://tjvantoll.com/2014/01/23/speaking-tip-use-the-ipad-clock-app-as-a-timer/';
+        var disqus_identifier = 'http://tjvantoll.com/2015/06/05/nativescript-showing-and-hiding-elements/';
+        var disqus_url = 'http://tjvantoll.com/2015/06/05/nativescript-showing-and-hiding-elements/';
         var disqus_script = 'embed.js';
       
     (function () {

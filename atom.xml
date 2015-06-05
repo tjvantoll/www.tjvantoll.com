@@ -4,7 +4,7 @@
   <title><![CDATA[TJ VanToll's Blog]]></title>
   <link href="http://tjvantoll.com/atom.xml" rel="self"/>
   <link href="http://tjvantoll.com/"/>
-  <updated>2015-05-26T20:10:50-04:00</updated>
+  <updated>2015-06-05T12:55:17-04:00</updated>
   <id>http://tjvantoll.com/</id>
   <author>
     <name><![CDATA[TJ VanToll]]></name>
@@ -12,6 +12,59 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[NativeScript Quick Tip: Showing and Hiding Elements]]></title>
+    <link href="http://tjvantoll.com/2015/06/05/nativescript-showing-and-hiding-elements/"/>
+    <updated>2015-06-05T00:00:00-04:00</updated>
+    <id>http://tjvantoll.com/2015/06/05/nativescript-showing-and-hiding-elements</id>
+    <content type="html"><![CDATA[<p>NativeScript supports the <code>"collapsed"</code> and <code>"visible"</code> states of the CSS <code>visibility</code> property. This means you can hide an element by setting its <code>"visibility"</code> property to <code>"collapsed"</code> in CSS. For example you can use the following CSS to hide all buttons.</p>
+
+<pre class="language-css"><code>button {
+    visibility: collapsed;
+}</code></pre>
+
+
+<blockquote><p><strong>Warning</strong>: Currently NativeScript is inconsistent with the CSS spec, as the CSS spec defines <code>visibility: collapse</code>, and NativeScript uses <code>visiblity: collapsed</code>. I have <a href="https://github.com/NativeScript/NativeScript/issues/285">an issue open</a> to resolve this discrepancy.</p></blockquote>
+
+<!-- more -->
+
+
+<p>Hiding an element in CSS works, but if you need to hide an element you almost certainly need to show it at some point. For this, NativeScript exposes a <code>visibility</code> <em>attribute</em>, which is just a light wrapper around the CSS property. For instance you could also use the following syntax to hide a button:</p>
+
+<pre class="language-markup line-numbers"><code>&lt;Button text="I'm hidden" visibility="collapsed" /&gt;</code></pre>
+
+
+<p>This is handy because having an attribute lets you to use <a href="http://docs.nativescript.org/bindings#using-expressions-for-bindings">data-binding expressions</a> to control the value of the attribute, which is the technique I almost always use to control visibility. To give a concrete example, in the code below I use a flag in my data model, <code>"showDetails"</code>, to determine the visibility of a <code>&lt;Label&gt;</code>.</p>
+
+<pre class="language-markup"><code>&lt;Page loaded="loaded"&gt;
+    &lt;StackLayout&gt;
+        &lt;Button text="{{ showDetails ? 'Hide' : 'Show' }}" tap="toggle" /&gt;
+        &lt;Label text="Lorem ipsum..." visibility="{{ showDetails ? 'visible' : 'collapsed' }}" /&gt;
+    &lt;/StackLayout&gt;
+&lt;/Page&gt;</code></pre>
+
+
+
+
+<pre class="language-javascript"><code>var observable = require("data/observable");
+var pageData = new observable.Observable();
+
+exports.loaded = function(args) {
+    pageData.set("showDetails", true);
+    args.object.bindingContext = pageData;
+}
+
+exports.toggle = function() {
+    pageData.set("showDetails", !pageData.get("showDetails"));
+}</code></pre>
+
+
+<p>The key here is the ternary used as part of the <code>&lt;Label&gt;</code>&#8217;s <code>visibility</code> attribute: <code>{{ showDetails ? 'visible' : 'collapsed' }}</code>. When the data model&#8217;s <code>"showDetails"</code> property is true NativeScript shows the label, and when the property is false NativeScript hides the label.</p>
+
+<p>That&#8217;s all there is to it. If you have any other techniques you use to show/hide elements let me know in the comments. If you have suggestions for a cleaner API feel free to <a href="https://github.com/NativeScript/NativeScript/issues/new">suggest it on GitHub</a>, or better yet, <a href="https://www.nativescript.org/contribute">send a PR</a> :)</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Linting JavaScript in NativeScript Apps]]></title>
@@ -1959,122 +2012,6 @@ Adding a strikethrough to a line of text in CSS is easy.</p>
 
 
 <p>So yeah, go crazy.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Bugs with document.activeElement in Internet Explorer]]></title>
-    <link href="http://tjvantoll.com/2013/08/30/bugs-with-document-activeelement-in-internet-explorer/"/>
-    <updated>2013-08-30T14:46:00-04:00</updated>
-    <id>http://tjvantoll.com/2013/08/30/bugs-with-document-activeelement-in-internet-explorer</id>
-    <content type="html"><![CDATA[<p>There are two <em>fun</em> bugs related to <code>document.activeElement</code> in IE that have come up recently in jQuery UI. To help save others some pain, I felt these needed to be documented.</p>
-
-<h3>Accessing <code>document.activeElement</code> from an <code>&lt;iframe&gt;</code> in IE9</h3>
-
-<p>Let&#8217;s say you have an <code>&lt;iframe&gt;</code>.</p>
-
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;iframe</span> <span class="na">src=</span><span class="s">&quot;other.html&quot;</span><span class="nt">&gt;&lt;/iframe&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>And in that <code>&lt;iframe&gt;</code>, you want to know what element has focus.</p>
-
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'>/* other.html */
-</span><span class='line'><span class="nt">&lt;script&gt;</span>
-</span><span class='line'>    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span> <span class="nx">parent</span><span class="p">.</span><span class="nb">document</span><span class="p">.</span><span class="nx">activeElement</span> <span class="p">);</span>
-</span><span class='line'><span class="nt">&lt;/script&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>In all browsers except IE9, this will log the element that has focus in the parent document (the <code>&lt;body&gt;</code> by default). In IE9 this will inexplicably throw an <code>"Unspecified Error"</code>.</p>
-
-<p>Yes, you read right; ACCESSING the <code>activeElement</code> property of a parent <code>document</code> throws an error in IE9.</p>
-
-<!--more-->
-
-
-<p>What can you to about it? Since the access causes the error, the only recourse is a try / catch.</p>
-
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="kd">var</span> <span class="nx">activeElement</span><span class="p">;</span>
-</span><span class='line'><span class="k">try</span> <span class="p">{</span>
-</span><span class='line'>    <span class="nx">activeElement</span> <span class="o">=</span> <span class="nx">parent</span><span class="p">.</span><span class="nb">document</span><span class="p">.</span><span class="nx">activeElement</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span> <span class="k">catch</span><span class="p">(</span> <span class="nx">error</span> <span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>    <span class="nx">activeElement</span> <span class="o">=</span> <span class="nx">parent</span><span class="p">.</span><span class="nb">document</span><span class="p">.</span><span class="nx">body</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Luckily this is a problem unique to IE9; the same behavior is not present in IE 7, 8, or 10.</p>
-
-<h3>Blurring the <code>&lt;body&gt;</code> Switches Windows in IE9 and IE10</h3>
-
-<p>If you call <code>document.body.blur()</code> in IE9 or IE10, you will switch application windows. Yes you again read right; if you have IE and Notepad open, calling <code>document.body.blur()</code> will switch focus to Notepad. If you don&#8217;t believe me, open IE9 or IE10 and try for yourself - run <code>document.body.blur()</code> in the console.</p>
-
-<p>Why is this problematic?</p>
-
-<p>Recall from the earlier section that the default <code>activeElement</code> is the <code>&lt;body&gt;</code>. Therefore, if you generically call <code>document.activeElement.blur()</code>, you will likely end up switching application windows for your users.</p>
-
-<p>The workaround for this is to ensure the <code>activeElement</code> is not the <code>&lt;body&gt;</code> before calling <code>blur()</code>.</p>
-
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="k">if</span> <span class="p">(</span> <span class="nb">document</span><span class="p">.</span><span class="nx">activeElement</span><span class="p">.</span><span class="nx">nodeName</span><span class="p">.</span><span class="nx">toLowerCase</span><span class="p">()</span> <span class="o">!==</span> <span class="s2">&quot;body&quot;</span> <span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>    <span class="nb">document</span><span class="p">.</span><span class="nx">activeElement</span><span class="p">.</span><span class="nx">blur</span><span class="p">();</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Luckily this problem has been fixed in IE11; <code>document.body.blur()</code> no longer switches windows.</p>
-
-<h3>Putting it all Together</h3>
-
-<p>This is <a href="https://github.com/jquery/jquery-ui/commit/eae2c4b358af3ebfae258abfe77eeace48fcefcb">the commit</a> I ended up using for the jQuery UI bugs.</p>
-
-<p>From:</p>
-
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">$</span><span class="p">(</span> <span class="nb">document</span><span class="p">.</span><span class="nx">activeElement</span> <span class="p">).</span><span class="nx">blur</span><span class="p">();</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>To:</p>
-
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="c1">// support: IE9</span>
-</span><span class='line'><span class="c1">// IE9 throws an &quot;Unspecified error&quot; accessing document.activeElement from an &lt;iframe&gt;</span>
-</span><span class='line'><span class="k">try</span> <span class="p">{</span>
-</span><span class='line'>    <span class="c1">// Support: IE9+</span>
-</span><span class='line'>    <span class="c1">// If the &lt;body&gt; is blurred, IE will switch windows, see #9520</span>
-</span><span class='line'>    <span class="k">if</span> <span class="p">(</span> <span class="nb">document</span><span class="p">.</span><span class="nx">activeElement</span> <span class="o">&amp;&amp;</span> <span class="nb">document</span><span class="p">.</span><span class="nx">activeElement</span><span class="p">.</span><span class="nx">nodeName</span><span class="p">.</span><span class="nx">toLowerCase</span><span class="p">()</span> <span class="o">!==</span> <span class="s2">&quot;body&quot;</span> <span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>        <span class="c1">// Blur any element that currently has focus, see #4261</span>
-</span><span class='line'>        <span class="nx">$</span><span class="p">(</span> <span class="nb">document</span><span class="p">.</span><span class="nx">activeElement</span> <span class="p">).</span><span class="nx">blur</span><span class="p">();</span>
-</span><span class='line'>    <span class="p">}</span>
-</span><span class='line'><span class="p">}</span> <span class="k">catch</span> <span class="p">(</span> <span class="nx">error</span> <span class="p">)</span> <span class="p">{}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Sigh.</p>
 ]]></content>
   </entry>
   
