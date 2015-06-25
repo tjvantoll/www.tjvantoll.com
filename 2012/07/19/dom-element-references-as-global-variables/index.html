@@ -308,15 +308,11 @@
 <span class='line-number'>10</span>
 <span class='line-number'>11</span>
 <span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
 </pre></td><td class='code'><pre><code class='html'><span class='line'><span class="cp">&lt;!DOCTYPE html&gt;</span>
 </span><span class='line'><span class="nt">&lt;html&gt;</span>
 </span><span class='line'>    <span class="nt">&lt;head&gt;&lt;/head&gt;</span>
 </span><span class='line'>    <span class="nt">&lt;body&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;form&gt;</span>
-</span><span class='line'>            <span class="nt">&lt;input</span> <span class="na">name=</span><span class="s">&quot;foo&quot;</span> <span class="nt">/&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;/form&gt;</span>
+</span><span class='line'>        <span class="nt">&lt;input</span> <span class="na">name=</span><span class="s">&quot;foo&quot;</span> <span class="nt">/&gt;</span>
 </span><span class='line'>        <span class="nt">&lt;script&gt;</span>
 </span><span class='line'>            <span class="c1">//Logs a reference to the &lt;input&gt; in IE.</span>
 </span><span class='line'>            <span class="c1">//ReferenceError in all other rendering engines.</span>
@@ -326,6 +322,8 @@
 </span><span class='line'><span class="nt">&lt;/html&gt;</span>
 </span></code></pre></td></tr></table></div></figure>
 
+
+<blockquote><p><strong>Update</strong>: Microsoft&#8217;s Edge browser no longer exhibits this behavior. Also, this behavior is not present when the <code>&lt;input&gt;</code> resides within a <code>&lt;form&gt;</code> element.</p></blockquote>
 
 <h5>Name Attribute on Anchor Tags</h5>
 
