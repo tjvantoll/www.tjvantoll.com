@@ -138,9 +138,7 @@ IE will (incorrectly) make the `name` attribute of form elements available on th
 <html>
     <head></head>
     <body>
-        <form>
-            <input name="foo" />
-        </form>
+        <input name="foo" />
         <script>
             //Logs a reference to the <input> in IE.
             //ReferenceError in all other rendering engines.
@@ -149,6 +147,8 @@ IE will (incorrectly) make the `name` attribute of form elements available on th
     </body>
 </html>
 ```
+
+> **Update**: Microsoft's Edge browser no longer exhibits this behavior. Also, this behavior is not present when the `<input>` resides within a `<form>` element.
 
 ##### Name Attribute on Anchor Tags
 
