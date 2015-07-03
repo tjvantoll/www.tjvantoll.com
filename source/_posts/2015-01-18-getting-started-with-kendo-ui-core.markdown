@@ -14,9 +14,7 @@ I've been using [Kendo UI Core](https://github.com/telerik/kendo-ui-core) in a b
 
 I start by downloading Kendo UI Core from Bower, as it's my preferred package manager for web apps:
 
-```
-$ bower install kendo-ui-core
-```
+<pre class="language-shell"><code>$ bower install kendo-ui-core</code></pre>
 
 You can alternatively [download Kendo UI Core from GitHub](https://github.com/telerik/kendo-ui-core/archive/master.zip), but Bower is my jam. (Not to be confused with [Jam](http://jamjs.org/), which—believe it or not—is actually the name of a competing JavaScript package manager. Who knew?)
 
@@ -24,25 +22,23 @@ You can alternatively [download Kendo UI Core from GitHub](https://github.com/te
 
 Next I create an index.html and paste in the following boilerplate HTML:
 
-``` html
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <title>My Project</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+<pre class="language-markup line-numbers"><code>&lt;!doctype html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+    &lt;meta charset="utf-8"&gt;
+    &lt;title&gt;My Project&lt;/title&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1"&gt;
 
-    <link rel="stylesheet" href="bower_components/kendo-ui-core/src/styles/web/kendo.common.core.css">
-    <link rel="stylesheet" href="bower_components/kendo-ui-core/src/styles/web/kendo.flat.css">
-</head>
-<body>
+    &lt;link rel="stylesheet" href="bower_components/kendo-ui-core/src/styles/web/kendo.common.core.css"&gt;
+    &lt;link rel="stylesheet" href="bower_components/kendo-ui-core/src/styles/web/kendo.flat.css"&gt;
+&lt;/head&gt;
+&lt;body&gt;
 
-<script src="bower_components/jquery/dist/jquery.js"></script>
-<script src="bower_components/kendo-ui-core/src/js/kendo.ui.core.js"></script>
+&lt;script src="bower_components/jquery/dist/jquery.js"&gt;&lt;/script&gt;
+&lt;script src="bower_components/kendo-ui-core/src/js/kendo.ui.core.js"&gt;&lt;/script&gt;
 
-</body>
-</html>
-```
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
 
 A couple things to note here. First, my HTML follows the [jQuery HTML style guide](http://contribute.jquery.org/style-guide/html/), which yes, actually is a thing.
 
@@ -59,14 +55,11 @@ This markup makes for a decent starting point for demos and quick tests. I even 
 
 I like using AMD and [RequireJS](http://requirejs.org/) to manage my app's dependencies, and luckily Kendo UI Core is intelligently broken into AMD modules. To start with AMD I download RequireJS from Bower:
 
-```
-$ bower install requirejs
-```
+<pre class="language-shell"><code>$ bower install requirejs</code></pre>
 
 Next I create an app.js file to serve as the main JavaScript file for my app. At this point my project's folder structure looks a little something like this:
 
-```
-.
+<pre class="language-shell"><code>.
 ├── bower_components
 │   ├── jquery
 │   │   └── ...
@@ -77,18 +70,15 @@ Next I create an app.js file to serve as the main JavaScript file for my app. At
 ├── index.html
 └── js
     └── app.js
-```
+</code></pre>
 
 With this structure in place I switch my index.html to use a single `<script>` tag:
 
-``` html
-<script src="bower_components/requirejs/require.js" data-main="js/app"></script>
-```
+<pre class="language-markup"><code>&lt;script src="bower_components/requirejs/require.js" data-main="js/app"&gt;&lt;/script&gt;</code></pre>
 
 Then I paste the following code in as a starting point for app.js:
 
-``` javascript
-require.config({
+<pre class="language-javascript line-numbers"><code>require.config({
     paths: {
         "jquery": "/bower_components/jquery/dist/jquery",
         "kendo-ui-core": "/bower_components/kendo-ui-core/src/js"
@@ -98,7 +88,7 @@ require.config({
 require([ "jquery", "kendo-ui-core/kendo.ui.core" ], function( $ ) {
 
 });
-```
+</code></pre>
 
 This gives me an entry point for my app that loads jQuery and Kendo UI Core dynamically. If my app only needs one portion of Kendo UI Core I only specify the modules I need in the `require()` call. For instance if I only want a [MaskedTextBox](http://demos.telerik.com/kendo-ui/maskedtextbox/index) I only require `"jquery"` and `"kendo-ui-core/kendo.maskedtextbox"`—i.e. `require([ "jquery", "kendo-ui-core/kendo.maskedtextbox" ])`.
 

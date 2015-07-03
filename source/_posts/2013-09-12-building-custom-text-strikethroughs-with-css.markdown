@@ -8,12 +8,11 @@ categories: [CSS]
 <link href="/stylesheets/custom/posts/2013-09-12.css" rel="stylesheet">
 Adding a strikethrough to a line of text in CSS is easy.
 
-``` html
-<style>
+<pre class="language-markup"><code>&lt;style&gt;
     p { text-decoration: line-through; }
-</style>
-<p>Hello World</p>
-```
+&lt;/style&gt;
+&lt;p&gt;Hello World&lt;/p&gt;
+</code></pre>
 
 Which displays as follows:
 
@@ -31,8 +30,7 @@ The [CSS text-decoration spec](http://dev.w3.org/csswg/css-text-decor-3) defines
 
 Unfortunately these two properties are only implemented in Firefox and are behind a `-moz-` prefix. Here's how you can use the various `text-decoration-style` values in Firefox:
 
-``` html
-<style>
+<pre class="language-markup line-numbers"><code>&lt;style&gt;
     p {
         text-decoration: line-through;
     }
@@ -56,13 +54,13 @@ Unfortunately these two properties are only implemented in Firefox and are behin
         -moz-text-decoration-color: orange;
         -moz-text-decoration-style: wavy;
     }
-</style>
-<p id="solid">solid</p>
-<p id="double">double</p>
-<p id="dotted">dotted</p>
-<p id="dashed">dashed</p>
-<p id="wavy">wavy</p>
-```
+&lt;/style&gt;
+&lt;p id="solid"&gt;solid&lt;/p&gt;
+&lt;p id="double"&gt;double&lt;/p&gt;
+&lt;p id="dotted"&gt;dotted&lt;/p&gt;
+&lt;p id="dashed"&gt;dashed&lt;/p&gt;
+&lt;p id="wavy"&gt;wavy&lt;/p&gt;
+</code></pre>
 
 Which looks like this (note the *sweet* `wavy` display):
 
@@ -74,8 +72,7 @@ While the spec changes are certainly interesting, you can accomplish much more t
 
 The easiest approach is to draw a line with the [`::before`](https://developer.mozilla.org/en-US/docs/Web/CSS/::before) or [`::after`](https://developer.mozilla.org/en-US/docs/Web/CSS/::after) pseudo-elements and position them on top of the element itself. Here, this is implemented with a CSS class name:
 
-``` css
-.strike {
+<pre class="language-css"><code>.strike {
     position: relative;
     display: inline-block;
 }
@@ -87,7 +84,7 @@ The easiest approach is to draw a line with the [`::before`](https://developer.m
     right: 0;
     top: 50%;
 }
-```
+</code></pre>
 
 This displays as follows:
 
@@ -99,8 +96,7 @@ The one major caveat to this approach is it does not work on text that spans mul
 
 But as long as your text is on one line, you can use this technique and be as crazy as you'd like. Here's an example that utilizes `::before` and `::after` and [CSS transforms](https://developer.mozilla.org/en-US/docs/Web/CSS/transform) to create a cross out effect on the text.
 
-``` css
-.cross {
+<pre class="language-css"><code>.cross {
     position: relative;
     display: inline-block;
 }
@@ -121,7 +117,7 @@ But as long as your text is on one line, you can use this technique and be as cr
     -webkit-transform: skewY(10deg);
     transform: skewY(10deg);
 }
-```
+</code></pre>
 
 Which displays as such.
 

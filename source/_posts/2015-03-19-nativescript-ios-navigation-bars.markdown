@@ -17,14 +17,14 @@ Let's say you have the following simple NativeScript app:
 <pre class="language-markup line-numbers"><code>&lt;!-- main-page.xml --&gt;
 &lt;Page loaded="pageLoaded"&gt;&lt;/Page&gt;</code></pre>
 
-<pre class="language-javascript"><code>// main-page.js
+<pre class="language-javascript line-numbers"><code>// main-page.js
 function pageLoaded(args) {
     var page = args.object;
 }</code></pre>
 
 By default this app does not show a navigation bar, because that's the default iOS behavior as well. Here's how you can alter your JavaScript to show the navigation bar on iOS with a title:
 
-<pre class="language-javascript"><code>// main-page.js
+<pre class="language-javascript line-numbers"><code>// main-page.js
 var frameModule = require("ui/frame");
 
 exports.pageLoaded = function(args) {
@@ -59,7 +59,7 @@ This means that in NativeScript you're not limited to what NativeScript provides
 
 Let's say you want to change your navigation bar's background color. Here's how you make the navigation bar red:
 
-<pre class="language-javascript"><code>// main-page.js
+<pre class="language-javascript line-numbers"><code>// main-page.js
 var frameModule = require("ui/frame");
 
 exports.pageLoaded = function(args) {

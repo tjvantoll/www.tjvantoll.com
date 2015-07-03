@@ -58,7 +58,7 @@ To write a Gulp task that runs JSHint and JSCS you'll need to create a `gulpfile
 
 Paste the following code into your newly created `gulpfile.js`:
 
-<pre class="language-javascript"><code>var gulp = require("gulp");
+<pre class="language-javascript line-numbers"><code>var gulp = require("gulp");
 var jscs = require("gulp-jscs");
 var jshint = require("gulp-jshint");
 

@@ -18,18 +18,18 @@ NativeScript supports the `"collapsed"` and `"visible"` states of the CSS `visib
 
 Hiding an element in CSS works, but if you need to hide an element you almost certainly need to show it at some point. For this, NativeScript exposes a `visibility` *attribute*, which is just a light wrapper around the CSS property. For instance you could also use the following syntax to hide a button:
 
-<pre class="language-markup line-numbers"><code>&lt;Button text="I'm hidden" visibility="collapsed" /&gt;</code></pre>
+<pre class="language-markup"><code>&lt;Button text="I'm hidden" visibility="collapsed" /&gt;</code></pre>
 
 This is handy because having an attribute lets you to use [data-binding expressions](http://docs.nativescript.org/bindings#using-expressions-for-bindings) to control the value of the attribute, which is the technique I almost always use to control visibility. To give a concrete example, in the code below I use a flag in my data model, `"showDetails"`, to determine the visibility of a `<Label>`.
 
-<pre class="language-markup"><code>&lt;Page loaded="loaded"&gt;
+<pre class="language-markup line-numbers"><code>&lt;Page loaded="loaded"&gt;
 	&lt;StackLayout&gt;
 		&lt;Button text="{% raw %}{{ showDetails ? 'Hide' : 'Show' }}{% endraw %}" tap="toggle" /&gt;
 		&lt;Label text="Lorem ipsum..." visibility="{% raw %}{{ showDetails ? 'visible' : 'collapsed' }}{% endraw %}" /&gt;
 	&lt;/StackLayout&gt;
 &lt;/Page&gt;</code></pre>
 
-<pre class="language-javascript"><code>var observable = require("data/observable");
+<pre class="language-javascript line-numbers"><code>var observable = require("data/observable");
 var pageData = new observable.Observable();
 
 exports.loaded = function(args) {

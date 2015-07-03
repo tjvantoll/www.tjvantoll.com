@@ -8,18 +8,16 @@ categories: [JavaScript, jQuery UI, HTML5]
 
 Say you have the following submittable `<form>`:
 
-``` html
-<form id="myForm" action="http://google.com">
-    <label for="search">Search For:</label>
-    <input type="text" id="search" name="q">
-    <button type="submit">Find</button>
-</form>
-```
+<pre class="language-markup"><code>&lt;form id="myForm" action="http://google.com"&gt;
+    &lt;label for="search"&gt;Search For:&lt;/label&gt;
+    &lt;input type="text" id="search" name="q"&gt;
+    &lt;button type="submit"&gt;Find&lt;/button&gt;
+&lt;/form&gt;
+</code></pre>
 
 And you want to show the form in a jQuery UI dialog. You can do that with the code below:
 
-``` javascript Turning a form into a dialog
-$( "form" ).dialog({
+<pre class="language-javascript"><code>$( "form" ).dialog({
     open: function() {
         // On open, hide the original submit button
         $( this ).find( "[type=submit]" ).hide();
@@ -38,7 +36,7 @@ $( "form" ).dialog({
         }
     ]
 });
-```
+</code></pre>
 
 Which looks like this:
 
@@ -62,8 +60,7 @@ There are a few ways we can work around this. One is avoid the [buttons option](
 
 Another solution is to add a `click` handler to the button that submits the form: 
 
-``` js Using a Click Handler to Submit the Form
-var form = $( "form" ).dialog({
+<pre class="language-javascript"><code>var form = $( "form" ).dialog({
     ...
     buttons: [
         {
@@ -75,18 +72,17 @@ var form = $( "form" ).dialog({
         ...
     ]
 });
-```
+</code></pre>
 
 This works, but you lose the browsers [browser's default enter key handling](/2013/01/01/enter-should-submit-forms-stop-messing-with-that/). Therefore it has to be replicated as well:
 
-``` javascript Adding Enter Key Handling
-var form = $( "form" ).dialog({ ... });
+<pre class="language-javascript"><code>var form = $( "form" ).dialog({ ... });
 form.on( "keypress", "input[type=text]", function( event ) {
     if ( event.keyCode == 13 ) {
         form.submit();
     }
 });
-```
+</code></pre>
 
 #### Form Attribute
 
@@ -94,13 +90,12 @@ An elegant solution to this problem is to use HTML5's new [form attribute](https
 
 For example here's the example `<form>` with a sibling (rather than child) submit button:
 
-``` html
-<form id="myForm" action="http://google.com">
-    <label for="search">Search For:</label>
-    <input type="text" id="search" name="q">
-</form>
-<button type="submit" form="myForm">Find</button>
-```
+<pre class="language-markup"><code>&lt;form id="myForm" action="http://google.com"&gt;
+    &lt;label for="search"&gt;Search For:&lt;/label&gt;
+    &lt;input type="text" id="search" name="q"&gt;
+&lt;/form&gt;
+&lt;button type="submit" form="myForm"&gt;Find&lt;/button&gt;
+</code></pre>
 
 The `<button>` is outside of the `<form>`, but because its `form` attribute is equal to the `<form>`'s `id`, the `<button>` will submit the `<form>` regardless.
 
@@ -108,13 +103,12 @@ The `<button>` is outside of the `<form>`, but because its `form` attribute is e
 
 To add this attribute to the dialog version, we'll pass `form: "myForm"` into the `buttons` option for the Find button:
 
-``` html Turning a form into a dialog
-<form id="myForm" action="http://google.com">
-    <label for="search">Search For:</label>
-    <input type="text" id="search" name="q">
-    <button type="submit">Find</button>
-</form>
-<script>
+<pre class="language-markup line-numbers"><code>&lt;form id="myForm" action="http://google.com"&gt;
+    &lt;label for="search"&gt;Search For:&lt;/label&gt;
+    &lt;input type="text" id="search" name="q"&gt;
+    &lt;button type="submit"&gt;Find&lt;/button&gt;
+&lt;/form&gt;
+&lt;script&gt;
     $( "form" ).dialog({
         open: function() {
             // On open, hide the original submit button
@@ -125,7 +119,7 @@ To add this attribute to the dialog version, we'll pass `form: "myForm"` into th
                 text: "Find",
                 click: $.noop,
                 type: "submit",
-                form: "myForm" // <-- Make the association
+                form: "myForm" // &lt;-- Make the association
             },
             {
                 text: "Close",
@@ -135,8 +129,7 @@ To add this attribute to the dialog version, we'll pass `form: "myForm"` into th
             }
         ]
     });
-</script>
-```
+&lt;/script&gt;</code></pre>
 
 [Live Example](/demos/2013-07-10/form.html)
 
@@ -146,10 +139,9 @@ The `form` attribute is implemented in Firefox, Chrome, Safari 5.1+, and Opera, 
 
 Because the form attribute is so handy here, I wrote a polyfill that adds support in browsers that don't support it natively: [https://gist.github.com/tjvantoll/5911571](https://gist.github.com/tjvantoll/5911571). The source is below:
 
-``` javascript
-/**
+<pre class="language-javascript line-numbers"><code>/**
  * The form attribute can be used to associate a submit button with a form, even
- * if the button is not a child of the <form> itself.
+ * if the button is not a child of the &lt;form&gt; itself.
  * 
  * This polyfill uses a support check taken from Modernizr and polyfills the
  * functionality using jQuery.
@@ -202,8 +194,8 @@ Because the form attribute is so handy here, I wrote a polyfill that adds suppor
                 }
             });
     }
-}());
-```
+}());</code></pre>
+
 
 This can be included anywhere on the page after jQuery is included.
 

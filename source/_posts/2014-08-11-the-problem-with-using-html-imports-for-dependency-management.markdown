@@ -8,11 +8,10 @@ categories: [Web Components]
 
 HTML imports are cool. If you haven't heard of them before, you should read [Eric Bidelman's excellent introduction to them](http://www.html5rocks.com/en/tutorials/webcomponents/imports/), but they're pretty self explanatory with a bit of code. For example the following is how a jQuery UI dialog works in [my proof-of-concept web components port](https://github.com/tjvantoll/ui-web-components):
 
-``` html
-<link rel="import" href="ui-dialog.html">
+<pre class="language-markup"><code>&lt;link rel="import" href="ui-dialog.html"&gt;
 
-<ui-dialog title="Hello World"></ui-dialog>
-```
+&lt;ui-dialog title="Hello World"&gt;&lt;/ui-dialog&gt;
+</code></pre>
 
 The cool thing here is not what you see—a `<link>` tag that imports a custom element—but rather, what you don't. Normally when using jQuery UI widgets, you have to worry about a number of JavaScript and CSS dependencies, such as jQuery Core, the widget factory, a CSS theme, and more. With HTML imports you don't, as the import takes care of bundling everything you need.
 
@@ -24,9 +23,8 @@ HTML imports transfer the dependency management burden from component consumers 
 
 Suppose you want to write a component that depends on jQuery. How might you do that? Well, the easiest way is to package jquery.js within your web component, and to reference it in your HTML import with a simple `<script>` tag:
 
-``` html
-<script src="jquery.js"></script>
-```
+<pre class="language-markup"><code>&lt;script src="jquery.js"&gt;&lt;/script&gt;
+</code></pre>
 
 This works, and is simple, but it has a serious repercussion: jquery.js is bundled with your component. That means, with this approach, if a user imports five jQuery-dependent components, the browser will download jQuery five times. And because reducing HTTP requests is a vital web performance optimization, this is [kind of a big deal](https://www.youtube.com/watch?v=H8OxKx6zKkQ).
 
@@ -54,9 +52,8 @@ Assuming that you don't package Moment.js as part of your component, and we've a
 
 You could refer to Moment.js on some CDN, for instance the following `<script>` tag imports Moment.js from [cdnjs](http://cdnjs.com/):
 
-```
-<script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.7.0/moment.min.js"></script>
-```
+<pre class="language-markup"><code>&lt;script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.7.0/moment.min.js"&gt;&lt;/script&gt;
+</code></pre>
 
 This approach works, but it has some major disadvantages. For one, the CDN approach only prevents multiple downloads of Moment.js if everyone magically chooses to retrieve Moment.js from the exact same URL—same CDN provider, same protocol, same version, and so forth. Second, the CDN reference also prevents the usage of script concatenation tooling, which is an essential performance optimization, especially for mobile. Because of this, I don't see CDNs as a viable option for managing external dependencies.
 
@@ -64,13 +61,12 @@ This approach works, but it has some major disadvantages. For one, the CDN appro
 
 The next option you have is enforcing a specific directory structure on the consumer of your component. For instance, you could enforce that users have a folder structure that looks like this:
 
-```
-.
+<pre class="language-shell"><code>.
 ├── momentjs
 │   └── moment.js
 └── formatted-time
     └── formatted-time.html
-```
+</code></pre>
 
 With this structure in place, your formatted-time.html file can reference moment.js using `<link rel="import" href="../momentjs/moment.js">`. This is the strategy Polymer itself uses, as all Polymer core elements include an import of `<link rel="import" href="../polymer/polymer.html">` to get the dependencies they need.
 
@@ -84,8 +80,7 @@ Worse, even agreeing on a directory structure isn't enough, as the exact file pa
 
 The next option is feature detection, or determining whether your dependency has already been loaded, and if not, loading it yourself. For example, with the `<formatted-time>` element you could use the following code to load conditionally load Moment.js:
 
-``` javascript
-<script>
+<pre class="language-markup line-numbers"><code>&lt;script&gt;
 	(function() {
 		var script;
 		if ( typeof window.moment === "undefined" ) {
@@ -94,8 +89,7 @@ The next option is feature detection, or determining whether your dependency has
 			document.body.appendChild( script );
 		}
 	}());
-</script>
-```
+&lt;/script&gt;</code></pre>
 
 > **Update August 13th, 2014**—As is, this code is not enough to prevent loading Moment.js multiple times, as two modules could request the script before it has been asynchronously fetched and parsed. To avoid multiple requests correctly you'd need to [additionally add some boolean logic](#comment-1540666406). Thanks [@webreflection](https://twitter.com/webreflection)!
 

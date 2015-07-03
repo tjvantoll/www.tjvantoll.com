@@ -10,9 +10,8 @@ One of the major, and [not well-received](http://www.mobilexweb.com/blog/safari-
 
 I wanted to quickly show the effect this property has. Adding it is as easy as appending `minimal-ui` to the `content` attribute of your site's `<meta>` tag.
 
-``` html
-<meta name="viewport" content="width=device-width, initial-scale=1, minimal-ui">
-```
+<pre class="language-markup"><code>&lt;meta name="viewport" content="width=device-width, initial-scale=1, minimal-ui"&gt;
+</code></pre>
 
 The two images below show a before and after of applying the property to a test page.
 

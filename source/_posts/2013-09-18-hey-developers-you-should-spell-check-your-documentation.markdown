@@ -24,13 +24,12 @@ Like most editors, Sublime Text has spell checking built in, but it is turned of
 
 Because spell checking is a configurable property, turning it on and off is a matter of toggling the property's value:
 
-``` js
-/* Writing docs */
+<pre class="language-javascript"><code>/* Writing docs */
 "spell_check": true
 
 /* Writing code */
 "spell_check": false
-```
+</code></pre>
 
 Like most spell checkers, you can right click misspelled words to get suggested fixes:
 

@@ -10,10 +10,9 @@ I had some issues updating iOS and Android version numbers yesterday so I though
 
 Doing so turns out to be as simple as running two commands:
 
-```
-$ appbuilder prop set BundleVersion 1.0.1
+<pre class="language-shell"><code>$ appbuilder prop set BundleVersion 1.0.1
 $ appbuilder prop set AndroidVersionCode 2
-```
+</code></pre>
 
 <!-- more -->
 

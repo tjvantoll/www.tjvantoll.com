@@ -20,13 +20,12 @@ Giving browsers control over the display of form controls has had an enormous im
 
 To start our discussion, consider this simple `<select>` element.
 
-``` html
-<select>
-    <option>One</option>
-    <option>Two</option>
-    <option>Three</option>
-</select>
-```
+<pre class="language-markup"><code>&lt;select&gt;
+    &lt;option&gt;One&lt;/option&gt;
+    &lt;option&gt;Two&lt;/option&gt;
+    &lt;option&gt;Three&lt;/option&gt;
+&lt;/select&gt;
+</code></pre>
 
 Here's a sampling of a few different renderings. The two on the left are Chrome and Firefox for OS X, the two on the right are IE and Chrome for Windows.
 
@@ -54,17 +53,16 @@ There are a number of ideas being thrown out there, so I thought I'd summarize a
 
 A number of browsers now offer styling hooks through vendor prefixed pseudo elements. (I created a [full list](/2013/12/06/why-is-styling-form-elements-so-damn-hard/) if you'd like to peruse them). For instance `::-ms-check` lets you play with the look of checkboxes and radio buttons in IE.
 
-``` html
-<style>
+<pre class="language-markup"><code>&lt;style&gt;
     ::-ms-check {
         color: red;
         background: black;
         padding: 1em;
     }
-</style>
-<input type="checkbox">
-<input type="radio">
-```
+&lt;/style&gt;
+&lt;input type="checkbox"&gt;
+&lt;input type="radio"&gt;
+</code></pre>
 
 Which renders as follows.
 
@@ -90,17 +88,16 @@ The [shadow DOM](http://www.w3.org/TR/shadow-dom/) specification has made anothe
 
 And as of Chrome 31, this is now something you can actually do. The following example creates a native `<input type="date">`, gives it a new shadow root to use, and implements the calendar using [jQuery UI's datepicker](http://jqueryui.com/datepicker/).
 
-``` html
-<style>
+<pre class="language-markup line-numbers"><code>&lt;style&gt;
     input {
         height: 2em;
         width: 15em;
     }
-</style>
+&lt;/style&gt;
 
-<input type="date">
+&lt;input type="date"&gt;
 
-<script>
+&lt;script&gt;
     var dateRoot = document.querySelector( "input" )
         .webkitCreateShadowRoot();
 
@@ -110,12 +107,11 @@ And as of Chrome 31, this is now something you can actually do. The following ex
             dateRoot.innerHTML = dateText;
         }
     });
-</script>
-```
+&lt;/script&gt;</code></pre>
 
 And here's the example live, although you need Chrome 31+ for it to actually work.
 
-<iframe width="100%" height="300" src="http://jsfiddle.net/tj_vantoll/6qadQ/embedded/result,html,js,css" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
+<iframe width="100%" height="300" src="http://jsfiddle.net/tj_vantoll/9v44L201/embedded/result,html,js,css" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
 
 You may notice that there is one big issue with this example. While we do get a custom datepicker, we lose the `<input>` behavior, including the ability to type in a value.
 

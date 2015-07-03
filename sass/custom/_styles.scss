@@ -7,20 +7,6 @@ $custom_header_color: #333;
 @import "custom/partials/helpers";
 @import "custom/partials/prism";
 
-// Tweaks to Prism
-pre[class*="language-"] {
-	position: static;
-	font-size: 0.9em;
-	margin-bottom: 1.6em;
-
-	pre[class*=language-]>code[data-language]::before {
-		content: "";
-	}
-}
-.token.lf::before {
-	content: "";
-}
-
 body > header {
 	@extend .striped_bg;
 
@@ -244,37 +230,37 @@ address {
 /*********************** Code ************************/
 /*****************************************************/
 
-h3 code { font-size: 0.9em; }
-figure.code figcaption.empty {
-	border: none;
+p code, ul code, ol code {
+	display: inline-block;
+	font-size: 0.8em;
+	background: white;
+	line-height: 1.5em;
+	color: #555;
+	border: 1px solid #ddd;
+	border-radius: 0.4em;
+	padding: 0 .3em;
+	margin: -1px 0;
 }
-.empty + .highlight {
-	border-radius: 5px;
-}
-.not_empty + .highlight {
-	border-radius: 0 0 5px 5px;
-}
-.highlight {
-	border: none !important;
-	table {
-		margin-bottom: 0;
-	}
-	.gutter, .code {
-		border: 0;
-		background-color: $custom_header_color !important;
 
-		.line-numbers {
-			background-color: $custom_header_color !important;
-			text-shadow: none;
-		}
-		code {
-			background-color: $custom_header_color !important;
-		}
+h3 code { font-size: 0.9em; }
+
+// Tweaks to Prism
+pre[class*="language-"] {
+	position: static;
+	font-size: 0.9em;
+	margin-bottom: 1.6em;
+	border: 1px solid #E7DEC3;
+	border-radius: 0.4em;
+	box-shadow: rgba(0,0,0,0.06) 0 0 10px;
+
+	pre[class*=language-]>code[data-language]::before {
+		content: "";
 	}
 }
-pre {
-	background-color: $custom_header_color;
+.token.lf::before {
+	content: "";
 }
+
 
 /*****************************************************/
 /************************ Posts **********************/

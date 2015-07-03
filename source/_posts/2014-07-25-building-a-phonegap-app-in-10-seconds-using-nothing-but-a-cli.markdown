@@ -25,11 +25,10 @@ You see, although I work with AppBuilder in the browser from time to time, I pre
 
 With the AppBuilder CLI installed (`npm install -g appbuilder`), and with the [AppBuilder iOS app](https://itunes.apple.com/us/app/telerik-appbuilder/id527547398?mt=8) installed, you can run this yourself with the following four commands:
 
-```
-$ appbuilder create hybrid gif --template=Blank
+<pre class="language-shell"><code>$ appbuilder create hybrid gif --template=Blank
 $ cd gif
 $ sed -i '' 's/Apache Cordova/gif/g' index.html
 $ appbuilder livesync ios --companion
-```
+</code></pre>
 
 What's really cool is that as of [the last AppBuilder release](http://blogs.telerik.com/appbuilder/posts/14-07-02/telerik-appbuilder-release-sharing-projects-cordova-update-nativescript-preview-and-more), you can now share your code across the AppBuilder clients. That means, I can collborate on Burke's project from the CLI, and he can collaborate on mine from the browser—which I think is pretty cool.

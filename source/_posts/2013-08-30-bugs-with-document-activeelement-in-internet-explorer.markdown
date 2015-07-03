@@ -12,18 +12,16 @@ There are two *fun* bugs related to `document.activeElement` in IE that have com
 
 Let's say you have an `<iframe>`.
 
-``` html
-<iframe src="other.html"></iframe>
-```
+<pre class="language-markup"><code>&lt;iframe src="other.html"&gt;&lt;/iframe&gt;
+</code></pre>
 
 And in that `<iframe>`, you want to know what element has focus.
 
-``` html
-/* other.html */
-<script>
+<pre class="language-markup"><code>/* other.html */
+&lt;script&gt;
     console.log( parent.document.activeElement );
-</script>
-```
+&lt;/script&gt;
+</code></pre>
 
 In all browsers except IE9, this will log the element that has focus in the parent document (the `<body>` by default). In IE9 this will inexplicably throw an `"Unspecified Error"`.
 
@@ -33,14 +31,13 @@ Yes, you read right; ACCESSING the `activeElement` property of a parent `documen
 
 What can you to about it? Since the access causes the error, the only recourse is a try / catch.
 
-``` javascript
-var activeElement;
+<pre class="language-javascript"><code>var activeElement;
 try {
     activeElement = parent.document.activeElement;
 } catch( error ) {
     activeElement = parent.document.body;
 }
-```
+</code></pre>
 
 Luckily this is a problem unique to IE9; the same behavior is not present in IE 7, 8, or 10.
 
@@ -54,11 +51,10 @@ Recall from the earlier section that the default `activeElement` is the `<body>`
 
 The workaround for this is to ensure the `activeElement` is not the `<body>` before calling `blur()`.
 
-``` javascript
-if ( document.activeElement.nodeName.toLowerCase() !== "body" ) {
+<pre class="language-javascript"><code>if ( document.activeElement.nodeName.toLowerCase() !== "body" ) {
     document.activeElement.blur();
 }
-```
+</code></pre>
 
 Luckily this problem has been fixed in IE11; `document.body.blur()` no longer switches windows.
 
@@ -67,22 +63,22 @@ Luckily this problem has been fixed in IE11; `document.body.blur()` no longer sw
 This is [the commit](https://github.com/jquery/jquery-ui/commit/eae2c4b358af3ebfae258abfe77eeace48fcefcb) I ended up using for the jQuery UI bugs.
 
 From:
-``` javascript
-$( document.activeElement ).blur();
-```
+
+<pre class="language-javascript"><code>$( document.activeElement ).blur();
+</code></pre>
 
 To:
-``` javascript
-// support: IE9
-// IE9 throws an "Unspecified error" accessing document.activeElement from an <iframe>
+
+<pre class="language-javascript"><code>// support: IE9
+// IE9 throws an "Unspecified error" accessing document.activeElement from an &lt;iframe&gt;
 try {
     // Support: IE9+
-    // If the <body> is blurred, IE will switch windows, see #9520
+    // If the &lt;body&gt; is blurred, IE will switch windows, see #9520
     if ( document.activeElement && document.activeElement.nodeName.toLowerCase() !== "body" ) {
         // Blur any element that currently has focus, see #4261
         $( document.activeElement ).blur();
     }
 } catch ( error ) {}
-```
+</code></pre>
 
 Sigh.
