@@ -16,19 +16,17 @@ As there have been [numerous bug submissions](http://bugs.jqueryui.com/ticket/78
 
 Consider the following example:
 
-``` html
-<base href="http://foo.com">
-<a href="bar.html">Bar</a>
-```
+<pre class="language-markup"><code>&lt;base href="http://foo.com"&gt;
+&lt;a href="bar.html"&gt;Bar&lt;/a&gt;
+</code></pre>
 
 Let's assume this HTML appears on this domain (`http://tjvantoll.com`).  When the link is clicked on, the browser will navigate to `http://foo.com/bar.html` rather than `http://tjvantoll.com/bar.html`.
 
 It's important to note that hash links are also relative to the specified base.  Therefore on the following:
 
-``` html
-<base href="http://foo.com">
-<a href="#bar">Bar</a>
-```
+<pre class="language-markup"><code>&lt;base href="http://foo.com"&gt;
+&lt;a href="#bar"&gt;Bar&lt;/a&gt;
+</code></pre>
 
 When the link is click on, the browser will navigate to `http://foo.com#bar` and NOT `http://tjvantoll.com#bar`.  This detail is important; it's the root cause of confusion when using a `<base>` tag with the tabs widget.
 
@@ -36,18 +34,17 @@ When the link is click on, the browser will navigate to `http://foo.com#bar` and
 
 Here is the intended HTML structure to be used by the tabs widget:
 
-``` html
-<div id="tabs">
-    <ul>
-        <li><a href="#tab-1">One</a></li>
-        <li><a href="#tab-2">Two</a></li>
-    </ul>
-    <div id="tab-1">Contents of tab one.</div>
-    <div id="tab-2">Contents of tab two.</div>
-</div>
+<pre class="language-markup"><code>&lt;div id="tabs"&gt;
+    &lt;ul&gt;
+        &lt;li&gt;&lt;a href="#tab-1"&gt;One&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href="#tab-2"&gt;Two&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+    &lt;div id="tab-1"&gt;Contents of tab one.&lt;/div&gt;
+    &lt;div id="tab-2"&gt;Contents of tab two.&lt;/div&gt;
+&lt;/div&gt;
 
-<script>$( "#tabs" ).tabs();</script>
-```
+&lt;script&gt;$( "#tabs" ).tabs();&lt;/script&gt;
+</code></pre>
 
 Which produces the following:
 
@@ -55,17 +52,16 @@ Which produces the following:
 
 In this example both links begin with a hash (`#`), indicating that their content is located on the current page.  If that is not the case, the tabs widget will retrieve the tab's contents server side via an XHR call.  Consider the following:
 
-``` html
-<div id="tabs">
-    <ul>
-        <li><a href="#local">Local</a></li>
-        <li><a href="external">External</a></li>
-    </ul>
-    <div id="local">Contents of the local tab.</div>
-</div>
+<pre class="language-markup"><code>&lt;div id="tabs"&gt;
+    &lt;ul&gt;
+        &lt;li&gt;&lt;a href="#local"&gt;Local&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href="external"&gt;External&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+    &lt;div id="local"&gt;Contents of the local tab.&lt;/div&gt;
+&lt;/div&gt;
 
-<script>$( "#tabs" ).tabs();</script>
-```
+&lt;script&gt;$( "#tabs" ).tabs();&lt;/script&gt;
+</code></pre>
 
 Here the local link will work as in the previous example - when it is clicked on, the tabs widget will simply display the contents of the `#local` container.
 
@@ -77,20 +73,19 @@ The markup pattern used here is no accident.  Consider a user that views this HT
 
 Given the descriptions above, the behavior of the `<base>` tag with the tabs widget shouldn't be surprising.  Here's the first example given for the tabs widget again.  This time, a `<base>` tag to `http://foo.com` has been added:
 
-``` html
-<base href="http://foo.com">
+<pre class="language-markup"><code>&lt;base href="http://foo.com"&gt;
 
-<div id="tabs">
-    <ul>
-        <li><a href="#tab-1">One</a></li>
-        <li><a href="#tab-2">Two</a></li>
-    </ul>
-    <div id="tab-1">Contents of tab one.</div>
-    <div id="tab-2">Contents of tab two.</div>
-</div>
+&lt;div id="tabs"&gt;
+    &lt;ul&gt;
+        &lt;li&gt;&lt;a href="#tab-1"&gt;One&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href="#tab-2"&gt;Two&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+    &lt;div id="tab-1"&gt;Contents of tab one.&lt;/div&gt;
+    &lt;div id="tab-2"&gt;Contents of tab two.&lt;/div&gt;
+&lt;/div&gt;
 
-<script>$( "#tabs" ).tabs();</script>
-```
+&lt;script&gt;$( "#tabs" ).tabs();&lt;/script&gt;
+</code></pre>
 
 Let's again assume this HTML is located on `http://tjvantoll.com`.  Because of the `<base>` tag, the links used in the tabs widget are actually external links to `http://foo.com`.  Therefore, upon instantiation, the tabs widget will attempt to load the contents of the first tab from `http://foo.com`.
 
@@ -104,20 +99,19 @@ From the numerous bug reports, it seems that a lot of people have applications w
 
 2) **Provide full URLs on links used to build the tabs widget.**  If approach #1 isn't feasible, you can also provide a fully qualified URL in the links used to build the tabs widget.  Here's the earlier example modified to show this approach:
 
-``` html
-<base href="http://foo.com">
+<pre class="language-markup"><code>&lt;base href="http://foo.com"&gt;
 
-<div id="tabs">
-    <ul>
-        <li><a href="http://tjvantoll.com#tab-1">One</a></li>
-        <li><a href="http://tjvantoll.com#tab-2">Two</a></li>
-    </ul>
-    <div id="tab-1">Contents of tab one.</div>
-    <div id="tab-2">Contents of tab two.</div>
-</div>
+&lt;div id="tabs"&gt;
+    &lt;ul&gt;
+        &lt;li&gt;&lt;a href="http://tjvantoll.com#tab-1"&gt;One&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href="http://tjvantoll.com#tab-2"&gt;Two&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+    &lt;div id="tab-1"&gt;Contents of tab one.&lt;/div&gt;
+    &lt;div id="tab-2"&gt;Contents of tab two.&lt;/div&gt;
+&lt;/div&gt;
 
-<script>$( "#tabs" ).tabs();</script>
-```
+&lt;script&gt;$( "#tabs" ).tabs();&lt;/script&gt;
+</code></pre>
 
 Since the links in the tabs are now fully qualified paths to the current page, the tabs widget will not perform a request to retrieve external content.
 
@@ -135,12 +129,11 @@ This is the same approach as #2, but the appropriate links are changed in JavaSc
 
 The hack is shown below, simply call the `makeTabs` function with the selector used to create the tabs widget:
 
-``` javascript
-var makeTabs = function(selector) {
+<pre class="language-javascript"><code>var makeTabs = function(selector) {
     $( selector )
         .find( "ul a" ).each( function() {
             var href = $( this ).attr( "href" ),
-                newHref = window.location.protocol + '//' + window.location.hostname + 
+                newHref = window.location.protocol + "//" + window.location.hostname + 
                     window.location.pathname + href;
 
             if ( href.indexOf( "#" ) == 0 ) {
@@ -151,7 +144,7 @@ var makeTabs = function(selector) {
 };
 
 makeTabs( "#tabs" );
-```
+</code></pre>
 
 As noted by the warning box, you should really fix this the right way.  But desperate times call for desperate measures.  You've been warned.
 

@@ -55,17 +55,16 @@ See <a href="#button_element">&lt;button&gt;</a>
 
 Trident provides the `::-ms-check` pseudo-element for checkbox and radio button controls.  For example:
 
-``` html
-<input type="checkbox">
-<input type="radio">
-```
-``` css
-::-ms-check {
+<pre class="language-markup"><code>&lt;input type="checkbox"&gt;
+&lt;input type="radio"&gt;
+</code></pre>
+
+<pre class="language-css"><code>::-ms-check {
     color: red;
     background: black;
     padding: 1em;
 }
-```
+</code></pre>
 
 This displays as follows in IE10 on Windows 8:
 
@@ -77,13 +76,12 @@ This displays as follows in IE10 on Windows 8:
 
 Webkit provides 2 pseudo elements for its color picker, `::-webkit-color-swatch-wrapper` and `::-webkit-color-swatch`.  You can apply a variety of rules to these elements but I haven't come up with anything useful.  Here's an example just to show it's possible:
 
-``` html
-<input type="color">
-```
-``` css
-::-webkit-color-swatch-wrapper { border: 2px solid red; }
+<pre class="language-markup"><code>&lt;input type="color"&gt;
+</code></pre>
+
+<pre class="language-css"><code>::-webkit-color-swatch-wrapper { border: 2px solid red; }
 ::-webkit-color-swatch { opacity: 0.5; }
-```
+</code></pre>
 
 This displays as follows in Chrome 26 on OS X:
 
@@ -110,11 +108,10 @@ Here is the internal structure of these elements:
 
 So if you thought the date input could use more spacing and a ridiculous color scheme you could add the following:
 
-``` html
-<input type="date">
-```
-``` css
-::-webkit-datetime-edit { padding: 1em; }
+<pre class="language-markup"><code>&lt;input type="date"&gt;
+</code></pre>
+
+<pre class="language-css"><code>::-webkit-datetime-edit { padding: 1em; }
 ::-webkit-datetime-edit-fields-wrapper { background: silver; }
 ::-webkit-datetime-edit-text { color: red; padding: 0 0.3em; }
 ::-webkit-datetime-edit-month-field { color: blue; }
@@ -122,7 +119,7 @@ So if you thought the date input could use more spacing and a ridiculous color s
 ::-webkit-datetime-edit-year-field { color: purple; }
 ::-webkit-inner-spin-button { display: none; }
 ::-webkit-calendar-picker-indicator { background: orange; }
-```
+</code></pre>
 
 This displays as follows in Chrome 26 on OS X:
 
@@ -136,16 +133,15 @@ All rendering engines automatically generate a button when an `<input type="file
 
 As of IE10 the file input button can be styled using the `::-ms-browse` pseudo-element.  Basically any CSS rules that you apply a regular button can be applied to the pseudo-element.  For example:
 
-``` html
-<input type="file">
-```
-``` css
-::-ms-browse {
+<pre class="language-markup"><code>&lt;input type="file"&gt;
+</code></pre>
+
+<pre class="language-css"><code>::-ms-browse {
     background: black;
     color: red;
     padding: 1em;
 }
-```
+</code></pre>
 
 This displays as follows in IE10 on Windows 8:
 
@@ -155,16 +151,15 @@ This displays as follows in IE10 on Windows 8:
 
 WebKit provides a hook for its file input button with the `::-webkit-file-upload-button` pseudo-element.  Again pretty much any CSS rule can be applied, therefore the Trident example will work here as well:
 
-``` html
-<input type="file">
-```
-``` css
-::-webkit-file-upload-button {
+<pre class="language-markup"><code>&lt;input type="file"&gt;
+</code></pre>
+
+<pre class="language-css"><code>::-webkit-file-upload-button {
     background: black;
     color: red;
     padding: 1em;
 }
-```
+</code></pre>
 
 This displays as follows in Chrome 26 on OS X:
 
@@ -176,18 +171,17 @@ This displays as follows in Chrome 26 on OS X:
 
 WebKit provides a spinner control by default for number picker inputs.  Pseudo-elements `::-webkit-textfield-decoration-container`, `::-webkit-inner-spin-button` and `::-webkit-outer-spin-button` are provided for customization.  While you cannot do a whole lot with these elements, it can be useful to hide the spinner.
 
-``` html
-<input type="number">
-```
-``` css
-::-webkit-textfield-decoration-container { }
+<pre class="language-markup"><code>&lt;input type="number"&gt;
+</code></pre>
+
+<pre class="language-css"><code>::-webkit-textfield-decoration-container { }
 ::-webkit-inner-spin-button {
     -webkit-appearance: none;
 }
 ::-webkit-outer-spin-button {
     -webkit-appearance: none;
 }
-```
+</code></pre>
 
 This displays as follows in Chrome 26 on OS X:
 
@@ -199,12 +193,11 @@ This displays as follows in Chrome 26 on OS X:
 
 Trident provides a control on password inputs that can be pressed to display the password in plain text.  This control is made customizable via the `::-ms-reveal` pseudo-element.  You can change a number of properties of the control including its `color`, `background`, or `display` to hide it.  The following will hide the control:
 
-``` html
-<input type="password">
-```
-``` css
-::-ms-reveal { display: none; }
-```
+<pre class="language-markup"><code>&lt;input type="password"&gt;
+</code></pre>
+
+<pre class="language-css"><code>::-ms-reveal { display: none; }
+</code></pre>
 
 This displays as follows in IE10 on Windows 8:
 
@@ -216,15 +209,14 @@ This displays as follows in IE10 on Windows 8:
 
 Gecko provides the pseduo-element `::-moz-placeholder` to style placeholder text.  You can use this to change the placeholder's color or font properties.  For example:
 
-``` html
-<input placeholder="placeholder">
-```
-``` css
-::-moz-placeholder {
+<pre class="language-markup"><code>&lt;input placeholder="placeholder"&gt;
+</code></pre>
+
+<pre class="language-css"><code>::-moz-placeholder {
     color: blue;
     font-family: 'Comic Sans MS';
 }
-```
+</code></pre>
 
 This displays as follows in Firefox 20 on OS X:
 
@@ -236,15 +228,14 @@ This displays as follows in Firefox 20 on OS X:
 
 Trident offers the ability to style the placeholder text with a pseudo-class rather than a pseudo-element.  However the pseudo-class, `:-ms-input-placeholder`, can be used the same as the pseudo-elements from the other rendering engines:
 
-``` html
-<input placeholder="placeholder">
-```
-``` css
-:-ms-input-placeholder {
+<pre class="language-markup"><code>&lt;input placeholder="placeholder"&gt;
+</code></pre>
+
+<pre class="language-css"><code>:-ms-input-placeholder {
     color: blue;
     font-family: 'Comic Sans MS';
 }
-```
+</code></pre>
 
 This displays as follows in IE10 on Windows 8:
 
@@ -254,15 +245,14 @@ This displays as follows in IE10 on Windows 8:
 
 WebKit provides the `::-webkit-input-placeholder` pseudo-element.  It can also be used to change the color and font of the placeholder text:
 
-``` html
-<input placeholder="placeholder">
-```
-``` css
-::-webkit-input-placeholder {
+<pre class="language-markup"><code>&lt;input placeholder="placeholder"&gt;
+</code></pre>
+
+<pre class="language-css"><code>::-webkit-input-placeholder {
     color: blue;
     font-family: 'Comic Sans MS';
 }
-```
+</code></pre>
 
 This displays as follows in Chrome 26 on OS X:
 
@@ -274,11 +264,10 @@ This displays as follows in Chrome 26 on OS X:
 
 As of Firefox 22, Gecko provides pseudo-elements `::-moz-range-track` and `::-moz-range-thumb` for styling range inputs.  It's possible to apply most CSS rules to these elements, for example:
 
-``` html
-<input type="range">
-```
-``` css
-::-moz-range-track {
+<pre class="language-markup"><code>&lt;input type="range"&gt;
+</code></pre>
+
+<pre class="language-css"><code>::-moz-range-track {
     border: 2px solid red;
     height: 20px;
     background: orange;
@@ -287,7 +276,7 @@ As of Firefox 22, Gecko provides pseudo-elements `::-moz-range-track` and `::-mo
     background: blue;
     height: 30px;
 }
-```
+</code></pre>
 
 This displays as follows in Firefox 22 on OS X:
 
@@ -307,18 +296,17 @@ Trident provides an impressive number of pseudo-elements to customize its range 
 
 This is easier to visualize with an example.  Take the following:
 
-``` html
-<input type="range">
-```
-``` css
-::-ms-fill-lower { background: orange; }
+<pre class="language-markup"><code>&lt;input type="range"&gt;
+</code></pre>
+
+<pre class="language-css"><code>::-ms-fill-lower { background: orange; }
 ::-ms-fill-upper { background: green; }
 ::-ms-thumb { background: red; }
 ::-ms-ticks-after { display: block; color: blue; }
 ::-ms-ticks-before { display: block; color: black; }
 ::-ms-track { padding: 20px 0; }
 ::-ms-tooltip { display: none; /* display and visibility only */ }
-```
+</code></pre>
 
 This will display as follows in IE10 on Windows 8:
 
@@ -328,11 +316,10 @@ This will display as follows in IE10 on Windows 8:
 
 WebKit provides the `::-webkit-slider-runnable-track` pseudo-element for the track and `::-webkit-slider-thumb` for the range handle itself.  While you cannot do much with these elements, you can add some colors and padding.
 
-``` html
-<input type="range">
-```
-``` css
-::-webkit-slider-runnable-track {
+<pre class="language-markup"><code>&lt;input type="range"&gt;
+</code></pre>
+
+<pre class="language-css"><code>::-webkit-slider-runnable-track {
     border: 2px solid red;
     background: green;
     padding: 2em 0;
@@ -340,7 +327,7 @@ WebKit provides the `::-webkit-slider-runnable-track` pseudo-element for the tra
 ::-webkit-slider-thumb {
     outline: 2px solid blue;
 }
-```
+</code></pre>
 
 This displays as follows in Chrome 26 on OS X:
 
@@ -360,11 +347,10 @@ See <a href="#button_element">&lt;button&gt;</a>
 
 By default WebKit provides a custom UI for search inputs with cancel and search buttons.  Two pseudo-elements, `::-webkit-search-cancel-button` and `::-webkit-search-results-button` are provided for customization, although you can't much of anything with them other than hide them as shown below:
 
-``` html
-<input type="search">
-```
-``` css
-/* Remove the rounded corners */
+<pre class="language-markup"><code>&lt;input type="search"&gt;
+</code></pre>
+
+<pre class="language-css"><code>/* Remove the rounded corners */
 input[type=search] { -webkit-appearance: none; }
 
 /* Hide the cancel button */
@@ -372,7 +358,7 @@ input[type=search] { -webkit-appearance: none; }
 
 /* Hide the magnifying glass */
 ::-webkit-search-results-button { -webkit-appearance: none; }
-```
+</code></pre>
 
 This displays as follows in Chrome 26 on OS X:
 
@@ -390,18 +376,17 @@ See <a href="#button_element">&lt;button&gt;</a>
 
 As of IE10 Trident provides the pseudo-element `::-ms-value` to style the value portion of text inputs (`input[type=text]`, `input[type=password]`, etc) and `<select>`s.  For example:
 
-``` html
-<input type="text" value="value">
-<input type="password" value="value">
-<select><option selected>option</option></select>
-```
-``` css
-::-ms-value { 
+<pre class="language-markup"><code>&lt;input type="text" value="value"&gt;
+&lt;input type="password" value="value"&gt;
+&lt;select&gt;&lt;option selected&gt;option&lt;/option&gt;&lt;/select&gt;
+</code></pre>
+
+<pre class="language-css"><code>::-ms-value { 
     color: red;
     background: black;
     padding: 1em;
 }
-```
+</code></pre>
 
 This displays as follows in IE10 on Windows 8:
 
@@ -411,12 +396,11 @@ This displays as follows in IE10 on Windows 8:
 
 In IE10 when a text input has focus and is not empty, a small X control appears in the right hand side of the input.  When clicked, the control will clear the contents of the text input.  The X is styleable with the `::-ms-clear` pseudo-element.  Therefore you can hide it:
 
-``` html
-<input type="text">
-```
-``` css
-::-ms-clear { display: none; }
-```
+<pre class="language-markup"><code>&lt;input type="text"&gt;
+</code></pre>
+
+<pre class="language-css"><code>::-ms-clear { display: none; }
+</code></pre>
 
 This displays as follows in IE10 on Windows 8:
 
@@ -424,16 +408,15 @@ This displays as follows in IE10 on Windows 8:
 
 There are a variety of rules that `::-ms-clear` will accept, so you can theme it as well:
 
-``` html
-<input type="text" value="Lorem Ipsum">
-```
-``` css
-::-ms-clear {
+<pre class="language-markup"><code>&lt;input type="text" value="Lorem Ipsum"&gt;
+</code></pre>
+
+<pre class="language-css"><code>::-ms-clear {
     color: red;
     background: black;
     padding: 1em;
 }
-```
+</code></pre>
 
 Which displays as follows:
 
@@ -447,8 +430,7 @@ Gecko applies pseudo-elements `::-moz-focus-outer` and `::-moz-focus-inner` to i
 
 There's not much you can do with these pseudo-elements, but there is one important thing to be aware of.  Gecko applies `padding` and `border` to `::-moz-focus-inner` by default:
 
-``` css
-button::-moz-focus-inner,
+<pre class="language-css"><code>button::-moz-focus-inner,
 input[type="reset"]::-moz-focus-inner,
 input[type="button"]::-moz-focus-inner,
 input[type="submit"]::-moz-focus-inner,
@@ -456,19 +438,18 @@ input[type="file"] > input[type="button"]::-moz-focus-inner {
     border: 1px dotted transparent;
     padding: 0 2px;
 }
-```
+</code></pre>
 
 These rules can easily create appearance differences between button displays in Gecko and other rendering engines.  This is confusing and there's actually [a ticket to remove it](https://bugzilla.mozilla.org/show_bug.cgi?id=140562).  The ticket has been open since 2002 so don't hold your breath.
 
 The default `padding` and `border` can be reset by just setting them to 0:
 
-``` css
-button::-moz-focus-inner,
+<pre class="language-css"><code>button::-moz-focus-inner,
 input::-moz-focus-inner {
     border: 0;
     padding: 0;
 }
-```
+</code></pre>
 
 The before and after of this can be seen in the screenshot (below) of Firefox 19 on OS X:
 
@@ -480,15 +461,14 @@ The before and after of this can be seen in the screenshot (below) of Firefox 19
 
 WebKit provides the `::-webkit-keygen-select` that can be used to customize the dropdown that a keygen element uses.  For example:
 
-``` html
-<keygen>
-```
-``` css
-::-webkit-keygen-select {
+<pre class="language-markup"><code>&lt;keygen&gt;
+</code></pre>
+
+<pre class="language-css"><code>::-webkit-keygen-select {
     background: black;
     color: red;
 }
-```
+</code></pre>
 
 This displays as follows on Chrome 26 on OS X:
 
@@ -506,13 +486,12 @@ Only one of the `::-webkit-meter-even-less-good-value`, `::-webkit-meter-optimum
 
 See the following for an example:
 
-``` html
-<meter low="69" high="80" max="100" optimum="100" value="92">A</meter>
-<meter low="69" high="80" max="100" optimum="100" value="72">C</meter>
-<meter low="69" high="80" max="100" optimum="100" value="52">E</meter>
-```
-``` css
-meter { -webkit-appearance: none; }
+<pre class="language-markup"><code>&lt;meter low="69" high="80" max="100" optimum="100" value="92">A&lt;/meter&gt;
+&lt;meter low="69" high="80" max="100" optimum="100" value="72"&gt;C&lt;/meter&gt;
+&lt;meter low="69" high="80" max="100" optimum="100" value="52"&gt;E&lt;/meter&gt;
+</code></pre>
+
+<pre class="language-css"><code>meter { -webkit-appearance: none; }
 ::-webkit-meter-bar {
     height: 50px;
     background: white;
@@ -521,7 +500,7 @@ meter { -webkit-appearance: none; }
 ::-webkit-meter-optimum-value { background: green; }
 ::-webkit-meter-suboptimum-value { background: orange; }
 ::-webkit-meter-even-less-good-value { background: blue; }
-```
+</code></pre>
 
 This displays as follows in Chrome 26 on OS X:
 
@@ -537,15 +516,14 @@ WebKit provides pseudo-elements `::-webkit-progress-inner-element`, `::-webkit-p
 
 Like meter, in order to apply any rules to these elements you must set `-webkit-appearance: none;` on the progress element.  Here's an example:
 
-``` html
-<progress max="100" value="50"></progress>
-```
-``` css
-progress { -webkit-appearance: none; }
+<pre class="language-markup"><code>&lt;progress max="100" value="50"&gt;&lt;/progress&gt;
+</code></pre>
+
+<pre class="language-css"><code>progress { -webkit-appearance: none; }
 ::-webkit-progress-inner-element { }
 ::-webkit-progress-bar { border: 2px solid black; }
 ::-webkit-progress-value { background: red; }
-```
+</code></pre>
 
 This displays as follows in Chrome 26 on OS X:
 
@@ -555,12 +533,11 @@ This displays as follows in Chrome 26 on OS X:
 
 Gecko provides a `::-moz-progress-bar` pseudo-element to style the progress bar itself.  For example:
 
-``` html
-<progress max="100" value="50"></progress>
-```
-``` css
-::-moz-progress-bar { background: red; }
-```
+<pre class="language-markup"><code>&lt;progress max="100" value="50"&gt;&lt;/progress&gt;
+</code></pre>
+
+<pre class="language-css"><code>::-moz-progress-bar { background: red; }
+</code></pre>
 
 This displays as follows in Firefox 19 on OS X:
 
@@ -570,12 +547,11 @@ This displays as follows in Firefox 19 on OS X:
 
 Like Gecko, Trident provides a single pseudo-element to style the progress bar, `::-ms-fill`.  For example:
 
-``` html
-<progress max="100" value="50"></progress>
-```
-``` css
-::-ms-fill { background: red; }
-```
+<pre class="language-markup"><code>&lt;progress max="100" value="50"&gt;&lt;/progress&gt;
+</code></pre>
+
+<pre class="language-css"><code>::-ms-fill { background: red; }
+</code></pre>
 
 This displays as follows in IE10 on Windows 8:
 
@@ -587,18 +563,17 @@ This displays as follows in IE10 on Windows 8:
 
 As of IE10 Trident gives you a hook to style the arrow within select dropdowns, `::-ms-expand`.  For example:
 
-``` html
-<select>
-    <option selected>One</option>
-</select>
-```
-``` css
-::-ms-expand {
+<pre class="language-markup"><code>&lt;select&gt;
+    &lt;option selected&gt;One&lt;/option&gt;
+&lt;/select&gt;
+</code></pre>
+
+<pre class="language-css"><code>::-ms-expand {
     padding: 2em;
     color: red;
     background: black;
 }
-```
+</code></pre>
 
 This displays as follows in IE10 on Windows 8:
 
@@ -612,14 +587,13 @@ WebKit provides the pseudo-element `::-webkit-resizer` for the resize control it
 
 It can be hidden by applying `display: none` or `-webkit-appearance: none`:
 
-``` html
-<textarea></textarea>
-```
-``` css
-::-webkit-resizer {
+<pre class="language-markup"><code>&lt;textarea&gt;&lt;/textarea&gt;
+</code></pre>
+
+<pre class="language-css"><code>::-webkit-resizer {
     display: none;
 }
-```
+</code></pre>
 
 This displays as follows in Chrome 26 on OS X:
 
@@ -629,17 +603,16 @@ This displays as follows in Chrome 26 on OS X:
 
 The `::-webkit-resizer` pseudo-element also allows for some basic styling.  If you thought the resize control could use significantly more color you could add this:
 
-``` html
-<textarea></textarea>
-```
-``` css
-::-webkit-resizer {
+<pre class="language-markup"><code>&lt;textarea&gt;&lt;/textarea&gt;
+</code></pre>
+
+<pre class="language-css"><code>::-webkit-resizer {
     border: 2px solid black;
     background: red;
     box-shadow: 0 0 5px 5px blue;
     outline: 2px solid yellow;
 }
-```
+</code></pre>
 
 This displays as follows in Chrome 26 on OS X:
 
@@ -664,14 +637,13 @@ WebKit is the only rendering engine to support styling the validation bubbles cr
 
 It's easier to see what each element does visually.  Here's an example:
 
-``` css
-::-webkit-validation-bubble { padding: 1em; background: orange; }
+<pre class="language-css"><code>::-webkit-validation-bubble { padding: 1em; background: orange; }
 ::-webkit-validation-bubble-arrow { background: blue; }
 ::-webkit-validation-bubble-arrow-clipper { border: 2px solid black; }
 ::-webkit-validation-bubble-heading { background: green; }
 ::-webkit-validation-bubble-message { color: white; background: purple; }
 ::-webkit-validation-bubble-text-block { border: 1px solid red; padding: 1em; }
-```
+</code></pre>
 
 This displays as follows in Chrome 26 on OS X:
 
@@ -679,8 +651,7 @@ This displays as follows in Chrome 26 on OS X:
 
 Here's a slightly more practical example showing how the bubble can be themed:
 
-``` css
-::-webkit-validation-bubble-message {
+<pre class="language-css"><code>::-webkit-validation-bubble-message {
     color: #eee;
     background: black;
 }
@@ -689,7 +660,7 @@ Here's a slightly more practical example showing how the bubble can be themed:
     border-color: #444;
     box-shadow: none;
 }
-```
+</code></pre>
 
 This displays as follows in Chrome 26 on OS X:
 

@@ -8,13 +8,12 @@ categories: [CSS]
 
 Debugging print stylesheets has always been a bit of a pain.  The traditional way of doing so was to manually change the `media` attribute of all `link` tags from `print` to `screen` or `all` while testing.
 
-``` html
-<!-- Before -->
-<link rel="stylesheet" href="print.css" media="print" />
+<pre class="language-markup"><code>&lt;!-- Before --&gt;
+&lt;link rel="stylesheet" href="print.css" media="print" /&gt;
 
-<!-- After -->
-<link rel="stylesheet" href="print.css" media="screen" />
-```
+&lt;!-- After --&gt;
+&lt;link rel="stylesheet" href="print.css" media="screen" /&gt;
+</code></pre>
 
 The popular [Web Developer Add-on](https://addons.mozilla.org/en-US/firefox/addon/web-developer/) for Firefox even has an option to do this for you automatically.
 
@@ -28,12 +27,11 @@ We found out that [unnecessary HTTP requests are bad](https://developers.google.
 
 Therefore, following the lead of projects like the [HTML5 Boilerplate](http://html5boilerplate.com/) we all switched to writing our print styles inline with the rest of our CSS.
 
-``` css
-@media print {
+<pre class="language-css"><code>@media print {
 	body { font-size: larger; }
 	#ads, #junk { display: none; }
 }
-```
+</code></pre>
 
 Inline print styles save HTTP requests and are easier to maintain, but they unfortunately make testing a bit harder.  They don't work with Firefox's Web Developer Add-on and a simple find and replace is now quite a bit harder.
 

@@ -18,9 +18,8 @@ I had trouble finding this from a Google search, so I thought I'd list the brows
 
 For any unsupported browser you can easily add support by just including the following CSS:
 
-``` css Polyfiling the hidden attribute.
-[hidden] { display: none; }
-```
+<pre class="language-css"><code>[hidden] { display: none; }
+</code></pre>
 
 This will work back to IE6, which doesn't support the [attribute selector](https://developer.mozilla.org/en-US/docs/CSS/Attribute_selectors).
 

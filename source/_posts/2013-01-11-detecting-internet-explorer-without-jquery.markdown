@@ -22,31 +22,28 @@ Testing for specific browsers is [a](http://www.sitepoint.com/why-browser-sniffi
 
 IE versions < 10 support <a href="http://msdn.microsoft.com/en-us/library/ms537512(v=vs.85).aspx">conditional comments</a> that can be used to detect Internet Explorer.  For example the [HTML5 boilerplate](http://html5boilerplate.com/) [uses the following](https://github.com/h5bp/html5-boilerplate/blob/master/index.html) to show a warning to users using IE < 7:
 
-``` html
-<!--[if lt IE 7]>
-    <p class="chromeframe">
-        You are using an <strong>outdated</strong> browser. Please
-        <a href="http://browsehappy.com/">upgrade your browser</a>
-        or <a href="http://www.google.com/chromeframe/?redirect=true">
-        activate Google Chrome Frame</a> to improve your experience.
-    </p>
-<![endif]-->
-```
+<pre class="language-markup"><code>&lt;!--[if lt IE 7]&gt;
+    &lt;p class="chromeframe"&gt;
+        You are using an &lt;strong&gt;outdated&lt;/strong&gt; browser. Please
+        &lt;a href="http://browsehappy.com/"&gt;upgrade your browser&lt;/a&gt;
+        or &lt;a href="http://www.google.com/chromeframe/?redirect=true"&gt;
+        activate Google Chrome Frame&lt;/a&gt; to improve your experience.
+    &lt;/p&gt;
+&lt;![endif]--&gt;
+</code></pre>
 
 This approach can be used to add conditional classes on the `html` element ([via Paul Irish](http://paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/)).
 
-``` html Conditional classes on the html element
-<!--[if lt IE 7]>      <html class="ie6"> <![endif]-->
-<!--[if IE 7]>         <html class="ie7"> <![endif]-->
-<!--[if IE 8]>         <html class="ie8"> <![endif]-->
-<!--[if gt IE 8]><!--> <html>         <!--<![endif]-->
-```
+<pre class="language-markup"><code>&lt;!--[if lt IE 7]&gt;      &lt;html class="ie6"&gt; &lt;![endif]--&gt;
+&lt;!--[if IE 7]&gt;         &lt;html class="ie7"&gt; &lt;![endif]--&gt;
+&lt;!--[if IE 8]&gt;         &lt;html class="ie8"&gt; &lt;![endif]--&gt;
+&lt;!--[if gt IE 8]&gt;&lt;!--&gt; &lt;html&gt;         &lt;!--&lt;![endif]--&gt;
+</code></pre>
 
 Now the presence of a class on the `html` element can be used to derive the version of Internet Explorer the user is using:
 
-``` javascript
-$('html').hasClass('ie6'); //True if the user is using IE6
-```
+<pre class="language-javascript"><code>$('html').hasClass('ie6'); //True if the user is using IE6
+</code></pre>
 
 ### Option 4: Sniff the User Agent
 
@@ -56,10 +53,9 @@ If for whatever reason you cannot do any of the options above, you *can* determi
 	User agent sniffing should be used as a last resort.  Make sure you at least consider the options above before using this.
 </div>
 
-``` javascript Sniffing the user agent string to test for Internet Explorer
-//Test for Internet Explorer
+<pre class="language-javascript"><code>//Test for Internet Explorer
 if (/MSIE\s([\d.]+)/.test(navigator.userAgent)) {
     //Get the IE version.  This will be 6 for IE6, 7 for IE7, etc...
     version = new Number(RegExp.$1);
 }
-```
+</code></pre>

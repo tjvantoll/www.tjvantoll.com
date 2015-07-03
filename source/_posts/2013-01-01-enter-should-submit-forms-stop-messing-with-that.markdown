@@ -13,13 +13,12 @@ I try to do most of my work and play on the internet with the keyboard.  In the 
 
 Take the following basic form:
 
-``` html
-<form>
-    <label for="name">Name:</label>
-    <input type="text" name="name" id="name">
-    <input type="submit" value="Submit">
-</form>
-```
+<pre class="language-markup"><code>&lt;form&gt;
+    &lt;label for="name"&gt;Name:&lt;/label&gt;
+    &lt;input type="text" name="name" id="name"&gt;
+    &lt;input type="submit" value="Submit"&gt;
+&lt;/form&gt;
+</code></pre>
 
 If you have focus in the textbox and hit enter, the form will be submitted automatically.  This behavior is consistent across all browsers and is known as implicit submission.  So why is this important?
 
@@ -59,23 +58,21 @@ For the purpose of the previous paragraph, an element is a field that blocks imp
 
 So, in a form with no submit buttons, implicit submission will be done if only one input is present.  Therefore, pressing enter in this textbox will submit the form:
 
-``` html
-<form>
-    <label for="name">Name:</label>
-    <input type="text" name="name" id="name">
-</form>
-```
+<pre class="language-markup"><code>&lt;form&gt;
+    &lt;label for="name"&gt;Name:&lt;/label&gt;
+    &lt;input type="text" name="name" id="name"&gt;
+&lt;/form&gt;
+</code></pre>
 
 But in this form it will not because there are multiple fields:
 
-``` html
-<form>
-    <label for="name">Name:</label>
-    <input type="text" name="name" id="name">
-    <label for="address">Address:</label>
-    <input type="text" name="address" id="address">
-</form>
-```
+<pre class="language-markup"><code>&lt;form&gt;
+    &lt;label for="name"&gt;Name:&lt;/label&gt;
+    &lt;input type="text" name="name" id="name"&gt;
+    &lt;label for="address"&gt;Address:&lt;/label&gt;
+    &lt;input type="text" name="address" id="address"&gt;
+&lt;/form&gt;
+</code></pre>
 
 Therefore, if you have a form with more than one input field, always include a submit button.  Specifically an `<input>` with the `type="submit"` attribute, or a `<button>` element should be present.  (Note: IE7 has a bug where the `type` attribute of a `<button>` defaults to `button` instead of `submit`.  Therefore for IE7 compatibility you'll need `<button type="submit">`.)
 
@@ -91,20 +88,19 @@ With modern day browsers and JavaScript libraries it's easy to send data to the 
 
 Finally, it's also quite easy to prevent implicit submission in JavaScript.  Take the following example:
 
-``` html
-<form>
-    <label for="name">Name:</label>
-    <input type="text" name="name" id="name">
-    <input type="submit" value="Submit">
-</form>
-<script>
+<pre class="language-markup"><code>&lt;form&gt;
+    &lt;label for="name"&gt;Name:&lt;/label&gt;
+    &lt;input type="text" name="name" id="name"&gt;
+    &lt;input type="submit" value="Submit"&gt;
+&lt;/form&gt;
+&lt;script&gt;
     document.getElementById('name').addEventListener('keypress', function(event) {
         if (event.keyCode == 13) {
             event.preventDefault();
         }
     });
-</script>
-```
+&lt;/script&gt;
+</code></pre>
 
 This sets up a `keypress` event handler that prevents the default action (implicit submission) from occurring when the enter key is pressed.
 
@@ -112,20 +108,19 @@ This technique can be handy.  For example, say you have a form with multiple sub
 
 Take the following example:
 
-``` html
-<form>
-    <label for="age">Age:</label>
-    <input type="number" min="0" max="120" name="age" id="age">
-    <button id="child">Child</button>
-    <button id="adult">Adult</button>
-</form>
-<script>
+<pre class="language-markup"><code>&lt;form&gt;
+    &lt;label for="age"&gt;Age:&lt;/label&gt;
+    &lt;input type="number" min="0" max="120" name="age" id="age"&gt;
+    &lt;button id="child"&gt;Child&lt;/button&gt;
+    &lt;button id="adult"&gt;Adult&lt;/button&gt;
+&lt;/form&gt;
+&lt;script&gt;
     (function() {
         var age = document.getElementById('age');
         age.addEventListener('keypress', function(event) {
             if (event.keyCode == 13) {
                 event.preventDefault();
-                if (age.value > 20) {
+                if (age.value &gt; 20) {
                     document.getElementById('adult').click();
                 } else {
                     document.getElementById('child').click();
@@ -133,8 +128,8 @@ Take the following example:
             }
         });
     }());
-</script>
-```
+&lt;/script&gt;
+</code></pre>
 
 When enter is clicked in the number input, the `keypress` event handler determines which submit button is appropriate and clicks it.
 

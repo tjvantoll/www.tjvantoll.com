@@ -8,16 +8,15 @@ categories: [HTML, CSS, Browsers]
 
 View source on almost any web page and you'll likely see the following:
 
-``` html Common HTML Template
-<html>
-    <head></head>
-    <body>
-        <div id="wrapper">
-            <!-- All the things -->
-        </div>
-    </body>
-</html>
-```
+<pre class="language-markup"><code>&lt;html&gt;
+    &lt;head&gt;&lt;/head&gt;
+    &lt;body&gt;
+        &lt;div id="wrapper"&gt;
+            &lt;!-- All the things --&gt;
+        &lt;/div&gt;
+    &lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
 
 The use of a wrapper or container `div` around the page is fairly universal.  It is commonly used to perform tasks such as centering a page's content or providing a shadow or border to frame it.  But, since the `body` element is a necessity in the markup, why can't it be styled directly instead?  Why is a wrapper `div` used? 
 
@@ -31,15 +30,14 @@ To get to the origins of the wrapper `div` let's go way back.  A pretty common p
 
 To center the top level container in IE 5.5 you had to make use of `text-align: center` as such:
 
-``` css Centering the top level container in IE 5.5
-body {
+<pre class="language-css"><code>body {
     text-align: center;
 }
 #wrapper {
     width: 1000px;
     text-align: left; /* counteract the declaration on body */
 }
-```
+</code></pre>
 
 `text-align: center` *should* only affect inline elements, but IE 5.5 incorrectly applied it to block elements as well.  (Note: The `text-align: center` bug was fixed in IE6 standards mode, but the behavior remained in Internet Explorer's quirks mode to this day.)
 
@@ -47,8 +45,7 @@ body {
 
 IE6 implemented `auto` margins, so `margin: 0 auto` was now safe to use on the `body`.  Additionally, IE6 fully supports adding a `width`, `padding`, `margin`, and `border` to the body element.  Take the following CSS:
 
-``` css
-body{
+<pre class="language-css"><code>body{
     width: 90%;
     border: 2px solid red;
     background-color: black;
@@ -56,7 +53,7 @@ body{
     padding: 10px;
     margin: 0 auto;
 }
-```
+</code></pre>
 
 The layout renders the same in IE6 as it does in the latest version of Chrome (23 as of this writing).
 
@@ -93,25 +90,23 @@ In my testing beyond IE7 there are no major issues using the `body` element as a
 
 Any absolutely positioned elements will be positioned relative to the viewport rather than the newly placed `body`.  To fix this set `position: relative` on the `body` as such:
 
-``` css Positioning elements relative to the body rather than the viewport
-body {
+<pre class="language-css"><code>body {
     margin: 0 auto;
     width: 90%;
     position: relative;
 }
-```
+</code></pre>
 
 ### Backgrounds
 
 Backgrounds applied to the `body` will take up whole page regardless of margins.  Consider the following:
 
-``` css
-body {
+<pre class="language-css"><code>body {
     background: black;
     margin: 0 auto;
     width: 200px;
 }
-```
+</code></pre>
 
 The screenshot below shows this.  The background of the entire viewport is black rather than a centered 200px block.  
 
@@ -119,8 +114,7 @@ The screenshot below shows this.  The background of the entire viewport is black
 
 This can be worked around by applying a `background` on the `html` element:
 
-``` css
-html {
+<pre class="language-css"><code>html {
     background: white;
     height: 100%;
 }
@@ -130,7 +124,7 @@ body {
     width: 200px;
     min-height: 100%;
 }
-```
+</code></pre>
 
 Note the `height` that was added to the `html` element and the `min-height` added to the `body`.  This ensures that the `background` applied to the `body` element will take up the entire height of the screen.
 
@@ -142,17 +136,16 @@ The rules above will now render as expected:
 
 In WebKit based browsers the `body`'s [scrollHeight](https://developer.mozilla.org/en-US/docs/DOM/element.scrollHeight) and [scrollWidth](https://developer.mozilla.org/en-US/docs/DOM/element.scrollWidth) properties are unaffected by declared `height` and `width` styles.  For example:
 
-``` html scrollHeight and scrollWidth on the body element
-<html>
-    <head></head>
-    <body style="height: 200px; width: 200px;">
-        <script>
+<pre class="language-markup"><code>&lt;html&gt;
+    &lt;head&gt;&lt;/head&gt;
+    &lt;body style="height: 200px; width: 200px;"&gt;
+        &lt;script&gt;
         	console.log(document.body.scrollHeight);
         	console.log(document.body.scrollWidth);
-        </script>
-    </body>
-</html>
-```
+        &lt;/script&gt;
+    &lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
 
 This will log `200` for both in all modern browsers with the exception of WebKit based ones.  WebKit will return the height and width of the viewport.
 

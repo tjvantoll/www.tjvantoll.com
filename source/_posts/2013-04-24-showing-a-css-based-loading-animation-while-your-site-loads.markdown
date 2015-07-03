@@ -12,16 +12,14 @@ Showing a loading indicator on startup is a common pattern in native application
 
 Here's an approach I've used a few times to accomplish this.  I start by giving the `<html>` element itself a class of `"loading"`:
 
-``` html
-<html class="loading">
-    <!-- All the things -->
-</html>
-```
+<pre class="language-markup"><code>&lt;html class="loading"&gt;
+    &lt;!-- All the things --&gt;
+&lt;/html&gt;
+</code></pre>
 
 I then setup two transitions that take effect when the loading class is removed.  I transition the color on the `<html>` element from a predefined color to its default, `transparent`.  To avoid seeing content during loading, I make the `<body>` opaque with `opacity: 0`.  When loading is complete, that is transitioned to `opacity: 1` to fade the content in.  The full source is below:
 
-``` css
-html {
+<pre class="language-css line-numbers"><code>html {
     -webkit-transition: background-color 1s;
     transition: background-color 1s;
 }
@@ -51,12 +49,11 @@ html.loading body {
     -webkit-transition: opacity 0;
     transition: opacity 0;
 }
-```
+</code></pre>
 
 The only JavaScript required is to remove the `"loading"` class from the `<html>` element.  Do this when your application is initialized and ready to go.
 
-``` javascript
-// IE10+
+<pre class="language-javascript"><code>// IE10+
 document.getElementsByTagName( "html" )[0].classList.remove( "loading" );
 
 // All browsers
@@ -64,7 +61,7 @@ document.getElementsByTagName( "html" )[0].className.replace( /loading/, "" );
 
 // Or with jQuery
 $( "html" ).removeClass( "loading" );
-```
+</code></pre>
 
 The demo below shows this animation in action.  To simulate a real load it waits 3 seconds before the `"loading"` class is removed.
 

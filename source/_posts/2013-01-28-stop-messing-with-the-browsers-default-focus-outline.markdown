@@ -12,12 +12,11 @@ This is the latest in my series of accessibility best practices after getting fr
 
 All browsers have a default value they apply to the currently focused item.  For example Chrome on OS X uses the following:
 
-``` css
-:focus {
+<pre class="language-css"><code>:focus {
     /* -webkit-focus-ring-color = '#5B9DD9' */
     outline: -webkit-focus-ring-color auto 5px;
 }
-```
+</code></pre>
 
 <!--more-->
 
@@ -29,13 +28,12 @@ Keyboard users **depend** on this `outline` to determine where they are on the p
 
 The `outline` *can* be removed with the following:
 
-``` css
-:focus {
+<pre class="language-css"><code>:focus {
     outline: 0;
     /* or */
     outline: none;
 }
-```
+</code></pre>
 
 This is obviously bad per the reasoning above.  The HTML5 specification has the following to say about removing the default `outline`:
 
@@ -47,13 +45,12 @@ This is obviously bad per the reasoning above.  The HTML5 specification has the 
 
 As the spec mentions, you can create your own styling for focused items instead of using the browser's default.  For example the following will change all focused links to white text on a black background:
 
-``` css
-:link:focus, :visited:focus {
+<pre class="language-css"><code>:link:focus, :visited:focus {
     outline: none;
     background-color: black;
     color: white;
 }
-```
+</code></pre>
 
 Although this is possible, I would **strongly** recommend simply leaving the default browser `outline` in place.  Changing the default display messes with a user's expectations, which is a big usability no no.  Furthermore, you need to make sure that whatever alternative you put in is sufficiently identifiable for users with reduced vision.
 
@@ -74,12 +71,11 @@ jQuery UI does nothing to alter the browser's default `outline` on these widgets
 
 Unfortunately one of the reasons much of the internet removes the default focus ring is because the [first version of Eric Meyer's CSS reset](http://meyerweb.com/eric/tools/css/reset/reset200802.css) included the following:
 
-``` css
-/* remember to define focus styles! */
+<pre class="language-css"><code>/* remember to define focus styles! */
 :focus {
     outline: 0;
 }
-```
+</code></pre>
 
 As you can see it's made abundantly clear that you should define your own focus styles, but most people simply copied and pasted the file without realizing this.
 

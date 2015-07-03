@@ -28,15 +28,14 @@ The image below is of a version 1.9 dialog in IE9, note how the down arrow of th
 
 To get the icon back, you have to override the rules that position the icon:
 
-``` css
-.ui-dialog .ui-resizable-se {
+<pre class="language-css"><code>.ui-dialog .ui-resizable-se {
     width: 14px;
     height: 14px;
     right: 3px;
     bottom: 3px;
     background-position: -80px -224px;
 }
-```
+</code></pre>
 
 This will display as follows:
 
