@@ -1,2 +1,52 @@
-@import "sidebar/base";
+.side-shadow-border {
+  box-shadow: lighten($sidebar-bg, 5) 0 1px;
+}
+aside.sidebar {
+  overflow: hidden;
+  color: $sidebar-color;
+  text-shadow: lighten($sidebar-bg, 8) 0 1px;
+  a { @extend .force-wrap; }
+  section {
+    @extend .sans;
+    font-size: .8em;
+    line-height: 1.4em;
+    margin-bottom: 1.5em;
+    h1 {
+      margin: 1.5em 0 0;
+      padding-bottom: .2em;
+      border-bottom: 1px solid $sidebar-border;
+      @extend .side-shadow-border;
+      + p {
+        padding-top: .4em;
+      }
+    }
+  }
+  img {
+    @extend .flex-content;
+    @extend .basic-alignment;
+  }
+  ul {
+    margin-bottom: 0.5em;
+    margin-left: 0;
+  }
+  li {
+    list-style: none;
+    padding: .5em 0;
+    margin: 0;
+    border-bottom: 1px solid $sidebar-border;
+    @extend .side-shadow-border;
+    p:last-child {
+      margin-bottom: 0;
+    }
+  }
+  a {
+    color: inherit;
+    -webkit-transition: color 0.5s;
+    transition: color 0.5s;
+  }
+  &:hover a {
+    color: $sidebar-link-color;
+    &:hover { color: $sidebar-link-color-hover; }
+  }
+}
 

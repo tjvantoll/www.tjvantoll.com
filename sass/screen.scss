@@ -9,9 +9,9 @@
 @import "partials/archive";
 @import "partials/sidebar";
 @import "partials/footer";
-@import "custom/partials/PictureCube";
-@import "custom/partials/helpers";
-@import "custom/partials/prism";
+@import "partials/PictureCube";
+@import "partials/helpers";
+@import "partials/prism";
 
 body > header {
 	@extend .striped_bg;
