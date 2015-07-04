@@ -17,8 +17,7 @@
 	position: relative;
 
 	h6 {
-		@extend .striped_bg;
-
+		background: $header_bg;
 		position: relative;
 		top: -1px;
 		color: black;

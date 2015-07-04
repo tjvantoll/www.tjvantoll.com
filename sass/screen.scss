@@ -21,6 +21,7 @@
 
 .entry-content table {
 	margin-bottom: 20px;
+	border-collapse: collapse;
 	th { font-weight: bold; text-decoration: underline; }
 	td, th { padding: 5px; border: 2px solid black; }
 	td.blue { color: blue; }
