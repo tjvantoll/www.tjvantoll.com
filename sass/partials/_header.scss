@@ -19,3 +19,17 @@ body > header {
 		font-weight: normal;
 	}
 }
+@media only screen and (max-width: 550px) {
+	body > header {
+		font-size: 0.8em;
+		padding-top: 1em;
+		padding-bottom: 1em;
+		h1 {
+			letter-spacing: 3px;
+			font-weight: normal;
+		}
+		h2 {
+			font-size: 0.9em;
+		}
+	}
+}
