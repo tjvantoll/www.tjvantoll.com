@@ -12,9 +12,9 @@ categories: [JavaScript, HTML5, jQuery UI]
 
 HTML5 adds several new valid `type` attributes for `<input>` elements.  One of them, `number`, can be used to create a number picker.
 
-``` html
-<input type="number" />
-```
+<pre class="language-markup"><code>
+&lt;input type="number" /&gt;
+</code></pre>
 
 This will present the user with a number picker in supported browsers, which, as of this writing includes Chrome, Safari, Opera, iOS, Opera Mobile, and Android 4.0+ ([full support list](http://caniuse.com/#feat=input-number)).  Here's what the user will see in supported browsers:
 
@@ -55,9 +55,9 @@ The native number picker supports `min`, `max`, and `step` attributes to allow y
 
 For example, on the `<input>` below the browser will enforce that the minimum value will be `2`, the maximum value will be `20`, and the user will step at increments of `2`.
 
-``` html
-<input type="number" min="2" max="20" step="2" />
-```
+<pre class="language-markup"><code>
+&lt;input type="number" min="2" max="20" step="2" /&gt;
+</code></pre>
 
 You can see how this behaves in your browser below:
 
@@ -81,9 +81,9 @@ jQuery UI's `spinner` is a new plugin due for jQuery UI's 1.9 release (currently
 
 It also supports setting minimum, maximum, and step values through options rather than attributes.
 
-``` html jQuery UI Spinner
-<input id="spinner" />
-<script>
+<pre class="language-markup"><code>
+&lt;input id="spinner" /&gt;
+&lt;script&gt;
     $(function() {
         $('#spinner').spinner({
             min: 2,
@@ -91,8 +91,8 @@ It also supports setting minimum, maximum, and step values through options rathe
             step: 2
         });
     });
-</script>
-```
+&lt;/script&gt;
+</code></pre>
 
 Example:
 
@@ -144,10 +144,10 @@ HTML5 also provides a native time picker (`input[type=time]`), but, it has [near
 
 Because `spinner` is built on top of [jQuery UI's widget factory](http://ajpiano.com/widgetfactory), it is easily extensible.  For example, let's say you need to build an input that accepts a year in which the modern summer olympics were held.  You could do that with the following:
 
-```javascript Extending spinner
-<input />
+<pre class="language-markup"><code>
+&lt;input /&gt;
 
-<script>
+&lt;script&gt;
     $.widget( "tj.olympicspicker", $.ui.spinner, {
         options: {
             min: 1896,
@@ -158,8 +158,8 @@ Because `spinner` is built on top of [jQuery UI's widget factory](http://ajpiano
     $(function() {
         $('input').olympicspicker();
     });
-</script>
-```
+&lt;/script&gt;
+</code></pre>
 
 <iframe style="width: 100%; height: 150px;" src="http://jsfiddle.net/tj_vantoll/EsTYd/1/embedded/result,js,html/" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
 
@@ -188,7 +188,7 @@ And the reasons to use jQuery UI's `spinner` are:
 
 Another option is to use the native HTML number picker when it's available, and fallback to jQuery UI's `spinner` when it's not.
 
-``` javascript Using jQuery UI to Polyfill input[type=number]
+<pre class="language-javascript"><code>
 $(function() {
     var input = document.createElement('input');
     input.setAttribute('type', 'number');
@@ -197,7 +197,7 @@ $(function() {
         $('input[type=number]').spinner();
     }
 });
-```
+</code></pre>
 
 The code to detect `input[type=number]` support was taken from [another number picker polyfill by jonstipe](https://github.com/jonstipe/number-polyfill).  It creates an `<input>`, changes its `type` to `number`, and sees if that change actually took effect to determine whether the browser supports the type.  You could also use the `Modernizr.inputtypes.number` check from [Modernizr](http://modernizr.com) to achieve the same thing.
 
@@ -227,7 +227,7 @@ Well it turns out hiding the native arrow controls is difficult because Chrome p
 
 Therefore the best approach I've came up with is to hide the `spinner`'s arrow controls when the browser creates its own.
 
-``` javascript Number keyboard for a spinner
+<pre class="language-javascript"><code>
 $(function() {
     $('input[type=number]').spinner();
     if (Modernizr.input.step) {
@@ -235,7 +235,7 @@ $(function() {
         $('.ui-spinner-input').css('marginRight', 0);
     }
 });
-```
+</code></pre>
 
 What this does is detect whether the browser supports the `step` attribute, if it does it removes jQuery UI's controls.  What does the `step` attribute have to do with the arrow controls?  Nothing, except that it just *happens* that the browsers that support the `step` attribute also create a native control to do the stepping.  Is this going to change in the future?  Quite possibly.
 
@@ -245,13 +245,13 @@ So obviously this is not ideal, and probably shouldn't be used in production cod
 
 Commenter amir pointed out the WebKit provides a pseudoclass that you can use to style, and therefore hide the native spin controls.
 
-``` css
+<pre class="language-css"><code>
 input[type=number]::-webkit-outer-spin-button {
     display: none; 
 }
 input[type=number]::-webkit-inner-spin-button {
     display: none;
 }
-```
+</code></pre>
 
 This solves the issue for Webkit, but this remains an issue for Opera and browsers that add `input[type=number]` support in the future.

@@ -35,10 +35,9 @@ This works, but the lazy programmer in you will be looking to automate this afte
 
 To create a Git commit hook navigate into the `.git/hooks` directory of your repository.  This folder has a number of sample hooks that you can potentially use with a `.sample` suffix.  To create a `pre-commit` script that Git will run simply create an un-prefixed copy of `pre-commit.sample`.
 
-``` bash
-cd /MyProject/.git/hooks
+<pre class="language-shell"><code>cd /MyProject/.git/hooks
 cp pre-commit.sample pre-commit
-```
+</code></pre>
 
 Once a `pre-commit` file exists in `.git/hooks`, Git will run it before every commit.
 
@@ -46,8 +45,7 @@ Once a `pre-commit` file exists in `.git/hooks`, Git will run it before every co
 
 There are many ways to implement a script that generates CSS files from LESS files.  This is the `pre-commit` script that I use.
 
-``` bash The script
-#!/bin/sh
+<pre class="language-shell"><code>#!/bin/sh
 
 # Pre-commit hook to generate .css files from .less files using lessc.
 # Script assumes .less files are in a directory named "less" and will
@@ -121,7 +119,7 @@ do
     fi
   fi
 done
-```
+</code></pre>
 
 You could greatly simplify this script to simply run `lessc` on all .less files on every commit.  I go file by file because the script has to be run on a large code base where generating hundreds to thousands of CSS files on every commit isn't practical.  This script is also setup to create sibling `css` and `less` directories.  You could easily modify this to simply put the files in the same directory; I like them to be logically separated.
 
@@ -129,67 +127,68 @@ You could greatly simplify this script to simply run `lessc` on all .less files 
 
 As I said, the script I use assumes that there are sibling `css` and `less` directories.  To give a concrete example of this say I have the following file system structure.
 
-    /MyProject
-        /css
-            * Generated files *
-        index.html
-        /js
-            less.js
-        /less
-            a.less
-            b.less
+<pre class="language-shell"><code>/MyProject
+    /css
+        * Generated files *
+    index.html
+    /js
+        less.js
+    /less
+        a.less
+        b.less
+</code></pre>
 
 To include these files I use the following locally:
 
-``` html Local Includes
-<!-- index.html -->
-<!DOCTYPE html>
-<html>
-    <head>
-        <link rel="stylesheet/less" href="less/a.less">
-        <link rel="stylesheet/less" href="less/b.less">
-        <script src="js/less.js"></script>
-    </head>
-    <body>
-    </body>
-</html>
-```
+<pre class="language-markup"><code>
+&lt;!-- index.html --&gt;
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+    &lt;head&gt;
+        &lt;link rel="stylesheet/less" href="less/a.less"&gt;
+        &lt;link rel="stylesheet/less" href="less/b.less"&gt;
+        &lt;script src="js/less.js"&gt;&lt;/script&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+    &lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
 
 And the following in production:
 
-``` html Production Includes
-<!-- index.html -->
-<!DOCTYPE html>
-<html>
-    <head>
-        <link rel="stylesheet" href="css/a.css">
-        <link rel="stylesheet" href="css/b.css">
-    </head>
-    <body>
-    </body>
-</html>
-```
+<pre class="language-markup"><code>
+&lt;!-- index.html --&gt;
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+    &lt;head&gt;
+        &lt;link rel="stylesheet" href="css/a.css"&gt;
+        &lt;link rel="stylesheet" href="css/b.css"&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+    &lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
 
 The best way to handle both development and production with minimal maintenance is to use some sort of server-side check so that you don't have to change your HTML whenever you release to production.  Here's an example of a PHP script that does this by detecting whether the host contains `localhost`.
 
-``` html Making both imports work
-<!-- index.html -->
-<!DOCTYPE html>
-<html>
-    <head>
-    	<? if (strpos($_SERVER['HTTP_HOST'], 'localhost')) { ?>
-            <link rel="stylesheet/less" href="/less/a.less">
-            <link rel="stylesheet/less" href="/less/b.less">
-            <script src="/js/less.js"></script>
-        < } else { ?>
-            <link rel="stylesheet" href="/css/a.css">
-            <link rel="stylesheet" href="/css/b.css">
-        <? } ?>
-    </head>
-    <body>
-    </body>
-</html>
-```
+<pre class="language-markup"><code>
+&lt;!-- index.html --&gt;
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+    &lt;head&gt;
+    	&lt;? if (strpos($_SERVER['HTTP_HOST'], 'localhost')) { ?&gt;
+            &lt;link rel="stylesheet/less" href="/less/a.less"&gt;
+            &lt;link rel="stylesheet/less" href="/less/b.less"&gt;
+            &lt;script src="/js/less.js"&gt;&lt;/script&gt;
+        &lt; } else { ?&gt;
+            &lt;link rel="stylesheet" href="/css/a.css"&gt;
+            &lt;link rel="stylesheet" href="/css/b.css"&gt;
+        &lt;? } ?&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+    &lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
 
 ### Conclusion
 

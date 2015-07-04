@@ -44,11 +44,11 @@ So the question is, can we work around this limitation and get desktop `onscroll
 
 My first attempt was to set an interval that did what I wanted to do in the `onscroll` event.  Yes the code will run continuously instead of just when the user scrolls, but it's somewhere to start.
 
-``` javascript
+<pre class="language-javascript"><code>
 setInterval(function() {
 	// Logic
 }, 20);
-```
+</code></pre>
 
 The problem with this approach is that iOS Safari, Android <= 2.3, and Opera Mobile do not run any functions queued through `setInterval` or `setTimeout` while a scroll is being performed.  The execution will simply be paused until the scroll has completed.
 
@@ -97,7 +97,7 @@ So what does all of this mean about using the `ontouchmove` event to mimic deskt
 
 Another *solution* out there is to disable native scrolling altogether and use JavaScript to mimic scrolling instead.
 
-``` javascript
+<pre class="language-javascript"><code>
 $('window').on('touchmove', function(event) {
     //Prevent the window from being scrolled.
     event.preventDefault();
@@ -105,7 +105,7 @@ $('window').on('touchmove', function(event) {
     //Do something like call window.scrollTo to mimic the scrolling
     //request the user made.
 });
-```
+</code></pre>
 
 Unfortunately such techniques are usually utilized to create fixed height/width scrolling areas and are not intended (nor especially practical) for full screens.  If you are only interested in a scrolling event for a small section of the page you might want to look into something such as [iScroll 4](http://cubiq.org/iscroll-4).
 

@@ -10,21 +10,19 @@ categories: [JavaScript, QUnit, Unit Testing]
 
 The output of said runner displays the number of tests ran and the number that passed.  For example, here's an example of the output when I use the default runner on jQuery UI's spinner test suite:
 
-``` text PhantomJS + QUnit Run Output
-tj-cpu:spinner tj$ phantomjs run-qunit.js spinner.html
+<pre class="language-shell"><code>tj-cpu:spinner tj$ phantomjs run-qunit.js spinner.html
 Tests completed in 492 milliseconds
 489 tests of 489 passed, 0 failed.
 'waitFor()' finished in 587ms.
-```
+</code></pre>
 
 Which is great, but if something fails you only get the following:
 
-``` text PhantomJS + QUnit Run Output with Failures
-tj-cpu:myproject tj$ phantomjs run-qunit.js spinner.html
+<pre class="language-shell"><code>tj-cpu:myproject tj$ phantomjs run-qunit.js spinner.html
 'waitFor()' finished in 630ms.
 Tests completed in 535 milliseconds.
 486 tests of 489 passed, 3 failed.
-```
+</code></pre>
 
 The provided runner doesn't provide any additional information about the tests that failed.  Luckily PhantomJS and QUnit make it trivial to customize the output to meet your needs.
 
@@ -34,12 +32,11 @@ The provided runner doesn't provide any additional information about the tests t
 
 PhantomJS's [page.onConsoleMessage](http://code.google.com/p/phantomjs/wiki/Interface#onConsoleMessage) callback can be used to redirect the browser's JavaScript console logging.  The provided test runner uses this callback to redirect the output to the command line instead of the headless browser (where you would never see it).
 
-```javascript Snippet from Default run-qunit.js
-// Route "console.log()" calls from within the Page context to the main Phantom context (i.e. current "this")
+<pre class="language-javascript"><code>// Route "console.log()" calls from within the Page context to the main Phantom context (i.e. current "this")
 page.onConsoleMessage = function(msg) {
     console.log(msg);
 };
-```
+</code></pre>
 
 Meaning, when running QUnit tests via PhantomJS, the output of any `console.log` statements will appear on the command line.
 
@@ -49,29 +46,28 @@ QUnit provides a [comprehensive API](http://api.qunitjs.com/) including [callbac
 
 For example you could use the following to log the associated message for every test that fails:
 
-``` javascript Logging Each Test Failure with QUnit
+<pre class="language-javascript"><code>
 QUnit.log(function(details) {
     if (!details.result) {
         console.log(details.message);
     }
 });
-```
+</code></pre>
 
 If we apply this our failing test suite we now get the following:
 
-``` text
-tj-mac:spinner tj3$ phantomjs run-qunit.js spinner.html
+<pre class="language-shell"><code>tj-mac:spinner tj3$ phantomjs run-qunit.js spinner.html
 min from markup
 stop from options
 blur after many keys
 'waitFor()' finished in 579ms.
 Tests completed in 483 milliseconds.
 486 tests of 489 passed, 3 failed.
-```
+</code></pre>
 
 Better, but still not terribly useful.  In order to provide a useful report of failed tests you need to combine more of QUnit's API callbacks with some basic text formatting.  Here's a more comprehensive example:
 
-``` javascript QUnit Test Results with a Formatted Display of Failed Tests
+<pre class="language-javascript"><code>
 (function() {
     var module = '', 
         test = '',
@@ -132,12 +128,11 @@ Better, but still not terribly useful.  In order to provide a useful report of f
         }
     });
 }());
-```
+</code></pre>
 
 Now running tests with failures will produce something like the following:
 
-``` text PhantomJS + QUnit Output with Failures
-tj-cpu:spinner tj$ phantomjs run-qunit.js spinner.html
+<pre class="language-shell"><code>tj-cpu:spinner tj$ phantomjs run-qunit.js spinner.html
 
 /*********************************************************************/
 /************************** FAILURE SUMMARY **************************/
@@ -194,7 +189,7 @@ Test: change
 'waitFor()' finished in 590ms.
 Tests completed in 494 milliseconds.
 486 tests of 489 passed, 3 failed.
-```
+</code></pre>
 
 This might be a bit excessive for some but I like being able to quickly see information about what failed from the command line.  Feel free to use this and alter it to your liking.
 

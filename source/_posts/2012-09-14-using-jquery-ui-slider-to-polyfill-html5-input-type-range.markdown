@@ -16,8 +16,7 @@ Here's the script that I used.
 
 <!--more-->
 
-``` javascript Polyfill input[type=range] with jQuery UI's Slider
-$(function() {
+<pre class="language-javascript line-numbers"><code>$(function() {
     //Determine whether the browser natively supports input[type=range].
     //If you're using Modernizr this is equivalent to Modernizr.inputtypes.range
     var input = document.createElement('input');
@@ -33,7 +32,7 @@ $(function() {
             //Create a new div, turn it into a slider, and set its attributes based on
             //the attributes of the input.  If the input doesn't possess those attributes
             //use jQuery UI's defaults.
-            $slider = $('<div />').slider({
+            $slider = $('&lt;div /&gt;').slider({
                 min: parseInt($input.attr('min'), 10) || 0,
                 max: parseInt($input.attr('max'), 10) || 100,
                 value: parseInt($input.attr('value'), 10) || 0,
@@ -43,14 +42,14 @@ $(function() {
                     $(this).prev('input').val(ui.value);
                 }
             });
-        
+
             //Append the slider after the input and hide the input.  The user will only
-            //interact with the slider.        
+            //interact with the slider.
             $input.after($slider).hide();
         });
     }
 });
-```
+</code></pre>
 
 ### Future
 

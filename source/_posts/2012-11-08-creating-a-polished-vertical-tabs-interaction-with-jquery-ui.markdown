@@ -14,8 +14,7 @@ The [jQuery UI tabs widget](http://jqueryui.com/tabs/) provides a clean way to i
 
 The following CSS will vertically arrange the tabs:
 
-``` css
-.ui-tabs.ui-tabs-vertical {
+<pre class="language-css line-numbers"><code>.ui-tabs.ui-tabs-vertical {
     padding: 0;
     width: 42em;
 }
@@ -64,14 +63,13 @@ The following CSS will vertically arrange the tabs:
     border-radius: 0;
     position: relative;
     left: -1px;
-}
-```
+}</code></pre>
 
 It only relies on a class of `ui-tabs-vertical` being applied to the elements the `tabs` widget is created on.
 
-``` javascript
+<pre class="language-javascript"><code>
 $('#tabs').tabs().addClass('ui-tabs-vertical');
-```
+</code></pre>
 
 And here's the result:
 

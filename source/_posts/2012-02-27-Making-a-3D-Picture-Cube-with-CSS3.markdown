@@ -29,24 +29,24 @@ I decided that I wanted a way to show off pictures in the footer of this blog us
 
 The markup I ended up using was very similar to the cube in [David DeSandro's cube demo](http://desandro.github.com/3dtransforms/examples/cube-02-show-sides.html).
 
-``` html Basic Markup
-<div class="PictureCube-container">
-	<div class="cube show-front">
-		<figure class="front"><img src="1.jpg" /></figure>
-		<figure class="back"><img src="2.jpg" /></figure>
-		<figure class="right"><img src="3.jpg" /></figure>
-		<figure class="left"><img src="4.jpg" /></figure>
-		<figure class="top"><img src="5.jpg" /></figure>
-		<figure class="bottom"><img src="6.jpg" /></figure>
-	</div>
-</div>
-```
+<pre class="language-markup"><code>
+&lt;div class="PictureCube-container"&gt;
+	&lt;div class="cube show-front"&gt;
+		&lt;figure class="front"&gt;&lt;img src="1.jpg" /&gt;&lt;/figure&gt;
+		&lt;figure class="back"&gt;&lt;img src="2.jpg" /&gt;&lt;/figure&gt;
+		&lt;figure class="right"&gt;&lt;img src="3.jpg" /&gt;&lt;/figure&gt;
+		&lt;figure class="left"&gt;&lt;img src="4.jpg" /&gt;&lt;/figure&gt;
+		&lt;figure class="top"&gt;&lt;img src="5.jpg" /&gt;&lt;/figure&gt;
+		&lt;figure class="bottom"&gt;&lt;img src="6.jpg" /&gt;&lt;/figure&gt;
+	&lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
 
 ### Styling
 
 I'm not going to go into the full details of how the styling to create the cubes works, those are best covered by the articles I linked to earlier, but I did want to give a high level overview of what's going on.  Here's a simplified version of the styles applied to each of the sides of the cube.
 
-``` css Basic Styling
+<pre class="language-css"><code>
 /* Vendor prefixes removed for readability */
 .cube .front {
 	/* No X/Y rotation needed since the front is */
@@ -67,7 +67,7 @@ I'm not going to go into the full details of how the styling to create the cubes
 .cube .bottom {
 	transform: rotateX( -90deg );
 }
-```
+</code></pre>
 
 The front side doesn't need to be rotated since it's already facing the screen front and center, but all the other sides need to be rotated on either the X or Y axis to create the cube.  For example, the back side is rotated on the X axis -180 degrees so that it faces directly away from the screen.  
 
@@ -93,7 +93,7 @@ Although I won't get into how the Z axis is used here, it's perhaps the hardest 
 
 So the 6 sides themselves have now have been rotated to form the cube.  In order to show various sides of the cube to the user, the cube itself needs to be rotated to move the appropriate side to the front.  This will be done by applying classes to the cube, one for each side.
 
-``` css Basic Classes for Rotation
+<pre class="language-css"><code>
 /* Vendor prefixes removed for readability */
 .cube.show-front {
 	/* No X/Y translation is necessary */
@@ -113,8 +113,7 @@ So the 6 sides themselves have now have been rotated to form the cube.  In order
 .cube.show-bottom {
 	transform: rotateX( 90deg );
 }
-```
-
+</code></pre>
 
 ### Designing an API
 
@@ -122,7 +121,7 @@ Now we have a cube but nothing to use to interact with it.  At the very least we
 
 I started with a constructor function that takes the necessary information, a DOM node and an array of the URLs for the images to use on the cube.
 
-``` javascript PictureCube Constructor
+<pre class="language-javascript"><code>
 /**
  * @param node {DOMNode|string} The node to turn into the cube 
  *             or the id attribute of the node
@@ -130,17 +129,17 @@ I started with a constructor function that takes the necessary information, a DO
  *               of the images to place in the cube
  */
 PictureCube = function( node, images ) { };
-```
+</code></pre>
 
 For convenience's sake I allow the user to pass in either a String id attribute of a DOM node or the node itself.  A quick conversion internally will make it so I only have to deal with the node.
 
-``` javascript Getting the Node
+<pre class="language-javascript"><code>
 typeof node == 'string' ? document.getElementById(node) : node
-```
+</code></pre>
 
 Next you need to be able to do things with the cube.  The things I wanted to do were the ability to go to a particular side, cycle through the sides at some interval, and the ability to clear that interval.
 
-``` javascript Methods
+<pre class="language-javascript"><code>
 /**
  * @param slide {number} The number of the side to change the 
  *              cube to.
@@ -154,30 +153,30 @@ PictureCube.prototype.goto = function(side) {}
 PictureCube.prototype.cycle = function(interval) {};
 
 PictureCube.prototype.clearCycle = function() {};
-```
+</code></pre>
 
 So to create the cube you call the constructor with the node you want the cube to be in and the images you want to be on the various sides of the cube.
 
-``` javascript Instantiating a Cube
+<pre class="language-javascript"><code>
 var myCube = new PictureCube(
 	document.getElementById('cube-container'), 
 	['1.jpg', '2.jpg', '3.jpg', '4.jpg', '5.jpg', '6.jpg']
 ]);
-```
+</code></pre>
 
 Then you can simply call the methods provided.
 
-``` javascript Calling the Available Methods
+<pre class="language-javascript"><code>
 myCube.goto(2);
 myCube.cycle(2000);
 myCube.clearCycle();
-```
+</code></pre>
 
 ### What's with the prototype?
 
 The methods are added to the function's prototype so PictureCube can be extended.  As an example here's an AwesomeCube extension that inherits functionality from PictureCube, and adds on an additional awesome method.
 
-``` javascript Extending PictureCube
+<pre class="language-javascript"><code>
 AwesomeCube = function(node, images) {
     PictureCube.apply(this, [node, images]);
 };
@@ -187,7 +186,7 @@ AwesomeCube.prototype.awesome = function() {
     //and this.clearCycle are available to the new
     //function.
 };
-```
+</code></pre>
 
 Line 1 defines AwesomeCube's constructor function with the same parameters as PictureCube.  It then invokes PictureCube's constructor using [function.apply](https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Function/apply).  The apply function is defined in [Function.prototype](https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Function#Methods), and essentially allows you to control what the value of <code>this</code> will be in the function being invoked.  This technique is actually [a common way of implementing Java-like super calls to chain constructors](https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Function/apply#Using_apply_to_chain_constructors).
 

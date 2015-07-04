@@ -8,22 +8,22 @@ categories: [CSS]
 
 What color will the number 3 be in the example below?
 
-``` html
-<style>
+<pre class="language-markup"><code>
+&lt;style&gt;
     td { color: red; }
     td[colspan=2] { color: blue; }
-</style>
+&lt;/style&gt;
 
-<table>
-    <tr>
-        <td colspan="2">1</td>
-    </tr>
-    <td>
-        <td>2</td>
-        <td>3</td>
-    </tr>
-</table>
-```
+&lt;table&gt;
+    &lt;tr&gt;
+        &lt;td colspan="2"&gt;1&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;td&gt;
+        &lt;td&gt;2&lt;/td&gt;
+        &lt;td&gt;3&lt;/td&gt;
+    &lt;/tr&gt;
+&lt;/table&gt;
+</code></pre>
 
 Turns out it will be red because the `td[colspan=2]` selector does not match it.  Why?
 

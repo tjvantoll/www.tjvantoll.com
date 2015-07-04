@@ -12,16 +12,16 @@ If no parents have a `text-transform` property defined, the element will take on
 
 Where it gets interesting is that all browsers define default `text-transform` properties for certain form elements.  What does this mean?  <!--more-->Let's say you have the following markup:
 
-``` html
-<style>
+<pre class="language-markup"><code>
+&lt;style&gt;
     div { text-transform: uppercase; }
-</style>
+&lt;/style&gt;
 
-<div>
-    <input type="text" value="foo" />
-    <input type="submit" value="bar" />
-</div>
-```
+&lt;div&gt;
+    &lt;input type="text" value="foo" /&gt;
+    &lt;input type="submit" value="bar" /&gt;
+&lt;/div&gt;
+</code></pre>
 
 Both `foo` and `bar` will appear lowercased in all major browsers.  You can see this for yourself below:
 
@@ -90,29 +90,29 @@ The browser differences occur on the `button` and `select` elements.  Therefore,
 
 For example:
 
-``` html
-<!DOCTYPE html>
-<html>
-    <head>
-        <style>
+<pre class="language-markup"><code>
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+    &lt;head&gt;
+        &lt;style&gt;
             form { text-transform: uppercase; }
-        </style>
-    </head>
-    <body>
-        <form>
-            <!-- "foo" will be uppercase in IE, Firefox, and Opera -->
-            <!-- "foo" will be lowercase in WebKit based browsers -->
-            <button>foo</button>
+        &lt;/style&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+        &lt;form&gt;
+            &lt;!-- "foo" will be uppercase in IE, Firefox, and Opera --&gt;
+            &lt;!-- "foo" will be lowercase in WebKit based browsers --&gt;
+            &lt;button&gt;foo&lt;/button&gt;
 
-            <!-- "bar" will be uppercase in Firefox and Opera -->
-            <!-- "bar" will be lowercase in IE and WebKit based browsers -->
-            <select>
-                <option>bar</option>
-            </select>
-        </form>
-    </body>
-</html>
-```
+            &lt;!-- "bar" will be uppercase in Firefox and Opera --&gt;
+            &lt;!-- "bar" will be lowercase in IE and WebKit based browsers --&gt;
+            &lt;select&gt;
+                &lt;option&gt;bar&lt;/option&gt;
+            &lt;/select&gt;
+        &lt;/form&gt;
+    &lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
 
 ### Consistency
 
@@ -120,13 +120,13 @@ You could make arguments as to whether the user agent stylesheets *should* be de
 
 Therefore to get consistent behavior you would *think* you would need to set the default value of `button` and `select` elements to either `none` or `inherit`.
 
-``` css
+<pre class="language-css"><code>
 /* Option 1 - Don't inherit values in all browsers */
 button, select { text-transform: none; }
 
 /* Option 2 - Inherit values in all browsers */
 button, select { text-transform: inherit; }
-```
+</code></pre>
 
 But unfortunately for whatever reason Option 2 doesn't work on the `<select>` in IE <= 7, Safari, and most interestingly, doesn't take effect in Chrome until you click on `<select>`.  You can verify this behavior for yourself below:
 
@@ -134,9 +134,9 @@ But unfortunately for whatever reason Option 2 doesn't work on the `<select>` in
 
 Fortunately Option 1 does indeed produce the same behavior in IE6+, Firefox, Chrome, Safari, and Opera.  Therefore to normalize `text-transform` you need to include the following in your stylesheet.
 
-``` css Cross Browser text-transform Goodness
+<pre class="language-css"><code>
 button, select { text-transform: none; }
-```
+</code></pre>
 
 #### Update (January 21st, 2013)
 

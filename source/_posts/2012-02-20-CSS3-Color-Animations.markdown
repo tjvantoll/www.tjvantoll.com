@@ -16,7 +16,7 @@ Let's start with a basic example (note - Whether or not you see the animation de
 
 Let's break this down how this works one section at a time.
 
-``` css Animation CSS
+<pre class="language-css"><code>
 div {
 	-webkit-animation: color_change 1s infinite alternate;
 	-moz-animation: color_change 1s infinite alternate;  
@@ -24,7 +24,7 @@ div {
 	-o-animation: color_change 1s infinite alternate;
 	animation: color_change 1s infinite alternate;   
 }
-```
+</code></pre>
 
 The <code>animation</code> property is how you define a [CSS3 animation](https://developer.mozilla.org/en/CSS/CSS_animations).  The [MDN](https://developer.mozilla.org/en-US/) (Mozilla Developer Network) docs have extensive documentation on all the various sub properties available to configure the animation [here](https://developer.mozilla.org/en/CSS/CSS_animations#Configuring_the_animation).  In this example I'm setting…
 
@@ -35,7 +35,7 @@ The <code>animation</code> property is how you define a [CSS3 animation](https:/
 
 For readability you can also list the properties out individually.
 
-``` css Animation broken out
+<pre class="language-css"><code>
 /* Note: Prefixes omitted, see below */
 div {
 	animation-name: color_change;
@@ -43,7 +43,7 @@ div {
 	animation-iteration-count: infinite;
 	animation-direction: alternate;
 }
-```
+</code></pre>
 
 ### Prefixes
 
@@ -57,7 +57,7 @@ Browser prefixes have been been a hot topic lately after it was announced that I
 
 ### Keyframes
 
-``` css Keyframe Declarations
+<pre class="language-css"><code>
 @-webkit-keyframes color_change {
 	from { background-color: blue; }
 	to { background-color: red; }
@@ -78,44 +78,44 @@ Browser prefixes have been been a hot topic lately after it was announced that I
 	from { background-color: blue; }
 	to { background-color: red; }
 }
-```
+</code></pre>
 
 [Keyframes](https://developer.mozilla.org/en/CSS/@keyframes) are a way of specifying a set of properties and their values at different states of an animation.  <code>@keyframes color_change</code> gives the @keyframes a name of <code>color_change</code>.  This provides the connection used on the animation property above.
 
-``` css
+<pre class="language-css"><code>
 from { background-color: blue; }
 to { background-color: red; }
-```
+</code></pre>
 
 This animation only has 2 steps, a start and an end.  Since such animations are quite common, the [spec](http://www.w3.org/TR/css3-animations/#keyframes-) provides the keywords <code>from</code> and <code>to</code> for defining the state of properties at the beginning and end of the animation.  This could also have been written using percentages for the steps.
 
-``` css
+<pre class="language-css"><code>
 0% { background-color: blue; }
 100% { background-color: red; }
-```
+</code></pre>
 
 If the animation has more than 2 steps, they can be listed using multiple steps as such.
 
-``` css
+<pre class="language-css"><code>
 0% { background-color: blue; }
 25% { background-color: orange; }
 50% { background-color: yellow; }
 75% { background-color: black; }
 100% { background-color: red; }
-```
+</code></pre>
 
 ### Real World Example
 
 Since the first demo was rather contrived, I thought I'd provide an example of how you could use this technique in the real world.  On buttons, a common UI pattern is to provide the user with visual feedback that they're on the button by applying a subtle color change.  This is usually done by applying a different <code>background-color</code> on the hover pseudoclass of the button as such:
 
-``` css
+<pre class="language-css"><code>
 button {
 	background-color: pink;
 }
 button:hover {
 	background-color: hotpink;
 }
-```
+</code></pre>
 
 To improve upon this, we can add a CSS 3 color animation to gradually make the color transition.  The following example shows each side by side:
 
@@ -127,7 +127,7 @@ Since CSS3 animations are only present in modern browsers, there's a good chance
 
 In the button example above if the browser can't perform the animation, the animated button will simply fallback on the hover button's behavior.
 
-``` css Color Animation with Fallback
+<pre class="language-css"><code>
 button {
 	background-color: pink;
 }
@@ -141,13 +141,13 @@ button:hover {
 	/* Note: I've omitted the vendor prefixes for simplicity. */
 	animation: color_change 1s;
 }
-```
+</code></pre>
 
 ### Detect Support and Polyfill
 
 If you have a CSS color animation that you absolutely must have work on all browsers back to IE6, you can do so by detecting support via [Modernizr](http://modernizr.com), and falling back to [jQuery UI's animation](http://jqueryui.com/demos/animate/).
 
-``` javascript Fallback Behavior with jQuery UI
+<pre class="language-javascript"><code>
 if (!Modernizr.cssanimation) {
 	$('button').on('mouseover', function() {
 		//jQuery UI doesn't support the hotpink keyword :(
@@ -157,7 +157,7 @@ if (!Modernizr.cssanimation) {
 		$(this).css('backgroundColor', 'pink');
 	});
 }
-```
+</code></pre>
 
 Live example (this should work across all browsers):
 
@@ -169,12 +169,12 @@ If the jQuery UI approach already works cross browser why would you bother doing
 * Users with JavaScript disabled will still see the animation.
 * If you're only using jQuery & jQuery UI for this animation you can save yourself two HTTP requests by using [Modernizr's load function](http://www.modernizr.com/docs/#load).  This will first test whether the browser supports CSS animations, if it does nothing needs to be done, if it doesn't all scripts listed in the <code>nope</code> parameter will be loaded.
 
-``` javascript Conditionally Loading jQuery UI
+<pre class="language-javascript"><code>
 Modernizr.load({
 	test: Modernizr.cssanimation,
 	nope: ['jquery.js', 'jquery-ui']
 });
-```
+</code></pre>
 
 ### Summary
 

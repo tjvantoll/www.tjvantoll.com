@@ -15,14 +15,14 @@ Print stylesheets are great for making presentational changes for printing, but 
 
 IE5+ fires `onbeforeprint` and `onafterprint` events before and after the user requests the page to be printed.
 
-``` javascript onbeforeprint and onaferprint
+<pre class="language-javascript"><code>
 window.onbeforeprint = function() {
     console.log('This will be called before the user prints.');
 };
 window.onafterprint = function() {
     console.log('This will be called after the user prints');   
 };
-```
+</code></pre>
 
 These events are not part of any specification but they are very convenient.  Because of this [Firefox added support for both events in version 6](https://developer.mozilla.org/en/DOM/window.onbeforeprint#Browser_compatibility).  However, WebKit and Opera do not support the events.  Therefore, for cross browser compatibility these events aren't going to cut it.
 
@@ -34,17 +34,17 @@ WebKit has a bug (#[19937](https://bugs.webkit.org/show_bug.cgi?id=19937)) out t
 
 The `window.matchMedia` [API](https://developer.mozilla.org/en/DOM/window.matchMedia) provides a means of determining whether the current `document` matches a given [media query](https://developer.mozilla.org/En/CSS/Media_queries).  For example:
 
-``` javascript window.matchMedia
+<pre class="language-javascript"><code>
 if (window.matchMedia(' (min-width: 600px) ').matches) {  
     console.log('The viewport is at least 600 pixels wide');
 } else { 
     console.log('The viewport is less than 600 pixels wide');
 } 
-```
+</code></pre>
 
 You can also use this API to add listeners that will be fired whenever the result of the media query changes.  In the above example the `matches` criteria will be met whenever the viewport is at least 600px wide.  If you wanted to receive notifications whenever the viewport crossed the 600px threshold you could use the following.
 
-``` javascript window.matchMedia with notifications
+<pre class="language-javascript"><code>
 var mediaQueryList = window.matchMedia(' (min-width: 600px) ');
 mediaQueryList.addListener(function(mql) {
     if (mql.matches) {
@@ -53,7 +53,7 @@ mediaQueryList.addListener(function(mql) {
         console.log('The viewport is less than 600 pixels wide');
     }
 });
-```
+</code></pre>
 
 [If your browser supports window.matchMedia](http://caniuse.com/#feat=matchmedia) you can see this behavior live below by resizing your browser window under 600px on the following demo:
 
@@ -61,7 +61,7 @@ mediaQueryList.addListener(function(mql) {
 
 Interestingly, it turns out you can also use this same technique to listen for the ```print``` media being applied when the user requests the document to be printed ([hat tip to Ben Wells](http://code.google.com/p/chromium/issues/detail?id=105743)):
 
-``` javascript Using window.matchMedia to detecting print requests
+<pre class="language-javascript"><code>
 var mediaQueryList = window.matchMedia('print');
 mediaQueryList.addListener(function(mql) {
     if (mql.matches) {
@@ -70,7 +70,7 @@ mediaQueryList.addListener(function(mql) {
         console.log('onafterprint equivalent');
     }
 });
-```
+</code></pre>
 
 This works great in Chrome 9+ and Safari 5.1 (with the exception of the fact that the [listeners fire twice in Chrome](http://code.google.com/p/chromium/issues/detail?id=105743)).  However, it doesn't work in Firefox or IE10, even though they both support ```window.matchMedia```.  
 
@@ -82,7 +82,7 @@ I created a bug on Firefox's issue tracker for this defect - [https://bugzilla.m
 
 If you combine the two approaches you can detect print requests in IE 5+, Firefox 6+, Chrome 9+, and Safari 5.1+ (unfortunately Opera doesn't support either approach).
 
-``` javascript Cross browser print request detection
+<pre class="language-javascript"><code>
 (function() {
     var beforePrint = function() {
         console.log('Functionality to run before printing.');
@@ -105,7 +105,7 @@ If you combine the two approaches you can detect print requests in IE 5+, Firefo
     window.onbeforeprint = beforePrint;
     window.onafterprint = afterPrint;
 }());
-```
+</code></pre>
 
 Note that your event handlers might potentially have to deal with the fact that they're going to be called twice per print request in Chrome.
 
@@ -123,10 +123,10 @@ The [technique to work around this](http://www.alistapart.com/articles/hiresprin
 
 With the ability to detect print requests in JavaScript you can substitute the higher quality image on the fly when the user requests the page to be printed.
 
-``` html Substituting higher quality images when printing
-<img src="low-quality.jpg" id="company_logo" alt="My Company" />
+<pre class="language-markup"><code>
+&lt;img src="low-quality.jpg" id="company_logo" alt="My Company" /&gt;
 
-<script>
+&lt;script&gt;
     (function() {
         var upgradeImage = function() {
             document.getElementById('company_logo')
@@ -140,8 +140,8 @@ With the ability to detect print requests in JavaScript you can substitute the h
 
         window.onbeforeprint = upgradeImage;
     });
-</script>
-```
+&lt;/script&gt;
+</code></pre>
 
 The nice thing about this approach is that users that never print will not have to download the high quality image.  This technique also degrades nicely; users with browsers that don't support the print events will simply print the lower quality image.
 
@@ -149,8 +149,7 @@ The nice thing about this approach is that users that never print will not have 
 
 Print events can also be used to track the number of times users print pages within a site or application.  Because of the lack of total browser support you wouldn't capture every print request, but this would be sufficient for getting a rough idea of how often people are printing.
 
-``` javascript Tracking Print Requests
-(function() {
+<pre class="language-javascript line-numbers"><code>(function() {
     var afterPrint = function() {
         // Here you would send an AJAX request to the server to track that a page
         // has been printed.  You could additionally pass the URL if you wanted to
@@ -167,8 +166,7 @@ Print events can also be used to track the number of times users print pages wit
     }
 
     window.onafterprint = afterPrint;
-}());
-```
+}());</code></pre>
 
 ### So can I use this in a "real" application?
 
@@ -180,11 +178,10 @@ Can you think of any other practical uses of detecting print requests in JavaScr
 
 Per the comments I've found that in addition to all the bugs mentioned above, certain browsers trigger the after print event early (with either `onafterprint` or the `window.matchMedia` handler implementation).
 
-``` html
-<!DOCTYPE html>
-<html>
-    <head>
-        <script>
+<pre class="language-markup line-numbers"><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+    &lt;head&gt;
+        &lt;script&gt;
             var beforePrint = function() {
                 document.getElementById('printImage').src = 
                     'http://stackoverflow.com/favicon.ico';
@@ -207,13 +204,12 @@ Per the comments I've found that in addition to all the bugs mentioned above, ce
 
             window.onbeforeprint = beforePrint;
             window.onafterprint = afterPrint;
-        </script>
-    </head>
-    <body>
-        <img id="printImage" src="http://google.com/favicon.ico" />
-    </body>
-</html>
-```
+        &lt;/script&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+        &lt;img id="printImage" src="http://google.com/favicon.ico" /&gt;
+    &lt;/body&gt;
+&lt;/html&gt;</code></pre>
 
 When printing the above document you would expect Stack Overflow's favicon to print, when in actuality Google's favicon prints.  Both events fire, but the after print event fires before the printing actually occurs, which in this case reverts the changes made in the before print event.
 

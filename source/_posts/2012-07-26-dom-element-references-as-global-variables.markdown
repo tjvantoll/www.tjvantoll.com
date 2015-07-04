@@ -8,17 +8,17 @@ categories: [JavaScript, Browsers]
 
 Quiz: What is logged when the following markup is rendered?
 
-``` html
-<html>
-    <head></head>
-    <body>
-        <button id="bar">Button</button>
-        <script>
+<pre class="language-markup"><code>
+&lt;html&gt;
+    &lt;head&gt;&lt;/head&gt;
+    &lt;body&gt;
+        &lt;button id="bar"&gt;Button&lt;/button&gt;
+        &lt;script&gt;
             console.log(bar);
-        </script>
-    </body>
-</html>
-```
+        &lt;/script&gt;
+    &lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
 
 [ReferenceError](https://developer.mozilla.org/en-US/docs/JavaScript/Reference/Global_Objects/ReferenceError) obviously, right?  Wrong.  All major browser rendering engines will log a reference to the `<button>` node.  This includes Trident (IE), Gecko (Firefox), WebKit (Chrome, Safari, etc), and Presto (Opera).
 
@@ -26,18 +26,18 @@ Quiz: What is logged when the following markup is rendered?
 
 Ah, I get it, there's no doctype on that markup.  So this a quirks mode only thing then right?  Wrong.  [As of Firefox 14](https://bugzilla.mozilla.org/show_bug.cgi?id=622491) the latest version of all major browsers will produce the same result IN STANDARDS MODE.
 
-``` html
-<!DOCTYPE html>
-<html>
-    <head></head>
-    <body>
-        <button id="bar">Button</button>
-        <script>
-            console.log(bar); //Reference to <button>, even in standards mode
-        </script>
-    </body>
-</html>
-```
+<pre class="language-markup"><code>
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+    &lt;head&gt;&lt;/head&gt;
+    &lt;body&gt;
+        &lt;button id="bar"&gt;Button&lt;/button&gt;
+        &lt;script&gt;
+            console.log(bar); //Reference to &lt;button&gt;, even in standards mode
+        &lt;/script&gt;
+    &lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
 
 <!--more-->
 
@@ -76,23 +76,23 @@ I've alluded to the fact that this behavior is bad, but I've haven't gotten into
 
 Let's say you have some code that looks something like this:
 
-``` html
-<html>
-    <head></head>
-    <body>
-        <input type="text" id="choice"></button>
-        <script>
+<pre class="language-markup"><code>
+&lt;html&gt;
+    &lt;head&gt;&lt;/head&gt;
+    &lt;body&gt;
+        &lt;input type="text" id="choice"&gt;&lt;/button&gt;
+        &lt;script&gt;
             var choice = 'foo';
             //Lots more JavaScript
             doSomethingVeryComplicated(choice);
-        </script>
-    </body>
-</html>
-```
+        &lt;/script&gt;
+    &lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
 
 Since a global `choice` variable is being created, `window.choice` will resolve to the string `foo` and not a reference to the `<input>`.  This is because the `<input>` reference is being [shadowed](http://en.wikipedia.org/wiki/Variable_shadowing) by the variable declaration.  This works the same way as a variable with the same name being declared in a nested function.
 
-``` javascript
+<pre class="language-javascript"><code>
 (function() {
     var x = 2;
     var y = function() {
@@ -103,7 +103,7 @@ Since a global `choice` variable is being created, `window.choice` will resolve 
     };
     y();
 }());
-```
+</code></pre>
 
 This is all well and good.  However, let's say that during a refactor of this code the `var choice = 'foo';` line is accidentally removed.  Under normal circumstances this would cause a ReferenceError because `window.choice` would now be undefined.  However, because there is a DOM node with an `id` of `choice`, that reference will now refer to the DOM node instead.  This can easily lead to unexpected behavior.
 
@@ -133,20 +133,20 @@ Even though this is behavior is now standardized, there are still browser quirks
 
 IE will (incorrectly) make the `name` attribute of form elements available on the `window` object.
 
-``` html
-<!DOCTYPE html>
-<html>
-    <head></head>
-    <body>
-        <input name="foo" />
-        <script>
-            //Logs a reference to the <input> in IE.
+<pre class="language-markup"><code>
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+    &lt;head&gt;&lt;/head&gt;
+    &lt;body&gt;
+        &lt;input name="foo" /&gt;
+        &lt;script&gt;
+            //Logs a reference to the &lt;input&gt; in IE.
             //ReferenceError in all other rendering engines.
             console.log(foo);
-        </script>
-    </body>
-</html>
-```
+        &lt;/script&gt;
+    &lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
 
 > **Update**: Microsoft's Edge browser no longer exhibits this behavior. Also, this behavior is not present when the `<input>` resides within a `<form>` element.
 
@@ -154,20 +154,20 @@ IE will (incorrectly) make the `name` attribute of form elements available on th
 
 Per the spec, `<a>` tags should be accessible on the `window` object via the value of their `name` attribute.  However, this only works in IE and Opera.
 
-``` html
-<!DOCTYPE html>
-<html>
-    <head></head>
-    <body>
-        <a name="foo"></a>
-        <script>
-            //Logs a reference to the <a> in IE and Opera.
+<pre class="language-markup"><code>
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+    &lt;head&gt;&lt;/head&gt;
+    &lt;body&gt;
+        &lt;a name="foo"&gt;&lt;/a&gt;
+        &lt;script&gt;
+            //Logs a reference to the &lt;a&gt; in IE and Opera.
             //ReferenceError in Gecko and WebKit.
             console.log(foo);
-        </script>
-    </body>
-</html>
-```
+        &lt;/script&gt;
+    &lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
 
 ##### Multiple Named Attributes with the Same Value
 
@@ -181,19 +181,19 @@ Otherwise return an HTMLCollection rooted at the Document node, whose filter mat
 
 What this is staying is that when there are multiple named properties with the same name, the browser should return an array when that property is referenced (instead of a reference to a specific DOM node).  As an example given this markup:
 
-``` html
-<!DOCTYPE html>
-<html>
-    <head></head>
-    <body>
-        <input id="one">
-        <input id="one">
-        <script>
+<pre class="language-markup"><code>
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+    &lt;head&gt;&lt;/head&gt;
+    &lt;body&gt;
+        &lt;input id="one"&gt;
+        &lt;input id="one"&gt;
+        &lt;script&gt;
             console.log(one);
-        </script>
-    </body>
-</html>
-```
+        &lt;/script&gt;
+    &lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
 
 ...an array with references to the two `<input>` nodes should be logged per the spec.  And it will be in all browsers except Firefox.  Firefox 14 will simply log the first element.
 
@@ -207,32 +207,32 @@ These are simply the bugs that I've ran into, I'm sure there are more.  If you k
 
 [ECMAScript 5 strict mode](https://developer.mozilla.org/en/JavaScript/Strict_mode) prevents you assigning values to variables before they are declared.  Therefore this...
 
-``` javascript
+<pre class="language-javascript"><code>
 (function() {
     foo = 2; 
 }());
-```
+</code></pre>
 
 will execute just fine whereas this...
 
-``` javascript
+<pre class="language-javascript"><code>
 (function() {
     'use strict';
     foo = 2; 
 }());
-```
+</code></pre>
 
 ...will produce a ReferenceError that `foo` is not defined.  This is great, but it will not stop you from accessing named properties on the `window` object.
 
-``` html
-<div id="foo"></div>
-<script>
+<pre class="language-markup"><code>
+&lt;div id="foo"&gt;&lt;/div&gt;
+&lt;script&gt;
     (function() {
         'use strict';
         console.log(foo);
     });
-</script>
-```
+&lt;/script&gt;
+</code></pre>
 
 This will log a reference to the `<div>` in standards mode in the latest version of all modern browsers.  Strict mode will only prevent you from assigning values to variables that have yet to be declared.  If you're simply using a variable then strict mode doesn't protect you.  Therefore, you're not prevented from accessing name properties on the global `window` object.
 
@@ -240,24 +240,24 @@ This will log a reference to the `<div>` in standards mode in the latest version
 
 Use `document.getElementById` to retrieve references to DOM nodes via their `id` attribute.
 
-``` html
-<button id="foo"></button>
+<pre class="language-markup"><code>
+&lt;button id="foo"&gt;&lt;/button&gt;
 
-<script>
+&lt;script&gt;
     document.getElementById('foo');
-</script>
-```
+&lt;/script&gt;
+</code></pre>
 
 To get a reference to a DOM node via its `name` attribute you can use `document.getElementsByName` or `document.querySelectorAll`.
 
-``` html
-<a name="bar"></a>
+<pre class="language-markup"><code>
+&lt;a name="bar"&gt;&lt;/a&gt;
 
-<script>
+&lt;script&gt;
     document.getElementsByName('bar');
     document.querySelectorAll('[name=bar]');
-</script>
-```
+&lt;/script&gt;
+</code></pre>
 
 `document.querySelectorAll` is not safe to use in IE <= 8, but `document.getElementsByName` is safe to use in all browsers.
 

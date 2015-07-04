@@ -60,26 +60,25 @@ To make things even easier browsers provide an [:invalid pseduoselector](https:/
 
 Here's how I accomplished this with a jQuery dependent script.
 
-``` html
-<form>
-    <ul class="errorMessages"></ul>
+<pre class="language-markup line-numbers"><code>&lt;form&gt;
+    &lt;ul class="errorMessages"&gt;&lt;/ul&gt;
     
-    <div>
-        <label for="name">Name:</label>
-        <input id="name" type="text" required>
-    </div>
+    &lt;div&gt;
+        &lt;label for="name"&gt;Name:&lt;/label&gt;
+        &lt;input id="name" type="text" required&gt;
+    &lt;/div&gt;
 
-    <div>
-        <label for="comments">Comments:</label>
-        <textarea id="comments" required></textarea>
-    </div>
+    &lt;div&gt;
+        &lt;label for="comments"&gt;Comments:&lt;/label&gt;
+        &lt;textarea id="comments" required&gt;&lt;/textarea&gt;
+    &lt;/div&gt;
     
-    <div class="buttons">
-        <button>Submit</button>
-    </div>
-</form>​
+    &lt;div class="buttons"&gt;
+        &lt;button&gt;Submit&lt;/button&gt;
+    &lt;/div&gt;
+&lt;/form&gt;​
 
-<script>
+&lt;script&gt;
     var createAllErrors = function() {
         var form = $( this ),
             errorList = $( "ul.errorMessages", form );
@@ -97,7 +96,7 @@ Here's how I accomplished this with a jQuery dependent script.
 
                 errorList
                     .show()
-                    .append( "<li><span>" + label.html() + "</span> " + message + "</li>" );
+                    .append( "&lt;li&gt;&lt;span&gt;" + label.html() + "&lt;/span&gt; " + message + "&lt;/li&gt;" );
             });
         };
 
@@ -122,8 +121,8 @@ Here's how I accomplished this with a jQuery dependent script.
     };
     
     $( "form" ).each( createAllErrors );
-</script>
-```
+&lt;/script&gt;
+</code></pre>
 
 You can see the results in your browser below:
 

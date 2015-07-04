@@ -7,11 +7,11 @@ categories: [Browsers, CSS]
 
 Form fields can be disabled by simply adding the <code>disabled</code> attribute.  
 
-``` html Simple Disabled Fields
-<input type="text" disabled />
-<textarea disabled></textarea>
-<select disabled></select>
-```
+<pre class="language-markup"><code>
+&lt;input type="text" disabled /&gt;
+&lt;textarea disabled&gt;&lt;/textarea&gt;
+&lt;select disabled&gt;&lt;/select&gt;
+</code></pre>
 
 Disabled fields cannot be interacted with by the user; the browser will not allow the field to receive focus or be tabbed to.  For an intuitive UI it's important that disabled fields are clearly evident to the user.  Users are easily confused and frustrated when attempting to interact with fields that they are not able to.
 
@@ -27,72 +27,68 @@ Here's the markup I used for the test cases, some very basic form fields with th
 
 #### No Value / Selected Attributes
 
-``` html Markup Used to Generate the Examples http://jsfiddle.net/ygwnh/12/
-<table>
-    <thead>
-        <tr>
-            <th>Enabled</th>
-            <th>Disabled</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td><input type="text" /></td>
-            <td><input type="text" disabled /></td>
-        </tr>
-        <tr>
-            <td><input type="checkbox" /></td>
-            <td><input type="checkbox" disabled /></td>
-        </tr>
-        <tr>
-            <td><input type="radio" /></td>
-            <td><input type="radio" disabled /></td>
-        </tr>
-        <tr>
-            <td><select></select></td>
-            <td><select disabled></select></td>
-        </tr>
-        <tr>
-            <td><textarea></textarea></td>
-            <td><textarea disabled></textarea></td>
-        </tr>
-    </tbody>
-</table>
-```
+<pre class="language-markup line-numbers"><code>&lt;table&gt;
+    &lt;thead&gt;
+        &lt;tr&gt;
+            &lt;th&gt;Enabled&lt;/th&gt;
+            &lt;th&gt;Disabled&lt;/th&gt;
+        &lt;/tr&gt;
+    &lt;/thead&gt;
+    &lt;tbody&gt;
+        &lt;tr&gt;
+            &lt;td&gt;&lt;input type="text" /&gt;&lt;/td&gt;
+            &lt;td&gt;&lt;input type="text" disabled /&gt;&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;td&gt;&lt;input type="checkbox" /&gt;&lt;/td&gt;
+            &lt;td&gt;&lt;input type="checkbox" disabled /&gt;&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;td&gt;&lt;input type="radio" /&gt;&lt;/td&gt;
+            &lt;td&gt;&lt;input type="radio" disabled /&gt;&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;td&gt;&lt;select&gt;&lt;/select&gt;&lt;/td&gt;
+            &lt;td&gt;&lt;select disabled&gt;&lt;/select&gt;&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;td&gt;&lt;textarea&gt;&lt;/textarea&gt;&lt;/td&gt;
+            &lt;td&gt;&lt;textarea disabled&gt;&lt;/textarea&gt;&lt;/td&gt;
+        &lt;/tr&gt;
+    &lt;/tbody&gt;
+&lt;/table&gt;</code></pre>
 
 #### With Value / Selected Attributes
 
-``` html Markup Used to Generate the Examples http://jsfiddle.net/ygwnh/12/
-<table>
-    <thead>
-        <tr>
-            <th>Enabled w/Value</th>
-            <th>Disabled w/Value</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td><input type="text" value="Value" /></td>
-            <td><input type="text" disabled value="Value"></td>
-        <tr>
-            <td><input type="checkbox" checked /></td>
-            <td><input type="checkbox" disabled checked /></td>
-        </tr>
-        <tr>
-            <td><input type="radio" checked /></td>
-            <td><input type="radio" disabled checked /></td>
-        </tr>
-        <tr>
-            <td><select><option selected>Value</option></select></td>
-            <td><select disabled><option selected>Value</option></select></td>
-        </tr>
-        <tr>
-            <td><textarea>Value</textarea></td>
-            <td><textarea disabled>Value</textarea></td>
-        </tr>
-    </tbody>
-</table>    
-```
+<pre class="language-markup line-numbers"><code>&lt;table&gt;
+    &lt;thead&gt;
+        &lt;tr&gt;
+            &lt;th&gt;Enabled w/Value&lt;/th&gt;
+            &lt;th&gt;Disabled w/Value&lt;/th&gt;
+        &lt;/tr&gt;
+    &lt;/thead&gt;
+    &lt;tbody&gt;
+        &lt;tr&gt;
+            &lt;td&gt;&lt;input type="text" value="Value" /&gt;&lt;/td&gt;
+            &lt;td&gt;&lt;input type="text" disabled value="Value"&gt;&lt;/td&gt;
+        &lt;tr&gt;
+            &lt;td&gt;&lt;input type="checkbox" checked /&gt;&lt;/td&gt;
+            &lt;td&gt;&lt;input type="checkbox" disabled checked /&gt;&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;td&gt;&lt;input type="radio" checked /&gt;&lt;/td&gt;
+            &lt;td&gt;&lt;input type="radio" disabled checked /&gt;&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;td&gt;&lt;select&gt;&lt;option selected&gt;Value&lt;/option&gt;&lt;/select&gt;&lt;/td&gt;
+            &lt;td&gt;&lt;select disabled&gt;&lt;option selected&gt;Value&lt;/option&gt;&lt;/select&gt;&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;td&gt;&lt;textarea&gt;Value&lt;/textarea&gt;&lt;/td&gt;
+            &lt;td&gt;&lt;textarea disabled&gt;Value&lt;/textarea&gt;&lt;/td&gt;
+        &lt;/tr&gt;
+    &lt;/tbody&gt;
+&lt;/table&gt;</code></pre>
 
 ### Results
 
@@ -135,30 +131,30 @@ To normalize the display of disabled fields in IE we need to be able to target I
 
 So back to selecting IE <= 9.  In my opinion the most elegant way to do this is use [IE's conditional comments](http://msdn.microsoft.com/en-us/library/ms537512.aspx) to apply classes to the HTML node.  This approach was [first proposed by Paul Irish in 2008](http://paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/) and is used in the [HTML5 boilerplate](http://html5boilerplate.com/).  There are many variations but in this case we only need to worry about IE <= 9.
 
-``` html Applying a Class to IE <= 9
-<!--[if lte IE 9 ]> <html class="lte9"> <![endif]-->
-<!--[if (gt IE 9)|!(IE)]><!--> <html class=""> <!--<![endif]-->
-```
+<pre class="language-markup"><code>
+&lt;!--[if lte IE 9 ]&gt; &lt;html class="lte9"&gt; &lt;![endif]--&gt;
+&lt;!--[if (gt IE 9)|!(IE)]&gt;&lt;!--&gt; &lt;html class=""&gt; &lt;!--&lt;![endif]--&gt;
+</code></pre>
 
 Then we can apply the <code>background-color</code> as such:
 
-``` css Normalizing the Disabled Field Display for Windows
+<pre class="language-css"><code>
 .lte9 input[type='text'][disabled], .lte9 textarea[disabled] {
 	background-color: #EBEBE4;
 }
-```
+</code></pre>
 
 Alternatively you could use IE's conditional comments to apply these rules directly:
 
-``` html Using IE's Conditional Comments
-<!--[if lte IE 9 ]>
-	<style>
+<pre class="language-markup"><code>
+&lt;!--[if lte IE 9 ]&gt;
+	&lt;style&gt;
 		input[type='text'][disabled], textarea[disabled] {
 			background-color: #EBEBE4;
 		}
-	</style>
-<!--<![endif]-->
-```
+	&lt;/style&gt;
+&lt;!--&lt;![endif]--&gt;
+</code></pre>
 
 Either of these approaches will normalize the display of disabled text inputs and textareas on Windows.
 
@@ -168,33 +164,34 @@ Either of these approaches will normalize the display of disabled text inputs an
 
 The above solution will not affect the display of these elements in IE6 because it does not support CSS attribute selectors.  Therefore, if you're still supporting IE6 and the display of disabled fields is important to your UI you'll need some other sort of hook on the node.  For example a class will work:
 
-``` html IE6 Disabled Field Markup
-<!--[if IE 6 ]> <html class="ie6"> <![endif]-->
-<!--[if (gt IE 6)|!(IE)]><!--> <html class=""> <!--<![endif]-->
+<pre class="language-markup"><code>
+&lt;!--[if IE 6 ]&gt; &lt;html class="ie6"&gt; &lt;![endif]--&gt;
+&lt;!--[if (gt IE 6)|!(IE)]&gt;&lt;!--&gt; &lt;html class=""&gt; &lt;!--&lt;![endif]--&gt;
 
 /* … */
 
-<input type="text" disabled class="disabled" />
-<textarea disabled class="disabled">
-```
+&lt;input type="text" disabled class="disabled" /&gt;
+&lt;textarea disabled class="disabled"&gt;
+&lt;/textarea&gt;&lt;/html&gt;
+</code></pre>
 
 Then you can apply the following CSS:
 
-``` css IE6 Disabled Field Styling
+<pre class="language-css"><code>
 .ie6 input.disabled, .ie6 textarea.disabled {
 	background-color: #EBEBE4;
 }
-```
+</code></pre>
 
 ### Other Issues
 
 A number of browsers including all OS X browsers except Opera, Android, and iOS do a poor job making textareas appear disabled, in some cases even when text is present.  If your UI contains disabled textareas it's probably worth adding a little bit of opacity to compensate for browsers that don't make it very apparent that you cannot interact with them.
 
-``` css Normalizing Textarea Disabling
+<pre class="language-css"><code>
 textarea:disabled {
 	opacity: 0.5;
 }
-```
+</code></pre>
 
 The effect is subtle but can make a big difference in helping the user to recognize that the field is disabled, especially if multiple textareas are near each other.  Here's an example from Chrome 17 on OS X:
 

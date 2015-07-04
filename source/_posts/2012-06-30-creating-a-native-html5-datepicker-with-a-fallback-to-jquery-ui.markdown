@@ -14,13 +14,13 @@ The recently released Chrome 20 features support for native datepickers on `<inp
 
 Using the native datepickers is easy, just change the `type` attribute of your date inputs from `text` to `date`.
 
-``` html Converting to a native HTML5 datepicker
-<!-- Before -->
-<input type="text">
+<pre class="language-markup"><code>
+&lt;!-- Before --&gt;
+&lt;input type="text"&gt;
 
-<!-- After -->
-<input type="date">
-```
+&lt;!-- After --&gt;
+&lt;input type="date"&gt;
+</code></pre>
 
 Here is what the user will see in supported browsers:
 
@@ -68,14 +68,14 @@ If any of this functionality is important to your application you'll probably wa
 
 [Modernizr](http://modernizr.com) gives you the ability to detect whether the browser supports native datepickers.  The following shows how you can use the native datepicker when available, and fallback to jQuery UI's picker in unsupported browsers.
 
-``` javascript Detect native support for datepickers and fallback to jQuery UI
+<pre class="language-javascript"><code>
 if (!Modernizr.inputtypes.date) {
     $('input[type=date]').datepicker({
         // Consistent format with the HTML5 picker
         dateFormat: 'yy-mm-dd'
     });
 }
-```
+</code></pre>
 
 You can see how your browser handles this situation here:
 
@@ -85,10 +85,10 @@ You can see how your browser handles this situation here:
 
 Another option I like is showing the native date picker only to users that are on touch capable devices.
 
-``` html Native picker for supported touch users only
-<input type="date">
+<pre class="language-markup"><code>
+&lt;input type="date"&gt;
 
-<script>
+&lt;script&gt;
     if (!Modernizr.touch || !Modernizr.inputtypes.date) {
         $('input[type=date]')
             .attr('type', 'text')
@@ -97,8 +97,8 @@ Another option I like is showing the native date picker only to users that are o
                 dateFormat: 'yy-mm-dd'
             });
     }
-</script>
-```
+&lt;/script&gt;
+</code></pre>
 
 This gives touch users with `input[type=date]` support the optimized UI / keyboard and everyone else jQuery UI's picker.
 

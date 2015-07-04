@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Creating Cross Browser Scrollable &lt;tbody&gt;s - A CSS Only Approach"
+title: "Creating Cross Browser Scrollable &lt;tbody&gt;s—A CSS-Only Approach"
 date: 2012-11-10 15:44
 comments: true
 categories: [CSS, HTML, Browsers]
@@ -32,21 +32,20 @@ When you set a `height` on a `<tbody>` Internet Explorer < 10 applies that `heig
 
 My workaround for this is to conditionally create a wrapper `<div>`.  When it's present I give it the `height` and `overflow` and remove the `height` from the `<tbody>`.
 
-``` html Wrap table for IE
-<style>
+<pre class="language-markup"><code>&lt;style&gt;
     .old_ie_wrapper { height: 300px; overflow: auto; }
     .old_ie_wrapper tbody { height: auto; }
-</style>
-<!--[if lte IE 9]>
-<div class="old_ie_wrapper">
-<!--<![endif]-->
-	<table>
-		<!-- Contents of the table -->
-	</table>
-<!--[if lte IE 9]>
-</div>
-<!--<![endif]-->
-```
+&lt;/style&gt;
+&lt;!--[if lte IE 9]&gt;
+&lt;div class="old_ie_wrapper"&gt;
+&lt;!--&lt;![endif]--&gt;
+	&lt;table&gt;
+		&lt;!-- Contents of the table --&gt;
+	&lt;/table&gt;
+&lt;!--[if lte IE 9]&gt;
+&lt;/div&gt;
+&lt;!--&lt;![endif]--&gt;
+</code></pre>
 
 The headers will scroll with the table body, but the table will at least be usable.  You could also create [conditional classes on the &lt;html&gt; tag](http://paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/) to handle this as well.
 
@@ -54,11 +53,10 @@ The headers will scroll with the table body, but the table will at least be usab
 
 Because the `<thead>` is relatively positioned each table cell needs an explicit `width`.
 
-``` css
-td:nth-child(1), th:nth-child(1) { width: 100px; }
+<pre class="language-css"><code>td:nth-child(1), th:nth-child(1) { width: 100px; }
 td:nth-child(2), th:nth-child(2) { width: 100px; }
 td:nth-child(3), th:nth-child(3) { width: 100px; }
-```
+</code></pre>
 
 But unfortunately that is not enough.  When a scrollbar is present browsers allocate space for it, therefore, the `<tbody>` ends up having less space available than the `<thead>`.  Notice the slight misalignment this creates:
 
@@ -66,11 +64,11 @@ But unfortunately that is not enough.  When a scrollbar is present browsers allo
 
 The only workaround I could come up with was to set a `min-width` on all columns except the last one.
 
-``` css
+<pre class="language-css"><code>
 td:nth-child(1), th:nth-child(1) { min-width: 100px; }
 td:nth-child(2), th:nth-child(2) { min-width: 100px; }
 td:nth-child(3), th:nth-child(3) { width: 100px; }
-```
+</code></pre>
 
 ### The Good
 

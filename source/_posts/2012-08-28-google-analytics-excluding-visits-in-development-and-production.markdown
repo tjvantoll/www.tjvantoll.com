@@ -27,8 +27,8 @@ Both these approaches seem especially silly considering how easy it is to simply
 
 If you test your site on a local server you likely don't want that traffic being logged.  Assuming that your local server is using `localhost` as the hostname the following will exclude the traffic.
 
-``` javascript Excluding localhost Traffic
-<script>
+<pre class="language-javascript"><code>
+&lt;script&gt;
     if (window.location.host != 'localhost') {
         var _gaq = _gaq || [];
         _gaq.push(['_setAccount', 'UA-12345678-1']);
@@ -40,8 +40,8 @@ If you test your site on a local server you likely don't want that traffic being
             var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
         })();
     }
-</script>
-```
+&lt;/script&gt;
+</code></pre>
 
 ### Excluding Production Traffic
 
@@ -49,8 +49,7 @@ While the above works great during development it won't help you when you're acc
 
 For example if your site is `http://mysite.com` then you could visit `http://mysite.com?analytics=off` to exclude the logging.  The following script makes it so that any page view with the appropriate `analytics=off` request parameter is not logged.
 
-``` javascript Excluding Production Traffic via a Request Parameter
-<script>
+<pre class="language-markup line-numbers"><code>&lt;script&gt;
     var useAnalytics = true;
 
     try {
@@ -59,7 +58,7 @@ For example if your site is `http://mysite.com` then you could visit `http://mys
         if (parameters[0]) {
             parameters[0] = parameters[0].replace('?', '');
         }
-        for (var i = 0; i < parameters.length; i++) {
+        for (var i = 0; i &lt; parameters.length; i++) {
             var values = parameters[i].split('=');
             if (values[0] == 'analytics' && values[1] == 'off') {
                 useAnalytics = false;
@@ -81,8 +80,8 @@ For example if your site is `http://mysite.com` then you could visit `http://mys
             var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
         })();
     }
-</script>
-```
+&lt;/script&gt;
+</code></pre>
 
 With this approach you could simply create a bookmark with the request parameter in the URL and use that to access the site.
 
@@ -92,8 +91,7 @@ Furthermore, it would be easy to add on code to [set a cookie](https://developer
 
 In case you want to include both of these here's a code snippet that makes it so that both `localhost` traffic and pages with a `analytics=off` request parameter are excluded.
 
-``` javascript The Final Exclusion Script
-<script>
+<pre class="language-markup line-numbers"><code>&lt;script&gt;
     var useAnalytics = true;
 
     try {
@@ -102,7 +100,7 @@ In case you want to include both of these here's a code snippet that makes it so
         if (parameters[0]) {
             parameters[0] = parameters[0].replace('?', '');
         }
-        for (var i = 0; i < parameters.length; i++) {
+        for (var i = 0; i &lt; parameters.length; i++) {
             var values = parameters[i].split('=');
             if (values[0] == 'analytics' && values[1] == 'off') {
                 useAnalytics = false;
@@ -129,8 +127,8 @@ In case you want to include both of these here's a code snippet that makes it so
             var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
         })();
     }
-</script>
-```
+&lt;/script&gt;
+</code></pre>
 
 If you have any other recommendations for how to exclude Google Analytics traffic let me know in the comments.
 

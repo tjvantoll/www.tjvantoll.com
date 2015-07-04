@@ -28,41 +28,41 @@ It's oftentimes convenient from a usability stand point to get some form of feed
 
 To use the ```showModalDialog``` method you simply call it with a URL.
 
-``` javascript window.showModalDialog Basic Usage
+<pre class="language-javascript"><code>
 window.showModalDialog('http://google.com');
-```
+</code></pre>
 
 This will open up a modal dialog with Google loaded in it.  In and of itself this isn't all that useful.  Usually if you're showing a modal dialog you want to get some information back from it.  This is where the window.returnValue comes into play.
 
 #### window.returnValue
 
-``` html window.returnValue Example
-<!-- page.html -->
-<!DOCTYPE html>
-<html>
-  <head>
-    <script>
+<pre class="language-markup"><code>
+&lt;!-- page.html --&gt;
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;script&gt;
       var result = window.showModalDialog('modal.html');
       console.log(result); //'foo'
-    </script>
-  </head>
-  <body>
-  </body>
-</html>
+    &lt;/script&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
 
-<!-- modal.html -->
-<!DOCTYPE html>
-<html>
-  <head>
-    <script>
+&lt;!-- modal.html --&gt;
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;script&gt;
       window.returnValue = 'foo';
       window.close();
-    </script>
-  </head>
-  <body>
-  </body>
-</html>
-```
+    &lt;/script&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
 
 In this example when page.html is loaded it will immediately open up a modal dialog with modal.html loaded in it.  It will then block until the modal dialog returns control.  The JavaScript interpreter will literally pause execution as if you had a breakpoint set at that line of code and wait for the result of the modal dialog.
 
@@ -72,32 +72,32 @@ When modal.html loads it will assign a value of 'foo' to ```window.returnValue``
 
 If you want to pass information to the modal dialog you can do so via the second parameter of ```window.showModalDialog```.  Those values will be available in the modal dialog's ```window.dialogArguments``` property.
 
-``` html window.returnValue Example
-<!-- page.html -->
-<!DOCTYPE html>
-<html>
-  <head>
-    <script>
+<pre class="language-markup"><code>
+&lt;!-- page.html --&gt;
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;script&gt;
       window.showModalDialog('modal.html', 'foo');
-    </script>
-  </head>
-  <body>
-  </body>
-</html>
+    &lt;/script&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
 
-<!-- modal.html -->
-<!DOCTYPE html>
-<html>
-  <head>
-    <script>
+&lt;!-- modal.html --&gt;
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;script&gt;
       alert(window.dialogArguments); //'foo'
       window.close();
-    </script>
-  </head>
-  <body>
-  </body>
-</html>
-```
+    &lt;/script&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
 
 #### Further Options
 

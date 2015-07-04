@@ -15,20 +15,20 @@ The [CSS specification](http://www.w3.org/TR/CSS2/syndata.html#parsing-errors) a
 
 **Declarations with unknown properties should be ignored.**
 
-``` css
+<pre class="language-css"><code>
 h1 { color: red; foo: bar; }
 
 /* foo is an unknown property so the browser should interpret this as... */
 h1 { color: red; }
-```
+</code></pre>
 
 **Illegal values should be ignored.**
 
-``` css
+<pre class="language-css"><code>
 h1 { float: 'foo'; }
 
 /* foo is an invalid value for the float property and should be ignored */
-```
+</code></pre>
 
 These are just a sampling of what is specified.  The above rules are well documented and consistently followed by all browsers.  Unfortunately that is not the case as we get into more complicated scenarios.
 
@@ -36,18 +36,19 @@ These are just a sampling of what is specified.  The above rules are well docume
 
 Take a guess, what *should* happen with the following:
 
-``` html
-<div data-number="one">one</div>
-<div data-number="two">two</div>​
+<pre class="language-markup"><code>
+&lt;div data-number="one"&gt;one&lt;/div&gt;
+&lt;div data-number="two"&gt;two&lt;/div&gt;​
 
-<style>
+&lt;style&gt;
 	div { color: black; }
 	/*Notice the missing double quote after the URL.*/
-	[data-number='one'] { background: url("some-url); color: red; }
+	[data-number='one'] { background: url(&quot;some-url); color: red; }
 	[data-number='two'] { color: blue; }
 	div { border: 2px solid black; }​
-</style>
-```
+&lt;/style&gt;
+</code></pre>
+
 The relevant portion of the specification states that...
 
 {% blockquote CSS Specification http://www.w3.org/TR/CSS2/syndata.html#parsing-errors %}
@@ -56,19 +57,27 @@ User agents must close strings upon reaching the end of a line (i.e., before an 
 
 Let's take this one rule at a time.
 
-    background: url("some-url);
+<pre class="language-css"><code>
+background: url("some-url);
+</code></pre>
 
 Per the spec you would expect the ```background``` to be ignored because of the malformed string, and it is in all browsers I tested.  
 
-    color: red;
+<pre class="language-css"><code>
+color: red;
+</code></pre>
 
 This is kind of in a gray area.  The spec says that the *construct in which the unclosed string was found* should be dropped, which makes it seem like this rule shouldn't be interpreted.   But what about subsequent rules that were encountered before a new line?  It seems like the browser could be smart enough to apply this rule.
 
-    color: blue;
+<pre class="language-css"><code>
+color: blue;
+</code></pre>
 
 Per the spec you would expect this to be interpreted since a new line character occurred between the unclosed quote and this rule.
 
-    border: 2px solid black;
+<pre class="language-css"><code>
+border: 2px solid black;
+</code></pre>
 
 Along the same lines you would also expect a border to be around both divs since the normal parsing of the stylesheet should resume.
 
@@ -161,7 +170,7 @@ You can see what your browser does here.
 
 WebKit based browsers are evaluating all rules after a semicolon is encountered and all other browsers stop and don't evaluate any other rules.  The same results occur with some other common fat finger situations.
 
-``` css
+<pre class="language-css"><code>
 /* Notice the mix of single and double quote in the url property value. */
 [data-number='one'] { background: url("some_url'); color: red; }
 [data-number='two'] { color: blue; }
@@ -171,7 +180,7 @@ WebKit based browsers are evaluating all rules after a semicolon is encountered 
 [data-number=one'] { color: red; }
 [data-number='two'] { color: blue; }
 /* Again in Webkit color: blue; will be evaluated, in others it will not be. */
-```
+</code></pre>
 
 ### What Could Possibly Go Wrong?
 
