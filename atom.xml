@@ -4,7 +4,7 @@
   <title><![CDATA[TJ VanToll's Blog]]></title>
   <link href="http://tjvantoll.com/atom.xml" rel="self"/>
   <link href="http://tjvantoll.com/"/>
-  <updated>2015-07-04T15:47:53-04:00</updated>
+  <updated>2015-07-04T16:19:59-04:00</updated>
   <id>http://tjvantoll.com/</id>
   <author>
     <name><![CDATA[TJ VanToll]]></name>
@@ -1613,7 +1613,7 @@ regularButton.addEventListener( "click", function() {
     <link href="http://tjvantoll.com/2013/09/12/building-custom-text-strikethroughs-with-css/"/>
     <updated>2013-09-12T15:25:00-04:00</updated>
     <id>http://tjvantoll.com/2013/09/12/building-custom-text-strikethroughs-with-css</id>
-    <content type="html"><![CDATA[<p><link href="http://tjvantoll.com/stylesheets/custom/posts/2013-09-12.css" rel="stylesheet">
+    <content type="html"><![CDATA[<p><link href="http://tjvantoll.com/stylesheets/posts/2013-09-12.css" rel="stylesheet">
 Adding a strikethrough to a line of text in CSS is easy.</p>
 
 <pre class="language-markup"><code>&lt;style&gt;
