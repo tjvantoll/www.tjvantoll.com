@@ -25,7 +25,6 @@ $type-border: #ddd !default;
 
 /* Navigation */
 $nav-bg: desaturate(#eceff5, 8);
-$nav-bg-front: image-url('noise.png');
 $nav-bg-back: linear-gradient(lighten($nav-bg, 8), $nav-bg, darken($nav-bg, 11));
 $nav-color: darken($nav-bg, 38) !default;
 $nav-color-hover: darken($nav-color, 25) !default;
