@@ -5,6 +5,21 @@ comments: true
 categories: CSS
 ---
 <script src="{{ root_url }}/javascripts/prefixfree.min.js"></script>
+<script src="{{ root_url }}/javascripts/PictureCube.js"></script>
+<script>
+	window.addEventListener("load", function() {
+		if (document.getElementById('playground-cube')) {
+			window.playgroundCube = new PictureCube('playground-cube', [
+				{ src: '/images/izzie/1.jpg' },
+				{ src: '/images/izzie/2.jpg' },
+				{ src: '/images/izzie/3.jpg' },
+				{ src: '/images/izzie/4.jpg' },
+				{ src: '/images/izzie/5.jpg' },
+				{ src: '/images/izzie/6.jpg' }
+			]);
+		}
+	});
+</script>
 
 Let's face it, the mere concept of doing something in 3D in the browser is pretty awesome.  For those of us that remember the good old days of font tags and spacer gifs… well, let's just say we've come a long way.
 
