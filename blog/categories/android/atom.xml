@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Android | TJ VanToll's Blog]]></title>
   <link href="http://tjvantoll.com/blog/categories/android/atom.xml" rel="self"/>
   <link href="http://tjvantoll.com/"/>
-  <updated>2015-06-25T11:24:59-04:00</updated>
+  <updated>2015-07-04T11:17:31-04:00</updated>
   <id>http://tjvantoll.com/</id>
   <author>
     <name><![CDATA[TJ VanToll]]></name>
@@ -22,10 +22,12 @@
 
 <p>Doing so turns out to be as simple as running two commands:</p>
 
-<p><code>
-$ appbuilder prop set BundleVersion 1.0.1
+<pre class="language-shell"><code>$ appbuilder prop set BundleVersion 1.0.1
 $ appbuilder prop set AndroidVersionCode 2
-</code></p>
+</code></pre>
+
+
+
 
 <!-- more -->
 

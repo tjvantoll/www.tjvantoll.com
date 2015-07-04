@@ -21,12 +21,7 @@
   <link rel="canonical" href="http://tjvantoll.com/2014/05/01/using-semantic-html-to-drive-display-logic">
   <link rel="author" href="https://plus.google.com/+TJVanToll">
 
-  <!--[if !lte IE 7]><!-->
-    <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet">
-  <!--<![endif]-->
-  <!--[if lte IE 7]>
-    <link rel="stylesheet" href="/stylesheets/old-ie.css" media="screen, projection">
-  <![endif]-->
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet">
   
   <!--Custom script concatenation
   <script src="/javascripts/modernizr-2.5.3.js"></script>
@@ -38,12 +33,6 @@
   <script src="/javascripts/build/scripts.js"></script>
 
   <link href="/atom.xml" rel="alternate" title="TJ VanToll's Blog" type="application/atom+xml">
-  <style>
-	/* Fonts from Google"s Web font directory at http://google.com/webfonts */
-	/*@import url(http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic);
-	@import url(http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic);*/
-</style>
-
   
   <script type="text/javascript">
   	if (window.location.host.indexOf('local') == -1) {
@@ -136,183 +125,105 @@
 
 <p>Here&#8217;s the HTML we&#8217;ll use:</p>
 
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;form</span> <span class="na">id=</span><span class="s">&quot;information-form&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;fieldset&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;legend&gt;</span>Information<span class="nt">&lt;/legend&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;div&gt;</span>
-</span><span class='line'>            <span class="nt">&lt;label</span> <span class="na">for=</span><span class="s">&quot;name&quot;</span><span class="nt">&gt;</span>Name:<span class="nt">&lt;/label&gt;</span>
-</span><span class='line'>            <span class="nt">&lt;input</span> <span class="na">id=</span><span class="s">&quot;name&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;/div&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;div&gt;</span>
-</span><span class='line'>            <span class="nt">&lt;label</span> <span class="na">for=</span><span class="s">&quot;address&quot;</span><span class="nt">&gt;</span>Address:<span class="nt">&lt;/label&gt;</span>
-</span><span class='line'>            <span class="nt">&lt;input</span> <span class="na">id=</span><span class="s">&quot;address&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;/div&gt;</span>
-</span><span class='line'>
-</span><span class='line'>        <span class="nt">&lt;button&gt;</span>Update<span class="nt">&lt;/button&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;button</span> <span class="na">id=</span><span class="s">&quot;delete&quot;</span><span class="nt">&gt;</span>Delete<span class="nt">&lt;/button&gt;</span>
-</span><span class='line'>
-</span><span class='line'>        <span class="nt">&lt;p</span> <span class="na">id=</span><span class="s">&quot;admin-message&quot;</span><span class="nt">&gt;</span>To delete this user, please contact an administrator.<span class="nt">&lt;/p&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;/fieldset&gt;</span>
-</span><span class='line'><span class="nt">&lt;/form&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre class="language-markup line-numbers"><code>&lt;form id="information-form"&gt;
+    &lt;fieldset&gt;
+        &lt;legend&gt;Information&lt;/legend&gt;
+        &lt;div&gt;
+            &lt;label for="name"&gt;Name:&lt;/label&gt;
+            &lt;input id="name"&gt;
+        &lt;/div&gt;
+        &lt;div&gt;
+            &lt;label for="address"&gt;Address:&lt;/label&gt;
+            &lt;input id="address"&gt;
+        &lt;/div&gt;
+
+        &lt;button&gt;Update&lt;/button&gt;
+        &lt;button id="delete"&gt;Delete&lt;/button&gt;
+
+        &lt;p id="admin-message"&gt;To delete this user, please contact an administrator.&lt;/p&gt;
+    &lt;/fieldset&gt;
+&lt;/form&gt;</code></pre>
 
 
 <p>And we&#8217;ll use two buttons to switch between the two user types.</p>
 
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;button</span> <span class="na">id=</span><span class="s">&quot;admin&quot;</span><span class="nt">&gt;</span>Display as admin<span class="nt">&lt;/button&gt;</span>
-</span><span class='line'><span class="nt">&lt;button</span> <span class="na">id=</span><span class="s">&quot;regular-user&quot;</span><span class="nt">&gt;</span>Display as regular user<span class="nt">&lt;/button&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre class="language-markup line-numbers"><code>&lt;button id="admin"&gt;Display as admin&lt;/button&gt;
+&lt;button id="regular-user"&gt;Display as regular user&lt;/button&gt;</code></pre>
 
 
 <p>So, the question is&#8230; what JavaScript do you implement to show/hide the delete button and informational message? The following shows an approach I often see: targeting individual elements in JavaScript, and altering their display.</p>
 
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="kd">var</span> <span class="nx">adminButton</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span> <span class="s2">&quot;#admin&quot;</span> <span class="p">),</span>
-</span><span class='line'>    <span class="nx">regularButton</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span> <span class="s2">&quot;#regular-user&quot;</span> <span class="p">),</span>
-</span><span class='line'>    <span class="nx">deleteButton</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span> <span class="s2">&quot;#delete&quot;</span> <span class="p">),</span>
-</span><span class='line'>    <span class="nx">adminMessage</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span> <span class="s2">&quot;#admin-message&quot;</span> <span class="p">);</span>
-</span><span class='line'>
-</span><span class='line'><span class="nx">adminButton</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span> <span class="s2">&quot;click&quot;</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-</span><span class='line'>    <span class="nx">deleteButton</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">display</span> <span class="o">=</span> <span class="s2">&quot;inline-block&quot;</span><span class="p">;</span>
-</span><span class='line'>    <span class="nx">adminMessage</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">display</span> <span class="o">=</span> <span class="s2">&quot;none&quot;</span><span class="p">;</span>
-</span><span class='line'><span class="p">});</span>
-</span><span class='line'><span class="nx">regularButton</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span> <span class="s2">&quot;click&quot;</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-</span><span class='line'>    <span class="nx">deleteButton</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">display</span> <span class="o">=</span> <span class="s2">&quot;none&quot;</span><span class="p">;</span>
-</span><span class='line'>    <span class="nx">adminMessage</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">display</span> <span class="o">=</span> <span class="s2">&quot;block&quot;</span><span class="p">;</span>
-</span><span class='line'><span class="p">});</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre class="language-javascript line-numbers"><code>var adminButton = document.querySelector( "#admin" ),
+    regularButton = document.querySelector( "#regular-user" ),
+    deleteButton = document.querySelector( "#delete" ),
+    adminMessage = document.querySelector( "#admin-message" );
+
+adminButton.addEventListener( "click", function() {
+    deleteButton.style.display = "inline-block";
+    adminMessage.style.display = "none";
+});
+regularButton.addEventListener( "click", function() {
+    deleteButton.style.display = "none";
+    adminMessage.style.display = "block";
+});</code></pre>
 
 
 <p>This works, but it&#8217;s verbose, as you have to target each element that should be shown or hidden whenever the user types changes. From a more abstract perspective, it also breaks the <a href="http://en.wikipedia.org/wiki/Separation_of_concerns">separation of concerns design principle</a>, since CSS changes are being done in JavaScript.</p>
 
 <p>To improve this, let&#8217;s switch the JavaScript to manage a single CSS class name on the form.</p>
 
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="kd">var</span> <span class="nx">adminButton</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span> <span class="s2">&quot;#admin&quot;</span> <span class="p">),</span>
-</span><span class='line'>    <span class="nx">regularButton</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span> <span class="s2">&quot;#regular-user&quot;</span> <span class="p">),</span>
-</span><span class='line'>    <span class="nx">form</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span> <span class="s2">&quot;#information-form&quot;</span> <span class="p">);</span>
-</span><span class='line'>
-</span><span class='line'><span class="nx">adminButton</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span> <span class="s2">&quot;click&quot;</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-</span><span class='line'>    <span class="nx">form</span><span class="p">.</span><span class="nx">classList</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span> <span class="s2">&quot;admin&quot;</span> <span class="p">);</span>
-</span><span class='line'><span class="p">});</span>
-</span><span class='line'><span class="nx">regularButton</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span> <span class="s2">&quot;click&quot;</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-</span><span class='line'>    <span class="nx">form</span><span class="p">.</span><span class="nx">classList</span><span class="p">.</span><span class="nx">remove</span><span class="p">(</span> <span class="s2">&quot;admin&quot;</span> <span class="p">);</span>
-</span><span class='line'><span class="p">});</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre class="language-javascript line-numbers"><code>var adminButton = document.querySelector( "#admin" ),
+    regularButton = document.querySelector( "#regular-user" ),
+    form = document.querySelector( "#information-form" );
+
+adminButton.addEventListener( "click", function() {
+    form.classList.add( "admin" );
+});
+regularButton.addEventListener( "click", function() {
+    form.classList.remove( "admin" );
+});</code></pre>
 
 
 <p>At the moment, nothing shows or hides when you click buttons, but with the <code>"admin"</code> class name in place, you have the hook you need to implement the logic in CSS.</p>
 
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nf">#delete</span> <span class="p">{</span>
-</span><span class='line'>    <span class="k">display</span><span class="o">:</span> <span class="k">none</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'><span class="nc">.admin</span> <span class="nf">#admin-message</span> <span class="p">{</span>
-</span><span class='line'>    <span class="k">display</span><span class="o">:</span> <span class="k">none</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'><span class="nc">.admin</span> <span class="nf">#delete</span> <span class="p">{</span>
-</span><span class='line'>    <span class="k">display</span><span class="o">:</span> <span class="k">inline</span><span class="o">-</span><span class="k">block</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre class="language-css line-numbers"><code>#delete {
+    display: none;
+}
+.admin #admin-message {
+    display: none;
+}
+.admin #delete {
+    display: inline-block;
+}</code></pre>
 
 
 <p>JavaScript manages the state of the element, which gives CSS the ability to control the display based on that state. This approach is not only cleaner, it is also more flexible. If you need to change colors for admin, or spacing, you now have a CSS hook you can use to do so.</p>
 
 <p>This same approach works with HTML attributes as well. For instance, let&#8217;s switch from using a CSS class name, to a <code>data-admin</code> attribute on the <code>&lt;form&gt;</code>. With that approach you use the following JavaScript:</p>
 
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="kd">var</span> <span class="nx">adminButton</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span> <span class="s2">&quot;#admin&quot;</span> <span class="p">),</span>
-</span><span class='line'>    <span class="nx">regularButton</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span> <span class="s2">&quot;#regular-user&quot;</span> <span class="p">),</span>
-</span><span class='line'>    <span class="nx">form</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span> <span class="s2">&quot;#information-form&quot;</span> <span class="p">);</span>
-</span><span class='line'>
-</span><span class='line'><span class="nx">adminButton</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span> <span class="s2">&quot;click&quot;</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-</span><span class='line'>    <span class="nx">form</span><span class="p">.</span><span class="nx">setAttribute</span><span class="p">(</span> <span class="s2">&quot;data-admin&quot;</span><span class="p">,</span> <span class="kc">true</span> <span class="p">);</span>
-</span><span class='line'><span class="p">});</span>
-</span><span class='line'><span class="nx">regularButton</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span> <span class="s2">&quot;click&quot;</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-</span><span class='line'>    <span class="nx">form</span><span class="p">.</span><span class="nx">setAttribute</span><span class="p">(</span> <span class="s2">&quot;data-admin&quot;</span><span class="p">,</span> <span class="kc">false</span> <span class="p">);</span>
-</span><span class='line'><span class="p">});</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre class="language-javascript line-numbers"><code>var adminButton = document.querySelector( "#admin" ),
+    regularButton = document.querySelector( "#regular-user" ),
+    form = document.querySelector( "#information-form" );
+
+adminButton.addEventListener( "click", function() {
+    form.setAttribute( "data-admin", true );
+});
+regularButton.addEventListener( "click", function() {
+    form.setAttribute( "data-admin", false );
+});</code></pre>
 
 
 <p>And the following CSS:</p>
 
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nf">#delete</span> <span class="p">{</span>
-</span><span class='line'>    <span class="k">display</span><span class="o">:</span> <span class="k">none</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'><span class="o">[</span><span class="nt">data-admin</span><span class="o">=</span><span class="s2">&quot;true&quot;</span><span class="o">]</span> <span class="nf">#admin-message</span> <span class="p">{</span>
-</span><span class='line'>    <span class="k">display</span><span class="o">:</span> <span class="k">none</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'><span class="o">[</span><span class="nt">data-admin</span><span class="o">=</span><span class="s2">&quot;true&quot;</span><span class="o">]</span> <span class="nf">#delete</span> <span class="p">{</span>
-</span><span class='line'>    <span class="k">display</span><span class="o">:</span> <span class="k">inline</span><span class="o">-</span><span class="k">block</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre class="language-css line-numbers"><code>#delete {
+    display: none;
+}
+[data-admin="true"] #admin-message {
+    display: none;
+}
+[data-admin="true"] #delete {
+    display: inline-block;
+}</code></pre>
 
 
 <p>Use whatever makes sense for your use case. The overarching idea is to use JavaScript to apply semantic HTML that reflects an element&#8217;s state, and to let CSS control the display from there. Personally I&#8217;ve found this to be the best way to handle display logic in UI components—especially complex ones.</p>
@@ -351,7 +262,7 @@
     </p>
     <p class="author_card meta">
       <img src="/images/me/1.jpg" alt="Me!" id="post_me">
-      TJ VanToll is a developer advocate for <a href="http://telerik.com">Telerik</a>, a <a href="http://jqueryui.com/about/">jQuery team member</a>, and the author of <a href="http://tjvantoll.com/jquery-ui-in-action.html">jQuery UI in Action</a>. TJ has over a decade of web development experience—specializing in performance and the mobile web—and <a href="/speaking">speaks</a> about his research at conferences around the world. When not online, TJ is generally found talking about himself in the third person. If you like hearing TJ talk about himself, you should consider following him on <a href="http://twitter.com/tjvantoll">Twitter</a> or <a href="https://plus.google.com/+TJVanToll?rel=author" rel="author">Google+</a>.
+      TJ VanToll is a developer advocate for <a href="http://telerik.com">Telerik</a>, a <a href="http://jqueryui.com/about/">jQuery team member</a>, and the author of <a href="http://tjvantoll.com/jquery-ui-in-action.html">jQuery UI in Action</a>. TJ has over a decade of web development experience—specializing in performance and the mobile web—and <a href="/speaking">speaks</a> about his research at conferences around the world.TJ is <a href="http://twitter.com/tjvantoll">@tjvantoll</a> on Twitter and <a href="https://plus.google.com/+TJVanToll?rel=author" rel="author">+TJVanToll</a> on Google+.
     </p>
     
       <div class="sharing">
@@ -463,8 +374,7 @@
 
 
 
-
-
+Included file 'google_plus_one.html' not found in _includes directory
 
   <script type="text/javascript">
     (function(){
@@ -477,8 +387,7 @@
   </script>
 
 
-
-
+Included file 'custom/after_footer.html' not found in _includes directory
 
 </body>
 </html>

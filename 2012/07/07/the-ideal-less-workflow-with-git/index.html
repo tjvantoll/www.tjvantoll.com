@@ -21,12 +21,7 @@
   <link rel="canonical" href="http://tjvantoll.com/2012/07/07/the-ideal-less-workflow-with-git">
   <link rel="author" href="https://plus.google.com/+TJVanToll">
 
-  <!--[if !lte IE 7]><!-->
-    <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet">
-  <!--<![endif]-->
-  <!--[if lte IE 7]>
-    <link rel="stylesheet" href="/stylesheets/old-ie.css" media="screen, projection">
-  <![endif]-->
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet">
   
   <!--Custom script concatenation
   <script src="/javascripts/modernizr-2.5.3.js"></script>
@@ -38,12 +33,6 @@
   <script src="/javascripts/build/scripts.js"></script>
 
   <link href="/atom.xml" rel="alternate" title="TJ VanToll's Blog" type="application/atom+xml">
-  <style>
-	/* Fonts from Google"s Web font directory at http://google.com/webfonts */
-	/*@import url(http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic);
-	@import url(http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic);*/
-</style>
-
   
   <script type="text/javascript">
   	if (window.location.host.indexOf('local') == -1) {
@@ -158,11 +147,9 @@
 
 <p>To create a Git commit hook navigate into the <code>.git/hooks</code> directory of your repository.  This folder has a number of sample hooks that you can potentially use with a <code>.sample</code> suffix.  To create a <code>pre-commit</code> script that Git will run simply create an un-prefixed copy of <code>pre-commit.sample</code>.</p>
 
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nb">cd</span> /MyProject/.git/hooks
-</span><span class='line'>cp pre-commit.sample pre-commit
-</span></code></pre></td></tr></table></div></figure>
+<pre class="language-shell"><code>cd /MyProject/.git/hooks
+cp pre-commit.sample pre-commit
+</code></pre>
 
 
 <p>Once a <code>pre-commit</code> file exists in <code>.git/hooks</code>, Git will run it before every commit.</p>
@@ -171,155 +158,81 @@
 
 <p>There are many ways to implement a script that generates CSS files from LESS files.  This is the <code>pre-commit</code> script that I use.</p>
 
-<figure class='code'><figcaption class='not_empty'><span>The script</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-<span class='line-number'>33</span>
-<span class='line-number'>34</span>
-<span class='line-number'>35</span>
-<span class='line-number'>36</span>
-<span class='line-number'>37</span>
-<span class='line-number'>38</span>
-<span class='line-number'>39</span>
-<span class='line-number'>40</span>
-<span class='line-number'>41</span>
-<span class='line-number'>42</span>
-<span class='line-number'>43</span>
-<span class='line-number'>44</span>
-<span class='line-number'>45</span>
-<span class='line-number'>46</span>
-<span class='line-number'>47</span>
-<span class='line-number'>48</span>
-<span class='line-number'>49</span>
-<span class='line-number'>50</span>
-<span class='line-number'>51</span>
-<span class='line-number'>52</span>
-<span class='line-number'>53</span>
-<span class='line-number'>54</span>
-<span class='line-number'>55</span>
-<span class='line-number'>56</span>
-<span class='line-number'>57</span>
-<span class='line-number'>58</span>
-<span class='line-number'>59</span>
-<span class='line-number'>60</span>
-<span class='line-number'>61</span>
-<span class='line-number'>62</span>
-<span class='line-number'>63</span>
-<span class='line-number'>64</span>
-<span class='line-number'>65</span>
-<span class='line-number'>66</span>
-<span class='line-number'>67</span>
-<span class='line-number'>68</span>
-<span class='line-number'>69</span>
-<span class='line-number'>70</span>
-<span class='line-number'>71</span>
-<span class='line-number'>72</span>
-<span class='line-number'>73</span>
-<span class='line-number'>74</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c">#!/bin/sh</span>
-</span><span class='line'>
-</span><span class='line'><span class="c"># Pre-commit hook to generate .css files from .less files using lessc.</span>
-</span><span class='line'><span class="c"># Script assumes .less files are in a directory named &quot;less&quot; and will</span>
-</span><span class='line'><span class="c"># put the generated files in a sibling &quot;css&quot; directory.  The generated</span>
-</span><span class='line'><span class="c"># CSS will also be compressed as part of lessc.</span>
-</span><span class='line'><span class="c">#</span>
-</span><span class='line'><span class="c"># When .less files are deleted the script will delete the corresponding</span>
-</span><span class='line'><span class="c"># .css files if they exist.</span>
-</span><span class='line'><span class="c">#</span>
-</span><span class='line'><span class="c"># Example</span>
-</span><span class='line'><span class="c"># -------</span>
-</span><span class='line'><span class="c">#</span>
-</span><span class='line'><span class="c"># Before:       After:</span>
-</span><span class='line'><span class="c">#</span>
-</span><span class='line'><span class="c"># foo/          foo/</span>
-</span><span class='line'><span class="c">#   less/         css/</span>
-</span><span class='line'><span class="c">#     a.less        a.css</span>
-</span><span class='line'><span class="c"># bar/            less/</span>
-</span><span class='line'><span class="c">#   less/           a.less</span>
-</span><span class='line'><span class="c">#     b.less    bar/   </span>
-</span><span class='line'><span class="c">#                 css/</span>
-</span><span class='line'><span class="c">#                   b.css</span>
-</span><span class='line'><span class="c">#                 less</span>
-</span><span class='line'><span class="c">#                   b.less</span>
-</span><span class='line'><span class="c">#</span>
-</span><span class='line'><span class="c"># Loop over all files included in the commit.</span>
-</span><span class='line'><span class="k">for </span>file in <span class="k">$(</span> <span class="nb">exec </span>git diff-index --cached --name-only HEAD <span class="k">)</span>
-</span><span class='line'><span class="k">do</span>
-</span><span class='line'><span class="c"># We only want to take action unless the file is a LESS file.</span>
-</span><span class='line'>  <span class="k">if</span> <span class="o">[[</span> <span class="nv">$file</span> <span class="o">==</span> *<span class="s2">&quot;.less&quot;</span>* <span class="o">]]</span>; <span class="k">then</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">    </span><span class="nv">lessFile</span><span class="o">=</span><span class="nv">$file</span>
-</span><span class='line'>
-</span><span class='line'><span class="c">#   Find where the corresponding CSS file should be located</span>
-</span><span class='line'><span class="c">#   in the file system, in this case a sibling CSS directory.</span>
-</span><span class='line'>    <span class="nv">cssFile</span><span class="o">=</span><span class="s2">&quot;${lessFile/less\//css/}&quot;</span>
-</span><span class='line'>    <span class="nv">cssFile</span><span class="o">=</span><span class="s2">&quot;${cssFile/.less/.css}&quot;</span>
-</span><span class='line'>
-</span><span class='line'><span class="c">#   Determine the status of the file in the commit.</span>
-</span><span class='line'><span class="c">#   M = Modified, A = Added, D = deleted, R = renamed,</span>
-</span><span class='line'><span class="c">#   C = copied, U = Updated but unmerged</span>
-</span><span class='line'>    <span class="nv">status</span><span class="o">=</span><span class="k">$(</span> <span class="nb">exec </span>git status --porcelain <span class="nv">$lessFile</span> <span class="k">)</span>
-</span><span class='line'>
-</span><span class='line'><span class="c">#   If the file was deleted as part of the commit, delete the</span>
-</span><span class='line'><span class="c">#   corresponding CSS file.</span>
-</span><span class='line'>    <span class="k">if</span> <span class="o">[[</span> <span class="nv">$status</span> <span class="o">==</span> D* <span class="o">]]</span>; <span class="k">then</span>
-</span><span class='line'><span class="k">      if</span> <span class="o">[</span> -e <span class="s2">&quot;$cssFile&quot;</span> <span class="o">]</span>; <span class="k">then</span>
-</span><span class='line'><span class="k">        </span><span class="nb">echo</span> <span class="s2">&quot;Removing $cssFile&quot;</span>
-</span><span class='line'>        git rm <span class="nv">$cssFile</span>
-</span><span class='line'>      <span class="k">fi</span>
-</span><span class='line'><span class="k">    else</span>
-</span><span class='line'><span class="c">#     Otherwise we must generate the CSS file. First create a</span>
-</span><span class='line'><span class="c">#     CSS folder to place the file in.  The -p option for mdkir</span>
-</span><span class='line'><span class="c">#     tells it to create parent folders if necessary.</span>
-</span><span class='line'>      <span class="nv">baseDirectory</span><span class="o">=</span><span class="k">${</span><span class="nv">lessFile</span><span class="p">/less\/*/</span><span class="k">}</span>
-</span><span class='line'>      mkdir -p <span class="k">${</span><span class="nv">baseDirectory</span><span class="k">}</span>css
-</span><span class='line'>
-</span><span class='line'><span class="c">#     Log to the console that the CSS is being generated so the person</span>
-</span><span class='line'><span class="c">#     running the commit is aware.</span>
-</span><span class='line'>      <span class="nb">echo</span> <span class="s2">&quot;Generating $cssFile from $lessFile&quot;</span>
-</span><span class='line'>
-</span><span class='line'><span class="c">#     Run lessc to do the actual generation.  If lessc fails exit</span>
-</span><span class='line'><span class="c">#     with a code of 1 so that the commit is rejected.  The -x option </span>
-</span><span class='line'><span class="c">#     tells lessc to generate compressed CSS for production usage.</span>
-</span><span class='line'>      <span class="k">if</span> ! lessc -x <span class="nv">$lessFile</span> <span class="nv">$cssFile</span>; <span class="k">then</span>
-</span><span class='line'><span class="k">        </span><span class="nb">exit </span>1
-</span><span class='line'>      <span class="k">fi</span>
-</span><span class='line'>
-</span><span class='line'><span class="c">#     Add the CSS file to the commit.</span>
-</span><span class='line'>      git add <span class="nv">$cssFile</span>
-</span><span class='line'>    <span class="k">fi</span>
-</span><span class='line'><span class="k">  fi</span>
-</span><span class='line'><span class="k">done</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre class="language-shell"><code>#!/bin/sh
+
+# Pre-commit hook to generate .css files from .less files using lessc.
+# Script assumes .less files are in a directory named "less" and will
+# put the generated files in a sibling "css" directory.  The generated
+# CSS will also be compressed as part of lessc.
+#
+# When .less files are deleted the script will delete the corresponding
+# .css files if they exist.
+#
+# Example
+# -------
+#
+# Before:       After:
+#
+# foo/          foo/
+#   less/         css/
+#     a.less        a.css
+# bar/            less/
+#   less/           a.less
+#     b.less    bar/   
+#                 css/
+#                   b.css
+#                 less
+#                   b.less
+#
+# Loop over all files included in the commit.
+for file in $( exec git diff-index --cached --name-only HEAD )
+do
+# We only want to take action unless the file is a LESS file.
+  if [[ $file == *".less"* ]]; then
+
+    lessFile=$file
+
+#   Find where the corresponding CSS file should be located
+#   in the file system, in this case a sibling CSS directory.
+    cssFile="${lessFile/less\//css/}"
+    cssFile="${cssFile/.less/.css}"
+
+#   Determine the status of the file in the commit.
+#   M = Modified, A = Added, D = deleted, R = renamed,
+#   C = copied, U = Updated but unmerged
+    status=$( exec git status --porcelain $lessFile )
+
+#   If the file was deleted as part of the commit, delete the
+#   corresponding CSS file.
+    if [[ $status == D* ]]; then
+      if [ -e "$cssFile" ]; then
+        echo "Removing $cssFile"
+        git rm $cssFile 
+      fi
+    else
+#     Otherwise we must generate the CSS file. First create a
+#     CSS folder to place the file in.  The -p option for mdkir
+#     tells it to create parent folders if necessary.
+      baseDirectory=${lessFile/less\/*/}
+      mkdir -p ${baseDirectory}css
+
+#     Log to the console that the CSS is being generated so the person
+#     running the commit is aware.
+      echo "Generating $cssFile from $lessFile"
+
+#     Run lessc to do the actual generation.  If lessc fails exit
+#     with a code of 1 so that the commit is rejected.  The -x option 
+#     tells lessc to generate compressed CSS for production usage.
+      if ! lessc -x $lessFile $cssFile; then
+        exit 1
+      fi
+
+#     Add the CSS file to the commit.
+      git add $cssFile
+    fi
+  fi
+done
+</code></pre>
 
 
 <p>You could greatly simplify this script to simply run <code>lessc</code> on all .less files on every commit.  I go file by file because the script has to be run on a large code base where generating hundreds to thousands of CSS files on every commit isn&#8217;t practical.  This script is also setup to create sibling <code>css</code> and <code>less</code> directories.  You could easily modify this to simply put the files in the same directory; I like them to be logically separated.</p>
@@ -328,7 +241,7 @@
 
 <p>As I said, the script I use assumes that there are sibling <code>css</code> and <code>less</code> directories.  To give a concrete example of this say I have the following file system structure.</p>
 
-<pre><code>/MyProject
+<pre class="language-shell"><code>/MyProject
     /css
         * Generated files *
     index.html
@@ -339,93 +252,60 @@
         b.less
 </code></pre>
 
+
 <p>To include these files I use the following locally:</p>
 
-<figure class='code'><figcaption class='not_empty'><span>Local Includes</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="c">&lt;!-- index.html --&gt;</span>
-</span><span class='line'><span class="cp">&lt;!DOCTYPE html&gt;</span>
-</span><span class='line'><span class="nt">&lt;html&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;head&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">&quot;stylesheet/less&quot;</span> <span class="na">href=</span><span class="s">&quot;less/a.less&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">&quot;stylesheet/less&quot;</span> <span class="na">href=</span><span class="s">&quot;less/b.less&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;js/less.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;/head&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;body&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;/body&gt;</span>
-</span><span class='line'><span class="nt">&lt;/html&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre class="language-markup"><code>
+&lt;!-- index.html --&gt;
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+    &lt;head&gt;
+        &lt;link rel="stylesheet/less" href="less/a.less"&gt;
+        &lt;link rel="stylesheet/less" href="less/b.less"&gt;
+        &lt;script src="js/less.js"&gt;&lt;/script&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+    &lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
 
 
 <p>And the following in production:</p>
 
-<figure class='code'><figcaption class='not_empty'><span>Production Includes</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="c">&lt;!-- index.html --&gt;</span>
-</span><span class='line'><span class="cp">&lt;!DOCTYPE html&gt;</span>
-</span><span class='line'><span class="nt">&lt;html&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;head&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">&quot;stylesheet&quot;</span> <span class="na">href=</span><span class="s">&quot;css/a.css&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">&quot;stylesheet&quot;</span> <span class="na">href=</span><span class="s">&quot;css/b.css&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;/head&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;body&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;/body&gt;</span>
-</span><span class='line'><span class="nt">&lt;/html&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre class="language-markup"><code>
+&lt;!-- index.html --&gt;
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+    &lt;head&gt;
+        &lt;link rel="stylesheet" href="css/a.css"&gt;
+        &lt;link rel="stylesheet" href="css/b.css"&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+    &lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
 
 
 <p>The best way to handle both development and production with minimal maintenance is to use some sort of server-side check so that you don&#8217;t have to change your HTML whenever you release to production.  Here&#8217;s an example of a PHP script that does this by detecting whether the host contains <code>localhost</code>.</p>
 
-<figure class='code'><figcaption class='not_empty'><span>Making both imports work</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="c">&lt;!-- index.html --&gt;</span>
-</span><span class='line'><span class="cp">&lt;!DOCTYPE html&gt;</span>
-</span><span class='line'><span class="nt">&lt;html&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;head&gt;</span>
-</span><span class='line'>      <span class="cp">&lt;? if (strpos($_SERVER[&#39;HTTP_HOST&#39;], &#39;localhost&#39;)) { ?&gt;</span>
-</span><span class='line'>            <span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">&quot;stylesheet/less&quot;</span> <span class="na">href=</span><span class="s">&quot;/less/a.less&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'>            <span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">&quot;stylesheet/less&quot;</span> <span class="na">href=</span><span class="s">&quot;/less/b.less&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'>            <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;/js/less.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
-</span><span class='line'>        <span class="err">&lt;</span> } else { ?&gt;
-</span><span class='line'>            <span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">&quot;stylesheet&quot;</span> <span class="na">href=</span><span class="s">&quot;/css/a.css&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'>            <span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">&quot;stylesheet&quot;</span> <span class="na">href=</span><span class="s">&quot;/css/b.css&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'>        <span class="cp">&lt;? } ?&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;/head&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;body&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;/body&gt;</span>
-</span><span class='line'><span class="nt">&lt;/html&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre class="language-markup"><code>
+&lt;!-- index.html --&gt;
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+    &lt;head&gt;
+        &lt;? if (strpos($_SERVER['HTTP_HOST'], 'localhost')) { ?&gt;
+            &lt;link rel="stylesheet/less" href="/less/a.less"&gt;
+            &lt;link rel="stylesheet/less" href="/less/b.less"&gt;
+            &lt;script src="/js/less.js"&gt;&lt;/script&gt;
+        &lt; } else { ?&gt;
+            &lt;link rel="stylesheet" href="/css/a.css"&gt;
+            &lt;link rel="stylesheet" href="/css/b.css"&gt;
+        &lt;? } ?&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+    &lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
 
 
 <h3>Conclusion</h3>
@@ -466,7 +346,7 @@
     </p>
     <p class="author_card meta">
       <img src="/images/me/1.jpg" alt="Me!" id="post_me">
-      TJ VanToll is a developer advocate for <a href="http://telerik.com">Telerik</a>, a <a href="http://jqueryui.com/about/">jQuery team member</a>, and the author of <a href="http://tjvantoll.com/jquery-ui-in-action.html">jQuery UI in Action</a>. TJ has over a decade of web development experience—specializing in performance and the mobile web—and <a href="/speaking">speaks</a> about his research at conferences around the world. When not online, TJ is generally found talking about himself in the third person. If you like hearing TJ talk about himself, you should consider following him on <a href="http://twitter.com/tjvantoll">Twitter</a> or <a href="https://plus.google.com/+TJVanToll?rel=author" rel="author">Google+</a>.
+      TJ VanToll is a developer advocate for <a href="http://telerik.com">Telerik</a>, a <a href="http://jqueryui.com/about/">jQuery team member</a>, and the author of <a href="http://tjvantoll.com/jquery-ui-in-action.html">jQuery UI in Action</a>. TJ has over a decade of web development experience—specializing in performance and the mobile web—and <a href="/speaking">speaks</a> about his research at conferences around the world.TJ is <a href="http://twitter.com/tjvantoll">@tjvantoll</a> on Twitter and <a href="https://plus.google.com/+TJVanToll?rel=author" rel="author">+TJVanToll</a> on Google+.
     </p>
     
       <div class="sharing">
@@ -578,8 +458,7 @@
 
 
 
-
-
+Included file 'google_plus_one.html' not found in _includes directory
 
   <script type="text/javascript">
     (function(){
@@ -592,8 +471,7 @@
   </script>
 
 
-
-
+Included file 'custom/after_footer.html' not found in _includes directory
 
 </body>
 </html>

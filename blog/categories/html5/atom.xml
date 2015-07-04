@@ -4,7 +4,7 @@
   <title><![CDATA[Category: HTML5 | TJ VanToll's Blog]]></title>
   <link href="http://tjvantoll.com/blog/categories/html5/atom.xml" rel="self"/>
   <link href="http://tjvantoll.com/"/>
-  <updated>2015-06-25T11:24:59-04:00</updated>
+  <updated>2015-07-04T11:17:31-04:00</updated>
   <id>http://tjvantoll.com/</id>
   <author>
     <name><![CDATA[TJ VanToll]]></name>
@@ -117,43 +117,37 @@
     <id>http://tjvantoll.com/2013/07/10/creating-a-jquery-ui-dialog-with-a-submit-button</id>
     <content type="html"><![CDATA[<p>Say you have the following submittable <code>&lt;form&gt;</code>:</p>
 
-<p>``` html
-<form id="myForm" action="http://google.com"></p>
-
-<pre><code>&lt;label for="search"&gt;Search For:&lt;/label&gt;
-&lt;input type="text" id="search" name="q"&gt;
-&lt;button type="submit"&gt;Find&lt;/button&gt;
+<pre class="language-markup"><code>&lt;form id="myForm" action="http://google.com"&gt;
+    &lt;label for="search"&gt;Search For:&lt;/label&gt;
+    &lt;input type="text" id="search" name="q"&gt;
+    &lt;button type="submit"&gt;Find&lt;/button&gt;
+&lt;/form&gt;
 </code></pre>
 
-<p></form>
-```</p>
 
 <p>And you want to show the form in a jQuery UI dialog. You can do that with the code below:</p>
 
-<p>``` javascript Turning a form into a dialog
-$( "form" ).dialog({</p>
-
-<pre><code>open: function() {
-    // On open, hide the original submit button
-    $( this ).find( "[type=submit]" ).hide();
-},
-buttons: [
-    {
-        text: "Find",
-        click: $.noop,
-        type: "submit"
+<pre class="language-javascript"><code>$( "form" ).dialog({
+    open: function() {
+        // On open, hide the original submit button
+        $( this ).find( "[type=submit]" ).hide();
     },
-    {
-        text: "Close",
-        click: function() {
-            $( this ).dialog( "close" );
+    buttons: [
+        {
+            text: "Find",
+            click: $.noop,
+            type: "submit"
+        },
+        {
+            text: "Close",
+            click: function() {
+                $( this ).dialog( "close" );
+            }
         }
-    }
-]
+    ]
+});
 </code></pre>
 
-<p>});
-```</p>
 
 <p>Which looks like this:</p>
 
@@ -178,37 +172,31 @@ buttons: [
 
 <p>Another solution is to add a <code>click</code> handler to the button that submits the form:</p>
 
-<p>``` js Using a Click Handler to Submit the Form
-var form = $( "form" ).dialog({</p>
-
-<pre><code>...
-buttons: [
-    {
-        text: "Find",
-        click: function() {
-            form.submit();
-        }
-    }
+<pre class="language-javascript"><code>var form = $( "form" ).dialog({
     ...
-]
+    buttons: [
+        {
+            text: "Find",
+            click: function() {
+                form.submit();
+            }
+        }
+        ...
+    ]
+});
 </code></pre>
 
-<p>});
-```</p>
 
 <p>This works, but you lose the browsers <a href="/2013/01/01/enter-should-submit-forms-stop-messing-with-that/">browser's default enter key handling</a>. Therefore it has to be replicated as well:</p>
 
-<p>``` javascript Adding Enter Key Handling
-var form = $( "form" ).dialog({ ... });
-form.on( "keypress", "input[type=text]", function( event ) {</p>
-
-<pre><code>if ( event.keyCode == 13 ) {
-    form.submit();
-}
+<pre class="language-javascript"><code>var form = $( "form" ).dialog({ ... });
+form.on( "keypress", "input[type=text]", function( event ) {
+    if ( event.keyCode == 13 ) {
+        form.submit();
+    }
+});
 </code></pre>
 
-<p>});
-```</p>
 
 <h4>Form Attribute</h4>
 
@@ -216,16 +204,13 @@ form.on( "keypress", "input[type=text]", function( event ) {</p>
 
 <p>For example here's the example <code>&lt;form&gt;</code> with a sibling (rather than child) submit button:</p>
 
-<p>``` html
-<form id="myForm" action="http://google.com"></p>
-
-<pre><code>&lt;label for="search"&gt;Search For:&lt;/label&gt;
-&lt;input type="text" id="search" name="q"&gt;
+<pre class="language-markup"><code>&lt;form id="myForm" action="http://google.com"&gt;
+    &lt;label for="search"&gt;Search For:&lt;/label&gt;
+    &lt;input type="text" id="search" name="q"&gt;
+&lt;/form&gt;
+&lt;button type="submit" form="myForm"&gt;Find&lt;/button&gt;
 </code></pre>
 
-<p></form>
-<button type="submit" form="myForm">Find</button>
-```</p>
 
 <p>The <code>&lt;button&gt;</code> is outside of the <code>&lt;form&gt;</code>, but because its <code>form</code> attribute is equal to the <code>&lt;form&gt;</code>'s <code>id</code>, the <code>&lt;button&gt;</code> will submit the <code>&lt;form&gt;</code> regardless.</p>
 
@@ -233,17 +218,12 @@ form.on( "keypress", "input[type=text]", function( event ) {</p>
 
 <p>To add this attribute to the dialog version, we'll pass <code>form: "myForm"</code> into the <code>buttons</code> option for the Find button:</p>
 
-<p>``` html Turning a form into a dialog
-<form id="myForm" action="http://google.com"></p>
-
-<pre><code>&lt;label for="search"&gt;Search For:&lt;/label&gt;
-&lt;input type="text" id="search" name="q"&gt;
-&lt;button type="submit"&gt;Find&lt;/button&gt;
-</code></pre>
-
-<p></form></p>
-
-<script>
+<pre class="language-markup line-numbers"><code>&lt;form id="myForm" action="http://google.com"&gt;
+    &lt;label for="search"&gt;Search For:&lt;/label&gt;
+    &lt;input type="text" id="search" name="q"&gt;
+    &lt;button type="submit"&gt;Find&lt;/button&gt;
+&lt;/form&gt;
+&lt;script&gt;
     $( "form" ).dialog({
         open: function() {
             // On open, hide the original submit button
@@ -254,7 +234,7 @@ form.on( "keypress", "input[type=text]", function( event ) {</p>
                 text: "Find",
                 click: $.noop,
                 type: "submit",
-                form: "myForm" // <-- Make the association
+                form: "myForm" // &lt;-- Make the association
             },
             {
                 text: "Close",
@@ -264,10 +244,8 @@ form.on( "keypress", "input[type=text]", function( event ) {</p>
             }
         ]
     });
-</script>
+&lt;/script&gt;</code></pre>
 
-
-<p>```</p>
 
 <p><a href="/demos/2013-07-10/form.html">Live Example</a></p>
 
@@ -277,67 +255,63 @@ form.on( "keypress", "input[type=text]", function( event ) {</p>
 
 <p>Because the form attribute is so handy here, I wrote a polyfill that adds support in browsers that don't support it natively: <a href="https://gist.github.com/tjvantoll/5911571">https://gist.github.com/tjvantoll/5911571</a>. The source is below:</p>
 
-<p>``` javascript
-/<em>*
+<pre class="language-javascript line-numbers"><code>/**
  * The form attribute can be used to associate a submit button with a form, even
- * if the button is not a child of the <form> itself.
- *
+ * if the button is not a child of the &lt;form&gt; itself.
+ * 
  * This polyfill uses a support check taken from Modernizr and polyfills the
  * functionality using jQuery.
- </em>/
-(function() {</p>
-
-<pre><code>// Via Modernizr
-function formAttributeSupport() {
-    var form = document.createElement( "form" ),
-        input = document.createElement( "input" ),
-        div = document.createElement( "div" ),
-        id = "formtest"+ ( new Date().getTime() ),
-        attr,
-        bool = false;
-
-        form.id = id;
-
-    // IE6/7 confuses the form idl attribute and the form content attribute
-    if ( document.createAttribute ) {
-        attr = document.createAttribute("form");
-        attr.nodeValue = id;
-        input.setAttributeNode(attr);
-        div.appendChild(form);
-        div.appendChild(input);
-
-        document.documentElement.appendChild(div);
-
-        bool = form.elements.length === 1 &amp;&amp; input.form == form;
-
-        div.parentNode.removeChild(div);
-    }
-
-    return bool;
-};
-
-if ( !formAttributeSupport() ) {
-    $( document )
-        .on( "click", "[type=submit][form]", function( event ) {
-            event.preventDefault();
-            var formId = $( this ).attr( "form" ),
-            $form = $( "#" + formId ).submit();
-        })
-        .on( "keypress", "form input", function( event ) {
-            var $form;
-            if ( event.keyCode == 13 ) {
-                $form = $( this ).parents( "form" );
-                if ( $form.find( "[type=submit]" ).length == 0 &amp;&amp;
-                    $( "[type=submit][form=" + $( this ).attr( "form" ) + "]" ).length &gt; 0 ) {
-                    $form.submit();
+ */
+(function() {
+    // Via Modernizr
+    function formAttributeSupport() {
+        var form = document.createElement( "form" ),
+            input = document.createElement( "input" ),
+            div = document.createElement( "div" ),
+            id = "formtest"+ ( new Date().getTime() ),
+            attr,
+            bool = false;
+        
+            form.id = id;
+        
+        // IE6/7 confuses the form idl attribute and the form content attribute
+        if ( document.createAttribute ) {
+            attr = document.createAttribute("form");
+            attr.nodeValue = id;
+            input.setAttributeNode(attr);
+            div.appendChild(form);
+            div.appendChild(input);
+        
+            document.documentElement.appendChild(div);
+        
+            bool = form.elements.length === 1 && input.form == form;
+        
+            div.parentNode.removeChild(div);
+        }
+        
+        return bool;
+    };
+    
+    if ( !formAttributeSupport() ) {
+        $( document )
+            .on( "click", "[type=submit][form]", function( event ) {
+                event.preventDefault();
+                var formId = $( this ).attr( "form" ),
+                $form = $( "#" + formId ).submit();
+            })
+            .on( "keypress", "form input", function( event ) {
+                var $form;
+                if ( event.keyCode == 13 ) {
+                    $form = $( this ).parents( "form" );
+                    if ( $form.find( "[type=submit]" ).length == 0 &&
+                        $( "[type=submit][form=" + $( this ).attr( "form" ) + "]" ).length > 0 ) {
+                        $form.submit();
+                    }
                 }
-            }
-        });
-}
-</code></pre>
+            });
+    }
+}());</code></pre>
 
-<p>}());
-```</p>
 
 <p>This can be included anywhere on the page after jQuery is included.</p>
 
@@ -373,9 +347,9 @@ if ( !formAttributeSupport() ) {
 
 <p>For any unsupported browser you can easily add support by just including the following CSS:</p>
 
-<p><code>css Polyfiling the hidden attribute.
-[hidden] { display: none; }
-</code></p>
+<pre class="language-css"><code>[hidden] { display: none; }
+</code></pre>
+
 
 <p>This will work back to IE6, which doesn't support the <a href="https://developer.mozilla.org/en-US/docs/CSS/Attribute_selectors">attribute selector</a>.</p>
 
@@ -460,44 +434,43 @@ if ( !formAttributeSupport() ) {
 <!--more-->
 
 
-<p>``` javascript Polyfill input[type=range] with jQuery UI's Slider
-$(function() {</p>
 
-<pre><code>//Determine whether the browser natively supports input[type=range].
-//If you're using Modernizr this is equivalent to Modernizr.inputtypes.range
-var input = document.createElement('input');
-input.setAttribute('type', 'range');
-var rangeSupport = input.type != 'text';
 
-if (!rangeSupport) {
-    var $input, $slider;
+<pre class="language-javascript line-numbers"><code>$(function() {
+    //Determine whether the browser natively supports input[type=range].
+    //If you're using Modernizr this is equivalent to Modernizr.inputtypes.range
+    var input = document.createElement('input');
+    input.setAttribute('type', 'range');
+    var rangeSupport = input.type != 'text';
+    
+    if (!rangeSupport) {
+        var $input, $slider;
+        
+        $('input[type=range]').each(function(index, input) {
+            $input = $(input);
+            
+            //Create a new div, turn it into a slider, and set its attributes based on
+            //the attributes of the input.  If the input doesn't possess those attributes
+            //use jQuery UI's defaults.
+            $slider = $('&lt;div /&gt;').slider({
+                min: parseInt($input.attr('min'), 10) || 0,
+                max: parseInt($input.attr('max'), 10) || 100,
+                value: parseInt($input.attr('value'), 10) || 0,
+                step: parseInt($input.attr('step'), 10) || 1,
+                slide: function(event, ui) {
+                    //Keep the value of the input[type=range] in sync with the slider.
+                    $(this).prev('input').val(ui.value);
+                }
+            });
 
-    $('input[type=range]').each(function(index, input) {
-        $input = $(input);
-
-        //Create a new div, turn it into a slider, and set its attributes based on
-        //the attributes of the input.  If the input doesn't possess those attributes
-        //use jQuery UI's defaults.
-        $slider = $('&lt;div /&gt;').slider({
-            min: parseInt($input.attr('min'), 10) || 0,
-            max: parseInt($input.attr('max'), 10) || 100,
-            value: parseInt($input.attr('value'), 10) || 0,
-            step: parseInt($input.attr('step'), 10) || 1,
-            slide: function(event, ui) {
-                //Keep the value of the input[type=range] in sync with the slider.
-                $(this).prev('input').val(ui.value);
-            }
+            //Append the slider after the input and hide the input.  The user will only
+            //interact with the slider.
+            $input.after($slider).hide();
         });
-
-        //Append the slider after the input and hide the input.  The user will only
-        //interact with the slider.        
-        $input.after($slider).hide();
-    });
-}
+    }
+});
 </code></pre>
 
-<p>});
-```</p>
 
 <h3>Future</h3>
 

@@ -21,12 +21,7 @@
   <link rel="canonical" href="http://tjvantoll.com/2013/05/28/showing-a-resize-icon-on-a-jquery-ui-dialog">
   <link rel="author" href="https://plus.google.com/+TJVanToll">
 
-  <!--[if !lte IE 7]><!-->
-    <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet">
-  <!--<![endif]-->
-  <!--[if lte IE 7]>
-    <link rel="stylesheet" href="/stylesheets/old-ie.css" media="screen, projection">
-  <![endif]-->
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet">
   
   <!--Custom script concatenation
   <script src="/javascripts/modernizr-2.5.3.js"></script>
@@ -38,12 +33,6 @@
   <script src="/javascripts/build/scripts.js"></script>
 
   <link href="/atom.xml" rel="alternate" title="TJ VanToll's Blog" type="application/atom+xml">
-  <style>
-	/* Fonts from Google"s Web font directory at http://google.com/webfonts */
-	/*@import url(http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic);
-	@import url(http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic);*/
-</style>
-
   
   <script type="text/javascript">
   	if (window.location.host.indexOf('local') == -1) {
@@ -146,21 +135,14 @@
 
 <p>To get the icon back, you have to override the rules that position the icon:</p>
 
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nc">.ui-dialog</span> <span class="nc">.ui-resizable-se</span> <span class="p">{</span>
-</span><span class='line'>    <span class="k">width</span><span class="o">:</span> <span class="m">14px</span><span class="p">;</span>
-</span><span class='line'>    <span class="k">height</span><span class="o">:</span> <span class="m">14px</span><span class="p">;</span>
-</span><span class='line'>    <span class="k">right</span><span class="o">:</span> <span class="m">3px</span><span class="p">;</span>
-</span><span class='line'>    <span class="k">bottom</span><span class="o">:</span> <span class="m">3px</span><span class="p">;</span>
-</span><span class='line'>    <span class="k">background-position</span><span class="o">:</span> <span class="m">-80px</span> <span class="m">-224px</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre class="language-css"><code>.ui-dialog .ui-resizable-se {
+    width: 14px;
+    height: 14px;
+    right: 3px;
+    bottom: 3px;
+    background-position: -80px -224px;
+}
+</code></pre>
 
 
 <p>This will display as follows:</p>
@@ -204,7 +186,7 @@
     </p>
     <p class="author_card meta">
       <img src="/images/me/1.jpg" alt="Me!" id="post_me">
-      TJ VanToll is a developer advocate for <a href="http://telerik.com">Telerik</a>, a <a href="http://jqueryui.com/about/">jQuery team member</a>, and the author of <a href="http://tjvantoll.com/jquery-ui-in-action.html">jQuery UI in Action</a>. TJ has over a decade of web development experience—specializing in performance and the mobile web—and <a href="/speaking">speaks</a> about his research at conferences around the world. When not online, TJ is generally found talking about himself in the third person. If you like hearing TJ talk about himself, you should consider following him on <a href="http://twitter.com/tjvantoll">Twitter</a> or <a href="https://plus.google.com/+TJVanToll?rel=author" rel="author">Google+</a>.
+      TJ VanToll is a developer advocate for <a href="http://telerik.com">Telerik</a>, a <a href="http://jqueryui.com/about/">jQuery team member</a>, and the author of <a href="http://tjvantoll.com/jquery-ui-in-action.html">jQuery UI in Action</a>. TJ has over a decade of web development experience—specializing in performance and the mobile web—and <a href="/speaking">speaks</a> about his research at conferences around the world.TJ is <a href="http://twitter.com/tjvantoll">@tjvantoll</a> on Twitter and <a href="https://plus.google.com/+TJVanToll?rel=author" rel="author">+TJVanToll</a> on Google+.
     </p>
     
       <div class="sharing">
@@ -316,8 +298,7 @@
 
 
 
-
-
+Included file 'google_plus_one.html' not found in _includes directory
 
   <script type="text/javascript">
     (function(){
@@ -330,8 +311,7 @@
   </script>
 
 
-
-
+Included file 'custom/after_footer.html' not found in _includes directory
 
 </body>
 </html>

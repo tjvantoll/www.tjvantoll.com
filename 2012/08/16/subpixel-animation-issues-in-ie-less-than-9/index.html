@@ -9,13 +9,7 @@
   <meta name="author" content="TJ VanToll">
 
   
-  <meta name="description" content="While there are definitely cross browser discrepancies handling subpixels, this one caught me by surprise. Take the following: 1
-2
-3
-4
-5
-6
-&lt;div id &hellip;">
+  <meta name="description" content="While there are definitely cross browser discrepancies handling subpixels, this one caught me by surprise. Take the following: &lt;div id="box"&gt;& &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -27,12 +21,7 @@
   <link rel="canonical" href="http://tjvantoll.com/2012/08/16/subpixel-animation-issues-in-ie-less-than-9">
   <link rel="author" href="https://plus.google.com/+TJVanToll">
 
-  <!--[if !lte IE 7]><!-->
-    <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet">
-  <!--<![endif]-->
-  <!--[if lte IE 7]>
-    <link rel="stylesheet" href="/stylesheets/old-ie.css" media="screen, projection">
-  <![endif]-->
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet">
   
   <!--Custom script concatenation
   <script src="/javascripts/modernizr-2.5.3.js"></script>
@@ -44,12 +33,6 @@
   <script src="/javascripts/build/scripts.js"></script>
 
   <link href="/atom.xml" rel="alternate" title="TJ VanToll's Blog" type="application/atom+xml">
-  <style>
-	/* Fonts from Google"s Web font directory at http://google.com/webfonts */
-	/*@import url(http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic);
-	@import url(http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic);*/
-</style>
-
   
   <script type="text/javascript">
   	if (window.location.host.indexOf('local') == -1) {
@@ -131,19 +114,14 @@
 
 <div class="entry-content"><p>While there are definitely <a href="http://ejohn.org/blog/sub-pixel-problems-in-css/">cross browser discrepancies handling subpixels</a>, this one caught me by surprise.  Take the following:</p>
 
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">&quot;box&quot;</span><span class="nt">&gt;&lt;/div&gt;</span>
-</span><span class='line'><span class="nt">&lt;script&gt;</span>
-</span><span class='line'>    <span class="kd">var</span> <span class="nx">box</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">&#39;box&#39;</span><span class="p">);</span>
-</span><span class='line'>    <span class="nx">box</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">left</span> <span class="o">=</span> <span class="s1">&#39;10.25px&#39;</span><span class="p">;</span>
-</span><span class='line'>    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">box</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">left</span><span class="p">);</span>
-</span><span class='line'><span class="nt">&lt;/script&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre class="language-markup"><code>
+&lt;div id="box"&gt;&lt;/div&gt;
+&lt;script&gt;
+    var box = document.getElementById('box');
+    box.style.left = '10.25px';
+    console.log(box.style.left);
+&lt;/script&gt;
+</code></pre>
 
 
 <p>This simply sets a value for the <code>left</code> CSS property then immediately retrieves it.  In Chrome 22, Firefox 14, Safari 6, Opera 12, IE >= 9, iOS 5, and Android <code>10.25px</code> will be logged.</p>
@@ -152,27 +130,18 @@
 
 <p>Why is this a problem?  <!--more-->Take the following code.</p>
 
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">&quot;box&quot;</span><span class="nt">&gt;&lt;/div&gt;</span>
-</span><span class='line'><span class="nt">&lt;script&gt;</span>
-</span><span class='line'>    <span class="kd">var</span> <span class="nx">box</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">&#39;box&#39;</span><span class="p">);</span>
-</span><span class='line'>    <span class="nx">box</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">left</span> <span class="o">=</span> <span class="s1">&#39;0px&#39;</span><span class="p">;</span>
-</span><span class='line'>    <span class="nx">setInterval</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-</span><span class='line'>        <span class="kd">var</span> <span class="nx">currentLeft</span> <span class="o">=</span> <span class="nx">box</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">left</span><span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="s1">&#39;px&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">);</span>
-</span><span class='line'>        <span class="nx">currentLeft</span> <span class="o">=</span> <span class="nb">parseFloat</span><span class="p">(</span><span class="nx">currentLeft</span><span class="p">);</span>
-</span><span class='line'>        <span class="nx">box</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">left</span> <span class="o">=</span> <span class="nx">currentLeft</span> <span class="o">+</span> <span class="mf">0.25</span> <span class="o">+</span> <span class="s1">&#39;px&#39;</span><span class="p">;</span>
-</span><span class='line'>    <span class="p">},</span> <span class="mi">20</span><span class="p">);</span>
-</span><span class='line'><span class="nt">&lt;/script&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre class="language-markup"><code>
+&lt;div id="box"&gt;&lt;/div&gt;
+&lt;script&gt;
+    var box = document.getElementById('box');
+    box.style.left = '0px';
+    setInterval(function() {
+        var currentLeft = box.style.left.replace('px', '');
+        currentLeft = parseFloat(currentLeft);
+        box.style.left = currentLeft + 0.25 + 'px';
+    }, 20);
+&lt;/script&gt;
+</code></pre>
 
 
 <p>This sets an interval that will increase the <code>left</code> property of a box by <code>0.25</code> pixels every 20 milliseconds.  Doing so will move the box left across the screen as seen below:</p>
@@ -184,25 +153,17 @@
 
 <p>The way around this is simply to use store off the value of the property outside of the animation loop itself.</p>
 
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">&quot;box&quot;</span><span class="nt">&gt;&lt;/div&gt;</span>
-</span><span class='line'><span class="nt">&lt;script&gt;</span>
-</span><span class='line'>    <span class="kd">var</span> <span class="nx">left</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-</span><span class='line'>    <span class="kd">var</span> <span class="nx">box</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">&#39;box&#39;</span><span class="p">);</span>
-</span><span class='line'>    <span class="nx">setInterval</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-</span><span class='line'>        <span class="nx">box</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">left</span> <span class="o">=</span> <span class="nx">left</span> <span class="o">+</span> <span class="s1">&#39;px&#39;</span><span class="p">;</span>
-</span><span class='line'>        <span class="nx">left</span> <span class="o">+=</span> <span class="mf">0.25</span><span class="p">;</span>
-</span><span class='line'>    <span class="p">},</span> <span class="mi">20</span><span class="p">);</span>
-</span><span class='line'><span class="nt">&lt;/script&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre class="language-markup"><code>
+&lt;div id="box"&gt;&lt;/div&gt;
+&lt;script&gt;
+    var left = 0;
+    var box = document.getElementById('box');
+    setInterval(function() {
+        box.style.left = left + 'px';
+        left += 0.25;
+    }, 20);
+&lt;/script&gt;
+</code></pre>
 
 
 <p>This has the added benefit of being more efficient since you save a property retrieval on every invocation of the loop.</p>
@@ -241,7 +202,7 @@
     </p>
     <p class="author_card meta">
       <img src="/images/me/1.jpg" alt="Me!" id="post_me">
-      TJ VanToll is a developer advocate for <a href="http://telerik.com">Telerik</a>, a <a href="http://jqueryui.com/about/">jQuery team member</a>, and the author of <a href="http://tjvantoll.com/jquery-ui-in-action.html">jQuery UI in Action</a>. TJ has over a decade of web development experience—specializing in performance and the mobile web—and <a href="/speaking">speaks</a> about his research at conferences around the world. When not online, TJ is generally found talking about himself in the third person. If you like hearing TJ talk about himself, you should consider following him on <a href="http://twitter.com/tjvantoll">Twitter</a> or <a href="https://plus.google.com/+TJVanToll?rel=author" rel="author">Google+</a>.
+      TJ VanToll is a developer advocate for <a href="http://telerik.com">Telerik</a>, a <a href="http://jqueryui.com/about/">jQuery team member</a>, and the author of <a href="http://tjvantoll.com/jquery-ui-in-action.html">jQuery UI in Action</a>. TJ has over a decade of web development experience—specializing in performance and the mobile web—and <a href="/speaking">speaks</a> about his research at conferences around the world.TJ is <a href="http://twitter.com/tjvantoll">@tjvantoll</a> on Twitter and <a href="https://plus.google.com/+TJVanToll?rel=author" rel="author">+TJVanToll</a> on Google+.
     </p>
     
       <div class="sharing">
@@ -353,8 +314,7 @@
 
 
 
-
-
+Included file 'google_plus_one.html' not found in _includes directory
 
   <script type="text/javascript">
     (function(){
@@ -367,8 +327,7 @@
   </script>
 
 
-
-
+Included file 'custom/after_footer.html' not found in _includes directory
 
 </body>
 </html>

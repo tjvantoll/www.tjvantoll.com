@@ -9,16 +9,7 @@
   <meta name="author" content="TJ VanToll">
 
   
-  <meta name="description" content="Quiz: What is logged when the following markup is rendered? 1
-2
-3
-4
-5
-6
-7
-8
-9
-&lt;html&gt; &lt;head&gt;&lt;/head&gt; &lt;body&gt; &lt;button id=&quot &hellip;">
+  <meta name="description" content="Quiz: What is logged when the following markup is rendered? &lt;html&gt; &lt;head&gt;&lt;/head&gt; &lt;body&gt; &lt;button id="bar"&gt;Button&lt;/ &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -30,12 +21,7 @@
   <link rel="canonical" href="http://tjvantoll.com/2012/07/19/dom-element-references-as-global-variables">
   <link rel="author" href="https://plus.google.com/+TJVanToll">
 
-  <!--[if !lte IE 7]><!-->
-    <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet">
-  <!--<![endif]-->
-  <!--[if lte IE 7]>
-    <link rel="stylesheet" href="/stylesheets/old-ie.css" media="screen, projection">
-  <![endif]-->
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet">
   
   <!--Custom script concatenation
   <script src="/javascripts/modernizr-2.5.3.js"></script>
@@ -47,12 +33,6 @@
   <script src="/javascripts/build/scripts.js"></script>
 
   <link href="/atom.xml" rel="alternate" title="TJ VanToll's Blog" type="application/atom+xml">
-  <style>
-	/* Fonts from Google"s Web font directory at http://google.com/webfonts */
-	/*@import url(http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic);
-	@import url(http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic);*/
-</style>
-
   
   <script type="text/javascript">
   	if (window.location.host.indexOf('local') == -1) {
@@ -134,25 +114,17 @@
 
 <div class="entry-content"><p>Quiz: What is logged when the following markup is rendered?</p>
 
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;html&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;head&gt;&lt;/head&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;body&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;button</span> <span class="na">id=</span><span class="s">&quot;bar&quot;</span><span class="nt">&gt;</span>Button<span class="nt">&lt;/button&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;script&gt;</span>
-</span><span class='line'>            <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">bar</span><span class="p">);</span>
-</span><span class='line'>        <span class="nt">&lt;/script&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;/body&gt;</span>
-</span><span class='line'><span class="nt">&lt;/html&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre class="language-markup"><code>
+&lt;html&gt;
+    &lt;head&gt;&lt;/head&gt;
+    &lt;body&gt;
+        &lt;button id="bar"&gt;Button&lt;/button&gt;
+        &lt;script&gt;
+            console.log(bar);
+        &lt;/script&gt;
+    &lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
 
 
 <p><a href="https://developer.mozilla.org/en-US/docs/JavaScript/Reference/Global_Objects/ReferenceError">ReferenceError</a> obviously, right?  Wrong.  All major browser rendering engines will log a reference to the <code>&lt;button&gt;</code> node.  This includes Trident (IE), Gecko (Firefox), WebKit (Chrome, Safari, etc), and Presto (Opera).</p>
@@ -161,27 +133,18 @@
 
 <p>Ah, I get it, there&#8217;s no doctype on that markup.  So this a quirks mode only thing then right?  Wrong.  <a href="https://bugzilla.mozilla.org/show_bug.cgi?id=622491">As of Firefox 14</a> the latest version of all major browsers will produce the same result IN STANDARDS MODE.</p>
 
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="cp">&lt;!DOCTYPE html&gt;</span>
-</span><span class='line'><span class="nt">&lt;html&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;head&gt;&lt;/head&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;body&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;button</span> <span class="na">id=</span><span class="s">&quot;bar&quot;</span><span class="nt">&gt;</span>Button<span class="nt">&lt;/button&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;script&gt;</span>
-</span><span class='line'>            <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">bar</span><span class="p">);</span> <span class="c1">//Reference to &lt;button&gt;, even in standards mode</span>
-</span><span class='line'>        <span class="nt">&lt;/script&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;/body&gt;</span>
-</span><span class='line'><span class="nt">&lt;/html&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre class="language-markup"><code>
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+    &lt;head&gt;&lt;/head&gt;
+    &lt;body&gt;
+        &lt;button id="bar"&gt;Button&lt;/button&gt;
+        &lt;script&gt;
+            console.log(bar); //Reference to &lt;button&gt;, even in standards mode
+        &lt;/script&gt;
+    &lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
 
 
 
@@ -218,54 +181,35 @@
 
 <p>Let&#8217;s say you have some code that looks something like this:</p>
 
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;html&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;head&gt;&lt;/head&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;body&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;text&quot;</span> <span class="na">id=</span><span class="s">&quot;choice&quot;</span><span class="nt">&gt;&lt;/button&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;script&gt;</span>
-</span><span class='line'>            <span class="kd">var</span> <span class="nx">choice</span> <span class="o">=</span> <span class="s1">&#39;foo&#39;</span><span class="p">;</span>
-</span><span class='line'>            <span class="c1">//Lots more JavaScript</span>
-</span><span class='line'>            <span class="nx">doSomethingVeryComplicated</span><span class="p">(</span><span class="nx">choice</span><span class="p">);</span>
-</span><span class='line'>        <span class="nt">&lt;/script&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;/body&gt;</span>
-</span><span class='line'><span class="nt">&lt;/html&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre class="language-markup"><code>
+&lt;html&gt;
+    &lt;head&gt;&lt;/head&gt;
+    &lt;body&gt;
+        &lt;input type="text" id="choice"&gt;&lt;/button&gt;
+        &lt;script&gt;
+            var choice = 'foo';
+            //Lots more JavaScript
+            doSomethingVeryComplicated(choice);
+        &lt;/script&gt;
+    &lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
 
 
 <p>Since a global <code>choice</code> variable is being created, <code>window.choice</code> will resolve to the string <code>foo</code> and not a reference to the <code>&lt;input&gt;</code>.  This is because the <code>&lt;input&gt;</code> reference is being <a href="http://en.wikipedia.org/wiki/Variable_shadowing">shadowed</a> by the variable declaration.  This works the same way as a variable with the same name being declared in a nested function.</p>
 
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-</span><span class='line'>    <span class="kd">var</span> <span class="nx">x</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
-</span><span class='line'>    <span class="kd">var</span> <span class="nx">y</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-</span><span class='line'>        <span class="kd">var</span> <span class="nx">x</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span>
-</span><span class='line'>        <span class="c1">//Logs 3 instead of 2 because the value defined in the outer</span>
-</span><span class='line'>        <span class="c1">//function is shadowed by the x defined in the inner function.</span>
-</span><span class='line'>        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">x</span><span class="p">);</span>
-</span><span class='line'>    <span class="p">};</span>
-</span><span class='line'>    <span class="nx">y</span><span class="p">();</span>
-</span><span class='line'><span class="p">}());</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre class="language-javascript"><code>
+(function() {
+    var x = 2;
+    var y = function() {
+        var x = 3;
+        //Logs 3 instead of 2 because the value defined in the outer
+        //function is shadowed by the x defined in the inner function.
+        console.log(x);
+    };
+    y();
+}());
+</code></pre>
 
 
 <p>This is all well and good.  However, let&#8217;s say that during a refactor of this code the <code>var choice = 'foo';</code> line is accidentally removed.  Under normal circumstances this would cause a ReferenceError because <code>window.choice</code> would now be undefined.  However, because there is a DOM node with an <code>id</code> of <code>choice</code>, that reference will now refer to the DOM node instead.  This can easily lead to unexpected behavior.</p>
@@ -296,31 +240,20 @@
 
 <p>IE will (incorrectly) make the <code>name</code> attribute of form elements available on the <code>window</code> object.</p>
 
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="cp">&lt;!DOCTYPE html&gt;</span>
-</span><span class='line'><span class="nt">&lt;html&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;head&gt;&lt;/head&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;body&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;input</span> <span class="na">name=</span><span class="s">&quot;foo&quot;</span> <span class="nt">/&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;script&gt;</span>
-</span><span class='line'>            <span class="c1">//Logs a reference to the &lt;input&gt; in IE.</span>
-</span><span class='line'>            <span class="c1">//ReferenceError in all other rendering engines.</span>
-</span><span class='line'>            <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">foo</span><span class="p">);</span>
-</span><span class='line'>        <span class="nt">&lt;/script&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;/body&gt;</span>
-</span><span class='line'><span class="nt">&lt;/html&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre class="language-markup"><code>
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+    &lt;head&gt;&lt;/head&gt;
+    &lt;body&gt;
+        &lt;input name="foo" /&gt;
+        &lt;script&gt;
+            //Logs a reference to the &lt;input&gt; in IE.
+            //ReferenceError in all other rendering engines.
+            console.log(foo);
+        &lt;/script&gt;
+    &lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
 
 
 <blockquote><p><strong>Update</strong>: Microsoft&#8217;s Edge browser no longer exhibits this behavior. Also, this behavior is not present when the <code>&lt;input&gt;</code> resides within a <code>&lt;form&gt;</code> element.</p></blockquote>
@@ -329,31 +262,20 @@
 
 <p>Per the spec, <code>&lt;a&gt;</code> tags should be accessible on the <code>window</code> object via the value of their <code>name</code> attribute.  However, this only works in IE and Opera.</p>
 
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="cp">&lt;!DOCTYPE html&gt;</span>
-</span><span class='line'><span class="nt">&lt;html&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;head&gt;&lt;/head&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;body&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;a</span> <span class="na">name=</span><span class="s">&quot;foo&quot;</span><span class="nt">&gt;&lt;/a&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;script&gt;</span>
-</span><span class='line'>            <span class="c1">//Logs a reference to the &lt;a&gt; in IE and Opera.</span>
-</span><span class='line'>            <span class="c1">//ReferenceError in Gecko and WebKit.</span>
-</span><span class='line'>            <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">foo</span><span class="p">);</span>
-</span><span class='line'>        <span class="nt">&lt;/script&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;/body&gt;</span>
-</span><span class='line'><span class="nt">&lt;/html&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre class="language-markup"><code>
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+    &lt;head&gt;&lt;/head&gt;
+    &lt;body&gt;
+        &lt;a name="foo"&gt;&lt;/a&gt;
+        &lt;script&gt;
+            //Logs a reference to the &lt;a&gt; in IE and Opera.
+            //ReferenceError in Gecko and WebKit.
+            console.log(foo);
+        &lt;/script&gt;
+    &lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
 
 
 <h5>Multiple Named Attributes with the Same Value</h5>
@@ -365,29 +287,19 @@
 
 <p>What this is staying is that when there are multiple named properties with the same name, the browser should return an array when that property is referenced (instead of a reference to a specific DOM node).  As an example given this markup:</p>
 
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="cp">&lt;!DOCTYPE html&gt;</span>
-</span><span class='line'><span class="nt">&lt;html&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;head&gt;&lt;/head&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;body&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;input</span> <span class="na">id=</span><span class="s">&quot;one&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;input</span> <span class="na">id=</span><span class="s">&quot;one&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;script&gt;</span>
-</span><span class='line'>            <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">one</span><span class="p">);</span>
-</span><span class='line'>        <span class="nt">&lt;/script&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;/body&gt;</span>
-</span><span class='line'><span class="nt">&lt;/html&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre class="language-markup"><code>
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+    &lt;head&gt;&lt;/head&gt;
+    &lt;body&gt;
+        &lt;input id="one"&gt;
+        &lt;input id="one"&gt;
+        &lt;script&gt;
+            console.log(one);
+        &lt;/script&gt;
+    &lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
 
 
 <p>&#8230;an array with references to the two <code>&lt;input&gt;</code> nodes should be logged per the spec.  And it will be in all browsers except Firefox.  Firefox 14 will simply log the first element.</p>
@@ -402,45 +314,34 @@
 
 <p><a href="https://developer.mozilla.org/en/JavaScript/Strict_mode">ECMAScript 5 strict mode</a> prevents you assigning values to variables before they are declared.  Therefore this&#8230;</p>
 
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-</span><span class='line'>    <span class="nx">foo</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
-</span><span class='line'><span class="p">}());</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre class="language-javascript"><code>
+(function() {
+    foo = 2; 
+}());
+</code></pre>
 
 
 <p>will execute just fine whereas this&#8230;</p>
 
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-</span><span class='line'>    <span class="s1">&#39;use strict&#39;</span><span class="p">;</span>
-</span><span class='line'>    <span class="nx">foo</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
-</span><span class='line'><span class="p">}());</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre class="language-javascript"><code>
+(function() {
+    'use strict';
+    foo = 2; 
+}());
+</code></pre>
 
 
 <p>&#8230;will produce a ReferenceError that <code>foo</code> is not defined.  This is great, but it will not stop you from accessing named properties on the <code>window</code> object.</p>
 
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">&quot;foo&quot;</span><span class="nt">&gt;&lt;/div&gt;</span>
-</span><span class='line'><span class="nt">&lt;script&gt;</span>
-</span><span class='line'>    <span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-</span><span class='line'>        <span class="s1">&#39;use strict&#39;</span><span class="p">;</span>
-</span><span class='line'>        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">foo</span><span class="p">);</span>
-</span><span class='line'>    <span class="p">});</span>
-</span><span class='line'><span class="nt">&lt;/script&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre class="language-markup"><code>
+&lt;div id="foo"&gt;&lt;/div&gt;
+&lt;script&gt;
+    (function() {
+        'use strict';
+        console.log(foo);
+    });
+&lt;/script&gt;
+</code></pre>
 
 
 <p>This will log a reference to the <code>&lt;div&gt;</code> in standards mode in the latest version of all modern browsers.  Strict mode will only prevent you from assigning values to variables that have yet to be declared.  If you&#8217;re simply using a variable then strict mode doesn&#8217;t protect you.  Therefore, you&#8217;re not prevented from accessing name properties on the global <code>window</code> object.</p>
@@ -449,34 +350,25 @@
 
 <p>Use <code>document.getElementById</code> to retrieve references to DOM nodes via their <code>id</code> attribute.</p>
 
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;button</span> <span class="na">id=</span><span class="s">&quot;foo&quot;</span><span class="nt">&gt;&lt;/button&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="nt">&lt;script&gt;</span>
-</span><span class='line'>    <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">&#39;foo&#39;</span><span class="p">);</span>
-</span><span class='line'><span class="nt">&lt;/script&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre class="language-markup"><code>
+&lt;button id="foo"&gt;&lt;/button&gt;
+
+&lt;script&gt;
+    document.getElementById('foo');
+&lt;/script&gt;
+</code></pre>
 
 
 <p>To get a reference to a DOM node via its <code>name</code> attribute you can use <code>document.getElementsByName</code> or <code>document.querySelectorAll</code>.</p>
 
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;a</span> <span class="na">name=</span><span class="s">&quot;bar&quot;</span><span class="nt">&gt;&lt;/a&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="nt">&lt;script&gt;</span>
-</span><span class='line'>    <span class="nb">document</span><span class="p">.</span><span class="nx">getElementsByName</span><span class="p">(</span><span class="s1">&#39;bar&#39;</span><span class="p">);</span>
-</span><span class='line'>    <span class="nb">document</span><span class="p">.</span><span class="nx">querySelectorAll</span><span class="p">(</span><span class="s1">&#39;[name=bar]&#39;</span><span class="p">);</span>
-</span><span class='line'><span class="nt">&lt;/script&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre class="language-markup"><code>
+&lt;a name="bar"&gt;&lt;/a&gt;
+
+&lt;script&gt;
+    document.getElementsByName('bar');
+    document.querySelectorAll('[name=bar]');
+&lt;/script&gt;
+</code></pre>
 
 
 <p><code>document.querySelectorAll</code> is not safe to use in IE &lt;= 8, but <code>document.getElementsByName</code> is safe to use in all browsers.</p>
@@ -536,7 +428,7 @@
     </p>
     <p class="author_card meta">
       <img src="/images/me/1.jpg" alt="Me!" id="post_me">
-      TJ VanToll is a developer advocate for <a href="http://telerik.com">Telerik</a>, a <a href="http://jqueryui.com/about/">jQuery team member</a>, and the author of <a href="http://tjvantoll.com/jquery-ui-in-action.html">jQuery UI in Action</a>. TJ has over a decade of web development experience—specializing in performance and the mobile web—and <a href="/speaking">speaks</a> about his research at conferences around the world. When not online, TJ is generally found talking about himself in the third person. If you like hearing TJ talk about himself, you should consider following him on <a href="http://twitter.com/tjvantoll">Twitter</a> or <a href="https://plus.google.com/+TJVanToll?rel=author" rel="author">Google+</a>.
+      TJ VanToll is a developer advocate for <a href="http://telerik.com">Telerik</a>, a <a href="http://jqueryui.com/about/">jQuery team member</a>, and the author of <a href="http://tjvantoll.com/jquery-ui-in-action.html">jQuery UI in Action</a>. TJ has over a decade of web development experience—specializing in performance and the mobile web—and <a href="/speaking">speaks</a> about his research at conferences around the world.TJ is <a href="http://twitter.com/tjvantoll">@tjvantoll</a> on Twitter and <a href="https://plus.google.com/+TJVanToll?rel=author" rel="author">+TJVanToll</a> on Google+.
     </p>
     
       <div class="sharing">
@@ -648,8 +540,7 @@
 
 
 
-
-
+Included file 'google_plus_one.html' not found in _includes directory
 
   <script type="text/javascript">
     (function(){
@@ -662,8 +553,7 @@
   </script>
 
 
-
-
+Included file 'custom/after_footer.html' not found in _includes directory
 
 </body>
 </html>

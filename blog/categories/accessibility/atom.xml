@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Accessibility | TJ VanToll's Blog]]></title>
   <link href="http://tjvantoll.com/blog/categories/accessibility/atom.xml" rel="self"/>
   <link href="http://tjvantoll.com/"/>
-  <updated>2015-06-25T11:24:59-04:00</updated>
+  <updated>2015-07-04T11:17:31-04:00</updated>
   <id>http://tjvantoll.com/</id>
   <author>
     <name><![CDATA[TJ VanToll]]></name>
@@ -24,15 +24,14 @@
 
 <p>All browsers have a default value they apply to the currently focused item.  For example Chrome on OS X uses the following:</p>
 
-<p>``` css
-:focus {</p>
-
-<pre><code>/* -webkit-focus-ring-color = '#5B9DD9' */
-outline: -webkit-focus-ring-color auto 5px;
+<pre class="language-css"><code>:focus {
+    /* -webkit-focus-ring-color = '#5B9DD9' */
+    outline: -webkit-focus-ring-color auto 5px;
+}
 </code></pre>
 
-<p>}
-```</p>
+
+
 
 <!--more-->
 
@@ -45,16 +44,13 @@ outline: -webkit-focus-ring-color auto 5px;
 
 <p>The <code>outline</code> <em>can</em> be removed with the following:</p>
 
-<p>``` css
-:focus {</p>
-
-<pre><code>outline: 0;
-/* or */
-outline: none;
+<pre class="language-css"><code>:focus {
+    outline: 0;
+    /* or */
+    outline: none;
+}
 </code></pre>
 
-<p>}
-```</p>
 
 <p>This is obviously bad per the reasoning above.  The HTML5 specification has the following to say about removing the default <code>outline</code>:</p>
 
@@ -64,16 +60,13 @@ outline: none;
 
 <p>As the spec mentions, you can create your own styling for focused items instead of using the browser's default.  For example the following will change all focused links to white text on a black background:</p>
 
-<p>``` css
-:link:focus, :visited:focus {</p>
-
-<pre><code>outline: none;
-background-color: black;
-color: white;
+<pre class="language-css"><code>:link:focus, :visited:focus {
+    outline: none;
+    background-color: black;
+    color: white;
+}
 </code></pre>
 
-<p>}
-```</p>
 
 <p>Although this is possible, I would <strong>strongly</strong> recommend simply leaving the default browser <code>outline</code> in place.  Changing the default display messes with a user's expectations, which is a big usability no no.  Furthermore, you need to make sure that whatever alternative you put in is sufficiently identifiable for users with reduced vision.</p>
 
@@ -94,15 +87,12 @@ color: white;
 
 <p>Unfortunately one of the reasons much of the internet removes the default focus ring is because the <a href="http://meyerweb.com/eric/tools/css/reset/reset200802.css">first version of Eric Meyer's CSS reset</a> included the following:</p>
 
-<p>``` css
-/<em> remember to define focus styles! </em>/
-:focus {</p>
-
-<pre><code>outline: 0;
+<pre class="language-css"><code>/* remember to define focus styles! */
+:focus {
+    outline: 0;
+}
 </code></pre>
 
-<p>}
-```</p>
 
 <p>As you can see it's made abundantly clear that you should define your own focus styles, but most people simply copied and pasted the file without realizing this.</p>
 
@@ -126,16 +116,13 @@ color: white;
 
 <p>Take the following basic form:</p>
 
-<p>``` html
-<form></p>
-
-<pre><code>&lt;label for="name"&gt;Name:&lt;/label&gt;
-&lt;input type="text" name="name" id="name"&gt;
-&lt;input type="submit" value="Submit"&gt;
+<pre class="language-markup"><code>&lt;form&gt;
+    &lt;label for="name"&gt;Name:&lt;/label&gt;
+    &lt;input type="text" name="name" id="name"&gt;
+    &lt;input type="submit" value="Submit"&gt;
+&lt;/form&gt;
 </code></pre>
 
-<p></form>
-```</p>
 
 <p>If you have focus in the textbox and hit enter, the form will be submitted automatically.  This behavior is consistent across all browsers and is known as implicit submission.  So why is this important?</p>
 
@@ -167,29 +154,23 @@ color: white;
 
 <p>So, in a form with no submit buttons, implicit submission will be done if only one input is present.  Therefore, pressing enter in this textbox will submit the form:</p>
 
-<p>``` html
-<form></p>
-
-<pre><code>&lt;label for="name"&gt;Name:&lt;/label&gt;
-&lt;input type="text" name="name" id="name"&gt;
+<pre class="language-markup"><code>&lt;form&gt;
+    &lt;label for="name"&gt;Name:&lt;/label&gt;
+    &lt;input type="text" name="name" id="name"&gt;
+&lt;/form&gt;
 </code></pre>
 
-<p></form>
-```</p>
 
 <p>But in this form it will not because there are multiple fields:</p>
 
-<p>``` html
-<form></p>
-
-<pre><code>&lt;label for="name"&gt;Name:&lt;/label&gt;
-&lt;input type="text" name="name" id="name"&gt;
-&lt;label for="address"&gt;Address:&lt;/label&gt;
-&lt;input type="text" name="address" id="address"&gt;
+<pre class="language-markup"><code>&lt;form&gt;
+    &lt;label for="name"&gt;Name:&lt;/label&gt;
+    &lt;input type="text" name="name" id="name"&gt;
+    &lt;label for="address"&gt;Address:&lt;/label&gt;
+    &lt;input type="text" name="address" id="address"&gt;
+&lt;/form&gt;
 </code></pre>
 
-<p></form>
-```</p>
 
 <p>Therefore, if you have a form with more than one input field, always include a submit button.  Specifically an <code>&lt;input&gt;</code> with the <code>type="submit"</code> attribute, or a <code>&lt;button&gt;</code> element should be present.  (Note: IE7 has a bug where the <code>type</code> attribute of a <code>&lt;button&gt;</code> defaults to <code>button</code> instead of <code>submit</code>.  Therefore for IE7 compatibility you'll need <code>&lt;button type="submit"&gt;</code>.)</p>
 
@@ -205,26 +186,20 @@ color: white;
 
 <p>Finally, it's also quite easy to prevent implicit submission in JavaScript.  Take the following example:</p>
 
-<p>``` html
-<form></p>
-
-<pre><code>&lt;label for="name"&gt;Name:&lt;/label&gt;
-&lt;input type="text" name="name" id="name"&gt;
-&lt;input type="submit" value="Submit"&gt;
-</code></pre>
-
-<p></form></p>
-
-<script>
+<pre class="language-markup"><code>&lt;form&gt;
+    &lt;label for="name"&gt;Name:&lt;/label&gt;
+    &lt;input type="text" name="name" id="name"&gt;
+    &lt;input type="submit" value="Submit"&gt;
+&lt;/form&gt;
+&lt;script&gt;
     document.getElementById('name').addEventListener('keypress', function(event) {
         if (event.keyCode == 13) {
             event.preventDefault();
         }
     });
-</script>
+&lt;/script&gt;
+</code></pre>
 
-
-<p>```</p>
 
 <p>This sets up a <code>keypress</code> event handler that prevents the default action (implicit submission) from occurring when the enter key is pressed.</p>
 
@@ -232,24 +207,19 @@ color: white;
 
 <p>Take the following example:</p>
 
-<p>``` html
-<form></p>
-
-<pre><code>&lt;label for="age"&gt;Age:&lt;/label&gt;
-&lt;input type="number" min="0" max="120" name="age" id="age"&gt;
-&lt;button id="child"&gt;Child&lt;/button&gt;
-&lt;button id="adult"&gt;Adult&lt;/button&gt;
-</code></pre>
-
-<p></form></p>
-
-<script>
+<pre class="language-markup"><code>&lt;form&gt;
+    &lt;label for="age"&gt;Age:&lt;/label&gt;
+    &lt;input type="number" min="0" max="120" name="age" id="age"&gt;
+    &lt;button id="child"&gt;Child&lt;/button&gt;
+    &lt;button id="adult"&gt;Adult&lt;/button&gt;
+&lt;/form&gt;
+&lt;script&gt;
     (function() {
         var age = document.getElementById('age');
         age.addEventListener('keypress', function(event) {
             if (event.keyCode == 13) {
                 event.preventDefault();
-                if (age.value > 20) {
+                if (age.value &gt; 20) {
                     document.getElementById('adult').click();
                 } else {
                     document.getElementById('child').click();
@@ -257,10 +227,9 @@ color: white;
             }
         });
     }());
-</script>
+&lt;/script&gt;
+</code></pre>
 
-
-<p>```</p>
 
 <p>When enter is clicked in the number input, the <code>keypress</code> event handler determines which submit button is appropriate and clicks it.</p>
 

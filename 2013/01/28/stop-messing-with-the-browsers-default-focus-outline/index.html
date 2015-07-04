@@ -21,12 +21,7 @@
   <link rel="canonical" href="http://tjvantoll.com/2013/01/28/stop-messing-with-the-browsers-default-focus-outline">
   <link rel="author" href="https://plus.google.com/+TJVanToll">
 
-  <!--[if !lte IE 7]><!-->
-    <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet">
-  <!--<![endif]-->
-  <!--[if lte IE 7]>
-    <link rel="stylesheet" href="/stylesheets/old-ie.css" media="screen, projection">
-  <![endif]-->
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet">
   
   <!--Custom script concatenation
   <script src="/javascripts/modernizr-2.5.3.js"></script>
@@ -38,12 +33,6 @@
   <script src="/javascripts/build/scripts.js"></script>
 
   <link href="/atom.xml" rel="alternate" title="TJ VanToll's Blog" type="application/atom+xml">
-  <style>
-	/* Fonts from Google"s Web font directory at http://google.com/webfonts */
-	/*@import url(http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic);
-	@import url(http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic);*/
-</style>
-
   
   <script type="text/javascript">
   	if (window.location.host.indexOf('local') == -1) {
@@ -129,15 +118,11 @@
 
 <p>All browsers have a default value they apply to the currently focused item.  For example Chrome on OS X uses the following:</p>
 
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nd">:focus</span> <span class="p">{</span>
-</span><span class='line'>    <span class="c">/* -webkit-focus-ring-color = &#39;#5B9DD9&#39; */</span>
-</span><span class='line'>    <span class="k">outline</span><span class="o">:</span> <span class="o">-</span><span class="n">webkit</span><span class="o">-</span><span class="n">focus</span><span class="o">-</span><span class="n">ring</span><span class="o">-</span><span class="k">color</span> <span class="k">auto</span> <span class="m">5px</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre class="language-css"><code>:focus {
+    /* -webkit-focus-ring-color = '#5B9DD9' */
+    outline: -webkit-focus-ring-color auto 5px;
+}
+</code></pre>
 
 
 
@@ -153,17 +138,12 @@
 
 <p>The <code>outline</code> <em>can</em> be removed with the following:</p>
 
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nd">:focus</span> <span class="p">{</span>
-</span><span class='line'>    <span class="k">outline</span><span class="o">:</span> <span class="m">0</span><span class="p">;</span>
-</span><span class='line'>    <span class="c">/* or */</span>
-</span><span class='line'>    <span class="k">outline</span><span class="o">:</span> <span class="k">none</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre class="language-css"><code>:focus {
+    outline: 0;
+    /* or */
+    outline: none;
+}
+</code></pre>
 
 
 <p>This is obviously bad per the reasoning above.  The HTML5 specification has the following to say about removing the default <code>outline</code>:</p>
@@ -175,17 +155,12 @@
 
 <p>As the spec mentions, you can create your own styling for focused items instead of using the browser&#8217;s default.  For example the following will change all focused links to white text on a black background:</p>
 
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nd">:link:focus</span><span class="o">,</span> <span class="nd">:visited:focus</span> <span class="p">{</span>
-</span><span class='line'>    <span class="k">outline</span><span class="o">:</span> <span class="k">none</span><span class="p">;</span>
-</span><span class='line'>    <span class="k">background-color</span><span class="o">:</span> <span class="nb">black</span><span class="p">;</span>
-</span><span class='line'>    <span class="k">color</span><span class="o">:</span> <span class="nb">white</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre class="language-css"><code>:link:focus, :visited:focus {
+    outline: none;
+    background-color: black;
+    color: white;
+}
+</code></pre>
 
 
 <p>Although this is possible, I would <strong>strongly</strong> recommend simply leaving the default browser <code>outline</code> in place.  Changing the default display messes with a user&#8217;s expectations, which is a big usability no no.  Furthermore, you need to make sure that whatever alternative you put in is sufficiently identifiable for users with reduced vision.</p>
@@ -207,15 +182,11 @@
 
 <p>Unfortunately one of the reasons much of the internet removes the default focus ring is because the <a href="http://meyerweb.com/eric/tools/css/reset/reset200802.css">first version of Eric Meyer&#8217;s CSS reset</a> included the following:</p>
 
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="c">/* remember to define focus styles! */</span>
-</span><span class='line'><span class="nd">:focus</span> <span class="p">{</span>
-</span><span class='line'>    <span class="k">outline</span><span class="o">:</span> <span class="m">0</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre class="language-css"><code>/* remember to define focus styles! */
+:focus {
+    outline: 0;
+}
+</code></pre>
 
 
 <p>As you can see it&#8217;s made abundantly clear that you should define your own focus styles, but most people simply copied and pasted the file without realizing this.</p>
@@ -258,7 +229,7 @@
     </p>
     <p class="author_card meta">
       <img src="/images/me/1.jpg" alt="Me!" id="post_me">
-      TJ VanToll is a developer advocate for <a href="http://telerik.com">Telerik</a>, a <a href="http://jqueryui.com/about/">jQuery team member</a>, and the author of <a href="http://tjvantoll.com/jquery-ui-in-action.html">jQuery UI in Action</a>. TJ has over a decade of web development experience—specializing in performance and the mobile web—and <a href="/speaking">speaks</a> about his research at conferences around the world. When not online, TJ is generally found talking about himself in the third person. If you like hearing TJ talk about himself, you should consider following him on <a href="http://twitter.com/tjvantoll">Twitter</a> or <a href="https://plus.google.com/+TJVanToll?rel=author" rel="author">Google+</a>.
+      TJ VanToll is a developer advocate for <a href="http://telerik.com">Telerik</a>, a <a href="http://jqueryui.com/about/">jQuery team member</a>, and the author of <a href="http://tjvantoll.com/jquery-ui-in-action.html">jQuery UI in Action</a>. TJ has over a decade of web development experience—specializing in performance and the mobile web—and <a href="/speaking">speaks</a> about his research at conferences around the world.TJ is <a href="http://twitter.com/tjvantoll">@tjvantoll</a> on Twitter and <a href="https://plus.google.com/+TJVanToll?rel=author" rel="author">+TJVanToll</a> on Google+.
     </p>
     
       <div class="sharing">
@@ -370,8 +341,7 @@
 
 
 
-
-
+Included file 'google_plus_one.html' not found in _includes directory
 
   <script type="text/javascript">
     (function(){
@@ -384,8 +354,7 @@
   </script>
 
 
-
-
+Included file 'custom/after_footer.html' not found in _includes directory
 
 </body>
 </html>

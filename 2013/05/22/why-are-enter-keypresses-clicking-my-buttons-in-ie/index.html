@@ -21,12 +21,7 @@
   <link rel="canonical" href="http://tjvantoll.com/2013/05/22/why-are-enter-keypresses-clicking-my-buttons-in-ie">
   <link rel="author" href="https://plus.google.com/+TJVanToll">
 
-  <!--[if !lte IE 7]><!-->
-    <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet">
-  <!--<![endif]-->
-  <!--[if lte IE 7]>
-    <link rel="stylesheet" href="/stylesheets/old-ie.css" media="screen, projection">
-  <![endif]-->
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet">
   
   <!--Custom script concatenation
   <script src="/javascripts/modernizr-2.5.3.js"></script>
@@ -38,12 +33,6 @@
   <script src="/javascripts/build/scripts.js"></script>
 
   <link href="/atom.xml" rel="alternate" title="TJ VanToll's Blog" type="application/atom+xml">
-  <style>
-	/* Fonts from Google"s Web font directory at http://google.com/webfonts */
-	/*@import url(http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic);
-	@import url(http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic);*/
-</style>
-
   
   <script type="text/javascript">
   	if (window.location.host.indexOf('local') == -1) {
@@ -127,15 +116,11 @@
 
 <p>For example, if you press Enter in the textbox of the following <code>&lt;form&gt;</code> it will submit a search query to Google:</p>
 
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;form</span> <span class="na">action=</span><span class="s">&quot;http://google.com&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;input</span> <span class="na">name=</span><span class="s">&quot;q&quot;</span> <span class="na">type=</span><span class="s">&quot;text&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;submit&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'><span class="nt">&lt;/form&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre class="language-markup"><code>&lt;form action="http://google.com"&gt;
+    &lt;input name="q" type="text"&gt;
+    &lt;input type="submit"&gt;
+&lt;/form&gt;
+</code></pre>
 
 
 
@@ -145,15 +130,11 @@
 
 <p>The same will occur if you use a <code>&lt;button&gt;</code> element, which has a default <code>type</code> of <code>submit</code>:</p>
 
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;form</span> <span class="na">action=</span><span class="s">&quot;http://google.com&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;input</span> <span class="na">name=</span><span class="s">&quot;q&quot;</span> <span class="na">type=</span><span class="s">&quot;text&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;button&gt;</span>Submit<span class="nt">&lt;/button&gt;</span>
-</span><span class='line'><span class="nt">&lt;/form&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre class="language-markup"><code>&lt;form action="http://google.com"&gt;
+    &lt;input name="q" type="text"&gt;
+    &lt;button&gt;Submit&lt;/button&gt;
+&lt;/form&gt;
+</code></pre>
 
 
 <p>In each of these examples a <code>click</code> event will be triggered on the form&#8217;s <code>input[type="submit"]</code> / <code>button[type="submit"]</code>. This is all expected and speced behavior that is consistently implemented across browsers.</p>
@@ -162,13 +143,10 @@
 
 <p>Internet Explorer has an annoying quirk that still exists as of IE10: submit buttons can be clicked when Enter is pressed in a textbox, even when no <code>&lt;form&gt;</code> is present. Consider the example below:</p>
 
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;text&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'><span class="c">&lt;!-- other stuff --&gt;</span>
-</span><span class='line'><span class="nt">&lt;button&gt;</span>Some Unrelated Action<span class="nt">&lt;/button&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre class="language-markup"><code>&lt;input type="text"&gt;
+&lt;!-- other stuff --&gt;
+&lt;button&gt;Some Unrelated Action&lt;/button&gt;
+</code></pre>
 
 
 <p>Pressing Enter in this textbox in IE will click the completely unrelated <code>&lt;button&gt;</code>. No other browsers exhibit this behavior.</p>
@@ -181,13 +159,10 @@
 
 <p>If for whatever reason that&#8217;s not an option, you can add <code>type="button"</code> to the <code>&lt;button&gt;</code>:</p>
 
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;text&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'><span class="c">&lt;!-- other stuff --&gt;</span>
-</span><span class='line'><span class="nt">&lt;button</span> <span class="na">type=</span><span class="s">&quot;button&quot;</span><span class="nt">&gt;</span>Some Unrelated Action<span class="nt">&lt;/button&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre class="language-markup"><code>&lt;input type="text"&gt;
+&lt;!-- other stuff --&gt;
+&lt;button type="button"&gt;Some Unrelated Action&lt;/button&gt;
+</code></pre>
 
 
 <p>This will override the default <code>type="submit"</code> and prevent IE from clicking the <code>&lt;button&gt;</code> on Enter keypresses.</p>
@@ -235,7 +210,7 @@
     </p>
     <p class="author_card meta">
       <img src="/images/me/1.jpg" alt="Me!" id="post_me">
-      TJ VanToll is a developer advocate for <a href="http://telerik.com">Telerik</a>, a <a href="http://jqueryui.com/about/">jQuery team member</a>, and the author of <a href="http://tjvantoll.com/jquery-ui-in-action.html">jQuery UI in Action</a>. TJ has over a decade of web development experience—specializing in performance and the mobile web—and <a href="/speaking">speaks</a> about his research at conferences around the world. When not online, TJ is generally found talking about himself in the third person. If you like hearing TJ talk about himself, you should consider following him on <a href="http://twitter.com/tjvantoll">Twitter</a> or <a href="https://plus.google.com/+TJVanToll?rel=author" rel="author">Google+</a>.
+      TJ VanToll is a developer advocate for <a href="http://telerik.com">Telerik</a>, a <a href="http://jqueryui.com/about/">jQuery team member</a>, and the author of <a href="http://tjvantoll.com/jquery-ui-in-action.html">jQuery UI in Action</a>. TJ has over a decade of web development experience—specializing in performance and the mobile web—and <a href="/speaking">speaks</a> about his research at conferences around the world.TJ is <a href="http://twitter.com/tjvantoll">@tjvantoll</a> on Twitter and <a href="https://plus.google.com/+TJVanToll?rel=author" rel="author">+TJVanToll</a> on Google+.
     </p>
     
       <div class="sharing">
@@ -347,8 +322,7 @@
 
 
 
-
-
+Included file 'google_plus_one.html' not found in _includes directory
 
   <script type="text/javascript">
     (function(){
@@ -361,8 +335,7 @@
   </script>
 
 
-
-
+Included file 'custom/after_footer.html' not found in _includes directory
 
 </body>
 </html>

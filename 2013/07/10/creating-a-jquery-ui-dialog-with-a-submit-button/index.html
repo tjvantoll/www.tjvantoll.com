@@ -9,12 +9,7 @@
   <meta name="author" content="TJ VanToll">
 
   
-  <meta name="description" content="Say you have the following submittable &lt;form&gt;: 1
-2
-3
-4
-5
-&lt;form id=&quot;myForm&quot; action=&quot;http://google.com&quot;&gt; &lt;label for &hellip;">
+  <meta name="description" content="Say you have the following submittable &lt;form&gt;: &lt;form id="myForm" action="http://google.com"&gt; &lt;label for="search"&gt;Search For:&lt;/ &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -26,12 +21,7 @@
   <link rel="canonical" href="http://tjvantoll.com/2013/07/10/creating-a-jquery-ui-dialog-with-a-submit-button">
   <link rel="author" href="https://plus.google.com/+TJVanToll">
 
-  <!--[if !lte IE 7]><!-->
-    <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet">
-  <!--<![endif]-->
-  <!--[if lte IE 7]>
-    <link rel="stylesheet" href="/stylesheets/old-ie.css" media="screen, projection">
-  <![endif]-->
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet">
   
   <!--Custom script concatenation
   <script src="/javascripts/modernizr-2.5.3.js"></script>
@@ -43,12 +33,6 @@
   <script src="/javascripts/build/scripts.js"></script>
 
   <link href="/atom.xml" rel="alternate" title="TJ VanToll's Blog" type="application/atom+xml">
-  <style>
-	/* Fonts from Google"s Web font directory at http://google.com/webfonts */
-	/*@import url(http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic);
-	@import url(http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic);*/
-</style>
-
   
   <script type="text/javascript">
   	if (window.location.host.indexOf('local') == -1) {
@@ -130,60 +114,36 @@
 
 <div class="entry-content"><p>Say you have the following submittable <code>&lt;form&gt;</code>:</p>
 
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;form</span> <span class="na">id=</span><span class="s">&quot;myForm&quot;</span> <span class="na">action=</span><span class="s">&quot;http://google.com&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;label</span> <span class="na">for=</span><span class="s">&quot;search&quot;</span><span class="nt">&gt;</span>Search For:<span class="nt">&lt;/label&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;text&quot;</span> <span class="na">id=</span><span class="s">&quot;search&quot;</span> <span class="na">name=</span><span class="s">&quot;q&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;button</span> <span class="na">type=</span><span class="s">&quot;submit&quot;</span><span class="nt">&gt;</span>Find<span class="nt">&lt;/button&gt;</span>
-</span><span class='line'><span class="nt">&lt;/form&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre class="language-markup"><code>&lt;form id="myForm" action="http://google.com"&gt;
+    &lt;label for="search"&gt;Search For:&lt;/label&gt;
+    &lt;input type="text" id="search" name="q"&gt;
+    &lt;button type="submit"&gt;Find&lt;/button&gt;
+&lt;/form&gt;
+</code></pre>
 
 
 <p>And you want to show the form in a jQuery UI dialog. You can do that with the code below:</p>
 
-<figure class='code'><figcaption class='not_empty'><span>Turning a form into a dialog</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">$</span><span class="p">(</span> <span class="s2">&quot;form&quot;</span> <span class="p">).</span><span class="nx">dialog</span><span class="p">({</span>
-</span><span class='line'>    <span class="nx">open</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-</span><span class='line'>        <span class="c1">// On open, hide the original submit button</span>
-</span><span class='line'>        <span class="nx">$</span><span class="p">(</span> <span class="k">this</span> <span class="p">).</span><span class="nx">find</span><span class="p">(</span> <span class="s2">&quot;[type=submit]&quot;</span> <span class="p">).</span><span class="nx">hide</span><span class="p">();</span>
-</span><span class='line'>    <span class="p">},</span>
-</span><span class='line'>    <span class="nx">buttons</span><span class="o">:</span> <span class="p">[</span>
-</span><span class='line'>        <span class="p">{</span>
-</span><span class='line'>            <span class="nx">text</span><span class="o">:</span> <span class="s2">&quot;Find&quot;</span><span class="p">,</span>
-</span><span class='line'>            <span class="nx">click</span><span class="o">:</span> <span class="nx">$</span><span class="p">.</span><span class="nx">noop</span><span class="p">,</span>
-</span><span class='line'>            <span class="nx">type</span><span class="o">:</span> <span class="s2">&quot;submit&quot;</span>
-</span><span class='line'>        <span class="p">},</span>
-</span><span class='line'>        <span class="p">{</span>
-</span><span class='line'>            <span class="nx">text</span><span class="o">:</span> <span class="s2">&quot;Close&quot;</span><span class="p">,</span>
-</span><span class='line'>            <span class="nx">click</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-</span><span class='line'>                <span class="nx">$</span><span class="p">(</span> <span class="k">this</span> <span class="p">).</span><span class="nx">dialog</span><span class="p">(</span> <span class="s2">&quot;close&quot;</span> <span class="p">);</span>
-</span><span class='line'>            <span class="p">}</span>
-</span><span class='line'>        <span class="p">}</span>
-</span><span class='line'>    <span class="p">]</span>
-</span><span class='line'><span class="p">});</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre class="language-javascript"><code>$( "form" ).dialog({
+    open: function() {
+        // On open, hide the original submit button
+        $( this ).find( "[type=submit]" ).hide();
+    },
+    buttons: [
+        {
+            text: "Find",
+            click: $.noop,
+            type: "submit"
+        },
+        {
+            text: "Close",
+            click: function() {
+                $( this ).dialog( "close" );
+            }
+        }
+    ]
+});
+</code></pre>
 
 
 <p>Which looks like this:</p>
@@ -209,48 +169,30 @@
 
 <p>Another solution is to add a <code>click</code> handler to the button that submits the form:</p>
 
-<figure class='code'><figcaption class='not_empty'><span>Using a Click Handler to Submit the Form</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="kd">var</span> <span class="nx">form</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span> <span class="s2">&quot;form&quot;</span> <span class="p">).</span><span class="nx">dialog</span><span class="p">({</span>
-</span><span class='line'>    <span class="p">...</span>
-</span><span class='line'>    <span class="nx">buttons</span><span class="o">:</span> <span class="p">[</span>
-</span><span class='line'>        <span class="p">{</span>
-</span><span class='line'>            <span class="nx">text</span><span class="o">:</span> <span class="s2">&quot;Find&quot;</span><span class="p">,</span>
-</span><span class='line'>            <span class="nx">click</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-</span><span class='line'>                <span class="nx">form</span><span class="p">.</span><span class="nx">submit</span><span class="p">();</span>
-</span><span class='line'>            <span class="p">}</span>
-</span><span class='line'>        <span class="p">}</span>
-</span><span class='line'>        <span class="p">...</span>
-</span><span class='line'>    <span class="p">]</span>
-</span><span class='line'><span class="p">});</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre class="language-javascript"><code>var form = $( "form" ).dialog({
+    ...
+    buttons: [
+        {
+            text: "Find",
+            click: function() {
+                form.submit();
+            }
+        }
+        ...
+    ]
+});
+</code></pre>
 
 
 <p>This works, but you lose the browsers <a href="/2013/01/01/enter-should-submit-forms-stop-messing-with-that/">browser&#8217;s default enter key handling</a>. Therefore it has to be replicated as well:</p>
 
-<figure class='code'><figcaption class='not_empty'><span>Adding Enter Key Handling</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="kd">var</span> <span class="nx">form</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span> <span class="s2">&quot;form&quot;</span> <span class="p">).</span><span class="nx">dialog</span><span class="p">({</span> <span class="p">...</span> <span class="p">});</span>
-</span><span class='line'><span class="nx">form</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span> <span class="s2">&quot;keypress&quot;</span><span class="p">,</span> <span class="s2">&quot;input[type=text]&quot;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span> <span class="nx">event</span> <span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>    <span class="k">if</span> <span class="p">(</span> <span class="nx">event</span><span class="p">.</span><span class="nx">keyCode</span> <span class="o">==</span> <span class="mi">13</span> <span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>        <span class="nx">form</span><span class="p">.</span><span class="nx">submit</span><span class="p">();</span>
-</span><span class='line'>    <span class="p">}</span>
-</span><span class='line'><span class="p">});</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre class="language-javascript"><code>var form = $( "form" ).dialog({ ... });
+form.on( "keypress", "input[type=text]", function( event ) {
+    if ( event.keyCode == 13 ) {
+        form.submit();
+    }
+});
+</code></pre>
 
 
 <h4>Form Attribute</h4>
@@ -259,17 +201,12 @@
 
 <p>For example here&#8217;s the example <code>&lt;form&gt;</code> with a sibling (rather than child) submit button:</p>
 
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;form</span> <span class="na">id=</span><span class="s">&quot;myForm&quot;</span> <span class="na">action=</span><span class="s">&quot;http://google.com&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;label</span> <span class="na">for=</span><span class="s">&quot;search&quot;</span><span class="nt">&gt;</span>Search For:<span class="nt">&lt;/label&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;text&quot;</span> <span class="na">id=</span><span class="s">&quot;search&quot;</span> <span class="na">name=</span><span class="s">&quot;q&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'><span class="nt">&lt;/form&gt;</span>
-</span><span class='line'><span class="nt">&lt;button</span> <span class="na">type=</span><span class="s">&quot;submit&quot;</span> <span class="na">form=</span><span class="s">&quot;myForm&quot;</span><span class="nt">&gt;</span>Find<span class="nt">&lt;/button&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre class="language-markup"><code>&lt;form id="myForm" action="http://google.com"&gt;
+    &lt;label for="search"&gt;Search For:&lt;/label&gt;
+    &lt;input type="text" id="search" name="q"&gt;
+&lt;/form&gt;
+&lt;button type="submit" form="myForm"&gt;Find&lt;/button&gt;
+</code></pre>
 
 
 <p>The <code>&lt;button&gt;</code> is outside of the <code>&lt;form&gt;</code>, but because its <code>form</code> attribute is equal to the <code>&lt;form&gt;</code>&#8217;s <code>id</code>, the <code>&lt;button&gt;</code> will submit the <code>&lt;form&gt;</code> regardless.</p>
@@ -278,61 +215,33 @@
 
 <p>To add this attribute to the dialog version, we&#8217;ll pass <code>form: "myForm"</code> into the <code>buttons</code> option for the Find button:</p>
 
-<figure class='code'><figcaption class='not_empty'><span>Turning a form into a dialog</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;form</span> <span class="na">id=</span><span class="s">&quot;myForm&quot;</span> <span class="na">action=</span><span class="s">&quot;http://google.com&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;label</span> <span class="na">for=</span><span class="s">&quot;search&quot;</span><span class="nt">&gt;</span>Search For:<span class="nt">&lt;/label&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;text&quot;</span> <span class="na">id=</span><span class="s">&quot;search&quot;</span> <span class="na">name=</span><span class="s">&quot;q&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;button</span> <span class="na">type=</span><span class="s">&quot;submit&quot;</span><span class="nt">&gt;</span>Find<span class="nt">&lt;/button&gt;</span>
-</span><span class='line'><span class="nt">&lt;/form&gt;</span>
-</span><span class='line'><span class="nt">&lt;script&gt;</span>
-</span><span class='line'>    <span class="nx">$</span><span class="p">(</span> <span class="s2">&quot;form&quot;</span> <span class="p">).</span><span class="nx">dialog</span><span class="p">({</span>
-</span><span class='line'>        <span class="nx">open</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-</span><span class='line'>            <span class="c1">// On open, hide the original submit button</span>
-</span><span class='line'>            <span class="nx">$</span><span class="p">(</span> <span class="k">this</span> <span class="p">).</span><span class="nx">find</span><span class="p">(</span> <span class="s2">&quot;[type=submit]&quot;</span> <span class="p">).</span><span class="nx">hide</span><span class="p">();</span>
-</span><span class='line'>        <span class="p">},</span>
-</span><span class='line'>        <span class="nx">buttons</span><span class="o">:</span> <span class="p">[</span>
-</span><span class='line'>            <span class="p">{</span>
-</span><span class='line'>                <span class="nx">text</span><span class="o">:</span> <span class="s2">&quot;Find&quot;</span><span class="p">,</span>
-</span><span class='line'>                <span class="nx">click</span><span class="o">:</span> <span class="nx">$</span><span class="p">.</span><span class="nx">noop</span><span class="p">,</span>
-</span><span class='line'>                <span class="nx">type</span><span class="o">:</span> <span class="s2">&quot;submit&quot;</span><span class="p">,</span>
-</span><span class='line'>                <span class="nx">form</span><span class="o">:</span> <span class="s2">&quot;myForm&quot;</span> <span class="c1">// &lt;-- Make the association</span>
-</span><span class='line'>            <span class="p">},</span>
-</span><span class='line'>            <span class="p">{</span>
-</span><span class='line'>                <span class="nx">text</span><span class="o">:</span> <span class="s2">&quot;Close&quot;</span><span class="p">,</span>
-</span><span class='line'>                <span class="nx">click</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-</span><span class='line'>                    <span class="nx">$</span><span class="p">(</span> <span class="k">this</span> <span class="p">).</span><span class="nx">dialog</span><span class="p">(</span> <span class="s2">&quot;close&quot;</span> <span class="p">);</span>
-</span><span class='line'>                <span class="p">}</span>
-</span><span class='line'>            <span class="p">}</span>
-</span><span class='line'>        <span class="p">]</span>
-</span><span class='line'>    <span class="p">});</span>
-</span><span class='line'><span class="nt">&lt;/script&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre class="language-markup line-numbers"><code>&lt;form id="myForm" action="http://google.com"&gt;
+    &lt;label for="search"&gt;Search For:&lt;/label&gt;
+    &lt;input type="text" id="search" name="q"&gt;
+    &lt;button type="submit"&gt;Find&lt;/button&gt;
+&lt;/form&gt;
+&lt;script&gt;
+    $( "form" ).dialog({
+        open: function() {
+            // On open, hide the original submit button
+            $( this ).find( "[type=submit]" ).hide();
+        },
+        buttons: [
+            {
+                text: "Find",
+                click: $.noop,
+                type: "submit",
+                form: "myForm" // &lt;-- Make the association
+            },
+            {
+                text: "Close",
+                click: function() {
+                    $( this ).dialog( "close" );
+                }
+            }
+        ]
+    });
+&lt;/script&gt;</code></pre>
 
 
 <p><a href="/demos/2013-07-10/form.html">Live Example</a></p>
@@ -343,119 +252,62 @@
 
 <p>Because the form attribute is so handy here, I wrote a polyfill that adds support in browsers that don&#8217;t support it natively: <a href="https://gist.github.com/tjvantoll/5911571">https://gist.github.com/tjvantoll/5911571</a>. The source is below:</p>
 
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-<span class='line-number'>33</span>
-<span class='line-number'>34</span>
-<span class='line-number'>35</span>
-<span class='line-number'>36</span>
-<span class='line-number'>37</span>
-<span class='line-number'>38</span>
-<span class='line-number'>39</span>
-<span class='line-number'>40</span>
-<span class='line-number'>41</span>
-<span class='line-number'>42</span>
-<span class='line-number'>43</span>
-<span class='line-number'>44</span>
-<span class='line-number'>45</span>
-<span class='line-number'>46</span>
-<span class='line-number'>47</span>
-<span class='line-number'>48</span>
-<span class='line-number'>49</span>
-<span class='line-number'>50</span>
-<span class='line-number'>51</span>
-<span class='line-number'>52</span>
-<span class='line-number'>53</span>
-<span class='line-number'>54</span>
-<span class='line-number'>55</span>
-<span class='line-number'>56</span>
-</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="cm">/**</span>
-</span><span class='line'><span class="cm"> * The form attribute can be used to associate a submit button with a form, even</span>
-</span><span class='line'><span class="cm"> * if the button is not a child of the &lt;form&gt; itself.</span>
-</span><span class='line'><span class="cm"> * </span>
-</span><span class='line'><span class="cm"> * This polyfill uses a support check taken from Modernizr and polyfills the</span>
-</span><span class='line'><span class="cm"> * functionality using jQuery.</span>
-</span><span class='line'><span class="cm"> */</span>
-</span><span class='line'><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-</span><span class='line'>    <span class="c1">// Via Modernizr</span>
-</span><span class='line'>    <span class="kd">function</span> <span class="nx">formAttributeSupport</span><span class="p">()</span> <span class="p">{</span>
-</span><span class='line'>        <span class="kd">var</span> <span class="nx">form</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span> <span class="s2">&quot;form&quot;</span> <span class="p">),</span>
-</span><span class='line'>            <span class="nx">input</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span> <span class="s2">&quot;input&quot;</span> <span class="p">),</span>
-</span><span class='line'>            <span class="nx">div</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span> <span class="s2">&quot;div&quot;</span> <span class="p">),</span>
-</span><span class='line'>            <span class="nx">id</span> <span class="o">=</span> <span class="s2">&quot;formtest&quot;</span><span class="o">+</span> <span class="p">(</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">().</span><span class="nx">getTime</span><span class="p">()</span> <span class="p">),</span>
-</span><span class='line'>            <span class="nx">attr</span><span class="p">,</span>
-</span><span class='line'>            <span class="nx">bool</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
-</span><span class='line'>
-</span><span class='line'>            <span class="nx">form</span><span class="p">.</span><span class="nx">id</span> <span class="o">=</span> <span class="nx">id</span><span class="p">;</span>
-</span><span class='line'>
-</span><span class='line'>        <span class="c1">// IE6/7 confuses the form idl attribute and the form content attribute</span>
-</span><span class='line'>        <span class="k">if</span> <span class="p">(</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createAttribute</span> <span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>            <span class="nx">attr</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createAttribute</span><span class="p">(</span><span class="s2">&quot;form&quot;</span><span class="p">);</span>
-</span><span class='line'>            <span class="nx">attr</span><span class="p">.</span><span class="nx">nodeValue</span> <span class="o">=</span> <span class="nx">id</span><span class="p">;</span>
-</span><span class='line'>            <span class="nx">input</span><span class="p">.</span><span class="nx">setAttributeNode</span><span class="p">(</span><span class="nx">attr</span><span class="p">);</span>
-</span><span class='line'>            <span class="nx">div</span><span class="p">.</span><span class="nx">appendChild</span><span class="p">(</span><span class="nx">form</span><span class="p">);</span>
-</span><span class='line'>            <span class="nx">div</span><span class="p">.</span><span class="nx">appendChild</span><span class="p">(</span><span class="nx">input</span><span class="p">);</span>
-</span><span class='line'>
-</span><span class='line'>            <span class="nb">document</span><span class="p">.</span><span class="nx">documentElement</span><span class="p">.</span><span class="nx">appendChild</span><span class="p">(</span><span class="nx">div</span><span class="p">);</span>
-</span><span class='line'>
-</span><span class='line'>            <span class="nx">bool</span> <span class="o">=</span> <span class="nx">form</span><span class="p">.</span><span class="nx">elements</span><span class="p">.</span><span class="nx">length</span> <span class="o">===</span> <span class="mi">1</span> <span class="o">&amp;&amp;</span> <span class="nx">input</span><span class="p">.</span><span class="nx">form</span> <span class="o">==</span> <span class="nx">form</span><span class="p">;</span>
-</span><span class='line'>
-</span><span class='line'>            <span class="nx">div</span><span class="p">.</span><span class="nx">parentNode</span><span class="p">.</span><span class="nx">removeChild</span><span class="p">(</span><span class="nx">div</span><span class="p">);</span>
-</span><span class='line'>        <span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'>        <span class="k">return</span> <span class="nx">bool</span><span class="p">;</span>
-</span><span class='line'>    <span class="p">};</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="k">if</span> <span class="p">(</span> <span class="o">!</span><span class="nx">formAttributeSupport</span><span class="p">()</span> <span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>        <span class="nx">$</span><span class="p">(</span> <span class="nb">document</span> <span class="p">)</span>
-</span><span class='line'>            <span class="p">.</span><span class="nx">on</span><span class="p">(</span> <span class="s2">&quot;click&quot;</span><span class="p">,</span> <span class="s2">&quot;[type=submit][form]&quot;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span> <span class="nx">event</span> <span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>                <span class="nx">event</span><span class="p">.</span><span class="nx">preventDefault</span><span class="p">();</span>
-</span><span class='line'>                <span class="kd">var</span> <span class="nx">formId</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span> <span class="k">this</span> <span class="p">).</span><span class="nx">attr</span><span class="p">(</span> <span class="s2">&quot;form&quot;</span> <span class="p">),</span>
-</span><span class='line'>                <span class="nx">$form</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span> <span class="s2">&quot;#&quot;</span> <span class="o">+</span> <span class="nx">formId</span> <span class="p">).</span><span class="nx">submit</span><span class="p">();</span>
-</span><span class='line'>            <span class="p">})</span>
-</span><span class='line'>            <span class="p">.</span><span class="nx">on</span><span class="p">(</span> <span class="s2">&quot;keypress&quot;</span><span class="p">,</span> <span class="s2">&quot;form input&quot;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span> <span class="nx">event</span> <span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>                <span class="kd">var</span> <span class="nx">$form</span><span class="p">;</span>
-</span><span class='line'>                <span class="k">if</span> <span class="p">(</span> <span class="nx">event</span><span class="p">.</span><span class="nx">keyCode</span> <span class="o">==</span> <span class="mi">13</span> <span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>                    <span class="nx">$form</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span> <span class="k">this</span> <span class="p">).</span><span class="nx">parents</span><span class="p">(</span> <span class="s2">&quot;form&quot;</span> <span class="p">);</span>
-</span><span class='line'>                    <span class="k">if</span> <span class="p">(</span> <span class="nx">$form</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span> <span class="s2">&quot;[type=submit]&quot;</span> <span class="p">).</span><span class="nx">length</span> <span class="o">==</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span>
-</span><span class='line'>                        <span class="nx">$</span><span class="p">(</span> <span class="s2">&quot;[type=submit][form=&quot;</span> <span class="o">+</span> <span class="nx">$</span><span class="p">(</span> <span class="k">this</span> <span class="p">).</span><span class="nx">attr</span><span class="p">(</span> <span class="s2">&quot;form&quot;</span> <span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;]&quot;</span> <span class="p">).</span><span class="nx">length</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>                        <span class="nx">$form</span><span class="p">.</span><span class="nx">submit</span><span class="p">();</span>
-</span><span class='line'>                    <span class="p">}</span>
-</span><span class='line'>                <span class="p">}</span>
-</span><span class='line'>            <span class="p">});</span>
-</span><span class='line'>    <span class="p">}</span>
-</span><span class='line'><span class="p">}());</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre class="language-javascript line-numbers"><code>/**
+ * The form attribute can be used to associate a submit button with a form, even
+ * if the button is not a child of the &lt;form&gt; itself.
+ * 
+ * This polyfill uses a support check taken from Modernizr and polyfills the
+ * functionality using jQuery.
+ */
+(function() {
+    // Via Modernizr
+    function formAttributeSupport() {
+        var form = document.createElement( "form" ),
+            input = document.createElement( "input" ),
+            div = document.createElement( "div" ),
+            id = "formtest"+ ( new Date().getTime() ),
+            attr,
+            bool = false;
+        
+            form.id = id;
+        
+        // IE6/7 confuses the form idl attribute and the form content attribute
+        if ( document.createAttribute ) {
+            attr = document.createAttribute("form");
+            attr.nodeValue = id;
+            input.setAttributeNode(attr);
+            div.appendChild(form);
+            div.appendChild(input);
+        
+            document.documentElement.appendChild(div);
+        
+            bool = form.elements.length === 1 && input.form == form;
+        
+            div.parentNode.removeChild(div);
+        }
+        
+        return bool;
+    };
+    
+    if ( !formAttributeSupport() ) {
+        $( document )
+            .on( "click", "[type=submit][form]", function( event ) {
+                event.preventDefault();
+                var formId = $( this ).attr( "form" ),
+                $form = $( "#" + formId ).submit();
+            })
+            .on( "keypress", "form input", function( event ) {
+                var $form;
+                if ( event.keyCode == 13 ) {
+                    $form = $( this ).parents( "form" );
+                    if ( $form.find( "[type=submit]" ).length == 0 &&
+                        $( "[type=submit][form=" + $( this ).attr( "form" ) + "]" ).length > 0 ) {
+                        $form.submit();
+                    }
+                }
+            });
+    }
+}());</code></pre>
 
 
 <p>This can be included anywhere on the page after jQuery is included.</p>
@@ -504,7 +356,7 @@
     </p>
     <p class="author_card meta">
       <img src="/images/me/1.jpg" alt="Me!" id="post_me">
-      TJ VanToll is a developer advocate for <a href="http://telerik.com">Telerik</a>, a <a href="http://jqueryui.com/about/">jQuery team member</a>, and the author of <a href="http://tjvantoll.com/jquery-ui-in-action.html">jQuery UI in Action</a>. TJ has over a decade of web development experience—specializing in performance and the mobile web—and <a href="/speaking">speaks</a> about his research at conferences around the world. When not online, TJ is generally found talking about himself in the third person. If you like hearing TJ talk about himself, you should consider following him on <a href="http://twitter.com/tjvantoll">Twitter</a> or <a href="https://plus.google.com/+TJVanToll?rel=author" rel="author">Google+</a>.
+      TJ VanToll is a developer advocate for <a href="http://telerik.com">Telerik</a>, a <a href="http://jqueryui.com/about/">jQuery team member</a>, and the author of <a href="http://tjvantoll.com/jquery-ui-in-action.html">jQuery UI in Action</a>. TJ has over a decade of web development experience—specializing in performance and the mobile web—and <a href="/speaking">speaks</a> about his research at conferences around the world.TJ is <a href="http://twitter.com/tjvantoll">@tjvantoll</a> on Twitter and <a href="https://plus.google.com/+TJVanToll?rel=author" rel="author">+TJVanToll</a> on Google+.
     </p>
     
       <div class="sharing">
@@ -616,8 +468,7 @@
 
 
 
-
-
+Included file 'google_plus_one.html' not found in _includes directory
 
   <script type="text/javascript">
     (function(){
@@ -630,8 +481,7 @@
   </script>
 
 
-
-
+Included file 'custom/after_footer.html' not found in _includes directory
 
 </body>
 </html>

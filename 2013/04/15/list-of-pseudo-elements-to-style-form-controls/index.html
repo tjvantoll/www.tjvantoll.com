@@ -21,12 +21,7 @@
   <link rel="canonical" href="http://tjvantoll.com/2013/04/15/list-of-pseudo-elements-to-style-form-controls">
   <link rel="author" href="https://plus.google.com/+TJVanToll">
 
-  <!--[if !lte IE 7]><!-->
-    <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet">
-  <!--<![endif]-->
-  <!--[if lte IE 7]>
-    <link rel="stylesheet" href="/stylesheets/old-ie.css" media="screen, projection">
-  <![endif]-->
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet">
   
   <!--Custom script concatenation
   <script src="/javascripts/modernizr-2.5.3.js"></script>
@@ -38,12 +33,6 @@
   <script src="/javascripts/build/scripts.js"></script>
 
   <link href="/atom.xml" rel="alternate" title="TJ VanToll's Blog" type="application/atom+xml">
-  <style>
-	/* Fonts from Google"s Web font directory at http://google.com/webfonts */
-	/*@import url(http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic);
-	@import url(http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic);*/
-</style>
-
   
   <script type="text/javascript">
   	if (window.location.host.indexOf('local') == -1) {
@@ -196,24 +185,19 @@
 
 <p>Trident provides the <code>::-ms-check</code> pseudo-element for checkbox and radio button controls.  For example:</p>
 
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;checkbox&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'><span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;radio&quot;</span><span class="nt">&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre class="language-markup"><code>&lt;input type="checkbox"&gt;
+&lt;input type="radio"&gt;
+</code></pre>
 
 
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="o">:</span><span class="nd">:-ms-check</span> <span class="p">{</span>
-</span><span class='line'>    <span class="k">color</span><span class="o">:</span> <span class="nb">red</span><span class="p">;</span>
-</span><span class='line'>    <span class="k">background</span><span class="o">:</span> <span class="nb">black</span><span class="p">;</span>
-</span><span class='line'>    <span class="k">padding</span><span class="o">:</span> <span class="m">1em</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
+
+
+<pre class="language-css"><code>::-ms-check {
+    color: red;
+    background: black;
+    padding: 1em;
+}
+</code></pre>
 
 
 <p>This displays as follows in IE10 on Windows 8:</p>
@@ -230,16 +214,15 @@
 
 <p>Webkit provides 2 pseudo elements for its color picker, <code>::-webkit-color-swatch-wrapper</code> and <code>::-webkit-color-swatch</code>.  You can apply a variety of rules to these elements but I haven&#8217;t come up with anything useful.  Here&#8217;s an example just to show it&#8217;s possible:</p>
 
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;color&quot;</span><span class="nt">&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre class="language-markup"><code>&lt;input type="color"&gt;
+</code></pre>
 
 
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="o">:</span><span class="nd">:-webkit-color-swatch-wrapper</span> <span class="p">{</span> <span class="k">border</span><span class="o">:</span> <span class="m">2px</span> <span class="k">solid</span> <span class="nb">red</span><span class="p">;</span> <span class="p">}</span>
-</span><span class='line'><span class="o">:</span><span class="nd">:-webkit-color-swatch</span> <span class="p">{</span> <span class="k">opacity</span><span class="o">:</span> <span class="m">0</span><span class="o">.</span><span class="m">5</span><span class="p">;</span> <span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
+
+
+<pre class="language-css"><code>::-webkit-color-swatch-wrapper { border: 2px solid red; }
+::-webkit-color-swatch { opacity: 0.5; }
+</code></pre>
 
 
 <p>This displays as follows in Chrome 26 on OS X:</p>
@@ -274,28 +257,21 @@
 
 <p>So if you thought the date input could use more spacing and a ridiculous color scheme you could add the following:</p>
 
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;date&quot;</span><span class="nt">&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre class="language-markup"><code>&lt;input type="date"&gt;
+</code></pre>
 
 
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="o">:</span><span class="nd">:-webkit-datetime-edit</span> <span class="p">{</span> <span class="k">padding</span><span class="o">:</span> <span class="m">1em</span><span class="p">;</span> <span class="p">}</span>
-</span><span class='line'><span class="o">:</span><span class="nd">:-webkit-datetime-edit-fields-wrapper</span> <span class="p">{</span> <span class="k">background</span><span class="o">:</span> <span class="nb">silver</span><span class="p">;</span> <span class="p">}</span>
-</span><span class='line'><span class="o">:</span><span class="nd">:-webkit-datetime-edit-text</span> <span class="p">{</span> <span class="k">color</span><span class="o">:</span> <span class="nb">red</span><span class="p">;</span> <span class="k">padding</span><span class="o">:</span> <span class="m">0</span> <span class="m">0.3em</span><span class="p">;</span> <span class="p">}</span>
-</span><span class='line'><span class="o">:</span><span class="nd">:-webkit-datetime-edit-month-field</span> <span class="p">{</span> <span class="k">color</span><span class="o">:</span> <span class="nb">blue</span><span class="p">;</span> <span class="p">}</span>
-</span><span class='line'><span class="o">:</span><span class="nd">:-webkit-datetime-edit-day-field</span> <span class="p">{</span> <span class="k">color</span><span class="o">:</span> <span class="nb">green</span><span class="p">;</span> <span class="p">}</span>
-</span><span class='line'><span class="o">:</span><span class="nd">:-webkit-datetime-edit-year-field</span> <span class="p">{</span> <span class="k">color</span><span class="o">:</span> <span class="nb">purple</span><span class="p">;</span> <span class="p">}</span>
-</span><span class='line'><span class="o">:</span><span class="nd">:-webkit-inner-spin-button</span> <span class="p">{</span> <span class="k">display</span><span class="o">:</span> <span class="k">none</span><span class="p">;</span> <span class="p">}</span>
-</span><span class='line'><span class="o">:</span><span class="nd">:-webkit-calendar-picker-indicator</span> <span class="p">{</span> <span class="k">background</span><span class="o">:</span> <span class="nb">orange</span><span class="p">;</span> <span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
+
+
+<pre class="language-css"><code>::-webkit-datetime-edit { padding: 1em; }
+::-webkit-datetime-edit-fields-wrapper { background: silver; }
+::-webkit-datetime-edit-text { color: red; padding: 0 0.3em; }
+::-webkit-datetime-edit-month-field { color: blue; }
+::-webkit-datetime-edit-day-field { color: green; }
+::-webkit-datetime-edit-year-field { color: purple; }
+::-webkit-inner-spin-button { display: none; }
+::-webkit-calendar-picker-indicator { background: orange; }
+</code></pre>
 
 
 <p>This displays as follows in Chrome 26 on OS X:</p>
@@ -314,22 +290,18 @@
 
 <p>As of IE10 the file input button can be styled using the <code>::-ms-browse</code> pseudo-element.  Basically any CSS rules that you apply a regular button can be applied to the pseudo-element.  For example:</p>
 
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;file&quot;</span><span class="nt">&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre class="language-markup"><code>&lt;input type="file"&gt;
+</code></pre>
 
 
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="o">:</span><span class="nd">:-ms-browse</span> <span class="p">{</span>
-</span><span class='line'>    <span class="k">background</span><span class="o">:</span> <span class="nb">black</span><span class="p">;</span>
-</span><span class='line'>    <span class="k">color</span><span class="o">:</span> <span class="nb">red</span><span class="p">;</span>
-</span><span class='line'>    <span class="k">padding</span><span class="o">:</span> <span class="m">1em</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
+
+
+<pre class="language-css"><code>::-ms-browse {
+    background: black;
+    color: red;
+    padding: 1em;
+}
+</code></pre>
 
 
 <p>This displays as follows in IE10 on Windows 8:</p>
@@ -340,22 +312,18 @@
 
 <p>WebKit provides a hook for its file input button with the <code>::-webkit-file-upload-button</code> pseudo-element.  Again pretty much any CSS rule can be applied, therefore the Trident example will work here as well:</p>
 
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;file&quot;</span><span class="nt">&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre class="language-markup"><code>&lt;input type="file"&gt;
+</code></pre>
 
 
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="o">:</span><span class="nd">:-webkit-file-upload-button</span> <span class="p">{</span>
-</span><span class='line'>    <span class="k">background</span><span class="o">:</span> <span class="nb">black</span><span class="p">;</span>
-</span><span class='line'>    <span class="k">color</span><span class="o">:</span> <span class="nb">red</span><span class="p">;</span>
-</span><span class='line'>    <span class="k">padding</span><span class="o">:</span> <span class="m">1em</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
+
+
+<pre class="language-css"><code>::-webkit-file-upload-button {
+    background: black;
+    color: red;
+    padding: 1em;
+}
+</code></pre>
 
 
 <p>This displays as follows in Chrome 26 on OS X:</p>
@@ -372,26 +340,20 @@
 
 <p>WebKit provides a spinner control by default for number picker inputs.  Pseudo-elements <code>::-webkit-textfield-decoration-container</code>, <code>::-webkit-inner-spin-button</code> and <code>::-webkit-outer-spin-button</code> are provided for customization.  While you cannot do a whole lot with these elements, it can be useful to hide the spinner.</p>
 
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;number&quot;</span><span class="nt">&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre class="language-markup"><code>&lt;input type="number"&gt;
+</code></pre>
 
 
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="o">:</span><span class="nd">:-webkit-textfield-decoration-container</span> <span class="p">{</span> <span class="p">}</span>
-</span><span class='line'><span class="o">:</span><span class="nd">:-webkit-inner-spin-button</span> <span class="p">{</span>
-</span><span class='line'>    <span class="o">-</span><span class="n">webkit</span><span class="o">-</span><span class="n">appearance</span><span class="o">:</span> <span class="k">none</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'><span class="o">:</span><span class="nd">:-webkit-outer-spin-button</span> <span class="p">{</span>
-</span><span class='line'>    <span class="o">-</span><span class="n">webkit</span><span class="o">-</span><span class="n">appearance</span><span class="o">:</span> <span class="k">none</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
+
+
+<pre class="language-css"><code>::-webkit-textfield-decoration-container { }
+::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+}
+::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+}
+</code></pre>
 
 
 <p>This displays as follows in Chrome 26 on OS X:</p>
@@ -408,14 +370,14 @@
 
 <p>Trident provides a control on password inputs that can be pressed to display the password in plain text.  This control is made customizable via the <code>::-ms-reveal</code> pseudo-element.  You can change a number of properties of the control including its <code>color</code>, <code>background</code>, or <code>display</code> to hide it.  The following will hide the control:</p>
 
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;password&quot;</span><span class="nt">&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre class="language-markup"><code>&lt;input type="password"&gt;
+</code></pre>
 
 
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="o">:</span><span class="nd">:-ms-reveal</span> <span class="p">{</span> <span class="k">display</span><span class="o">:</span> <span class="k">none</span><span class="p">;</span> <span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
+
+
+<pre class="language-css"><code>::-ms-reveal { display: none; }
+</code></pre>
 
 
 <p>This displays as follows in IE10 on Windows 8:</p>
@@ -432,20 +394,17 @@
 
 <p>Gecko provides the pseduo-element <code>::-moz-placeholder</code> to style placeholder text.  You can use this to change the placeholder&#8217;s color or font properties.  For example:</p>
 
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;input</span> <span class="na">placeholder=</span><span class="s">&quot;placeholder&quot;</span><span class="nt">&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre class="language-markup"><code>&lt;input placeholder="placeholder"&gt;
+</code></pre>
 
 
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="o">:</span><span class="nd">:-moz-placeholder</span> <span class="p">{</span>
-</span><span class='line'>    <span class="k">color</span><span class="o">:</span> <span class="nb">blue</span><span class="p">;</span>
-</span><span class='line'>    <span class="k">font-family</span><span class="o">:</span> <span class="s1">&#39;Comic Sans MS&#39;</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
+
+
+<pre class="language-css"><code>::-moz-placeholder {
+    color: blue;
+    font-family: 'Comic Sans MS';
+}
+</code></pre>
 
 
 <p>This displays as follows in Firefox 20 on OS X:</p>
@@ -458,20 +417,17 @@
 
 <p>Trident offers the ability to style the placeholder text with a pseudo-class rather than a pseudo-element.  However the pseudo-class, <code>:-ms-input-placeholder</code>, can be used the same as the pseudo-elements from the other rendering engines:</p>
 
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;input</span> <span class="na">placeholder=</span><span class="s">&quot;placeholder&quot;</span><span class="nt">&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre class="language-markup"><code>&lt;input placeholder="placeholder"&gt;
+</code></pre>
 
 
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nd">:-ms-input-placeholder</span> <span class="p">{</span>
-</span><span class='line'>    <span class="k">color</span><span class="o">:</span> <span class="nb">blue</span><span class="p">;</span>
-</span><span class='line'>    <span class="k">font-family</span><span class="o">:</span> <span class="s1">&#39;Comic Sans MS&#39;</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
+
+
+<pre class="language-css"><code>:-ms-input-placeholder {
+    color: blue;
+    font-family: 'Comic Sans MS';
+}
+</code></pre>
 
 
 <p>This displays as follows in IE10 on Windows 8:</p>
@@ -482,20 +438,17 @@
 
 <p>WebKit provides the <code>::-webkit-input-placeholder</code> pseudo-element.  It can also be used to change the color and font of the placeholder text:</p>
 
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;input</span> <span class="na">placeholder=</span><span class="s">&quot;placeholder&quot;</span><span class="nt">&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre class="language-markup"><code>&lt;input placeholder="placeholder"&gt;
+</code></pre>
 
 
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="o">:</span><span class="nd">:-webkit-input-placeholder</span> <span class="p">{</span>
-</span><span class='line'>    <span class="k">color</span><span class="o">:</span> <span class="nb">blue</span><span class="p">;</span>
-</span><span class='line'>    <span class="k">font-family</span><span class="o">:</span> <span class="s1">&#39;Comic Sans MS&#39;</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
+
+
+<pre class="language-css"><code>::-webkit-input-placeholder {
+    color: blue;
+    font-family: 'Comic Sans MS';
+}
+</code></pre>
 
 
 <p>This displays as follows in Chrome 26 on OS X:</p>
@@ -512,30 +465,22 @@
 
 <p>As of Firefox 22, Gecko provides pseudo-elements <code>::-moz-range-track</code> and <code>::-moz-range-thumb</code> for styling range inputs.  It&#8217;s possible to apply most CSS rules to these elements, for example:</p>
 
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;range&quot;</span><span class="nt">&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre class="language-markup"><code>&lt;input type="range"&gt;
+</code></pre>
 
 
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="o">:</span><span class="nd">:-moz-range-track</span> <span class="p">{</span>
-</span><span class='line'>    <span class="k">border</span><span class="o">:</span> <span class="m">2px</span> <span class="k">solid</span> <span class="nb">red</span><span class="p">;</span>
-</span><span class='line'>    <span class="k">height</span><span class="o">:</span> <span class="m">20px</span><span class="p">;</span>
-</span><span class='line'>    <span class="k">background</span><span class="o">:</span> <span class="nb">orange</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'><span class="o">:</span><span class="nd">:-moz-range-thumb</span> <span class="p">{</span>
-</span><span class='line'>    <span class="k">background</span><span class="o">:</span> <span class="nb">blue</span><span class="p">;</span>
-</span><span class='line'>    <span class="k">height</span><span class="o">:</span> <span class="m">30px</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
+
+
+<pre class="language-css"><code>::-moz-range-track {
+    border: 2px solid red;
+    height: 20px;
+    background: orange;
+}
+::-moz-range-thumb {
+    background: blue;
+    height: 30px;
+}
+</code></pre>
 
 
 <p>This displays as follows in Firefox 22 on OS X:</p>
@@ -559,26 +504,20 @@
 
 <p>This is easier to visualize with an example.  Take the following:</p>
 
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;range&quot;</span><span class="nt">&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre class="language-markup"><code>&lt;input type="range"&gt;
+</code></pre>
 
 
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="o">:</span><span class="nd">:-ms-fill-lower</span> <span class="p">{</span> <span class="k">background</span><span class="o">:</span> <span class="nb">orange</span><span class="p">;</span> <span class="p">}</span>
-</span><span class='line'><span class="o">:</span><span class="nd">:-ms-fill-upper</span> <span class="p">{</span> <span class="k">background</span><span class="o">:</span> <span class="nb">green</span><span class="p">;</span> <span class="p">}</span>
-</span><span class='line'><span class="o">:</span><span class="nd">:-ms-thumb</span> <span class="p">{</span> <span class="k">background</span><span class="o">:</span> <span class="nb">red</span><span class="p">;</span> <span class="p">}</span>
-</span><span class='line'><span class="o">:</span><span class="nd">:-ms-ticks-after</span> <span class="p">{</span> <span class="k">display</span><span class="o">:</span> <span class="k">block</span><span class="p">;</span> <span class="k">color</span><span class="o">:</span> <span class="nb">blue</span><span class="p">;</span> <span class="p">}</span>
-</span><span class='line'><span class="o">:</span><span class="nd">:-ms-ticks-before</span> <span class="p">{</span> <span class="k">display</span><span class="o">:</span> <span class="k">block</span><span class="p">;</span> <span class="k">color</span><span class="o">:</span> <span class="nb">black</span><span class="p">;</span> <span class="p">}</span>
-</span><span class='line'><span class="o">:</span><span class="nd">:-ms-track</span> <span class="p">{</span> <span class="k">padding</span><span class="o">:</span> <span class="m">20px</span> <span class="m">0</span><span class="p">;</span> <span class="p">}</span>
-</span><span class='line'><span class="o">:</span><span class="nd">:-ms-tooltip</span> <span class="p">{</span> <span class="k">display</span><span class="o">:</span> <span class="k">none</span><span class="p">;</span> <span class="c">/* display and visibility only */</span> <span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
+
+
+<pre class="language-css"><code>::-ms-fill-lower { background: orange; }
+::-ms-fill-upper { background: green; }
+::-ms-thumb { background: red; }
+::-ms-ticks-after { display: block; color: blue; }
+::-ms-ticks-before { display: block; color: black; }
+::-ms-track { padding: 20px 0; }
+::-ms-tooltip { display: none; /* display and visibility only */ }
+</code></pre>
 
 
 <p>This will display as follows in IE10 on Windows 8:</p>
@@ -589,28 +528,21 @@
 
 <p>WebKit provides the <code>::-webkit-slider-runnable-track</code> pseudo-element for the track and <code>::-webkit-slider-thumb</code> for the range handle itself.  While you cannot do much with these elements, you can add some colors and padding.</p>
 
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;range&quot;</span><span class="nt">&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre class="language-markup"><code>&lt;input type="range"&gt;
+</code></pre>
 
 
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="o">:</span><span class="nd">:-webkit-slider-runnable-track</span> <span class="p">{</span>
-</span><span class='line'>    <span class="k">border</span><span class="o">:</span> <span class="m">2px</span> <span class="k">solid</span> <span class="nb">red</span><span class="p">;</span>
-</span><span class='line'>    <span class="k">background</span><span class="o">:</span> <span class="nb">green</span><span class="p">;</span>
-</span><span class='line'>    <span class="k">padding</span><span class="o">:</span> <span class="m">2em</span> <span class="m">0</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'><span class="o">:</span><span class="nd">:-webkit-slider-thumb</span> <span class="p">{</span>
-</span><span class='line'>    <span class="k">outline</span><span class="o">:</span> <span class="m">2px</span> <span class="k">solid</span> <span class="nb">blue</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
+
+
+<pre class="language-css"><code>::-webkit-slider-runnable-track {
+    border: 2px solid red;
+    background: green;
+    padding: 2em 0;
+}
+::-webkit-slider-thumb {
+    outline: 2px solid blue;
+}
+</code></pre>
 
 
 <p>This displays as follows in Chrome 26 on OS X:</p>
@@ -636,28 +568,21 @@
 
 <p>By default WebKit provides a custom UI for search inputs with cancel and search buttons.  Two pseudo-elements, <code>::-webkit-search-cancel-button</code> and <code>::-webkit-search-results-button</code> are provided for customization, although you can&#8217;t much of anything with them other than hide them as shown below:</p>
 
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;search&quot;</span><span class="nt">&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre class="language-markup"><code>&lt;input type="search"&gt;
+</code></pre>
 
 
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="c">/* Remove the rounded corners */</span>
-</span><span class='line'><span class="nt">input</span><span class="o">[</span><span class="nt">type</span><span class="o">=</span><span class="nt">search</span><span class="o">]</span> <span class="p">{</span> <span class="o">-</span><span class="n">webkit</span><span class="o">-</span><span class="n">appearance</span><span class="o">:</span> <span class="k">none</span><span class="p">;</span> <span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'><span class="c">/* Hide the cancel button */</span>
-</span><span class='line'><span class="o">:</span><span class="nd">:-webkit-search-cancel-button</span> <span class="p">{</span> <span class="o">-</span><span class="n">webkit</span><span class="o">-</span><span class="n">appearance</span><span class="o">:</span> <span class="k">none</span><span class="p">;</span> <span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'><span class="c">/* Hide the magnifying glass */</span>
-</span><span class='line'><span class="o">:</span><span class="nd">:-webkit-search-results-button</span> <span class="p">{</span> <span class="o">-</span><span class="n">webkit</span><span class="o">-</span><span class="n">appearance</span><span class="o">:</span> <span class="k">none</span><span class="p">;</span> <span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
+
+
+<pre class="language-css"><code>/* Remove the rounded corners */
+input[type=search] { -webkit-appearance: none; }
+
+/* Hide the cancel button */
+::-webkit-search-cancel-button { -webkit-appearance: none; }
+
+/* Hide the magnifying glass */
+::-webkit-search-results-button { -webkit-appearance: none; }
+</code></pre>
 
 
 <p>This displays as follows in Chrome 26 on OS X:</p>
@@ -681,26 +606,20 @@
 
 <p>As of IE10 Trident provides the pseudo-element <code>::-ms-value</code> to style the value portion of text inputs (<code>input[type=text]</code>, <code>input[type=password]</code>, etc) and <code>&lt;select&gt;</code>s.  For example:</p>
 
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;text&quot;</span> <span class="na">value=</span><span class="s">&quot;value&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'><span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;password&quot;</span> <span class="na">value=</span><span class="s">&quot;value&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'><span class="nt">&lt;select&gt;&lt;option</span> <span class="na">selected</span><span class="nt">&gt;</span>option<span class="nt">&lt;/option&gt;&lt;/select&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre class="language-markup"><code>&lt;input type="text" value="value"&gt;
+&lt;input type="password" value="value"&gt;
+&lt;select&gt;&lt;option selected&gt;option&lt;/option&gt;&lt;/select&gt;
+</code></pre>
 
 
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="o">:</span><span class="nd">:-ms-value</span> <span class="p">{</span>
-</span><span class='line'>    <span class="k">color</span><span class="o">:</span> <span class="nb">red</span><span class="p">;</span>
-</span><span class='line'>    <span class="k">background</span><span class="o">:</span> <span class="nb">black</span><span class="p">;</span>
-</span><span class='line'>    <span class="k">padding</span><span class="o">:</span> <span class="m">1em</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
+
+
+<pre class="language-css"><code>::-ms-value { 
+    color: red;
+    background: black;
+    padding: 1em;
+}
+</code></pre>
 
 
 <p>This displays as follows in IE10 on Windows 8:</p>
@@ -711,14 +630,14 @@
 
 <p>In IE10 when a text input has focus and is not empty, a small X control appears in the right hand side of the input.  When clicked, the control will clear the contents of the text input.  The X is styleable with the <code>::-ms-clear</code> pseudo-element.  Therefore you can hide it:</p>
 
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;text&quot;</span><span class="nt">&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre class="language-markup"><code>&lt;input type="text"&gt;
+</code></pre>
 
 
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="o">:</span><span class="nd">:-ms-clear</span> <span class="p">{</span> <span class="k">display</span><span class="o">:</span> <span class="k">none</span><span class="p">;</span> <span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
+
+
+<pre class="language-css"><code>::-ms-clear { display: none; }
+</code></pre>
 
 
 <p>This displays as follows in IE10 on Windows 8:</p>
@@ -727,22 +646,18 @@
 
 <p>There are a variety of rules that <code>::-ms-clear</code> will accept, so you can theme it as well:</p>
 
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;text&quot;</span> <span class="na">value=</span><span class="s">&quot;Lorem Ipsum&quot;</span><span class="nt">&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre class="language-markup"><code>&lt;input type="text" value="Lorem Ipsum"&gt;
+</code></pre>
 
 
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="o">:</span><span class="nd">:-ms-clear</span> <span class="p">{</span>
-</span><span class='line'>    <span class="k">color</span><span class="o">:</span> <span class="nb">red</span><span class="p">;</span>
-</span><span class='line'>    <span class="k">background</span><span class="o">:</span> <span class="nb">black</span><span class="p">;</span>
-</span><span class='line'>    <span class="k">padding</span><span class="o">:</span> <span class="m">1em</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
+
+
+<pre class="language-css"><code>::-ms-clear {
+    color: red;
+    background: black;
+    padding: 1em;
+}
+</code></pre>
 
 
 <p>Which displays as follows:</p>
@@ -761,40 +676,27 @@
 
 <p>There&#8217;s not much you can do with these pseudo-elements, but there is one important thing to be aware of.  Gecko applies <code>padding</code> and <code>border</code> to <code>::-moz-focus-inner</code> by default:</p>
 
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nt">button</span><span class="o">:</span><span class="nd">:-moz-focus-inner</span><span class="o">,</span>
-</span><span class='line'><span class="nt">input</span><span class="o">[</span><span class="nt">type</span><span class="o">=</span><span class="s2">&quot;reset&quot;</span><span class="o">]:</span><span class="nd">:-moz-focus-inner</span><span class="o">,</span>
-</span><span class='line'><span class="nt">input</span><span class="o">[</span><span class="nt">type</span><span class="o">=</span><span class="s2">&quot;button&quot;</span><span class="o">]:</span><span class="nd">:-moz-focus-inner</span><span class="o">,</span>
-</span><span class='line'><span class="nt">input</span><span class="o">[</span><span class="nt">type</span><span class="o">=</span><span class="s2">&quot;submit&quot;</span><span class="o">]:</span><span class="nd">:-moz-focus-inner</span><span class="o">,</span>
-</span><span class='line'><span class="nt">input</span><span class="o">[</span><span class="nt">type</span><span class="o">=</span><span class="s2">&quot;file&quot;</span><span class="o">]</span> <span class="o">&gt;</span> <span class="nt">input</span><span class="o">[</span><span class="nt">type</span><span class="o">=</span><span class="s2">&quot;button&quot;</span><span class="o">]:</span><span class="nd">:-moz-focus-inner</span> <span class="p">{</span>
-</span><span class='line'>    <span class="k">border</span><span class="o">:</span> <span class="m">1px</span> <span class="k">dotted</span> <span class="k">transparent</span><span class="p">;</span>
-</span><span class='line'>    <span class="k">padding</span><span class="o">:</span> <span class="m">0</span> <span class="m">2px</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre class="language-css"><code>button::-moz-focus-inner,
+input[type="reset"]::-moz-focus-inner,
+input[type="button"]::-moz-focus-inner,
+input[type="submit"]::-moz-focus-inner,
+input[type="file"] > input[type="button"]::-moz-focus-inner {
+    border: 1px dotted transparent;
+    padding: 0 2px;
+}
+</code></pre>
 
 
 <p>These rules can easily create appearance differences between button displays in Gecko and other rendering engines.  This is confusing and there&#8217;s actually <a href="https://bugzilla.mozilla.org/show_bug.cgi?id=140562">a ticket to remove it</a>.  The ticket has been open since 2002 so don&#8217;t hold your breath.</p>
 
 <p>The default <code>padding</code> and <code>border</code> can be reset by just setting them to 0:</p>
 
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nt">button</span><span class="o">:</span><span class="nd">:-moz-focus-inner</span><span class="o">,</span>
-</span><span class='line'><span class="nt">input</span><span class="o">:</span><span class="nd">:-moz-focus-inner</span> <span class="p">{</span>
-</span><span class='line'>    <span class="k">border</span><span class="o">:</span> <span class="m">0</span><span class="p">;</span>
-</span><span class='line'>    <span class="k">padding</span><span class="o">:</span> <span class="m">0</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre class="language-css"><code>button::-moz-focus-inner,
+input::-moz-focus-inner {
+    border: 0;
+    padding: 0;
+}
+</code></pre>
 
 
 <p>The before and after of this can be seen in the screenshot (below) of Firefox 19 on OS X:</p>
@@ -811,20 +713,17 @@
 
 <p>WebKit provides the <code>::-webkit-keygen-select</code> that can be used to customize the dropdown that a keygen element uses.  For example:</p>
 
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;keygen&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre class="language-markup"><code>&lt;keygen&gt;
+</code></pre>
 
 
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="o">:</span><span class="nd">:-webkit-keygen-select</span> <span class="p">{</span>
-</span><span class='line'>    <span class="k">background</span><span class="o">:</span> <span class="nb">black</span><span class="p">;</span>
-</span><span class='line'>    <span class="k">color</span><span class="o">:</span> <span class="nb">red</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
+
+
+<pre class="language-css"><code>::-webkit-keygen-select {
+    background: black;
+    color: red;
+}
+</code></pre>
 
 
 <p>This displays as follows on Chrome 26 on OS X:</p>
@@ -847,34 +746,24 @@
 
 <p>See the following for an example:</p>
 
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;meter</span> <span class="na">low=</span><span class="s">&quot;69&quot;</span> <span class="na">high=</span><span class="s">&quot;80&quot;</span> <span class="na">max=</span><span class="s">&quot;100&quot;</span> <span class="na">optimum=</span><span class="s">&quot;100&quot;</span> <span class="na">value=</span><span class="s">&quot;92&quot;</span><span class="nt">&gt;</span>A<span class="nt">&lt;/meter&gt;</span>
-</span><span class='line'><span class="nt">&lt;meter</span> <span class="na">low=</span><span class="s">&quot;69&quot;</span> <span class="na">high=</span><span class="s">&quot;80&quot;</span> <span class="na">max=</span><span class="s">&quot;100&quot;</span> <span class="na">optimum=</span><span class="s">&quot;100&quot;</span> <span class="na">value=</span><span class="s">&quot;72&quot;</span><span class="nt">&gt;</span>C<span class="nt">&lt;/meter&gt;</span>
-</span><span class='line'><span class="nt">&lt;meter</span> <span class="na">low=</span><span class="s">&quot;69&quot;</span> <span class="na">high=</span><span class="s">&quot;80&quot;</span> <span class="na">max=</span><span class="s">&quot;100&quot;</span> <span class="na">optimum=</span><span class="s">&quot;100&quot;</span> <span class="na">value=</span><span class="s">&quot;52&quot;</span><span class="nt">&gt;</span>E<span class="nt">&lt;/meter&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre class="language-markup"><code>&lt;meter low="69" high="80" max="100" optimum="100" value="92">A&lt;/meter&gt;
+&lt;meter low="69" high="80" max="100" optimum="100" value="72"&gt;C&lt;/meter&gt;
+&lt;meter low="69" high="80" max="100" optimum="100" value="52"&gt;E&lt;/meter&gt;
+</code></pre>
 
 
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nt">meter</span> <span class="p">{</span> <span class="o">-</span><span class="n">webkit</span><span class="o">-</span><span class="n">appearance</span><span class="o">:</span> <span class="k">none</span><span class="p">;</span> <span class="p">}</span>
-</span><span class='line'><span class="o">:</span><span class="nd">:-webkit-meter-bar</span> <span class="p">{</span>
-</span><span class='line'>    <span class="k">height</span><span class="o">:</span> <span class="m">50px</span><span class="p">;</span>
-</span><span class='line'>    <span class="k">background</span><span class="o">:</span> <span class="nb">white</span><span class="p">;</span>
-</span><span class='line'>    <span class="k">border</span><span class="o">:</span> <span class="m">2px</span> <span class="k">solid</span> <span class="nb">black</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'><span class="o">:</span><span class="nd">:-webkit-meter-optimum-value</span> <span class="p">{</span> <span class="k">background</span><span class="o">:</span> <span class="nb">green</span><span class="p">;</span> <span class="p">}</span>
-</span><span class='line'><span class="o">:</span><span class="nd">:-webkit-meter-suboptimum-value</span> <span class="p">{</span> <span class="k">background</span><span class="o">:</span> <span class="nb">orange</span><span class="p">;</span> <span class="p">}</span>
-</span><span class='line'><span class="o">:</span><span class="nd">:-webkit-meter-even-less-good-value</span> <span class="p">{</span> <span class="k">background</span><span class="o">:</span> <span class="nb">blue</span><span class="p">;</span> <span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
+
+
+<pre class="language-css"><code>meter { -webkit-appearance: none; }
+::-webkit-meter-bar {
+    height: 50px;
+    background: white;
+    border: 2px solid black;
+}
+::-webkit-meter-optimum-value { background: green; }
+::-webkit-meter-suboptimum-value { background: orange; }
+::-webkit-meter-even-less-good-value { background: blue; }
+</code></pre>
 
 
 <p>This displays as follows in Chrome 26 on OS X:</p>
@@ -895,20 +784,17 @@
 
 <p>Like meter, in order to apply any rules to these elements you must set <code>-webkit-appearance: none;</code> on the progress element.  Here&#8217;s an example:</p>
 
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;progress</span> <span class="na">max=</span><span class="s">&quot;100&quot;</span> <span class="na">value=</span><span class="s">&quot;50&quot;</span><span class="nt">&gt;&lt;/progress&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre class="language-markup"><code>&lt;progress max="100" value="50"&gt;&lt;/progress&gt;
+</code></pre>
 
 
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nt">progress</span> <span class="p">{</span> <span class="o">-</span><span class="n">webkit</span><span class="o">-</span><span class="n">appearance</span><span class="o">:</span> <span class="k">none</span><span class="p">;</span> <span class="p">}</span>
-</span><span class='line'><span class="o">:</span><span class="nd">:-webkit-progress-inner-element</span> <span class="p">{</span> <span class="p">}</span>
-</span><span class='line'><span class="o">:</span><span class="nd">:-webkit-progress-bar</span> <span class="p">{</span> <span class="k">border</span><span class="o">:</span> <span class="m">2px</span> <span class="k">solid</span> <span class="nb">black</span><span class="p">;</span> <span class="p">}</span>
-</span><span class='line'><span class="o">:</span><span class="nd">:-webkit-progress-value</span> <span class="p">{</span> <span class="k">background</span><span class="o">:</span> <span class="nb">red</span><span class="p">;</span> <span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
+
+
+<pre class="language-css"><code>progress { -webkit-appearance: none; }
+::-webkit-progress-inner-element { }
+::-webkit-progress-bar { border: 2px solid black; }
+::-webkit-progress-value { background: red; }
+</code></pre>
 
 
 <p>This displays as follows in Chrome 26 on OS X:</p>
@@ -919,14 +805,14 @@
 
 <p>Gecko provides a <code>::-moz-progress-bar</code> pseudo-element to style the progress bar itself.  For example:</p>
 
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;progress</span> <span class="na">max=</span><span class="s">&quot;100&quot;</span> <span class="na">value=</span><span class="s">&quot;50&quot;</span><span class="nt">&gt;&lt;/progress&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre class="language-markup"><code>&lt;progress max="100" value="50"&gt;&lt;/progress&gt;
+</code></pre>
 
 
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="o">:</span><span class="nd">:-moz-progress-bar</span> <span class="p">{</span> <span class="k">background</span><span class="o">:</span> <span class="nb">red</span><span class="p">;</span> <span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
+
+
+<pre class="language-css"><code>::-moz-progress-bar { background: red; }
+</code></pre>
 
 
 <p>This displays as follows in Firefox 19 on OS X:</p>
@@ -937,14 +823,14 @@
 
 <p>Like Gecko, Trident provides a single pseudo-element to style the progress bar, <code>::-ms-fill</code>.  For example:</p>
 
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;progress</span> <span class="na">max=</span><span class="s">&quot;100&quot;</span> <span class="na">value=</span><span class="s">&quot;50&quot;</span><span class="nt">&gt;&lt;/progress&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre class="language-markup"><code>&lt;progress max="100" value="50"&gt;&lt;/progress&gt;
+</code></pre>
 
 
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="o">:</span><span class="nd">:-ms-fill</span> <span class="p">{</span> <span class="k">background</span><span class="o">:</span> <span class="nb">red</span><span class="p">;</span> <span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
+
+
+<pre class="language-css"><code>::-ms-fill { background: red; }
+</code></pre>
 
 
 <p>This displays as follows in IE10 on Windows 8:</p>
@@ -961,26 +847,20 @@
 
 <p>As of IE10 Trident gives you a hook to style the arrow within select dropdowns, <code>::-ms-expand</code>.  For example:</p>
 
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;select&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;option</span> <span class="na">selected</span><span class="nt">&gt;</span>One<span class="nt">&lt;/option&gt;</span>
-</span><span class='line'><span class="nt">&lt;/select&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre class="language-markup"><code>&lt;select&gt;
+    &lt;option selected&gt;One&lt;/option&gt;
+&lt;/select&gt;
+</code></pre>
 
 
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="o">:</span><span class="nd">:-ms-expand</span> <span class="p">{</span>
-</span><span class='line'>    <span class="k">padding</span><span class="o">:</span> <span class="m">2em</span><span class="p">;</span>
-</span><span class='line'>    <span class="k">color</span><span class="o">:</span> <span class="nb">red</span><span class="p">;</span>
-</span><span class='line'>    <span class="k">background</span><span class="o">:</span> <span class="nb">black</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
+
+
+<pre class="language-css"><code>::-ms-expand {
+    padding: 2em;
+    color: red;
+    background: black;
+}
+</code></pre>
 
 
 <p>This displays as follows in IE10 on Windows 8:</p>
@@ -999,18 +879,16 @@
 
 <p>It can be hidden by applying <code>display: none</code> or <code>-webkit-appearance: none</code>:</p>
 
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;textarea&gt;&lt;/textarea&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre class="language-markup"><code>&lt;textarea&gt;&lt;/textarea&gt;
+</code></pre>
 
 
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="o">:</span><span class="nd">:-webkit-resizer</span> <span class="p">{</span>
-</span><span class='line'>    <span class="k">display</span><span class="o">:</span> <span class="k">none</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
+
+
+<pre class="language-css"><code>::-webkit-resizer {
+    display: none;
+}
+</code></pre>
 
 
 <p>This displays as follows in Chrome 26 on OS X:</p>
@@ -1021,24 +899,19 @@
 
 <p>The <code>::-webkit-resizer</code> pseudo-element also allows for some basic styling.  If you thought the resize control could use significantly more color you could add this:</p>
 
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;textarea&gt;&lt;/textarea&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre class="language-markup"><code>&lt;textarea&gt;&lt;/textarea&gt;
+</code></pre>
 
 
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="o">:</span><span class="nd">:-webkit-resizer</span> <span class="p">{</span>
-</span><span class='line'>    <span class="k">border</span><span class="o">:</span> <span class="m">2px</span> <span class="k">solid</span> <span class="nb">black</span><span class="p">;</span>
-</span><span class='line'>    <span class="k">background</span><span class="o">:</span> <span class="nb">red</span><span class="p">;</span>
-</span><span class='line'>    <span class="n">box</span><span class="o">-</span><span class="n">shadow</span><span class="o">:</span> <span class="m">0</span> <span class="m">0</span> <span class="m">5px</span> <span class="m">5px</span> <span class="nb">blue</span><span class="p">;</span>
-</span><span class='line'>    <span class="k">outline</span><span class="o">:</span> <span class="m">2px</span> <span class="k">solid</span> <span class="nb">yellow</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
+
+
+<pre class="language-css"><code>::-webkit-resizer {
+    border: 2px solid black;
+    background: red;
+    box-shadow: 0 0 5px 5px blue;
+    outline: 2px solid yellow;
+}
+</code></pre>
 
 
 <p>This displays as follows in Chrome 26 on OS X:</p>
@@ -1072,19 +945,13 @@
 
 <p>It&#8217;s easier to see what each element does visually.  Here&#8217;s an example:</p>
 
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="o">:</span><span class="nd">:-webkit-validation-bubble</span> <span class="p">{</span> <span class="k">padding</span><span class="o">:</span> <span class="m">1em</span><span class="p">;</span> <span class="k">background</span><span class="o">:</span> <span class="nb">orange</span><span class="p">;</span> <span class="p">}</span>
-</span><span class='line'><span class="o">:</span><span class="nd">:-webkit-validation-bubble-arrow</span> <span class="p">{</span> <span class="k">background</span><span class="o">:</span> <span class="nb">blue</span><span class="p">;</span> <span class="p">}</span>
-</span><span class='line'><span class="o">:</span><span class="nd">:-webkit-validation-bubble-arrow-clipper</span> <span class="p">{</span> <span class="k">border</span><span class="o">:</span> <span class="m">2px</span> <span class="k">solid</span> <span class="nb">black</span><span class="p">;</span> <span class="p">}</span>
-</span><span class='line'><span class="o">:</span><span class="nd">:-webkit-validation-bubble-heading</span> <span class="p">{</span> <span class="k">background</span><span class="o">:</span> <span class="nb">green</span><span class="p">;</span> <span class="p">}</span>
-</span><span class='line'><span class="o">:</span><span class="nd">:-webkit-validation-bubble-message</span> <span class="p">{</span> <span class="k">color</span><span class="o">:</span> <span class="nb">white</span><span class="p">;</span> <span class="k">background</span><span class="o">:</span> <span class="nb">purple</span><span class="p">;</span> <span class="p">}</span>
-</span><span class='line'><span class="o">:</span><span class="nd">:-webkit-validation-bubble-text-block</span> <span class="p">{</span> <span class="k">border</span><span class="o">:</span> <span class="m">1px</span> <span class="k">solid</span> <span class="nb">red</span><span class="p">;</span> <span class="k">padding</span><span class="o">:</span> <span class="m">1em</span><span class="p">;</span> <span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre class="language-css"><code>::-webkit-validation-bubble { padding: 1em; background: orange; }
+::-webkit-validation-bubble-arrow { background: blue; }
+::-webkit-validation-bubble-arrow-clipper { border: 2px solid black; }
+::-webkit-validation-bubble-heading { background: green; }
+::-webkit-validation-bubble-message { color: white; background: purple; }
+::-webkit-validation-bubble-text-block { border: 1px solid red; padding: 1em; }
+</code></pre>
 
 
 <p>This displays as follows in Chrome 26 on OS X:</p>
@@ -1093,25 +960,16 @@
 
 <p>Here&#8217;s a slightly more practical example showing how the bubble can be themed:</p>
 
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="o">:</span><span class="nd">:-webkit-validation-bubble-message</span> <span class="p">{</span>
-</span><span class='line'>    <span class="k">color</span><span class="o">:</span> <span class="m">#eee</span><span class="p">;</span>
-</span><span class='line'>    <span class="k">background</span><span class="o">:</span> <span class="nb">black</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'><span class="o">:</span><span class="nd">:-webkit-validation-bubble-arrow</span> <span class="p">{</span>
-</span><span class='line'>    <span class="k">background</span><span class="o">:</span> <span class="nb">black</span><span class="p">;</span>
-</span><span class='line'>    <span class="k">border-color</span><span class="o">:</span> <span class="m">#444</span><span class="p">;</span>
-</span><span class='line'>    <span class="n">box</span><span class="o">-</span><span class="n">shadow</span><span class="o">:</span> <span class="k">none</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre class="language-css"><code>::-webkit-validation-bubble-message {
+    color: #eee;
+    background: black;
+}
+::-webkit-validation-bubble-arrow {
+    background: black;
+    border-color: #444;
+    box-shadow: none;
+}
+</code></pre>
 
 
 <p>This displays as follows in Chrome 26 on OS X:</p>
@@ -1179,7 +1037,7 @@
     </p>
     <p class="author_card meta">
       <img src="/images/me/1.jpg" alt="Me!" id="post_me">
-      TJ VanToll is a developer advocate for <a href="http://telerik.com">Telerik</a>, a <a href="http://jqueryui.com/about/">jQuery team member</a>, and the author of <a href="http://tjvantoll.com/jquery-ui-in-action.html">jQuery UI in Action</a>. TJ has over a decade of web development experience—specializing in performance and the mobile web—and <a href="/speaking">speaks</a> about his research at conferences around the world. When not online, TJ is generally found talking about himself in the third person. If you like hearing TJ talk about himself, you should consider following him on <a href="http://twitter.com/tjvantoll">Twitter</a> or <a href="https://plus.google.com/+TJVanToll?rel=author" rel="author">Google+</a>.
+      TJ VanToll is a developer advocate for <a href="http://telerik.com">Telerik</a>, a <a href="http://jqueryui.com/about/">jQuery team member</a>, and the author of <a href="http://tjvantoll.com/jquery-ui-in-action.html">jQuery UI in Action</a>. TJ has over a decade of web development experience—specializing in performance and the mobile web—and <a href="/speaking">speaks</a> about his research at conferences around the world.TJ is <a href="http://twitter.com/tjvantoll">@tjvantoll</a> on Twitter and <a href="https://plus.google.com/+TJVanToll?rel=author" rel="author">+TJVanToll</a> on Google+.
     </p>
     
       <div class="sharing">
@@ -1291,8 +1149,7 @@
 
 
 
-
-
+Included file 'google_plus_one.html' not found in _includes directory
 
   <script type="text/javascript">
     (function(){
@@ -1305,8 +1162,7 @@
   </script>
 
 
-
-
+Included file 'custom/after_footer.html' not found in _includes directory
 
 </body>
 </html>

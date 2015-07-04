@@ -4,7 +4,7 @@
   <title><![CDATA[Category: iOS | TJ VanToll's Blog]]></title>
   <link href="http://tjvantoll.com/blog/categories/ios/atom.xml" rel="self"/>
   <link href="http://tjvantoll.com/"/>
-  <updated>2015-06-25T11:24:59-04:00</updated>
+  <updated>2015-07-04T11:17:31-04:00</updated>
   <id>http://tjvantoll.com/</id>
   <author>
     <name><![CDATA[TJ VanToll]]></name>
@@ -22,10 +22,12 @@
 
 <p>Doing so turns out to be as simple as running two commands:</p>
 
-<p><code>
-$ appbuilder prop set BundleVersion 1.0.1
+<pre class="language-shell"><code>$ appbuilder prop set BundleVersion 1.0.1
 $ appbuilder prop set AndroidVersionCode 2
-</code></p>
+</code></pre>
+
+
+
 
 <!-- more -->
 
@@ -59,9 +61,9 @@ $ appbuilder prop set AndroidVersionCode 2
 
 <p>I wanted to quickly show the effect this property has. Adding it is as easy as appending <code>minimal-ui</code> to the <code>content</code> attribute of your site's <code>&lt;meta&gt;</code> tag.</p>
 
-<p><code>html
-&lt;meta name="viewport" content="width=device-width, initial-scale=1, minimal-ui"&gt;
-</code></p>
+<pre class="language-markup"><code>&lt;meta name="viewport" content="width=device-width, initial-scale=1, minimal-ui"&gt;
+</code></pre>
+
 
 <p>The two images below show a before and after of applying the property to a test page.</p>
 

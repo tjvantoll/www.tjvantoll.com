@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Unit Testing | TJ VanToll's Blog]]></title>
   <link href="http://tjvantoll.com/blog/categories/unit-testing/atom.xml" rel="self"/>
   <link href="http://tjvantoll.com/"/>
-  <updated>2015-06-25T11:24:59-04:00</updated>
+  <updated>2015-07-04T11:17:31-04:00</updated>
   <id>http://tjvantoll.com/</id>
   <author>
     <name><![CDATA[TJ VanToll]]></name>
@@ -22,21 +22,21 @@
 
 <p>The output of said runner displays the number of tests ran and the number that passed.  For example, here's an example of the output when I use the default runner on jQuery UI's spinner test suite:</p>
 
-<p><code>text PhantomJS + QUnit Run Output
-tj-cpu:spinner tj$ phantomjs run-qunit.js spinner.html
+<pre class="language-shell"><code>tj-cpu:spinner tj$ phantomjs run-qunit.js spinner.html
 Tests completed in 492 milliseconds
 489 tests of 489 passed, 0 failed.
 'waitFor()' finished in 587ms.
-</code></p>
+</code></pre>
+
 
 <p>Which is great, but if something fails you only get the following:</p>
 
-<p><code>text PhantomJS + QUnit Run Output with Failures
-tj-cpu:myproject tj$ phantomjs run-qunit.js spinner.html
+<pre class="language-shell"><code>tj-cpu:myproject tj$ phantomjs run-qunit.js spinner.html
 'waitFor()' finished in 630ms.
 Tests completed in 535 milliseconds.
 486 tests of 489 passed, 3 failed.
-</code></p>
+</code></pre>
+
 
 <p>The provided runner doesn't provide any additional information about the tests that failed.  Luckily PhantomJS and QUnit make it trivial to customize the output to meet your needs.</p>
 
@@ -47,15 +47,12 @@ Tests completed in 535 milliseconds.
 
 <p>PhantomJS's <a href="http://code.google.com/p/phantomjs/wiki/Interface#onConsoleMessage">page.onConsoleMessage</a> callback can be used to redirect the browser's JavaScript console logging.  The provided test runner uses this callback to redirect the output to the command line instead of the headless browser (where you would never see it).</p>
 
-<p>```javascript Snippet from Default run-qunit.js
-// Route "console.log()" calls from within the Page context to the main Phantom context (i.e. current "this")
-page.onConsoleMessage = function(msg) {</p>
-
-<pre><code>console.log(msg);
+<pre class="language-javascript"><code>// Route "console.log()" calls from within the Page context to the main Phantom context (i.e. current "this")
+page.onConsoleMessage = function(msg) {
+    console.log(msg);
+};
 </code></pre>
 
-<p>};
-```</p>
 
 <p>Meaning, when running QUnit tests via PhantomJS, the output of any <code>console.log</code> statements will appear on the command line.</p>
 
@@ -65,168 +62,154 @@ page.onConsoleMessage = function(msg) {</p>
 
 <p>For example you could use the following to log the associated message for every test that fails:</p>
 
-<p>``` javascript Logging Each Test Failure with QUnit
-QUnit.log(function(details) {</p>
-
-<pre><code>if (!details.result) {
-    console.log(details.message);
-}
+<pre class="language-javascript"><code>
+QUnit.log(function(details) {
+    if (!details.result) {
+        console.log(details.message);
+    }
+});
 </code></pre>
 
-<p>});
-```</p>
 
 <p>If we apply this our failing test suite we now get the following:</p>
 
-<p><code>text
-tj-mac:spinner tj3$ phantomjs run-qunit.js spinner.html
+<pre class="language-shell"><code>tj-mac:spinner tj3$ phantomjs run-qunit.js spinner.html
 min from markup
 stop from options
 blur after many keys
 'waitFor()' finished in 579ms.
 Tests completed in 483 milliseconds.
 486 tests of 489 passed, 3 failed.
-</code></p>
+</code></pre>
+
 
 <p>Better, but still not terribly useful.  In order to provide a useful report of failed tests you need to combine more of QUnit's API callbacks with some basic text formatting.  Here's a more comprehensive example:</p>
 
-<p>``` javascript QUnit Test Results with a Formatted Display of Failed Tests
-(function() {</p>
+<pre class="language-javascript"><code>
+(function() {
+    var module = '', 
+        test = '',
+        lastModuleLogged = '',
+        lastTestLogged = '',
+        failuresOnCurrentTest = 0,
+        failureFound = false;
 
-<pre><code>var module = '', 
-    test = '',
-    lastModuleLogged = '',
-    lastTestLogged = '',
-    failuresOnCurrentTest = 0,
-    failureFound = false;
+    QUnit.moduleStart(function(details) {
+        module = details.name;
+    });
+    QUnit.testStart(function(details) {
+        test = details.name;
+    });
 
-QUnit.moduleStart(function(details) {
-    module = details.name;
-});
-QUnit.testStart(function(details) {
-    test = details.name;
-});
+    QUnit.log(function(details) {
+        if (!details.result) {
+            if (!failureFound) {
+                failureFound = true;
+                console.log('');
+                console.log('/*********************************************************************/');
+                console.log('/************************** FAILURE SUMMARY **************************/');
+                console.log('/*********************************************************************/');
+            }
 
-QUnit.log(function(details) {
-    if (!details.result) {
-        if (!failureFound) {
-            failureFound = true;
-            console.log('');
-            console.log('/*********************************************************************/');
-            console.log('/************************** FAILURE SUMMARY **************************/');
-            console.log('/*********************************************************************/');
+            if (lastModuleLogged != module) {
+                console.log('');
+                console.log('-----------------------------------------------------------------------');
+                console.log('Module: ' + module);
+            }
+
+            if (lastTestLogged != test) {
+                failuresOnCurrentTest = 1;
+                console.log('-----------------------------------------------------------------------');
+                console.log('Test: ' + test);
+            } else {
+                failuresOnCurrentTest++;
+            }
+
+            console.log(' ' + failuresOnCurrentTest + ') Message: ' + details.message);
+            if (typeof details.expected !== 'undefined') {
+                console.log('    Expected: ' + details.expected);
+                console.log('    Actual: ' + details.actual);
+            }
+            if (typeof details.source !== 'undefined') {
+                console.log('    Source: ' + details.source);
+            }
+
+            lastModuleLogged = module;
+            lastTestLogged = test;
         }
+    });
 
-        if (lastModuleLogged != module) {
-            console.log('');
+    QUnit.done(function(details) {
+        if (details.failed > 0) {
             console.log('-----------------------------------------------------------------------');
-            console.log('Module: ' + module);
+            console.log('');
         }
-
-        if (lastTestLogged != test) {
-            failuresOnCurrentTest = 1;
-            console.log('-----------------------------------------------------------------------');
-            console.log('Test: ' + test);
-        } else {
-            failuresOnCurrentTest++;
-        }
-
-        console.log(' ' + failuresOnCurrentTest + ') Message: ' + details.message);
-        if (typeof details.expected !== 'undefined') {
-            console.log('    Expected: ' + details.expected);
-            console.log('    Actual: ' + details.actual);
-        }
-        if (typeof details.source !== 'undefined') {
-            console.log('    Source: ' + details.source);
-        }
-
-        lastModuleLogged = module;
-        lastTestLogged = test;
-    }
-});
-
-QUnit.done(function(details) {
-    if (details.failed &gt; 0) {
-        console.log('-----------------------------------------------------------------------');
-        console.log('');
-    }
-});
+    });
+}());
 </code></pre>
 
-<p>}());
-```</p>
 
 <p>Now running tests with failures will produce something like the following:</p>
 
-<p>``` text PhantomJS + QUnit Output with Failures
-tj-cpu:spinner tj$ phantomjs run-qunit.js spinner.html</p>
+<pre class="language-shell"><code>tj-cpu:spinner tj$ phantomjs run-qunit.js spinner.html
 
-<p>/<strong><strong><strong><strong><strong><strong><strong><strong><em><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>/
-/</strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong> FAILURE SUMMARY </strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong>/
-/</em></strong></strong></strong></strong></strong></strong></strong></strong>****************************************************/</p>
+/*********************************************************************/
+/************************** FAILURE SUMMARY **************************/
+/*********************************************************************/
 
-<hr />
+-----------------------------------------------------------------------
+Module: spinner: core
+-----------------------------------------------------------------------
+Test: reading HTML5 attributes
+ 1) Message: min from markup
+    Expected: -1000
+    Actual: -100
+    Source:     at file:///Applications/XAMPP/xamppfiles/htdocs/jquery/jquery-ui/external/qunit.js:447
+    at file:///Applications/XAMPP/xamppfiles/htdocs/jquery/jquery-ui/tests/unit/spinner/spinner_core.js:137
+    at file:///Applications/XAMPP/xamppfiles/htdocs/jquery/jquery-ui/external/qunit.js:134
+    at file:///Applications/XAMPP/xamppfiles/htdocs/jquery/jquery-ui/external/qunit.js:277
+    at process (file:///Applications/XAMPP/xamppfiles/htdocs/jquery/jquery-ui/external/qunit.js:1233)
+    at file:///Applications/XAMPP/xamppfiles/htdocs/jquery/jquery-ui/external/qunit.js:376
+ 2) Message: stop from options
+    Expected: 50
+    Actual: 5
+    Source:     at file:///Applications/XAMPP/xamppfiles/htdocs/jquery/jquery-ui/external/qunit.js:447
+    at file:///Applications/XAMPP/xamppfiles/htdocs/jquery/jquery-ui/tests/unit/spinner/spinner_core.js:148
+    at file:///Applications/XAMPP/xamppfiles/htdocs/jquery/jquery-ui/external/qunit.js:134
+    at file:///Applications/XAMPP/xamppfiles/htdocs/jquery/jquery-ui/external/qunit.js:277
+    at process (file:///Applications/XAMPP/xamppfiles/htdocs/jquery/jquery-ui/external/qunit.js:1233)
+    at file:///Applications/XAMPP/xamppfiles/htdocs/jquery/jquery-ui/external/qunit.js:376
 
-<h2>Module: spinner: core</h2>
+-----------------------------------------------------------------------
+Module: spinner: events
+-----------------------------------------------------------------------
+Test: change
+ 1) Message: blur after many keys
+    Source:     at file:///Applications/XAMPP/xamppfiles/htdocs/jquery/jquery-ui/external/qunit.js:426
+    at file:///Applications/XAMPP/xamppfiles/htdocs/jquery/jquery-ui/tests/unit/spinner/spinner_events.js:130
+    at file:///Applications/XAMPP/xamppfiles/htdocs/jquery/jquery-ui/ui/jquery.ui.widget.js:454
+    at file:///Applications/XAMPP/xamppfiles/htdocs/jquery/jquery-ui/ui/jquery.ui.spinner.js:109
+    at handlerProxy (file:///Applications/XAMPP/xamppfiles/htdocs/jquery/jquery-ui/ui/jquery.ui.widget.js:371)
+    at file:///Applications/XAMPP/xamppfiles/htdocs/jquery/jquery-ui/tests/jquery-1.8.0.js:3061
+    at file:///Applications/XAMPP/xamppfiles/htdocs/jquery/jquery-ui/tests/jquery-1.8.0.js:2677
+    at file:///Applications/XAMPP/xamppfiles/htdocs/jquery/jquery-ui/tests/jquery-1.8.0.js:2941
+    at file:///Applications/XAMPP/xamppfiles/htdocs/jquery/jquery-ui/tests/jquery-1.8.0.js:3607
+    at file:///Applications/XAMPP/xamppfiles/htdocs/jquery/jquery-ui/tests/jquery-1.8.0.js:611
+    at file:///Applications/XAMPP/xamppfiles/htdocs/jquery/jquery-ui/tests/jquery-1.8.0.js:241
+    at file:///Applications/XAMPP/xamppfiles/htdocs/jquery/jquery-ui/tests/jquery-1.8.0.js:3608
+    at file:///Applications/XAMPP/xamppfiles/htdocs/jquery/jquery-ui/tests/jquery-1.8.0.js:3660
+    at file:///Applications/XAMPP/xamppfiles/htdocs/jquery/jquery-ui/tests/unit/spinner/spinner_events.js:165
+    at file:///Applications/XAMPP/xamppfiles/htdocs/jquery/jquery-ui/external/qunit.js:134
+    at file:///Applications/XAMPP/xamppfiles/htdocs/jquery/jquery-ui/external/qunit.js:277
+    at process (file:///Applications/XAMPP/xamppfiles/htdocs/jquery/jquery-ui/external/qunit.js:1233)
+    at file:///Applications/XAMPP/xamppfiles/htdocs/jquery/jquery-ui/external/qunit.js:376
+-----------------------------------------------------------------------
 
-<p>Test: reading HTML5 attributes
- 1) Message: min from markup</p>
-
-<pre><code>Expected: -1000
-Actual: -100
-Source:     at file:///Applications/XAMPP/xamppfiles/htdocs/jquery/jquery-ui/external/qunit.js:447
-at file:///Applications/XAMPP/xamppfiles/htdocs/jquery/jquery-ui/tests/unit/spinner/spinner_core.js:137
-at file:///Applications/XAMPP/xamppfiles/htdocs/jquery/jquery-ui/external/qunit.js:134
-at file:///Applications/XAMPP/xamppfiles/htdocs/jquery/jquery-ui/external/qunit.js:277
-at process (file:///Applications/XAMPP/xamppfiles/htdocs/jquery/jquery-ui/external/qunit.js:1233)
-at file:///Applications/XAMPP/xamppfiles/htdocs/jquery/jquery-ui/external/qunit.js:376
-</code></pre>
-
-<p> 2) Message: stop from options</p>
-
-<pre><code>Expected: 50
-Actual: 5
-Source:     at file:///Applications/XAMPP/xamppfiles/htdocs/jquery/jquery-ui/external/qunit.js:447
-at file:///Applications/XAMPP/xamppfiles/htdocs/jquery/jquery-ui/tests/unit/spinner/spinner_core.js:148
-at file:///Applications/XAMPP/xamppfiles/htdocs/jquery/jquery-ui/external/qunit.js:134
-at file:///Applications/XAMPP/xamppfiles/htdocs/jquery/jquery-ui/external/qunit.js:277
-at process (file:///Applications/XAMPP/xamppfiles/htdocs/jquery/jquery-ui/external/qunit.js:1233)
-at file:///Applications/XAMPP/xamppfiles/htdocs/jquery/jquery-ui/external/qunit.js:376
-</code></pre>
-
-<hr />
-
-<h2>Module: spinner: events</h2>
-
-<p>Test: change
- 1) Message: blur after many keys</p>
-
-<pre><code>Source:     at file:///Applications/XAMPP/xamppfiles/htdocs/jquery/jquery-ui/external/qunit.js:426
-at file:///Applications/XAMPP/xamppfiles/htdocs/jquery/jquery-ui/tests/unit/spinner/spinner_events.js:130
-at file:///Applications/XAMPP/xamppfiles/htdocs/jquery/jquery-ui/ui/jquery.ui.widget.js:454
-at file:///Applications/XAMPP/xamppfiles/htdocs/jquery/jquery-ui/ui/jquery.ui.spinner.js:109
-at handlerProxy (file:///Applications/XAMPP/xamppfiles/htdocs/jquery/jquery-ui/ui/jquery.ui.widget.js:371)
-at file:///Applications/XAMPP/xamppfiles/htdocs/jquery/jquery-ui/tests/jquery-1.8.0.js:3061
-at file:///Applications/XAMPP/xamppfiles/htdocs/jquery/jquery-ui/tests/jquery-1.8.0.js:2677
-at file:///Applications/XAMPP/xamppfiles/htdocs/jquery/jquery-ui/tests/jquery-1.8.0.js:2941
-at file:///Applications/XAMPP/xamppfiles/htdocs/jquery/jquery-ui/tests/jquery-1.8.0.js:3607
-at file:///Applications/XAMPP/xamppfiles/htdocs/jquery/jquery-ui/tests/jquery-1.8.0.js:611
-at file:///Applications/XAMPP/xamppfiles/htdocs/jquery/jquery-ui/tests/jquery-1.8.0.js:241
-at file:///Applications/XAMPP/xamppfiles/htdocs/jquery/jquery-ui/tests/jquery-1.8.0.js:3608
-at file:///Applications/XAMPP/xamppfiles/htdocs/jquery/jquery-ui/tests/jquery-1.8.0.js:3660
-at file:///Applications/XAMPP/xamppfiles/htdocs/jquery/jquery-ui/tests/unit/spinner/spinner_events.js:165
-at file:///Applications/XAMPP/xamppfiles/htdocs/jquery/jquery-ui/external/qunit.js:134
-at file:///Applications/XAMPP/xamppfiles/htdocs/jquery/jquery-ui/external/qunit.js:277
-at process (file:///Applications/XAMPP/xamppfiles/htdocs/jquery/jquery-ui/external/qunit.js:1233)
-at file:///Applications/XAMPP/xamppfiles/htdocs/jquery/jquery-ui/external/qunit.js:376
-</code></pre>
-
-<hr />
-
-<p>'waitFor()' finished in 590ms.
+'waitFor()' finished in 590ms.
 Tests completed in 494 milliseconds.
 486 tests of 489 passed, 3 failed.
-```</p>
+</code></pre>
+
 
 <p>This might be a bit excessive for some but I like being able to quickly see information about what failed from the command line.  Feel free to use this and alter it to your liking.</p>
 

@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Writing | TJ VanToll's Blog]]></title>
   <link href="http://tjvantoll.com/blog/categories/writing/atom.xml" rel="self"/>
   <link href="http://tjvantoll.com/"/>
-  <updated>2015-06-25T11:24:59-04:00</updated>
+  <updated>2015-07-04T11:17:31-04:00</updated>
   <id>http://tjvantoll.com/</id>
   <author>
     <name><![CDATA[TJ VanToll]]></name>
@@ -202,13 +202,13 @@
 
 <p>Because spell checking is a configurable property, turning it on and off is a matter of toggling the property's value:</p>
 
-<p>``` js
-/<em> Writing docs </em>/
-"spell_check": true</p>
+<pre class="language-javascript"><code>/* Writing docs */
+"spell_check": true
 
-<p>/<em> Writing code </em>/
+/* Writing code */
 "spell_check": false
-```</p>
+</code></pre>
+
 
 <p>Like most spell checkers, you can right click misspelled words to get suggested fixes:</p>
 

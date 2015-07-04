@@ -4,7 +4,7 @@
   <title><![CDATA[Category: HTML | TJ VanToll's Blog]]></title>
   <link href="http://tjvantoll.com/blog/categories/html/atom.xml" rel="self"/>
   <link href="http://tjvantoll.com/"/>
-  <updated>2015-06-25T11:24:59-04:00</updated>
+  <updated>2015-07-04T11:17:31-04:00</updated>
   <id>http://tjvantoll.com/</id>
   <author>
     <name><![CDATA[TJ VanToll]]></name>
@@ -31,160 +31,106 @@
 
 <p>Here's the HTML we'll use:</p>
 
-<p>``` html
-<form id="information-form"></p>
+<pre class="language-markup line-numbers"><code>&lt;form id="information-form"&gt;
+    &lt;fieldset&gt;
+        &lt;legend&gt;Information&lt;/legend&gt;
+        &lt;div&gt;
+            &lt;label for="name"&gt;Name:&lt;/label&gt;
+            &lt;input id="name"&gt;
+        &lt;/div&gt;
+        &lt;div&gt;
+            &lt;label for="address"&gt;Address:&lt;/label&gt;
+            &lt;input id="address"&gt;
+        &lt;/div&gt;
 
-<pre><code>&lt;fieldset&gt;
-    &lt;legend&gt;Information&lt;/legend&gt;
-    &lt;div&gt;
-        &lt;label for="name"&gt;Name:&lt;/label&gt;
-        &lt;input id="name"&gt;
-    &lt;/div&gt;
-    &lt;div&gt;
-        &lt;label for="address"&gt;Address:&lt;/label&gt;
-        &lt;input id="address"&gt;
-    &lt;/div&gt;
+        &lt;button&gt;Update&lt;/button&gt;
+        &lt;button id="delete"&gt;Delete&lt;/button&gt;
 
-    &lt;button&gt;Update&lt;/button&gt;
-    &lt;button id="delete"&gt;Delete&lt;/button&gt;
+        &lt;p id="admin-message"&gt;To delete this user, please contact an administrator.&lt;/p&gt;
+    &lt;/fieldset&gt;
+&lt;/form&gt;</code></pre>
 
-    &lt;p id="admin-message"&gt;To delete this user, please contact an administrator.&lt;/p&gt;
-&lt;/fieldset&gt;
-</code></pre>
-
-<p></form>
-```</p>
 
 <p>And we'll use two buttons to switch between the two user types.</p>
 
-<p><code>html
-&lt;button id="admin"&gt;Display as admin&lt;/button&gt;
-&lt;button id="regular-user"&gt;Display as regular user&lt;/button&gt;
-</code></p>
+<pre class="language-markup line-numbers"><code>&lt;button id="admin"&gt;Display as admin&lt;/button&gt;
+&lt;button id="regular-user"&gt;Display as regular user&lt;/button&gt;</code></pre>
+
 
 <p>So, the question is... what JavaScript do you implement to show/hide the delete button and informational message? The following shows an approach I often see: targeting individual elements in JavaScript, and altering their display.</p>
 
-<p>``` javascript
-var adminButton = document.querySelector( "#admin" ),</p>
+<pre class="language-javascript line-numbers"><code>var adminButton = document.querySelector( "#admin" ),
+    regularButton = document.querySelector( "#regular-user" ),
+    deleteButton = document.querySelector( "#delete" ),
+    adminMessage = document.querySelector( "#admin-message" );
 
-<pre><code>regularButton = document.querySelector( "#regular-user" ),
-deleteButton = document.querySelector( "#delete" ),
-adminMessage = document.querySelector( "#admin-message" );
-</code></pre>
+adminButton.addEventListener( "click", function() {
+    deleteButton.style.display = "inline-block";
+    adminMessage.style.display = "none";
+});
+regularButton.addEventListener( "click", function() {
+    deleteButton.style.display = "none";
+    adminMessage.style.display = "block";
+});</code></pre>
 
-<p>adminButton.addEventListener( "click", function() {</p>
-
-<pre><code>deleteButton.style.display = "inline-block";
-adminMessage.style.display = "none";
-</code></pre>
-
-<p>});
-regularButton.addEventListener( "click", function() {</p>
-
-<pre><code>deleteButton.style.display = "none";
-adminMessage.style.display = "block";
-</code></pre>
-
-<p>});
-```</p>
 
 <p>This works, but it's verbose, as you have to target each element that should be shown or hidden whenever the user types changes. From a more abstract perspective, it also breaks the <a href="http://en.wikipedia.org/wiki/Separation_of_concerns">separation of concerns design principle</a>, since CSS changes are being done in JavaScript.</p>
 
 <p>To improve this, let's switch the JavaScript to manage a single CSS class name on the form.</p>
 
-<p>``` javascript
-var adminButton = document.querySelector( "#admin" ),</p>
+<pre class="language-javascript line-numbers"><code>var adminButton = document.querySelector( "#admin" ),
+    regularButton = document.querySelector( "#regular-user" ),
+    form = document.querySelector( "#information-form" );
 
-<pre><code>regularButton = document.querySelector( "#regular-user" ),
-form = document.querySelector( "#information-form" );
-</code></pre>
+adminButton.addEventListener( "click", function() {
+    form.classList.add( "admin" );
+});
+regularButton.addEventListener( "click", function() {
+    form.classList.remove( "admin" );
+});</code></pre>
 
-<p>adminButton.addEventListener( "click", function() {</p>
-
-<pre><code>form.classList.add( "admin" );
-</code></pre>
-
-<p>});
-regularButton.addEventListener( "click", function() {</p>
-
-<pre><code>form.classList.remove( "admin" );
-</code></pre>
-
-<p>});
-```</p>
 
 <p>At the moment, nothing shows or hides when you click buttons, but with the <code>"admin"</code> class name in place, you have the hook you need to implement the logic in CSS.</p>
 
-<p>``` css</p>
+<pre class="language-css line-numbers"><code>#delete {
+    display: none;
+}
+.admin #admin-message {
+    display: none;
+}
+.admin #delete {
+    display: inline-block;
+}</code></pre>
 
-<h1>delete {</h1>
-
-<pre><code>display: none;
-</code></pre>
-
-<p>}
-.admin #admin-message {</p>
-
-<pre><code>display: none;
-</code></pre>
-
-<p>}
-.admin #delete {</p>
-
-<pre><code>display: inline-block;
-</code></pre>
-
-<p>}
-```</p>
 
 <p>JavaScript manages the state of the element, which gives CSS the ability to control the display based on that state. This approach is not only cleaner, it is also more flexible. If you need to change colors for admin, or spacing, you now have a CSS hook you can use to do so.</p>
 
 <p>This same approach works with HTML attributes as well. For instance, let's switch from using a CSS class name, to a <code>data-admin</code> attribute on the <code>&lt;form&gt;</code>. With that approach you use the following JavaScript:</p>
 
-<p>``` javascript
-var adminButton = document.querySelector( "#admin" ),</p>
+<pre class="language-javascript line-numbers"><code>var adminButton = document.querySelector( "#admin" ),
+    regularButton = document.querySelector( "#regular-user" ),
+    form = document.querySelector( "#information-form" );
 
-<pre><code>regularButton = document.querySelector( "#regular-user" ),
-form = document.querySelector( "#information-form" );
-</code></pre>
+adminButton.addEventListener( "click", function() {
+    form.setAttribute( "data-admin", true );
+});
+regularButton.addEventListener( "click", function() {
+    form.setAttribute( "data-admin", false );
+});</code></pre>
 
-<p>adminButton.addEventListener( "click", function() {</p>
-
-<pre><code>form.setAttribute( "data-admin", true );
-</code></pre>
-
-<p>});
-regularButton.addEventListener( "click", function() {</p>
-
-<pre><code>form.setAttribute( "data-admin", false );
-</code></pre>
-
-<p>});
-```</p>
 
 <p>And the following CSS:</p>
 
-<p>``` css</p>
+<pre class="language-css line-numbers"><code>#delete {
+    display: none;
+}
+[data-admin="true"] #admin-message {
+    display: none;
+}
+[data-admin="true"] #delete {
+    display: inline-block;
+}</code></pre>
 
-<h1>delete {</h1>
-
-<pre><code>display: none;
-</code></pre>
-
-<p>}
-[data-admin="true"] #admin-message {</p>
-
-<pre><code>display: none;
-</code></pre>
-
-<p>}
-[data-admin="true"] #delete {</p>
-
-<pre><code>display: inline-block;
-</code></pre>
-
-<p>}
-```</p>
 
 <p>Use whatever makes sense for your use case. The overarching idea is to use JavaScript to apply semantic HTML that reflects an element's state, and to let CSS control the display from there. Personally I've found this to be the best way to handle display logic in UI components—especially complex ones.</p>
 ]]></content>
@@ -199,9 +145,9 @@ regularButton.addEventListener( "click", function() {</p>
 
 <p>I wanted to quickly show the effect this property has. Adding it is as easy as appending <code>minimal-ui</code> to the <code>content</code> attribute of your site's <code>&lt;meta&gt;</code> tag.</p>
 
-<p><code>html
-&lt;meta name="viewport" content="width=device-width, initial-scale=1, minimal-ui"&gt;
-</code></p>
+<pre class="language-markup"><code>&lt;meta name="viewport" content="width=device-width, initial-scale=1, minimal-ui"&gt;
+</code></pre>
+
 
 <p>The two images below show a before and after of applying the property to a test page.</p>
 
@@ -230,16 +176,13 @@ regularButton.addEventListener( "click", function() {</p>
 
 <p>To start our discussion, consider this simple <code>&lt;select&gt;</code> element.</p>
 
-<p>``` html
-<select></p>
-
-<pre><code>&lt;option&gt;One&lt;/option&gt;
-&lt;option&gt;Two&lt;/option&gt;
-&lt;option&gt;Three&lt;/option&gt;
+<pre class="language-markup"><code>&lt;select&gt;
+    &lt;option&gt;One&lt;/option&gt;
+    &lt;option&gt;Two&lt;/option&gt;
+    &lt;option&gt;Three&lt;/option&gt;
+&lt;/select&gt;
 </code></pre>
 
-<p></select>
-```</p>
 
 <p>Here's a sampling of a few different renderings. The two on the left are Chrome and Firefox for OS X, the two on the right are IE and Chrome for Windows.</p>
 
@@ -267,13 +210,17 @@ regularButton.addEventListener( "click", function() {</p>
 
 <p>A number of browsers now offer styling hooks through vendor prefixed pseudo elements. (I created a <a href="/2013/12/06/why-is-styling-form-elements-so-damn-hard/">full list</a> if you'd like to peruse them). For instance <code>::-ms-check</code> lets you play with the look of checkboxes and radio buttons in IE.</p>
 
-<p>``` html</p>
+<pre class="language-markup"><code>&lt;style&gt;
+    ::-ms-check {
+        color: red;
+        background: black;
+        padding: 1em;
+    }
+&lt;/style&gt;
+&lt;input type="checkbox"&gt;
+&lt;input type="radio"&gt;
+</code></pre>
 
-
-
-<p><input type="checkbox">
-<input type="radio">
-```</p>
 
 <p>Which renders as follows.</p>
 
@@ -299,13 +246,16 @@ regularButton.addEventListener( "click", function() {</p>
 
 <p>And as of Chrome 31, this is now something you can actually do. The following example creates a native <code>&lt;input type="date"&gt;</code>, gives it a new shadow root to use, and implements the calendar using <a href="http://jqueryui.com/datepicker/">jQuery UI's datepicker</a>.</p>
 
-<p>``` html</p>
+<pre class="language-markup line-numbers"><code>&lt;style&gt;
+    input {
+        height: 2em;
+        width: 15em;
+    }
+&lt;/style&gt;
 
+&lt;input type="date"&gt;
 
-
-<p><input type="date"></p>
-
-<script>
+&lt;script&gt;
     var dateRoot = document.querySelector( "input" )
         .webkitCreateShadowRoot();
 
@@ -315,14 +265,12 @@ regularButton.addEventListener( "click", function() {</p>
             dateRoot.innerHTML = dateText;
         }
     });
-</script>
+&lt;/script&gt;</code></pre>
 
-
-<p>```</p>
 
 <p>And here's the example live, although you need Chrome 31+ for it to actually work.</p>
 
-<iframe width="100%" height="300" src="http://jsfiddle.net/tj_vantoll/6qadQ/embedded/result,html,js,css" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
+<iframe width="100%" height="300" src="http://jsfiddle.net/tj_vantoll/9v44L201/embedded/result,html,js,css" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
 
 
 <p>You may notice that there is one big issue with this example. While we do get a custom datepicker, we lose the <code>&lt;input&gt;</code> behavior, including the ability to type in a value.</p>
@@ -357,19 +305,19 @@ regularButton.addEventListener( "click", function() {</p>
 
 <p>Consider the following example:</p>
 
-<p><code>html
-&lt;base href="http://foo.com"&gt;
+<pre class="language-markup"><code>&lt;base href="http://foo.com"&gt;
 &lt;a href="bar.html"&gt;Bar&lt;/a&gt;
-</code></p>
+</code></pre>
+
 
 <p>Let's assume this HTML appears on this domain (<code>http://tjvantoll.com</code>).  When the link is clicked on, the browser will navigate to <code>http://foo.com/bar.html</code> rather than <code>http://tjvantoll.com/bar.html</code>.</p>
 
 <p>It's important to note that hash links are also relative to the specified base.  Therefore on the following:</p>
 
-<p><code>html
-&lt;base href="http://foo.com"&gt;
+<pre class="language-markup"><code>&lt;base href="http://foo.com"&gt;
 &lt;a href="#bar"&gt;Bar&lt;/a&gt;
-</code></p>
+</code></pre>
+
 
 <p>When the link is click on, the browser will navigate to <code>http://foo.com#bar</code> and NOT <code>http://tjvantoll.com#bar</code>.  This detail is important; it's the root cause of confusion when using a <code>&lt;base&gt;</code> tag with the tabs widget.</p>
 
@@ -377,24 +325,18 @@ regularButton.addEventListener( "click", function() {</p>
 
 <p>Here is the intended HTML structure to be used by the tabs widget:</p>
 
-<p>``` html</p>
+<pre class="language-markup"><code>&lt;div id="tabs"&gt;
+    &lt;ul&gt;
+        &lt;li&gt;&lt;a href="#tab-1"&gt;One&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href="#tab-2"&gt;Two&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+    &lt;div id="tab-1"&gt;Contents of tab one.&lt;/div&gt;
+    &lt;div id="tab-2"&gt;Contents of tab two.&lt;/div&gt;
+&lt;/div&gt;
 
-<div id="tabs">
-    <ul>
-        <li><a href="#tab-1">One</a></li>
-        <li><a href="#tab-2">Two</a></li>
-    </ul>
-    <div id="tab-1">Contents of tab one.</div>
-    <div id="tab-2">Contents of tab two.</div>
-</div>
+&lt;script&gt;$( "#tabs" ).tabs();&lt;/script&gt;
+</code></pre>
 
-
-
-
-<script>$( "#tabs" ).tabs();</script>
-
-
-<p>```</p>
 
 <p>Which produces the following:</p>
 
@@ -402,23 +344,17 @@ regularButton.addEventListener( "click", function() {</p>
 
 <p>In this example both links begin with a hash (<code>#</code>), indicating that their content is located on the current page.  If that is not the case, the tabs widget will retrieve the tab's contents server side via an XHR call.  Consider the following:</p>
 
-<p>``` html</p>
+<pre class="language-markup"><code>&lt;div id="tabs"&gt;
+    &lt;ul&gt;
+        &lt;li&gt;&lt;a href="#local"&gt;Local&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href="external"&gt;External&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+    &lt;div id="local"&gt;Contents of the local tab.&lt;/div&gt;
+&lt;/div&gt;
 
-<div id="tabs">
-    <ul>
-        <li><a href="#local">Local</a></li>
-        <li><a href="external">External</a></li>
-    </ul>
-    <div id="local">Contents of the local tab.</div>
-</div>
+&lt;script&gt;$( "#tabs" ).tabs();&lt;/script&gt;
+</code></pre>
 
-
-
-
-<script>$( "#tabs" ).tabs();</script>
-
-
-<p>```</p>
 
 <p>Here the local link will work as in the previous example - when it is clicked on, the tabs widget will simply display the contents of the <code>#local</code> container.</p>
 
@@ -430,25 +366,20 @@ regularButton.addEventListener( "click", function() {</p>
 
 <p>Given the descriptions above, the behavior of the <code>&lt;base&gt;</code> tag with the tabs widget shouldn't be surprising.  Here's the first example given for the tabs widget again.  This time, a <code>&lt;base&gt;</code> tag to <code>http://foo.com</code> has been added:</p>
 
-<p>``` html
-<base href="http://foo.com"></p>
+<pre class="language-markup"><code>&lt;base href="http://foo.com"&gt;
 
-<div id="tabs">
-    <ul>
-        <li><a href="#tab-1">One</a></li>
-        <li><a href="#tab-2">Two</a></li>
-    </ul>
-    <div id="tab-1">Contents of tab one.</div>
-    <div id="tab-2">Contents of tab two.</div>
-</div>
+&lt;div id="tabs"&gt;
+    &lt;ul&gt;
+        &lt;li&gt;&lt;a href="#tab-1"&gt;One&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href="#tab-2"&gt;Two&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+    &lt;div id="tab-1"&gt;Contents of tab one.&lt;/div&gt;
+    &lt;div id="tab-2"&gt;Contents of tab two.&lt;/div&gt;
+&lt;/div&gt;
 
+&lt;script&gt;$( "#tabs" ).tabs();&lt;/script&gt;
+</code></pre>
 
-
-
-<script>$( "#tabs" ).tabs();</script>
-
-
-<p>```</p>
 
 <p>Let's again assume this HTML is located on <code>http://tjvantoll.com</code>.  Because of the <code>&lt;base&gt;</code> tag, the links used in the tabs widget are actually external links to <code>http://foo.com</code>.  Therefore, upon instantiation, the tabs widget will attempt to load the contents of the first tab from <code>http://foo.com</code>.</p>
 
@@ -462,25 +393,20 @@ regularButton.addEventListener( "click", function() {</p>
 
 <p>2) <strong>Provide full URLs on links used to build the tabs widget.</strong>  If approach #1 isn't feasible, you can also provide a fully qualified URL in the links used to build the tabs widget.  Here's the earlier example modified to show this approach:</p>
 
-<p>``` html
-<base href="http://foo.com"></p>
+<pre class="language-markup"><code>&lt;base href="http://foo.com"&gt;
 
-<div id="tabs">
-    <ul>
-        <li><a href="http://tjvantoll.com#tab-1">One</a></li>
-        <li><a href="http://tjvantoll.com#tab-2">Two</a></li>
-    </ul>
-    <div id="tab-1">Contents of tab one.</div>
-    <div id="tab-2">Contents of tab two.</div>
-</div>
+&lt;div id="tabs"&gt;
+    &lt;ul&gt;
+        &lt;li&gt;&lt;a href="http://tjvantoll.com#tab-1"&gt;One&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href="http://tjvantoll.com#tab-2"&gt;Two&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+    &lt;div id="tab-1"&gt;Contents of tab one.&lt;/div&gt;
+    &lt;div id="tab-2"&gt;Contents of tab two.&lt;/div&gt;
+&lt;/div&gt;
 
+&lt;script&gt;$( "#tabs" ).tabs();&lt;/script&gt;
+</code></pre>
 
-
-
-<script>$( "#tabs" ).tabs();</script>
-
-
-<p>```</p>
 
 <p>Since the links in the tabs are now fully qualified paths to the current page, the tabs widget will not perform a request to retrieve external content.</p>
 
@@ -499,26 +425,23 @@ regularButton.addEventListener( "click", function() {</p>
 
 <p>The hack is shown below, simply call the <code>makeTabs</code> function with the selector used to create the tabs widget:</p>
 
-<p>``` javascript
-var makeTabs = function(selector) {</p>
+<pre class="language-javascript"><code>var makeTabs = function(selector) {
+    $( selector )
+        .find( "ul a" ).each( function() {
+            var href = $( this ).attr( "href" ),
+                newHref = window.location.protocol + "//" + window.location.hostname + 
+                    window.location.pathname + href;
 
-<pre><code>$( selector )
-    .find( "ul a" ).each( function() {
-        var href = $( this ).attr( "href" ),
-            newHref = window.location.protocol + '//' + window.location.hostname + 
-                window.location.pathname + href;
+            if ( href.indexOf( "#" ) == 0 ) {
+                $( this ).attr( "href", newHref );
+            }
+        })
+    $( selector ).tabs();
+};
 
-        if ( href.indexOf( "#" ) == 0 ) {
-            $( this ).attr( "href", newHref );
-        }
-    })
-$( selector ).tabs();
+makeTabs( "#tabs" );
 </code></pre>
 
-<p>};</p>
-
-<p>makeTabs( "#tabs" );
-```</p>
 
 <p>As noted by the warning box, you should really fix this the right way.  But desperate times call for desperate measures.  You've been warned.</p>
 
@@ -539,19 +462,16 @@ $( selector ).tabs();
     <id>http://tjvantoll.com/2013/01/05/is-it-safe-to-use-the-body-as-a-top-level-container-yet</id>
     <content type="html"><![CDATA[<p>View source on almost any web page and you'll likely see the following:</p>
 
-<p>``` html Common HTML Template
-<html></p>
-
-<pre><code>&lt;head&gt;&lt;/head&gt;
-&lt;body&gt;
-    &lt;div id="wrapper"&gt;
-        &lt;!-- All the things --&gt;
-    &lt;/div&gt;
-&lt;/body&gt;
+<pre class="language-markup"><code>&lt;html&gt;
+    &lt;head&gt;&lt;/head&gt;
+    &lt;body&gt;
+        &lt;div id="wrapper"&gt;
+            &lt;!-- All the things --&gt;
+        &lt;/div&gt;
+    &lt;/body&gt;
+&lt;/html&gt;
 </code></pre>
 
-<p></html>
-```</p>
 
 <p>The use of a wrapper or container <code>div</code> around the page is fairly universal.  It is commonly used to perform tasks such as centering a page's content or providing a shadow or border to frame it.  But, since the <code>body</code> element is a necessity in the markup, why can't it be styled directly instead?  Why is a wrapper <code>div</code> used?</p>
 
@@ -566,22 +486,15 @@ $( selector ).tabs();
 
 <p>To center the top level container in IE 5.5 you had to make use of <code>text-align: center</code> as such:</p>
 
-<p>``` css Centering the top level container in IE 5.5
-body {</p>
-
-<pre><code>text-align: center;
+<pre class="language-css"><code>body {
+    text-align: center;
+}
+#wrapper {
+    width: 1000px;
+    text-align: left; /* counteract the declaration on body */
+}
 </code></pre>
 
-<p>}</p>
-
-<h1>wrapper {</h1>
-
-<pre><code>width: 1000px;
-text-align: left; /* counteract the declaration on body */
-</code></pre>
-
-<p>}
-```</p>
 
 <p><code>text-align: center</code> <em>should</em> only affect inline elements, but IE 5.5 incorrectly applied it to block elements as well.  (Note: The <code>text-align: center</code> bug was fixed in IE6 standards mode, but the behavior remained in Internet Explorer's quirks mode to this day.)</p>
 
@@ -589,19 +502,16 @@ text-align: left; /* counteract the declaration on body */
 
 <p>IE6 implemented <code>auto</code> margins, so <code>margin: 0 auto</code> was now safe to use on the <code>body</code>.  Additionally, IE6 fully supports adding a <code>width</code>, <code>padding</code>, <code>margin</code>, and <code>border</code> to the body element.  Take the following CSS:</p>
 
-<p>``` css
-body{</p>
-
-<pre><code>width: 90%;
-border: 2px solid red;
-background-color: black;
-color: white;
-padding: 10px;
-margin: 0 auto;
+<pre class="language-css"><code>body{
+    width: 90%;
+    border: 2px solid red;
+    background-color: black;
+    color: white;
+    padding: 10px;
+    margin: 0 auto;
+}
 </code></pre>
 
-<p>}
-```</p>
 
 <p>The layout renders the same in IE6 as it does in the latest version of Chrome (23 as of this writing).</p>
 
@@ -641,31 +551,25 @@ margin: 0 auto;
 
 <p>Any absolutely positioned elements will be positioned relative to the viewport rather than the newly placed <code>body</code>.  To fix this set <code>position: relative</code> on the <code>body</code> as such:</p>
 
-<p>``` css Positioning elements relative to the body rather than the viewport
-body {</p>
-
-<pre><code>margin: 0 auto;
-width: 90%;
-position: relative;
+<pre class="language-css"><code>body {
+    margin: 0 auto;
+    width: 90%;
+    position: relative;
+}
 </code></pre>
 
-<p>}
-```</p>
 
 <h3>Backgrounds</h3>
 
 <p>Backgrounds applied to the <code>body</code> will take up whole page regardless of margins.  Consider the following:</p>
 
-<p>``` css
-body {</p>
-
-<pre><code>background: black;
-margin: 0 auto;
-width: 200px;
+<pre class="language-css"><code>body {
+    background: black;
+    margin: 0 auto;
+    width: 200px;
+}
 </code></pre>
 
-<p>}
-```</p>
 
 <p>The screenshot below shows this.  The background of the entire viewport is black rather than a centered 200px block.</p>
 
@@ -673,24 +577,18 @@ width: 200px;
 
 <p>This can be worked around by applying a <code>background</code> on the <code>html</code> element:</p>
 
-<p>``` css
-html {</p>
-
-<pre><code>background: white;
-height: 100%;
+<pre class="language-css"><code>html {
+    background: white;
+    height: 100%;
+}
+body {
+    background: black;
+    margin: 0 auto;
+    width: 200px;
+    min-height: 100%;
+}
 </code></pre>
 
-<p>}
-body {</p>
-
-<pre><code>background: black;
-margin: 0 auto;
-width: 200px;
-min-height: 100%;
-</code></pre>
-
-<p>}
-```</p>
 
 <p>Note the <code>height</code> that was added to the <code>html</code> element and the <code>min-height</code> added to the <code>body</code>.  This ensures that the <code>background</code> applied to the <code>body</code> element will take up the entire height of the screen.</p>
 
@@ -702,20 +600,17 @@ min-height: 100%;
 
 <p>In WebKit based browsers the <code>body</code>'s <a href="https://developer.mozilla.org/en-US/docs/DOM/element.scrollHeight">scrollHeight</a> and <a href="https://developer.mozilla.org/en-US/docs/DOM/element.scrollWidth">scrollWidth</a> properties are unaffected by declared <code>height</code> and <code>width</code> styles.  For example:</p>
 
-<p>``` html scrollHeight and scrollWidth on the body element
-<html></p>
-
-<pre><code>&lt;head&gt;&lt;/head&gt;
-&lt;body style="height: 200px; width: 200px;"&gt;
-    &lt;script&gt;
-        console.log(document.body.scrollHeight);
-        console.log(document.body.scrollWidth);
-    &lt;/script&gt;
-&lt;/body&gt;
+<pre class="language-markup"><code>&lt;html&gt;
+    &lt;head&gt;&lt;/head&gt;
+    &lt;body style="height: 200px; width: 200px;"&gt;
+        &lt;script&gt;
+            console.log(document.body.scrollHeight);
+            console.log(document.body.scrollWidth);
+        &lt;/script&gt;
+    &lt;/body&gt;
+&lt;/html&gt;
 </code></pre>
 
-<p></html>
-```</p>
 
 <p>This will log <code>200</code> for both in all modern browsers with the exception of WebKit based ones.  WebKit will return the height and width of the viewport.</p>
 

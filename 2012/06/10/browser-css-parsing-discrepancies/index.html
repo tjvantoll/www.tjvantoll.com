@@ -21,12 +21,7 @@
   <link rel="canonical" href="http://tjvantoll.com/2012/06/10/browser-css-parsing-discrepancies">
   <link rel="author" href="https://plus.google.com/+TJVanToll">
 
-  <!--[if !lte IE 7]><!-->
-    <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet">
-  <!--<![endif]-->
-  <!--[if lte IE 7]>
-    <link rel="stylesheet" href="/stylesheets/old-ie.css" media="screen, projection">
-  <![endif]-->
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet">
   
   <!--Custom script concatenation
   <script src="/javascripts/modernizr-2.5.3.js"></script>
@@ -38,12 +33,6 @@
   <script src="/javascripts/build/scripts.js"></script>
 
   <link href="/atom.xml" rel="alternate" title="TJ VanToll's Blog" type="application/atom+xml">
-  <style>
-	/* Fonts from Google"s Web font directory at http://google.com/webfonts */
-	/*@import url(http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic);
-	@import url(http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic);*/
-</style>
-
   
   <script type="text/javascript">
   	if (window.location.host.indexOf('local') == -1) {
@@ -134,26 +123,21 @@
 
 <p><strong>Declarations with unknown properties should be ignored.</strong></p>
 
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nt">h1</span> <span class="p">{</span> <span class="k">color</span><span class="o">:</span> <span class="nb">red</span><span class="p">;</span> <span class="n">foo</span><span class="o">:</span> <span class="n">bar</span><span class="p">;</span> <span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'><span class="c">/* foo is an unknown property so the browser should interpret this as... */</span>
-</span><span class='line'><span class="nt">h1</span> <span class="p">{</span> <span class="k">color</span><span class="o">:</span> <span class="nb">red</span><span class="p">;</span> <span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre class="language-css"><code>
+h1 { color: red; foo: bar; }
+
+/* foo is an unknown property so the browser should interpret this as... */
+h1 { color: red; }
+</code></pre>
 
 
 <p><strong>Illegal values should be ignored.</strong></p>
 
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nt">h1</span> <span class="p">{</span> <span class="k">float</span><span class="o">:</span> <span class="s1">&#39;foo&#39;</span><span class="p">;</span> <span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'><span class="c">/* foo is an invalid value for the float property and should be ignored */</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre class="language-css"><code>
+h1 { float: 'foo'; }
+
+/* foo is an invalid value for the float property and should be ignored */
+</code></pre>
 
 
 <p>These are just a sampling of what is specified.  The above rules are well documented and consistently followed by all browsers.  Unfortunately that is not the case as we get into more complicated scenarios.</p>
@@ -162,27 +146,18 @@
 
 <p>Take a guess, what <em>should</em> happen with the following:</p>
 
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;div</span> <span class="na">data-number=</span><span class="s">&quot;one&quot;</span><span class="nt">&gt;</span>one<span class="nt">&lt;/div&gt;</span>
-</span><span class='line'><span class="nt">&lt;div</span> <span class="na">data-number=</span><span class="s">&quot;two&quot;</span><span class="nt">&gt;</span>two<span class="nt">&lt;/div&gt;</span>​
-</span><span class='line'>
-</span><span class='line'><span class="nt">&lt;style&gt;</span>
-</span><span class='line'>  <span class="nt">div</span> <span class="p">{</span> <span class="k">color</span><span class="o">:</span> <span class="nb">black</span><span class="p">;</span> <span class="p">}</span>
-</span><span class='line'>  <span class="c">/*Notice the missing double quote after the URL.*/</span>
-</span><span class='line'>  <span class="o">[</span><span class="nt">data-number</span><span class="o">=</span><span class="s1">&#39;one&#39;</span><span class="o">]</span> <span class="p">{</span> <span class="k">background</span><span class="o">:</span> <span class="sx">url(&quot;some-url)</span><span class="p">;</span> <span class="k">color</span><span class="o">:</span> <span class="nb">red</span><span class="p">;</span> <span class="p">}</span>
-</span><span class='line'>  <span class="o">[</span><span class="nt">data-number</span><span class="o">=</span><span class="s1">&#39;two&#39;</span><span class="o">]</span> <span class="p">{</span> <span class="k">color</span><span class="o">:</span> <span class="nb">blue</span><span class="p">;</span> <span class="p">}</span>
-</span><span class='line'>  <span class="nt">div</span> <span class="p">{</span> <span class="k">border</span><span class="o">:</span> <span class="m">2px</span> <span class="k">solid</span> <span class="nb">black</span><span class="p">;</span> <span class="p">}</span><span class="err">​</span>
-</span><span class='line'><span class="nt">&lt;/style&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre class="language-markup"><code>
+&lt;div data-number="one"&gt;one&lt;/div&gt;
+&lt;div data-number="two"&gt;two&lt;/div&gt;​
+
+&lt;style&gt;
+    div { color: black; }
+    /*Notice the missing double quote after the URL.*/
+    [data-number='one'] { background: url(&quot;some-url); color: red; }
+    [data-number='two'] { color: blue; }
+    div { border: 2px solid black; }​
+&lt;/style&gt;
+</code></pre>
 
 
 <p>The relevant portion of the specification states that&#8230;</p>
@@ -192,23 +167,31 @@
 
 <p>Let&#8217;s take this one rule at a time.</p>
 
-<pre><code>background: url("some-url);
+<pre class="language-css"><code>
+background: url("some-url);
 </code></pre>
+
 
 <p>Per the spec you would expect the <code>background</code> to be ignored because of the malformed string, and it is in all browsers I tested.</p>
 
-<pre><code>color: red;
+<pre class="language-css"><code>
+color: red;
 </code></pre>
+
 
 <p>This is kind of in a gray area.  The spec says that the <em>construct in which the unclosed string was found</em> should be dropped, which makes it seem like this rule shouldn&#8217;t be interpreted.   But what about subsequent rules that were encountered before a new line?  It seems like the browser could be smart enough to apply this rule.</p>
 
-<pre><code>color: blue;
+<pre class="language-css"><code>
+color: blue;
 </code></pre>
+
 
 <p>Per the spec you would expect this to be interpreted since a new line character occurred between the unclosed quote and this rule.</p>
 
-<pre><code>border: 2px solid black;
+<pre class="language-css"><code>
+border: 2px solid black;
 </code></pre>
+
 
 <p>Along the same lines you would also expect a border to be around both divs since the normal parsing of the stylesheet should resume.</p>
 
@@ -303,25 +286,17 @@
 
 <p>WebKit based browsers are evaluating all rules after a semicolon is encountered and all other browsers stop and don&#8217;t evaluate any other rules.  The same results occur with some other common fat finger situations.</p>
 
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="c">/* Notice the mix of single and double quote in the url property value. */</span>
-</span><span class='line'><span class="o">[</span><span class="nt">data-number</span><span class="o">=</span><span class="s1">&#39;one&#39;</span><span class="o">]</span> <span class="p">{</span> <span class="k">background</span><span class="o">:</span> <span class="sx">url(&quot;some_url&#39;)</span><span class="p">;</span> <span class="k">color</span><span class="o">:</span> <span class="nb">red</span><span class="p">;</span> <span class="p">}</span>
-</span><span class='line'><span class="o">[</span><span class="nt">data-number</span><span class="o">=</span><span class="s1">&#39;two&#39;</span><span class="o">]</span> <span class="p">{</span> <span class="k">color</span><span class="o">:</span> <span class="nb">blue</span><span class="p">;</span> <span class="p">}</span>
-</span><span class='line'><span class="c">/* In WebKit browsers the color: blue; will be evaluated, in others it will not be. */</span>
-</span><span class='line'>
-</span><span class='line'><span class="c">/* Same thing if there&#39;s a malfored selector (notice the missing single quote in the selector. */</span>
-</span><span class='line'><span class="o">[</span><span class="nt">data-number</span><span class="o">=</span><span class="nt">one</span><span class="s1">&#39;] { color: red; }</span>
-</span><span class='line'><span class="s1">[data-number=&#39;</span><span class="nt">two</span><span class="err">&#39;</span><span class="o">]</span> <span class="p">{</span> <span class="k">color</span><span class="o">:</span> <span class="nb">blue</span><span class="p">;</span> <span class="p">}</span>
-</span><span class='line'><span class="c">/* Again in Webkit color: blue; will be evaluated, in others it will not be. */</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre class="language-css"><code>
+/* Notice the mix of single and double quote in the url property value. */
+[data-number='one'] { background: url("some_url'); color: red; }
+[data-number='two'] { color: blue; }
+/* In WebKit browsers the color: blue; will be evaluated, in others it will not be. */
+
+/* Same thing if there's a malfored selector (notice the missing single quote in the selector. */
+[data-number=one'] { color: red; }
+[data-number='two'] { color: blue; }
+/* Again in Webkit color: blue; will be evaluated, in others it will not be. */
+</code></pre>
 
 
 <h3>What Could Possibly Go Wrong?</h3>
@@ -374,7 +349,7 @@
     </p>
     <p class="author_card meta">
       <img src="/images/me/1.jpg" alt="Me!" id="post_me">
-      TJ VanToll is a developer advocate for <a href="http://telerik.com">Telerik</a>, a <a href="http://jqueryui.com/about/">jQuery team member</a>, and the author of <a href="http://tjvantoll.com/jquery-ui-in-action.html">jQuery UI in Action</a>. TJ has over a decade of web development experience—specializing in performance and the mobile web—and <a href="/speaking">speaks</a> about his research at conferences around the world. When not online, TJ is generally found talking about himself in the third person. If you like hearing TJ talk about himself, you should consider following him on <a href="http://twitter.com/tjvantoll">Twitter</a> or <a href="https://plus.google.com/+TJVanToll?rel=author" rel="author">Google+</a>.
+      TJ VanToll is a developer advocate for <a href="http://telerik.com">Telerik</a>, a <a href="http://jqueryui.com/about/">jQuery team member</a>, and the author of <a href="http://tjvantoll.com/jquery-ui-in-action.html">jQuery UI in Action</a>. TJ has over a decade of web development experience—specializing in performance and the mobile web—and <a href="/speaking">speaks</a> about his research at conferences around the world.TJ is <a href="http://twitter.com/tjvantoll">@tjvantoll</a> on Twitter and <a href="https://plus.google.com/+TJVanToll?rel=author" rel="author">+TJVanToll</a> on Google+.
     </p>
     
       <div class="sharing">
@@ -486,8 +461,7 @@
 
 
 
-
-
+Included file 'google_plus_one.html' not found in _includes directory
 
   <script type="text/javascript">
     (function(){
@@ -500,8 +474,7 @@
   </script>
 
 
-
-
+Included file 'custom/after_footer.html' not found in _includes directory
 
 </body>
 </html>

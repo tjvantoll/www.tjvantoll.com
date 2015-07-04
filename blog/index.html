@@ -21,12 +21,7 @@
   <link rel="canonical" href="http://tjvantoll.com/blog">
   <link rel="author" href="https://plus.google.com/+TJVanToll">
 
-  <!--[if !lte IE 7]><!-->
-    <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet">
-  <!--<![endif]-->
-  <!--[if lte IE 7]>
-    <link rel="stylesheet" href="/stylesheets/old-ie.css" media="screen, projection">
-  <![endif]-->
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet">
   
   <!--Custom script concatenation
   <script src="/javascripts/modernizr-2.5.3.js"></script>
@@ -38,12 +33,6 @@
   <script src="/javascripts/build/scripts.js"></script>
 
   <link href="/atom.xml" rel="alternate" title="TJ VanToll's Blog" type="application/atom+xml">
-  <style>
-	/* Fonts from Google"s Web font directory at http://google.com/webfonts */
-	/*@import url(http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic);
-	@import url(http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic);*/
-</style>
-
   
   <script type="text/javascript">
   	if (window.location.host.indexOf('local') == -1) {
@@ -402,10 +391,9 @@
 
 <p>Doing so turns out to be as simple as running two commands:</p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ appbuilder prop set BundleVersion 1.0.1
-</span><span class='line'>$ appbuilder prop set AndroidVersionCode 2</span></code></pre></td></tr></table></div></figure>
+<pre class="language-shell"><code>$ appbuilder prop set BundleVersion 1.0.1
+$ appbuilder prop set AndroidVersionCode 2
+</code></pre>
 
 
 
@@ -500,13 +488,10 @@
 
   <div class="entry-content"><p>HTML imports are cool. If you haven&#8217;t heard of them before, you should read <a href="http://www.html5rocks.com/en/tutorials/webcomponents/imports/">Eric Bidelman&#8217;s excellent introduction to them</a>, but they&#8217;re pretty self explanatory with a bit of code. For example the following is how a jQuery UI dialog works in <a href="https://github.com/tjvantoll/ui-web-components">my proof-of-concept web components port</a>:</p>
 
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">&quot;import&quot;</span> <span class="na">href=</span><span class="s">&quot;ui-dialog.html&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="nt">&lt;ui</span><span class="na">-dialog</span> <span class="na">title=</span><span class="s">&quot;Hello World&quot;</span><span class="nt">&gt;</span><span class="err">&lt;</span>/ui-dialog&gt;
-</span></code></pre></td></tr></table></div></figure>
+<pre class="language-markup"><code>&lt;link rel="import" href="ui-dialog.html"&gt;
+
+&lt;ui-dialog title="Hello World"&gt;&lt;/ui-dialog&gt;
+</code></pre>
 
 
 <p>The cool thing here is not what you see—a <code>&lt;link&gt;</code> tag that imports a custom element—but rather, what you don&#8217;t. Normally when using jQuery UI widgets, you have to worry about a number of JavaScript and CSS dependencies, such as jQuery Core, the widget factory, a CSS theme, and more. With HTML imports you don&#8217;t, as the import takes care of bundling everything you need.</p>
@@ -654,8 +639,7 @@
 
 
 
-
-
+Included file 'google_plus_one.html' not found in _includes directory
 
   <script type="text/javascript">
     (function(){
@@ -668,8 +652,7 @@
   </script>
 
 
-
-
+Included file 'custom/after_footer.html' not found in _includes directory
 
 </body>
 </html>

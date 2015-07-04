@@ -21,12 +21,7 @@
   <link rel="canonical" href="http://tjvantoll.com/2012/02/27/Making-a-3D-Picture-Cube-with-CSS3">
   <link rel="author" href="https://plus.google.com/+TJVanToll">
 
-  <!--[if !lte IE 7]><!-->
-    <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet">
-  <!--<![endif]-->
-  <!--[if lte IE 7]>
-    <link rel="stylesheet" href="/stylesheets/old-ie.css" media="screen, projection">
-  <![endif]-->
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet">
   
   <!--Custom script concatenation
   <script src="/javascripts/modernizr-2.5.3.js"></script>
@@ -38,12 +33,6 @@
   <script src="/javascripts/build/scripts.js"></script>
 
   <link href="/atom.xml" rel="alternate" title="TJ VanToll's Blog" type="application/atom+xml">
-  <style>
-	/* Fonts from Google"s Web font directory at http://google.com/webfonts */
-	/*@import url(http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic);
-	@import url(http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic);*/
-</style>
-
   
   <script type="text/javascript">
   	if (window.location.host.indexOf('local') == -1) {
@@ -155,74 +144,46 @@ Note: Google Chrome supports 3D transforms, but <a href="https://github.com/Mode
 
 <p>The markup I ended up using was very similar to the cube in <a href="http://desandro.github.com/3dtransforms/examples/cube-02-show-sides.html">David DeSandro&#8217;s cube demo</a>.</p>
 
-<figure class='code'><figcaption class='not_empty'><span>Basic Markup</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;PictureCube-container&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;cube show-front&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'>      <span class="nt">&lt;figure</span> <span class="na">class=</span><span class="s">&quot;front&quot;</span><span class="nt">&gt;&lt;img</span> <span class="na">src=</span><span class="s">&quot;1.jpg&quot;</span> <span class="nt">/&gt;&lt;/figure&gt;</span>
-</span><span class='line'>      <span class="nt">&lt;figure</span> <span class="na">class=</span><span class="s">&quot;back&quot;</span><span class="nt">&gt;&lt;img</span> <span class="na">src=</span><span class="s">&quot;2.jpg&quot;</span> <span class="nt">/&gt;&lt;/figure&gt;</span>
-</span><span class='line'>      <span class="nt">&lt;figure</span> <span class="na">class=</span><span class="s">&quot;right&quot;</span><span class="nt">&gt;&lt;img</span> <span class="na">src=</span><span class="s">&quot;3.jpg&quot;</span> <span class="nt">/&gt;&lt;/figure&gt;</span>
-</span><span class='line'>      <span class="nt">&lt;figure</span> <span class="na">class=</span><span class="s">&quot;left&quot;</span><span class="nt">&gt;&lt;img</span> <span class="na">src=</span><span class="s">&quot;4.jpg&quot;</span> <span class="nt">/&gt;&lt;/figure&gt;</span>
-</span><span class='line'>      <span class="nt">&lt;figure</span> <span class="na">class=</span><span class="s">&quot;top&quot;</span><span class="nt">&gt;&lt;img</span> <span class="na">src=</span><span class="s">&quot;5.jpg&quot;</span> <span class="nt">/&gt;&lt;/figure&gt;</span>
-</span><span class='line'>      <span class="nt">&lt;figure</span> <span class="na">class=</span><span class="s">&quot;bottom&quot;</span><span class="nt">&gt;&lt;img</span> <span class="na">src=</span><span class="s">&quot;6.jpg&quot;</span> <span class="nt">/&gt;&lt;/figure&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;/div&gt;</span>
-</span><span class='line'><span class="nt">&lt;/div&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre class="language-markup"><code>
+&lt;div class="PictureCube-container"&gt;
+    &lt;div class="cube show-front"&gt;
+        &lt;figure class="front"&gt;&lt;img src="1.jpg" /&gt;&lt;/figure&gt;
+        &lt;figure class="back"&gt;&lt;img src="2.jpg" /&gt;&lt;/figure&gt;
+        &lt;figure class="right"&gt;&lt;img src="3.jpg" /&gt;&lt;/figure&gt;
+        &lt;figure class="left"&gt;&lt;img src="4.jpg" /&gt;&lt;/figure&gt;
+        &lt;figure class="top"&gt;&lt;img src="5.jpg" /&gt;&lt;/figure&gt;
+        &lt;figure class="bottom"&gt;&lt;img src="6.jpg" /&gt;&lt;/figure&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
 
 
 <h3>Styling</h3>
 
 <p>I&#8217;m not going to go into the full details of how the styling to create the cubes works, those are best covered by the articles I linked to earlier, but I did want to give a high level overview of what&#8217;s going on.  Here&#8217;s a simplified version of the styles applied to each of the sides of the cube.</p>
 
-<figure class='code'><figcaption class='not_empty'><span>Basic Styling</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="c">/* Vendor prefixes removed for readability */</span>
-</span><span class='line'><span class="nc">.cube</span> <span class="nc">.front</span> <span class="p">{</span>
-</span><span class='line'>  <span class="c">/* No X/Y rotation needed since the front is */</span>
-</span><span class='line'>  <span class="c">/* already facing forward. */</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'><span class="nc">.cube</span> <span class="nc">.back</span> <span class="p">{</span>
-</span><span class='line'>  <span class="n">transform</span><span class="o">:</span> <span class="n">rotateX</span><span class="p">(</span> <span class="m">-180</span><span class="n">deg</span> <span class="p">);</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'><span class="nc">.cube</span> <span class="nc">.right</span> <span class="p">{</span>
-</span><span class='line'>  <span class="n">transform</span><span class="o">:</span> <span class="n">rotateY</span><span class="p">(</span> <span class="m">90</span><span class="n">deg</span> <span class="p">);</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'><span class="nc">.cube</span> <span class="nc">.left</span> <span class="p">{</span>
-</span><span class='line'>  <span class="n">transform</span><span class="o">:</span> <span class="n">rotateY</span><span class="p">(</span> <span class="m">-90</span><span class="n">deg</span> <span class="p">);</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'><span class="nc">.cube</span> <span class="nc">.top</span> <span class="p">{</span>
-</span><span class='line'>  <span class="n">transform</span><span class="o">:</span> <span class="n">rotateX</span><span class="p">(</span> <span class="m">90</span><span class="n">deg</span> <span class="p">);</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'><span class="nc">.cube</span> <span class="nc">.bottom</span> <span class="p">{</span>
-</span><span class='line'>  <span class="n">transform</span><span class="o">:</span> <span class="n">rotateX</span><span class="p">(</span> <span class="m">-90</span><span class="n">deg</span> <span class="p">);</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre class="language-css"><code>
+/* Vendor prefixes removed for readability */
+.cube .front {
+    /* No X/Y rotation needed since the front is */
+    /* already facing forward. */
+}
+.cube .back {
+    transform: rotateX( -180deg );
+}
+.cube .right {
+    transform: rotateY( 90deg );
+}
+.cube .left {
+    transform: rotateY( -90deg );
+}
+.cube .top {
+    transform: rotateX( 90deg );
+}
+.cube .bottom {
+    transform: rotateX( -90deg );
+}
+</code></pre>
 
 
 <p>The front side doesn&#8217;t need to be rotated since it&#8217;s already facing the screen front and center, but all the other sides need to be rotated on either the X or Y axis to create the cube.  For example, the back side is rotated on the X axis -180 degrees so that it faces directly away from the screen.</p>
@@ -252,45 +213,27 @@ Note: Google Chrome supports 3D transforms, but <a href="https://github.com/Mode
 
 <p>So the 6 sides themselves have now have been rotated to form the cube.  In order to show various sides of the cube to the user, the cube itself needs to be rotated to move the appropriate side to the front.  This will be done by applying classes to the cube, one for each side.</p>
 
-<figure class='code'><figcaption class='not_empty'><span>Basic Classes for Rotation</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="c">/* Vendor prefixes removed for readability */</span>
-</span><span class='line'><span class="nc">.cube.show-front</span> <span class="p">{</span>
-</span><span class='line'>  <span class="c">/* No X/Y translation is necessary */</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'><span class="nc">.cube.show-back</span> <span class="p">{</span>
-</span><span class='line'>  <span class="n">transform</span><span class="o">:</span> <span class="n">rotateX</span><span class="p">(</span> <span class="m">-180</span><span class="n">deg</span> <span class="p">);</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'><span class="nc">.cube.show-right</span> <span class="p">{</span>
-</span><span class='line'>  <span class="n">transform</span><span class="o">:</span> <span class="n">rotateY</span><span class="p">(</span> <span class="m">-90</span><span class="n">deg</span> <span class="p">);</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'><span class="nc">.cube.show-left</span> <span class="p">{</span>
-</span><span class='line'>  <span class="n">transform</span><span class="o">:</span> <span class="n">rotateY</span><span class="p">(</span> <span class="m">90</span><span class="n">deg</span> <span class="p">);</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'><span class="nc">.cube.show-top</span> <span class="p">{</span>
-</span><span class='line'>  <span class="n">transform</span><span class="o">:</span> <span class="n">rotateX</span><span class="p">(</span> <span class="m">-90</span><span class="n">deg</span> <span class="p">);</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'><span class="nc">.cube.show-bottom</span> <span class="p">{</span>
-</span><span class='line'>  <span class="n">transform</span><span class="o">:</span> <span class="n">rotateX</span><span class="p">(</span> <span class="m">90</span><span class="n">deg</span> <span class="p">);</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre class="language-css"><code>
+/* Vendor prefixes removed for readability */
+.cube.show-front {
+    /* No X/Y translation is necessary */
+}
+.cube.show-back {
+    transform: rotateX( -180deg );
+}
+.cube.show-right {
+    transform: rotateY( -90deg );
+}
+.cube.show-left {
+    transform: rotateY( 90deg );
+}
+.cube.show-top {
+    transform: rotateX( -90deg );
+}
+.cube.show-bottom {
+    transform: rotateX( 90deg );
+}
+</code></pre>
 
 
 <h3>Designing an API</h3>
@@ -299,108 +242,77 @@ Note: Google Chrome supports 3D transforms, but <a href="https://github.com/Mode
 
 <p>I started with a constructor function that takes the necessary information, a DOM node and an array of the URLs for the images to use on the cube.</p>
 
-<figure class='code'><figcaption class='not_empty'><span>PictureCube Constructor</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="cm">/**</span>
-</span><span class='line'><span class="cm"> * @param node {DOMNode|string} The node to turn into the cube </span>
-</span><span class='line'><span class="cm"> *             or the id attribute of the node</span>
-</span><span class='line'><span class="cm"> * @param images {Array} An Array of 6 Strings containing the URLs </span>
-</span><span class='line'><span class="cm"> *               of the images to place in the cube</span>
-</span><span class='line'><span class="cm"> */</span>
-</span><span class='line'><span class="nx">PictureCube</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span> <span class="nx">node</span><span class="p">,</span> <span class="nx">images</span> <span class="p">)</span> <span class="p">{</span> <span class="p">};</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre class="language-javascript"><code>
+/**
+ * @param node {DOMNode|string} The node to turn into the cube 
+ *             or the id attribute of the node
+ * @param images {Array} An Array of 6 Strings containing the URLs 
+ *               of the images to place in the cube
+ */
+PictureCube = function( node, images ) { };
+</code></pre>
 
 
 <p>For convenience&#8217;s sake I allow the user to pass in either a String id attribute of a DOM node or the node itself.  A quick conversion internally will make it so I only have to deal with the node.</p>
 
-<figure class='code'><figcaption class='not_empty'><span>Getting the Node</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="k">typeof</span> <span class="nx">node</span> <span class="o">==</span> <span class="s1">&#39;string&#39;</span> <span class="o">?</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="nx">node</span><span class="p">)</span> <span class="o">:</span> <span class="nx">node</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre class="language-javascript"><code>
+typeof node == 'string' ? document.getElementById(node) : node
+</code></pre>
 
 
 <p>Next you need to be able to do things with the cube.  The things I wanted to do were the ability to go to a particular side, cycle through the sides at some interval, and the ability to clear that interval.</p>
 
-<figure class='code'><figcaption class='not_empty'><span>Methods</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="cm">/**</span>
-</span><span class='line'><span class="cm"> * @param slide {number} The number of the side to change the </span>
-</span><span class='line'><span class="cm"> *              cube to.</span>
-</span><span class='line'><span class="cm"> */</span>
-</span><span class='line'><span class="nx">PictureCube</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="kr">goto</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">side</span><span class="p">)</span> <span class="p">{}</span>
-</span><span class='line'>
-</span><span class='line'><span class="cm">/**</span>
-</span><span class='line'><span class="cm"> * @param interval {number} The number of milliseconds between each </span>
-</span><span class='line'><span class="cm"> *                 image transition</span>
-</span><span class='line'><span class="cm"> */</span>
-</span><span class='line'><span class="nx">PictureCube</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">cycle</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">interval</span><span class="p">)</span> <span class="p">{};</span>
-</span><span class='line'>
-</span><span class='line'><span class="nx">PictureCube</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">clearCycle</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{};</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre class="language-javascript"><code>
+/**
+ * @param slide {number} The number of the side to change the 
+ *              cube to.
+ */
+PictureCube.prototype.goto = function(side) {}
+
+/**
+ * @param interval {number} The number of milliseconds between each 
+ *                 image transition
+ */
+PictureCube.prototype.cycle = function(interval) {};
+
+PictureCube.prototype.clearCycle = function() {};
+</code></pre>
 
 
 <p>So to create the cube you call the constructor with the node you want the cube to be in and the images you want to be on the various sides of the cube.</p>
 
-<figure class='code'><figcaption class='not_empty'><span>Instantiating a Cube</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="kd">var</span> <span class="nx">myCube</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">PictureCube</span><span class="p">(</span>
-</span><span class='line'>  <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">&#39;cube-container&#39;</span><span class="p">),</span>
-</span><span class='line'>  <span class="p">[</span><span class="s1">&#39;1.jpg&#39;</span><span class="p">,</span> <span class="s1">&#39;2.jpg&#39;</span><span class="p">,</span> <span class="s1">&#39;3.jpg&#39;</span><span class="p">,</span> <span class="s1">&#39;4.jpg&#39;</span><span class="p">,</span> <span class="s1">&#39;5.jpg&#39;</span><span class="p">,</span> <span class="s1">&#39;6.jpg&#39;</span><span class="p">]</span>
-</span><span class='line'><span class="p">]);</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre class="language-javascript"><code>
+var myCube = new PictureCube(
+    document.getElementById('cube-container'), 
+    ['1.jpg', '2.jpg', '3.jpg', '4.jpg', '5.jpg', '6.jpg']
+]);
+</code></pre>
 
 
 <p>Then you can simply call the methods provided.</p>
 
-<figure class='code'><figcaption class='not_empty'><span>Calling the Available Methods</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">myCube</span><span class="p">.</span><span class="kr">goto</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
-</span><span class='line'><span class="nx">myCube</span><span class="p">.</span><span class="nx">cycle</span><span class="p">(</span><span class="mi">2000</span><span class="p">);</span>
-</span><span class='line'><span class="nx">myCube</span><span class="p">.</span><span class="nx">clearCycle</span><span class="p">();</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre class="language-javascript"><code>
+myCube.goto(2);
+myCube.cycle(2000);
+myCube.clearCycle();
+</code></pre>
 
 
 <h3>What&#8217;s with the prototype?</h3>
 
 <p>The methods are added to the function&#8217;s prototype so PictureCube can be extended.  As an example here&#8217;s an AwesomeCube extension that inherits functionality from PictureCube, and adds on an additional awesome method.</p>
 
-<figure class='code'><figcaption class='not_empty'><span>Extending PictureCube</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">AwesomeCube</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">node</span><span class="p">,</span> <span class="nx">images</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>    <span class="nx">PictureCube</span><span class="p">.</span><span class="nx">apply</span><span class="p">(</span><span class="k">this</span><span class="p">,</span> <span class="p">[</span><span class="nx">node</span><span class="p">,</span> <span class="nx">images</span><span class="p">]);</span>
-</span><span class='line'><span class="p">};</span>
-</span><span class='line'><span class="nx">AwesomeCube</span><span class="p">.</span><span class="nx">prototype</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">PictureCube</span><span class="p">();</span>
-</span><span class='line'><span class="nx">AwesomeCube</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">awesome</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-</span><span class='line'>    <span class="c1">//this.cube, this.images, this.goto, this.cycle</span>
-</span><span class='line'>    <span class="c1">//and this.clearCycle are available to the new</span>
-</span><span class='line'>    <span class="c1">//function.</span>
-</span><span class='line'><span class="p">};</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre class="language-javascript"><code>
+AwesomeCube = function(node, images) {
+    PictureCube.apply(this, [node, images]);
+};
+AwesomeCube.prototype = new PictureCube();
+AwesomeCube.prototype.awesome = function() {
+    //this.cube, this.images, this.goto, this.cycle
+    //and this.clearCycle are available to the new
+    //function.
+};
+</code></pre>
 
 
 <p>Line 1 defines AwesomeCube&#8217;s constructor function with the same parameters as PictureCube.  It then invokes PictureCube&#8217;s constructor using <a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Function/apply">function.apply</a>.  The apply function is defined in <a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Function#Methods">Function.prototype</a>, and essentially allows you to control what the value of <code>this</code> will be in the function being invoked.  This technique is actually <a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Function/apply#Using_apply_to_chain_constructors">a common way of implementing Java-like super calls to chain constructors</a>.</p>
@@ -475,7 +387,7 @@ Note: Google Chrome supports 3D transforms, but <a href="https://github.com/Mode
     </p>
     <p class="author_card meta">
       <img src="/images/me/1.jpg" alt="Me!" id="post_me">
-      TJ VanToll is a developer advocate for <a href="http://telerik.com">Telerik</a>, a <a href="http://jqueryui.com/about/">jQuery team member</a>, and the author of <a href="http://tjvantoll.com/jquery-ui-in-action.html">jQuery UI in Action</a>. TJ has over a decade of web development experience—specializing in performance and the mobile web—and <a href="/speaking">speaks</a> about his research at conferences around the world. When not online, TJ is generally found talking about himself in the third person. If you like hearing TJ talk about himself, you should consider following him on <a href="http://twitter.com/tjvantoll">Twitter</a> or <a href="https://plus.google.com/+TJVanToll?rel=author" rel="author">Google+</a>.
+      TJ VanToll is a developer advocate for <a href="http://telerik.com">Telerik</a>, a <a href="http://jqueryui.com/about/">jQuery team member</a>, and the author of <a href="http://tjvantoll.com/jquery-ui-in-action.html">jQuery UI in Action</a>. TJ has over a decade of web development experience—specializing in performance and the mobile web—and <a href="/speaking">speaks</a> about his research at conferences around the world.TJ is <a href="http://twitter.com/tjvantoll">@tjvantoll</a> on Twitter and <a href="https://plus.google.com/+TJVanToll?rel=author" rel="author">+TJVanToll</a> on Google+.
     </p>
     
       <div class="sharing">
@@ -587,8 +499,7 @@ Note: Google Chrome supports 3D transforms, but <a href="https://github.com/Mode
 
 
 
-
-
+Included file 'google_plus_one.html' not found in _includes directory
 
   <script type="text/javascript">
     (function(){
@@ -601,8 +512,7 @@ Note: Google Chrome supports 3D transforms, but <a href="https://github.com/Mode
   </script>
 
 
-
-
+Included file 'custom/after_footer.html' not found in _includes directory
 
 </body>
 </html>

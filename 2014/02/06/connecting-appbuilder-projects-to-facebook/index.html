@@ -21,12 +21,7 @@
   <link rel="canonical" href="http://tjvantoll.com/2014/02/06/connecting-appbuilder-projects-to-facebook">
   <link rel="author" href="https://plus.google.com/+TJVanToll">
 
-  <!--[if !lte IE 7]><!-->
-    <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet">
-  <!--<![endif]-->
-  <!--[if lte IE 7]>
-    <link rel="stylesheet" href="/stylesheets/old-ie.css" media="screen, projection">
-  <![endif]-->
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet">
   
   <!--Custom script concatenation
   <script src="/javascripts/modernizr-2.5.3.js"></script>
@@ -38,12 +33,6 @@
   <script src="/javascripts/build/scripts.js"></script>
 
   <link href="/atom.xml" rel="alternate" title="TJ VanToll's Blog" type="application/atom+xml">
-  <style>
-	/* Fonts from Google"s Web font directory at http://google.com/webfonts */
-	/*@import url(http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic);
-	@import url(http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic);*/
-</style>
-
   
   <script type="text/javascript">
   	if (window.location.host.indexOf('local') == -1) {
@@ -146,11 +135,9 @@
 
 <p>Now add the following two <code>&lt;script&gt;</code> tags to your project&#8217;s <code>index.html</code> file:</p>
 
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;cdv-plugin-fb-connect.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
-</span><span class='line'><span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;facebook-js-sdk.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre class="language-markup"><code>&lt;script src="cdv-plugin-fb-connect.js">&lt;/script&gt;
+&lt;script src="facebook-js-sdk.js"&gt;&lt;/script&gt;
+</code></pre>
 
 
 <p>The plugin is now a part of your project, but before we dig into the its APIs, we have a bit of configuration we have to change.</p>
@@ -175,47 +162,33 @@
 
 <p>Facebook&#8217;s APIs are provided through a <code>FB</code> global variable, and the first thing you must do with it is call <code>FB.init()</code>.</p>
 
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">FB</span><span class="p">.</span><span class="nx">init</span><span class="p">({</span>
-</span><span class='line'>    <span class="nx">appId</span><span class="o">:</span> <span class="s2">&quot;204075246457176&quot;</span><span class="p">,</span>
-</span><span class='line'>    <span class="nx">nativeInterface</span><span class="o">:</span> <span class="nx">CDV</span><span class="p">.</span><span class="nx">FB</span>
-</span><span class='line'><span class="p">});</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre class="language-javascript"><code>FB.init({
+    appId: "204075246457176",
+    nativeInterface: CDV.FB
+});
+</code></pre>
 
 
 <p>You can see that we again need to provide our Facebook&#8217;s app id. We also need to set a <code>nativeInterface</code> property to <code>CDV.FB</code>. You won&#8217;t find this property on Facebook&#8217;s documentation, but it&#8217;s what tells the Cordova plugin to step in and do its thing.</p>
 
 <p>From here, there are several things we can do, but most of them require the user to be logged into Facebook. We can check whether the user is logged in using <code>FB.getLoginStatus()</code>.</p>
 
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">FB</span><span class="p">.</span><span class="nx">getLoginStatus</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span> <span class="nx">response</span> <span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>    <span class="k">if</span> <span class="p">(</span> <span class="nx">response</span><span class="p">.</span><span class="nx">status</span> <span class="o">===</span> <span class="s2">&quot;connected&quot;</span> <span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>        <span class="nx">alert</span><span class="p">(</span> <span class="s2">&quot;logged in&quot;</span> <span class="p">);</span>
-</span><span class='line'>    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-</span><span class='line'>        <span class="nx">alert</span><span class="p">(</span> <span class="s2">&quot;not logged in&quot;</span> <span class="p">);</span>
-</span><span class='line'>    <span class="p">}</span>
-</span><span class='line'><span class="p">});</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre class="language-javascript"><code>FB.getLoginStatus(function( response ) {
+    if ( response.status === "connected" ) {
+        alert( "logged in" );
+    } else {
+        alert( "not logged in" );
+    }
+});
+</code></pre>
 
 
 <p>Or we can just prompt the user to login with <code>FB.login()</code>. Like most of Facebook&#8217;s API methods, the first argument to <code>FB.login()</code> is a callback function to run when the login completes. The second argument is an object with a single <code>scope</code> property. The <code>scope</code> property needs to contain a comma delimited list of permissions your application needs. Here, we&#8217;re asking the user to give us access to their email address.</p>
 
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">FB</span><span class="p">.</span><span class="nx">login</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span> <span class="nx">response</span> <span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>    <span class="c1">// Handle the response</span>
-</span><span class='line'><span class="p">},</span> <span class="p">{</span> <span class="nx">scope</span><span class="o">:</span> <span class="s2">&quot;email&quot;</span> <span class="p">});</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre class="language-javascript"><code>FB.login(function( response ) {
+    // Handle the response
+}, { scope: "email" });
+</code></pre>
 
 
 <p><em>Note: Refer to Facebook&#8217;s SDK documentation for a <a href="https://developers.facebook.com/docs/reference/login/extended-permissions">full list of the permissions you can request</a>.</em></p>
@@ -230,9 +203,8 @@
 
 <p>Once they have given access, you can use Facebook&#8217;s API to access what you need. For example the following retrieves the id, name, and picture of the user&#8217;s friends.</p>
 
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">FB</span><span class="p">.</span><span class="nx">api</span><span class="p">(</span> <span class="s2">&quot;/me/friends&quot;</span><span class="p">,</span> <span class="p">{</span> <span class="nx">fields</span><span class="o">:</span> <span class="s2">&quot;id, name, picture&quot;</span> <span class="p">});</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre class="language-javascript"><code>FB.api( "/me/friends", { fields: "id, name, picture" });
+</code></pre>
 
 
 <h3>Wrapping up</h3>
@@ -275,7 +247,7 @@
     </p>
     <p class="author_card meta">
       <img src="/images/me/1.jpg" alt="Me!" id="post_me">
-      TJ VanToll is a developer advocate for <a href="http://telerik.com">Telerik</a>, a <a href="http://jqueryui.com/about/">jQuery team member</a>, and the author of <a href="http://tjvantoll.com/jquery-ui-in-action.html">jQuery UI in Action</a>. TJ has over a decade of web development experience—specializing in performance and the mobile web—and <a href="/speaking">speaks</a> about his research at conferences around the world. When not online, TJ is generally found talking about himself in the third person. If you like hearing TJ talk about himself, you should consider following him on <a href="http://twitter.com/tjvantoll">Twitter</a> or <a href="https://plus.google.com/+TJVanToll?rel=author" rel="author">Google+</a>.
+      TJ VanToll is a developer advocate for <a href="http://telerik.com">Telerik</a>, a <a href="http://jqueryui.com/about/">jQuery team member</a>, and the author of <a href="http://tjvantoll.com/jquery-ui-in-action.html">jQuery UI in Action</a>. TJ has over a decade of web development experience—specializing in performance and the mobile web—and <a href="/speaking">speaks</a> about his research at conferences around the world.TJ is <a href="http://twitter.com/tjvantoll">@tjvantoll</a> on Twitter and <a href="https://plus.google.com/+TJVanToll?rel=author" rel="author">+TJVanToll</a> on Google+.
     </p>
     
       <div class="sharing">
@@ -387,8 +359,7 @@
 
 
 
-
-
+Included file 'google_plus_one.html' not found in _includes directory
 
   <script type="text/javascript">
     (function(){
@@ -401,8 +372,7 @@
   </script>
 
 
-
-
+Included file 'custom/after_footer.html' not found in _includes directory
 
 </body>
 </html>

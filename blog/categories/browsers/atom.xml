@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Browsers | TJ VanToll's Blog]]></title>
   <link href="http://tjvantoll.com/blog/categories/browsers/atom.xml" rel="self"/>
   <link href="http://tjvantoll.com/"/>
-  <updated>2015-06-25T11:24:59-04:00</updated>
+  <updated>2015-07-04T11:17:31-04:00</updated>
   <id>http://tjvantoll.com/</id>
   <author>
     <name><![CDATA[TJ VanToll]]></name>
@@ -24,24 +24,18 @@
 
 <p>Let's say you have an <code>&lt;iframe&gt;</code>.</p>
 
-<p>``` html</p>
+<pre class="language-markup"><code>&lt;iframe src="other.html"&gt;&lt;/iframe&gt;
+</code></pre>
 
-<iframe src="other.html"></iframe>
-
-
-<p>```</p>
 
 <p>And in that <code>&lt;iframe&gt;</code>, you want to know what element has focus.</p>
 
-<p>``` html
-/<em> other.html </em>/</p>
-
-<script>
+<pre class="language-markup"><code>/* other.html */
+&lt;script&gt;
     console.log( parent.document.activeElement );
-</script>
+&lt;/script&gt;
+</code></pre>
 
-
-<p>```</p>
 
 <p>In all browsers except IE9, this will log the element that has focus in the parent document (the <code>&lt;body&gt;</code> by default). In IE9 this will inexplicably throw an <code>"Unspecified Error"</code>.</p>
 
@@ -52,20 +46,14 @@
 
 <p>What can you to about it? Since the access causes the error, the only recourse is a try / catch.</p>
 
-<p>``` javascript
-var activeElement;
-try {</p>
-
-<pre><code>activeElement = parent.document.activeElement;
+<pre class="language-javascript"><code>var activeElement;
+try {
+    activeElement = parent.document.activeElement;
+} catch( error ) {
+    activeElement = parent.document.body;
+}
 </code></pre>
 
-<p>} catch( error ) {</p>
-
-<pre><code>activeElement = parent.document.body;
-</code></pre>
-
-<p>}
-```</p>
 
 <p>Luckily this is a problem unique to IE9; the same behavior is not present in IE 7, 8, or 10.</p>
 
@@ -79,14 +67,11 @@ try {</p>
 
 <p>The workaround for this is to ensure the <code>activeElement</code> is not the <code>&lt;body&gt;</code> before calling <code>blur()</code>.</p>
 
-<p>``` javascript
-if ( document.activeElement.nodeName.toLowerCase() !== "body" ) {</p>
-
-<pre><code>document.activeElement.blur();
+<pre class="language-javascript"><code>if ( document.activeElement.nodeName.toLowerCase() !== "body" ) {
+    document.activeElement.blur();
+}
 </code></pre>
 
-<p>}
-```</p>
 
 <p>Luckily this problem has been fixed in IE11; <code>document.body.blur()</code> no longer switches windows.</p>
 
@@ -94,27 +79,26 @@ if ( document.activeElement.nodeName.toLowerCase() !== "body" ) {</p>
 
 <p>This is <a href="https://github.com/jquery/jquery-ui/commit/eae2c4b358af3ebfae258abfe77eeace48fcefcb">the commit</a> I ended up using for the jQuery UI bugs.</p>
 
-<p>From:
-<code>javascript
-$( document.activeElement ).blur();
-</code></p>
+<p>From:</p>
 
-<p>To:
-``` javascript
-// support: IE9
-// IE9 throws an "Unspecified error" accessing document.activeElement from an <iframe>
-try {</p>
-
-<pre><code>// Support: IE9+
-// If the &lt;body&gt; is blurred, IE will switch windows, see #9520
-if ( document.activeElement &amp;&amp; document.activeElement.nodeName.toLowerCase() !== "body" ) {
-    // Blur any element that currently has focus, see #4261
-    $( document.activeElement ).blur();
-}
+<pre class="language-javascript"><code>$( document.activeElement ).blur();
 </code></pre>
 
-<p>} catch ( error ) {}
-```</p>
+
+<p>To:</p>
+
+<pre class="language-javascript"><code>// support: IE9
+// IE9 throws an "Unspecified error" accessing document.activeElement from an &lt;iframe&gt;
+try {
+    // Support: IE9+
+    // If the &lt;body&gt; is blurred, IE will switch windows, see #9520
+    if ( document.activeElement && document.activeElement.nodeName.toLowerCase() !== "body" ) {
+        // Blur any element that currently has focus, see #4261
+        $( document.activeElement ).blur();
+    }
+} catch ( error ) {}
+</code></pre>
+
 
 <p>Sigh.</p>
 ]]></content>
@@ -129,25 +113,26 @@ if ( document.activeElement &amp;&amp; document.activeElement.nodeName.toLowerCa
 
 <p>As an example, take the following:</p>
 
-<p>``` html</p>
+<pre class="language-markup"><code>&lt;style&gt;
+    /* Elements that have the attribute */
+    div[data-test] { background: red; }
 
+    /* Elements that have the attribute, and its value contains "Nullam" */
+    div[data-test*="Nullam"] { color: blue; }
 
+    /* Elements that have the attribute, and its value starts with "Lorem" */
+    div[data-test^="Lorem"] { border: 1px solid black; }
+&lt;/style&gt;
 
-
-
-<div data-test="Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus. Phasellus viverra nulla ut metus varius laoreet. Quisque rutrum. Aenean imperdiet. Etiam ultricies nisi vel augue. Curabitur ullamcorper ultricies nisi. Nam eget dui. Etiam rhoncus. Maecenas tempus, tellus eget condimentum rhoncus, sem quam semper libero, sit amet adipiscing sem neque sed ipsum. Nam quam nunc, blandit vel, luctus pulvinar, hendrerit id, lorem. Maecenas nec odio et ante tincidunt tempus. Donec vitae sapien ut libero venenatis faucibus. Nullam quis ante. Etiam sit amet orci eget eros faucibus tincidunt. Duis leo. Sed fringilla mauris sit amet nibh. Donec sodales sagittis magna. Sed consequat, leo eget bibendum sodales, augue velit cursus nunc, quis gravida magna mi a libero. Fusce vulputate eleifend sapien. Vestibulum purus quam, scelerisque ut, mollis sed, nonummy id, metus. Nullam accumsan lorem in dui. Cras ultricies mi eu turpis hendrerit fringilla. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; In ac dui quis mi consectetuer lacinia. Nam pretium turpis et arcu. Duis arcu tortor, suscipit eget, imperdiet nec, imperdiet iaculis, ipsum. Sed aliquam ultrices mauris. Integer ante arcu, accumsan a, consectetuer eget, posuere ut, mauris. Praesent adipiscing. Phasellus ullamcorper ipsum rutrum nunc. Nunc nonummy metus. Vestibulum volutpat pretium libero. Cras id dui. Aenean ut eros et nisl sagittis vestibulum. Nullam nulla eros, ultricies sit amet, nonummy id, imperdiet feugiat, pede. Sed lectus. Donec mollis hendrerit risus. Phasellus nec sem in justo pellentesque facilisis. Etiam imperdiet imperdiet orci. Nunc nec neque. Phasellus leo dolor, tempus non, auctor et, hendrerit quis, nisi. Curabitur ligula sapien, tincidunt non, euismod vitae, posuere imperdiet, leo. Maecenas malesuada. Praesent congue erat at massa. Sed cursus turpis vitae tortor. Donec posuere vulputate arcu. Phasellus accumsan cursus velit. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Sed aliquam, nisi quis porttitor congue, elit erat euismod orci, ac placerat dolor lectus quis orci. Phasellus consectetuer vestibulum elit. Aenean tellus metus, bibendum sed, posuere ac, mattis non, nunc. Vestibulum fringilla pede sit amet augue. In turpis. Pellentesque posuere. Praesent turpis. Aenean posuere, tortor sed cursus feugiat, nunc augue blandit nunc, eu sollicitudin urna dolor sagittis lacus. Donec elit libero, sodales nec, volutpat a, suscipit non, turpis. Nullam sagittis. Suspendisse pulvinar, augue ac venenatis condimentum, sem libero volutpat nibh, nec pellentesque velit pede quis nunc. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Fusce id purus. Ut varius tincidunt libero. Phasellus dolor. Maecenas vestibulum mollis diam. Pellentesque ut neque. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. In dui magna, posuere eget, vestibulum et, tempor auctor, justo. In ac felis quis tortor malesuada pretium. Pellentesque auctor neque nec urna. Proin sapien ipsum, porta a, auctor quis, euismod ut, mi. Aenean viverra rhoncus pede. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Ut non enim eleifend felis pretium feugiat. Vivamus quis mi. Phasellus a est. Phasellus magna. In hac habitasse platea dictumst. Curabitur at lacus ac velit ornare lobortis. Cur">
+&lt;div data-test="Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus. Phasellus viverra nulla ut metus varius laoreet. Quisque rutrum. Aenean imperdiet. Etiam ultricies nisi vel augue. Curabitur ullamcorper ultricies nisi. Nam eget dui. Etiam rhoncus. Maecenas tempus, tellus eget condimentum rhoncus, sem quam semper libero, sit amet adipiscing sem neque sed ipsum. Nam quam nunc, blandit vel, luctus pulvinar, hendrerit id, lorem. Maecenas nec odio et ante tincidunt tempus. Donec vitae sapien ut libero venenatis faucibus. Nullam quis ante. Etiam sit amet orci eget eros faucibus tincidunt. Duis leo. Sed fringilla mauris sit amet nibh. Donec sodales sagittis magna. Sed consequat, leo eget bibendum sodales, augue velit cursus nunc, quis gravida magna mi a libero. Fusce vulputate eleifend sapien. Vestibulum purus quam, scelerisque ut, mollis sed, nonummy id, metus. Nullam accumsan lorem in dui. Cras ultricies mi eu turpis hendrerit fringilla. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; In ac dui quis mi consectetuer lacinia. Nam pretium turpis et arcu. Duis arcu tortor, suscipit eget, imperdiet nec, imperdiet iaculis, ipsum. Sed aliquam ultrices mauris. Integer ante arcu, accumsan a, consectetuer eget, posuere ut, mauris. Praesent adipiscing. Phasellus ullamcorper ipsum rutrum nunc. Nunc nonummy metus. Vestibulum volutpat pretium libero. Cras id dui. Aenean ut eros et nisl sagittis vestibulum. Nullam nulla eros, ultricies sit amet, nonummy id, imperdiet feugiat, pede. Sed lectus. Donec mollis hendrerit risus. Phasellus nec sem in justo pellentesque facilisis. Etiam imperdiet imperdiet orci. Nunc nec neque. Phasellus leo dolor, tempus non, auctor et, hendrerit quis, nisi. Curabitur ligula sapien, tincidunt non, euismod vitae, posuere imperdiet, leo. Maecenas malesuada. Praesent congue erat at massa. Sed cursus turpis vitae tortor. Donec posuere vulputate arcu. Phasellus accumsan cursus velit. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Sed aliquam, nisi quis porttitor congue, elit erat euismod orci, ac placerat dolor lectus quis orci. Phasellus consectetuer vestibulum elit. Aenean tellus metus, bibendum sed, posuere ac, mattis non, nunc. Vestibulum fringilla pede sit amet augue. In turpis. Pellentesque posuere. Praesent turpis. Aenean posuere, tortor sed cursus feugiat, nunc augue blandit nunc, eu sollicitudin urna dolor sagittis lacus. Donec elit libero, sodales nec, volutpat a, suscipit non, turpis. Nullam sagittis. Suspendisse pulvinar, augue ac venenatis condimentum, sem libero volutpat nibh, nec pellentesque velit pede quis nunc. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Fusce id purus. Ut varius tincidunt libero. Phasellus dolor. Maecenas vestibulum mollis diam. Pellentesque ut neque. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. In dui magna, posuere eget, vestibulum et, tempor auctor, justo. In ac felis quis tortor malesuada pretium. Pellentesque auctor neque nec urna. Proin sapien ipsum, porta a, auctor quis, euismod ut, mi. Aenean viverra rhoncus pede. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Ut non enim eleifend felis pretium feugiat. Vivamus quis mi. Phasellus a est. Phasellus magna. In hac habitasse platea dictumst. Curabitur at lacus ac velit ornare lobortis. Cur"&gt;
     4095 Characters
-</div>
+&lt;/div&gt;
 
-
-
-
-<div data-test="Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus. Phasellus viverra nulla ut metus varius laoreet. Quisque rutrum. Aenean imperdiet. Etiam ultricies nisi vel augue. Curabitur ullamcorper ultricies nisi. Nam eget dui. Etiam rhoncus. Maecenas tempus, tellus eget condimentum rhoncus, sem quam semper libero, sit amet adipiscing sem neque sed ipsum. Nam quam nunc, blandit vel, luctus pulvinar, hendrerit id, lorem. Maecenas nec odio et ante tincidunt tempus. Donec vitae sapien ut libero venenatis faucibus. Nullam quis ante. Etiam sit amet orci eget eros faucibus tincidunt. Duis leo. Sed fringilla mauris sit amet nibh. Donec sodales sagittis magna. Sed consequat, leo eget bibendum sodales, augue velit cursus nunc, quis gravida magna mi a libero. Fusce vulputate eleifend sapien. Vestibulum purus quam, scelerisque ut, mollis sed, nonummy id, metus. Nullam accumsan lorem in dui. Cras ultricies mi eu turpis hendrerit fringilla. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; In ac dui quis mi consectetuer lacinia. Nam pretium turpis et arcu. Duis arcu tortor, suscipit eget, imperdiet nec, imperdiet iaculis, ipsum. Sed aliquam ultrices mauris. Integer ante arcu, accumsan a, consectetuer eget, posuere ut, mauris. Praesent adipiscing. Phasellus ullamcorper ipsum rutrum nunc. Nunc nonummy metus. Vestibulum volutpat pretium libero. Cras id dui. Aenean ut eros et nisl sagittis vestibulum. Nullam nulla eros, ultricies sit amet, nonummy id, imperdiet feugiat, pede. Sed lectus. Donec mollis hendrerit risus. Phasellus nec sem in justo pellentesque facilisis. Etiam imperdiet imperdiet orci. Nunc nec neque. Phasellus leo dolor, tempus non, auctor et, hendrerit quis, nisi. Curabitur ligula sapien, tincidunt non, euismod vitae, posuere imperdiet, leo. Maecenas malesuada. Praesent congue erat at massa. Sed cursus turpis vitae tortor. Donec posuere vulputate arcu. Phasellus accumsan cursus velit. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Sed aliquam, nisi quis porttitor congue, elit erat euismod orci, ac placerat dolor lectus quis orci. Phasellus consectetuer vestibulum elit. Aenean tellus metus, bibendum sed, posuere ac, mattis non, nunc. Vestibulum fringilla pede sit amet augue. In turpis. Pellentesque posuere. Praesent turpis. Aenean posuere, tortor sed cursus feugiat, nunc augue blandit nunc, eu sollicitudin urna dolor sagittis lacus. Donec elit libero, sodales nec, volutpat a, suscipit non, turpis. Nullam sagittis. Suspendisse pulvinar, augue ac venenatis condimentum, sem libero volutpat nibh, nec pellentesque velit pede quis nunc. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Fusce id purus. Ut varius tincidunt libero. Phasellus dolor. Maecenas vestibulum mollis diam. Pellentesque ut neque. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. In dui magna, posuere eget, vestibulum et, tempor auctor, justo. In ac felis quis tortor malesuada pretium. Pellentesque auctor neque nec urna. Proin sapien ipsum, porta a, auctor quis, euismod ut, mi. Aenean viverra rhoncus pede. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Ut non enim eleifend felis pretium feugiat. Vivamus quis mi. Phasellus a est. Phasellus magna. In hac habitasse platea dictumst. Curabitur at lacus ac velit ornare lobortis. Cura">
+&lt;div data-test="Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus. Phasellus viverra nulla ut metus varius laoreet. Quisque rutrum. Aenean imperdiet. Etiam ultricies nisi vel augue. Curabitur ullamcorper ultricies nisi. Nam eget dui. Etiam rhoncus. Maecenas tempus, tellus eget condimentum rhoncus, sem quam semper libero, sit amet adipiscing sem neque sed ipsum. Nam quam nunc, blandit vel, luctus pulvinar, hendrerit id, lorem. Maecenas nec odio et ante tincidunt tempus. Donec vitae sapien ut libero venenatis faucibus. Nullam quis ante. Etiam sit amet orci eget eros faucibus tincidunt. Duis leo. Sed fringilla mauris sit amet nibh. Donec sodales sagittis magna. Sed consequat, leo eget bibendum sodales, augue velit cursus nunc, quis gravida magna mi a libero. Fusce vulputate eleifend sapien. Vestibulum purus quam, scelerisque ut, mollis sed, nonummy id, metus. Nullam accumsan lorem in dui. Cras ultricies mi eu turpis hendrerit fringilla. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; In ac dui quis mi consectetuer lacinia. Nam pretium turpis et arcu. Duis arcu tortor, suscipit eget, imperdiet nec, imperdiet iaculis, ipsum. Sed aliquam ultrices mauris. Integer ante arcu, accumsan a, consectetuer eget, posuere ut, mauris. Praesent adipiscing. Phasellus ullamcorper ipsum rutrum nunc. Nunc nonummy metus. Vestibulum volutpat pretium libero. Cras id dui. Aenean ut eros et nisl sagittis vestibulum. Nullam nulla eros, ultricies sit amet, nonummy id, imperdiet feugiat, pede. Sed lectus. Donec mollis hendrerit risus. Phasellus nec sem in justo pellentesque facilisis. Etiam imperdiet imperdiet orci. Nunc nec neque. Phasellus leo dolor, tempus non, auctor et, hendrerit quis, nisi. Curabitur ligula sapien, tincidunt non, euismod vitae, posuere imperdiet, leo. Maecenas malesuada. Praesent congue erat at massa. Sed cursus turpis vitae tortor. Donec posuere vulputate arcu. Phasellus accumsan cursus velit. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Sed aliquam, nisi quis porttitor congue, elit erat euismod orci, ac placerat dolor lectus quis orci. Phasellus consectetuer vestibulum elit. Aenean tellus metus, bibendum sed, posuere ac, mattis non, nunc. Vestibulum fringilla pede sit amet augue. In turpis. Pellentesque posuere. Praesent turpis. Aenean posuere, tortor sed cursus feugiat, nunc augue blandit nunc, eu sollicitudin urna dolor sagittis lacus. Donec elit libero, sodales nec, volutpat a, suscipit non, turpis. Nullam sagittis. Suspendisse pulvinar, augue ac venenatis condimentum, sem libero volutpat nibh, nec pellentesque velit pede quis nunc. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Fusce id purus. Ut varius tincidunt libero. Phasellus dolor. Maecenas vestibulum mollis diam. Pellentesque ut neque. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. In dui magna, posuere eget, vestibulum et, tempor auctor, justo. In ac felis quis tortor malesuada pretium. Pellentesque auctor neque nec urna. Proin sapien ipsum, porta a, auctor quis, euismod ut, mi. Aenean viverra rhoncus pede. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Ut non enim eleifend felis pretium feugiat. Vivamus quis mi. Phasellus a est. Phasellus magna. In hac habitasse platea dictumst. Curabitur at lacus ac velit ornare lobortis. Cura"&gt;
     4096 Characters
-</div>
+&lt;/div&gt;
+</code></pre>
 
-
-<p>```</p>
 
 <p>The example has two <code>&lt;div&gt;</code>s and 3 rules applied to both elements via attribute selectors. In Firefox, Chrome, Safari, and Opera all rules apply as they should and the elements display as follows:</p>
 
@@ -172,30 +157,26 @@ if ( document.activeElement &amp;&amp; document.activeElement.nodeName.toLowerCa
 
 <p>For example, if you press Enter in the textbox of the following <code>&lt;form&gt;</code> it will submit a search query to Google:</p>
 
-<p>``` html
-<form action="http://google.com"></p>
-
-<pre><code>&lt;input name="q" type="text"&gt;
-&lt;input type="submit"&gt;
+<pre class="language-markup"><code>&lt;form action="http://google.com"&gt;
+    &lt;input name="q" type="text"&gt;
+    &lt;input type="submit"&gt;
+&lt;/form&gt;
 </code></pre>
 
-<p></form>
-```</p>
+
+
 
 <!--more-->
 
 
 <p>The same will occur if you use a <code>&lt;button&gt;</code> element, which has a default <code>type</code> of <code>submit</code>:</p>
 
-<p>``` html
-<form action="http://google.com"></p>
-
-<pre><code>&lt;input name="q" type="text"&gt;
-&lt;button&gt;Submit&lt;/button&gt;
+<pre class="language-markup"><code>&lt;form action="http://google.com"&gt;
+    &lt;input name="q" type="text"&gt;
+    &lt;button&gt;Submit&lt;/button&gt;
+&lt;/form&gt;
 </code></pre>
 
-<p></form>
-```</p>
 
 <p>In each of these examples a <code>click</code> event will be triggered on the form's <code>input[type="submit"]</code> / <code>button[type="submit"]</code>. This is all expected and speced behavior that is consistently implemented across browsers.</p>
 
@@ -203,14 +184,11 @@ if ( document.activeElement &amp;&amp; document.activeElement.nodeName.toLowerCa
 
 <p>Internet Explorer has an annoying quirk that still exists as of IE10: submit buttons can be clicked when Enter is pressed in a textbox, even when no <code>&lt;form&gt;</code> is present. Consider the example below:</p>
 
-<p>``` html
-<input type="text"></p>
+<pre class="language-markup"><code>&lt;input type="text"&gt;
+&lt;!-- other stuff --&gt;
+&lt;button&gt;Some Unrelated Action&lt;/button&gt;
+</code></pre>
 
-<!-- other stuff -->
-
-
-<p><button>Some Unrelated Action</button>
-```</p>
 
 <p>Pressing Enter in this textbox in IE will click the completely unrelated <code>&lt;button&gt;</code>. No other browsers exhibit this behavior.</p>
 
@@ -222,14 +200,11 @@ if ( document.activeElement &amp;&amp; document.activeElement.nodeName.toLowerCa
 
 <p>If for whatever reason that's not an option, you can add <code>type="button"</code> to the <code>&lt;button&gt;</code>:</p>
 
-<p>``` html
-<input type="text"></p>
+<pre class="language-markup"><code>&lt;input type="text"&gt;
+&lt;!-- other stuff --&gt;
+&lt;button type="button"&gt;Some Unrelated Action&lt;/button&gt;
+</code></pre>
 
-<!-- other stuff -->
-
-
-<p><button type="button">Some Unrelated Action</button>
-```</p>
 
 <p>This will override the default <code>type="submit"</code> and prevent IE from clicking the <code>&lt;button&gt;</code> on Enter keypresses.</p>
 
@@ -322,20 +297,20 @@ if ( document.activeElement &amp;&amp; document.activeElement.nodeName.toLowerCa
 
 <p>Trident provides the <code>::-ms-check</code> pseudo-element for checkbox and radio button controls.  For example:</p>
 
-<p><code>html
-&lt;input type="checkbox"&gt;
+<pre class="language-markup"><code>&lt;input type="checkbox"&gt;
 &lt;input type="radio"&gt;
-</code>
-``` css
-::-ms-check {</p>
-
-<pre><code>color: red;
-background: black;
-padding: 1em;
 </code></pre>
 
-<p>}
-```</p>
+
+
+
+<pre class="language-css"><code>::-ms-check {
+    color: red;
+    background: black;
+    padding: 1em;
+}
+</code></pre>
+
 
 <p>This displays as follows in IE10 on Windows 8:</p>
 
@@ -351,13 +326,16 @@ padding: 1em;
 
 <p>Webkit provides 2 pseudo elements for its color picker, <code>::-webkit-color-swatch-wrapper</code> and <code>::-webkit-color-swatch</code>.  You can apply a variety of rules to these elements but I haven't come up with anything useful.  Here's an example just to show it's possible:</p>
 
-<p><code>html
-&lt;input type="color"&gt;
-</code>
-<code>css
-::-webkit-color-swatch-wrapper { border: 2px solid red; }
+<pre class="language-markup"><code>&lt;input type="color"&gt;
+</code></pre>
+
+
+
+
+<pre class="language-css"><code>::-webkit-color-swatch-wrapper { border: 2px solid red; }
 ::-webkit-color-swatch { opacity: 0.5; }
-</code></p>
+</code></pre>
+
 
 <p>This displays as follows in Chrome 26 on OS X:</p>
 
@@ -391,11 +369,13 @@ padding: 1em;
 
 <p>So if you thought the date input could use more spacing and a ridiculous color scheme you could add the following:</p>
 
-<p><code>html
-&lt;input type="date"&gt;
-</code>
-<code>css
-::-webkit-datetime-edit { padding: 1em; }
+<pre class="language-markup"><code>&lt;input type="date"&gt;
+</code></pre>
+
+
+
+
+<pre class="language-css"><code>::-webkit-datetime-edit { padding: 1em; }
 ::-webkit-datetime-edit-fields-wrapper { background: silver; }
 ::-webkit-datetime-edit-text { color: red; padding: 0 0.3em; }
 ::-webkit-datetime-edit-month-field { color: blue; }
@@ -403,7 +383,8 @@ padding: 1em;
 ::-webkit-datetime-edit-year-field { color: purple; }
 ::-webkit-inner-spin-button { display: none; }
 ::-webkit-calendar-picker-indicator { background: orange; }
-</code></p>
+</code></pre>
+
 
 <p>This displays as follows in Chrome 26 on OS X:</p>
 
@@ -421,19 +402,19 @@ padding: 1em;
 
 <p>As of IE10 the file input button can be styled using the <code>::-ms-browse</code> pseudo-element.  Basically any CSS rules that you apply a regular button can be applied to the pseudo-element.  For example:</p>
 
-<p><code>html
-&lt;input type="file"&gt;
-</code>
-``` css
-::-ms-browse {</p>
-
-<pre><code>background: black;
-color: red;
-padding: 1em;
+<pre class="language-markup"><code>&lt;input type="file"&gt;
 </code></pre>
 
-<p>}
-```</p>
+
+
+
+<pre class="language-css"><code>::-ms-browse {
+    background: black;
+    color: red;
+    padding: 1em;
+}
+</code></pre>
+
 
 <p>This displays as follows in IE10 on Windows 8:</p>
 
@@ -443,19 +424,19 @@ padding: 1em;
 
 <p>WebKit provides a hook for its file input button with the <code>::-webkit-file-upload-button</code> pseudo-element.  Again pretty much any CSS rule can be applied, therefore the Trident example will work here as well:</p>
 
-<p><code>html
-&lt;input type="file"&gt;
-</code>
-``` css
-::-webkit-file-upload-button {</p>
-
-<pre><code>background: black;
-color: red;
-padding: 1em;
+<pre class="language-markup"><code>&lt;input type="file"&gt;
 </code></pre>
 
-<p>}
-```</p>
+
+
+
+<pre class="language-css"><code>::-webkit-file-upload-button {
+    background: black;
+    color: red;
+    padding: 1em;
+}
+</code></pre>
+
 
 <p>This displays as follows in Chrome 26 on OS X:</p>
 
@@ -471,24 +452,21 @@ padding: 1em;
 
 <p>WebKit provides a spinner control by default for number picker inputs.  Pseudo-elements <code>::-webkit-textfield-decoration-container</code>, <code>::-webkit-inner-spin-button</code> and <code>::-webkit-outer-spin-button</code> are provided for customization.  While you cannot do a whole lot with these elements, it can be useful to hide the spinner.</p>
 
-<p><code>html
-&lt;input type="number"&gt;
-</code>
-``` css
-::-webkit-textfield-decoration-container { }
-::-webkit-inner-spin-button {</p>
-
-<pre><code>-webkit-appearance: none;
+<pre class="language-markup"><code>&lt;input type="number"&gt;
 </code></pre>
 
-<p>}
-::-webkit-outer-spin-button {</p>
 
-<pre><code>-webkit-appearance: none;
+
+
+<pre class="language-css"><code>::-webkit-textfield-decoration-container { }
+::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+}
+::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+}
 </code></pre>
 
-<p>}
-```</p>
 
 <p>This displays as follows in Chrome 26 on OS X:</p>
 
@@ -504,12 +482,15 @@ padding: 1em;
 
 <p>Trident provides a control on password inputs that can be pressed to display the password in plain text.  This control is made customizable via the <code>::-ms-reveal</code> pseudo-element.  You can change a number of properties of the control including its <code>color</code>, <code>background</code>, or <code>display</code> to hide it.  The following will hide the control:</p>
 
-<p><code>html
-&lt;input type="password"&gt;
-</code>
-<code>css
-::-ms-reveal { display: none; }
-</code></p>
+<pre class="language-markup"><code>&lt;input type="password"&gt;
+</code></pre>
+
+
+
+
+<pre class="language-css"><code>::-ms-reveal { display: none; }
+</code></pre>
+
 
 <p>This displays as follows in IE10 on Windows 8:</p>
 
@@ -525,18 +506,18 @@ padding: 1em;
 
 <p>Gecko provides the pseduo-element <code>::-moz-placeholder</code> to style placeholder text.  You can use this to change the placeholder's color or font properties.  For example:</p>
 
-<p><code>html
-&lt;input placeholder="placeholder"&gt;
-</code>
-``` css
-::-moz-placeholder {</p>
-
-<pre><code>color: blue;
-font-family: 'Comic Sans MS';
+<pre class="language-markup"><code>&lt;input placeholder="placeholder"&gt;
 </code></pre>
 
-<p>}
-```</p>
+
+
+
+<pre class="language-css"><code>::-moz-placeholder {
+    color: blue;
+    font-family: 'Comic Sans MS';
+}
+</code></pre>
+
 
 <p>This displays as follows in Firefox 20 on OS X:</p>
 
@@ -548,18 +529,18 @@ font-family: 'Comic Sans MS';
 
 <p>Trident offers the ability to style the placeholder text with a pseudo-class rather than a pseudo-element.  However the pseudo-class, <code>:-ms-input-placeholder</code>, can be used the same as the pseudo-elements from the other rendering engines:</p>
 
-<p><code>html
-&lt;input placeholder="placeholder"&gt;
-</code>
-``` css
-:-ms-input-placeholder {</p>
-
-<pre><code>color: blue;
-font-family: 'Comic Sans MS';
+<pre class="language-markup"><code>&lt;input placeholder="placeholder"&gt;
 </code></pre>
 
-<p>}
-```</p>
+
+
+
+<pre class="language-css"><code>:-ms-input-placeholder {
+    color: blue;
+    font-family: 'Comic Sans MS';
+}
+</code></pre>
+
 
 <p>This displays as follows in IE10 on Windows 8:</p>
 
@@ -569,18 +550,18 @@ font-family: 'Comic Sans MS';
 
 <p>WebKit provides the <code>::-webkit-input-placeholder</code> pseudo-element.  It can also be used to change the color and font of the placeholder text:</p>
 
-<p><code>html
-&lt;input placeholder="placeholder"&gt;
-</code>
-``` css
-::-webkit-input-placeholder {</p>
-
-<pre><code>color: blue;
-font-family: 'Comic Sans MS';
+<pre class="language-markup"><code>&lt;input placeholder="placeholder"&gt;
 </code></pre>
 
-<p>}
-```</p>
+
+
+
+<pre class="language-css"><code>::-webkit-input-placeholder {
+    color: blue;
+    font-family: 'Comic Sans MS';
+}
+</code></pre>
+
 
 <p>This displays as follows in Chrome 26 on OS X:</p>
 
@@ -596,26 +577,23 @@ font-family: 'Comic Sans MS';
 
 <p>As of Firefox 22, Gecko provides pseudo-elements <code>::-moz-range-track</code> and <code>::-moz-range-thumb</code> for styling range inputs.  It's possible to apply most CSS rules to these elements, for example:</p>
 
-<p><code>html
-&lt;input type="range"&gt;
-</code>
-``` css
-::-moz-range-track {</p>
-
-<pre><code>border: 2px solid red;
-height: 20px;
-background: orange;
+<pre class="language-markup"><code>&lt;input type="range"&gt;
 </code></pre>
 
-<p>}
-::-moz-range-thumb {</p>
 
-<pre><code>background: blue;
-height: 30px;
+
+
+<pre class="language-css"><code>::-moz-range-track {
+    border: 2px solid red;
+    height: 20px;
+    background: orange;
+}
+::-moz-range-thumb {
+    background: blue;
+    height: 30px;
+}
 </code></pre>
 
-<p>}
-```</p>
 
 <p>This displays as follows in Firefox 22 on OS X:</p>
 
@@ -638,18 +616,21 @@ height: 30px;
 
 <p>This is easier to visualize with an example.  Take the following:</p>
 
-<p><code>html
-&lt;input type="range"&gt;
-</code>
-<code>css
-::-ms-fill-lower { background: orange; }
+<pre class="language-markup"><code>&lt;input type="range"&gt;
+</code></pre>
+
+
+
+
+<pre class="language-css"><code>::-ms-fill-lower { background: orange; }
 ::-ms-fill-upper { background: green; }
 ::-ms-thumb { background: red; }
 ::-ms-ticks-after { display: block; color: blue; }
 ::-ms-ticks-before { display: block; color: black; }
 ::-ms-track { padding: 20px 0; }
 ::-ms-tooltip { display: none; /* display and visibility only */ }
-</code></p>
+</code></pre>
+
 
 <p>This will display as follows in IE10 on Windows 8:</p>
 
@@ -659,25 +640,22 @@ height: 30px;
 
 <p>WebKit provides the <code>::-webkit-slider-runnable-track</code> pseudo-element for the track and <code>::-webkit-slider-thumb</code> for the range handle itself.  While you cannot do much with these elements, you can add some colors and padding.</p>
 
-<p><code>html
-&lt;input type="range"&gt;
-</code>
-``` css
-::-webkit-slider-runnable-track {</p>
-
-<pre><code>border: 2px solid red;
-background: green;
-padding: 2em 0;
+<pre class="language-markup"><code>&lt;input type="range"&gt;
 </code></pre>
 
-<p>}
-::-webkit-slider-thumb {</p>
 
-<pre><code>outline: 2px solid blue;
+
+
+<pre class="language-css"><code>::-webkit-slider-runnable-track {
+    border: 2px solid red;
+    background: green;
+    padding: 2em 0;
+}
+::-webkit-slider-thumb {
+    outline: 2px solid blue;
+}
 </code></pre>
 
-<p>}
-```</p>
 
 <p>This displays as follows in Chrome 26 on OS X:</p>
 
@@ -702,19 +680,22 @@ padding: 2em 0;
 
 <p>By default WebKit provides a custom UI for search inputs with cancel and search buttons.  Two pseudo-elements, <code>::-webkit-search-cancel-button</code> and <code>::-webkit-search-results-button</code> are provided for customization, although you can't much of anything with them other than hide them as shown below:</p>
 
-<p><code>html
-&lt;input type="search"&gt;
-</code>
-``` css
-/<em> Remove the rounded corners </em>/
-input[type=search] { -webkit-appearance: none; }</p>
+<pre class="language-markup"><code>&lt;input type="search"&gt;
+</code></pre>
 
-<p>/<em> Hide the cancel button </em>/
-::-webkit-search-cancel-button { -webkit-appearance: none; }</p>
 
-<p>/<em> Hide the magnifying glass </em>/
+
+
+<pre class="language-css"><code>/* Remove the rounded corners */
+input[type=search] { -webkit-appearance: none; }
+
+/* Hide the cancel button */
+::-webkit-search-cancel-button { -webkit-appearance: none; }
+
+/* Hide the magnifying glass */
 ::-webkit-search-results-button { -webkit-appearance: none; }
-```</p>
+</code></pre>
+
 
 <p>This displays as follows in Chrome 26 on OS X:</p>
 
@@ -737,21 +718,21 @@ input[type=search] { -webkit-appearance: none; }</p>
 
 <p>As of IE10 Trident provides the pseudo-element <code>::-ms-value</code> to style the value portion of text inputs (<code>input[type=text]</code>, <code>input[type=password]</code>, etc) and <code>&lt;select&gt;</code>s.  For example:</p>
 
-<p><code>html
-&lt;input type="text" value="value"&gt;
+<pre class="language-markup"><code>&lt;input type="text" value="value"&gt;
 &lt;input type="password" value="value"&gt;
 &lt;select&gt;&lt;option selected&gt;option&lt;/option&gt;&lt;/select&gt;
-</code>
-``` css
-::-ms-value {</p>
-
-<pre><code>color: red;
-background: black;
-padding: 1em;
 </code></pre>
 
-<p>}
-```</p>
+
+
+
+<pre class="language-css"><code>::-ms-value { 
+    color: red;
+    background: black;
+    padding: 1em;
+}
+</code></pre>
+
 
 <p>This displays as follows in IE10 on Windows 8:</p>
 
@@ -761,12 +742,15 @@ padding: 1em;
 
 <p>In IE10 when a text input has focus and is not empty, a small X control appears in the right hand side of the input.  When clicked, the control will clear the contents of the text input.  The X is styleable with the <code>::-ms-clear</code> pseudo-element.  Therefore you can hide it:</p>
 
-<p><code>html
-&lt;input type="text"&gt;
-</code>
-<code>css
-::-ms-clear { display: none; }
-</code></p>
+<pre class="language-markup"><code>&lt;input type="text"&gt;
+</code></pre>
+
+
+
+
+<pre class="language-css"><code>::-ms-clear { display: none; }
+</code></pre>
+
 
 <p>This displays as follows in IE10 on Windows 8:</p>
 
@@ -774,19 +758,19 @@ padding: 1em;
 
 <p>There are a variety of rules that <code>::-ms-clear</code> will accept, so you can theme it as well:</p>
 
-<p><code>html
-&lt;input type="text" value="Lorem Ipsum"&gt;
-</code>
-``` css
-::-ms-clear {</p>
-
-<pre><code>color: red;
-background: black;
-padding: 1em;
+<pre class="language-markup"><code>&lt;input type="text" value="Lorem Ipsum"&gt;
 </code></pre>
 
-<p>}
-```</p>
+
+
+
+<pre class="language-css"><code>::-ms-clear {
+    color: red;
+    background: black;
+    padding: 1em;
+}
+</code></pre>
+
 
 <p>Which displays as follows:</p>
 
@@ -804,34 +788,28 @@ padding: 1em;
 
 <p>There's not much you can do with these pseudo-elements, but there is one important thing to be aware of.  Gecko applies <code>padding</code> and <code>border</code> to <code>::-moz-focus-inner</code> by default:</p>
 
-<p>``` css
-button::-moz-focus-inner,
+<pre class="language-css"><code>button::-moz-focus-inner,
 input[type="reset"]::-moz-focus-inner,
 input[type="button"]::-moz-focus-inner,
 input[type="submit"]::-moz-focus-inner,
-input[type="file"] > input[type="button"]::-moz-focus-inner {</p>
-
-<pre><code>border: 1px dotted transparent;
-padding: 0 2px;
+input[type="file"] > input[type="button"]::-moz-focus-inner {
+    border: 1px dotted transparent;
+    padding: 0 2px;
+}
 </code></pre>
 
-<p>}
-```</p>
 
 <p>These rules can easily create appearance differences between button displays in Gecko and other rendering engines.  This is confusing and there's actually <a href="https://bugzilla.mozilla.org/show_bug.cgi?id=140562">a ticket to remove it</a>.  The ticket has been open since 2002 so don't hold your breath.</p>
 
 <p>The default <code>padding</code> and <code>border</code> can be reset by just setting them to 0:</p>
 
-<p>``` css
-button::-moz-focus-inner,
-input::-moz-focus-inner {</p>
-
-<pre><code>border: 0;
-padding: 0;
+<pre class="language-css"><code>button::-moz-focus-inner,
+input::-moz-focus-inner {
+    border: 0;
+    padding: 0;
+}
 </code></pre>
 
-<p>}
-```</p>
 
 <p>The before and after of this can be seen in the screenshot (below) of Firefox 19 on OS X:</p>
 
@@ -847,18 +825,18 @@ padding: 0;
 
 <p>WebKit provides the <code>::-webkit-keygen-select</code> that can be used to customize the dropdown that a keygen element uses.  For example:</p>
 
-<p><code>html
-&lt;keygen&gt;
-</code>
-``` css
-::-webkit-keygen-select {</p>
-
-<pre><code>background: black;
-color: red;
+<pre class="language-markup"><code>&lt;keygen&gt;
 </code></pre>
 
-<p>}
-```</p>
+
+
+
+<pre class="language-css"><code>::-webkit-keygen-select {
+    background: black;
+    color: red;
+}
+</code></pre>
+
 
 <p>This displays as follows on Chrome 26 on OS X:</p>
 
@@ -880,25 +858,25 @@ color: red;
 
 <p>See the following for an example:</p>
 
-<p><code>html
-&lt;meter low="69" high="80" max="100" optimum="100" value="92"&gt;A&lt;/meter&gt;
+<pre class="language-markup"><code>&lt;meter low="69" high="80" max="100" optimum="100" value="92">A&lt;/meter&gt;
 &lt;meter low="69" high="80" max="100" optimum="100" value="72"&gt;C&lt;/meter&gt;
 &lt;meter low="69" high="80" max="100" optimum="100" value="52"&gt;E&lt;/meter&gt;
-</code>
-``` css
-meter { -webkit-appearance: none; }
-::-webkit-meter-bar {</p>
-
-<pre><code>height: 50px;
-background: white;
-border: 2px solid black;
 </code></pre>
 
-<p>}
+
+
+
+<pre class="language-css"><code>meter { -webkit-appearance: none; }
+::-webkit-meter-bar {
+    height: 50px;
+    background: white;
+    border: 2px solid black;
+}
 ::-webkit-meter-optimum-value { background: green; }
 ::-webkit-meter-suboptimum-value { background: orange; }
 ::-webkit-meter-even-less-good-value { background: blue; }
-```</p>
+</code></pre>
+
 
 <p>This displays as follows in Chrome 26 on OS X:</p>
 
@@ -918,15 +896,18 @@ border: 2px solid black;
 
 <p>Like meter, in order to apply any rules to these elements you must set <code>-webkit-appearance: none;</code> on the progress element.  Here's an example:</p>
 
-<p><code>html
-&lt;progress max="100" value="50"&gt;&lt;/progress&gt;
-</code>
-<code>css
-progress { -webkit-appearance: none; }
+<pre class="language-markup"><code>&lt;progress max="100" value="50"&gt;&lt;/progress&gt;
+</code></pre>
+
+
+
+
+<pre class="language-css"><code>progress { -webkit-appearance: none; }
 ::-webkit-progress-inner-element { }
 ::-webkit-progress-bar { border: 2px solid black; }
 ::-webkit-progress-value { background: red; }
-</code></p>
+</code></pre>
+
 
 <p>This displays as follows in Chrome 26 on OS X:</p>
 
@@ -936,12 +917,15 @@ progress { -webkit-appearance: none; }
 
 <p>Gecko provides a <code>::-moz-progress-bar</code> pseudo-element to style the progress bar itself.  For example:</p>
 
-<p><code>html
-&lt;progress max="100" value="50"&gt;&lt;/progress&gt;
-</code>
-<code>css
-::-moz-progress-bar { background: red; }
-</code></p>
+<pre class="language-markup"><code>&lt;progress max="100" value="50"&gt;&lt;/progress&gt;
+</code></pre>
+
+
+
+
+<pre class="language-css"><code>::-moz-progress-bar { background: red; }
+</code></pre>
+
 
 <p>This displays as follows in Firefox 19 on OS X:</p>
 
@@ -951,12 +935,15 @@ progress { -webkit-appearance: none; }
 
 <p>Like Gecko, Trident provides a single pseudo-element to style the progress bar, <code>::-ms-fill</code>.  For example:</p>
 
-<p><code>html
-&lt;progress max="100" value="50"&gt;&lt;/progress&gt;
-</code>
-<code>css
-::-ms-fill { background: red; }
-</code></p>
+<pre class="language-markup"><code>&lt;progress max="100" value="50"&gt;&lt;/progress&gt;
+</code></pre>
+
+
+
+
+<pre class="language-css"><code>::-ms-fill { background: red; }
+</code></pre>
+
 
 <p>This displays as follows in IE10 on Windows 8:</p>
 
@@ -972,24 +959,21 @@ progress { -webkit-appearance: none; }
 
 <p>As of IE10 Trident gives you a hook to style the arrow within select dropdowns, <code>::-ms-expand</code>.  For example:</p>
 
-<p>``` html
-<select></p>
-
-<pre><code>&lt;option selected&gt;One&lt;/option&gt;
+<pre class="language-markup"><code>&lt;select&gt;
+    &lt;option selected&gt;One&lt;/option&gt;
+&lt;/select&gt;
 </code></pre>
 
-<p></select>
-<code>
-</code> css
-::-ms-expand {</p>
 
-<pre><code>padding: 2em;
-color: red;
-background: black;
+
+
+<pre class="language-css"><code>::-ms-expand {
+    padding: 2em;
+    color: red;
+    background: black;
+}
 </code></pre>
 
-<p>}
-```</p>
 
 <p>This displays as follows in IE10 on Windows 8:</p>
 
@@ -1007,17 +991,17 @@ background: black;
 
 <p>It can be hidden by applying <code>display: none</code> or <code>-webkit-appearance: none</code>:</p>
 
-<p><code>html
-&lt;textarea&gt;&lt;/textarea&gt;
-</code>
-``` css
-::-webkit-resizer {</p>
-
-<pre><code>display: none;
+<pre class="language-markup"><code>&lt;textarea&gt;&lt;/textarea&gt;
 </code></pre>
 
-<p>}
-```</p>
+
+
+
+<pre class="language-css"><code>::-webkit-resizer {
+    display: none;
+}
+</code></pre>
+
 
 <p>This displays as follows in Chrome 26 on OS X:</p>
 
@@ -1027,20 +1011,20 @@ background: black;
 
 <p>The <code>::-webkit-resizer</code> pseudo-element also allows for some basic styling.  If you thought the resize control could use significantly more color you could add this:</p>
 
-<p><code>html
-&lt;textarea&gt;&lt;/textarea&gt;
-</code>
-``` css
-::-webkit-resizer {</p>
-
-<pre><code>border: 2px solid black;
-background: red;
-box-shadow: 0 0 5px 5px blue;
-outline: 2px solid yellow;
+<pre class="language-markup"><code>&lt;textarea&gt;&lt;/textarea&gt;
 </code></pre>
 
-<p>}
-```</p>
+
+
+
+<pre class="language-css"><code>::-webkit-resizer {
+    border: 2px solid black;
+    background: red;
+    box-shadow: 0 0 5px 5px blue;
+    outline: 2px solid yellow;
+}
+</code></pre>
+
 
 <p>This displays as follows in Chrome 26 on OS X:</p>
 
@@ -1073,14 +1057,14 @@ outline: 2px solid yellow;
 
 <p>It's easier to see what each element does visually.  Here's an example:</p>
 
-<p><code>css
-::-webkit-validation-bubble { padding: 1em; background: orange; }
+<pre class="language-css"><code>::-webkit-validation-bubble { padding: 1em; background: orange; }
 ::-webkit-validation-bubble-arrow { background: blue; }
 ::-webkit-validation-bubble-arrow-clipper { border: 2px solid black; }
 ::-webkit-validation-bubble-heading { background: green; }
 ::-webkit-validation-bubble-message { color: white; background: purple; }
 ::-webkit-validation-bubble-text-block { border: 1px solid red; padding: 1em; }
-</code></p>
+</code></pre>
+
 
 <p>This displays as follows in Chrome 26 on OS X:</p>
 
@@ -1088,23 +1072,17 @@ outline: 2px solid yellow;
 
 <p>Here's a slightly more practical example showing how the bubble can be themed:</p>
 
-<p>``` css
-::-webkit-validation-bubble-message {</p>
-
-<pre><code>color: #eee;
-background: black;
+<pre class="language-css"><code>::-webkit-validation-bubble-message {
+    color: #eee;
+    background: black;
+}
+::-webkit-validation-bubble-arrow {
+    background: black;
+    border-color: #444;
+    box-shadow: none;
+}
 </code></pre>
 
-<p>}
-::-webkit-validation-bubble-arrow {</p>
-
-<pre><code>background: black;
-border-color: #444;
-box-shadow: none;
-</code></pre>
-
-<p>}
-```</p>
 
 <p>This displays as follows in Chrome 26 on OS X:</p>
 

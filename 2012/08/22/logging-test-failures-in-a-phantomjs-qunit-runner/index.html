@@ -21,12 +21,7 @@
   <link rel="canonical" href="http://tjvantoll.com/2012/08/22/logging-test-failures-in-a-phantomjs-qunit-runner">
   <link rel="author" href="https://plus.google.com/+TJVanToll">
 
-  <!--[if !lte IE 7]><!-->
-    <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet">
-  <!--<![endif]-->
-  <!--[if lte IE 7]>
-    <link rel="stylesheet" href="/stylesheets/old-ie.css" media="screen, projection">
-  <![endif]-->
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet">
   
   <!--Custom script concatenation
   <script src="/javascripts/modernizr-2.5.3.js"></script>
@@ -38,12 +33,6 @@
   <script src="/javascripts/build/scripts.js"></script>
 
   <link href="/atom.xml" rel="alternate" title="TJ VanToll's Blog" type="application/atom+xml">
-  <style>
-	/* Fonts from Google"s Web font directory at http://google.com/webfonts */
-	/*@import url(http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic);
-	@import url(http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic);*/
-</style>
-
   
   <script type="text/javascript">
   	if (window.location.host.indexOf('local') == -1) {
@@ -127,28 +116,20 @@
 
 <p>The output of said runner displays the number of tests ran and the number that passed.  For example, here&#8217;s an example of the output when I use the default runner on jQuery UI&#8217;s spinner test suite:</p>
 
-<figure class='code'><figcaption class='not_empty'><span>PhantomJS + QUnit Run Output</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='text'><span class='line'>tj-cpu:spinner tj$ phantomjs run-qunit.js spinner.html
-</span><span class='line'>Tests completed in 492 milliseconds
-</span><span class='line'>489 tests of 489 passed, 0 failed.
-</span><span class='line'>&#39;waitFor()&#39; finished in 587ms.
-</span></code></pre></td></tr></table></div></figure>
+<pre class="language-shell"><code>tj-cpu:spinner tj$ phantomjs run-qunit.js spinner.html
+Tests completed in 492 milliseconds
+489 tests of 489 passed, 0 failed.
+'waitFor()' finished in 587ms.
+</code></pre>
 
 
 <p>Which is great, but if something fails you only get the following:</p>
 
-<figure class='code'><figcaption class='not_empty'><span>PhantomJS + QUnit Run Output with Failures</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='text'><span class='line'>tj-cpu:myproject tj$ phantomjs run-qunit.js spinner.html
-</span><span class='line'>&#39;waitFor()&#39; finished in 630ms.
-</span><span class='line'>Tests completed in 535 milliseconds.
-</span><span class='line'>486 tests of 489 passed, 3 failed.
-</span></code></pre></td></tr></table></div></figure>
+<pre class="language-shell"><code>tj-cpu:myproject tj$ phantomjs run-qunit.js spinner.html
+'waitFor()' finished in 630ms.
+Tests completed in 535 milliseconds.
+486 tests of 489 passed, 3 failed.
+</code></pre>
 
 
 <p>The provided runner doesn&#8217;t provide any additional information about the tests that failed.  Luckily PhantomJS and QUnit make it trivial to customize the output to meet your needs.</p>
@@ -160,15 +141,11 @@
 
 <p>PhantomJS&#8217;s <a href="http://code.google.com/p/phantomjs/wiki/Interface#onConsoleMessage">page.onConsoleMessage</a> callback can be used to redirect the browser&#8217;s JavaScript console logging.  The provided test runner uses this callback to redirect the output to the command line instead of the headless browser (where you would never see it).</p>
 
-<figure class='code'><figcaption class='not_empty'><span>Snippet from Default run-qunit.js</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="c1">// Route &quot;console.log()&quot; calls from within the Page context to the main Phantom context (i.e. current &quot;this&quot;)</span>
-</span><span class='line'><span class="nx">page</span><span class="p">.</span><span class="nx">onConsoleMessage</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">msg</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">msg</span><span class="p">);</span>
-</span><span class='line'><span class="p">};</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre class="language-javascript"><code>// Route "console.log()" calls from within the Page context to the main Phantom context (i.e. current "this")
+page.onConsoleMessage = function(msg) {
+    console.log(msg);
+};
+</code></pre>
 
 
 <p>Meaning, when running QUnit tests via PhantomJS, the output of any <code>console.log</code> statements will appear on the command line.</p>
@@ -179,280 +156,153 @@
 
 <p>For example you could use the following to log the associated message for every test that fails:</p>
 
-<figure class='code'><figcaption class='not_empty'><span>Logging Each Test Failure with QUnit</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">QUnit</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">details</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">details</span><span class="p">.</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">details</span><span class="p">.</span><span class="nx">message</span><span class="p">);</span>
-</span><span class='line'>    <span class="p">}</span>
-</span><span class='line'><span class="p">});</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre class="language-javascript"><code>
+QUnit.log(function(details) {
+    if (!details.result) {
+        console.log(details.message);
+    }
+});
+</code></pre>
 
 
 <p>If we apply this our failing test suite we now get the following:</p>
 
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class='text'><span class='line'>tj-mac:spinner tj3$ phantomjs run-qunit.js spinner.html
-</span><span class='line'>min from markup
-</span><span class='line'>stop from options
-</span><span class='line'>blur after many keys
-</span><span class='line'>&#39;waitFor()&#39; finished in 579ms.
-</span><span class='line'>Tests completed in 483 milliseconds.
-</span><span class='line'>486 tests of 489 passed, 3 failed.
-</span></code></pre></td></tr></table></div></figure>
+<pre class="language-shell"><code>tj-mac:spinner tj3$ phantomjs run-qunit.js spinner.html
+min from markup
+stop from options
+blur after many keys
+'waitFor()' finished in 579ms.
+Tests completed in 483 milliseconds.
+486 tests of 489 passed, 3 failed.
+</code></pre>
 
 
 <p>Better, but still not terribly useful.  In order to provide a useful report of failed tests you need to combine more of QUnit&#8217;s API callbacks with some basic text formatting.  Here&#8217;s a more comprehensive example:</p>
 
-<figure class='code'><figcaption class='not_empty'><span>QUnit Test Results with a Formatted Display of Failed Tests</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-<span class='line-number'>33</span>
-<span class='line-number'>34</span>
-<span class='line-number'>35</span>
-<span class='line-number'>36</span>
-<span class='line-number'>37</span>
-<span class='line-number'>38</span>
-<span class='line-number'>39</span>
-<span class='line-number'>40</span>
-<span class='line-number'>41</span>
-<span class='line-number'>42</span>
-<span class='line-number'>43</span>
-<span class='line-number'>44</span>
-<span class='line-number'>45</span>
-<span class='line-number'>46</span>
-<span class='line-number'>47</span>
-<span class='line-number'>48</span>
-<span class='line-number'>49</span>
-<span class='line-number'>50</span>
-<span class='line-number'>51</span>
-<span class='line-number'>52</span>
-<span class='line-number'>53</span>
-<span class='line-number'>54</span>
-<span class='line-number'>55</span>
-<span class='line-number'>56</span>
-<span class='line-number'>57</span>
-<span class='line-number'>58</span>
-<span class='line-number'>59</span>
-<span class='line-number'>60</span>
-</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-</span><span class='line'>    <span class="kd">var</span> <span class="nx">module</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
-</span><span class='line'>        <span class="nx">test</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
-</span><span class='line'>        <span class="nx">lastModuleLogged</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
-</span><span class='line'>        <span class="nx">lastTestLogged</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
-</span><span class='line'>        <span class="nx">failuresOnCurrentTest</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
-</span><span class='line'>        <span class="nx">failureFound</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="nx">QUnit</span><span class="p">.</span><span class="nx">moduleStart</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">details</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>        <span class="nx">module</span> <span class="o">=</span> <span class="nx">details</span><span class="p">.</span><span class="nx">name</span><span class="p">;</span>
-</span><span class='line'>    <span class="p">});</span>
-</span><span class='line'>    <span class="nx">QUnit</span><span class="p">.</span><span class="nx">testStart</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">details</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>        <span class="nx">test</span> <span class="o">=</span> <span class="nx">details</span><span class="p">.</span><span class="nx">name</span><span class="p">;</span>
-</span><span class='line'>    <span class="p">});</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="nx">QUnit</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">details</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">details</span><span class="p">.</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>            <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">failureFound</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>                <span class="nx">failureFound</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
-</span><span class='line'>                <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">);</span>
-</span><span class='line'>                <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;/*********************************************************************/&#39;</span><span class="p">);</span>
-</span><span class='line'>                <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;/************************** FAILURE SUMMARY **************************/&#39;</span><span class="p">);</span>
-</span><span class='line'>                <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;/*********************************************************************/&#39;</span><span class="p">);</span>
-</span><span class='line'>            <span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'>            <span class="k">if</span> <span class="p">(</span><span class="nx">lastModuleLogged</span> <span class="o">!=</span> <span class="nx">module</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>                <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">);</span>
-</span><span class='line'>                <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;-----------------------------------------------------------------------&#39;</span><span class="p">);</span>
-</span><span class='line'>                <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Module: &#39;</span> <span class="o">+</span> <span class="nx">module</span><span class="p">);</span>
-</span><span class='line'>            <span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'>            <span class="k">if</span> <span class="p">(</span><span class="nx">lastTestLogged</span> <span class="o">!=</span> <span class="nx">test</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>                <span class="nx">failuresOnCurrentTest</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
-</span><span class='line'>                <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;-----------------------------------------------------------------------&#39;</span><span class="p">);</span>
-</span><span class='line'>                <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Test: &#39;</span> <span class="o">+</span> <span class="nx">test</span><span class="p">);</span>
-</span><span class='line'>            <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-</span><span class='line'>                <span class="nx">failuresOnCurrentTest</span><span class="o">++</span><span class="p">;</span>
-</span><span class='line'>            <span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'>            <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39; &#39;</span> <span class="o">+</span> <span class="nx">failuresOnCurrentTest</span> <span class="o">+</span> <span class="s1">&#39;) Message: &#39;</span> <span class="o">+</span> <span class="nx">details</span><span class="p">.</span><span class="nx">message</span><span class="p">);</span>
-</span><span class='line'>            <span class="k">if</span> <span class="p">(</span><span class="k">typeof</span> <span class="nx">details</span><span class="p">.</span><span class="nx">expected</span> <span class="o">!==</span> <span class="s1">&#39;undefined&#39;</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>                <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;    Expected: &#39;</span> <span class="o">+</span> <span class="nx">details</span><span class="p">.</span><span class="nx">expected</span><span class="p">);</span>
-</span><span class='line'>                <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;    Actual: &#39;</span> <span class="o">+</span> <span class="nx">details</span><span class="p">.</span><span class="nx">actual</span><span class="p">);</span>
-</span><span class='line'>            <span class="p">}</span>
-</span><span class='line'>            <span class="k">if</span> <span class="p">(</span><span class="k">typeof</span> <span class="nx">details</span><span class="p">.</span><span class="nx">source</span> <span class="o">!==</span> <span class="s1">&#39;undefined&#39;</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>                <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;    Source: &#39;</span> <span class="o">+</span> <span class="nx">details</span><span class="p">.</span><span class="nx">source</span><span class="p">);</span>
-</span><span class='line'>            <span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'>            <span class="nx">lastModuleLogged</span> <span class="o">=</span> <span class="nx">module</span><span class="p">;</span>
-</span><span class='line'>            <span class="nx">lastTestLogged</span> <span class="o">=</span> <span class="nx">test</span><span class="p">;</span>
-</span><span class='line'>        <span class="p">}</span>
-</span><span class='line'>    <span class="p">});</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="nx">QUnit</span><span class="p">.</span><span class="nx">done</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">details</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>        <span class="k">if</span> <span class="p">(</span><span class="nx">details</span><span class="p">.</span><span class="nx">failed</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>            <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;-----------------------------------------------------------------------&#39;</span><span class="p">);</span>
-</span><span class='line'>            <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">);</span>
-</span><span class='line'>        <span class="p">}</span>
-</span><span class='line'>    <span class="p">});</span>
-</span><span class='line'><span class="p">}());</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre class="language-javascript"><code>
+(function() {
+    var module = '', 
+        test = '',
+        lastModuleLogged = '',
+        lastTestLogged = '',
+        failuresOnCurrentTest = 0,
+        failureFound = false;
+
+    QUnit.moduleStart(function(details) {
+        module = details.name;
+    });
+    QUnit.testStart(function(details) {
+        test = details.name;
+    });
+
+    QUnit.log(function(details) {
+        if (!details.result) {
+            if (!failureFound) {
+                failureFound = true;
+                console.log('');
+                console.log('/*********************************************************************/');
+                console.log('/************************** FAILURE SUMMARY **************************/');
+                console.log('/*********************************************************************/');
+            }
+
+            if (lastModuleLogged != module) {
+                console.log('');
+                console.log('-----------------------------------------------------------------------');
+                console.log('Module: ' + module);
+            }
+
+            if (lastTestLogged != test) {
+                failuresOnCurrentTest = 1;
+                console.log('-----------------------------------------------------------------------');
+                console.log('Test: ' + test);
+            } else {
+                failuresOnCurrentTest++;
+            }
+
+            console.log(' ' + failuresOnCurrentTest + ') Message: ' + details.message);
+            if (typeof details.expected !== 'undefined') {
+                console.log('    Expected: ' + details.expected);
+                console.log('    Actual: ' + details.actual);
+            }
+            if (typeof details.source !== 'undefined') {
+                console.log('    Source: ' + details.source);
+            }
+
+            lastModuleLogged = module;
+            lastTestLogged = test;
+        }
+    });
+
+    QUnit.done(function(details) {
+        if (details.failed > 0) {
+            console.log('-----------------------------------------------------------------------');
+            console.log('');
+        }
+    });
+}());
+</code></pre>
 
 
 <p>Now running tests with failures will produce something like the following:</p>
 
-<figure class='code'><figcaption class='not_empty'><span>PhantomJS + QUnit Output with Failures</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-<span class='line-number'>33</span>
-<span class='line-number'>34</span>
-<span class='line-number'>35</span>
-<span class='line-number'>36</span>
-<span class='line-number'>37</span>
-<span class='line-number'>38</span>
-<span class='line-number'>39</span>
-<span class='line-number'>40</span>
-<span class='line-number'>41</span>
-<span class='line-number'>42</span>
-<span class='line-number'>43</span>
-<span class='line-number'>44</span>
-<span class='line-number'>45</span>
-<span class='line-number'>46</span>
-<span class='line-number'>47</span>
-<span class='line-number'>48</span>
-<span class='line-number'>49</span>
-<span class='line-number'>50</span>
-<span class='line-number'>51</span>
-<span class='line-number'>52</span>
-<span class='line-number'>53</span>
-<span class='line-number'>54</span>
-<span class='line-number'>55</span>
-<span class='line-number'>56</span>
-<span class='line-number'>57</span>
-</pre></td><td class='code'><pre><code class='text'><span class='line'>tj-cpu:spinner tj$ phantomjs run-qunit.js spinner.html
-</span><span class='line'>
-</span><span class='line'>/*********************************************************************/
-</span><span class='line'>/************************** FAILURE SUMMARY **************************/
-</span><span class='line'>/*********************************************************************/
-</span><span class='line'>
-</span><span class='line'>-----------------------------------------------------------------------
-</span><span class='line'>Module: spinner: core
-</span><span class='line'>-----------------------------------------------------------------------
-</span><span class='line'>Test: reading HTML5 attributes
-</span><span class='line'> 1) Message: min from markup
-</span><span class='line'>    Expected: -1000
-</span><span class='line'>    Actual: -100
-</span><span class='line'>    Source:     at file:///Applications/XAMPP/xamppfiles/htdocs/jquery/jquery-ui/external/qunit.js:447
-</span><span class='line'>    at file:///Applications/XAMPP/xamppfiles/htdocs/jquery/jquery-ui/tests/unit/spinner/spinner_core.js:137
-</span><span class='line'>    at file:///Applications/XAMPP/xamppfiles/htdocs/jquery/jquery-ui/external/qunit.js:134
-</span><span class='line'>    at file:///Applications/XAMPP/xamppfiles/htdocs/jquery/jquery-ui/external/qunit.js:277
-</span><span class='line'>    at process (file:///Applications/XAMPP/xamppfiles/htdocs/jquery/jquery-ui/external/qunit.js:1233)
-</span><span class='line'>    at file:///Applications/XAMPP/xamppfiles/htdocs/jquery/jquery-ui/external/qunit.js:376
-</span><span class='line'> 2) Message: stop from options
-</span><span class='line'>    Expected: 50
-</span><span class='line'>    Actual: 5
-</span><span class='line'>    Source:     at file:///Applications/XAMPP/xamppfiles/htdocs/jquery/jquery-ui/external/qunit.js:447
-</span><span class='line'>    at file:///Applications/XAMPP/xamppfiles/htdocs/jquery/jquery-ui/tests/unit/spinner/spinner_core.js:148
-</span><span class='line'>    at file:///Applications/XAMPP/xamppfiles/htdocs/jquery/jquery-ui/external/qunit.js:134
-</span><span class='line'>    at file:///Applications/XAMPP/xamppfiles/htdocs/jquery/jquery-ui/external/qunit.js:277
-</span><span class='line'>    at process (file:///Applications/XAMPP/xamppfiles/htdocs/jquery/jquery-ui/external/qunit.js:1233)
-</span><span class='line'>    at file:///Applications/XAMPP/xamppfiles/htdocs/jquery/jquery-ui/external/qunit.js:376
-</span><span class='line'>
-</span><span class='line'>-----------------------------------------------------------------------
-</span><span class='line'>Module: spinner: events
-</span><span class='line'>-----------------------------------------------------------------------
-</span><span class='line'>Test: change
-</span><span class='line'> 1) Message: blur after many keys
-</span><span class='line'>    Source:     at file:///Applications/XAMPP/xamppfiles/htdocs/jquery/jquery-ui/external/qunit.js:426
-</span><span class='line'>    at file:///Applications/XAMPP/xamppfiles/htdocs/jquery/jquery-ui/tests/unit/spinner/spinner_events.js:130
-</span><span class='line'>    at file:///Applications/XAMPP/xamppfiles/htdocs/jquery/jquery-ui/ui/jquery.ui.widget.js:454
-</span><span class='line'>    at file:///Applications/XAMPP/xamppfiles/htdocs/jquery/jquery-ui/ui/jquery.ui.spinner.js:109
-</span><span class='line'>    at handlerProxy (file:///Applications/XAMPP/xamppfiles/htdocs/jquery/jquery-ui/ui/jquery.ui.widget.js:371)
-</span><span class='line'>    at file:///Applications/XAMPP/xamppfiles/htdocs/jquery/jquery-ui/tests/jquery-1.8.0.js:3061
-</span><span class='line'>    at file:///Applications/XAMPP/xamppfiles/htdocs/jquery/jquery-ui/tests/jquery-1.8.0.js:2677
-</span><span class='line'>    at file:///Applications/XAMPP/xamppfiles/htdocs/jquery/jquery-ui/tests/jquery-1.8.0.js:2941
-</span><span class='line'>    at file:///Applications/XAMPP/xamppfiles/htdocs/jquery/jquery-ui/tests/jquery-1.8.0.js:3607
-</span><span class='line'>    at file:///Applications/XAMPP/xamppfiles/htdocs/jquery/jquery-ui/tests/jquery-1.8.0.js:611
-</span><span class='line'>    at file:///Applications/XAMPP/xamppfiles/htdocs/jquery/jquery-ui/tests/jquery-1.8.0.js:241
-</span><span class='line'>    at file:///Applications/XAMPP/xamppfiles/htdocs/jquery/jquery-ui/tests/jquery-1.8.0.js:3608
-</span><span class='line'>    at file:///Applications/XAMPP/xamppfiles/htdocs/jquery/jquery-ui/tests/jquery-1.8.0.js:3660
-</span><span class='line'>    at file:///Applications/XAMPP/xamppfiles/htdocs/jquery/jquery-ui/tests/unit/spinner/spinner_events.js:165
-</span><span class='line'>    at file:///Applications/XAMPP/xamppfiles/htdocs/jquery/jquery-ui/external/qunit.js:134
-</span><span class='line'>    at file:///Applications/XAMPP/xamppfiles/htdocs/jquery/jquery-ui/external/qunit.js:277
-</span><span class='line'>    at process (file:///Applications/XAMPP/xamppfiles/htdocs/jquery/jquery-ui/external/qunit.js:1233)
-</span><span class='line'>    at file:///Applications/XAMPP/xamppfiles/htdocs/jquery/jquery-ui/external/qunit.js:376
-</span><span class='line'>-----------------------------------------------------------------------
-</span><span class='line'>
-</span><span class='line'>&#39;waitFor()&#39; finished in 590ms.
-</span><span class='line'>Tests completed in 494 milliseconds.
-</span><span class='line'>486 tests of 489 passed, 3 failed.
-</span></code></pre></td></tr></table></div></figure>
+<pre class="language-shell"><code>tj-cpu:spinner tj$ phantomjs run-qunit.js spinner.html
+
+/*********************************************************************/
+/************************** FAILURE SUMMARY **************************/
+/*********************************************************************/
+
+-----------------------------------------------------------------------
+Module: spinner: core
+-----------------------------------------------------------------------
+Test: reading HTML5 attributes
+ 1) Message: min from markup
+    Expected: -1000
+    Actual: -100
+    Source:     at file:///Applications/XAMPP/xamppfiles/htdocs/jquery/jquery-ui/external/qunit.js:447
+    at file:///Applications/XAMPP/xamppfiles/htdocs/jquery/jquery-ui/tests/unit/spinner/spinner_core.js:137
+    at file:///Applications/XAMPP/xamppfiles/htdocs/jquery/jquery-ui/external/qunit.js:134
+    at file:///Applications/XAMPP/xamppfiles/htdocs/jquery/jquery-ui/external/qunit.js:277
+    at process (file:///Applications/XAMPP/xamppfiles/htdocs/jquery/jquery-ui/external/qunit.js:1233)
+    at file:///Applications/XAMPP/xamppfiles/htdocs/jquery/jquery-ui/external/qunit.js:376
+ 2) Message: stop from options
+    Expected: 50
+    Actual: 5
+    Source:     at file:///Applications/XAMPP/xamppfiles/htdocs/jquery/jquery-ui/external/qunit.js:447
+    at file:///Applications/XAMPP/xamppfiles/htdocs/jquery/jquery-ui/tests/unit/spinner/spinner_core.js:148
+    at file:///Applications/XAMPP/xamppfiles/htdocs/jquery/jquery-ui/external/qunit.js:134
+    at file:///Applications/XAMPP/xamppfiles/htdocs/jquery/jquery-ui/external/qunit.js:277
+    at process (file:///Applications/XAMPP/xamppfiles/htdocs/jquery/jquery-ui/external/qunit.js:1233)
+    at file:///Applications/XAMPP/xamppfiles/htdocs/jquery/jquery-ui/external/qunit.js:376
+
+-----------------------------------------------------------------------
+Module: spinner: events
+-----------------------------------------------------------------------
+Test: change
+ 1) Message: blur after many keys
+    Source:     at file:///Applications/XAMPP/xamppfiles/htdocs/jquery/jquery-ui/external/qunit.js:426
+    at file:///Applications/XAMPP/xamppfiles/htdocs/jquery/jquery-ui/tests/unit/spinner/spinner_events.js:130
+    at file:///Applications/XAMPP/xamppfiles/htdocs/jquery/jquery-ui/ui/jquery.ui.widget.js:454
+    at file:///Applications/XAMPP/xamppfiles/htdocs/jquery/jquery-ui/ui/jquery.ui.spinner.js:109
+    at handlerProxy (file:///Applications/XAMPP/xamppfiles/htdocs/jquery/jquery-ui/ui/jquery.ui.widget.js:371)
+    at file:///Applications/XAMPP/xamppfiles/htdocs/jquery/jquery-ui/tests/jquery-1.8.0.js:3061
+    at file:///Applications/XAMPP/xamppfiles/htdocs/jquery/jquery-ui/tests/jquery-1.8.0.js:2677
+    at file:///Applications/XAMPP/xamppfiles/htdocs/jquery/jquery-ui/tests/jquery-1.8.0.js:2941
+    at file:///Applications/XAMPP/xamppfiles/htdocs/jquery/jquery-ui/tests/jquery-1.8.0.js:3607
+    at file:///Applications/XAMPP/xamppfiles/htdocs/jquery/jquery-ui/tests/jquery-1.8.0.js:611
+    at file:///Applications/XAMPP/xamppfiles/htdocs/jquery/jquery-ui/tests/jquery-1.8.0.js:241
+    at file:///Applications/XAMPP/xamppfiles/htdocs/jquery/jquery-ui/tests/jquery-1.8.0.js:3608
+    at file:///Applications/XAMPP/xamppfiles/htdocs/jquery/jquery-ui/tests/jquery-1.8.0.js:3660
+    at file:///Applications/XAMPP/xamppfiles/htdocs/jquery/jquery-ui/tests/unit/spinner/spinner_events.js:165
+    at file:///Applications/XAMPP/xamppfiles/htdocs/jquery/jquery-ui/external/qunit.js:134
+    at file:///Applications/XAMPP/xamppfiles/htdocs/jquery/jquery-ui/external/qunit.js:277
+    at process (file:///Applications/XAMPP/xamppfiles/htdocs/jquery/jquery-ui/external/qunit.js:1233)
+    at file:///Applications/XAMPP/xamppfiles/htdocs/jquery/jquery-ui/external/qunit.js:376
+-----------------------------------------------------------------------
+
+'waitFor()' finished in 590ms.
+Tests completed in 494 milliseconds.
+486 tests of 489 passed, 3 failed.
+</code></pre>
 
 
 <p>This might be a bit excessive for some but I like being able to quickly see information about what failed from the command line.  Feel free to use this and alter it to your liking.</p>
@@ -507,7 +357,7 @@
     </p>
     <p class="author_card meta">
       <img src="/images/me/1.jpg" alt="Me!" id="post_me">
-      TJ VanToll is a developer advocate for <a href="http://telerik.com">Telerik</a>, a <a href="http://jqueryui.com/about/">jQuery team member</a>, and the author of <a href="http://tjvantoll.com/jquery-ui-in-action.html">jQuery UI in Action</a>. TJ has over a decade of web development experience—specializing in performance and the mobile web—and <a href="/speaking">speaks</a> about his research at conferences around the world. When not online, TJ is generally found talking about himself in the third person. If you like hearing TJ talk about himself, you should consider following him on <a href="http://twitter.com/tjvantoll">Twitter</a> or <a href="https://plus.google.com/+TJVanToll?rel=author" rel="author">Google+</a>.
+      TJ VanToll is a developer advocate for <a href="http://telerik.com">Telerik</a>, a <a href="http://jqueryui.com/about/">jQuery team member</a>, and the author of <a href="http://tjvantoll.com/jquery-ui-in-action.html">jQuery UI in Action</a>. TJ has over a decade of web development experience—specializing in performance and the mobile web—and <a href="/speaking">speaks</a> about his research at conferences around the world.TJ is <a href="http://twitter.com/tjvantoll">@tjvantoll</a> on Twitter and <a href="https://plus.google.com/+TJVanToll?rel=author" rel="author">+TJVanToll</a> on Google+.
     </p>
     
       <div class="sharing">
@@ -619,8 +469,7 @@
 
 
 
-
-
+Included file 'google_plus_one.html' not found in _includes directory
 
   <script type="text/javascript">
     (function(){
@@ -633,8 +482,7 @@
   </script>
 
 
-
-
+Included file 'custom/after_footer.html' not found in _includes directory
 
 </body>
 </html>

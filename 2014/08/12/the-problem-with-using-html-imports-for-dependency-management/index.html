@@ -21,12 +21,7 @@
   <link rel="canonical" href="http://tjvantoll.com/2014/08/12/the-problem-with-using-html-imports-for-dependency-management">
   <link rel="author" href="https://plus.google.com/+TJVanToll">
 
-  <!--[if !lte IE 7]><!-->
-    <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet">
-  <!--<![endif]-->
-  <!--[if lte IE 7]>
-    <link rel="stylesheet" href="/stylesheets/old-ie.css" media="screen, projection">
-  <![endif]-->
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet">
   
   <!--Custom script concatenation
   <script src="/javascripts/modernizr-2.5.3.js"></script>
@@ -38,12 +33,6 @@
   <script src="/javascripts/build/scripts.js"></script>
 
   <link href="/atom.xml" rel="alternate" title="TJ VanToll's Blog" type="application/atom+xml">
-  <style>
-	/* Fonts from Google"s Web font directory at http://google.com/webfonts */
-	/*@import url(http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic);
-	@import url(http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic);*/
-</style>
-
   
   <script type="text/javascript">
   	if (window.location.host.indexOf('local') == -1) {
@@ -125,13 +114,10 @@
 
 <div class="entry-content"><p>HTML imports are cool. If you haven&#8217;t heard of them before, you should read <a href="http://www.html5rocks.com/en/tutorials/webcomponents/imports/">Eric Bidelman&#8217;s excellent introduction to them</a>, but they&#8217;re pretty self explanatory with a bit of code. For example the following is how a jQuery UI dialog works in <a href="https://github.com/tjvantoll/ui-web-components">my proof-of-concept web components port</a>:</p>
 
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">&quot;import&quot;</span> <span class="na">href=</span><span class="s">&quot;ui-dialog.html&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="nt">&lt;ui</span><span class="na">-dialog</span> <span class="na">title=</span><span class="s">&quot;Hello World&quot;</span><span class="nt">&gt;</span><span class="err">&lt;</span>/ui-dialog&gt;
-</span></code></pre></td></tr></table></div></figure>
+<pre class="language-markup"><code>&lt;link rel="import" href="ui-dialog.html"&gt;
+
+&lt;ui-dialog title="Hello World"&gt;&lt;/ui-dialog&gt;
+</code></pre>
 
 
 <p>The cool thing here is not what you see—a <code>&lt;link&gt;</code> tag that imports a custom element—but rather, what you don&#8217;t. Normally when using jQuery UI widgets, you have to worry about a number of JavaScript and CSS dependencies, such as jQuery Core, the widget factory, a CSS theme, and more. With HTML imports you don&#8217;t, as the import takes care of bundling everything you need.</p>
@@ -145,9 +131,8 @@
 
 <p>Suppose you want to write a component that depends on jQuery. How might you do that? Well, the easiest way is to package jquery.js within your web component, and to reference it in your HTML import with a simple <code>&lt;script&gt;</code> tag:</p>
 
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;jquery.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre class="language-markup"><code>&lt;script src="jquery.js"&gt;&lt;/script&gt;
+</code></pre>
 
 
 <p>This works, and is simple, but it has a serious repercussion: jquery.js is bundled with your component. That means, with this approach, if a user imports five jQuery-dependent components, the browser will download jQuery five times. And because reducing HTTP requests is a vital web performance optimization, this is <a href="https://www.youtube.com/watch?v=H8OxKx6zKkQ">kind of a big deal</a>.</p>
@@ -176,9 +161,8 @@
 
 <p>You could refer to Moment.js on some CDN, for instance the following <code>&lt;script&gt;</code> tag imports Moment.js from <a href="http://cdnjs.com/">cdnjs</a>:</p>
 
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;//cdnjs.cloudflare.com/ajax/libs/moment.js/2.7.0/moment.min.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre class="language-markup"><code>&lt;script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.7.0/moment.min.js"&gt;&lt;/script&gt;
+</code></pre>
 
 
 <p>This approach works, but it has some major disadvantages. For one, the CDN approach only prevents multiple downloads of Moment.js if everyone magically chooses to retrieve Moment.js from the exact same URL—same CDN provider, same protocol, same version, and so forth. Second, the CDN reference also prevents the usage of script concatenation tooling, which is an essential performance optimization, especially for mobile. Because of this, I don&#8217;t see CDNs as a viable option for managing external dependencies.</p>
@@ -187,17 +171,12 @@
 
 <p>The next option you have is enforcing a specific directory structure on the consumer of your component. For instance, you could enforce that users have a folder structure that looks like this:</p>
 
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'>.
-</span><span class='line'>├── momentjs
-</span><span class='line'>│   └── moment.js
-</span><span class='line'>└── formatted-time
-</span><span class='line'>    └── formatted-time.html
-</span></code></pre></td></tr></table></div></figure>
+<pre class="language-shell"><code>.
+├── momentjs
+│   └── moment.js
+└── formatted-time
+    └── formatted-time.html
+</code></pre>
 
 
 <p>With this structure in place, your formatted-time.html file can reference moment.js using <code>&lt;link rel="import" href="../momentjs/moment.js"&gt;</code>. This is the strategy Polymer itself uses, as all Polymer core elements include an import of <code>&lt;link rel="import" href="../polymer/polymer.html"&gt;</code> to get the dependencies they need.</p>
@@ -212,27 +191,16 @@
 
 <p>The next option is feature detection, or determining whether your dependency has already been loaded, and if not, loading it yourself. For example, with the <code>&lt;formatted-time&gt;</code> element you could use the following code to load conditionally load Moment.js:</p>
 
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="o">&lt;</span><span class="nx">script</span><span class="o">&gt;</span>
-</span><span class='line'>  <span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-</span><span class='line'>      <span class="kd">var</span> <span class="nx">script</span><span class="p">;</span>
-</span><span class='line'>      <span class="k">if</span> <span class="p">(</span> <span class="k">typeof</span> <span class="nb">window</span><span class="p">.</span><span class="nx">moment</span> <span class="o">===</span> <span class="s2">&quot;undefined&quot;</span> <span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>          <span class="nx">script</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span> <span class="s2">&quot;script&quot;</span> <span class="p">);</span>
-</span><span class='line'>          <span class="nx">script</span><span class="p">.</span><span class="nx">src</span> <span class="o">=</span> <span class="s2">&quot;path/to/formatted-time/moment.js&quot;</span><span class="p">;</span>
-</span><span class='line'>          <span class="nb">document</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">appendChild</span><span class="p">(</span> <span class="nx">script</span> <span class="p">);</span>
-</span><span class='line'>      <span class="p">}</span>
-</span><span class='line'>  <span class="p">}());</span>
-</span><span class='line'><span class="o">&lt;</span><span class="err">/script&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre class="language-markup line-numbers"><code>&lt;script&gt;
+    (function() {
+        var script;
+        if ( typeof window.moment === "undefined" ) {
+            script = document.createElement( "script" );
+            script.src = "path/to/formatted-time/moment.js";
+            document.body.appendChild( script );
+        }
+    }());
+&lt;/script&gt;</code></pre>
 
 
 <blockquote><p><strong>Update August 13th, 2014</strong>—As is, this code is not enough to prevent loading Moment.js multiple times, as two modules could request the script before it has been asynchronously fetched and parsed. To avoid multiple requests correctly you&#8217;d need to <a href="#comment-1540666406">additionally add some boolean logic</a>. Thanks <a href="https://twitter.com/webreflection">@webreflection</a>!</p></blockquote>
@@ -285,7 +253,7 @@
     </p>
     <p class="author_card meta">
       <img src="/images/me/1.jpg" alt="Me!" id="post_me">
-      TJ VanToll is a developer advocate for <a href="http://telerik.com">Telerik</a>, a <a href="http://jqueryui.com/about/">jQuery team member</a>, and the author of <a href="http://tjvantoll.com/jquery-ui-in-action.html">jQuery UI in Action</a>. TJ has over a decade of web development experience—specializing in performance and the mobile web—and <a href="/speaking">speaks</a> about his research at conferences around the world. When not online, TJ is generally found talking about himself in the third person. If you like hearing TJ talk about himself, you should consider following him on <a href="http://twitter.com/tjvantoll">Twitter</a> or <a href="https://plus.google.com/+TJVanToll?rel=author" rel="author">Google+</a>.
+      TJ VanToll is a developer advocate for <a href="http://telerik.com">Telerik</a>, a <a href="http://jqueryui.com/about/">jQuery team member</a>, and the author of <a href="http://tjvantoll.com/jquery-ui-in-action.html">jQuery UI in Action</a>. TJ has over a decade of web development experience—specializing in performance and the mobile web—and <a href="/speaking">speaks</a> about his research at conferences around the world.TJ is <a href="http://twitter.com/tjvantoll">@tjvantoll</a> on Twitter and <a href="https://plus.google.com/+TJVanToll?rel=author" rel="author">+TJVanToll</a> on Google+.
     </p>
     
       <div class="sharing">
@@ -397,8 +365,7 @@
 
 
 
-
-
+Included file 'google_plus_one.html' not found in _includes directory
 
   <script type="text/javascript">
     (function(){
@@ -411,8 +378,7 @@
   </script>
 
 
-
-
+Included file 'custom/after_footer.html' not found in _includes directory
 
 </body>
 </html>

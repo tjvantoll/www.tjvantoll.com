@@ -21,12 +21,7 @@
   <link rel="canonical" href="http://tjvantoll.com/2013/12/06/why-is-styling-form-elements-so-damn-hard">
   <link rel="author" href="https://plus.google.com/+TJVanToll">
 
-  <!--[if !lte IE 7]><!-->
-    <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet">
-  <!--<![endif]-->
-  <!--[if lte IE 7]>
-    <link rel="stylesheet" href="/stylesheets/old-ie.css" media="screen, projection">
-  <![endif]-->
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet">
   
   <!--Custom script concatenation
   <script src="/javascripts/modernizr-2.5.3.js"></script>
@@ -38,12 +33,6 @@
   <script src="/javascripts/build/scripts.js"></script>
 
   <link href="/atom.xml" rel="alternate" title="TJ VanToll's Blog" type="application/atom+xml">
-  <style>
-	/* Fonts from Google"s Web font directory at http://google.com/webfonts */
-	/*@import url(http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic);
-	@import url(http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic);*/
-</style>
-
   
   <script type="text/javascript">
   	if (window.location.host.indexOf('local') == -1) {
@@ -138,17 +127,12 @@
 
 <p>To start our discussion, consider this simple <code>&lt;select&gt;</code> element.</p>
 
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;select&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;option&gt;</span>One<span class="nt">&lt;/option&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;option&gt;</span>Two<span class="nt">&lt;/option&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;option&gt;</span>Three<span class="nt">&lt;/option&gt;</span>
-</span><span class='line'><span class="nt">&lt;/select&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre class="language-markup"><code>&lt;select&gt;
+    &lt;option&gt;One&lt;/option&gt;
+    &lt;option&gt;Two&lt;/option&gt;
+    &lt;option&gt;Three&lt;/option&gt;
+&lt;/select&gt;
+</code></pre>
 
 
 <p>Here&#8217;s a sampling of a few different renderings. The two on the left are Chrome and Firefox for OS X, the two on the right are IE and Chrome for Windows.</p>
@@ -177,25 +161,16 @@
 
 <p>A number of browsers now offer styling hooks through vendor prefixed pseudo elements. (I created a <a href="/2013/12/06/why-is-styling-form-elements-so-damn-hard/">full list</a> if you&#8217;d like to peruse them). For instance <code>::-ms-check</code> lets you play with the look of checkboxes and radio buttons in IE.</p>
 
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;style&gt;</span>
-</span><span class='line'>    <span class="o">:</span><span class="nd">:-ms-check</span> <span class="p">{</span>
-</span><span class='line'>        <span class="k">color</span><span class="o">:</span> <span class="nb">red</span><span class="p">;</span>
-</span><span class='line'>        <span class="k">background</span><span class="o">:</span> <span class="nb">black</span><span class="p">;</span>
-</span><span class='line'>        <span class="k">padding</span><span class="o">:</span> <span class="m">1em</span><span class="p">;</span>
-</span><span class='line'>    <span class="p">}</span>
-</span><span class='line'><span class="nt">&lt;/style&gt;</span>
-</span><span class='line'><span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;checkbox&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'><span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;radio&quot;</span><span class="nt">&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre class="language-markup"><code>&lt;style&gt;
+    ::-ms-check {
+        color: red;
+        background: black;
+        padding: 1em;
+    }
+&lt;/style&gt;
+&lt;input type="checkbox"&gt;
+&lt;input type="radio"&gt;
+</code></pre>
 
 
 <p>Which renders as follows.</p>
@@ -222,52 +197,31 @@
 
 <p>And as of Chrome 31, this is now something you can actually do. The following example creates a native <code>&lt;input type="date"&gt;</code>, gives it a new shadow root to use, and implements the calendar using <a href="http://jqueryui.com/datepicker/">jQuery UI&#8217;s datepicker</a>.</p>
 
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;style&gt;</span>
-</span><span class='line'>    <span class="nt">input</span> <span class="p">{</span>
-</span><span class='line'>        <span class="k">height</span><span class="o">:</span> <span class="m">2em</span><span class="p">;</span>
-</span><span class='line'>        <span class="k">width</span><span class="o">:</span> <span class="m">15em</span><span class="p">;</span>
-</span><span class='line'>    <span class="p">}</span>
-</span><span class='line'><span class="nt">&lt;/style&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;date&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="nt">&lt;script&gt;</span>
-</span><span class='line'>    <span class="kd">var</span> <span class="nx">dateRoot</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span> <span class="s2">&quot;input&quot;</span> <span class="p">)</span>
-</span><span class='line'>        <span class="p">.</span><span class="nx">webkitCreateShadowRoot</span><span class="p">();</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="nx">$</span><span class="p">(</span> <span class="s2">&quot;input&quot;</span> <span class="p">).</span><span class="nx">datepicker</span><span class="p">({</span>
-</span><span class='line'>        <span class="nx">dateFormat</span><span class="o">:</span> <span class="s2">&quot;yy-mm-dd&quot;</span><span class="p">,</span>
-</span><span class='line'>        <span class="nx">onSelect</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span> <span class="nx">dateText</span> <span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>            <span class="nx">dateRoot</span><span class="p">.</span><span class="nx">innerHTML</span> <span class="o">=</span> <span class="nx">dateText</span><span class="p">;</span>
-</span><span class='line'>        <span class="p">}</span>
-</span><span class='line'>    <span class="p">});</span>
-</span><span class='line'><span class="nt">&lt;/script&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre class="language-markup line-numbers"><code>&lt;style&gt;
+    input {
+        height: 2em;
+        width: 15em;
+    }
+&lt;/style&gt;
+
+&lt;input type="date"&gt;
+
+&lt;script&gt;
+    var dateRoot = document.querySelector( "input" )
+        .webkitCreateShadowRoot();
+
+    $( "input" ).datepicker({
+        dateFormat: "yy-mm-dd",
+        onSelect: function( dateText ) {
+            dateRoot.innerHTML = dateText;
+        }
+    });
+&lt;/script&gt;</code></pre>
 
 
 <p>And here&#8217;s the example live, although you need Chrome 31+ for it to actually work.</p>
 
-<iframe width="100%" height="300" src="http://jsfiddle.net/tj_vantoll/6qadQ/embedded/result,html,js,css" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
+<iframe width="100%" height="300" src="http://jsfiddle.net/tj_vantoll/9v44L201/embedded/result,html,js,css" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
 
 
 <p>You may notice that there is one big issue with this example. While we do get a custom datepicker, we lose the <code>&lt;input&gt;</code> behavior, including the ability to type in a value.</p>
@@ -318,7 +272,7 @@
     </p>
     <p class="author_card meta">
       <img src="/images/me/1.jpg" alt="Me!" id="post_me">
-      TJ VanToll is a developer advocate for <a href="http://telerik.com">Telerik</a>, a <a href="http://jqueryui.com/about/">jQuery team member</a>, and the author of <a href="http://tjvantoll.com/jquery-ui-in-action.html">jQuery UI in Action</a>. TJ has over a decade of web development experience—specializing in performance and the mobile web—and <a href="/speaking">speaks</a> about his research at conferences around the world. When not online, TJ is generally found talking about himself in the third person. If you like hearing TJ talk about himself, you should consider following him on <a href="http://twitter.com/tjvantoll">Twitter</a> or <a href="https://plus.google.com/+TJVanToll?rel=author" rel="author">Google+</a>.
+      TJ VanToll is a developer advocate for <a href="http://telerik.com">Telerik</a>, a <a href="http://jqueryui.com/about/">jQuery team member</a>, and the author of <a href="http://tjvantoll.com/jquery-ui-in-action.html">jQuery UI in Action</a>. TJ has over a decade of web development experience—specializing in performance and the mobile web—and <a href="/speaking">speaks</a> about his research at conferences around the world.TJ is <a href="http://twitter.com/tjvantoll">@tjvantoll</a> on Twitter and <a href="https://plus.google.com/+TJVanToll?rel=author" rel="author">+TJVanToll</a> on Google+.
     </p>
     
       <div class="sharing">
@@ -430,8 +384,7 @@
 
 
 
-
-
+Included file 'google_plus_one.html' not found in _includes directory
 
   <script type="text/javascript">
     (function(){
@@ -444,8 +397,7 @@
   </script>
 
 
-
-
+Included file 'custom/after_footer.html' not found in _includes directory
 
 </body>
 </html>

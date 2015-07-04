@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Mobile | TJ VanToll's Blog]]></title>
   <link href="http://tjvantoll.com/blog/categories/mobile/atom.xml" rel="self"/>
   <link href="http://tjvantoll.com/"/>
-  <updated>2015-06-25T11:24:59-04:00</updated>
+  <updated>2015-07-04T11:17:31-04:00</updated>
   <id>http://tjvantoll.com/</id>
   <author>
     <name><![CDATA[TJ VanToll]]></name>
@@ -22,9 +22,9 @@
 
 <p>I wanted to quickly show the effect this property has. Adding it is as easy as appending <code>minimal-ui</code> to the <code>content</code> attribute of your site's <code>&lt;meta&gt;</code> tag.</p>
 
-<p><code>html
-&lt;meta name="viewport" content="width=device-width, initial-scale=1, minimal-ui"&gt;
-</code></p>
+<pre class="language-markup"><code>&lt;meta name="viewport" content="width=device-width, initial-scale=1, minimal-ui"&gt;
+</code></pre>
+
 
 <p>The two images below show a before and after of applying the property to a test page.</p>
 
@@ -81,14 +81,12 @@
 
 <p>My first attempt was to set an interval that did what I wanted to do in the <code>onscroll</code> event.  Yes the code will run continuously instead of just when the user scrolls, but it's somewhere to start.</p>
 
-<p>``` javascript
-setInterval(function() {</p>
-
-<pre><code>// Logic
+<pre class="language-javascript"><code>
+setInterval(function() {
+    // Logic
+}, 20);
 </code></pre>
 
-<p>}, 20);
-```</p>
 
 <p>The problem with this approach is that iOS Safari, Android &lt;= 2.3, and Opera Mobile do not run any functions queued through <code>setInterval</code> or <code>setTimeout</code> while a scroll is being performed.  The execution will simply be paused until the scroll has completed.</p>
 
@@ -144,18 +142,16 @@ setInterval(function() {</p>
 
 <p>Another <em>solution</em> out there is to disable native scrolling altogether and use JavaScript to mimic scrolling instead.</p>
 
-<p>``` javascript
-$('window').on('touchmove', function(event) {</p>
+<pre class="language-javascript"><code>
+$('window').on('touchmove', function(event) {
+    //Prevent the window from being scrolled.
+    event.preventDefault();
 
-<pre><code>//Prevent the window from being scrolled.
-event.preventDefault();
-
-//Do something like call window.scrollTo to mimic the scrolling
-//request the user made.
+    //Do something like call window.scrollTo to mimic the scrolling
+    //request the user made.
+});
 </code></pre>
 
-<p>});
-```</p>
 
 <p>Unfortunately such techniques are usually utilized to create fixed height/width scrolling areas and are not intended (nor especially practical) for full screens.  If you are only interested in a scrolling event for a small section of the page you might want to look into something such as <a href="http://cubiq.org/iscroll-4">iScroll 4</a>.</p>
 

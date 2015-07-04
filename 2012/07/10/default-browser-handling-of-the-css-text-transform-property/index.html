@@ -21,12 +21,7 @@
   <link rel="canonical" href="http://tjvantoll.com/2012/07/10/default-browser-handling-of-the-css-text-transform-property">
   <link rel="author" href="https://plus.google.com/+TJVanToll">
 
-  <!--[if !lte IE 7]><!-->
-    <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet">
-  <!--<![endif]-->
-  <!--[if lte IE 7]>
-    <link rel="stylesheet" href="/stylesheets/old-ie.css" media="screen, projection">
-  <![endif]-->
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet">
   
   <!--Custom script concatenation
   <script src="/javascripts/modernizr-2.5.3.js"></script>
@@ -38,12 +33,6 @@
   <script src="/javascripts/build/scripts.js"></script>
 
   <link href="/atom.xml" rel="alternate" title="TJ VanToll's Blog" type="application/atom+xml">
-  <style>
-	/* Fonts from Google"s Web font directory at http://google.com/webfonts */
-	/*@import url(http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic);
-	@import url(http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic);*/
-</style>
-
   
   <script type="text/javascript">
   	if (window.location.host.indexOf('local') == -1) {
@@ -129,23 +118,16 @@
 
 <p>Where it gets interesting is that all browsers define default <code>text-transform</code> properties for certain form elements.  What does this mean?  <!--more-->Let&#8217;s say you have the following markup:</p>
 
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;style&gt;</span>
-</span><span class='line'>    <span class="nt">div</span> <span class="p">{</span> <span class="k">text-transform</span><span class="o">:</span> <span class="k">uppercase</span><span class="p">;</span> <span class="p">}</span>
-</span><span class='line'><span class="nt">&lt;/style&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="nt">&lt;div&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;text&quot;</span> <span class="na">value=</span><span class="s">&quot;foo&quot;</span> <span class="nt">/&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;submit&quot;</span> <span class="na">value=</span><span class="s">&quot;bar&quot;</span> <span class="nt">/&gt;</span>
-</span><span class='line'><span class="nt">&lt;/div&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre class="language-markup"><code>
+&lt;style&gt;
+    div { text-transform: uppercase; }
+&lt;/style&gt;
+
+&lt;div&gt;
+    &lt;input type="text" value="foo" /&gt;
+    &lt;input type="submit" value="bar" /&gt;
+&lt;/div&gt;
+</code></pre>
 
 
 <p>Both <code>foo</code> and <code>bar</code> will appear lowercased in all major browsers.  You can see this for yourself below:</p>
@@ -217,49 +199,29 @@
 
 <p>For example:</p>
 
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="cp">&lt;!DOCTYPE html&gt;</span>
-</span><span class='line'><span class="nt">&lt;html&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;head&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;style&gt;</span>
-</span><span class='line'>            <span class="nt">form</span> <span class="p">{</span> <span class="k">text-transform</span><span class="o">:</span> <span class="k">uppercase</span><span class="p">;</span> <span class="p">}</span>
-</span><span class='line'>        <span class="nt">&lt;/style&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;/head&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;body&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;form&gt;</span>
-</span><span class='line'>            <span class="c">&lt;!-- &quot;foo&quot; will be uppercase in IE, Firefox, and Opera --&gt;</span>
-</span><span class='line'>            <span class="c">&lt;!-- &quot;foo&quot; will be lowercase in WebKit based browsers --&gt;</span>
-</span><span class='line'>            <span class="nt">&lt;button&gt;</span>foo<span class="nt">&lt;/button&gt;</span>
-</span><span class='line'>
-</span><span class='line'>            <span class="c">&lt;!-- &quot;bar&quot; will be uppercase in Firefox and Opera --&gt;</span>
-</span><span class='line'>            <span class="c">&lt;!-- &quot;bar&quot; will be lowercase in IE and WebKit based browsers --&gt;</span>
-</span><span class='line'>            <span class="nt">&lt;select&gt;</span>
-</span><span class='line'>                <span class="nt">&lt;option&gt;</span>bar<span class="nt">&lt;/option&gt;</span>
-</span><span class='line'>            <span class="nt">&lt;/select&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;/form&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;/body&gt;</span>
-</span><span class='line'><span class="nt">&lt;/html&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre class="language-markup"><code>
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+    &lt;head&gt;
+        &lt;style&gt;
+            form { text-transform: uppercase; }
+        &lt;/style&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+        &lt;form&gt;
+            &lt;!-- "foo" will be uppercase in IE, Firefox, and Opera --&gt;
+            &lt;!-- "foo" will be lowercase in WebKit based browsers --&gt;
+            &lt;button&gt;foo&lt;/button&gt;
+
+            &lt;!-- "bar" will be uppercase in Firefox and Opera --&gt;
+            &lt;!-- "bar" will be lowercase in IE and WebKit based browsers --&gt;
+            &lt;select&gt;
+                &lt;option&gt;bar&lt;/option&gt;
+            &lt;/select&gt;
+        &lt;/form&gt;
+    &lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
 
 
 <h3>Consistency</h3>
@@ -268,17 +230,13 @@
 
 <p>Therefore to get consistent behavior you would <em>think</em> you would need to set the default value of <code>button</code> and <code>select</code> elements to either <code>none</code> or <code>inherit</code>.</p>
 
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="c">/* Option 1 - Don&#39;t inherit values in all browsers */</span>
-</span><span class='line'><span class="nt">button</span><span class="o">,</span> <span class="nt">select</span> <span class="p">{</span> <span class="k">text-transform</span><span class="o">:</span> <span class="k">none</span><span class="p">;</span> <span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'><span class="c">/* Option 2 - Inherit values in all browsers */</span>
-</span><span class='line'><span class="nt">button</span><span class="o">,</span> <span class="nt">select</span> <span class="p">{</span> <span class="k">text-transform</span><span class="o">:</span> <span class="k">inherit</span><span class="p">;</span> <span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre class="language-css"><code>
+/* Option 1 - Don't inherit values in all browsers */
+button, select { text-transform: none; }
+
+/* Option 2 - Inherit values in all browsers */
+button, select { text-transform: inherit; }
+</code></pre>
 
 
 <p>But unfortunately for whatever reason Option 2 doesn&#8217;t work on the <code>&lt;select&gt;</code> in IE &lt;= 7, Safari, and most interestingly, doesn&#8217;t take effect in Chrome until you click on <code>&lt;select&gt;</code>.  You can verify this behavior for yourself below:</p>
@@ -288,9 +246,9 @@
 
 <p>Fortunately Option 1 does indeed produce the same behavior in IE6+, Firefox, Chrome, Safari, and Opera.  Therefore to normalize <code>text-transform</code> you need to include the following in your stylesheet.</p>
 
-<figure class='code'><figcaption class='not_empty'><span>Cross Browser text-transform Goodness</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nt">button</span><span class="o">,</span> <span class="nt">select</span> <span class="p">{</span> <span class="k">text-transform</span><span class="o">:</span> <span class="k">none</span><span class="p">;</span> <span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre class="language-css"><code>
+button, select { text-transform: none; }
+</code></pre>
 
 
 <h4>Update (January 21st, 2013)</h4>
@@ -331,7 +289,7 @@
     </p>
     <p class="author_card meta">
       <img src="/images/me/1.jpg" alt="Me!" id="post_me">
-      TJ VanToll is a developer advocate for <a href="http://telerik.com">Telerik</a>, a <a href="http://jqueryui.com/about/">jQuery team member</a>, and the author of <a href="http://tjvantoll.com/jquery-ui-in-action.html">jQuery UI in Action</a>. TJ has over a decade of web development experience—specializing in performance and the mobile web—and <a href="/speaking">speaks</a> about his research at conferences around the world. When not online, TJ is generally found talking about himself in the third person. If you like hearing TJ talk about himself, you should consider following him on <a href="http://twitter.com/tjvantoll">Twitter</a> or <a href="https://plus.google.com/+TJVanToll?rel=author" rel="author">Google+</a>.
+      TJ VanToll is a developer advocate for <a href="http://telerik.com">Telerik</a>, a <a href="http://jqueryui.com/about/">jQuery team member</a>, and the author of <a href="http://tjvantoll.com/jquery-ui-in-action.html">jQuery UI in Action</a>. TJ has over a decade of web development experience—specializing in performance and the mobile web—and <a href="/speaking">speaks</a> about his research at conferences around the world.TJ is <a href="http://twitter.com/tjvantoll">@tjvantoll</a> on Twitter and <a href="https://plus.google.com/+TJVanToll?rel=author" rel="author">+TJVanToll</a> on Google+.
     </p>
     
       <div class="sharing">
@@ -443,8 +401,7 @@
 
 
 
-
-
+Included file 'google_plus_one.html' not found in _includes directory
 
   <script type="text/javascript">
     (function(){
@@ -457,8 +414,7 @@
   </script>
 
 
-
-
+Included file 'custom/after_footer.html' not found in _includes directory
 
 </body>
 </html>

@@ -9,11 +9,8 @@
   <meta name="author" content="TJ VanToll">
 
   
-  <meta name="description" content="Form fields can be disabled by simply adding the disabled attribute. Simple Disabled Fields1
-2
-3
-&lt;input type=&quot;text&quot; disabled /&gt;
-&lt; &hellip;">
+  <meta name="description" content="Form fields can be disabled by simply adding the disabled attribute. &lt;input type="text" disabled /&gt;
+&lt;textarea disabled&gt;&lt;/textarea&gt &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -25,12 +22,7 @@
   <link rel="canonical" href="http://tjvantoll.com/2012/03/17/Styling-Disabled-Form-Fields">
   <link rel="author" href="https://plus.google.com/+TJVanToll">
 
-  <!--[if !lte IE 7]><!-->
-    <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet">
-  <!--<![endif]-->
-  <!--[if lte IE 7]>
-    <link rel="stylesheet" href="/stylesheets/old-ie.css" media="screen, projection">
-  <![endif]-->
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet">
   
   <!--Custom script concatenation
   <script src="/javascripts/modernizr-2.5.3.js"></script>
@@ -42,12 +34,6 @@
   <script src="/javascripts/build/scripts.js"></script>
 
   <link href="/atom.xml" rel="alternate" title="TJ VanToll's Blog" type="application/atom+xml">
-  <style>
-	/* Fonts from Google"s Web font directory at http://google.com/webfonts */
-	/*@import url(http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic);
-	@import url(http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic);*/
-</style>
-
   
   <script type="text/javascript">
   	if (window.location.host.indexOf('local') == -1) {
@@ -129,13 +115,11 @@
 
 <div class="entry-content"><p>Form fields can be disabled by simply adding the <code>disabled</code> attribute.</p>
 
-<figure class='code'><figcaption class='not_empty'><span>Simple Disabled Fields</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;text&quot;</span> <span class="na">disabled</span> <span class="nt">/&gt;</span>
-</span><span class='line'><span class="nt">&lt;textarea</span> <span class="na">disabled</span><span class="nt">&gt;&lt;/textarea&gt;</span>
-</span><span class='line'><span class="nt">&lt;select</span> <span class="na">disabled</span><span class="nt">&gt;&lt;/select&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre class="language-markup"><code>
+&lt;input type="text" disabled /&gt;
+&lt;textarea disabled&gt;&lt;/textarea&gt;
+&lt;select disabled&gt;&lt;/select&gt;
+</code></pre>
 
 
 <p>Disabled fields cannot be interacted with by the user; the browser will not allow the field to receive focus or be tabbed to.  For an intuitive UI it&#8217;s important that disabled fields are clearly evident to the user.  Users are easily confused and frustrated when attempting to interact with fields that they are not able to.</p>
@@ -152,130 +136,69 @@
 
 <h4>No Value / Selected Attributes</h4>
 
-<figure class='code'><figcaption class='not_empty'><span>Markup Used to Generate the Examples </span><a href='http://jsfiddle.net/ygwnh/12/'>link</a></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;table&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;thead&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;tr&gt;</span>
-</span><span class='line'>            <span class="nt">&lt;th&gt;</span>Enabled<span class="nt">&lt;/th&gt;</span>
-</span><span class='line'>            <span class="nt">&lt;th&gt;</span>Disabled<span class="nt">&lt;/th&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;/tr&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;/thead&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;tbody&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;tr&gt;</span>
-</span><span class='line'>            <span class="nt">&lt;td&gt;&lt;input</span> <span class="na">type=</span><span class="s">&quot;text&quot;</span> <span class="nt">/&gt;&lt;/td&gt;</span>
-</span><span class='line'>            <span class="nt">&lt;td&gt;&lt;input</span> <span class="na">type=</span><span class="s">&quot;text&quot;</span> <span class="na">disabled</span> <span class="nt">/&gt;&lt;/td&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;/tr&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;tr&gt;</span>
-</span><span class='line'>            <span class="nt">&lt;td&gt;&lt;input</span> <span class="na">type=</span><span class="s">&quot;checkbox&quot;</span> <span class="nt">/&gt;&lt;/td&gt;</span>
-</span><span class='line'>            <span class="nt">&lt;td&gt;&lt;input</span> <span class="na">type=</span><span class="s">&quot;checkbox&quot;</span> <span class="na">disabled</span> <span class="nt">/&gt;&lt;/td&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;/tr&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;tr&gt;</span>
-</span><span class='line'>            <span class="nt">&lt;td&gt;&lt;input</span> <span class="na">type=</span><span class="s">&quot;radio&quot;</span> <span class="nt">/&gt;&lt;/td&gt;</span>
-</span><span class='line'>            <span class="nt">&lt;td&gt;&lt;input</span> <span class="na">type=</span><span class="s">&quot;radio&quot;</span> <span class="na">disabled</span> <span class="nt">/&gt;&lt;/td&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;/tr&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;tr&gt;</span>
-</span><span class='line'>            <span class="nt">&lt;td&gt;&lt;select&gt;&lt;/select&gt;&lt;/td&gt;</span>
-</span><span class='line'>            <span class="nt">&lt;td&gt;&lt;select</span> <span class="na">disabled</span><span class="nt">&gt;&lt;/select&gt;&lt;/td&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;/tr&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;tr&gt;</span>
-</span><span class='line'>            <span class="nt">&lt;td&gt;&lt;textarea&gt;&lt;/textarea&gt;&lt;/td&gt;</span>
-</span><span class='line'>            <span class="nt">&lt;td&gt;&lt;textarea</span> <span class="na">disabled</span><span class="nt">&gt;&lt;/textarea&gt;&lt;/td&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;/tr&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;/tbody&gt;</span>
-</span><span class='line'><span class="nt">&lt;/table&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre class="language-markup line-numbers"><code>&lt;table&gt;
+    &lt;thead&gt;
+        &lt;tr&gt;
+            &lt;th&gt;Enabled&lt;/th&gt;
+            &lt;th&gt;Disabled&lt;/th&gt;
+        &lt;/tr&gt;
+    &lt;/thead&gt;
+    &lt;tbody&gt;
+        &lt;tr&gt;
+            &lt;td&gt;&lt;input type="text" /&gt;&lt;/td&gt;
+            &lt;td&gt;&lt;input type="text" disabled /&gt;&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;td&gt;&lt;input type="checkbox" /&gt;&lt;/td&gt;
+            &lt;td&gt;&lt;input type="checkbox" disabled /&gt;&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;td&gt;&lt;input type="radio" /&gt;&lt;/td&gt;
+            &lt;td&gt;&lt;input type="radio" disabled /&gt;&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;td&gt;&lt;select&gt;&lt;/select&gt;&lt;/td&gt;
+            &lt;td&gt;&lt;select disabled&gt;&lt;/select&gt;&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;td&gt;&lt;textarea&gt;&lt;/textarea&gt;&lt;/td&gt;
+            &lt;td&gt;&lt;textarea disabled&gt;&lt;/textarea&gt;&lt;/td&gt;
+        &lt;/tr&gt;
+    &lt;/tbody&gt;
+&lt;/table&gt;</code></pre>
 
 
 <h4>With Value / Selected Attributes</h4>
 
-<figure class='code'><figcaption class='not_empty'><span>Markup Used to Generate the Examples </span><a href='http://jsfiddle.net/ygwnh/12/'>link</a></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;table&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;thead&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;tr&gt;</span>
-</span><span class='line'>            <span class="nt">&lt;th&gt;</span>Enabled w/Value<span class="nt">&lt;/th&gt;</span>
-</span><span class='line'>            <span class="nt">&lt;th&gt;</span>Disabled w/Value<span class="nt">&lt;/th&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;/tr&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;/thead&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;tbody&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;tr&gt;</span>
-</span><span class='line'>            <span class="nt">&lt;td&gt;&lt;input</span> <span class="na">type=</span><span class="s">&quot;text&quot;</span> <span class="na">value=</span><span class="s">&quot;Value&quot;</span> <span class="nt">/&gt;&lt;/td&gt;</span>
-</span><span class='line'>            <span class="nt">&lt;td&gt;&lt;input</span> <span class="na">type=</span><span class="s">&quot;text&quot;</span> <span class="na">disabled</span> <span class="na">value=</span><span class="s">&quot;Value&quot;</span><span class="nt">&gt;&lt;/td&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;tr&gt;</span>
-</span><span class='line'>            <span class="nt">&lt;td&gt;&lt;input</span> <span class="na">type=</span><span class="s">&quot;checkbox&quot;</span> <span class="na">checked</span> <span class="nt">/&gt;&lt;/td&gt;</span>
-</span><span class='line'>            <span class="nt">&lt;td&gt;&lt;input</span> <span class="na">type=</span><span class="s">&quot;checkbox&quot;</span> <span class="na">disabled</span> <span class="na">checked</span> <span class="nt">/&gt;&lt;/td&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;/tr&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;tr&gt;</span>
-</span><span class='line'>            <span class="nt">&lt;td&gt;&lt;input</span> <span class="na">type=</span><span class="s">&quot;radio&quot;</span> <span class="na">checked</span> <span class="nt">/&gt;&lt;/td&gt;</span>
-</span><span class='line'>            <span class="nt">&lt;td&gt;&lt;input</span> <span class="na">type=</span><span class="s">&quot;radio&quot;</span> <span class="na">disabled</span> <span class="na">checked</span> <span class="nt">/&gt;&lt;/td&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;/tr&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;tr&gt;</span>
-</span><span class='line'>            <span class="nt">&lt;td&gt;&lt;select&gt;&lt;option</span> <span class="na">selected</span><span class="nt">&gt;</span>Value<span class="nt">&lt;/option&gt;&lt;/select&gt;&lt;/td&gt;</span>
-</span><span class='line'>            <span class="nt">&lt;td&gt;&lt;select</span> <span class="na">disabled</span><span class="nt">&gt;&lt;option</span> <span class="na">selected</span><span class="nt">&gt;</span>Value<span class="nt">&lt;/option&gt;&lt;/select&gt;&lt;/td&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;/tr&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;tr&gt;</span>
-</span><span class='line'>            <span class="nt">&lt;td&gt;&lt;textarea&gt;</span>Value<span class="nt">&lt;/textarea&gt;&lt;/td&gt;</span>
-</span><span class='line'>            <span class="nt">&lt;td&gt;&lt;textarea</span> <span class="na">disabled</span><span class="nt">&gt;</span>Value<span class="nt">&lt;/textarea&gt;&lt;/td&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;/tr&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;/tbody&gt;</span>
-</span><span class='line'><span class="nt">&lt;/table&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre class="language-markup line-numbers"><code>&lt;table&gt;
+    &lt;thead&gt;
+        &lt;tr&gt;
+            &lt;th&gt;Enabled w/Value&lt;/th&gt;
+            &lt;th&gt;Disabled w/Value&lt;/th&gt;
+        &lt;/tr&gt;
+    &lt;/thead&gt;
+    &lt;tbody&gt;
+        &lt;tr&gt;
+            &lt;td&gt;&lt;input type="text" value="Value" /&gt;&lt;/td&gt;
+            &lt;td&gt;&lt;input type="text" disabled value="Value"&gt;&lt;/td&gt;
+        &lt;tr&gt;
+            &lt;td&gt;&lt;input type="checkbox" checked /&gt;&lt;/td&gt;
+            &lt;td&gt;&lt;input type="checkbox" disabled checked /&gt;&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;td&gt;&lt;input type="radio" checked /&gt;&lt;/td&gt;
+            &lt;td&gt;&lt;input type="radio" disabled checked /&gt;&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;td&gt;&lt;select&gt;&lt;option selected&gt;Value&lt;/option&gt;&lt;/select&gt;&lt;/td&gt;
+            &lt;td&gt;&lt;select disabled&gt;&lt;option selected&gt;Value&lt;/option&gt;&lt;/select&gt;&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;td&gt;&lt;textarea&gt;Value&lt;/textarea&gt;&lt;/td&gt;
+            &lt;td&gt;&lt;textarea disabled&gt;Value&lt;/textarea&gt;&lt;/td&gt;
+        &lt;/tr&gt;
+    &lt;/tbody&gt;
+&lt;/table&gt;</code></pre>
 
 
 <h3>Results</h3>
@@ -328,41 +251,32 @@
 
 <p>So back to selecting IE &lt;= 9.  In my opinion the most elegant way to do this is use <a href="http://msdn.microsoft.com/en-us/library/ms537512.aspx">IE&#8217;s conditional comments</a> to apply classes to the HTML node.  This approach was <a href="http://paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/">first proposed by Paul Irish in 2008</a> and is used in the <a href="http://html5boilerplate.com/">HTML5 boilerplate</a>.  There are many variations but in this case we only need to worry about IE &lt;= 9.</p>
 
-<figure class='code'><figcaption class='not_empty'><span>Applying a Class to IE <= 9</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="c">&lt;!--[if lte IE 9 ]&gt; &lt;html class=&quot;lte9&quot;&gt; &lt;![endif]--&gt;</span>
-</span><span class='line'><span class="c">&lt;!--[if (gt IE 9)|!(IE)]&gt;&lt;!--&gt;</span> <span class="nt">&lt;html</span> <span class="na">class=</span><span class="s">&quot;&quot;</span><span class="nt">&gt;</span> <span class="c">&lt;!--&lt;![endif]--&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre class="language-markup"><code>
+&lt;!--[if lte IE 9 ]&gt; &lt;html class="lte9"&gt; &lt;![endif]--&gt;
+&lt;!--[if (gt IE 9)|!(IE)]&gt;&lt;!--&gt; &lt;html class=""&gt; &lt;!--&lt;![endif]--&gt;
+</code></pre>
 
 
 <p>Then we can apply the <code>background-color</code> as such:</p>
 
-<figure class='code'><figcaption class='not_empty'><span>Normalizing the Disabled Field Display for Windows</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nc">.lte9</span> <span class="nt">input</span><span class="o">[</span><span class="nt">type</span><span class="o">=</span><span class="s1">&#39;text&#39;</span><span class="o">][</span><span class="nt">disabled</span><span class="o">],</span> <span class="nc">.lte9</span> <span class="nt">textarea</span><span class="o">[</span><span class="nt">disabled</span><span class="o">]</span> <span class="p">{</span>
-</span><span class='line'>  <span class="k">background-color</span><span class="o">:</span> <span class="m">#EBEBE4</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre class="language-css"><code>
+.lte9 input[type='text'][disabled], .lte9 textarea[disabled] {
+    background-color: #EBEBE4;
+}
+</code></pre>
 
 
 <p>Alternatively you could use IE&#8217;s conditional comments to apply these rules directly:</p>
 
-<figure class='code'><figcaption class='not_empty'><span>Using IE&#8217;s Conditional Comments</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="c">&lt;!--[if lte IE 9 ]&gt;</span>
-</span><span class='line'><span class="c">  &lt;style&gt;</span>
-</span><span class='line'><span class="c">      input[type=&#39;text&#39;][disabled], textarea[disabled] {</span>
-</span><span class='line'><span class="c">          background-color: #EBEBE4;</span>
-</span><span class='line'><span class="c">      }</span>
-</span><span class='line'><span class="c">  &lt;/style&gt;</span>
-</span><span class='line'><span class="c">&lt;!--&lt;![endif]--&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre class="language-markup"><code>
+&lt;!--[if lte IE 9 ]&gt;
+    &lt;style&gt;
+        input[type='text'][disabled], textarea[disabled] {
+            background-color: #EBEBE4;
+        }
+    &lt;/style&gt;
+&lt;!--&lt;![endif]--&gt;
+</code></pre>
 
 
 <p>Either of these approaches will normalize the display of disabled text inputs and textareas on Windows.</p>
@@ -373,45 +287,36 @@
 
 <p>The above solution will not affect the display of these elements in IE6 because it does not support CSS attribute selectors.  Therefore, if you&#8217;re still supporting IE6 and the display of disabled fields is important to your UI you&#8217;ll need some other sort of hook on the node.  For example a class will work:</p>
 
-<figure class='code'><figcaption class='not_empty'><span>IE6 Disabled Field Markup</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="c">&lt;!--[if IE 6 ]&gt; &lt;html class=&quot;ie6&quot;&gt; &lt;![endif]--&gt;</span>
-</span><span class='line'><span class="c">&lt;!--[if (gt IE 6)|!(IE)]&gt;&lt;!--&gt;</span> <span class="nt">&lt;html</span> <span class="na">class=</span><span class="s">&quot;&quot;</span><span class="nt">&gt;</span> <span class="c">&lt;!--&lt;![endif]--&gt;</span>
-</span><span class='line'>
-</span><span class='line'>/* … */
-</span><span class='line'>
-</span><span class='line'><span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;text&quot;</span> <span class="na">disabled</span> <span class="na">class=</span><span class="s">&quot;disabled&quot;</span> <span class="nt">/&gt;</span>
-</span><span class='line'><span class="nt">&lt;textarea</span> <span class="na">disabled</span> <span class="na">class=</span><span class="s">&quot;disabled&quot;</span><span class="nt">&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre class="language-markup"><code>
+&lt;!--[if IE 6 ]&gt; &lt;html class="ie6"&gt; &lt;![endif]--&gt;
+&lt;!--[if (gt IE 6)|!(IE)]&gt;&lt;!--&gt; &lt;html class=""&gt; &lt;!--&lt;![endif]--&gt;
+
+/* … */
+
+&lt;input type="text" disabled class="disabled" /&gt;
+&lt;textarea disabled class="disabled"&gt;
+&lt;/textarea&gt;&lt;/html&gt;
+</code></pre>
 
 
 <p>Then you can apply the following CSS:</p>
 
-<figure class='code'><figcaption class='not_empty'><span>IE6 Disabled Field Styling</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nc">.ie6</span> <span class="nt">input</span><span class="nc">.disabled</span><span class="o">,</span> <span class="nc">.ie6</span> <span class="nt">textarea</span><span class="nc">.disabled</span> <span class="p">{</span>
-</span><span class='line'>  <span class="k">background-color</span><span class="o">:</span> <span class="m">#EBEBE4</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre class="language-css"><code>
+.ie6 input.disabled, .ie6 textarea.disabled {
+    background-color: #EBEBE4;
+}
+</code></pre>
 
 
 <h3>Other Issues</h3>
 
 <p>A number of browsers including all OS X browsers except Opera, Android, and iOS do a poor job making textareas appear disabled, in some cases even when text is present.  If your UI contains disabled textareas it&#8217;s probably worth adding a little bit of opacity to compensate for browsers that don&#8217;t make it very apparent that you cannot interact with them.</p>
 
-<figure class='code'><figcaption class='not_empty'><span>Normalizing Textarea Disabling</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nt">textarea</span><span class="nd">:disabled</span> <span class="p">{</span>
-</span><span class='line'>  <span class="k">opacity</span><span class="o">:</span> <span class="m">0</span><span class="o">.</span><span class="m">5</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre class="language-css"><code>
+textarea:disabled {
+    opacity: 0.5;
+}
+</code></pre>
 
 
 <p>The effect is subtle but can make a big difference in helping the user to recognize that the field is disabled, especially if multiple textareas are near each other.  Here&#8217;s an example from Chrome 17 on OS X:</p>
@@ -456,7 +361,7 @@
     </p>
     <p class="author_card meta">
       <img src="/images/me/1.jpg" alt="Me!" id="post_me">
-      TJ VanToll is a developer advocate for <a href="http://telerik.com">Telerik</a>, a <a href="http://jqueryui.com/about/">jQuery team member</a>, and the author of <a href="http://tjvantoll.com/jquery-ui-in-action.html">jQuery UI in Action</a>. TJ has over a decade of web development experience—specializing in performance and the mobile web—and <a href="/speaking">speaks</a> about his research at conferences around the world. When not online, TJ is generally found talking about himself in the third person. If you like hearing TJ talk about himself, you should consider following him on <a href="http://twitter.com/tjvantoll">Twitter</a> or <a href="https://plus.google.com/+TJVanToll?rel=author" rel="author">Google+</a>.
+      TJ VanToll is a developer advocate for <a href="http://telerik.com">Telerik</a>, a <a href="http://jqueryui.com/about/">jQuery team member</a>, and the author of <a href="http://tjvantoll.com/jquery-ui-in-action.html">jQuery UI in Action</a>. TJ has over a decade of web development experience—specializing in performance and the mobile web—and <a href="/speaking">speaks</a> about his research at conferences around the world.TJ is <a href="http://twitter.com/tjvantoll">@tjvantoll</a> on Twitter and <a href="https://plus.google.com/+TJVanToll?rel=author" rel="author">+TJVanToll</a> on Google+.
     </p>
     
       <div class="sharing">
@@ -568,8 +473,7 @@
 
 
 
-
-
+Included file 'google_plus_one.html' not found in _includes directory
 
   <script type="text/javascript">
     (function(){
@@ -582,8 +486,7 @@
   </script>
 
 
-
-
+Included file 'custom/after_footer.html' not found in _includes directory
 
 </body>
 </html>

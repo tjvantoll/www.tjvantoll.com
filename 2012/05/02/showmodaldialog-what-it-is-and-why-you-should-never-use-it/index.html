@@ -21,12 +21,7 @@
   <link rel="canonical" href="http://tjvantoll.com/2012/05/02/showmodaldialog-what-it-is-and-why-you-should-never-use-it">
   <link rel="author" href="https://plus.google.com/+TJVanToll">
 
-  <!--[if !lte IE 7]><!-->
-    <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet">
-  <!--<![endif]-->
-  <!--[if lte IE 7]>
-    <link rel="stylesheet" href="/stylesheets/old-ie.css" media="screen, projection">
-  <![endif]-->
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet">
   
   <!--Custom script concatenation
   <script src="/javascripts/modernizr-2.5.3.js"></script>
@@ -38,12 +33,6 @@
   <script src="/javascripts/build/scripts.js"></script>
 
   <link href="/atom.xml" rel="alternate" title="TJ VanToll's Blog" type="application/atom+xml">
-  <style>
-	/* Fonts from Google"s Web font directory at http://google.com/webfonts */
-	/*@import url(http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic);
-	@import url(http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic);*/
-</style>
-
   
   <script type="text/javascript">
   	if (window.location.host.indexOf('local') == -1) {
@@ -146,66 +135,42 @@
 
 <p>To use the <code>showModalDialog</code> method you simply call it with a URL.</p>
 
-<figure class='code'><figcaption class='not_empty'><span>window.showModalDialog Basic Usage</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nb">window</span><span class="p">.</span><span class="nx">showModalDialog</span><span class="p">(</span><span class="s1">&#39;http://google.com&#39;</span><span class="p">);</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre class="language-javascript"><code>
+window.showModalDialog('http://google.com');
+</code></pre>
 
 
 <p>This will open up a modal dialog with Google loaded in it.  In and of itself this isn&#8217;t all that useful.  Usually if you&#8217;re showing a modal dialog you want to get some information back from it.  This is where the window.returnValue comes into play.</p>
 
 <h4>window.returnValue</h4>
 
-<figure class='code'><figcaption class='not_empty'><span>window.returnValue Example</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="c">&lt;!-- page.html --&gt;</span>
-</span><span class='line'><span class="cp">&lt;!DOCTYPE html&gt;</span>
-</span><span class='line'><span class="nt">&lt;html&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;head&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;script&gt;</span>
-</span><span class='line'>      <span class="kd">var</span> <span class="nx">result</span> <span class="o">=</span> <span class="nb">window</span><span class="p">.</span><span class="nx">showModalDialog</span><span class="p">(</span><span class="s1">&#39;modal.html&#39;</span><span class="p">);</span>
-</span><span class='line'>      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span> <span class="c1">//&#39;foo&#39;</span>
-</span><span class='line'>    <span class="nt">&lt;/script&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;/head&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;body&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;/body&gt;</span>
-</span><span class='line'><span class="nt">&lt;/html&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="c">&lt;!-- modal.html --&gt;</span>
-</span><span class='line'><span class="cp">&lt;!DOCTYPE html&gt;</span>
-</span><span class='line'><span class="nt">&lt;html&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;head&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;script&gt;</span>
-</span><span class='line'>      <span class="nb">window</span><span class="p">.</span><span class="nx">returnValue</span> <span class="o">=</span> <span class="s1">&#39;foo&#39;</span><span class="p">;</span>
-</span><span class='line'>      <span class="nb">window</span><span class="p">.</span><span class="nx">close</span><span class="p">();</span>
-</span><span class='line'>    <span class="nt">&lt;/script&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;/head&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;body&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;/body&gt;</span>
-</span><span class='line'><span class="nt">&lt;/html&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre class="language-markup"><code>
+&lt;!-- page.html --&gt;
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;script&gt;
+      var result = window.showModalDialog('modal.html');
+      console.log(result); //'foo'
+    &lt;/script&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+
+&lt;!-- modal.html --&gt;
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;script&gt;
+      window.returnValue = 'foo';
+      window.close();
+    &lt;/script&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
 
 
 <p>In this example when page.html is loaded it will immediately open up a modal dialog with modal.html loaded in it.  It will then block until the modal dialog returns control.  The JavaScript interpreter will literally pause execution as if you had a breakpoint set at that line of code and wait for the result of the modal dialog.</p>
@@ -216,55 +181,32 @@
 
 <p>If you want to pass information to the modal dialog you can do so via the second parameter of <code>window.showModalDialog</code>.  Those values will be available in the modal dialog&#8217;s <code>window.dialogArguments</code> property.</p>
 
-<figure class='code'><figcaption class='not_empty'><span>window.returnValue Example</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="c">&lt;!-- page.html --&gt;</span>
-</span><span class='line'><span class="cp">&lt;!DOCTYPE html&gt;</span>
-</span><span class='line'><span class="nt">&lt;html&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;head&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;script&gt;</span>
-</span><span class='line'>      <span class="nb">window</span><span class="p">.</span><span class="nx">showModalDialog</span><span class="p">(</span><span class="s1">&#39;modal.html&#39;</span><span class="p">,</span> <span class="s1">&#39;foo&#39;</span><span class="p">);</span>
-</span><span class='line'>    <span class="nt">&lt;/script&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;/head&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;body&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;/body&gt;</span>
-</span><span class='line'><span class="nt">&lt;/html&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="c">&lt;!-- modal.html --&gt;</span>
-</span><span class='line'><span class="cp">&lt;!DOCTYPE html&gt;</span>
-</span><span class='line'><span class="nt">&lt;html&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;head&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;script&gt;</span>
-</span><span class='line'>      <span class="nx">alert</span><span class="p">(</span><span class="nb">window</span><span class="p">.</span><span class="nx">dialogArguments</span><span class="p">);</span> <span class="c1">//&#39;foo&#39;</span>
-</span><span class='line'>      <span class="nb">window</span><span class="p">.</span><span class="nx">close</span><span class="p">();</span>
-</span><span class='line'>    <span class="nt">&lt;/script&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;/head&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;body&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;/body&gt;</span>
-</span><span class='line'><span class="nt">&lt;/html&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre class="language-markup"><code>
+&lt;!-- page.html --&gt;
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;script&gt;
+      window.showModalDialog('modal.html', 'foo');
+    &lt;/script&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+
+&lt;!-- modal.html --&gt;
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;script&gt;
+      alert(window.dialogArguments); //'foo'
+      window.close();
+    &lt;/script&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
 
 
 <h4>Further Options</h4>
@@ -362,7 +304,7 @@
     </p>
     <p class="author_card meta">
       <img src="/images/me/1.jpg" alt="Me!" id="post_me">
-      TJ VanToll is a developer advocate for <a href="http://telerik.com">Telerik</a>, a <a href="http://jqueryui.com/about/">jQuery team member</a>, and the author of <a href="http://tjvantoll.com/jquery-ui-in-action.html">jQuery UI in Action</a>. TJ has over a decade of web development experience—specializing in performance and the mobile web—and <a href="/speaking">speaks</a> about his research at conferences around the world. When not online, TJ is generally found talking about himself in the third person. If you like hearing TJ talk about himself, you should consider following him on <a href="http://twitter.com/tjvantoll">Twitter</a> or <a href="https://plus.google.com/+TJVanToll?rel=author" rel="author">Google+</a>.
+      TJ VanToll is a developer advocate for <a href="http://telerik.com">Telerik</a>, a <a href="http://jqueryui.com/about/">jQuery team member</a>, and the author of <a href="http://tjvantoll.com/jquery-ui-in-action.html">jQuery UI in Action</a>. TJ has over a decade of web development experience—specializing in performance and the mobile web—and <a href="/speaking">speaks</a> about his research at conferences around the world.TJ is <a href="http://twitter.com/tjvantoll">@tjvantoll</a> on Twitter and <a href="https://plus.google.com/+TJVanToll?rel=author" rel="author">+TJVanToll</a> on Google+.
     </p>
     
       <div class="sharing">
@@ -474,8 +416,7 @@
 
 
 
-
-
+Included file 'google_plus_one.html' not found in _includes directory
 
   <script type="text/javascript">
     (function(){
@@ -488,8 +429,7 @@
   </script>
 
 
-
-
+Included file 'custom/after_footer.html' not found in _includes directory
 
 </body>
 </html>

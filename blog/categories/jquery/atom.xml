@@ -4,7 +4,7 @@
   <title><![CDATA[Category: jQuery | TJ VanToll's Blog]]></title>
   <link href="http://tjvantoll.com/blog/categories/jquery/atom.xml" rel="self"/>
   <link href="http://tjvantoll.com/"/>
-  <updated>2015-06-25T11:24:59-04:00</updated>
+  <updated>2015-07-04T11:17:31-04:00</updated>
   <id>http://tjvantoll.com/</id>
   <author>
     <name><![CDATA[TJ VanToll]]></name>
@@ -37,74 +37,56 @@
     <id>http://tjvantoll.com/2013/03/28/shorthand-for-preventing-default-event-actions-with-jquery</id>
     <content type="html"><![CDATA[<p>The common way of preventing the default action of an event is to call <a href="http://api.jquery.com/event.preventDefault/">preventDefault</a> on its <a href="http://api.jquery.com/category/event-object/">Event Object</a>:</p>
 
-<p>``` html
-<a href="http://google.com">Google</a></p>
-
-<script>
+<pre class="language-markup"><code>&lt;a href="http://google.com">Google&lt;/a&gt;
+&lt;script&gt;
     // Prevent the default action (navigating to google.com)
     $( "a" ).on( "click", function( event ) {
         event.preventDefault();
     });
-</script>
+&lt;/script&gt;
+</code></pre>
 
-
-<p>```</p>
 
 <p>...which works just fine.  But if all you need to do is prevent the default action, <code>jQuery.fn.on</code> provides a handy shorthand.  Per <a href="http://api.jquery.com/on/#on-events-selector-data-handlereventObject">its docs</a>:</p>
 
-<p><em>The value <code>false</code> is also allowed as a shorthand for a function that simply does <code>return false</code>.</em></p>
+<blockquote><p>“The value <code>false</code> is also allowed as a shorthand for a function that simply does <code>return false</code>.”</p></blockquote>
 
 <!--more-->
 
 
 <p>Therefore, the same example could be written as follows:</p>
 
-<p>``` html
-<a href="http://google.com">Google</a></p>
-
-<script>
+<pre class="language-markup"><code>&lt;a href="http://google.com">Google&lt;/a&gt;
+&lt;script&gt;
     $( "a" ).on( "click", false );
-</script>
+&lt;/script&gt;
+</code></pre>
 
-
-<p>```</p>
 
 <p>The same approach will also work using delegated events:</p>
 
-<p>``` html
-<nav></p>
-
-<pre><code>&lt;a href="http://google.com"&gt;Google&lt;/a&gt;
-&lt;a href="http://twitter.com"&gt;Twitter&lt;/a&gt;
-&lt;a href="http://facebook.com"&gt;Facebook&lt;/a&gt;
+<pre class="language-markup"><code>&lt;nav&gt;
+    &lt;a href="http://google.com"&gt;Google&lt;/a&gt;
+    &lt;a href="http://twitter.com"&gt;Twitter&lt;/a&gt;
+    &lt;a href="http://facebook.com"&gt;Facebook&lt;/a&gt;
+&lt;/nav&gt;
+&lt;script&gt;
+    $( "nav" ).on( "click", "a", false );
+&lt;/script&gt;
 </code></pre>
 
-<p></nav></p>
-
-<script>
-    $( "nav" ).on( "click", "a", false );
-</script>
-
-
-<p>```</p>
 
 <h3>Update: April 1st, 2013</h3>
 
 <p>As noted in the comments, using the <code>false</code> shorthand is the equivalent of <code>event.preventDefault(); event.stopPropagation();</code>.  Therefore when using the shorthand, the event will not bubble to parent elements (which may or may not be what you want to happen).  The following example illustrates this:</p>
 
-<p>``` html</p>
-
-<div id="container-1">
-    <a id="a-1" href="http://google.com">Google</a>
-</div>
-
-
-<div id="container-2">
-    <a id="a-2" href="http://google.com">Google</a>
-</div>
-
-
-<script>
+<pre class="language-markup"><code>&lt;div id="container-1"&gt;
+    &lt;a id="a-1" href="http://google.com"&gt;Google&lt;/a&gt;
+&lt;/div&gt;
+&lt;div id="container-2"&gt;
+    &lt;a id="a-2" href="http://google.com"&gt;Google&lt;/a&gt;
+&lt;/div&gt;
+&lt;script&gt;
     $( "#a-1" ).on( "click", function( event ) {
         event.preventDefault();
     });
@@ -116,10 +98,9 @@
     // When a#a-2 is clicked this will not fire because the shorthand
     // stops propagation.
     $( "#container-2" ).on( "click", function(){} );
-</script>
+&lt;/script&gt;
+</code></pre>
 
-
-<p>```</p>
 ]]></content>
   </entry>
   
@@ -145,44 +126,31 @@
 
 <p>IE versions &lt; 10 support <a href="http://msdn.microsoft.com/en-us/library/ms537512(v=vs.85).aspx">conditional comments</a> that can be used to detect Internet Explorer.  For example the <a href="http://html5boilerplate.com/">HTML5 boilerplate</a> <a href="https://github.com/h5bp/html5-boilerplate/blob/master/index.html">uses the following</a> to show a warning to users using IE &lt; 7:</p>
 
-<p>``` html</p>
+<pre class="language-markup"><code>&lt;!--[if lt IE 7]&gt;
+    &lt;p class="chromeframe"&gt;
+        You are using an &lt;strong&gt;outdated&lt;/strong&gt; browser. Please
+        &lt;a href="http://browsehappy.com/"&gt;upgrade your browser&lt;/a&gt;
+        or &lt;a href="http://www.google.com/chromeframe/?redirect=true"&gt;
+        activate Google Chrome Frame&lt;/a&gt; to improve your experience.
+    &lt;/p&gt;
+&lt;![endif]--&gt;
+</code></pre>
 
-<!--[if lt IE 7]>
-    <p class="chromeframe">
-        You are using an <strong>outdated</strong> browser. Please
-        <a href="http://browsehappy.com/">upgrade your browser</a>
-        or <a href="http://www.google.com/chromeframe/?redirect=true">
-        activate Google Chrome Frame</a> to improve your experience.
-    </p>
-<![endif]-->
-
-
-<p>```</p>
 
 <p>This approach can be used to add conditional classes on the <code>html</code> element (<a href="http://paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/">via Paul Irish</a>).</p>
 
-<p>``` html Conditional classes on the html element</p>
+<pre class="language-markup"><code>&lt;!--[if lt IE 7]&gt;      &lt;html class="ie6"&gt; &lt;![endif]--&gt;
+&lt;!--[if IE 7]&gt;         &lt;html class="ie7"&gt; &lt;![endif]--&gt;
+&lt;!--[if IE 8]&gt;         &lt;html class="ie8"&gt; &lt;![endif]--&gt;
+&lt;!--[if gt IE 8]&gt;&lt;!--&gt; &lt;html&gt;         &lt;!--&lt;![endif]--&gt;
+</code></pre>
 
-<!--[if lt IE 7]>      <html class="ie6"> <![endif]-->
-
-
-<!--[if IE 7]>         <html class="ie7"> <![endif]-->
-
-
-<!--[if IE 8]>         <html class="ie8"> <![endif]-->
-
-
-<!--[if gt IE 8]><!-->
-
-
-<p> <html>         <!--<![endif]-->
-```</p>
 
 <p>Now the presence of a class on the <code>html</code> element can be used to derive the version of Internet Explorer the user is using:</p>
 
-<p><code>javascript
-$('html').hasClass('ie6'); //True if the user is using IE6
-</code></p>
+<pre class="language-javascript"><code>$('html').hasClass('ie6'); //True if the user is using IE6
+</code></pre>
+
 
 <h3>Option 4: Sniff the User Agent</h3>
 
@@ -193,16 +161,15 @@ $('html').hasClass('ie6'); //True if the user is using IE6
 </div>
 
 
-<p>``` javascript Sniffing the user agent string to test for Internet Explorer
-//Test for Internet Explorer
-if (/MSIE\s([\d.]+)/.test(navigator.userAgent)) {</p>
 
-<pre><code>//Get the IE version.  This will be 6 for IE6, 7 for IE7, etc...
-version = new Number(RegExp.$1);
+
+<pre class="language-javascript"><code>//Test for Internet Explorer
+if (/MSIE\s([\d.]+)/.test(navigator.userAgent)) {
+    //Get the IE version.  This will be 6 for IE6, 7 for IE7, etc...
+    version = new Number(RegExp.$1);
+}
 </code></pre>
 
-<p>}
-```</p>
 ]]></content>
   </entry>
   

@@ -4,7 +4,7 @@
   <title><![CDATA[TJ VanToll's Blog]]></title>
   <link href="http://tjvantoll.com/atom.xml" rel="self"/>
   <link href="http://tjvantoll.com/"/>
-  <updated>2015-06-25T11:24:59-04:00</updated>
+  <updated>2015-07-04T11:17:31-04:00</updated>
   <id>http://tjvantoll.com/</id>
   <author>
     <name><![CDATA[TJ VanToll]]></name>
@@ -32,12 +32,12 @@
 
 <p>Hiding an element in CSS works, but if you need to hide an element you almost certainly need to show it at some point. For this, NativeScript exposes a <code>visibility</code> <em>attribute</em>, which is just a light wrapper around the CSS property. For instance you could also use the following syntax to hide a button:</p>
 
-<pre class="language-markup line-numbers"><code>&lt;Button text="I'm hidden" visibility="collapsed" /&gt;</code></pre>
+<pre class="language-markup"><code>&lt;Button text="I'm hidden" visibility="collapsed" /&gt;</code></pre>
 
 
 <p>This is handy because having an attribute lets you to use <a href="http://docs.nativescript.org/bindings#using-expressions-for-bindings">data-binding expressions</a> to control the value of the attribute, which is the technique I almost always use to control visibility. To give a concrete example, in the code below I use a flag in my data model, <code>"showDetails"</code>, to determine the visibility of a <code>&lt;Label&gt;</code>.</p>
 
-<pre class="language-markup"><code>&lt;Page loaded="loaded"&gt;
+<pre class="language-markup line-numbers"><code>&lt;Page loaded="loaded"&gt;
     &lt;StackLayout&gt;
         &lt;Button text="{{ showDetails ? 'Hide' : 'Show' }}" tap="toggle" /&gt;
         &lt;Label text="Lorem ipsum..." visibility="{{ showDetails ? 'visible' : 'collapsed' }}" /&gt;
@@ -47,7 +47,7 @@
 
 
 
-<pre class="language-javascript"><code>var observable = require("data/observable");
+<pre class="language-javascript line-numbers"><code>var observable = require("data/observable");
 var pageData = new observable.Observable();
 
 exports.loaded = function(args) {
@@ -129,7 +129,7 @@ exports.toggle = function() {
 
 <p>Paste the following code into your newly created <code>gulpfile.js</code>:</p>
 
-<pre class="language-javascript"><code>var gulp = require("gulp");
+<pre class="language-javascript line-numbers"><code>var gulp = require("gulp");
 var jscs = require("gulp-jscs");
 var jshint = require("gulp-jshint");
 
@@ -286,7 +286,7 @@ Error: Unexpected identifier at my-file.js :
 
 
 
-<pre class="language-javascript"><code>// main-page.js
+<pre class="language-javascript line-numbers"><code>// main-page.js
 function pageLoaded(args) {
     var page = args.object;
 }</code></pre>
@@ -294,7 +294,7 @@ function pageLoaded(args) {
 
 <p>By default this app does not show a navigation bar, because that&#8217;s the default iOS behavior as well. Here&#8217;s how you can alter your JavaScript to show the navigation bar on iOS with a title:</p>
 
-<pre class="language-javascript"><code>// main-page.js
+<pre class="language-javascript line-numbers"><code>// main-page.js
 var frameModule = require("ui/frame");
 
 exports.pageLoaded = function(args) {
@@ -330,7 +330,7 @@ exports.pageLoaded = function(args) {
 
 <p>Let&#8217;s say you want to change your navigation bar&#8217;s background color. Here&#8217;s how you make the navigation bar red:</p>
 
-<pre class="language-javascript"><code>// main-page.js
+<pre class="language-javascript line-numbers"><code>// main-page.js
 var frameModule = require("ui/frame");
 
 exports.pageLoaded = function(args) {
@@ -524,8 +524,7 @@ exports.pageLoaded = function(args) {
 
 <p>I start by downloading Kendo UI Core from Bower, as it&#8217;s my preferred package manager for web apps:</p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ bower install kendo-ui-core</span></code></pre></td></tr></table></div></figure>
+<pre class="language-shell"><code>$ bower install kendo-ui-core</code></pre>
 
 
 <p>You can alternatively <a href="https://github.com/telerik/kendo-ui-core/archive/master.zip">download Kendo UI Core from GitHub</a>, but Bower is my jam. (Not to be confused with <a href="http://jamjs.org/">Jam</a>, which—believe it or not—is actually the name of a competing JavaScript package manager. Who knew?)</p>
@@ -534,41 +533,23 @@ exports.pageLoaded = function(args) {
 
 <p>Next I create an index.html and paste in the following boilerplate HTML:</p>
 
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="cp">&lt;!doctype html&gt;</span>
-</span><span class='line'><span class="nt">&lt;html</span> <span class="na">lang=</span><span class="s">&quot;en&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'><span class="nt">&lt;head&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">&quot;utf-8&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;title&gt;</span>My Project<span class="nt">&lt;/title&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;meta</span> <span class="na">name=</span><span class="s">&quot;viewport&quot;</span> <span class="na">content=</span><span class="s">&quot;width=device-width, initial-scale=1&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">&quot;stylesheet&quot;</span> <span class="na">href=</span><span class="s">&quot;bower_components/kendo-ui-core/src/styles/web/kendo.common.core.css&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">&quot;stylesheet&quot;</span> <span class="na">href=</span><span class="s">&quot;bower_components/kendo-ui-core/src/styles/web/kendo.flat.css&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'><span class="nt">&lt;/head&gt;</span>
-</span><span class='line'><span class="nt">&lt;body&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;bower_components/jquery/dist/jquery.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
-</span><span class='line'><span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;bower_components/kendo-ui-core/src/js/kendo.ui.core.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="nt">&lt;/body&gt;</span>
-</span><span class='line'><span class="nt">&lt;/html&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre class="language-markup line-numbers"><code>&lt;!doctype html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+    &lt;meta charset="utf-8"&gt;
+    &lt;title&gt;My Project&lt;/title&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1"&gt;
+
+    &lt;link rel="stylesheet" href="bower_components/kendo-ui-core/src/styles/web/kendo.common.core.css"&gt;
+    &lt;link rel="stylesheet" href="bower_components/kendo-ui-core/src/styles/web/kendo.flat.css"&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+&lt;script src="bower_components/jquery/dist/jquery.js"&gt;&lt;/script&gt;
+&lt;script src="bower_components/kendo-ui-core/src/js/kendo.ui.core.js"&gt;&lt;/script&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
 
 
 <p>A couple things to note here. First, my HTML follows the <a href="http://contribute.jquery.org/style-guide/html/">jQuery HTML style guide</a>, which yes, actually is a thing.</p>
@@ -586,68 +567,43 @@ exports.pageLoaded = function(args) {
 
 <p>I like using AMD and <a href="http://requirejs.org/">RequireJS</a> to manage my app&#8217;s dependencies, and luckily Kendo UI Core is intelligently broken into AMD modules. To start with AMD I download RequireJS from Bower:</p>
 
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'>$ bower install requirejs
-</span></code></pre></td></tr></table></div></figure>
+<pre class="language-shell"><code>$ bower install requirejs</code></pre>
 
 
 <p>Next I create an app.js file to serve as the main JavaScript file for my app. At this point my project&#8217;s folder structure looks a little something like this:</p>
 
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'>.
-</span><span class='line'>├── bower_components
-</span><span class='line'>│   ├── jquery
-</span><span class='line'>│   │   └── ...
-</span><span class='line'>│   ├── kendo-ui-core
-</span><span class='line'>│   │   └── ...
-</span><span class='line'>│   └── requirejs
-</span><span class='line'>│       └── ...
-</span><span class='line'>├── index.html
-</span><span class='line'>└── js
-</span><span class='line'>    └── app.js
-</span></code></pre></td></tr></table></div></figure>
+<pre class="language-shell"><code>.
+├── bower_components
+│   ├── jquery
+│   │   └── ...
+│   ├── kendo-ui-core
+│   │   └── ...
+│   └── requirejs
+│       └── ...
+├── index.html
+└── js
+    └── app.js
+</code></pre>
 
 
 <p>With this structure in place I switch my index.html to use a single <code>&lt;script&gt;</code> tag:</p>
 
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;bower_components/requirejs/require.js&quot;</span> <span class="na">data-main=</span><span class="s">&quot;js/app&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre class="language-markup"><code>&lt;script src="bower_components/requirejs/require.js" data-main="js/app"&gt;&lt;/script&gt;</code></pre>
 
 
 <p>Then I paste the following code in as a starting point for app.js:</p>
 
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">require</span><span class="p">.</span><span class="nx">config</span><span class="p">({</span>
-</span><span class='line'>    <span class="nx">paths</span><span class="o">:</span> <span class="p">{</span>
-</span><span class='line'>        <span class="s2">&quot;jquery&quot;</span><span class="o">:</span> <span class="s2">&quot;/bower_components/jquery/dist/jquery&quot;</span><span class="p">,</span>
-</span><span class='line'>        <span class="s2">&quot;kendo-ui-core&quot;</span><span class="o">:</span> <span class="s2">&quot;/bower_components/kendo-ui-core/src/js&quot;</span>
-</span><span class='line'>    <span class="p">}</span>
-</span><span class='line'><span class="p">});</span>
-</span><span class='line'>
-</span><span class='line'><span class="nx">require</span><span class="p">([</span> <span class="s2">&quot;jquery&quot;</span><span class="p">,</span> <span class="s2">&quot;kendo-ui-core/kendo.ui.core&quot;</span> <span class="p">],</span> <span class="kd">function</span><span class="p">(</span> <span class="nx">$</span> <span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>
-</span><span class='line'><span class="p">});</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre class="language-javascript line-numbers"><code>require.config({
+    paths: {
+        "jquery": "/bower_components/jquery/dist/jquery",
+        "kendo-ui-core": "/bower_components/kendo-ui-core/src/js"
+    }
+});
+
+require([ "jquery", "kendo-ui-core/kendo.ui.core" ], function( $ ) {
+
+});
+</code></pre>
 
 
 <p>This gives me an entry point for my app that loads jQuery and Kendo UI Core dynamically. If my app only needs one portion of Kendo UI Core I only specify the modules I need in the <code>require()</code> call. For instance if I only want a <a href="http://demos.telerik.com/kendo-ui/maskedtextbox/index">MaskedTextBox</a> I only require <code>"jquery"</code> and <code>"kendo-ui-core/kendo.maskedtextbox"</code>—i.e. <code>require([ "jquery", "kendo-ui-core/kendo.maskedtextbox" ])</code>.</p>
@@ -667,10 +623,9 @@ exports.pageLoaded = function(args) {
 
 <p>Doing so turns out to be as simple as running two commands:</p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ appbuilder prop set BundleVersion 1.0.1
-</span><span class='line'>$ appbuilder prop set AndroidVersionCode 2</span></code></pre></td></tr></table></div></figure>
+<pre class="language-shell"><code>$ appbuilder prop set BundleVersion 1.0.1
+$ appbuilder prop set AndroidVersionCode 2
+</code></pre>
 
 
 
@@ -870,13 +825,10 @@ exports.pageLoaded = function(args) {
     <id>http://tjvantoll.com/2014/08/12/the-problem-with-using-html-imports-for-dependency-management</id>
     <content type="html"><![CDATA[<p>HTML imports are cool. If you haven&#8217;t heard of them before, you should read <a href="http://www.html5rocks.com/en/tutorials/webcomponents/imports/">Eric Bidelman&#8217;s excellent introduction to them</a>, but they&#8217;re pretty self explanatory with a bit of code. For example the following is how a jQuery UI dialog works in <a href="https://github.com/tjvantoll/ui-web-components">my proof-of-concept web components port</a>:</p>
 
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">&quot;import&quot;</span> <span class="na">href=</span><span class="s">&quot;ui-dialog.html&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="nt">&lt;ui</span><span class="na">-dialog</span> <span class="na">title=</span><span class="s">&quot;Hello World&quot;</span><span class="nt">&gt;</span><span class="err">&lt;</span>/ui-dialog&gt;
-</span></code></pre></td></tr></table></div></figure>
+<pre class="language-markup"><code>&lt;link rel="import" href="ui-dialog.html"&gt;
+
+&lt;ui-dialog title="Hello World"&gt;&lt;/ui-dialog&gt;
+</code></pre>
 
 
 <p>The cool thing here is not what you see—a <code>&lt;link&gt;</code> tag that imports a custom element—but rather, what you don&#8217;t. Normally when using jQuery UI widgets, you have to worry about a number of JavaScript and CSS dependencies, such as jQuery Core, the widget factory, a CSS theme, and more. With HTML imports you don&#8217;t, as the import takes care of bundling everything you need.</p>
@@ -890,9 +842,8 @@ exports.pageLoaded = function(args) {
 
 <p>Suppose you want to write a component that depends on jQuery. How might you do that? Well, the easiest way is to package jquery.js within your web component, and to reference it in your HTML import with a simple <code>&lt;script&gt;</code> tag:</p>
 
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;jquery.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre class="language-markup"><code>&lt;script src="jquery.js"&gt;&lt;/script&gt;
+</code></pre>
 
 
 <p>This works, and is simple, but it has a serious repercussion: jquery.js is bundled with your component. That means, with this approach, if a user imports five jQuery-dependent components, the browser will download jQuery five times. And because reducing HTTP requests is a vital web performance optimization, this is <a href="https://www.youtube.com/watch?v=H8OxKx6zKkQ">kind of a big deal</a>.</p>
@@ -921,9 +872,8 @@ exports.pageLoaded = function(args) {
 
 <p>You could refer to Moment.js on some CDN, for instance the following <code>&lt;script&gt;</code> tag imports Moment.js from <a href="http://cdnjs.com/">cdnjs</a>:</p>
 
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;//cdnjs.cloudflare.com/ajax/libs/moment.js/2.7.0/moment.min.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre class="language-markup"><code>&lt;script src="http://tjvantoll.com//cdnjs.cloudflare.com/ajax/libs/moment.js/2.7.0/moment.min.js"&gt;&lt;/script&gt;
+</code></pre>
 
 
 <p>This approach works, but it has some major disadvantages. For one, the CDN approach only prevents multiple downloads of Moment.js if everyone magically chooses to retrieve Moment.js from the exact same URL—same CDN provider, same protocol, same version, and so forth. Second, the CDN reference also prevents the usage of script concatenation tooling, which is an essential performance optimization, especially for mobile. Because of this, I don&#8217;t see CDNs as a viable option for managing external dependencies.</p>
@@ -932,17 +882,12 @@ exports.pageLoaded = function(args) {
 
 <p>The next option you have is enforcing a specific directory structure on the consumer of your component. For instance, you could enforce that users have a folder structure that looks like this:</p>
 
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'>.
-</span><span class='line'>├── momentjs
-</span><span class='line'>│   └── moment.js
-</span><span class='line'>└── formatted-time
-</span><span class='line'>    └── formatted-time.html
-</span></code></pre></td></tr></table></div></figure>
+<pre class="language-shell"><code>.
+├── momentjs
+│   └── moment.js
+└── formatted-time
+    └── formatted-time.html
+</code></pre>
 
 
 <p>With this structure in place, your formatted-time.html file can reference moment.js using <code>&lt;link rel="import" href="../momentjs/moment.js"&gt;</code>. This is the strategy Polymer itself uses, as all Polymer core elements include an import of <code>&lt;link rel="import" href="../polymer/polymer.html"&gt;</code> to get the dependencies they need.</p>
@@ -957,27 +902,16 @@ exports.pageLoaded = function(args) {
 
 <p>The next option is feature detection, or determining whether your dependency has already been loaded, and if not, loading it yourself. For example, with the <code>&lt;formatted-time&gt;</code> element you could use the following code to load conditionally load Moment.js:</p>
 
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="o">&lt;</span><span class="nx">script</span><span class="o">&gt;</span>
-</span><span class='line'>  <span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-</span><span class='line'>      <span class="kd">var</span> <span class="nx">script</span><span class="p">;</span>
-</span><span class='line'>      <span class="k">if</span> <span class="p">(</span> <span class="k">typeof</span> <span class="nb">window</span><span class="p">.</span><span class="nx">moment</span> <span class="o">===</span> <span class="s2">&quot;undefined&quot;</span> <span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>          <span class="nx">script</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span> <span class="s2">&quot;script&quot;</span> <span class="p">);</span>
-</span><span class='line'>          <span class="nx">script</span><span class="p">.</span><span class="nx">src</span> <span class="o">=</span> <span class="s2">&quot;path/to/formatted-time/moment.js&quot;</span><span class="p">;</span>
-</span><span class='line'>          <span class="nb">document</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">appendChild</span><span class="p">(</span> <span class="nx">script</span> <span class="p">);</span>
-</span><span class='line'>      <span class="p">}</span>
-</span><span class='line'>  <span class="p">}());</span>
-</span><span class='line'><span class="o">&lt;</span><span class="err">/script&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre class="language-markup line-numbers"><code>&lt;script&gt;
+    (function() {
+        var script;
+        if ( typeof window.moment === "undefined" ) {
+            script = document.createElement( "script" );
+            script.src = "path/to/formatted-time/moment.js";
+            document.body.appendChild( script );
+        }
+    }());
+&lt;/script&gt;</code></pre>
 
 
 <blockquote><p><strong>Update August 13th, 2014</strong>—As is, this code is not enough to prevent loading Moment.js multiple times, as two modules could request the script before it has been asynchronously fetched and parsed. To avoid multiple requests correctly you&#8217;d need to <a href="#comment-1540666406">additionally add some boolean logic</a>. Thanks <a href="https://twitter.com/webreflection">@webreflection</a>!</p></blockquote>
@@ -1026,14 +960,11 @@ exports.pageLoaded = function(args) {
 
 <p>With the AppBuilder CLI installed (<code>npm install -g appbuilder</code>), and with the <a href="https://itunes.apple.com/us/app/telerik-appbuilder/id527547398?mt=8">AppBuilder iOS app</a> installed, you can run this yourself with the following four commands:</p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ appbuilder create hybrid gif --template=Blank
-</span><span class='line'>$ cd gif
-</span><span class='line'>$ sed -i '' 's/Apache Cordova/gif/g' index.html
-</span><span class='line'>$ appbuilder livesync ios --companion</span></code></pre></td></tr></table></div></figure>
+<pre class="language-shell"><code>$ appbuilder create hybrid gif --template=Blank
+$ cd gif
+$ sed -i '' 's/Apache Cordova/gif/g' index.html
+$ appbuilder livesync ios --companion
+</code></pre>
 
 
 <p>What&#8217;s really cool is that as of <a href="http://blogs.telerik.com/appbuilder/posts/14-07-02/telerik-appbuilder-release-sharing-projects-cordova-update-nativescript-preview-and-more">the last AppBuilder release</a>, you can now share your code across the AppBuilder clients. That means, I can collborate on Burke&#8217;s project from the CLI, and he can collaborate on mine from the browser—which I think is pretty cool.</p>
@@ -1146,183 +1077,105 @@ exports.pageLoaded = function(args) {
 
 <p>Here&#8217;s the HTML we&#8217;ll use:</p>
 
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;form</span> <span class="na">id=</span><span class="s">&quot;information-form&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;fieldset&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;legend&gt;</span>Information<span class="nt">&lt;/legend&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;div&gt;</span>
-</span><span class='line'>            <span class="nt">&lt;label</span> <span class="na">for=</span><span class="s">&quot;name&quot;</span><span class="nt">&gt;</span>Name:<span class="nt">&lt;/label&gt;</span>
-</span><span class='line'>            <span class="nt">&lt;input</span> <span class="na">id=</span><span class="s">&quot;name&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;/div&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;div&gt;</span>
-</span><span class='line'>            <span class="nt">&lt;label</span> <span class="na">for=</span><span class="s">&quot;address&quot;</span><span class="nt">&gt;</span>Address:<span class="nt">&lt;/label&gt;</span>
-</span><span class='line'>            <span class="nt">&lt;input</span> <span class="na">id=</span><span class="s">&quot;address&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;/div&gt;</span>
-</span><span class='line'>
-</span><span class='line'>        <span class="nt">&lt;button&gt;</span>Update<span class="nt">&lt;/button&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;button</span> <span class="na">id=</span><span class="s">&quot;delete&quot;</span><span class="nt">&gt;</span>Delete<span class="nt">&lt;/button&gt;</span>
-</span><span class='line'>
-</span><span class='line'>        <span class="nt">&lt;p</span> <span class="na">id=</span><span class="s">&quot;admin-message&quot;</span><span class="nt">&gt;</span>To delete this user, please contact an administrator.<span class="nt">&lt;/p&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;/fieldset&gt;</span>
-</span><span class='line'><span class="nt">&lt;/form&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre class="language-markup line-numbers"><code>&lt;form id="information-form"&gt;
+    &lt;fieldset&gt;
+        &lt;legend&gt;Information&lt;/legend&gt;
+        &lt;div&gt;
+            &lt;label for="name"&gt;Name:&lt;/label&gt;
+            &lt;input id="name"&gt;
+        &lt;/div&gt;
+        &lt;div&gt;
+            &lt;label for="address"&gt;Address:&lt;/label&gt;
+            &lt;input id="address"&gt;
+        &lt;/div&gt;
+
+        &lt;button&gt;Update&lt;/button&gt;
+        &lt;button id="delete"&gt;Delete&lt;/button&gt;
+
+        &lt;p id="admin-message"&gt;To delete this user, please contact an administrator.&lt;/p&gt;
+    &lt;/fieldset&gt;
+&lt;/form&gt;</code></pre>
 
 
 <p>And we&#8217;ll use two buttons to switch between the two user types.</p>
 
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;button</span> <span class="na">id=</span><span class="s">&quot;admin&quot;</span><span class="nt">&gt;</span>Display as admin<span class="nt">&lt;/button&gt;</span>
-</span><span class='line'><span class="nt">&lt;button</span> <span class="na">id=</span><span class="s">&quot;regular-user&quot;</span><span class="nt">&gt;</span>Display as regular user<span class="nt">&lt;/button&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre class="language-markup line-numbers"><code>&lt;button id="admin"&gt;Display as admin&lt;/button&gt;
+&lt;button id="regular-user"&gt;Display as regular user&lt;/button&gt;</code></pre>
 
 
 <p>So, the question is&#8230; what JavaScript do you implement to show/hide the delete button and informational message? The following shows an approach I often see: targeting individual elements in JavaScript, and altering their display.</p>
 
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="kd">var</span> <span class="nx">adminButton</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span> <span class="s2">&quot;#admin&quot;</span> <span class="p">),</span>
-</span><span class='line'>    <span class="nx">regularButton</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span> <span class="s2">&quot;#regular-user&quot;</span> <span class="p">),</span>
-</span><span class='line'>    <span class="nx">deleteButton</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span> <span class="s2">&quot;#delete&quot;</span> <span class="p">),</span>
-</span><span class='line'>    <span class="nx">adminMessage</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span> <span class="s2">&quot;#admin-message&quot;</span> <span class="p">);</span>
-</span><span class='line'>
-</span><span class='line'><span class="nx">adminButton</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span> <span class="s2">&quot;click&quot;</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-</span><span class='line'>    <span class="nx">deleteButton</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">display</span> <span class="o">=</span> <span class="s2">&quot;inline-block&quot;</span><span class="p">;</span>
-</span><span class='line'>    <span class="nx">adminMessage</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">display</span> <span class="o">=</span> <span class="s2">&quot;none&quot;</span><span class="p">;</span>
-</span><span class='line'><span class="p">});</span>
-</span><span class='line'><span class="nx">regularButton</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span> <span class="s2">&quot;click&quot;</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-</span><span class='line'>    <span class="nx">deleteButton</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">display</span> <span class="o">=</span> <span class="s2">&quot;none&quot;</span><span class="p">;</span>
-</span><span class='line'>    <span class="nx">adminMessage</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">display</span> <span class="o">=</span> <span class="s2">&quot;block&quot;</span><span class="p">;</span>
-</span><span class='line'><span class="p">});</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre class="language-javascript line-numbers"><code>var adminButton = document.querySelector( "#admin" ),
+    regularButton = document.querySelector( "#regular-user" ),
+    deleteButton = document.querySelector( "#delete" ),
+    adminMessage = document.querySelector( "#admin-message" );
+
+adminButton.addEventListener( "click", function() {
+    deleteButton.style.display = "inline-block";
+    adminMessage.style.display = "none";
+});
+regularButton.addEventListener( "click", function() {
+    deleteButton.style.display = "none";
+    adminMessage.style.display = "block";
+});</code></pre>
 
 
 <p>This works, but it&#8217;s verbose, as you have to target each element that should be shown or hidden whenever the user types changes. From a more abstract perspective, it also breaks the <a href="http://en.wikipedia.org/wiki/Separation_of_concerns">separation of concerns design principle</a>, since CSS changes are being done in JavaScript.</p>
 
 <p>To improve this, let&#8217;s switch the JavaScript to manage a single CSS class name on the form.</p>
 
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="kd">var</span> <span class="nx">adminButton</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span> <span class="s2">&quot;#admin&quot;</span> <span class="p">),</span>
-</span><span class='line'>    <span class="nx">regularButton</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span> <span class="s2">&quot;#regular-user&quot;</span> <span class="p">),</span>
-</span><span class='line'>    <span class="nx">form</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span> <span class="s2">&quot;#information-form&quot;</span> <span class="p">);</span>
-</span><span class='line'>
-</span><span class='line'><span class="nx">adminButton</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span> <span class="s2">&quot;click&quot;</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-</span><span class='line'>    <span class="nx">form</span><span class="p">.</span><span class="nx">classList</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span> <span class="s2">&quot;admin&quot;</span> <span class="p">);</span>
-</span><span class='line'><span class="p">});</span>
-</span><span class='line'><span class="nx">regularButton</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span> <span class="s2">&quot;click&quot;</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-</span><span class='line'>    <span class="nx">form</span><span class="p">.</span><span class="nx">classList</span><span class="p">.</span><span class="nx">remove</span><span class="p">(</span> <span class="s2">&quot;admin&quot;</span> <span class="p">);</span>
-</span><span class='line'><span class="p">});</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre class="language-javascript line-numbers"><code>var adminButton = document.querySelector( "#admin" ),
+    regularButton = document.querySelector( "#regular-user" ),
+    form = document.querySelector( "#information-form" );
+
+adminButton.addEventListener( "click", function() {
+    form.classList.add( "admin" );
+});
+regularButton.addEventListener( "click", function() {
+    form.classList.remove( "admin" );
+});</code></pre>
 
 
 <p>At the moment, nothing shows or hides when you click buttons, but with the <code>"admin"</code> class name in place, you have the hook you need to implement the logic in CSS.</p>
 
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nf">#delete</span> <span class="p">{</span>
-</span><span class='line'>    <span class="k">display</span><span class="o">:</span> <span class="k">none</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'><span class="nc">.admin</span> <span class="nf">#admin-message</span> <span class="p">{</span>
-</span><span class='line'>    <span class="k">display</span><span class="o">:</span> <span class="k">none</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'><span class="nc">.admin</span> <span class="nf">#delete</span> <span class="p">{</span>
-</span><span class='line'>    <span class="k">display</span><span class="o">:</span> <span class="k">inline</span><span class="o">-</span><span class="k">block</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre class="language-css line-numbers"><code>#delete {
+    display: none;
+}
+.admin #admin-message {
+    display: none;
+}
+.admin #delete {
+    display: inline-block;
+}</code></pre>
 
 
 <p>JavaScript manages the state of the element, which gives CSS the ability to control the display based on that state. This approach is not only cleaner, it is also more flexible. If you need to change colors for admin, or spacing, you now have a CSS hook you can use to do so.</p>
 
 <p>This same approach works with HTML attributes as well. For instance, let&#8217;s switch from using a CSS class name, to a <code>data-admin</code> attribute on the <code>&lt;form&gt;</code>. With that approach you use the following JavaScript:</p>
 
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="kd">var</span> <span class="nx">adminButton</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span> <span class="s2">&quot;#admin&quot;</span> <span class="p">),</span>
-</span><span class='line'>    <span class="nx">regularButton</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span> <span class="s2">&quot;#regular-user&quot;</span> <span class="p">),</span>
-</span><span class='line'>    <span class="nx">form</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span> <span class="s2">&quot;#information-form&quot;</span> <span class="p">);</span>
-</span><span class='line'>
-</span><span class='line'><span class="nx">adminButton</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span> <span class="s2">&quot;click&quot;</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-</span><span class='line'>    <span class="nx">form</span><span class="p">.</span><span class="nx">setAttribute</span><span class="p">(</span> <span class="s2">&quot;data-admin&quot;</span><span class="p">,</span> <span class="kc">true</span> <span class="p">);</span>
-</span><span class='line'><span class="p">});</span>
-</span><span class='line'><span class="nx">regularButton</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span> <span class="s2">&quot;click&quot;</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-</span><span class='line'>    <span class="nx">form</span><span class="p">.</span><span class="nx">setAttribute</span><span class="p">(</span> <span class="s2">&quot;data-admin&quot;</span><span class="p">,</span> <span class="kc">false</span> <span class="p">);</span>
-</span><span class='line'><span class="p">});</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre class="language-javascript line-numbers"><code>var adminButton = document.querySelector( "#admin" ),
+    regularButton = document.querySelector( "#regular-user" ),
+    form = document.querySelector( "#information-form" );
+
+adminButton.addEventListener( "click", function() {
+    form.setAttribute( "data-admin", true );
+});
+regularButton.addEventListener( "click", function() {
+    form.setAttribute( "data-admin", false );
+});</code></pre>
 
 
 <p>And the following CSS:</p>
 
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nf">#delete</span> <span class="p">{</span>
-</span><span class='line'>    <span class="k">display</span><span class="o">:</span> <span class="k">none</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'><span class="o">[</span><span class="nt">data-admin</span><span class="o">=</span><span class="s2">&quot;true&quot;</span><span class="o">]</span> <span class="nf">#admin-message</span> <span class="p">{</span>
-</span><span class='line'>    <span class="k">display</span><span class="o">:</span> <span class="k">none</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'><span class="o">[</span><span class="nt">data-admin</span><span class="o">=</span><span class="s2">&quot;true&quot;</span><span class="o">]</span> <span class="nf">#delete</span> <span class="p">{</span>
-</span><span class='line'>    <span class="k">display</span><span class="o">:</span> <span class="k">inline</span><span class="o">-</span><span class="k">block</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre class="language-css line-numbers"><code>#delete {
+    display: none;
+}
+[data-admin="true"] #admin-message {
+    display: none;
+}
+[data-admin="true"] #delete {
+    display: inline-block;
+}</code></pre>
 
 
 <p>Use whatever makes sense for your use case. The overarching idea is to use JavaScript to apply semantic HTML that reflects an element&#8217;s state, and to let CSS control the display from there. Personally I&#8217;ve found this to be the best way to handle display logic in UI components—especially complex ones.</p>
@@ -1338,9 +1191,8 @@ exports.pageLoaded = function(args) {
 
 <p>I wanted to quickly show the effect this property has. Adding it is as easy as appending <code>minimal-ui</code> to the <code>content</code> attribute of your site&#8217;s <code>&lt;meta&gt;</code> tag.</p>
 
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;meta</span> <span class="na">name=</span><span class="s">&quot;viewport&quot;</span> <span class="na">content=</span><span class="s">&quot;width=device-width, initial-scale=1, minimal-ui&quot;</span><span class="nt">&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre class="language-markup"><code>&lt;meta name="viewport" content="width=device-width, initial-scale=1, minimal-ui"&gt;
+</code></pre>
 
 
 <p>The two images below show a before and after of applying the property to a test page.</p>
@@ -1378,11 +1230,9 @@ exports.pageLoaded = function(args) {
 
 <p>Now add the following two <code>&lt;script&gt;</code> tags to your project&#8217;s <code>index.html</code> file:</p>
 
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;cdv-plugin-fb-connect.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
-</span><span class='line'><span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;facebook-js-sdk.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre class="language-markup"><code>&lt;script src="cdv-plugin-fb-connect.js">&lt;/script&gt;
+&lt;script src="facebook-js-sdk.js"&gt;&lt;/script&gt;
+</code></pre>
 
 
 <p>The plugin is now a part of your project, but before we dig into the its APIs, we have a bit of configuration we have to change.</p>
@@ -1407,47 +1257,33 @@ exports.pageLoaded = function(args) {
 
 <p>Facebook&#8217;s APIs are provided through a <code>FB</code> global variable, and the first thing you must do with it is call <code>FB.init()</code>.</p>
 
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">FB</span><span class="p">.</span><span class="nx">init</span><span class="p">({</span>
-</span><span class='line'>    <span class="nx">appId</span><span class="o">:</span> <span class="s2">&quot;204075246457176&quot;</span><span class="p">,</span>
-</span><span class='line'>    <span class="nx">nativeInterface</span><span class="o">:</span> <span class="nx">CDV</span><span class="p">.</span><span class="nx">FB</span>
-</span><span class='line'><span class="p">});</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre class="language-javascript"><code>FB.init({
+    appId: "204075246457176",
+    nativeInterface: CDV.FB
+});
+</code></pre>
 
 
 <p>You can see that we again need to provide our Facebook&#8217;s app id. We also need to set a <code>nativeInterface</code> property to <code>CDV.FB</code>. You won&#8217;t find this property on Facebook&#8217;s documentation, but it&#8217;s what tells the Cordova plugin to step in and do its thing.</p>
 
 <p>From here, there are several things we can do, but most of them require the user to be logged into Facebook. We can check whether the user is logged in using <code>FB.getLoginStatus()</code>.</p>
 
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">FB</span><span class="p">.</span><span class="nx">getLoginStatus</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span> <span class="nx">response</span> <span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>    <span class="k">if</span> <span class="p">(</span> <span class="nx">response</span><span class="p">.</span><span class="nx">status</span> <span class="o">===</span> <span class="s2">&quot;connected&quot;</span> <span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>        <span class="nx">alert</span><span class="p">(</span> <span class="s2">&quot;logged in&quot;</span> <span class="p">);</span>
-</span><span class='line'>    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-</span><span class='line'>        <span class="nx">alert</span><span class="p">(</span> <span class="s2">&quot;not logged in&quot;</span> <span class="p">);</span>
-</span><span class='line'>    <span class="p">}</span>
-</span><span class='line'><span class="p">});</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre class="language-javascript"><code>FB.getLoginStatus(function( response ) {
+    if ( response.status === "connected" ) {
+        alert( "logged in" );
+    } else {
+        alert( "not logged in" );
+    }
+});
+</code></pre>
 
 
 <p>Or we can just prompt the user to login with <code>FB.login()</code>. Like most of Facebook&#8217;s API methods, the first argument to <code>FB.login()</code> is a callback function to run when the login completes. The second argument is an object with a single <code>scope</code> property. The <code>scope</code> property needs to contain a comma delimited list of permissions your application needs. Here, we&#8217;re asking the user to give us access to their email address.</p>
 
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">FB</span><span class="p">.</span><span class="nx">login</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span> <span class="nx">response</span> <span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>    <span class="c1">// Handle the response</span>
-</span><span class='line'><span class="p">},</span> <span class="p">{</span> <span class="nx">scope</span><span class="o">:</span> <span class="s2">&quot;email&quot;</span> <span class="p">});</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre class="language-javascript"><code>FB.login(function( response ) {
+    // Handle the response
+}, { scope: "email" });
+</code></pre>
 
 
 <p><em>Note: Refer to Facebook&#8217;s SDK documentation for a <a href="https://developers.facebook.com/docs/reference/login/extended-permissions">full list of the permissions you can request</a>.</em></p>
@@ -1462,9 +1298,8 @@ exports.pageLoaded = function(args) {
 
 <p>Once they have given access, you can use Facebook&#8217;s API to access what you need. For example the following retrieves the id, name, and picture of the user&#8217;s friends.</p>
 
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">FB</span><span class="p">.</span><span class="nx">api</span><span class="p">(</span> <span class="s2">&quot;/me/friends&quot;</span><span class="p">,</span> <span class="p">{</span> <span class="nx">fields</span><span class="o">:</span> <span class="s2">&quot;id, name, picture&quot;</span> <span class="p">});</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre class="language-javascript"><code>FB.api( "/me/friends", { fields: "id, name, picture" });
+</code></pre>
 
 
 <h3>Wrapping up</h3>
@@ -1616,17 +1451,12 @@ exports.pageLoaded = function(args) {
 
 <p>To start our discussion, consider this simple <code>&lt;select&gt;</code> element.</p>
 
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;select&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;option&gt;</span>One<span class="nt">&lt;/option&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;option&gt;</span>Two<span class="nt">&lt;/option&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;option&gt;</span>Three<span class="nt">&lt;/option&gt;</span>
-</span><span class='line'><span class="nt">&lt;/select&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre class="language-markup"><code>&lt;select&gt;
+    &lt;option&gt;One&lt;/option&gt;
+    &lt;option&gt;Two&lt;/option&gt;
+    &lt;option&gt;Three&lt;/option&gt;
+&lt;/select&gt;
+</code></pre>
 
 
 <p>Here&#8217;s a sampling of a few different renderings. The two on the left are Chrome and Firefox for OS X, the two on the right are IE and Chrome for Windows.</p>
@@ -1655,25 +1485,16 @@ exports.pageLoaded = function(args) {
 
 <p>A number of browsers now offer styling hooks through vendor prefixed pseudo elements. (I created a <a href="http://tjvantoll.com/2013/12/06/why-is-styling-form-elements-so-damn-hard/">full list</a> if you&#8217;d like to peruse them). For instance <code>::-ms-check</code> lets you play with the look of checkboxes and radio buttons in IE.</p>
 
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;style&gt;</span>
-</span><span class='line'>    <span class="o">:</span><span class="nd">:-ms-check</span> <span class="p">{</span>
-</span><span class='line'>        <span class="k">color</span><span class="o">:</span> <span class="nb">red</span><span class="p">;</span>
-</span><span class='line'>        <span class="k">background</span><span class="o">:</span> <span class="nb">black</span><span class="p">;</span>
-</span><span class='line'>        <span class="k">padding</span><span class="o">:</span> <span class="m">1em</span><span class="p">;</span>
-</span><span class='line'>    <span class="p">}</span>
-</span><span class='line'><span class="nt">&lt;/style&gt;</span>
-</span><span class='line'><span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;checkbox&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'><span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;radio&quot;</span><span class="nt">&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre class="language-markup"><code>&lt;style&gt;
+    ::-ms-check {
+        color: red;
+        background: black;
+        padding: 1em;
+    }
+&lt;/style&gt;
+&lt;input type="checkbox"&gt;
+&lt;input type="radio"&gt;
+</code></pre>
 
 
 <p>Which renders as follows.</p>
@@ -1700,52 +1521,31 @@ exports.pageLoaded = function(args) {
 
 <p>And as of Chrome 31, this is now something you can actually do. The following example creates a native <code>&lt;input type="date"&gt;</code>, gives it a new shadow root to use, and implements the calendar using <a href="http://jqueryui.com/datepicker/">jQuery UI&#8217;s datepicker</a>.</p>
 
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;style&gt;</span>
-</span><span class='line'>    <span class="nt">input</span> <span class="p">{</span>
-</span><span class='line'>        <span class="k">height</span><span class="o">:</span> <span class="m">2em</span><span class="p">;</span>
-</span><span class='line'>        <span class="k">width</span><span class="o">:</span> <span class="m">15em</span><span class="p">;</span>
-</span><span class='line'>    <span class="p">}</span>
-</span><span class='line'><span class="nt">&lt;/style&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;date&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="nt">&lt;script&gt;</span>
-</span><span class='line'>    <span class="kd">var</span> <span class="nx">dateRoot</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span> <span class="s2">&quot;input&quot;</span> <span class="p">)</span>
-</span><span class='line'>        <span class="p">.</span><span class="nx">webkitCreateShadowRoot</span><span class="p">();</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="nx">$</span><span class="p">(</span> <span class="s2">&quot;input&quot;</span> <span class="p">).</span><span class="nx">datepicker</span><span class="p">({</span>
-</span><span class='line'>        <span class="nx">dateFormat</span><span class="o">:</span> <span class="s2">&quot;yy-mm-dd&quot;</span><span class="p">,</span>
-</span><span class='line'>        <span class="nx">onSelect</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span> <span class="nx">dateText</span> <span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>            <span class="nx">dateRoot</span><span class="p">.</span><span class="nx">innerHTML</span> <span class="o">=</span> <span class="nx">dateText</span><span class="p">;</span>
-</span><span class='line'>        <span class="p">}</span>
-</span><span class='line'>    <span class="p">});</span>
-</span><span class='line'><span class="nt">&lt;/script&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre class="language-markup line-numbers"><code>&lt;style&gt;
+    input {
+        height: 2em;
+        width: 15em;
+    }
+&lt;/style&gt;
+
+&lt;input type="date"&gt;
+
+&lt;script&gt;
+    var dateRoot = document.querySelector( "input" )
+        .webkitCreateShadowRoot();
+
+    $( "input" ).datepicker({
+        dateFormat: "yy-mm-dd",
+        onSelect: function( dateText ) {
+            dateRoot.innerHTML = dateText;
+        }
+    });
+&lt;/script&gt;</code></pre>
 
 
 <p>And here&#8217;s the example live, although you need Chrome 31+ for it to actually work.</p>
 
-<iframe width="100%" height="300" src="http://jsfiddle.net/tj_vantoll/6qadQ/embedded/result,html,js,css" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
+<iframe width="100%" height="300" src="http://jsfiddle.net/tj_vantoll/9v44L201/embedded/result,html,js,css" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
 
 
 <p>You may notice that there is one big issue with this example. While we do get a custom datepicker, we lose the <code>&lt;input&gt;</code> behavior, including the ability to type in a value.</p>
@@ -1788,17 +1588,12 @@ exports.pageLoaded = function(args) {
 
 <p>Because spell checking is a configurable property, turning it on and off is a matter of toggling the property&#8217;s value:</p>
 
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="cm">/* Writing docs */</span>
-</span><span class='line'><span class="s2">&quot;spell_check&quot;</span><span class="o">:</span> <span class="kc">true</span>
-</span><span class='line'>
-</span><span class='line'><span class="cm">/* Writing code */</span>
-</span><span class='line'><span class="s2">&quot;spell_check&quot;</span><span class="o">:</span> <span class="kc">false</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre class="language-javascript"><code>/* Writing docs */
+"spell_check": true
+
+/* Writing code */
+"spell_check": false
+</code></pre>
 
 
 <p>Like most spell checkers, you can right click misspelled words to get suggested fixes:</p>
@@ -1821,15 +1616,11 @@ exports.pageLoaded = function(args) {
     <content type="html"><![CDATA[<p><link href="http://tjvantoll.com/stylesheets/custom/posts/2013-09-12.css" rel="stylesheet">
 Adding a strikethrough to a line of text in CSS is easy.</p>
 
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;style&gt;</span>
-</span><span class='line'>    <span class="nt">p</span> <span class="p">{</span> <span class="k">text-decoration</span><span class="o">:</span> <span class="k">line-through</span><span class="p">;</span> <span class="p">}</span>
-</span><span class='line'><span class="nt">&lt;/style&gt;</span>
-</span><span class='line'><span class="nt">&lt;p&gt;</span>Hello World<span class="nt">&lt;/p&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre class="language-markup"><code>&lt;style&gt;
+    p { text-decoration: line-through; }
+&lt;/style&gt;
+&lt;p&gt;Hello World&lt;/p&gt;
+</code></pre>
 
 
 <p>Which displays as follows:</p>
@@ -1850,67 +1641,37 @@ Adding a strikethrough to a line of text in CSS is easy.</p>
 
 <p>Unfortunately these two properties are only implemented in Firefox and are behind a <code>-moz-</code> prefix. Here&#8217;s how you can use the various <code>text-decoration-style</code> values in Firefox:</p>
 
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;style&gt;</span>
-</span><span class='line'>    <span class="nt">p</span> <span class="p">{</span>
-</span><span class='line'>        <span class="k">text-decoration</span><span class="o">:</span> <span class="k">line-through</span><span class="p">;</span>
-</span><span class='line'>    <span class="p">}</span>
-</span><span class='line'>    <span class="nf">#solid</span> <span class="p">{</span>
-</span><span class='line'>        <span class="o">-</span><span class="n">moz</span><span class="o">-</span><span class="k">text-decoration</span><span class="o">-</span><span class="k">color</span><span class="o">:</span> <span class="nb">red</span><span class="p">;</span>
-</span><span class='line'>        <span class="o">-</span><span class="n">moz</span><span class="o">-</span><span class="k">text-decoration</span><span class="o">-</span><span class="n">style</span><span class="o">:</span> <span class="k">solid</span><span class="p">;</span>
-</span><span class='line'>    <span class="p">}</span>
-</span><span class='line'>    <span class="nf">#double</span> <span class="p">{</span>
-</span><span class='line'>        <span class="o">-</span><span class="n">moz</span><span class="o">-</span><span class="k">text-decoration</span><span class="o">-</span><span class="k">color</span><span class="o">:</span> <span class="nb">blue</span><span class="p">;</span>
-</span><span class='line'>        <span class="o">-</span><span class="n">moz</span><span class="o">-</span><span class="k">text-decoration</span><span class="o">-</span><span class="n">style</span><span class="o">:</span> <span class="k">double</span><span class="p">;</span>
-</span><span class='line'>    <span class="p">}</span>
-</span><span class='line'>    <span class="nf">#dotted</span> <span class="p">{</span>
-</span><span class='line'>        <span class="o">-</span><span class="n">moz</span><span class="o">-</span><span class="k">text-decoration</span><span class="o">-</span><span class="k">color</span><span class="o">:</span> <span class="nb">green</span><span class="p">;</span>
-</span><span class='line'>        <span class="o">-</span><span class="n">moz</span><span class="o">-</span><span class="k">text-decoration</span><span class="o">-</span><span class="n">style</span><span class="o">:</span> <span class="k">dotted</span><span class="p">;</span>
-</span><span class='line'>    <span class="p">}</span>
-</span><span class='line'>    <span class="nf">#dashed</span> <span class="p">{</span>
-</span><span class='line'>        <span class="o">-</span><span class="n">moz</span><span class="o">-</span><span class="k">text-decoration</span><span class="o">-</span><span class="k">color</span><span class="o">:</span> <span class="nb">purple</span><span class="p">;</span>
-</span><span class='line'>        <span class="o">-</span><span class="n">moz</span><span class="o">-</span><span class="k">text-decoration</span><span class="o">-</span><span class="n">style</span><span class="o">:</span> <span class="k">dashed</span><span class="p">;</span>
-</span><span class='line'>    <span class="p">}</span>
-</span><span class='line'>    <span class="nf">#wavy</span> <span class="p">{</span>
-</span><span class='line'>        <span class="o">-</span><span class="n">moz</span><span class="o">-</span><span class="k">text-decoration</span><span class="o">-</span><span class="k">color</span><span class="o">:</span> <span class="nb">orange</span><span class="p">;</span>
-</span><span class='line'>        <span class="o">-</span><span class="n">moz</span><span class="o">-</span><span class="k">text-decoration</span><span class="o">-</span><span class="n">style</span><span class="o">:</span> <span class="n">wavy</span><span class="p">;</span>
-</span><span class='line'>    <span class="p">}</span>
-</span><span class='line'><span class="nt">&lt;/style&gt;</span>
-</span><span class='line'><span class="nt">&lt;p</span> <span class="na">id=</span><span class="s">&quot;solid&quot;</span><span class="nt">&gt;</span>solid<span class="nt">&lt;/p&gt;</span>
-</span><span class='line'><span class="nt">&lt;p</span> <span class="na">id=</span><span class="s">&quot;double&quot;</span><span class="nt">&gt;</span>double<span class="nt">&lt;/p&gt;</span>
-</span><span class='line'><span class="nt">&lt;p</span> <span class="na">id=</span><span class="s">&quot;dotted&quot;</span><span class="nt">&gt;</span>dotted<span class="nt">&lt;/p&gt;</span>
-</span><span class='line'><span class="nt">&lt;p</span> <span class="na">id=</span><span class="s">&quot;dashed&quot;</span><span class="nt">&gt;</span>dashed<span class="nt">&lt;/p&gt;</span>
-</span><span class='line'><span class="nt">&lt;p</span> <span class="na">id=</span><span class="s">&quot;wavy&quot;</span><span class="nt">&gt;</span>wavy<span class="nt">&lt;/p&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre class="language-markup line-numbers"><code>&lt;style&gt;
+    p {
+        text-decoration: line-through;
+    }
+    #solid {
+        -moz-text-decoration-color: red;
+        -moz-text-decoration-style: solid;
+    }
+    #double {
+        -moz-text-decoration-color: blue;
+        -moz-text-decoration-style: double;
+    }
+    #dotted {
+        -moz-text-decoration-color: green;
+        -moz-text-decoration-style: dotted;
+    }
+    #dashed {
+        -moz-text-decoration-color: purple;
+        -moz-text-decoration-style: dashed;
+    }
+    #wavy {
+        -moz-text-decoration-color: orange;
+        -moz-text-decoration-style: wavy;
+    }
+&lt;/style&gt;
+&lt;p id="solid"&gt;solid&lt;/p&gt;
+&lt;p id="double"&gt;double&lt;/p&gt;
+&lt;p id="dotted"&gt;dotted&lt;/p&gt;
+&lt;p id="dashed"&gt;dashed&lt;/p&gt;
+&lt;p id="wavy"&gt;wavy&lt;/p&gt;
+</code></pre>
 
 
 <p>Which looks like this (note the <em>sweet</em> <code>wavy</code> display):</p>
@@ -1923,31 +1684,19 @@ Adding a strikethrough to a line of text in CSS is easy.</p>
 
 <p>The easiest approach is to draw a line with the <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/::before"><code>::before</code></a> or <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/::after"><code>::after</code></a> pseudo-elements and position them on top of the element itself. Here, this is implemented with a CSS class name:</p>
 
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nc">.strike</span> <span class="p">{</span>
-</span><span class='line'>    <span class="k">position</span><span class="o">:</span> <span class="k">relative</span><span class="p">;</span>
-</span><span class='line'>    <span class="k">display</span><span class="o">:</span> <span class="k">inline</span><span class="o">-</span><span class="k">block</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'><span class="nc">.strike</span><span class="o">:</span><span class="nd">:before</span> <span class="p">{</span>
-</span><span class='line'>    <span class="k">content</span><span class="o">:</span> <span class="s1">&#39;&#39;</span><span class="p">;</span>
-</span><span class='line'>    <span class="k">border-bottom</span><span class="o">:</span> <span class="m">2px</span> <span class="k">solid</span> <span class="nb">red</span><span class="p">;</span>
-</span><span class='line'>    <span class="k">width</span><span class="o">:</span> <span class="m">100</span><span class="o">%</span><span class="p">;</span>
-</span><span class='line'>    <span class="k">position</span><span class="o">:</span> <span class="k">absolute</span><span class="p">;</span>
-</span><span class='line'>    <span class="k">right</span><span class="o">:</span> <span class="m">0</span><span class="p">;</span>
-</span><span class='line'>    <span class="k">top</span><span class="o">:</span> <span class="m">50</span><span class="o">%</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre class="language-css"><code>.strike {
+    position: relative;
+    display: inline-block;
+}
+.strike::before {
+    content: '';
+    border-bottom: 2px solid red;
+    width: 100%;
+    position: absolute;
+    right: 0;
+    top: 50%;
+}
+</code></pre>
 
 
 <p>This displays as follows:</p>
@@ -1961,49 +1710,28 @@ Adding a strikethrough to a line of text in CSS is easy.</p>
 
 <p>But as long as your text is on one line, you can use this technique and be as crazy as you&#8217;d like. Here&#8217;s an example that utilizes <code>::before</code> and <code>::after</code> and <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/transform">CSS transforms</a> to create a cross out effect on the text.</p>
 
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nc">.cross</span> <span class="p">{</span>
-</span><span class='line'>    <span class="k">position</span><span class="o">:</span> <span class="k">relative</span><span class="p">;</span>
-</span><span class='line'>    <span class="k">display</span><span class="o">:</span> <span class="k">inline</span><span class="o">-</span><span class="k">block</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'><span class="nc">.cross</span><span class="o">:</span><span class="nd">:before</span><span class="o">,</span> <span class="nc">.cross</span><span class="o">:</span><span class="nd">:after</span> <span class="p">{</span>
-</span><span class='line'>    <span class="k">content</span><span class="o">:</span> <span class="s1">&#39;&#39;</span><span class="p">;</span>
-</span><span class='line'>    <span class="k">width</span><span class="o">:</span> <span class="m">100</span><span class="o">%</span><span class="p">;</span>
-</span><span class='line'>    <span class="k">position</span><span class="o">:</span> <span class="k">absolute</span><span class="p">;</span>
-</span><span class='line'>    <span class="k">right</span><span class="o">:</span> <span class="m">0</span><span class="p">;</span>
-</span><span class='line'>    <span class="k">top</span><span class="o">:</span> <span class="m">50</span><span class="o">%</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'><span class="nc">.cross</span><span class="o">:</span><span class="nd">:before</span> <span class="p">{</span>
-</span><span class='line'>    <span class="k">border-bottom</span><span class="o">:</span> <span class="m">2px</span> <span class="k">solid</span> <span class="nb">green</span><span class="p">;</span>
-</span><span class='line'>    <span class="o">-</span><span class="n">webkit</span><span class="o">-</span><span class="n">transform</span><span class="o">:</span> <span class="n">skewY</span><span class="p">(</span><span class="m">-10</span><span class="n">deg</span><span class="p">);</span>
-</span><span class='line'>    <span class="n">transform</span><span class="o">:</span> <span class="n">skewY</span><span class="p">(</span><span class="m">-10</span><span class="n">deg</span><span class="p">);</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'><span class="nc">.cross</span><span class="o">:</span><span class="nd">:after</span> <span class="p">{</span>
-</span><span class='line'>    <span class="k">border-bottom</span><span class="o">:</span> <span class="m">2px</span> <span class="k">solid</span> <span class="nb">blue</span><span class="p">;</span>
-</span><span class='line'>    <span class="o">-</span><span class="n">webkit</span><span class="o">-</span><span class="n">transform</span><span class="o">:</span> <span class="n">skewY</span><span class="p">(</span><span class="m">10</span><span class="n">deg</span><span class="p">);</span>
-</span><span class='line'>    <span class="n">transform</span><span class="o">:</span> <span class="n">skewY</span><span class="p">(</span><span class="m">10</span><span class="n">deg</span><span class="p">);</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre class="language-css"><code>.cross {
+    position: relative;
+    display: inline-block;
+}
+.cross::before, .cross::after {
+    content: '';
+    width: 100%;
+    position: absolute;
+    right: 0;
+    top: 50%;
+}
+.cross::before {
+    border-bottom: 2px solid green;
+    -webkit-transform: skewY(-10deg);
+    transform: skewY(-10deg);
+}
+.cross::after {
+    border-bottom: 2px solid blue;
+    -webkit-transform: skewY(10deg);
+    transform: skewY(10deg);
+}
+</code></pre>
 
 
 <p>Which displays as such.</p>

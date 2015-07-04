@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Telerik | TJ VanToll's Blog]]></title>
   <link href="http://tjvantoll.com/blog/categories/telerik/atom.xml" rel="self"/>
   <link href="http://tjvantoll.com/"/>
-  <updated>2015-06-25T11:24:59-04:00</updated>
+  <updated>2015-07-04T11:17:31-04:00</updated>
   <id>http://tjvantoll.com/</id>
   <author>
     <name><![CDATA[TJ VanToll]]></name>
@@ -41,15 +41,10 @@
 
 <p>Now add the following two <code>&lt;script&gt;</code> tags to your project's <code>index.html</code> file:</p>
 
-<p>``` html</p>
+<pre class="language-markup"><code>&lt;script src="cdv-plugin-fb-connect.js">&lt;/script&gt;
+&lt;script src="facebook-js-sdk.js"&gt;&lt;/script&gt;
+</code></pre>
 
-<script src="cdv-plugin-fb-connect.js"></script>
-
-
-<script src="facebook-js-sdk.js"></script>
-
-
-<p>```</p>
 
 <p>The plugin is now a part of your project, but before we dig into the its APIs, we have a bit of configuration we have to change.</p>
 
@@ -73,43 +68,34 @@
 
 <p>Facebook's APIs are provided through a <code>FB</code> global variable, and the first thing you must do with it is call <code>FB.init()</code>.</p>
 
-<p>``` javascript
-FB.init({</p>
-
-<pre><code>appId: "204075246457176",
-nativeInterface: CDV.FB
+<pre class="language-javascript"><code>FB.init({
+    appId: "204075246457176",
+    nativeInterface: CDV.FB
+});
 </code></pre>
 
-<p>});
-```</p>
 
 <p>You can see that we again need to provide our Facebook's app id. We also need to set a <code>nativeInterface</code> property to <code>CDV.FB</code>. You won't find this property on Facebook's documentation, but it's what tells the Cordova plugin to step in and do its thing.</p>
 
 <p>From here, there are several things we can do, but most of them require the user to be logged into Facebook. We can check whether the user is logged in using <code>FB.getLoginStatus()</code>.</p>
 
-<p>``` javascript
-FB.getLoginStatus(function( response ) {</p>
-
-<pre><code>if ( response.status === "connected" ) {
-    alert( "logged in" );
-} else {
-    alert( "not logged in" );
-}
+<pre class="language-javascript"><code>FB.getLoginStatus(function( response ) {
+    if ( response.status === "connected" ) {
+        alert( "logged in" );
+    } else {
+        alert( "not logged in" );
+    }
+});
 </code></pre>
 
-<p>});
-```</p>
 
 <p>Or we can just prompt the user to login with <code>FB.login()</code>. Like most of Facebook's API methods, the first argument to <code>FB.login()</code> is a callback function to run when the login completes. The second argument is an object with a single <code>scope</code> property. The <code>scope</code> property needs to contain a comma delimited list of permissions your application needs. Here, we're asking the user to give us access to their email address.</p>
 
-<p>``` javascript
-FB.login(function( response ) {</p>
-
-<pre><code>// Handle the response
+<pre class="language-javascript"><code>FB.login(function( response ) {
+    // Handle the response
+}, { scope: "email" });
 </code></pre>
 
-<p>}, { scope: "email" });
-```</p>
 
 <p><em>Note: Refer to Facebook's SDK documentation for a <a href="https://developers.facebook.com/docs/reference/login/extended-permissions">full list of the permissions you can request</a>.</em></p>
 
@@ -123,9 +109,9 @@ FB.login(function( response ) {</p>
 
 <p>Once they have given access, you can use Facebook's API to access what you need. For example the following retrieves the id, name, and picture of the user's friends.</p>
 
-<p><code>javascript
-FB.api( "/me/friends", { fields: "id, name, picture" });
-</code></p>
+<pre class="language-javascript"><code>FB.api( "/me/friends", { fields: "id, name, picture" });
+</code></pre>
+
 
 <h3>Wrapping up</h3>
 

@@ -21,12 +21,7 @@
   <link rel="canonical" href="http://tjvantoll.com/blog/page/7">
   <link rel="author" href="https://plus.google.com/+TJVanToll">
 
-  <!--[if !lte IE 7]><!-->
-    <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet">
-  <!--<![endif]-->
-  <!--[if lte IE 7]>
-    <link rel="stylesheet" href="/stylesheets/old-ie.css" media="screen, projection">
-  <![endif]-->
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet">
   
   <!--Custom script concatenation
   <script src="/javascripts/modernizr-2.5.3.js"></script>
@@ -38,12 +33,6 @@
   <script src="/javascripts/build/scripts.js"></script>
 
   <link href="/atom.xml" rel="alternate" title="TJ VanToll's Blog" type="application/atom+xml">
-  <style>
-	/* Fonts from Google"s Web font directory at http://google.com/webfonts */
-	/*@import url(http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic);
-	@import url(http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic);*/
-</style>
-
   
   <script type="text/javascript">
   	if (window.location.host.indexOf('local') == -1) {
@@ -310,13 +299,11 @@
 
   <div class="entry-content"><p>Form fields can be disabled by simply adding the <code>disabled</code> attribute.</p>
 
-<figure class='code'><figcaption class='not_empty'><span>Simple Disabled Fields</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;text&quot;</span> <span class="na">disabled</span> <span class="nt">/&gt;</span>
-</span><span class='line'><span class="nt">&lt;textarea</span> <span class="na">disabled</span><span class="nt">&gt;&lt;/textarea&gt;</span>
-</span><span class='line'><span class="nt">&lt;select</span> <span class="na">disabled</span><span class="nt">&gt;&lt;/select&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre class="language-markup"><code>
+&lt;input type="text" disabled /&gt;
+&lt;textarea disabled&gt;&lt;/textarea&gt;
+&lt;select disabled&gt;&lt;/select&gt;
+</code></pre>
 
 
 <p>Disabled fields cannot be interacted with by the user; the browser will not allow the field to receive focus or be tabbed to.  For an intuitive UI it&#8217;s important that disabled fields are clearly evident to the user.  Users are easily confused and frustrated when attempting to interact with fields that they are not able to.</p>
@@ -368,17 +355,15 @@
 
   <div class="entry-content"><p>The CSS attribute selector allows you to select HTML elements based on their attributes.  For example, take the following markup:</p>
 
-<figure class='code'><figcaption class='not_empty'><span>Simple List</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;ul&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;li</span> <span class="na">id=</span><span class="s">&quot;item1&quot;</span><span class="nt">&gt;&lt;/li&gt;</span>  <span class="c">&lt;!-- #1 --&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;li</span> <span class="na">id=</span><span class="s">&quot;item2&quot;</span><span class="nt">&gt;&lt;/li&gt;</span>  <span class="c">&lt;!-- #2 --&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;li&gt;&lt;/li&gt;</span>             <span class="c">&lt;!-- #3 --&gt;</span>
-</span><span class='line'><span class="nt">&lt;/ul&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre class="language-markup"><code>
+&lt;ul&gt;
+    &lt;li id="item1"&gt;&lt;/li&gt;  &lt;!-- #1 --&gt;
+    &lt;li id="item2"&gt;&lt;/li&gt;  &lt;!-- #2 --&gt;
+    &lt;li&gt;&lt;/li&gt;             &lt;!-- #3 --&gt;
+&lt;/ul&gt;
+</code></pre>
+
+
 
 
 </div>
@@ -570,8 +555,7 @@
 
 
 
-
-
+Included file 'google_plus_one.html' not found in _includes directory
 
   <script type="text/javascript">
     (function(){
@@ -584,8 +568,7 @@
   </script>
 
 
-
-
+Included file 'custom/after_footer.html' not found in _includes directory
 
 </body>
 </html>

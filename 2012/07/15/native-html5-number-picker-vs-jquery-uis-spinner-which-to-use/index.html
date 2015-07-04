@@ -21,12 +21,7 @@
   <link rel="canonical" href="http://tjvantoll.com/2012/07/15/native-html5-number-picker-vs-jquery-uis-spinner-which-to-use">
   <link rel="author" href="https://plus.google.com/+TJVanToll">
 
-  <!--[if !lte IE 7]><!-->
-    <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet">
-  <!--<![endif]-->
-  <!--[if lte IE 7]>
-    <link rel="stylesheet" href="/stylesheets/old-ie.css" media="screen, projection">
-  <![endif]-->
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet">
   
   <!--Custom script concatenation
   <script src="/javascripts/modernizr-2.5.3.js"></script>
@@ -38,12 +33,6 @@
   <script src="/javascripts/build/scripts.js"></script>
 
   <link href="/atom.xml" rel="alternate" title="TJ VanToll's Blog" type="application/atom+xml">
-  <style>
-	/* Fonts from Google"s Web font directory at http://google.com/webfonts */
-	/*@import url(http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic);
-	@import url(http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic);*/
-</style>
-
   
   <script type="text/javascript">
   	if (window.location.host.indexOf('local') == -1) {
@@ -129,9 +118,9 @@
 
 <p>HTML5 adds several new valid <code>type</code> attributes for <code>&lt;input&gt;</code> elements.  One of them, <code>number</code>, can be used to create a number picker.</p>
 
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;number&quot;</span> <span class="nt">/&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre class="language-markup"><code>
+&lt;input type="number" /&gt;
+</code></pre>
 
 
 <p>This will present the user with a number picker in supported browsers, which, as of this writing includes Chrome, Safari, Opera, iOS, Opera Mobile, and Android 4.0+ (<a href="http://caniuse.com/#feat=input-number">full support list</a>).  Here&#8217;s what the user will see in supported browsers:</p>
@@ -176,9 +165,9 @@
 
 <p>For example, on the <code>&lt;input&gt;</code> below the browser will enforce that the minimum value will be <code>2</code>, the maximum value will be <code>20</code>, and the user will step at increments of <code>2</code>.</p>
 
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;number&quot;</span> <span class="na">min=</span><span class="s">&quot;2&quot;</span> <span class="na">max=</span><span class="s">&quot;20&quot;</span> <span class="na">step=</span><span class="s">&quot;2&quot;</span> <span class="nt">/&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre class="language-markup"><code>
+&lt;input type="number" min="2" max="20" step="2" /&gt;
+</code></pre>
 
 
 <p>You can see how this behaves in your browser below:</p>
@@ -208,27 +197,18 @@
 
 <p>It also supports setting minimum, maximum, and step values through options rather than attributes.</p>
 
-<figure class='code'><figcaption class='not_empty'><span>jQuery UI Spinner</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;input</span> <span class="na">id=</span><span class="s">&quot;spinner&quot;</span> <span class="nt">/&gt;</span>
-</span><span class='line'><span class="nt">&lt;script&gt;</span>
-</span><span class='line'>    <span class="nx">$</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-</span><span class='line'>        <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#spinner&#39;</span><span class="p">).</span><span class="nx">spinner</span><span class="p">({</span>
-</span><span class='line'>            <span class="nx">min</span><span class="o">:</span> <span class="mi">2</span><span class="p">,</span>
-</span><span class='line'>            <span class="nx">max</span><span class="o">:</span> <span class="mi">20</span><span class="p">,</span>
-</span><span class='line'>            <span class="nx">step</span><span class="o">:</span> <span class="mi">2</span>
-</span><span class='line'>        <span class="p">});</span>
-</span><span class='line'>    <span class="p">});</span>
-</span><span class='line'><span class="nt">&lt;/script&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre class="language-markup"><code>
+&lt;input id="spinner" /&gt;
+&lt;script&gt;
+    $(function() {
+        $('#spinner').spinner({
+            min: 2,
+            max: 20,
+            step: 2
+        });
+    });
+&lt;/script&gt;
+</code></pre>
 
 
 <p>Example:</p>
@@ -287,35 +267,22 @@
 
 <p>Because <code>spinner</code> is built on top of <a href="http://ajpiano.com/widgetfactory">jQuery UI&#8217;s widget factory</a>, it is easily extensible.  For example, let&#8217;s say you need to build an input that accepts a year in which the modern summer olympics were held.  You could do that with the following:</p>
 
-<figure class='code'><figcaption class='not_empty'><span>Extending spinner</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="o">&lt;</span><span class="nx">input</span> <span class="o">/&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="nx">script</span><span class="o">&gt;</span>
-</span><span class='line'>    <span class="nx">$</span><span class="p">.</span><span class="nx">widget</span><span class="p">(</span> <span class="s2">&quot;tj.olympicspicker&quot;</span><span class="p">,</span> <span class="nx">$</span><span class="p">.</span><span class="nx">ui</span><span class="p">.</span><span class="nx">spinner</span><span class="p">,</span> <span class="p">{</span>
-</span><span class='line'>        <span class="nx">options</span><span class="o">:</span> <span class="p">{</span>
-</span><span class='line'>            <span class="nx">min</span><span class="o">:</span> <span class="mi">1896</span><span class="p">,</span>
-</span><span class='line'>            <span class="nx">max</span><span class="o">:</span> <span class="mi">2012</span><span class="p">,</span>
-</span><span class='line'>            <span class="nx">step</span><span class="o">:</span> <span class="mi">4</span>
-</span><span class='line'>        <span class="p">}</span>
-</span><span class='line'>    <span class="p">});</span>
-</span><span class='line'>    <span class="nx">$</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-</span><span class='line'>        <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;input&#39;</span><span class="p">).</span><span class="nx">olympicspicker</span><span class="p">();</span>
-</span><span class='line'>    <span class="p">});</span>
-</span><span class='line'><span class="o">&lt;</span><span class="err">/script&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre class="language-markup"><code>
+&lt;input /&gt;
+
+&lt;script&gt;
+    $.widget( "tj.olympicspicker", $.ui.spinner, {
+        options: {
+            min: 1896,
+            max: 2012,
+            step: 4
+        }
+    });
+    $(function() {
+        $('input').olympicspicker();
+    });
+&lt;/script&gt;
+</code></pre>
 
 
 
@@ -354,23 +321,16 @@
 
 <p>Another option is to use the native HTML number picker when it&#8217;s available, and fallback to jQuery UI&#8217;s <code>spinner</code> when it&#8217;s not.</p>
 
-<figure class='code'><figcaption class='not_empty'><span>Using jQuery UI to Polyfill input[type=number]</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">$</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-</span><span class='line'>    <span class="kd">var</span> <span class="nx">input</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="s1">&#39;input&#39;</span><span class="p">);</span>
-</span><span class='line'>    <span class="nx">input</span><span class="p">.</span><span class="nx">setAttribute</span><span class="p">(</span><span class="s1">&#39;type&#39;</span><span class="p">,</span> <span class="s1">&#39;number&#39;</span><span class="p">);</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="k">if</span> <span class="p">(</span><span class="nx">input</span><span class="p">.</span><span class="nx">type</span> <span class="o">==</span> <span class="s1">&#39;text&#39;</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>        <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;input[type=number]&#39;</span><span class="p">).</span><span class="nx">spinner</span><span class="p">();</span>
-</span><span class='line'>    <span class="p">}</span>
-</span><span class='line'><span class="p">});</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre class="language-javascript"><code>
+$(function() {
+    var input = document.createElement('input');
+    input.setAttribute('type', 'number');
+
+    if (input.type == 'text') {
+        $('input[type=number]').spinner();
+    }
+});
+</code></pre>
 
 
 <p>The code to detect <code>input[type=number]</code> support was taken from <a href="https://github.com/jonstipe/number-polyfill">another number picker polyfill by jonstipe</a>.  It creates an <code>&lt;input&gt;</code>, changes its <code>type</code> to <code>number</code>, and sees if that change actually took effect to determine whether the browser supports the type.  You could also use the <code>Modernizr.inputtypes.number</code> check from <a href="http://modernizr.com">Modernizr</a> to achieve the same thing.</p>
@@ -401,21 +361,15 @@
 
 <p>Therefore the best approach I&#8217;ve came up with is to hide the <code>spinner</code>&#8217;s arrow controls when the browser creates its own.</p>
 
-<figure class='code'><figcaption class='not_empty'><span>Number keyboard for a spinner</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">$</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-</span><span class='line'>    <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;input[type=number]&#39;</span><span class="p">).</span><span class="nx">spinner</span><span class="p">();</span>
-</span><span class='line'>    <span class="k">if</span> <span class="p">(</span><span class="nx">Modernizr</span><span class="p">.</span><span class="nx">input</span><span class="p">.</span><span class="nx">step</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>        <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;.ui-spinner-button&#39;</span><span class="p">).</span><span class="nx">hide</span><span class="p">();</span>
-</span><span class='line'>        <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;.ui-spinner-input&#39;</span><span class="p">).</span><span class="nx">css</span><span class="p">(</span><span class="s1">&#39;marginRight&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
-</span><span class='line'>    <span class="p">}</span>
-</span><span class='line'><span class="p">});</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre class="language-javascript"><code>
+$(function() {
+    $('input[type=number]').spinner();
+    if (Modernizr.input.step) {
+        $('.ui-spinner-button').hide();
+        $('.ui-spinner-input').css('marginRight', 0);
+    }
+});
+</code></pre>
 
 
 <p>What this does is detect whether the browser supports the <code>step</code> attribute, if it does it removes jQuery UI&#8217;s controls.  What does the <code>step</code> attribute have to do with the arrow controls?  Nothing, except that it just <em>happens</em> that the browsers that support the <code>step</code> attribute also create a native control to do the stepping.  Is this going to change in the future?  Quite possibly.</p>
@@ -426,19 +380,14 @@
 
 <p>Commenter amir pointed out the WebKit provides a pseudoclass that you can use to style, and therefore hide the native spin controls.</p>
 
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nt">input</span><span class="o">[</span><span class="nt">type</span><span class="o">=</span><span class="nt">number</span><span class="o">]:</span><span class="nd">:-webkit-outer-spin-button</span> <span class="p">{</span>
-</span><span class='line'>    <span class="k">display</span><span class="o">:</span> <span class="k">none</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'><span class="nt">input</span><span class="o">[</span><span class="nt">type</span><span class="o">=</span><span class="nt">number</span><span class="o">]:</span><span class="nd">:-webkit-inner-spin-button</span> <span class="p">{</span>
-</span><span class='line'>    <span class="k">display</span><span class="o">:</span> <span class="k">none</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre class="language-css"><code>
+input[type=number]::-webkit-outer-spin-button {
+    display: none; 
+}
+input[type=number]::-webkit-inner-spin-button {
+    display: none;
+}
+</code></pre>
 
 
 <p>This solves the issue for Webkit, but this remains an issue for Opera and browsers that add <code>input[type=number]</code> support in the future.</p>
@@ -477,7 +426,7 @@
     </p>
     <p class="author_card meta">
       <img src="/images/me/1.jpg" alt="Me!" id="post_me">
-      TJ VanToll is a developer advocate for <a href="http://telerik.com">Telerik</a>, a <a href="http://jqueryui.com/about/">jQuery team member</a>, and the author of <a href="http://tjvantoll.com/jquery-ui-in-action.html">jQuery UI in Action</a>. TJ has over a decade of web development experience—specializing in performance and the mobile web—and <a href="/speaking">speaks</a> about his research at conferences around the world. When not online, TJ is generally found talking about himself in the third person. If you like hearing TJ talk about himself, you should consider following him on <a href="http://twitter.com/tjvantoll">Twitter</a> or <a href="https://plus.google.com/+TJVanToll?rel=author" rel="author">Google+</a>.
+      TJ VanToll is a developer advocate for <a href="http://telerik.com">Telerik</a>, a <a href="http://jqueryui.com/about/">jQuery team member</a>, and the author of <a href="http://tjvantoll.com/jquery-ui-in-action.html">jQuery UI in Action</a>. TJ has over a decade of web development experience—specializing in performance and the mobile web—and <a href="/speaking">speaks</a> about his research at conferences around the world.TJ is <a href="http://twitter.com/tjvantoll">@tjvantoll</a> on Twitter and <a href="https://plus.google.com/+TJVanToll?rel=author" rel="author">+TJVanToll</a> on Google+.
     </p>
     
       <div class="sharing">
@@ -589,8 +538,7 @@
 
 
 
-
-
+Included file 'google_plus_one.html' not found in _includes directory
 
   <script type="text/javascript">
     (function(){
@@ -603,8 +551,7 @@
   </script>
 
 
-
-
+Included file 'custom/after_footer.html' not found in _includes directory
 
 </body>
 </html>

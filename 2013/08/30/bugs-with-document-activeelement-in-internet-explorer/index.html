@@ -21,12 +21,7 @@
   <link rel="canonical" href="http://tjvantoll.com/2013/08/30/bugs-with-document-activeelement-in-internet-explorer">
   <link rel="author" href="https://plus.google.com/+TJVanToll">
 
-  <!--[if !lte IE 7]><!-->
-    <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet">
-  <!--<![endif]-->
-  <!--[if lte IE 7]>
-    <link rel="stylesheet" href="/stylesheets/old-ie.css" media="screen, projection">
-  <![endif]-->
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet">
   
   <!--Custom script concatenation
   <script src="/javascripts/modernizr-2.5.3.js"></script>
@@ -38,12 +33,6 @@
   <script src="/javascripts/build/scripts.js"></script>
 
   <link href="/atom.xml" rel="alternate" title="TJ VanToll's Blog" type="application/atom+xml">
-  <style>
-	/* Fonts from Google"s Web font directory at http://google.com/webfonts */
-	/*@import url(http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic);
-	@import url(http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic);*/
-</style>
-
   
   <script type="text/javascript">
   	if (window.location.host.indexOf('local') == -1) {
@@ -129,22 +118,17 @@
 
 <p>Let&#8217;s say you have an <code>&lt;iframe&gt;</code>.</p>
 
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;iframe</span> <span class="na">src=</span><span class="s">&quot;other.html&quot;</span><span class="nt">&gt;&lt;/iframe&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre class="language-markup"><code>&lt;iframe src="other.html"&gt;&lt;/iframe&gt;
+</code></pre>
 
 
 <p>And in that <code>&lt;iframe&gt;</code>, you want to know what element has focus.</p>
 
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'>/* other.html */
-</span><span class='line'><span class="nt">&lt;script&gt;</span>
-</span><span class='line'>    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span> <span class="nx">parent</span><span class="p">.</span><span class="nb">document</span><span class="p">.</span><span class="nx">activeElement</span> <span class="p">);</span>
-</span><span class='line'><span class="nt">&lt;/script&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre class="language-markup"><code>/* other.html */
+&lt;script&gt;
+    console.log( parent.document.activeElement );
+&lt;/script&gt;
+</code></pre>
 
 
 <p>In all browsers except IE9, this will log the element that has focus in the parent document (the <code>&lt;body&gt;</code> by default). In IE9 this will inexplicably throw an <code>"Unspecified Error"</code>.</p>
@@ -156,19 +140,13 @@
 
 <p>What can you to about it? Since the access causes the error, the only recourse is a try / catch.</p>
 
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="kd">var</span> <span class="nx">activeElement</span><span class="p">;</span>
-</span><span class='line'><span class="k">try</span> <span class="p">{</span>
-</span><span class='line'>    <span class="nx">activeElement</span> <span class="o">=</span> <span class="nx">parent</span><span class="p">.</span><span class="nb">document</span><span class="p">.</span><span class="nx">activeElement</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span> <span class="k">catch</span><span class="p">(</span> <span class="nx">error</span> <span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>    <span class="nx">activeElement</span> <span class="o">=</span> <span class="nx">parent</span><span class="p">.</span><span class="nb">document</span><span class="p">.</span><span class="nx">body</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre class="language-javascript"><code>var activeElement;
+try {
+    activeElement = parent.document.activeElement;
+} catch( error ) {
+    activeElement = parent.document.body;
+}
+</code></pre>
 
 
 <p>Luckily this is a problem unique to IE9; the same behavior is not present in IE 7, 8, or 10.</p>
@@ -183,13 +161,10 @@
 
 <p>The workaround for this is to ensure the <code>activeElement</code> is not the <code>&lt;body&gt;</code> before calling <code>blur()</code>.</p>
 
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="k">if</span> <span class="p">(</span> <span class="nb">document</span><span class="p">.</span><span class="nx">activeElement</span><span class="p">.</span><span class="nx">nodeName</span><span class="p">.</span><span class="nx">toLowerCase</span><span class="p">()</span> <span class="o">!==</span> <span class="s2">&quot;body&quot;</span> <span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>    <span class="nb">document</span><span class="p">.</span><span class="nx">activeElement</span><span class="p">.</span><span class="nx">blur</span><span class="p">();</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre class="language-javascript"><code>if ( document.activeElement.nodeName.toLowerCase() !== "body" ) {
+    document.activeElement.blur();
+}
+</code></pre>
 
 
 <p>Luckily this problem has been fixed in IE11; <code>document.body.blur()</code> no longer switches windows.</p>
@@ -200,34 +175,23 @@
 
 <p>From:</p>
 
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">$</span><span class="p">(</span> <span class="nb">document</span><span class="p">.</span><span class="nx">activeElement</span> <span class="p">).</span><span class="nx">blur</span><span class="p">();</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre class="language-javascript"><code>$( document.activeElement ).blur();
+</code></pre>
 
 
 <p>To:</p>
 
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="c1">// support: IE9</span>
-</span><span class='line'><span class="c1">// IE9 throws an &quot;Unspecified error&quot; accessing document.activeElement from an &lt;iframe&gt;</span>
-</span><span class='line'><span class="k">try</span> <span class="p">{</span>
-</span><span class='line'>    <span class="c1">// Support: IE9+</span>
-</span><span class='line'>    <span class="c1">// If the &lt;body&gt; is blurred, IE will switch windows, see #9520</span>
-</span><span class='line'>    <span class="k">if</span> <span class="p">(</span> <span class="nb">document</span><span class="p">.</span><span class="nx">activeElement</span> <span class="o">&amp;&amp;</span> <span class="nb">document</span><span class="p">.</span><span class="nx">activeElement</span><span class="p">.</span><span class="nx">nodeName</span><span class="p">.</span><span class="nx">toLowerCase</span><span class="p">()</span> <span class="o">!==</span> <span class="s2">&quot;body&quot;</span> <span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>        <span class="c1">// Blur any element that currently has focus, see #4261</span>
-</span><span class='line'>        <span class="nx">$</span><span class="p">(</span> <span class="nb">document</span><span class="p">.</span><span class="nx">activeElement</span> <span class="p">).</span><span class="nx">blur</span><span class="p">();</span>
-</span><span class='line'>    <span class="p">}</span>
-</span><span class='line'><span class="p">}</span> <span class="k">catch</span> <span class="p">(</span> <span class="nx">error</span> <span class="p">)</span> <span class="p">{}</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre class="language-javascript"><code>// support: IE9
+// IE9 throws an "Unspecified error" accessing document.activeElement from an &lt;iframe&gt;
+try {
+    // Support: IE9+
+    // If the &lt;body&gt; is blurred, IE will switch windows, see #9520
+    if ( document.activeElement && document.activeElement.nodeName.toLowerCase() !== "body" ) {
+        // Blur any element that currently has focus, see #4261
+        $( document.activeElement ).blur();
+    }
+} catch ( error ) {}
+</code></pre>
 
 
 <p>Sigh.</p>
@@ -266,7 +230,7 @@
     </p>
     <p class="author_card meta">
       <img src="/images/me/1.jpg" alt="Me!" id="post_me">
-      TJ VanToll is a developer advocate for <a href="http://telerik.com">Telerik</a>, a <a href="http://jqueryui.com/about/">jQuery team member</a>, and the author of <a href="http://tjvantoll.com/jquery-ui-in-action.html">jQuery UI in Action</a>. TJ has over a decade of web development experience—specializing in performance and the mobile web—and <a href="/speaking">speaks</a> about his research at conferences around the world. When not online, TJ is generally found talking about himself in the third person. If you like hearing TJ talk about himself, you should consider following him on <a href="http://twitter.com/tjvantoll">Twitter</a> or <a href="https://plus.google.com/+TJVanToll?rel=author" rel="author">Google+</a>.
+      TJ VanToll is a developer advocate for <a href="http://telerik.com">Telerik</a>, a <a href="http://jqueryui.com/about/">jQuery team member</a>, and the author of <a href="http://tjvantoll.com/jquery-ui-in-action.html">jQuery UI in Action</a>. TJ has over a decade of web development experience—specializing in performance and the mobile web—and <a href="/speaking">speaks</a> about his research at conferences around the world.TJ is <a href="http://twitter.com/tjvantoll">@tjvantoll</a> on Twitter and <a href="https://plus.google.com/+TJVanToll?rel=author" rel="author">+TJVanToll</a> on Google+.
     </p>
     
       <div class="sharing">
@@ -378,8 +342,7 @@
 
 
 
-
-
+Included file 'google_plus_one.html' not found in _includes directory
 
   <script type="text/javascript">
     (function(){
@@ -392,8 +355,7 @@
   </script>
 
 
-
-
+Included file 'custom/after_footer.html' not found in _includes directory
 
 </body>
 </html>

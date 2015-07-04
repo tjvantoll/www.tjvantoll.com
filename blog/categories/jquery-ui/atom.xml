@@ -4,7 +4,7 @@
   <title><![CDATA[Category: jQuery UI | TJ VanToll's Blog]]></title>
   <link href="http://tjvantoll.com/blog/categories/jquery-ui/atom.xml" rel="self"/>
   <link href="http://tjvantoll.com/"/>
-  <updated>2015-06-25T11:24:59-04:00</updated>
+  <updated>2015-07-04T11:17:31-04:00</updated>
   <id>http://tjvantoll.com/</id>
   <author>
     <name><![CDATA[TJ VanToll]]></name>
@@ -202,43 +202,37 @@
     <id>http://tjvantoll.com/2013/07/10/creating-a-jquery-ui-dialog-with-a-submit-button</id>
     <content type="html"><![CDATA[<p>Say you have the following submittable <code>&lt;form&gt;</code>:</p>
 
-<p>``` html
-<form id="myForm" action="http://google.com"></p>
-
-<pre><code>&lt;label for="search"&gt;Search For:&lt;/label&gt;
-&lt;input type="text" id="search" name="q"&gt;
-&lt;button type="submit"&gt;Find&lt;/button&gt;
+<pre class="language-markup"><code>&lt;form id="myForm" action="http://google.com"&gt;
+    &lt;label for="search"&gt;Search For:&lt;/label&gt;
+    &lt;input type="text" id="search" name="q"&gt;
+    &lt;button type="submit"&gt;Find&lt;/button&gt;
+&lt;/form&gt;
 </code></pre>
 
-<p></form>
-```</p>
 
 <p>And you want to show the form in a jQuery UI dialog. You can do that with the code below:</p>
 
-<p>``` javascript Turning a form into a dialog
-$( "form" ).dialog({</p>
-
-<pre><code>open: function() {
-    // On open, hide the original submit button
-    $( this ).find( "[type=submit]" ).hide();
-},
-buttons: [
-    {
-        text: "Find",
-        click: $.noop,
-        type: "submit"
+<pre class="language-javascript"><code>$( "form" ).dialog({
+    open: function() {
+        // On open, hide the original submit button
+        $( this ).find( "[type=submit]" ).hide();
     },
-    {
-        text: "Close",
-        click: function() {
-            $( this ).dialog( "close" );
+    buttons: [
+        {
+            text: "Find",
+            click: $.noop,
+            type: "submit"
+        },
+        {
+            text: "Close",
+            click: function() {
+                $( this ).dialog( "close" );
+            }
         }
-    }
-]
+    ]
+});
 </code></pre>
 
-<p>});
-```</p>
 
 <p>Which looks like this:</p>
 
@@ -263,37 +257,31 @@ buttons: [
 
 <p>Another solution is to add a <code>click</code> handler to the button that submits the form:</p>
 
-<p>``` js Using a Click Handler to Submit the Form
-var form = $( "form" ).dialog({</p>
-
-<pre><code>...
-buttons: [
-    {
-        text: "Find",
-        click: function() {
-            form.submit();
-        }
-    }
+<pre class="language-javascript"><code>var form = $( "form" ).dialog({
     ...
-]
+    buttons: [
+        {
+            text: "Find",
+            click: function() {
+                form.submit();
+            }
+        }
+        ...
+    ]
+});
 </code></pre>
 
-<p>});
-```</p>
 
 <p>This works, but you lose the browsers <a href="/2013/01/01/enter-should-submit-forms-stop-messing-with-that/">browser's default enter key handling</a>. Therefore it has to be replicated as well:</p>
 
-<p>``` javascript Adding Enter Key Handling
-var form = $( "form" ).dialog({ ... });
-form.on( "keypress", "input[type=text]", function( event ) {</p>
-
-<pre><code>if ( event.keyCode == 13 ) {
-    form.submit();
-}
+<pre class="language-javascript"><code>var form = $( "form" ).dialog({ ... });
+form.on( "keypress", "input[type=text]", function( event ) {
+    if ( event.keyCode == 13 ) {
+        form.submit();
+    }
+});
 </code></pre>
 
-<p>});
-```</p>
 
 <h4>Form Attribute</h4>
 
@@ -301,16 +289,13 @@ form.on( "keypress", "input[type=text]", function( event ) {</p>
 
 <p>For example here's the example <code>&lt;form&gt;</code> with a sibling (rather than child) submit button:</p>
 
-<p>``` html
-<form id="myForm" action="http://google.com"></p>
-
-<pre><code>&lt;label for="search"&gt;Search For:&lt;/label&gt;
-&lt;input type="text" id="search" name="q"&gt;
+<pre class="language-markup"><code>&lt;form id="myForm" action="http://google.com"&gt;
+    &lt;label for="search"&gt;Search For:&lt;/label&gt;
+    &lt;input type="text" id="search" name="q"&gt;
+&lt;/form&gt;
+&lt;button type="submit" form="myForm"&gt;Find&lt;/button&gt;
 </code></pre>
 
-<p></form>
-<button type="submit" form="myForm">Find</button>
-```</p>
 
 <p>The <code>&lt;button&gt;</code> is outside of the <code>&lt;form&gt;</code>, but because its <code>form</code> attribute is equal to the <code>&lt;form&gt;</code>'s <code>id</code>, the <code>&lt;button&gt;</code> will submit the <code>&lt;form&gt;</code> regardless.</p>
 
@@ -318,17 +303,12 @@ form.on( "keypress", "input[type=text]", function( event ) {</p>
 
 <p>To add this attribute to the dialog version, we'll pass <code>form: "myForm"</code> into the <code>buttons</code> option for the Find button:</p>
 
-<p>``` html Turning a form into a dialog
-<form id="myForm" action="http://google.com"></p>
-
-<pre><code>&lt;label for="search"&gt;Search For:&lt;/label&gt;
-&lt;input type="text" id="search" name="q"&gt;
-&lt;button type="submit"&gt;Find&lt;/button&gt;
-</code></pre>
-
-<p></form></p>
-
-<script>
+<pre class="language-markup line-numbers"><code>&lt;form id="myForm" action="http://google.com"&gt;
+    &lt;label for="search"&gt;Search For:&lt;/label&gt;
+    &lt;input type="text" id="search" name="q"&gt;
+    &lt;button type="submit"&gt;Find&lt;/button&gt;
+&lt;/form&gt;
+&lt;script&gt;
     $( "form" ).dialog({
         open: function() {
             // On open, hide the original submit button
@@ -339,7 +319,7 @@ form.on( "keypress", "input[type=text]", function( event ) {</p>
                 text: "Find",
                 click: $.noop,
                 type: "submit",
-                form: "myForm" // <-- Make the association
+                form: "myForm" // &lt;-- Make the association
             },
             {
                 text: "Close",
@@ -349,10 +329,8 @@ form.on( "keypress", "input[type=text]", function( event ) {</p>
             }
         ]
     });
-</script>
+&lt;/script&gt;</code></pre>
 
-
-<p>```</p>
 
 <p><a href="/demos/2013-07-10/form.html">Live Example</a></p>
 
@@ -362,67 +340,63 @@ form.on( "keypress", "input[type=text]", function( event ) {</p>
 
 <p>Because the form attribute is so handy here, I wrote a polyfill that adds support in browsers that don't support it natively: <a href="https://gist.github.com/tjvantoll/5911571">https://gist.github.com/tjvantoll/5911571</a>. The source is below:</p>
 
-<p>``` javascript
-/<em>*
+<pre class="language-javascript line-numbers"><code>/**
  * The form attribute can be used to associate a submit button with a form, even
- * if the button is not a child of the <form> itself.
- *
+ * if the button is not a child of the &lt;form&gt; itself.
+ * 
  * This polyfill uses a support check taken from Modernizr and polyfills the
  * functionality using jQuery.
- </em>/
-(function() {</p>
-
-<pre><code>// Via Modernizr
-function formAttributeSupport() {
-    var form = document.createElement( "form" ),
-        input = document.createElement( "input" ),
-        div = document.createElement( "div" ),
-        id = "formtest"+ ( new Date().getTime() ),
-        attr,
-        bool = false;
-
-        form.id = id;
-
-    // IE6/7 confuses the form idl attribute and the form content attribute
-    if ( document.createAttribute ) {
-        attr = document.createAttribute("form");
-        attr.nodeValue = id;
-        input.setAttributeNode(attr);
-        div.appendChild(form);
-        div.appendChild(input);
-
-        document.documentElement.appendChild(div);
-
-        bool = form.elements.length === 1 &amp;&amp; input.form == form;
-
-        div.parentNode.removeChild(div);
-    }
-
-    return bool;
-};
-
-if ( !formAttributeSupport() ) {
-    $( document )
-        .on( "click", "[type=submit][form]", function( event ) {
-            event.preventDefault();
-            var formId = $( this ).attr( "form" ),
-            $form = $( "#" + formId ).submit();
-        })
-        .on( "keypress", "form input", function( event ) {
-            var $form;
-            if ( event.keyCode == 13 ) {
-                $form = $( this ).parents( "form" );
-                if ( $form.find( "[type=submit]" ).length == 0 &amp;&amp;
-                    $( "[type=submit][form=" + $( this ).attr( "form" ) + "]" ).length &gt; 0 ) {
-                    $form.submit();
+ */
+(function() {
+    // Via Modernizr
+    function formAttributeSupport() {
+        var form = document.createElement( "form" ),
+            input = document.createElement( "input" ),
+            div = document.createElement( "div" ),
+            id = "formtest"+ ( new Date().getTime() ),
+            attr,
+            bool = false;
+        
+            form.id = id;
+        
+        // IE6/7 confuses the form idl attribute and the form content attribute
+        if ( document.createAttribute ) {
+            attr = document.createAttribute("form");
+            attr.nodeValue = id;
+            input.setAttributeNode(attr);
+            div.appendChild(form);
+            div.appendChild(input);
+        
+            document.documentElement.appendChild(div);
+        
+            bool = form.elements.length === 1 && input.form == form;
+        
+            div.parentNode.removeChild(div);
+        }
+        
+        return bool;
+    };
+    
+    if ( !formAttributeSupport() ) {
+        $( document )
+            .on( "click", "[type=submit][form]", function( event ) {
+                event.preventDefault();
+                var formId = $( this ).attr( "form" ),
+                $form = $( "#" + formId ).submit();
+            })
+            .on( "keypress", "form input", function( event ) {
+                var $form;
+                if ( event.keyCode == 13 ) {
+                    $form = $( this ).parents( "form" );
+                    if ( $form.find( "[type=submit]" ).length == 0 &&
+                        $( "[type=submit][form=" + $( this ).attr( "form" ) + "]" ).length > 0 ) {
+                        $form.submit();
+                    }
                 }
-            }
-        });
-}
-</code></pre>
+            });
+    }
+}());</code></pre>
 
-<p>}());
-```</p>
 
 <p>This can be included anywhere on the page after jQuery is included.</p>
 
@@ -466,18 +440,15 @@ if ( !formAttributeSupport() ) {
 
 <p>To get the icon back, you have to override the rules that position the icon:</p>
 
-<p>``` css
-.ui-dialog .ui-resizable-se {</p>
-
-<pre><code>width: 14px;
-height: 14px;
-right: 3px;
-bottom: 3px;
-background-position: -80px -224px;
+<pre class="language-css"><code>.ui-dialog .ui-resizable-se {
+    width: 14px;
+    height: 14px;
+    right: 3px;
+    bottom: 3px;
+    background-position: -80px -224px;
+}
 </code></pre>
 
-<p>}
-```</p>
 
 <p>This will display as follows:</p>
 
@@ -503,19 +474,19 @@ background-position: -80px -224px;
 
 <p>Consider the following example:</p>
 
-<p><code>html
-&lt;base href="http://foo.com"&gt;
+<pre class="language-markup"><code>&lt;base href="http://foo.com"&gt;
 &lt;a href="bar.html"&gt;Bar&lt;/a&gt;
-</code></p>
+</code></pre>
+
 
 <p>Let's assume this HTML appears on this domain (<code>http://tjvantoll.com</code>).  When the link is clicked on, the browser will navigate to <code>http://foo.com/bar.html</code> rather than <code>http://tjvantoll.com/bar.html</code>.</p>
 
 <p>It's important to note that hash links are also relative to the specified base.  Therefore on the following:</p>
 
-<p><code>html
-&lt;base href="http://foo.com"&gt;
+<pre class="language-markup"><code>&lt;base href="http://foo.com"&gt;
 &lt;a href="#bar"&gt;Bar&lt;/a&gt;
-</code></p>
+</code></pre>
+
 
 <p>When the link is click on, the browser will navigate to <code>http://foo.com#bar</code> and NOT <code>http://tjvantoll.com#bar</code>.  This detail is important; it's the root cause of confusion when using a <code>&lt;base&gt;</code> tag with the tabs widget.</p>
 
@@ -523,24 +494,18 @@ background-position: -80px -224px;
 
 <p>Here is the intended HTML structure to be used by the tabs widget:</p>
 
-<p>``` html</p>
+<pre class="language-markup"><code>&lt;div id="tabs"&gt;
+    &lt;ul&gt;
+        &lt;li&gt;&lt;a href="#tab-1"&gt;One&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href="#tab-2"&gt;Two&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+    &lt;div id="tab-1"&gt;Contents of tab one.&lt;/div&gt;
+    &lt;div id="tab-2"&gt;Contents of tab two.&lt;/div&gt;
+&lt;/div&gt;
 
-<div id="tabs">
-    <ul>
-        <li><a href="#tab-1">One</a></li>
-        <li><a href="#tab-2">Two</a></li>
-    </ul>
-    <div id="tab-1">Contents of tab one.</div>
-    <div id="tab-2">Contents of tab two.</div>
-</div>
+&lt;script&gt;$( "#tabs" ).tabs();&lt;/script&gt;
+</code></pre>
 
-
-
-
-<script>$( "#tabs" ).tabs();</script>
-
-
-<p>```</p>
 
 <p>Which produces the following:</p>
 
@@ -548,23 +513,17 @@ background-position: -80px -224px;
 
 <p>In this example both links begin with a hash (<code>#</code>), indicating that their content is located on the current page.  If that is not the case, the tabs widget will retrieve the tab's contents server side via an XHR call.  Consider the following:</p>
 
-<p>``` html</p>
+<pre class="language-markup"><code>&lt;div id="tabs"&gt;
+    &lt;ul&gt;
+        &lt;li&gt;&lt;a href="#local"&gt;Local&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href="external"&gt;External&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+    &lt;div id="local"&gt;Contents of the local tab.&lt;/div&gt;
+&lt;/div&gt;
 
-<div id="tabs">
-    <ul>
-        <li><a href="#local">Local</a></li>
-        <li><a href="external">External</a></li>
-    </ul>
-    <div id="local">Contents of the local tab.</div>
-</div>
+&lt;script&gt;$( "#tabs" ).tabs();&lt;/script&gt;
+</code></pre>
 
-
-
-
-<script>$( "#tabs" ).tabs();</script>
-
-
-<p>```</p>
 
 <p>Here the local link will work as in the previous example - when it is clicked on, the tabs widget will simply display the contents of the <code>#local</code> container.</p>
 
@@ -576,25 +535,20 @@ background-position: -80px -224px;
 
 <p>Given the descriptions above, the behavior of the <code>&lt;base&gt;</code> tag with the tabs widget shouldn't be surprising.  Here's the first example given for the tabs widget again.  This time, a <code>&lt;base&gt;</code> tag to <code>http://foo.com</code> has been added:</p>
 
-<p>``` html
-<base href="http://foo.com"></p>
+<pre class="language-markup"><code>&lt;base href="http://foo.com"&gt;
 
-<div id="tabs">
-    <ul>
-        <li><a href="#tab-1">One</a></li>
-        <li><a href="#tab-2">Two</a></li>
-    </ul>
-    <div id="tab-1">Contents of tab one.</div>
-    <div id="tab-2">Contents of tab two.</div>
-</div>
+&lt;div id="tabs"&gt;
+    &lt;ul&gt;
+        &lt;li&gt;&lt;a href="#tab-1"&gt;One&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href="#tab-2"&gt;Two&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+    &lt;div id="tab-1"&gt;Contents of tab one.&lt;/div&gt;
+    &lt;div id="tab-2"&gt;Contents of tab two.&lt;/div&gt;
+&lt;/div&gt;
 
+&lt;script&gt;$( "#tabs" ).tabs();&lt;/script&gt;
+</code></pre>
 
-
-
-<script>$( "#tabs" ).tabs();</script>
-
-
-<p>```</p>
 
 <p>Let's again assume this HTML is located on <code>http://tjvantoll.com</code>.  Because of the <code>&lt;base&gt;</code> tag, the links used in the tabs widget are actually external links to <code>http://foo.com</code>.  Therefore, upon instantiation, the tabs widget will attempt to load the contents of the first tab from <code>http://foo.com</code>.</p>
 
@@ -608,25 +562,20 @@ background-position: -80px -224px;
 
 <p>2) <strong>Provide full URLs on links used to build the tabs widget.</strong>  If approach #1 isn't feasible, you can also provide a fully qualified URL in the links used to build the tabs widget.  Here's the earlier example modified to show this approach:</p>
 
-<p>``` html
-<base href="http://foo.com"></p>
+<pre class="language-markup"><code>&lt;base href="http://foo.com"&gt;
 
-<div id="tabs">
-    <ul>
-        <li><a href="http://tjvantoll.com#tab-1">One</a></li>
-        <li><a href="http://tjvantoll.com#tab-2">Two</a></li>
-    </ul>
-    <div id="tab-1">Contents of tab one.</div>
-    <div id="tab-2">Contents of tab two.</div>
-</div>
+&lt;div id="tabs"&gt;
+    &lt;ul&gt;
+        &lt;li&gt;&lt;a href="http://tjvantoll.com#tab-1"&gt;One&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href="http://tjvantoll.com#tab-2"&gt;Two&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+    &lt;div id="tab-1"&gt;Contents of tab one.&lt;/div&gt;
+    &lt;div id="tab-2"&gt;Contents of tab two.&lt;/div&gt;
+&lt;/div&gt;
 
+&lt;script&gt;$( "#tabs" ).tabs();&lt;/script&gt;
+</code></pre>
 
-
-
-<script>$( "#tabs" ).tabs();</script>
-
-
-<p>```</p>
 
 <p>Since the links in the tabs are now fully qualified paths to the current page, the tabs widget will not perform a request to retrieve external content.</p>
 
@@ -645,26 +594,23 @@ background-position: -80px -224px;
 
 <p>The hack is shown below, simply call the <code>makeTabs</code> function with the selector used to create the tabs widget:</p>
 
-<p>``` javascript
-var makeTabs = function(selector) {</p>
+<pre class="language-javascript"><code>var makeTabs = function(selector) {
+    $( selector )
+        .find( "ul a" ).each( function() {
+            var href = $( this ).attr( "href" ),
+                newHref = window.location.protocol + "//" + window.location.hostname + 
+                    window.location.pathname + href;
 
-<pre><code>$( selector )
-    .find( "ul a" ).each( function() {
-        var href = $( this ).attr( "href" ),
-            newHref = window.location.protocol + '//' + window.location.hostname + 
-                window.location.pathname + href;
+            if ( href.indexOf( "#" ) == 0 ) {
+                $( this ).attr( "href", newHref );
+            }
+        })
+    $( selector ).tabs();
+};
 
-        if ( href.indexOf( "#" ) == 0 ) {
-            $( this ).attr( "href", newHref );
-        }
-    })
-$( selector ).tabs();
+makeTabs( "#tabs" );
 </code></pre>
 
-<p>};</p>
-
-<p>makeTabs( "#tabs" );
-```</p>
 
 <p>As noted by the warning box, you should really fix this the right way.  But desperate times call for desperate measures.  You've been warned.</p>
 

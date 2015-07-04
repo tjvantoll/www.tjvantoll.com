@@ -21,12 +21,7 @@
   <link rel="canonical" href="http://tjvantoll.com/2012/06/15/detecting-print-requests-with-javascript">
   <link rel="author" href="https://plus.google.com/+TJVanToll">
 
-  <!--[if !lte IE 7]><!-->
-    <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet">
-  <!--<![endif]-->
-  <!--[if lte IE 7]>
-    <link rel="stylesheet" href="/stylesheets/old-ie.css" media="screen, projection">
-  <![endif]-->
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet">
   
   <!--Custom script concatenation
   <script src="/javascripts/modernizr-2.5.3.js"></script>
@@ -38,12 +33,6 @@
   <script src="/javascripts/build/scripts.js"></script>
 
   <link href="/atom.xml" rel="alternate" title="TJ VanToll's Blog" type="application/atom+xml">
-  <style>
-	/* Fonts from Google"s Web font directory at http://google.com/webfonts */
-	/*@import url(http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic);
-	@import url(http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic);*/
-</style>
-
   
   <script type="text/javascript">
   	if (window.location.host.indexOf('local') == -1) {
@@ -134,19 +123,14 @@
 
 <p>IE5+ fires <code>onbeforeprint</code> and <code>onafterprint</code> events before and after the user requests the page to be printed.</p>
 
-<figure class='code'><figcaption class='not_empty'><span>onbeforeprint and onaferprint</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nb">window</span><span class="p">.</span><span class="nx">onbeforeprint</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-</span><span class='line'>    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;This will be called before the user prints.&#39;</span><span class="p">);</span>
-</span><span class='line'><span class="p">};</span>
-</span><span class='line'><span class="nb">window</span><span class="p">.</span><span class="nx">onafterprint</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-</span><span class='line'>    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;This will be called after the user prints&#39;</span><span class="p">);</span>
-</span><span class='line'><span class="p">};</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre class="language-javascript"><code>
+window.onbeforeprint = function() {
+    console.log('This will be called before the user prints.');
+};
+window.onafterprint = function() {
+    console.log('This will be called after the user prints');   
+};
+</code></pre>
 
 
 <p>These events are not part of any specification but they are very convenient.  Because of this <a href="https://developer.mozilla.org/en/DOM/window.onbeforeprint#Browser_compatibility">Firefox added support for both events in version 6</a>.  However, WebKit and Opera do not support the events.  Therefore, for cross browser compatibility these events aren&#8217;t going to cut it.</p>
@@ -159,38 +143,27 @@
 
 <p>The <code>window.matchMedia</code> <a href="https://developer.mozilla.org/en/DOM/window.matchMedia">API</a> provides a means of determining whether the current <code>document</code> matches a given <a href="https://developer.mozilla.org/En/CSS/Media_queries">media query</a>.  For example:</p>
 
-<figure class='code'><figcaption class='not_empty'><span>window.matchMedia</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="k">if</span> <span class="p">(</span><span class="nb">window</span><span class="p">.</span><span class="nx">matchMedia</span><span class="p">(</span><span class="s1">&#39; (min-width: 600px) &#39;</span><span class="p">).</span><span class="nx">matches</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;The viewport is at least 600 pixels wide&#39;</span><span class="p">);</span>
-</span><span class='line'><span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-</span><span class='line'>    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;The viewport is less than 600 pixels wide&#39;</span><span class="p">);</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre class="language-javascript"><code>
+if (window.matchMedia(' (min-width: 600px) ').matches) {  
+    console.log('The viewport is at least 600 pixels wide');
+} else { 
+    console.log('The viewport is less than 600 pixels wide');
+} 
+</code></pre>
 
 
 <p>You can also use this API to add listeners that will be fired whenever the result of the media query changes.  In the above example the <code>matches</code> criteria will be met whenever the viewport is at least 600px wide.  If you wanted to receive notifications whenever the viewport crossed the 600px threshold you could use the following.</p>
 
-<figure class='code'><figcaption class='not_empty'><span>window.matchMedia with notifications</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="kd">var</span> <span class="nx">mediaQueryList</span> <span class="o">=</span> <span class="nb">window</span><span class="p">.</span><span class="nx">matchMedia</span><span class="p">(</span><span class="s1">&#39; (min-width: 600px) &#39;</span><span class="p">);</span>
-</span><span class='line'><span class="nx">mediaQueryList</span><span class="p">.</span><span class="nx">addListener</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">mql</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>    <span class="k">if</span> <span class="p">(</span><span class="nx">mql</span><span class="p">.</span><span class="nx">matches</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;The viewport is at least 600 pixels wide&#39;</span><span class="p">);</span>
-</span><span class='line'>    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-</span><span class='line'>        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;The viewport is less than 600 pixels wide&#39;</span><span class="p">);</span>
-</span><span class='line'>    <span class="p">}</span>
-</span><span class='line'><span class="p">});</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre class="language-javascript"><code>
+var mediaQueryList = window.matchMedia(' (min-width: 600px) ');
+mediaQueryList.addListener(function(mql) {
+    if (mql.matches) {
+        console.log('The viewport is at least 600 pixels wide');
+    } else {
+        console.log('The viewport is less than 600 pixels wide');
+    }
+});
+</code></pre>
 
 
 <p><a href="http://caniuse.com/#feat=matchmedia">If your browser supports window.matchMedia</a> you can see this behavior live below by resizing your browser window under 600px on the following demo:</p>
@@ -200,23 +173,16 @@
 
 <p>Interestingly, it turns out you can also use this same technique to listen for the <code>print</code> media being applied when the user requests the document to be printed (<a href="http://code.google.com/p/chromium/issues/detail?id=105743">hat tip to Ben Wells</a>):</p>
 
-<figure class='code'><figcaption class='not_empty'><span>Using window.matchMedia to detecting print requests</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="kd">var</span> <span class="nx">mediaQueryList</span> <span class="o">=</span> <span class="nb">window</span><span class="p">.</span><span class="nx">matchMedia</span><span class="p">(</span><span class="s1">&#39;print&#39;</span><span class="p">);</span>
-</span><span class='line'><span class="nx">mediaQueryList</span><span class="p">.</span><span class="nx">addListener</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">mql</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>    <span class="k">if</span> <span class="p">(</span><span class="nx">mql</span><span class="p">.</span><span class="nx">matches</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;onbeforeprint equivalent&#39;</span><span class="p">);</span>
-</span><span class='line'>    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-</span><span class='line'>        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;onafterprint equivalent&#39;</span><span class="p">);</span>
-</span><span class='line'>    <span class="p">}</span>
-</span><span class='line'><span class="p">});</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre class="language-javascript"><code>
+var mediaQueryList = window.matchMedia('print');
+mediaQueryList.addListener(function(mql) {
+    if (mql.matches) {
+        console.log('onbeforeprint equivalent');
+    } else {
+        console.log('onafterprint equivalent');
+    }
+});
+</code></pre>
 
 
 <p>This works great in Chrome 9+ and Safari 5.1 (with the exception of the fact that the <a href="http://code.google.com/p/chromium/issues/detail?id=105743">listeners fire twice in Chrome</a>).  However, it doesn&#8217;t work in Firefox or IE10, even though they both support <code>window.matchMedia</code>.</p>
@@ -229,51 +195,30 @@
 
 <p>If you combine the two approaches you can detect print requests in IE 5+, Firefox 6+, Chrome 9+, and Safari 5.1+ (unfortunately Opera doesn&#8217;t support either approach).</p>
 
-<figure class='code'><figcaption class='not_empty'><span>Cross browser print request detection</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-</span><span class='line'>    <span class="kd">var</span> <span class="nx">beforePrint</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-</span><span class='line'>        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Functionality to run before printing.&#39;</span><span class="p">);</span>
-</span><span class='line'>    <span class="p">};</span>
-</span><span class='line'>    <span class="kd">var</span> <span class="nx">afterPrint</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-</span><span class='line'>        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Functionality to run after printing&#39;</span><span class="p">);</span>
-</span><span class='line'>    <span class="p">};</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="k">if</span> <span class="p">(</span><span class="nb">window</span><span class="p">.</span><span class="nx">matchMedia</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>        <span class="kd">var</span> <span class="nx">mediaQueryList</span> <span class="o">=</span> <span class="nb">window</span><span class="p">.</span><span class="nx">matchMedia</span><span class="p">(</span><span class="s1">&#39;print&#39;</span><span class="p">);</span>
-</span><span class='line'>        <span class="nx">mediaQueryList</span><span class="p">.</span><span class="nx">addListener</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">mql</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>            <span class="k">if</span> <span class="p">(</span><span class="nx">mql</span><span class="p">.</span><span class="nx">matches</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>                <span class="nx">beforePrint</span><span class="p">();</span>
-</span><span class='line'>            <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-</span><span class='line'>                <span class="nx">afterPrint</span><span class="p">();</span>
-</span><span class='line'>            <span class="p">}</span>
-</span><span class='line'>        <span class="p">});</span>
-</span><span class='line'>    <span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="nb">window</span><span class="p">.</span><span class="nx">onbeforeprint</span> <span class="o">=</span> <span class="nx">beforePrint</span><span class="p">;</span>
-</span><span class='line'>    <span class="nb">window</span><span class="p">.</span><span class="nx">onafterprint</span> <span class="o">=</span> <span class="nx">afterPrint</span><span class="p">;</span>
-</span><span class='line'><span class="p">}());</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre class="language-javascript"><code>
+(function() {
+    var beforePrint = function() {
+        console.log('Functionality to run before printing.');
+    };
+    var afterPrint = function() {
+        console.log('Functionality to run after printing');
+    };
+
+    if (window.matchMedia) {
+        var mediaQueryList = window.matchMedia('print');
+        mediaQueryList.addListener(function(mql) {
+            if (mql.matches) {
+                beforePrint();
+            } else {
+                afterPrint();
+            }
+        });
+    }
+
+    window.onbeforeprint = beforePrint;
+    window.onafterprint = afterPrint;
+}());
+</code></pre>
 
 
 <p>Note that your event handlers might potentially have to deal with the fact that they&#8217;re going to be called twice per print request in Chrome.</p>
@@ -292,41 +237,25 @@
 
 <p>With the ability to detect print requests in JavaScript you can substitute the higher quality image on the fly when the user requests the page to be printed.</p>
 
-<figure class='code'><figcaption class='not_empty'><span>Substituting higher quality images when printing</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;img</span> <span class="na">src=</span><span class="s">&quot;low-quality.jpg&quot;</span> <span class="na">id=</span><span class="s">&quot;company_logo&quot;</span> <span class="na">alt=</span><span class="s">&quot;My Company&quot;</span> <span class="nt">/&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="nt">&lt;script&gt;</span>
-</span><span class='line'>    <span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-</span><span class='line'>        <span class="kd">var</span> <span class="nx">upgradeImage</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-</span><span class='line'>            <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">&#39;company_logo&#39;</span><span class="p">)</span>
-</span><span class='line'>                <span class="p">.</span><span class="nx">setAttribute</span><span class="p">(</span><span class="s1">&#39;src&#39;</span><span class="p">,</span> <span class="s1">&#39;high-quality.png&#39;</span><span class="p">);</span>
-</span><span class='line'>        <span class="p">};</span>
-</span><span class='line'>
-</span><span class='line'>        <span class="k">if</span> <span class="p">(</span><span class="nb">window</span><span class="p">.</span><span class="nx">matchMedia</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>            <span class="kd">var</span> <span class="nx">mediaQueryList</span> <span class="o">=</span> <span class="nb">window</span><span class="p">.</span><span class="nx">matchMedia</span><span class="p">(</span><span class="s1">&#39;print&#39;</span><span class="p">);</span>
-</span><span class='line'>            <span class="nx">mediaQueryList</span><span class="p">.</span><span class="nx">addListener</span><span class="p">(</span><span class="nx">upgradeImage</span><span class="p">);</span>
-</span><span class='line'>        <span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'>        <span class="nb">window</span><span class="p">.</span><span class="nx">onbeforeprint</span> <span class="o">=</span> <span class="nx">upgradeImage</span><span class="p">;</span>
-</span><span class='line'>    <span class="p">});</span>
-</span><span class='line'><span class="nt">&lt;/script&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre class="language-markup"><code>
+&lt;img src="low-quality.jpg" id="company_logo" alt="My Company" /&gt;
+
+&lt;script&gt;
+    (function() {
+        var upgradeImage = function() {
+            document.getElementById('company_logo')
+                .setAttribute('src', 'high-quality.png'); 
+        };
+
+        if (window.matchMedia) {
+            var mediaQueryList = window.matchMedia('print');
+            mediaQueryList.addListener(upgradeImage);
+        }
+
+        window.onbeforeprint = upgradeImage;
+    });
+&lt;/script&gt;
+</code></pre>
 
 
 <p>The nice thing about this approach is that users that never print will not have to download the high quality image.  This technique also degrades nicely; users with browsers that don&#8217;t support the print events will simply print the lower quality image.</p>
@@ -335,43 +264,24 @@
 
 <p>Print events can also be used to track the number of times users print pages within a site or application.  Because of the lack of total browser support you wouldn&#8217;t capture every print request, but this would be sufficient for getting a rough idea of how often people are printing.</p>
 
-<figure class='code'><figcaption class='not_empty'><span>Tracking Print Requests</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-</span><span class='line'>    <span class="kd">var</span> <span class="nx">afterPrint</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-</span><span class='line'>        <span class="c1">// Here you would send an AJAX request to the server to track that a page</span>
-</span><span class='line'>        <span class="c1">// has been printed.  You could additionally pass the URL if you wanted to</span>
-</span><span class='line'>        <span class="c1">// track printing across an entire site or application.</span>
-</span><span class='line'>    <span class="p">};</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="k">if</span> <span class="p">(</span><span class="nb">window</span><span class="p">.</span><span class="nx">matchMedia</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>        <span class="kd">var</span> <span class="nx">mediaQueryList</span> <span class="o">=</span> <span class="nb">window</span><span class="p">.</span><span class="nx">matchMedia</span><span class="p">(</span><span class="s1">&#39;print&#39;</span><span class="p">);</span>
-</span><span class='line'>        <span class="nx">mediaQueryList</span><span class="p">.</span><span class="nx">addListener</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">mql</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>            <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">mql</span><span class="p">.</span><span class="nx">matches</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>                <span class="nx">afterPrint</span><span class="p">();</span>
-</span><span class='line'>            <span class="p">}</span>
-</span><span class='line'>        <span class="p">});</span>
-</span><span class='line'>    <span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="nb">window</span><span class="p">.</span><span class="nx">onafterprint</span> <span class="o">=</span> <span class="nx">afterPrint</span><span class="p">;</span>
-</span><span class='line'><span class="p">}());</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre class="language-javascript line-numbers"><code>(function() {
+    var afterPrint = function() {
+        // Here you would send an AJAX request to the server to track that a page
+        // has been printed.  You could additionally pass the URL if you wanted to
+        // track printing across an entire site or application.
+    };
+
+    if (window.matchMedia) {
+        var mediaQueryList = window.matchMedia('print');
+        mediaQueryList.addListener(function(mql) {
+            if (!mql.matches) {
+                afterPrint();
+            }
+        });
+    }
+
+    window.onafterprint = afterPrint;
+}());</code></pre>
 
 
 <h3>So can I use this in a &#8220;real&#8221; application?</h3>
@@ -384,71 +294,38 @@
 
 <p>Per the comments I&#8217;ve found that in addition to all the bugs mentioned above, certain browsers trigger the after print event early (with either <code>onafterprint</code> or the <code>window.matchMedia</code> handler implementation).</p>
 
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="cp">&lt;!DOCTYPE html&gt;</span>
-</span><span class='line'><span class="nt">&lt;html&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;head&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;script&gt;</span>
-</span><span class='line'>            <span class="kd">var</span> <span class="nx">beforePrint</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-</span><span class='line'>                <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">&#39;printImage&#39;</span><span class="p">).</span><span class="nx">src</span> <span class="o">=</span>
-</span><span class='line'>                    <span class="s1">&#39;http://stackoverflow.com/favicon.ico&#39;</span><span class="p">;</span>
-</span><span class='line'>            <span class="p">};</span>
-</span><span class='line'>            <span class="kd">var</span> <span class="nx">afterPrint</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-</span><span class='line'>                <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">&#39;printImage&#39;</span><span class="p">).</span><span class="nx">src</span> <span class="o">=</span>
-</span><span class='line'>                    <span class="s1">&#39;http://google.com/favicon.ico&#39;</span><span class="p">;</span>
-</span><span class='line'>            <span class="p">};</span>
-</span><span class='line'>
-</span><span class='line'>            <span class="k">if</span> <span class="p">(</span><span class="nb">window</span><span class="p">.</span><span class="nx">matchMedia</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>                <span class="kd">var</span> <span class="nx">mediaQueryList</span> <span class="o">=</span> <span class="nb">window</span><span class="p">.</span><span class="nx">matchMedia</span><span class="p">(</span><span class="s1">&#39;print&#39;</span><span class="p">);</span>
-</span><span class='line'>                <span class="nx">mediaQueryList</span><span class="p">.</span><span class="nx">addListener</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">mql</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>                    <span class="k">if</span> <span class="p">(</span><span class="nx">mql</span><span class="p">.</span><span class="nx">matches</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>                        <span class="nx">beforePrint</span><span class="p">();</span>
-</span><span class='line'>                    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-</span><span class='line'>                        <span class="nx">afterPrint</span><span class="p">();</span>
-</span><span class='line'>                    <span class="p">}</span>
-</span><span class='line'>                <span class="p">});</span>
-</span><span class='line'>            <span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'>            <span class="nb">window</span><span class="p">.</span><span class="nx">onbeforeprint</span> <span class="o">=</span> <span class="nx">beforePrint</span><span class="p">;</span>
-</span><span class='line'>            <span class="nb">window</span><span class="p">.</span><span class="nx">onafterprint</span> <span class="o">=</span> <span class="nx">afterPrint</span><span class="p">;</span>
-</span><span class='line'>        <span class="nt">&lt;/script&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;/head&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;body&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;img</span> <span class="na">id=</span><span class="s">&quot;printImage&quot;</span> <span class="na">src=</span><span class="s">&quot;http://google.com/favicon.ico&quot;</span> <span class="nt">/&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;/body&gt;</span>
-</span><span class='line'><span class="nt">&lt;/html&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre class="language-markup line-numbers"><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+    &lt;head&gt;
+        &lt;script&gt;
+            var beforePrint = function() {
+                document.getElementById('printImage').src = 
+                    'http://stackoverflow.com/favicon.ico';
+            };
+            var afterPrint = function() {
+                document.getElementById('printImage').src = 
+                    'http://google.com/favicon.ico';
+            };
+
+            if (window.matchMedia) {
+                var mediaQueryList = window.matchMedia('print');
+                mediaQueryList.addListener(function(mql) {
+                    if (mql.matches) {
+                        beforePrint();
+                    } else {
+                        afterPrint();
+                    }
+                });
+            }
+
+            window.onbeforeprint = beforePrint;
+            window.onafterprint = afterPrint;
+        &lt;/script&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+        &lt;img id="printImage" src="http://google.com/favicon.ico" /&gt;
+    &lt;/body&gt;
+&lt;/html&gt;</code></pre>
 
 
 <p>When printing the above document you would expect Stack Overflow&#8217;s favicon to print, when in actuality Google&#8217;s favicon prints.  Both events fire, but the after print event fires before the printing actually occurs, which in this case reverts the changes made in the before print event.</p>
@@ -491,7 +368,7 @@
     </p>
     <p class="author_card meta">
       <img src="/images/me/1.jpg" alt="Me!" id="post_me">
-      TJ VanToll is a developer advocate for <a href="http://telerik.com">Telerik</a>, a <a href="http://jqueryui.com/about/">jQuery team member</a>, and the author of <a href="http://tjvantoll.com/jquery-ui-in-action.html">jQuery UI in Action</a>. TJ has over a decade of web development experience—specializing in performance and the mobile web—and <a href="/speaking">speaks</a> about his research at conferences around the world. When not online, TJ is generally found talking about himself in the third person. If you like hearing TJ talk about himself, you should consider following him on <a href="http://twitter.com/tjvantoll">Twitter</a> or <a href="https://plus.google.com/+TJVanToll?rel=author" rel="author">Google+</a>.
+      TJ VanToll is a developer advocate for <a href="http://telerik.com">Telerik</a>, a <a href="http://jqueryui.com/about/">jQuery team member</a>, and the author of <a href="http://tjvantoll.com/jquery-ui-in-action.html">jQuery UI in Action</a>. TJ has over a decade of web development experience—specializing in performance and the mobile web—and <a href="/speaking">speaks</a> about his research at conferences around the world.TJ is <a href="http://twitter.com/tjvantoll">@tjvantoll</a> on Twitter and <a href="https://plus.google.com/+TJVanToll?rel=author" rel="author">+TJVanToll</a> on Google+.
     </p>
     
       <div class="sharing">
@@ -603,8 +480,7 @@
 
 
 
-
-
+Included file 'google_plus_one.html' not found in _includes directory
 
   <script type="text/javascript">
     (function(){
@@ -617,8 +493,7 @@
   </script>
 
 
-
-
+Included file 'custom/after_footer.html' not found in _includes directory
 
 </body>
 </html>

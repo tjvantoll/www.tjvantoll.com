@@ -21,12 +21,7 @@
   <link rel="canonical" href="http://tjvantoll.com/2013/04/26/using-ternary-operators-for-more-maintainable-templates">
   <link rel="author" href="https://plus.google.com/+TJVanToll">
 
-  <!--[if !lte IE 7]><!-->
-    <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet">
-  <!--<![endif]-->
-  <!--[if lte IE 7]>
-    <link rel="stylesheet" href="/stylesheets/old-ie.css" media="screen, projection">
-  <![endif]-->
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet">
   
   <!--Custom script concatenation
   <script src="/javascripts/modernizr-2.5.3.js"></script>
@@ -38,12 +33,6 @@
   <script src="/javascripts/build/scripts.js"></script>
 
   <link href="/atom.xml" rel="alternate" title="TJ VanToll's Blog" type="application/atom+xml">
-  <style>
-	/* Fonts from Google"s Web font directory at http://google.com/webfonts */
-	/*@import url(http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic);
-	@import url(http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic);*/
-</style>
-
   
   <script type="text/javascript">
   	if (window.location.host.indexOf('local') == -1) {
@@ -134,187 +123,119 @@
 
 <p>Let&#8217;s say you have the following data for your application:</p>
 
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="kd">var</span> <span class="nx">items</span> <span class="o">=</span> <span class="p">[</span>
-</span><span class='line'>    <span class="p">{</span> <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;Clock&#39;</span><span class="p">,</span> <span class="nx">selected</span><span class="o">:</span> <span class="kc">false</span> <span class="p">},</span>
-</span><span class='line'>    <span class="p">{</span> <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;Chair&#39;</span><span class="p">,</span> <span class="nx">selected</span><span class="o">:</span> <span class="kc">false</span> <span class="p">},</span>
-</span><span class='line'>    <span class="p">{</span> <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;Radio&#39;</span><span class="p">,</span> <span class="nx">selected</span><span class="o">:</span> <span class="kc">true</span> <span class="p">}</span>
-</span><span class='line'><span class="p">];</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre class="language-javascript"><code>var items = [
+    { name: 'Clock', selected: false },
+    { name: 'Chair', selected: false },
+    { name: 'Radio', selected: true }
+];
+</code></pre>
 
 
 <p>And you want to run this data through a template to generate an HTML list. You might start with something like this:</p>
 
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;ul&gt;</span>
-</span><span class='line'>    <span class="err">&lt;</span>% _.each( items, function( item ) { %&gt;
-</span><span class='line'>        <span class="nt">&lt;li&gt;</span>
-</span><span class='line'>            <span class="err">&lt;</span>%- item.name %&gt;
-</span><span class='line'>        <span class="nt">&lt;/li&gt;</span>
-</span><span class='line'>    <span class="err">&lt;</span>% }); %&gt;
-</span><span class='line'><span class="nt">&lt;/ul&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre class="language-markup"><code>&lt;ul&gt;
+    &lt;% _.each( items, function( item ) { %&gt;
+        &lt;li&gt;
+            &lt;%- item.name %&gt;
+        &lt;/li&gt;
+    &lt;% }); %&gt;
+&lt;/ul&gt;
+</code></pre>
 
 
 <p>This works fine.  But chances are, for a real application you&#8217;ll need to do something significantly more complicated than this.  As a first step, let&#8217;s say you have to add a CSS hook for selected items. You could accomplish that with an if check around each list item:</p>
 
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;ul&gt;</span>
-</span><span class='line'>    <span class="err">&lt;</span>% _.each( items, function( item ) { %&gt;
-</span><span class='line'>        <span class="err">&lt;</span>% if ( item.selected ) { %&gt;
-</span><span class='line'>            <span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">&quot;selected&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'>        <span class="err">&lt;</span>% } else { %&gt;
-</span><span class='line'>            <span class="nt">&lt;li&gt;</span>
-</span><span class='line'>        <span class="err">&lt;</span>% } %&gt;
-</span><span class='line'>            <span class="err">&lt;</span>%- item.name %&gt;
-</span><span class='line'>        <span class="nt">&lt;/li&gt;</span>
-</span><span class='line'>    <span class="err">&lt;</span>% }); %&gt;
-</span><span class='line'><span class="nt">&lt;/ul&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre class="language-markup"><code>&lt;ul&gt;
+    &lt;% _.each( items, function( item ) { %&gt;
+        &lt;% if ( item.selected ) { %&gt;
+            &lt;li class="selected"&gt;
+        &lt;% } else { %&gt;
+            &lt;li&gt;
+        &lt;% } %&gt;
+            &lt;%- item.name %&gt;
+        &lt;/li&gt;
+    &lt;% }); %&gt;
+&lt;/ul&gt;
+</code></pre>
 
 
 <p>Unfortunately this adds 4 lines of code and some unfortunate indentation just to add a simple class. Another alternative is to put the if check within the attribute:</p>
 
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;ul&gt;</span>
-</span><span class='line'>    <span class="err">&lt;</span>% _.each( items, function( item ) { %&gt;
-</span><span class='line'>        <span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">&quot;&lt;% if ( item.selected ) { %&gt;selected&lt;% } %&gt;&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'>            <span class="err">&lt;</span>%- item.name %&gt;
-</span><span class='line'>        <span class="nt">&lt;/li&gt;</span>
-</span><span class='line'>    <span class="err">&lt;</span>% }); %&gt;
-</span><span class='line'><span class="nt">&lt;/ul&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre class="language-markup"><code>&lt;ul&gt;
+    &lt;% _.each( items, function( item ) { %&gt;
+        &lt;li class="&lt;% if ( item.selected ) { %&gt;selected&lt;% } %&gt;"&gt;
+            &lt;%- item.name %&gt;
+        &lt;/li&gt;
+    &lt;% }); %&gt;
+&lt;/ul&gt;
+</code></pre>
 
 
 <p>This isn&#8217;t bad, but personally I find this code difficult to scan. I prefer to handle this situation with a ternary operator:</p>
 
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;ul&gt;</span>
-</span><span class='line'>    <span class="err">&lt;</span>% _.each( items, function( item ) { %&gt;
-</span><span class='line'>        <span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">&quot;&lt;%= (item.selected) ? &#39;selected&#39; : &#39;&#39; %&gt;&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'>            <span class="err">&lt;</span>%- item.name %&gt;
-</span><span class='line'>        <span class="nt">&lt;/li&gt;</span>
-</span><span class='line'>    <span class="err">&lt;</span>% }); %&gt;
-</span><span class='line'><span class="nt">&lt;/ul&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre class="language-markup"><code>&lt;ul&gt;
+    &lt;% _.each( items, function( item ) { %&gt;
+        &lt;li class="&lt;%= (item.selected) ? 'selected' : '' %&gt;"&gt;
+            &lt;%- item.name %&gt;
+        &lt;/li&gt;
+    &lt;% }); %&gt;
+&lt;/ul&gt;
+</code></pre>
 
 
 <p>Yes this is a stylistic thing, but I find this clearer and more readable. This will produce an unnecessary empty class attribute on non-selected items, but I believe the readability of the code to be far more important.</p>
 
 <p>For added fun, ternary operators can be nested. Say your application now has to handle deleted items:</p>
 
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="kd">var</span> <span class="nx">items</span> <span class="o">=</span> <span class="p">[</span>
-</span><span class='line'>    <span class="p">{</span> <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;Clock&#39;</span><span class="p">,</span> <span class="nx">selected</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span> <span class="nx">deleted</span><span class="o">:</span> <span class="kc">true</span> <span class="p">},</span>
-</span><span class='line'>    <span class="p">{</span> <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;Chair&#39;</span><span class="p">,</span> <span class="nx">selected</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span> <span class="nx">deleted</span><span class="o">:</span> <span class="kc">false</span> <span class="p">},</span>
-</span><span class='line'>    <span class="p">{</span> <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;Radio&#39;</span><span class="p">,</span> <span class="nx">selected</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span> <span class="nx">deleted</span><span class="o">:</span> <span class="kc">false</span> <span class="p">}</span>
-</span><span class='line'><span class="p">];</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre class="language-javascript"><code>var items = [
+    { name: 'Clock', selected: false, deleted: true },
+    { name: 'Chair', selected: false, deleted: false },
+    { name: 'Radio', selected: true, deleted: false }
+];
+</code></pre>
 
 
 <p>The following template shows how nested ternaries could be used to handle either a selected or deleted hook:</p>
 
 <p><i>Note: This assumes that the selected and deleted states will not occur at the same time.</i></p>
 
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;ul&gt;</span>
-</span><span class='line'>    <span class="err">&lt;</span>% _.each( items, function( item ) { %&gt;
-</span><span class='line'>        <span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">&quot;&lt;%= (item.selected) ? &#39;selected&#39; :</span>
-</span><span class='line'><span class="s">                       (item.deleted) ? &#39;deleted&#39; : &#39;&#39; %&gt;&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'>            <span class="err">&lt;</span>%- item.name %&gt;
-</span><span class='line'>        <span class="nt">&lt;/li&gt;</span>
-</span><span class='line'>    <span class="err">&lt;</span>% }); %&gt;
-</span><span class='line'><span class="nt">&lt;/ul&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre class="language-markup"><code>&lt;ul&gt;
+    &lt;% _.each( items, function( item ) { %&gt;
+        &lt;li class="&lt;%= (item.selected) ? 'selected' :
+                       (item.deleted) ? 'deleted' : '' %&gt;"&gt;
+            &lt;%- item.name %&gt;
+        &lt;/li&gt;
+    &lt;% }); %&gt;
+&lt;/ul&gt;
+</code></pre>
 
 
 <p>Here are a couple other examples of how you could structure this check. The most important thing is to find something that works for you, or more importantly, the person who will be maintaining your code.</p>
 
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;ul&gt;</span>
-</span><span class='line'>    <span class="err">&lt;</span>% _.each( items, function( item ) { %&gt;
-</span><span class='line'>        <span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">&quot;&lt;% if (item.selected) { %&gt;selected&lt;% } %&gt;</span>
-</span><span class='line'><span class="s">                   &lt;% if (item.deleted) { %&gt;deleted&lt;% } %&gt;&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'>            <span class="err">&lt;</span>%- item.name %&gt;
-</span><span class='line'>        <span class="nt">&lt;/li&gt;</span>
-</span><span class='line'>    <span class="err">&lt;</span>% }); %&gt;
-</span><span class='line'><span class="nt">&lt;/ul&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre class="language-markup"><code>&lt;ul&gt;
+    &lt;% _.each( items, function( item ) { %&gt;
+        &lt;li class="&lt;% if (item.selected) { %&gt;selected&lt;% } %&gt;
+                   &lt;% if (item.deleted) { %&gt;deleted&lt;% } %&gt;"&gt;
+            &lt;%- item.name %&gt;
+        &lt;/li&gt;
+    &lt;% }); %&gt;
+&lt;/ul&gt;
+</code></pre>
 
 
 
 
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;ul&gt;</span>
-</span><span class='line'>    <span class="err">&lt;</span>% _.each( items, function( item ) { %&gt;
-</span><span class='line'>        <span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">&quot;</span>
-</span><span class='line'><span class="s">          &lt;% if (item.selected) { %&gt; selected &lt;% } %&gt;</span>
-</span><span class='line'><span class="s">          &lt;% if (item.deleted)  { %&gt; deleted  &lt;% } %&gt;</span>
-</span><span class='line'><span class="s">        &quot;</span><span class="nt">&gt;</span>
-</span><span class='line'>            <span class="err">&lt;</span>%- item.name %&gt;
-</span><span class='line'>        <span class="nt">&lt;/li&gt;</span>
-</span><span class='line'>    <span class="err">&lt;</span>% }); %&gt;
-</span><span class='line'><span class="nt">&lt;/ul&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre class="language-markup"><code>&lt;ul&gt;
+    &lt;% _.each( items, function( item ) { %&gt;
+        &lt;li class="
+          &lt;% if (item.selected) { %&gt; selected &lt;% } %&gt;
+          &lt;% if (item.deleted)  { %&gt; deleted  &lt;% } %&gt;
+        "&gt;
+            &lt;%- item.name %&gt;
+        &lt;/li&gt;
+    &lt;% }); %&gt;
+&lt;/ul&gt;
+</code></pre>
 
 </div>
 
@@ -351,7 +272,7 @@
     </p>
     <p class="author_card meta">
       <img src="/images/me/1.jpg" alt="Me!" id="post_me">
-      TJ VanToll is a developer advocate for <a href="http://telerik.com">Telerik</a>, a <a href="http://jqueryui.com/about/">jQuery team member</a>, and the author of <a href="http://tjvantoll.com/jquery-ui-in-action.html">jQuery UI in Action</a>. TJ has over a decade of web development experience—specializing in performance and the mobile web—and <a href="/speaking">speaks</a> about his research at conferences around the world. When not online, TJ is generally found talking about himself in the third person. If you like hearing TJ talk about himself, you should consider following him on <a href="http://twitter.com/tjvantoll">Twitter</a> or <a href="https://plus.google.com/+TJVanToll?rel=author" rel="author">Google+</a>.
+      TJ VanToll is a developer advocate for <a href="http://telerik.com">Telerik</a>, a <a href="http://jqueryui.com/about/">jQuery team member</a>, and the author of <a href="http://tjvantoll.com/jquery-ui-in-action.html">jQuery UI in Action</a>. TJ has over a decade of web development experience—specializing in performance and the mobile web—and <a href="/speaking">speaks</a> about his research at conferences around the world.TJ is <a href="http://twitter.com/tjvantoll">@tjvantoll</a> on Twitter and <a href="https://plus.google.com/+TJVanToll?rel=author" rel="author">+TJVanToll</a> on Google+.
     </p>
     
       <div class="sharing">
@@ -463,8 +384,7 @@
 
 
 
-
-
+Included file 'google_plus_one.html' not found in _includes directory
 
   <script type="text/javascript">
     (function(){
@@ -477,8 +397,7 @@
   </script>
 
 
-
-
+Included file 'custom/after_footer.html' not found in _includes directory
 
 </body>
 </html>

@@ -21,12 +21,7 @@
   <link rel="canonical" href="http://tjvantoll.com/2013/06/19/using-semantic-class-names-to-show-and-hide-elements">
   <link rel="author" href="https://plus.google.com/+TJVanToll">
 
-  <!--[if !lte IE 7]><!-->
-    <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet">
-  <!--<![endif]-->
-  <!--[if lte IE 7]>
-    <link rel="stylesheet" href="/stylesheets/old-ie.css" media="screen, projection">
-  <![endif]-->
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet">
   
   <!--Custom script concatenation
   <script src="/javascripts/modernizr-2.5.3.js"></script>
@@ -38,12 +33,6 @@
   <script src="/javascripts/build/scripts.js"></script>
 
   <link href="/atom.xml" rel="alternate" title="TJ VanToll's Blog" type="application/atom+xml">
-  <style>
-	/* Fonts from Google"s Web font directory at http://google.com/webfonts */
-	/*@import url(http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic);
-	@import url(http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic);*/
-</style>
-
   
   <script type="text/javascript">
   	if (window.location.host.indexOf('local') == -1) {
@@ -127,49 +116,28 @@
 
 <p>As a small example, say you have the following form that both displays a user&#8217;s data as well as allows them to edit it:</p>
 
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;form&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;fieldset&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;legend&gt;</span>Account Information<span class="nt">&lt;/legend&gt;</span>
-</span><span class='line'>
-</span><span class='line'>        <span class="nt">&lt;div&gt;</span>
-</span><span class='line'>            <span class="nt">&lt;label</span> <span class="na">for=</span><span class="s">&quot;name&quot;</span><span class="nt">&gt;</span>Name:<span class="nt">&lt;/label&gt;</span>
-</span><span class='line'>            <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;text&quot;</span> <span class="na">id=</span><span class="s">&quot;name&quot;</span> <span class="na">value=</span><span class="s">&quot;TJ&quot;</span> <span class="na">required</span><span class="nt">&gt;</span>
-</span><span class='line'>            <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">&quot;display&quot;</span><span class="nt">&gt;</span>TJ<span class="nt">&lt;/span&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;/div&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;div&gt;</span>
-</span><span class='line'>            <span class="nt">&lt;label</span> <span class="na">for=</span><span class="s">&quot;email&quot;</span><span class="nt">&gt;</span>Email:<span class="nt">&lt;/label&gt;</span>
-</span><span class='line'>            <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;email&quot;</span> <span class="na">id=</span><span class="s">&quot;email&quot;</span> <span class="na">value=</span><span class="s">&quot;tj@somedomain.com&quot;</span> <span class="na">required</span><span class="nt">&gt;</span>
-</span><span class='line'>            <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">&quot;display&quot;</span><span class="nt">&gt;</span>tj@somedomain.com<span class="nt">&lt;/span&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;/div&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;actions&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'>            <span class="nt">&lt;button</span> <span class="na">type=</span><span class="s">&quot;button&quot;</span> <span class="na">class=</span><span class="s">&quot;edit&quot;</span><span class="nt">&gt;</span>Edit<span class="nt">&lt;/button&gt;</span>
-</span><span class='line'>            <span class="nt">&lt;button</span> <span class="na">type=</span><span class="s">&quot;submit&quot;</span> <span class="na">class=</span><span class="s">&quot;save&quot;</span><span class="nt">&gt;</span>Save<span class="nt">&lt;/button&gt;</span>
-</span><span class='line'>            <span class="nt">&lt;button</span> <span class="na">type=</span><span class="s">&quot;button&quot;</span> <span class="na">class=</span><span class="s">&quot;cancel&quot;</span><span class="nt">&gt;</span>Cancel<span class="nt">&lt;/button&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;/div&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;/fieldset&gt;</span>
-</span><span class='line'><span class="nt">&lt;/form&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre class="language-markup"><code>&lt;form&gt;
+    &lt;fieldset&gt;
+        &lt;legend&gt;Account Information&lt;/legend&gt;
+        
+        &lt;div&gt;
+            &lt;label for="name"&gt;Name:&lt;/label&gt;
+            &lt;input type="text" id="name" value="TJ" required&gt;
+            &lt;span class="display"&gt;TJ&lt;/span&gt;
+        &lt;/div&gt;
+        &lt;div&gt;
+            &lt;label for="email"&gt;Email:&lt;/label&gt;
+            &lt;input type="email" id="email" value="tj@somedomain.com" required&gt;
+            &lt;span class="display"&gt;tj@somedomain.com&lt;/span&gt;
+        &lt;/div&gt;
+        &lt;div class="actions"&gt;
+            &lt;button type="button" class="edit"&gt;Edit&lt;/button&gt;
+            &lt;button type="submit" class="save"&gt;Save&lt;/button&gt;
+            &lt;button type="button" class="cancel"&gt;Cancel&lt;/button&gt;
+        &lt;/div&gt;
+    &lt;/fieldset&gt;
+&lt;/form&gt;
+</code></pre>
 
 
 
@@ -199,34 +167,23 @@
 
 <p>The traditional approach to this problem is to show and hide elements explicitly in JavaScript:</p>
 
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">$</span><span class="p">(</span> <span class="s2">&quot;.edit&quot;</span> <span class="p">).</span><span class="nx">on</span><span class="p">(</span> <span class="s2">&quot;click&quot;</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-</span><span class='line'>    <span class="nx">$</span><span class="p">(</span> <span class="s2">&quot;.display, .edit&quot;</span> <span class="p">).</span><span class="nx">hide</span><span class="p">();</span>
-</span><span class='line'>    <span class="nx">$</span><span class="p">(</span> <span class="s2">&quot;.cancel, .save, input&quot;</span> <span class="p">).</span><span class="nx">show</span><span class="p">();</span>
-</span><span class='line'><span class="p">});</span>
-</span><span class='line'><span class="nx">$</span><span class="p">(</span> <span class="s2">&quot;.cancel&quot;</span> <span class="p">).</span><span class="nx">on</span><span class="p">(</span> <span class="s2">&quot;click&quot;</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-</span><span class='line'>    <span class="nx">$</span><span class="p">(</span> <span class="s2">&quot;.display, .edit&quot;</span> <span class="p">).</span><span class="nx">show</span><span class="p">();</span>
-</span><span class='line'>    <span class="nx">$</span><span class="p">(</span> <span class="s2">&quot;.cancel, .save, input&quot;</span> <span class="p">).</span><span class="nx">hide</span><span class="p">();</span>
-</span><span class='line'><span class="p">});</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre class="language-javascript"><code>$( ".edit" ).on( "click", function() {
+    $( ".display, .edit" ).hide();
+    $( ".cancel, .save, input" ).show();
+});
+$( ".cancel" ).on( "click", function() {
+    $( ".display, .edit" ).show();
+    $( ".cancel, .save, input" ).hide();
+});
+</code></pre>
 
 
 <p>To get the initial state of the form correct you also need some CSS:</p>
 
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nc">.cancel</span><span class="o">,</span> <span class="nc">.save</span><span class="o">,</span> <span class="nt">input</span> <span class="p">{</span>
-</span><span class='line'>    <span class="k">display</span><span class="o">:</span> <span class="k">none</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre class="language-css"><code>.cancel, .save, input {
+    display: none;
+}
+</code></pre>
 
 
 <p>Because the list of elements has to be specified in JavaScript and CSS, this logic will be difficult to maintain. And this is for a trivial example; usually requirements are much more complex.</p>
@@ -237,48 +194,30 @@
 
 <p>Instead of targeting individual elements in JavaScript, let&#8217;s add a class name to the parent element that makes the most sense, in this case, the <code>&lt;form&gt;</code>:</p>
 
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">$</span><span class="p">(</span> <span class="s2">&quot;.edit&quot;</span> <span class="p">).</span><span class="nx">on</span><span class="p">(</span> <span class="s2">&quot;click&quot;</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-</span><span class='line'>    <span class="nx">$</span><span class="p">(</span> <span class="k">this</span> <span class="p">).</span><span class="nx">parents</span><span class="p">(</span> <span class="s2">&quot;form&quot;</span> <span class="p">).</span><span class="nx">addClass</span><span class="p">(</span> <span class="s2">&quot;editing&quot;</span> <span class="p">);</span>
-</span><span class='line'><span class="p">});</span>
-</span><span class='line'><span class="nx">$</span><span class="p">(</span> <span class="s2">&quot;.cancel&quot;</span> <span class="p">).</span><span class="nx">on</span><span class="p">(</span> <span class="s2">&quot;click&quot;</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-</span><span class='line'>    <span class="nx">$</span><span class="p">(</span> <span class="k">this</span> <span class="p">).</span><span class="nx">parents</span><span class="p">(</span> <span class="s2">&quot;form&quot;</span> <span class="p">).</span><span class="nx">removeClass</span><span class="p">(</span> <span class="s2">&quot;editing&quot;</span> <span class="p">);</span>
-</span><span class='line'><span class="p">});</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre class="language-javascript"><code>$( ".edit" ).on( "click", function() {
+    $( this ).parents( "form" ).addClass( "editing" );
+});
+$( ".cancel" ).on( "click", function() {
+    $( this ).parents( "form" ).removeClass( "editing" );
+});
+</code></pre>
 
 
 <p>Since the logic is simple, this can be written library-free as well (<em>note <code>classList</code> is not available in IE &lt; 10</em>):</p>
 
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-</span><span class='line'>    <span class="kd">var</span> <span class="nx">form</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span> <span class="s2">&quot;form&quot;</span> <span class="p">),</span>
-</span><span class='line'>        <span class="nx">editButton</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span> <span class="s2">&quot;.edit&quot;</span> <span class="p">),</span>
-</span><span class='line'>        <span class="nx">cancelButton</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span> <span class="s2">&quot;.cancel&quot;</span> <span class="p">);</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="nx">editButton</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span> <span class="s2">&quot;click&quot;</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-</span><span class='line'>        <span class="nx">form</span><span class="p">.</span><span class="nx">classList</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span> <span class="s2">&quot;editing&quot;</span> <span class="p">);</span>
-</span><span class='line'>    <span class="p">});</span>
-</span><span class='line'>    <span class="nx">cancelButton</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span> <span class="s2">&quot;click&quot;</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-</span><span class='line'>        <span class="nx">form</span><span class="p">.</span><span class="nx">classList</span><span class="p">.</span><span class="nx">remove</span><span class="p">(</span> <span class="s2">&quot;editing&quot;</span> <span class="p">);</span>
-</span><span class='line'>    <span class="p">});</span>
-</span><span class='line'><span class="p">}());</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre class="language-javascript"><code>(function() {
+    var form = document.querySelector( "form" ),
+        editButton = document.querySelector( ".edit" ),
+        cancelButton = document.querySelector( ".cancel" );
+
+    editButton.addEventListener( "click", function() {
+        form.classList.add( "editing" ); 
+    });
+    cancelButton.addEventListener( "click", function() {
+        form.classList.remove( "editing" ); 
+    });
+}());
+</code></pre>
 
 
 <h3>Advantages of Using Semantic Classes</h3>
@@ -287,42 +226,27 @@
 
 <p>1) All display logic is now handled in CSS:</p>
 
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nc">.cancel</span><span class="o">,</span> <span class="nc">.save</span><span class="o">,</span> <span class="nt">input</span> <span class="p">{</span>
-</span><span class='line'>    <span class="k">display</span><span class="o">:</span> <span class="k">none</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'><span class="nc">.editing</span> <span class="nc">.save</span><span class="o">,</span>
-</span><span class='line'><span class="nc">.editing</span> <span class="nc">.cancel</span><span class="o">,</span>
-</span><span class='line'><span class="nc">.editing</span> <span class="nt">input</span> <span class="p">{</span>
-</span><span class='line'>    <span class="k">display</span><span class="o">:</span> <span class="k">inline</span><span class="o">-</span><span class="k">block</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'><span class="nc">.editing</span> <span class="nc">.edit</span><span class="o">,</span>
-</span><span class='line'><span class="nc">.editing</span> <span class="nc">.display</span> <span class="p">{</span>
-</span><span class='line'>    <span class="k">display</span><span class="o">:</span> <span class="k">none</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre class="language-css"><code>.cancel, .save, input {
+    display: none;
+}
+.editing .save,
+.editing .cancel,
+.editing input {
+    display: inline-block;
+}
+.editing .edit,
+.editing .display {
+    display: none;
+}
+</code></pre>
 
 
 <p>2) You have a styling hook that can be used to make further changes to the display. For example, you might want to bold the labels when editing:</p>
 
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nc">.editing</span> <span class="nt">label</span> <span class="p">{</span>
-</span><span class='line'>    <span class="k">font-weight</span><span class="o">:</span> <span class="k">bold</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre class="language-css"><code>.editing label {
+    font-weight: bold;
+}
+</code></pre>
 
 
 <p>The final display of the form looks like this:</p>
@@ -370,7 +294,7 @@
     </p>
     <p class="author_card meta">
       <img src="/images/me/1.jpg" alt="Me!" id="post_me">
-      TJ VanToll is a developer advocate for <a href="http://telerik.com">Telerik</a>, a <a href="http://jqueryui.com/about/">jQuery team member</a>, and the author of <a href="http://tjvantoll.com/jquery-ui-in-action.html">jQuery UI in Action</a>. TJ has over a decade of web development experience—specializing in performance and the mobile web—and <a href="/speaking">speaks</a> about his research at conferences around the world. When not online, TJ is generally found talking about himself in the third person. If you like hearing TJ talk about himself, you should consider following him on <a href="http://twitter.com/tjvantoll">Twitter</a> or <a href="https://plus.google.com/+TJVanToll?rel=author" rel="author">Google+</a>.
+      TJ VanToll is a developer advocate for <a href="http://telerik.com">Telerik</a>, a <a href="http://jqueryui.com/about/">jQuery team member</a>, and the author of <a href="http://tjvantoll.com/jquery-ui-in-action.html">jQuery UI in Action</a>. TJ has over a decade of web development experience—specializing in performance and the mobile web—and <a href="/speaking">speaks</a> about his research at conferences around the world.TJ is <a href="http://twitter.com/tjvantoll">@tjvantoll</a> on Twitter and <a href="https://plus.google.com/+TJVanToll?rel=author" rel="author">+TJVanToll</a> on Google+.
     </p>
     
       <div class="sharing">
@@ -482,8 +406,7 @@
 
 
 
-
-
+Included file 'google_plus_one.html' not found in _includes directory
 
   <script type="text/javascript">
     (function(){
@@ -496,8 +419,7 @@
   </script>
 
 
-
-
+Included file 'custom/after_footer.html' not found in _includes directory
 
 </body>
 </html>

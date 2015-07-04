@@ -21,12 +21,7 @@
   <link rel="canonical" href="http://tjvantoll.com/2015/01/18/getting-started-with-kendo-ui-core">
   <link rel="author" href="https://plus.google.com/+TJVanToll">
 
-  <!--[if !lte IE 7]><!-->
-    <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet">
-  <!--<![endif]-->
-  <!--[if lte IE 7]>
-    <link rel="stylesheet" href="/stylesheets/old-ie.css" media="screen, projection">
-  <![endif]-->
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet">
   
   <!--Custom script concatenation
   <script src="/javascripts/modernizr-2.5.3.js"></script>
@@ -38,12 +33,6 @@
   <script src="/javascripts/build/scripts.js"></script>
 
   <link href="/atom.xml" rel="alternate" title="TJ VanToll's Blog" type="application/atom+xml">
-  <style>
-	/* Fonts from Google"s Web font directory at http://google.com/webfonts */
-	/*@import url(http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic);
-	@import url(http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic);*/
-</style>
-
   
   <script type="text/javascript">
   	if (window.location.host.indexOf('local') == -1) {
@@ -132,8 +121,7 @@
 
 <p>I start by downloading Kendo UI Core from Bower, as it&#8217;s my preferred package manager for web apps:</p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ bower install kendo-ui-core</span></code></pre></td></tr></table></div></figure>
+<pre class="language-shell"><code>$ bower install kendo-ui-core</code></pre>
 
 
 <p>You can alternatively <a href="https://github.com/telerik/kendo-ui-core/archive/master.zip">download Kendo UI Core from GitHub</a>, but Bower is my jam. (Not to be confused with <a href="http://jamjs.org/">Jam</a>, which—believe it or not—is actually the name of a competing JavaScript package manager. Who knew?)</p>
@@ -142,41 +130,23 @@
 
 <p>Next I create an index.html and paste in the following boilerplate HTML:</p>
 
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="cp">&lt;!doctype html&gt;</span>
-</span><span class='line'><span class="nt">&lt;html</span> <span class="na">lang=</span><span class="s">&quot;en&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'><span class="nt">&lt;head&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">&quot;utf-8&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;title&gt;</span>My Project<span class="nt">&lt;/title&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;meta</span> <span class="na">name=</span><span class="s">&quot;viewport&quot;</span> <span class="na">content=</span><span class="s">&quot;width=device-width, initial-scale=1&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">&quot;stylesheet&quot;</span> <span class="na">href=</span><span class="s">&quot;bower_components/kendo-ui-core/src/styles/web/kendo.common.core.css&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">&quot;stylesheet&quot;</span> <span class="na">href=</span><span class="s">&quot;bower_components/kendo-ui-core/src/styles/web/kendo.flat.css&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'><span class="nt">&lt;/head&gt;</span>
-</span><span class='line'><span class="nt">&lt;body&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;bower_components/jquery/dist/jquery.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
-</span><span class='line'><span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;bower_components/kendo-ui-core/src/js/kendo.ui.core.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="nt">&lt;/body&gt;</span>
-</span><span class='line'><span class="nt">&lt;/html&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre class="language-markup line-numbers"><code>&lt;!doctype html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+    &lt;meta charset="utf-8"&gt;
+    &lt;title&gt;My Project&lt;/title&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1"&gt;
+
+    &lt;link rel="stylesheet" href="bower_components/kendo-ui-core/src/styles/web/kendo.common.core.css"&gt;
+    &lt;link rel="stylesheet" href="bower_components/kendo-ui-core/src/styles/web/kendo.flat.css"&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+&lt;script src="bower_components/jquery/dist/jquery.js"&gt;&lt;/script&gt;
+&lt;script src="bower_components/kendo-ui-core/src/js/kendo.ui.core.js"&gt;&lt;/script&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
 
 
 <p>A couple things to note here. First, my HTML follows the <a href="http://contribute.jquery.org/style-guide/html/">jQuery HTML style guide</a>, which yes, actually is a thing.</p>
@@ -194,68 +164,43 @@
 
 <p>I like using AMD and <a href="http://requirejs.org/">RequireJS</a> to manage my app&#8217;s dependencies, and luckily Kendo UI Core is intelligently broken into AMD modules. To start with AMD I download RequireJS from Bower:</p>
 
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'>$ bower install requirejs
-</span></code></pre></td></tr></table></div></figure>
+<pre class="language-shell"><code>$ bower install requirejs</code></pre>
 
 
 <p>Next I create an app.js file to serve as the main JavaScript file for my app. At this point my project&#8217;s folder structure looks a little something like this:</p>
 
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'>.
-</span><span class='line'>├── bower_components
-</span><span class='line'>│   ├── jquery
-</span><span class='line'>│   │   └── ...
-</span><span class='line'>│   ├── kendo-ui-core
-</span><span class='line'>│   │   └── ...
-</span><span class='line'>│   └── requirejs
-</span><span class='line'>│       └── ...
-</span><span class='line'>├── index.html
-</span><span class='line'>└── js
-</span><span class='line'>    └── app.js
-</span></code></pre></td></tr></table></div></figure>
+<pre class="language-shell"><code>.
+├── bower_components
+│   ├── jquery
+│   │   └── ...
+│   ├── kendo-ui-core
+│   │   └── ...
+│   └── requirejs
+│       └── ...
+├── index.html
+└── js
+    └── app.js
+</code></pre>
 
 
 <p>With this structure in place I switch my index.html to use a single <code>&lt;script&gt;</code> tag:</p>
 
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;bower_components/requirejs/require.js&quot;</span> <span class="na">data-main=</span><span class="s">&quot;js/app&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre class="language-markup"><code>&lt;script src="bower_components/requirejs/require.js" data-main="js/app"&gt;&lt;/script&gt;</code></pre>
 
 
 <p>Then I paste the following code in as a starting point for app.js:</p>
 
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">require</span><span class="p">.</span><span class="nx">config</span><span class="p">({</span>
-</span><span class='line'>    <span class="nx">paths</span><span class="o">:</span> <span class="p">{</span>
-</span><span class='line'>        <span class="s2">&quot;jquery&quot;</span><span class="o">:</span> <span class="s2">&quot;/bower_components/jquery/dist/jquery&quot;</span><span class="p">,</span>
-</span><span class='line'>        <span class="s2">&quot;kendo-ui-core&quot;</span><span class="o">:</span> <span class="s2">&quot;/bower_components/kendo-ui-core/src/js&quot;</span>
-</span><span class='line'>    <span class="p">}</span>
-</span><span class='line'><span class="p">});</span>
-</span><span class='line'>
-</span><span class='line'><span class="nx">require</span><span class="p">([</span> <span class="s2">&quot;jquery&quot;</span><span class="p">,</span> <span class="s2">&quot;kendo-ui-core/kendo.ui.core&quot;</span> <span class="p">],</span> <span class="kd">function</span><span class="p">(</span> <span class="nx">$</span> <span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>
-</span><span class='line'><span class="p">});</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre class="language-javascript line-numbers"><code>require.config({
+    paths: {
+        "jquery": "/bower_components/jquery/dist/jquery",
+        "kendo-ui-core": "/bower_components/kendo-ui-core/src/js"
+    }
+});
+
+require([ "jquery", "kendo-ui-core/kendo.ui.core" ], function( $ ) {
+
+});
+</code></pre>
 
 
 <p>This gives me an entry point for my app that loads jQuery and Kendo UI Core dynamically. If my app only needs one portion of Kendo UI Core I only specify the modules I need in the <code>require()</code> call. For instance if I only want a <a href="http://demos.telerik.com/kendo-ui/maskedtextbox/index">MaskedTextBox</a> I only require <code>"jquery"</code> and <code>"kendo-ui-core/kendo.maskedtextbox"</code>—i.e. <code>require([ "jquery", "kendo-ui-core/kendo.maskedtextbox" ])</code>.</p>
@@ -298,7 +243,7 @@
     </p>
     <p class="author_card meta">
       <img src="/images/me/1.jpg" alt="Me!" id="post_me">
-      TJ VanToll is a developer advocate for <a href="http://telerik.com">Telerik</a>, a <a href="http://jqueryui.com/about/">jQuery team member</a>, and the author of <a href="http://tjvantoll.com/jquery-ui-in-action.html">jQuery UI in Action</a>. TJ has over a decade of web development experience—specializing in performance and the mobile web—and <a href="/speaking">speaks</a> about his research at conferences around the world. When not online, TJ is generally found talking about himself in the third person. If you like hearing TJ talk about himself, you should consider following him on <a href="http://twitter.com/tjvantoll">Twitter</a> or <a href="https://plus.google.com/+TJVanToll?rel=author" rel="author">Google+</a>.
+      TJ VanToll is a developer advocate for <a href="http://telerik.com">Telerik</a>, a <a href="http://jqueryui.com/about/">jQuery team member</a>, and the author of <a href="http://tjvantoll.com/jquery-ui-in-action.html">jQuery UI in Action</a>. TJ has over a decade of web development experience—specializing in performance and the mobile web—and <a href="/speaking">speaks</a> about his research at conferences around the world.TJ is <a href="http://twitter.com/tjvantoll">@tjvantoll</a> on Twitter and <a href="https://plus.google.com/+TJVanToll?rel=author" rel="author">+TJVanToll</a> on Google+.
     </p>
     
       <div class="sharing">
@@ -410,8 +355,7 @@
 
 
 
-
-
+Included file 'google_plus_one.html' not found in _includes directory
 
   <script type="text/javascript">
     (function(){
@@ -424,8 +368,7 @@
   </script>
 
 
-
-
+Included file 'custom/after_footer.html' not found in _includes directory
 
 </body>
 </html>

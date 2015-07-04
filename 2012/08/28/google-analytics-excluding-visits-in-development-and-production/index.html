@@ -21,12 +21,7 @@
   <link rel="canonical" href="http://tjvantoll.com/2012/08/28/google-analytics-excluding-visits-in-development-and-production">
   <link rel="author" href="https://plus.google.com/+TJVanToll">
 
-  <!--[if !lte IE 7]><!-->
-    <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet">
-  <!--<![endif]-->
-  <!--[if lte IE 7]>
-    <link rel="stylesheet" href="/stylesheets/old-ie.css" media="screen, projection">
-  <![endif]-->
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet">
   
   <!--Custom script concatenation
   <script src="/javascripts/modernizr-2.5.3.js"></script>
@@ -38,12 +33,6 @@
   <script src="/javascripts/build/scripts.js"></script>
 
   <link href="/atom.xml" rel="alternate" title="TJ VanToll's Blog" type="application/atom+xml">
-  <style>
-	/* Fonts from Google"s Web font directory at http://google.com/webfonts */
-	/*@import url(http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic);
-	@import url(http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic);*/
-</style>
-
   
   <script type="text/javascript">
   	if (window.location.host.indexOf('local') == -1) {
@@ -148,33 +137,21 @@
 
 <p>If you test your site on a local server you likely don&#8217;t want that traffic being logged.  Assuming that your local server is using <code>localhost</code> as the hostname the following will exclude the traffic.</p>
 
-<figure class='code'><figcaption class='not_empty'><span>Excluding localhost Traffic</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="o">&lt;</span><span class="nx">script</span><span class="o">&gt;</span>
-</span><span class='line'>    <span class="k">if</span> <span class="p">(</span><span class="nb">window</span><span class="p">.</span><span class="nx">location</span><span class="p">.</span><span class="nx">host</span> <span class="o">!=</span> <span class="s1">&#39;localhost&#39;</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>        <span class="kd">var</span> <span class="nx">_gaq</span> <span class="o">=</span> <span class="nx">_gaq</span> <span class="o">||</span> <span class="p">[];</span>
-</span><span class='line'>        <span class="nx">_gaq</span><span class="p">.</span><span class="nx">push</span><span class="p">([</span><span class="s1">&#39;_setAccount&#39;</span><span class="p">,</span> <span class="s1">&#39;UA-12345678-1&#39;</span><span class="p">]);</span>
-</span><span class='line'>        <span class="nx">_gaq</span><span class="p">.</span><span class="nx">push</span><span class="p">([</span><span class="s1">&#39;_trackPageview&#39;</span><span class="p">]);</span>
-</span><span class='line'>
-</span><span class='line'>        <span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-</span><span class='line'>            <span class="kd">var</span> <span class="nx">ga</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="s1">&#39;script&#39;</span><span class="p">);</span> <span class="nx">ga</span><span class="p">.</span><span class="nx">type</span> <span class="o">=</span> <span class="s1">&#39;text/javascript&#39;</span><span class="p">;</span> <span class="nx">ga</span><span class="p">.</span><span class="nx">async</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
-</span><span class='line'>            <span class="nx">ga</span><span class="p">.</span><span class="nx">src</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;https:&#39;</span> <span class="o">==</span> <span class="nb">document</span><span class="p">.</span><span class="nx">location</span><span class="p">.</span><span class="nx">protocol</span> <span class="o">?</span> <span class="s1">&#39;https://ssl&#39;</span> <span class="o">:</span> <span class="s1">&#39;http://www&#39;</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;.google-analytics.com/ga.js&#39;</span><span class="p">;</span>
-</span><span class='line'>            <span class="kd">var</span> <span class="nx">s</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementsByTagName</span><span class="p">(</span><span class="s1">&#39;script&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">];</span> <span class="nx">s</span><span class="p">.</span><span class="nx">parentNode</span><span class="p">.</span><span class="nx">insertBefore</span><span class="p">(</span><span class="nx">ga</span><span class="p">,</span> <span class="nx">s</span><span class="p">);</span>
-</span><span class='line'>        <span class="p">})();</span>
-</span><span class='line'>    <span class="p">}</span>
-</span><span class='line'><span class="o">&lt;</span><span class="err">/script&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre class="language-javascript"><code>
+&lt;script&gt;
+    if (window.location.host != 'localhost') {
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-12345678-1']);
+        _gaq.push(['_trackPageview']);
+
+        (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+    }
+&lt;/script&gt;
+</code></pre>
 
 
 <h3>Excluding Production Traffic</h3>
@@ -183,71 +160,39 @@
 
 <p>For example if your site is <code>http://mysite.com</code> then you could visit <code>http://mysite.com?analytics=off</code> to exclude the logging.  The following script makes it so that any page view with the appropriate <code>analytics=off</code> request parameter is not logged.</p>
 
-<figure class='code'><figcaption class='not_empty'><span>Excluding Production Traffic via a Request Parameter</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="o">&lt;</span><span class="nx">script</span><span class="o">&gt;</span>
-</span><span class='line'>    <span class="kd">var</span> <span class="nx">useAnalytics</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="k">try</span> <span class="p">{</span>
-</span><span class='line'>        <span class="c1">//Turn off analytics if &#39;analytics=off&#39; is included as a request parameter.</span>
-</span><span class='line'>        <span class="kd">var</span> <span class="nx">parameters</span> <span class="o">=</span> <span class="nb">window</span><span class="p">.</span><span class="nx">location</span><span class="p">.</span><span class="nx">search</span><span class="p">.</span><span class="nx">split</span><span class="p">(</span><span class="s1">&#39;&amp;&#39;</span><span class="p">);</span>
-</span><span class='line'>        <span class="k">if</span> <span class="p">(</span><span class="nx">parameters</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="p">{</span>
-</span><span class='line'>            <span class="nx">parameters</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="nx">parameters</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nx">replace</span><span class="p">(</span><span class="s1">&#39;?&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">);</span>
-</span><span class='line'>        <span class="p">}</span>
-</span><span class='line'>        <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">parameters</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>            <span class="kd">var</span> <span class="nx">values</span> <span class="o">=</span> <span class="nx">parameters</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">split</span><span class="p">(</span><span class="s1">&#39;=&#39;</span><span class="p">);</span>
-</span><span class='line'>            <span class="k">if</span> <span class="p">(</span><span class="nx">values</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;analytics&#39;</span> <span class="o">&amp;&amp;</span> <span class="nx">values</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;off&#39;</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>                <span class="nx">useAnalytics</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
-</span><span class='line'>            <span class="p">}</span>
-</span><span class='line'>        <span class="p">}</span>
-</span><span class='line'>    <span class="p">}</span> <span class="k">catch</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>        <span class="c1">//Just in case something goes wrong...</span>
-</span><span class='line'>        <span class="nx">useAnalytics</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
-</span><span class='line'>    <span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="k">if</span> <span class="p">(</span><span class="nx">useAnalytics</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>        <span class="kd">var</span> <span class="nx">_gaq</span> <span class="o">=</span> <span class="nx">_gaq</span> <span class="o">||</span> <span class="p">[];</span>
-</span><span class='line'>        <span class="nx">_gaq</span><span class="p">.</span><span class="nx">push</span><span class="p">([</span><span class="s1">&#39;_setAccount&#39;</span><span class="p">,</span> <span class="s1">&#39;UA-12345678-1&#39;</span><span class="p">]);</span>
-</span><span class='line'>        <span class="nx">_gaq</span><span class="p">.</span><span class="nx">push</span><span class="p">([</span><span class="s1">&#39;_trackPageview&#39;</span><span class="p">]);</span>
-</span><span class='line'>
-</span><span class='line'>        <span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-</span><span class='line'>            <span class="kd">var</span> <span class="nx">ga</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="s1">&#39;script&#39;</span><span class="p">);</span> <span class="nx">ga</span><span class="p">.</span><span class="nx">type</span> <span class="o">=</span> <span class="s1">&#39;text/javascript&#39;</span><span class="p">;</span> <span class="nx">ga</span><span class="p">.</span><span class="nx">async</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
-</span><span class='line'>            <span class="nx">ga</span><span class="p">.</span><span class="nx">src</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;https:&#39;</span> <span class="o">==</span> <span class="nb">document</span><span class="p">.</span><span class="nx">location</span><span class="p">.</span><span class="nx">protocol</span> <span class="o">?</span> <span class="s1">&#39;https://ssl&#39;</span> <span class="o">:</span> <span class="s1">&#39;http://www&#39;</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;.google-analytics.com/ga.js&#39;</span><span class="p">;</span>
-</span><span class='line'>            <span class="kd">var</span> <span class="nx">s</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementsByTagName</span><span class="p">(</span><span class="s1">&#39;script&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">];</span> <span class="nx">s</span><span class="p">.</span><span class="nx">parentNode</span><span class="p">.</span><span class="nx">insertBefore</span><span class="p">(</span><span class="nx">ga</span><span class="p">,</span> <span class="nx">s</span><span class="p">);</span>
-</span><span class='line'>        <span class="p">})();</span>
-</span><span class='line'>    <span class="p">}</span>
-</span><span class='line'><span class="o">&lt;</span><span class="err">/script&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre class="language-markup line-numbers"><code>&lt;script&gt;
+    var useAnalytics = true;
+
+    try {
+        //Turn off analytics if 'analytics=off' is included as a request parameter.
+        var parameters = window.location.search.split('&');
+        if (parameters[0]) {
+            parameters[0] = parameters[0].replace('?', '');
+        }
+        for (var i = 0; i &lt; parameters.length; i++) {
+            var values = parameters[i].split('=');
+            if (values[0] == 'analytics' && values[1] == 'off') {
+                useAnalytics = false;
+            }
+        }
+    } catch(e) {
+        //Just in case something goes wrong...
+        useAnalytics = true;
+    }
+
+    if (useAnalytics) {
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-12345678-1']);
+        _gaq.push(['_trackPageview']);
+
+        (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+    }
+&lt;/script&gt;
+</code></pre>
 
 
 <p>With this approach you could simply create a bookmark with the request parameter in the URL and use that to access the site.</p>
@@ -258,81 +203,44 @@
 
 <p>In case you want to include both of these here&#8217;s a code snippet that makes it so that both <code>localhost</code> traffic and pages with a <code>analytics=off</code> request parameter are excluded.</p>
 
-<figure class='code'><figcaption class='not_empty'><span>The Final Exclusion Script</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-<span class='line-number'>33</span>
-<span class='line-number'>34</span>
-<span class='line-number'>35</span>
-<span class='line-number'>36</span>
-<span class='line-number'>37</span>
-</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="o">&lt;</span><span class="nx">script</span><span class="o">&gt;</span>
-</span><span class='line'>    <span class="kd">var</span> <span class="nx">useAnalytics</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="k">try</span> <span class="p">{</span>
-</span><span class='line'>        <span class="c1">//Turn off analytics if &#39;analytics=off&#39; is included as a request parameter.</span>
-</span><span class='line'>        <span class="kd">var</span> <span class="nx">parameters</span> <span class="o">=</span> <span class="nb">window</span><span class="p">.</span><span class="nx">location</span><span class="p">.</span><span class="nx">search</span><span class="p">.</span><span class="nx">split</span><span class="p">(</span><span class="s1">&#39;&amp;&#39;</span><span class="p">);</span>
-</span><span class='line'>        <span class="k">if</span> <span class="p">(</span><span class="nx">parameters</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="p">{</span>
-</span><span class='line'>            <span class="nx">parameters</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="nx">parameters</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nx">replace</span><span class="p">(</span><span class="s1">&#39;?&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">);</span>
-</span><span class='line'>        <span class="p">}</span>
-</span><span class='line'>        <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">parameters</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>            <span class="kd">var</span> <span class="nx">values</span> <span class="o">=</span> <span class="nx">parameters</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">split</span><span class="p">(</span><span class="s1">&#39;=&#39;</span><span class="p">);</span>
-</span><span class='line'>            <span class="k">if</span> <span class="p">(</span><span class="nx">values</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;analytics&#39;</span> <span class="o">&amp;&amp;</span> <span class="nx">values</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;off&#39;</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>                <span class="nx">useAnalytics</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
-</span><span class='line'>            <span class="p">}</span>
-</span><span class='line'>        <span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'>        <span class="c1">//Turn off analytics if &#39;localhost&#39; is the host</span>
-</span><span class='line'>        <span class="k">if</span> <span class="p">(</span><span class="nb">window</span><span class="p">.</span><span class="nx">location</span><span class="p">.</span><span class="nx">host</span> <span class="o">==</span> <span class="s1">&#39;localhost&#39;</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>            <span class="nx">useAnalytics</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
-</span><span class='line'>        <span class="p">}</span>
-</span><span class='line'>    <span class="p">}</span> <span class="k">catch</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>        <span class="c1">//Just in case something goes wrong...</span>
-</span><span class='line'>        <span class="nx">useAnalytics</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
-</span><span class='line'>    <span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="k">if</span> <span class="p">(</span><span class="nx">useAnalytics</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>        <span class="kd">var</span> <span class="nx">_gaq</span> <span class="o">=</span> <span class="nx">_gaq</span> <span class="o">||</span> <span class="p">[];</span>
-</span><span class='line'>        <span class="nx">_gaq</span><span class="p">.</span><span class="nx">push</span><span class="p">([</span><span class="s1">&#39;_setAccount&#39;</span><span class="p">,</span> <span class="s1">&#39;UA-29179796-1&#39;</span><span class="p">]);</span>
-</span><span class='line'>        <span class="nx">_gaq</span><span class="p">.</span><span class="nx">push</span><span class="p">([</span><span class="s1">&#39;_trackPageview&#39;</span><span class="p">]);</span>
-</span><span class='line'>
-</span><span class='line'>        <span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-</span><span class='line'>            <span class="kd">var</span> <span class="nx">ga</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="s1">&#39;script&#39;</span><span class="p">);</span> <span class="nx">ga</span><span class="p">.</span><span class="nx">type</span> <span class="o">=</span> <span class="s1">&#39;text/javascript&#39;</span><span class="p">;</span> <span class="nx">ga</span><span class="p">.</span><span class="nx">async</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
-</span><span class='line'>            <span class="nx">ga</span><span class="p">.</span><span class="nx">src</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;https:&#39;</span> <span class="o">==</span> <span class="nb">document</span><span class="p">.</span><span class="nx">location</span><span class="p">.</span><span class="nx">protocol</span> <span class="o">?</span> <span class="s1">&#39;https://ssl&#39;</span> <span class="o">:</span> <span class="s1">&#39;http://www&#39;</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;.google-analytics.com/ga.js&#39;</span><span class="p">;</span>
-</span><span class='line'>            <span class="kd">var</span> <span class="nx">s</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementsByTagName</span><span class="p">(</span><span class="s1">&#39;script&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">];</span> <span class="nx">s</span><span class="p">.</span><span class="nx">parentNode</span><span class="p">.</span><span class="nx">insertBefore</span><span class="p">(</span><span class="nx">ga</span><span class="p">,</span> <span class="nx">s</span><span class="p">);</span>
-</span><span class='line'>        <span class="p">})();</span>
-</span><span class='line'>    <span class="p">}</span>
-</span><span class='line'><span class="o">&lt;</span><span class="err">/script&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre class="language-markup line-numbers"><code>&lt;script&gt;
+    var useAnalytics = true;
+
+    try {
+        //Turn off analytics if 'analytics=off' is included as a request parameter.
+        var parameters = window.location.search.split('&');
+        if (parameters[0]) {
+            parameters[0] = parameters[0].replace('?', '');
+        }
+        for (var i = 0; i &lt; parameters.length; i++) {
+            var values = parameters[i].split('=');
+            if (values[0] == 'analytics' && values[1] == 'off') {
+                useAnalytics = false;
+            }
+        }
+
+        //Turn off analytics if 'localhost' is the host
+        if (window.location.host == 'localhost') {
+            useAnalytics = false;
+        }
+    } catch(e) {
+        //Just in case something goes wrong...
+        useAnalytics = true;
+    }
+
+    if (useAnalytics) {
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-29179796-1']);
+        _gaq.push(['_trackPageview']);
+
+        (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+    }
+&lt;/script&gt;
+</code></pre>
 
 
 <p>If you have any other recommendations for how to exclude Google Analytics traffic let me know in the comments.</p>
@@ -375,7 +283,7 @@
     </p>
     <p class="author_card meta">
       <img src="/images/me/1.jpg" alt="Me!" id="post_me">
-      TJ VanToll is a developer advocate for <a href="http://telerik.com">Telerik</a>, a <a href="http://jqueryui.com/about/">jQuery team member</a>, and the author of <a href="http://tjvantoll.com/jquery-ui-in-action.html">jQuery UI in Action</a>. TJ has over a decade of web development experience—specializing in performance and the mobile web—and <a href="/speaking">speaks</a> about his research at conferences around the world. When not online, TJ is generally found talking about himself in the third person. If you like hearing TJ talk about himself, you should consider following him on <a href="http://twitter.com/tjvantoll">Twitter</a> or <a href="https://plus.google.com/+TJVanToll?rel=author" rel="author">Google+</a>.
+      TJ VanToll is a developer advocate for <a href="http://telerik.com">Telerik</a>, a <a href="http://jqueryui.com/about/">jQuery team member</a>, and the author of <a href="http://tjvantoll.com/jquery-ui-in-action.html">jQuery UI in Action</a>. TJ has over a decade of web development experience—specializing in performance and the mobile web—and <a href="/speaking">speaks</a> about his research at conferences around the world.TJ is <a href="http://twitter.com/tjvantoll">@tjvantoll</a> on Twitter and <a href="https://plus.google.com/+TJVanToll?rel=author" rel="author">+TJVanToll</a> on Google+.
     </p>
     
       <div class="sharing">
@@ -487,8 +395,7 @@
 
 
 
-
-
+Included file 'google_plus_one.html' not found in _includes directory
 
   <script type="text/javascript">
     (function(){
@@ -501,8 +408,7 @@
   </script>
 
 
-
-
+Included file 'custom/after_footer.html' not found in _includes directory
 
 </body>
 </html>

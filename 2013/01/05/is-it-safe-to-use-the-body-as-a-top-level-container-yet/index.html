@@ -9,15 +9,7 @@
   <meta name="author" content="TJ VanToll">
 
   
-  <meta name="description" content="View source on almost any web page and you&#8217;ll likely see the following: Common HTML Template1
-2
-3
-4
-5
-6
-7
-8
-&lt;html&gt; &lt;head&gt;&lt;/head& &hellip;">
+  <meta name="description" content="View source on almost any web page and you&#8217;ll likely see the following: &lt;html&gt; &lt;head&gt;&lt;/head&gt; &lt;body&gt; &lt;div id="wrapper &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -29,12 +21,7 @@
   <link rel="canonical" href="http://tjvantoll.com/2013/01/05/is-it-safe-to-use-the-body-as-a-top-level-container-yet">
   <link rel="author" href="https://plus.google.com/+TJVanToll">
 
-  <!--[if !lte IE 7]><!-->
-    <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet">
-  <!--<![endif]-->
-  <!--[if lte IE 7]>
-    <link rel="stylesheet" href="/stylesheets/old-ie.css" media="screen, projection">
-  <![endif]-->
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet">
   
   <!--Custom script concatenation
   <script src="/javascripts/modernizr-2.5.3.js"></script>
@@ -46,12 +33,6 @@
   <script src="/javascripts/build/scripts.js"></script>
 
   <link href="/atom.xml" rel="alternate" title="TJ VanToll's Blog" type="application/atom+xml">
-  <style>
-	/* Fonts from Google"s Web font directory at http://google.com/webfonts */
-	/*@import url(http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic);
-	@import url(http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic);*/
-</style>
-
   
   <script type="text/javascript">
   	if (window.location.host.indexOf('local') == -1) {
@@ -133,23 +114,15 @@
 
 <div class="entry-content"><p>View source on almost any web page and you&#8217;ll likely see the following:</p>
 
-<figure class='code'><figcaption class='not_empty'><span>Common HTML Template</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;html&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;head&gt;&lt;/head&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;body&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">&quot;wrapper&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'>            <span class="c">&lt;!-- All the things --&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;/div&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;/body&gt;</span>
-</span><span class='line'><span class="nt">&lt;/html&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre class="language-markup"><code>&lt;html&gt;
+    &lt;head&gt;&lt;/head&gt;
+    &lt;body&gt;
+        &lt;div id="wrapper"&gt;
+            &lt;!-- All the things --&gt;
+        &lt;/div&gt;
+    &lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
 
 
 <p>The use of a wrapper or container <code>div</code> around the page is fairly universal.  It is commonly used to perform tasks such as centering a page&#8217;s content or providing a shadow or border to frame it.  But, since the <code>body</code> element is a necessity in the markup, why can&#8217;t it be styled directly instead?  Why is a wrapper <code>div</code> used?</p>
@@ -165,21 +138,14 @@
 
 <p>To center the top level container in IE 5.5 you had to make use of <code>text-align: center</code> as such:</p>
 
-<figure class='code'><figcaption class='not_empty'><span>Centering the top level container in IE 5.5</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nt">body</span> <span class="p">{</span>
-</span><span class='line'>    <span class="k">text-align</span><span class="o">:</span> <span class="k">center</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'><span class="nf">#wrapper</span> <span class="p">{</span>
-</span><span class='line'>    <span class="k">width</span><span class="o">:</span> <span class="m">1000px</span><span class="p">;</span>
-</span><span class='line'>    <span class="k">text-align</span><span class="o">:</span> <span class="k">left</span><span class="p">;</span> <span class="c">/* counteract the declaration on body */</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre class="language-css"><code>body {
+    text-align: center;
+}
+#wrapper {
+    width: 1000px;
+    text-align: left; /* counteract the declaration on body */
+}
+</code></pre>
 
 
 <p><code>text-align: center</code> <em>should</em> only affect inline elements, but IE 5.5 incorrectly applied it to block elements as well.  (Note: The <code>text-align: center</code> bug was fixed in IE6 standards mode, but the behavior remained in Internet Explorer&#8217;s quirks mode to this day.)</p>
@@ -188,23 +154,15 @@
 
 <p>IE6 implemented <code>auto</code> margins, so <code>margin: 0 auto</code> was now safe to use on the <code>body</code>.  Additionally, IE6 fully supports adding a <code>width</code>, <code>padding</code>, <code>margin</code>, and <code>border</code> to the body element.  Take the following CSS:</p>
 
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nt">body</span><span class="p">{</span>
-</span><span class='line'>    <span class="k">width</span><span class="o">:</span> <span class="m">90</span><span class="o">%</span><span class="p">;</span>
-</span><span class='line'>    <span class="k">border</span><span class="o">:</span> <span class="m">2px</span> <span class="k">solid</span> <span class="nb">red</span><span class="p">;</span>
-</span><span class='line'>    <span class="k">background-color</span><span class="o">:</span> <span class="nb">black</span><span class="p">;</span>
-</span><span class='line'>    <span class="k">color</span><span class="o">:</span> <span class="nb">white</span><span class="p">;</span>
-</span><span class='line'>    <span class="k">padding</span><span class="o">:</span> <span class="m">10px</span><span class="p">;</span>
-</span><span class='line'>    <span class="k">margin</span><span class="o">:</span> <span class="m">0</span> <span class="k">auto</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre class="language-css"><code>body{
+    width: 90%;
+    border: 2px solid red;
+    background-color: black;
+    color: white;
+    padding: 10px;
+    margin: 0 auto;
+}
+</code></pre>
 
 
 <p>The layout renders the same in IE6 as it does in the latest version of Chrome (23 as of this writing).</p>
@@ -245,34 +203,24 @@
 
 <p>Any absolutely positioned elements will be positioned relative to the viewport rather than the newly placed <code>body</code>.  To fix this set <code>position: relative</code> on the <code>body</code> as such:</p>
 
-<figure class='code'><figcaption class='not_empty'><span>Positioning elements relative to the body rather than the viewport</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nt">body</span> <span class="p">{</span>
-</span><span class='line'>    <span class="k">margin</span><span class="o">:</span> <span class="m">0</span> <span class="k">auto</span><span class="p">;</span>
-</span><span class='line'>    <span class="k">width</span><span class="o">:</span> <span class="m">90</span><span class="o">%</span><span class="p">;</span>
-</span><span class='line'>    <span class="k">position</span><span class="o">:</span> <span class="k">relative</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre class="language-css"><code>body {
+    margin: 0 auto;
+    width: 90%;
+    position: relative;
+}
+</code></pre>
 
 
 <h3>Backgrounds</h3>
 
 <p>Backgrounds applied to the <code>body</code> will take up whole page regardless of margins.  Consider the following:</p>
 
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nt">body</span> <span class="p">{</span>
-</span><span class='line'>    <span class="k">background</span><span class="o">:</span> <span class="nb">black</span><span class="p">;</span>
-</span><span class='line'>    <span class="k">margin</span><span class="o">:</span> <span class="m">0</span> <span class="k">auto</span><span class="p">;</span>
-</span><span class='line'>    <span class="k">width</span><span class="o">:</span> <span class="m">200px</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre class="language-css"><code>body {
+    background: black;
+    margin: 0 auto;
+    width: 200px;
+}
+</code></pre>
 
 
 <p>The screenshot below shows this.  The background of the entire viewport is black rather than a centered 200px block.</p>
@@ -281,27 +229,17 @@
 
 <p>This can be worked around by applying a <code>background</code> on the <code>html</code> element:</p>
 
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nt">html</span> <span class="p">{</span>
-</span><span class='line'>    <span class="k">background</span><span class="o">:</span> <span class="nb">white</span><span class="p">;</span>
-</span><span class='line'>    <span class="k">height</span><span class="o">:</span> <span class="m">100</span><span class="o">%</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'><span class="nt">body</span> <span class="p">{</span>
-</span><span class='line'>    <span class="k">background</span><span class="o">:</span> <span class="nb">black</span><span class="p">;</span>
-</span><span class='line'>    <span class="k">margin</span><span class="o">:</span> <span class="m">0</span> <span class="k">auto</span><span class="p">;</span>
-</span><span class='line'>    <span class="k">width</span><span class="o">:</span> <span class="m">200px</span><span class="p">;</span>
-</span><span class='line'>    <span class="k">min-height</span><span class="o">:</span> <span class="m">100</span><span class="o">%</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre class="language-css"><code>html {
+    background: white;
+    height: 100%;
+}
+body {
+    background: black;
+    margin: 0 auto;
+    width: 200px;
+    min-height: 100%;
+}
+</code></pre>
 
 
 <p>Note the <code>height</code> that was added to the <code>html</code> element and the <code>min-height</code> added to the <code>body</code>.  This ensures that the <code>background</code> applied to the <code>body</code> element will take up the entire height of the screen.</p>
@@ -314,25 +252,16 @@
 
 <p>In WebKit based browsers the <code>body</code>&#8217;s <a href="https://developer.mozilla.org/en-US/docs/DOM/element.scrollHeight">scrollHeight</a> and <a href="https://developer.mozilla.org/en-US/docs/DOM/element.scrollWidth">scrollWidth</a> properties are unaffected by declared <code>height</code> and <code>width</code> styles.  For example:</p>
 
-<figure class='code'><figcaption class='not_empty'><span>scrollHeight and scrollWidth on the body element</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;html&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;head&gt;&lt;/head&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;body</span> <span class="na">style=</span><span class="s">&quot;height: 200px; width: 200px;&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;script&gt;</span>
-</span><span class='line'>          <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nb">document</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">scrollHeight</span><span class="p">);</span>
-</span><span class='line'>          <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nb">document</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">scrollWidth</span><span class="p">);</span>
-</span><span class='line'>        <span class="nt">&lt;/script&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;/body&gt;</span>
-</span><span class='line'><span class="nt">&lt;/html&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre class="language-markup"><code>&lt;html&gt;
+    &lt;head&gt;&lt;/head&gt;
+    &lt;body style="height: 200px; width: 200px;"&gt;
+        &lt;script&gt;
+            console.log(document.body.scrollHeight);
+            console.log(document.body.scrollWidth);
+        &lt;/script&gt;
+    &lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
 
 
 <p>This will log <code>200</code> for both in all modern browsers with the exception of WebKit based ones.  WebKit will return the height and width of the viewport.</p>
@@ -381,7 +310,7 @@
     </p>
     <p class="author_card meta">
       <img src="/images/me/1.jpg" alt="Me!" id="post_me">
-      TJ VanToll is a developer advocate for <a href="http://telerik.com">Telerik</a>, a <a href="http://jqueryui.com/about/">jQuery team member</a>, and the author of <a href="http://tjvantoll.com/jquery-ui-in-action.html">jQuery UI in Action</a>. TJ has over a decade of web development experience—specializing in performance and the mobile web—and <a href="/speaking">speaks</a> about his research at conferences around the world. When not online, TJ is generally found talking about himself in the third person. If you like hearing TJ talk about himself, you should consider following him on <a href="http://twitter.com/tjvantoll">Twitter</a> or <a href="https://plus.google.com/+TJVanToll?rel=author" rel="author">Google+</a>.
+      TJ VanToll is a developer advocate for <a href="http://telerik.com">Telerik</a>, a <a href="http://jqueryui.com/about/">jQuery team member</a>, and the author of <a href="http://tjvantoll.com/jquery-ui-in-action.html">jQuery UI in Action</a>. TJ has over a decade of web development experience—specializing in performance and the mobile web—and <a href="/speaking">speaks</a> about his research at conferences around the world.TJ is <a href="http://twitter.com/tjvantoll">@tjvantoll</a> on Twitter and <a href="https://plus.google.com/+TJVanToll?rel=author" rel="author">+TJVanToll</a> on Google+.
     </p>
     
       <div class="sharing">
@@ -493,8 +422,7 @@
 
 
 
-
-
+Included file 'google_plus_one.html' not found in _includes directory
 
   <script type="text/javascript">
     (function(){
@@ -507,8 +435,7 @@
   </script>
 
 
-
-
+Included file 'custom/after_footer.html' not found in _includes directory
 
 </body>
 </html>

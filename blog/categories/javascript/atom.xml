@@ -4,7 +4,7 @@
   <title><![CDATA[Category: JavaScript | TJ VanToll's Blog]]></title>
   <link href="http://tjvantoll.com/blog/categories/javascript/atom.xml" rel="self"/>
   <link href="http://tjvantoll.com/"/>
-  <updated>2015-06-25T11:24:59-04:00</updated>
+  <updated>2015-07-04T11:17:31-04:00</updated>
   <id>http://tjvantoll.com/</id>
   <author>
     <name><![CDATA[TJ VanToll]]></name>
@@ -76,7 +76,7 @@
 
 <p>Paste the following code into your newly created <code>gulpfile.js</code>:</p>
 
-<pre class="language-javascript"><code>var gulp = require("gulp");
+<pre class="language-javascript line-numbers"><code>var gulp = require("gulp");
 var jscs = require("gulp-jscs");
 var jshint = require("gulp-jshint");
 
@@ -324,9 +324,8 @@ Error: Unexpected identifier at my-file.js :
 
 <p>I start by downloading Kendo UI Core from Bower, as it's my preferred package manager for web apps:</p>
 
-<p><code>
-$ bower install kendo-ui-core
-</code></p>
+<pre class="language-shell"><code>$ bower install kendo-ui-core</code></pre>
+
 
 <p>You can alternatively <a href="https://github.com/telerik/kendo-ui-core/archive/master.zip">download Kendo UI Core from GitHub</a>, but Bower is my jam. (Not to be confused with <a href="http://jamjs.org/">Jam</a>, which—believe it or not—is actually the name of a competing JavaScript package manager. Who knew?)</p>
 
@@ -334,31 +333,24 @@ $ bower install kendo-ui-core
 
 <p>Next I create an index.html and paste in the following boilerplate HTML:</p>
 
-<p>``` html
-&lt;!doctype html>
-<html lang="en">
-<head></p>
+<pre class="language-markup line-numbers"><code>&lt;!doctype html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+    &lt;meta charset="utf-8"&gt;
+    &lt;title&gt;My Project&lt;/title&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1"&gt;
 
-<pre><code>&lt;meta charset="utf-8"&gt;
-&lt;title&gt;My Project&lt;/title&gt;
-&lt;meta name="viewport" content="width=device-width, initial-scale=1"&gt;
+    &lt;link rel="stylesheet" href="bower_components/kendo-ui-core/src/styles/web/kendo.common.core.css"&gt;
+    &lt;link rel="stylesheet" href="bower_components/kendo-ui-core/src/styles/web/kendo.flat.css"&gt;
+&lt;/head&gt;
+&lt;body&gt;
 
-&lt;link rel="stylesheet" href="bower_components/kendo-ui-core/src/styles/web/kendo.common.core.css"&gt;
-&lt;link rel="stylesheet" href="bower_components/kendo-ui-core/src/styles/web/kendo.flat.css"&gt;
-</code></pre>
+&lt;script src="bower_components/jquery/dist/jquery.js"&gt;&lt;/script&gt;
+&lt;script src="bower_components/kendo-ui-core/src/js/kendo.ui.core.js"&gt;&lt;/script&gt;
 
-<p></head>
-<body></p>
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
 
-<script src="bower_components/jquery/dist/jquery.js"></script>
-
-
-<script src="bower_components/kendo-ui-core/src/js/kendo.ui.core.js"></script>
-
-
-<p></body>
-</html>
-```</p>
 
 <p>A couple things to note here. First, my HTML follows the <a href="http://contribute.jquery.org/style-guide/html/">jQuery HTML style guide</a>, which yes, actually is a thing.</p>
 
@@ -375,14 +367,12 @@ $ bower install kendo-ui-core
 
 <p>I like using AMD and <a href="http://requirejs.org/">RequireJS</a> to manage my app's dependencies, and luckily Kendo UI Core is intelligently broken into AMD modules. To start with AMD I download RequireJS from Bower:</p>
 
-<p><code>
-$ bower install requirejs
-</code></p>
+<pre class="language-shell"><code>$ bower install requirejs</code></pre>
+
 
 <p>Next I create an app.js file to serve as the main JavaScript file for my app. At this point my project's folder structure looks a little something like this:</p>
 
-<p>```
-.
+<pre class="language-shell"><code>.
 ├── bower_components
 │   ├── jquery
 │   │   └── ...
@@ -391,39 +381,30 @@ $ bower install requirejs
 │   └── requirejs
 │       └── ...
 ├── index.html
-└── js</p>
-
-<pre><code>└── app.js
+└── js
+    └── app.js
 </code></pre>
 
-<p>```</p>
 
 <p>With this structure in place I switch my index.html to use a single <code>&lt;script&gt;</code> tag:</p>
 
-<p>``` html</p>
+<pre class="language-markup"><code>&lt;script src="bower_components/requirejs/require.js" data-main="js/app"&gt;&lt;/script&gt;</code></pre>
 
-<script src="bower_components/requirejs/require.js" data-main="js/app"></script>
-
-
-<p>```</p>
 
 <p>Then I paste the following code in as a starting point for app.js:</p>
 
-<p>``` javascript
-require.config({</p>
+<pre class="language-javascript line-numbers"><code>require.config({
+    paths: {
+        "jquery": "/bower_components/jquery/dist/jquery",
+        "kendo-ui-core": "/bower_components/kendo-ui-core/src/js"
+    }
+});
 
-<pre><code>paths: {
-    "jquery": "/bower_components/jquery/dist/jquery",
-    "kendo-ui-core": "/bower_components/kendo-ui-core/src/js"
-}
+require([ "jquery", "kendo-ui-core/kendo.ui.core" ], function( $ ) {
+
+});
 </code></pre>
 
-<p>});</p>
-
-<p>require([ "jquery", "kendo-ui-core/kendo.ui.core" ], function( $ ) {</p>
-
-<p>});
-```</p>
 
 <p>This gives me an entry point for my app that loads jQuery and Kendo UI Core dynamically. If my app only needs one portion of Kendo UI Core I only specify the modules I need in the <code>require()</code> call. For instance if I only want a <a href="http://demos.telerik.com/kendo-ui/maskedtextbox/index">MaskedTextBox</a> I only require <code>"jquery"</code> and <code>"kendo-ui-core/kendo.maskedtextbox"</code>—i.e. <code>require([ "jquery", "kendo-ui-core/kendo.maskedtextbox" ])</code>.</p>
 

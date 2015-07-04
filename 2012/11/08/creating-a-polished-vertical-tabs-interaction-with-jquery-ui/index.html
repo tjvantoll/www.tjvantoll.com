@@ -21,12 +21,7 @@
   <link rel="canonical" href="http://tjvantoll.com/2012/11/08/creating-a-polished-vertical-tabs-interaction-with-jquery-ui">
   <link rel="author" href="https://plus.google.com/+TJVanToll">
 
-  <!--[if !lte IE 7]><!-->
-    <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet">
-  <!--<![endif]-->
-  <!--[if lte IE 7]>
-    <link rel="stylesheet" href="/stylesheets/old-ie.css" media="screen, projection">
-  <![endif]-->
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet">
   
   <!--Custom script concatenation
   <script src="/javascripts/modernizr-2.5.3.js"></script>
@@ -38,12 +33,6 @@
   <script src="/javascripts/build/scripts.js"></script>
 
   <link href="/atom.xml" rel="alternate" title="TJ VanToll's Blog" type="application/atom+xml">
-  <style>
-	/* Fonts from Google"s Web font directory at http://google.com/webfonts */
-	/*@import url(http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic);
-	@import url(http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic);*/
-</style>
-
   
   <script type="text/javascript">
   	if (window.location.host.indexOf('local') == -1) {
@@ -133,114 +122,63 @@
 
 <p>The following CSS will vertically arrange the tabs:</p>
 
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-<span class='line-number'>33</span>
-<span class='line-number'>34</span>
-<span class='line-number'>35</span>
-<span class='line-number'>36</span>
-<span class='line-number'>37</span>
-<span class='line-number'>38</span>
-<span class='line-number'>39</span>
-<span class='line-number'>40</span>
-<span class='line-number'>41</span>
-<span class='line-number'>42</span>
-<span class='line-number'>43</span>
-<span class='line-number'>44</span>
-<span class='line-number'>45</span>
-<span class='line-number'>46</span>
-<span class='line-number'>47</span>
-<span class='line-number'>48</span>
-<span class='line-number'>49</span>
-<span class='line-number'>50</span>
-</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nc">.ui-tabs.ui-tabs-vertical</span> <span class="p">{</span>
-</span><span class='line'>    <span class="k">padding</span><span class="o">:</span> <span class="m">0</span><span class="p">;</span>
-</span><span class='line'>    <span class="k">width</span><span class="o">:</span> <span class="m">42em</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'><span class="nc">.ui-tabs.ui-tabs-vertical</span> <span class="nc">.ui-widget-header</span> <span class="p">{</span>
-</span><span class='line'>    <span class="k">border</span><span class="o">:</span> <span class="k">none</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'><span class="nc">.ui-tabs.ui-tabs-vertical</span> <span class="nc">.ui-tabs-nav</span> <span class="p">{</span>
-</span><span class='line'>    <span class="k">float</span><span class="o">:</span> <span class="k">left</span><span class="p">;</span>
-</span><span class='line'>    <span class="k">width</span><span class="o">:</span> <span class="m">10em</span><span class="p">;</span>
-</span><span class='line'>    <span class="k">background</span><span class="o">:</span> <span class="m">#CCC</span><span class="p">;</span>
-</span><span class='line'>    <span class="k">border</span><span class="o">-</span><span class="n">radius</span><span class="o">:</span> <span class="m">4px</span> <span class="m">0</span> <span class="m">0</span> <span class="m">4px</span><span class="p">;</span>
-</span><span class='line'>    <span class="k">border-right</span><span class="o">:</span> <span class="m">1px</span> <span class="k">solid</span> <span class="nb">gray</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'><span class="nc">.ui-tabs.ui-tabs-vertical</span> <span class="nc">.ui-tabs-nav</span> <span class="nt">li</span> <span class="p">{</span>
-</span><span class='line'>    <span class="k">clear</span><span class="o">:</span> <span class="k">left</span><span class="p">;</span>
-</span><span class='line'>    <span class="k">width</span><span class="o">:</span> <span class="m">100</span><span class="o">%</span><span class="p">;</span>
-</span><span class='line'>    <span class="k">margin</span><span class="o">:</span> <span class="m">0.2em</span> <span class="m">0</span><span class="p">;</span>
-</span><span class='line'>    <span class="k">border</span><span class="o">:</span> <span class="m">1px</span> <span class="k">solid</span> <span class="nb">gray</span><span class="p">;</span>
-</span><span class='line'>    <span class="k">border-width</span><span class="o">:</span> <span class="m">1px</span> <span class="m">0</span> <span class="m">1px</span> <span class="m">1px</span><span class="p">;</span>
-</span><span class='line'>    <span class="k">border</span><span class="o">-</span><span class="n">radius</span><span class="o">:</span> <span class="m">4px</span> <span class="m">0</span> <span class="m">0</span> <span class="m">4px</span><span class="p">;</span>
-</span><span class='line'>    <span class="k">overflow</span><span class="o">:</span> <span class="k">hidden</span><span class="p">;</span>
-</span><span class='line'>    <span class="k">position</span><span class="o">:</span> <span class="k">relative</span><span class="p">;</span>
-</span><span class='line'>    <span class="k">right</span><span class="o">:</span> <span class="m">-2px</span><span class="p">;</span>
-</span><span class='line'>    <span class="k">z-index</span><span class="o">:</span> <span class="m">2</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'><span class="nc">.ui-tabs.ui-tabs-vertical</span> <span class="nc">.ui-tabs-nav</span> <span class="nt">li</span> <span class="nt">a</span> <span class="p">{</span>
-</span><span class='line'>    <span class="k">display</span><span class="o">:</span> <span class="k">block</span><span class="p">;</span>
-</span><span class='line'>    <span class="k">width</span><span class="o">:</span> <span class="m">100</span><span class="o">%</span><span class="p">;</span>
-</span><span class='line'>    <span class="k">padding</span><span class="o">:</span> <span class="m">0.6em</span> <span class="m">1em</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'><span class="nc">.ui-tabs.ui-tabs-vertical</span> <span class="nc">.ui-tabs-nav</span> <span class="nt">li</span> <span class="nt">a</span><span class="nd">:hover</span> <span class="p">{</span>
-</span><span class='line'>    <span class="k">cursor</span><span class="o">:</span> <span class="k">pointer</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'><span class="nc">.ui-tabs.ui-tabs-vertical</span> <span class="nc">.ui-tabs-nav</span> <span class="nt">li</span><span class="nc">.ui-tabs-active</span> <span class="p">{</span>
-</span><span class='line'>    <span class="k">margin-bottom</span><span class="o">:</span> <span class="m">0.2em</span><span class="p">;</span>
-</span><span class='line'>    <span class="k">padding-bottom</span><span class="o">:</span> <span class="m">0</span><span class="p">;</span>
-</span><span class='line'>    <span class="k">border-right</span><span class="o">:</span> <span class="m">1px</span> <span class="k">solid</span> <span class="nb">white</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'><span class="nc">.ui-tabs.ui-tabs-vertical</span> <span class="nc">.ui-tabs-nav</span> <span class="nt">li</span><span class="nd">:last-child</span> <span class="p">{</span>
-</span><span class='line'>    <span class="k">margin-bottom</span><span class="o">:</span> <span class="m">10px</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'><span class="nc">.ui-tabs.ui-tabs-vertical</span> <span class="nc">.ui-tabs-panel</span> <span class="p">{</span>
-</span><span class='line'>    <span class="k">float</span><span class="o">:</span> <span class="k">left</span><span class="p">;</span>
-</span><span class='line'>    <span class="k">width</span><span class="o">:</span> <span class="m">28em</span><span class="p">;</span>
-</span><span class='line'>    <span class="k">border-left</span><span class="o">:</span> <span class="m">1px</span> <span class="k">solid</span> <span class="nb">gray</span><span class="p">;</span>
-</span><span class='line'>    <span class="k">border</span><span class="o">-</span><span class="n">radius</span><span class="o">:</span> <span class="m">0</span><span class="p">;</span>
-</span><span class='line'>    <span class="k">position</span><span class="o">:</span> <span class="k">relative</span><span class="p">;</span>
-</span><span class='line'>    <span class="k">left</span><span class="o">:</span> <span class="m">-1px</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre class="language-css line-numbers"><code>.ui-tabs.ui-tabs-vertical {
+    padding: 0;
+    width: 42em;
+}
+.ui-tabs.ui-tabs-vertical .ui-widget-header {
+    border: none;
+}
+.ui-tabs.ui-tabs-vertical .ui-tabs-nav {
+    float: left;
+    width: 10em;
+    background: #CCC;
+    border-radius: 4px 0 0 4px;
+    border-right: 1px solid gray;
+}
+.ui-tabs.ui-tabs-vertical .ui-tabs-nav li {
+    clear: left;
+    width: 100%;
+    margin: 0.2em 0;
+    border: 1px solid gray;
+    border-width: 1px 0 1px 1px;
+    border-radius: 4px 0 0 4px;
+    overflow: hidden;
+    position: relative;
+    right: -2px;
+    z-index: 2;
+}
+.ui-tabs.ui-tabs-vertical .ui-tabs-nav li a {
+    display: block;
+    width: 100%;
+    padding: 0.6em 1em;
+}
+.ui-tabs.ui-tabs-vertical .ui-tabs-nav li a:hover {
+    cursor: pointer;
+}
+.ui-tabs.ui-tabs-vertical .ui-tabs-nav li.ui-tabs-active {
+    margin-bottom: 0.2em;
+    padding-bottom: 0;
+    border-right: 1px solid white;
+}
+.ui-tabs.ui-tabs-vertical .ui-tabs-nav li:last-child {
+    margin-bottom: 10px;
+}
+.ui-tabs.ui-tabs-vertical .ui-tabs-panel {
+    float: left;
+    width: 28em;
+    border-left: 1px solid gray;
+    border-radius: 0;
+    position: relative;
+    left: -1px;
+}</code></pre>
 
 
 <p>It only relies on a class of <code>ui-tabs-vertical</code> being applied to the elements the <code>tabs</code> widget is created on.</p>
 
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#tabs&#39;</span><span class="p">).</span><span class="nx">tabs</span><span class="p">().</span><span class="nx">addClass</span><span class="p">(</span><span class="s1">&#39;ui-tabs-vertical&#39;</span><span class="p">);</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre class="language-javascript"><code>
+$('#tabs').tabs().addClass('ui-tabs-vertical');
+</code></pre>
 
 
 <p>And here&#8217;s the result:</p>
@@ -284,7 +222,7 @@
     </p>
     <p class="author_card meta">
       <img src="/images/me/1.jpg" alt="Me!" id="post_me">
-      TJ VanToll is a developer advocate for <a href="http://telerik.com">Telerik</a>, a <a href="http://jqueryui.com/about/">jQuery team member</a>, and the author of <a href="http://tjvantoll.com/jquery-ui-in-action.html">jQuery UI in Action</a>. TJ has over a decade of web development experience—specializing in performance and the mobile web—and <a href="/speaking">speaks</a> about his research at conferences around the world. When not online, TJ is generally found talking about himself in the third person. If you like hearing TJ talk about himself, you should consider following him on <a href="http://twitter.com/tjvantoll">Twitter</a> or <a href="https://plus.google.com/+TJVanToll?rel=author" rel="author">Google+</a>.
+      TJ VanToll is a developer advocate for <a href="http://telerik.com">Telerik</a>, a <a href="http://jqueryui.com/about/">jQuery team member</a>, and the author of <a href="http://tjvantoll.com/jquery-ui-in-action.html">jQuery UI in Action</a>. TJ has over a decade of web development experience—specializing in performance and the mobile web—and <a href="/speaking">speaks</a> about his research at conferences around the world.TJ is <a href="http://twitter.com/tjvantoll">@tjvantoll</a> on Twitter and <a href="https://plus.google.com/+TJVanToll?rel=author" rel="author">+TJVanToll</a> on Google+.
     </p>
     
       <div class="sharing">
@@ -301,7 +239,7 @@
         <a class="basic-alignment left" href="/2012/10/24/adding-pointers-to-jquery-ui-tooltips/" title="Previous Post: Adding Pointers to jQuery UI Tooltips">&laquo; Adding Pointers to jQuery UI Tooltips</a>
       
       
-        <a class="basic-alignment right" href="/2012/11/10/creating-cross-browser-scrollable-tbody/" title="Next Post: Creating Cross Browser Scrollable &lt;tbody&gt;s - A CSS Only Approach">Creating Cross Browser Scrollable &lt;tbody&gt;s - A CSS Only Approach &raquo;</a>
+        <a class="basic-alignment right" href="/2012/11/10/creating-cross-browser-scrollable-tbody/" title="Next Post: Creating Cross Browser Scrollable &lt;tbody&gt;s—A CSS-Only Approach">Creating Cross Browser Scrollable &lt;tbody&gt;s—A CSS-Only Approach &raquo;</a>
       
     </p>
   </footer>
@@ -396,8 +334,7 @@
 
 
 
-
-
+Included file 'google_plus_one.html' not found in _includes directory
 
   <script type="text/javascript">
     (function(){
@@ -410,8 +347,7 @@
   </script>
 
 
-
-
+Included file 'custom/after_footer.html' not found in _includes directory
 
 </body>
 </html>

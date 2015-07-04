@@ -21,12 +21,7 @@
   <link rel="canonical" href="http://tjvantoll.com/2015/06/05/nativescript-showing-and-hiding-elements">
   <link rel="author" href="https://plus.google.com/+TJVanToll">
 
-  <!--[if !lte IE 7]><!-->
-    <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet">
-  <!--<![endif]-->
-  <!--[if lte IE 7]>
-    <link rel="stylesheet" href="/stylesheets/old-ie.css" media="screen, projection">
-  <![endif]-->
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet">
   
   <!--Custom script concatenation
   <script src="/javascripts/modernizr-2.5.3.js"></script>
@@ -38,12 +33,6 @@
   <script src="/javascripts/build/scripts.js"></script>
 
   <link href="/atom.xml" rel="alternate" title="TJ VanToll's Blog" type="application/atom+xml">
-  <style>
-	/* Fonts from Google"s Web font directory at http://google.com/webfonts */
-	/*@import url(http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic);
-	@import url(http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic);*/
-</style>
-
   
   <script type="text/javascript">
   	if (window.location.host.indexOf('local') == -1) {
@@ -137,12 +126,12 @@
 
 <p>Hiding an element in CSS works, but if you need to hide an element you almost certainly need to show it at some point. For this, NativeScript exposes a <code>visibility</code> <em>attribute</em>, which is just a light wrapper around the CSS property. For instance you could also use the following syntax to hide a button:</p>
 
-<pre class="language-markup line-numbers"><code>&lt;Button text="I'm hidden" visibility="collapsed" /&gt;</code></pre>
+<pre class="language-markup"><code>&lt;Button text="I'm hidden" visibility="collapsed" /&gt;</code></pre>
 
 
 <p>This is handy because having an attribute lets you to use <a href="http://docs.nativescript.org/bindings#using-expressions-for-bindings">data-binding expressions</a> to control the value of the attribute, which is the technique I almost always use to control visibility. To give a concrete example, in the code below I use a flag in my data model, <code>"showDetails"</code>, to determine the visibility of a <code>&lt;Label&gt;</code>.</p>
 
-<pre class="language-markup"><code>&lt;Page loaded="loaded"&gt;
+<pre class="language-markup line-numbers"><code>&lt;Page loaded="loaded"&gt;
     &lt;StackLayout&gt;
         &lt;Button text="{{ showDetails ? 'Hide' : 'Show' }}" tap="toggle" /&gt;
         &lt;Label text="Lorem ipsum..." visibility="{{ showDetails ? 'visible' : 'collapsed' }}" /&gt;
@@ -152,7 +141,7 @@
 
 
 
-<pre class="language-javascript"><code>var observable = require("data/observable");
+<pre class="language-javascript line-numbers"><code>var observable = require("data/observable");
 var pageData = new observable.Observable();
 
 exports.loaded = function(args) {
@@ -203,7 +192,7 @@ exports.toggle = function() {
     </p>
     <p class="author_card meta">
       <img src="/images/me/1.jpg" alt="Me!" id="post_me">
-      TJ VanToll is a developer advocate for <a href="http://telerik.com">Telerik</a>, a <a href="http://jqueryui.com/about/">jQuery team member</a>, and the author of <a href="http://tjvantoll.com/jquery-ui-in-action.html">jQuery UI in Action</a>. TJ has over a decade of web development experience—specializing in performance and the mobile web—and <a href="/speaking">speaks</a> about his research at conferences around the world. When not online, TJ is generally found talking about himself in the third person. If you like hearing TJ talk about himself, you should consider following him on <a href="http://twitter.com/tjvantoll">Twitter</a> or <a href="https://plus.google.com/+TJVanToll?rel=author" rel="author">Google+</a>.
+      TJ VanToll is a developer advocate for <a href="http://telerik.com">Telerik</a>, a <a href="http://jqueryui.com/about/">jQuery team member</a>, and the author of <a href="http://tjvantoll.com/jquery-ui-in-action.html">jQuery UI in Action</a>. TJ has over a decade of web development experience—specializing in performance and the mobile web—and <a href="/speaking">speaks</a> about his research at conferences around the world.TJ is <a href="http://twitter.com/tjvantoll">@tjvantoll</a> on Twitter and <a href="https://plus.google.com/+TJVanToll?rel=author" rel="author">+TJVanToll</a> on Google+.
     </p>
     
       <div class="sharing">
@@ -313,8 +302,7 @@ exports.toggle = function() {
 
 
 
-
-
+Included file 'google_plus_one.html' not found in _includes directory
 
   <script type="text/javascript">
     (function(){
@@ -327,8 +315,7 @@ exports.toggle = function() {
   </script>
 
 
-
-
+Included file 'custom/after_footer.html' not found in _includes directory
 
 </body>
 </html>

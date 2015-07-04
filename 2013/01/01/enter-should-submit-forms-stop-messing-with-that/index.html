@@ -21,12 +21,7 @@
   <link rel="canonical" href="http://tjvantoll.com/2013/01/01/enter-should-submit-forms-stop-messing-with-that">
   <link rel="author" href="https://plus.google.com/+TJVanToll">
 
-  <!--[if !lte IE 7]><!-->
-    <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet">
-  <!--<![endif]-->
-  <!--[if lte IE 7]>
-    <link rel="stylesheet" href="/stylesheets/old-ie.css" media="screen, projection">
-  <![endif]-->
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet">
   
   <!--Custom script concatenation
   <script src="/javascripts/modernizr-2.5.3.js"></script>
@@ -38,12 +33,6 @@
   <script src="/javascripts/build/scripts.js"></script>
 
   <link href="/atom.xml" rel="alternate" title="TJ VanToll's Blog" type="application/atom+xml">
-  <style>
-	/* Fonts from Google"s Web font directory at http://google.com/webfonts */
-	/*@import url(http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic);
-	@import url(http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic);*/
-</style>
-
   
   <script type="text/javascript">
   	if (window.location.host.indexOf('local') == -1) {
@@ -132,17 +121,12 @@
 
 <p>Take the following basic form:</p>
 
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;form&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;label</span> <span class="na">for=</span><span class="s">&quot;name&quot;</span><span class="nt">&gt;</span>Name:<span class="nt">&lt;/label&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;text&quot;</span> <span class="na">name=</span><span class="s">&quot;name&quot;</span> <span class="na">id=</span><span class="s">&quot;name&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;submit&quot;</span> <span class="na">value=</span><span class="s">&quot;Submit&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'><span class="nt">&lt;/form&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre class="language-markup"><code>&lt;form&gt;
+    &lt;label for="name"&gt;Name:&lt;/label&gt;
+    &lt;input type="text" name="name" id="name"&gt;
+    &lt;input type="submit" value="Submit"&gt;
+&lt;/form&gt;
+</code></pre>
 
 
 <p>If you have focus in the textbox and hit enter, the form will be submitted automatically.  This behavior is consistent across all browsers and is known as implicit submission.  So why is this important?</p>
@@ -178,32 +162,22 @@
 
 <p>So, in a form with no submit buttons, implicit submission will be done if only one input is present.  Therefore, pressing enter in this textbox will submit the form:</p>
 
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;form&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;label</span> <span class="na">for=</span><span class="s">&quot;name&quot;</span><span class="nt">&gt;</span>Name:<span class="nt">&lt;/label&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;text&quot;</span> <span class="na">name=</span><span class="s">&quot;name&quot;</span> <span class="na">id=</span><span class="s">&quot;name&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'><span class="nt">&lt;/form&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre class="language-markup"><code>&lt;form&gt;
+    &lt;label for="name"&gt;Name:&lt;/label&gt;
+    &lt;input type="text" name="name" id="name"&gt;
+&lt;/form&gt;
+</code></pre>
 
 
 <p>But in this form it will not because there are multiple fields:</p>
 
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;form&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;label</span> <span class="na">for=</span><span class="s">&quot;name&quot;</span><span class="nt">&gt;</span>Name:<span class="nt">&lt;/label&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;text&quot;</span> <span class="na">name=</span><span class="s">&quot;name&quot;</span> <span class="na">id=</span><span class="s">&quot;name&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;label</span> <span class="na">for=</span><span class="s">&quot;address&quot;</span><span class="nt">&gt;</span>Address:<span class="nt">&lt;/label&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;text&quot;</span> <span class="na">name=</span><span class="s">&quot;address&quot;</span> <span class="na">id=</span><span class="s">&quot;address&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'><span class="nt">&lt;/form&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre class="language-markup"><code>&lt;form&gt;
+    &lt;label for="name"&gt;Name:&lt;/label&gt;
+    &lt;input type="text" name="name" id="name"&gt;
+    &lt;label for="address"&gt;Address:&lt;/label&gt;
+    &lt;input type="text" name="address" id="address"&gt;
+&lt;/form&gt;
+</code></pre>
 
 
 <p>Therefore, if you have a form with more than one input field, always include a submit button.  Specifically an <code>&lt;input&gt;</code> with the <code>type="submit"</code> attribute, or a <code>&lt;button&gt;</code> element should be present.  (Note: IE7 has a bug where the <code>type</code> attribute of a <code>&lt;button&gt;</code> defaults to <code>button</code> instead of <code>submit</code>.  Therefore for IE7 compatibility you&#8217;ll need <code>&lt;button type="submit"&gt;</code>.)</p>
@@ -220,31 +194,19 @@
 
 <p>Finally, it&#8217;s also quite easy to prevent implicit submission in JavaScript.  Take the following example:</p>
 
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;form&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;label</span> <span class="na">for=</span><span class="s">&quot;name&quot;</span><span class="nt">&gt;</span>Name:<span class="nt">&lt;/label&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;text&quot;</span> <span class="na">name=</span><span class="s">&quot;name&quot;</span> <span class="na">id=</span><span class="s">&quot;name&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;submit&quot;</span> <span class="na">value=</span><span class="s">&quot;Submit&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'><span class="nt">&lt;/form&gt;</span>
-</span><span class='line'><span class="nt">&lt;script&gt;</span>
-</span><span class='line'>    <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">).</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">&#39;keypress&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>        <span class="k">if</span> <span class="p">(</span><span class="nx">event</span><span class="p">.</span><span class="nx">keyCode</span> <span class="o">==</span> <span class="mi">13</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>            <span class="nx">event</span><span class="p">.</span><span class="nx">preventDefault</span><span class="p">();</span>
-</span><span class='line'>        <span class="p">}</span>
-</span><span class='line'>    <span class="p">});</span>
-</span><span class='line'><span class="nt">&lt;/script&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre class="language-markup"><code>&lt;form&gt;
+    &lt;label for="name"&gt;Name:&lt;/label&gt;
+    &lt;input type="text" name="name" id="name"&gt;
+    &lt;input type="submit" value="Submit"&gt;
+&lt;/form&gt;
+&lt;script&gt;
+    document.getElementById('name').addEventListener('keypress', function(event) {
+        if (event.keyCode == 13) {
+            event.preventDefault();
+        }
+    });
+&lt;/script&gt;
+</code></pre>
 
 
 <p>This sets up a <code>keypress</code> event handler that prevents the default action (implicit submission) from occurring when the enter key is pressed.</p>
@@ -253,49 +215,28 @@
 
 <p>Take the following example:</p>
 
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;form&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;label</span> <span class="na">for=</span><span class="s">&quot;age&quot;</span><span class="nt">&gt;</span>Age:<span class="nt">&lt;/label&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;number&quot;</span> <span class="na">min=</span><span class="s">&quot;0&quot;</span> <span class="na">max=</span><span class="s">&quot;120&quot;</span> <span class="na">name=</span><span class="s">&quot;age&quot;</span> <span class="na">id=</span><span class="s">&quot;age&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;button</span> <span class="na">id=</span><span class="s">&quot;child&quot;</span><span class="nt">&gt;</span>Child<span class="nt">&lt;/button&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;button</span> <span class="na">id=</span><span class="s">&quot;adult&quot;</span><span class="nt">&gt;</span>Adult<span class="nt">&lt;/button&gt;</span>
-</span><span class='line'><span class="nt">&lt;/form&gt;</span>
-</span><span class='line'><span class="nt">&lt;script&gt;</span>
-</span><span class='line'>    <span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-</span><span class='line'>        <span class="kd">var</span> <span class="nx">age</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">&#39;age&#39;</span><span class="p">);</span>
-</span><span class='line'>        <span class="nx">age</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">&#39;keypress&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>            <span class="k">if</span> <span class="p">(</span><span class="nx">event</span><span class="p">.</span><span class="nx">keyCode</span> <span class="o">==</span> <span class="mi">13</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>                <span class="nx">event</span><span class="p">.</span><span class="nx">preventDefault</span><span class="p">();</span>
-</span><span class='line'>                <span class="k">if</span> <span class="p">(</span><span class="nx">age</span><span class="p">.</span><span class="nx">value</span> <span class="o">&gt;</span> <span class="mi">20</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>                    <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">&#39;adult&#39;</span><span class="p">).</span><span class="nx">click</span><span class="p">();</span>
-</span><span class='line'>                <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-</span><span class='line'>                    <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">&#39;child&#39;</span><span class="p">).</span><span class="nx">click</span><span class="p">();</span>
-</span><span class='line'>                <span class="p">}</span>
-</span><span class='line'>            <span class="p">}</span>
-</span><span class='line'>        <span class="p">});</span>
-</span><span class='line'>    <span class="p">}());</span>
-</span><span class='line'><span class="nt">&lt;/script&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre class="language-markup"><code>&lt;form&gt;
+    &lt;label for="age"&gt;Age:&lt;/label&gt;
+    &lt;input type="number" min="0" max="120" name="age" id="age"&gt;
+    &lt;button id="child"&gt;Child&lt;/button&gt;
+    &lt;button id="adult"&gt;Adult&lt;/button&gt;
+&lt;/form&gt;
+&lt;script&gt;
+    (function() {
+        var age = document.getElementById('age');
+        age.addEventListener('keypress', function(event) {
+            if (event.keyCode == 13) {
+                event.preventDefault();
+                if (age.value &gt; 20) {
+                    document.getElementById('adult').click();
+                } else {
+                    document.getElementById('child').click();
+                }
+            }
+        });
+    }());
+&lt;/script&gt;
+</code></pre>
 
 
 <p>When enter is clicked in the number input, the <code>keypress</code> event handler determines which submit button is appropriate and clicks it.</p>
@@ -340,7 +281,7 @@
     </p>
     <p class="author_card meta">
       <img src="/images/me/1.jpg" alt="Me!" id="post_me">
-      TJ VanToll is a developer advocate for <a href="http://telerik.com">Telerik</a>, a <a href="http://jqueryui.com/about/">jQuery team member</a>, and the author of <a href="http://tjvantoll.com/jquery-ui-in-action.html">jQuery UI in Action</a>. TJ has over a decade of web development experience—specializing in performance and the mobile web—and <a href="/speaking">speaks</a> about his research at conferences around the world. When not online, TJ is generally found talking about himself in the third person. If you like hearing TJ talk about himself, you should consider following him on <a href="http://twitter.com/tjvantoll">Twitter</a> or <a href="https://plus.google.com/+TJVanToll?rel=author" rel="author">Google+</a>.
+      TJ VanToll is a developer advocate for <a href="http://telerik.com">Telerik</a>, a <a href="http://jqueryui.com/about/">jQuery team member</a>, and the author of <a href="http://tjvantoll.com/jquery-ui-in-action.html">jQuery UI in Action</a>. TJ has over a decade of web development experience—specializing in performance and the mobile web—and <a href="/speaking">speaks</a> about his research at conferences around the world.TJ is <a href="http://twitter.com/tjvantoll">@tjvantoll</a> on Twitter and <a href="https://plus.google.com/+TJVanToll?rel=author" rel="author">+TJVanToll</a> on Google+.
     </p>
     
       <div class="sharing">
@@ -452,8 +393,7 @@
 
 
 
-
-
+Included file 'google_plus_one.html' not found in _includes directory
 
   <script type="text/javascript">
     (function(){
@@ -466,8 +406,7 @@
   </script>
 
 
-
-
+Included file 'custom/after_footer.html' not found in _includes directory
 
 </body>
 </html>

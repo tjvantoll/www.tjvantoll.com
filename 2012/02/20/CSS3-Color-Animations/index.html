@@ -21,12 +21,7 @@
   <link rel="canonical" href="http://tjvantoll.com/2012/02/20/CSS3-Color-Animations">
   <link rel="author" href="https://plus.google.com/+TJVanToll">
 
-  <!--[if !lte IE 7]><!-->
-    <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet">
-  <!--<![endif]-->
-  <!--[if lte IE 7]>
-    <link rel="stylesheet" href="/stylesheets/old-ie.css" media="screen, projection">
-  <![endif]-->
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet">
   
   <!--Custom script concatenation
   <script src="/javascripts/modernizr-2.5.3.js"></script>
@@ -38,12 +33,6 @@
   <script src="/javascripts/build/scripts.js"></script>
 
   <link href="/atom.xml" rel="alternate" title="TJ VanToll's Blog" type="application/atom+xml">
-  <style>
-	/* Fonts from Google"s Web font directory at http://google.com/webfonts */
-	/*@import url(http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic);
-	@import url(http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic);*/
-</style>
-
   
   <script type="text/javascript">
   	if (window.location.host.indexOf('local') == -1) {
@@ -139,21 +128,15 @@
 
 <p>Let&#8217;s break this down how this works one section at a time.</p>
 
-<figure class='code'><figcaption class='not_empty'><span>Animation CSS</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nt">div</span> <span class="p">{</span>
-</span><span class='line'>  <span class="o">-</span><span class="n">webkit</span><span class="o">-</span><span class="n">animation</span><span class="o">:</span> <span class="n">color</span><span class="err">_</span><span class="n">change</span> <span class="m">1s</span> <span class="n">infinite</span> <span class="n">alternate</span><span class="p">;</span>
-</span><span class='line'>  <span class="o">-</span><span class="n">moz</span><span class="o">-</span><span class="n">animation</span><span class="o">:</span> <span class="n">color</span><span class="err">_</span><span class="n">change</span> <span class="m">1s</span> <span class="n">infinite</span> <span class="n">alternate</span><span class="p">;</span>
-</span><span class='line'>  <span class="o">-</span><span class="n">ms</span><span class="o">-</span><span class="n">animation</span><span class="o">:</span> <span class="n">color</span><span class="err">_</span><span class="n">change</span> <span class="m">1s</span> <span class="n">infinite</span> <span class="n">alternate</span><span class="p">;</span>
-</span><span class='line'>  <span class="o">-</span><span class="err">o</span><span class="o">-</span><span class="n">animation</span><span class="o">:</span> <span class="n">color</span><span class="err">_</span><span class="n">change</span> <span class="m">1s</span> <span class="n">infinite</span> <span class="n">alternate</span><span class="p">;</span>
-</span><span class='line'>  <span class="n">animation</span><span class="o">:</span> <span class="n">color</span><span class="err">_</span><span class="n">change</span> <span class="m">1s</span> <span class="n">infinite</span> <span class="n">alternate</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre class="language-css"><code>
+div {
+    -webkit-animation: color_change 1s infinite alternate;
+    -moz-animation: color_change 1s infinite alternate;  
+    -ms-animation: color_change 1s infinite alternate;  
+    -o-animation: color_change 1s infinite alternate;
+    animation: color_change 1s infinite alternate;   
+}
+</code></pre>
 
 
 <p>The <code>animation</code> property is how you define a <a href="https://developer.mozilla.org/en/CSS/CSS_animations">CSS3 animation</a>.  The <a href="https://developer.mozilla.org/en-US/">MDN</a> (Mozilla Developer Network) docs have extensive documentation on all the various sub properties available to configure the animation <a href="https://developer.mozilla.org/en/CSS/CSS_animations#Configuring_the_animation">here</a>.  In this example I&#8217;m setting…</p>
@@ -168,21 +151,15 @@
 
 <p>For readability you can also list the properties out individually.</p>
 
-<figure class='code'><figcaption class='not_empty'><span>Animation broken out</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="c">/* Note: Prefixes omitted, see below */</span>
-</span><span class='line'><span class="nt">div</span> <span class="p">{</span>
-</span><span class='line'>  <span class="n">animation</span><span class="o">-</span><span class="n">name</span><span class="o">:</span> <span class="n">color</span><span class="err">_</span><span class="n">change</span><span class="p">;</span>
-</span><span class='line'>  <span class="n">animation</span><span class="o">-</span><span class="n">duration</span><span class="o">:</span> <span class="m">1s</span><span class="p">;</span>
-</span><span class='line'>  <span class="n">animation</span><span class="o">-</span><span class="n">iteration</span><span class="o">-</span><span class="n">count</span><span class="o">:</span> <span class="n">infinite</span><span class="p">;</span>
-</span><span class='line'>  <span class="n">animation</span><span class="o">-</span><span class="k">direction</span><span class="o">:</span> <span class="n">alternate</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre class="language-css"><code>
+/* Note: Prefixes omitted, see below */
+div {
+    animation-name: color_change;
+    animation-duration: 1s;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+</code></pre>
 
 
 <h3>Prefixes</h3>
@@ -197,99 +174,69 @@
 
 <h3>Keyframes</h3>
 
-<figure class='code'><figcaption class='not_empty'><span>Keyframe Declarations</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="k">@-webkit-keyframes</span> <span class="nt">color_change</span> <span class="p">{</span>
-</span><span class='line'>  <span class="nt">from</span> <span class="p">{</span> <span class="k">background-color</span><span class="o">:</span> <span class="nb">blue</span><span class="p">;</span> <span class="p">}</span>
-</span><span class='line'>  <span class="nt">to</span> <span class="p">{</span> <span class="k">background-color</span><span class="o">:</span> <span class="nb">red</span><span class="p">;</span> <span class="p">}</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'><span class="k">@-moz-keyframes</span> <span class="nt">color_change</span> <span class="p">{</span>
-</span><span class='line'>  <span class="nt">from</span> <span class="p">{</span> <span class="k">background-color</span><span class="o">:</span> <span class="nb">blue</span><span class="p">;</span> <span class="p">}</span>
-</span><span class='line'>  <span class="nt">to</span> <span class="p">{</span> <span class="k">background-color</span><span class="o">:</span> <span class="nb">red</span><span class="p">;</span> <span class="p">}</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'><span class="k">@-ms-keyframes</span> <span class="nt">color_change</span> <span class="p">{</span>
-</span><span class='line'>  <span class="nt">from</span> <span class="p">{</span> <span class="k">background-color</span><span class="o">:</span> <span class="nb">blue</span><span class="p">;</span> <span class="p">}</span>
-</span><span class='line'>  <span class="nt">to</span> <span class="p">{</span> <span class="k">background-color</span><span class="o">:</span> <span class="nb">red</span><span class="p">;</span> <span class="p">}</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'><span class="k">@-o-keyframes</span> <span class="nt">color_change</span> <span class="p">{</span>
-</span><span class='line'>  <span class="nt">from</span> <span class="p">{</span> <span class="k">background-color</span><span class="o">:</span> <span class="nb">blue</span><span class="p">;</span> <span class="p">}</span>
-</span><span class='line'>  <span class="nt">to</span> <span class="p">{</span> <span class="k">background-color</span><span class="o">:</span> <span class="nb">red</span><span class="p">;</span> <span class="p">}</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'><span class="k">@keyframes</span> <span class="nt">color_change</span> <span class="p">{</span>
-</span><span class='line'>  <span class="nt">from</span> <span class="p">{</span> <span class="k">background-color</span><span class="o">:</span> <span class="nb">blue</span><span class="p">;</span> <span class="p">}</span>
-</span><span class='line'>  <span class="nt">to</span> <span class="p">{</span> <span class="k">background-color</span><span class="o">:</span> <span class="nb">red</span><span class="p">;</span> <span class="p">}</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre class="language-css"><code>
+@-webkit-keyframes color_change {
+    from { background-color: blue; }
+    to { background-color: red; }
+}
+@-moz-keyframes color_change {
+    from { background-color: blue; }
+    to { background-color: red; }
+}
+@-ms-keyframes color_change {
+    from { background-color: blue; }
+    to { background-color: red; }
+}
+@-o-keyframes color_change {
+    from { background-color: blue; }
+    to { background-color: red; }
+}
+@keyframes color_change {
+    from { background-color: blue; }
+    to { background-color: red; }
+}
+</code></pre>
 
 
 <p><a href="https://developer.mozilla.org/en/CSS/@keyframes">Keyframes</a> are a way of specifying a set of properties and their values at different states of an animation.  <code>@keyframes color_change</code> gives the @keyframes a name of <code>color_change</code>.  This provides the connection used on the animation property above.</p>
 
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nt">from</span> <span class="p">{</span> <span class="k">background-color</span><span class="o">:</span> <span class="nb">blue</span><span class="p">;</span> <span class="p">}</span>
-</span><span class='line'><span class="nt">to</span> <span class="p">{</span> <span class="k">background-color</span><span class="o">:</span> <span class="nb">red</span><span class="p">;</span> <span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre class="language-css"><code>
+from { background-color: blue; }
+to { background-color: red; }
+</code></pre>
 
 
 <p>This animation only has 2 steps, a start and an end.  Since such animations are quite common, the <a href="http://www.w3.org/TR/css3-animations/#keyframes-">spec</a> provides the keywords <code>from</code> and <code>to</code> for defining the state of properties at the beginning and end of the animation.  This could also have been written using percentages for the steps.</p>
 
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nt">0</span><span class="o">%</span> <span class="p">{</span> <span class="k">background-color</span><span class="o">:</span> <span class="nb">blue</span><span class="p">;</span> <span class="p">}</span>
-</span><span class='line'><span class="nt">100</span><span class="o">%</span> <span class="p">{</span> <span class="k">background-color</span><span class="o">:</span> <span class="nb">red</span><span class="p">;</span> <span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre class="language-css"><code>
+0% { background-color: blue; }
+100% { background-color: red; }
+</code></pre>
 
 
 <p>If the animation has more than 2 steps, they can be listed using multiple steps as such.</p>
 
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nt">0</span><span class="o">%</span> <span class="p">{</span> <span class="k">background-color</span><span class="o">:</span> <span class="nb">blue</span><span class="p">;</span> <span class="p">}</span>
-</span><span class='line'><span class="nt">25</span><span class="o">%</span> <span class="p">{</span> <span class="k">background-color</span><span class="o">:</span> <span class="nb">orange</span><span class="p">;</span> <span class="p">}</span>
-</span><span class='line'><span class="nt">50</span><span class="o">%</span> <span class="p">{</span> <span class="k">background-color</span><span class="o">:</span> <span class="nb">yellow</span><span class="p">;</span> <span class="p">}</span>
-</span><span class='line'><span class="nt">75</span><span class="o">%</span> <span class="p">{</span> <span class="k">background-color</span><span class="o">:</span> <span class="nb">black</span><span class="p">;</span> <span class="p">}</span>
-</span><span class='line'><span class="nt">100</span><span class="o">%</span> <span class="p">{</span> <span class="k">background-color</span><span class="o">:</span> <span class="nb">red</span><span class="p">;</span> <span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre class="language-css"><code>
+0% { background-color: blue; }
+25% { background-color: orange; }
+50% { background-color: yellow; }
+75% { background-color: black; }
+100% { background-color: red; }
+</code></pre>
 
 
 <h3>Real World Example</h3>
 
 <p>Since the first demo was rather contrived, I thought I&#8217;d provide an example of how you could use this technique in the real world.  On buttons, a common UI pattern is to provide the user with visual feedback that they&#8217;re on the button by applying a subtle color change.  This is usually done by applying a different <code>background-color</code> on the hover pseudoclass of the button as such:</p>
 
-<figure class='code'><figcaption class='empty'><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nt">button</span> <span class="p">{</span>
-</span><span class='line'>  <span class="k">background-color</span><span class="o">:</span> <span class="nb">pink</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'><span class="nt">button</span><span class="nd">:hover</span> <span class="p">{</span>
-</span><span class='line'>  <span class="k">background-color</span><span class="o">:</span> <span class="nb">hotpink</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre class="language-css"><code>
+button {
+    background-color: pink;
+}
+button:hover {
+    background-color: hotpink;
+}
+</code></pre>
 
 
 <p>To improve upon this, we can add a CSS 3 color animation to gradually make the color transition.  The following example shows each side by side:</p>
@@ -303,58 +250,38 @@
 
 <p>In the button example above if the browser can&#8217;t perform the animation, the animated button will simply fallback on the hover button&#8217;s behavior.</p>
 
-<figure class='code'><figcaption class='not_empty'><span>Color Animation with Fallback</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nt">button</span> <span class="p">{</span>
-</span><span class='line'>  <span class="k">background-color</span><span class="o">:</span> <span class="nb">pink</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'><span class="nt">button</span><span class="nd">:hover</span> <span class="p">{</span>
-</span><span class='line'>  <span class="c">/* IE &lt;= 6 get no hover effect */</span>
-</span><span class='line'>  <span class="c">/* All browsers IE 7+ know how to handle this */</span>
-</span><span class='line'>  <span class="k">background-color</span><span class="o">:</span> <span class="nb">hotpink</span><span class="p">;</span>
-</span><span class='line'>  
-</span><span class='line'>  <span class="c">/* Browsers that support CSS animations get the animation, */</span>
-</span><span class='line'>  <span class="c">/* those that don&#39;t ignore this and move on. */</span>
-</span><span class='line'>  <span class="c">/* Note: I&#39;ve omitted the vendor prefixes for simplicity. */</span>
-</span><span class='line'>  <span class="n">animation</span><span class="o">:</span> <span class="n">color</span><span class="err">_</span><span class="n">change</span> <span class="m">1s</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre class="language-css"><code>
+button {
+    background-color: pink;
+}
+button:hover {
+    /* IE <= 6 get no hover effect */
+    /* All browsers IE 7+ know how to handle this */
+    background-color: hotpink;
+    
+    /* Browsers that support CSS animations get the animation, */
+    /* those that don't ignore this and move on. */
+    /* Note: I've omitted the vendor prefixes for simplicity. */
+    animation: color_change 1s;
+}
+</code></pre>
 
 
 <h3>Detect Support and Polyfill</h3>
 
 <p>If you have a CSS color animation that you absolutely must have work on all browsers back to IE6, you can do so by detecting support via <a href="http://modernizr.com">Modernizr</a>, and falling back to <a href="http://jqueryui.com/demos/animate/">jQuery UI&#8217;s animation</a>.</p>
 
-<figure class='code'><figcaption class='not_empty'><span>Fallback Behavior with jQuery UI</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">Modernizr</span><span class="p">.</span><span class="nx">cssanimation</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>  <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;button&#39;</span><span class="p">).</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;mouseover&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-</span><span class='line'>      <span class="c1">//jQuery UI doesn&#39;t support the hotpink keyword :(</span>
-</span><span class='line'>      <span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">animate</span><span class="p">({</span> <span class="nx">backgroundColor</span><span class="o">:</span> <span class="s1">&#39;#FF69B4&#39;</span> <span class="p">},</span> <span class="mi">1000</span><span class="p">);</span>
-</span><span class='line'>  <span class="p">}).</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;mouseout&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-</span><span class='line'>      <span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">stop</span><span class="p">(</span><span class="kc">true</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span>
-</span><span class='line'>      <span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">css</span><span class="p">(</span><span class="s1">&#39;backgroundColor&#39;</span><span class="p">,</span> <span class="s1">&#39;pink&#39;</span><span class="p">);</span>
-</span><span class='line'>  <span class="p">});</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre class="language-javascript"><code>
+if (!Modernizr.cssanimation) {
+    $('button').on('mouseover', function() {
+        //jQuery UI doesn't support the hotpink keyword :(
+        $(this).animate({ backgroundColor: '#FF69B4' }, 1000);
+    }).on('mouseout', function() {
+        $(this).stop(true, true);
+        $(this).css('backgroundColor', 'pink');
+    });
+}
+</code></pre>
 
 
 <p>Live example (this should work across all browsers):</p>
@@ -371,15 +298,12 @@
 </ul>
 
 
-<figure class='code'><figcaption class='not_empty'><span>Conditionally Loading jQuery UI</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">Modernizr</span><span class="p">.</span><span class="nx">load</span><span class="p">({</span>
-</span><span class='line'>  <span class="nx">test</span><span class="o">:</span> <span class="nx">Modernizr</span><span class="p">.</span><span class="nx">cssanimation</span><span class="p">,</span>
-</span><span class='line'>  <span class="nx">nope</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;jquery.js&#39;</span><span class="p">,</span> <span class="s1">&#39;jquery-ui&#39;</span><span class="p">]</span>
-</span><span class='line'><span class="p">});</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre class="language-javascript"><code>
+Modernizr.load({
+    test: Modernizr.cssanimation,
+    nope: ['jquery.js', 'jquery-ui']
+});
+</code></pre>
 
 
 <h3>Summary</h3>
@@ -420,7 +344,7 @@
     </p>
     <p class="author_card meta">
       <img src="/images/me/1.jpg" alt="Me!" id="post_me">
-      TJ VanToll is a developer advocate for <a href="http://telerik.com">Telerik</a>, a <a href="http://jqueryui.com/about/">jQuery team member</a>, and the author of <a href="http://tjvantoll.com/jquery-ui-in-action.html">jQuery UI in Action</a>. TJ has over a decade of web development experience—specializing in performance and the mobile web—and <a href="/speaking">speaks</a> about his research at conferences around the world. When not online, TJ is generally found talking about himself in the third person. If you like hearing TJ talk about himself, you should consider following him on <a href="http://twitter.com/tjvantoll">Twitter</a> or <a href="https://plus.google.com/+TJVanToll?rel=author" rel="author">Google+</a>.
+      TJ VanToll is a developer advocate for <a href="http://telerik.com">Telerik</a>, a <a href="http://jqueryui.com/about/">jQuery team member</a>, and the author of <a href="http://tjvantoll.com/jquery-ui-in-action.html">jQuery UI in Action</a>. TJ has over a decade of web development experience—specializing in performance and the mobile web—and <a href="/speaking">speaks</a> about his research at conferences around the world.TJ is <a href="http://twitter.com/tjvantoll">@tjvantoll</a> on Twitter and <a href="https://plus.google.com/+TJVanToll?rel=author" rel="author">+TJVanToll</a> on Google+.
     </p>
     
       <div class="sharing">
@@ -530,8 +454,7 @@
 
 
 
-
-
+Included file 'google_plus_one.html' not found in _includes directory
 
   <script type="text/javascript">
     (function(){
@@ -544,8 +467,7 @@
   </script>
 
 
-
-
+Included file 'custom/after_footer.html' not found in _includes directory
 
 </body>
 </html>
