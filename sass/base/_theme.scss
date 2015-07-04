@@ -68,7 +68,8 @@ aside.sidebar a {
   @include link-colors($sidebar-link-color, $hover: $sidebar-link-color-hover, $focus: $sidebar-link-color-hover, $active: $sidebar-link-color-active);
 }
 a {
-  @include transition(color .3s);
+  -webkit-transition: color 0.3s;
+  transition: color 0.3s;
 }
 
 html {

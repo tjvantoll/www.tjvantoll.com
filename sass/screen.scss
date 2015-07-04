@@ -1,4 +1,41 @@
-@import "compass";
+@mixin link-colors($normal, $hover: false, $active: false, $visited: false, $focus: false) {
+  color: $normal;
+  @if $visited {
+    &:visited {
+      color: $visited;
+    }
+  }
+  @if $focus {
+    &:focus {
+      color: $focus;
+    }
+  }
+  @if $hover {
+    &:hover {
+      color: $hover;
+    }
+  }
+  @if $active {
+    &:active {
+      color: $active;
+    }
+  }
+}
+
+@mixin pie-clearfix {
+  &:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+}
+
+@mixin hover-link {
+  text-decoration: none;
+  &:hover, &:focus {
+    text-decoration: underline;
+  }
+}
 
 $header-bg: rgba(30, 171, 221, 0.74);
 $subtitle-color: lighten($header-bg, 58);

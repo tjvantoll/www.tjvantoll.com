@@ -1,27 +1,25 @@
 body > nav {
   position: relative;
   background-color: $nav-bg;
-  @include background($nav-bg-front, $nav-bg-back);
   border: {
     top: 1px solid $nav-border-top;
     bottom: 1px solid $nav-border-bottom; }
-  padding-top: .35em;
+  padding-top: .45em;
   padding-bottom: .35em;
 
   font-size: .9em;
   ul {
-    @include horizontal-list(0);
+    overflow: hidden;
     float: left;
     display: block;
     padding-top: .15em;
-  }
-  ul.subscription {
-    margin-left: .8em;
-    float: right;
-    li:last-child a { padding-right: 0; }
+    margin: 0;
+    padding: 0;
   }
   ul li {
     margin: 0;
+    list-style: none;
+    float: left;
   }
   a {
     @include link-colors($nav-color, $nav-color-hover, $visited: $nav-color);
