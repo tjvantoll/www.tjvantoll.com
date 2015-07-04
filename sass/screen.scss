@@ -1,7 +1,16 @@
 @import "compass";
 
-@import "custom/colors";
-@import "custom/layout";
+$header-bg: rgba(30, 171, 221, 0.74);
+$subtitle-color: lighten($header-bg, 58);
+$nav-bg: desaturate(#eceff5, 8);
+$nav-bg-front: image-url('noise.png');
+$nav-bg-back: linear-gradient(lighten($nav-bg, 8), $nav-bg, darken($nav-bg, 11));
+$sidebar-bg: desaturate(#eceff5, 8);
+$sidebar-link-color: saturate(#526f9a, 10);
+$sidebar-link-color-hover: darken(#7ab662, 9);
+$footer-bg: $header-bg;
+$indented-lists: true;
+
 @import "base";
 @import "partials";
 @import "custom/styles";
