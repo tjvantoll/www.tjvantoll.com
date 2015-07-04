@@ -9,13 +9,6 @@
 	background-size: 50px;
 }
 
-.striped_bg {
-	background: #058AA3;
-	background: rgba(30, 171, 221, 0.74);
-	background: rgba(30, 171, 221, 0.74) -webkit-repeating-linear-gradient(60deg, transparent, transparent 42px, rgba(190, 190, 190, 0.1) 30px, rgba(190, 190, 190, 0.1) 45px);
-	background: rgba(30, 171, 221, 0.74) repeating-linear-gradient(35deg, transparent, transparent 42px, rgba(190, 190, 190, 0.1) 30px, rgba(190, 190, 190, 0.1) 45px);
-}
-
 .code_example {
 	border: 1px solid black;
 	border-radius: 5px;

@@ -2,7 +2,7 @@ body > footer {
   @extend .sans;
   font-size: 0.9em;
   color: $subtitle-color;
-  background-color: rgba(23,133,172,0.74);
+  background-color: $header-bg;
   position: relative;
   padding-top: 1em;
   padding-bottom: 1em;

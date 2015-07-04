@@ -13,23 +13,6 @@
 @import "partials/helpers";
 @import "partials/prism";
 
-body > header {
-	@extend .striped_bg;
-
-	h1 {
-		font-weight: bold;
-		text-shadow: 1px 1px 1px $custom_header_color;
-
-		a {
-			-webkit-transition: none;
-			transition: none;
-		}
-		a:hover, a:visited {
-			color: $custom_header_color;
-		}
-	}
-}
-
 @media only screen and (max-width: 768px) {
 	#content > div {
 		padding-top: $pad-medium / 2;

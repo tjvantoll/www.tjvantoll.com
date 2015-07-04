@@ -4,9 +4,11 @@ body > header {
 		display: inline-block;
 		margin: 0;
 		letter-spacing: 5px;
+		font-weight: bold;
+		text-shadow: 1px 1px 1px $custom_header_color;
 		a, a:visited, a:hover {
-		  color: $title_color;
-		  text-decoration: none;
+			color: $custom_header_color;
+			text-decoration: none;
 		}
 	}
 	h2 {
@@ -17,5 +19,3 @@ body > header {
 		font-weight: normal;
 	}
 }
-
-
