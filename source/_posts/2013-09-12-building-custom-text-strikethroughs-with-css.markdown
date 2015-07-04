@@ -5,7 +5,7 @@ date: 2013-09-12 15:25
 comments: true
 categories: [CSS]
 ---
-<link href="/stylesheets/custom/posts/2013-09-12.css" rel="stylesheet">
+<link href="/stylesheets/posts/2013-09-12.css" rel="stylesheet">
 Adding a strikethrough to a line of text in CSS is easy.
 
 <pre class="language-markup"><code>&lt;style&gt;
