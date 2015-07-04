@@ -32,6 +32,14 @@ article {
     padding-top: 0.8em;
     background: $img-border top left repeat-x;
   }
+  .entry-content table {
+    margin-bottom: 20px;
+    border-collapse: collapse;
+    th { font-weight: bold; text-decoration: underline; }
+    td, th { padding: 5px; border: 2px solid black; }
+    td.blue { color: blue; }
+    td.red { color: red; }
+  }
   .entry-content & h2:first-child, header + h2 { padding-top: 0; }
   h2:first-child, header + h2 { background: none; }
   .feature {
@@ -121,4 +129,8 @@ article + article {
       &:before, &:after { content: '\2014'; padding: 0 .3em; }
     }
   }
+}
+
+header.no_comments {
+  padding-top: 0;
 }

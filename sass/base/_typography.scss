@@ -83,6 +83,7 @@ ul, ol { &, ul, ol {
 strong { font-weight: bold; }
 
 em { font-style: italic; }
+i { font-style: italic; }
 
 sup, sub { font-size: 0.8em; position: relative;  display: inline-block; }
 sup { top: -.5em; }
@@ -164,4 +165,39 @@ blockquote {
   white-space: -o-pre-wrap;
   white-space: pre-wrap;
   word-wrap: break-word;
+}
+
+/*****************************************************/
+/*********************** Code ************************/
+/*****************************************************/
+
+p code, ul code, ol code {
+  display: inline-block;
+  font-size: 0.8em;
+  background: white;
+  line-height: 1.5em;
+  color: #555;
+  border: 1px solid #ddd;
+  border-radius: 0.4em;
+  padding: 0 .3em;
+  margin: -1px 0;
+}
+
+h3 code { font-size: 0.9em; }
+
+// Tweaks to Prism
+pre[class*="language-"] {
+  position: static;
+  font-size: 0.9em;
+  margin-bottom: 1.6em;
+  border: 1px solid #E7DEC3;
+  border-radius: 0.4em;
+  box-shadow: rgba(0,0,0,0.06) 0 0 10px;
+
+  pre[class*=language-]>code[data-language]::before {
+    content: "";
+  }
+}
+.token.lf::before {
+  content: "";
 }
