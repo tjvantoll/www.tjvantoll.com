@@ -4,33 +4,26 @@ single: true
 ---
 
 <div>
-<article itemscope itemtype="http://schema.org/BlogPosting" role="article">
-  {% include article.html %}
-  <footer>
-    <p class="meta">
-      {% include post/author.html %}
-      {% include post/date.html %}{% if updated %}{{ updated }}{% else %}{{ time }}{% endif %}
-      {% include post/categories.html %}
-    </p>
-    <p class="author_card meta">
-      <img src="/images/me/1.jpg" alt="Me!" id="post_me">
-      TJ VanToll is a developer advocate for <a href="http://telerik.com">Telerik</a>, a <a href="http://jqueryui.com/about/">jQuery team member</a>, and the author of <a href="http://tjvantoll.com/jquery-ui-in-action.html">jQuery UI in Action</a>. TJ has over a decade of web development experience—specializing in performance and the mobile web—and <a href="/speaking">speaks</a> about his research at conferences around the world.TJ is <a href="http://twitter.com/tjvantoll">@tjvantoll</a> on Twitter and <a href="https://plus.google.com/+TJVanToll?rel=author" rel="author">+TJVanToll</a> on Google+.
-    </p>
-  </footer>
-</article>
-{% if site.disqus_short_name and page.comments == true %}
-  <section>
-    <h1 id="comments">Comments</h1>
-    <div id="disqus_thread" aria-live="polite">{% include post/disqus_thread.html %}</div>
-  </section>
-{% endif %}
+	<article itemscope itemtype="http://schema.org/BlogPosting" role="article">
+		{% include article.html %}
+		<footer>
+			<p class="meta">
+				{% include post/author.html %}
+				{% include post/date.html %}{% if updated %}{{ updated }}{% else %}{{ time }}{% endif %}
+				{% include post/categories.html %}
+			</p>
+			<p class="author_card meta">
+				<img src="/images/me/1.jpg" alt="Me!" id="post_me">
+				TJ VanToll is a developer advocate for <a href="http://telerik.com">Telerik</a>, a <a href="http://jqueryui.com/about/">jQuery team member</a>, and the author of <a href="http://tjvantoll.com/jquery-ui-in-action.html">jQuery UI in Action</a>. TJ has over a decade of web development experience—specializing in performance and the mobile web—and <a href="/speaking">speaks</a> about his research at conferences around the world.TJ is <a href="http://twitter.com/tjvantoll">@tjvantoll</a> on Twitter and <a href="https://plus.google.com/+TJVanToll?rel=author" rel="author">+TJVanToll</a> on Google+.
+			</p>
+		</footer>
+	</article>
+	{% if site.disqus_short_name and page.comments == true %}
+		<section>
+			<h1 id="comments">Comments</h1>
+			<div id="disqus_thread" aria-live="polite">{% include post/disqus_thread.html %}</div>
+		</section>
+	{% endif %}
 </div>
-{% unless page.sidebar == false %}
-<aside class="sidebar">
-  {% if site.post_asides.size %}
-    {% include_array post_asides %}
-  {% else %}
-    {% include_array default_asides %}
-  {% endif %}
-</aside>
-{% endunless %}
+
+{% include sidebar.html %}
