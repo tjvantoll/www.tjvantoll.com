@@ -1,1 +1,0 @@
-{% include disqus.html %}
