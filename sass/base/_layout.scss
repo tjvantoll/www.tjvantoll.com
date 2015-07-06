@@ -1,8 +1,7 @@
 * { box-sizing: border-box; }
 
-$noise-bg: image-url('noise.png') top left !default;
 html {
-	background: $noise-bg;
+	background: $noise-bg top left;
 }
 body {
 	margin: 0;
@@ -13,11 +12,20 @@ body {
 	max-width: 1200px;
 	margin: 1em auto;
 }
+aside.sidebar {
+	border: 1px solid #dadde3;
+	-webkit-flex: 0 0 300px;
+	flex: 0 0 300px;
+	margin-left: 1em;
+}
 #main > div {
 	border-style: solid;
 	border-width: 1px 1px 1px 0;
 	border-color: #dadde3;
 	background: white;
+	margin-right: 1em;
+	// wtf Firefox? http://stackoverflow.com/questions/27472595/firefox-34-ignoring-max-width-for-flexbox
+	min-width: 1px;
 }
 #main > div > article {
 	padding: 15px 35px 0 35px;

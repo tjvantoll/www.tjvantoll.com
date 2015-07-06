@@ -1,4 +1,5 @@
-$img-border: inline-image('dotted-border.png');
+$noise-bg: url("/images/noise.png");
+$img-border: url("/images/dotted-border.png");
 
 // Main Link Colors
 $link-color: lighten(#165b94, 3) !default;

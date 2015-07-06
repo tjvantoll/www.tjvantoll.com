@@ -1,17 +1,17 @@
 aside.sidebar {
 	@extend .sans;
 	background: #f3f5f8;
-	border: 1px solid #dadde3;
-	flex: 0 0 300px;
 	section {
 		padding: 1em;
 	}
 }
 
 .main-info {
+	display: -webkit-flex;
 	display: flex;
 	padding: 1em;
 	div {
+		-webkit-flex: 0 0 170px;
 		flex: 0 0 170px;
 		text-align: center;
 	}
@@ -62,6 +62,7 @@ nav {
 	margin: 0;
 	border-bottom: 1px solid #dadde3;
 	ul {
+		display: -webkit-flex;
 		display: flex;
 		justify-content: center;
 		margin: 1em 0;
