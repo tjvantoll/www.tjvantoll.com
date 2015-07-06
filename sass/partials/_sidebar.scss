@@ -1,6 +1,6 @@
 aside.sidebar {
 	@extend .sans;
-	background: #edeff4;
+	background: #f3f5f8;
 	border: 1px solid #dadde3;
 	flex: 0 0 300px;
 	section {
@@ -11,7 +11,6 @@ aside.sidebar {
 .main-info {
 	display: flex;
 	padding: 1em;
-	background: rgba(4, 159, 255, 0.2);
 	div {
 		flex: 0 0 170px;
 		text-align: center;
@@ -26,10 +25,15 @@ aside.sidebar {
 		font-size: 1.5em;
 	}
 	a {
-		color: #222;
-		&:visited { color: #222; }
-		&:active { color: #222; }
+		color: inherit;
+		&:visited { color: inherit; }
+		&:active { color: inherit; }
+		&:hover {
+			color: $link-color-hover;
+			text-decoration: underline;
+		}
 		text-decoration: none;
+		line-height: 1;
 	}
 }
 
@@ -48,7 +52,9 @@ aside.sidebar .me {
 	p {
 		padding: 1em 0;
 		font-size: 0.9em;
-		border-bottom: 1px solid #dadde3;
+		border-style: solid;
+		border-width: 1px 0;
+		border-color: #dadde3;
 	}
 }
 
