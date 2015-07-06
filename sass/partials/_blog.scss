@@ -55,6 +55,7 @@ article {
     @extend .basic-alignment;
     border-radius: 0.3em;
     box-shadow: rgba(0,0,0,0.15) 0 1px 4px;
+    max-width: 100%;
   }
   > footer {
     padding-bottom: 2.5em;
@@ -77,7 +78,7 @@ article + article {
     background: $img-border top left repeat-x;
   }
 }
-#content .blog-index {
+#main .blog-index {
   padding: { top: 0; bottom: 0; }
   article { padding-top: 2em; }
   article header { background: none; padding-bottom: 0; }
@@ -113,12 +114,14 @@ article + article {
   display: inline-block;
 }
 
-#content div.pagination {
+#main div.pagination {
   text-align: center;
   font-size: .95em;
   position: relative;
   background: $img-border top left repeat-x;
-  padding: {top: 1.5em; bottom: 1.5em;}
+  padding: 1.5em 0;
+  margin-left: 35px;
+  margin-right: 35px;
   a {
     text-decoration: none;
     color: $text-color-light;

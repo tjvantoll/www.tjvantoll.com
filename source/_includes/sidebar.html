@@ -1,9 +1,26 @@
-{% unless page.sidebar == false %}
-	<aside class="sidebar">
-		{% if site.page_asides.size %}
-			{% include_array page_asides %}
-		{% else %}
-			{% include_array default_asides %}
-		{% endif %}
-	</aside>
-{% endunless %}
+<aside class="sidebar">
+	<div class="main-info">
+		<img src="/images/me/1.jpg" alt="TJ VanToll">
+		<div>
+			<h1>TJ VanToll</h1>
+			<a href="https://twitter.com/tjvantoll">@tjvantoll</a></li>
+		</div>
+	</div>
+	<section class="me">
+		<p>Front-end developer, tech author, developer advocate @Telerik, jQuery team member, Cordova & NativeScript enthusiast.</p>
+
+		<nav role="navigation">
+			<ul>
+				<li><a href="{{ root_url }}/blog/">Blog</a></li>
+				<li><a href="{{ root_url }}/blog/archives/">Archives</a></li>
+				<li><a href="{{ root_url }}/speaking/">Speaking</a></li>
+				<li><a href="{{ root_url }}/">About</a></li>
+			</ul>
+		</nav>
+	</section>
+	<section class="ad-section">
+		<div class="ad-container">
+			<script defer async src="http://cdn.adpacks.com/adpacks.js?legacyid=1285803&zoneid=1386&key=cb7a6f705dfe7532dde49b4c2c5adf2d&serve=C6SI42Y&placement=tjvantollcom&circle=dev" id="_adpacks_js"></script>
+		</div>
+	</section>
+</aside>

@@ -67,6 +67,14 @@ p, blockquote, ul, ol {
   margin: 0 0 1.5em 0;
 }
 
+a {
+  @include link-colors($link-color, $hover: $link-color-hover, $focus: $link-color-hover, $visited: $link-color-visited, $active: $link-color-active);
+}
+a {
+  -webkit-transition: color 0.3s;
+  transition: color 0.3s;
+}
+
 ul { list-style-type: disc;
   ul { list-style-type: circle; margin-bottom: 0px;
     ul { list-style-type: square; margin-bottom: 0px; }}}
