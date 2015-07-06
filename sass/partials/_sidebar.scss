@@ -69,6 +69,8 @@ nav {
 	li {
 		list-style: none;
 		border-right: 1px solid $text-color;
+		flex-grow: 1;
+		text-align: center;
 		&:last-child {
 			border: none;
 		}
