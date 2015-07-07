@@ -79,7 +79,7 @@ aside.sidebar {
 	}
 }
 
-aside.sidebar .me {
+aside.sidebar .me-section {
 	font-size: 0.9em;
 	padding-top: 0;
 	p {
@@ -149,7 +149,7 @@ body .one {
 		nav {
 			border-bottom-width: 0;
 		}
-		.me {
+		.me-section {
 			font-size: 1em;
 			padding: 0;
 			p { display: none; }
@@ -173,7 +173,26 @@ body .one {
 			display: none;
 		}
 	}
-	.ad-section {
-		display: none;
+	aside.sidebar .ad-section {
+		padding: 0 1em 1em 1em;
+	}
+	.ad-container {
+		background: white;
+		border: 1px solid $text-color;
+		padding: 1em;
+		min-height: 137px;
+	}
+	body .one {
+		.bsa_it_ad .bsa_it_i {
+			margin-bottom: 0;
+		}
+		.bsa_it_p {
+			position: static;
+			a {
+				position: absolute;
+				right: 0;
+				bottom: -10px;
+			}
+		}
 	}
 }
