@@ -40,6 +40,8 @@ aside.sidebar {
 }
 
 .main-info {
+	background: $link-color-hover;
+	color: $main-bg;
 	display: -webkit-flex;
 	display: flex;
 	padding: 1em;
@@ -161,7 +163,6 @@ body .one {
 	}
 	.main-info {
 		display: block;
-		background: rgba(31, 135, 187, 1);
 		h1 {
 			margin: 0;
 			font-size: 2em;
@@ -174,12 +175,13 @@ body .one {
 		}
 	}
 	aside.sidebar .ad-section {
-		padding: 0 1em 1em 1em;
+		display: none;
 	}
 	.ad-container {
 		background: white;
 		border: 1px solid $text-color;
 		padding: 1em;
+		margin-bottom: 1.5em;
 		min-height: 137px;
 	}
 	body .one {
