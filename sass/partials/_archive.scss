@@ -73,12 +73,12 @@
 
 #blog-archives.speaking {
   article {
-    padding-left: 0.5em;
+    padding-left: 0em;
     color: $text-color;
     ul {
       overflow: hidden;
-      padding-left: 1em;
-      margin: 0;
+      padding-left: 1.5em;
+      margin: 0.5em 0 1em 0;
     }
     li:not(:first-child) { margin-top: 0.4em; }
     span { display: block; }
