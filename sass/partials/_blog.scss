@@ -51,8 +51,6 @@ article {
     line-height: 1.3em;
   }
   img {
-    @extend .flex-content;
-    @extend .basic-alignment;
     border-radius: 0.3em;
     box-shadow: rgba(0,0,0,0.15) 0 1px 4px;
     max-width: 100%;

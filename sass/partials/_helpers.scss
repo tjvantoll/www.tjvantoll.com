@@ -9,6 +9,15 @@
 	background-size: 50px;
 }
 
+/* @extend this to force long lines of continuous text to wrap */
+.force-wrap {
+	white-space: -moz-pre-wrap;
+	white-space: -pre-wrap;
+	white-space: -o-pre-wrap;
+	white-space: pre-wrap;
+	word-wrap: break-word;
+}
+
 .author_card {
 	padding: 1em;
 	border: 1px solid $custom_header_color;
