@@ -6,15 +6,6 @@ single: true
 <div>
 	<article itemscope itemtype="http://schema.org/BlogPosting" role="article">
 		{% include article.html %}
-		<script>
-			(function() {
-				if (window.innerWidth <= 800) {
-					var ad = document.querySelector(".ad-container");
-					var destination = document.querySelector(".entry-content p");
-					destination.appendChild(ad);
-				}
-			}());
-		</script>
 		<footer>
 			<p class="meta">
 				{% include post/author.html %}

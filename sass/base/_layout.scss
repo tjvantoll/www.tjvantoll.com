@@ -137,6 +137,31 @@ body .one {
 	}
 }
 
+/* When the ad lives in the content */
+.entry-content {
+	.ad-container {
+		display: none;
+		background: white;
+		border: 1px solid $text-color;
+		padding: 1em;
+		margin-bottom: 1.5em;
+		min-height: 137px;
+	}
+	.one {
+		.bsa_it_ad .bsa_it_i {
+			margin-bottom: 0;
+		}
+		.bsa_it_p {
+			position: static;
+			a {
+				position: absolute;
+				right: 0;
+				bottom: -10px;
+			}
+		}
+	}
+}
+
 @media only screen and (max-width: 800px) {
 	// Prevent an image download
 	html { background: none; }
@@ -176,25 +201,5 @@ body .one {
 	}
 	aside.sidebar .ad-section {
 		display: none;
-	}
-	.ad-container {
-		background: white;
-		border: 1px solid $text-color;
-		padding: 1em;
-		margin-bottom: 1.5em;
-		min-height: 137px;
-	}
-	body .one {
-		.bsa_it_ad .bsa_it_i {
-			margin-bottom: 0;
-		}
-		.bsa_it_p {
-			position: static;
-			a {
-				position: absolute;
-				right: 0;
-				bottom: -10px;
-			}
-		}
 	}
 }
