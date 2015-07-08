@@ -60,11 +60,11 @@ aside.sidebar {
 		font-size: 1.5em;
 	}
 	a {
-		color: inherit;
-		&:visited { color: inherit; }
-		&:active { color: inherit; }
+		color: $main-bg;
+		&:visited { color: $main-bg;; }
+		&:active { color: $main-bg; }
 		&:hover {
-			color: $link-color-hover;
+			color: $main-bg;
 			text-decoration: underline;
 		}
 		text-decoration: none;
