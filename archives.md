@@ -1,6 +1,6 @@
 ---
 layout: page
-title: Blog Archive
+title: "Blog Archive"
 comments: false
 permalink: /blog/archives/
 ---

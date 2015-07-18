@@ -122,13 +122,8 @@ article + article {
   margin-right: 35px;
   a {
     text-decoration: none;
-    color: $text-color-light;
     &.prev { position: absolute; left: 0; }
     &.next { position: absolute; right: 0; }
-    &:hover { color: $link-color-hover; }
-    &[href*=archive] {
-      &:before, &:after { content: '\2014'; padding: 0 .3em; }
-    }
   }
 }
 

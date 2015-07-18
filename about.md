@@ -5,7 +5,7 @@ title: "About Me"
 permalink: /about/
 ---
 
-<p>I'm TJ VanToll. I'm a developer advocate for <a href="http://telerik.com">Telerik</a>, a <a href="http://jqueryui.com/about/">jQuery team member</a>, and the author of <a href="http://tjvantoll.com/jquery-ui-in-action.html">jQuery UI in Action</a>. I have over a decade of web development experience—specializing in performance and the mobile web.</p>
+<p>Hi, I'm TJ. I'm a developer advocate for <a href="http://telerik.com">Telerik</a>, a <a href="http://jqueryui.com/about/">jQuery team member</a>, and the author of <a href="http://tjvantoll.com/jquery-ui-in-action.html">jQuery UI in Action</a>. I have over a decade of web development experience—specializing in performance and the mobile web.</p>
 
 <p>I <a href="/speaking">speak</a> about my research and experiences at conferences around the world, and I've written for publications such as <a href="http://www.smashingmagazine.com/2014/05/21/mobile-accessibility-why-care-what-can-you-do/">Smashing Magazine</a>, <a href="http://www.html5rocks.com/en/tutorials/forms/constraintvalidation/">HTML5 Rocks</a>, <a href="http://msdn.microsoft.com/en-us/magazine/dn133614.aspx">MSDN Magazine</a>, and <a href="http://modernweb.com/2014/03/10/is-jquery-too-big-for-mobile/">ModernWeb</a>. You can contact me on Twitter (<a href="https://twitter.com/tjvantoll">@tjvantoll</a>), Google Plus (<a href="https://plus.google.com/+TJVanToll">+TJVanToll</a>), GitHub (<a href="https://github.com/tjvantoll">tjvantoll</a>), or <a href="mailto:tj.vantoll@gmail.com">via email</a>.</p>
 

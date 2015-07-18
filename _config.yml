@@ -6,6 +6,7 @@ description: >
 baseurl: "" # the subpath of your site, e.g. /blog/
 url: "http://tjvantoll.com"
 excerpt_separator: <!--more-->
+paginate: 10
 
 google_analytics_tracking_id: UA-29179796-1
 disqus_short_name: tjvantoll
