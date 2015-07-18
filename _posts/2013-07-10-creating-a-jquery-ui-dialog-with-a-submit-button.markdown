@@ -44,7 +44,7 @@ Which looks like this:
 
 There's one problem with this - the "Find" button doesn't work. Because of the generated structure of a jQuery UI dialog, the buttons are not within the `<form>` itself. Therefore, the buttons are not associated with the `<form>`. You can see the structure below:
 
-<!-- more -->
+<!--more-->
 
 <img src="/images/posts/2013-07-10/markup.png" alt="Markup of a UI dialog showing the the buttons are not children of the content.">
 

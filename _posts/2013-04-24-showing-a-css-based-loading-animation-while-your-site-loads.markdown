@@ -6,7 +6,7 @@ comments: true
 
 Showing a loading indicator on startup is a common pattern in native applications that is becoming more common on the web.  If you need to load a lot of resources when your web application is first loaded, you should give the user a clear indication that this is occurring.
 
-<!-- more -->
+<!--more-->
 
 Here's an approach I've used a few times to accomplish this.  I start by giving the `<html>` element itself a class of `"loading"`:
 

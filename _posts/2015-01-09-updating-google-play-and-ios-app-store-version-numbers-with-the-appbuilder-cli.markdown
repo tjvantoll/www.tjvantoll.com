@@ -12,7 +12,7 @@ Doing so turns out to be as simple as running two commands:
 $ appbuilder prop set AndroidVersionCode 2
 </code></pre>
 
-<!-- more -->
+<!--more-->
 
 The [**`BundleVersion`**](http://docs.telerik.com/platform/appbuilder/configuring-your-project/project-properties-general#general-project-properties-in-the-appbuilder-command-line-interface) is publicly visible version number; it's what users see in Google Play and the iOS App Store. Under the hood, `BundleVersion` changes the [`CFBundleVersion`](https://developer.apple.com/library/ios/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html#//apple_ref/doc/uid/20001431-102364) in your iOS app's Info.plist, and [`android:versionName`](http://developer.android.com/guide/topics/manifest/manifest-element.html#vname) in your Android app's AndroidManifest.xml.
 

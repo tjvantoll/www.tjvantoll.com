@@ -6,7 +6,7 @@ comments: true
 
 I've been using [Kendo UI Core](https://github.com/telerik/kendo-ui-core) in a bunch of projects lately, so I thought I'd document the process I use to get Kendo UI Core up and running. Note that the workflow I show isn't the “right” way of doing things, just the workflow I like.
 
-<!-- more -->
+<!--more-->
 
 ## Step 1) Download
 

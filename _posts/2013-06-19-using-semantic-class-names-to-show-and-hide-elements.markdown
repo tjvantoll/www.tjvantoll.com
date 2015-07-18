@@ -31,7 +31,7 @@ As a small example, say you have the following form that both displays a user's 
 &lt;/form&gt;
 </code></pre>
 
-<!-- more -->
+<!--more-->
 
 Without any logic both states of the form display:
 

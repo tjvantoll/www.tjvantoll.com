@@ -6,7 +6,7 @@ comments: true
 
 One of the great things about [NativeScript](https://www.nativescript.org/) is you can use the JavaScript tools you already know to help build your native iOS and Android apps. In my case I recently added two tools I was already familiar with—[JSHint](http://jshint.com/) and [JSCS](http://jscs.info/)—to my NativeScript apps to automate [linting](http://en.wikipedia.org/wiki/Lint_%28software%29). In this article I'll show you how to do it too.
 
-<!-- more -->
+<!--more-->
 
 ## Setting up Gulp
 

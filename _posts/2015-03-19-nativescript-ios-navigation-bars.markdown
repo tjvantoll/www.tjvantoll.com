@@ -6,7 +6,7 @@ comments: true
 
 I've gotten a whole lot of questions about adding navigation bars to NativeScript iOS apps, so I thought I'd write a quick post about it.
 
-<!-- more -->
+<!--more-->
 
 ## Showing the navigation bar with a title
 

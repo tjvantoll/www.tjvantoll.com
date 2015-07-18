@@ -13,7 +13,7 @@ A couple of notes:
 * All Trident pseudo-elements listed here were added in IE10 and will not work in earlier versions of Internet Explorer.
 * In WebKit, to style some pseudo-elements you must set the basis element's `-webkit-appearance` pseudo-class to `none`.  For example, to style `::-webkit-progress-bar` you must apply `-webkit-appearance: none;` to the appropriate `<progress>` element.
 
-<!-- more -->
+<!--more-->
 
 ## Table of Contents
 

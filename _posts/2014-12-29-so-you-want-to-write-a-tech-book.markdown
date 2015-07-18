@@ -10,7 +10,7 @@ When I finished *[jQuery UI in Action](http://tjvantoll.com/jquery-ui-in-action.
 
 But I did finally get around to doing this. What follows is a semi-coherent series of sentences about my experiences writing a tech book. The target reader is someone curious about how tech books are authored—especially masochistic readers that might be interested in writing a book themselves one day.
 
-<!-- more -->
+<!--more-->
 
 ## A timeline
 

@@ -12,7 +12,7 @@ NativeScript supports the `"collapsed"` and `"visible"` states of the CSS `visib
 
 > **Warning**: Currently NativeScript is inconsistent with the CSS spec, as the CSS spec defines `visibility: collapse`, and NativeScript uses `visiblity: collapsed`. I have [an issue open](https://github.com/NativeScript/NativeScript/issues/285) to resolve this discrepancy.
 
-<!-- more -->
+<!--more-->
 
 Hiding an element in CSS works, but if you need to hide an element you almost certainly need to show it at some point. For this, NativeScript exposes a `visibility` *attribute*, which is just a light wrapper around the CSS property. For instance you could also use the following syntax to hide a button:
 

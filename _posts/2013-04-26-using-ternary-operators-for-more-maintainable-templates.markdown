@@ -8,7 +8,7 @@ With the rise of JavaScript MVC frameworks, writing templates has become a large
 
 <i>Note: For my examples I'm using [Underscore's templates](http://underscorejs.org/#template), but this same tip applies to any templating language, even traditional server side ones like PHP.</i>
 
-<!-- more -->
+<!--more-->
 
 ## Example
 
