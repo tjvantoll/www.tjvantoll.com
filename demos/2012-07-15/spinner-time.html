@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<title>jQuery UI spinner currency</title>
+
+	<link rel="stylesheet" href="../assets/jquery-ui/1.11.0/jquery-ui.min.css">
+</head>
+<body>
+
+<h3>Time - U.S. 12-hour clock</h3>
+<input value="08:00 PM">
+
+<script src="../assets/jquery/2.1.1/jquery.min.js"></script>
+<script src="../assets/jquery-mousewheel/3.1.13/jquery.mousewheel.js"></script>
+<script src="../assets/globalize/0.1.1/globalize.js"></script>
+<script src="../assets/globalize/0.1.1/globalize.culture.de-DE.js"></script>
+<script src="../assets/jquery-ui/1.11.0/jquery-ui.min.js"></script>
+
+<script>
+	$.widget( "ui.timespinner", $.ui.spinner, {
+		options: {
+			// seconds
+			step: 60 * 1000,
+			// hours
+			page: 60
+		},
+
+		_parse: function( value ) {
+			if ( typeof value === "string" ) {
+				// already a timestamp
+				if ( Number( value ) == value ) {
+					return Number( value );
+				}
+				return +Globalize.parseDate( value );
+			}
+			return value;
+		},
+
+		_format: function( value ) {
+			return Globalize.format( new Date(value), "t" );
+		}
+	});
+
+	$("input").timespinner();
+</script>
+
+</body>
+</html>

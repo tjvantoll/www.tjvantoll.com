@@ -44,7 +44,10 @@ As you can see one of the nicest effects of using `[type=number]` is that mobile
 
 You can see what your browser does below:
 
-<iframe style="width: 100%; height: 120px;" src="http://jsfiddle.net/tj_vantoll/XMEEz/1/embedded/result,html/" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
+{% capture demo_height %}120{% endcapture %}
+{% capture demo_path %}2012-07-15/number{% endcapture %}
+{% capture demo_title %}input[type=number] example{% endcapture %}
+{% include post/demo.html %}
 
 ### Additional Functionality
 
@@ -57,7 +60,10 @@ For example, on the `<input>` below the browser will enforce that the minimum va
 
 You can see how this behaves in your browser below:
 
-<iframe style="width: 100%; height: 120px;" src="http://jsfiddle.net/tj_vantoll/YmQFS/embedded/result,html/" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
+{% capture demo_height %}120{% endcapture %}
+{% capture demo_path %}2012-07-15/number-attributes{% endcapture %}
+{% capture demo_title %}Min, max, and step attributes example{% endcapture %}
+{% include post/demo.html %}
 
 Just as a word of warning, Android 4.1 and iOS 5 do not support the `min`, `max`, or `step` attributes.
 
@@ -73,7 +79,10 @@ In addition to the new attributes, supporting browsers also provide 3  JavaScrip
 
 jQuery UI's `spinner` is a new plugin due for jQuery UI's 1.9 release (currently in beta).  The plugin by default looks and behaves much like the native number picker.
 
-<iframe style="width: 100%; height: 120px;" src="http://jsfiddle.net/tj_vantoll/scXYB/1/embedded/result,js,html/" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
+{% capture demo_height %}120{% endcapture %}
+{% capture demo_path %}2012-07-15/spinner{% endcapture %}
+{% capture demo_title %}jQuery UI spinner example{% endcapture %}
+{% include post/demo.html %}
 
 It also supports setting minimum, maximum, and step values through options rather than attributes.
 
@@ -91,7 +100,10 @@ It also supports setting minimum, maximum, and step values through options rathe
 
 Example:
 
-<iframe style="width: 100%; height: 120px;" src="http://jsfiddle.net/tj_vantoll/N7UXT/2/embedded/result,js,html/" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
+{% capture demo_height %}120{% endcapture %}
+{% capture demo_path %}2012-07-15/spinner-attributes{% endcapture %}
+{% capture demo_title %}jQuery UI spinner attributes{% endcapture %}
+{% include post/demo.html %}
 
 ### Above and Beyond
 
@@ -101,7 +113,10 @@ What really sets jQuery UI's `spinner` apart from the native picker is that it i
 
 `spinner` takes a `page` option that allows you to define how much the `spinner` should step when the page down / page up keys are pressed.  The example below shows a `spinner` with a `step` value of `1` and a `page` value of `10`.
 
-<iframe style="width: 100%; height: 150px;" src="http://jsfiddle.net/tj_vantoll/EvTeQ/1/embedded/result,js,html/" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
+{% capture demo_height %}120{% endcapture %}
+{% capture demo_path %}2012-07-15/spinner-paging{% endcapture %}
+{% capture demo_title %}jQuery UI spinner paging{% endcapture %}
+{% include post/demo.html %}
 
 ### Mousewheel
 
@@ -111,17 +126,26 @@ If you want mousewheel support for a `spinner` all you need to do is include [Br
 
 Ever need to accept currency at certain defined increments?  This example shows a `spinner` that spins through currency values at $25 increments, all with the same clean API.
 
-<iframe style="width: 100%; height: 150px;" src="http://jsfiddle.net/tj_vantoll/2wEe6/3/embedded/result,js,html/" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
+{% capture demo_height %}120{% endcapture %}
+{% capture demo_path %}2012-07-15/spinner-currency{% endcapture %}
+{% capture demo_title %}jQuery UI spinner currency{% endcapture %}
+{% include post/demo.html %}
 
 The formatting is localized through [Globalize.js](https://github.com/jquery/globalize/), therefore, if you want to handle different currencies all you need to do is pass in the appropriate `culture` and include the necessary JavaScript dependencies.  Here's an example of an input that takes Euros. 
 
-<iframe style="width: 100%; height: 150px;" src="http://jsfiddle.net/tj_vantoll/ppH7g/embedded/result,js,html/" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
+{% capture demo_height %}120{% endcapture %}
+{% capture demo_path %}2012-07-15/spinner-euros{% endcapture %}
+{% capture demo_title %}jQuery UI spinner euros{% endcapture %}
+{% include post/demo.html %}
 
 ### Time
 
 If you need to accept time data `spinner` can be used for that as well.
 
-<iframe style="width: 100%; height: 150px;" src="http://jsfiddle.net/tj_vantoll/2wEe6/5/embedded/result,js,html/" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
+{% capture demo_height %}120{% endcapture %}
+{% capture demo_path %}2012-07-15/spinner-time{% endcapture %}
+{% capture demo_title %}jQuery UI spinner time{% endcapture %}
+{% include post/demo.html %}
 
 The `page` option discussed earlier is used nicely here to make the up / down keys control the minutes and the page up / page down keys to controls hours.  Try it out on the example above.
 
@@ -129,7 +153,10 @@ The `page` option discussed earlier is used nicely here to make the up / down ke
 
 Since the `spinner` uses Globalize.js, you're free to use a time system different than the United States' nonsensical one.
 
-<iframe style="width: 100%; height: 150px;" src="http://jsfiddle.net/tj_vantoll/Kenve/2/embedded/result,js,html/" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
+{% capture demo_height %}120{% endcapture %}
+{% capture demo_path %}2012-07-15/spinner-24-hour-time{% endcapture %}
+{% capture demo_title %}jQuery UI spinner 24-hour time{% endcapture %}
+{% include post/demo.html %}
 
 ### Time Picker vs. `<input type="time">`
 
@@ -155,7 +182,10 @@ Because `spinner` is built on top of [jQuery UI's widget factory](http://ajpiano
 &lt;/script&gt;
 </code></pre>
 
-<iframe style="width: 100%; height: 150px;" src="http://jsfiddle.net/tj_vantoll/EsTYd/1/embedded/result,js,html/" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
+{% capture demo_height %}120{% endcapture %}
+{% capture demo_path %}2012-07-15/spinner-olympics{% endcapture %}
+{% capture demo_title %}jQuery UI spinner olympics year pickers{% endcapture %}
+{% include post/demo.html %}
 
 Now all your olympics pickers in your code base can share the same code!
 

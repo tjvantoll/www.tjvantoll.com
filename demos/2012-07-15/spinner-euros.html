@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<title>jQuery UI spinner currency</title>
+
+	<link rel="stylesheet" href="../assets/jquery-ui/1.11.0/jquery-ui.min.css">
+</head>
+<body>
+
+<input value="25">
+
+<script src="../assets/jquery/2.1.1/jquery.min.js"></script>
+<script src="../assets/jquery-mousewheel/3.1.13/jquery.mousewheel.js"></script>
+<script src="../assets/globalize/0.1.1/globalize.js"></script>
+<script src="../assets/globalize/0.1.1/globalize.culture.de-DE.js"></script>
+<script src="../assets/jquery-ui/1.11.0/jquery-ui.min.js"></script>
+
+<script>
+	$("input").spinner({
+		min: 25,
+		max: 2500,
+		step: 25,
+		numberFormat: "C",
+		culture: "de-DE"
+	});
+</script>
+
+</body>
+</html>
