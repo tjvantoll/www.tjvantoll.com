@@ -1,0 +1,8 @@
+{% capture demo_full_path %}/demos/{{ demo_path }}.html{% endcapture %}
+<div class="code_example">
+	<h6>
+		{{ demo_title }}
+		<a href="{{ demo_full_path }}" target="_blank">Open in New Window</a>
+	</h6>
+	<iframe style="width: 100%; height: {{ demo_height}}px;" frameborder="0" src="{{ demo_full_path }}"></iframe>
+</div>

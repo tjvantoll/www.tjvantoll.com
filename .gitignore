@@ -1,15 +1,2 @@
-.bundle
-.DS_Store
+_site
 .sass-cache
-.gist-cache
-.pygments-cache
-.preview-mode
-.tweet-cache
-_deploy
-public
-sass.old
-source.old
-source/_stash
-source/stylesheets/screen.css
-vendor
-node_modules

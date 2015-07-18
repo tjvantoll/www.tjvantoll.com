@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>setInterval and onscroll</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<style>
+		#foo { width: 500px; height: 1000px; padding-top: 30px; }
+	</style>
+</head>
+<body>
+	<div id="foo"></div>
+	<script>
+	var foo = document.getElementById('foo');
+		setInterval(function() {
+			foo.innerHTML += '* ';
+		}, 500);
+	</script>
+</body>
+</html>

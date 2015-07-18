@@ -1,0 +1,5 @@
+{% assign dateToPrint = page.date %}
+{% if post.date %}{% assign dateToPrint = post.date %}{% endif %}
+<time>
+	{{ dateToPrint | date: "	<span class='month'>%b</span> <span class='day'>%d</span>, <span class='year'>%Y</span>"}}
+</time>

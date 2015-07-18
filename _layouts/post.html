@@ -1,0 +1,25 @@
+---
+layout: default
+single: true
+---
+
+<div>
+	<article itemscope itemtype="http://schema.org/BlogPosting" role="article">
+		{% include article.html %}
+		<footer>
+			<p class="meta">
+				{% include post/author.html %}
+				{% include post/date.html %}
+			</p>
+			<p class="author_card meta">
+				{% include post/profile.html %}
+			</p>
+		</footer>
+	</article>
+	{% if page.comments == true %}
+		<section>
+			<h1 id="comments">Comments</h1>
+			<div id="disqus_thread" aria-live="polite"></div>
+		</section>
+	{% endif %}
+</div>

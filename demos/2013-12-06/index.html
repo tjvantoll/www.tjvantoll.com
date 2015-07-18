@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<title>Shadow root swap example</title>
+
+	<link rel="stylesheet" href="../assets/jquery-ui/1.11.0/jquery-ui.min.css">
+	<style>
+		input {
+			height: 2em;
+			width: 15em;
+		}
+	</style>
+</head>
+<body>
+
+<input type="date">
+
+<script src="../assets/jquery/2.1.1/jquery.min.js"></script>
+<script src="../assets/jquery-ui/1.11.0/jquery-ui.min.js"></script>
+
+<script>
+	var dateRoot = document.querySelector( "input" )
+		.createShadowRoot();
+
+	$( "input" ).datepicker({
+		dateFormat: "yy-mm-dd",
+		onSelect: function( dateText ) {
+			dateRoot.innerHTML = dateText;
+		}
+	});
+</script>
+
+</body>
+</html>
