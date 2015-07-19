@@ -1,23 +1,7 @@
-@mixin pie-clearfix {
-	&:after {
-		content: "";
-		display: table;
-		clear: both;
-	}
-}
-
-@mixin hover-link {
-	text-decoration: none;
-	&:hover, &:focus {
-		text-decoration: underline;
-	}
-}
-
 .warning {
 	border: 2px solid yellow;
 	padding: 20px 20px 20px 80px;
 	margin-bottom: 1.5em;
-	background-color: #FEEFB3;
 	color: #9F6000;
 	background: url(/images/icons/warning.png) no-repeat #FEEFB3;
 	background-position: 20px 45%;
@@ -47,7 +31,7 @@ img.plain {
 }
 
 .code_example {
-	border: 1px solid black;
+	border: 1px solid $text-color;
 	margin-bottom: 1.5em;
 	overflow-x: auto;
 	position: relative;
@@ -68,8 +52,7 @@ img.plain {
 			top: 0.2em;
 			right: 0.5em;
 			font-size: 0.8em;
-			font-weight: normal;
-			color: white;
+			color: inherit;
 		}
 	}
 	&::after {
@@ -79,14 +62,13 @@ img.plain {
 		content: "Demo";
 		background: white;
 		color: $text-color;
-		border-color: black;
+		border-color: $text-color;
 		border-width: 1px 0 0 1px;
 		border-style: dotted;
-		font-size: 0.8em;
 		padding: 0.2em 0.3em;
 	}
 }
-@media all and (max-width: 500px) {
+@media (max-width: $breakpoint-phone) {
 	.code_example {
 		h6 {
 			overflow: hidden;

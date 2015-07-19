@@ -74,7 +74,7 @@ aside.sidebar {
 	}
 }
 
-@media only screen and (max-width: 992px) {
+@media only screen and (max-width: $breakpoint-small-desktop) {
 	aside.sidebar {
 		flex: 0 0 250px;
 	}
@@ -164,7 +164,7 @@ body .one {
 	}
 }
 
-@media only screen and (max-width: 800px) {
+@media (max-width: $breakpoint-tablet) {
 	// Prevent an image download
 	html { background: none; }
 

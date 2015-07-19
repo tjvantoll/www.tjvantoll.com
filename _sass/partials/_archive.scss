@@ -16,14 +16,17 @@
 	h1 {
 		font-size: 1.5em;
 		a {
-			@include hover-link;
+			text-decoration: none;
+			&:hover, &:focus {
+				text-decoration: underline;
+			}
 			color: inherit;
 			&:hover { color: $link-color-hover; }
 			font-weight: normal;
 			display: inline-block;
 		}
 	}
-	a.category, time {
+	time {
 		@extend .sans;
 		color: $text-color-light;
 	}
@@ -43,7 +46,7 @@
 		}
 	}
 	a:hover { color: $link-color-hover; }
-	@media only screen and (min-width: 550px) {
+	@media (min-width: $breakpoint-phone) {
 		article { margin-left: 5em; }
 		h2 {
 			margin-bottom: .3em;
@@ -63,17 +66,7 @@
 		article {
 			padding:{left: 4.5em; bottom: .7em;}
 		}
-	a.category {
-		line-height: 1.1em;
-		}
 	}
-}
-#content > .category {
-	article {
-		margin-left: 0;
-		padding-left: 6.8em;
-	}
-	.year { display: inline; }
 }
 
 #blog-archives.speaking {
