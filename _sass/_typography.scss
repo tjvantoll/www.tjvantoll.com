@@ -10,18 +10,14 @@ body > header h1 {
 }
 
 body {
+	font-size: 1.15em;
 	line-height: 1.5em;
 	color: $text-color;
 	@extend .serif;
 }
 h1 {
-	font-size: 2.2em;
+	font-size: 2.6em;
 	line-height: 1.2em;
-}
-
-@media (min-width: $breakpoint-small-desktop) {
-	body { font-size: 1.15em; }
-	h1 { font-size: 2.6em; line-height: 1.2em; }
 }
 
 h1, h2, h3, h4, h5, h6 {
