@@ -1,0 +1,264 @@
+{"talks": [
+
+{
+	"name": "Introducing NativeScript",
+	"abstract": "https://gist.github.com/tjvantoll/a5f7111ed131d5f54e98",
+	"url": "https://www.youtube.com/watch?v=HWboi_9aba8",
+	"year": "2015",
+	"events": [
+		{
+			"date": "May 4th, 2015",
+			"url": "http://teleriknext.com/",
+			"name": "TelerikNEXT",
+			"city": "Boston, Massachusetts",
+			"country": "us",
+			"slides": "/speaking/slides/Introducing-NativeScript/Boston/A-Lap-Around-NativeScript.pdf",
+			"video": "https://www.youtube.com/watch?v=HWboi_9aba8"
+		},
+		{
+			"date": "March 12th, 2015",
+			"url": "http://www.devnexus.com/",
+			"name": "DevNexus",
+			"city": "Atlanta, Georgia",
+			"country": "us",
+			"slides": "/speaking/slides/Introducing-NativeScript/Atlanta/introducing-nativescript.pdf",
+			"video": "https://www.youtube.com/watch?v=Rw7oAu3yiik"
+		}
+	]
+},
+{
+	"name": "Web Components—What's the Catch?",
+	"abstract": "https://gist.github.com/tjvantoll/d9a3e84c19bb6d64eee2",
+	"url": "/speaking/slides/Web-Components-Catch/San-Francisco/web-components-catch.pdf",
+	"year": "2015",
+	"events": [
+		{
+			"date": "April 21st, 2015",
+			"url": "http://fluentconf.com/",
+			"name": "Fluent Conference",
+			"city": "San Francisco, California",
+			"country": "us",
+			"slides": "/speaking/slides/Web-Components-Catch/San-Francisco/web-components-catch.pdf"
+		}
+	]
+},
+{
+	"name": "The State of Hybrid Tooling",
+	"abstract": "https://gist.github.com/tjvantoll/9949d3c80d8f27de254d",
+	"url": "https://www.youtube.com/watch?v=3nmE0PQVb_k",
+	"year": "2015",
+	"events": [
+		{
+			"date": "March 12th, 2015",
+			"url": "http://www.meetup.com/Atlanta-Mobile-Developers-Group/",
+			"name": "Atlanta Mobile Developers Group",
+			"city": "Atlanta, Georgia",
+			"country": "us",
+			"slides": "/speaking/slides/State-of-Hybrid/Atlanta/"
+		},
+		{
+			"date": "October 24th, 2014",
+			"url": "http://pgday.phonegap.com/us2014/",
+			"name": "PhoneGap Day US",
+			"city": "San Francisco, California",
+			"country": "us",
+			"slides": "/speaking/slides/State-of-Hybrid/San-Francisco/",
+			"video": "https://www.youtube.com/watch?v=3nmE0PQVb_k",
+			"feedback": "https://storify.com/tjvantoll/phonegap-day-us-2014"
+		}
+	]
+},
+{
+	"name": "Building Cross-Platform Apps with the Telerik Platform",
+	"abstract": "https://gist.github.com/tjvantoll/ca3e139cb51ea8e30004",
+	"url": "/speaking/slides/Telerik-Platform/Columbus/",
+	"year": "2014",
+	"events": [
+		{
+			"date": "November 21st, 2014",
+			"url": "http://www.m3conf.com/",
+			"name": "M3 Conf",
+			"city": "Columbus, Ohio",
+			"country": "us",
+			"slides": "/speaking/slides/Telerik-Platform/Columbus/"
+		}
+	]
+},
+{
+	"name": "HTML5 Form Validation: Why no one uses it, and how you can!",
+	"abstract": "https://gist.github.com/tjvantoll/b9dd3b8cb9e7629b689e",
+	"url": "https://www.youtube.com/watch?v=8qvjhMr6UGM",
+	"year": "2014",
+	"events": [
+		{
+			"date": "September 12th, 2014",
+			"url": "http://events.jquery.org/2014/chicago/",
+			"name": "jQuery Chicago",
+			"city": "Chicago, Illinois",
+			"country": "us",
+			"slides": "/speaking/slides/Constraint-Validation/Chicago/",
+			"video": "https://www.youtube.com/watch?v=8qvjhMr6UGM",
+			"feedback": "https://storify.com/tjvantoll/jquery-chicago-talk"
+		}
+	]
+},
+{
+	"name": "The State of Hybrid",
+	"abstract": "https://gist.github.com/tjvantoll/9aa512cdee29316bc5da",
+	"url": "/speaking/slides/State-of-Hybrid/New-York/",
+	"year": "2014",
+	"events": [
+		{
+			"date": "June 12th, 2014",
+			"url": "https://qconnewyork.com",
+			"name": "QCon NY",
+			"city": "New York, New York",
+			"country": "us",
+			"slides": "/speaking/slides/State-of-Hybrid/New-York/"
+		},
+		{
+			"date": "April 28th, 2014",
+			"url": "http://www.meetup.com/grwebdev/events/165953762/",
+			"name": "Grand Rapids Web Dev Meetup",
+			"city": "Grand Rapids, Michigan",
+			"country": "us",
+			"slides": "/speaking/slides/State-of-Hybrid/Grand-Rapids/"
+		}
+	]
+},
+{
+	"name": "Validating Forms With HTML5",
+	"abstract": "https://gist.github.com/tjvantoll/dcf2dc7b2930b73416a2",
+	"url": "/speaking/slides/Constraint-Validation/Atlanta/",
+	"year": "2014",
+	"events": [
+		{
+			"date": "February 25th, 2014",
+			"url": "http://www.meetup.com/AtlantaHTML5/events/166212742/",
+			"name": "Atlanta HTML5 User Group",
+			"city": "Atlanta, Georgia",
+			"country": "us",
+			"slides": "/speaking/slides/Constraint-Validation/Atlanta/"
+		}
+	]
+},
+{
+	"name": "Making the Case for jQuery in a Browser Utopia",
+	"abstract": "https://gist.github.com/tjvantoll/c1781a7707be124c7c46",
+	"url": "https://www.youtube.com/watch?v=OBLvBcGgVQc",
+	"year": "2014",
+	"events": [
+		{
+			"date": "February 12th, 2014",
+			"url": "http://events.jquery.org/2014/san-diego/",
+			"name": "jQuery San Diego",
+			"city": "San Diego, California",
+			"country": "us",
+			"slides": "/speaking/slides/jQuery-Defense/San-Diego/",
+			"video": "https://www.youtube.com/watch?v=OBLvBcGgVQc"
+		}
+	]
+},
+{
+	"name": "jQuery UI Widgets vs. HTML5",
+	"abstract": "https://gist.github.com/tjvantoll/8c560cbdc89560652d5a",
+	"url": "http://www.youtube.com/watch?v=Q6Bjs4BoBTc",
+	"year": "2014",
+	"events": [
+		{
+			"date": "February 24th, 2014",
+			"url": "http://devnexus.com/",
+			"name": "DevNexus",
+			"city": "Atlanta, Georgia",
+			"country": "us",
+			"slides": "/speaking/slides/UI-Widgets-vs-HTML5/Atlanta"
+		},
+		{
+			"date": "October 2nd, 2013",
+			"url": "http://www.devreach.com/",
+			"name": "DevReach",
+			"city": "Sofia, Bulgaria",
+			"country": "bulgaria",
+			"slides": "/speaking/slides/UI-Widgets-vs-HTML5/Sofia"
+		},
+		{
+			"date": "June 13th, 2013",
+			"url": "http://events.jquery.org/2013/portland/",
+			"name": "jQuery Portland",
+			"city": "Portland, Oregon",
+			"country": "us",
+			"slides": "/speaking/slides/UI-Widgets-vs-HTML5/Portland",
+			"video": "http://www.youtube.com/watch?v=Q6Bjs4BoBTc"
+		}
+	]
+},
+{
+	"name": "Constraint Validation: Native Client Side Validation for Web Forms",
+	"url": "/speaking/slides/Constraint-Validation/San-Francisco",
+	"year": "2013",
+	"events": [
+		{
+			"date": "October 22nd, 2013",
+			"url": "http://html5devconf.com/",
+			"name": "HTML5 Developer Conference",
+			"city": "San Francisco, California",
+			"country": "us",
+			"slides": "/speaking/slides/Constraint-Validation/San-Francisco"
+		},
+		{
+			"date": "May 29th, 2013",
+			"url": "http://www.meetup.com/grwebdev/",
+			"name": "Grand Rapids Web Dev Meetup",
+			"city": "Grand Rapids, MI",
+			"country": "us",
+			"slides": "/speaking/slides/Constraint-Validation/Grand-Rapids"
+		}
+	]
+},
+{
+	"name": "Submitting Bugs the Right Way",
+	"url": "/speaking/slides/Submitting-Bugs-the-Right-Way/Toronto",
+	"year": "2013",
+	"events": [
+		{
+			"date": "March 3rd, 2013",
+			"url": "http://jqueryto.com",
+			"name": "jQuery TO",
+			"city": "Toronto, Ontario",
+			"country": "canada",
+			"slides": "/speaking/slides/Submitting-Bugs-the-Right-Way/Toronto"
+		}
+	]
+},
+{
+	"name": "Front End Web Efficiency—The Top Ten",
+	"url": "/speaking/slides/Efficiency-Top-Ten/Okemos?plain",
+	"year": "2012",
+	"events": [
+		{
+			"date": "October 23rd, 2012",
+			"url": "https://groups.google.com/forum/#!forum/greaterlansingjug",
+			"name": "Lansing Java Users Group",
+			"city": "Lansing, MI",
+			"country": "us",
+			"slides": "/speaking/slides/Efficiency-Top-Ten/Okemos?plain"
+		}
+	]
+},
+{
+	"name": "JavaScript for the Java Developer",
+	"url": "/speaking/slides/JavaScript-for-the-Java-Developer/Okemos",
+	"year": "2012",
+	"events": [
+		{
+			"date": "March 20th, 2012",
+			"url": "https://groups.google.com/forum/#!forum/greaterlansingjug",
+			"name": "Lansing Java Users Group",
+			"city": "Lansing, MI",
+			"country": "us",
+			"slides": "/speaking/slides/JavaScript-for-the-Java-Developer/Okemos"
+		}
+	]
+}
+
+]}
