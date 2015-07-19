@@ -6,39 +6,14 @@ $link-color-hover: adjust-color($link-color, $lightness: 10, $saturation: 25) !d
 $link-color-visited: adjust-color($link-color, $hue: 80, $lightness: -4) !default;
 $link-color-active: adjust-color($link-color-hover, $lightness: -15) !default;
 
-// Main Section Colors
 $main-bg: #f8f8f8 !default;
-$page-bg: #252525 !default;
-$article-border: #eeeeee !default;
 
-$custom_header_color: #333;
-$accent_color: #CF481C;
-
-$title-color: #f2f2f2 !default;
-$subtitle-color: #C0DDEB;
-
+/* Text */
 $text-color: #222 !default;
 $text-color-light: #aaa !default;
-$type-border: #ddd !default;
 
-/* Navigation */
-$nav-bg: desaturate(#eceff5, 8);
-$nav-bg-back: linear-gradient(lighten($nav-bg, 8), $nav-bg, darken($nav-bg, 11));
-$nav-color: darken($nav-bg, 38) !default;
-$nav-color-hover: darken($nav-color, 25) !default;
-$nav-border: darken($nav-bg, 10) !default;
-$nav-border-top: lighten($nav-bg, 15) !default;
-$nav-border-bottom: darken($nav-bg, 25) !default;
-$nav-border-left: darken($nav-bg, 11) !default;
-$nav-border-right: lighten($nav-bg, 7) !default;
-
-/* Sidebar colors */
-$sidebar-bg: desaturate(#eceff5, 8);
-$sidebar-link-color: saturate(#526f9a, 10);
-$sidebar-link-color-hover: darken(#7ab662, 9);
-$sidebar-link-color-active: $link-color-active !default;
-$sidebar-color: change-color(mix($text-color, $sidebar-bg, 80), $hue: hue($sidebar-bg), $saturation: saturation($sidebar-bg)/2) !default;
-$sidebar-border: desaturate(darken($sidebar-bg, 7), 10) !default;
-$sidebar-border-hover: darken($sidebar-bg, 7) !default;
-$sidebar-link-color-subdued: lighten($sidebar-color, 20) !default;
-$sidebar-link-color-subdued-hover: $sidebar-link-color-hover !default;
+/* Fonts */
+$sans: "PT Sans", "Helvetica Neue", Arial, sans-serif !default;
+$serif: "PT Serif", Georgia, Times, "Times New Roman", serif !default;
+$mono: Menlo, Monaco, "Andale Mono", "lucida console", "Courier New", monospace !default;
+$heading-font-family: "PT Serif", "Georgia", "Helvetica Neue", Arial, sans-serif !default;
