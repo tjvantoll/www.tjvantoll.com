@@ -2,6 +2,8 @@
 
 This repo contains the source code for <http://tjvantoll.com>, my personal home page and blog. The site is built on top of [Jekyll](http://jekyllrb.com/) and runs on [GitHub Pages](https://pages.github.com/).
 
+![](images/site-screenshot.png)
+
 ## Running
 
 To run the site for yourself clone the repo and run `jekyll serve` from your command-line interface of choice.
