@@ -3,6 +3,7 @@ layout: page
 comments: false
 title: "About Me"
 permalink: /about/
+hasCode: false
 ---
 
 <p>Hi, I'm TJ. I'm a developer advocate for <a href="http://telerik.com">Telerik</a>, a <a href="http://jqueryui.com/about/">jQuery team member</a>, and the author of <a href="http://tjvantoll.com/jquery-ui-in-action.html">jQuery UI in Action</a>. I have over a decade of web development experience—specializing in performance and the mobile web.</p>

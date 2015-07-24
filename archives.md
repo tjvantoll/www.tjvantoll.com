@@ -3,6 +3,7 @@ layout: page
 title: "Blog Archive"
 comments: false
 permalink: /blog/archives/
+hasCode: false
 ---
 
 <div id="blog-archives">

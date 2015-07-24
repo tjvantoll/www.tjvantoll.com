@@ -19,6 +19,8 @@
 		{{ include_to_scssify | scssify }}
 	</style>
 
-	{% include prism.html %}
+	{% if page.hasCode != false %}
+		{% include prism.html %}
+	{% endif %}
 	{% include google_analytics.html %}
 </head>
