@@ -1,15 +1,18 @@
 # Site settings
 title: TJ VanToll's Blog
 email: tj.vantoll@gmail.com
-description: >
-  TJ VanToll's blog about front-end technologies
-baseurl: "" # the subpath of your site, e.g. /blog/
+description: "TJ VanToll's blog about front-end technologies"
+baseurl: ""
 url: "http://tjvantoll.com"
 excerpt_separator: <!--more-->
 paginate: 10
 
+# Accounts
 google_analytics_tracking_id: UA-29179796-1
 disqus_short_name: tjvantoll
 
 # Build settings
 markdown: kramdown
+permalink: pretty
+sass:
+    style: :compressed
