@@ -93,12 +93,14 @@ nav {
 	ul {
 		display: -webkit-flex;
 		display: flex;
+		-webkit-justify-content: center;
 		justify-content: center;
 		margin: 1em 0;
 	}
 	li {
 		list-style: none;
 		border-right: 1px solid $text-color;
+		-webkit-flex-grow: 1;
 		flex-grow: 1;
 		text-align: center;
 		&:last-child {
