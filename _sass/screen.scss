@@ -11,6 +11,9 @@ $link-color-hover: adjust-color($link-color, $lightness: 10, $saturation: 25) !d
 $link-color-visited: adjust-color($link-color, $hue: 80, $lightness: -4) !default;
 $link-color-active: adjust-color($link-color-hover, $lightness: -15) !default;
 
+/* Spacing */
+$gutter-size: 1.5em;
+
 /* Backgrounds */
 $main-bg: #f8f8f8 !default;
 

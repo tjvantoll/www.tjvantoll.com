@@ -118,8 +118,8 @@ article + article {
 	position: relative;
 	background: $img-border top left repeat-x;
 	padding: 1.5em 0;
-	margin-left: 35px;
-	margin-right: 35px;
+	margin-left: $gutter-size;
+	margin-right: $gutter-size;
 	a {
 		text-decoration: none;
 		&.prev { position: absolute; left: 0; }

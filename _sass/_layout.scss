@@ -35,10 +35,10 @@ aside.sidebar {
 	min-width: 1px;
 }
 #main > div > article {
-	padding: 15px 35px 0 35px;
+	padding: 15px $gutter-size 0 $gutter-size;
 }
 #main > div > section {
-	padding: 0 35px 1em 35px;
+	padding: 0 $gutter-size 1em $gutter-size;
 }
 
 .main-info {
