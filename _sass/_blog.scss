@@ -118,12 +118,18 @@ article + article {
 	position: relative;
 	background: $img-border top left repeat-x;
 	padding: 1.5em 0;
-	margin-left: $gutter-size;
-	margin-right: $gutter-size;
+	margin-left: $gutter-width-mobile;
+	margin-right: $gutter-width-mobile;
 	a {
 		text-decoration: none;
 		&.prev { position: absolute; left: 0; }
 		&.next { position: absolute; right: 0; }
+	}
+}
+@media (min-width: $breakpoint-phone) {
+	#main div.pagination {
+		margin-left: $gutter-width;
+		margin-right: $gutter-width;
 	}
 }
 
