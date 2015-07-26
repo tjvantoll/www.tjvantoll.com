@@ -162,9 +162,6 @@ body .one {
 }
 
 @media (max-width: $breakpoint-tablet) {
-	// Prevent an image download
-	html { background: none; }
-
 	#main {
 		display: block;
 		margin: 0;
