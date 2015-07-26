@@ -4,9 +4,9 @@ title: "Mobile Safari's Performance is Not the Problem"
 comments: true
 ---
 
-Earlier this week [Nilay Patel](https://twitter.com/reckless/) of The Verge published an article about how [“The Mobile Web Sucks”](http://www.theverge.com/2015/7/20/9002721/the-mobile-web-sucks). An article that—in what I'm sure was a complete coincidence—was *eerily* similar to [an article I wrote just one week before](http://developer.telerik.com/featured/the-webs-cruft-problem/).
+Earlier this week [Nilay Patel](https://twitter.com/reckless/) of The Verge published an article about how [“The Mobile Web Sucks”](http://www.theverge.com/2015/7/20/9002721/the-mobile-web-sucks), which caught my attention, as I had [written about the mobile web's woes](http://developer.telerik.com/featured/the-webs-cruft-problem/) just a few days before.
 
-But although both our articles argued that reading content on the mobile web is less than ideal, our reasoning diverged when it came to explaining why. Whereas I argued that the issue is the web's broken monetization and advertising model, Nilay argued that the issue is performance, and more specifically, “the performance of Mobile Safari”. Or in longer form:
+But although both our articles argued that reading content on the mobile web can be less than ideal, our reasoning diverged when it came to explaining why. Whereas I argued that the issue is the web's broken monetization and advertising model, Nilay argued that the issue is performance, and more specifically, “the performance of Mobile Safari”. Or in longer form:
 
 > “The entire point of the web was to democratize and simplify publishing using standards that anyone could build on, and it has been a raging, massively disruptive success for decades now. But the iPhone's depressing combination of dominant mobile web marketshare and shitbox performance means we're all sort of ready to throw that progress away.”
 
@@ -25,7 +25,7 @@ Here's the specific wording Nilay used:
 
 > “Apple totally forbids other companies from developing alternative web rendering engines for the iPhone, so there's no competition for better performance, and no incentive for Apple to invest heavily in Safari development. In many ways, Safari is the new Internet Explorer.”
 
-What Nilay doesn't realize is developers' animosity towards Safari is driven by the slow pace of new web standards making it into Safari, and the lack of communication about why that's the case. Not performance. Jake's tweet in particular was in response to the [somewhat lackluster list of features coming in iOS Safari in iOS 9](https://developer.apple.com/library/prerelease/mac/releasenotes/General/WhatsNewInSafari/Articles/Safari_9.html#//apple_ref/doc/uid/TP40014305-CH9-SW27), coming off of a lackluster list of features in iOS 8 a year earlier. The entire “Safari is the new IE” article is about features that the author would like to see in Safari.
+What Nilay doesn't realize is developers' animosity towards Safari is primarily driven by the slow pace of new web standards appearing in Safari, and the lack of communication about why that's the case. Not performance. Jake's tweet in particular was in response to the [somewhat lackluster list of features coming in iOS Safari in iOS 9](https://developer.apple.com/library/prerelease/mac/releasenotes/General/WhatsNewInSafari/Articles/Safari_9.html#//apple_ref/doc/uid/TP40014305-CH9-SW27), coming off of a lackluster list of features in iOS 8 a year earlier. The entire “Safari is the new IE” article is about features that the author would like to see in Safari.
 
 Nilay is correct that web developers, myself included, would indeed love to see alternative rendering engines on iOS, and the competition would undoubtedly encourage performance improvements, but we're mostly interesting in increasing the cadence of new web features making their way to iOS.
 
@@ -47,7 +47,7 @@ The mobile web's achilles heel is the network, because as it turns out, the extr
 
 Even when you're on wifi, mobile browsers have other constraints compared to their desktop counterparts, most notably memory and disk space. Even though a four-year-old MacBook and modern iPhone may have equivalent processing power, modern devices are still well behind desktops in terms of RAM and sheer storage capacity. And this has repercussions on the mobile browsing experience because of caching.
 
-The Verge uses a lot of resources to load a simple page, but if they were to set the cache headings on those resources appropriately, the user would be spared downloading those same resources on subsequent visits to the site—at least on desktop computers. Mobile browsers have caches too, but they're [notoriously small](http://www.webperformancetoday.com/2012/07/12/early-findings-mobile-browser-cache-persistence-and-behaviour/).
+The Verge uses a lot of resources to load a simple page, but if they were to set the cache headings on those resources appropriately, the user would be spared downloading those same resources on subsequent visits to the site—at least on desktop computers. The problem is, although mobile browsers have caches too, but they're [notoriously small](http://www.webperformancetoday.com/2012/07/12/early-findings-mobile-browser-cache-persistence-and-behaviour/).
 
 Whereas desktop caches are typically measured in triple-digit MBs (my Chrome install is rocking ~400 MB right now), mobile ones are typically measured in double, or even single digit MBs. For instance iOS Safari on my iPhone, which I use daily, is inexplicably storing a mere 184 KB—even though I have over 70 GB available on the device.
 
@@ -65,9 +65,7 @@ There is some good news on this front, as both Apple and Google recently announc
 
 ## The bigger picture
 
-Even though things like the network and memory constraints certainly contribute to the mobile web's woes, I would [continue to argue that the core issue is still the web's lack of monetization options](http://developer.telerik.com/featured/the-webs-cruft-problem/) that don't impose massive performance penalties.
-
-The painfully slow speed at which The Verge loads has a lot more to due with the eight ads, “Recommended” links, and other such cruft that the site uses than with network or browser limitations. But in my experience, if you confront sites with this sort of performance data they'll defend it as a necessity... which is exactly what happened for this article on Twitter.
+Even though things like the network and memory constraints certainly contribute to the mobile web's woes, I would [continue to argue that the core issue is still the web's lack of monetization options](http://developer.telerik.com/featured/the-webs-cruft-problem/). The painfully slow speed at which The Verge loads has a lot more to due with the eight ads, “Recommended” links, and other such cruft that the site uses than with network or browser limitations. But in my experience, if you confront sites with this sort of performance data they'll defend it as a necessity... which is exactly what happened for this article on Twitter.
 
 <blockquote class="twitter-tweet" lang="en"><p lang="en" dir="ltr"><a href="https://twitter.com/satefan">@satefan</a> <a href="https://twitter.com/verge">@verge</a> You realize that &quot;bloat&quot; pays the salaries of editorial, product, design, video, etc etc etc, right?</p>&mdash; nilay patel (@reckless) <a href="https://twitter.com/reckless/status/623229284040183808">July 20, 2015</a></blockquote>
 
