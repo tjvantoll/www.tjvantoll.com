@@ -136,3 +136,7 @@ article + article {
 header.no_comments {
 	padding-top: 0;
 }
+.twitter-tweet {
+	/* Need to override the Twitter-applied inline styles */
+	margin-bottom: 1.5em !important;
+}
