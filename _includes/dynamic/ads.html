@@ -1,0 +1,26 @@
+<script>
+	(function() {
+		var isSmallScreen = window.innerWidth <= 800;
+		var isBlogPage = document.querySelector(".entry-content") && !document.querySelector(".blog-index");
+
+		if (isSmallScreen && !isBlogPage) {
+			return;
+		}
+
+		var ad = document.querySelector(".ad-container");
+		var script = document.createElement("script");
+		script.type = "text/javascript";
+		script.src = "http://cdn.adpacks.com/adpacks.js?legacyid=1285803&zoneid=1386&key=cb7a6f705dfe7532dde49b4c2c5adf2d&serve=C6SI42Y&placement=tjvantollcom&circle=dev";
+		script.id = "_adpacks_js";
+		script.async = true;
+		script.onload = function() {
+			if (isSmallScreen) {
+				var paragraphs = document.querySelectorAll(".entry-content p");
+				paragraphToUse = paragraphs.length > 2 ? paragraphs[2] : paragraphs[0];
+				paragraphToUse.parentNode.insertBefore(ad, paragraphToUse);
+			}
+			ad.style.display = "block";
+		};
+		document.querySelector(".ad-container").appendChild(script);
+	}());
+</script>

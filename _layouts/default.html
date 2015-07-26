@@ -3,39 +3,38 @@ layout: compress
 ---
 
 {% capture root_url %}{{ site.root | strip_slash }}{% endcapture %}
-{% include head.html %}
-<body {% if page.body_id %} id="{{ page.body_id }}" {% endif %}>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>{% if page.title %}{{ page.title }}{% else %}{{ site.title }}{% endif %}</title>
+
+	<meta name="author" content="TJ VanToll">
+	<meta name="description" content="{% if page.excerpt %}{{ page.excerpt | strip_html | strip_newlines | truncate: 160 }}{% else %}{{ site.description }}{% endif %}">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link rel="author" href="https://plus.google.com/+TJVanToll">
+	<link rel="canonical" href="{{ page.url | replace:'index.html','' | prepend: site.baseurl | prepend: site.url }}">
+	<link rel="alternate" type="application/rss+xml" title="{{ site.title }}" href="{{ "/feed.xml" | prepend: site.baseurl | prepend: site.url }}" />
+
+	<style>
+		{% capture include_to_scssify %}
+			{% include style.scss %}
+		{% endcapture %}
+		{{ include_to_scssify | scssify }}
+	</style>
+
+	{% if page.hasCode != false %}
+		{% include prism.html %}
+	{% endif %}
+</head>
+<body>
 	<div id="main">
 		{% include sidebar.html %}
 		{{ content | expand_urls: root_url }}
 	</div>
-	<script>
-		(function() {
-			var isSmallScreen = window.innerWidth <= 800;
-			var isBlogPage = document.querySelector(".entry-content") && !document.querySelector(".blog-index");
-
-			if (isSmallScreen && !isBlogPage) {
-				return;
-			}
-
-			var ad = document.querySelector(".ad-container");
-			var script = document.createElement("script");
-			script.type = "text/javascript";
-			script.src = "http://cdn.adpacks.com/adpacks.js?legacyid=1285803&zoneid=1386&key=cb7a6f705dfe7532dde49b4c2c5adf2d&serve=C6SI42Y&placement=tjvantollcom&circle=dev";
-			script.id = "_adpacks_js";
-			script.async = true;
-			script.onload = function() {
-				if (isSmallScreen) {
-					var paragraphs = document.querySelectorAll(".entry-content p");
-					paragraphToUse = paragraphs.length > 2 ? paragraphs[2] : paragraphs[0];
-					paragraphToUse.parentNode.insertBefore(ad, paragraphToUse);
-				}
-				ad.style.display = "block";
-			};
-			document.querySelector(".ad-container").appendChild(script);
-		}());
-	</script>
-	{% include google_analytics.html %}
-	{% include disqus.html %}
+	{% include dynamic/ads.html %}
+	{% include dynamic/google_analytics.html %}
+	{% include dynamic/disqus.html %}
 </body>
 </html>
