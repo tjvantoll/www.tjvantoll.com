@@ -37,7 +37,7 @@ However, despite misinterpreting web developers' sentiments, Nilay does make one
 
 > “Safari on a MacBook is simply better at rendering the web than on an iPhone of roughly equivalent computing power.”
 
-This statement is true, or at least I would agree with it, but the reason its true is not because iOS Safari is so much worse at rendering webpages, it's because raw computing power has almost nothing to do with the speed at which you browse the mobile web. So what are the actual bottlenecks?
+This statement is true, or at least I would agree with it, but the reason it's true is not because iOS Safari is so much worse at rendering webpages, it's because raw computing power has almost nothing to do with the speed at which you browse the mobile web. So what are the actual bottlenecks?
 
 ### The network
 
