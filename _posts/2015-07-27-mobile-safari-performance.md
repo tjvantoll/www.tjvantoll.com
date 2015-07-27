@@ -41,7 +41,7 @@ This statement is true, or at least I would agree with it, but the reason its tr
 
 ### The network
 
-The mobile web's achilles heel is the network, because as it turns out, the extra hop mobile browsers need to take to get web assets from a radio tower is an [enormous performance hit](https://www.igvita.com/2012/07/19/latency-the-new-web-performance-bottleneck/). And if your site is The Verge, and you [make 263 network requests](http://blog.lmorchard.com/2015/07/22/the-verge-web-sucks/#ow-my-data-plan-), you have yourself a recipe for a miserable mobile browsing experience, regardless of the browser you use to render that mess.
+The mobile web's achilles heel is the network, because as it turns out, the extra hop mobile browsers need to take to get web assets from a radio tower is an [enormous performance hit](https://www.igvita.com/2012/07/19/latency-the-new-web-performance-bottleneck/). And if your site is The Verge, and you [make 181 network requests](http://www.theverge.com/2015/7/24/9031267/one-verge-article-loads-9-5mb-across-263-http-requests#317856360), you have yourself a recipe for a miserable mobile browsing experience, regardless of the browser you use to render that mess.
 
 ### Memory
 
