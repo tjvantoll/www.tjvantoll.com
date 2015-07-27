@@ -47,7 +47,7 @@ The mobile web's achilles heel is the network, because as it turns out, the extr
 
 Even when you're on wifi, mobile browsers have other constraints compared to their desktop counterparts, most notably memory and disk space. Even though a four-year-old MacBook and modern iPhone may have equivalent processing power, modern devices are still well behind desktops in terms of RAM and sheer storage capacity. And this has repercussions on the mobile browsing experience because of caching.
 
-The Verge uses a lot of resources to load a simple page, but if they were to set the cache headings on those resources appropriately, the user would be spared downloading those same resources on subsequent visits to the site—at least on desktop computers. The problem is, although mobile browsers have caches too, but they're [notoriously small](http://www.webperformancetoday.com/2012/07/12/early-findings-mobile-browser-cache-persistence-and-behaviour/).
+The Verge uses a lot of resources to load a simple page, but if they were to set the cache headings on those resources appropriately, the user would be spared downloading those same resources on subsequent visits to the site—at least on desktop computers. The problem is, although mobile browsers have caches too, they're [notoriously small](http://www.webperformancetoday.com/2012/07/12/early-findings-mobile-browser-cache-persistence-and-behaviour/).
 
 Whereas desktop caches are typically measured in triple-digit MBs (my Chrome install is rocking ~400 MB right now), mobile ones are typically measured in double, or even single digit MBs. For instance iOS Safari on my iPhone, which I use daily, is inexplicably storing a mere 184 KB—even though I have over 70 GB available on the device.
 
