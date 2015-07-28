@@ -15,8 +15,8 @@
 		script.async = true;
 		script.onload = function() {
 			if (isSmallScreen) {
-				var paragraphs = document.querySelectorAll(".entry-content p");
-				paragraphToUse = paragraphs.length > 2 ? paragraphs[2] : paragraphs[0];
+				var paragraphs = document.querySelectorAll(".entry-content > p");
+				paragraphToUse = paragraphs.length > 1 ? paragraphs[1] : paragraphs[0];
 				paragraphToUse.parentNode.insertBefore(ad, paragraphToUse);
 			}
 			ad.style.display = "block";
