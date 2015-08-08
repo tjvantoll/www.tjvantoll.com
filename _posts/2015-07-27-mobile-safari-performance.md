@@ -27,9 +27,9 @@ Here's the specific wording Nilay used:
 
 What Nilay doesn't realize is developers' animosity towards Safari is primarily driven by the slow pace of new web standards appearing in Safari, and the lack of communication about why that's the case. Not performance. Jake's tweet in particular was in response to the [somewhat lackluster list of features coming in iOS Safari in iOS 9](https://developer.apple.com/library/prerelease/mac/releasenotes/General/WhatsNewInSafari/Articles/Safari_9.html#//apple_ref/doc/uid/TP40014305-CH9-SW27), coming off of a lackluster list of features in iOS 8 a year earlier. The entire “Safari is the new IE” article is about features that the author would like to see in Safari.
 
-Nilay is correct that web developers, myself included, would indeed love to see alternative rendering engines on iOS, and the competition would undoubtedly encourage performance improvements, but we're mostly interesting in increasing the cadence of new web features making their way to iOS.
+Nilay is correct that web developers, myself included, would indeed love to see alternative rendering engines on iOS, and the competition would undoubtedly encourage performance improvements, but we're mostly interested in increasing the cadence of new web features making their way to iOS.
 
-And actually, as someone whom has developed for the mobile web since it was a thing, and someone whom browses the web on iOS and Android devices daily, I would argue that iOS Safari is the most performant mobile browser out there. Of course that's just my personal experience, which is subjective, but the thought that iOS Safari is some glaring performance outlier in the mobile browsing world is crazy.
+And actually, as someone who has developed for the mobile web since it was a thing, and someone who browses the web on iOS and Android devices daily, I would argue that iOS Safari is the most performant mobile browser out there. Of course that's just my personal experience, which is subjective, but the thought that iOS Safari is some glaring performance outlier in the mobile browsing world is crazy.
 
 ## Why is mobile browsing slow?
 
@@ -65,7 +65,7 @@ There is some good news on this front, as both Apple and Google recently announc
 
 ## The bigger picture
 
-Even though things like the network and memory constraints certainly contribute to the mobile web's woes, I would [continue to argue that the core issue is still the web's lack of monetization options](http://developer.telerik.com/featured/the-webs-cruft-problem/). The painfully slow speed at which The Verge loads has a lot more to due with the eight ads, “Recommended” links, and other such cruft that the site uses than with network or browser limitations. But in my experience, if you confront sites with this sort of performance data they'll defend it as a necessity... which is exactly what happened for this article on Twitter.
+Even though things like the network and memory constraints certainly contribute to the mobile web's woes, I would [continue to argue that the core issue is still the web's lack of monetization options](http://developer.telerik.com/featured/the-webs-cruft-problem/). The painfully slow speed at which The Verge loads has a lot more to do with the eight ads, “Recommended” links, and other such cruft that the site uses than with network or browser limitations. But in my experience, if you confront sites with this sort of performance data they'll defend it as a necessity... which is exactly what happened for this article on Twitter.
 
 <blockquote class="twitter-tweet" lang="en"><p lang="en" dir="ltr"><a href="https://twitter.com/satefan">@satefan</a> <a href="https://twitter.com/verge">@verge</a> You realize that &quot;bloat&quot; pays the salaries of editorial, product, design, video, etc etc etc, right?</p>&mdash; nilay patel (@reckless) <a href="https://twitter.com/reckless/status/623229284040183808">July 20, 2015</a></blockquote>
 
