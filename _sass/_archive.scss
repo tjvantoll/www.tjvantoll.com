@@ -39,12 +39,6 @@
 		.month { text-transform: uppercase; }
 	}
 	p { margin-bottom: 1em; }
-	&, .entry-content {
-		a {
-			color: inherit;
-			&:hover { color: $link-color-hover; }
-		}
-	}
 	a:hover { color: $link-color-hover; }
 	@media (min-width: $breakpoint-phone) {
 		article { margin-left: 5em; }
