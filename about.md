@@ -6,11 +6,11 @@ permalink: /about/
 hasCode: false
 ---
 
-<p>Hi, I'm TJ. I'm a developer advocate for <a href="http://telerik.com">Telerik</a>, a <a href="http://jqueryui.com/about/">jQuery team member</a>, and the author of <a href="http://tjvantoll.com/jquery-ui-in-action.html">jQuery UI in Action</a>. I have over a decade of web development experience—specializing in performance and the mobile web.</p>
+Hi, I'm TJ. I'm a developer advocate for [Telerik](http://telerik.com), a [jQuery team member](http://jqueryui.com/about/), and the author of [jQuery UI in Action](http://tjvantoll.com/jquery-ui-in-action.html). I have over a decade of web development experience—specializing in performance and the mobile web.
 
-<p>I <a href="/speaking">speak</a> about my research and experiences at conferences around the world, and I've written for publications such as <a href="http://www.smashingmagazine.com/2014/05/21/mobile-accessibility-why-care-what-can-you-do/">Smashing Magazine</a>, <a href="http://www.html5rocks.com/en/tutorials/forms/constraintvalidation/">HTML5 Rocks</a>, <a href="http://msdn.microsoft.com/en-us/magazine/dn133614.aspx">MSDN Magazine</a>, and <a href="http://modernweb.com/2014/03/10/is-jquery-too-big-for-mobile/">ModernWeb</a>. You can contact me on Twitter (<a href="https://twitter.com/tjvantoll">@tjvantoll</a>), Google Plus (<a href="https://plus.google.com/+TJVanToll">+TJVanToll</a>), GitHub (<a href="https://github.com/tjvantoll">tjvantoll</a>), or <a href="mailto:tj.vantoll@gmail.com">via email</a>.</p>
+I [speak](/speaking) about my research and experiences at conferences around the world, and I've written for publications such as [Smashing Magazine](http://www.smashingmagazine.com/2014/05/21/mobile-accessibility-why-care-what-can-you-do/), [HTML5 Rocks](http://www.html5rocks.com/en/tutorials/forms/constraintvalidation/), [MSDN Magazine](http://msdn.microsoft.com/en-us/magazine/dn133614.aspx), and [ModernWeb](http://modernweb.com/2014/03/10/is-jquery-too-big-for-mobile/). You can contact me on Twitter ([@tjvantoll](https://twitter.com/tjvantoll)), GitHub ([tjvantoll](https://github.com/tjvantoll)), or [via email](mailto:tj.vantoll@gmail.com).
 
-<p>Here are a few of the things I've done:</p>
+Here are a few of the things I've done:
 
 <ul>
 	<li><a href="#books">Books</a></li>
@@ -23,15 +23,22 @@ hasCode: false
 	<h2 class="entry-title" id="books">Books</h2>
 </header>
 
-<h3>Manning</h3>
+<h3 class="home-heading"><a href="https://manning.com/">Manning</a></h3>
 <ul>
-	<li><a href="http://tjvantoll.com/jquery-ui-in-action.html">jQuery UI in Action</a>
+	<li>
+		<a href="http://tjvantoll.com/jquery-ui-in-action.html">jQuery UI in Action</a>
 		<ul>
-			<li>Published on September 2014</li>
+			<li>Published in September 2014</li>
 			<li>5-star average on <a href="http://www.amazon.com/jQuery-UI-Action-T-VanToll/dp/1617291935/ref=sr_1_1?ie=UTF8&qid=1436237989&sr=8-1&keywords=jquery+ui">Amazon</a> (as of 2015)</li>
 		</ul>
 	</li>
 </ul>
+
+<h3 class="home-heading"><a href="http://www.smashingmagazine.com/">Smashing Magazine</a></h3>
+
+* [Practical Approaches For Designing Accessible Websites](https://shop.smashingmagazine.com/products/practical-approaches-for-designing-accessible-websites)
+	* Published in August 2015
+	* I wrote chapter 3.
 
 <header class="home">
 	<h2 class="entry-title" id="publications">Publications</h2>
@@ -44,6 +51,9 @@ hasCode: false
 		<a href="http://developer.telerik.com/featured/the-webs-cruft-problem/">The Web's Cruft Problem</a>
 		<!-- http://html5weekly.com/issues/196 -->
 		<!-- http://css-weekly.com/issue-171/ -->
+		<!-- http://email.jakebresnehan.com/t/ViewEmail/r/76FE5AB90EE6D7252540EF23F30FEDED/CFEBE054D5B8E97A2438807772DD75D1 -->
+		<!-- http://post.oreilly.com/form/oreilly/viewhtml/9z1ziu15cn56vlslcepediiijpbdvt5865t6bsq89n8?imm_mid=0d58b4&cmp=em-web-na-na-newsltr_20150722 -->
+		<!-- http://mobilewebweekly.co/issues/64 -->
 	</li>
 	<li>
 		<span>March 30th, 2015</span>
