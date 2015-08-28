@@ -54,7 +54,7 @@ aside.sidebar {
 	color: $main-bg;
 	display: -webkit-flex;
 	display: flex;
-	padding: 1em;
+	padding: 1rem;
 	div {
 		-webkit-flex: 0 0 170px;
 		flex: 0 0 170px;
@@ -67,7 +67,7 @@ aside.sidebar {
 	}
 	h1 {
 		margin: 0.4em 0 0 0em;
-		font-size: 1.5em;
+		font-size: 1.5rem;
 	}
 	a {
 		color: $main-bg;
@@ -83,10 +83,10 @@ aside.sidebar {
 }
 
 aside.sidebar .me-section {
-	font-size: 0.9em;
+	font-size: 0.9rem;
 	p {
-		font-size: 0.9em;
-		margin: 1em 0;
+		font-size: 0.9rem;
+		margin: 1rem 0;
 	}
 }
 

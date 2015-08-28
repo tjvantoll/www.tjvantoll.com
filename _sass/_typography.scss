@@ -2,17 +2,18 @@
 .serif { font-family: $serif; }
 .mono { font-family: $mono; }
 
+html {
+	font-size: 16px;
+	line-height: 1.6;
+	color: $text-color;
+	@extend .serif;
+}
+
 body > header h1 {
 	font-size: 2.2em;
 	font-weight: normal;
 	line-height: 1.2em;
 	margin-bottom: 0.6667em;
-}
-
-body {
-	line-height: 1.5em;
-	color: $text-color;
-	@extend .serif;
 }
 h1 {
 	font-size: 2.2em;
@@ -20,7 +21,7 @@ h1 {
 }
 
 @media (min-width: $breakpoint-tablet) {
-	body { font-size: 1.15em; }
+	html { font-size: 18px; }
 	h1 { font-size: 2.6em; }
 }
 
@@ -139,13 +140,23 @@ p code, ul code, ol code {
 h3 code { font-size: 0.9em; }
 
 // Tweaks to Prism
-pre[class*="language-"] {
-	font-size: 0.9em;
-	margin-bottom: 1.6em;
-	border: 1px solid #E7DEC3;
-
-	pre[class*=language-]>code[data-language]::before {
-		content: "";
+pre[class*="language"] {
+	font-size: 0.9rem;
+	margin: 0.5rem (-$gutter-width) 1.6rem;
+	padding: 1rem $gutter-width;
+	border-width: 1px 0;
+	border-style: solid;
+	border-color: #E7DEC3;
+}
+pre[class*="language"].line-numbers {
+	padding-left: ($gutter-width) + 2rem;
+}
+@media (min-width: $breakpoint-phone) {
+	pre[class="language"] {
+		margin-left: -$gutter-width-mobile;
+		margin-right: -$gutter-width-mobile;
+		padding-left: $gutter-width-mobile;
+		padding-right: $gutter-width-mobile;
 	}
 }
 .token.lf::before {
