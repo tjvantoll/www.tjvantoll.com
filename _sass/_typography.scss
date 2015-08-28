@@ -151,8 +151,8 @@ pre[class*="language"] {
 pre[class*="language"].line-numbers {
 	padding-left: ($gutter-width) + 2rem;
 }
-@media (min-width: $breakpoint-phone) {
-	pre[class="language"] {
+@media (max-width: $breakpoint-phone) {
+	pre[class*="language"] {
 		margin-left: -$gutter-width-mobile;
 		margin-right: -$gutter-width-mobile;
 		padding-left: $gutter-width-mobile;
