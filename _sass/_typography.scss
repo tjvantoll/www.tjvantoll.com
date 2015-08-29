@@ -8,47 +8,42 @@ html {
 	color: $text-color;
 	@extend .serif;
 }
-
-body > header h1 {
-	font-size: 2.2em;
-	font-weight: normal;
-	line-height: 1.2em;
-	margin-bottom: 0.6667em;
-}
 h1 {
-	font-size: 2.2em;
-	line-height: 1.2em;
+	font-size: 2.2rem;
+	line-height: 1.2;
 }
-
 @media (min-width: $breakpoint-tablet) {
-	html { font-size: 18px; }
-	h1 { font-size: 2.6em; }
+	html {
+		font-size: 18px;
+		line-height: 1.5;
+	}
+	h1 { font-size: 2.6rem; }
 }
 
 h1, h2, h3, h4, h5, h6 {
 	font-family: $heading-font-family;
 	text-rendering: optimizelegibility;
-	margin: 0 0 1em 0;
+	margin: 0 0 1rem 0;
 	padding: 0;
 	font-weight: bold;
 }
 h2, section h1 {
-	font-size: 1.5em;
+	font-size: 1.5rem;
 }
 h3, section h2, section section h1 {
-	font-size: 1.3em;
+	font-size: 1.3rem;
 }
 h4, section h3, section section h2, section section section h1 {
-	font-size: 1em;
+	font-size: 1rem;
 }
 h5, section h4, section section h3 {
-	font-size: .9em;
+	font-size: .9rem;
 }
 h6, section h5, section section h4, section section section h3 {
-	font-size: .8em;
+	font-size: .8rem;
 }
 p, blockquote, ul, ol {
-	margin: 0 0 1.5em 0;
+	margin: 0 0 1.5rem 0;
 }
 
 a {
@@ -109,14 +104,14 @@ small { font-size: .8em; }
 big { font-size: 1.2em; }
 
 blockquote {
-	$bq-margin: 1.2em;
+	$bq-margin: 1.2rem;
 	font-style: italic;
-	font-size: 1.2em;
-	line-height: 1.5em;
-	padding-left: 1em;
+	font-size: 1.2rem;
+	line-height: 1.5;
+	padding-left: 1rem;
 	border-left: 4px solid rgba($text-color-light, .5);
 	@media only screen and (min-width: 992px) {
-		padding-left: 1.5em;
+		padding-left: 1.5rem;
 		border-left-width: 4px;
 	}
 }
@@ -127,17 +122,17 @@ blockquote {
 
 p code, ul code, ol code {
 	display: inline-block;
-	font-size: 0.8em;
+	font-size: 0.8rem;
 	background: white;
-	line-height: 1.5em;
+	line-height: 1.5;
 	color: #555;
 	border: 1px solid #ddd;
-	border-radius: 0.4em;
-	padding: 0 .3em;
+	border-radius: 0.4rem;
+	padding: 0 .3rem;
 	margin: -1px 0;
 }
 
-h3 code { font-size: 0.9em; }
+h3 code { font-size: 0.9rem; }
 
 // Tweaks to Prism
 pre[class*="language"] {
