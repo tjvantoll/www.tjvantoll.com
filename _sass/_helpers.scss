@@ -33,26 +33,25 @@ img.plain {
 
 .code_example {
 	border: 1px solid $text-color;
-	margin-bottom: 1.5em;
+	margin-bottom: 1.5rem;
 	overflow-x: auto;
 	position: relative;
 
 	h6 {
 		background: $link-color-hover;
 		color: $main-bg;
-		position: relative;
-		top: -1px;
-		padding: 0.2em 1em 0.2em 0.5em;
+		padding: 0.2rem 1rem 0.2rem 0.5rem;
 		border-bottom: 1px solid black;
 		margin-bottom: 0;
-		font-size: 1em;
+		font-size: 1.1rem;
 		font-weight: normal;
 
 		a {
 			position: absolute;
-			top: 0.2em;
-			right: 0.5em;
-			font-size: 0.8em;
+			top: 0.35rem;
+			right: 0;
+			padding-right: 0.5rem;
+			font-size: 0.8rem;
 			color: inherit;
 		}
 	}
@@ -66,7 +65,7 @@ img.plain {
 		border-color: $text-color;
 		border-width: 1px 0 0 1px;
 		border-style: dotted;
-		padding: 0.2em 0.3em;
+		padding: 0.2rem 0.3rem;
 	}
 }
 @media (max-width: $breakpoint-phone) {
