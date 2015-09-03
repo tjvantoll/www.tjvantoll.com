@@ -47,6 +47,15 @@ Here are a few of the things I've done:
 <h3 class="home-heading"><a href="http://developer.telerik.com/">Telerik Developer Network</a></h3>
 <ul>
 	<li>
+		<span>September 2nd, 2015</span>
+		<a href="http://developer.telerik.com/featured/you-might-not-need-an-apple-watch-app/">You Might Not Need an Apple Watch App</a>
+	</li>
+	<li>
+		<span>July 7th, 2015</span>
+		<a href="http://developer.telerik.com/featured/safari-is-not-the-new-ie-but/">Safari is Not the New IE, But...</a>
+		<!-- http://html5weekly.com/issues/204 -->
+	</li>
+	<li>
 		<span>July 7th, 2015</span>
 		<a href="http://developer.telerik.com/featured/the-webs-cruft-problem/">The Web's Cruft Problem</a>
 		<!-- http://html5weekly.com/issues/196 -->
