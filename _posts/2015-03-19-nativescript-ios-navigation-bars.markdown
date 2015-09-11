@@ -6,6 +6,8 @@ comments: true
 
 I've gotten a whole lot of questions about adding navigation bars to NativeScript iOS apps, so I thought I'd write a quick post about it.
 
+<div class="warning">The NativeScript 1.2 release included an <a href="https://docs.nativescript.org/ApiReference/ui/action-bar/HOW-TO"><code>&lt;ActionBar&gt;</code> UI component</a> that makes the functionality this article describes possible without needing to know the iOS specifics.</div>
+
 <!--more-->
 
 ## Showing the navigation bar with a title
