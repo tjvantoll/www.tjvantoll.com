@@ -37,6 +37,7 @@ The good is news is `fetch` provides a simple `ok` flag that indicates whether a
         if (!response.ok) {
             return Promise.reject(new Error(response.statusText));
         }
+        return Promise.resolve(response);
     }).then(function(response) {
         console.log("ok");
     }).catch(function(error) {
@@ -49,6 +50,7 @@ To keep this code [DRY](https://en.wikipedia.org/wiki/Don%27t_repeat_yourself) a
     if (!response.ok) {
         return Promise.reject(new Error(response.statusText));
     }
+    return Promise.resolve(response);
 }
 
 fetch("http://httpstat.us/500")
@@ -65,6 +67,7 @@ For added fun you can use [ES6 arrow functions](https://developer.mozilla.org/en
     if (!response.ok) {
         return Promise.reject(new Error(response.statusText));
     }
+    return Promise.resolve(response);
 }
 fetch("http://httpstat.us/500")
     .then(handleErrors)
