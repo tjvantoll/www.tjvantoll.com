@@ -35,9 +35,9 @@ The good is news is `fetch` provides a simple `ok` flag that indicates whether a
 <pre class="language-javascript"><code class="language-javascript">fetch("http://httpstat.us/500")
     .then(function(response) {
         if (!response.ok) {
-            return Promise.reject(new Error(response.statusText));
+            throw Error(response.statusText);
         }
-        return Promise.resolve(response);
+        return response;
     }).then(function(response) {
         console.log("ok");
     }).catch(function(error) {
@@ -48,9 +48,9 @@ To keep this code [DRY](https://en.wikipedia.org/wiki/Don%27t_repeat_yourself) a
 
 <pre class="language-javascript"><code class="language-javascript">function handleErrors(response) {
     if (!response.ok) {
-        return Promise.reject(new Error(response.statusText));
+        throw Error(response.statusText);
     }
-    return Promise.resolve(response);
+    return response;
 }
 
 fetch("http://httpstat.us/500")
@@ -65,9 +65,9 @@ For added fun you can use [ES6 arrow functions](https://developer.mozilla.org/en
 
 <pre class="language-javascript"><code class="language-javascript">function handleErrors(response) {
     if (!response.ok) {
-        return Promise.reject(new Error(response.statusText));
+        throw Error(response.statusText);
     }
-    return Promise.resolve(response);
+    return response;
 }
 fetch("http://httpstat.us/500")
     .then(handleErrors)
@@ -79,3 +79,5 @@ fetch("http://httpstat.us/500")
 Although I still don't like `fetch()`'s lack of rejecting failed HTTP status codes, over time `fetch()`'s behavior has grown on me—mostly because it gives me more control over how I handle individual problems. Plus, the composable nature of `fetch()` makes it fairly trivial to manually handle errors without adding a bunch of verbose code.
 
 Overall I think it's worth taking few minutes to play with `fetch()`, even if it's just to see what you think. It's certainly a far more readable alternative to XMLHttpRequest. If you happen to be building [NativeScript](https://www.nativescript.org/) apps, you might not know that you can [use `fetch()` today](https://docs.nativescript.org/ApiReference/fetch/HOW-TO.html) without any need for a polyfill or fallback. And something about using `fetch()` to perform HTTP requests in native Android and iOS apps is just plain cool :)
+
+*This article was updated on September 15th, 2015 to use a simpler `handleErrors()` function based on a [comment from Jake Archibald](#comment-2254295840).*
