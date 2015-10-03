@@ -4,7 +4,11 @@ title: Preview NativeScript Apps in a Browser with Appetize
 comments: true
 ---
 
-If you haven't heard of [Appetize.io](https://appetize.io) before, it's an awesome service that lets you run your native iOS and Android apps in a simulator that lives in a web browser. Using the service is as simple as uploading a `.app` or `.apk` file, but I thought I'd show you how it works in the context of a [NativeScript](https://www.nativescript.org/) app. To give you an idea of what the finished product looks like, here's what the [NativeScript Groceries sample](https://github.com/NativeScript/sample-Groceries) looks like running in Appetize:
+If you haven't heard of [Appetize.io](https://appetize.io) before, it's an awesome service that lets you run your native iOS and Android apps in a simulator that lives in a web browser. Using the service is as simple as uploading a `.app` or `.apk` file, but I thought I'd show you how it works in the context of a [NativeScript](https://www.nativescript.org/) app.
+
+<!--more-->
+
+To give you an idea of what the finished product looks like, here's what the [NativeScript Groceries sample](https://github.com/NativeScript/sample-Groceries) looks like running in Appetize:
 
 <iframe src="https://appetize.io/embed/4q6jyttdgf0c2zg7ne9ekp96z0?device=iphone5s&scale=75&autoplay=false&orientation=portrait&deviceColor=black" width="300" height="600" frameborder="0" scrolling="no"></iframe>
 
