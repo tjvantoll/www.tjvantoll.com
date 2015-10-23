@@ -253,6 +253,11 @@ Here are a few of the things I've done:
 	<h2 class="entry-title" id="apps">Apps</h2>
 </header>
 
+### Groceries
+
+* [GitHub](https://github.com/nativescript/sample-Groceries)
+* [Google Play](https://play.google.com/store/apps/details?id=org.nativescript.groceries&hl=en)
+
 ### City Search Challenge
 
 * [GitHub](https://github.com/tjvantoll/city-search-challenge)
