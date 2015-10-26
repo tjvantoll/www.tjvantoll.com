@@ -225,6 +225,14 @@ Here are a few of the things I've done:
 	<h2 class="entry-title" id="interviews">Podcasts & Interviews</h2>
 </header>
 
+<h3 class="home-heading"><a href="http://developer.telerik.com/community/eat-sleep-code/">Eat Sleep Code (The Official Telerik Podcast)</a></h3>
+<ul>
+	<li>
+		<span>October 26th, 2015</span>
+		<a href="http://developer.telerik.com/products/nativescript-inside-the-black-box/">NativeScript Under the Hood</a>
+	</li>
+</ul>
+
 <h3 class="home-heading"><a href="http://www.infoq.com/">InfoQ</a></h3>
 <ul>
 	<li>
