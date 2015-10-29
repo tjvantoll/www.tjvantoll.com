@@ -264,6 +264,7 @@ Here are a few of the things I've done:
 ### Groceries
 
 * [GitHub](https://github.com/nativescript/sample-Groceries)
+* [iOS App Store](https://itunes.apple.com/us/app/groceries-simple-grocery-lists/id1041129105?mt=8)
 * [Google Play](https://play.google.com/store/apps/details?id=org.nativescript.groceries&hl=en)
 
 ### City Search Challenge
