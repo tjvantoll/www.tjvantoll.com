@@ -271,4 +271,4 @@ Here are a few of the things I've done:
 
 * [GitHub](https://github.com/tjvantoll/city-search-challenge)
 * [iOS App Store](https://itunes.apple.com/us/app/city-search-geography-challenge/id954908040?mt=8)
-* [Google Play](https://play.google.com/store/apps/details?id=com.tjvantoll.citysearch&hl=en)
+* [Google Play](https://play.google.com/store/apps/details?id=com.tjvantoll.citysearchchallenge)
