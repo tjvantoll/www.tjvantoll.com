@@ -14,7 +14,7 @@ To give you an idea of what the finished product looks like, here's what the [Na
 
 <iframe src="https://appetize.io/embed/gz472kucwh88p6nxj3t4exdear?device=nexus5&scale=75&autoplay=false&orientation=portrait" width="325" height="600" frameborder="0" scrolling="no"></iframe>
 
-## Building you app
+## Building your app
 
 Before heading into Appetize, you first need to generate the executables service needs, and you can do that with NativeScript's `build` command:
 
