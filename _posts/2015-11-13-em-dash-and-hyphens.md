@@ -10,6 +10,8 @@ This is an article for all command-line users on OS X. Have you ever been typing
 
 It’s subtle, but OS X is replacing `nativescript --version` with `nativescript —version`, or more specifically, it’s converting `--` (two hyphens) into `—` (an em-dash).
 
+<!--more-->
+
 ## Em-dash what?
 
 I’ll let [an actual grammar site give a good explanation of what em-dashes are](http://www.thepunctuationguide.com/em-dash.html):
