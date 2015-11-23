@@ -225,6 +225,26 @@ Here are a few of the things I've done:
 	<h2 class="entry-title" id="interviews">Podcasts & Interviews</h2>
 </header>
 
+<h3 class="home-heading"><a href="http://javascriptjabber.com/">JavaScript Jabber</a></h3>
+<ul>
+	<li>
+		<span>November 18th, 2015</span>
+		<a href="https://devchat.tv/js-jabber/186-jsj-nativescript-with-tj-vantoll-and-burke-holland">NativeScript</a>
+	</li>
+	<li>
+		<span>July 9th, 2014</span>
+		<a href="http://javascriptjabber.com/116-jsj-jquery-ui-vs-kendoui-with-burke-holland-and-tj-vantoll/">jQuery UI vs Kendo UI</a>
+	</li>
+</ul>
+
+<h3 class="home-heading"><a href="https://devchat.tv/react-native-radio">React Native Radio</a></h3>
+<ul>
+	<li>
+		<span>October 26th, 2015</span>
+		<a href="https://devchat.tv/react-native-radio/04-nativeScript-with-TJ-VanToll">NativeScript</a>
+	</li>
+</ul>
+
 <h3 class="home-heading"><a href="http://developer.telerik.com/community/eat-sleep-code/">Eat Sleep Code (The Official Telerik Podcast)</a></h3>
 <ul>
 	<li>
@@ -238,14 +258,6 @@ Here are a few of the things I've done:
 	<li>
 		<span>July 19th, 2014</span>
 		<a href="http://www.infoq.com/interviews/vantoll-hybrid-development">Hybrid Development for Mobile Apps</a>
-	</li>
-</ul>
-
-<h3 class="home-heading"><a href="http://javascriptjabber.com/">JavaScript Jabber</a></h3>
-<ul>
-	<li>
-		<span>July 9th, 2014</span>
-		<a href="http://javascriptjabber.com/116-jsj-jquery-ui-vs-kendoui-with-burke-holland-and-tj-vantoll/">jQuery UI vs Kendo UI</a>
 	</li>
 </ul>
 
