@@ -47,6 +47,10 @@ Here are a few of the things I've done:
 <h3 class="home-heading"><a href="http://developer.telerik.com/">Telerik Developer Network</a></h3>
 <ul>
 	<li>
+		<span>October 27th, 2015</span>
+		<a href="http://developer.telerik.com/featured/defining-a-new-breed-of-cross-platform-mobile-apps/">Defining a New Breed of Cross-Platform Mobile Apps</a> (with <a href="http://remotesynthesis.com/">Brian Rinaldi</a>)
+	</li>
+	<li>
 		<span>September 2nd, 2015</span>
 		<a href="http://developer.telerik.com/featured/you-might-not-need-an-apple-watch-app/">You Might Not Need an Apple Watch App</a>
 	</li>
