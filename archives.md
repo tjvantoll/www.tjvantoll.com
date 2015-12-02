@@ -2,7 +2,6 @@
 layout: page
 title: "Blog Archive"
 comments: false
-permalink: /blog/archives/
 hasCode: false
 ---
 
