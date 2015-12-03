@@ -34,6 +34,7 @@ aside.sidebar {
 	margin-right: 1em;
 	// wtf Firefox? http://stackoverflow.com/questions/27472595/firefox-34-ignoring-max-width-for-flexbox
 	min-width: 1px;
+	min-height: 30rem;
 }
 #main > div > article {
 	padding: 15px $gutter-width-mobile 0 $gutter-width-mobile;

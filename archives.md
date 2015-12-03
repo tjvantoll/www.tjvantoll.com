@@ -2,7 +2,6 @@
 layout: page
 title: "Blog Archive"
 comments: false
-hasCode: false
 ---
 
 <div id="blog-archives">

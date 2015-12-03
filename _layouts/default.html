@@ -33,9 +33,12 @@ Oh, hi! Since you're here, you might want to know that the source code that buil
 		{{ include_to_scssify | scssify }}
 	</style>
 
-	{% if page.hasCode != false %}
-		{% include prism.html %}
-	{% endif %}
+	{% include prism.html %}
+	<script>
+		if ("serviceWorker" in navigator) {
+			navigator.serviceWorker.register("/service-worker.js");
+		}
+	</script>
 </head>
 <body>
 	<div id="main">

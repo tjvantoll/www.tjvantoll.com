@@ -3,7 +3,6 @@ layout: page
 title: "Speaking"
 comments: false
 permalink: /speaking/
-hasCode: false
 ---
 
 <div id="blog-archives" class="speaking">
