@@ -37,7 +37,7 @@ Here are a few of the things I've done:
 
 * [Practical Approaches For Designing Accessible Websites](https://shop.smashingmagazine.com/products/practical-approaches-for-designing-accessible-websites)
 	* Published in August 2015
-	* I wrote chapter 3.
+	* I wrote chapter 3
 
 <header class="home">
 	<h2 class="entry-title" id="publications">Publications</h2>
