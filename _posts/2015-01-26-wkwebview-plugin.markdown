@@ -27,7 +27,7 @@ I could immediately tell that the performance difference was *noticeable*. It wa
 
 In the video below I run the same app twice, once with the WKWebView plugin installed (on the right), and once with it not (on the left). I made sure this app avoided the network, and I slowed the video down to 50% speed to make it easier to watch.
 
-<iframe width="100%" height="315" src="//www.youtube.com/embed/4jYAjhYyH74" frameborder="0" allowfullscreen></iframe>
+<iframe width="100%" height="315" src="https://www.youtube.com/embed/4jYAjhYyH74" frameborder="0" allowfullscreen></iframe>
 
 Now, this test isn't intended to be conclusive, statistically significant, or anything like that, and your experiences may vary. However, the performance difference shown in the video is consistent with what the statistics have shown, and what I've seen from playing with the plugin today: adding the WKWebView gives your hybrid app a small performance boost, basically for free. How much of a boost your app gets depends on what you're doing, with JavaScript-processing-heavy apps getting the most help, but even mundane apps like mine stand to benefit.
 

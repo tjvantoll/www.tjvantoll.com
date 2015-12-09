@@ -25,7 +25,7 @@ If you try the same demo on iOS Safari (5.0), the default Android browser <= 2.3
 
 You can see this in the video below (the video shows iOS Safari but the same behavior occurs in the other listed browsers):
 
-<iframe width="420" height="315" src="http://www.youtube.com/embed/5-vOJEP3x28" frameborder="0" allowfullscreen></iframe>
+<iframe width="420" height="315" src="https://www.youtube.com/embed/5-vOJEP3x28" frameborder="0" allowfullscreen></iframe>
 
 ## Why
 
