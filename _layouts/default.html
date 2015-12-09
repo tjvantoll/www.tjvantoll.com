@@ -12,7 +12,7 @@ Oh, hi! Since you're here, you might want to know that the source code that buil
 
 {% capture root_url %}{{ site.root | strip_slash }}{% endcapture %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="{% if page.className %}{{ page.className }}{% endif %}">
 <head>
 	<meta charset="utf-8">
 	<title>{% if page.title %}{{ page.title }}{% else %}{{ site.title }}{% endif %}</title>

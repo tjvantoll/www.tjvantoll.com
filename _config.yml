@@ -6,6 +6,7 @@ baseurl: ""
 url: "https://www.tjvantoll.com"
 excerpt_separator: <!--more-->
 paginate: 10
+paginate_path: "/blog/page:num/"
 
 # Accounts
 google_analytics_tracking_id: UA-29179796-1

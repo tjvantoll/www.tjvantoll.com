@@ -1,5 +1,6 @@
 ---
-layout: default
+layout: page
+comments: false
 ---
 <div class="blog-index">
 	{% assign index = true %}
@@ -12,7 +13,7 @@ layout: default
 		{% if paginator.previous_page %}
 			<a href="{{ paginator.previous_page_path }}" class="prev">&larr; Previous</a>
 		{% endif %}
-		<span class="page_number ">Page: {{ paginator.page }} of {{ paginator.total_pages }} <a href="/blog/archives">(View all)</a></span>
+		<span class="page_number ">Page: {{ paginator.page }} of {{ paginator.total_pages }} <a href="/archives/">(View all)</a></span>
 		{% if paginator.next_page %}
 			<a href="{{ paginator.next_page_path }}" class="next">Next &rarr;</a>
 		{% endif %}

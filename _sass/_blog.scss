@@ -60,10 +60,9 @@ article {
 		margin-top: 2rem;
 		@extend .sans;
 		p.meta {
-			margin-bottom: .8rem;
-			font-size: .9rem;
-			clear: both;
-			overflow: hidden;
+			padding: 1rem 0;
+			margin-bottom: 0;
+			background: $img-border bottom left repeat-x, $img-border top left repeat-x;
 		}
 		.byline + time:before, time +time:before, .comments:before, .byline ~ .categories:before {
 			@extend .separator;

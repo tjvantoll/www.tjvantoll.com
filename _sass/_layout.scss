@@ -67,7 +67,7 @@ aside.sidebar {
 		border-radius: 20px;
 	}
 	h1 {
-		margin: 0.4rem 0 0 0em;
+		margin: 0.6rem 0 0 0em;
 		font-size: 1.5rem;
 	}
 	a {
@@ -160,6 +160,12 @@ body .one {
 				bottom: -10px;
 			}
 		}
+	}
+}
+
+.home {
+	.me-section p {
+		display: none;
 	}
 }
 

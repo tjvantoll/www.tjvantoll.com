@@ -1,13 +1,12 @@
 ---
 layout: page
 comments: false
-title: "About Me"
-permalink: /about/
+className: home
 ---
 
-Hi, I'm TJ. I'm a developer advocate for [Telerik](http://telerik.com), a [jQuery team member](http://jqueryui.com/about/), and the author of [jQuery UI in Action](http://tjvantoll.com/jquery-ui-in-action.html). I have over a decade of web development experience—specializing in performance and the mobile web.
+Hi, I'm TJ. I'm a front-end developer, [tech author](#books), [speaker](/speaking), and a senior developer advocate for [Telerik](http://telerik.com). I have over a decade of web development experience, including a few years working on the [jQuery team](http://jqueryui.com/about/). Nowadays I spend my time helping web developers build mobile apps through projects like [Cordova](https://cordova.apache.org/) and [NativeScript](https://www.nativescript.org/). You can contact me on Twitter ([@tjvantoll](https://twitter.com/tjvantoll)), GitHub ([tjvantoll](https://github.com/tjvantoll)), or [via email](mailto:tj.vantoll@gmail.com).
 
-I [speak](/speaking) about my research and experiences at conferences around the world, and I've written for publications such as [Smashing Magazine](http://www.smashingmagazine.com/2014/05/21/mobile-accessibility-why-care-what-can-you-do/), [HTML5 Rocks](http://www.html5rocks.com/en/tutorials/forms/constraintvalidation/), [MSDN Magazine](http://msdn.microsoft.com/en-us/magazine/dn133614.aspx), and [ModernWeb](http://modernweb.com/2014/03/10/is-jquery-too-big-for-mobile/). You can contact me on Twitter ([@tjvantoll](https://twitter.com/tjvantoll)), GitHub ([tjvantoll](https://github.com/tjvantoll)), or [via email](mailto:tj.vantoll@gmail.com).
+![Me presenting at TelerikNEXT in 2015](/images/me/next.jpg)
 
 Here are a few of the things I've done:
 
@@ -42,6 +41,14 @@ Here are a few of the things I've done:
 <header class="home">
 	<h2 class="entry-title" id="publications">Publications</h2>
 </header>
+
+<h3 class="home-heading"><a href="http://angularjs.blogspot.com/">AngularJS’s Blog</a></h3>
+<ul>
+	<li>
+		<span>December 9th, 2015</span>
+		<a href="http://angularjs.blogspot.com/2015/12/building-mobile-apps-with-angular-2-and.html">Building Mobile Apps with Angular 2 and NativeScript</a>
+	</li>
+</ul>
 
 <h3 class="home-heading"><a href="http://developer.telerik.com/">Telerik Developer Network</a></h3>
 <ul>
