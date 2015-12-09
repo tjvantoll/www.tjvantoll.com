@@ -26,14 +26,9 @@ Oh, hi! Since you're here, you might want to know that the source code that buil
 	<link rel="manifest" href="/manifest.json">
 	<link rel="alternate" type="application/rss+xml" title="{{ site.title }}" href="{{ "/feed.xml" | prepend: site.baseurl | prepend: site.url }}" />
 
-	<style>
-		{% capture include_to_scssify %}
-			{% include style.scss %}
-		{% endcapture %}
-		{{ include_to_scssify | scssify }}
-	</style>
+	<link rel="stylesheet" href="/css/app.css">
 
-	{% include prism.html %}
+	<script src="/js/prism.min.js"></script>
 	<script>
 		if ("serviceWorker" in navigator) {
 			navigator.serviceWorker.register("/service-worker.js");
