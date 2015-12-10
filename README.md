@@ -1,6 +1,6 @@
 # TJ VanToll's Blog
 
-This repo contains the source code for <http://tjvantoll.com>, my personal home page and blog. The site is built on top of [Jekyll](http://jekyllrb.com/) and runs on [GitHub Pages](https://pages.github.com/).
+This repo contains the source code for <https://www.tjvantoll.com>, my personal home page and blog. The site is built on top of [Jekyll](http://jekyllrb.com/).
 
 ![](images/site-screenshot.png)
 
@@ -9,8 +9,8 @@ This repo contains the source code for <http://tjvantoll.com>, my personal home 
 To run the site for yourself clone the repo and run `jekyll serve` from your command-line interface of choice.
 
 ```
-$ git clone https://github.com/tjvantoll/tjvantoll.github.com.git
-$ cd tjvantoll.github.com
+$ git clone https://github.com/tjvantoll/www.tjvantoll.com.git
+$ cd www.tjvantoll.com
 $ jekyll serve
 ```
 
