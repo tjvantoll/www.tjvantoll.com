@@ -12,7 +12,12 @@ Oh, hi! Since you're here, you might want to know that the source code that buil
 
 {% capture root_url %}{{ site.root | strip_slash }}{% endcapture %}
 <!DOCTYPE html>
-<html lang="en" class="{% if page.className %}{{ page.className }}{% endif %}">
+<html
+	lang="en"
+	class="{% if page.className %}{{ page.className }}{% endif %}"
+	data-comments="{{ page.comments }}"
+	data-disqus-shortname="{{ site.disqus_short_name }}"
+	data-disqus-url="{{ site.url }}{{ page.url }}">
 <head>
 	<meta charset="utf-8">
 	<title>{% if page.title %}{{ page.title }}{% else %}{{ site.title }}{% endif %}</title>
@@ -40,8 +45,9 @@ Oh, hi! Since you're here, you might want to know that the source code that buil
 		{% include sidebar.html %}
 		{{ content | expand_urls: root_url }}
 	</div>
-	{% include dynamic/ads.html %}
-	{% include dynamic/google_analytics.html %}
-	{% include dynamic/disqus.html %}
+	<script src="/js/dynamic.js"></script>
+	{% if page.comments != false %}
+		<script id="dsq-count-scr" src="https://tjvantoll.disqus.com/count.js" async></script>
+	{% endif %}
 </body>
 </html>

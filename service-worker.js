@@ -1,7 +1,9 @@
-var version = "3.0::";
+var version = "4.0::";
 var offlineResources = [
 	"/",
-	"/offline/"
+	"/offline/",
+	"/css/app.css",
+	"/js/prism.min.js"
 ];
 self.addEventListener("install", function(event) {
 	event.waitUntil(
