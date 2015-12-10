@@ -42,11 +42,11 @@ ga('send', 'pageview');
 	if (comments === "true") {
 		window.disqus_config = function () {
 			this.page.url = disqus_url;
-			this.page.identifier = disqus_shortname;
+			this.page.identifier = disqus_url;
 		};
 
 		var d = document, s = d.createElement("script");
-		s.src = '//tjvantoll.disqus.com/embed.js';
+		s.src = "https://" + disqus_shortname + ".disqus.com/embed.js";
 		s.setAttribute("data-timestamp", +new Date());
 		(d.head || d.body).appendChild(s);
 	}
