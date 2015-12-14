@@ -9,7 +9,6 @@ paginate: 10
 paginate_path: "/blog/page:num/"
 
 # Accounts
-google_analytics_tracking_id: UA-29179796-1
 disqus_short_name: tjvantoll
 
 # Build settings

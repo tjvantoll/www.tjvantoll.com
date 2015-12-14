@@ -4,7 +4,7 @@
 m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
 })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-ga('create', '{{ site.google_analytics_tracking_id }}', 'auto');
+ga('create', 'UA-29179796-1', 'auto');
 ga('send', 'pageview');
 
 // Ads
