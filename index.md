@@ -235,6 +235,14 @@ Here are a few of the things I've done:
 	<h2 class="entry-title" id="interviews">Podcasts & Interviews</h2>
 </header>
 
+<h3 class="home-heading"><a href="http://www.wired.com">Wired</a></h3>
+<ul>
+	<li>
+		<span>December 15th, 2015</span>
+		<a href="http://www.wired.com/2015/12/googles-angular-2-release-helps-push-javascript-beyond-the-browser/">Google’s Angular 2 Release Pushes JavaScript Beyond the Browser</a>
+	</li>
+</ul>
+
 <h3 class="home-heading"><a href="http://javascriptjabber.com/">JavaScript Jabber</a></h3>
 <ul>
 	<li>

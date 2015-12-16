@@ -7,6 +7,13 @@
 	"year": "2015",
 	"events": [
 		{
+			"date": "December 15th, 2015",
+			"url": "http://www.meetup.com/Lansing-Javascript-Meetup/events/223413321/",
+			"name": "Lansing JavaScript Meetup",
+			"city": "East Lansing, MI",
+			"country": "us"
+		},
+		{
 			"date": "May 4th, 2015",
 			"url": "http://teleriknext.com/",
 			"name": "TelerikNEXT",
