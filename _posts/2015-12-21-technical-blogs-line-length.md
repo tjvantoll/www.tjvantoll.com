@@ -99,6 +99,6 @@ And there are definitely examples that show it is possible to embed code and kee
 
 ## What to do?
 
-Experts recommend line lengths in the 65–75 character range, but for a tech blog I think 75–90 is more appropriate to accommodate code samples. If you maintain a technical blog, pick a few lines at random, and copy and paste them into an [online character counter](http://www.charactercountonline.com/). 
+Experts recommend line lengths in the 65–75 character range, but for a tech blog I personally think 75–90 is reasonable to accommodate code samples. If you maintain a technical blog, pick a few lines at random, and copy and paste them into an [online character counter](http://www.charactercountonline.com/). 
 
-If your site is using 90+ characters per line, as so many technical blogs are, consider tossing a `max-width` on the content to cap the text at some reasonable, readable width. Your pedantic readers will thank you.
+If your site is using 90+ characters per line, as so many technical blogs are, consider tossing a `max-width` on the content to cap the text at some a readable width. Your pedantic readers will thank you.
