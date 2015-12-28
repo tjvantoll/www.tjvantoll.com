@@ -6,6 +6,8 @@ comments: true
 
 Studies have shown that [using ~45–75 characters in a line of text produces the most readable articles](http://baymard.com/blog/line-length-readability)—yet many technical blogs egregiously violate this recommendation. For example here are the last two articles I read today, along with arrows for where the 75th character is at on the first line:
 
+<!--more-->
+
 * [Introducing Background Sync](https://developers.google.com/web/updates/2015/12/background-sync) on Google’s Developers blog. Line length is in the 100–110 character range.
 
 ![](/images/posts/2015-12-21/google-developers-blog.png)
