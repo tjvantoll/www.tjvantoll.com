@@ -53,6 +53,14 @@ Here are a few of the things I've done:
 <h3 class="home-heading"><a href="http://developer.telerik.com/">Telerik Developer Network</a></h3>
 <ul>
 	<li>
+		<span>December 14th, 2015</span>
+		<a href="http://developer.telerik.com/featured/what-progressive-web-apps-mean-for-the-web/">What Progressive Web Apps Mean for the Web</a>
+	</li>
+	<li>
+		<span>October 29th, 2015</span>
+		<a href="http://developer.telerik.com/featured/defining-a-new-breed-of-cross-platform-mobile-apps/">Fixing Stupid Mistakes in Git Pull Requests</a>
+	</li>
+	<li>
 		<span>October 27th, 2015</span>
 		<a href="http://developer.telerik.com/featured/defining-a-new-breed-of-cross-platform-mobile-apps/">Defining a New Breed of Cross-Platform Mobile Apps</a> (with <a href="http://remotesynthesis.com/">Brian Rinaldi</a>)
 	</li>
