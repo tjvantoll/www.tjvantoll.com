@@ -13,6 +13,8 @@ I have, most recently in the [Angular 2 quick start guide](https://angular.io/do
 
 I decided to take a bit of time to get to the bottom of this.
 
+<!--more-->
+
 ## Context
 
 Let’s setup a small example to show how this all works. Normally you see the `console.error.bind(console)` shorthand used with asynchronous code. For example suppose you have the `someAsyncTask()` function below:
