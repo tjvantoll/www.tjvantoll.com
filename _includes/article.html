@@ -2,7 +2,7 @@
 	{% if index %}
 		<h1 class="entry-title" itemprop="name headline"><a href="{{ root_url }}{{ post.url }}">{{ post.title }}</a></h1>
 	{% else %}
-		<h1 class="entry-title" itemprop="name headline">{{ page.title }}</h1>
+		<h1 class="entry-title force-wrap" itemprop="name headline">{{ page.title }}</h1>
 	{% endif %}
 	<p class="meta">
 		{% include post/date.html %}{{ time }}
