@@ -243,6 +243,14 @@ Here are a few of the things I've done:
 	<h2 class="entry-title" id="interviews">Podcasts & Interviews</h2>
 </header>
 
+<h3 class="home-heading"><a href="https://dzone.com">DZone</a></h3>
+<ul>
+	<li>
+		<span>January 14th, 2016</span>
+		<a href="https://dzone.com/articles/a-developer-evangelists-thoughts-on-angular2">A Developer Evangelist's Thoughts on Angular 2</a>
+	</li>
+</ul>
+
 <h3 class="home-heading"><a href="https://devchat.tv/adventures-in-angular/">Adventures in Angular</a></h3>
 <ul>
 	<li>
