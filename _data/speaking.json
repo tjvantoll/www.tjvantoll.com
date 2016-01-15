@@ -1,6 +1,22 @@
 {"talks": [
 
 {
+	"name": "A Lap Around NativeScript",
+	"abstract": "https://gist.github.com/tjvantoll/f307d65513ec871e0e12",
+	"url": "/speaking/slides/Introducing-NativeScript/Internet/a-lap-around-nativescript.pdf",
+	"year": "2016",
+	"events": [
+		{
+			"date": "January 14th, 2016",
+			"url": "https://allremoteconfs.com/js-2016",
+			"name": "JS Remote Conf",
+			"city": "The Internet",
+			"slides": "/speaking/slides/Introducing-NativeScript/Internet/a-lap-around-nativescript.pdf"
+		}
+	]
+},
+
+{
 	"name": "Introducing NativeScript",
 	"abstract": "https://gist.github.com/tjvantoll/a5f7111ed131d5f54e98",
 	"url": "https://www.youtube.com/watch?v=HWboi_9aba8",

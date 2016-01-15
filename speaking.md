@@ -20,7 +20,10 @@ permalink: /speaking/
 						<li>
 							<span>{{ event.date }}</span>
 							<a href="{{ event.url }}">{{ event.name }}</a> | 
-							<address class="country-{{ event.country }}">{{ event.city }}</address>
+							<address
+								{% if event.country %}class="country-{{ event.country }}"{% endif %}>
+								{{ event.city }}
+							</address>
 							{% if event.slides %}
 								| <a href="{{ event.slides }}">Slides</a>
 							{% endif %}
