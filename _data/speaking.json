@@ -1,6 +1,23 @@
 {"talks": [
 
 {
+	"name": "Cordova Plugin Roundup",
+	"abstract": "https://gist.github.com/tjvantoll/1a11c1045be8b4e47e6c",
+	"url": "/speaking/slides/Cordova-Plugin-Roundup/Lehi/cordova-plugin-roundup.pdf",
+	"year": "2016",
+	"events": [
+		{
+			"date": "January 29th, 2016",
+			"url": "http://pgday.phonegap.com/us2016/",
+			"name": "PhoneGap Day US",
+			"city": "Lehi, Utah",
+			"slides": "/speaking/slides/Cordova-Plugin-Roundup/Lehi/cordova-plugin-roundup.pdf",
+			"country": "us"
+		}
+	]
+},
+
+{
 	"name": "A Lap Around NativeScript",
 	"abstract": "https://gist.github.com/tjvantoll/f307d65513ec871e0e12",
 	"url": "/speaking/slides/Introducing-NativeScript/Internet/a-lap-around-nativescript.pdf",
