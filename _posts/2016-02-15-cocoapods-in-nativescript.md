@@ -4,7 +4,7 @@ title: Using CocoaPods in NativeScript Versus React Native
 comments: true
 ---
 
-I really like React Native, but after reading [a Beginner’s Guide to Using CocoaPods with React Native](https://medium.com/infinite-red/beginner-s-guide-to-using-cocoapods-with-react-native-46cb4d372995) by Gant Laborde, I wanted show how [NativeScript](https://www.nativescript.org/) handles the same thing, but easier.
+I really like React Native, but after reading [a Beginner’s Guide to Using CocoaPods with React Native](https://medium.com/infinite-red/beginner-s-guide-to-using-cocoapods-with-react-native-46cb4d372995) by Gant Laborde, I wanted show just how much easier [NativeScript](https://www.nativescript.org/) handles the same thing.
 
 If you’re curious, start by reading through [Laborde’s article](https://medium.com/infinite-red/beginner-s-guide-to-using-cocoapods-with-react-native-46cb4d372995). It’s well written, but a quick skim of the content shows the inherit difficulty of the task: there are a half dozen manual Xcode steps, some `.m` and `.h` files to create, and dozens of lines of Objective-C to write—which isn’t exactly trivial for your average JavaScript developer like me.
 
