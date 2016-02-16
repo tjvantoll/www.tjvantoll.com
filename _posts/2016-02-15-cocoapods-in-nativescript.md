@@ -6,6 +6,8 @@ comments: true
 
 I really like React Native, but after reading [a Beginner’s Guide to Using CocoaPods with React Native](https://medium.com/infinite-red/beginner-s-guide-to-using-cocoapods-with-react-native-46cb4d372995) by Gant Laborde, I wanted show just how much easier the same task is in [NativeScript](https://www.nativescript.org/).
 
+<!--more-->
+
 If you’re curious, start by reading through [Laborde’s article](https://medium.com/infinite-red/beginner-s-guide-to-using-cocoapods-with-react-native-46cb4d372995). It’s well written, but a quick skim of the content shows the inherit difficulty of the task: there are a half dozen manual Xcode steps, some `.m` and `.h` files to create, and dozens of lines of Objective-C to write—which isn’t exactly trivial for your average JavaScript developer like me.
 
 In NativeScript we spent a _lot_ of time trying to optimize this exact use case for your average JavaScript developer. We feel that leveraging third-party iOS and Android frameworks—such as CocoaPods for iOS—is essential for building high-quality native applications, and that these libraries should be just as easy to use as JavaScript libraries from npm. To show that in action let’s look at how to use the JTSImageViewController CocoaPod in a NativeScript app.
