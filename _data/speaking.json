@@ -3,7 +3,7 @@
 {
 	"name": "Cordova Plugin Roundup",
 	"abstract": "https://gist.github.com/tjvantoll/1a11c1045be8b4e47e6c",
-	"url": "/speaking/slides/Cordova-Plugin-Roundup/Lehi/cordova-plugin-roundup.pdf",
+	"url": "https://www.youtube.com/watch?v=IpEsJJFIz7g",
 	"year": "2016",
 	"events": [
 		{
@@ -12,6 +12,7 @@
 			"name": "PhoneGap Day US",
 			"city": "Lehi, Utah",
 			"slides": "/speaking/slides/Cordova-Plugin-Roundup/Lehi/cordova-plugin-roundup.pdf",
+			"video": "https://www.youtube.com/watch?v=IpEsJJFIz7g",
 			"country": "us"
 		}
 	]

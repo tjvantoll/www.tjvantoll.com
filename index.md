@@ -243,6 +243,14 @@ Here are a few of the things I've done:
 	<h2 class="entry-title" id="interviews">Podcasts & Interviews</h2>
 </header>
 
+<h3 class="home-heading"><a href="http://rangle.io/">Rangle.io</a></h3>
+<ul>
+	<li>
+		<span>January 14th, 2016</span>
+		<a href="https://www.youtube.com/watch?v=HjFzouGIXYY">Interview with TJ VanToll (Telerik) at PhoneGap Day 2016 in Utah</a>
+	</li>
+</ul>
+
 <h3 class="home-heading"><a href="https://dzone.com">DZone</a></h3>
 <ul>
 	<li>
