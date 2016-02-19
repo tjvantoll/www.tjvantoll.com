@@ -106,7 +106,7 @@ exports.showImage = function(url) {
 
 This is the same code as before, just wrapped in a `showImage()` function.
 
-> **Note**: NativeScript uses the [CommonJS](http://wiki.commonjs.org/wiki/CommonJS) `exports` keyboard for defining a JavaScript module’s API, and the CommonJS `require()` method for bringing in other JavaScript modules.
+> **Note**: NativeScript uses the [CommonJS](http://wiki.commonjs.org/wiki/CommonJS) `exports` keyword for defining a JavaScript module’s API, and the CommonJS `require()` method for bringing in other JavaScript modules.
 
 Now that this file is in place you can use that same `require()` method elsewhere in your code to leverage this new plugin:
 
