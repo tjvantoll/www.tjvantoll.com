@@ -44,7 +44,7 @@ This tells the browser that the text in the `<input>` is invalid (`setCustomVali
 
 You may be wondering, if this is such a common use case, how did you report errors before `reportValidity()`? The completely unintuitive way to do that is by...  wait for it.... clicking the `<form>`'s submit button in JavaScript:
 
-<pre class="language-javascript"><code class="language-javascript">document.querySelector( "button" ).submit();</code></pre>
+<pre class="language-javascript"><code class="language-javascript">document.querySelector( "button" ).click();</code></pre>
 
 OF COURSE, right? Here's a [live example](http://jsfiddle.net/tj_vantoll/fdofmt7o/) that proves this technique works, in case you don't believe me.
 
