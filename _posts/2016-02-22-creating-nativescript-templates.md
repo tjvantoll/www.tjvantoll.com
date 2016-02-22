@@ -4,7 +4,7 @@ title: Starting NativeScript Apps From Templates
 comments: true
 ---
 
-NativeScript 1.6 shipped with a new `--template` option for the `create` command. Let’s look at how it works.
+[NativeScript](https://www.nativescript.org/) 1.6 shipped with a new `--template` option for the `create` command. Let’s look at how it works.
 
 ## Using existing templates
 
