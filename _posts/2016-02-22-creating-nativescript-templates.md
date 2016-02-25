@@ -6,6 +6,8 @@ comments: true
 
 [NativeScript](https://www.nativescript.org/) 1.6 shipped with a new `--template` option for the `create` command. Let’s look at how it works.
 
+<!--more-->
+
 ## Using existing templates
 
 The easiest way to use the `--template` option is to point it at an existing NativeScript template up on GitHub or npm. For instance, the [“tns-template-blank package” on npm](https://www.npmjs.com/package/tns-template-blank) makes it possible to create a completely blank NativeScript app:
