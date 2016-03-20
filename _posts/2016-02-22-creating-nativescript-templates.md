@@ -38,6 +38,14 @@ This template creates a NativeScript app with the same hello world example, howe
 
 <pre class="language-shell"><code class="language-shell">tns create my-app-name --template tns-template-hello-world-ts</code></pre>
 
+Because TypeScript is commonly used to build NativeScript apps, the NativeScript CLI also provides two shorthands to start with the same hello world TypeScript template.
+
+<pre class="language-shell"><code class="language-shell">tns create my-app-name --template typescript</code></pre>
+
+Or
+
+<pre class="language-shell"><code class="language-shell">tns create my-app-name --template tsc</code></pre>
+
 ### tns-template-master-detail
 
 This template creates a NativeScript app with a very basic master-detail UI in place.
@@ -86,16 +94,20 @@ To build a NativeScript template, take all the code out of `app`, as well as the
     ├── app.js
     └── package.json</code></pre>
 
-> **Note**: There’s no official naming convention for NativeScript templates, but I kind of like prefixing my NativeScript templates with “nativescript-template-” for discoverability.
+> **Tip**: The `App_Resources` folder is optional in a NativeScript template; the NativeScript CLI is smart enough to generate the folder as necessary when you start new apps from a template.
 
 If you get stuck, the [NativeScript hello world template on GitHub](https://github.com/NativeScript/template-hello-world) is a good reference for how to structure a template.
 
 Once you have your template, if you upload the files to GitHub you can immediately use the template with the `--template` option. For example, this weekend I threw together a small NativeScript drawer template and [tossed it up on GitHub](https://github.com/tjvantoll/nativescript-template-drawer). Now, anyone can start a new NativeScript app that uses drawer navigation with the following command:
 
-<pre class="language-shell"><code class="language-shell">tns create foo --template https://github.com/tjvantoll/nativescript-template-drawer</code></pre>
+<pre class="language-shell"><code class="language-shell">tns create my-app-name --template https://github.com/tjvantoll/nativescript-template-drawer</code></pre>
+
+> **Tip**: During testing, you can also point the `--template` option at a local folder—for example `tns create my-app-name --template ~/Desktop/my-template`.
 
 Even better, because I then [published the template to npm](https://www.npmjs.com/package/nativescript-template-drawer), you can use the same template with significantly fewer characters to type:
 
 <pre class="language-shell"><code class="language-shell">tns create my-app-name --template nativescript-template-drawer</code></pre>
+
+> **Note**: There’s no official naming convention for NativeScript templates, but I kind of like prefixing my NativeScript templates with “nativescript-template-” for discoverability.
 
 Cool, huh? If you have any questions about templates feel free to ask in the comments. And if you’d like to chat with me and the rest of the NativeScript community about templates, or whatever, [join our new fancy Slack channel](http://developer.telerik.com/wp-login.php?action=slack-invitation).
