@@ -1,6 +1,24 @@
 {"talks": [
 
 {
+	"name": "Sharing Code Between Web and Native Apps",
+	"abstract": "https://gist.github.com/tjvantoll/1a60028cf8ec94d7e825#sharing-code-between-web-and-native-apps",
+	"url": "https://www.youtube.com/watch?v=R3nyG2xtzeQ",
+	"year": "2016",
+	"events": [
+		{
+			"date": "May 4th, 2016",
+			"url": "https://www.ng-conf.org",
+			"name": "ng-conf",
+			"city": "Salt Lake City, Utah",
+			"slides": "/speaking/slides/Sharing-Code-Web-Native/Salt-Lake-City/sharing-code-web-native.pdf",
+			"video": "https://www.youtube.com/watch?v=R3nyG2xtzeQ",
+			"country": "us"
+		}
+	]
+},
+
+{
 	"name": "Cordova Plugin Roundup",
 	"abstract": "https://gist.github.com/tjvantoll/1a11c1045be8b4e47e6c",
 	"url": "https://www.youtube.com/watch?v=IpEsJJFIz7g",

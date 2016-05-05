@@ -4,7 +4,7 @@ comments: false
 className: home
 ---
 
-Hi, I'm TJ. I'm a front-end developer, [tech author](#books), [speaker](/speaking), and a senior developer advocate for [Telerik](http://telerik.com). I have over a decade of web development experience, including a few years working on the [jQuery team](http://jqueryui.com/about/). Nowadays I spend my time helping web developers build mobile apps through projects like [Cordova](https://cordova.apache.org/) and [NativeScript](https://www.nativescript.org/). You can contact me on Twitter ([@tjvantoll](https://twitter.com/tjvantoll)), GitHub ([tjvantoll](https://github.com/tjvantoll)), or [via email](mailto:tj.vantoll@gmail.com).
+Hi, I'm TJ. I'm a front-end developer, [tech author](#books), [speaker](/speaking), and a principal developer advocate for [Telerik](http://telerik.com). I have over a decade of web development experience, including a few years working on the [jQuery team](http://jqueryui.com/about/). Nowadays I spend my time helping web developers build mobile apps through projects like [Cordova](https://cordova.apache.org/) and [NativeScript](https://www.nativescript.org/). You can contact me on Twitter ([@tjvantoll](https://twitter.com/tjvantoll)), GitHub ([tjvantoll](https://github.com/tjvantoll)), or [via email](mailto:tj.vantoll@gmail.com).
 
 ![Me presenting at TelerikNEXT in 2015](/images/me/next.jpg)
 
@@ -243,6 +243,18 @@ Here are a few of the things I've done:
 	<h2 class="entry-title" id="interviews">Podcasts & Interviews</h2>
 </header>
 
+<h3 class="home-heading"><a href="https://devchat.tv/adventures-in-angular/">Adventures in Angular</a></h3>
+<ul>
+	<li>
+		<span>April 28th, 2016</span>
+		<a href="https://devchat.tv/adv-in-angular/090-aia-nativescript-part-2-with-tj-vantoll">NativeScript Part 2</a>
+	</li>
+	<li>
+		<span>January 7th, 2016</span>
+		<a href="https://devchat.tv/adventures-in-angular/074-aia-nativescript-with-burke-holland-and-tj-vantoll">NativeScript</a>
+	</li>
+</ul>
+
 <h3 class="home-heading"><a href="http://developeronfire.com/">Developer on Fire</a></h3>
 <ul>
 	<li>
@@ -264,14 +276,6 @@ Here are a few of the things I've done:
 	<li>
 		<span>January 14th, 2016</span>
 		<a href="https://dzone.com/articles/a-developer-evangelists-thoughts-on-angular2">A Developer Evangelist's Thoughts on Angular 2</a>
-	</li>
-</ul>
-
-<h3 class="home-heading"><a href="https://devchat.tv/adventures-in-angular/">Adventures in Angular</a></h3>
-<ul>
-	<li>
-		<span>January 7th, 2016</span>
-		<a href="https://devchat.tv/adventures-in-angular/074-aia-nativescript-with-burke-holland-and-tj-vantoll">NativeScript</a>
 	</li>
 </ul>
 
