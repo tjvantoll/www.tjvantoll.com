@@ -1,5 +1,22 @@
 {"talks": [
 
+	{
+		"name": "Building Native iOS and Android Apps With Angular 2 and NativeScript",
+		"abstract": "https://gist.github.com/tjvantoll/1a60028cf8ec94d7e825#building-native-ios-and-android-apps-with-angular-2-and-nativescript",
+		"url": "/speaking/slides/Building-with-Angular2-and-NativeScript/Salt-Lake-City/building-with-angular2-and-nativescript.pdf",
+		"year": "2016",
+		"events": [
+			{
+				"date": "May 5th, 2016",
+				"url": "https://www.ng-conf.org",
+				"name": "ng-conf",
+				"city": "Salt Lake City, Utah",
+				"slides": "/speaking/slides/Building-with-Angular2-and-NativeScript/Salt-Lake-City/building-with-angular2-and-nativescript.pdf",
+				"country": "us"
+			}
+		]
+	},
+
 {
 	"name": "Sharing Code Between Web and Native Apps",
 	"abstract": "https://gist.github.com/tjvantoll/1a60028cf8ec94d7e825#sharing-code-between-web-and-native-apps",
