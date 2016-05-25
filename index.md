@@ -243,6 +243,14 @@ Here are a few of the things I've done:
 	<h2 class="entry-title" id="interviews">Podcasts & Interviews</h2>
 </header>
 
+<h3 class="home-heading"><a href="https://www.thepolyglotdeveloper.com/">The Polyglot Developer</a></h3>
+<ul>
+	<li>
+		<span>May 11th, 2016</span>
+		<a href="https://www.thepolyglotdeveloper.com/2016/05/tpdp-episode-5-developing-mobile-apps-telerik-nativescript/">Episode #5: Developing Mobile Apps with Telerik NativeScript</a>
+	</li>
+</ul>
+
 <h3 class="home-heading"><a href="https://devchat.tv/adventures-in-angular/">Adventures in Angular</a></h3>
 <ul>
 	<li>
