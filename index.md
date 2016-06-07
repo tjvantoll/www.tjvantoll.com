@@ -53,6 +53,18 @@ Here are a few of the things I've done:
 <h3 class="home-heading"><a href="http://developer.telerik.com/">Telerik Developer Network</a></h3>
 <ul>
 	<li>
+		<span>April 14th, 2016</span>
+		<a href="http://developer.telerik.com/featured/how-i-build-for-proprietary-platforms/">How I Build For Proprietary Platforms and Sleep at Night</a>
+	</li>
+	<li>
+		<span>March 30th, 2016</span>
+		<a href="http://developer.telerik.com/featured/building-polished-mobile-apps-telerik-ui-nativescript/">Building Polished Mobile Apps with Telerik UI for NativeScript</a>
+	</li>
+	<li>
+		<span>February 2nd, 2016</span>
+		<a href="http://developer.telerik.com/featured/what-to-expect-from-javascript-in-2016-beyond-the-browser/">What To Expect From JavaScript In 2016 – Beyond the Browser</a>
+	</li>
+	<li>
 		<span>December 14th, 2015</span>
 		<a href="http://developer.telerik.com/featured/what-progressive-web-apps-mean-for-the-web/">What Progressive Web Apps Mean for the Web</a>
 	</li>
