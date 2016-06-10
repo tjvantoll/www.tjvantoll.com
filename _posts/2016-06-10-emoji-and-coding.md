@@ -8,7 +8,7 @@ Who doesn’t love emoji? As a massive emoji user on messaging and email apps, I
 
 And although this started as a bit of a joke, I’ve found emoji to be legitimately valuable in my development work in some cases. Why?
 
-We, as developers, routinely look at large amounts of text—whether it’s code, production logs, commit messages, documentation, or whatever—and Emoji inherently stand out in what is normally a wall of text. It’s far easier to pick an emoji out of a list than a random string, and that skimmability can lead to real productivity gains. Plus, even if there is no _actual_ productivity gain—using emoji is just plain fun. Here are a few of the things I’ve been playing with.
+We, as developers, routinely look at large amounts of text—whether it’s code, production logs, commit messages, documentation, or whatever—and emoji inherently stand out in what is normally a wall of text. It’s far easier to pick an emoji out of a list than a random string, and that skimmability can lead to real productivity gains. Plus, even if there is no _actual_ productivity gain—using emoji is just plain fun. Here are a few of the things I’ve been playing with.
 
 ## Emoji in comments
 
@@ -48,7 +48,7 @@ Commit messages are usually boring. But with emojis you can make them slightly l
 
 <img src="/images/posts/2016-06-10/commit-messages.png" class="plain">
 
-Although this is again a bit of a silly example, I would again make the argument that the emoji improve the readability here. If you’re looking at a giant list of commit messages, which you often are in big projects, having an emoji in the text makes picking a single commit out of a list a heck of a lot easier. The [Atom editor by GitHub](https://atom.io/) even has an emoji guide in their [git commit message styleguide](https://github.com/atom/atom/blob/master/CONTRIBUTING.md#git-commit-messages).
+Although this is a bit of a silly example, I would again make the argument that the emoji improve the readability here. If you’re looking at a giant list of commit messages, which you often are in big projects, having an emoji in the text makes picking a single commit out of a list a heck of a lot easier. The [Atom editor by GitHub](https://atom.io/) even has an emoji guide in their [git commit message styleguide](https://github.com/atom/atom/blob/master/CONTRIBUTING.md#git-commit-messages).
 
 ## Emoji in code
 
@@ -85,4 +85,4 @@ My terminal of choice, [iTerm2](https://www.iterm2.com/) also handles emoji well
 
 <img src="/images/posts/2016-06-10/emoji-iterm2.png" class="plain">
 
-That being said not every piece of software is going to support emoji perfectly. Many of us deal with legacy software that has enough trouble with characters a lot simpler than emoji. But we can change this. If you’re using a tool that doesn’t support emoji please file a ticket or bug in the appropriate place. Let’s make the emoji revolution happen 🎉
+That being said not every piece of software is going to support emoji perfectly. Many of us deal with legacy software that has enough trouble with basic characters—much less emoji. But we can change this. If you’re using a tool that doesn’t support emoji, please file a ticket or bug in the appropriate place. Let’s make the emoji revolution happen 🎉
