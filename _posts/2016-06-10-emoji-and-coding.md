@@ -10,6 +10,8 @@ And although this started as a bit of a joke, I’ve found emoji to be legitimat
 
 We, as developers, routinely look at large amounts of text—whether it’s code, production logs, commit messages, documentation, or whatever—and emoji inherently stand out in what is normally a wall of text. It’s far easier to pick an emoji out of a list than a random string, and that skimmability can lead to real productivity gains. Plus, even if there is no _actual_ productivity gain—using emoji is just plain fun. Here are a few of the things I’ve been playing with.
 
+<!--more-->
+
 ## Emoji in comments
 
 Suppose you need to add a warning to your code, something like this:
