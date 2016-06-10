@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Emoji and Coding
+title: How Emoji Can Improve Your Code—Seriously
 comments: true
 ---
 
