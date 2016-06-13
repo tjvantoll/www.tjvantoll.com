@@ -83,10 +83,6 @@ aside.sidebar {
 	}
 }
 
-🎙
-Studio microphone
-Unicode: U+1F399, UTF-8: F0 9F 8E 99
-
 aside.sidebar .me-section {
 	font-size: 0.9rem;
 }
@@ -101,10 +97,10 @@ aside.sidebar .me-section {
 			vertical-align: middle;
 		}
 	}
-	.emoji-computer::before { content: "🖥"; }
-	.emoji-pencil::before { content: "✏️"; }
-	.emoji-mic::before { content: "🎙"; }
-	.emoji-heart::before { content: "❤️"; }
+	.emoji-computer::before { content: "\01F5A5"; }
+	.emoji-pencil::before { content: "\1F4DD"; }
+	.emoji-mic::before { content: "\01F399"; }
+	.emoji-heart::before { content: "\01F496"; }
 }
 
 nav {
