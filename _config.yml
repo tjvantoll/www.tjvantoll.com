@@ -12,6 +12,7 @@ paginate_path: "/blog/page:num/"
 disqus_short_name: tjvantoll
 
 # Build settings
+gems: [jekyll-paginate]
 markdown: kramdown
 permalink: pretty
 sass:
