@@ -1,4 +1,4 @@
-var version = "5.0::";
+var version = "6.0::";
 var offlineResources = [
 	"/",
 	"/offline/",
