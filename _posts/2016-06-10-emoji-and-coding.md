@@ -24,7 +24,7 @@ Suppose you need to add a warning to your code, something like this:
 I add these sorts of notes to my code all the time, but years of development have taught me that few people actually read these warnings—myself included. What would make this comment more noticeable and way more skimmable? An emoji.
 
 <pre class="language-javascript"><code class="language-javascript">/**
- * ⚠️ WARNING:
+ * 🚨 WARNING:
  * Changing this code breaks the build
  */</code></pre>
 
