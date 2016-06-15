@@ -91,12 +91,15 @@ aside.sidebar .me-section {
 	margin: 1rem 0 1rem 1rem;
 	list-style-type: none;
 	li {
-		margin-bottom: 0.2rem;
+		margin-bottom: 0.6em;
+		padding-left: 1.8em;
+		position: relative;
 		&::before {
 			font-family: "Segoe UI Emoji";
-			font-size: 1.2em;
-			padding-right: 0.5rem;
+			font-size: 1.3em;
 			vertical-align: middle;
+			position: absolute;
+			left: 0;
 		}
 	}
 	.emoji-computer::before { content: "\01F5A5"; }
