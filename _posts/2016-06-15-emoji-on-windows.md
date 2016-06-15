@@ -34,4 +34,6 @@ And with that approach my emoji looked substantially nicer on Windows.
 
 > **NOTE**: There’s no harm in applying the “Segoe UI Emoji” font family on non-Windows operating systems; the font declaration will be ignored when the named font is not available.
 
-Happy emoji-ing! <span class="emoji">😎</span>
+Ideally browsers on Windows would automatically detect the emoji unicode range and apply the “Segoe UI Emoji” font family automatically; Firefox on Windows seems to do this already, but Edge and Chrome do not. I submitted this as a feature request both to the Microsoft Edge team ([here](https://developer.microsoft.com/en-us/microsoft-edge/platform/issues/7900499)), and the Google Chrome team ([here](https://bugs.chromium.org/p/chromium/issues/detail?id=620419)), so perhaps this won’t be an issue in the future.
+
+Until then, hopefully this post helps you get your emoji looking sharp! <span class="emoji">😎</span>
