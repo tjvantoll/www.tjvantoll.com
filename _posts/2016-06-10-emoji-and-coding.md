@@ -87,4 +87,4 @@ My terminal of choice, [iTerm2](https://www.iterm2.com/) also handles emoji well
 
 <img src="/images/posts/2016-06-10/emoji-iterm2.png" class="plain">
 
-That being said not every piece of software is going to support emoji perfectly. Many of us deal with legacy software that has enough trouble with basic characters—much less emoji. But we can change this. If you’re using a tool that doesn’t support emoji, please file a ticket or bug in the appropriate place. Let’s make the emoji revolution happen 🎉
+That being said not every piece of software is going to support emoji perfectly. Many of us deal with legacy software that has enough trouble with basic characters—much less emoji. But we can change this. If you’re using a tool that doesn’t support emoji, please file a ticket or bug in the appropriate place. Let’s make the emoji revolution happen <span class="emoji">🎉</span>
