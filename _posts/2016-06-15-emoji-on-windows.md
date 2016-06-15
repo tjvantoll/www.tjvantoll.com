@@ -12,6 +12,8 @@ But the exact same set of emoji looked like this on Windows.
 
 <img src="/images/posts/2016-06-15/emoji-windows.png" class="plain">
 
+<!--more-->
+
 This drove me nuts, because the characters I was using were exactly the same, and Windows has really good emoji support. After extensive googling I finally figured out what was up.
 
 Apparently, Windows’ polished emoji live in a specific system font named “Segoe UI Emoji”. And unless you specifically target that font in CSS your emoji will fallback to the boring graphics you see in the screenshot above.
