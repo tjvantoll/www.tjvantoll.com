@@ -1,6 +1,6 @@
 ---
 layout: page
-title: "Blog Archive"
+title: "Writing"
 comments: false
 ---
 

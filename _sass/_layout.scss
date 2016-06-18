@@ -135,6 +135,12 @@ nav {
 		}
 	}
 }
+nav a[href*="github"] {
+	background-image: url("/images/github.svg");
+	background-repeat: no-repeat;
+	background-size: 20px;
+	padding-left: 25px;
+}
 
 /* Ads */
 .ad-section {
