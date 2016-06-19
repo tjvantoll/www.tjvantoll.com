@@ -5,12 +5,10 @@ className: home
 ---
 
 Home page:
-	- Hide sidebar
+	- Hide sidebar?
 	- Show image, brief description like Addy’s site
 	- Have links to Writing (include book), Speaking, Coding (include jQuery)
 	- Include icons
-Sidebar:
-	- Writing, Speaking, Coding (w/GitHub icon)
 
 
 
@@ -18,39 +16,8 @@ Hi, I'm TJ. I'm a front-end developer, [tech author](#books), [speaker](/speakin
 
 ![Me presenting at TelerikNEXT in 2015](/images/me/next.jpg)
 
-Here are a few of the things I've done:
 
-<ul>
-	<li><a href="#books">Books</a></li>
-	<li><a href="#publications">Publications</a></li>
-	<li><a href="#interviews">Podcasts & Interviews</a></li>
-	<li><a href="#apps">Apps</a></li>
-</ul>
 
-<header class="home">
-	<h2 class="entry-title" id="books">Books</h2>
-</header>
-
-<h3 class="home-heading"><a href="https://manning.com/">Manning</a></h3>
-<ul>
-	<li>
-		<a href="http://tjvantoll.com/jquery-ui-in-action.html">jQuery UI in Action</a>
-		<ul>
-			<li>Published in September 2014</li>
-			<li>5-star average on <a href="http://www.amazon.com/jQuery-UI-Action-T-VanToll/dp/1617291935/ref=sr_1_1?ie=UTF8&qid=1436237989&sr=8-1&keywords=jquery+ui">Amazon</a> (as of 2015)</li>
-		</ul>
-	</li>
-</ul>
-
-<h3 class="home-heading"><a href="http://www.smashingmagazine.com/">Smashing Magazine</a></h3>
-
-* [Practical Approaches For Designing Accessible Websites](https://shop.smashingmagazine.com/products/practical-approaches-for-designing-accessible-websites)
-	* Published in August 2015
-	* I wrote chapter 3
-
-<header class="home">
-	<h2 class="entry-title" id="publications">Publications</h2>
-</header>
 
 <h3 class="home-heading"><a href="http://angularjs.blogspot.com/">AngularJS’s Blog</a></h3>
 <ul>
@@ -261,118 +228,4 @@ Here are a few of the things I've done:
 	</li>
 </ul>
 
-<header class="home">
-	<h2 class="entry-title" id="interviews">Podcasts & Interviews</h2>
-</header>
 
-<h3 class="home-heading"><a href="https://www.thepolyglotdeveloper.com/">The Polyglot Developer</a></h3>
-<ul>
-	<li>
-		<span>May 11th, 2016</span>
-		<a href="https://www.thepolyglotdeveloper.com/2016/05/tpdp-episode-5-developing-mobile-apps-telerik-nativescript/">Episode #5: Developing Mobile Apps with Telerik NativeScript</a>
-	</li>
-</ul>
-
-<h3 class="home-heading"><a href="https://devchat.tv/adventures-in-angular/">Adventures in Angular</a></h3>
-<ul>
-	<li>
-		<span>April 28th, 2016</span>
-		<a href="https://devchat.tv/adv-in-angular/090-aia-nativescript-part-2-with-tj-vantoll">NativeScript Part 2</a>
-	</li>
-	<li>
-		<span>January 7th, 2016</span>
-		<a href="https://devchat.tv/adventures-in-angular/074-aia-nativescript-with-burke-holland-and-tj-vantoll">NativeScript</a>
-	</li>
-</ul>
-
-<h3 class="home-heading"><a href="http://developeronfire.com/">Developer on Fire</a></h3>
-<ul>
-	<li>
-		<span>April 14th, 2016</span>
-		<a href="http://developeronfire.com/episode-121-tj-vantoll-community-engagement">Episode 121 | TJ VanToll - Community Engagement</a>
-	</li>
-</ul>
-
-<h3 class="home-heading"><a href="http://rangle.io/">Rangle.io</a></h3>
-<ul>
-	<li>
-		<span>January 14th, 2016</span>
-		<a href="https://www.youtube.com/watch?v=HjFzouGIXYY">Interview with TJ VanToll (Telerik) at PhoneGap Day 2016 in Utah</a>
-	</li>
-</ul>
-
-<h3 class="home-heading"><a href="https://dzone.com">DZone</a></h3>
-<ul>
-	<li>
-		<span>January 14th, 2016</span>
-		<a href="https://dzone.com/articles/a-developer-evangelists-thoughts-on-angular2">A Developer Evangelist's Thoughts on Angular 2</a>
-	</li>
-</ul>
-
-<h3 class="home-heading"><a href="http://www.wired.com">Wired</a></h3>
-<ul>
-	<li>
-		<span>December 15th, 2015</span>
-		<a href="http://www.wired.com/2015/12/googles-angular-2-release-helps-push-javascript-beyond-the-browser/">Google’s Angular 2 Release Pushes JavaScript Beyond the Browser</a>
-	</li>
-</ul>
-
-<h3 class="home-heading"><a href="http://javascriptjabber.com/">JavaScript Jabber</a></h3>
-<ul>
-	<li>
-		<span>November 18th, 2015</span>
-		<a href="https://devchat.tv/js-jabber/186-jsj-nativescript-with-tj-vantoll-and-burke-holland">NativeScript</a>
-	</li>
-	<li>
-		<span>July 9th, 2014</span>
-		<a href="http://javascriptjabber.com/116-jsj-jquery-ui-vs-kendoui-with-burke-holland-and-tj-vantoll/">jQuery UI vs Kendo UI</a>
-	</li>
-</ul>
-
-<h3 class="home-heading"><a href="https://devchat.tv/react-native-radio">React Native Radio</a></h3>
-<ul>
-	<li>
-		<span>October 26th, 2015</span>
-		<a href="https://devchat.tv/react-native-radio/04-nativeScript-with-TJ-VanToll">NativeScript</a>
-	</li>
-</ul>
-
-<h3 class="home-heading"><a href="http://developer.telerik.com/community/eat-sleep-code/">Eat Sleep Code (The Official Telerik Podcast)</a></h3>
-<ul>
-	<li>
-		<span>October 26th, 2015</span>
-		<a href="http://developer.telerik.com/products/nativescript-inside-the-black-box/">NativeScript Under the Hood</a>
-	</li>
-</ul>
-
-<h3 class="home-heading"><a href="http://www.infoq.com/">InfoQ</a></h3>
-<ul>
-	<li>
-		<span>July 19th, 2014</span>
-		<a href="http://www.infoq.com/interviews/vantoll-hybrid-development">Hybrid Development for Mobile Apps</a>
-	</li>
-</ul>
-
-<h3 class="home-heading"><a href="http://hallwayconversations.com">Hallway Conversations</a></h3>
-<ul>
-	<li>
-		<span>March 16th, 2014</span>
-		<a href="http://hallwayconversations.com/podcast/episode-005-navigating-hybrid-mobile-apps-with-tj-vantoll/">Navigating Hybrid Mobile Apps</a>
-	</li>
-</ul>
-
-<header class="home">
-	<h2 class="entry-title" id="apps">Apps</h2>
-</header>
-
-### Groceries
-
-* [GitHub](https://github.com/nativescript/sample-Groceries)
-* [iOS App Store](https://itunes.apple.com/us/app/groceries-simple-grocery-lists/id1041129105?mt=8)
-* [Google Play](https://play.google.com/store/apps/details?id=org.nativescript.groceries&hl=en)
-
-### City Search Challenge
-
-* [GitHub](https://github.com/tjvantoll/city-search-challenge)
-* [iOS App Store](https://itunes.apple.com/us/app/city-search-geography-challenge/id954908040?mt=8)
-* [Google Play](https://play.google.com/store/apps/details?id=com.tjvantoll.citysearchchallenge)
