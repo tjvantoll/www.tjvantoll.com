@@ -99,27 +99,20 @@
 	}
 }
 
+hr.dotted {
+	background: $img-border bottom left repeat-x;
+	border: none;
+	height: 2px;
+}
+
+.cover {
+	height: 120px;
+	float: right;
+}
+
 address {
 	display: inline-block;
 	background-position: right center;
 	background-repeat: no-repeat;
 	font-style: normal;
 }
-
-.archive-header {
-	margin-bottom: 1em;
-
-	h2 {
-		margin: 0.2em 0 0 0;
-		padding: 0;
-		clear: both;
-	}
-}
-.archive-subheading {
-	a:not(:hover) {
-		color: black;
-		text-decoration: none;
-	}
-}
-
-

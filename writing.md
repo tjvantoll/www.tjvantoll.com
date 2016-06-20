@@ -4,13 +4,10 @@ title: "Writing"
 comments: false
 ---
 
-<header class="archive-header">
-	<h2 class="entry-title">Books</h2>
-</header>
-
 <div class="blog-archives">
 	<h2>2014</h2>
 	<article>
+		<img class="cover" src="/images/book.jpg" alt="jQuery UI in Action cover">
 		<h1>
 			<a href="http://tjvantoll.com/jquery-ui-in-action.html">jQuery UI in Action</a>
 		</h1>
@@ -26,9 +23,7 @@ comments: false
 	</article>
 </div>
 
-<header class="archive-header">
-	<h2 class="entry-title">Blog Posts</h2>
-</header>
+<hr class="dotted">
 
 <div class="blog-archives">
 	{% for post in site.posts reverse %}
