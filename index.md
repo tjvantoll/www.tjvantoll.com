@@ -40,6 +40,7 @@ Hi, I'm TJ. I'm a front-end developer, [tech author](#books), [speaker](/speakin
 	<li>
 		<span>February 2nd, 2016</span>
 		<a href="http://developer.telerik.com/featured/what-to-expect-from-javascript-in-2016-beyond-the-browser/">What To Expect From JavaScript In 2016 – Beyond the Browser</a>
+		<!-- http://javascriptweekly.com/issues/270 -->
 	</li>
 	<li>
 		<span>December 14th, 2015</span>
