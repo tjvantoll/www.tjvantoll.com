@@ -53,6 +53,22 @@ Here are a few of the things I've done:
 <h3 class="home-heading"><a href="http://developer.telerik.com/">Telerik Developer Network</a></h3>
 <ul>
 	<li>
+		<span>August 18th, 2016</span>
+		<a href="http://developer.telerik.com/featured/write-nativescript-plugins-theyre-easier-cordova-plugins/">How to Write NativeScript Plugins and Why They’re Easier Than Cordova Plugins</a>
+	</li>
+	<li>
+		<span>August 9th, 2016</span>
+		<a href="http://developer.telerik.com/featured/successfully-contribute-large-open-source-projects/">How to Successfully Contribute to Large Open Source Projects</a>
+	</li>
+	<li>
+		<span>July 6th, 2016</span>
+		<a href="http://developer.telerik.com/featured/advice-companies-fighting-adblockers/">Some Advice for Companies Fighting Ad Blockers</a>
+	</li>
+	<li>
+		<span>June 23rd, 2016</span>
+		<a href="http://developer.telerik.com/featured/will-angular-2-take-off/">Will Angular 2 Take Off?</a>
+	</li>
+	<li>
 		<span>April 14th, 2016</span>
 		<a href="http://developer.telerik.com/featured/how-i-build-for-proprietary-platforms/">How I Build For Proprietary Platforms and Sleep at Night</a>
 	</li>
