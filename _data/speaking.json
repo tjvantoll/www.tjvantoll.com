@@ -1,6 +1,22 @@
 {"talks": [
 
 	{
+		"name": "What’s New with NativeScript",
+		"url": "/speaking/slides/NativeScript-New-and-Hot/Boston/NativeScript-New-and-Hot.pdf",
+		"year": "2016",
+		"events": [
+			{
+				"date": "September 20th, 2016",
+				"url": "http://developerday.nativescript.org/",
+				"name": "NativeScript Developer Day",
+				"city": "Boston, Massachusetts",
+				"slides": "/speaking/slides/NativeScript-New-and-Hot/Boston/NativeScript-New-and-Hot.pdf",
+				"country": "us"
+			}
+		]
+	},
+
+	{
 		"name": "Building Native iOS and Android Apps With Angular 2 and NativeScript",
 		"abstract": "https://gist.github.com/tjvantoll/1a60028cf8ec94d7e825#building-native-ios-and-android-apps-with-angular-2-and-nativescript",
 		"url": "/speaking/slides/Building-with-Angular2-and-NativeScript/Salt-Lake-City/building-with-angular2-and-nativescript.pdf",

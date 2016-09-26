@@ -255,6 +255,14 @@ Here are a few of the things I've done:
 	<h2 class="entry-title" id="interviews">Podcasts & Interviews</h2>
 </header>
 
+<h3 class="home-heading"><a href="http://www.gistia.com/techpeople/">Tech People at Work</a></h3>
+<ul>
+	<li>
+		<span>September 15th, 2016</span>
+		<a href="http://www.gistia.com/tj-vantoll/">Episode 18, The Developer Advocate’s Quest with TJ VanToll</a>
+	</li>
+</ul>
+
 <h3 class="home-heading"><a href="https://www.thepolyglotdeveloper.com/">The Polyglot Developer</a></h3>
 <ul>
 	<li>
