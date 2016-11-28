@@ -20,7 +20,7 @@ ga('send', 'pageview');
 	var script = document.createElement("script");
 	script.type = "text/javascript";
 	script.src = "//cdn.carbonads.com/carbon.js?zoneid=1673&serve=C6AILKT&placement=tjvantollcom";
-	script.id = "_adpacks_js";
+	script.id = "_carbonads_js";
 	script.async = true;
 	script.onload = function() {
 		if (isSmallScreen) {
