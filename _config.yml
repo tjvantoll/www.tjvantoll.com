@@ -5,14 +5,11 @@ description: "TJ VanToll's blog about front-end technologies"
 baseurl: ""
 url: "https://www.tjvantoll.com"
 excerpt_separator: <!--more-->
-paginate: 10
-paginate_path: "/blog/page:num/"
 
 # Accounts
 disqus_short_name: tjvantoll
 
 # Build settings
-gems: [jekyll-paginate]
 markdown: kramdown
 permalink: pretty
 sass:
