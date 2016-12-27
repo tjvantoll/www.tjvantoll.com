@@ -4,6 +4,12 @@ comments: false
 className: home
 ---
 
+All:
+	- Update headshot image to use https://cloud.githubusercontent.com/assets/544280/17529306/c77a6de2-5e40-11e6-8d89-06f812d250c9.jpg
+	- Emoji in sidebar
+	- Redo home page
+	- Fix speaking page indentation
+
 Home page:
 	- Hide sidebar?
 	- Show image, brief description like Addy’s site
@@ -11,13 +17,9 @@ Home page:
 	- Include icons
 
 
-
-Hi, I'm TJ. I'm a front-end developer, [tech author](#books), [speaker](/speaking), and a principal developer advocate for [Telerik](http://telerik.com). I have over a decade of web development experience, including a few years working on the [jQuery team](http://jqueryui.com/about/). Nowadays I spend my time helping web developers build mobile apps through projects like [NativeScript](https://www.nativescript.org/). You can contact me on Twitter ([@tjvantoll](https://twitter.com/tjvantoll)), GitHub ([tjvantoll](https://github.com/tjvantoll)), or [via email](mailto:tj.vantoll@gmail.com).
+Hi, I'm TJ. I'm a front-end developer, [tech author](#books), [speaker](/speaking), and a principal developer advocate for [Progress](https://www.progress.com). I have over a decade of web development experience, including a few years working on the [jQuery team](http://jqueryui.com/about/). Nowadays I spend my time helping web developers build mobile apps through projects like [NativeScript](https://www.nativescript.org/). You can contact me on Twitter ([@tjvantoll](https://twitter.com/tjvantoll)), GitHub ([tjvantoll](https://github.com/tjvantoll)), or [via email](mailto:tj.vantoll@gmail.com).
 
 ![Me presenting at TelerikNEXT in 2015](/images/me/next.jpg)
-
-
-
 
 <h3 class="home-heading"><a href="http://angularjs.blogspot.com/">AngularJS’s Blog</a></h3>
 <ul>
@@ -29,6 +31,22 @@ Hi, I'm TJ. I'm a front-end developer, [tech author](#books), [speaker](/speakin
 
 <h3 class="home-heading"><a href="http://developer.telerik.com/">Telerik Developer Network</a></h3>
 <ul>
+	<li>
+		<span>August 18th, 2016</span>
+		<a href="http://developer.telerik.com/featured/write-nativescript-plugins-theyre-easier-cordova-plugins/">How to Write NativeScript Plugins and Why They’re Easier Than Cordova Plugins</a>
+	</li>
+	<li>
+		<span>August 9th, 2016</span>
+		<a href="http://developer.telerik.com/featured/successfully-contribute-large-open-source-projects/">How to Successfully Contribute to Large Open Source Projects</a>
+	</li>
+	<li>
+		<span>July 6th, 2016</span>
+		<a href="http://developer.telerik.com/featured/advice-companies-fighting-adblockers/">Some Advice for Companies Fighting Ad Blockers</a>
+	</li>
+	<li>
+		<span>June 23rd, 2016</span>
+		<a href="http://developer.telerik.com/featured/will-angular-2-take-off/">Will Angular 2 Take Off?</a>
+	</li>
 	<li>
 		<span>April 14th, 2016</span>
 		<a href="http://developer.telerik.com/featured/how-i-build-for-proprietary-platforms/">How I Build For Proprietary Platforms and Sleep at Night</a>
@@ -229,4 +247,126 @@ Hi, I'm TJ. I'm a front-end developer, [tech author](#books), [speaker](/speakin
 	</li>
 </ul>
 
+<<<<<<< HEAD
+=======
+<header class="home">
+	<h2 class="entry-title" id="interviews">Podcasts & Interviews</h2>
+</header>
+
+<h3 class="home-heading"><a href="http://www.gistia.com/techpeople/">Tech People at Work</a></h3>
+<ul>
+	<li>
+		<span>September 15th, 2016</span>
+		<a href="http://www.gistia.com/tj-vantoll/">Episode 18, The Developer Advocate’s Quest with TJ VanToll</a>
+	</li>
+</ul>
+
+<h3 class="home-heading"><a href="https://www.thepolyglotdeveloper.com/">The Polyglot Developer</a></h3>
+<ul>
+	<li>
+		<span>May 11th, 2016</span>
+		<a href="https://www.thepolyglotdeveloper.com/2016/05/tpdp-episode-5-developing-mobile-apps-telerik-nativescript/">Episode #5: Developing Mobile Apps with Telerik NativeScript</a>
+	</li>
+</ul>
+
+<h3 class="home-heading"><a href="https://devchat.tv/adventures-in-angular/">Adventures in Angular</a></h3>
+<ul>
+	<li>
+		<span>April 28th, 2016</span>
+		<a href="https://devchat.tv/adv-in-angular/090-aia-nativescript-part-2-with-tj-vantoll">NativeScript Part 2</a>
+	</li>
+	<li>
+		<span>January 7th, 2016</span>
+		<a href="https://devchat.tv/adventures-in-angular/074-aia-nativescript-with-burke-holland-and-tj-vantoll">NativeScript</a>
+	</li>
+</ul>
+
+<h3 class="home-heading"><a href="http://developeronfire.com/">Developer on Fire</a></h3>
+<ul>
+	<li>
+		<span>April 14th, 2016</span>
+		<a href="http://developeronfire.com/episode-121-tj-vantoll-community-engagement">Episode 121 | TJ VanToll - Community Engagement</a>
+	</li>
+</ul>
+
+<h3 class="home-heading"><a href="http://rangle.io/">Rangle.io</a></h3>
+<ul>
+	<li>
+		<span>January 14th, 2016</span>
+		<a href="https://www.youtube.com/watch?v=HjFzouGIXYY">Interview with TJ VanToll (Telerik) at PhoneGap Day 2016 in Utah</a>
+	</li>
+</ul>
+
+<h3 class="home-heading"><a href="https://dzone.com">DZone</a></h3>
+<ul>
+	<li>
+		<span>January 14th, 2016</span>
+		<a href="https://dzone.com/articles/a-developer-evangelists-thoughts-on-angular2">A Developer Evangelist's Thoughts on Angular 2</a>
+	</li>
+</ul>
+
+<h3 class="home-heading"><a href="http://www.wired.com">Wired</a></h3>
+<ul>
+	<li>
+		<span>December 15th, 2015</span>
+		<a href="http://www.wired.com/2015/12/googles-angular-2-release-helps-push-javascript-beyond-the-browser/">Google’s Angular 2 Release Pushes JavaScript Beyond the Browser</a>
+	</li>
+</ul>
+
+<h3 class="home-heading"><a href="http://javascriptjabber.com/">JavaScript Jabber</a></h3>
+<ul>
+	<li>
+		<span>November 18th, 2015</span>
+		<a href="https://devchat.tv/js-jabber/186-jsj-nativescript-with-tj-vantoll-and-burke-holland">NativeScript</a>
+	</li>
+	<li>
+		<span>July 9th, 2014</span>
+		<a href="http://javascriptjabber.com/116-jsj-jquery-ui-vs-kendoui-with-burke-holland-and-tj-vantoll/">jQuery UI vs Kendo UI</a>
+	</li>
+</ul>
+
+<h3 class="home-heading"><a href="https://devchat.tv/react-native-radio">React Native Radio</a></h3>
+<ul>
+	<li>
+		<span>October 26th, 2015</span>
+		<a href="https://devchat.tv/react-native-radio/04-nativeScript-with-TJ-VanToll">NativeScript</a>
+	</li>
+</ul>
+
+<h3 class="home-heading"><a href="http://developer.telerik.com/community/eat-sleep-code/">Eat Sleep Code (The Official Telerik Podcast)</a></h3>
+<ul>
+	<li>
+		<span>October 26th, 2015</span>
+		<a href="http://developer.telerik.com/products/nativescript-inside-the-black-box/">NativeScript Under the Hood</a>
+	</li>
+</ul>
+
+<h3 class="home-heading"><a href="http://www.infoq.com/">InfoQ</a></h3>
+<ul>
+	<li>
+		<span>July 19th, 2014</span>
+		<a href="http://www.infoq.com/interviews/vantoll-hybrid-development">Hybrid Development for Mobile Apps</a>
+	</li>
+</ul>
+
+<h3 class="home-heading"><a href="http://hallwayconversations.com">Hallway Conversations</a></h3>
+<ul>
+	<li>
+		<span>March 16th, 2014</span>
+		<a href="http://hallwayconversations.com/podcast/episode-005-navigating-hybrid-mobile-apps-with-tj-vantoll/">Navigating Hybrid Mobile Apps</a>
+	</li>
+</ul>
+
+<header class="home">
+	<h2 class="entry-title" id="apps">Apps</h2>
+</header>
+
+### Groceries
+
+* [GitHub](https://github.com/nativescript/sample-Groceries)
+* [iOS App Store](https://itunes.apple.com/us/app/groceries-simple-grocery-lists/id1041129105?mt=8)
+* [Google Play](https://play.google.com/store/apps/details?id=org.nativescript.groceries&hl=en)
+
+### City Search Challenge
+>>>>>>> master
 

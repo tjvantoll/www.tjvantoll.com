@@ -106,11 +106,11 @@ aside.sidebar .me-section {
 			left: 0;
 		}
 	}
-	.emoji-computer::before { content: "\01F5A5"; }
-	.emoji-pencil::before { content: "\1F4DD"; }
-	.emoji-mic::before { content: "\01F399"; }
-	.emoji-heart::before { content: "\01F496"; }
 }
+.emoji-computer::before { content: "\01F5A5"; }
+.emoji-pencil::before { content: "\1F4DD"; }
+.emoji-mic::before { content: "\01F399"; }
+.emoji-heart::before { content: "\01F496"; }
 
 nav {
 	margin: 0;
@@ -135,11 +135,24 @@ nav {
 		}
 	}
 }
-nav a[href*="github"] {
-	background-image: url("/images/github.svg");
-	background-repeat: no-repeat;
-	background-size: 20px;
-	padding-left: 25px;
+nav [class*="emoji"]::before {
+	display: none;
+	@extend .emoji;
+}
+@media (max-width: $breakpoint-tablet) {
+	nav a { text-decoration: none; }
+	nav a:hover { text-decoration: underline; }
+
+	nav [class*="emoji"]::before {
+		display: inline;
+		padding-right: 0.4rem;
+	}
+	nav a[href*="github"] {
+		background-image: url("/images/github.svg");
+		background-repeat: no-repeat;
+		background-size: 20px;
+		padding-left: 23px;
+	}
 }
 
 /* Ads */
@@ -147,21 +160,31 @@ nav a[href*="github"] {
 	margin: 1em 0;
 }
 .ad-container {
-	min-height: 113px;
 	a { text-decoration: none; }
 }
-body .one {
-	.bsa_it_ad {
-		font-family: inherit;
-		padding: 0;
-		border: none;
-		background: none;
-	}
-	.bsa_it_p {
-		position: absolute;
-		bottom: -10px;
-		left: 30px;
-	}
+#carbonads a {
+	font-size: 0.7rem;
+}
+#carbonads > span {
+	position: relative;
+}
+.carbon-wrap {
+	display: flex;
+	padding-bottom: 10px;
+}
+.carbon-text {
+	padding: 0.5rem;
+}
+.carbon-img {
+	display: flex;
+	align-items: center;
+}
+.carbon-poweredby {
+	position: absolute;
+	bottom: -10px;
+	left: 26px;
+	font-size: 0.7rem;
+	width: 300px;
 }
 
 /* When the ad lives in the content */
@@ -173,19 +196,6 @@ body .one {
 		padding: 1em;
 		margin-bottom: 1.5em;
 		min-height: 137px;
-	}
-	.one {
-		.bsa_it_ad .bsa_it_i {
-			margin-bottom: 0;
-		}
-		.bsa_it_p {
-			position: static;
-			a {
-				position: absolute;
-				right: 0;
-				bottom: -10px;
-			}
-		}
 	}
 }
 

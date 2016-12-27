@@ -1,6 +1,38 @@
 {"talks": [
 
 {
+  "name": "What’s New with NativeScript",
+  "url": "/speaking/slides/NativeScript-New-and-Hot/Boston/NativeScript-New-and-Hot.pdf",
+  "year": "2016",
+  "events": [
+    {
+      "date": "September 20th, 2016",
+      "url": "http://developerday.nativescript.org/",
+      "name": "NativeScript Developer Day",
+      "city": "Boston, Massachusetts",
+      "slides": "/speaking/slides/NativeScript-New-and-Hot/Boston/NativeScript-New-and-Hot.pdf",
+      "country": "us"
+    }
+  ]
+},
+
+{
+  "name": "Building Native iOS and Android Apps With Angular 2 and NativeScript",
+  "abstract": "https://gist.github.com/tjvantoll/1a60028cf8ec94d7e825#building-native-ios-and-android-apps-with-angular-2-and-nativescript",
+  "url": "/speaking/slides/Building-with-Angular2-and-NativeScript/Salt-Lake-City/building-with-angular2-and-nativescript.pdf",
+  "year": "2016",
+  "events": [
+    {
+      "date": "May 5th, 2016",
+      "url": "https://www.ng-conf.org",
+      "name": "ng-conf",
+      "city": "Salt Lake City, Utah",
+      "slides": "/speaking/slides/Building-with-Angular2-and-NativeScript/Salt-Lake-City/building-with-angular2-and-nativescript.pdf",
+      "country": "us"
+    }
+  ]
+},
+{
   "name": "Episode #5: Developing Mobile Apps with Telerik NativeScript",
   "url": "https://www.thepolyglotdeveloper.com/2016/05/tpdp-episode-5-developing-mobile-apps-telerik-nativescript/",
   "year": "2016",
@@ -22,7 +54,7 @@
       "url": "https://www.ng-conf.org",
       "name": "ng-conf",
       "city": "Salt Lake City, Utah",
-      "slides": "/speaking/slides/Building-with-Angular2-and-NativeScript/Salt-Lake-City/building-with-angular2-and-nativescript.pdf",
+      "slides": "/speaking/slides/Building-with-Angular2-and-NativeScript/Salt-Lake-City/building-with-angular2-and-nativescript.pdf"
     }
   ]
 },
@@ -40,7 +72,7 @@
       "name": "ng-conf",
       "city": "Salt Lake City, Utah",
       "slides": "/speaking/slides/Sharing-Code-Web-Native/Salt-Lake-City/sharing-code-web-native.pdf",
-      "video": "https://www.youtube.com/watch?v=R3nyG2xtzeQ",
+      "video": "https://www.youtube.com/watch?v=R3nyG2xtzeQ"
     }
   ]
 },
@@ -63,7 +95,6 @@
   "podcast_name": "Adventures in Angular",
   "podcast_url": "https://devchat.tv/adventures-in-angular/"
 },
-
 {
   "name": "Episode 121 | TJ VanToll - Community Engagement",
   "url": "http://developeronfire.com/episode-121-tj-vantoll-community-engagement",
@@ -97,7 +128,7 @@
       "name": "PhoneGap Day US",
       "city": "Lehi, Utah",
       "slides": "/speaking/slides/Cordova-Plugin-Roundup/Lehi/cordova-plugin-roundup.pdf",
-      "video": "https://www.youtube.com/watch?v=IpEsJJFIz7g",
+      "video": "https://www.youtube.com/watch?v=IpEsJJFIz7g"
     }
   ]
 },

@@ -19,8 +19,8 @@ ga('send', 'pageview');
 	var ad = document.querySelector(".ad-container");
 	var script = document.createElement("script");
 	script.type = "text/javascript";
-	script.src = "https://cdn.adpacks.com/adpacks.js?legacyid=1285803&zoneid=1386&key=cb7a6f705dfe7532dde49b4c2c5adf2d&serve=C6SI42Y&placement=tjvantollcom&circle=dev";
-	script.id = "_adpacks_js";
+	script.src = "//cdn.carbonads.com/carbon.js?zoneid=1673&serve=C6AILKT&placement=tjvantollcom";
+	script.id = "_carbonads_js";
 	script.async = true;
 	script.onload = function() {
 		if (isSmallScreen) {
