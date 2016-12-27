@@ -12,7 +12,7 @@ permalink: /speaking/
 			<h2>{{ talk.year }}</h2>
 		{% endif %}
 		{% capture year %}{{ talk.year }}{% endcapture %}
-		<article>
+		<article class="main-border">
 			<h1><a href="{{ talk.url }}">{{ talk.name }}</a></h1>
 			<footer>
 				<ul>

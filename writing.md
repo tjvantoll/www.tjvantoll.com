@@ -25,7 +25,7 @@ comments: false
 	</article>
 </div>
 
-<hr class="dotted">
+<hr class="main-border">
 
 <h2 class="archive-heading main-border">Articles</h2>
 
@@ -36,7 +36,7 @@ comments: false
 			{% assign year = this_year %}
 			<h2>{{ year }}</h2>
 		{% endunless %}
-		<article>
+		<article class="main-border">
 			<h1>
 				<a href="{{ root_url }}{{ post.url }}">{{post.title}}</a>
 			</h1>

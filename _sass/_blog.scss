@@ -24,7 +24,8 @@ article {
 	}
 	h2 {
 		padding-top: 0.8em;
-		background: $img-border top left repeat-x;
+		@extend .main-border;
+		background-position: top;
 	}
 	.entry-content table {
 		margin-bottom: 20px;
@@ -40,14 +41,6 @@ article {
 	h2:first-child, header + h2 {
 		background: none;
 	}
-	.feature {
-		padding-top: .5em;
-		margin-bottom: 1em;
-		padding-bottom: 1em;
-		background: $img-border bottom left repeat-x;
-		font-size: 2.0em; font-style: italic;
-		line-height: 1.3em;
-	}
 	img {
 		border-radius: 0.3em;
 		box-shadow: rgba(0, 0, 0, 0.15) 0 1px 4px;
@@ -60,7 +53,10 @@ article {
 		p.meta {
 			padding: 1rem 0;
 			margin-bottom: 0;
-			background: $img-border bottom left repeat-x, $img-border top left repeat-x;
+			background-image: $main-border-background-image, $main-border-background-image;
+			background-size: $main-border-background-size, $main-border-background-size;
+			background-position: top, bottom;
+			background-repeat: repeat-x, repeat-x;
 		}
 		.byline + time:before, time +time:before, .comments:before, .byline ~ .categories:before {
 			@extend .separator;

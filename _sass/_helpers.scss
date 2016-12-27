@@ -15,9 +15,9 @@
 }
 
 .main-border {
-	background-image: linear-gradient(to right, #BABABA 33%, rgba(255, 255, 255, 0) 0%);
+	background-image: $main-border-background-image;
+	background-size: $main-border-background-size;
 	background-position: bottom;
-	background-size: 4px 1px;
 	background-repeat: repeat-x;
 }	
 
