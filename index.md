@@ -5,8 +5,6 @@ className: home
 ---
 
 All:
-	- Update headshot image to use https://cloud.githubusercontent.com/assets/544280/17529306/c77a6de2-5e40-11e6-8d89-06f812d250c9.jpg
-	- Emoji in sidebar
 	- Redo home page
 	- Fix speaking page indentation
 

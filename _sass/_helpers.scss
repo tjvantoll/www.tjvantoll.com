@@ -14,6 +14,13 @@
 	word-wrap: break-word;
 }
 
+.main-border {
+	background-image: linear-gradient(to right, #BABABA 33%, rgba(255, 255, 255, 0) 0%);
+	background-position: bottom;
+	background-size: 4px 1px;
+	background-repeat: repeat-x;
+}	
+
 img.plain {
 	box-shadow: none;
 }

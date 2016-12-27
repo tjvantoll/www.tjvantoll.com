@@ -4,6 +4,8 @@ title: "Writing"
 comments: false
 ---
 
+<h2 class="archive-heading main-border">Books</h2>
+
 <div class="blog-archives">
 	<h2>2014</h2>
 	<article>
@@ -18,12 +20,14 @@ comments: false
 		</time>
 		<ul>
 			<li>Published by <a href="https://manning.com/">Manning</a></li>
-			<li>5-star average on <a href="http://www.amazon.com/jQuery-UI-Action-T-VanToll/dp/1617291935/ref=sr_1_1?ie=UTF8&qid=1436237989&sr=8-1&keywords=jquery+ui">Amazon</a> (as of 2015)</li>
+			<li>5-star average on <a href="http://www.amazon.com/jQuery-UI-Action-T-VanToll/dp/1617291935/ref=sr_1_1?ie=UTF8&qid=1436237989&sr=8-1&keywords=jquery+ui">Amazon</a></li>
 		</ul>
 	</article>
 </div>
 
 <hr class="dotted">
+
+<h2 class="archive-heading main-border">Articles</h2>
 
 <div class="blog-archives">
 	{% for post in site.posts reverse %}

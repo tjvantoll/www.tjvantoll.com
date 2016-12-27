@@ -1,6 +1,10 @@
 #archive {
 	#content > div { &, > article { padding-top: 0; } }
 }
+.archive-heading {
+	display: inline-block;
+	font-weight: normal;
+}
 .blog-archives {
 	article {
 		padding: 1em 0 1em;

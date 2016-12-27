@@ -1,16 +1,12 @@
 article {
-	padding-top: 1em;
 	a { @extend .force-wrap; }
 	header {
 		position: relative;
 		padding-top: 2em;
 		padding-bottom: 1em;
 		margin-bottom: 1em;
-		background: $img-border bottom left repeat-x;
 		h1 {
 			margin: 0;
-			a { text-decoration: none;
-				&:hover { text-decoration: underline; } }
 		}
 		p {
 			font-size: .9em;
@@ -24,8 +20,6 @@ article {
 		}
 		@media only screen and (min-width: 768px) {
 			margin-bottom: 1.5em;
-			padding-bottom: 1em;
-			background: $img-border bottom left repeat-x;
 		}
 	}
 	h2 {
@@ -40,8 +34,12 @@ article {
 		td.blue { color: blue; }
 		td.red { color: red; }
 	}
-	.entry-content & h2:first-child, header + h2 { padding-top: 0; }
-	h2:first-child, header + h2 { background: none; }
+	.entry-content & h2:first-child, header + h2 {
+		padding-top: 0;
+	}
+	h2:first-child, header + h2 {
+		background: none;
+	}
 	.feature {
 		padding-top: .5em;
 		margin-bottom: 1em;
@@ -52,12 +50,12 @@ article {
 	}
 	img {
 		border-radius: 0.3em;
-		box-shadow: rgba(0,0,0,0.15) 0 1px 4px;
+		box-shadow: rgba(0, 0, 0, 0.15) 0 1px 4px;
 		max-width: 100%;
 	}
 	> footer {
-		padding-bottom: 2.5rem;
-		margin-top: 2rem;
+		padding-bottom: 1.5rem;
+		margin-top: 1rem;
 		@extend .sans;
 		p.meta {
 			padding: 1rem 0;
@@ -68,68 +66,12 @@ article {
 			@extend .separator;
 		}
 	}
-
-}
-article + article {
-	.blog-index & {
-		background: $img-border top left repeat-x;
-	}
-}
-#main .blog-index {
-	padding: { top: 0; bottom: 0; }
-	article { padding-top: 1em; }
-	article header { background: none; padding-bottom: 0; }
-	article h1 {
-		font-size: 2.2em;
-		a { color: inherit; &:hover { color: $link-color-hover; } }
-	}
-	a[rel=full-article] {
-		background: darken($main-bg, 5);
-		display: inline-block;
-		padding: .4em .8em;
-		margin-right: .5em;
-		text-decoration: none;
-		color: mix($text-color, $text-color-light);
-		@extend .serif;
-		-webkit-transition: background-color .5s;
-		transition: background-color .5s;
-		&:hover {
-			background: $link-color-hover;
-			text-shadow: none;
-			color: $main-bg;
-		}
-	}
-	footer {
-		@extend .sans;
-		margin-top: 1em;
-	}
 }
 
 .separator {
 	content: "\2022 ";
 	padding: 0 .4em 0 .2em;
 	display: inline-block;
-}
-
-#main div.pagination {
-	text-align: center;
-	font-size: .95em;
-	position: relative;
-	background: $img-border top left repeat-x;
-	padding: 1.5em 0;
-	margin-left: $gutter-width-mobile;
-	margin-right: $gutter-width-mobile;
-	a {
-		text-decoration: none;
-		&.prev { position: absolute; left: 0; }
-		&.next { position: absolute; right: 0; }
-	}
-}
-@media (min-width: $breakpoint-phone) {
-	#main div.pagination {
-		margin-left: $gutter-width;
-		margin-right: $gutter-width;
-	}
 }
 
 header.no_comments {
