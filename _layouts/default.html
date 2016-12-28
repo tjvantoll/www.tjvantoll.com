@@ -25,7 +25,6 @@ Oh, hi! Since you're here, you might want to know that the source code that buil
 
 	<link rel="stylesheet" href="/css/app.css">
 
-	<script src="/js/prism.min.js"></script>
 	<script>
 		if ("serviceWorker" in navigator) {
 			// navigator.serviceWorker.register("/service-worker.js");
@@ -38,7 +37,7 @@ Oh, hi! Since you're here, you might want to know that the source code that buil
 		{{ content | expand_urls: root_url }}
 	</div>
 	<script src="/js/dynamic.js"></script>
-	{% if page.comments != false %}
+	{% if page.comments == true %}
 		<script id="dsq-count-scr" src="https://{{ site.disqus_short_name }}.disqus.com/count.js" async></script>
 	{% endif %}
 </body>
