@@ -35,13 +35,26 @@ title: "Writing"
 			{% assign year = this_year %}
 			<h2>{{ year }}</h2>
 		{% endunless %}
+
 		<article class="main-border">
+
 			<h1>
-				<a href="{{ root_url }}{{ post.url }}">{{ post.title }}</a>
+				{% if post.redirect_url %}
+					<a href="{{ post.redirect_url }}">{{ post.title }}</a>
+				{% else %}
+					<a href="{{ root_url }}{{ post.url }}">{{ post.title }}</a>
+				{% endif %}
 			</h1>
 			<time>
 				{{ post.date | date: " <span class='month'>%b</span> <span class='day'>%d</span> <span class='year'>%Y</span>"}}
 			</time>
+			{% if post.redirect_url %}
+				<footer>
+					<ul>
+						<li>Published on <a href="{{ post.publication_url }}">{{ post.publication_name }}</a></li>
+					</ul>
+				</footer>
+			{% endif %}
 		</article>
 	{% endfor %}
 </div>
