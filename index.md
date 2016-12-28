@@ -7,7 +7,7 @@ className: home
 All:
 	- Redo home page
 	- Finish speaking page
-	- Mass generate speaking pages
+	- Mass generate speaking pagess
 
 Home page:
 	- Hide sidebar?

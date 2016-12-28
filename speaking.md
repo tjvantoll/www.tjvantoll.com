@@ -1,18 +1,18 @@
 ---
 layout: page
 title: "Speaking"
-comments: false
-permalink: /speaking/
 ---
 
-<div class="blog-archives speaking">
+<div class="blog-archives">
 	{% capture year %}{% endcapture %}
+
 	{% for talk in site.data.speaking.talks %}
 		{% capture talk_year %}{{ talk.date | date: "%Y" }}{% endcapture %}
 		{% if year != talk_year %}
 			<h2>{{ talk_year }}</h2>
 		{% endif %}
 		{% capture year %}{{ talk_year }}{% endcapture %}
+
 		<article class="main-border">
 			<h1><a href="{{ talk.url }}">{{ talk.name }}</a></h1>
 			<time>

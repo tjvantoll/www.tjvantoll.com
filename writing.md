@@ -1,7 +1,6 @@
 ---
 layout: page
 title: "Writing"
-comments: false
 ---
 
 <h2 class="archive-heading main-border">Books</h2>
@@ -41,7 +40,7 @@ comments: false
 				<a href="{{ root_url }}{{ post.url }}">{{ post.title }}</a>
 			</h1>
 			<time>
-				{{ post.date | date: "	<span class='month'>%b</span> <span class='day'>%d</span> <span class='year'>%Y</span>"}}
+				{{ post.date | date: " <span class='month'>%b</span> <span class='day'>%d</span> <span class='year'>%Y</span>"}}
 			</time>
 		</article>
 	{% endfor %}

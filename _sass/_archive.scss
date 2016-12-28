@@ -1,86 +1,71 @@
-#archive {
-	#content > div { &, > article { padding-top: 0; } }
-}
 .archive-heading {
 	display: inline-block;
 	font-weight: normal;
 }
 .blog-archives {
+	color: $text-color-light;
+
 	article {
 		padding: 1em 0 1em;
 		position: relative;
-		&:last-child {
-			background: none;
-		}
+		// No dotted border under the last entry
+		&:last-child { background: none; }
 		footer { padding: 0; margin: 0;}
 	}
-	h2 { display: none; }
+
+	// Hide the years by default
+	h2 {
+		display: none;
+		padding-top: 0.9rem;
+	}
+
 	h1 {
 		color: $text-color;
-		font-size: 1.5em;
-		margin-bottom: .3em;
+		font-size: 1.5rem;
+		margin-bottom: 0.4rem;
 		a {
 			text-decoration: none;
-			&:hover, &:focus {
-				text-decoration: underline;
-			}
+			&:hover, &:focus { text-decoration: underline; }
 			color: inherit;
 			&:hover { color: $link-color-hover; }
 			font-weight: normal;
-			display: inline-block;
 		}
 	}
+
 	ul { color: $text-color; }
+
 	time {
 		@extend .sans;
-		color: $text-color-light;
-	}
-	color: $text-color-light;
-	.entry-content { display: none; }
-	time {
 		font-size: .9em;
 		line-height: 1.2em;
+		display: inline-block;
+		padding-bottom: 0.5rem;
 		.month, .day { display: inline-block; }
 		.month { text-transform: uppercase; }
 	}
-	p { margin-bottom: 1em; }
+
 	a:hover { color: $link-color-hover; }
+
 	@media (min-width: $breakpoint-phone) {
 		article { margin-left: 5em; }
+
 		h2 {
 			margin-bottom: .3em;
 			font-weight: normal;
 			display: inline-block;
-			position: relative; top: -1px;
 			float: left;
-			&:first-child { padding-top: .75em; }
 		}
+
 		time {
 			position: absolute;
-			text-align: right;
-			left: 0em;
-			top: 1.8em;
+			left: 0;
+			top: 1.5rem;
 		}
+
 		.year { display: none; }
+
 		article {
 			padding: { left: 4.5em; bottom: .7em; }
-		}
-	}
-}
-
-.blog-archives.speaking {
-	article {
-		ul {
-			overflow: hidden;
-			padding-left: 1.5em;
-			margin: 0.5em 0 1em 0;
-		}
-		li:not(:first-child) { margin-top: 0.2rem; }
-		a {
-			white-space: normal;
-			&:hover {
-				color: $link-color-hover;
-			}
 		}
 	}
 }
@@ -95,9 +80,3 @@ hr.main-border {
 	float: right;
 }
 
-address {
-	display: inline-block;
-	background-position: right center;
-	background-repeat: no-repeat;
-	font-style: normal;
-}
