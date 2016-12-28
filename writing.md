@@ -7,7 +7,7 @@ title: "Writing"
 
 <div class="blog-archives">
 	<h2>2014</h2>
-	<article>
+	<article class="book-listing">
 		<img class="cover" src="/images/book.jpg" alt="jQuery UI in Action cover">
 		<h1>
 			<a href="http://tjvantoll.com/jquery-ui-in-action.html">jQuery UI in Action</a>

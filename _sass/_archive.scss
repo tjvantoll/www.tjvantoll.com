@@ -2,6 +2,12 @@
 	display: inline-block;
 	font-weight: normal;
 }
+
+.book-listing {
+	margin-bottom: 2rem;
+	ul { margin-bottom: 0; }
+}
+
 .blog-archives {
 	color: $text-color-light;
 
@@ -22,7 +28,7 @@
 	h1 {
 		color: $text-color;
 		font-size: 1.5rem;
-		margin-bottom: 0.4rem;
+		margin-bottom: 0.5rem;
 		a {
 			text-decoration: none;
 			&:hover, &:focus { text-decoration: underline; }
@@ -32,7 +38,10 @@
 		}
 	}
 
-	ul { color: $text-color; }
+	ul {
+		color: $text-color;
+		margin-bottom: 0.5rem;
+	}
 
 	time {
 		@extend .sans;
