@@ -1,0 +1,33 @@
+<!--
+Oh, hi! Since you're here, you might want to know that the source code that builds this site is available at https://github.com/tjvantoll/www.tjvantoll.com. Enjoy 😀
+-->
+
+{% capture root_url %}{{ site.root | strip_slash }}{% endcapture %}
+<!DOCTYPE html>
+<html
+	lang="en"
+	class="{% if page.className %}{{ page.className }}{% endif %}"
+	data-comments="{{ page.comments }}"
+	data-disqus-shortname="{{ site.disqus_short_name }}"
+	data-disqus-url="{{ site.url }}{{ page.url }}">
+<head>
+	<meta charset="utf-8">
+	<title>{% if page.title %}{{ page.title }}{% else %}{{ site.title }}{% endif %}</title>
+
+	<meta name="author" content="TJ VanToll">
+	<meta name="description" content="{% if page.excerpt %}{{ page.excerpt | strip_html | strip_newlines | truncate: 160 }}{% else %}{{ site.description }}{% endif %}">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link rel="author" href="https://plus.google.com/+TJVanToll">
+	<link rel="canonical" href="{{ page.url | replace:'index.html','' | prepend: site.baseurl | prepend: site.url }}">
+	<link rel="manifest" href="/manifest.json">
+	<link rel="alternate" type="application/rss+xml" title="{{ site.title }}" href="{{ "/feed.xml" | prepend: site.baseurl | prepend: site.url }}">
+
+	<link rel="stylesheet" href="/css/app.css">
+
+	<script>
+		if ("serviceWorker" in navigator) {
+			// navigator.serviceWorker.register("/service-worker.js");
+		}
+	</script>
+</head>
