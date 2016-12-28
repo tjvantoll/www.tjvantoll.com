@@ -6,7 +6,8 @@ className: home
 
 All:
 	- Redo home page
-	- Fix speaking page indentation
+	- Finish speaking page
+	- Mass generate speaking pages
 
 Home page:
 	- Hide sidebar?

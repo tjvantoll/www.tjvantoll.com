@@ -70,29 +70,12 @@
 
 .blog-archives.speaking {
 	article {
-		padding-left: 0em;
-		color: $text-color;
 		ul {
 			overflow: hidden;
 			padding-left: 1.5em;
 			margin: 0.5em 0 1em 0;
 		}
-		li:not(:first-child) { margin-top: 0.4em; }
-		li.type {
-			&::before {
-				@extend .emoji;
-				font-size: 1.3em;
-				line-height: 1.3;
-				vertical-align: middle;
-				padding-right: 0.3em;
-			}
-			&.podcast, &.interview { list-style-type: none; }
-			&.podcast::before { content: "\2728"; }
-			&.interview::before { content: "\1F3A9"; }
-			&.conference::before { content: "\1F37A"; }
-			&.workshop::before { content: "\1F680"; }
-		}
-		span { display: block; }
+		li:not(:first-child) { margin-top: 0.2rem; }
 		a {
 			white-space: normal;
 			&:hover {

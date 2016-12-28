@@ -1,0 +1,24 @@
+{"talks": [
+
+{
+  "name": "Building Native iOS and Android Apps With Angular 2 and NativeScript",
+  "abstract": "https://gist.github.com/tjvantoll/1a60028cf8ec94d7e825#building-native-ios-and-android-apps-with-angular-2-and-nativescript",
+  "url": "/speaking/slides/Building-with-Angular2-and-NativeScript/Salt-Lake-City/building-with-angular2-and-nativescript.pdf",
+  "date": "2016-05-05",
+  "type": "workshop",
+  "talk_venue": "ng-conf",
+  "talk_venue_url": "https://www.ng-conf.org",
+  "talk_venue_city": "Salt Lake City, Utah",
+  "talk_slides": "/speaking/slides/Building-with-Angular2-and-NativeScript/Salt-Lake-City/building-with-angular2-and-nativescript.pdf"
+},
+{
+  "name": "A Developer Evangelist's Thoughts on Angular 2",
+  "url": "https://dzone.com/articles/a-developer-evangelists-thoughts-on-angular2",
+  "year": "2016",
+  "type": "interview",
+  "date": "January 14th, 2016",
+  "site_name": "DZone",
+  "site_url": "https://dzone.com"
+}
+
+]}

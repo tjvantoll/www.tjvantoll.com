@@ -38,9 +38,9 @@ comments: false
 		{% endunless %}
 		<article class="main-border">
 			<h1>
-				<a href="{{ root_url }}{{ post.url }}">{{post.title}}</a>
+				<a href="{{ root_url }}{{ post.url }}">{{ post.title }}</a>
 			</h1>
-			<time datetime="{{ post.date | datetime | date_to_xmlschema }}" pubdate>
+			<time>
 				{{ post.date | date: "	<span class='month'>%b</span> <span class='day'>%d</span> <span class='year'>%Y</span>"}}
 			</time>
 		</article>
