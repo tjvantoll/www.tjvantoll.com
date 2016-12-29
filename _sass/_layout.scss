@@ -147,11 +147,17 @@ nav [class*="emoji"]::before {
 		display: inline;
 		padding-right: 0.4rem;
 	}
-	nav a[href*="github"] {
-		background-image: url("/images/github.svg");
+	nav a[href*="github"], nav a[href*="twitter"] {
+		background-position: left center;
 		background-repeat: no-repeat;
-		background-size: 20px;
-		padding-left: 23px;
+		background-size: 1.2rem;
+		padding-left: 1.4rem;
+	}
+	nav a[href*="github"] {
+		background-image: url("/images/icons/github.svg");
+	}
+	nav a[href*="twitter"] {
+		background-image: url("/images/icons/twitter.svg");
 	}
 }
 

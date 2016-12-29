@@ -27,13 +27,31 @@ layout: empty
   ul {
     display: flex;
     justify-content: center;
-    font-size: 2rem;
-    margin: 0 auto;
-    max-width: 600px;
+    font-size: 1.5rem;
+    margin: 0 auto 1.5rem;
+    max-width: 400px;
   }
   li {
     list-style: none;
     flex-grow: 1;
+    width: 45%;
+  }
+  .divider {
+    color: lightgray;
+    line-height: 100%;
+    width: 10%;
+  }
+  a[href*="github"], a[href*="twitter"] {
+    background-position: left center;
+    background-repeat: no-repeat;
+    background-size: 1.5rem;
+    padding-left: 1.8rem;
+  }
+  a[href*="github"] {
+    background-image: url("/images/icons/github.svg");
+  }
+  a[href*="twitter"] {
+    background-image: url("/images/icons/twitter.svg");
   }
 </style>
 
@@ -53,11 +71,21 @@ layout: empty
   </p>
 
   <ul>
-    <li class="emoji-pencil">
+    <li class="emoji emoji-pencil">
       <a href="/writing">Writing</a>
     </li>
-    <li class="emoji-mic">
+    <li class="divider">.</li>
+    <li class="emoji emoji-mic">
       <a href="/speaking">Speaking</a>
+    </li>
+  </ul>
+  <ul>
+    <li>
+      <a href="https://github.com/tjvantoll">GitHub</a>
+    </li>
+    <li class="divider">.</li>
+    <li>
+      <a href="https://twitter.com/tjvantoll">Twitter</a>
     </li>
   </ul>
 </div>
