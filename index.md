@@ -15,7 +15,7 @@ layout: empty
   h1 {
     font-size: 3rem;
   }
-  img {
+  .profile-image {
     border-radius: 10%;
     height: 200px;
   }
@@ -29,36 +29,30 @@ layout: empty
     justify-content: center;
     font-size: 1.5rem;
     margin: 0 auto 1.5rem;
-    max-width: 400px;
+    max-width: 600px;
   }
   li {
     list-style: none;
     flex-grow: 1;
-    width: 45%;
+    border-right: 1px solid lightgray;
+  }
+  li:last-child {
+    border: none;
   }
   .divider {
     color: lightgray;
-    line-height: 100%;
-    width: 10%;
   }
-  a[href*="github"], a[href*="twitter"] {
-    background-position: left center;
-    background-repeat: no-repeat;
-    background-size: 1.5rem;
-    padding-left: 1.8rem;
-  }
-  a[href*="github"] {
-    background-image: url("/images/icons/github.svg");
-  }
-  a[href*="twitter"] {
-    background-image: url("/images/icons/twitter.svg");
+  .svg-image {
+    height: 2rem;
+    vertical-align: middle;
   }
 </style>
 
 <div class="container">
   <h1>TJ VanToll</h1>
 
-  <img src="https://cloud.githubusercontent.com/assets/544280/17529306/c77a6de2-5e40-11e6-8d89-06f812d250c9.jpg"
+  <img class="profile-image"
+    src="/images/me/headshot-big.jpg"
     alt="Me presenting at TelerikNEXT">
 
   <p>
@@ -71,21 +65,21 @@ layout: empty
   </p>
 
   <ul>
-    <li class="emoji emoji-pencil">
+    <li>
       <a href="/writing">Writing</a>
     </li>
-    <li class="divider">.</li>
-    <li class="emoji emoji-mic">
+    <li>
       <a href="/speaking">Speaking</a>
     </li>
-  </ul>
-  <ul>
     <li>
-      <a href="https://github.com/tjvantoll">GitHub</a>
+      <a href="https://github.com/tjvantoll">
+        <img class="svg-image" src="/images/icons/github.svg" alt="GitHub">
+      </a>
     </li>
-    <li class="divider">.</li>
     <li>
-      <a href="https://twitter.com/tjvantoll">Twitter</a>
+      <a href="https://twitter.com/tjvantoll">
+        <img class="svg-image" src="/images/icons/twitter.svg" alt="Twitter">
+      </a>
     </li>
   </ul>
 </div>
