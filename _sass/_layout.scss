@@ -142,14 +142,15 @@ nav {
 	a[href*="github"], a[href*="twitter"] {
 		background-position: center;
 		background-repeat: no-repeat;
-		background-size: 1.2rem;
 		padding: 1rem;
 	}
 	a[href*="github"] {
 		background-image: url("/images/icons/github.svg");
+		background-size: 1.3rem;
 	}
 	a[href*="twitter"] {
 		background-image: url("/images/icons/twitter.svg");
+		background-size: 1.4rem;
 	}
 }
 nav [class*="emoji"]::before {

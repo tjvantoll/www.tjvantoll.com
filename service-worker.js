@@ -1,9 +1,7 @@
-var version = "9.0::";
+var version = "10.0::";
 var offlineResources = [
 	"/",
-	"/offline/",
-	"/css/app.css",
-	"/js/prism.min.js"
+	"/offline/"
 ];
 self.addEventListener("install", function(event) {
 	event.waitUntil(
@@ -66,12 +64,6 @@ self.addEventListener("fetch", function(event) {
 		return;
 	}
 
-	// For non-HTML requests look in the cache first, and fall back to
-	// the network
-	event.respondWith(
-		caches.match(request)
-			.then(function(response) {
-				return response || fetch(request);
-			})
-	);
+	// For non-HTML requests just respond from the network
+	event.respondWith(fetch(request));
 });
