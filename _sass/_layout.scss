@@ -134,37 +134,14 @@ nav {
 			border: none;
 		}
 	}
-	span {
-		position: absolute;
-		top: -9999px;
-		left: -9999px;
-	}
-	a[href*="github"], a[href*="twitter"] {
-		background-position: center;
-		background-repeat: no-repeat;
-		padding: 1rem;
-	}
-	a[href*="github"] {
-		background-image: url("/images/icons/github.svg");
-		background-size: 1.3rem;
-	}
-	a[href*="twitter"] {
-		background-image: url("/images/icons/twitter.svg");
-		background-size: 1.4rem;
-	}
+	.svg-image { vertical-align: middle; }
+	.svg-image[alt="GitHub"] { height: 1.3rem; }
+	.svg-image[alt="Twitter"] { height: 1.4rem; }
 }
-nav [class*="emoji"]::before {
-	display: none;
-	@extend .emoji;
-}
+
 @media (max-width: $breakpoint-tablet) {
 	nav a { text-decoration: none; }
 	nav a:hover { text-decoration: underline; }
-
-	nav [class*="emoji"]::before {
-		display: inline;
-		padding-right: 0.4rem;
-	}
 }
 
 /* Ads */
