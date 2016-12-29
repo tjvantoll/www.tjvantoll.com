@@ -134,6 +134,23 @@ nav {
 			border: none;
 		}
 	}
+	span {
+		position: absolute;
+		top: -9999px;
+		left: -9999px;
+	}
+	a[href*="github"], a[href*="twitter"] {
+		background-position: center;
+		background-repeat: no-repeat;
+		background-size: 1.2rem;
+		padding: 1rem;
+	}
+	a[href*="github"] {
+		background-image: url("/images/icons/github.svg");
+	}
+	a[href*="twitter"] {
+		background-image: url("/images/icons/twitter.svg");
+	}
 }
 nav [class*="emoji"]::before {
 	display: none;
@@ -146,18 +163,6 @@ nav [class*="emoji"]::before {
 	nav [class*="emoji"]::before {
 		display: inline;
 		padding-right: 0.4rem;
-	}
-	nav a[href*="github"], nav a[href*="twitter"] {
-		background-position: left center;
-		background-repeat: no-repeat;
-		background-size: 1.2rem;
-		padding-left: 1.4rem;
-	}
-	nav a[href*="github"] {
-		background-image: url("/images/icons/github.svg");
-	}
-	nav a[href*="twitter"] {
-		background-image: url("/images/icons/twitter.svg");
 	}
 }
 
