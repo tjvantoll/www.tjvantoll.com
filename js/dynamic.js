@@ -9,37 +9,38 @@ ga('send', 'pageview');
 
 // Ads
 (function() {
-	var isSmallScreen = window.innerWidth <= 800;
-	var isBlogPage = document.querySelector(".entry-content") && !document.querySelector(".blog-index");
+	var isBlogPage = document.querySelector("html").getAttribute("data-comments") === "true";
 
-	if (isSmallScreen && !isBlogPage) {
+	if (!isBlogPage) {
 		return;
 	}
 
-	var ad = document.querySelector(".ad-container");
+	var ad = document.createElement("div");
+	ad.className = "ad-container";
+
+	var paragraphs = document.querySelectorAll(".entry-content > p");
+	paragraphToUse = paragraphs.length > 1 ? paragraphs[1] : paragraphs[0];
+	paragraphToUse.parentNode.insertBefore(ad, paragraphToUse);
+
 	var script = document.createElement("script");
 	script.type = "text/javascript";
 	script.src = "//cdn.carbonads.com/carbon.js?zoneid=1673&serve=C6AILKT&placement=tjvantollcom";
 	script.id = "_carbonads_js";
 	script.async = true;
 	script.onload = function() {
-		if (isSmallScreen) {
-			var paragraphs = document.querySelectorAll(".entry-content > p");
-			paragraphToUse = paragraphs.length > 1 ? paragraphs[1] : paragraphs[0];
-			paragraphToUse.parentNode.insertBefore(ad, paragraphToUse);
-		}
 		ad.style.display = "block";
 	};
-	document.querySelector(".ad-container").appendChild(script);
+
+	ad.appendChild(script);
 }());
 
 // Comments
 (function () {
-	var comments = document.querySelector("html").getAttribute("data-comments");
+	var comments = document.querySelector("html").getAttribute("data-comments") === "true";
 	var disqus_shortname = document.querySelector("html").getAttribute("data-disqus-shortname");
 	var disqus_url = document.querySelector("html").getAttribute("data-disqus-url");
 
-	if (comments === "true") {
+	if (comments) {
 		window.disqus_config = function () {
 			this.page.url = disqus_url;
 			this.page.identifier = disqus_url;

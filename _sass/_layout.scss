@@ -90,14 +90,20 @@ body {
 }
 
 /* Ads */
-.ad-section {
-	margin: 1em 0;
-}
 .ad-container {
+	display: none;
+	border: 1px solid $text-color;
+	padding: 1rem;
+	margin: 0 0 1rem 1rem;
+	min-height: 137px;
+	width: 350px;
+	float: right;
 	a { text-decoration: none; }
 }
 #carbonads a {
 	font-size: 0.7rem;
+	color: $text-color;
+	&:hover { color: $link-color-hover; }
 }
 #carbonads > span {
 	position: relative;
@@ -116,19 +122,13 @@ body {
 .carbon-poweredby {
 	position: absolute;
 	bottom: -10px;
-	left: 26px;
+	left: 19px;
 	font-size: 0.7rem;
 	width: 300px;
 }
-
-/* When the ad lives in the content */
-.entry-content {
+@media (max-width: $breakpoint-tablet) {
 	.ad-container {
-		display: none;
-		background: white;
-		border: 1px solid $text-color;
-		padding: 1em;
-		margin-bottom: 1.5em;
-		min-height: 137px;
+		width: 100%;
+		margin: 0 0 1rem 0;
 	}
 }
