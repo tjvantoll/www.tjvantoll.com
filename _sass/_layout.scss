@@ -9,139 +9,84 @@ body {
 	margin: 0;
 }
 #main {
-	display: -webkit-flex;
-	display: flex;
-	-webkit-align-items: flex-start;
-	align-items: flex-start;
-	max-width: 59rem;
-	margin: 1rem auto;
-}
-aside.sidebar {
-	border: 1px solid #dadde3;
-	border-right-width: 0;
-	-webkit-flex: 0 0 300px;
-	flex: 0 0 300px;
-	margin-left: 1em;
-	@extend .sans;
-	background: #f3f5f8;
-	section {
-		padding: 0 1em;
-	}
-}
-#main > div {
-	border: 1px solid #dadde3;
-	background: white;
-	margin-right: 1em;
-	// wtf Firefox? http://stackoverflow.com/questions/27472595/firefox-34-ignoring-max-width-for-flexbox
-	min-width: 1px;
-	min-height: 30rem;
-}
-#main > div > article {
-	padding: 15px $gutter-width-mobile 0 $gutter-width-mobile;
-}
-#main > div > section {
-	padding: 0 $gutter-width-mobile 1em $gutter-width-mobile;
-}
-@media (min-width: $breakpoint-phone) {
-	#main > div > article,
-	#main > div > section {
-		padding-left: $gutter-width;
-		padding-right: $gutter-width;
-	}
+	padding: 0 1rem;
+	max-width: 38rem;
+	margin: 0 auto;
 }
 
-.main-info {
-	background: $link-color-hover;
-	color: $main-bg;
+.header {
+	@extend .sans;
+	@extend .main-border;
 	display: flex;
-	padding: 1rem;
-	> a, div { flex-grow: 1; }
-	div {
-		text-align: center;
+	margin-bottom: 1rem;
+
+	> div {
+		width: 300px;
 		display: flex;
 		align-items: center;
+
+		img {
+			height: 40px;
+			width: 40px;
+			border-radius: 10px;
+		}
+		a { display: inline-flex; }
 	}
-	img {
-		height: 80px;
-		width: 80px;
-		border-radius: 20px;
-	}
+
 	h1 {
+		display: inline-block;
 		margin: 0;
+		padding-left: 0.3rem;
 		font-size: 1.5rem;
-	}
-	a {
-		color: $main-bg;
-		&:visited { color: $main-bg;; }
-		&:active { color: $main-bg; }
-		&:hover {
-			color: $main-bg;
-			text-decoration: underline;
-		}
-		text-decoration: none;
-		line-height: 1;
-	}
-}
+		font-weight: normal;
 
-aside.sidebar .me-section {
-	font-size: 0.9rem;
-}
-
-.emoji {
-	font-family: "Segoe UI Emoji";
-}
-.emoji-list {
-	margin: 1rem 0 1rem 1rem;
-	list-style-type: none;
-	li {
-		margin-bottom: 0.6em;
-		padding-left: 1.8em;
-		position: relative;
-		&::before {
-			@extend .emoji;
-			font-size: 1.3em;
-			line-height: 1.3;
-			vertical-align: middle;
-			position: absolute;
-			left: 0;
-		}
+		a { text-decoration: none; }
+		a:visited { color: $link-color; }
+		a:hover { text-decoration: underline; }
 	}
-}
-.emoji-computer::before { content: "\01F5A5"; }
-.emoji-pencil::before { content: "\1F4DD"; }
-.emoji-mic::before { content: "\01F399"; }
-.emoji-heart::before { content: "\01F496"; }
 
-nav {
-	margin: 0;
-	border-style: solid;
-	border-width: 1px 0;
-	border-color: #dadde3;
-	ul {
-		display: -webkit-flex;
-		display: flex;
-		-webkit-justify-content: center;
-		justify-content: center;
-		margin: 1em 0;
-	}
-	li {
-		list-style: none;
-		border-right: 1px solid $text-color-light;
-		-webkit-flex-grow: 1;
+	nav {
 		flex-grow: 1;
-		text-align: center;
-		&:last-child {
-			border: none;
+		margin: 0;
+		ul {
+			display: flex;
+			justify-content: center;
+			margin: 1em 0;
 		}
+		li {
+			list-style: none;
+			border-right: 1px solid $text-color-light;
+			flex-grow: 1;
+			text-align: center;
+			&:last-child {
+				border: none;
+			}
+		}
+		.svg-image { vertical-align: middle; }
+		.svg-image[alt="GitHub"] { height: 1.3rem; width: 1.3rem; }
+		.svg-image[alt="Twitter"] { height: 1.4rem; width: 1.4rem; }
 	}
-	.svg-image { vertical-align: middle; }
-	.svg-image[alt="GitHub"] { height: 1.3rem; }
-	.svg-image[alt="Twitter"] { height: 1.4rem; }
 }
 
 @media (max-width: $breakpoint-tablet) {
 	nav a { text-decoration: none; }
 	nav a:hover { text-decoration: underline; }
+}
+@media (max-width: 700px) {
+	.header > div { width: 225px; }
+}
+@media (max-width: $breakpoint-phone) {
+	.header {
+		display: block;
+		padding-bottom: 1rem;
+		nav ul { margin-bottom: 0; }
+	}
+	.header > div {
+		margin: 1rem auto 0 auto;
+	}
+	.header > div {
+		text-align: center;
+	}
 }
 
 /* Ads */
@@ -186,55 +131,4 @@ nav {
 		margin-bottom: 1.5em;
 		min-height: 137px;
 	}
-}
-
-@media (max-width: $breakpoint-tablet) {
-	body {
-		max-width: 37rem;
-		margin: 0 auto;
-		border: 1px solid #dadde3;
-		border-width: 0 1px 0 1px;
-	}
-	#main {
-		display: block;
-		margin: 0;
-	}
-	aside.sidebar {
-		margin: 0;
-		border-width: 0 0 1px 0;
-		nav {
-			border-bottom-width: 0;
-			font-size: 1.1rem;
-		}
-		.me-section {
-			font-size: 1em;
-			padding: 0;
-			.emoji-list { display: none; }
-		}
-	}
-	#main > div {
-		margin: 0;
-		border: none;
-	}
-	.main-info {
-		display: block;
-		div { display: block; }
-		h1 {
-			margin: 0;
-			font-size: 2em;
-		}
-		& > a {
-			display: none;
-		}
-		h1 + a {
-			display: none;
-		}
-	}
-	aside.sidebar .ad-section {
-		display: none;
-	}
-}
-
-@media (max-width: 37rem) {
-	body { border: none; }
 }

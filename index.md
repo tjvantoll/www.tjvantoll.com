@@ -27,7 +27,7 @@ layout: empty
   ul {
     display: flex;
     justify-content: center;
-    font-size: 1.5rem;
+    font-size: 1.4rem;
     margin: 0 auto 1.5rem;
     max-width: 600px;
   }
@@ -44,6 +44,7 @@ layout: empty
   }
   .svg-image {
     height: 2rem;
+    width: 2rem;
     vertical-align: middle;
   }
 </style>
@@ -73,12 +74,12 @@ layout: empty
     </li>
     <li>
       <a href="https://github.com/tjvantoll">
-        <img class="svg-image" src="/images/icons/github.svg" alt="GitHub">
+        <img class="svg-image" src="/images/icons/github.svg" alt="GitHub" height="40" width="40">
       </a>
     </li>
     <li>
       <a href="https://twitter.com/tjvantoll">
-        <img class="svg-image" src="/images/icons/twitter.svg" alt="Twitter">
+        <img class="svg-image" src="/images/icons/twitter.svg" alt="Twitter" height="40" width="40">
       </a>
     </li>
   </ul>

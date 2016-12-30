@@ -3,6 +3,8 @@ layout: page
 title: "Speaking"
 ---
 
+I started speaking at conferences and user groups all the way back in 2012. Over the years I’ve attended a number of awesome events, met some really cool people, and awkwardly messed with PowerPoint in front of a thousand people. Here’s a list of the events I’ve been to and the podcasts I’ve appeared on.
+
 <div class="blog-archives">
 	{% capture year %}{% endcapture %}
 

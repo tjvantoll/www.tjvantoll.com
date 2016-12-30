@@ -3,21 +3,21 @@
 .mono { font-family: $mono; }
 
 html {
-	font-size: 16px;
+	font-size: 20px;
 	line-height: 1.6;
 	color: $text-color;
 	@extend .serif;
 }
 h1 {
-	font-size: 2.2rem;
+	font-size: 2.6rem;
 	line-height: 1.2;
 }
-@media (min-width: $breakpoint-tablet) {
+@media (max-width: $breakpoint-tablet) {
 	html {
 		font-size: 18px;
 		line-height: 1.5;
 	}
-	h1 { font-size: 2.6rem; }
+	h1 { font-size: 2.2rem; }
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -137,22 +137,14 @@ h3 code { font-size: 0.9rem; }
 // Tweaks to Prism
 pre[class*="language"] {
 	font-size: 0.9rem;
-	margin: 0.5rem (-$gutter-width) 1.6rem;
-	padding: 1rem $gutter-width;
-	border-width: 1px 0;
+	margin: 0.5rem 0 1.6rem;
+	padding: 1rem;
+	border-width: 1px;
 	border-style: solid;
 	border-color: #E7DEC3;
 }
 pre[class*="language"].line-numbers {
-	padding-left: ($gutter-width) + 2rem;
-}
-@media (max-width: $breakpoint-phone) {
-	pre[class*="language"] {
-		margin-left: -$gutter-width-mobile;
-		margin-right: -$gutter-width-mobile;
-		padding-left: $gutter-width-mobile;
-		padding-right: $gutter-width-mobile;
-	}
+	padding-left: 2rem;
 }
 .token.lf::before {
 	content: "";
