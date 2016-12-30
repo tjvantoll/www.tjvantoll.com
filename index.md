@@ -17,7 +17,7 @@ layout: empty
   }
   .profile-image {
     border-radius: 10%;
-    height: 200px;
+    height: 10rem;
   }
   p {
     max-width: 600px;
@@ -46,6 +46,9 @@ layout: empty
     height: 2rem;
     width: 2rem;
     vertical-align: middle;
+  }
+  @media (max-width: 600px) {
+    html { font-size: 16px; }
   }
 </style>
 
