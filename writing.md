@@ -38,12 +38,13 @@ My biggest writing endeavor was a book I wrote on [jQuery UI](http://jqueryui.co
 
 		<article class="main-border">
 
+			{% capture url_to_use %}{{ post.url" }}{% endcapture %}
+			{% if post.redirect_url %}
+				{% capture url_to_use %}{{ post.redirect_url" }}{% endcapture %}
+			{% endif %}
+
 			<h1>
-				{% if post.redirect_url %}
-					<a href="{{ post.redirect_url }}">{{ post.title }}</a>
-				{% else %}
-					<a href="{{ root_url }}{{ post.url }}">{{ post.title }}</a>
-				{% endif %}
+				<a href="{{ url_to_use }}">{{ post.title }}</a>
 			</h1>
 			<time>
 				{{ post.date | date: " <span class='month'>%b</span> <span class='day'>%d</span> <span class='year'>%Y</span>"}}
