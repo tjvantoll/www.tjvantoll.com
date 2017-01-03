@@ -3,7 +3,7 @@
 .mono { font-family: $mono; }
 
 html {
-	font-size: 20px;
+	font-size: 18px;
 	line-height: 1.6;
 	color: $text-color;
 	@extend .serif;
@@ -14,7 +14,6 @@ h1 {
 }
 @media (max-width: $breakpoint-tablet) {
 	html {
-		font-size: 18px;
 		line-height: 1.5;
 	}
 	h1 { font-size: 2.2rem; }
