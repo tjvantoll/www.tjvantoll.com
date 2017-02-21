@@ -70,10 +70,10 @@ layout: empty
 
   <ul>
     <li>
-      <a href="/writing">Writing</a>
+      <a href="/writing/">Writing</a>
     </li>
     <li>
-      <a href="/speaking">Speaking</a>
+      <a href="/speaking/">Speaking</a>
     </li>
     <li>
       <a href="https://github.com/tjvantoll">
