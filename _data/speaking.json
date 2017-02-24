@@ -1,6 +1,17 @@
 {"talks": [
 
 {
+  "name": "Learn NativeScript—the Quickest Way to Build Cross-Platform Native Apps",
+  "url": "/speaking/slides/Learn-NativeScript/Atlanta/Learn-NativeScript.pdf",
+  "date": "2017-02-24",
+  "type": "talk",
+  "talk_venue": "DevNexus",
+  "talk_venue_url": "https://devnexus.com",
+  "talk_venue_city": "Atlanta, Georgia",
+  "talk_slides": "/speaking/slides/Learn-NativeScript/Atlanta/Learn-NativeScript.pdf"
+},
+
+{
   "name": "What’s New with NativeScript",
   "url": "https://www.youtube.com/watch?v=6em3r-NJRJs",
   "date": "2016-09-20",
