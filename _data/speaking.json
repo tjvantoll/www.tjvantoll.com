@@ -1,6 +1,14 @@
 {"talks": [
 
 {
+  "name": "TJ VanToll—Building Mobile Apps with NativeScript",
+  "url": "https://devchat.tv/react-native-radio/t-j-van-toll-of-the-native-script-project",
+  "date": "2017-02-28",
+  "podcast_name": "React Native Radio",
+  "podcast_url": "https://devchat.tv/react-native-radio/"
+},
+
+{
   "name": "Learn NativeScript—the Quickest Way to Build Cross-Platform Native Apps",
   "url": "/speaking/slides/Learn-NativeScript/Atlanta/Learn-NativeScript.pdf",
   "date": "2017-02-24",
