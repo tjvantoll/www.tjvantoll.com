@@ -1,6 +1,18 @@
 {"talks": [
 
 {
+  "name": "Building EmotiNg (w/Jen Looper & Tara Manicsic)",
+  "url": "https://www.youtube.com/watch?v=j2S5OrMUj9g",
+  "date": "2017-04-07",
+  "type": "talk",
+  "talk_venue": "ng-conf",
+  "talk_venue_url": "https://www.ng-conf.org/",
+  "talk_venue_city": "Salt Lake City, Utah",
+  "talk_slides": "/speaking/slides/Building-Emoting/Salt-Lake-City/index.html",
+  "talk_video": "https://www.youtube.com/watch?v=j2S5OrMUj9g"
+},
+
+{
   "name": "TJ VanToll—Building Mobile Apps with NativeScript",
   "url": "https://devchat.tv/react-native-radio/t-j-van-toll-of-the-native-script-project",
   "date": "2017-02-28",
