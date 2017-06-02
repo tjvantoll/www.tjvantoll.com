@@ -10,7 +10,7 @@ Starting a blog is one of the best ways to advance your career as a software dev
 
 But writing can be hard, especially if you’re a developer that doesn’t have much experience. In this article I’m going to share a few tips I’ve learned from writing technical content for the last five years. Hopefully you’ll find some of these tips helpful whether you’re just getting into the technical writing world, or whether you’re already a technical writing professional.
 
-Let’s start with what I consider the single most important thing you can do when it comes to writing.
+Let’s start with what I consider to be the single most important thing you can do when it comes to writing.
 
 ## Tip #1: Write!
 
@@ -28,11 +28,11 @@ Just write. If it helps, pretend you’re explaining a concept to a friend sitti
 ![](/images/posts/2017-06-02/desk.jpg)
 _The desk I do most of my writing at. Not the world’s most impressive setup but it works for me._
 
-When you’re writing you need to constantly fight to fight the tendency to let perfection be the enemy of good enough. [Imposter syndrome](https://en.wikipedia.org/wiki/Impostor_syndrome) is just as real for technical writing as it is for software development—perhaps even more so.
+When you’re writing, you need to constantly fight to fight the tendency to let perfection be the enemy of good enough. [Imposter syndrome](https://en.wikipedia.org/wiki/Impostor_syndrome) is just as real for technical writing as it is for software development—perhaps even more so—and no one is immune.
 
-I’ve written some things I’m proud of and some things I’m not, but what I regret most are the article drafts that have died on my hard drive, or the article ideas that never materialized because I didn’t think I could write about a topic as well as someone else had.
+Personally, I’ve written some things I’m proud of and some things I’m not, but what I regret most are the article drafts that have died on my hard drive, or the article ideas that never materialized because I didn’t think I could write about a topic as well as someone else had.
 
-When you start to feel like that, step back for a moment and remember that, with technical content, you’re not writing for a newspaper, a magazine, or for a novel; you’re writing for developers, and developers usually aren’t looking for world-class prose. They’re looking for straight-to-the-point content that tells them what they need to know.
+When you start to feel like that, step back for a moment and remember that, with technical content, you’re not writing for a newspaper, a magazine, or for a novel—you’re writing for developers, and developers usually aren’t looking for world-class prose; they’re looking for straight-to-the-point content that tells them what they need to know.
 
 ## Tip #2: Get to the point
 
@@ -54,15 +54,15 @@ Regardless of what you’re writing, you’ll inevitably get readers from a wide
 
 This doesn’t mean that you need to explain every single concept you use and every line of code you write. But it does mean that you should try to constantly read your writing from a beginner’s perspective, and provide context as necessary.
 
-One technique I frequently use is providing quick asides for readers that may want more details on topics that aren’t the focus of the article. For example, I commonly include statements like the following.
+One technique I frequently use is quick asides for readers that need more information on a topics that isn’t the focus of the article. For example, I commonly include statements like the following.
 
-> **NOTE**: The `() => {}` syntax in following code are JavaScript arrow functions, which are fairly new to the JavaScript language. If you’re looking for more detail on what JavaScript arrow functions are and how they work, check out the [Mozilla Developer Network’s article on the topic](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions).
+> **NOTE**: The `() => {}` syntax in the following code is a JavaScript arrow function, which is fairly new to the JavaScript language. If you’re looking for more detail on what JavaScript arrow functions are and how they work, check out the [Mozilla Developer Network’s article on the topic](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions).
 
 These asides are a great way to direct readers to relevant material without messing with the main flow of your article. You can use this same technique for introducing prerequisties at the beginning of your article. For instance, an advanced NativeScript article might include the following warning right at the beginning.
 
 > **NOTE**: This article assumes you have some basic knowledge of what [NativeScript](https://www.nativescript.org/) is and how it works. If you’re new to NativeScript, start by going through the [framework’s getting started guide](http://docs.nativescript.org/).
 
-Overall the most important thing to keep in mind is you should always try to interpret what you write from other people’s perspective. And because that can be difficult, another thing you can try is running your writing by other people.
+Overall the most important thing to keep in mind is you should always try to interpret what you write from other people’s perspective. And because that can be difficult, another thing you can try is having others actually reader your work.
 
 ## Tip #4: Get honest feedback
 
@@ -75,7 +75,7 @@ For me that person is my significant other, who has no reservations about tellin
 If you’re having trouble finding someone I will give you two tips:
 
 * 1) **Reach out to the people behind the technology you’re writing about**. If your writing is helping people using a specific project or framework, there are almost certainly people in that project’s community that are willing to help you out.
-* 2) **Write for sites that employ professional editors and copy editors**. Over my career I’ve written for Manning, MSDN, Smashing Magazine, and a few other sites, and each time I’ve learned something from the process. If you have interesting topics to write about, you’d be surprised how many publications would be willing to get your content out to the their audience.
+* 2) **Write for sites that employ professional editors and copy editors**. Over my career I’ve written for Manning, MSDN, Smashing Magazine, and a few other sites, and each time I’ve learned something from the process. If you have interesting topics to write about, you’d be surprised how many publications would be willing to help you write a polished article for their audience.
 
 ## Tip #5: Have fun?
 
@@ -91,6 +91,6 @@ The important thing is to find what you enjoy doing, because that’s what’s g
 
 Writing good technical content can be hard, but it also can be extraordinarily beneficial to your career and personal development. I have the job I do today because of this blog I started five years ago, and I know many others with similar stories.
 
-The most important advice I have for new technical writers is to just start writing without worrying about the consequences. Don’t worry about grammar, or formatting, or where to blog, or anything like that—just start writing. Over time you can start to refine the content you write, improve your grammar, and find your own style, but if you never get started none of that will matter.
+The most important advice I have for new technical writers is to just start writing without worrying about the consequences. Don’t worry about grammar, or formatting, or where to blog, or what others are going to think—just start writing. Over time you can start to refine the content you write, improve your grammar, and find your own style, but if you never get started none of that will matter.
 
 > **NOTE**: This article was inspired by an [article on the same topic by Brian Rinaldi](http://www.remotesynthesis.com/blog/writing-for-tech-audience). It’s a good follow-up read if you found this interesting.
