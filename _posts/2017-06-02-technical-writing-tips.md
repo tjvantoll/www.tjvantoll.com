@@ -8,7 +8,7 @@ comments: true
 
 Starting a blog is one of the best ways to advance your career as a software developer. Writing can help establish your name in your field of choice, can open doors to conference speaking opportunities, can earn you new job opportunities, and more.
 
-But writing can be hard, especially if you’re a developer that doesn’t have much experience. In this article I’m going to share a few tips I’ve learned from writing technical content for the last five years. Hopefully you’ll find some of these tips helpful whether you’re just getting into the technical writing world, or whether you’re already a technical writing professional.
+But writing can be hard, especially if you’re a developer that doesn’t have much writing experience. In this article I’m going to share a few tips I’ve learned from writing technical content for the last five years. Hopefully you’ll find some of these tips helpful whether you’re just getting into the technical writing world, or whether you’re already a technical writing professional.
 
 Let’s start with what I consider to be the single most important thing you can do when it comes to writing.
 
@@ -36,7 +36,7 @@ When you start to feel like that, step back for a moment and remember that, with
 
 ## Tip #2: Get to the point
 
-Your average developer reads with the attention span of a gnat. Think of your own behavior when you’re looking for the answer to a compilation issue, or researching how to work with a specific API. You’re not looking for a novel with intricate detail and clever metaphors—you’re looking for an immediate answer.
+Your average developer reads blog posts with the attention span of a gnat. Think of your own behavior when you’re looking for the answer to a compilation issue, or researching how to work with a specific API. You’re not looking for a novel with intricate detail and clever metaphors—you’re looking for an immediate answer.
 
 Just to give you an example, this blog has an average session duration of 30 seconds, and an average of 1.08 pages per session—and most of the things I write take well more than 30 seconds to read 😄
 
@@ -54,7 +54,7 @@ Regardless of what you’re writing, you’ll inevitably get readers from a wide
 
 This doesn’t mean that you need to explain every single concept you use and every line of code you write. But it does mean that you should try to constantly read your writing from a beginner’s perspective, and provide context as necessary.
 
-One technique I frequently use is quick asides for readers that need more information on a topics that isn’t the focus of the article. For example, I commonly include statements like the following.
+I like to use little asides to point readers at relevant background information. For example I might use something like this in a JavaScript article.
 
 > **NOTE**: The `() => {}` syntax in the following code is a JavaScript arrow function, which is fairly new to the JavaScript language. If you’re looking for more detail on what JavaScript arrow functions are and how they work, check out the [Mozilla Developer Network’s article on the topic](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions).
 
@@ -62,7 +62,7 @@ These asides are a great way to direct readers to relevant material without mess
 
 > **NOTE**: This article assumes you have some basic knowledge of what [NativeScript](https://www.nativescript.org/) is and how it works. If you’re new to NativeScript, start by going through the [framework’s getting started guide](http://docs.nativescript.org/).
 
-Overall the most important thing to keep in mind is you should always try to interpret what you write from other people’s perspective. And because that can be difficult, another thing you can try is having others actually reader your work.
+Overall the most important thing to keep in mind is you should always try to interpret what you write from other people’s perspective. And because that can be difficult, another thing you can try is having others read your work and give feedback.
 
 ## Tip #4: Get honest feedback
 
@@ -74,7 +74,7 @@ For me that person is my significant other, who has no reservations about tellin
 
 If you’re having trouble finding someone I will give you two tips:
 
-* 1) **Reach out to the people behind the technology you’re writing about**. If your writing is helping people using a specific project or framework, there are almost certainly people in that project’s community that are willing to help you out.
+* 1) **Try reaching out to the people behind the technology you’re writing about**. If your writing is helping people using a specific project or framework, there are almost certainly people in that project’s community that are willing to help you out. Try asking for feedback in that project’s forum, blog, chat, or wherever.
 * 2) **Write for sites that employ professional editors and copy editors**. Over my career I’ve written for Manning, MSDN, Smashing Magazine, and a few other sites, and each time I’ve learned something from the process. If you have interesting topics to write about, you’d be surprised how many publications would be willing to help you write a polished article for their audience.
 
 ## Tip #5: Have fun?
@@ -91,6 +91,6 @@ The important thing is to find what you enjoy doing, because that’s what’s g
 
 Writing good technical content can be hard, but it also can be extraordinarily beneficial to your career and personal development. I have the job I do today because of this blog I started five years ago, and I know many others with similar stories.
 
-The most important advice I have for new technical writers is to just start writing without worrying about the consequences. Don’t worry about grammar, or formatting, or where to blog, or what others are going to think—just start writing. Over time you can start to refine the content you write, improve your grammar, and find your own style, but if you never get started none of that will matter.
+The most important advice I have for new technical writers is to just start writing without worrying about the consequences. Don’t worry about grammar, or formatting, or where to blog, or what others are going to think—just start writing. Over time you can start to refine the content you write, improve your grammar, and find your own style—but if you never get started none of that will matter.
 
 > **NOTE**: This article was inspired by an [article on the same topic by Brian Rinaldi](http://www.remotesynthesis.com/blog/writing-for-tech-audience). It’s a good follow-up read if you found this interesting.
