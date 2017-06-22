@@ -1,6 +1,17 @@
 {"talks": [
 
 {
+  "name": "Building Performant Native Apps with NativeScript",
+  "url": "/speaking/slides/Performant-Native-Apps-NativeScript/San-Jose/Performant-Native-Apps-NativeScript.pdf",
+  "date": "2017-06-22",
+  "type": "talk",
+  "talk_venue": "Fluent Conference",
+  "talk_venue_url": "https://conferences.oreilly.com/fluent/fl-ca",
+  "talk_venue_city": "San Jose, California",
+  "talk_slides": "/speaking/slides/Performant-Native-Apps-NativeScript/San-Jose/Performant-Native-Apps-NativeScript.pdf"
+},
+
+{
   "name": "Building EmotiNg (w/Jen Looper & Tara Manicsic)",
   "url": "https://www.youtube.com/watch?v=j2S5OrMUj9g",
   "date": "2017-04-07",
