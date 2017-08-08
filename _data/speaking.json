@@ -2,13 +2,14 @@
 
 {
   "name": "Building Performant Native Apps with NativeScript",
-  "url": "/speaking/slides/Performant-Native-Apps-NativeScript/San-Jose/Performant-Native-Apps-NativeScript.pdf",
+  "url": "https://www.youtube.com/watch?v=ySIsAKjGa4E",
   "date": "2017-06-22",
   "type": "talk",
   "talk_venue": "Fluent Conference",
   "talk_venue_url": "https://conferences.oreilly.com/fluent/fl-ca",
   "talk_venue_city": "San Jose, California",
-  "talk_slides": "/speaking/slides/Performant-Native-Apps-NativeScript/San-Jose/Performant-Native-Apps-NativeScript.pdf"
+  "talk_slides": "/speaking/slides/Performant-Native-Apps-NativeScript/San-Jose/Performant-Native-Apps-NativeScript.pdf",
+  "talk_video": "https://www.youtube.com/watch?v=ySIsAKjGa4E"
 },
 
 {
