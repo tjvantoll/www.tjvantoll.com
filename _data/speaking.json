@@ -1,6 +1,17 @@
 {"talks": [
 
 {
+  "name": "NativeScript UI—Beyond the Basics",
+  "url": "/speaking/slides/NativeScript-UI/NativeScript-UI.pdf",
+  "date": "2017-09-18",
+  "type": "talk",
+  "talk_venue": "NativeScript Developer Day",
+  "talk_venue_url": "http://developerday.nativescript.org/",
+  "talk_venue_city": "New York, New York",
+  "talk_slides": "/speaking/slides/NativeScript-UI/NativeScript-UI.pdf"
+},
+
+{
   "name": "Building Performant Native Apps with NativeScript",
   "url": "https://www.youtube.com/watch?v=ySIsAKjGa4E",
   "date": "2017-06-22",
