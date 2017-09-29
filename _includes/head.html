@@ -9,7 +9,8 @@ Oh, hi! Since you're here, you might want to know that this site’s source code
 	class="{% if page.className %}{{ page.className }}{% endif %}"
 	data-comments="{{ page.comments }}"
 	data-disqus-shortname="{{ site.disqus_short_name }}"
-	data-disqus-url="{{ site.url }}{{ page.url }}">
+	data-disqus-url="{{ site.url }}{{ page.url }}"
+	data-ads="{{ page.ads }}">
 <head>
 	<meta charset="utf-8">
 	<title>{% if page.title %}{{ page.title }}{% else %}{{ site.title }}{% endif %}</title>

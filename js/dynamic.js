@@ -10,8 +10,12 @@ ga('send', 'pageview');
 // Ads
 (function() {
 	var isBlogPage = document.querySelector("html").getAttribute("data-comments") === "true";
+	var noAds = document.querySelector("html").getAttribute("data-ads") === "false";
 
 	if (!isBlogPage) {
+		return;
+	}
+	if (noAds) {
 		return;
 	}
 
