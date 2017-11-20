@@ -1,6 +1,28 @@
 {"talks": [
 
 {
+  "name": "Mobile Development Inside-Out with NativeScript and Kinvey (w/Jen Looper)",
+  "url": "/speaking/slides/NativeScript-Kinvey/NativeScript-Kinvey.pdf",
+  "date": "2017-11-14",
+  "type": "talk",
+  "talk_venue": "DevReach",
+  "talk_venue_url": "http://devreach.com/",
+  "talk_venue_city": "Sofia, Bulgaria",
+  "talk_slides": "/speaking/slides/NativeScript-Kinvey/NativeScript-Kinvey.pdf"
+},
+
+{
+  "name": "Why I Was Wrong About TypeScript",
+  "url": "/speaking/slides/Why-I-Was-Wrong-About-TypeScript/Sofia/Why-I-Was-Wrong-About-TypeScript.pdf",
+  "date": "2017-11-13",
+  "type": "talk",
+  "talk_venue": "DevReach",
+  "talk_venue_url": "http://devreach.com/",
+  "talk_venue_city": "Sofia, Bulgaria",
+  "talk_slides": "/speaking/slides/Why-I-Was-Wrong-About-TypeScript/Sofia/Why-I-Was-Wrong-About-TypeScript.pdf"
+},
+
+{
   "name": "NativeScript UI—Beyond the Basics",
   "url": "/speaking/slides/NativeScript-UI/NativeScript-UI.pdf",
   "date": "2017-09-18",
