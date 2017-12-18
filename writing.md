@@ -29,7 +29,7 @@ My biggest writing endeavor was a book I wrote on [jQuery UI](http://jqueryui.co
 <hr class="main-border">
 
 <div class="blog-archives">
-	{% for post in site.posts reverse %}
+	{% for post in site.posts %}
 		{% capture this_year %}{{ post.date | date: "%Y" }}{% endcapture %}
 		{% unless year == this_year %}
 			{% assign year = this_year %}
@@ -38,9 +38,9 @@ My biggest writing endeavor was a book I wrote on [jQuery UI](http://jqueryui.co
 
 		<article class="main-border">
 
-			{% capture url_to_use %}{{ post.url" }}{% endcapture %}
+			{% capture url_to_use %}{{ post.url }}{% endcapture %}
 			{% if post.redirect_url %}
-				{% capture url_to_use %}{{ post.redirect_url" }}{% endcapture %}
+				{% capture url_to_use %}{{ post.redirect_url }}{% endcapture %}
 			{% endif %}
 
 			<h1>
