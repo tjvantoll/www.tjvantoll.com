@@ -1,6 +1,17 @@
 {"talks": [
 
 {
+  "name": "Building Augmented Reality Apps With JavaScript",
+  "url": "/speaking/slides/AR/ar.pptx",
+  "date": "2018-03-02",
+  "type": "talk",
+  "talk_venue": "Google Developers Group Chicago",
+  "talk_venue_url": "https://www.meetup.com/Google-Developers-Group-GDG-Chicago/events/247324115/",
+  "talk_venue_city": "Chicago, Illinois",
+  "talk_slides": "/speaking/slides/AR/ar.pdf"
+},
+
+{
   "name": "Mobile Development Inside-Out with NativeScript and Kinvey (w/Jen Looper)",
   "url": "/speaking/slides/NativeScript-Kinvey/NativeScript-Kinvey.pdf",
   "date": "2017-11-14",
