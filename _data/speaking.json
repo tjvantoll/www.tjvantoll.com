@@ -19,7 +19,8 @@
   "talk_venue": "DevReach",
   "talk_venue_url": "http://devreach.com/",
   "talk_venue_city": "Sofia, Bulgaria",
-  "talk_slides": "/speaking/slides/NativeScript-Kinvey/NativeScript-Kinvey.pdf"
+  "talk_slides": "/speaking/slides/NativeScript-Kinvey/NativeScript-Kinvey.pdf",
+  "talk_video": "https://www.youtube.com/watch?v=U-uM2hBWfKg"
 },
 
 {
@@ -30,7 +31,8 @@
   "talk_venue": "DevReach",
   "talk_venue_url": "http://devreach.com/",
   "talk_venue_city": "Sofia, Bulgaria",
-  "talk_slides": "/speaking/slides/Why-I-Was-Wrong-About-TypeScript/Sofia/Why-I-Was-Wrong-About-TypeScript.pdf"
+  "talk_slides": "/speaking/slides/Why-I-Was-Wrong-About-TypeScript/Sofia/Why-I-Was-Wrong-About-TypeScript.pdf",
+  "talk_video": "https://www.youtube.com/watch?v=w6rdLx2LYz8"
 },
 
 {
@@ -41,7 +43,8 @@
   "talk_venue": "NativeScript Developer Day",
   "talk_venue_url": "http://developerday.nativescript.org/",
   "talk_venue_city": "New York, New York",
-  "talk_slides": "/speaking/slides/NativeScript-UI/NativeScript-UI.pdf"
+  "talk_slides": "/speaking/slides/NativeScript-UI/NativeScript-UI.pdf",
+  "talk_video": "https://www.youtube.com/watch?v=fcSHvUrJshA"
 },
 
 {
