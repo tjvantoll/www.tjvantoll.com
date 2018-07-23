@@ -3,7 +3,7 @@ layout: page
 title: "Writing"
 ---
 
-Here you’ll find a list of books and articles I’ve written, both on this blog and around the web. If you’re looking for a quick sample of my writing style without reading my life’s work, check out [A Love Letter to CSS](http://developer.telerik.com/topics/web-development/love-letter-css/), [The Web’s Cruft Problem](http://developer.telerik.com/featured/the-webs-cruft-problem/), or [The Rise of TypeScript](http://developer.telerik.com/featured/the-rise-of-typescript/).
+Here you’ll find a list of books and articles I’ve written, both on this blog and around the web. If you’re looking for a quick sample of my writing style without reading my life’s work, check out [The Web’s Cruft Problem](http://developer.telerik.com/featured/the-webs-cruft-problem/), [The Rise of TypeScript](http://developer.telerik.com/featured/the-rise-of-typescript/), or [Would Airbnb Have Fared Better With NativeScript](https://www.nativescript.org/blog/would-airbnb-have-fared-better-with-nativescript-instead-of-react-native).
 
 My biggest writing endeavor was a book I wrote on [jQuery UI](http://jqueryui.com/) back in 2014. I wrote up an article about [what the experience of writing a tech book is like](https://www.tjvantoll.com/2014/12/29/so-you-want-to-write-a-tech-book/), if you’re curious.
 
