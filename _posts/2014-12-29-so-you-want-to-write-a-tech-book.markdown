@@ -59,7 +59,7 @@ In general I would advise anyone debating authoring a tech book to make sure you
 From my earlier timeline you may have noticed that there was a roughly five-month gap between the time the first draft of the book was complete and publication. A couple things were going on during that time, but it was mostly editing. I can't speak for other publishers, but Manning has a lot of processes that are all about producing the best possible book. Off the top of my head this includes the following:
 
 * A review of the original book proposal and TOC (table of contents) by a group of potential readers
-* A review after each chapter by my editor
+* A review after each chapter by [my editor](http://seandennis.com/)
 * External reviews by ~8 individuals at three points throughout the book (after chapters 4, 8, and 12 were completed, respectively)
 * A copy edit pass for grammar and formatting
 * A dedicated technical review
