@@ -1,6 +1,17 @@
 {"talks": [
 
-  {
+{
+  "name": "One Project. One Language. Three Apps.",
+  "url": "/speaking/slides/Three-Apps/Boston/Three-Apps.pdf",
+  "date": "2018-10-25",
+  "type": "talk",
+  "talk_venue": "jsMobileConf",
+  "talk_venue_url": "https://jsmobileconf.com/",
+  "talk_venue_city": "Boston, Massachusetts",
+  "talk_slides": "/speaking/slides/Three-Apps/Boston/Three-Apps.pdf"
+},
+
+{
   "name": "Cross-Platform Augmented Reality",
   "url": "/speaking/slides/AR/Boston/ar.pdf",
   "date": "2018-05-09",
