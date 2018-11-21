@@ -1,6 +1,28 @@
 {"talks": [
 
 {
+  "name": "Why I Was Wrong About TypeScript",
+  "url": "/speaking/slides/Why-I-Was-Wrong-About-TypeScript/Copenhagen/Why-I-Was-Wrong-About-TypeScript.pdf",
+  "date": "2018-11-20",
+  "type": "talk",
+  "talk_venue": "GOTO Copenhagen",
+  "talk_venue_url": "https://gotocph.com/2018",
+  "talk_venue_city": "Copenhagen, Denmark",
+  "talk_slides": "/speaking/slides/Why-I-Was-Wrong-About-TypeScript/Copenhagen/Why-I-Was-Wrong-About-TypeScript.pdf"
+},
+
+{
+  "name": "One Project. One Language. Three Apps.",
+  "url": "/speaking/slides/Three-Apps/Sofia/Three-Apps.pdf",
+  "date": "2018-11-13",
+  "type": "talk",
+  "talk_venue": "DevReach",
+  "talk_venue_url": "https://devreach.com/",
+  "talk_venue_city": "Sofia, Bulgaria",
+  "talk_slides": "/speaking/slides/Three-Apps/Sofia/Three-Apps.pdf"
+},
+
+{
   "name": "One Project. One Language. Three Apps.",
   "url": "/speaking/slides/Three-Apps/Boston/Three-Apps.pdf",
   "date": "2018-10-25",
