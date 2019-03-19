@@ -1,6 +1,17 @@
 {"talks": [
 
 {
+  "name": "Is Augmented Reality the Future?",
+  "url": "/speaking/slides/AR/Toronto/ar.pdf",
+  "date": "2019-03-15",
+  "type": "talk",
+  "talk_venue": "ConFoo",
+  "talk_venue_url": "https://confoo.ca/en/yul2019",
+  "talk_venue_city": "Toronto, Canada",
+  "talk_slides": "/speaking/slides/AR/Toronto/ar.pdf"
+},
+
+{
   "name": "Why I Was Wrong About TypeScript",
   "url": "/speaking/slides/Why-I-Was-Wrong-About-TypeScript/Copenhagen/Why-I-Was-Wrong-About-TypeScript.pdf",
   "date": "2018-11-20",
@@ -8,7 +19,8 @@
   "talk_venue": "GOTO Copenhagen",
   "talk_venue_url": "https://gotocph.com/2018",
   "talk_venue_city": "Copenhagen, Denmark",
-  "talk_slides": "/speaking/slides/Why-I-Was-Wrong-About-TypeScript/Copenhagen/Why-I-Was-Wrong-About-TypeScript.pdf"
+  "talk_slides": "/speaking/slides/Why-I-Was-Wrong-About-TypeScript/Copenhagen/Why-I-Was-Wrong-About-TypeScript.pdf",
+  "talk_video": "https://www.youtube.com/watch?v=AQOEZVG2WY0"
 },
 
 {
