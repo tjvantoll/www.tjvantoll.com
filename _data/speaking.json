@@ -1,14 +1,25 @@
 {"talks": [
 
 {
+  "name": "Getting Started With Serverless",
+  "url": "/speaking/slides/Serverless/Boston/Serverless.pdf",
+  "date": "2019-05-07",
+  "type": "talk",
+  "talk_venue": "ProgressNEXT",
+  "talk_venue_url": "https://www.progress.com/next",
+  "talk_venue_city": "Boston, Massachusetts",
+  "talk_slides": "/speaking/slides/Serverless/Boston/Serverless.pptx"
+},
+
+{
   "name": "Is Augmented Reality the Future?",
-  "url": "/speaking/slides/AR/Toronto/ar.pdf",
+  "url": "/speaking/slides/AR/Montreal/ar.pdf",
   "date": "2019-03-15",
   "type": "talk",
   "talk_venue": "ConFoo",
   "talk_venue_url": "https://confoo.ca/en/yul2019",
-  "talk_venue_city": "Toronto, Canada",
-  "talk_slides": "/speaking/slides/AR/Toronto/ar.pptx"
+  "talk_venue_city": "Montreal, Canada",
+  "talk_slides": "/speaking/slides/AR/Montreal/ar.pptx"
 },
 
 {
