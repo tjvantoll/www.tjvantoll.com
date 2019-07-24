@@ -2,13 +2,13 @@
 
 {
   "name": "Getting Started With Serverless",
-  "url": "/speaking/slides/Serverless/Boston/Serverless.pdf",
+  "url": "/speaking/slides/Serverless/Orlando/Serverless.pdf",
   "date": "2019-05-07",
   "type": "talk",
   "talk_venue": "ProgressNEXT",
   "talk_venue_url": "https://www.progress.com/next",
-  "talk_venue_city": "Boston, Massachusetts",
-  "talk_slides": "/speaking/slides/Serverless/Boston/Serverless.pptx"
+  "talk_venue_city": "Orlando, Florida",
+  "talk_slides": "/speaking/slides/Serverless/Orlando/Serverless.pptx"
 },
 
 {
