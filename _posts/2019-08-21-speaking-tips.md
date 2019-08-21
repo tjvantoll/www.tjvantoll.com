@@ -4,6 +4,8 @@ title: My Top 5 Tech Speaking Tips
 comments: true
 ---
 
+<img src="/images/posts/2019-08-21/header.png" alt="Me on stage at TelerikNEXT" style="border: none;">
+
 This article is an eclectic set of speaking tips I’ve learned from giving [dozens of tech talks at conferences around the world](https://www.tjvantoll.com/speaking/). I hope these tips help new speakers prepare their first talk, and help give experienced speakers ideas to potentially improve.
 
 One thing I’ll note though: these are tips that I’ve found work for _me_, which doesn’t necessarily mean they’ll work for you. Each speaker needs to find their own style and workflow, so try to take inspiration from these tips and don’t interpret them as hard and fast rules.
