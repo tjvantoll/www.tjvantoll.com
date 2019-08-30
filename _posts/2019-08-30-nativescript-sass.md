@@ -58,11 +58,11 @@ At this point you now have everything you need to use SASS in NativeScript, but 
 
 There are two popular ways to compile SASS using webpack. The first is `node-sass`, which we looked at in the previous section, and which NativeScript apps are configured to use by default.
 
-Under the hood `node-sass` has a native Ruby dependency that it uses to compile your SASS code. Ruby is pretty fast at compiling SASS, but it comes with a catch that you might care about: if you update your Node installation, you’ll need to rebuild your `node_modules` folder for the Ruby compilation to continue working. (And you often don’t get a helpful error that tells you exactly what the problem is.)
+Under the hood `node-sass` uses [libsass](https://sass-lang.com/libsass), which uses a C/C++ module to compile your SASS code. C/C++ is pretty fast at compiling SASS, but it comes with a catch that you might care about: if you update your Node installation, you’ll need to rebuild your `node_modules` folder for the C/C++ compilation to continue working. (And you often don’t get a helpful error that tells you exactly what the problem is.)
 
-With that in mind, the other option for compiling SASS with webpack is `dart-sass` (which is actually just `sass` on npm now), which is a SASS compiler that uses Dart-compiled JavaScript, and therefore doesn’t have the same recompilation requirements as the Ruby-based `node-sass`. Both the [Angular and Vue.js CLIs have recently switched to `dart-sass`](https://blog.ninja-squad.com/2019/05/29/angular-cli-8.0/#dart-sass-replaces-node-sass), so it seems to be the direction the JavaScript community is heading.
+With that in mind, the other option for compiling SASS with webpack is `dart-sass` (which is actually just `sass` on npm now), which is a SASS compiler that uses Dart-compiled JavaScript, and therefore doesn’t have the same recompilation requirements as  `node-sass`. Both the [Angular and Vue.js CLIs have recently switched to `dart-sass`](https://blog.ninja-squad.com/2019/05/29/angular-cli-8.0/#dart-sass-replaces-node-sass), so it seems to be the direction the JavaScript community is heading.
 
-There are internet debates over whether `dart-sass` or `node-sass` are faster, but unless your app has an absolute ton of `.scss` it’s probably not something you’ll notice.
+There are internet debates over whether `dart-sass` or `node-sass` are faster, but unless your app has a ton of SASS code it’s probably not something you’ll notice.
 
 > **NOTE**: There are a [handful of syntactical differences between `node-sass` and `dart-sass`](https://github.com/sass/dart-sass#behavioral-differences-from-ruby-sass), which you might hit if you’re making the switch and you have existing SASS code.
 
@@ -91,6 +91,8 @@ Next, add an `options` object to your `.scss` configuration in your `webpack.con
     ]
 }
 </code></pre>
+
+> **NOTE**: You need to be using `sass-loader` version 7.1.0+ for the `implementation` option to work, which you should only hit if you’re updating an older app.
 
 And with that, you’re all set to use `dart-sass` to compile your the SASS files in your NativeScript app.
 
