@@ -92,7 +92,7 @@ Next, add an `options` object to your `.scss` configuration in your `webpack.con
 }
 </code></pre>
 
-> **NOTE**: You need to be using `sass-loader` version 7.1.0+ for the `implementation` option to work, which you should only hit if you’re updating an older app.
+> **NOTE**: If you’re upgrading an older app you might need to update your `sass-loader` dependency, as you need version 7.1.0+ for the `implementation` option to work.
 
 And with that, you’re all set to use `dart-sass` to compile your the SASS files in your NativeScript app.
 
