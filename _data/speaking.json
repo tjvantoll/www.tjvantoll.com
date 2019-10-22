@@ -1,5 +1,16 @@
 {"talks": [
 
+  {
+    "name": "Ten Awesome Things You Can Build With NativeScript",
+    "url": "/speaking/slides/Top-10/Sofia/Top-10.pptx",
+    "date": "2019-10-22",
+    "type": "talk",
+    "talk_venue": "DevReach",
+    "talk_venue_url": "https://www.telerik.com/devreach",
+    "talk_venue_city": "Sofia, Bulgaria",
+    "talk_slides": "/speaking/slides/Top-10/Sofia/Top-10.pptx"
+  },
+
 {
   "name": "Getting Started With Serverless",
   "url": "/speaking/slides/Serverless/Orlando/Serverless.pdf",
