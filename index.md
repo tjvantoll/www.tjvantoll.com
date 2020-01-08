@@ -63,9 +63,9 @@ layout: empty
     Hi, I'm TJ. I'm a front-end developer, tech author, speaker, and a
     Principal Developer Advocate for <a href="https://www.progress.com">Progress</a>.
     I have over a decade of web development experience, including a few years working
-    on the <a href="https://jquery.org/team/">jQuery team</a>. Nowadays I spend my time
-    helping web developers build mobile apps through projects like
-    <a href="https://www.nativescript.org">NativeScript</a>.
+    on the jQuery and NativeScript teams. Nowadays I spend my time
+    helping web developers build awesome UIs with
+    <a href="https://www.telerik.com/kendo-react-ui/">KendoReact</a>.
   </p>
 
   <ul>
