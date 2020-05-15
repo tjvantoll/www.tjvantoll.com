@@ -1,6 +1,14 @@
 {"talks": [
 
   {
+    "name": "UI Components-Open Source vs. Paid with TJ VanToll",
+    "url": "https://devchat.tv/react-round-up/rru-102-ui-components-open-source-vs-paid-with-tj-vantoll/",
+    "date": "2020-03-03",
+    "podcast_name": "React Round Up",
+    "podcast_url": "https://devchat.tv/react-round-up/"
+  },
+
+  {
     "name": "Ten Awesome Things You Can Build With NativeScript",
     "url": "/speaking/slides/Top-10/Sofia/Top-10.pptx",
     "date": "2019-10-22",
