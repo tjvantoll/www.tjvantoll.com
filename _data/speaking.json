@@ -1,4 +1,13 @@
 {"talks": [
+  {
+    "name": "How Native Mobile Development Changed the Way I Write Web Apps",
+    "url": "/speaking/slides/Native-To-Web/NativeToWeb.pptx",
+    "date": "2020-06-25",
+    "type": "talk",
+    "talk_venue": "Certified Fresh Events",
+    "talk_venue_url": "https://cfe.dev/events/native-to-web/",
+    "talk_slides": "/speaking/slides/Native-To-Web/NativeToWeb.pptx"
+  },
 
   {
     "name": "UI Components-Open Source vs. Paid with TJ VanToll",
