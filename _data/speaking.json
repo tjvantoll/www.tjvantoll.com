@@ -1,12 +1,12 @@
 {"talks": [
   {
     "name": "How Native Mobile Development Changed the Way I Write Web Apps",
-    "url": "/speaking/slides/Native-To-Web/NativeToWeb.pptx",
+    "url": "https://www.dropbox.com/s/4kuyd2q2mcuv9y5/NativeToWeb.pptx?dl=0",
     "date": "2020-06-25",
     "type": "talk",
     "talk_venue": "Certified Fresh Events",
     "talk_venue_url": "https://cfe.dev/events/native-to-web/",
-    "talk_slides": "/speaking/slides/Native-To-Web/NativeToWeb.pptx"
+    "talk_slides": "https://www.dropbox.com/s/4kuyd2q2mcuv9y5/NativeToWeb.pptx?dl=0"
   },
 
   {
