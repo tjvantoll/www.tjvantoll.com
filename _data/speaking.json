@@ -1,12 +1,33 @@
 {"talks": [
   {
+    "name": "Why Paid UI Components Aren’t Evil",
+    "url": "https://www.youtube.com/watch?v=9A4oNTAYn6U",
+    "date": "2020-10-16",
+    "type": "talk",
+    "talk_venue": "React Summit",
+    "talk_venue_url": "https://reactsummit.com/",
+    "talk_slides": "https://drive.google.com/file/d/14_TobpDHjScH8u1vhsbY6XxGaGFz7H81/view?usp=sharing",
+    "talk_video": "https://www.youtube.com/watch?v=9A4oNTAYn6U"
+  },
+
+  {
     "name": "How Native Mobile Development Changed the Way I Write Web Apps",
-    "url": "https://www.dropbox.com/s/4kuyd2q2mcuv9y5/NativeToWeb.pptx?dl=0",
+    "url": "https://drive.google.com/file/d/1yerAyJeph1hPGv74jFW5oLfZp3t1smna/view?usp=sharing",
+    "date": "2020-09-03",
+    "type": "talk",
+    "talk_venue": "International JavaScript Conference",
+    "talk_venue_url": "https://javascript-conference.com/javascript-practices-tools/how-native-mobile-development-changed-the-way-i-write-web-apps/",
+    "talk_slides": "https://drive.google.com/file/d/1yerAyJeph1hPGv74jFW5oLfZp3t1smna/view?usp=sharing"
+  },
+
+  {
+    "name": "How Native Mobile Development Changed the Way I Write Web Apps",
+    "url": "https://drive.google.com/file/d/1mljxj5A3c1TZZNOxqc4-tjOj-X4yZ3Ob/view?usp=sharing",
     "date": "2020-06-25",
     "type": "talk",
     "talk_venue": "Certified Fresh Events",
     "talk_venue_url": "https://cfe.dev/events/native-to-web/",
-    "talk_slides": "https://www.dropbox.com/s/4kuyd2q2mcuv9y5/NativeToWeb.pptx?dl=0"
+    "talk_slides": "https://drive.google.com/file/d/1mljxj5A3c1TZZNOxqc4-tjOj-X4yZ3Ob/view?usp=sharing"
   },
 
   {
