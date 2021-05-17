@@ -310,7 +310,7 @@ function App() {
 export default App;
 {% endraw %}</code></pre>
 
-Save this change and return to your browser to see an amazing set of randomly generated avatars, perfect for you next sample app.
+Save this change and return to your browser to see an amazing set of randomly generated avatars, perfect for your next sample app.
 
 <img src="/images/posts/2021-05-14/lots-of-avatars.png" alt="A browser with 100 random avatars" class="plain">
 
