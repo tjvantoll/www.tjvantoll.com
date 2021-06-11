@@ -1,5 +1,16 @@
 {"talks": [
   {
+    "name": "Building a Custom Component Library—Fast",
+    "url": "https://www.youtube.com/watch?v=4ZYQQHk7fpk",
+    "date": "2021-06-09",
+    "type": "talk",
+    "talk_venue": "JSNation",
+    "talk_venue_url": "https://live.jsnation.com/",
+    "talk_slides": "https://drive.google.com/file/d/1KxvTA_sHl2FNtmMJ6xG9rIKUIKeL1CaH/view?usp=sharing",
+    "talk_video": "https://www.youtube.com/watch?v=4ZYQQHk7fpk"
+  },
+
+  {
     "name": "Why Paid UI Components Aren’t Evil",
     "url": "https://www.youtube.com/watch?v=9A4oNTAYn6U",
     "date": "2020-10-16",
