@@ -60,12 +60,11 @@ layout: empty
     alt="Me presenting at TelerikNEXT">
 
   <p>
-    Hi, I'm TJ. I'm a front-end developer, tech author, speaker, and a
-    Principal Developer Advocate for <a href="https://www.progress.com">Progress</a>.
-    I have over a decade of web development experience, including a few years working
-    on the jQuery and NativeScript teams. Nowadays I spend my time
-    helping web developers build awesome UIs with
-    <a href="https://www.telerik.com/kendo-react-ui/">KendoReact</a>.
+    Hi, I'm TJ. I'm a software developer, tech author, speaker, and a
+    Principal Developer Advocate for <a href="https://blues.io/">Blues Wireless</a>.
+    I have over a decade of development experience, including a few years working
+    on the jQuery, NativeScript, and Kendo UI teams. Nowadays I spend my time
+    helping developers build awesome IoT experiences.
   </p>
 
   <ul>
