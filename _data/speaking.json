@@ -1,553 +1,564 @@
-{"talks": [
-  {
-    "name": "Building a Custom Component Library—Fast",
-    "url": "https://www.youtube.com/watch?v=4ZYQQHk7fpk",
-    "date": "2021-06-09",
-    "type": "talk",
-    "talk_venue": "JSNation",
-    "talk_venue_url": "https://live.jsnation.com/",
-    "talk_slides": "https://drive.google.com/file/d/1KxvTA_sHl2FNtmMJ6xG9rIKUIKeL1CaH/view?usp=sharing",
-    "talk_video": "https://www.youtube.com/watch?v=4ZYQQHk7fpk"
-  },
-
-  {
-    "name": "Why Paid UI Components Aren’t Evil",
-    "url": "https://www.youtube.com/watch?v=9A4oNTAYn6U",
-    "date": "2020-10-16",
-    "type": "talk",
-    "talk_venue": "React Summit",
-    "talk_venue_url": "https://reactsummit.com/",
-    "talk_slides": "https://drive.google.com/file/d/14_TobpDHjScH8u1vhsbY6XxGaGFz7H81/view?usp=sharing",
-    "talk_video": "https://www.youtube.com/watch?v=9A4oNTAYn6U"
-  },
-
-  {
-    "name": "What Web Developers Can Learn From Native Mobile Developers",
-    "url": "https://drive.google.com/file/d/1yerAyJeph1hPGv74jFW5oLfZp3t1smna/view?usp=sharing",
-    "date": "2020-09-03",
-    "type": "talk",
-    "talk_venue": "International JavaScript Conference",
-    "talk_venue_url": "https://javascript-conference.com/javascript-practices-tools/how-native-mobile-development-changed-the-way-i-write-web-apps/",
-    "talk_slides": "https://drive.google.com/file/d/1yerAyJeph1hPGv74jFW5oLfZp3t1smna/view?usp=sharing"
-  },
-
-  {
-    "name": "How Native Mobile Development Changed the Way I Write Web Apps",
-    "url": "https://drive.google.com/file/d/1mljxj5A3c1TZZNOxqc4-tjOj-X4yZ3Ob/view?usp=sharing",
-    "date": "2020-06-25",
-    "type": "talk",
-    "talk_venue": "Certified Fresh Events",
-    "talk_venue_url": "https://cfe.dev/events/native-to-web/",
-    "talk_slides": "https://drive.google.com/file/d/1mljxj5A3c1TZZNOxqc4-tjOj-X4yZ3Ob/view?usp=sharing"
-  },
-
-  {
-    "name": "UI Components-Open Source vs. Paid with TJ VanToll",
-    "url": "https://devchat.tv/react-round-up/rru-102-ui-components-open-source-vs-paid-with-tj-vantoll/",
-    "date": "2020-03-03",
-    "podcast_name": "React Round Up",
-    "podcast_url": "https://devchat.tv/react-round-up/"
-  },
-
-  {
-    "name": "Ten Awesome Things You Can Build With NativeScript",
-    "url": "/speaking/slides/Top-10/Sofia/Top-10.pptx",
-    "date": "2019-10-22",
-    "type": "talk",
-    "talk_venue": "DevReach",
-    "talk_venue_url": "https://www.telerik.com/devreach",
-    "talk_venue_city": "Sofia, Bulgaria",
-    "talk_slides": "/speaking/slides/Top-10/Sofia/Top-10.pptx"
-  },
-
 {
-  "name": "Getting Started With Serverless",
-  "url": "/speaking/slides/Serverless/Orlando/Serverless.pdf",
-  "date": "2019-05-07",
-  "type": "talk",
-  "talk_venue": "ProgressNEXT",
-  "talk_venue_url": "https://www.progress.com/next",
-  "talk_venue_city": "Orlando, Florida",
-  "talk_slides": "/speaking/slides/Serverless/Orlando/Serverless.pptx"
-},
+  "talks": [
+    {
+      "name": "Building Custom GPS Trackers From Scratch",
+      "url": "https://docs.google.com/presentation/d/1WUsgToX5eBTkmKuRjDHBPQ3bnPNbluUQ/edit?usp=sharing&ouid=107609230756320894410&rtpof=true&sd=true",
+      "date": "2022-07-28",
+      "type": "talk",
+      "talk_venue": "THAT Conference",
+      "talk_venue_url": "https://that.us",
+      "talk_slides": "https://docs.google.com/presentation/d/1WUsgToX5eBTkmKuRjDHBPQ3bnPNbluUQ/edit?usp=sharing&ouid=107609230756320894410&rtpof=true&sd=true"
+    },
 
-{
-  "name": "Is Augmented Reality the Future?",
-  "url": "/speaking/slides/AR/Montreal/ar.pdf",
-  "date": "2019-03-15",
-  "type": "talk",
-  "talk_venue": "ConFoo",
-  "talk_venue_url": "https://confoo.ca/en/yul2019",
-  "talk_venue_city": "Montreal, Canada",
-  "talk_slides": "/speaking/slides/AR/Montreal/ar.pptx"
-},
+    {
+      "name": "Building a Custom Component Library—Fast",
+      "url": "https://www.youtube.com/watch?v=4ZYQQHk7fpk",
+      "date": "2021-06-09",
+      "type": "talk",
+      "talk_venue": "JSNation",
+      "talk_venue_url": "https://live.jsnation.com/",
+      "talk_slides": "https://drive.google.com/file/d/1KxvTA_sHl2FNtmMJ6xG9rIKUIKeL1CaH/view?usp=sharing",
+      "talk_video": "https://www.youtube.com/watch?v=4ZYQQHk7fpk"
+    },
 
-{
-  "name": "Why I Was Wrong About TypeScript",
-  "url": "/speaking/slides/Why-I-Was-Wrong-About-TypeScript/Copenhagen/Why-I-Was-Wrong-About-TypeScript.pdf",
-  "date": "2018-11-20",
-  "type": "talk",
-  "talk_venue": "GOTO Copenhagen",
-  "talk_venue_url": "https://gotocph.com/2018",
-  "talk_venue_city": "Copenhagen, Denmark",
-  "talk_slides": "/speaking/slides/Why-I-Was-Wrong-About-TypeScript/Copenhagen/Why-I-Was-Wrong-About-TypeScript.pdf",
-  "talk_video": "https://www.youtube.com/watch?v=AQOEZVG2WY0"
-},
+    {
+      "name": "Why Paid UI Components Aren’t Evil",
+      "url": "https://www.youtube.com/watch?v=9A4oNTAYn6U",
+      "date": "2020-10-16",
+      "type": "talk",
+      "talk_venue": "React Summit",
+      "talk_venue_url": "https://reactsummit.com/",
+      "talk_slides": "https://drive.google.com/file/d/14_TobpDHjScH8u1vhsbY6XxGaGFz7H81/view?usp=sharing",
+      "talk_video": "https://www.youtube.com/watch?v=9A4oNTAYn6U"
+    },
 
-{
-  "name": "One Project. One Language. Three Apps.",
-  "url": "/speaking/slides/Three-Apps/Sofia/Three-Apps.pdf",
-  "date": "2018-11-13",
-  "type": "talk",
-  "talk_venue": "DevReach",
-  "talk_venue_url": "https://devreach.com/",
-  "talk_venue_city": "Sofia, Bulgaria",
-  "talk_slides": "/speaking/slides/Three-Apps/Sofia/Three-Apps.pdf"
-},
+    {
+      "name": "What Web Developers Can Learn From Native Mobile Developers",
+      "url": "https://drive.google.com/file/d/1yerAyJeph1hPGv74jFW5oLfZp3t1smna/view?usp=sharing",
+      "date": "2020-09-03",
+      "type": "talk",
+      "talk_venue": "International JavaScript Conference",
+      "talk_venue_url": "https://javascript-conference.com/javascript-practices-tools/how-native-mobile-development-changed-the-way-i-write-web-apps/",
+      "talk_slides": "https://drive.google.com/file/d/1yerAyJeph1hPGv74jFW5oLfZp3t1smna/view?usp=sharing"
+    },
 
-{
-  "name": "One Project. One Language. Three Apps.",
-  "url": "/speaking/slides/Three-Apps/Boston/Three-Apps.pdf",
-  "date": "2018-10-25",
-  "type": "talk",
-  "talk_venue": "jsMobileConf",
-  "talk_venue_url": "https://jsmobileconf.com/",
-  "talk_venue_city": "Boston, Massachusetts",
-  "talk_slides": "/speaking/slides/Three-Apps/Boston/Three-Apps.pdf"
-},
+    {
+      "name": "How Native Mobile Development Changed the Way I Write Web Apps",
+      "url": "https://drive.google.com/file/d/1mljxj5A3c1TZZNOxqc4-tjOj-X4yZ3Ob/view?usp=sharing",
+      "date": "2020-06-25",
+      "type": "talk",
+      "talk_venue": "Certified Fresh Events",
+      "talk_venue_url": "https://cfe.dev/events/native-to-web/",
+      "talk_slides": "https://drive.google.com/file/d/1mljxj5A3c1TZZNOxqc4-tjOj-X4yZ3Ob/view?usp=sharing"
+    },
 
-{
-  "name": "Cross-Platform Augmented Reality",
-  "url": "/speaking/slides/AR/Boston/ar.pdf",
-  "date": "2018-05-09",
-  "type": "talk",
-  "talk_venue": "ProgressNEXT",
-  "talk_venue_url": "https://www.progress.com/next",
-  "talk_venue_city": "Boston, Massachusetts",
-  "talk_slides": "/speaking/slides/AR/Boston/ar.pdf"
-},
+    {
+      "name": "UI Components-Open Source vs. Paid with TJ VanToll",
+      "url": "https://devchat.tv/react-round-up/rru-102-ui-components-open-source-vs-paid-with-tj-vantoll/",
+      "date": "2020-03-03",
+      "podcast_name": "React Round Up",
+      "podcast_url": "https://devchat.tv/react-round-up/"
+    },
 
-{
-  "name": "Why I Was Wrong About TypeScript",
-  "url": "/speaking/slides/Why-I-Was-Wrong-About-TypeScript/Seattle/Why-I-Was-Wrong-About-TypeScript.pdf",
-  "date": "2018-03-08",
-  "type": "talk",
-  "talk_venue": "Seattle JS",
-  "talk_venue_url": "https://www.meetup.com/seattlejs/",
-  "talk_venue_city": "Seattle, Washington",
-  "talk_slides": "/speaking/slides/Why-I-Was-Wrong-About-TypeScript/Seattle/Why-I-Was-Wrong-About-TypeScript.pdf"
-},
+    {
+      "name": "Ten Awesome Things You Can Build With NativeScript",
+      "url": "/speaking/slides/Top-10/Sofia/Top-10.pptx",
+      "date": "2019-10-22",
+      "type": "talk",
+      "talk_venue": "DevReach",
+      "talk_venue_url": "https://www.telerik.com/devreach",
+      "talk_venue_city": "Sofia, Bulgaria",
+      "talk_slides": "/speaking/slides/Top-10/Sofia/Top-10.pptx"
+    },
 
-{
-  "name": "Building Augmented Reality Apps With JavaScript",
-  "url": "/speaking/slides/AR/Chicago/ar.pdf",
-  "date": "2018-03-02",
-  "type": "talk",
-  "talk_venue": "Google Developers Group Chicago",
-  "talk_venue_url": "https://www.meetup.com/Google-Developers-Group-GDG-Chicago/events/247324115/",
-  "talk_venue_city": "Chicago, Illinois",
-  "talk_slides": "/speaking/slides/AR/Chicago/ar.pdf"
-},
+    {
+      "name": "Getting Started With Serverless",
+      "url": "/speaking/slides/Serverless/Orlando/Serverless.pdf",
+      "date": "2019-05-07",
+      "type": "talk",
+      "talk_venue": "ProgressNEXT",
+      "talk_venue_url": "https://www.progress.com/next",
+      "talk_venue_city": "Orlando, Florida",
+      "talk_slides": "/speaking/slides/Serverless/Orlando/Serverless.pptx"
+    },
 
-{
-  "name": "Mobile Development Inside-Out with NativeScript and Kinvey (w/Jen Looper)",
-  "url": "/speaking/slides/NativeScript-Kinvey/NativeScript-Kinvey.pdf",
-  "date": "2017-11-14",
-  "type": "talk",
-  "talk_venue": "DevReach",
-  "talk_venue_url": "http://devreach.com/",
-  "talk_venue_city": "Sofia, Bulgaria",
-  "talk_slides": "/speaking/slides/NativeScript-Kinvey/NativeScript-Kinvey.pdf",
-  "talk_video": "https://www.youtube.com/watch?v=U-uM2hBWfKg"
-},
+    {
+      "name": "Is Augmented Reality the Future?",
+      "url": "/speaking/slides/AR/Montreal/ar.pdf",
+      "date": "2019-03-15",
+      "type": "talk",
+      "talk_venue": "ConFoo",
+      "talk_venue_url": "https://confoo.ca/en/yul2019",
+      "talk_venue_city": "Montreal, Canada",
+      "talk_slides": "/speaking/slides/AR/Montreal/ar.pptx"
+    },
 
-{
-  "name": "Why I Was Wrong About TypeScript",
-  "url": "/speaking/slides/Why-I-Was-Wrong-About-TypeScript/Sofia/Why-I-Was-Wrong-About-TypeScript.pdf",
-  "date": "2017-11-13",
-  "type": "talk",
-  "talk_venue": "DevReach",
-  "talk_venue_url": "http://devreach.com/",
-  "talk_venue_city": "Sofia, Bulgaria",
-  "talk_slides": "/speaking/slides/Why-I-Was-Wrong-About-TypeScript/Sofia/Why-I-Was-Wrong-About-TypeScript.pdf",
-  "talk_video": "https://www.youtube.com/watch?v=w6rdLx2LYz8"
-},
+    {
+      "name": "Why I Was Wrong About TypeScript",
+      "url": "/speaking/slides/Why-I-Was-Wrong-About-TypeScript/Copenhagen/Why-I-Was-Wrong-About-TypeScript.pdf",
+      "date": "2018-11-20",
+      "type": "talk",
+      "talk_venue": "GOTO Copenhagen",
+      "talk_venue_url": "https://gotocph.com/2018",
+      "talk_venue_city": "Copenhagen, Denmark",
+      "talk_slides": "/speaking/slides/Why-I-Was-Wrong-About-TypeScript/Copenhagen/Why-I-Was-Wrong-About-TypeScript.pdf",
+      "talk_video": "https://www.youtube.com/watch?v=AQOEZVG2WY0"
+    },
 
-{
-  "name": "NativeScript UI—Beyond the Basics",
-  "url": "/speaking/slides/NativeScript-UI/NativeScript-UI.pdf",
-  "date": "2017-09-18",
-  "type": "talk",
-  "talk_venue": "NativeScript Developer Day",
-  "talk_venue_url": "http://developerday.nativescript.org/",
-  "talk_venue_city": "New York, New York",
-  "talk_slides": "/speaking/slides/NativeScript-UI/NativeScript-UI.pdf",
-  "talk_video": "https://www.youtube.com/watch?v=fcSHvUrJshA"
-},
+    {
+      "name": "One Project. One Language. Three Apps.",
+      "url": "/speaking/slides/Three-Apps/Sofia/Three-Apps.pdf",
+      "date": "2018-11-13",
+      "type": "talk",
+      "talk_venue": "DevReach",
+      "talk_venue_url": "https://devreach.com/",
+      "talk_venue_city": "Sofia, Bulgaria",
+      "talk_slides": "/speaking/slides/Three-Apps/Sofia/Three-Apps.pdf"
+    },
 
-{
-  "name": "Building Performant Native Apps with NativeScript",
-  "url": "https://www.youtube.com/watch?v=ySIsAKjGa4E",
-  "date": "2017-06-22",
-  "type": "talk",
-  "talk_venue": "Fluent Conference",
-  "talk_venue_url": "https://conferences.oreilly.com/fluent/fl-ca",
-  "talk_venue_city": "San Jose, California",
-  "talk_slides": "/speaking/slides/Performant-Native-Apps-NativeScript/San-Jose/Performant-Native-Apps-NativeScript.pdf",
-  "talk_video": "https://www.youtube.com/watch?v=ySIsAKjGa4E"
-},
+    {
+      "name": "One Project. One Language. Three Apps.",
+      "url": "/speaking/slides/Three-Apps/Boston/Three-Apps.pdf",
+      "date": "2018-10-25",
+      "type": "talk",
+      "talk_venue": "jsMobileConf",
+      "talk_venue_url": "https://jsmobileconf.com/",
+      "talk_venue_city": "Boston, Massachusetts",
+      "talk_slides": "/speaking/slides/Three-Apps/Boston/Three-Apps.pdf"
+    },
 
-{
-  "name": "Building EmotiNg (w/Jen Looper & Tara Manicsic)",
-  "url": "https://www.youtube.com/watch?v=j2S5OrMUj9g",
-  "date": "2017-04-07",
-  "type": "talk",
-  "talk_venue": "ng-conf",
-  "talk_venue_url": "https://www.ng-conf.org/",
-  "talk_venue_city": "Salt Lake City, Utah",
-  "talk_slides": "/speaking/slides/Building-Emoting/Salt-Lake-City/index.html",
-  "talk_video": "https://www.youtube.com/watch?v=j2S5OrMUj9g"
-},
+    {
+      "name": "Cross-Platform Augmented Reality",
+      "url": "/speaking/slides/AR/Boston/ar.pdf",
+      "date": "2018-05-09",
+      "type": "talk",
+      "talk_venue": "ProgressNEXT",
+      "talk_venue_url": "https://www.progress.com/next",
+      "talk_venue_city": "Boston, Massachusetts",
+      "talk_slides": "/speaking/slides/AR/Boston/ar.pdf"
+    },
 
-{
-  "name": "TJ VanToll—Building Mobile Apps with NativeScript",
-  "url": "https://devchat.tv/react-native-radio/t-j-van-toll-of-the-native-script-project",
-  "date": "2017-02-28",
-  "podcast_name": "React Native Radio",
-  "podcast_url": "https://devchat.tv/react-native-radio/"
-},
+    {
+      "name": "Why I Was Wrong About TypeScript",
+      "url": "/speaking/slides/Why-I-Was-Wrong-About-TypeScript/Seattle/Why-I-Was-Wrong-About-TypeScript.pdf",
+      "date": "2018-03-08",
+      "type": "talk",
+      "talk_venue": "Seattle JS",
+      "talk_venue_url": "https://www.meetup.com/seattlejs/",
+      "talk_venue_city": "Seattle, Washington",
+      "talk_slides": "/speaking/slides/Why-I-Was-Wrong-About-TypeScript/Seattle/Why-I-Was-Wrong-About-TypeScript.pdf"
+    },
 
-{
-  "name": "Learn NativeScript—the Quickest Way to Build Cross-Platform Native Apps",
-  "url": "/speaking/slides/Learn-NativeScript/Atlanta/Learn-NativeScript.pdf",
-  "date": "2017-02-24",
-  "type": "talk",
-  "talk_venue": "DevNexus",
-  "talk_venue_url": "https://devnexus.com",
-  "talk_venue_city": "Atlanta, Georgia",
-  "talk_slides": "/speaking/slides/Learn-NativeScript/Atlanta/Learn-NativeScript.pdf"
-},
+    {
+      "name": "Building Augmented Reality Apps With JavaScript",
+      "url": "/speaking/slides/AR/Chicago/ar.pdf",
+      "date": "2018-03-02",
+      "type": "talk",
+      "talk_venue": "Google Developers Group Chicago",
+      "talk_venue_url": "https://www.meetup.com/Google-Developers-Group-GDG-Chicago/events/247324115/",
+      "talk_venue_city": "Chicago, Illinois",
+      "talk_slides": "/speaking/slides/AR/Chicago/ar.pdf"
+    },
 
-{
-  "name": "What’s New with NativeScript",
-  "url": "https://www.youtube.com/watch?v=6em3r-NJRJs",
-  "date": "2016-09-20",
-  "type": "talk",
-  "talk_venue": "NativeScript Developer Day",
-  "talk_venue_url": "http://developerday.nativescript.org/",
-  "talk_venue_city": "Boston, Massachusetts",
-  "talk_slides": "/speaking/slides/NativeScript-New-and-Hot/Boston/NativeScript-New-and-Hot.pdf",
-  "talk_video": "https://www.youtube.com/watch?v=6em3r-NJRJs"
-},
+    {
+      "name": "Mobile Development Inside-Out with NativeScript and Kinvey (w/Jen Looper)",
+      "url": "/speaking/slides/NativeScript-Kinvey/NativeScript-Kinvey.pdf",
+      "date": "2017-11-14",
+      "type": "talk",
+      "talk_venue": "DevReach",
+      "talk_venue_url": "http://devreach.com/",
+      "talk_venue_city": "Sofia, Bulgaria",
+      "talk_slides": "/speaking/slides/NativeScript-Kinvey/NativeScript-Kinvey.pdf",
+      "talk_video": "https://www.youtube.com/watch?v=U-uM2hBWfKg"
+    },
 
-{
-  "name": "Episode #5: Developing Mobile Apps with Telerik NativeScript",
-  "url": "https://www.thepolyglotdeveloper.com/2016/05/tpdp-episode-5-developing-mobile-apps-telerik-nativescript/",
-  "date": "2016-05-11",
-  "podcast_name": "The Polyglot Developer",
-  "podcast_url": "https://www.thepolyglotdeveloper.com/"
-},
+    {
+      "name": "Why I Was Wrong About TypeScript",
+      "url": "/speaking/slides/Why-I-Was-Wrong-About-TypeScript/Sofia/Why-I-Was-Wrong-About-TypeScript.pdf",
+      "date": "2017-11-13",
+      "type": "talk",
+      "talk_venue": "DevReach",
+      "talk_venue_url": "http://devreach.com/",
+      "talk_venue_city": "Sofia, Bulgaria",
+      "talk_slides": "/speaking/slides/Why-I-Was-Wrong-About-TypeScript/Sofia/Why-I-Was-Wrong-About-TypeScript.pdf",
+      "talk_video": "https://www.youtube.com/watch?v=w6rdLx2LYz8"
+    },
 
-{
-  "name": "Sharing Code Between Web and Native Apps",
-  "abstract": "https://gist.github.com/tjvantoll/1a60028cf8ec94d7e825#sharing-code-between-web-and-native-apps",
-  "url": "https://www.youtube.com/watch?v=R3nyG2xtzeQ",
-  "date": "2016-05-04",
-  "talk_venue": "ng-conf",
-  "talk_venue_url": "https://www.ng-conf.org",
-  "talk_venue_city": "Salt Lake City, Utah",
-  "talk_slides": "/speaking/slides/Sharing-Code-Web-Native/Salt-Lake-City/sharing-code-web-native.pdf",
-  "talk_video": "https://www.youtube.com/watch?v=R3nyG2xtzeQ"
-},
+    {
+      "name": "NativeScript UI—Beyond the Basics",
+      "url": "/speaking/slides/NativeScript-UI/NativeScript-UI.pdf",
+      "date": "2017-09-18",
+      "type": "talk",
+      "talk_venue": "NativeScript Developer Day",
+      "talk_venue_url": "http://developerday.nativescript.org/",
+      "talk_venue_city": "New York, New York",
+      "talk_slides": "/speaking/slides/NativeScript-UI/NativeScript-UI.pdf",
+      "talk_video": "https://www.youtube.com/watch?v=fcSHvUrJshA"
+    },
 
-{
-  "name": "NativeScript (Part 2)",
-  "url": "https://devchat.tv/adv-in-angular/090-aia-nativescript-part-2-with-tj-vantoll",
-  "date": "2016-04-28",
-  "podcast_name": "Adventures in Angular",
-  "podcast_url": "https://devchat.tv/adventures-in-angular/"
-},
+    {
+      "name": "Building Performant Native Apps with NativeScript",
+      "url": "https://www.youtube.com/watch?v=ySIsAKjGa4E",
+      "date": "2017-06-22",
+      "type": "talk",
+      "talk_venue": "Fluent Conference",
+      "talk_venue_url": "https://conferences.oreilly.com/fluent/fl-ca",
+      "talk_venue_city": "San Jose, California",
+      "talk_slides": "/speaking/slides/Performant-Native-Apps-NativeScript/San-Jose/Performant-Native-Apps-NativeScript.pdf",
+      "talk_video": "https://www.youtube.com/watch?v=ySIsAKjGa4E"
+    },
 
-{
-  "name": "Episode 121 | TJ VanToll - Community Engagement",
-  "url": "http://developeronfire.com/episode-121-tj-vantoll-community-engagement",
-  "date": "2016-04-14",
-  "podcast_name": "Developer on Fire",
-  "podcast_url": "http://developeronfire.com/"
-},
+    {
+      "name": "Building EmotiNg (w/Jen Looper & Tara Manicsic)",
+      "url": "https://www.youtube.com/watch?v=j2S5OrMUj9g",
+      "date": "2017-04-07",
+      "type": "talk",
+      "talk_venue": "ng-conf",
+      "talk_venue_url": "https://www.ng-conf.org/",
+      "talk_venue_city": "Salt Lake City, Utah",
+      "talk_slides": "/speaking/slides/Building-Emoting/Salt-Lake-City/index.html",
+      "talk_video": "https://www.youtube.com/watch?v=j2S5OrMUj9g"
+    },
 
-{
-  "name": "Episode 57: Is NativeScript the holy grail for mobile development?",
-  "url": "https://plus.google.com/events/cgg9c8c4cikfj75p2irru4bor14",
-  "date": "2016-03-01",
-  "podcast_name": "Angular Air",
-  "podcast_url": "https://angularair.com/"
-},
+    {
+      "name": "TJ VanToll—Building Mobile Apps with NativeScript",
+      "url": "https://devchat.tv/react-native-radio/t-j-van-toll-of-the-native-script-project",
+      "date": "2017-02-28",
+      "podcast_name": "React Native Radio",
+      "podcast_url": "https://devchat.tv/react-native-radio/"
+    },
 
-{
-  "name": "Cordova Plugin Roundup",
-  "abstract": "https://gist.github.com/tjvantoll/1a11c1045be8b4e47e6c",
-  "url": "https://www.youtube.com/watch?v=IpEsJJFIz7g",
-  "date": "2016-01-29",
-  "talk_venue": "PhoneGap Day US",
-  "talk_venue_url": "http://pgday.phonegap.com/us2016/",
-  "talk_venue_city": "Lehi, Utah",
-  "talk_slides": "/speaking/slides/Cordova-Plugin-Roundup/Lehi/cordova-plugin-roundup.pdf",
-  "talk_video": "https://www.youtube.com/watch?v=IpEsJJFIz7g"
-},
+    {
+      "name": "Learn NativeScript—the Quickest Way to Build Cross-Platform Native Apps",
+      "url": "/speaking/slides/Learn-NativeScript/Atlanta/Learn-NativeScript.pdf",
+      "date": "2017-02-24",
+      "type": "talk",
+      "talk_venue": "DevNexus",
+      "talk_venue_url": "https://devnexus.com",
+      "talk_venue_city": "Atlanta, Georgia",
+      "talk_slides": "/speaking/slides/Learn-NativeScript/Atlanta/Learn-NativeScript.pdf"
+    },
 
-{
-  "name": "NativeScript (Part 1)",
-  "url": "https://devchat.tv/adventures-in-angular/074-aia-nativescript-with-burke-holland-and-tj-vantoll",
-  "date": "2016-01-07",
-  "podcast_name": "Adventures in Angular",
-  "podcast_url": "https://devchat.tv/adventures-in-angular/"
-},
+    {
+      "name": "What’s New with NativeScript",
+      "url": "https://www.youtube.com/watch?v=6em3r-NJRJs",
+      "date": "2016-09-20",
+      "type": "talk",
+      "talk_venue": "NativeScript Developer Day",
+      "talk_venue_url": "http://developerday.nativescript.org/",
+      "talk_venue_city": "Boston, Massachusetts",
+      "talk_slides": "/speaking/slides/NativeScript-New-and-Hot/Boston/NativeScript-New-and-Hot.pdf",
+      "talk_video": "https://www.youtube.com/watch?v=6em3r-NJRJs"
+    },
 
-{
-  "name": "A Lap Around NativeScript",
-  "abstract": "https://gist.github.com/tjvantoll/f307d65513ec871e0e12",
-  "url": "/speaking/slides/Introducing-NativeScript/Internet/a-lap-around-nativescript.pdf",
-  "date": "2016-01-14",
-  "talk_venue": "JS Remote Conf",
-  "talk_venue_url": "https://allremoteconfs.com/js-2016",
-  "talk_slides": "/speaking/slides/Introducing-NativeScript/Internet/a-lap-around-nativescript.pdf"
-},
+    {
+      "name": "Episode #5: Developing Mobile Apps with Telerik NativeScript",
+      "url": "https://www.thepolyglotdeveloper.com/2016/05/tpdp-episode-5-developing-mobile-apps-telerik-nativescript/",
+      "date": "2016-05-11",
+      "podcast_name": "The Polyglot Developer",
+      "podcast_url": "https://www.thepolyglotdeveloper.com/"
+    },
 
-{
-  "name": "Google’s Angular 2 Release Pushes JavaScript Beyond the Browser",
-  "url": "http://www.wired.com/2015/12/googles-angular-2-release-helps-push-javascript-beyond-the-browser/",
-  "date": "2015-12-15",
-  "interview_site": "WIRED",
-  "interview_site_url": "http://www.wired.com",
-  "interview_person": "Cade Metz"
-},
+    {
+      "name": "Sharing Code Between Web and Native Apps",
+      "abstract": "https://gist.github.com/tjvantoll/1a60028cf8ec94d7e825#sharing-code-between-web-and-native-apps",
+      "url": "https://www.youtube.com/watch?v=R3nyG2xtzeQ",
+      "date": "2016-05-04",
+      "talk_venue": "ng-conf",
+      "talk_venue_url": "https://www.ng-conf.org",
+      "talk_venue_city": "Salt Lake City, Utah",
+      "talk_slides": "/speaking/slides/Sharing-Code-Web-Native/Salt-Lake-City/sharing-code-web-native.pdf",
+      "talk_video": "https://www.youtube.com/watch?v=R3nyG2xtzeQ"
+    },
 
-{
-  "name": "Episode 186: NativeScript with TJ VanToll and Burke Holland",
-  "url": "https://devchat.tv/js-jabber/186-jsj-nativescript-with-tj-vantoll-and-burke-holland",
-  "date": "2015-11-18",
-  "podcast_name": "JavaScript Jabber",
-  "podcast_url": "http://javascriptjabber.com/"
-},
+    {
+      "name": "NativeScript (Part 2)",
+      "url": "https://devchat.tv/adv-in-angular/090-aia-nativescript-part-2-with-tj-vantoll",
+      "date": "2016-04-28",
+      "podcast_name": "Adventures in Angular",
+      "podcast_url": "https://devchat.tv/adventures-in-angular/"
+    },
 
-{
-  "name": "Episode 4: NativeScript with TJ VanToll",
-  "url": "https://devchat.tv/react-native-radio/04-nativeScript-with-TJ-VanToll",
-  "date": "2015-10-26",
-  "podcast_name": "React Native Radio",
-  "podcast_url": "https://devchat.tv/react-native-radio"
-},
+    {
+      "name": "Episode 121 | TJ VanToll - Community Engagement",
+      "url": "http://developeronfire.com/episode-121-tj-vantoll-community-engagement",
+      "date": "2016-04-14",
+      "podcast_name": "Developer on Fire",
+      "podcast_url": "http://developeronfire.com/"
+    },
 
-{
-  "name": "NativeScript Inside the Black Box",
-  "url": "http://developer.telerik.com/products/nativescript-inside-the-black-box/",
-  "date": "2015-10-26",
-  "podcast_name": "Eat Sleep Code (The Official Telerik Podcast)",
-  "podcast_url": "http://developer.telerik.com/community/eat-sleep-code/"
-},
+    {
+      "name": "Episode 57: Is NativeScript the holy grail for mobile development?",
+      "url": "https://plus.google.com/events/cgg9c8c4cikfj75p2irru4bor14",
+      "date": "2016-03-01",
+      "podcast_name": "Angular Air",
+      "podcast_url": "https://angularair.com/"
+    },
 
-{
-  "name": "A Lap Around NativeScript",
-  "abstract": "https://gist.github.com/tjvantoll/a5f7111ed131d5f54e98",
-  "url": "https://www.youtube.com/watch?v=HWboi_9aba8",
-  "date": "2015-05-04",
-  "talk_venue": "TelerikNEXT",
-  "talk_venue_url": "http://teleriknext.com/",
-  "talk_venue_city": "Boston, Massachusetts",
-  "talk_slides": "/speaking/slides/Introducing-NativeScript/Boston/A-Lap-Around-NativeScript.pdf",
-  "talk_video": "https://www.youtube.com/watch?v=HWboi_9aba8"
-},
+    {
+      "name": "Cordova Plugin Roundup",
+      "abstract": "https://gist.github.com/tjvantoll/1a11c1045be8b4e47e6c",
+      "url": "https://www.youtube.com/watch?v=IpEsJJFIz7g",
+      "date": "2016-01-29",
+      "talk_venue": "PhoneGap Day US",
+      "talk_venue_url": "http://pgday.phonegap.com/us2016/",
+      "talk_venue_city": "Lehi, Utah",
+      "talk_slides": "/speaking/slides/Cordova-Plugin-Roundup/Lehi/cordova-plugin-roundup.pdf",
+      "talk_video": "https://www.youtube.com/watch?v=IpEsJJFIz7g"
+    },
 
-{
-  "name": "Web Components—What's the Catch?",
-  "abstract": "https://gist.github.com/tjvantoll/d9a3e84c19bb6d64eee2",
-  "url": "/speaking/slides/Web-Components-Catch/San-Francisco/web-components-catch.pdf",
-  "date": "2015-04-21",
-  "talk_venue": "Fluent Conference",
-  "talk_venue_url": "http://fluentconf.com/",
-  "talk_venue_city": "San Francisco, California",
-  "talk_slides": "/speaking/slides/Web-Components-Catch/San-Francisco/web-components-catch.pdf"
-},
+    {
+      "name": "NativeScript (Part 1)",
+      "url": "https://devchat.tv/adventures-in-angular/074-aia-nativescript-with-burke-holland-and-tj-vantoll",
+      "date": "2016-01-07",
+      "podcast_name": "Adventures in Angular",
+      "podcast_url": "https://devchat.tv/adventures-in-angular/"
+    },
 
-{
-  "name": "Introducing NativeScript",
-  "date": "2015-03-12",
-  "talk_venue": "DevNexus",
-  "talk_venue_url": "http://www.devnexus.com/",
-  "talk_venue_city": "Atlanta, Georgia",
-  "talk_slides": "/speaking/slides/Introducing-NativeScript/Atlanta/introducing-nativescript.pdf",
-  "talk_video": "https://www.youtube.com/watch?v=Rw7oAu3yiik"
-},
+    {
+      "name": "A Lap Around NativeScript",
+      "abstract": "https://gist.github.com/tjvantoll/f307d65513ec871e0e12",
+      "url": "/speaking/slides/Introducing-NativeScript/Internet/a-lap-around-nativescript.pdf",
+      "date": "2016-01-14",
+      "talk_venue": "JS Remote Conf",
+      "talk_venue_url": "https://allremoteconfs.com/js-2016",
+      "talk_slides": "/speaking/slides/Introducing-NativeScript/Internet/a-lap-around-nativescript.pdf"
+    },
 
-{
-  "name": "Building Cross-Platform Apps with the Telerik Platform",
-  "abstract": "https://gist.github.com/tjvantoll/ca3e139cb51ea8e30004",
-  "url": "/speaking/slides/Telerik-Platform/Columbus/",
-  "date": "2014-11-21",
-  "talk_venue": "M3 Conf",
-  "talk_venue_url": "http://www.m3conf.com/",
-  "talk_venue_city": "Columbus, Ohio",
-  "talk_slides": "/speaking/slides/Telerik-Platform/Columbus/"
-},
+    {
+      "name": "Google’s Angular 2 Release Pushes JavaScript Beyond the Browser",
+      "url": "http://www.wired.com/2015/12/googles-angular-2-release-helps-push-javascript-beyond-the-browser/",
+      "date": "2015-12-15",
+      "interview_site": "WIRED",
+      "interview_site_url": "http://www.wired.com",
+      "interview_person": "Cade Metz"
+    },
 
-{
-  "name": "The State of Hybrid Tooling",
-  "abstract": "https://gist.github.com/tjvantoll/9949d3c80d8f27de254d",
-  "url": "https://www.youtube.com/watch?v=3nmE0PQVb_k",
-  "date": "2014-10-24",
-  "talk_venue": "PhoneGap Day US",
-  "talk_venue_url": "http://pgday.phonegap.com/us2014/",
-  "talk_venue_city": "San Francisco, California",
-  "talk_slides": "/speaking/slides/State-of-Hybrid/San-Francisco/",
-  "talk_video": "https://www.youtube.com/watch?v=3nmE0PQVb_k",
-  "talk_feedback": "https://storify.com/tjvantoll/phonegap-day-us-2014"
-},
+    {
+      "name": "Episode 186: NativeScript with TJ VanToll and Burke Holland",
+      "url": "https://devchat.tv/js-jabber/186-jsj-nativescript-with-tj-vantoll-and-burke-holland",
+      "date": "2015-11-18",
+      "podcast_name": "JavaScript Jabber",
+      "podcast_url": "http://javascriptjabber.com/"
+    },
 
-{
-  "name": "HTML5 Form Validation: Why no one uses it, and how you can!",
-  "abstract": "https://gist.github.com/tjvantoll/b9dd3b8cb9e7629b689e",
-  "url": "https://www.youtube.com/watch?v=8qvjhMr6UGM",
-  "date": "2014-09-12",
-  "talk_venue": "jQuery Chicago",
-  "talk_venue_url": "http://events.jquery.org/2014/chicago/",
-  "talk_venue_city": "Chicago, Illinois",
-  "talk_slides": "/speaking/slides/Constraint-Validation/Chicago/",
-  "talk_video": "https://www.youtube.com/watch?v=8qvjhMr6UGM",
-  "talk_feedback": "https://storify.com/tjvantoll/jquery-chicago-talk"
-},
+    {
+      "name": "Episode 4: NativeScript with TJ VanToll",
+      "url": "https://devchat.tv/react-native-radio/04-nativeScript-with-TJ-VanToll",
+      "date": "2015-10-26",
+      "podcast_name": "React Native Radio",
+      "podcast_url": "https://devchat.tv/react-native-radio"
+    },
 
-{
-  "name": "Hybrid Development for Mobile Apps",
-  "url": "http://www.infoq.com/interviews/vantoll-hybrid-development",
-  "date": "2014-07-19",
-  "interview_site": "InfoQ",
-  "interview_site_url": "http://www.infoq.com/",
-  "interview_person": "Barry Burd"
-},
+    {
+      "name": "NativeScript Inside the Black Box",
+      "url": "http://developer.telerik.com/products/nativescript-inside-the-black-box/",
+      "date": "2015-10-26",
+      "podcast_name": "Eat Sleep Code (The Official Telerik Podcast)",
+      "podcast_url": "http://developer.telerik.com/community/eat-sleep-code/"
+    },
 
-{
-  "name": "Episode 116: jQuery UI vs Kendo UI with Burke Holland and TJ VanToll",
-  "url": "http://javascriptjabber.com/116-jsj-jquery-ui-vs-kendoui-with-burke-holland-and-tj-vantoll/",
-  "date": "2014-07-09",
-  "podcast_name": "JavaScript Jabber",
-  "podcast_url": "http://javascriptjabber.com/"
-},
+    {
+      "name": "A Lap Around NativeScript",
+      "abstract": "https://gist.github.com/tjvantoll/a5f7111ed131d5f54e98",
+      "url": "https://www.youtube.com/watch?v=HWboi_9aba8",
+      "date": "2015-05-04",
+      "talk_venue": "TelerikNEXT",
+      "talk_venue_url": "http://teleriknext.com/",
+      "talk_venue_city": "Boston, Massachusetts",
+      "talk_slides": "/speaking/slides/Introducing-NativeScript/Boston/A-Lap-Around-NativeScript.pdf",
+      "talk_video": "https://www.youtube.com/watch?v=HWboi_9aba8"
+    },
 
-{
-  "name": "The State of Hybrid",
-  "abstract": "https://gist.github.com/tjvantoll/9aa512cdee29316bc5da",
-  "url": "/speaking/slides/State-of-Hybrid/New-York/",
-  "date": "2014-06-12",
-  "talk_venue": "QCon NY",
-  "talk_venue_url": "https://qconnewyork.com",
-  "talk_venue_city": "New York, New York",
-  "talk_slides": "/speaking/slides/State-of-Hybrid/New-York/"
-},
+    {
+      "name": "Web Components—What's the Catch?",
+      "abstract": "https://gist.github.com/tjvantoll/d9a3e84c19bb6d64eee2",
+      "url": "/speaking/slides/Web-Components-Catch/San-Francisco/web-components-catch.pdf",
+      "date": "2015-04-21",
+      "talk_venue": "Fluent Conference",
+      "talk_venue_url": "http://fluentconf.com/",
+      "talk_venue_city": "San Francisco, California",
+      "talk_slides": "/speaking/slides/Web-Components-Catch/San-Francisco/web-components-catch.pdf"
+    },
 
-{
-  "name": "Navigating Hybrid Mobile Apps",
-  "url": "http://hallwayconversations.com/podcast/episode-005-navigating-hybrid-mobile-apps-with-tj-vantoll/",
-  "date": "2014-03-16",
-  "podcast_name": "Hallway Conversations",
-  "podcast_url": "http://hallwayconversations.com"
-},
+    {
+      "name": "Introducing NativeScript",
+      "date": "2015-03-12",
+      "talk_venue": "DevNexus",
+      "talk_venue_url": "http://www.devnexus.com/",
+      "talk_venue_city": "Atlanta, Georgia",
+      "talk_slides": "/speaking/slides/Introducing-NativeScript/Atlanta/introducing-nativescript.pdf",
+      "talk_video": "https://www.youtube.com/watch?v=Rw7oAu3yiik"
+    },
 
-{
-  "name": "Validating Forms With HTML5",
-  "abstract": "https://gist.github.com/tjvantoll/dcf2dc7b2930b73416a2",
-  "url": "/speaking/slides/Constraint-Validation/Atlanta/",
-  "date": "2014-02-25",
-  "talk_venue": "Atlanta HTML5 User Group",
-  "talk_venue_url": "http://www.meetup.com/AtlantaHTML5/events/166212742/",
-  "talk_city": "Atlanta, Georgia",
-  "talk_slides": "/speaking/slides/Constraint-Validation/Atlanta/"
-},
+    {
+      "name": "Building Cross-Platform Apps with the Telerik Platform",
+      "abstract": "https://gist.github.com/tjvantoll/ca3e139cb51ea8e30004",
+      "url": "/speaking/slides/Telerik-Platform/Columbus/",
+      "date": "2014-11-21",
+      "talk_venue": "M3 Conf",
+      "talk_venue_url": "http://www.m3conf.com/",
+      "talk_venue_city": "Columbus, Ohio",
+      "talk_slides": "/speaking/slides/Telerik-Platform/Columbus/"
+    },
 
-{
-  "name": "jQuery UI Widgets vs. HTML5",
-  "abstract": "https://gist.github.com/tjvantoll/8c560cbdc89560652d5a",
-  "url": "/speaking/slides/UI-Widgets-vs-HTML5/Atlanta",
-  "date": "2014-02-24",
-  "talk_venue": "DevNexus",
-  "talk_venue_url": "http://devnexus.com/",
-  "talk_city": "Atlanta, Georgia",
-  "talk_slides": "/speaking/slides/UI-Widgets-vs-HTML5/Atlanta"
-},
+    {
+      "name": "The State of Hybrid Tooling",
+      "abstract": "https://gist.github.com/tjvantoll/9949d3c80d8f27de254d",
+      "url": "https://www.youtube.com/watch?v=3nmE0PQVb_k",
+      "date": "2014-10-24",
+      "talk_venue": "PhoneGap Day US",
+      "talk_venue_url": "http://pgday.phonegap.com/us2014/",
+      "talk_venue_city": "San Francisco, California",
+      "talk_slides": "/speaking/slides/State-of-Hybrid/San-Francisco/",
+      "talk_video": "https://www.youtube.com/watch?v=3nmE0PQVb_k",
+      "talk_feedback": "https://storify.com/tjvantoll/phonegap-day-us-2014"
+    },
 
-{
-  "name": "Making the Case for jQuery in a Browser Utopia",
-  "abstract": "https://gist.github.com/tjvantoll/c1781a7707be124c7c46",
-  "url": "https://www.youtube.com/watch?v=OBLvBcGgVQc",
-  "date": "2014-02-12",
-  "talk_venue": "jQuery San Diego",
-  "talk_venue_url": "http://events.jquery.org/2014/san-diego/",
-  "talk_city": "San Diego, California",
-  "talk_slides": "/speaking/slides/jQuery-Defense/San-Diego/",
-  "talk_video": "https://www.youtube.com/watch?v=OBLvBcGgVQc"
-},
+    {
+      "name": "HTML5 Form Validation: Why no one uses it, and how you can!",
+      "abstract": "https://gist.github.com/tjvantoll/b9dd3b8cb9e7629b689e",
+      "url": "https://www.youtube.com/watch?v=8qvjhMr6UGM",
+      "date": "2014-09-12",
+      "talk_venue": "jQuery Chicago",
+      "talk_venue_url": "http://events.jquery.org/2014/chicago/",
+      "talk_venue_city": "Chicago, Illinois",
+      "talk_slides": "/speaking/slides/Constraint-Validation/Chicago/",
+      "talk_video": "https://www.youtube.com/watch?v=8qvjhMr6UGM",
+      "talk_feedback": "https://storify.com/tjvantoll/jquery-chicago-talk"
+    },
 
-{
-  "name": "Constraint Validation: Native Client Side Validation for Web Forms",
-  "url": "/speaking/slides/Constraint-Validation/San-Francisco",
-  "date": "2013-10-22",
-  "talk_venue": "HTML5 Developer Conference",
-  "talk_venue_url": "http://html5devconf.com/",
-  "talk_city": "San Francisco, California",
-  "talk_slides": "/speaking/slides/Constraint-Validation/San-Francisco"
-},
+    {
+      "name": "Hybrid Development for Mobile Apps",
+      "url": "http://www.infoq.com/interviews/vantoll-hybrid-development",
+      "date": "2014-07-19",
+      "interview_site": "InfoQ",
+      "interview_site_url": "http://www.infoq.com/",
+      "interview_person": "Barry Burd"
+    },
 
-{
-  "name": "jQuery UI Widgets vs. HTML5",
-  "abstract": "https://gist.github.com/tjvantoll/8c560cbdc89560652d5a",
-  "url": "/speaking/slides/UI-Widgets-vs-HTML5/Sofia",
-  "date": "2013-10-02",
-  "talk_venue": "DevReach",
-  "talk_venue_url": "http://www.devreach.com/",
-  "talk_venue_city": "Sofia, Bulgaria",
-  "talk_slides": "/speaking/slides/UI-Widgets-vs-HTML5/Sofia"
-},
+    {
+      "name": "Episode 116: jQuery UI vs Kendo UI with Burke Holland and TJ VanToll",
+      "url": "http://javascriptjabber.com/116-jsj-jquery-ui-vs-kendoui-with-burke-holland-and-tj-vantoll/",
+      "date": "2014-07-09",
+      "podcast_name": "JavaScript Jabber",
+      "podcast_url": "http://javascriptjabber.com/"
+    },
 
-{
-  "name": "jQuery UI Widgets vs. HTML5",
-  "abstract": "https://gist.github.com/tjvantoll/8c560cbdc89560652d5a",
-  "url": "http://www.youtube.com/watch?v=Q6Bjs4BoBTc",
-  "date": "2013-06-13",
-  "talk_venue": "jQuery Portland",
-  "talk_venue_url": "http://events.jquery.org/2013/portland/",
-  "talk_venue_city": "Portland, Oregon",
-  "talk_slides": "/speaking/slides/UI-Widgets-vs-HTML5/Portland",
-  "talk_video": "http://www.youtube.com/watch?v=Q6Bjs4BoBTc"
-},
+    {
+      "name": "The State of Hybrid",
+      "abstract": "https://gist.github.com/tjvantoll/9aa512cdee29316bc5da",
+      "url": "/speaking/slides/State-of-Hybrid/New-York/",
+      "date": "2014-06-12",
+      "talk_venue": "QCon NY",
+      "talk_venue_url": "https://qconnewyork.com",
+      "talk_venue_city": "New York, New York",
+      "talk_slides": "/speaking/slides/State-of-Hybrid/New-York/"
+    },
 
-{
-  "name": "Submitting Bugs the Right Way",
-  "url": "/speaking/slides/Submitting-Bugs-the-Right-Way/Toronto",
-  "date": "2013-03-03",
-  "talk_venue": "jQuery TO",
-  "talk_venue_url": "http://jqueryto.com",
-  "talk_city": "Toronto, Ontario",
-  "talk_slides": "/speaking/slides/Submitting-Bugs-the-Right-Way/Toronto"
-},
+    {
+      "name": "Navigating Hybrid Mobile Apps",
+      "url": "http://hallwayconversations.com/podcast/episode-005-navigating-hybrid-mobile-apps-with-tj-vantoll/",
+      "date": "2014-03-16",
+      "podcast_name": "Hallway Conversations",
+      "podcast_url": "http://hallwayconversations.com"
+    },
 
-{
-  "name": "Front End Web Efficiency—The Top Ten",
-  "url": "/speaking/slides/Efficiency-Top-Ten/Okemos?plain",
-  "date": "2012-10-23",
-  "talk_venue": "Lansing Java Users Group",
-  "talk_venue_url": "https://groups.google.com/forum/#!forum/greaterlansingjug",
-  "talk_city": "Lansing, MI",
-  "talk_slides": "/speaking/slides/Efficiency-Top-Ten/Okemos?plain"
-},
+    {
+      "name": "Validating Forms With HTML5",
+      "abstract": "https://gist.github.com/tjvantoll/dcf2dc7b2930b73416a2",
+      "url": "/speaking/slides/Constraint-Validation/Atlanta/",
+      "date": "2014-02-25",
+      "talk_venue": "Atlanta HTML5 User Group",
+      "talk_venue_url": "http://www.meetup.com/AtlantaHTML5/events/166212742/",
+      "talk_city": "Atlanta, Georgia",
+      "talk_slides": "/speaking/slides/Constraint-Validation/Atlanta/"
+    },
 
-{
-  "name": "JavaScript for the Java Developer",
-  "url": "/speaking/slides/JavaScript-for-the-Java-Developer/Okemos",
-  "date": "2012-03-20",
-  "talk_venue": "Lansing Java Users Group",
-  "talk_venue_url": "https://groups.google.com/forum/#!forum/greaterlansingjug",
-  "talk_venue_city": "Lansing, MI",
-  "talk_slides": "/speaking/slides/JavaScript-for-the-Java-Developer/Okemos"
+    {
+      "name": "jQuery UI Widgets vs. HTML5",
+      "abstract": "https://gist.github.com/tjvantoll/8c560cbdc89560652d5a",
+      "url": "/speaking/slides/UI-Widgets-vs-HTML5/Atlanta",
+      "date": "2014-02-24",
+      "talk_venue": "DevNexus",
+      "talk_venue_url": "http://devnexus.com/",
+      "talk_city": "Atlanta, Georgia",
+      "talk_slides": "/speaking/slides/UI-Widgets-vs-HTML5/Atlanta"
+    },
+
+    {
+      "name": "Making the Case for jQuery in a Browser Utopia",
+      "abstract": "https://gist.github.com/tjvantoll/c1781a7707be124c7c46",
+      "url": "https://www.youtube.com/watch?v=OBLvBcGgVQc",
+      "date": "2014-02-12",
+      "talk_venue": "jQuery San Diego",
+      "talk_venue_url": "http://events.jquery.org/2014/san-diego/",
+      "talk_city": "San Diego, California",
+      "talk_slides": "/speaking/slides/jQuery-Defense/San-Diego/",
+      "talk_video": "https://www.youtube.com/watch?v=OBLvBcGgVQc"
+    },
+
+    {
+      "name": "Constraint Validation: Native Client Side Validation for Web Forms",
+      "url": "/speaking/slides/Constraint-Validation/San-Francisco",
+      "date": "2013-10-22",
+      "talk_venue": "HTML5 Developer Conference",
+      "talk_venue_url": "http://html5devconf.com/",
+      "talk_city": "San Francisco, California",
+      "talk_slides": "/speaking/slides/Constraint-Validation/San-Francisco"
+    },
+
+    {
+      "name": "jQuery UI Widgets vs. HTML5",
+      "abstract": "https://gist.github.com/tjvantoll/8c560cbdc89560652d5a",
+      "url": "/speaking/slides/UI-Widgets-vs-HTML5/Sofia",
+      "date": "2013-10-02",
+      "talk_venue": "DevReach",
+      "talk_venue_url": "http://www.devreach.com/",
+      "talk_venue_city": "Sofia, Bulgaria",
+      "talk_slides": "/speaking/slides/UI-Widgets-vs-HTML5/Sofia"
+    },
+
+    {
+      "name": "jQuery UI Widgets vs. HTML5",
+      "abstract": "https://gist.github.com/tjvantoll/8c560cbdc89560652d5a",
+      "url": "http://www.youtube.com/watch?v=Q6Bjs4BoBTc",
+      "date": "2013-06-13",
+      "talk_venue": "jQuery Portland",
+      "talk_venue_url": "http://events.jquery.org/2013/portland/",
+      "talk_venue_city": "Portland, Oregon",
+      "talk_slides": "/speaking/slides/UI-Widgets-vs-HTML5/Portland",
+      "talk_video": "http://www.youtube.com/watch?v=Q6Bjs4BoBTc"
+    },
+
+    {
+      "name": "Submitting Bugs the Right Way",
+      "url": "/speaking/slides/Submitting-Bugs-the-Right-Way/Toronto",
+      "date": "2013-03-03",
+      "talk_venue": "jQuery TO",
+      "talk_venue_url": "http://jqueryto.com",
+      "talk_city": "Toronto, Ontario",
+      "talk_slides": "/speaking/slides/Submitting-Bugs-the-Right-Way/Toronto"
+    },
+
+    {
+      "name": "Front End Web Efficiency—The Top Ten",
+      "url": "/speaking/slides/Efficiency-Top-Ten/Okemos?plain",
+      "date": "2012-10-23",
+      "talk_venue": "Lansing Java Users Group",
+      "talk_venue_url": "https://groups.google.com/forum/#!forum/greaterlansingjug",
+      "talk_city": "Lansing, MI",
+      "talk_slides": "/speaking/slides/Efficiency-Top-Ten/Okemos?plain"
+    },
+
+    {
+      "name": "JavaScript for the Java Developer",
+      "url": "/speaking/slides/JavaScript-for-the-Java-Developer/Okemos",
+      "date": "2012-03-20",
+      "talk_venue": "Lansing Java Users Group",
+      "talk_venue_url": "https://groups.google.com/forum/#!forum/greaterlansingjug",
+      "talk_venue_city": "Lansing, MI",
+      "talk_slides": "/speaking/slides/JavaScript-for-the-Java-Developer/Okemos"
+    }
+  ]
 }
-
-]}
