@@ -3,7 +3,7 @@ layout: page
 title: "Speaking"
 ---
 
-I started speaking at conferences and user groups in 2012. Over the years I’ve attended a number of awesome events, met some really cool people, and awkwardly messed with PowerPoint in front of a thousand people. Below is a list of the events I’ve been to and the podcasts I’ve appeared on.
+I started speaking at conferences and user groups in 2012. Over the years I’ve attended a number of awesome events, met some really cool people, and awkwardly messed with PowerPoint in front of several large crowds. Below is a list of the events I’ve been to and the podcasts I’ve appeared on.
 
 If you’re looking to quickly evaluate my speaking skills, watch [Why I Was Wrong About TypeScript](https://www.youtube.com/watch?v=AQOEZVG2WY0), which I presented at [GOTO Copenhagen](https://gotocph.com/2018), and which was [JavaScript Weekly’s most popular video of 2019](https://javascriptweekly.com/issues/469).
 

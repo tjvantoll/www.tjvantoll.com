@@ -1,6 +1,16 @@
 {
   "talks": [
     {
+      "name": "Edge AI Connectivity Made Simple",
+      "url": "https://docs.google.com/presentation/d/1Xkq6Q8pgc9g_QVeT0sCFxw35P_mQCqIX/edit?usp=sharing&ouid=107609230756320894410&rtpof=true&sd=true",
+      "date": "2022-09-29",
+      "type": "talk",
+      "talk_venue": "Edge Impulse Imagine",
+      "talk_venue_url": "https://edgeimpulse.com/imagine",
+      "talk_slides": "https://docs.google.com/presentation/d/1Xkq6Q8pgc9g_QVeT0sCFxw35P_mQCqIX/edit?usp=sharing&ouid=107609230756320894410&rtpof=true&sd=true"
+    },
+
+    {
       "name": "Building Custom GPS Trackers From Scratch",
       "url": "https://docs.google.com/presentation/d/1WUsgToX5eBTkmKuRjDHBPQ3bnPNbluUQ/edit?usp=sharing&ouid=107609230756320894410&rtpof=true&sd=true",
       "date": "2022-07-28",
