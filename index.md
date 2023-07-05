@@ -61,7 +61,7 @@ layout: empty
 
   <p>
     Hi, I'm TJ. I'm a software developer, tech author, speaker, and a
-    Principal Developer Advocate for <a href="https://blues.io/">Blues Wireless</a>.
+    Principal Developer Advocate for <a href="https://blues.io/">Blues</a>.
     I have over a decade of development experience, including a few years working
     on the jQuery, NativeScript, and Kendo UI teams. Nowadays I spend my time
     helping developers build awesome IoT experiences.
