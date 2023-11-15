@@ -1,5 +1,7 @@
-# Run `bundle update` to update the Gemfile.lock file
+# frozen_string_literal: true
 
-source "http://rubygems.org"
+source "https://rubygems.org"
 
-gem "github-pages"
+# gem "rails"
+
+gem "jekyll", "~> 4.3"
