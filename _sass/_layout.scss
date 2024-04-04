@@ -1,134 +1,162 @@
 html {
-	box-sizing: border-box;
+  box-sizing: border-box;
 }
-*, *::before, *::after {
-	box-sizing: inherit;
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
 }
 
 body {
-	margin: 0;
+  margin: 0;
 }
 #main {
-	padding: 0 1rem;
-	max-width: 38rem;
-	margin: 0 auto;
+  padding: 0 1rem;
+  max-width: 38rem;
+  margin: 0 auto;
 }
 
 .header {
-	@extend .sans;
-	@extend .main-border;
-	display: flex;
-	margin-bottom: 1rem;
+  @extend .sans;
+  @extend .main-border;
+  display: flex;
+  margin-bottom: 1rem;
 
-	> div {
-		width: 300px;
-		display: flex;
-		align-items: center;
+  > div {
+    width: 300px;
+    display: flex;
+    align-items: center;
 
-		img {
-			height: 40px;
-			width: 40px;
-			border-radius: 10px;
-		}
-		a { display: inline-flex; }
-	}
+    img {
+      height: 40px;
+      width: 40px;
+      border-radius: 10px;
+    }
+    a {
+      display: inline-flex;
+    }
+  }
 
-	h1 {
-		display: inline-block;
-		margin: 0;
-		padding-left: 0.3rem;
-		font-size: 1.5rem;
-		font-weight: normal;
+  h1 {
+    display: inline-block;
+    margin: 0;
+    padding-left: 0.3rem;
+    font-size: 1.5rem;
+    font-weight: normal;
 
-		a { text-decoration: none; }
-		a:hover { text-decoration: underline; }
-	}
+    a {
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+  }
 
-	nav {
-		flex-grow: 1;
-		margin: 0;
-		ul {
-			display: flex;
-			justify-content: center;
-			margin: 1em 0;
-		}
-		li {
-			list-style: none;
-			border-right: 1px solid $text-color-light;
-			flex-grow: 1;
-			text-align: center;
-			&:last-child {
-				border: none;
-			}
-		}
-		.svg-image { vertical-align: middle; }
-		.svg-image[alt="GitHub"] { height: 1.3rem; width: 1.3rem; }
-		.svg-image[alt="Twitter"] { height: 1.4rem; width: 1.4rem; }
-	}
+  nav {
+    flex-grow: 1;
+    margin: 0;
+    ul {
+      display: flex;
+      justify-content: center;
+      margin: 1em 0;
+    }
+    li {
+      list-style: none;
+      border-right: 1px solid $text-color-light;
+      flex-grow: 1;
+      text-align: center;
+      &:last-child {
+        border: none;
+      }
+    }
+    .svg-image {
+      vertical-align: middle;
+    }
+    .svg-image[alt="GitHub"] {
+      height: 1.3rem;
+      width: 1.3rem;
+    }
+    .svg-image[alt="Twitter"] {
+      height: 1.4rem;
+      width: 1.4rem;
+    }
+  }
 }
 
 @media (max-width: $breakpoint-tablet) {
-	nav a { text-decoration: none; }
-	nav a:hover { text-decoration: underline; }
+  nav a {
+    text-decoration: none;
+  }
+  nav a:hover {
+    text-decoration: underline;
+  }
 }
 @media (max-width: 700px) {
-	.header > div { width: 225px; }
+  .header > div {
+    width: 225px;
+  }
 }
 @media (max-width: $breakpoint-phone) {
-	.header {
-		display: block;
-		padding-bottom: 1rem;
-		nav ul { margin-bottom: 0; }
-	}
-	.header > div {
-		margin: 1rem auto 0 auto;
-	}
-	.header > div {
-		text-align: center;
-	}
+  .header {
+    display: block;
+    padding-bottom: 1rem;
+    nav ul {
+      margin-bottom: 0;
+    }
+  }
+  .header > div {
+    margin: 1rem auto 0 auto;
+  }
+  .header > div {
+    text-align: center;
+  }
 }
 
 /* Ads */
 .ad-container {
-	display: none;
-	border: 1px solid $text-color;
-	padding: 1rem;
-	margin: 0 0 1rem 1rem;
-	min-height: 137px;
-	width: 350px;
-	float: right;
-	a { text-decoration: none; }
+  display: none;
+  border: 1px solid $text-color;
+  padding: 1rem;
+  margin: 0 0 1rem 1rem;
+  min-height: 137px;
+  width: 350px;
+  float: right;
+  a {
+    text-decoration: none;
+  }
 }
 #carbonads a {
-	font-size: 0.7rem;
-	color: $text-color;
-	&:hover { color: $link-color-hover; }
+  font-size: 0.7rem;
+  color: $text-color;
+  &:hover {
+    color: $link-color-hover;
+  }
 }
 #carbonads > span {
-	position: relative;
-	display: block;
+  position: relative;
+  display: block;
 }
 .carbon-wrap {
-	display: flex;
-	padding-bottom: 10px;
+  display: flex;
+  padding-bottom: 10px;
 }
 .carbon-text {
-	padding: 0.5rem;
+  padding: 0.5rem;
 }
 .carbon-img {
-	display: flex;
-	align-items: center;
+  display: flex;
+  align-items: center;
 }
 .carbon-poweredby {
-	position: absolute;
-	bottom: -12px;
-	left: 19px;
-	font-size: 0.7rem;
-	width: 300px;
+  position: absolute;
+  bottom: -12px;
+  left: 19px;
+  font-size: 0.7rem;
+  width: 300px;
 }
 @media (max-width: $breakpoint-tablet) {
-	.ad-container {
-		width: 100%;
-		margin: 0 0 1rem 0;
-	}
+  .ad-container {
+    width: 100%;
+    margin: 0 0 1rem 0;
+  }
 }
