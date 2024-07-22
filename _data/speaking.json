@@ -1,6 +1,17 @@
 {
   "talks": [
     {
+      "name": "Unlocking the IoT with TinyML and LoRaWAN",
+      "url": "https://drive.google.com/file/d/1pqUYyiXacbdT6QVdqe-PlMR5_m0T1KUq/view?usp=sharing",
+      "date": "2024-06-24",
+      "type": "talk",
+      "talk_venue": "Sensors Converge",
+      "talk_venue_city": "Santa Clara, California",
+      "talk_venue_url": "https://www.sensorsconverge.com",
+      "talk_slides": "https://drive.google.com/file/d/1pqUYyiXacbdT6QVdqe-PlMR5_m0T1KUq/view?usp=sharing"
+    },
+
+    {
       "name": "Build a Smarter City with (Swappable) Cellular, Wi-Fi, and LoRa",
       "url": "https://drive.google.com/file/d/1ebFik9bcB3I-GDCqq7umvM28Prh3qhvk/view?usp=sharing",
       "date": "2023-11-15",
@@ -39,6 +50,7 @@
       "type": "talk",
       "talk_venue": "THAT Conference",
       "talk_venue_url": "https://that.us",
+      "talk_venue_city": "Wisconsin Dells, Wisconsin",
       "talk_slides": "https://docs.google.com/presentation/d/1WUsgToX5eBTkmKuRjDHBPQ3bnPNbluUQ/edit?usp=sharing&ouid=107609230756320894410&rtpof=true&sd=true"
     },
 
