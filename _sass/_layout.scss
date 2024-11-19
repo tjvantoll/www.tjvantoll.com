@@ -116,7 +116,7 @@ body {
 .ad-container {
   display: none;
   border: 1px solid $text-color;
-  padding: 1rem;
+  padding: 1rem 1rem 1.2rem 1rem;
   margin: 0 0 1rem 1rem;
   min-height: 137px;
   width: 350px;
@@ -142,6 +142,7 @@ body {
 }
 .carbon-text {
   padding: 0.5rem;
+  white-space: initial;
 }
 .carbon-img {
   display: flex;
