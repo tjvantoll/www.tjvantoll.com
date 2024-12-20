@@ -19,10 +19,13 @@ layout: empty
     border-radius: 10%;
     height: 10rem;
   }
+  .description {
+    margin: 1rem auto 2rem;
+  }
   p {
     max-width: 600px;
     text-align: center;
-    margin: 1rem auto 2rem;
+    margin: 1rem auto;
   }
   ul {
     display: flex;
@@ -59,13 +62,24 @@ layout: empty
     src="/images/me/headshot-big.jpg"
     alt="Me presenting at TelerikNEXT">
 
-  <p>
-    Hi, I'm TJ. I'm a software developer, tech author, speaker, and a
-    Principal Developer Advocate for <a href="https://blues.io/">Blues</a>.
-    I have over a decade of development experience, including a few years working
-    on the jQuery, NativeScript, and Kendo UI teams. Nowadays I spend my time
-    helping developers build awesome IoT experiences.
-  </p>
+  <div class="description">
+    <p>
+      Hi, I'm TJ 👋
+    </p>
+
+    <p>
+      I'm a software developer, tech author, speaker, and
+      <a href="https://front-end-fire.com/">podcast host</a>.
+      I have over 15 years of development experience, including time working
+      on the jQuery, NativeScript, and Kendo UI teams.
+    </p>
+
+    <p>
+      Nowadays I work as a Principal Developer Advocate for
+      <a href="https://blues.io/">Blues</a>, and help developers build awesome IoT
+      experiences.
+    </p>
+  </div>
 
   <ul>
     <li>
@@ -80,8 +94,8 @@ layout: empty
       </a>
     </li>
     <li>
-      <a href="https://twitter.com/tjvantoll">
-        <img class="svg-image" src="/images/icons/twitter.svg" alt="Twitter" height="40" width="40">
+      <a href="https://x.com/tjvantoll">
+        <img class="svg-image" src="/images/icons/twitter-x.svg" alt="Twitter" height="40" width="40">
       </a>
     </li>
   </ul>

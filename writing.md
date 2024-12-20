@@ -3,30 +3,9 @@ layout: page
 title: "Writing"
 ---
 
-Here you’ll find a list of books and articles I’ve written, both on this blog and around the web. If you’re looking for a quick sample of my writing style without reading my life’s work, check out [The Web’s Cruft Problem](http://developer.telerik.com/featured/the-webs-cruft-problem/), [The Rise of TypeScript](https://web.archive.org/web/20170808064945/http://developer.telerik.com/featured/the-rise-of-typescript/), or [Would Airbnb Have Fared Better With NativeScript](https://www.nativescript.org/blog/would-airbnb-have-fared-better-with-nativescript-instead-of-react-native).
+Here you’ll find a list of articles I’ve written, both on this blog and around the web. If you’re looking for a quick sample of my writing style without reading my life’s work, check out [The Web’s Cruft Problem](http://developer.telerik.com/featured/the-webs-cruft-problem/) or [The Rise of TypeScript](https://web.archive.org/web/20170808064945/http://developer.telerik.com/featured/the-rise-of-typescript/).
 
-My biggest writing endeavor was a book I wrote on [jQuery UI](http://jqueryui.com/) back in 2014. I wrote up an article about [what the experience of writing a tech book is like](https://www.tjvantoll.com/2014/12/29/so-you-want-to-write-a-tech-book/), if you’re curious.
-
-<div class="blog-archives">
-	<h2 class="book-heading">Books</h2>
-	<article class="book-listing">
-		<img class="cover" src="/images/book.jpg" alt="jQuery UI in Action cover">
-		<h1>
-			<a href="http://tjvantoll.com/jquery-ui-in-action.html">jQuery UI in Action</a>
-		</h1>
-		<time style="visibility: hidden;">
-			<span class="month">OCT</span>
-			<span class="day">12</span>
-			<span class="year">2014</span>
-		</time>
-		<ul>
-			<li>Published by <a href="https://manning.com/">Manning</a></li>
-			<li>5-star average on <a href="http://www.amazon.com/jQuery-UI-Action-T-VanToll/dp/1617291935/ref=sr_1_1?ie=UTF8&qid=1436237989&sr=8-1&keywords=jquery+ui">Amazon</a></li>
-		</ul>
-	</article>
-</div>
-
-<hr class="main-border">
+My biggest writing endeavor was a [book I wrote on jQuery UI](https://www.amazon.com/jQuery-UI-Action-T-VanToll/dp/1617291935) back in 2014. I wrote up an article about [what the experience of writing a tech book is like](https://www.tjvantoll.com/2014/12/29/so-you-want-to-write-a-tech-book/), if you’re curious.
 
 <div class="blog-archives">
 	{% for post in site.posts %}
