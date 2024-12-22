@@ -10,105 +10,130 @@ html {
 body {
   margin: 0;
 }
-#main {
-  padding: 0 1rem;
-  max-width: 38rem;
+.main {
+  padding: 1rem;
   margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
 }
 
-.header {
+.sidebar {
   @extend .sans;
-  @extend .main-border;
   display: flex;
-  margin-bottom: 1rem;
+  flex-flow: column;
+  margin-right: 1.5rem;
 
-  > div {
-    width: 300px;
-    display: flex;
-    align-items: center;
-
-    img {
-      height: 40px;
-      width: 40px;
-      border-radius: 10px;
-    }
-    a {
-      display: inline-flex;
-    }
+  .headshot {
+    height: 120px;
+    width: 120px;
+    border-radius: 10%;
   }
 
-  h1 {
-    display: inline-block;
-    margin: 0;
-    padding-left: 0.3rem;
+  h2 {
     font-size: 1.5rem;
     font-weight: normal;
+    margin-bottom: 0;
 
-    a {
+    > a {
       text-decoration: none;
+      color: $text-color;
     }
-    a:hover {
+    > a:hover {
       text-decoration: underline;
+      color: $link-color-hover;
     }
   }
 
   nav {
-    flex-grow: 1;
     margin: 0;
     ul {
       display: flex;
-      justify-content: center;
-      margin: 1em 0;
+      flex-flow: column;
+      margin: 1rem 0;
     }
     li {
       list-style: none;
-      border-right: 1px solid $text-color-light;
-      flex-grow: 1;
-      text-align: center;
-      &:last-child {
-        border: none;
-      }
+      margin: 0.5rem 0;
+    }
+    a {
+      text-decoration: none;
+      font-size: 1rem;
+      color: $text-color;
+    }
+    a:hover {
+      color: $link-color-hover;
+    }
+    span:last-child {
+      display: inline-block;
+      margin-left: 0.3rem;
+    }
+    span:has(.svg-image) + span {
+      position: relative;
+      top: -0.25rem;
     }
     .svg-image {
-      vertical-align: middle;
-    }
-    .svg-image[alt="GitHub"] {
       height: 1.3rem;
       width: 1.3rem;
-    }
-    .svg-image[alt="Twitter"] {
-      height: 1.4rem;
-      width: 1.4rem;
     }
   }
 }
 
+.content {
+  max-width: 38rem;
+  flex: 1;
+  background-image: linear-gradient(to bottom, #bababa 33%, white 0%);
+  background-size: 1px 4px;
+  background-position: left;
+  background-repeat: repeat-y;
+  padding-left: 1.5rem;
+}
+
 @media (max-width: $breakpoint-tablet) {
-  nav a {
-    text-decoration: none;
+  .main {
+    flex-direction: column;
   }
-  nav a:hover {
-    text-decoration: underline;
-  }
-}
-@media (max-width: 700px) {
-  .header > div {
-    width: 225px;
-  }
-}
-@media (max-width: $breakpoint-phone) {
-  .header {
-    display: block;
-    padding-bottom: 1rem;
+  .sidebar {
+    width: 100%;
+
+    & > div {
+      display: flex;
+      justify-content: center;
+    }
+
+    .headshot {
+      height: 40px;
+      width: 40px;
+      margin-right: 0.5rem;
+      border-radius: 10px;
+    }
     nav ul {
-      margin-bottom: 0;
+      flex-flow: row;
+      justify-content: center;
+      margin: 0.5rem 0 2rem 0;
+      li {
+        margin: 0;
+        padding: 0 1rem;
+        border-right: 1px solid #bababa;
+        flex-grow: 1;
+        text-align: center;
+      }
+      li:last-child {
+        border-right: none;
+      }
     }
   }
-  .header > div {
-    margin: 1rem auto 0 auto;
+  .content {
+    background: none;
+    padding-left: 0;
+    width: 100%;
+    margin: 0 auto;
   }
-  .header > div {
-    text-align: center;
+}
+
+@media (max-width: $breakpoint-phone) {
+  .sidebar nav span.hide-small {
+    display: none;
   }
 }
 
@@ -116,6 +141,7 @@ body {
 .ad-container {
   display: none;
   border: 1px solid $text-color;
+  border-radius: 10px;
   padding: 1rem 1rem 1.2rem 1rem;
   margin: 0 0 1rem 1rem;
   min-height: 137px;

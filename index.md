@@ -7,7 +7,7 @@ layout: empty
     border: none;
   }
   .container {
-    max-width: 800px;
+    max-width: 600px;
     margin: 20px auto 0;
     text-align: center;
     padding: 0 1rem;
@@ -23,7 +23,6 @@ layout: empty
     margin: 1rem auto 2rem;
   }
   p {
-    max-width: 600px;
     text-align: center;
     margin: 1rem auto;
   }
@@ -32,26 +31,19 @@ layout: empty
     justify-content: center;
     font-size: 1.4rem;
     margin: 0 auto 1.5rem;
-    max-width: 600px;
   }
   li {
     list-style: none;
     flex-grow: 1;
-    border-right: 1px solid lightgray;
+    border-right: 1px solid #bababa;
   }
   li:last-child {
     border: none;
-  }
-  .divider {
-    color: lightgray;
   }
   .svg-image {
     height: 2rem;
     width: 2rem;
     vertical-align: middle;
-  }
-  @media (max-width: 600px) {
-    html { font-size: 16px; }
   }
 </style>
 

@@ -1,76 +1,76 @@
 .warning {
-	border: 2px solid yellow;
-	padding: 20px 20px 20px 80px;
-	margin-bottom: 1.5em;
-	color: #9F6000;
-	background: url(/images/icons/warning.png) no-repeat #FEEFB3;
-	background-position: 20px 45%;
-	background-size: 50px;
+  border: 2px solid yellow;
+  padding: 20px 20px 20px 80px;
+  margin-bottom: 1.5em;
+  color: #9f6000;
+  background: url(/images/icons/warning.png) no-repeat #feefb3;
+  background-position: 20px 45%;
+  background-size: 50px;
 }
 
 /* @extend this to force long lines of continuous text to wrap */
 .force-wrap {
-	white-space: pre-wrap;
-	word-wrap: break-word;
+  white-space: pre-wrap;
+  word-wrap: break-word;
 }
 
 .main-border {
-	background-image: $main-border-background-image;
-	background-size: $main-border-background-size;
-	background-position: bottom;
-	background-repeat: repeat-x;
-}	
+  background-image: $main-border-background-image;
+  background-size: $main-border-background-size;
+  background-position: bottom;
+  background-repeat: repeat-x;
+}
 
 img.plain {
-	box-shadow: none;
+  box-shadow: none;
 }
 
 .code_example {
-	border: 1px solid $text-color;
-	margin-bottom: 1.5rem;
-	overflow-x: auto;
-	position: relative;
+  border: 1px solid $text-color;
+  margin-bottom: 1.5rem;
+  overflow-x: auto;
+  position: relative;
 
-	h6 {
-		background: $link-color-hover;
-		color: $main-bg;
-		padding: 0.2rem 1rem 0.2rem 0.5rem;
-		border-bottom: 1px solid black;
-		margin-bottom: 0;
-		font-size: 1.1rem;
-		font-weight: normal;
+  h6 {
+    background: $link-color-hover;
+    color: $main-bg;
+    padding: 0.2rem 1rem 0.2rem 0.5rem;
+    border-bottom: 1px solid black;
+    margin-bottom: 0;
+    font-size: 1.1rem;
+    font-weight: normal;
 
-		a {
-			position: absolute;
-			top: 0.35rem;
-			right: 0;
-			padding-right: 0.5rem;
-			font-size: 0.8rem;
-			color: inherit;
-		}
-	}
-	&::after {
-		position: absolute;
-		right: 1px;
-		bottom: 1px;
-		content: "Demo";
-		background: white;
-		color: $text-color;
-		border-color: $text-color;
-		border-width: 1px 0 0 1px;
-		border-style: dotted;
-		padding: 0.2rem 0.3rem;
-	}
+    a {
+      position: absolute;
+      top: 0.35rem;
+      right: 0;
+      padding-right: 0.5rem;
+      font-size: 0.8rem;
+      color: inherit;
+    }
+  }
+  &::after {
+    position: absolute;
+    right: 1px;
+    bottom: 1px;
+    content: "Demo";
+    background: white;
+    color: $text-color;
+    border-color: $text-color;
+    border-width: 1px 0 0 1px;
+    border-style: dotted;
+    padding: 0.2rem 0.3rem;
+  }
 }
 @media (max-width: $breakpoint-phone) {
-	.code_example {
-		h6 {
-			overflow: hidden;
-			a {
-				position: static;
-				float: left;
-				width: 100%;
-			}
-		}
-	}
+  .code_example {
+    h6 {
+      overflow: hidden;
+      a {
+        position: static;
+        float: left;
+        width: 100%;
+      }
+    }
+  }
 }

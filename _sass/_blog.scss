@@ -1,79 +1,101 @@
 article {
-	a { @extend .force-wrap; }
-	header {
-		position: relative;
-		padding-top: 2em;
-		padding-bottom: 1em;
-		margin-bottom: 1em;
-		h1 {
-			margin: 0;
-		}
-		p {
-			font-size: .9em;
-			color: $text-color-light;
-			margin: 0;
-			&.meta {
-				@extend .sans;
-				text-transform: uppercase;
-				position: absolute; top: 0;
-			}
-		}
-		@media only screen and (min-width: 768px) {
-			margin-bottom: 1.5em;
-		}
-	}
-	h2 {
-		padding-top: 0.8em;
-		@extend .main-border;
-		background-position: top;
-	}
-	.entry-content table {
-		margin-bottom: 20px;
-		border-collapse: collapse;
-		th { font-weight: bold; text-decoration: underline; }
-		td, th { padding: 5px; border: 2px solid black; }
-		td.blue { color: blue; }
-		td.red { color: red; }
-	}
-	.entry-content & h2:first-child, header + h2 {
-		padding-top: 0;
-	}
-	h2:first-child, header + h2 {
-		background: none;
-	}
-	img {
-		border-radius: 0.3em;
-		box-shadow: rgba(0, 0, 0, 0.15) 0 1px 4px;
-		max-width: 100%;
-	}
-	> footer {
-		padding-bottom: 1.5rem;
-		margin-top: 1rem;
-		@extend .sans;
-		p.meta {
-			padding: 1rem 0;
-			margin-bottom: 0;
-			background-image: $main-border-background-image, $main-border-background-image;
-			background-size: $main-border-background-size, $main-border-background-size;
-			background-position: top, bottom;
-			background-repeat: repeat-x, repeat-x;
-		}
-		.byline + time:before, time +time:before, .comments:before, .byline ~ .categories:before {
-			@extend .separator;
-		}
-	}
+  a {
+    @extend .force-wrap;
+  }
+  header {
+    position: relative;
+    padding-top: 2em;
+    padding-bottom: 1em;
+    margin-bottom: 1em;
+    h1 {
+      margin: 0;
+    }
+    p {
+      font-size: 0.9em;
+      color: $text-color-light;
+      margin: 0;
+      &.meta {
+        @extend .sans;
+        text-transform: uppercase;
+        position: absolute;
+        top: 0;
+      }
+    }
+    @media only screen and (min-width: 768px) {
+      margin-bottom: 1.5em;
+    }
+  }
+  h2 {
+    padding-top: 0.8em;
+    @extend .main-border;
+    background-position: top;
+  }
+  .entry-content > p:first-of-type > img {
+    width: 100%;
+  }
+  .entry-content table {
+    margin-bottom: 20px;
+    border-collapse: collapse;
+    th {
+      font-weight: bold;
+      text-decoration: underline;
+    }
+    td,
+    th {
+      padding: 5px;
+      border: 2px solid black;
+    }
+    td.blue {
+      color: blue;
+    }
+    td.red {
+      color: red;
+    }
+  }
+  .entry-content & h2:first-child,
+  header + h2 {
+    padding-top: 0;
+  }
+  h2:first-child,
+  header + h2 {
+    background: none;
+  }
+  img {
+    border-radius: 0.3em;
+    box-shadow: rgba(0, 0, 0, 0.15) 0 1px 4px;
+    max-width: 100%;
+  }
+  > footer {
+    padding-bottom: 1.5rem;
+    margin-top: 1rem;
+    @extend .sans;
+    p.meta {
+      padding: 1rem 0;
+      margin-bottom: 0;
+      background-image: $main-border-background-image;
+      background-size: $main-border-background-size;
+      background-position: bottom;
+      background-repeat: repeat-x;
+    }
+    .byline + time:before,
+    time + time:before,
+    .comments:before,
+    .byline ~ .categories:before {
+      @extend .separator;
+    }
+  }
 }
 
 .separator {
-	content: "\2022 ";
-	padding: 0 .4em 0 .2em;
-	display: inline-block;
+  content: "\2022 ";
+  padding: 0 0.4em 0 0.2em;
+  display: inline-block;
 }
 
 header.no_comments {
-	padding-top: 0;
+  padding-top: 0;
 }
 .twitter-tweet {
-	/* Need to override the Twitter-applied inline styles */
-	margin-bottom: 1.5em !important;
+  /* Need to override the Twitter-applied inline styles */
+  margin-bottom: 1.5em !important;
 }

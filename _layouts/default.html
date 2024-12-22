@@ -1,12 +1,14 @@
 {% include head.html %}
 <body>
-	<div id="main">
-		{% include header.html %}
-		{{ content | expand_urls: root_url }}
-	</div>
-	<script src="/js/dynamic.js"></script>
-	{% if page.comments == true %}
-		<script id="dsq-count-scr" src="https://{{ site.disqus_short_name }}.disqus.com/count.js" async></script>
-	{% endif %}
+  <div class="main">
+    {% include sidebar.html %}
+    <div class="content">
+      {{ content | expand_urls: root_url }}
+    </div>
+  </div>
+  <script src="/js/dynamic.js"></script>
+  {% if page.comments == true %}
+    <script id="dsq-count-scr" src="https://{{ site.disqus_short_name }}.disqus.com/count.js" async></script>
+  {% endif %}
 </body>
 </html>

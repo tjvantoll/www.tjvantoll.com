@@ -1,150 +1,256 @@
-.sans { font-family: $sans; }
-.serif { font-family: $serif; }
-.mono { font-family: $mono; }
+.sans {
+  font-family: $sans;
+}
+.serif {
+  font-family: $serif;
+}
+.mono {
+  font-family: $mono;
+}
 
 html {
-	font-size: 18px;
-	line-height: 1.6;
-	color: $text-color;
-	@extend .serif;
+  font-size: 18px;
+  line-height: 1.6;
+  color: $text-color;
+  @extend .serif;
 }
 h1 {
-	font-size: 2.6rem;
-	line-height: 1.2;
+  font-size: 2.6rem;
+  line-height: 1.2;
 }
 @media (max-width: $breakpoint-tablet) {
-	html {
-		line-height: 1.5;
-	}
-	h1 { font-size: 2.2rem; }
+  html {
+    line-height: 1.5;
+  }
+  h1 {
+    font-size: 2.2rem;
+  }
 }
 
-h1, h2, h3, h4, h5, h6 {
-	font-family: $heading-font-family;
-	text-rendering: optimizelegibility;
-	margin: 0 0 1rem 0;
-	padding: 0;
-	font-weight: bold;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: $heading-font-family;
+  text-rendering: optimizelegibility;
+  margin: 0 0 1rem 0;
+  padding: 0;
+  font-weight: bold;
 }
-h2, section h1 {
-	font-size: 1.5rem;
+h2,
+section h1 {
+  font-size: 1.5rem;
 }
-h3, section h2, section section h1 {
-	font-size: 1.3rem;
+h3,
+section h2,
+section section h1 {
+  font-size: 1.3rem;
 }
-h4, section h3, section section h2, section section section h1 {
-	font-size: 1rem;
+h4,
+section h3,
+section section h2,
+section section section h1 {
+  font-size: 1rem;
 }
-h5, section h4, section section h3 {
-	font-size: .9rem;
+h5,
+section h4,
+section section h3 {
+  font-size: 0.9rem;
 }
-h6, section h5, section section h4, section section section h3 {
-	font-size: .8rem;
+h6,
+section h5,
+section section h4,
+section section section h3 {
+  font-size: 0.8rem;
 }
-p, blockquote, ul, ol {
-	margin: 0 0 1.5rem 0;
+p,
+blockquote,
+ul,
+ol {
+  margin: 0 0 1.5rem 0;
 }
 
 a {
-	color: $link-color;
-	&:visited { color: $link-color-visited; }
-	&:focus { color: $link-color-hover; }
-	&:hover { color: $link-color-hover; }
-	&:active { color: $link-color-active; }
+  color: $link-color;
+  &:visited {
+    color: $link-color-visited;
+  }
+  &:focus {
+    color: $link-color-hover;
+  }
+  &:hover {
+    color: $link-color-hover;
+  }
+  &:active {
+    color: $link-color-active;
+  }
 }
 a {
-	-webkit-transition: color 0.3s;
-	transition: color 0.3s;
+  -webkit-transition: color 0.3s;
+  transition: color 0.3s;
 }
 
-ul { list-style-type: disc;
-	ul { list-style-type: circle; margin-bottom: 0px;
-		ul { list-style-type: square; margin-bottom: 0px; }}}
-
-ol { list-style-type: decimal;
-	ol { list-style-type: lower-alpha; margin-bottom: 0px;
-		ol { list-style-type: lower-roman; margin-bottom: 0px; }}}
-
-ul, ol { &, ul, ol {
-	margin-left: 1.3em;
-	padding: 0;
-}}
-
-strong { font-weight: bold; }
-
-em { font-style: italic; }
-i { font-style: italic; }
-
-sup, sub { font-size: 0.8em; position: relative;  display: inline-block; }
-sup { top: -.5em; }
-sub { bottom: -.5em; }
-
-q { font-style: italic;
-	&:before { content: "\201C"; }
-	&:after { content: "\201D"; }
+ul {
+  list-style-type: disc;
+  ul {
+    list-style-type: circle;
+    margin-bottom: 0px;
+    ul {
+      list-style-type: square;
+      margin-bottom: 0px;
+    }
+  }
 }
 
-em, dfn { font-style: italic; }
+ol {
+  list-style-type: decimal;
+  ol {
+    list-style-type: lower-alpha;
+    margin-bottom: 0px;
+    ol {
+      list-style-type: lower-roman;
+      margin-bottom: 0px;
+    }
+  }
+}
 
-strong, dfn { font-weight: bold; }
+ul,
+ol {
+  &,
+  ul,
+  ol {
+    margin-left: 1.3em;
+    padding: 0;
+  }
+}
 
-del, s { text-decoration: line-through; }
+strong {
+  font-weight: bold;
+}
 
-abbr, acronym { border-bottom: 1px dotted; cursor: help; }
+em {
+  font-style: italic;
+}
+i {
+  font-style: italic;
+}
 
-pre, code, tt { @extend .mono; }
+sup,
+sub {
+  font-size: 0.8em;
+  position: relative;
+  display: inline-block;
+}
+sup {
+  top: -0.5em;
+}
+sub {
+  bottom: -0.5em;
+}
 
-sub, sup { line-height: 0; }
+q {
+  font-style: italic;
+  &:before {
+    content: "\201C";
+  }
+  &:after {
+    content: "\201D";
+  }
+}
 
-hr { margin-bottom: 0.2em; }
+em,
+dfn {
+  font-style: italic;
+}
 
-small { font-size: .8em; }
+strong,
+dfn {
+  font-weight: bold;
+}
 
-big { font-size: 1.2em; }
+del,
+s {
+  text-decoration: line-through;
+}
+
+abbr,
+acronym {
+  border-bottom: 1px dotted;
+  cursor: help;
+}
+
+pre,
+code,
+tt {
+  @extend .mono;
+}
+
+sub,
+sup {
+  line-height: 0;
+}
+
+hr {
+  margin-bottom: 0.2em;
+}
+
+small {
+  font-size: 0.8em;
+}
+
+big {
+  font-size: 1.2em;
+}
 
 blockquote {
-	$bq-margin: 1.2rem;
-	font-style: italic;
-	font-size: 1.2rem;
-	line-height: 1.5;
-	padding-left: 1rem;
-	border-left: 4px solid rgba($text-color-light, .5);
-	@media only screen and (min-width: 992px) {
-		padding-left: 1.5rem;
-		border-left-width: 4px;
-	}
+  $bq-margin: 1.2rem;
+  font-style: italic;
+  font-size: 1.2rem;
+  line-height: 1.5;
+  padding-left: 1rem;
+  border-left: 4px solid rgba($text-color-light, 0.5);
+  @media only screen and (min-width: 992px) {
+    padding-left: 1.5rem;
+    border-left-width: 4px;
+  }
 }
 
 /*****************************************************/
 /*********************** Code ************************/
 /*****************************************************/
 
-p code, ul code, ol code {
-	display: inline-block;
-	font-size: 0.8rem;
-	background: white;
-	line-height: 1.5;
-	color: #555;
-	border: 1px solid #ddd;
-	border-radius: 0.4rem;
-	padding: 0 .3rem;
-	margin: -1px 0;
+p code,
+ul code,
+ol code {
+  display: inline-block;
+  font-size: 0.8rem;
+  background: white;
+  line-height: 1.5;
+  color: #555;
+  border: 1px solid #ddd;
+  border-radius: 0.4rem;
+  padding: 0 0.3rem;
+  margin: -1px 0;
 }
 
-h3 code { font-size: 0.9rem; }
+h3 code {
+  font-size: 0.9rem;
+}
 
 // Tweaks to Prism
 pre[class*="language"] {
-	font-size: 0.9rem;
-	margin: 0.5rem 0 1.6rem;
-	padding: 1rem;
-	border-width: 1px;
-	border-style: solid;
-	border-color: #E7DEC3;
+  font-size: 0.9rem;
+  margin: 0.5rem 0 1.6rem;
+  padding: 1rem;
+  border-width: 1px;
+  border-style: solid;
+  border-color: #e7dec3;
 }
 pre[class*="language"].line-numbers {
-	padding-left: 3rem;
+  padding-left: 3rem;
 }
 .token.lf::before {
-	content: "";
+  content: "";
 }
