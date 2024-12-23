@@ -6,7 +6,7 @@ comments: true
 
 When I started this blog in 2012 one of my motivations was to make a bit of money. In those days if you had a successful blog that generated traffic, you could work out an ad deal and bring in some recurring cash for your effort.
 
-And it worked—at least a little. By 2016 or so my blog was generating $40–$50 a month, which wasn’t life altering, but it was a nice bit of recurring revenue I got for keeping this site up and running.
+And it worked—at least a little. By 2016 or so my blog was generating $40–$50 a month, which wasn’t life altering, but it was a nice bit of recurring revenue for keeping this site up and running.
 
 In the last few years I’ve focused on [publishing elsewhere](/writing), but I’ve kept this blog up, kept it fast, and ensured all links continued to work. From a revenue perspective my earnings started slowly dropping after I stopped regularly publishing—which I expected and makes sense.
 
@@ -20,9 +20,9 @@ The chart above shows my earnings per month since March 2018 (which is as far ba
 
 I don’t post this data for you to feel sorry for me. This blog has always been a side project for me, and my primary goal with it has always been to write for writing’s sake (like I’m doing now!).
 
-I’m posting this because I think it’s interesting to see hard data on the effect AI has had on a random tech blog. I do most of my development searches with ChatGPT or GitHub Copilot nowadays, and it seems like most of the rest of you do too.
+I’m posting this because I think it’s interesting to see hard data on the effect AI has had on a random tech blog. I do most of my development searches with ChatGPT or GitHub Copilot nowadays, and it seems like the rest of you do too.
 
-And while I’m excited about the AI future, this experience also has me feeling a bit nostalgic for the glory days of the tech blog. There are way fewer individual-run high-quality tech blogs today than there were years ago, and I feel like this is one reason why.
+And while I’m excited about the AI future, this experience also has me feeling a bit nostalgic for the glory days of the tech blog. There are way fewer individual-run high-quality tech blogs today, and I feel like this is one reason why.
 
 Here’s my full data in case you’re curious.
 
