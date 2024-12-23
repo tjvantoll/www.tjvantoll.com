@@ -22,7 +22,7 @@ I don’t post this data for you to feel sorry for me. This blog has always been
 
 I’m posting this because I think it’s interesting to see hard data on the effect AI has had on a random tech blog. I do most of my development searches with ChatGPT or GitHub Copilot nowadays, and it seems like most of the rest of you do too.
 
-And while I’m excited about the AI future, this experience also has me feeling a bit nostalgic for the glory days of the tech blog.
+And while I’m excited about the AI future, this experience also has me feeling a bit nostalgic for the glory days of the tech blog. There are way fewer individual-run high-quality tech blogs today than there were years ago, and I feel like this is one reason why.
 
 Here’s my full data in case you’re curious.
 
