@@ -37,8 +37,10 @@ article {
     margin-bottom: 20px;
     border-collapse: collapse;
     th {
-      font-weight: bold;
-      text-decoration: underline;
+      background-color: $link-color;
+      color: white;
+      font-weight: normal;
+      text-align: left;
     }
     td,
     th {
