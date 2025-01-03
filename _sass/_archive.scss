@@ -17,7 +17,7 @@
   // Hide the years by default
   h2 {
     display: none;
-    margin-top: -10px;
+    line-height: 27px;
     background: none;
   }
 
@@ -71,8 +71,9 @@
 
     h2 {
       font-weight: normal;
-      display: inline-block;
+      display: block;
       float: left;
+      clear: both;
     }
 
     time {
