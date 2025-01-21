@@ -7,6 +7,10 @@ html {
   box-sizing: inherit;
 }
 
+@view-transition {
+  navigation: auto;
+}
+
 body {
   margin: 0;
 }
