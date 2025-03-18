@@ -12,7 +12,7 @@ I’ve been aware of “vibecoding” and the growing set of tools that allow yo
 
 I knew the day would come where non-technical people would be able to build useful applications with AI, but I didn’t think that day had come quite yet.
 
-In my view, AI was useful for _learning_ to code, but “real” applications would still require an experienced developer who uses AI as a junior assistant or copilot. Addy Osmani phrased it quite well in his writeup, [The 70% problem: Hard truths about AI-assisted coding](https://addyo.substack.com/p/the-70-problem-hard-truths-about).
+In my view, AI was useful for _learning_ to code, but “real” applications would still require an experienced developer who uses AI as a junior assistant or copilot. Addy Osmani phrased it well in his writeup, [The 70% problem: Hard truths about AI-assisted coding](https://addyo.substack.com/p/the-70-problem-hard-truths-about).
 
 > “Here's the most counterintuitive thing I've discovered: AI tools help experienced developers more than beginners. This seems backward – shouldn't AI democratize coding?
 The reality is that AI is like having a very eager junior developer on your team. They can write code quickly, but they need constant supervision and correction. The more you know, the better you can guide them.”
@@ -25,13 +25,15 @@ I’m writing this article because I believe professional developers need to tak
 
 There are a lot of tools that allow you to vibecode ([Cursor](https://www.cursor.com/), [Windsurf](https://codeium.com/windsurf), [GitHub Copilot](https://github.com/features/copilot), [Bolt](https://bolt.new/), [Replit](https://replit.com/), [V0](https://v0.dev/), etc). I experimented with most of these tools but ended up sticking with Cursor because it’s a Visual Studio Code-based text editor (so I can still see code in a familiar environment when I need to), and because they have excellent tooling for AI agents to control a whole project. For example, I love that they have a [Yolo mode](https://docs.cursor.com/context/model-context-protocol#yolo-mode) that allows their agent to run automatically without approval.
 
-Once I got everything set up I wanted to start by building something fun, so I asked Cursor’s agent to build me an open-world racing game where I could drive around and interact with AI cars. I was stunned at what it built.
+Honestly though, all these tools are more similar than they are different. They all provide a chat panel that is the primary way you interact with their AI agent, and they all use the same underlying LLMs under the hood (typically Claude Sonnet 3.5 or 3.7).
+
+Once I got Cursor downloaded and installed I wanted to start by building something fun, so I asked Cursor’s agent to build me an open-world racing game where I could drive around and interact with AI cars. I was stunned at what it built.
 
 <img alt="An open-world racing game I built with Cursor" src="/images/posts/2025-03-17/open-world-racing.png" class="plain" />
 
 My “Open World Driving Game” isn’t perfect—the cars look a bit odd, there are trees in the roads, and so on—but the game works; the game runs in the browser, and the AI even built a freakin’ minimap (that works amazingly) without me asking.
 
-I’m capable of building an open-world racing game like this on my own, but only with a lot of time and research. Building something like this would easily take me several days.
+I’m capable of building an open-world racing game like this on my own, but only with a lot of time and research. Building something like this would easily take me several days and maybe several weeks.
 
 Yet, suddenly I was able to say things like “add a command that lets the cars jump” or “add buildings to the world”, and instead of having to take an hour or two to code that myself, I could see those features implemented in 1–2 minutes. I was able to be creative in ways I never was before.
 
@@ -55,11 +57,11 @@ However, because I had been looking for an excuse to vibecode for science, I dec
 
 ![A map application I built with Cursor](/images/posts/2025-03-17/maps.gif)
 
-As I’m writing this I’m still shocked I was able to build this tool so easily. While this app isn’t solving the world’s most difficult software problem—it’s not solving a trivial problem either.
+As I’m writing this I’m still shocked I was able to build my map debugging tool so easily. While this app isn’t solving the world’s most difficult software problem—it’s not solving a trivial problem either.
 
 But as I’ve continued to experiment I’ve found that this was actually a perfect use case for vibecoding. My app had clear requirements, and I didn’t have to incorporate my output into an existing application with constraints or integration challenges.
 
-Interestingly this idea of using vibecoding to solve one-off problems like this also came up in the New York Times vibecoding article.
+Interestingly this idea of using vibecoding to solve specific, one-off problems like my map also came up in the New York Times vibecoding article.
 
 > “My own vibecoding experiments have been aimed at making what I call “software for one” — small, bespoke apps that solve specific problems in my life. These aren’t the kinds of tools a big tech company would build. There’s no real market for them, their features are limited and some of them only sort of work.”
 
