@@ -18,7 +18,7 @@ If you’re looking to quickly evaluate my speaking skills, watch [Why I Was Wro
     {% capture year %}{{ talk_year }}{% endcapture %}
 
     <article class="main-border">
-      <h1><a href="{{ talk.url }}">{{ talk.name }}</a></h1>
+      <p><a href="{{ talk.url }}">{{ talk.name }}</a></p>
       <time>
         {{ talk.date | date: "	<span class='month'>%b</span> <span class='day'>%d</span> <span class='year'>%Y</span>"}}
       </time>

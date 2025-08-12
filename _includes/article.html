@@ -1,11 +1,10 @@
-<header class="main-border">
-	<h1 class="entry-title force-wrap">{{ page.title }}</h1>
-	<p class="meta">
-		{% include post/date.html %}{{ time }}
-		{% if page.comments != false %}
-			 | <a href="#disqus_thread">Comments</a>
-		{% endif %}
-	</p>
+<header>
+  <h1 class="entry-title force-wrap">{{ page.title }}</h1>
+  <p class="meta">
+    {% include post/date.html %}{{ time }} {% if page.comments != false %} |
+    <a href="#disqus_thread">Comments</a>
+    {% endif %}
+  </p>
 </header>
 
 <div class="entry-content">{{ content }}</div>

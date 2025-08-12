@@ -2,88 +2,201 @@ article {
   a {
     @extend .force-wrap;
   }
+
   header {
     position: relative;
-    padding-top: 2em;
-    padding-bottom: 1em;
-    margin-bottom: 1em;
+    padding: 0 0 1.5rem 0;
+    margin-bottom: 2rem;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+
     h1 {
       margin: 0;
+      font-size: 2.8rem;
+      line-height: 1.2;
+      font-weight: 700;
+      color: $text-color;
+      letter-spacing: -0.02em;
     }
+
     p {
-      font-size: 0.9em;
+      font-size: 0.9rem;
       color: $text-color-light;
       margin: 0;
+      font-weight: 400;
+
       &.meta {
         @extend .sans;
         text-transform: uppercase;
-        position: absolute;
-        top: 0;
+        letter-spacing: 0.5px;
+        font-size: 0.8rem;
+        margin-top: 0.5rem;
       }
     }
+
     @media only screen and (min-width: 768px) {
-      margin-bottom: 1.5em;
+      margin-bottom: 2rem;
+      padding: 0 0 2rem 0;
+
+      h1 {
+        font-size: 3.2rem;
+      }
     }
   }
+
   h2 {
-    padding-top: 0.8em;
-    @extend .main-border;
-    background-position: top;
+    padding-top: 1rem;
+    margin-top: 2rem;
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: $text-color;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+    padding-bottom: 0.5rem;
+    margin-bottom: 1.5rem;
   }
-  .entry-content > p:first-of-type > img {
-    width: 100%;
+
+  h3 {
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: $text-color;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
   }
-  .entry-content table {
-    margin-bottom: 20px;
-    border-collapse: collapse;
-    th {
-      background-color: $link-color;
-      color: white;
-      font-weight: normal;
-      text-align: left;
+
+  h4 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: $text-color;
+    margin-top: 1.5rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .entry-content {
+    line-height: 1.7;
+    color: $text-color;
+
+    > p:first-of-type > img {
+      width: 100%;
     }
-    td,
-    th {
-      padding: 5px;
-      border: 2px solid black;
+
+    p {
+      margin-bottom: 1rem;
     }
-    td.blue {
-      color: blue;
+
+    ul,
+    ol {
+      margin-bottom: 1rem;
+      padding-left: 1rem;
+
+      li {
+        margin-bottom: 0.5rem;
+      }
     }
-    td.red {
-      color: red;
+
+    blockquote {
+      border-left: 4px solid $link-color;
+      margin: 2rem 0;
+      font-style: italic;
+      color: $text-color-light;
+      background: rgba($link-color, 0.03);
+      padding: 1rem;
+      border-radius: 0 6px 6px 0;
+    }
+
+    code {
+      background: rgba(0, 0, 0, 0.05);
+      padding: 0.2rem 0.4rem;
+      border-radius: 4px;
+      font-size: 0.9em;
+      font-family: $mono;
+    }
+
+    pre {
+      background: #f8f9fa;
+      border: 1px solid rgba(0, 0, 0, 0.1);
+      border-radius: 8px;
+      padding: 1rem;
+      margin: 1rem 0;
+      overflow-x: auto;
+
+      code {
+        background: none;
+        padding: 0;
+        border-radius: 0;
+      }
+    }
+
+    table {
+      margin: 2rem 0;
+      border-collapse: collapse;
+      width: 100%;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+
+      th {
+        background-color: $link-color;
+        color: white;
+        font-weight: 600;
+        text-align: left;
+        padding: 1rem;
+        font-size: 0.95rem;
+      }
+
+      td {
+        padding: 1rem;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        vertical-align: top;
+      }
+
+      tr:nth-child(even) {
+        background-color: rgba(0, 0, 0, 0.02);
+      }
+
+      tr:hover {
+        background-color: rgba($link-color, 0.05);
+      }
+    }
+
+    iframe {
+      max-width: 100%;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
     }
   }
+
   .entry-content & h2:first-child,
   header + h2 {
     padding-top: 0;
+    margin-top: 0;
   }
+
   h2:first-child,
   header + h2 {
-    background: none;
+    border-bottom: none;
   }
+
   img {
-    border-radius: 0.3em;
-    box-shadow: rgba(0, 0, 0, 0.15) 0 1px 4px;
+    border-radius: 8px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
     max-width: 100%;
+    height: auto;
+    margin: 1rem 0;
   }
-  .entry-content {
-    iframe {
-      max-width: 100%;
-    }
-  }
+
   > footer {
-    padding-bottom: 1.5rem;
-    margin-top: 1rem;
+    padding: 1.5rem 0;
+    margin-top: 2.5rem;
+    border-top: 1px solid rgba(0, 0, 0, 0.06);
     @extend .sans;
+
     p.meta {
-      padding: 1rem 0;
+      padding: 0;
       margin-bottom: 0;
-      background-image: $main-border-background-image;
-      background-size: $main-border-background-size;
-      background-position: bottom;
-      background-repeat: repeat-x;
+      font-size: 0.9rem;
+      color: $text-color-light;
+      background: none;
     }
+
     .byline + time:before,
     time + time:before,
     .comments:before,
@@ -97,12 +210,59 @@ article {
   content: "\2022 ";
   padding: 0 0.4em 0 0.2em;
   display: inline-block;
+  color: $text-color-light;
 }
 
 header.no_comments {
   padding-top: 0;
 }
+
 .twitter-tweet {
-  /* Need to override the Twitter-applied inline styles */
-  margin-bottom: 1.5em !important;
+  margin: 2rem 0 !important;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+// Responsive improvements
+@media (max-width: $breakpoint-tablet) {
+  article {
+    header {
+      padding: 0 0 1.5rem 0;
+      margin-bottom: 2rem;
+
+      h1 {
+        font-size: 2.2rem;
+      }
+    }
+
+    .entry-content {
+      font-size: 1rem;
+      line-height: 1.6;
+    }
+
+    h2 {
+      font-size: 1.6rem;
+    }
+
+    h3 {
+      font-size: 1.3rem;
+    }
+  }
+}
+
+@media (max-width: $breakpoint-phone) {
+  article {
+    header {
+      padding: 0 0 1rem 0;
+
+      h1 {
+        font-size: 2rem;
+      }
+    }
+
+    .entry-content {
+      font-size: 0.95rem;
+    }
+  }
 }

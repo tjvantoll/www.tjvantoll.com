@@ -1,51 +1,66 @@
 <div class="sidebar">
-  <div>
-    <a href="/"
-      ><img class="headshot" src="/images/me/headshot-big.jpg" alt="Me!"
-    /></a>
-    <h2><a href="/">TJ VanToll</a></h2>
+  <div class="sidebar-header">
+    <a href="/" class="profile-link">
+      <img
+        class="headshot"
+        src="/images/me/headshot-big.jpg"
+        alt="TJ VanToll"
+      />
+    </a>
+    <h2 class="profile-name"><a href="/">TJ VanToll</a></h2>
+    <p class="profile-tagline">Developer Advocate</p>
   </div>
 
-  <nav role="navigation">
-    <ul>
-      <li>
-        <a href="{{ root_url }}/writing/">
-          <span class="hide-small">✏️</span>
-          <span>Writing</span>
+  <button class="hamburger-menu" aria-label="Toggle navigation menu">
+    <div class="hamburger-line"></div>
+    <div class="hamburger-line"></div>
+    <div class="hamburger-line"></div>
+  </button>
+
+  <nav class="sidebar-nav" role="navigation" aria-label="Main navigation">
+    <ul class="nav-list">
+      <li class="nav-item">
+        <a href="{{ root_url }}/writing/" class="nav-link">
+          <span class="nav-icon">✏️</span>
+          <span class="nav-text">Writing</span>
         </a>
       </li>
-      <li>
-        <a href="{{ root_url }}/speaking/">
-          <span class="hide-small">🎤</span>
-          <span>Speaking</span>
+      <li class="nav-item">
+        <a href="{{ root_url }}/speaking/" class="nav-link">
+          <span class="nav-icon">🎤</span>
+          <span class="nav-text">Speaking</span>
         </a>
       </li>
-      <li>
-        <a href="https://github.com/tjvantoll">
-          <span>
-            <img
-              class="svg-image"
-              src="/images/icons/github.svg"
-              height="26"
-              width="26"
-              alt="GitHub"
-            />
-          </span>
-          <span class="hide-small">GitHub</span>
+      <li class="nav-item">
+        <a
+          href="https://github.com/tjvantoll"
+          class="nav-link"
+          aria-label="GitHub"
+        >
+          <img
+            class="nav-icon"
+            src="/images/icons/github.svg"
+            height="24"
+            width="24"
+            alt="GitHub"
+          />
+          <span class="nav-text">GitHub</span>
         </a>
       </li>
-      <li>
-        <a href="https://x.com/tjvantoll">
-          <span>
-            <img
-              class="svg-image"
-              src="/images/icons/twitter-x.svg"
-              height="28"
-              width="28"
-              alt="Twitter"
-            />
-          </span>
-          <span class="hide-small">X</span>
+      <li class="nav-item">
+        <a
+          href="https://www.linkedin.com/in/tjvantoll/"
+          class="nav-link"
+          aria-label="LinkedIn"
+        >
+          <img
+            class="nav-icon"
+            src="/images/icons/linkedin.svg"
+            height="24"
+            width="24"
+            alt="LinkedIn"
+          />
+          <span class="nav-text">LinkedIn</span>
         </a>
       </li>
     </ul>

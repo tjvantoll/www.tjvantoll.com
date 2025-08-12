@@ -17,13 +17,17 @@
   // Hide the years by default
   h2 {
     display: none;
-    line-height: 27px;
     background: none;
+    margin-top: 0;
+    padding-top: 1rem;
+    border: none;
   }
 
-  h1 {
+  p {
+    @extend .serif;
     color: $text-color;
-    font-size: 1.2rem;
+    font-weight: 600;
+    font-size: 1.1rem;
     margin-bottom: 0.5rem;
     a {
       text-decoration: none;
@@ -62,6 +66,10 @@
 
   a:hover {
     color: $link-color-hover;
+  }
+
+  footer {
+    border: none;
   }
 
   @media (min-width: $breakpoint-phone) {

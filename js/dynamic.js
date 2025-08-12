@@ -66,3 +66,25 @@ ga('send', 'pageview');
     (d.head || d.body).appendChild(s);
   }
 })();
+
+// Hamburger Menu
+(function () {
+  var hamburger = document.querySelector(".hamburger-menu");
+  var nav = document.querySelector(".sidebar-nav");
+
+  if (hamburger && nav) {
+    hamburger.addEventListener("click", function (event) {
+      event.preventDefault();
+      event.stopPropagation();
+      hamburger.classList.toggle("active");
+      nav.classList.toggle("active");
+    });
+
+    document.addEventListener("click", function (event) {
+      if (!hamburger.contains(event.target) && !nav.contains(event.target)) {
+        hamburger.classList.remove("active");
+        nav.classList.remove("active");
+      }
+    });
+  }
+})();
