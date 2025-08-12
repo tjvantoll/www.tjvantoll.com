@@ -44,7 +44,7 @@ article {
   }
 
   h2 {
-    padding-top: 2rem;
+    padding-top: 1rem;
     margin-top: 2rem;
     font-size: 1.8rem;
     font-weight: 600;
@@ -71,7 +71,6 @@ article {
   }
 
   .entry-content {
-    font-size: 1.1rem;
     line-height: 1.7;
     color: $text-color;
 
@@ -80,13 +79,13 @@ article {
     }
 
     p {
-      margin-bottom: 1.5rem;
+      margin-bottom: 1rem;
     }
 
     ul,
     ol {
-      margin-bottom: 1.5rem;
-      padding-left: 1.5rem;
+      margin-bottom: 1rem;
+      padding-left: 1rem;
 
       li {
         margin-bottom: 0.5rem;
@@ -95,12 +94,11 @@ article {
 
     blockquote {
       border-left: 4px solid $link-color;
-      padding-left: 1.5rem;
       margin: 2rem 0;
       font-style: italic;
       color: $text-color-light;
       background: rgba($link-color, 0.03);
-      padding: 1.5rem;
+      padding: 1rem;
       border-radius: 0 6px 6px 0;
     }
 
@@ -116,8 +114,8 @@ article {
       background: #f8f9fa;
       border: 1px solid rgba(0, 0, 0, 0.1);
       border-radius: 8px;
-      padding: 1.5rem;
-      margin: 2rem 0;
+      padding: 1rem;
+      margin: 1rem 0;
       overflow-x: auto;
 
       code {
