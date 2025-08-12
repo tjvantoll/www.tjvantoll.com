@@ -22,9 +22,9 @@ My biggest writing endeavor was a [book I wrote on jQuery UI](https://www.amazon
         {% capture url_to_use %}{{ post.redirect_url }}{% endcapture %}
       {% endif %}
 
-      <h1>
+      <p>
         <a href="{{ url_to_use }}">{{ post.title }}</a>
-      </h1>
+      </p>
       <time>
         {{ post.date | date: " <span class='month'>%b</span> <span class='day'>%d</span> <span class='year'>%Y</span>"}}
       </time>

@@ -38,7 +38,7 @@ body {
   background: #fafbfc;
   border-radius: 16px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
-  padding: 1.5rem;
+  padding: 1.5rem 1.5rem 0 1.5rem;
   border: 1px solid rgba(0, 0, 0, 0.04);
   max-width: 280px;
   position: sticky;
@@ -46,7 +46,7 @@ body {
 
   .sidebar-header {
     text-align: center;
-    margin-bottom: 2rem;
+    margin-bottom: 1.5rem;
     padding-bottom: 1.5rem;
     border-bottom: 1px solid rgba(0, 0, 0, 0.08);
 
@@ -88,6 +88,10 @@ body {
       font-weight: 500;
       letter-spacing: 0.2px;
     }
+  }
+
+  .hamburger-menu {
+    display: none;
   }
 
   .sidebar-nav {
@@ -153,6 +157,7 @@ body {
     margin: 0;
   }
   .sidebar {
+    top: 0;
     width: 100%;
     max-width: none;
     margin-bottom: 0;
@@ -231,7 +236,7 @@ body {
     }
 
     .hamburger-menu {
-      display: block !important;
+      display: block;
       position: absolute;
       top: 1rem;
       right: 1rem;
@@ -299,7 +304,7 @@ body {
     }
 
     .hamburger-menu {
-      display: block !important;
+      display: block;
       background: rgba(255, 255, 255, 0.95) !important;
       border: 1px solid rgba(0, 0, 0, 0.15) !important;
     }
@@ -409,6 +414,9 @@ body {
 }
 
 @media (max-width: $breakpoint-tablet) {
+  .entry-title {
+    margin-top: 2rem;
+  }
   .homepage {
     padding: 1.5rem;
 

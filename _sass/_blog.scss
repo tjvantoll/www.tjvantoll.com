@@ -10,7 +10,7 @@ article {
     border-bottom: 1px solid rgba(0, 0, 0, 0.08);
 
     h1 {
-      margin: 0 0 0.5rem 0;
+      margin: 0;
       font-size: 2.8rem;
       line-height: 1.2;
       font-weight: 700;
@@ -230,7 +230,7 @@ header.no_comments {
 @media (max-width: $breakpoint-tablet) {
   article {
     header {
-      padding: 2rem 0 1.5rem 0;
+      padding: 0 0 1.5rem 0;
       margin-bottom: 2rem;
 
       h1 {
@@ -256,10 +256,10 @@ header.no_comments {
 @media (max-width: $breakpoint-phone) {
   article {
     header {
-      padding: 1.5rem 0 1rem 0;
+      padding: 0 0 1rem 0;
 
       h1 {
-        font-size: 1.8rem;
+        font-size: 2rem;
       }
     }
 
