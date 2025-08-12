@@ -72,29 +72,19 @@ ga('send', 'pageview');
   var hamburger = document.querySelector(".hamburger-menu");
   var nav = document.querySelector(".sidebar-nav");
 
-  console.log("Hamburger menu script loaded");
-  console.log("Hamburger element:", hamburger);
-  console.log("Nav element:", nav);
-
   if (hamburger && nav) {
     hamburger.addEventListener("click", function (event) {
       event.preventDefault();
       event.stopPropagation();
-      console.log("Hamburger clicked!");
       hamburger.classList.toggle("active");
       nav.classList.toggle("active");
-      console.log("Hamburger active:", hamburger.classList.contains("active"));
-      console.log("Nav active:", nav.classList.contains("active"));
     });
 
-    // Close menu when clicking outside
     document.addEventListener("click", function (event) {
       if (!hamburger.contains(event.target) && !nav.contains(event.target)) {
         hamburger.classList.remove("active");
         nav.classList.remove("active");
       }
     });
-  } else {
-    console.log("Hamburger menu elements not found");
   }
 })();

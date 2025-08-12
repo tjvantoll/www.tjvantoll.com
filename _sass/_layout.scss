@@ -159,13 +159,20 @@ body {
   .sidebar {
     top: 0;
     width: 100%;
+    background: white;
+    border: none;
     max-width: none;
     margin-bottom: 0;
     position: relative;
     box-shadow: none;
     border-radius: 0;
     padding: 1rem 1rem 0.5rem 1rem;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+    display: grid;
+    grid-template-areas:
+      "header hamburger"
+      "nav nav";
+    grid-template-columns: 1fr auto;
+    gap: 0;
 
     .sidebar-header {
       display: flex;
@@ -175,7 +182,7 @@ body {
       margin-bottom: 0;
       padding-bottom: 0;
       border-bottom: none;
-      position: relative;
+      grid-area: header;
 
       .profile-link {
         display: flex;
@@ -205,15 +212,16 @@ body {
     .sidebar-nav {
       display: none;
       position: absolute;
-      top: 100%;
+      top: 1.5rem;
       left: 0;
       right: 0;
       background: white;
       border-radius: 8px;
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-      margin-top: 0.5rem;
+      margin-top: 0;
       padding: 0.75rem;
       z-index: 1000;
+      grid-area: nav;
 
       &.active {
         display: block;
@@ -237,14 +245,14 @@ body {
 
     .hamburger-menu {
       display: block;
-      position: absolute;
-      top: 1rem;
-      right: 1rem;
       background: rgba(255, 255, 255, 0.9);
       border: 1px solid rgba(0, 0, 0, 0.1);
       cursor: pointer;
       padding: 0.5rem;
       border-radius: 4px;
+      grid-area: hamburger;
+      align-self: start;
+      justify-self: end;
       z-index: 1001;
 
       .hamburger-line {
@@ -282,8 +290,7 @@ body {
 
 @media (max-width: $breakpoint-phone) {
   .sidebar {
-    padding: 0.75rem 0.75rem 0.5rem 0.75rem;
-    position: relative;
+    padding: 0.75rem;
 
     .sidebar-header {
       .headshot {
@@ -296,224 +303,21 @@ body {
       }
     }
 
+    .hamburger-menu {
+      background: rgba(255, 255, 255, 0.95);
+      border: 1px solid rgba(0, 0, 0, 0.15);
+    }
+
     .sidebar-nav {
       .nav-link {
         padding: 0.6rem 0.8rem;
         font-size: 0.85rem;
       }
     }
-
-    .hamburger-menu {
-      display: block;
-      background: rgba(255, 255, 255, 0.95) !important;
-      border: 1px solid rgba(0, 0, 0, 0.15) !important;
-    }
   }
 
   .content {
     padding: 0.75rem;
     background: #fafbfc;
-  }
-}
-
-/* Homepage Styles */
-.homepage {
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
-
-  .homepage-header {
-    margin-bottom: 3rem;
-
-    .homepage-image {
-      height: 180px;
-      width: 180px;
-      border-radius: 50%;
-      border: 3px solid rgba($link-color, 0.1);
-      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
-      margin-bottom: 1.5rem;
-    }
-
-    h1 {
-      font-size: 3rem;
-      font-weight: 700;
-      margin: 0 0 0.5rem 0;
-      color: $text-color;
-      letter-spacing: -0.02em;
-    }
-
-    .homepage-tagline {
-      font-size: 1.1rem;
-      color: $text-color-light;
-      margin: 0;
-      font-weight: 500;
-    }
-  }
-
-  .homepage-content {
-    font-size: 1.1rem;
-    line-height: 1.7;
-    color: $text-color;
-    margin-bottom: 3rem;
-    text-align: left;
-
-    p {
-      margin-bottom: 1.5rem;
-    }
-  }
-
-  .homepage-nav {
-    .homepage-nav-list {
-      display: flex;
-      justify-content: center;
-      gap: 1rem;
-      list-style: none;
-      margin: 0;
-      padding: 0;
-      flex-wrap: wrap;
-    }
-
-    .homepage-nav-item {
-      margin: 0;
-    }
-
-    .homepage-nav-link {
-      display: flex;
-      align-items: center;
-      padding: 0.75rem 1.5rem;
-      text-decoration: none;
-      color: $text-color;
-      border-radius: 8px;
-      transition: color 0.3s ease;
-      font-weight: 500;
-      background: white;
-      border: 1px solid rgba(0, 0, 0, 0.08);
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
-
-      &:hover {
-        background: rgba($link-color, 0.08);
-        color: $link-color-hover;
-      }
-
-      .nav-icon {
-        margin-right: 0.75rem;
-        font-size: 1.1rem;
-
-        &.nav-icon img {
-          height: 1.3rem;
-          width: 1.3rem;
-        }
-      }
-
-      .nav-text {
-        font-size: 0.95rem;
-      }
-    }
-  }
-}
-
-@media (max-width: $breakpoint-tablet) {
-  .entry-title {
-    margin-top: 2rem;
-  }
-  .homepage {
-    padding: 1.5rem;
-
-    .homepage-header {
-      margin-bottom: 2rem;
-
-      .homepage-image {
-        height: 140px;
-        width: 140px;
-      }
-
-      h1 {
-        font-size: 2.5rem;
-      }
-    }
-
-    .homepage-nav .homepage-nav-list {
-      flex-direction: column;
-      align-items: center;
-      gap: 0.75rem;
-    }
-  }
-}
-
-@media (max-width: $breakpoint-phone) {
-  .homepage {
-    padding: 1rem;
-
-    .homepage-header {
-      .homepage-image {
-        height: 120px;
-        width: 120px;
-      }
-
-      h1 {
-        font-size: 2rem;
-      }
-
-      .homepage-tagline {
-        font-size: 1rem;
-      }
-    }
-
-    .homepage-content {
-      font-size: 1rem;
-    }
-  }
-}
-
-/* Ads */
-.ad-container {
-  display: none;
-  border: 1px solid $text-color;
-  border-radius: 10px;
-  padding: 1rem 1rem 1.2rem 1rem;
-  margin: 0 0 1rem 1rem;
-  min-height: 137px;
-  width: 350px;
-  float: right;
-  a {
-    text-decoration: none;
-  }
-}
-#carbonads a {
-  font-size: 0.7rem;
-  color: $text-color;
-  &:hover {
-    color: $link-color-hover;
-  }
-}
-#carbonads > span {
-  position: relative;
-  display: block;
-}
-.carbon-wrap {
-  display: flex;
-  padding-bottom: 10px;
-}
-.carbon-text {
-  padding: 0.5rem;
-  white-space: initial;
-  margin-left: 3px;
-}
-.carbon-img {
-  display: flex;
-  align-items: center;
-}
-.carbon-poweredby {
-  position: absolute;
-  bottom: -12px;
-  left: 19px;
-  font-size: 0.7rem;
-  width: 300px;
-}
-@media (max-width: $breakpoint-tablet) {
-  .ad-container {
-    width: 100%;
-    margin: 0 0 1rem 0;
   }
 }
