@@ -20,208 +20,249 @@ body {
   color: $text-color;
   line-height: 1.6;
 }
-.main {
-  padding: 2rem;
-  margin: 0 auto;
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  max-width: 1200px;
-  gap: 2rem;
-}
 
-.sidebar {
-  @extend .sans;
-  display: flex;
-  flex-flow: column;
+// ─── Header ──────────────────────────────────────────────────────────────────
 
-  background: #fafbfc;
-  border-radius: 16px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
-  padding: 1.5rem 1.5rem 0 1.5rem;
-  border: 1px solid rgba(0, 0, 0, 0.04);
-  max-width: 280px;
+.site-header {
   position: sticky;
-  top: 2rem;
+  top: 0;
+  z-index: 100;
+  background: white;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 
-  .sidebar-header {
-    text-align: center;
-    margin-bottom: 1.5rem;
-    padding-bottom: 1.5rem;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  .header-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.75rem 2rem;
+  }
 
-    .profile-link {
-      display: block;
-      margin-bottom: 1rem;
+  .header-logo {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    text-decoration: none;
+    color: $text-color;
+
+    &:hover .header-name {
+      color: $link-color-hover;
     }
 
     .headshot {
-      height: 80px;
-      width: 80px;
-      border-radius: 12px;
-      border: none;
-      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
+      height: 40px;
+      width: 40px;
+      border-radius: 50%;
+      display: block;
     }
 
-    .profile-name {
-      font-size: 1.6rem;
-      font-weight: 700;
-      margin: 0 0 0.25rem 0;
-      color: $text-color;
-      line-height: 1.2;
+    .header-name {
+      font-weight: 600;
+      font-size: 1.05rem;
+      letter-spacing: 0.04em;
+      transition: color 0.3s ease;
+    }
+  }
 
-      > a {
-        text-decoration: none;
-        color: inherit;
-        transition: color 0.3s ease;
+  .header-nav {
+    .nav-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      align-items: center;
+      gap: 1.75rem;
+    }
+
+    a {
+      text-decoration: none;
+      color: $text-color-light;
+      font-weight: 500;
+      font-size: 0.95rem;
+      transition: color 0.3s ease;
+      display: flex;
+      align-items: center;
+
+      &:hover {
+        color: $link-color;
+      }
+
+      .nav-icon-img {
+        display: block;
+        opacity: 0.6;
+        transition: opacity 0.3s ease;
 
         &:hover {
-          color: $link-color-hover;
+          opacity: 1;
         }
       }
-    }
 
-    .profile-tagline {
-      font-size: 0.95rem;
-      color: $text-color-light;
-      margin: 0;
-      font-weight: 500;
-      letter-spacing: 0.2px;
+      .nav-icon-text {
+        display: none;
+      }
     }
   }
 
   .hamburger-menu {
     display: none;
+    background: none;
+    border: 1px solid rgba(0, 0, 0, 0.12);
+    cursor: pointer;
+    padding: 0.4rem;
+    border-radius: 4px;
+    color: $text-color;
+    aspect-ratio: 1;
+    align-items: center;
+    justify-content: center;
+
+    .hamburger-open {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .hamburger-line {
+      width: 20px;
+      height: 2px;
+      background: $text-color;
+      display: block;
+    }
+
+    .hamburger-close {
+      display: none;
+      font-size: 1rem;
+      line-height: 1;
+      width: 20px;
+      text-align: center;
+    }
+
+    &.active .hamburger-open {
+      display: none;
+    }
+
+    &.active .hamburger-close {
+      display: block;
+    }
+  }
+}
+
+// ─── Main content area (non-post pages) ──────────────────────────────────────
+
+.main {
+  max-width: 1100px;
+  margin: 2rem auto;
+  padding: 0 1.5rem;
+}
+
+.content {
+  padding: 0.5rem 2rem 2rem;
+}
+
+// ─── Post layout (content + right TOC) ───────────────────────────────────────
+
+.post-layout {
+  max-width: 1100px;
+  margin: 2rem auto;
+  padding: 0 1.5rem;
+  display: grid;
+  grid-template-columns: 1fr 240px;
+  gap: 3rem;
+  align-items: start;
+
+  > article {
+    padding: 0.5rem 0 2rem;
+    min-width: 0;
+  }
+}
+
+// ─── TOC Sidebar ─────────────────────────────────────────────────────────────
+
+.toc-sidebar {
+  align-self: stretch;
+  .toc-inner {
+    position: sticky;
+    top: 80px;
+    max-height: calc(100vh - 100px);
+    overflow-y: auto;
+    background: #fafbfc;
+    border-radius: 12px;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    padding: 1.25rem;
   }
 
-  .sidebar-nav {
-    margin-bottom: 1.5rem;
+  .toc-title {
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: $text-color-light;
+    margin: 0 0 0.75rem 0;
+    font-weight: 700;
+    font-family: $sans;
+  }
 
-    .nav-list {
+  .toc-nav {
+    ul {
       list-style: none;
       margin: 0;
       padding: 0;
     }
 
-    .nav-item {
-      margin-bottom: 0.5rem;
+    li.toc-h3 {
+      padding-left: 0.75rem;
     }
 
-    .nav-link {
-      display: flex;
-      align-items: center;
-      padding: 0.75rem 1rem;
+    a {
+      display: block;
+      font-size: 0.85rem;
+      padding: 0.3rem 0 0.3rem 0.6rem;
+      color: $text-color-light;
       text-decoration: none;
-      color: $text-color;
-      border-radius: 8px;
-      transition: color 0.3s ease;
-      font-weight: 500;
+      border-left: 2px solid transparent;
+      transition: color 0.2s ease, border-color 0.2s ease;
+      line-height: 1.4;
 
       &:hover {
-        background: rgba($link-color, 0.08);
-        color: $link-color-hover;
+        color: $link-color;
       }
 
-      .nav-icon {
-        margin-right: 0.75rem;
-        font-size: 1.1rem;
-
-        &.nav-icon img {
-          height: 1.3rem;
-          width: 1.3rem;
-        }
-      }
-
-      .nav-text {
-        font-size: 0.95rem;
+      &.active {
+        color: $link-color;
+        font-weight: 600;
+        border-left-color: $link-color;
       }
     }
   }
 }
 
-.content {
-  max-width: 45rem;
-  flex: 1;
-  background: #fafbfc;
-  border-radius: 16px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
-  padding: 2rem;
-  border: 1px solid rgba(0, 0, 0, 0.04);
+// ─── Responsive ──────────────────────────────────────────────────────────────
+
+@media (max-width: 1050px) {
+  .post-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .toc-sidebar {
+    display: none;
+  }
 }
 
 @media (max-width: $breakpoint-tablet) {
-  .main {
-    flex-direction: column;
-    gap: 0;
-    padding: 0;
-    margin: 0;
-  }
-  .sidebar {
-    top: 0;
-    width: 100%;
-    background: white;
-    border: none;
-    max-width: none;
-    margin-bottom: 0;
-    position: relative;
-    box-shadow: none;
-    border-radius: 0;
-    padding: 1rem 1rem 0.5rem 1rem;
-    display: grid;
-    grid-template-areas:
-      "header hamburger"
-      "nav nav";
-    grid-template-columns: 1fr auto;
-    gap: 0;
-
-    .sidebar-header {
+  .site-header {
+    .hamburger-menu {
       display: flex;
-      align-items: center;
-      justify-content: flex-start;
-      text-align: left;
-      margin-bottom: 0;
-      padding-bottom: 0;
-      border-bottom: none;
-      grid-area: header;
-
-      .profile-link {
-        display: flex;
-        align-items: center;
-        margin-bottom: 0;
-        margin-right: 0;
-      }
-
-      .headshot {
-        height: 50px;
-        width: 50px;
-        border-radius: 50%;
-        border: none;
-        box-shadow: none;
-      }
-
-      .profile-name {
-        font-size: 1.2rem;
-        margin: 0 0 0 0.75rem;
-      }
-
-      .profile-tagline {
-        display: none;
-      }
     }
 
-    .sidebar-nav {
+    .header-nav {
       display: none;
       position: absolute;
-      top: 1.5rem;
+      top: 100%;
       left: 0;
       right: 0;
       background: white;
-      border-radius: 8px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-      margin-top: 0;
-      padding: 0.75rem;
-      z-index: 1000;
-      grid-area: nav;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+      padding: 0.75rem 2rem 1rem;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
 
       &.active {
         display: block;
@@ -229,95 +270,65 @@ body {
 
       .nav-list {
         flex-direction: column;
-        gap: 0.5rem;
+        align-items: flex-start;
+        gap: 0;
       }
 
-      .nav-link {
-        padding: 0.75rem 1rem;
-        font-size: 0.9rem;
-        justify-content: flex-start;
+      a {
+        display: block;
+        padding: 0.6rem 0;
+        font-size: 1rem;
+      }
 
-        .nav-text {
-          font-size: 0.85rem;
+      a {
+        .nav-icon-img {
+          display: none;
+        }
+
+        .nav-icon-text {
+          display: inline;
         }
       }
     }
-
-    .hamburger-menu {
-      display: block;
-      background: rgba(255, 255, 255, 0.9);
-      border: 1px solid rgba(0, 0, 0, 0.1);
-      cursor: pointer;
-      padding: 0.5rem;
-      border-radius: 4px;
-      grid-area: hamburger;
-      align-self: start;
-      justify-self: end;
-      z-index: 1001;
-
-      .hamburger-line {
-        width: 20px;
-        height: 2px;
-        background: $text-color;
-        margin: 4px 0;
-        transition: 0.3s;
-        display: block;
-      }
-
-      &.active .hamburger-line:nth-child(1) {
-        transform: rotate(-45deg) translate(-5px, 6px);
-      }
-
-      &.active .hamburger-line:nth-child(2) {
-        opacity: 0;
-      }
-
-      &.active .hamburger-line:nth-child(3) {
-        transform: rotate(45deg) translate(-5px, -6px);
-      }
-    }
   }
+
+  .main {
+    padding: 0 1rem;
+    margin: 1rem auto;
+  }
+
+  .post-layout {
+    padding: 0 1rem;
+    margin: 1rem auto;
+  }
+
   .content {
-    background: #fafbfc;
-    padding: 1rem;
-    width: 100%;
-    margin: 0 auto;
-    max-width: 100%;
-    border-radius: 0;
-    box-shadow: none;
+    padding: 1.25rem;
   }
 }
 
 @media (max-width: $breakpoint-phone) {
-  .sidebar {
-    padding: 0.75rem;
-
-    .sidebar-header {
-      .headshot {
-        height: 40px;
-        width: 40px;
-      }
-
-      .profile-name {
-        font-size: 1rem;
-      }
-    }
-
-    .hamburger-menu {
-      background: rgba(255, 255, 255, 0.95);
-      border: 1px solid rgba(0, 0, 0, 0.15);
-    }
-
-    .sidebar-nav {
-      .nav-link {
-        padding: 0.6rem 0.8rem;
-        font-size: 0.85rem;
-      }
+  .site-header {
+    .header-inner {
+      padding: 0.6rem 1rem;
     }
   }
 
+  .main {
+    padding: 0 0.75rem;
+    margin: 0.75rem auto;
+  }
+
   .content {
-    padding: 0.75rem;
-    background: #fafbfc;
+    padding: 1rem;
+  }
+
+  .post-layout {
+    padding: 0 0.75rem;
+    margin: 0.75rem auto;
+
+    > article {
+      padding: 1rem 0;
+    }
   }
 }

@@ -28,7 +28,6 @@ article {
         @extend .sans;
         text-transform: uppercase;
         letter-spacing: 0.5px;
-        font-size: 0.8rem;
         margin-top: 0.5rem;
       }
     }
@@ -93,11 +92,11 @@ article {
     }
 
     blockquote {
-      border-left: 4px solid $link-color;
+      border-left: 4px solid $accent-color;
       margin: 2rem 0;
       font-style: italic;
-      color: $text-color-light;
-      background: rgba($link-color, 0.03);
+      color: $text-color;
+      background: rgba($accent-color, 0.06);
       padding: 1rem;
       border-radius: 0 6px 6px 0;
     }

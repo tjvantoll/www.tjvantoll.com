@@ -24,6 +24,9 @@ $link-color-visited: adjust-color(
 ) !default;
 $link-color-active: adjust-color($link-color-hover, $lightness: -15%) !default;
 
+/* Accent (favicon blue) */
+$accent-color: #1eabdd !default;
+
 /* Backgrounds */
 $main-bg: #f6f7f8 !default;
 

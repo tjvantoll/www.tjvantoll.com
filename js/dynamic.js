@@ -70,7 +70,7 @@ ga('send', 'pageview');
 // Hamburger Menu
 (function () {
   var hamburger = document.querySelector(".hamburger-menu");
-  var nav = document.querySelector(".sidebar-nav");
+  var nav = document.querySelector(".header-nav");
 
   if (hamburger && nav) {
     hamburger.addEventListener("click", function (event) {
@@ -87,4 +87,57 @@ ga('send', 'pageview');
       }
     });
   }
+})();
+
+// TOC Generation
+(function () {
+  var tocNav = document.querySelector(".toc-nav");
+  if (!tocNav) return;
+
+  var headings = document.querySelectorAll("article h2, article h3");
+  if (headings.length === 0) {
+    var sidebar = document.querySelector(".toc-sidebar");
+    if (sidebar) sidebar.style.display = "none";
+    return;
+  }
+
+  var ul = document.createElement("ul");
+  headings.forEach(function (heading) {
+    var li = document.createElement("li");
+    li.className = heading.tagName === "H3" ? "toc-h3" : "toc-h2";
+    var a = document.createElement("a");
+    a.href = "#" + heading.id;
+    a.textContent = heading.textContent;
+    li.appendChild(a);
+    ul.appendChild(li);
+  });
+  tocNav.appendChild(ul);
+})();
+
+// TOC Active State (Intersection Observer)
+(function () {
+  var tocLinks = document.querySelectorAll(".toc-nav a");
+  if (!tocLinks.length) return;
+
+  var headings = document.querySelectorAll("article h2, article h3");
+  var observer = new IntersectionObserver(
+    function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          tocLinks.forEach(function (a) {
+            a.classList.remove("active");
+          });
+          var active = document.querySelector(
+            '.toc-nav a[href="#' + entry.target.id + '"]'
+          );
+          if (active) active.classList.add("active");
+        }
+      });
+    },
+    { rootMargin: "-10% 0px -80% 0px" }
+  );
+
+  headings.forEach(function (h) {
+    observer.observe(h);
+  });
 })();

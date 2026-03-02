@@ -1,0 +1,27 @@
+{% capture root_url %}{{ site.root | strip_slash }}{% endcapture %}
+<header class="site-header">
+  <div class="header-inner">
+    <a href="{{ root_url }}/" class="header-logo">
+      <img class="headshot" src="/images/me/headshot-big.jpg" alt="TJ VanToll" />
+      <span class="header-name">TJ VanToll</span>
+    </a>
+
+    <button class="hamburger-menu" aria-label="Toggle navigation menu">
+      <span class="hamburger-open">
+        <div class="hamburger-line"></div>
+        <div class="hamburger-line"></div>
+        <div class="hamburger-line"></div>
+      </span>
+      <span class="hamburger-close">&#x2715;</span>
+    </button>
+
+    <nav class="header-nav" role="navigation" aria-label="Main navigation">
+      <ul class="nav-list">
+        <li><a href="{{ root_url }}/writing/">Writing</a></li>
+        <li><a href="{{ root_url }}/speaking/">Speaking</a></li>
+        <li><a href="https://github.com/tjvantoll" aria-label="GitHub"><img class="nav-icon-img" src="/images/icons/github.svg" height="22" width="22" alt="GitHub" /><span class="nav-icon-text">GitHub</span></a></li>
+        <li><a href="https://www.linkedin.com/in/tjvantoll/" aria-label="LinkedIn"><img class="nav-icon-img" src="/images/icons/linkedin.svg" height="22" width="22" alt="LinkedIn" /><span class="nav-icon-text">LinkedIn</span></a></li>
+      </ul>
+    </nav>
+  </div>
+</header>

@@ -1,7 +1,7 @@
 {% include head.html %}
 <body>
+  {% include header.html %}
   <div class="main">
-    {% include sidebar.html %}
     <div class="content">
       {{ content | expand_urls: root_url }}
     </div>

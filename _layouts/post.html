@@ -1,24 +1,36 @@
 ---
-layout: default
-single: true
 ---
 
-<script src="/js/prism.min.js"></script>
-
-<div>
-	<article>
-		{% include article.html %}
-		<footer>
-			<p class="meta">
-				{% include post/author.html %}
-				{% include post/date.html %}
-			</p>
-		</footer>
-	</article>
-	{% if page.comments == true %}
-		<section>
-			<h1 id="comments">Comments</h1>
-			<div id="disqus_thread" aria-live="polite"></div>
-		</section>
-	{% endif %}
-</div>
+{% include head.html %}
+<body>
+  {% include header.html %}
+  <div class="post-layout">
+    <article>
+      <script src="/js/prism.min.js"></script>
+      {% include article.html %}
+      <footer>
+        <p class="meta">
+          {% include post/author.html %}
+          {% include post/date.html %}
+        </p>
+      </footer>
+      {% if page.comments == true %}
+        <section>
+          <h1 id="comments">Comments</h1>
+          <div id="disqus_thread" aria-live="polite"></div>
+        </section>
+      {% endif %}
+    </article>
+    <aside class="toc-sidebar">
+      <div class="toc-inner">
+        <h4 class="toc-title">In This Article</h4>
+        <nav class="toc-nav" aria-label="Table of contents"></nav>
+      </div>
+    </aside>
+  </div>
+  <script src="/js/dynamic.js"></script>
+  {% if page.comments == true %}
+    <script id="dsq-count-scr" src="https://{{ site.disqus_short_name }}.disqus.com/count.js" async></script>
+  {% endif %}
+</body>
+</html>

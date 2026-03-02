@@ -1,150 +1,82 @@
 /* Homepage Styles */
 .homepage {
-  max-width: 800px;
+  max-width: 700px;
   margin: 0 auto;
-  padding: 2rem;
+  padding: 4rem 2rem 3rem;
   text-align: center;
 
   .homepage-header {
-    margin-bottom: 3rem;
-
     .homepage-image {
-      height: 180px;
-      width: 180px;
+      height: 200px;
+      width: 200px;
       border-radius: 50%;
-      border: 3px solid rgba($link-color, 0.1);
-      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
-      margin-bottom: 1.5rem;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12);
+      margin-bottom: 1.75rem;
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
     }
 
     h1 {
-      font-size: 3rem;
+      font-family: $sans;
+      font-size: 3.2rem;
       font-weight: 700;
-      margin: 0 0 0.5rem 0;
+      margin: 0 0 0.6rem 0;
       color: $text-color;
-      letter-spacing: -0.02em;
+      letter-spacing: -0.01em;
     }
 
     .homepage-tagline {
-      font-size: 1.1rem;
-      color: $text-color-light;
-      margin: 0;
-      font-weight: 500;
-    }
-  }
-
-  .homepage-content {
-    font-size: 1.1rem;
-    line-height: 1.7;
-    color: $text-color;
-    margin-bottom: 3rem;
-    text-align: left;
-
-    p {
-      margin-bottom: 1.5rem;
-    }
-  }
-
-  .homepage-nav {
-    .homepage-nav-list {
-      display: flex;
-      justify-content: center;
-      gap: 1rem;
-      list-style: none;
-      margin: 0;
-      padding: 0;
-      flex-wrap: wrap;
-    }
-
-    .homepage-nav-item {
-      margin: 0;
-    }
-
-    .homepage-nav-link {
-      display: flex;
-      align-items: center;
-      padding: 0.75rem 1.5rem;
-      text-decoration: none;
+      font-size: 1.15rem;
       color: $text-color;
-      border-radius: 8px;
-      transition: color 0.3s ease;
-      font-weight: 500;
-      background: white;
-      border: 1px solid rgba(0, 0, 0, 0.08);
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+      margin: 0 0 0.6rem;
+      font-weight: 400;
+      font-family: $sans;
+    }
 
-      &:hover {
-        background: rgba($link-color, 0.08);
-        color: $link-color-hover;
-      }
-
-      .nav-icon {
-        margin-right: 0.75rem;
-        font-size: 1.1rem;
-
-        &.nav-icon img {
-          height: 1.3rem;
-          width: 1.3rem;
-        }
-      }
-
-      .nav-text {
-        font-size: 0.95rem;
-      }
+    .homepage-bio {
+      font-size: 1rem;
+      color: $text-color;
+      margin: 1.25rem 0 0;
+      font-family: $sans;
     }
   }
 }
 
 @media (max-width: $breakpoint-tablet) {
-  .entry-title {
-    margin-top: 2rem;
-  }
-
   .homepage {
-    padding: 1.5rem;
+    padding: 3rem 1.5rem 2rem;
 
     .homepage-header {
-      margin-bottom: 2rem;
-
       .homepage-image {
-        height: 140px;
-        width: 140px;
+        height: 160px;
+        width: 160px;
       }
 
       h1 {
-        font-size: 2.5rem;
+        font-size: 2.6rem;
       }
-    }
-
-    .homepage-nav .homepage-nav-list {
-      flex-direction: column;
-      align-items: center;
-      gap: 0.75rem;
     }
   }
 }
 
 @media (max-width: $breakpoint-phone) {
   .homepage {
-    padding: 1rem;
+    padding: 2rem 1rem 1.5rem;
 
     .homepage-header {
       .homepage-image {
-        height: 120px;
-        width: 120px;
+        height: 140px;
+        width: 140px;
       }
 
       h1 {
-        font-size: 2rem;
+        font-size: 2.2rem;
       }
 
       .homepage-tagline {
         font-size: 1rem;
       }
-    }
-
-    .homepage-content {
-      font-size: 1rem;
     }
   }
 }
