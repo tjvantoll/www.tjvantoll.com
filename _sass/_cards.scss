@@ -73,6 +73,17 @@
   color: $text-color-light;
 }
 
+.card-pub-badge {
+  font-size: 0.72rem;
+  font-family: $sans;
+  font-weight: 600;
+  background: rgba($link-color, 0.08);
+  color: $link-color;
+  padding: 0.15rem 0.55rem;
+  border-radius: 20px;
+  white-space: nowrap;
+}
+
 .card-badge {
   font-size: 0.68rem;
   text-transform: uppercase;
@@ -84,6 +95,32 @@
   font-family: $sans;
   font-weight: 600;
   white-space: nowrap;
+}
+
+// ─── Type badges (Conference / Podcast / Interview) ───────────────────────────
+
+.card-type-badge {
+  font-size: 0.72rem;
+  font-family: $sans;
+  font-weight: 600;
+  padding: 0.15rem 0.55rem;
+  border-radius: 20px;
+  white-space: nowrap;
+}
+
+.card-type-conference {
+  background: rgba(#1a7a4a, 0.08);
+  color: #1a7a4a;
+}
+
+.card-type-podcast {
+  background: rgba(#b45309, 0.1);
+  color: #b45309;
+}
+
+.card-type-interview {
+  background: rgba(#7c3aed, 0.08);
+  color: #7c3aed;
 }
 
 .card-links {

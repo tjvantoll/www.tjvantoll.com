@@ -31,8 +31,7 @@ My biggest writing endeavor was a [book I wrote on jQuery UI](https://www.amazon
         <div class="card-meta">
           <time>{{ post.date | date: "%b %d, %Y" }}</time>
           {% if post.redirect_url %}
-            <span>·</span>
-            <span class="card-publication">{{ post.publication_name }}</span>
+            <span class="card-pub-badge">{{ post.publication_name }}</span>
           {% endif %}
         </div>
       </div>

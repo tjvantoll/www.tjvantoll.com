@@ -18,32 +18,26 @@ If you're looking to quickly evaluate my speaking skills, watch [Why I Was Wrong
       <div class="card-grid">
     {% endif %}
 
+    {% if talk.talk_video %}
+      {% assign card_url = talk.talk_video %}
+    {% else %}
+      {% assign card_url = talk.url %}
+    {% endif %}
     <div class="card">
       <div class="card-body">
         <div class="card-title">
-          <a href="{{ talk.url }}">{{ talk.name }}</a>
+          <a href="{{ card_url }}">{{ talk.name }}</a>
         </div>
         <div class="card-meta">
           <time>{{ talk.date | date: "%b %d, %Y" }}</time>
           {% if talk.podcast_name %}
-            <span>·</span>
-            <span class="card-badge">Podcast</span>
-            <span class="card-publication">{{ talk.podcast_name }}</span>
+            <span class="card-pub-badge">{{ talk.podcast_name }}</span>
           {% elsif talk.interview_site %}
-            <span>·</span>
-            <span class="card-badge">Interview</span>
-            <span class="card-publication">{{ talk.interview_site }}</span>
+            <span class="card-pub-badge">{{ talk.interview_site }}</span>
           {% elsif talk.talk_venue %}
-            <span>·</span>
-            <span class="card-publication">{{ talk.talk_venue }}{% if talk.talk_venue_city %}, {{ talk.talk_venue_city }}{% endif %}</span>
+            <span class="card-pub-badge">{{ talk.talk_venue }}</span>
           {% endif %}
         </div>
-        {% if talk.talk_slides or talk.talk_video %}
-          <div class="card-links">
-            {% if talk.talk_slides %}<a href="{{ talk.talk_slides }}">Slides</a>{% endif %}
-            {% if talk.talk_video %}<a href="{{ talk.talk_video }}">Video</a>{% endif %}
-          </div>
-        {% endif %}
       </div>
     </div>
   {% endfor %}
