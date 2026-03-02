@@ -1,2 +1,0 @@
-[     590ms] [WARNING] Your client application uses libraries for user authentication or authorization that are deprecated. See the [Migration Guide](https://developers.google.com/identity/gsi/web/guides/gis-migration) for more information. @ https://c.disquscdn.com/next/embed/common.bundle.fc85be64480ad2632be650aec92d9bf8.js:6
-[     623ms] [ERROR] Failed to load resource: the server responded with a status of 400 () @ https://accounts.google.com/_/IdpIFrameHttp/cspreport/fine-allowlist:0
