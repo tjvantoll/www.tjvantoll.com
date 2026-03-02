@@ -30,45 +30,4 @@ layout: empty
       experiences.
     </p>
   </div>
-
-  <nav class="homepage-nav">
-    <ul class="homepage-nav-list">
-      <li class="homepage-nav-item">
-        <a href="/writing/" class="homepage-nav-link">
-          <span class="nav-icon">✏️</span>
-          <span class="nav-text">Writing</span>
-        </a>
-      </li>
-      <li class="homepage-nav-item">
-        <a href="/speaking/" class="homepage-nav-link">
-          <span class="nav-icon">🎤</span>
-          <span class="nav-text">Speaking</span>
-        </a>
-      </li>
-      <li class="homepage-nav-item">
-        <a href="https://github.com/tjvantoll" class="homepage-nav-link">
-          <img
-            class="nav-icon"
-            src="/images/icons/github.svg"
-            height="24"
-            width="24"
-            alt="GitHub"
-          />
-          <span class="nav-text">GitHub</span>
-        </a>
-      </li>
-      <li class="homepage-nav-item">
-        <a href="https://www.linkedin.com/in/tjvantoll/" class="homepage-nav-link">
-          <img
-            class="nav-icon"
-            src="/images/icons/linkedin.svg"
-            height="24"
-            width="24"
-            alt="LinkedIn"
-          />
-          <span class="nav-text">LinkedIn</span>
-        </a>
-      </li>
-    </ul>
-  </nav>
 </div>

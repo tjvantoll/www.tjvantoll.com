@@ -86,8 +86,8 @@ p {
 
 blockquote {
   font-style: italic;
-  color: $text-color-light;
-  border-left: 4px solid $link-color;
+  color: $text-color;
+  border-left: 4px solid $accent-color;
   padding-left: 1.5rem;
   margin: 2rem 0;
 }
