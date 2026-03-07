@@ -1,7 +1,7 @@
 # Site settings
-title: TJ VanToll's Blog
+title: TJ VanToll | Principal Developer Advocate
 email: tj.vantoll@gmail.com
-description: "TJ VanToll's blog about front-end technologies"
+description: "A collection of the stuff TJ VanToll is working on and interested in."
 baseurl: ""
 url: "https://www.tjvantoll.com"
 excerpt_separator: <!--more-->
@@ -13,4 +13,4 @@ disqus_short_name: tjvantoll
 markdown: kramdown
 permalink: pretty
 sass:
-    style: :compressed
+  style: :compressed

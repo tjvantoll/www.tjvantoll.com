@@ -2,16 +2,16 @@
 .homepage {
   max-width: 700px;
   margin: 0 auto;
-  padding: 4rem 2rem 3rem;
+  padding: 2.5rem 2rem 1.5rem;
   text-align: center;
 
   .homepage-header {
     .homepage-image {
-      height: 200px;
-      width: 200px;
+      height: 160px;
+      width: 160px;
       border-radius: 50%;
       box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12);
-      margin-bottom: 1.75rem;
+      margin-bottom: 1.25rem;
       display: block;
       margin-left: auto;
       margin-right: auto;
@@ -19,9 +19,9 @@
 
     h1 {
       font-family: $sans;
-      font-size: 3.2rem;
+      font-size: 2.6rem;
       font-weight: 700;
-      margin: 0 0 0.6rem 0;
+      margin: 0;
       color: $text-color;
       letter-spacing: -0.01em;
     }
@@ -45,16 +45,16 @@
 
 @media (max-width: $breakpoint-tablet) {
   .homepage {
-    padding: 3rem 1.5rem 2rem;
+    padding: 2rem 1.5rem 1.25rem;
 
     .homepage-header {
       .homepage-image {
-        height: 160px;
-        width: 160px;
+        height: 130px;
+        width: 130px;
       }
 
       h1 {
-        font-size: 2.6rem;
+        font-size: 2.2rem;
       }
     }
   }
@@ -62,12 +62,12 @@
 
 @media (max-width: $breakpoint-phone) {
   .homepage {
-    padding: 2rem 1rem 1.5rem;
+    padding: 1.5rem 1rem 1rem;
 
     .homepage-header {
       .homepage-image {
-        height: 140px;
-        width: 140px;
+        height: 110px;
+        width: 110px;
       }
 
       h1 {
@@ -78,5 +78,149 @@
         font-size: 1rem;
       }
     }
+  }
+}
+
+// ─── Homepage Sections (Featured + Recent) ────────────────────────────────────
+
+.homepage-sections {
+  max-width: 1100px;
+  margin: 2rem auto 3rem;
+  padding: 0 1.5rem;
+}
+
+.homepage-section {
+  margin-bottom: 3rem;
+}
+
+.homepage-section-heading {
+  font-family: $sans;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: $text-color;
+  margin: 0 0 1.25rem 0;
+  padding: 0;
+  border: none;
+}
+
+// ─── Featured Cards ───────────────────────────────────────────────────────────
+
+.featured-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+
+.featured-card {
+  display: flex;
+  flex-direction: column;
+  background: white;
+  border-radius: 12px;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+  text-decoration: none;
+  color: inherit;
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+
+  &:hover {
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+    transform: translateY(-3px);
+  }
+}
+
+.featured-card-image {
+  width: 100%;
+  overflow: hidden;
+
+  img {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+
+  &--podcast {
+    background: #111;
+    aspect-ratio: 16 / 9;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2.5rem 3rem;
+
+    img {
+      width: auto;
+      height: auto;
+      max-height: 120px;
+      max-width: 80%;
+      object-fit: contain;
+    }
+  }
+
+  &--video {
+    aspect-ratio: 16 / 9;
+
+    img {
+      object-fit: cover;
+    }
+  }
+}
+
+.featured-card-body {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.featured-card-label {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-weight: 700;
+  font-family: $sans;
+  color: $link-color;
+  margin-bottom: 0.5rem;
+  display: block;
+}
+
+.featured-card-title {
+  font-family: $sans;
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: $text-color;
+  margin: 0 0 0.75rem 0;
+  line-height: 1.4;
+}
+
+.featured-card-desc {
+  font-family: $sans;
+  font-size: 0.9rem;
+  color: $text-color-light;
+  margin: 0 0 1rem 0;
+  line-height: 1.5;
+  flex: 1;
+}
+
+.featured-card-cta {
+  font-family: $sans;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: $link-color;
+  margin-top: auto;
+}
+
+@media (max-width: $breakpoint-tablet) {
+  .homepage-sections {
+    padding: 0 1rem;
+  }
+}
+
+@media (max-width: $breakpoint-phone) {
+  .homepage-sections {
+    padding: 0 0.75rem;
+  }
+
+  .featured-grid {
+    grid-template-columns: 1fr;
   }
 }
