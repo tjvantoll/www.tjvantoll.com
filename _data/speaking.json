@@ -1,6 +1,87 @@
 {
   "talks": [
     {
+      "name": "One Board: A New Way to Build with Blues",
+      "url": "https://dev.blues.io/webinars/one-board-a-new-way-to-build-with-blues/",
+      "date": "2026-01-27",
+      "type": "webinar",
+      "talk_venue": "Blues Webinar",
+      "talk_venue_url": "https://dev.blues.io/webinars/one-board-a-new-way-to-build-with-blues/"
+    },
+
+    {
+      "name": "Solar-Powered IoT: Designing Solar into Your Connected Product",
+      "url": "https://dev.blues.io/webinars/solar-powered-iot-designing-solar-into-your-connected-product",
+      "date": "2025-12-11",
+      "type": "webinar",
+      "talk_venue": "Blues Webinar",
+      "talk_venue_url": "https://dev.blues.io/webinars/solar-powered-iot-designing-solar-into-your-connected-product"
+    },
+
+    {
+      "name": "Write Better IoT Firmware Using AI",
+      "url": "https://dev.blues.io/webinars/write-better-iot-firmware-using-ai",
+      "date": "2025-11-12",
+      "type": "webinar",
+      "talk_venue": "Blues Webinar",
+      "talk_venue_url": "https://dev.blues.io/webinars/write-better-iot-firmware-using-ai"
+    },
+
+    {
+      "name": "AI-Ready IoT: Wiring MCP Servers into Your Blues Development Toolchain",
+      "url": "https://dev.blues.io/webinars/ai-ready-iot-wiring-mcp-servers-into-your-blues-development-toolchain",
+      "date": "2025-06-24",
+      "type": "webinar",
+      "talk_venue": "Blues Webinar",
+      "talk_venue_url": "https://dev.blues.io/webinars/ai-ready-iot-wiring-mcp-servers-into-your-blues-development-toolchain"
+    },
+
+    {
+      "name": "Vibe Code a Cloud Dashboard with AI, Blues Notecard, and Notehub APIs",
+      "url": "https://dev.blues.io/webinars/vibe-code-a-cloud-dashboard-with-ai-blues-notecard-and-notehub-apis",
+      "date": "2025-04-09",
+      "type": "webinar",
+      "talk_venue": "Blues Webinar",
+      "talk_venue_url": "https://dev.blues.io/webinars/vibe-code-a-cloud-dashboard-with-ai-blues-notecard-and-notehub-apis"
+    },
+
+    {
+      "name": "Smart Vision, Smarter Industry: Anomaly Detection with Edge Impulse and Blues",
+      "url": "https://dev.blues.io/webinars/smart-vision-smarter-industry-anomaly-detection-with-edge-impulse-and-blues",
+      "date": "2025-02-27",
+      "type": "webinar",
+      "talk_venue": "Blues Webinar",
+      "talk_venue_url": "https://dev.blues.io/webinars/smart-vision-smarter-industry-anomaly-detection-with-edge-impulse-and-blues"
+    },
+
+    {
+      "name": "Simplifying Scalable IoT with Blynk and Blues",
+      "url": "https://dev.blues.io/webinars/simplifying-scalable-iot-with-blynk-and-blues",
+      "date": "2024-12-05",
+      "type": "webinar",
+      "talk_venue": "Blues Webinar",
+      "talk_venue_url": "https://dev.blues.io/webinars/simplifying-scalable-iot-with-blynk-and-blues"
+    },
+
+    {
+      "name": "Revolutionize Industrial Control by Deploying Anomaly Detection Models in PLCs",
+      "url": "https://dev.blues.io/webinars/revolutionize-industrial-control-by-deploying-anomaly-detection-models-in-plcs/",
+      "date": "2024-10-30",
+      "type": "webinar",
+      "talk_venue": "Blues Webinar",
+      "talk_venue_url": "https://dev.blues.io/webinars/revolutionize-industrial-control-by-deploying-anomaly-detection-models-in-plcs/"
+    },
+
+    {
+      "name": "Unlocking LoRa with Blues and The Things Industries",
+      "url": "https://dev.blues.io/webinars/unlocking-lora-with-blues-and-the-things-industries/",
+      "date": "2024-09-29",
+      "type": "webinar",
+      "talk_venue": "Blues Webinar",
+      "talk_venue_url": "https://dev.blues.io/webinars/unlocking-lora-with-blues-and-the-things-industries/"
+    },
+
+    {
       "name": "Unlocking the IoT with TinyML and LoRaWAN",
       "url": "https://drive.google.com/file/d/1pqUYyiXacbdT6QVdqe-PlMR5_m0T1KUq/view?usp=sharing",
       "date": "2024-06-24",
@@ -12,6 +93,15 @@
     },
 
     {
+      "name": "Starnote: The Final Frontier - Building with Satellite IoT using Blues and Skylo",
+      "url": "https://dev.blues.io/webinars/starnote-the-final-frontier-building-with-satellite-iot-using-blues-and-skylo",
+      "date": "2024-05-29",
+      "type": "webinar",
+      "talk_venue": "Blues Webinar",
+      "talk_venue_url": "https://dev.blues.io/webinars/starnote-the-final-frontier-building-with-satellite-iot-using-blues-and-skylo"
+    },
+
+    {
       "name": "Build a Smarter City with (Swappable) Cellular, Wi-Fi, and LoRa",
       "url": "https://www.youtube.com/watch?v=wbPZEO7FFDo",
       "date": "2023-11-15",
@@ -19,6 +109,24 @@
       "talk_venue": "Hackster Impact Summit",
       "talk_venue_url": "https://events.hackster.io/impactsummit2023",
       "talk_video": "https://www.youtube.com/watch?v=wbPZEO7FFDo"
+    },
+
+    {
+      "name": "Introducing the Next Generation of Blues Notecards",
+      "url": "https://dev.blues.io/webinars/introducing-the-next-generation-of-blues-notecards/",
+      "date": "2023-10-20",
+      "type": "webinar",
+      "talk_venue": "Blues Webinar",
+      "talk_venue_url": "https://dev.blues.io/webinars/introducing-the-next-generation-of-blues-notecards/"
+    },
+
+    {
+      "name": "Optimized MLOps with Edge Impulse, Blues, and Zephyr",
+      "url": "https://dev.blues.io/webinars/optimized-mlops-with-edge-impulse-blues-and-zephyr",
+      "date": "2023-08-31",
+      "type": "webinar",
+      "talk_venue": "Blues Webinar",
+      "talk_venue_url": "https://dev.blues.io/webinars/optimized-mlops-with-edge-impulse-blues-and-zephyr"
     },
 
     {

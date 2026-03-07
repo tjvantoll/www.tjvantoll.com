@@ -1,0 +1,45 @@
+{
+  "videos": [
+    {
+      "name": "Building a Connected Product with Notecard: Part 3—Writing Host Firmware",
+      "url": "https://www.youtube.com/watch?v=5fb_mx91nOs",
+      "date": "2026-02-24"
+    },
+
+    {
+      "name": "Blues Notecard Outboard Firmware Update in Action",
+      "url": "https://www.youtube.com/watch?v=MVLlQQLQ9lQ",
+      "date": "2026-02-11"
+    },
+
+    {
+      "name": "Managing Notefiles in Blues Notehub",
+      "url": "https://www.youtube.com/watch?v=2UOKspx-obw",
+      "date": "2025-12-17"
+    },
+
+    {
+      "name": "Introducing Blues Expert - AI Tools for Notecard and Notehub Development",
+      "url": "https://www.youtube.com/watch?v=FUgp_rPPTbk",
+      "date": "2025-10-15"
+    },
+
+    {
+      "name": "Building a Connected Product with Notecard: Part 2—Configuring Notecard",
+      "url": "https://www.youtube.com/watch?v=RPH2FkGINWs",
+      "date": "2025-07-10"
+    },
+
+    {
+      "name": "Building a Connected Product with Notecard: Part 1—Connecting Hardware",
+      "url": "https://www.youtube.com/watch?v=dbzncnJwadE",
+      "date": "2025-05-07"
+    },
+
+    {
+      "name": "Building Web Dashboards for Your IoT Projects Using AI",
+      "url": "https://www.youtube.com/watch?v=uJIe5iw3Blk",
+      "date": "2025-03-17"
+    }
+  ]
+}
