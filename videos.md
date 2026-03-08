@@ -3,7 +3,7 @@ layout: page
 title: "Videos"
 ---
 
-I’ve been spending a lot of my time lately creating high-quality YouTube videos. Here’s a collection of what I’ve been working on.
+I make YouTube videos—mostly on Blues topics, but occasionally on other random things. My biggest endeavor lately has been an [in-depth series on building products using Blues Notecard](https://www.youtube.com/playlist?list=PLv0HV8FqacRUiTodE-IRxt-iIDeSylxze).
 
 <div class="blog-archives">
   {% assign current_year = "" %}
