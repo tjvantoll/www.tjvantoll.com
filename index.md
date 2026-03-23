@@ -6,7 +6,7 @@ layout: empty
   <div class="homepage-header">
     <img class="homepage-image"
       src="/images/me/headshot-big.jpg"
-      alt="TJ VanToll">
+      alt="Headshot of TJ VanToll">
 
     <h1>TJ VanToll</h1>
     <p class="homepage-tagline">Principal Developer Advocate</p>
