@@ -1,4 +1,4 @@
-var version = "10.0::";
+var version = "11.0::";
 var offlineResources = [
 	"/",
 	"/offline/"
@@ -64,6 +64,5 @@ self.addEventListener("fetch", function(event) {
 		return;
 	}
 
-	// For non-HTML requests just respond from the network
-	event.respondWith(fetch(request));
+	// For non-HTML requests, do nothing and let the browser handle caching normally
 });
