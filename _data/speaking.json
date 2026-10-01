@@ -1,6 +1,24 @@
 {
   "talks": [
     {
+      "name": "No Towers? No Problem: Satellite Connectivity for IoT",
+      "url": "https://dev.blues.io/webinars/no-towers-no-problem-satellite-connectivity-for-iot/",
+      "date": "2026-09-29",
+      "type": "webinar",
+      "talk_venue": "Blues Webinar",
+      "talk_venue_url": "https://dev.blues.io/webinars/no-towers-no-problem-satellite-connectivity-for-iot/"
+    },
+
+    {
+      "name": "Notehub IQ: Use AI to Talk to Your Products",
+      "url": "https://dev.blues.io/webinars/notehub-iq-use-ai-to-talk-to-your-products/",
+      "date": "2026-08-19",
+      "type": "webinar",
+      "talk_venue": "Blues Webinar",
+      "talk_venue_url": "https://dev.blues.io/webinars/notehub-iq-use-ai-to-talk-to-your-products/"
+    },
+
+    {
       "name": "One Board: A New Way to Build with Blues",
       "url": "https://dev.blues.io/webinars/one-board-a-new-way-to-build-with-blues/",
       "date": "2026-01-27",

@@ -1,6 +1,36 @@
 {
   "videos": [
     {
+      "name": "Introducing Blues Notehub IQ: Use AI to Talk to Your Products",
+      "url": "https://www.youtube.com/watch?v=dRq3BuDcP6M",
+      "date": "2026-07-28"
+    },
+
+    {
+      "name": "An In-Depth Guide to Notecard's hub.set Request",
+      "url": "https://www.youtube.com/watch?v=3D2p1t8UMHQ",
+      "date": "2026-07-20"
+    },
+
+    {
+      "name": "Introducing Blues Starnote for Iridium",
+      "url": "https://www.youtube.com/watch?v=AKgaEpfCAjI",
+      "date": "2026-07-07"
+    },
+
+    {
+      "name": "Blues Notecard Quickstart",
+      "url": "https://www.youtube.com/watch?v=yicvFkVUXOg",
+      "date": "2026-06-03"
+    },
+
+    {
+      "name": "Introducing Blues Notecard for Skylo",
+      "url": "https://www.youtube.com/watch?v=Vvpz6V_7JZQ",
+      "date": "2026-03-13"
+    },
+
+    {
       "name": "Building a Connected Product with Notecard: Part 3—Writing Host Firmware",
       "url": "https://www.youtube.com/watch?v=5fb_mx91nOs",
       "date": "2026-02-24"
